@@ -32,7 +32,7 @@ The context object properties are:
 
 + `Logger`: The Lambda logger associated with the ILambdaContext object\. For more information, see [Logging \(C\#\)](dotnet-logging.md)\.
 
- The following C\# code snippet shows a simple handler function that displays the value of the input parameter and then prints some of the context information\. 
+ The following C\# code snippet shows a simple handler function that prints some of the context information\. 
 
 ```
 public async Task Handler(ILambdaContext context)

@@ -16,13 +16,13 @@ GET /2015-03-31/functions/FunctionName/policy?Qualifier=Qualifier HTTP/1.1
 
 The request requires the following URI parameters\.
 
- ** FunctionName **   
+ ** [FunctionName](#API_GetPolicy_RequestSyntax) **   <a name="SSS-GetPolicy-request-FunctionName"></a>
 Function name whose resource policy you want to retrieve\.  
  You can specify the function name \(for example, `Thumbnail`\) or you can specify Amazon Resource Name \(ARN\) of the function \(for example, `arn:aws:lambda:us-west-2:account-id:function:ThumbNail`\)\. If you are using versioning, you can also provide a qualified function ARN \(ARN that is qualified with function version or alias name as suffix\)\. AWS Lambda also allows you to specify only the function name with the account ID qualifier \(for example, `account-id:Thumbnail`\)\. Note that the length constraint applies only to the ARN\. If you specify only the function name, it is limited to 64 characters in length\.   
 Length Constraints: Minimum length of 1\. Maximum length of 170\.  
 Pattern: `(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_\.]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
- ** Qualifier **   
+ ** [Qualifier](#API_GetPolicy_RequestSyntax) **   <a name="SSS-GetPolicy-request-Qualifier"></a>
 You can specify this optional query parameter to specify a function version or an alias name in which case this API will return all permissions associated with the specific qualified ARN\. If you don't provide this parameter, the API will return permissions that apply to the unqualified function ARN\.  
 Length Constraints: Minimum length of 1\. Maximum length of 128\.  
 Pattern: `(|[a-zA-Z0-9$_-]+)` 
@@ -38,7 +38,8 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "Policy": "string"
+   "[Policy](#SSS-GetPolicy-response-Policy)": "string",
+   "[RevisionId](#SSS-GetPolicy-response-RevisionId)": "string"
 }
 ```
 
@@ -48,8 +49,12 @@ If the action is successful, the service sends back an HTTP 200 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** Policy **   
+ ** [Policy](#API_GetPolicy_ResponseSyntax) **   <a name="SSS-GetPolicy-response-Policy"></a>
 The resource policy associated with the specified function\. The response returns the same as a string using a backslash \("\\"\) as an escape character in the JSON\.  
+Type: String
+
+ ** [RevisionId](#API_GetPolicy_ResponseSyntax) **   <a name="SSS-GetPolicy-response-RevisionId"></a>
+Represents the latest updated revision of the function or alias\.  
 Type: String
 
 ## Errors<a name="API_GetPolicy_Errors"></a>

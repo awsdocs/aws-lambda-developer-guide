@@ -19,7 +19,7 @@ InvokeArgs
 
 The request requires the following URI parameters\.
 
- ** FunctionName **   
+ ** [FunctionName](#API_InvokeAsync_RequestSyntax) **   <a name="SSS-InvokeAsync-request-FunctionName"></a>
 The Lambda function name\. Note that the length constraint applies only to the ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
 Length Constraints: Minimum length of 1\. Maximum length of 170\.  
 Pattern: `(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_\.]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
@@ -28,7 +28,7 @@ Pattern: `(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-z
 
 The request accepts the following binary data\.
 
- ** InvokeArgs **   
+ ** [InvokeArgs](#API_InvokeAsync_RequestSyntax) **   <a name="SSS-InvokeAsync-request-InvokeArgs"></a>
 JSON that you want to provide to your Lambda function as input\.
 
 ## Response Syntax<a name="API_InvokeAsync_ResponseSyntax"></a>
@@ -41,7 +41,7 @@ HTTP/1.1 Status
 
 If the action is successful, the service sends back the following HTTP response\.
 
- ** Status **   
+ ** [Status](#API_InvokeAsync_ResponseSyntax) **   <a name="SSS-InvokeAsync-response-Status"></a>
 It will be 202 upon success\.
 
 ## Errors<a name="API_InvokeAsync_Errors"></a>

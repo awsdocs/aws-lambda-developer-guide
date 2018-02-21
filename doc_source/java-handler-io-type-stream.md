@@ -3,7 +3,7 @@
 If you do not want to use POJOs or if Lambda's serialization approach does not meet your needs, you can use the byte stream implementation\. In this case, you can use the `InputStream` and `OutputStream` as the input and output types for the handler\. An example handler function is shown:
 
 ```
-public void handler(InputStream inputStream, OutputStream outputStream, Context context) {
+public void handler(InputStream inputStream, OutputStream outputStream, Context context) throws IOException{
    ...
 }
 ```
@@ -46,7 +46,7 @@ You can do the following to test the code:
   test
   ```
 
-Follow instructions provided in the Getting Started\. For more information, see  [Step 2\.3: \(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\. Note the following differences:
+Follow instructions provided in the Getting Started\. For more information, see  [\(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\. Note the following differences:
 
 + When you create a deployment package, don't forget the `aws-lambda-java-core` library dependency\.
 

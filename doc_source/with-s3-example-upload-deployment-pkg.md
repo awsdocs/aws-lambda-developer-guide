@@ -10,11 +10,11 @@ In this section, you do the following:
 
 In this step, you upload the deployment package using the AWS CLI\.
 
-1. At the command prompt, run the following Lambda AWS CLI `create-function` command using the `adminuser` as the `--profile`\. You need to update the command by providing the \.zip file path and the execution role ARN\. For the runtime parameter, choose between `nodejs6.10`, `nodejs4.3`, `python3.6`, `python2.7` or `java8`, depending on the code sample you when you created your deployment package\.
+1. At the command prompt, run the following Lambda AWS CLI `create-function` command using the `adminuser` as the `--profile`\. For more information on setting this up, see [Configuring the AWS CLI](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html)\. You need to update the command by providing the \.zip file path and the execution role ARN\. For the runtime parameter, choose between `nodejs6.10`, `nodejs4.3`, `python3.6`, `python2.7` or `java8`, depending on the code sample you when you created your deployment package\.
 
    ```
    $ aws lambda create-function \
-   --region us-west-2 \
+   --region region \
    --function-name CreateThumbnail \
    --zip-file fileb://file-path/CreateThumbnail.zip \
    --role role-arn \
@@ -38,7 +38,7 @@ In this step, you upload the deployment package using the AWS CLI\.
    ```
    $ aws lambda update-function-configuration \
       --function-name CreateThumbnail  \
-      --region us-west-2 \
+      --region region \
       --timeout timeout-in-seconds \
       --profile adminuser
    ```
@@ -62,7 +62,7 @@ In this step, you invoke the Lambda function manually using sample Amazon S3 eve
 
 **To test the Lambda function \(AWS CLI\)**
 
-1. Save the following Amazon S3 sample event data in a file and save it as `input.txt`\. You need to update the JSON by providing your *sourcebucket* name and a \.jpg object key\.
+1. Save the following Amazon S3 sample event data in a file and save it as `inputFile.txt`\. You need to update the JSON by providing your *sourcebucket* name and a \.jpg object key\.
 
    ```
    {  
@@ -111,7 +111,7 @@ In this step, you invoke the Lambda function manually using sample Amazon S3 eve
    $ aws lambda invoke \
    --invocation-type Event \
    --function-name CreateThumbnail \
-   --region us-west-2 \
+   --region region \
    --payload file://file-path/inputfile.txt \
    --profile adminuser \
    outputfile.txt

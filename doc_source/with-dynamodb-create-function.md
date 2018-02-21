@@ -12,7 +12,7 @@ In the next section, you create an DynamoDB stream and test the end\-to\-end exp
 
 In this step, you upload the deployment package using the AWS CLI\.
 
-At the command prompt, run the following Lambda CLI `create-function` command using the **adminuser** profile\. 
+At the command prompt, run the following Lambda CLI `create-function` command using the **adminuser** profile\. If you have already created this profile, see [Set Up an AWS Account](setup.md)
 
 You need to update the command by providing the \.zip file path and the execution role ARN\. The `--runtime` parameter value can be `python3.6`, `python2.7`, `nodejs6.10` `nodejs4.3`, or `java8`, depending on the language you used to author your code\.
 

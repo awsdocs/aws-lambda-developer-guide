@@ -4,7 +4,7 @@
 
 ## Account Level Concurrent Execution Limit<a name="concurrent-execution-safety-limit"></a>
 
-By default, AWS Lambda limits the total concurrent executions across all functions within a given region to 1000\. You can view the account level setting by using the [GetAccountSettings](API_GetAccountSettings.md) API and viewing the `AccountLimit` object\. This limit can be raised as described below:
+By default, AWS Lambda limits the total concurrent executions across all functions within a given region to 1000\. You can view the account level setting by using the [GetAccountSettings](API_GetAccountSettings.md) API and viewing the `AccountLimit` object\. This limit can be raised as described below:<a name="increase-concurrent-executions-limit"></a>
 
 **To request a limit increase for concurrent executions**
 
@@ -14,16 +14,13 @@ By default, AWS Lambda limits the total concurrent executions across all functio
 
 1. For **Limit Type**, choose **Lambda**, fill in the necessary fields in the form, and then choose the button at the bottom of the page for your preferred method of contact\.
 
-**Note**  
-AWS might automatically raise the concurrent execution limit for you so that your function can match the incoming event rate\. An example is the case of when your function is triggered from an Amazon S3 bucket\.
-
 ## Function Level Concurrent Execution Limit<a name="per-function-concurrency"></a>
 
 By default, the concurrent execution limit is enforced against the sum of the concurrent executions of all functions\. The shared concurrent execution pool is referred to as the unreserved concurrency allocation\. If you haven’t set up any function\-level concurrency limit, then the unreserved concurrency limit is the same as the account level concurrency limit\. Any increases to the account level limit have a corresponding increase in the unreserved concurrency limit\. You can view the unreserved concurrency allocation for a function by using the [GetAccountSettings](API_GetAccountSettings.md) API or using the AWS Lambda console\. Functions that are being accounted against the shared concurrent execution pool will not show any concurrency value when queried using the [GetFunctionConfiguration](API_GetFunctionConfiguration.md) API\.
 
 You can optionally set the concurrent execution limit for a function\. You may choose to do this for a few reasons:
 
-+ The default behavior means a surge of concurrent executions in one function may cause another function sharing the concurrent execution limit from getting throttled\. By setting a concurrent execution limit on a function, you are reserving the specified concurrent execution value for that function\.
++ The default behavior means a surge of concurrent executions in one function prevents the function you have isolated with an execution limit from getting throttled\. By setting a concurrent execution limit on a function, you are reserving the specified concurrent execution value for that function\.
 
 + Functions scale automatically based on incoming request rate, but not all resources in your architecture may be able to do so\. For example, relational databases have limits on how many concurrent connections they can handle\. You can set the concurrent execution limit for a function to align with the values its downstream resources support\.
 
@@ -31,7 +28,7 @@ You can optionally set the concurrent execution limit for a function\. You may c
 
 + If you need a function to stop processing any invocations, you can choose to set the concurrency to 0 and throttle all incoming executions\.
 
-By setting a concurrency limit on a function, Lambda guarantees that allocation will be applied specifically to that function, regardless of the amount of traffic processing remaining functions\. If that limit is exceeded, the function will be throttled\. How that function behaves when throttled will depend on the event source\. For more information, see [Throttling Behavior](#throttling-metrics)\.
+By setting a concurrency limit on a function, Lambda guarantees that allocation will be applied specifically to that function, regardless of the amount of traffic processing remaining functions\. If that limit is exceeded, the function will be throttled\. How that function behaves when throttled will depend on the event source\. For more information, see [Throttling Behavior](#throttling-behavior)\.
 
 **Note**  
 Concurrency limits can only be set at the function level, not for individual versions\. All invocations to all versions and aliases of a given function will accrue towards the function limit\.
@@ -51,7 +48,7 @@ To set a concurrency limit for your Lambda function using the Lambda console, do
 
 1. Whether you are creating a new Lambda function or updating an existing function, the process of setting a concurrency limit is the same\. If you are new to Lambda and are unfamiliar with creating a function, see [Create a Simple Lambda Function](get-started-create-function.md)\.
 
-1. Under the **Configuration** tab, choose **Concurrency**\. In **Reserve concurrency**, set the value to the maximum of concurrent executions you want reserved for the function\. Note that whenn you set this value, the **Unreserved account concurrency** value will automatically be updated to display the remaining number of concurrent executions available for all other functions in the account\. Also note that if you want to block invocation of this function, set the value to 0\. To remove a dedicated allotment value for this account, choose **Use unreserved account concurrency**\.
+1. Under the **Configuration** tab, choose **Concurrency**\. In **Reserve concurrency**, set the value to the maximum of concurrent executions you want reserved for the function\. Note that when you set this value, the **Unreserved account concurrency** value will automatically be updated to display the remaining number of concurrent executions available for all other functions in the account\. Also note that if you want to block invocation of this function, set the value to 0\. To remove a dedicated allotment value for this account, choose **Use unreserved account concurrency**\.
 
 ### Setting Concurrency Limits Per Function \(CLI\)<a name="per-function-concurrency-cli"></a>
 
@@ -83,7 +80,7 @@ To view a concurrency limit for your Lambda function using the AWS CLI, do the f
 **Note**  
 Setting the per function concurrency can impact the concurrency pool available to other functions\. We recommend restricting the permissions to the [PutFunctionConcurrency](API_PutFunctionConcurrency.md) API and [DeleteFunctionConcurrency](API_DeleteFunctionConcurrency.md) API to administrative users so that the number of users who can make these changes is limited\.
 
-### Throttling Behavior<a name="throttling-metrics"></a>
+## Throttling Behavior<a name="throttling-behavior"></a>
 
 On reaching the concurrency limit associated with a function, any further invocation requests to that function are throttled, i\.e\. the invocation doesn't execute your function\. Each throttled invocation increases the Amazon CloudWatch `Throttles` metric for the function\. AWS Lambda handles throttled invocation requests differently, depending on their source: 
 
@@ -91,7 +88,7 @@ On reaching the concurrency limit associated with a function, any further invoca
 
   + **Synchronous invocation:** If the function is invoked synchronously and is throttled, Lambda returns a 429 error and the invoking service is responsible for retries\. The `ThrottledReason` error code explains whether you ran into a function level throttle \(if specified\) or an account level throttle \(see note below\)\. Each service may have its own retry policy\. For example, CloudWatch Logs retries the failed batch up to five times with delays between retries\. For a list of event sources and their invocation type, see [Supported Event Sources](invoking-lambda-function.md)\. 
 **Note**  
-If you invoke Lambda through API Gateway, make sure that you map Lambda response errors to API Gateway error codes\. If you invoke the function directly, such as through the AWS SDKs using the `RequestResponse` invocation mode or through API Gateway your client receives the 429 error and you can retry the invocation\. 
+If you invoke the function directly through the AWS SDKs using the `RequestResponse` invocation mode, your client receives the 429 error and you can retry the invocation\. 
 
   + **Asynchronous invocation:** If your Lambda function is invoked asynchronously and is throttled, AWS Lambda automatically retries the throttled event for up to six hours, with delays between retries\. Remember, asynchronous events are queued before they are used to invoke the Lambda function\. 
 

@@ -18,7 +18,7 @@ You'll do the following:
   };
   ```
 **Note**  
-The code sample is compliant with the Node\.js runtime v4\.3\. For more information, see [Programming Model \(Node\.js\)](programming-model.md)
+The code sample is compliant with the Node\.js runtime v4\.3\. For more information, see [Programming Model\(Node\.js\)](programming-model.md)
 
   The function is simple\. It processes incoming event data by logging it \(these logs are available in Amazon CloudWatch\), and in the request\-response model, you can request the log data be returned in the response\.
 

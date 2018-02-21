@@ -36,6 +36,8 @@ It is possible for an AWS account to delete a bucket and some other AWS account 
 In IAM:
 
 + Administrator user – Called **adminuser**\. Using root credentials of an AWS account is not recommended\. Instead, use the **adminuser** credentials to perform the steps in this tutorial\. 
+**Note**  
+If you have not already created the `adminuser` profile, see [Set Up the AWS Command Line Interface \(AWS CLI\)](setup-awscli.md)\.
 
 + An IAM role \(execution role\) – You grant permissions that your Lambda function needs through the permissions policy associated with this role\. 
 

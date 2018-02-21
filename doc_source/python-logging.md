@@ -22,11 +22,9 @@ def my_logging_handler(event, context):
     return 'Hello from Lambda!'
 ```
 
-Because the code example uses the `logging` module to write message to the logs, you also get some additional information in the log such as the time stamp and the log levels\. The log level identifies the type of log, such as `[INFO]`, `[ERROR]`, and `[DEBUG]`, as shown:
+Because the code example uses the `logging` module to write message to the logs, you also get some additional information in the log such as the time stamp and the log levels\. The log level identifies the type of log, such as `[INFO]`, `[ERROR]`, and `[DEBUG]`\.
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/python-logging-10.png)
-
-The screen shot shows an example **Log output** section in the Lambda console; you can also find these logs in CloudWatch\. For more information, see [Accessing Amazon CloudWatch Logs for AWS Lambda](monitoring-functions-logs.md)\.
+You can also find these logs in CloudWatch\. For more information, see [Accessing Amazon CloudWatch Logs for AWS Lambda](monitoring-functions-logs.md)\.
 
 Instead of using the `logging` module, you can use the `print` statements in your code as shown in the following Python example:
 

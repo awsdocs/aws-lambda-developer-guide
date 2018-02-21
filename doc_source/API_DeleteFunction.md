@@ -18,13 +18,13 @@ DELETE /2015-03-31/functions/FunctionName?Qualifier=Qualifier HTTP/1.1
 
 The request requires the following URI parameters\.
 
- ** FunctionName **   
+ ** [FunctionName](#API_DeleteFunction_RequestSyntax) **   <a name="SSS-DeleteFunction-request-FunctionName"></a>
 The Lambda function to delete\.  
  You can specify the function name \(for example, `Thumbnail`\) or you can specify Amazon Resource Name \(ARN\) of the function \(for example, `arn:aws:lambda:us-west-2:account-id:function:ThumbNail`\)\. If you are using versioning, you can also provide a qualified function ARN \(ARN that is qualified with function version or alias name as suffix\)\. AWS Lambda also allows you to specify only the function name with the account ID qualifier \(for example, `account-id:Thumbnail`\)\. Note that the length constraint applies only to the ARN\. If you specify only the function name, it is limited to 64 characters in length\.   
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
 Pattern: `(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
- ** Qualifier **   
+ ** [Qualifier](#API_DeleteFunction_RequestSyntax) **   <a name="SSS-DeleteFunction-request-Qualifier"></a>
 Using this optional parameter you can specify a function version \(but not the `$LATEST` version\) to direct AWS Lambda to delete a specific function version\. If the function version has one or more aliases pointing to it, you will get an error because you cannot have aliases pointing to it\. You can delete any function version but not the `$LATEST`, that is, you cannot specify `$LATEST` as the value of this parameter\. The `$LATEST` version can be deleted only when you want to delete all the function versions and aliases\.  
 You can only specify a function version, not an alias name, using this parameter\. You cannot delete a function version using its alias\.  
 If you don't specify this parameter, AWS Lambda will delete the function, including all of its versions and aliases\.  

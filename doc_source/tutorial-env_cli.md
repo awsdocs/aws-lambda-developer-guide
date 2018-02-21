@@ -16,11 +16,9 @@ In this tutorial, you will do the following:
 
 Make sure you have completed the following steps:
 
-+ Signed up for an AWS account and created an administrator user in the account\. 
++ Signed up for an AWS account and created an administrator user in the account \(called **adminuser**\)\. For instructions, see [Set Up an AWS Account](setup.md) 
 
-+ Installed and set up the AWS CLI\. 
-
-For instructions, see [Set Up an AWS Account](setup.md)\. 
++ Installed and set up the AWS CLI\. For instructions, see [Set Up the AWS Command Line Interface \(AWS CLI\)](setup-awscli.md)
 
 ## Step 2: Set Up the Lambda Environment<a name="env-test-function"></a>
 
@@ -111,7 +109,7 @@ Next, run the following Lambda CLI `update-function-configuration` command to up
 aws lambda update-function-configuration
 --function-name ReturnBucketName \
 --region us-east-1 \
---environment Variables={S3_BUCKET=Prod} \
+--environment Variables={S3_BUCKET=Prod}
 ```
 
 Run the `aws lambda invoke` command again using the same parameters\. This time, the Lambda function will return the Amazon S3 bucket name as `Prod`\.

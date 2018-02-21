@@ -18,7 +18,7 @@ The following is a list of example events published by the supported AWS service
 
 + [Amazon Cognito Sync Trigger Sample Event](#eventsources-cognito-sync-trigger)
 
-+ [Amazon Kinesis Streams Sample Event](#eventsources-kinesis-streams)
++ [Amazon Kinesis Data Streams Sample Event](#eventsources-kinesis-streams)
 
 + [Amazon S3 Put Sample Event](#eventsources-s3-put)
 
@@ -36,37 +36,30 @@ The following is a list of example events published by the supported AWS service
 
 + [AWS IoT Button Event](#eventsources-iot-button)
 
-+ [Kinesis Firehose Event](#eventsources-kinesis-firehose)
++ [Kinesis Data Firehose Event](#eventsources-kinesis-firehose)
 
-**AWS CloudFormation Create Request Sample Event**  
+**AWS CloudFormation Create Request Sample Event**  <a name="eventsources-cloudformation-create-request"></a>
 
 ```
 {
-  "Records": [
-    {
-      "EventVersion": "1.0",
-      "EventSource": "aws:sns",
-      "EventSubscriptionArn": "arn:aws:sns:us-west-2:123456789000:ses_messages:26a58451-3392-4ab6-a829-d65c2968421a",
-      "Sns":
-      {
-        "MessageId": "69762821-22a2-5b4f-89c1-79c9678a6323",
-        "Signature": "KZAVoA90WiCiiN3KOUtXymUc3nXO3Pztj1YDwcVbHj+tXFC1iDTOyWlpUvwsu5cgLaIAn56Li3vkeyLzc36oc5nNKKbc5NKYQy6Sz4qFGuGFslHilIyVYMLqqZmh66e4XlxEYIs84Et+8ttbSfR5TQ8BaQJLRKhwABB7buxNyDfiPo5BY2DG/BrKE6fIP3Xn8p9STlHlzzAF9wFOeGxCXLpbDZ728mPsyUNYrOnL3I9GKQfjAizAhfI1ilqyAhlBcXBUpI0Epb+5SHplUSVw9I+y8Zugce32hPAx2h4TV079kiWlUsZK/1APJj4+cw0xJuzP2af0jr84MlX7GnEb1g==",
-        "Type": "Notification",
-        "TopicArn": "arn:aws:sns:us-west-2:123456789000:ses_messages",
-        "MessageAttributes": {},
-        "SignatureVersion": "1",
-        "Timestamp": "2017-07-18T17:18:32.240Z",
-        "SigningCertUrl": "https://sns.us-west-2.amazonaws.com/SimpleNotificationService-b95095beb82e8f6a046b3aafc7f4149a.pem",
-        "Message": "StackId=\'arn:aws:cloudformation:us-west-2:123456789000:stack/testlin/c6a2d3f0-6bd7-11e7-aed2-50a68a2012ba\'\nTimestamp=\'2017-07-18T17:18:32.137Z\'\nEventId=\'1fb1f430-6bdd-11e7-87b8-50d5ca11b8f2\'\nLogicalResourceId=\'testlin\'\nNamespace=\'123456789000\'\nPhysicalResourceId=\'arn:aws:cloudformation:us-west-2:123456789000:stack/testlin/c6a2d3f0-6bd7-11e7-aed2-50a68a2012ba\'\nPrincipalId=\'AROAJONWXY64TJGXHBNKK:jeff-Isengard\'\nResourceProperties=\'null\'\nResourceStatus=\'DELETE_IN_PROGRESS\'\nResourceStatusReason=\'User Initiated\'\nResourceType=\'AWS::CloudFormation::Stack\'\nStackName=\'testlin\'\nClientRequestToken=\'Console-DeleteStack-437dbb41-a006-403a-b445-ff4e27b40dc9\'\n",
-        "UnsubscribeUrl": "https://sns.us-west-2.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-west-2:123456789000:ses_messages:26a58451-3392-4ab6-a829-d65c2968421a",
-        "Subject": "AWS CloudFormation Notification"
-      }
-    }
-  ]
+  "StackId": "arn:aws:cloudformation:us-west-2:EXAMPLE/stack-name/guid",
+  "ResponseURL": "http://pre-signed-S3-url-for-response",
+  "ResourceProperties": {
+    "StackName": "stack-name",
+    "List": [
+      "1",
+      "2",
+      "3"
+    ]
+  },
+  "RequestType": "Create",
+  "ResourceType": "Custom::TestResource",
+  "RequestId": "unique id for this create request",
+  "LogicalResourceId": "MyTestResource"
 }
 ```
 
-**Amazon SES Email Receiving Sample Event**  
+**Amazon SES Email Receiving Sample Event**  <a name="eventsources-ses-email-receiving"></a>
 
 ```
 {
@@ -95,7 +88,7 @@ The following is a list of example events published by the supported AWS service
 }
 ```
 
-**Scheduled Event Sample Event**  
+**Scheduled Event Sample Event**  <a name="eventsources-scheduled-event"></a>
 
 ```
 {
@@ -112,7 +105,7 @@ The following is a list of example events published by the supported AWS service
 }
 ```
 
-**Amazon CloudWatch Logs Sample Event**  
+**Amazon CloudWatch Logs Sample Event**  <a name="eventsources-cloudwatch-logs"></a>
 
 ```
 {
@@ -122,7 +115,7 @@ The following is a list of example events published by the supported AWS service
  }
 ```
 
-**Amazon SNS Sample Event**  
+**Amazon SNS Sample Event**  <a name="eventsources-sns"></a>
 
 ```
 {
@@ -158,10 +151,10 @@ The following is a list of example events published by the supported AWS service
 }
 ```
 
-**Amazon DynamoDB Update Sample Event**  
+**Amazon DynamoDB Update Sample Event**  <a name="eventsources-ddb-update"></a>
 
 ```
-     {
+{
   "Records": [
     {
       "eventID": "1",
@@ -253,7 +246,7 @@ The following is a list of example events published by the supported AWS service
 }
 ```
 
-**Amazon Cognito Sync Trigger Sample Event**  
+**Amazon Cognito Sync Trigger Sample Event**  <a name="eventsources-cognito-sync-trigger"></a>
 
 ```
    {
@@ -278,7 +271,7 @@ The following is a list of example events published by the supported AWS service
 }
 ```
 
-**Amazon Kinesis Streams Sample Event**  
+**Amazon Kinesis Data Streams Sample Event**  <a name="eventsources-kinesis-streams"></a>
 
 ```
      
@@ -302,7 +295,7 @@ The following is a list of example events published by the supported AWS service
 }
 ```
 
-**Amazon S3 Put Sample Event**  
+**Amazon S3 Put Sample Event**  <a name="eventsources-s3-put"></a>
 
 ```
 {
@@ -345,7 +338,7 @@ The following is a list of example events published by the supported AWS service
 }
 ```
 
-**Amazon S3 Delete Sample Event**  
+**Amazon S3 Delete Sample Event**  <a name="eventsources-s3-delete"></a>
 
 ```
   {
@@ -386,7 +379,7 @@ The following is a list of example events published by the supported AWS service
 }
 ```
 
-**Amazon Lex Sample Event**  
+**Amazon Lex Sample Event**  <a name="eventsources-lex"></a>
 
 ```
 {
@@ -416,7 +409,7 @@ The following is a list of example events published by the supported AWS service
 }
 ```
 
-**API Gateway Proxy Request Event**  
+**API Gateway Proxy Request Event**  <a name="eventsources-api-gateway-request"></a>
 
 ```
 {
@@ -476,7 +469,7 @@ The following is a list of example events published by the supported AWS service
 }
 ```
 
-**API Gateway Proxy Response Event**  
+**API Gateway Proxy Response Event**  <a name="eventsources-api-gateway-response"></a>
 
 ```
 {
@@ -504,7 +497,7 @@ The following is a list of example events published by the supported AWS service
 }
 ```
 
-**CloudFront Event**  
+**CloudFront Event**  <a name="eventsources-cloudfront"></a>
 
 ```
 {
@@ -539,7 +532,7 @@ The following is a list of example events published by the supported AWS service
 }
 ```
 
-**AWS Config Event**  
+**AWS Config Event**  <a name="eventsources-config"></a>
 
 ```
 { 
@@ -556,7 +549,7 @@ The following is a list of example events published by the supported AWS service
 }
 ```
 
-**AWS IoT Button Event**  
+**AWS IoT Button Event**  <a name="eventsources-iot-button"></a>
 
 ```
 {
@@ -566,7 +559,7 @@ The following is a list of example events published by the supported AWS service
 }
 ```
 
-**Kinesis Firehose Event**  
+**Kinesis Data Firehose Event**  <a name="eventsources-kinesis-firehose"></a>
 
 ```
 {

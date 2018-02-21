@@ -26,7 +26,7 @@ Resources:
         HttpPost:
           Type: Api
           Properties:
-            Path: 'DynamoDBOperations/DynamoDBManager'
+            Path: '/DynamoDBOperations/DynamoDBManager'
             Method: post
 ```
 

@@ -108,3 +108,5 @@ Information about the client application and device when invoked through the AWS
 + **client\_context\.env**
 
   A `dict` of environment information provided by the AWS Mobile SDK\.
+
+In addition to the options listed above, you can also use the AWS X\-Ray SDK for [Python](python-tracing.md) to identify critical code paths, trace their performance and capture the data for analysis\. 

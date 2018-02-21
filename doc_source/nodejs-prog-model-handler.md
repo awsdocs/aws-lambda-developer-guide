@@ -63,8 +63,6 @@ If you are using runtime v0\.10\.42, you need to use the context methods \(done,
 
    + We recommend specifying ** nodejs6\.10** as the **runtime** but you can also select **nodejs4\.3**\. The code samples provided will work for either version\.
 
-   + In **Handler**, replace `index.handler` with `exports.myHandler`\.
-
    For instructions to create a Lambda function using the console, see [Create a Simple Lambda Function](get-started-create-function.md)\.
 
 1. Replace the template code with the code provided in this section and create the function\.

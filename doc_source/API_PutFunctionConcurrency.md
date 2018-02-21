@@ -9,7 +9,7 @@ PUT /2017-10-31/functions/FunctionName/concurrency HTTP/1.1
 Content-type: application/json
 
 {
-   "ReservedConcurrentExecutions": number
+   "[ReservedConcurrentExecutions](#SSS-PutFunctionConcurrency-request-ReservedConcurrentExecutions)": number
 }
 ```
 
@@ -17,7 +17,7 @@ Content-type: application/json
 
 The request requires the following URI parameters\.
 
- ** FunctionName **   
+ ** [FunctionName](#API_PutFunctionConcurrency_RequestSyntax) **   <a name="SSS-PutFunctionConcurrency-request-FunctionName"></a>
 The name of the function you are setting concurrent execution limits on\. For more information, see [Managing Concurrency](concurrent-executions.md)\.  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
 Pattern: `(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
@@ -26,7 +26,7 @@ Pattern: `(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-z
 
 The request accepts the following data in JSON format\.
 
- ** ReservedConcurrentExecutions **   
+ ** [ReservedConcurrentExecutions](#API_PutFunctionConcurrency_RequestSyntax) **   <a name="SSS-PutFunctionConcurrency-request-ReservedConcurrentExecutions"></a>
 The concurrent execution limit reserved for this function\. For more information, see [Managing Concurrency](concurrent-executions.md)\.  
 Type: Integer  
 Valid Range: Minimum value of 0\.  
@@ -39,7 +39,7 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "ReservedConcurrentExecutions": number
+   "[ReservedConcurrentExecutions](#SSS-PutFunctionConcurrency-response-ReservedConcurrentExecutions)": number
 }
 ```
 
@@ -49,7 +49,7 @@ If the action is successful, the service sends back an HTTP 200 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** ReservedConcurrentExecutions **   
+ ** [ReservedConcurrentExecutions](#API_PutFunctionConcurrency_ResponseSyntax) **   <a name="SSS-PutFunctionConcurrency-response-ReservedConcurrentExecutions"></a>
 The number of concurrent executions reserved for this function\. For more information, see [Managing Concurrency](concurrent-executions.md)\.  
 Type: Integer  
 Valid Range: Minimum value of 0\.

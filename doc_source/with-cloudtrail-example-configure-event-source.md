@@ -17,11 +17,13 @@
    + An object\-created event is detected on a specific bucket\.
 
    + The bucket is owned by a specific AWS account\. If a bucket owner deletes a bucket, some other AWS account can create a bucket with the same name\. This condition ensures that only a specific AWS account can invoke your Lambda function\.
+**Note**  
+If you have not already created the `adminuser` profile, see [Set Up the AWS Command Line Interface \(AWS CLI\)](setup-awscli.md)\.
 
    ```
    $ aws lambda add-permission \
    --function-name CloudTrailEventProcessing \
-   --region us-west-2 \
+   --region region \
    --statement-id Id-1 \
    --action "lambda:InvokeFunction" \
    --principal s3.amazonaws.com \

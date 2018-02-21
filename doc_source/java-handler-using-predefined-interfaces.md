@@ -13,7 +13,7 @@ If you implement one of the interfaces, you specify *package*\.*class* in your J
 
 ```
 aws lambda create-function \
---region us-west-2 \
+--region region \
 --function-name getting-started-lambda-function-in-java \
 --zip-file fileb://deployment-package (zip or jar)
         path \
@@ -134,7 +134,7 @@ public class Response {
 
 You can create a Lambda function from this code and test the end\-to\-end experience as follows:
 
-+ Using the preceding code, create a deployment package\.
++ Using the preceding code, create a deployment package\. For more information, see [Creating a Deployment Package \(Java\)](lambda-java-how-to-create-deployment-package.md)
 
 + Upload the deployment package to AWS Lambda and create your Lambda function\.
 
@@ -155,7 +155,7 @@ You can create a Lambda function from this code and test the end\-to\-end experi
   }
   ```
 
-Follow instructions provided in the getting started \(see  [Step 2\.3: \(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\)\. Note the following differences:
+Follow instructions provided in the getting started \(see  [\(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\)\. Note the following differences:
 
 + When you create a deployment package, don't forget the `aws-lambda-java-core` library dependency\.
 
@@ -210,7 +210,7 @@ You can create a Lambda function from this code and test the end\-to\-end experi
 
   The Lambda function will return `TEST` in response\. 
 
-Follow instructions provided in the getting started \(see  [Step 2\.3: \(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\)\. Note the following differences:
+Follow instructions provided in the getting started \(see  [\(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\)\. Note the following differences:
 
 + When you create a deployment package, don't forget the `aws-lambda-java-core` library dependency\.
 

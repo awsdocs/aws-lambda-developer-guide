@@ -51,7 +51,7 @@ The following example AWS CLI command adds a permission to the `helloworld` Lamb
 
 ```
 aws lambda add-permission \
---region us-west-2 \
+--region region \
 --function-name helloworld \
 --statement-id 1 \
 --principal s3.amazonaws.com \
@@ -92,7 +92,7 @@ The following example AWS CLI command adds a permission to the `helloworld` Lamb
 
 ```
 aws lambda add-permission \
---region us-west-2 \
+--region region \
 --function-name helloworld \
 --statement-id 5 \
 --principal apigateway.amazonaws.com \
@@ -120,7 +120,7 @@ To grant permissions to another AWS account \(that is, to create a cross\-accoun
 
 ```
 aws lambda add-permission \
---region us-west-2 \
+--region region \
 --function-name helloworld \
 --statement-id 3 \
 --principal 111111111111 \

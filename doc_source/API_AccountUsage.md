@@ -4,12 +4,12 @@ Provides code size usage and function count associated with the current account 
 
 ## Contents<a name="API_AccountUsage_Contents"></a>
 
- **FunctionCount**   
+ **FunctionCount**   <a name="SSS-Type-AccountUsage-FunctionCount"></a>
 The number of your account's existing functions per region\.  
 Type: Long  
 Required: No
 
- **TotalCodeSize**   
+ **TotalCodeSize**   <a name="SSS-Type-AccountUsage-TotalCodeSize"></a>
 Total size, in bytes, of the account's deployment packages per region\.  
 Type: Long  
 Required: No

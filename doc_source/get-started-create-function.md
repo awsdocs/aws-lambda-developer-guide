@@ -25,7 +25,7 @@ The console shows the **Get Started** page only if you do not have any Lambda fu
 
       + Enter **dynamodb** in **Filter** to get a list of available blueprints to process Amazon DynamoDB events\.
 
-   1. For this Getting Started exercise, choose the **Author from scatch** button\.
+   1. For this Getting Started exercise, choose the **Author from scratch** button\.
 
 1. In **Author from scratch**, do the following:
 
@@ -54,7 +54,7 @@ The console shows the **Get Started** page only if you do not have any Lambda fu
 
    1. For this example, do not configure a trigger\.
 
-   + In **Function code** note that code authored in Python is provided\. It returns a simple "Hello from Lambda" greeting\.
+   + In **Function code** note that code authored in Node\.js is provided\. It returns a simple "Hello from Lambda" greeting\.
 
    + **Handler** shows **lambda\_function\.lambda\_handler** value\. It is the *filename*\.*handler\-function*\. The console saves the sample code in the `lambda_function.py` file and in the code `lambda_handler` is the function name that receives the event as a parameter when the Lambda function is invoked\. For more information, see [Lambda Function Handler \(Python\)](python-programming-model-handler-types.md)\.
 
@@ -72,7 +72,7 @@ The console shows the **Get Started** page only if you do not have any Lambda fu
 
    + **Network** – allows you to select a VPC your function will access\. For more information, see [Configuring a Lambda Function to Access Resources in an Amazon VPC](vpc.md)\.
 
-   + **Debugging and error handling** – allows you to select a [Dead Letter Queues](dlq.md) resource to analyze failed function invocation retries\. It also allows you to enable active tracing\. For more information, see [Lambda X\-Ray](lambda-x-ray.md)\. 
+   + **Debugging and error handling** – allows you to select a [Dead Letter Queues](dlq.md) resource to analyze failed function invocation retries\. It also allows you to enable active tracing\. For more information, see [Using AWS X\-Ray](lambda-x-ray.md)\. 
 
    + **Concurrency** – allows you to allocate a specific limit of concurrent executions allowed for this function\. For more information, see [Function Level Concurrent Execution Limit](concurrent-executions.md#per-function-concurrency)\. 
 

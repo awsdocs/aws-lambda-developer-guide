@@ -31,7 +31,7 @@ You can have similar handler functions for other simple Java types\.
 **Note**  
 When you invoke a Lambda function asynchronously, any return value by your Lambda function will be ignored\. Therefore you might want to set the return type to void to make this clear in your code\. For more information, see [Invoke](API_Invoke.md)\.
 
-To test an end\-to\-end example, see  [Step 2\.3: \(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\.
+To test an end\-to\-end example, see  [\(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\.
 
 ## Handler Input/Output: POJO Type<a name="java-programming-model-req-resp-pojo"></a>
 

@@ -18,20 +18,20 @@ GET /2015-03-31/event-source-mappings/?EventSourceArn=EventSourceArn&FunctionNam
 
 The request requires the following URI parameters\.
 
- ** EventSourceArn **   
+ ** [EventSourceArn](#API_ListEventSourceMappings_RequestSyntax) **   <a name="SSS-ListEventSourceMappings-request-EventSourceArn"></a>
 The Amazon Resource Name \(ARN\) of the Amazon Kinesis stream\. \(This parameter is optional\.\)  
 Pattern: `arn:aws:([a-zA-Z0-9\-])+:([a-z]{2}-[a-z]+-\d{1})?:(\d{12})?:(.*)` 
 
- ** FunctionName **   
+ ** [FunctionName](#API_ListEventSourceMappings_RequestSyntax) **   <a name="SSS-ListEventSourceMappings-request-FunctionName"></a>
 The name of the Lambda function\.  
  You can specify the function name \(for example, `Thumbnail`\) or you can specify Amazon Resource Name \(ARN\) of the function \(for example, `arn:aws:lambda:us-west-2:account-id:function:ThumbNail`\)\. If you are using versioning, you can also provide a qualified function ARN \(ARN that is qualified with function version or alias name as suffix\)\. AWS Lambda also allows you to specify only the function name with the account ID qualifier \(for example, `account-id:Thumbnail`\)\. Note that the length constraint applies only to the ARN\. If you specify only the function name, it is limited to 64 characters in length\.   
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
 Pattern: `(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
- ** Marker **   
+ ** [Marker](#API_ListEventSourceMappings_RequestSyntax) **   <a name="SSS-ListEventSourceMappings-request-Marker"></a>
 Optional string\. An opaque pagination token returned from a previous `ListEventSourceMappings` operation\. If present, specifies to continue the list from where the returning call left off\. 
 
- ** MaxItems **   
+ ** [MaxItems](#API_ListEventSourceMappings_RequestSyntax) **   <a name="SSS-ListEventSourceMappings-request-MaxItems"></a>
 Optional integer\. Specifies the maximum number of event sources to return in response\. This value must be greater than 0\.  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.
 
@@ -46,19 +46,19 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "EventSourceMappings": [ 
+   "[EventSourceMappings](#SSS-ListEventSourceMappings-response-EventSourceMappings)": [ 
       { 
-         "BatchSize": number,
-         "EventSourceArn": "string",
-         "FunctionArn": "string",
-         "LastModified": number,
-         "LastProcessingResult": "string",
-         "State": "string",
-         "StateTransitionReason": "string",
-         "UUID": "string"
+         "[BatchSize](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-BatchSize)": number,
+         "[EventSourceArn](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-EventSourceArn)": "string",
+         "[FunctionArn](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-FunctionArn)": "string",
+         "[LastModified](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-LastModified)": number,
+         "[LastProcessingResult](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-LastProcessingResult)": "string",
+         "[State](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-State)": "string",
+         "[StateTransitionReason](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-StateTransitionReason)": "string",
+         "[UUID](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-UUID)": "string"
       }
    ],
-   "NextMarker": "string"
+   "[NextMarker](#SSS-ListEventSourceMappings-response-NextMarker)": "string"
 }
 ```
 
@@ -68,11 +68,11 @@ If the action is successful, the service sends back an HTTP 200 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** EventSourceMappings **   
+ ** [EventSourceMappings](#API_ListEventSourceMappings_ResponseSyntax) **   <a name="SSS-ListEventSourceMappings-response-EventSourceMappings"></a>
 An array of `EventSourceMappingConfiguration` objects\.  
 Type: Array of [EventSourceMappingConfiguration](API_EventSourceMappingConfiguration.md) objects
 
- ** NextMarker **   
+ ** [NextMarker](#API_ListEventSourceMappings_ResponseSyntax) **   <a name="SSS-ListEventSourceMappings-response-NextMarker"></a>
 A string, present if there are more event source mappings\.  
 Type: String
 

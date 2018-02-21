@@ -2,11 +2,11 @@
 
 For the end\-to\-end AWS Lambda\-based applications to work, you have to manage various permissions\. For example:
 
-+ For event sources, except for the stream\-based services \(Amazon Kinesis Streams and DynamoDB streams\), you must grant the event source permissions to invoke your AWS Lambda function\. 
++ For event sources, except for the stream\-based services \(Amazon Kinesis Data Streams and DynamoDB streams\), you must grant the event source permissions to invoke your AWS Lambda function\. 
 
    
 
-+ For stream\-based event sources \(Amazon Kinesis Streams and DynamoDB streams\), AWS Lambda polls the streams on your behalf and reads new records on the stream, so you need to grant AWS Lambda permissions for the relevant stream actions\.
++ For stream\-based event sources \(Amazon Kinesis Data Streams and DynamoDB streams\), AWS Lambda polls the streams on your behalf and reads new records on the stream, so you need to grant AWS Lambda permissions for the relevant stream actions\.
 
    
 
@@ -27,7 +27,7 @@ Each Lambda function has an IAM role \(execution role\) associated with it\. You
 
    
 
-+ If the event source is stream\-based \(Amazon Kinesis Streams and DynamoDB streams\), AWS Lambda polls these streams on your behalf\. AWS Lambda needs permissions to poll the stream and read new records on the stream so you need to grant the relevant permissions to this role\. 
++ If the event source is stream\-based \(Amazon Kinesis Data Streams and DynamoDB streams\), AWS Lambda polls these streams on your behalf\. AWS Lambda needs permissions to poll the stream and read new records on the stream so you need to grant the relevant permissions to this role\. 
 
 For more information about IAM roles, see [Roles \(Delegation and Federation\)](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *IAM User Guide*\. 
 
@@ -40,7 +40,7 @@ To simplify the process for creating an execution role, AWS Lambda provides the 
 
    
 
-+ **AWSLambdaKinesisExecutionRole** – Grants permissions for Amazon Kinesis Streams actions, and CloudWatch Logs actions\. If you are writing a Lambda function to process Kinesis stream events you can attach this permissions policy\.
++ **AWSLambdaKinesisExecutionRole** – Grants permissions for Amazon Kinesis Data Streams actions, and CloudWatch Logs actions\. If you are writing a Lambda function to process Kinesis stream events you can attach this permissions policy\.
 
    
 

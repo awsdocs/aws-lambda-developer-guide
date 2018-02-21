@@ -4,7 +4,7 @@ The parent object that implements what percentage of traffic will invoke each fu
 
 ## Contents<a name="API_AliasRoutingConfiguration_Contents"></a>
 
- **AdditionalVersionWeights**   
+ **AdditionalVersionWeights**   <a name="SSS-Type-AliasRoutingConfiguration-AdditionalVersionWeights"></a>
 Set this value to dictate what percentage of traffic will invoke the updated function version\. If set to an empty string, 100 percent of traffic will invoke `function-version`\. For more information, see [Traffic Shifting Using Aliases](lambda-traffic-shifting-using-aliases.md)\.  
 Type: String to double map  
 Key Length Constraints: Minimum length of 1\. Maximum length of 1024\.  

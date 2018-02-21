@@ -4,7 +4,7 @@
 
 ## Custom Appender for Log4j™ 2<a name="java-logging-log4j2"></a>
 
- AWS Lambda recommends Log4j 2 to provide a custom appender\. You can use the custom Log4j \(see [Apache log4j](Apache Log4j 2)\) appender provided by Lambda for logging from your lambda functions\. Every call to Log4j methods, such as `log.debug()` or `log.error()`, will result in a CloudWatch Logs event\. The custom appender is called `LambdaAppender` and must be used in the `log4j2.xml` file\. You must include the `aws-lambda-java-log4j2` artifact \(`artifactId:aws-lambda-java-log4j2`\) in the deployment package \(\.jar file\)\. For an example, see [Example 1: Writing Logs Using Log4J v2\.8 ](#java-wt-logging-using-log4j2.8)\.
+ AWS Lambda recommends Log4j 2 to provide a custom appender\. You can use the custom Log4j \(see [Apache log4j](https://logging.apache.org/log4j/2.x/)\) appender provided by Lambda for logging from your lambda functions\. Every call to Log4j methods, such as `log.debug()` or `log.error()`, will result in a CloudWatch Logs event\. The custom appender is called `LambdaAppender` and must be used in the `log4j2.xml` file\. You must include the `aws-lambda-java-log4j2` artifact \(`artifactId:aws-lambda-java-log4j2`\) in the deployment package \(\.jar file\)\. For an example, see [Example 1: Writing Logs Using Log4J v2\.8 ](#java-wt-logging-using-log4j2.8)\.
 
 ## LambdaLogger\.log\(\)<a name="java-logging-lambdalogger"></a>
 
@@ -201,7 +201,7 @@ You can do the following to test the code:
 
 + To test your Lambda function use a string \("this is a test"\) as sample event\. The handler code receives the sample event but does nothing with it\. It only shows how to write logs\.
 
-Follow the instructions provided in the Getting Started\. For more information, see  [Step 2\.3: \(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\. Note the following differences:
+Follow the instructions provided in the Getting Started\. For more information, see  [\(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\. Note the following differences:
 
 + When you create a deployment package, don't forget the `aws-lambda-java-core` library dependency\. 
 

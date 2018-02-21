@@ -14,7 +14,7 @@ If you are new to managing permissions, we recommend that you start with the exa
 + [Amazon CloudWatch Logs](#console-permissions-cloudwatch-logs)
 + [Amazon Cognito](#console-permissions-cognito)
 + [Amazon DynamoDB](#console-permissions-dynamodb)
-+ [Amazon Kinesis Streams](#console-permissions-kinesis)
++ [Amazon Kinesis Data Streams](#console-permissions-kinesis)
 + [Amazon S3](#console-permissions-s3)
 + [Amazon SNS](#console-permissions-sns)
 + [AWS IoT](#console-permissions-iot)
@@ -250,7 +250,7 @@ The console lists all of the tables in your account\. After you select a table, 
 **Important**  
 For a Lambda function to read from a DynamoDB stream, the execution role associated with the Lambda function must have the correct permissions\. Therefore, the user must also have the same permissions before you can grant the permissions to the execution role\. You can grant these permissions by attaching the `AWSLambdaDynamoDBExecutionRole` predefined policy, first to the user and then to the execution role\.
 
-## Amazon Kinesis Streams<a name="console-permissions-kinesis"></a>
+## Amazon Kinesis Data Streams<a name="console-permissions-kinesis"></a>
 
 The console lists all Kinesis streams in your account\. After you select a stream, the console creates event source mappings in AWS Lambda\. For this to work, you need to grant the following additional permissions:
 

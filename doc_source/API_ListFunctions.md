@@ -16,23 +16,23 @@ GET /2015-03-31/functions/?FunctionVersion=FunctionVersion&Marker=Marker&MasterR
 
 The request requires the following URI parameters\.
 
- ** FunctionVersion **   
+ ** [FunctionVersion](#API_ListFunctions_RequestSyntax) **   <a name="SSS-ListFunctions-request-FunctionVersion"></a>
 Optional string\. If not specified, only the unqualified functions ARNs \(Amazon Resource Names\) will be returned\.  
 Valid value:  
  `ALL`: Will return all versions, including `$LATEST` which will have fully qualified ARNs \(Amazon Resource Names\)\.  
 Valid Values:` ALL` 
 
- ** Marker **   
+ ** [Marker](#API_ListFunctions_RequestSyntax) **   <a name="SSS-ListFunctions-request-Marker"></a>
 Optional string\. An opaque pagination token returned from a previous `ListFunctions` operation\. If present, indicates where to continue the listing\. 
 
- ** MasterRegion **   
+ ** [MasterRegion](#API_ListFunctions_RequestSyntax) **   <a name="SSS-ListFunctions-request-MasterRegion"></a>
 Optional string\. If not specified, will return only regular function versions \(i\.e\., non\-replicated versions\)\.  
 Valid values are:  
 The region from which the functions are replicated\. For example, if you specify `us-east-1`, only functions replicated from that region will be returned\.  
  `ALL`: Will return all functions from any region\. If specified, you also must specify a valid FunctionVersion parameter\.  
 Pattern: `ALL|[a-z]{2}(-gov)?-[a-z]+-\d{1}` 
 
- ** MaxItems **   
+ ** [MaxItems](#API_ListFunctions_RequestSyntax) **   <a name="SSS-ListFunctions-request-MaxItems"></a>
 Optional integer\. Specifies the maximum number of AWS Lambda functions to return in response\. This parameter value must be greater than 0\.  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.
 
@@ -47,45 +47,46 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "Functions": [ 
+   "[Functions](#SSS-ListFunctions-response-Functions)": [ 
       { 
-         "CodeSha256": "string",
-         "CodeSize": number,
-         "DeadLetterConfig": { 
-            "TargetArn": "string"
+         "[CodeSha256](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-CodeSha256)": "string",
+         "[CodeSize](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-CodeSize)": number,
+         "[DeadLetterConfig](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-DeadLetterConfig)": { 
+            "[TargetArn](API_DeadLetterConfig.md#SSS-Type-DeadLetterConfig-TargetArn)": "string"
          },
-         "Description": "string",
-         "Environment": { 
-            "Error": { 
-               "ErrorCode": "string",
-               "Message": "string"
+         "[Description](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-Description)": "string",
+         "[Environment](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-Environment)": { 
+            "[Error](API_EnvironmentResponse.md#SSS-Type-EnvironmentResponse-Error)": { 
+               "[ErrorCode](API_EnvironmentError.md#SSS-Type-EnvironmentError-ErrorCode)": "string",
+               "[Message](API_EnvironmentError.md#SSS-Type-EnvironmentError-Message)": "string"
             },
-            "Variables": { 
+            "[Variables](API_EnvironmentResponse.md#SSS-Type-EnvironmentResponse-Variables)": { 
                "string" : "string" 
             }
          },
-         "FunctionArn": "string",
-         "FunctionName": "string",
-         "Handler": "string",
-         "KMSKeyArn": "string",
-         "LastModified": "string",
-         "MasterArn": "string",
-         "MemorySize": number,
-         "Role": "string",
-         "Runtime": "string",
-         "Timeout": number,
-         "TracingConfig": { 
-            "Mode": "string"
+         "[FunctionArn](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-FunctionArn)": "string",
+         "[FunctionName](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-FunctionName)": "string",
+         "[Handler](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-Handler)": "string",
+         "[KMSKeyArn](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-KMSKeyArn)": "string",
+         "[LastModified](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-LastModified)": "string",
+         "[MasterArn](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-MasterArn)": "string",
+         "[MemorySize](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-MemorySize)": number,
+         "[RevisionId](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-RevisionId)": "string",
+         "[Role](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-Role)": "string",
+         "[Runtime](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-Runtime)": "string",
+         "[Timeout](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-Timeout)": number,
+         "[TracingConfig](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-TracingConfig)": { 
+            "[Mode](API_TracingConfigResponse.md#SSS-Type-TracingConfigResponse-Mode)": "string"
          },
-         "Version": "string",
-         "VpcConfig": { 
-            "SecurityGroupIds": [ "string" ],
-            "SubnetIds": [ "string" ],
-            "VpcId": "string"
+         "[Version](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-Version)": "string",
+         "[VpcConfig](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-VpcConfig)": { 
+            "[SecurityGroupIds](API_VpcConfigResponse.md#SSS-Type-VpcConfigResponse-SecurityGroupIds)": [ "string" ],
+            "[SubnetIds](API_VpcConfigResponse.md#SSS-Type-VpcConfigResponse-SubnetIds)": [ "string" ],
+            "[VpcId](API_VpcConfigResponse.md#SSS-Type-VpcConfigResponse-VpcId)": "string"
          }
       }
    ],
-   "NextMarker": "string"
+   "[NextMarker](#SSS-ListFunctions-response-NextMarker)": "string"
 }
 ```
 
@@ -95,11 +96,11 @@ If the action is successful, the service sends back an HTTP 200 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** Functions **   
+ ** [Functions](#API_ListFunctions_ResponseSyntax) **   <a name="SSS-ListFunctions-response-Functions"></a>
 A list of Lambda functions\.  
 Type: Array of [FunctionConfiguration](API_FunctionConfiguration.md) objects
 
- ** NextMarker **   
+ ** [NextMarker](#API_ListFunctions_ResponseSyntax) **   <a name="SSS-ListFunctions-response-NextMarker"></a>
 A string, present if there are more functions\.  
 Type: String
 

@@ -73,10 +73,10 @@ This section explains how to create a deployment package if you are using a Pyth
   + On OS X and Linux, you source the `activate` script:
 
     ```
-    source  path/to/my/virtual-env/bin/activate
+    source path/to/my/virtual-env/bin/activate
     ```
 
-+ Also, suppose you have installed the **requests** package in the activated environment \(assume that you will you use these in your code\)\. You can install these packages as follows :
++ Also, to install the **requests** package in the activated environment, do the following: :
 
   ```
   pip install requests  

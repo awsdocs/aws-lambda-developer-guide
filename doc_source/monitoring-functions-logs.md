@@ -4,7 +4,7 @@ AWS Lambda automatically monitors Lambda functions on your behalf, reporting met
 
 You can insert logging statements into your code to help you validate that your code is working as expected\. Lambda automatically integrates with CloudWatch Logs and pushes all logs from your code to a CloudWatch Logs group associated with a Lambda function, which is named /aws/lambda/*<function name>*\. To learn more about log groups and accessing them through the CloudWatch console, see the [Monitoring System, Application, and Custom Log Files](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatchLogs.html) in the *Amazon CloudWatch User Guide*\. 
 
-You can view logs for Lambda by using the Lambda console, the CloudWatch console, the AWS CLI, or the CloudWatch API\. The following procedure show you how to view the logs by using the Lambda console\. 
+You can view logs for Lambda by using the Lambda console, the CloudWatch console, the AWS CLI, or the CloudWatch API\. The following procedure show you how to view the logs by using the Lambda console\. If you have not created a Lambda function before, see [Getting Started](getting-started.md)\.
 
 **Note**  
 There is no additional charge for using Lambda logs; however, standard CloudWatch Logs charges apply\. For more information, see [CloudWatch Pricing\.](https://aws.amazon.com/cloudwatch/pricing/)
@@ -13,14 +13,12 @@ There is no additional charge for using Lambda logs; however, standard CloudWatc
 
 1. Sign in to the AWS Management Console and open the AWS Lambda console at [https://console\.aws\.amazon\.com/lambda/](https://console.aws.amazon.com/lambda/)\.
 
-1. If you have not created a Lambda function before, see [Getting Started](getting-started.md)\.
-
 1. On the **Functions ** page, choose the function name and then choose the **Monitoring** tab\.  
 ![\[Events\]](http://docs.aws.amazon.com/lambda/latest/dg/images/metrics-functions-list.png)![\[Events\]](http://docs.aws.amazon.com/lambda/latest/dg/)![\[Events\]](http://docs.aws.amazon.com/lambda/latest/dg/)
 
    A graphical representation of the metrics for the Lambda function are shown\.
 
-1. Choose **View logs in CloudWatch** to view the logs\.
+1. Choose **Jump to logs** to view the logs\.
 
 For more information on accessing CloudWatch Logs, see the following guides:
 

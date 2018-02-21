@@ -44,10 +44,6 @@ The Lambda function execution role must have permissions to create, describe and
 
 Note the following additional considerations:
 
-+ We recommend that you avoid DNS resolution of public host names for your VPC\. This can take several seconds to resolve, which adds several seconds of billable time on your request\. For example, if your Lambda function accesses an Amazon RDS instance in your VPC, launch the instance with the `no-publicly-accessible` option\.
-
-   
-
 + When you add VPC configuration to a Lambda function, it can only access resources in that VPC\. If a Lambda function needs to access both VPC resources and the public Internet, the VPC needs to have a Network Address Translation \(NAT\) instance inside the VPC\. 
 
    

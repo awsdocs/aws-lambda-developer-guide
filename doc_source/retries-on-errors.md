@@ -18,9 +18,9 @@ If any of these failures occur, your function will throw an exception\. How the 
 
    
 
-  + **Synchronous invocation** – The invoking application receives a 429 error, and is responsible for retries\. For a list of supported event sources and the invocation types they use, see [Supported Event Sources](http://docs.aws.amazon.com/lambda/latest/dg/invoking-lambda-function.html)\. These event sources may have additional retries built into the integration\. 
+  + **Synchronous invocation** – The invoking application receives a 429 error and is responsible for retries\. For a list of supported event sources and the invocation types they use, see [Supported Event Sources](http://docs.aws.amazon.com/lambda/latest/dg/invoking-lambda-function.html)\. These event sources may have additional retries built into the integration\. 
 
-    If you invoked the Lambda function directly through AWS SDKs, or through API Gateway, your client receives the error and can choose to retry\. If you are invoking Lambda through API Gateway, you need to make sure you map Lambda response errors to API Gateway error codes\.
+    If you invoked the Lambda function directly through AWS SDKs, your client receives the error and can choose to retry\.
 
      
 
@@ -28,6 +28,6 @@ If any of these failures occur, your function will throw an exception\. How the 
 
      
 
-+ **Stream\-based event sources** – For stream\-based event sources \(Amazon Kinesis Streams and DynamoDB streams\), AWS Lambda polls your stream and invokes your Lambda function\. Therefore, if a Lambda function fails, AWS Lambda attempts to process the erring batch of records until the time the data expires, which can be up to seven days for Amazon Kinesis Streams\. The exception is treated as blocking, and AWS Lambda will not read any new records from the stream until the failed batch of records either expires or processed successfully\. This ensures that AWS Lambda processes the stream events in order\.
++ **Stream\-based event sources** – For stream\-based event sources \(Amazon Kinesis Data Streams and DynamoDB streams\), AWS Lambda polls your stream and invokes your Lambda function\. Therefore, if a Lambda function fails, AWS Lambda attempts to process the erring batch of records until the time the data expires, which can be up to seven days for Amazon Kinesis Data Streams\. The exception is treated as blocking, and AWS Lambda will not read any new records from the stream until the failed batch of records either expires or processed successfully\. This ensures that AWS Lambda processes the stream events in order\.
 
 For more information about invocation modes, see [Event Source Mapping](java-invocation-options.md#intro-invocation-modes)\.

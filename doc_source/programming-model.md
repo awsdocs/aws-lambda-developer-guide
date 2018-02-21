@@ -1,4 +1,4 @@
-# Programming Model \(Node\.js\)<a name="programming-model"></a>
+# Programming Model\(Node\.js\)<a name="programming-model"></a>
 
 AWS Lambda currently supports the following Node\.js runtimes:
 

@@ -8,7 +8,7 @@ The following sections explain how [common programming patterns and core concept
 + [Logging \(Java\)](java-logging.md)
 + [Function Errors \(Java\)](java-exceptions.md)
 + [Using Earlier Custom Appender for Log4j™ 1\.2 \(Not Recommended\)](java-logging-log4j1.md)
-+ [Step 2\.3: \(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)
++ [\(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)
 
 Additionally, note that AWS Lambda provides the following libraries:
 
@@ -16,10 +16,10 @@ Additionally, note that AWS Lambda provides the following libraries:
 
 + **aws\-lambda\-java\-events** – This library provides predefined types that you can use when writing Lambda functions to process events published by Amazon S3, Kinesis, Amazon SNS, and Amazon Cognito\. These classes help you process the event without having to write your own custom serialization logic\.
 
-+ **Custom Appender for Log4j2\.8** – You can use the custom Log4j \(see [Apache Log4j 2](http://logging.apache.org/log4j/2.x/index.html)\) appender provided by AWS Lambda for logging from your lambda functions\. Every call to Log4j methods, such as log\.debug\(\) or log\.error\(\), will result in a CloudWatch Logs event\. The custom appender is called LambdaAppender and must be used in the log4j2\.xml file\. You must include the aws\-lambda\-java\-log4j2 artifact \(artifactId:aws\-lambda\-java\-log4j2\) in the deployment package \(\.jar file\)\.For more information, see [Logging \(Java\)](java-logging.md)\.
++ **Custom Appender for Log4j2\.8** – You can use the custom Log4j \(see [Apache Log4j 2](http://logging.apache.org/log4j/2.x)\) appender provided by AWS Lambda for logging from your lambda functions\. Every call to Log4j methods, such as log\.debug\(\) or log\.error\(\), will result in a CloudWatch Logs event\. The custom appender is called LambdaAppender and must be used in the log4j2\.xml file\. You must include the aws\-lambda\-java\-log4j2 artifact \(artifactId:aws\-lambda\-java\-log4j2\) in the deployment package \(\.jar file\)\.For more information, see [Logging \(Java\)](java-logging.md)\.
 
-+ **Custom Appender for Log4j1\.2 ** – You can use the custom Log4j \(see [Apache Log4j 1\.2](http://logging.apache.org/log4j/1.2index.html)\) appender provided by AWS Lambda for logging from your lambda functions\. For more information, see [Logging \(Java\)](java-logging.md)\.
++ **Custom Appender for Log4j1\.2 ** – You can use the custom Log4j \(see [Apache Log4j 1\.2](http://logging.apache.org/log4j/1.2)\) appender provided by AWS Lambda for logging from your lambda functions\. For more information, see [Logging \(Java\)](java-logging.md)\.
 **Note**  
 Support for the Log4j v1\.2 custom appender is marked for End\-Of\-Life\. It will not receive ongoing updates and is not recommended for use\.
 
- These libraries are available through the Maven Central Repository and can also be found on GitHub\.
+ These libraries are available through the [Maven Central Repository](https://maven.apache.org/) and can also be found on [GitHub](https://github.com/)\.

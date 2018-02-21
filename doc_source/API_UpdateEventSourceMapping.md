@@ -15,9 +15,9 @@ PUT /2015-03-31/event-source-mappings/UUID HTTP/1.1
 Content-type: application/json
 
 {
-   "BatchSize": number,
-   "Enabled": boolean,
-   "FunctionName": "string"
+   "[BatchSize](#SSS-UpdateEventSourceMapping-request-BatchSize)": number,
+   "[Enabled](#SSS-UpdateEventSourceMapping-request-Enabled)": boolean,
+   "[FunctionName](#SSS-UpdateEventSourceMapping-request-FunctionName)": "string"
 }
 ```
 
@@ -25,25 +25,25 @@ Content-type: application/json
 
 The request requires the following URI parameters\.
 
- ** UUID **   
+ ** [UUID](#API_UpdateEventSourceMapping_RequestSyntax) **   <a name="SSS-UpdateEventSourceMapping-request-UUID"></a>
 The event source mapping identifier\.
 
 ## Request Body<a name="API_UpdateEventSourceMapping_RequestBody"></a>
 
 The request accepts the following data in JSON format\.
 
- ** BatchSize **   
+ ** [BatchSize](#API_UpdateEventSourceMapping_RequestSyntax) **   <a name="SSS-UpdateEventSourceMapping-request-BatchSize"></a>
 The maximum number of stream records that can be sent to your Lambda function for a single invocation\.  
 Type: Integer  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.  
 Required: No
 
- ** Enabled **   
+ ** [Enabled](#API_UpdateEventSourceMapping_RequestSyntax) **   <a name="SSS-UpdateEventSourceMapping-request-Enabled"></a>
 Specifies whether AWS Lambda should actively poll the stream or not\. If disabled, AWS Lambda will not poll the stream\.  
 Type: Boolean  
 Required: No
 
- ** FunctionName **   
+ ** [FunctionName](#API_UpdateEventSourceMapping_RequestSyntax) **   <a name="SSS-UpdateEventSourceMapping-request-FunctionName"></a>
 The Lambda function to which you want the stream records sent\.  
  You can specify a function name \(for example, `Thumbnail`\) or you can specify Amazon Resource Name \(ARN\) of the function \(for example, `arn:aws:lambda:us-west-2:account-id:function:ThumbNail`\)\. AWS Lambda also allows you to specify a partial ARN \(for example, `account-id:Thumbnail`\)\. Note that the length constraint applies only to the ARN\. If you specify only the function name, it is limited to 64 characters in length\.   
 If you are using versioning, you can also provide a qualified function ARN \(ARN that is qualified with function version or alias name as suffix\)\. For more information about versioning, see [AWS Lambda Function Versioning and Aliases](http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html)   
@@ -60,14 +60,14 @@ HTTP/1.1 202
 Content-type: application/json
 
 {
-   "BatchSize": number,
-   "EventSourceArn": "string",
-   "FunctionArn": "string",
-   "LastModified": number,
-   "LastProcessingResult": "string",
-   "State": "string",
-   "StateTransitionReason": "string",
-   "UUID": "string"
+   "[BatchSize](#SSS-UpdateEventSourceMapping-response-BatchSize)": number,
+   "[EventSourceArn](#SSS-UpdateEventSourceMapping-response-EventSourceArn)": "string",
+   "[FunctionArn](#SSS-UpdateEventSourceMapping-response-FunctionArn)": "string",
+   "[LastModified](#SSS-UpdateEventSourceMapping-response-LastModified)": number,
+   "[LastProcessingResult](#SSS-UpdateEventSourceMapping-response-LastProcessingResult)": "string",
+   "[State](#SSS-UpdateEventSourceMapping-response-State)": "string",
+   "[StateTransitionReason](#SSS-UpdateEventSourceMapping-response-StateTransitionReason)": "string",
+   "[UUID](#SSS-UpdateEventSourceMapping-response-UUID)": "string"
 }
 ```
 
@@ -77,38 +77,38 @@ If the action is successful, the service sends back an HTTP 202 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** BatchSize **   
+ ** [BatchSize](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-BatchSize"></a>
 The largest number of records that AWS Lambda will retrieve from your event source at the time of invoking your function\. Your function receives an event with all the retrieved records\.  
 Type: Integer  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.
 
- ** EventSourceArn **   
+ ** [EventSourceArn](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-EventSourceArn"></a>
 The Amazon Resource Name \(ARN\) of the Amazon Kinesis stream that is the source of events\.  
 Type: String  
 Pattern: `arn:aws:([a-zA-Z0-9\-])+:([a-z]{2}-[a-z]+-\d{1})?:(\d{12})?:(.*)` 
 
- ** FunctionArn **   
+ ** [FunctionArn](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-FunctionArn"></a>
 The Lambda function to invoke when AWS Lambda detects an event on the stream\.  
 Type: String  
 Pattern: `arn:aws:lambda:[a-z]{2}-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
- ** LastModified **   
+ ** [LastModified](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-LastModified"></a>
 The UTC time string indicating the last time the event mapping was updated\.  
 Type: Timestamp
 
- ** LastProcessingResult **   
+ ** [LastProcessingResult](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-LastProcessingResult"></a>
 The result of the last AWS Lambda invocation of your Lambda function\.  
 Type: String
 
- ** State **   
+ ** [State](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-State"></a>
 The state of the event source mapping\. It can be `Creating`, `Enabled`, `Disabled`, `Enabling`, `Disabling`, `Updating`, or `Deleting`\.  
 Type: String
 
- ** StateTransitionReason **   
+ ** [StateTransitionReason](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-StateTransitionReason"></a>
 The reason the event source mapping is in its current state\. It is either user\-requested or an AWS Lambda\-initiated state transition\.  
 Type: String
 
- ** UUID **   
+ ** [UUID](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-UUID"></a>
 The AWS Lambda assigned opaque identifier for the mapping\.  
 Type: String
 

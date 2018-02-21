@@ -1,4 +1,4 @@
-# Step 6: Deploy With AWS SAM and AWS CloudFormation<a name="with-sched-event-example-use-app-spec"></a>
+# \(Optional\): Deploy With AWS SAM and AWS CloudFormation<a name="with-sched-event-example-use-app-spec"></a>
 
 In the previous section, you used AWS Lambda APIs to create and update a Lambda function by providing a deployment package as a ZIP file\. However, this mechanism may not be convenient for automating deployment steps for functions, or coordinating deployments and updates to other elements of a serverless application, like event sources and downstream resources\.
 

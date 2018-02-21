@@ -2,11 +2,9 @@
 
 Make sure you have completed the following steps:
 
-+ Signed up for an AWS account and created an administrator user in the account\. 
++ Signed up for an AWS account and created an administrator user in the account \(called **adminuser**\)\. For instructions, see [Set Up an AWS Account](setup.md) 
 
-+ Installed and set up the AWS CLI\. 
-
-For instructions, see [Set Up an AWS Account](setup.md)\. 
++ Installed and set up the AWS CLI\. For instructions, see [Set Up the AWS Command Line Interface \(AWS CLI\)](setup-awscli.md)
 
 **Note**  
 The tutorial creates a Lambda function and an Amazon Cognito identity pool in the `us-east-1` region\. If you want to use a different AWS region, you must create these resources in the same region\. You also need to update the example mobile application code by providing the specific region that you want to use\.

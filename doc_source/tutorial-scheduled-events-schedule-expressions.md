@@ -19,21 +19,9 @@ For example:
 
 | Example | Cron expression | 
 | --- | --- | 
-|  Invoke Lambda function every 5 minutes  |  
-
-```
-rate(5 minutes)
-```  | 
-|  Invoke Lambda function every hour  |  
-
-```
-rate(1 hour)
-```  | 
-|  Invoke Lambda function every seven days  |  
-
-```
-rate(7 days)
-```  | 
+|  Invoke Lambda function every 5 minutes  |  <pre>rate(5 minutes)</pre>  | 
+|  Invoke Lambda function every hour  |  <pre>rate(1 hour)</pre>  | 
+|  Invoke Lambda function every seven days  |  <pre>rate(7 days)</pre>  | 
 
 Note the following: 
 
@@ -87,41 +75,13 @@ The following table lists common examples of cron expressions\.
 
 | Example | Cron expression | 
 | --- | --- | 
-|  Invoke a Lambda function at 10:00am \(UTC\) everyday  |  
-
-```
-cron(0 10 * * ? *)
-```  | 
-|  Invoke a Lambda function 12:15pm \(UTC\) everyday  |  
-
-```
-cron(15 12 * * ? *)
-```  | 
-|  Invoke a Lambda function at 06:00pm \(UTC\) every Mon\-Fri  |  
-
-```
-cron(0 18 ? * MON-FRI *)
-```  | 
-|  Invoke a Lambda function at 8:00am \(UTC\) every first day of the month  |  
-
-```
-cron(0 8 1 * ? *)
-```  | 
-|  Invoke a Lambda function every 10 min Mon\-Fri  |  
-
-```
-cron(0/10 * ? * MON-FRI *)
-```  | 
-|  Invoke a Lambda function every 5 minutes Mon\-Fri between 8:00am and 5:55pm \(UTC\)  |  
-
-```
-cron(0/5 8-17 ? * MON-FRI *)
-```  | 
-|  Invoke a Lambda function at 9 a\.m\. \(UTC\) the first Monday of each month  |  
-
-```
-cron(0 9 ? * 2#1 *)
-```  | 
+|  Invoke a Lambda function at 10:00am \(UTC\) everyday  |  <pre>cron(0 10 * * ? *)</pre>  | 
+|  Invoke a Lambda function 12:15pm \(UTC\) everyday  |  <pre>cron(15 12 * * ? *)</pre>  | 
+|  Invoke a Lambda function at 06:00pm \(UTC\) every Mon\-Fri  |  <pre>cron(0 18 ? * MON-FRI *)</pre>  | 
+|  Invoke a Lambda function at 8:00am \(UTC\) every first day of the month  |  <pre>cron(0 8 1 * ? *)</pre>  | 
+|  Invoke a Lambda function every 10 min Mon\-Fri  |  <pre>cron(0/10 * ? * MON-FRI *)</pre>  | 
+|  Invoke a Lambda function every 5 minutes Mon\-Fri between 8:00am and 5:55pm \(UTC\)  |  <pre>cron(0/5 8-17 ? * MON-FRI *)</pre>  | 
+|  Invoke a Lambda function at 9 a\.m\. \(UTC\) the first Monday of each month  |  <pre>cron(0 9 ? * 2#1 *)</pre>  | 
 
 Note the following: 
 

@@ -26,9 +26,9 @@ For example, consider the following C\# example code\.
 
 ```
 using System.IO;
-{
-  namespace Example
-  {
+
+namespace Example{
+
             
     public class Hello
     {
@@ -130,8 +130,6 @@ using System.IO;
 
 The handler string would be: `HelloWorldApp::Example.Hello::MyHandler` 
 
-For instructions to create a Lambda function using this C\# code, see [Step 2\.4: \(Optional\) Create a Lambda Function Authored in C\#](get-started-step5-optional.md)\.
-
 **Important**  
 If the method specified in your handler string is overloaded, you must provide the exact signature of the method Lambda should invoke\. AWS Lambda will reject an otherwise valid signature if the resolution would require selecting among multiple \(overloaded\) signatures\. 
 
@@ -172,32 +170,32 @@ If you use this pattern, there are some considerations you must take into accoun
   }
   ```
 
-+ Your Lambda function can include multiple async calls, which can be invoked in parallel\. You can use the `Task.WaitAll` and `Task.WaitAny` methods to work with multiple tasks\. To use the `Task.WaitAll` method, you pass a list of the operations as an array to the method\. Note that in the example below, if you neglect to include any operation to the array, that call may return before its operation completes\.
++ Your Lambda function can include multiple async calls, which can be invoked in parallel\. You can use the `Task.WhenAll` and `Task.WhenAny` methods to work with multiple tasks\. To use the `Task.WhenAll` method, you pass a list of the operations as an array to the method\. Note that in the example below, if you neglect to include any operation to the array, that call may return before its operation completes\.
 
   ```
-  public async Task SaveAsync(Profile profile)
+  public async Task DoesNotWaitForAllTasks1()
   {
-    var s3Save = s3.SaveImage(profile.image);
-    var ddbSave = ddb.SaveAttributes(profile.Attributes);
-    var ddbSave2 = ddb.SaveConnections(profile.connections);  // Lambda will return before this call completes
-                                                              // No compiler warnings
-    return await Task.WaitAll(new Task[]{ s3Save, ddbSave }); // Did not "await" for ddbSave2
+     // In Lambda, Console.WriteLine goes to CloudWatch Logs.
+     var task1 = Task.Run(() => Console.WriteLine("Test1"));
+     var task2 = Task.Run(() => Console.WriteLine("Test2"));
+     var task3 = Task.Run(() => Console.WriteLine("Test3"));
+   
+     // Lambda may return before printing "Test2" since we never wait on task2.
+     await Task.WhenAll(task1, task3);
   }
   ```
 
-  To use the `Task.WaitAny` method, you again pass a list of operations as an array to the method\. The call returns as soon as the first operation completes, even if the others are still running\.
+  To use the `Task.WhenAny` method, you again pass a list of operations as an array to the method\. The call returns as soon as the first operation completes, even if the others are still running\.
 
   ```
-  public async Task<SearchResult> SearchAsync(Query q)
+  public async Task DoesNotWaitForAllTasks2()
   {
-    var siteSearch1 = site1.SearchAsync(q);
-    var siteSearch2 = site2.SearchAsync(q);
-    var siteSearch3 = site3.SearchAsync(q);
-    var tasks[] = new Task[]{siteSearch1, siteSearch2, siteSearch3};
-    
-    var index = await Task.WaitAny(tasks); // Returns as soon as any of the tasks complete, other task may run in background
-    return tasks[index].Result;
+    // In Lambda, Console.WriteLine goes to CloudWatch Logs.
+    var task1 = Task.Run(() => Console.WriteLine("Test1"));
+    var task2 = Task.Run(() => Console.WriteLine("Test2"));
+    var task3 = Task.Run(() => Console.WriteLine("Test3"));
+   
+    // Lambda may return before printing all tests since we're only waiting for one to finish.
+    await Task.WhenAny(task1, task2, task3);
   }
   ```
-
-  We do not recommend using `Task.WaitAny` for the above reasons\.

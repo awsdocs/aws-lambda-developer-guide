@@ -49,7 +49,7 @@ This example has one function called `my_handler`\. The function returns a messa
 
    ```
    aws lambda create-function \
-   --region us-west-2 \
+   --region region \
    --function-name HelloPython \
    --zip-file fileb://deployment-package.zip \
    --role arn:aws:iam::account-id:role/lambda_basic_execution  \

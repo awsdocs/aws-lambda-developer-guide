@@ -5,7 +5,7 @@ Execute the following `delete-function` command to delete the `helloworld` funct
 ```
 $ aws lambda delete-function \
  --function-name helloworld \
- --region us-west-2 \
+ --region region \
 --profile adminuser
 ```
 

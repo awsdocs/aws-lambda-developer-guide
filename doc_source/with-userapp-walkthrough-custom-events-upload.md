@@ -4,7 +4,7 @@ Execute the following Lambda CLI `create-function` command to create a Lambda fu
 
 ```
 $ aws lambda create-function \
---region us-west-2 \
+--region region \
 --function-name helloworld \
 --zip-file fileb://file-path/helloworld.zip \
 --role role-arn \

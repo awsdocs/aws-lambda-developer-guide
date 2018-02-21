@@ -18,7 +18,7 @@ From the **Filter View** list, choose the language you want to use for your Lamb
    };
    ```
 **Note**  
-The code sample is compliant with the Node\.js runtimes v6\.10 or v4\.3\. For more information, see [Programming Model \(Node\.js\)](programming-model.md)
+The code sample is compliant with the Node\.js runtimes v6\.10 or v4\.3\. For more information, see [Programming Model\(Node\.js\)](programming-model.md)
 
 1. Save the file as ` index.js`\.
 
@@ -69,6 +69,33 @@ Your deployment package can be a \.zip file or a standalone \.jar\. You can use 
 After you verify that your deployment package is created, go to the next step to create an IAM role \(execution role\)\. You specify this role at the time you create your Lambda function\. 
 
 ### Next Step<a name="sns-create-deployment-pkg-java-next-step"></a>
+
+ [Step 2\.2: Create the Execution Role \(IAM Role\)](with-sns-example-create-iam-role.md) 
+
+## Go<a name="with-sns-example-deployment-pkg-go"></a>
+
+1. Open a text editor, and then copy the following code\. 
+
+   ```
+   import (
+       "strings"
+       "github.com/aws/aws-lambda-go/events”
+   )
+   
+   func handler(ctx context.Context, events.SNSEvent snsEvent) {
+       for _, record := range snsEvent.Records {
+           snsRecord := record.SNS
+   
+           fmt.Printf("[%s %s] Message = %s \n", record.EventSource, snsRecord.Timestamp, snsRecord.Message) 
+       }
+   }
+   ```
+
+1. Save the file as ` lambda_handler.go`\.
+
+1. Zip the ` lambda_handler.go` file as ` LambdaWithSNS.zip`\. 
+
+### Next Step<a name="sns-create-deployment-pkg-python-next-step"></a>
 
  [Step 2\.2: Create the Execution Role \(IAM Role\)](with-sns-example-create-iam-role.md) 
 

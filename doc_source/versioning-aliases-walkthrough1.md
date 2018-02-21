@@ -40,7 +40,7 @@ Create a Lambda function \(`helloworld`\)\.
 
 ```
 aws lambda create-function \
---region us-west-2 \
+--region region \
 --function-name helloworld \
 --zip-file fileb://file-path/helloworld.zip \
 --role arn:aws:iam::account-id:role/lambda_basic_execution \
@@ -72,7 +72,7 @@ The response returns the configuration information showing `$LATEST` as the func
 
    ```
    aws lambda create-alias \
-   --region us-west-2 \
+   --region region \
    --function-name helloworld \
    --description "sample alias" \
    --function-version "\$LATEST" \
@@ -95,7 +95,7 @@ The response returns the configuration information showing `$LATEST` as the func
 
    ```
    aws lambda publish-version \
-   --region us-west-2 \
+   --region region \
    --function-name helloworld \
    --profile adminuser
    ```
@@ -124,7 +124,7 @@ The response returns the configuration information showing `$LATEST` as the func
 
    ```
    aws lambda create-alias \
-   --region us-west-2 \
+   --region region \
    --function-name helloworld \
    --description "sample alias" \
    --function-version 1 \
@@ -138,7 +138,7 @@ The response returns the configuration information showing `$LATEST` as the func
 
    ```
    aws lambda create-alias \
-   --region us-west-2 \
+   --region region \
    --function-name helloworld \
    --description "sample alias" \
    --function-version 1 \
@@ -152,7 +152,7 @@ The response returns the configuration information showing `$LATEST` as the func
 
    ```
    aws lambda update-alias \
-   --region us-west-2 \
+   --region region \
    --function-name helloworld \
    --function-version 2 \
    --name BETA \
@@ -173,7 +173,7 @@ For information about using the AWS Lambda console to manage versioning, see [Ma
 
   ```
   aws lambda add-permission \
-  --region us-west-2 \
+  --region region \
   --function-name helloworld \
   --qualifier PROD \
   --statement-id 1 \

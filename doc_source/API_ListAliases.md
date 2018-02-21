@@ -14,20 +14,20 @@ GET /2015-03-31/functions/FunctionName/aliases?FunctionVersion=FunctionVersion&M
 
 The request requires the following URI parameters\.
 
- ** FunctionName **   
+ ** [FunctionName](#API_ListAliases_RequestSyntax) **   <a name="SSS-ListAliases-request-FunctionName"></a>
 Lambda function name for which the alias is created\. Note that the length constraint applies only to the ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
 Pattern: `(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
- ** FunctionVersion **   
+ ** [FunctionVersion](#API_ListAliases_RequestSyntax) **   <a name="SSS-ListAliases-request-FunctionVersion"></a>
 If you specify this optional parameter, the API returns only the aliases that are pointing to the specific Lambda function version, otherwise the API returns all of the aliases created for the Lambda function\.  
 Length Constraints: Minimum length of 1\. Maximum length of 1024\.  
 Pattern: `(\$LATEST|[0-9]+)` 
 
- ** Marker **   
+ ** [Marker](#API_ListAliases_RequestSyntax) **   <a name="SSS-ListAliases-request-Marker"></a>
 Optional string\. An opaque pagination token returned from a previous `ListAliases` operation\. If present, indicates where to continue the listing\.
 
- ** MaxItems **   
+ ** [MaxItems](#API_ListAliases_RequestSyntax) **   <a name="SSS-ListAliases-request-MaxItems"></a>
 Optional integer\. Specifies the maximum number of aliases to return in response\. This parameter value must be greater than 0\.  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.
 
@@ -42,20 +42,21 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "Aliases": [ 
+   "[Aliases](#SSS-ListAliases-response-Aliases)": [ 
       { 
-         "AliasArn": "string",
-         "Description": "string",
-         "FunctionVersion": "string",
-         "Name": "string",
-         "RoutingConfig": { 
-            "AdditionalVersionWeights": { 
+         "[AliasArn](API_AliasConfiguration.md#SSS-Type-AliasConfiguration-AliasArn)": "string",
+         "[Description](API_AliasConfiguration.md#SSS-Type-AliasConfiguration-Description)": "string",
+         "[FunctionVersion](API_AliasConfiguration.md#SSS-Type-AliasConfiguration-FunctionVersion)": "string",
+         "[Name](API_AliasConfiguration.md#SSS-Type-AliasConfiguration-Name)": "string",
+         "[RevisionId](API_AliasConfiguration.md#SSS-Type-AliasConfiguration-RevisionId)": "string",
+         "[RoutingConfig](API_AliasConfiguration.md#SSS-Type-AliasConfiguration-RoutingConfig)": { 
+            "[AdditionalVersionWeights](API_AliasRoutingConfiguration.md#SSS-Type-AliasRoutingConfiguration-AdditionalVersionWeights)": { 
                "string" : number 
             }
          }
       }
    ],
-   "NextMarker": "string"
+   "[NextMarker](#SSS-ListAliases-response-NextMarker)": "string"
 }
 ```
 
@@ -65,11 +66,11 @@ If the action is successful, the service sends back an HTTP 200 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** Aliases **   
+ ** [Aliases](#API_ListAliases_ResponseSyntax) **   <a name="SSS-ListAliases-response-Aliases"></a>
 A list of aliases\.  
 Type: Array of [AliasConfiguration](API_AliasConfiguration.md) objects
 
- ** NextMarker **   
+ ** [NextMarker](#API_ListAliases_ResponseSyntax) **   <a name="SSS-ListAliases-response-NextMarker"></a>
 A string, present if there are more aliases\.  
 Type: String
 

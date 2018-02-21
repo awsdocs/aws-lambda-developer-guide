@@ -49,14 +49,14 @@ The above revisions to a SAM template do the following:
 
   + **Canary:** Traffic is shifted in two increments\. You can choose from predefined canary options that specify the percentage of traffic shifted to your updated Lambda function version in the first increment and the interval, in minutes, before the remaining traffic is shifted in the second increment\. 
 
-  + **Linear:** Traffic is shifted in equal increments with an equal number of minutes between each increment\. You can choose from predefined linear options that specify the percentage of traffic shifted in each incrememnt and the number of minutes between each increment\. 
+  + **Linear:** Traffic is shifted in equal increments with an equal number of minutes between each increment\. You can choose from predefined linear options that specify the percentage of traffic shifted in each incremement and the number of minutes between each increment\. 
 
   + ** All\-at\-once:** All traffic is shifted from the original Lambda function to the updated Lambda function version at once\. 
 
         
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/lambda/latest/dg/automating-updates-to-serverless-apps.html)
 
-+ **Alarms** \- CloudWatch alarms that will be triggered by any errors raised by the deployment and automatically roll back your deployment\. For instance, if the updated code you are deploying is creating errors within the application or any [AWS Lambda](http://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions-metrics.html) or custom CloudWatch metrics you have specified have breached the alarm threshold\.
++ **Alarms** \- CloudWatch alarms that will be triggered by any errors raised by the deployment and automatically roll back your deployment\. For instance, if the updated code you are deploying is creating errors within the application or any [AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions-metrics.html) or custom CloudWatch metrics you have specified have breached the alarm threshold\.
 
 + **Hooks** \- Pre\-traffic and Post\-traffic test functions that run sanity checks before traffic\-shifting starts to the new version and after traffic\-shifting completes\. 
 

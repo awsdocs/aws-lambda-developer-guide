@@ -4,7 +4,7 @@ This topic lists the supported AWS services that you can configure as event sour
 
 For all of the event sources listed in this topic, note the following:
 
-+ Event sources maintain the event source mapping, except for the stream\-based services \(Amazon Kinesis Streams and Amazon DynamoDB Streams\)\. For the stream\-based services, AWS Lambda maintains the event source mapping\. AWS Lambda provides the [CreateEventSourceMapping](API_CreateEventSourceMapping.md) operation for you to create and manage the event source mapping\. For more information, see [Event Source Mapping](java-invocation-options.md#intro-invocation-modes)\.
++ Event sources maintain the event source mapping, except for the stream\-based services \(Amazon Kinesis Data Streams and Amazon DynamoDB Streams\)\. For the stream\-based services, AWS Lambda maintains the event source mapping\. AWS Lambda provides the [CreateEventSourceMapping](API_CreateEventSourceMapping.md) operation for you to create and manage the event source mapping\. For more information, see [Event Source Mapping](java-invocation-options.md#intro-invocation-modes)\.
 
    
 
@@ -23,7 +23,7 @@ For examples of events that are published by these event sources, see [Sample Ev
 
 + [Amazon S3](#supported-event-source-s3)
 + [Amazon DynamoDB](#supported-event-source-dynamo-db)
-+ [Amazon Kinesis Streams](#supported-event-source-kinesis-streams)
++ [Amazon Kinesis Data Streams](#supported-event-source-kinesis-streams)
 + [Amazon Simple Notification Service](#supported-event-source-sns)
 + [Amazon Simple Email Service](#supported-event-source-ses)
 + [Amazon Cognito](#supported-event-source-cognito)
@@ -38,7 +38,7 @@ For examples of events that are published by these event sources, see [Sample Ev
 + [Amazon API Gateway](#supported-event-source-api-gateway)
 + [AWS IoT Button](#supported-event-source-iot-button)
 + [Amazon CloudFront](#supported-event-source-cloudfront)
-+ [Amazon Kinesis Firehose](#supported-event-source-kinesis-firehose)
++ [Amazon Kinesis Data Firehose](#supported-event-source-kinesis-firehose)
 + [Other Event Sources: Invoking a Lambda Function On Demand](#api-gateway-with-lambda)
 + [Sample Events Published by Event Sources](eventsources.md)
 
@@ -62,15 +62,15 @@ For an example DynamoDB event, see [Step 2\.3\.2: Test the Lambda Function \(Inv
 
 Error handling for a given event source depends on how Lambda is invoked\. DynamoDB is a stream\-based event source\. For more information on how errors are retried, see [Understanding Retry Behavior](retries-on-errors.md)\.
 
-## Amazon Kinesis Streams<a name="supported-event-source-kinesis-streams"></a>
+## Amazon Kinesis Data Streams<a name="supported-event-source-kinesis-streams"></a>
 
 You can configure AWS Lambda to automatically poll your stream and process any new records such as website click streams, financial transactions, social media feeds, IT logs, and location\-tracking events\. Then, AWS Lambda polls the stream periodically \(once per second\) for new records\.
 
 For stream\-based service, you create event source mapping in AWS Lambda, identifying the stream to poll and which Lambda function to invoke\.
 
-For an example event, see [Step 2\.3: Create the Lambda Function and Test It Manually](with-kinesis-example-upload-deployment-pkg.md) and [Amazon Kinesis Streams Sample Event](eventsources.md#eventsources-kinesis-streams)\. For an example use case, see [Using AWS Lambda with Kinesis](with-kinesis.md)\.
+For an example event, see [Step 2\.3: Create the Lambda Function and Test It Manually](with-kinesis-example-upload-deployment-pkg.md) and [Amazon Kinesis Data Streams Sample Event](eventsources.md#eventsources-kinesis-streams)\. For an example use case, see [Using AWS Lambda with Kinesis](with-kinesis.md)\.
 
-Error handling for a given event source depends on how Lambda is invoked\. Amazon Kinesis Streams is a stream\-based event source\. For more information on how errors are retried, see [Understanding Retry Behavior](retries-on-errors.md)\.
+Error handling for a given event source depends on how Lambda is invoked\. Amazon Kinesis Data Streams is a stream\-based event source\. For more information on how errors are retried, see [Understanding Retry Behavior](retries-on-errors.md)\.
 
 ## Amazon Simple Notification Service<a name="supported-event-source-sns"></a>
 
@@ -224,11 +224,11 @@ For more information, see [AWS Lambda@Edge](lambda-edge.md)
 
 Error handling for a given event source depends on how Lambda is invoked\. CloudFront is configured to invoke a Lambda function synchronously\. For more information on how errors are retried, see [Understanding Retry Behavior](retries-on-errors.md)\.
 
-## Amazon Kinesis Firehose<a name="supported-event-source-kinesis-firehose"></a>
+## Amazon Kinesis Data Firehose<a name="supported-event-source-kinesis-firehose"></a>
 
-Amazon Kinesis Firehose is the easiest way to load streaming data into AWS\. It can capture, transform, and load streaming data into downstream services such as Kinesis Analytics or Amazon S3, enabling near real\-time analytics with existing business intelligence tools and dashboards you’re already using today\. You can write Lambda functions to request additional, customized processing of the data before it is sent downstream\.
+Amazon Kinesis Data Firehose is the easiest way to load streaming data into AWS\. It can capture, transform, and load streaming data into downstream services such as Kinesis Data Analytics or Amazon S3, enabling near real\-time analytics with existing business intelligence tools and dashboards you’re already using today\. You can write Lambda functions to request additional, customized processing of the data before it is sent downstream\.
 
-Error handling for a given event source depends on how Lambda is invoked\. Kinesis Firehose is configured to invoke a Lambda function synchronously\. For more information on how errors are retried, see [Understanding Retry Behavior](retries-on-errors.md)\.
+Error handling for a given event source depends on how Lambda is invoked\. Kinesis Data Firehose is configured to invoke a Lambda function synchronously\. For more information on how errors are retried, see [Understanding Retry Behavior](retries-on-errors.md)\.
 
 ## Other Event Sources: Invoking a Lambda Function On Demand<a name="api-gateway-with-lambda"></a>
 

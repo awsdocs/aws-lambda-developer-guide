@@ -1,10 +1,10 @@
-# Step 3: Add an Event Source \(Create an Kinesis Stream and Associate It with Your Lambda Function\)<a name="with-kinesis-example-configure-event-source"></a>
+# Step 3: Add an Event Source \(Create a Kinesis Stream and Associate It with Your Lambda Function\)<a name="with-kinesis-example-configure-event-source"></a>
 
- In this section, you create an Kinesis stream, and then you add an event source in AWS Lambda to associate the Kinesis stream with your Lambda function\. 
+ In this section, you create a Kinesis stream, and then you add an event source in AWS Lambda to associate the Kinesis stream with your Lambda function\. 
 
 After you create an event source, AWS Lambda starts polling the stream\. You then test the setup by adding events to the stream and verify that AWS Lambda executed your Lambda function on your behalf:
 
-## Step 3\.1: Create an Kinesis Stream<a name="with-kinesis-example-configure-event-source-create"></a>
+## Step 3\.1: Create a Kinesis Stream<a name="with-kinesis-example-configure-event-source-create"></a>
 
 Use the following Kinesis `create-stream ` CLI command to create a stream\.
 
@@ -12,7 +12,7 @@ Use the following Kinesis `create-stream ` CLI command to create a stream\.
 $ aws kinesis create-stream \
 --stream-name examplestream \
 --shard-count 1 \
---region us-west-2 \
+--region region \
 --profile adminuser
 ```
 
@@ -21,7 +21,7 @@ Run the following Kinesis `describe-stream` AWS CLI command to get the stream AR
 ```
 $ aws kinesis describe-stream \
 --stream-name examplestream \
---region us-west-2 \
+--region region \
 --profile adminuser
 ```
 
@@ -37,7 +37,7 @@ Run the following AWS CLI `add-event-source` command\. After the command execute
 
 ```
 $ aws lambda create-event-source-mapping \
---region us-west-2 \
+--region region \
 --function-name ProcessKinesisRecords \
 --event-source  kinesis-stream-arn \
 --batch-size 100 \
@@ -49,7 +49,7 @@ You can get a list of event source mappings by running the following command\.
 
 ```
 $ aws lambda list-event-source-mappings \
---region us-west-2 \
+--region region \
 --function-name ProcessKinesisRecords \
 --event-source kinesis-stream-arn \
 --profile adminuser \
@@ -72,7 +72,7 @@ You're all done\! Now *adminuser* can test the setup as follows:
    --stream-name examplestream \
    --data "This is a test. final" \
    --partition-key shardId-000000000000 \
-   --region us-west-2 \
+   --region region \
    --profile adminuser
    ```
 

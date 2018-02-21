@@ -21,7 +21,7 @@ In this step, you add the remaining configuration so that Amazon S3 can publish 
    ```
    $ aws lambda add-permission \
    --function-name CreateThumbnail \
-   --region us-west-2 \
+   --region region \
    --statement-id some-unique-id \
    --action "lambda:InvokeFunction" \
    --principal s3.amazonaws.com \

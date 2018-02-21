@@ -20,7 +20,7 @@ From the **Filter View** list, choose the language you want to use for your Lamb
    };
    ```
 **Note**  
-The code sample is compliant with the Node\.js runtimes v6\.10 or v4\.3\. For more information, see [Programming Model \(Node\.js\)](programming-model.md)
+The code sample is compliant with the Node\.js runtimes v6\.10 or v4\.3\. For more information, see [Programming Model\(Node\.js\)](programming-model.md)
 
 1. Save the file as ` ProcessDynamoDBStream.js`\.
 
@@ -130,14 +130,6 @@ To create a deployment package, follow the steps outlined in [\.NET Core CLI](la
 
 + Replace the default contents of the renamed *Program\.cs* file with the code example above\.
 
-+ In the *project\.json* file, add the following references to the `dependencies` node\. 
-
-  + `"Amazon.Lambda.Core":"1.0.0-*"`
-
-  + `"Amazon.Lambda.Serialiation.Json":"1.0.0-*"` 
-
-  + `"Amazon.Lambda.DynamoDBEvents":"1.0.0-*"` 
-
 After you verify that your deployment package is created, go to the next step to create an IAM role \(execution role\)\. You specify this role at the time you create your Lambda function\. 
 
 ### Next Step<a name="create-deployment-pkg-dotnet-next-step"></a>
@@ -165,5 +157,39 @@ The `from __future__` statement enables you to write code that is compatible wit
 1. Zip the ` ProcessDynamoDBStream.py` file as ` ProcessDynamoDBStream.zip`\. 
 
 ### Next Step<a name="ddb-create-deployment-pkg-python-next-step"></a>
+
+ [Step 2\.2: Create the Execution Role \(IAM Role\)](with-dynamodb-create-execution-role.md) 
+
+## Go<a name="with-ddb-example-deployment-pkg-go"></a>
+
+1. Open a text editor, and then copy the following code\. 
+
+   ```
+   import (
+       "strings"
+   
+       "github.com/aws/aws-lambda-go/events"
+   )
+   
+   func handleRequest(ctx context.Context, e events.DynamoDBEvent) {
+   
+       for _, record := range e.Records {
+           fmt.Printf("Processing request data for event ID %s, type %s.\n", record.EventID, record.EventName)
+   
+           // Print new values for attributes of type String
+           for name, value := range record.DynamoDB.NewImage {
+               if value.DataType() == events.DataTypeString {
+                   fmt.Printf("Attribute name: %s, value: %s\n", name, value.String())
+               }
+           }
+       }
+   }
+   ```
+
+1. Save the file as ` ProcessDynamoDBStream.go`\.
+
+1. Zip the ` ProcessDynamoDBStream.go` file as ` ProcessDynamoDBStream.zip`\. 
+
+### Next Step<a name="ddb-create-deployment-pkg-go-next-step"></a>
 
  [Step 2\.2: Create the Execution Role \(IAM Role\)](with-dynamodb-create-execution-role.md) 

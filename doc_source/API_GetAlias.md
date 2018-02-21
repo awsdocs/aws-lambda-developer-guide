@@ -14,12 +14,12 @@ GET /2015-03-31/functions/FunctionName/aliases/Name HTTP/1.1
 
 The request requires the following URI parameters\.
 
- ** FunctionName **   
+ ** [FunctionName](#API_GetAlias_RequestSyntax) **   <a name="SSS-GetAlias-request-FunctionName"></a>
 Function name for which the alias is created\. An alias is a subresource that exists only in the context of an existing Lambda function so you must specify the function name\. Note that the length constraint applies only to the ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
 Pattern: `(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
- ** Name **   
+ ** [Name](#API_GetAlias_RequestSyntax) **   <a name="SSS-GetAlias-request-Name"></a>
 Name of the alias for which you want to retrieve information\.  
 Length Constraints: Minimum length of 1\. Maximum length of 128\.  
 Pattern: `(?!^[0-9]+$)([a-zA-Z0-9-_]+)` 
@@ -35,12 +35,13 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "AliasArn": "string",
-   "Description": "string",
-   "FunctionVersion": "string",
-   "Name": "string",
-   "RoutingConfig": { 
-      "AdditionalVersionWeights": { 
+   "[AliasArn](#SSS-GetAlias-response-AliasArn)": "string",
+   "[Description](#SSS-GetAlias-response-Description)": "string",
+   "[FunctionVersion](#SSS-GetAlias-response-FunctionVersion)": "string",
+   "[Name](#SSS-GetAlias-response-Name)": "string",
+   "[RevisionId](#SSS-GetAlias-response-RevisionId)": "string",
+   "[RoutingConfig](#SSS-GetAlias-response-RoutingConfig)": { 
+      "[AdditionalVersionWeights](API_AliasRoutingConfiguration.md#SSS-Type-AliasRoutingConfiguration-AdditionalVersionWeights)": { 
          "string" : number 
       }
    }
@@ -53,29 +54,33 @@ If the action is successful, the service sends back an HTTP 200 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** AliasArn **   
+ ** [AliasArn](#API_GetAlias_ResponseSyntax) **   <a name="SSS-GetAlias-response-AliasArn"></a>
 Lambda function ARN that is qualified using the alias name as the suffix\. For example, if you create an alias called `BETA` that points to a helloworld function version, the ARN is `arn:aws:lambda:aws-regions:acct-id:function:helloworld:BETA`\.  
 Type: String  
 Pattern: `arn:aws:lambda:[a-z]{2}-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
- ** Description **   
+ ** [Description](#API_GetAlias_ResponseSyntax) **   <a name="SSS-GetAlias-response-Description"></a>
 Alias description\.  
 Type: String  
 Length Constraints: Minimum length of 0\. Maximum length of 256\.
 
- ** FunctionVersion **   
+ ** [FunctionVersion](#API_GetAlias_ResponseSyntax) **   <a name="SSS-GetAlias-response-FunctionVersion"></a>
 Function version to which the alias points\.  
 Type: String  
 Length Constraints: Minimum length of 1\. Maximum length of 1024\.  
 Pattern: `(\$LATEST|[0-9]+)` 
 
- ** Name **   
+ ** [Name](#API_GetAlias_ResponseSyntax) **   <a name="SSS-GetAlias-response-Name"></a>
 Alias name\.  
 Type: String  
 Length Constraints: Minimum length of 1\. Maximum length of 128\.  
 Pattern: `(?!^[0-9]+$)([a-zA-Z0-9-_]+)` 
 
- ** RoutingConfig **   
+ ** [RevisionId](#API_GetAlias_ResponseSyntax) **   <a name="SSS-GetAlias-response-RevisionId"></a>
+Represents the latest updated revision of the function or alias\.  
+Type: String
+
+ ** [RoutingConfig](#API_GetAlias_ResponseSyntax) **   <a name="SSS-GetAlias-response-RoutingConfig"></a>
 Specifies an additional function versions the alias points to, allowing you to dictate what percentage of traffic will invoke each version\. For more information, see [Traffic Shifting Using Aliases](lambda-traffic-shifting-using-aliases.md)\.  
 Type: [AliasRoutingConfiguration](API_AliasRoutingConfiguration.md) object
 

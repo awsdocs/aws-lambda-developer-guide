@@ -6,7 +6,7 @@ From the **Filter View** list, choose the language you want to use for your Lamb
 
 The following is example Node\.js code that receives Kinesis event records as input and processes them\. For illustration, the code writes some of the incoming event data to CloudWatch Logs\.
 
-Follow the instructions to create a AWS Lambda function deployment package\. 
+Follow the instructions to create an AWS Lambda function deployment package\. 
 
 1. Open a text editor, and then copy the following code\. 
 
@@ -24,7 +24,7 @@ Follow the instructions to create a AWS Lambda function deployment package\.
    };
    ```
 **Note**  
-The code sample is compliant with the Node\.js runtimes v6\.10 or v4\.3\. For more information, see [Programming Model \(Node\.js\)](programming-model.md)
+The code sample is compliant with the Node\.js runtimes v6\.10 or v4\.3\. For more information, see [Programming Model\(Node\.js\)](programming-model.md)
 
 1. Save the file as `ProcessKinesisRecords.js`\. 
 
@@ -131,14 +131,6 @@ To create a deployment package, follow the steps outlined in [\.NET Core CLI](la
 
 + Replace the default contents of the renamed *Program\.cs* file with the code example above\.
 
-+ In the *project\.json* file, make sure the following references are included in the `dependencies` node\. 
-
-  + `"Amazon.Lambda.Core": "1.0.0-*"`
-
-  + `"Amazon.Lambda.KinesisEvents":"1.0.0-*"` 
-
-  + `"Amazon.Lambda.Serialization.Json":"1.0.0-*"` 
-
 After you verify that your deployment package is created, go to the next step to create an IAM role \(execution role\)\. You specify this role at the time you create your Lambda function\. 
 
 ### Next Step<a name="create-deployment-pkg-dotnet-next-step1"></a>
@@ -171,5 +163,38 @@ The `from __future__` statement enables you to write code that is compatible wit
 1.  Zip the `ProcessKinesisRecords.py` file as `ProcessKinesisRecords.zip`\. 
 
 ### Next Step<a name="create-deployment-pkg-python-next-step"></a>
+
+ [Step 2\.2: Create the Execution Role \(IAM Role\)](with-kinesis-example-create-iam-role.md) 
+
+## Go<a name="with-kinesis-example-deployment-pkg-go"></a>
+
+ The following is example Go code that receives Kinesis event record data as input and processes it\. For illustration, the code writes to some of the incoming event data to CloudWatch Logs\. 
+
+Follow the instructions to create a AWS Lambda function deployment package\. 
+
+1.  Open a text editor, and then copy the following code\. 
+
+   ```
+   import (
+       "strings"
+       "github.com/aws/aws-lambda-go/events”
+   )
+   
+   func handler(ctx context.Context, kinesisEvent events.KinesisEvent) {
+       for _, record := range kinesisEvent.Records {
+           kinesisRecord := record.Kinesis
+           dataBytes := kinesisRecordData.Data
+           dataText := string(dataBytes)
+   
+           fmt.Printf("%s Data = %s \n", record.EventName, dataText) 
+       }
+   }
+   ```
+
+1. Save the file as `ProcessKinesisRecords.go`\. 
+
+1.  Zip the `ProcessKinesisRecords.go` file as `ProcessKinesisRecords.zip`\. 
+
+### Next Step<a name="create-deployment-pkg-go-next-step"></a>
 
  [Step 2\.2: Create the Execution Role \(IAM Role\)](with-kinesis-example-create-iam-role.md) 

@@ -10,11 +10,9 @@ In this section, you do the following:
 
 Make sure you have completed the following steps:
 
-+ Signed up for an AWS account and created an administrator user in the account \(called **adminuser**\)\. 
++ Signed up for an AWS account and created an administrator user in the account \(called **adminuser**\)\. For instructions, see [Set Up an AWS Account](setup.md)\. 
 
-+ Installed and set up the AWS CLI\. 
-
-For instructions, see [Set Up an AWS Account](setup.md)\. 
++ Installed and set up the AWS CLI\. For instructions, see [Set Up the AWS Command Line Interface \(AWS CLI\)](setup-awscli.md)\.
 
 ## Step 1\.2: Create Buckets and Upload a Sample Object<a name="with-s3-example-prepare-create-buckets"></a>
 

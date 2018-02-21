@@ -22,7 +22,7 @@ There are three key tools that you use to interact with the AWS Lambda service, 
 
 + **AWS CLI: **A command\-line interface you can use to leverage Lambda's API operations, such as creating functions and mapping event sources\. For a full list of Lambda's API operations, see [Actions](API_Operations.md)\.
 
-+ **SAM Local: **A command\-line interface you can use to to develop, test, and analyze your serverless applications locally before uploading them to the Lambda runtime\. For more information, see [Test Your Serverless Applications Locally Using SAM Local \(Public Beta\)](test-sam-local.md)\.
++ **SAM Local: **A command\-line interface you can use to develop, test, and analyze your serverless applications locally before uploading them to the Lambda runtime\. For more information, see [Test Your Serverless Applications Locally Using SAM Local \(Public Beta\)](test-sam-local.md)\.
 
 ## Before you begin<a name="lambda-application-fundamentals-before-you-begin"></a>
 

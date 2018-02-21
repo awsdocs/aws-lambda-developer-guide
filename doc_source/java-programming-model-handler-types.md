@@ -24,7 +24,7 @@ In the syntax, note the following:
 
 + *outputType* – If you plan to invoke the Lambda function synchronously \(using the `RequestResponse` invocation type\), you can return the output of your function using any of the supported data types\. For example, if you use a Lambda function as a mobile application backend, you are invoking it synchronously\. Your output data type will be serialized into JSON\. 
 
-  If you plan to invoke the Lambda function asynchronously \(using the `Event` invocation type\), the `outputType` should be `void`\. For example, if you use AWS Lambda with event sources such as Amazon S3, Kinesis, and Amazon SNS, these event sources invoke the Lambda function using the `Event` invocation type\.
+  If you plan to invoke the Lambda function asynchronously \(using the `Event` invocation type\), the `outputType` should be `void`\. For example, if you use AWS Lambda with event sources such as Amazon S3 or Amazon SNS, these event sources invoke the Lambda function using the `Event` invocation type\.
 
 + The *inputType* and *outputType* can be one of the following:
 
@@ -59,7 +59,7 @@ In this example input is of type Integer and output is of type String\. If you p
 
 In the example Java code, the first handler parameter is the input to the handler \(myHandler\), which can be event data \(published by an event source such as Amazon S3\) or custom input you provide such as an Integer object \(as in this example\) or any custom data object\. 
 
-For instructions to create a Lambda function using this Java code, see [Step 2\.3: \(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\.
+For instructions to create a Lambda function using this Java code, see [\(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\.
 
 ## Handler Overload Resolution<a name="java-programming-model-handler-types-overload-resolution"></a>
 

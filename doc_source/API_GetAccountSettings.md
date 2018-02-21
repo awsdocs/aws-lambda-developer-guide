@@ -25,16 +25,16 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "AccountLimit": { 
-      "CodeSizeUnzipped": number,
-      "CodeSizeZipped": number,
-      "ConcurrentExecutions": number,
-      "TotalCodeSize": number,
-      "UnreservedConcurrentExecutions": number
+   "[AccountLimit](#SSS-GetAccountSettings-response-AccountLimit)": { 
+      "[CodeSizeUnzipped](API_AccountLimit.md#SSS-Type-AccountLimit-CodeSizeUnzipped)": number,
+      "[CodeSizeZipped](API_AccountLimit.md#SSS-Type-AccountLimit-CodeSizeZipped)": number,
+      "[ConcurrentExecutions](API_AccountLimit.md#SSS-Type-AccountLimit-ConcurrentExecutions)": number,
+      "[TotalCodeSize](API_AccountLimit.md#SSS-Type-AccountLimit-TotalCodeSize)": number,
+      "[UnreservedConcurrentExecutions](API_AccountLimit.md#SSS-Type-AccountLimit-UnreservedConcurrentExecutions)": number
    },
-   "AccountUsage": { 
-      "FunctionCount": number,
-      "TotalCodeSize": number
+   "[AccountUsage](#SSS-GetAccountSettings-response-AccountUsage)": { 
+      "[FunctionCount](API_AccountUsage.md#SSS-Type-AccountUsage-FunctionCount)": number,
+      "[TotalCodeSize](API_AccountUsage.md#SSS-Type-AccountUsage-TotalCodeSize)": number
    }
 }
 ```
@@ -45,11 +45,11 @@ If the action is successful, the service sends back an HTTP 200 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** AccountLimit **   
+ ** [AccountLimit](#API_GetAccountSettings_ResponseSyntax) **   <a name="SSS-GetAccountSettings-response-AccountLimit"></a>
 Provides limits of code size and concurrency associated with the current account and region\.  
 Type: [AccountLimit](API_AccountLimit.md) object
 
- ** AccountUsage **   
+ ** [AccountUsage](#API_GetAccountSettings_ResponseSyntax) **   <a name="SSS-GetAccountSettings-response-AccountUsage"></a>
 Provides code size usage and function count associated with the current account and region\.  
 Type: [AccountUsage](API_AccountUsage.md) object
 

@@ -1,6 +1,6 @@
 # Install SAM Local<a name="sam-cli-requirements"></a>
 
-SAM Local is a tool that also allows faster, iterative development of your Lambda function code, which is explained at [Test Your Serverless Applications Locally Using SAM Local \(Public Beta\)](test-sam-local.md)\. To use SAM Local, you first need need to install Docker\.
+SAM Local is a tool that also allows faster, iterative development of your Lambda function code, which is explained at [Test Your Serverless Applications Locally Using SAM Local \(Public Beta\)](test-sam-local.md)\. To use SAM Local, you first need to install Docker\.
 
 ## Installing Docker<a name="sam-cli-requirements-docker"></a>
 

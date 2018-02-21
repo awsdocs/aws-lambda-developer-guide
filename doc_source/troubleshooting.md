@@ -4,4 +4,4 @@ AWS Lambda will automatically track the behavior of your Lambda function invocat
 
 
 + [Using Amazon CloudWatch](monitoring-functions.md)
-+ [Lambda X\-Ray](lambda-x-ray.md)
++ [Using AWS X\-Ray](lambda-x-ray.md)

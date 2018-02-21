@@ -4,45 +4,45 @@ Describes mapping between an Amazon Kinesis stream and a Lambda function\.
 
 ## Contents<a name="API_EventSourceMappingConfiguration_Contents"></a>
 
- **BatchSize**   
+ **BatchSize**   <a name="SSS-Type-EventSourceMappingConfiguration-BatchSize"></a>
 The largest number of records that AWS Lambda will retrieve from your event source at the time of invoking your function\. Your function receives an event with all the retrieved records\.  
 Type: Integer  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.  
 Required: No
 
- **EventSourceArn**   
+ **EventSourceArn**   <a name="SSS-Type-EventSourceMappingConfiguration-EventSourceArn"></a>
 The Amazon Resource Name \(ARN\) of the Amazon Kinesis stream that is the source of events\.  
 Type: String  
 Pattern: `arn:aws:([a-zA-Z0-9\-])+:([a-z]{2}-[a-z]+-\d{1})?:(\d{12})?:(.*)`   
 Required: No
 
- **FunctionArn**   
+ **FunctionArn**   <a name="SSS-Type-EventSourceMappingConfiguration-FunctionArn"></a>
 The Lambda function to invoke when AWS Lambda detects an event on the stream\.  
 Type: String  
 Pattern: `arn:aws:lambda:[a-z]{2}-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
 Required: No
 
- **LastModified**   
+ **LastModified**   <a name="SSS-Type-EventSourceMappingConfiguration-LastModified"></a>
 The UTC time string indicating the last time the event mapping was updated\.  
 Type: Timestamp  
 Required: No
 
- **LastProcessingResult**   
+ **LastProcessingResult**   <a name="SSS-Type-EventSourceMappingConfiguration-LastProcessingResult"></a>
 The result of the last AWS Lambda invocation of your Lambda function\.  
 Type: String  
 Required: No
 
- **State**   
+ **State**   <a name="SSS-Type-EventSourceMappingConfiguration-State"></a>
 The state of the event source mapping\. It can be `Creating`, `Enabled`, `Disabled`, `Enabling`, `Disabling`, `Updating`, or `Deleting`\.  
 Type: String  
 Required: No
 
- **StateTransitionReason**   
+ **StateTransitionReason**   <a name="SSS-Type-EventSourceMappingConfiguration-StateTransitionReason"></a>
 The reason the event source mapping is in its current state\. It is either user\-requested or an AWS Lambda\-initiated state transition\.  
 Type: String  
 Required: No
 
- **UUID**   
+ **UUID**   <a name="SSS-Type-EventSourceMappingConfiguration-UUID"></a>
 The AWS Lambda assigned opaque identifier for the mapping\.  
 Type: String  
 Required: No

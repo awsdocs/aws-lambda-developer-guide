@@ -4,7 +4,7 @@ The parent object that contains your function's tracing settings\.
 
 ## Contents<a name="API_TracingConfig_Contents"></a>
 
- **Mode**   
+ **Mode**   <a name="SSS-Type-TracingConfig-Mode"></a>
 Can be either PassThrough or Active\. If PassThrough, Lambda will only trace the request from an upstream service if it contains a tracing header with "sampled=1"\. If Active, Lambda will respect any tracing header it receives from an upstream service\. If no tracing header is received, Lambda will call X\-Ray for a tracing decision\.  
 Type: String  
 Valid Values:` Active | PassThrough`   

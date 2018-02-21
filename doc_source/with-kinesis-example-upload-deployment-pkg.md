@@ -18,7 +18,7 @@ You need to update the command by providing the \.zip file path and the executio
 
 ```
 $ aws lambda create-function \
---region us-west-2 \
+--region region \
 --function-name ProcessKinesisRecords  \
 --zip-file fileb://file-path/ProcessKinesisRecords.zip \
 --role execution-role-arn  \
@@ -80,7 +80,7 @@ Invoke the function manually using sample Kinesis event data\. We recommend that
    $ aws lambda  invoke \
    --invocation-type Event \
    --function-name ProcessKinesisRecords \
-   --region us-west-2 \
+   --region region \
    --payload file://file-path/input.txt \
    --profile adminuser 
    outputfile.txt
@@ -96,4 +96,4 @@ For Python or Java, it is the message in the return statement:
 
 ## Next Step<a name="with-kinesis-example-upload-deployment-pkg-next-step"></a>
 
- [Step 3: Add an Event Source \(Create an Kinesis Stream and Associate It with Your Lambda Function\)](with-kinesis-example-configure-event-source.md) 
+ [Step 3: Add an Event Source \(Create a Kinesis Stream and Associate It with Your Lambda Function\)](with-kinesis-example-configure-event-source.md) 

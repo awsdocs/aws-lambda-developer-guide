@@ -5,8 +5,6 @@ A Lambda function consists of code and any associated dependencies\. In addition
 + **Compute resources that you need** – You only specify the amount of memory you want to allocate for your Lambda function\. AWS Lambda allocates CPU power proportional to the memory by using the same ratio as a general purpose Amazon EC2 instance type, such as an M3 type\. For example, if you allocate 256 MB memory, your Lambda function will receive twice the CPU share than if you allocated only 128 MB\. 
 
   You can update the configuration and request additional memory in 64 MB increments from 128MB to 3008 MB\. For information about relevant limits, see [AWS Lambda Limits](limits.md)\.
-**Note**  
-Functions larger than 1536MB are allocated multiple CPU threads, and multi\-threaded or multi\-process code is needed to take advantage of the additional performance\.
 
   To change the amount of memory your Lambda function requires, do the following:
 

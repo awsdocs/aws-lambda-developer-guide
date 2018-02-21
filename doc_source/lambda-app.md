@@ -29,12 +29,13 @@ The following table lists languages, and the available tools and options that yo
 
 ****  
 
-| Language | Tools and Options for Authoring Code | More Info | 
-| --- | --- | --- | 
-| Node\.js | [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/lambda/latest/dg/lambda-app.html) | You can use the console if the languages you choose do not require compilation, the code is saved in a single file, and it does not depend on any libraries\.  | 
-| Java | [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/lambda/latest/dg/lambda-app.html) | The AWS Toolkit also creates the deployment package, which is explained in [Deploying Code and Creating a Lambda Function](#lambda-app-deploy)\.  | 
-| C\# | [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/lambda/latest/dg/lambda-app.html) | The AWS Toolkit also creates the deployment package, which is explained in [Deploying Code and Creating a Lambda Function](#lambda-app-deploy)\.  | 
-| Python | [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/lambda/latest/dg/lambda-app.html) |  You can use the console if the languages you choose do not require compilation, the code is saved in a single file, and it does not depend on any libraries\.   | 
+| Language | Tools and Options for Authoring Code | 
+| --- | --- | 
+| Node\.js | [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/lambda/latest/dg/lambda-app.html) | 
+| Java | [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/lambda/latest/dg/lambda-app.html) | 
+| C\# | [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/lambda/latest/dg/lambda-app.html) | 
+| Python | [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/lambda/latest/dg/lambda-app.html) | 
+| Go | [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/lambda/latest/dg/lambda-app.html) | 
 
 In addition, regardless of the language you choose, there is a pattern to writing Lambda function code\. For example, how you write the handler method of your Lambda function \(that is, the method that AWS Lambda first calls when it begins executing the code\), how you pass events to the handler, what statements you can use in your code to generate logs in CloudWatch Logs, how to interact with AWS Lambda runtime and obtain information such as the time remaining before timeout, and how to handle exceptions\. The [Programming Model](programming-model-v2.md) section provides information for each of the supported languages\.
 
@@ -81,11 +82,11 @@ To help you troubleshoot failures in a function, Lambda logs all requests handle
 
 This guide provides several examples with step\-by\-step instructions\. If you are new to AWS Lambda, we recommend you try the following exercises:
 
-+ [Getting Started](getting-started.md) – The Getting Started exercise provides a console\-based experience\. The sample code is authored in Python\. You can edit the code in the console, using the [](code-editor.md), upload it to AWS Lambda, and test it using sample event data provided in the console\.
++ [Getting Started](getting-started.md) – The Getting Started exercise provides a console\-based experience\. Sample code is provided for your preferred runtimes\. You can also code within the console, using the [Code Editor](https://docs.aws.amazon.com/lambda/latest/dg/code-editor.html) and upload it to AWS Lambda, and test it using sample event data provided in the console\.
 
    
 
-+ [Use Cases](use-cases.md) – If you cannot author your code using the console, you must create your own deployment packages and use the AWS CLI \(or SDKs\) to create your Lambda function\. For more information, see [Authoring Code for Your Lambda Function](#lambda-app-author)\. Most examples in the Uses Cases section use the AWS CLI\. If you are new to AWS Lambda, we recommend that you try one of these exercises\. 
++ [Use Cases](use-cases.md) – If you cannot author your code using the console, you must create your own deployment packages and use the AWS CLI \(or SDKs\) to create your Lambda function\. For more information, see [Authoring Code for Your Lambda Function](#lambda-app-author)\. Most examples in the Use Cases section use the AWS CLI\. If you are new to AWS Lambda, we recommend that you try one of these exercises\. 
 
 ## Related Topics<a name="building-apps-related-topics"></a>
 

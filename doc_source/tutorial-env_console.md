@@ -2,7 +2,7 @@
 
 Along with specifying configuration settings for your Lambda function, you can also use environment variables to store sensitive information, such as a database password, using [AWS Key Management Service](http://docs.aws.amazon.com/kms/latest/developerguide/) and the Lambda console's encryption helpers\. For more information, see [Environment Variable Encryption](env_variables.md#env_encrypt)\. The following example shows you how to do this and also how to use KMS to decrypt that information\.
 
-This tutorial will demonstrate how you can use the Lambda console to encrypt an environment variable containing sensitive information and provides sample code for decrypting that information to use in your Lambda function\.
+This tutorial will demonstrate how you can use the Lambda console to encrypt an environment variable containing sensitive information\.
 
 ## Step 1: Create the Lambda Function<a name="tutorial-env-create-function"></a>
 
@@ -32,7 +32,7 @@ If the policy of the execution role does not have the `decrypt` permission, you 
 
 1. Choose the **Triggers** tab\. Under the **Triggers** page, you can optionally choose a service that automatically triggers your Lambda function by choosing the **Add trigger** button and then choosing the gray box with ellipses \(\.\.\.\) to display a list of available services\. For this example, do not configure a trigger and choose **Configuration**\.
 
-1. Choose the **Monitoring** tab\. This page will provide immediate CloudWatch metrics for your Lambda function invocations, as well as links to other helpful guides, including [Lambda X\-Ray](lambda-x-ray.md)\. 
+1. Choose the **Monitoring** tab\. This page will provide immediate CloudWatch metrics for your Lambda function invocations, as well as links to other helpful guides, including [Using AWS X\-Ray](lambda-x-ray.md)\. 
 
 1. Expand the **Environment variables** section\.
 

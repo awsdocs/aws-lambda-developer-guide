@@ -86,7 +86,7 @@ You can do the following to test the code:
 
   You can type any string and the function will return the same string in uppercase\. In addition, you will also get the useful function information provided by the `context` object\.
 
-Follow the instructions provided in the Getting Started\. For more information, see  [Step 2\.3: \(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\. Note the following differences:
+Follow the instructions provided in the Getting Started\. For more information, see  [\(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\. Note the following differences:
 
 + When you create a deployment package, don't forget the `aws-lambda-java-core` library dependency\.
 

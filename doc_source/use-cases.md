@@ -19,3 +19,5 @@ The use cases for AWS Lambda can be grouped into the following categories:
 + **On\-demand Lambda function invocation \(build your own event sources using custom apps\)** – User applications such as client, mobile, or web applications can publish events and invoke Lambda functions using the AWS SDKs or AWS Mobile SDKs, such as the AWS Mobile SDK for Android\. For more information and a tutorial, see [Getting Started](getting-started.md) and [Using AWS Lambda as Mobile Application Backend \(Custom Event Source: Android\)](with-on-demand-custom-android.md)
 
 + **Scheduled events** – You can also set up AWS Lambda to invoke your code on a regular, scheduled basis using the AWS Lambda console\. You can specify a fixed rate \(number of hours, days, or weeks\) or you can specify a cron expression\. For more information and a tutorial, see [Using AWS Lambda with Scheduled Events](with-scheduled-events.md)\.
+
+In addition, you also a Lambda State Machine\. For more information, see [Using a State Machine](http://docs.aws.amazon.com/step-functions/latest/dg/tutorial-creating-lambda-state-machine.html)\.

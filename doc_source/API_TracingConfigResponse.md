@@ -4,7 +4,7 @@ Parent object of the tracing information associated with your Lambda function\.
 
 ## Contents<a name="API_TracingConfigResponse_Contents"></a>
 
- **Mode**   
+ **Mode**   <a name="SSS-Type-TracingConfigResponse-Mode"></a>
 The tracing mode associated with your Lambda function\.  
 Type: String  
 Valid Values:` Active | PassThrough`   

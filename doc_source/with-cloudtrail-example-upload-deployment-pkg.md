@@ -10,7 +10,7 @@ In this section, you do the following:
 
 ## Step 2\.3\.1: Create the Lambda Function \(Upload the Deployment Package\)<a name="walkthrough-cloudtrail-events-adminuser-create-test-function-upload-zip-test-upload"></a>
 
-In this step, you upload the deployment package using the AWS CLI and provide configuration information when you create the Lambda function\. At the command prompt, run the following Lambda CLI `create-function` command using the `adminuser` `profile`\. 
+In this step, you upload the deployment package using the AWS CLI and provide configuration information when you create the Lambda function using the `adminuser` `profile`\. For more information on setting up the `admin` profile and using the AWS CLI, see [Set Up the AWS Command Line Interface \(AWS CLI\)](setup-awscli.md)\.
 
 **Note**  
 You need to update the command by providing the \.zip file path \(*//file\-path/CloudTrailEventProcessing\.zip \\*\) and the execution role ARN \(*execution\-role\-arn*\)\. If you used the sample code provided earlier in this tutorial, set the `--runtime` parameter value to `nodejs6.10` or `nodejs4.3`\.   
@@ -18,7 +18,7 @@ You can author your Lambda functions in Java or Python too\. If you use another 
 
 ```
 $ aws lambda create-function \
---region us-west-2 \
+--region region \
 --function-name CloudTrailEventProcessing  \
 --zip-file fileb://file-path/CloudTrailEventProcessing.zip \
 --role execution-role-arn \
@@ -217,12 +217,14 @@ We recommend that you invoke the function using the console because the console 
    }
    ```
 
-1. Execute the following AWS CLI command to invoke the function manually using the `adminuser` `profile`\. 
+1. Execute the following AWS CLI command to invoke the function manually using the `adminuser` profile\.
+**Note**  
+ If you have not already created this profile, see [Set Up the AWS Command Line Interface \(AWS CLI\)](setup-awscli.md)\.
 
    ```
-   $   aws lambda invoke-async \
+   $ aws lambda invoke-async \
     --function-name CloudTrailEventProcessing \
-    --region us-west-2 \
+    --region region \
     --invoke-args /filepath/input.txt \
     --debug \
    --profile adminuser
@@ -242,7 +244,7 @@ We recommend that you invoke the function using the console because the console 
       $ aws lambda  invoke \
       --invocation-type Event \
       --function-name CloudTrailEventProcessing \
-      --region us-west-2 \
+      --region region \
       --payload file://file-path/input.txt \
       --profile adminuser 
       outputfile.txt

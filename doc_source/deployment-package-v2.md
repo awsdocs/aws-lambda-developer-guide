@@ -4,8 +4,10 @@ To create a Lambda function you first create a Lambda function deployment packag
 
 + [Creating a Deployment Package \(Node\.js\)](nodejs-create-deployment-pkg.md)
 
-+ [Creating a Deployment Package \(Java\)](lambda-java-how-to-create-deployment-package.md)
-
 + [Creating a Deployment Package \(C\#\)](lambda-dotnet-how-to-create-deployment-package.md)
+
++ [Creating a Deployment Package \(Go\)](lambda-go-how-to-create-deployment-package.md)
+
++ [Creating a Deployment Package \(Java\)](lambda-java-how-to-create-deployment-package.md)
 
 + [Creating a Deployment Package \(Python\)](lambda-python-how-to-create-deployment-package.md)

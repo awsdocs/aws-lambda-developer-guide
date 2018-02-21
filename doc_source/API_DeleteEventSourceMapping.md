@@ -14,7 +14,7 @@ DELETE /2015-03-31/event-source-mappings/UUID HTTP/1.1
 
 The request requires the following URI parameters\.
 
- ** UUID **   
+ ** [UUID](#API_DeleteEventSourceMapping_RequestSyntax) **   <a name="SSS-DeleteEventSourceMapping-request-UUID"></a>
 The event source mapping ID\.
 
 ## Request Body<a name="API_DeleteEventSourceMapping_RequestBody"></a>
@@ -28,14 +28,14 @@ HTTP/1.1 202
 Content-type: application/json
 
 {
-   "BatchSize": number,
-   "EventSourceArn": "string",
-   "FunctionArn": "string",
-   "LastModified": number,
-   "LastProcessingResult": "string",
-   "State": "string",
-   "StateTransitionReason": "string",
-   "UUID": "string"
+   "[BatchSize](#SSS-DeleteEventSourceMapping-response-BatchSize)": number,
+   "[EventSourceArn](#SSS-DeleteEventSourceMapping-response-EventSourceArn)": "string",
+   "[FunctionArn](#SSS-DeleteEventSourceMapping-response-FunctionArn)": "string",
+   "[LastModified](#SSS-DeleteEventSourceMapping-response-LastModified)": number,
+   "[LastProcessingResult](#SSS-DeleteEventSourceMapping-response-LastProcessingResult)": "string",
+   "[State](#SSS-DeleteEventSourceMapping-response-State)": "string",
+   "[StateTransitionReason](#SSS-DeleteEventSourceMapping-response-StateTransitionReason)": "string",
+   "[UUID](#SSS-DeleteEventSourceMapping-response-UUID)": "string"
 }
 ```
 
@@ -45,38 +45,38 @@ If the action is successful, the service sends back an HTTP 202 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** BatchSize **   
+ ** [BatchSize](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-BatchSize"></a>
 The largest number of records that AWS Lambda will retrieve from your event source at the time of invoking your function\. Your function receives an event with all the retrieved records\.  
 Type: Integer  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.
 
- ** EventSourceArn **   
+ ** [EventSourceArn](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-EventSourceArn"></a>
 The Amazon Resource Name \(ARN\) of the Amazon Kinesis stream that is the source of events\.  
 Type: String  
 Pattern: `arn:aws:([a-zA-Z0-9\-])+:([a-z]{2}-[a-z]+-\d{1})?:(\d{12})?:(.*)` 
 
- ** FunctionArn **   
+ ** [FunctionArn](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-FunctionArn"></a>
 The Lambda function to invoke when AWS Lambda detects an event on the stream\.  
 Type: String  
 Pattern: `arn:aws:lambda:[a-z]{2}-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
- ** LastModified **   
+ ** [LastModified](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-LastModified"></a>
 The UTC time string indicating the last time the event mapping was updated\.  
 Type: Timestamp
 
- ** LastProcessingResult **   
+ ** [LastProcessingResult](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-LastProcessingResult"></a>
 The result of the last AWS Lambda invocation of your Lambda function\.  
 Type: String
 
- ** State **   
+ ** [State](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-State"></a>
 The state of the event source mapping\. It can be `Creating`, `Enabled`, `Disabled`, `Enabling`, `Disabling`, `Updating`, or `Deleting`\.  
 Type: String
 
- ** StateTransitionReason **   
+ ** [StateTransitionReason](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-StateTransitionReason"></a>
 The reason the event source mapping is in its current state\. It is either user\-requested or an AWS Lambda\-initiated state transition\.  
 Type: String
 
- ** UUID **   
+ ** [UUID](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-UUID"></a>
 The AWS Lambda assigned opaque identifier for the mapping\.  
 Type: String
 

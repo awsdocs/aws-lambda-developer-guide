@@ -1,6 +1,6 @@
 # ListTags<a name="API_ListTags"></a>
 
-Returns a list of tags assigned to a function when supplied the function ARN \(Amazon Resource Name\)\.
+Returns a list of tags assigned to a function when supplied the function ARN \(Amazon Resource Name\)\. For more information on Tagging, see [Tagging Lambda Functions](http://docs.aws.amazon.com/lambda/latest/dg/tagging.html) in the **AWS Lambda Developer Guide**\.
 
 ## Request Syntax<a name="API_ListTags_RequestSyntax"></a>
 
@@ -12,8 +12,8 @@ GET /2017-03-31/tags/ARN HTTP/1.1
 
 The request requires the following URI parameters\.
 
- ** Resource **   
-The ARN \(Amazon Resource Name\) of the function\.  
+ ** [Resource](#API_ListTags_RequestSyntax) **   <a name="SSS-ListTags-request-Resource"></a>
+The ARN \(Amazon Resource Name\) of the function\. For more information, see [Tagging Lambda Functions](http://docs.aws.amazon.com/lambda/latest/dg/tagging.html) in the **AWS Lambda Developer Guide**\.  
 Pattern: `arn:aws:lambda:[a-z]{2}-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
 ## Request Body<a name="API_ListTags_RequestBody"></a>
@@ -27,7 +27,7 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "Tags": { 
+   "[Tags](#SSS-ListTags-response-Tags)": { 
       "string" : "string" 
    }
 }
@@ -39,8 +39,8 @@ If the action is successful, the service sends back an HTTP 200 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** Tags **   
-The list of tags assigned to the function\.  
+ ** [Tags](#API_ListTags_ResponseSyntax) **   <a name="SSS-ListTags-response-Tags"></a>
+The list of tags assigned to the function\. For more information, see [Tagging Lambda Functions](http://docs.aws.amazon.com/lambda/latest/dg/tagging.html) in the **AWS Lambda Developer Guide**\.  
 Type: String to string map
 
 ## Errors<a name="API_ListTags_Errors"></a>

@@ -28,7 +28,7 @@ The following are recommended best practices for using AWS Lambda:
   }
   ```
 
-+ **Take advantage of container re\-use to improve the performance of your function\. ** Make sure any externalized configuration or dependencies that your code retrieves are stored and referenced locally after initial execution\. Limit the re\-initialization of variables/objects on every invocation\. Instead use static initialization/constructor, global/static variables and singletons\. Keep alive and reuse connections \(HTTP, database, etc\.\) that were established during a previous invocation\. 
++ **Take advantage of Execution Context reuse to improve the performance of your function\. ** Make sure any externalized configuration or dependencies that your code retrieves are stored and referenced locally after initial execution\. Limit the re\-initialization of variables/objects on every invocation\. Instead use static initialization/constructor, global/static variables and singletons\. Keep alive and reuse connections \(HTTP, database, etc\.\) that were established during a previous invocation\. 
 
 + **Use [Environment Variables](env_variables.md) to pass operational parameters to your function\.** For example, if you are writing to an Amazon S3 bucket, instead of hard\-coding the bucket name you are writing to, configure the bucket name as an environment variable\. 
 
@@ -38,7 +38,7 @@ The following are recommended best practices for using AWS Lambda:
 
 + **Reduce the time it takes Lambda to unpack deployment packages** authored in Java by putting your dependency `.jar` files in a separate /lib directory\. This is faster than putting all your function’s code in a single jar with a large number of `.class` files\. 
 
-+ **Minimize the complexity of your dependencies\.** Prefer simpler frameworks that load quickly on container startup\. For example, prefer simpler Java dependency injection \(IoC\) frameworks like [Dagger](http://square.github.io/dagger/) or [Guice](https://github.com/google/guice), over more complex ones like [Spring Framework](https://github.com/spring-projects/spring-framework)\. 
++ **Minimize the complexity of your dependencies\.** Prefer simpler frameworks that load quickly on [Execution Context](http://docs.aws.amazon.com/lambda/latest/dg/running-lambda-code.html) startup\. For example, prefer simpler Java dependency injection \(IoC\) frameworks like [Dagger](http://square.github.io/dagger/) or [Guice](https://github.com/google/guice), over more complex ones like [Spring Framework](https://github.com/spring-projects/spring-framework)\. 
 
 + **Avoid using recursive code** in your Lambda function, wherein the function automatically calls itself until some arbitrary criteria is met\. This could lead to unintended volume of function invocations and escalated costs\. If you do accidentally do so, set the function concurrent execution limit to `0` immediately to throttle all invocations to the function, while you update the code\.
 
@@ -62,13 +62,13 @@ The following are recommended best practices for using AWS Lambda:
 
 ## Alarming and Metrics<a name="alarming-metrics"></a>
 
-+ **Use [AWS Lambda Metrics](monitoring-functions-metrics.md) and [ CloudWatch Alarms](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html)** instead of creating or updating a metric from within your Lambda function code\. It's a much more efficient way to track the health of your Lambda functions, allowing you to catch issues early in the development process\. For instance, you can configure an alarm based on the expected duration of your Lambda function exection time in order to address any bottlenecks or latencies attributable to your function code\.
++ **Use [AWS Lambda Metrics](monitoring-functions-metrics.md) and [ CloudWatch Alarms](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html)** instead of creating or updating a metric from within your Lambda function code\. It's a much more efficient way to track the health of your Lambda functions, allowing you to catch issues early in the development process\. For instance, you can configure an alarm based on the expected duration of your Lambda function exectuion time in order to address any bottlenecks or latencies attributable to your function code\.
 
 + **Leverage your logging library and [AWS Lambda Metrics and Dimensions](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/lam-metricscollected.html)** to catch app errors \(e\.g\. ERR, ERROR, WARNING, etc\.\) 
 
 ## Stream Event Invokes<a name="stream-events"></a>
 
-+ **Test with different batch and record sizes **so that the polling frequency of each event source is tuned to how quickly your function is able to complete its task\. [BatchSize ](http://docs.aws.amazon.com/lambda/latest/dg/API_CreateEventSourceMapping.html#SSS-CreateEventSourceMapping-request-BatchSize)controls the maximum number of records that can be sent to your function with each invoke\. A larger batch size can often more efficiently absorb the invoke overhead across a larger set of records, increasing your throughput\.
++ **Test with different batch and record sizes **so that the polling frequency of each event source is tuned to how quickly your function is able to complete its task\. [BatchSize ](https://docs.aws.amazon.com/lambda/latest/dg/API_CreateEventSourceMapping.html#SSS-CreateEventSourceMapping-request-BatchSize)controls the maximum number of records that can be sent to your function with each invoke\. A larger batch size can often more efficiently absorb the invoke overhead across a larger set of records, increasing your throughput\.
 **Note**  
 When there are not enough records to process, instead of waiting, the stream processing function will be invoked with a smaller number of records\.
 

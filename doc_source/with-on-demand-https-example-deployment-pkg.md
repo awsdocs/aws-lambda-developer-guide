@@ -4,7 +4,7 @@ From the **Filter View** list, choose the language you want to use for your Lamb
 
 ## Node\.js<a name="with-kinesis-example-deployment-pkg-nodejs1"></a>
 
-Follow the instructions to create a AWS Lambda function deployment package\. 
+Follow the instructions to create an AWS Lambda function deployment package\. 
 
 1. Open a text editor, and then copy the following code\. 
 
@@ -58,7 +58,7 @@ Follow the instructions to create a AWS Lambda function deployment package\.
    };
    ```
 **Note**  
-The code sample is compliant with the Node\.js runtimes v6\.10 or v4\.3\. For more information, see [Programming Model \(Node\.js\)](programming-model.md)
+The code sample is compliant with the Node\.js runtimes v6\.10 or v4\.3\. For more information, see [Programming Model\(Node\.js\)](programming-model.md)
 
 1. Save the file as `LambdaFunctionOverHttps.js`\. 
 
@@ -70,7 +70,7 @@ The code sample is compliant with the Node\.js runtimes v6\.10 or v4\.3\. For mo
 
 ## Python<a name="with-kinesis-example-deployment-pkg-python1"></a>
 
- Follow the instructions to create AWS Lambda function deployment package\. 
+ Follow the instructions to create an AWS Lambda function deployment package\. 
 
 1.  Open a text editor, and then copy the following code\. 
 **Note**  
@@ -120,5 +120,38 @@ The `from __future__` statement enables you to write code that is compatible wit
 1.  Zip the `LambdaFunctionOverHttps.py` file as `LambdaFunctionOverHttps.zip`\. 
 
 ### Next Step<a name="create-deployment-pkg-python-next-step1"></a>
+
+ [Step 2\.2: Create the Execution Role \(IAM Role\)](with-on-demand-https-example-create-iam-role.md) 
+
+## Go<a name="with-kinesis-example-deployment-pkg-go"></a>
+
+ Follow the instructions to create an AWS Lambda function deployment package\. 
+
+1.  Open a text editor, and then copy the following code\. 
+
+   ```
+   import (
+       "strings"
+       "github.com/aws/aws-lambda-go/events"
+   )
+   
+   func handleRequest(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+       fmt.Printf("Processing request data for request %s.\n", request.RequestContext.RequestId)
+       fmt.Printf("Body size = %d.\n", len(request.Body))
+   
+       fmt.Println("Headers:")
+       for key, value := range request.Headers {
+           fmt.Printf("    %s: %s\n", key, value)
+       }
+   
+       return events.APIGatewayProxyResponse { Body: request.Body, StatusCode: 200 }, nil
+   }
+   ```
+
+1. Save the file as `LambdaFunctionOverHttps.go`\. 
+
+1.  Zip the `LambdaFunctionOverHttps.go` file as `LambdaFunctionOverHttps.zip`\. 
+
+### Next Step<a name="create-deployment-pkg-go-next-step1"></a>
 
  [Step 2\.2: Create the Execution Role \(IAM Role\)](with-on-demand-https-example-create-iam-role.md) 

@@ -74,7 +74,7 @@ You can do the following to test the code:
 
 + To test your Lambda function use a string \("this is a test"\) as sample event\. The handler code receives the sample event but does nothing with it\. It only shows how to write logs\.
 
-Follow the instructions provided in the Getting Started\. For more information, see  [Step 2\.3: \(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\. Note the following differences:
+Follow the instructions provided in the Getting Started\. For more information, see  [\(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\. Note the following differences:
 
 + When you create a deployment package, don't forget the `aws-lambda-java-log4j` dependency for Log4j 1\.2 dependency\. 
 

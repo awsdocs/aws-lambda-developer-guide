@@ -4,12 +4,12 @@ The object for the Lambda function location\.
 
 ## Contents<a name="API_FunctionCodeLocation_Contents"></a>
 
- **Location**   
+ **Location**   <a name="SSS-Type-FunctionCodeLocation-Location"></a>
 The presigned URL you can use to download the function's \.zip file that you previously uploaded\. The URL is valid for up to 10 minutes\.  
 Type: String  
 Required: No
 
- **RepositoryType**   
+ **RepositoryType**   <a name="SSS-Type-FunctionCodeLocation-RepositoryType"></a>
 The repository from which you can download the function\.  
 Type: String  
 Required: No

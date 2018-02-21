@@ -26,7 +26,7 @@ You configure a DLQ by specifying a target Amazon Resource Name \(ARN\) on a Lam
 }
 ```
 
- Lambda directs events that cannot be processed to the Amazon SNS topic or Amazon SQS queue that you’ve configured for the Lambda function\. Functions without an associated DLQ discard events after they have exhausted their retries\. For more information about retry policies, see [Understanding Retry Behavior](retries-on-errors.md)\. You need to explicitly provide read/publish/sendMessage access to your DLQ resource as part of the execution role for your Lambda function\. The payload written to the DLQ target ARN is the original event payload with no modifications to the message body\. The attributes of the message, described below, contain information to help you understand why the event wasn’t processed: 
+ Lambda directs events that cannot be processed to the Amazon SNS topic or Amazon SQS queue that you’ve configured for the Lambda function\. Functions without an associated DLQ discard events after they have exhausted their retries\. For more information about retry policies, see [Understanding Retry Behavior](retries-on-errors.md)\. You need to explicitly provide receive/delete/sendMessage access to your DLQ resource as part of the execution role for your Lambda function\. The payload written to the DLQ target ARN is the original event payload with no modifications to the message body\. The attributes of the message, described below, contain information to help you understand why the event wasn’t processed: 
 
 
 | Name | Type | Value | 

@@ -12,7 +12,7 @@ DELETE /2017-10-31/functions/FunctionName/concurrency HTTP/1.1
 
 The request requires the following URI parameters\.
 
- ** FunctionName **   
+ ** [FunctionName](#API_DeleteFunctionConcurrency_RequestSyntax) **   <a name="SSS-DeleteFunctionConcurrency-request-FunctionName"></a>
 The name of the function you are removing concurrent execution limits from\. For more information, see [Managing Concurrency](concurrent-executions.md)\.  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
 Pattern: `(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 

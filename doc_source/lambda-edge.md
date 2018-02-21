@@ -29,7 +29,8 @@ You write Lambda functions for CloudFront in Node\.js 6\.10\. With Lambda@Edge, 
 For more information about setting up CloudFront with Lambda@Edge, including sample code, see [Using CloudFront with Lambda@Edge](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-at-the-edge.html) in the *Amazon CloudFront Developer Guide*\. 
 
 
-+ [How You Create Lambda Functions for Lambda@Edge](#lambda-edge-how-it-works)
++ [How You Create and Use Lambda Functions for Lambda@Edge](#lambda-edge-how-it-works)
++ [How Replicas of Lambda Functions are Deleted](#lambda-edge-delete-replicas)
 + [Setting IAM Permissions and Roles for Lambda@Edge](#lambda-edge-permissions)
 + [Creating a Lambda@Edge Function](#lambda-edge-create-function)
 + [Adding Triggers for a Lambda@Edge Function \(AWS Lambda Console\)](#lambda-edge-add-triggers)
@@ -38,9 +39,9 @@ For more information about setting up CloudFront with Lambda@Edge, including sam
 + [Testing and Debugging](#lambda-edge-testing-debugging)
 + [Lambda@Edge Limits](#lambda-edge-limits)
 
-## How You Create Lambda Functions for Lambda@Edge<a name="lambda-edge-how-it-works"></a>
+## How You Create and Use Lambda Functions for Lambda@Edge<a name="lambda-edge-how-it-works"></a>
 
-Here's an overview of how you create Lambda functions for Lambda@Edge:
+Here's an overview of how you create and use Lambda functions for Lambda@Edge:
 
 1. You use Node\.js 6\.10 to write the code for your Lambda function\.
 
@@ -59,6 +60,14 @@ Here's an overview of how you create Lambda functions for Lambda@Edge:
    When you create a trigger, Lambda replicates the function to AWS Regions and CloudFront edge locations around the globe\.
 
 ![\[Conceptual graphic that shows how you create Lambda functions that integrate with CloudFront.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/lambda-creation-workflow.png)
+
+## How Replicas of Lambda Functions are Deleted<a name="lambda-edge-delete-replicas"></a>
+
+Replicas of a Lambda function are automatically deleted after you have removed the last association for the function from all your CloudFront distributions\. Replicas are typically deleted within a few hours\. If more than one distribution uses a function, the replicas are removed only after the function is disassociated from the last one\.
+
+Replicas are also removed if you delete the last distribution that a function was associated with\. Replicas, as well as functions, cannot be manually deleted at this time\. This helps prevent a situation where a replica is removed that is still being used, causing an error to be returned\.
+
+Note that it's important not to build applications that use function replicas outside of CloudFront because the replicas will be deleted whenever their associations with distributions are removed, or when distributions themselves are deleted\. So the replica that an outside application depends on could be removed without warning, causing it to fail\.
 
 ## Setting IAM Permissions and Roles for Lambda@Edge<a name="lambda-edge-permissions"></a>
 
@@ -86,7 +95,7 @@ In addition to the IAM permissions that you need to use AWS Lambda, you need the
   Choose `cloudfront:UpdateDistribution` to update a distribution or `cloudfront:CreateDistribution` to create a distribution\.
 For more information, see the following documentation:  
 
-+ [Authentication and Access Control for AWS Lambda](lambda-auth-and-access-control.md) in this guide
++ [Authentication and Access Control for AWS Lambda](lambda-auth-and-access-control.md)\.
 
 + [Authentication and Access Control for CloudFront](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/auth-and-access-control.html) in the *Amazon CloudFront Developer Guide*
 
@@ -125,7 +134,7 @@ When you first create a trigger, a role named AWSServiceRoleForLambdaReplicator 
 
 ## Creating a Lambda@Edge Function<a name="lambda-edge-create-function"></a>
 
-To set up AWS Lambda to run Lambda functions that are based on CloudFront events, follow this procedure\.
+To set up AWS Lambda to run Lambda functions that are based on CloudFront events, follow this procedure\.<a name="lambda-edge-create-function-procedure"></a>
 
 **To create a Lambda@Edge function**
 
@@ -184,7 +193,7 @@ We recommend that you test and debug the function before you add triggers\. If y
 
    + [Using Amazon CloudWatch](monitoring-functions.md)
 
-   + [Lambda X\-Ray](lambda-x-ray.md)
+   + [Using AWS X\-Ray](lambda-x-ray.md)
 
    + [Test Your Serverless Applications Locally Using SAM Local \(Public Beta\)](test-sam-local.md)
 
@@ -196,7 +205,7 @@ When you create a Lambda function, you can specify only one trigger—only one c
 
 + To use the Lambda console, perform the following procedure\. This method works well if you want to add more triggers to a function for the same CloudFront distribution\.
 
-+ To use the CloudFront console, see [Adding Triggers for CloudFront Events to a Lambda Function](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-create-functions.html#lambda-create-functions-add-triggers) in the *Amazon CloudFront Developer Guide*\. This method works well if you want to add triggers for multiple distributions because it's easier to find the distribution that you want to update\. You can also update other CloudFront settings at the same time\.
++ To use the CloudFront console, see [Adding Triggers for CloudFront Events to a Lambda Function](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-create-functions.html#lambda-create-functions-add-triggers) in the *Amazon CloudFront Developer Guide*\. This method works well if you want to add triggers for multiple distributions because it's easier to find the distribution that you want to update\. You can also update other CloudFront settings at the same time\.<a name="lambda-edge-add-triggers-procedure"></a>
 
 **To add triggers to a Lambda@Edge function \(AWS Lambda console\)**
 
@@ -238,7 +247,7 @@ Select this check box so that AWS Lambda replicates the function to regions glob
 
 ## Writing Functions for Lambda@Edge<a name="lambda-edge-authoring-functions"></a>
 
-The programming model for using Node\.js with Lambda@Edge is the same as using Lambda in an AWS Region\. For more information, see [Programming Model \(Node\.js\)](programming-model.md)\. 
+The programming model for using Node\.js with Lambda@Edge is the same as using Lambda in an AWS Region\. For more information, see [Programming Model\(Node\.js\)](programming-model.md)\. 
 
 For more information about writing functions for Lambda@Edge, see [Requirements and Restrictions on Lambda Functions](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-requirements-limits.html) in the *Amazon CloudFront Developer Guide*\.
 
@@ -342,7 +351,7 @@ exports.handler = (event, context, callback) => {
         headers: {
             location: [{
                 key: 'Location',
-                value: 'http://docs.aws.amazon.com/lambda/latest/dg/lambda-edge.html',
+                value: 'https://docs.aws.amazon.com/lambda/latest/dg/lambda-edge.html',
             }],
         },
     };
@@ -364,7 +373,7 @@ When you want to edit a Lambda function, note the following:
 
 + When you publish a new version of a function, Lambda doesn't automatically copy triggers from the previous version to the new version\. You must reproduce the triggers for the new version\. 
 
-+ When you add a trigger for a CloudFront event to a function, if there's already a trigger for the same distribution, cache behavior, and event for an earlier version of the same function, Lambda deletes the trigger from the earlier version\.
++ When you add a trigger for a CloudFront event to a function, if there's already a trigger for the same distribution, cache behavior, and event for an earlier version of the same function, Lambda deletes the trigger from the earlier version\.<a name="lambda-edge-edit-function-procedure"></a>
 
 **To edit a Lambda function \(AWS Lambda console\)**
 

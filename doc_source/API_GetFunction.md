@@ -16,13 +16,13 @@ GET /2015-03-31/functions/FunctionName?Qualifier=Qualifier HTTP/1.1
 
 The request requires the following URI parameters\.
 
- ** FunctionName **   
+ ** [FunctionName](#API_GetFunction_RequestSyntax) **   <a name="SSS-GetFunction-request-FunctionName"></a>
 The Lambda function name\.  
  You can specify a function name \(for example, `Thumbnail`\) or you can specify Amazon Resource Name \(ARN\) of the function \(for example, `arn:aws:lambda:us-west-2:account-id:function:ThumbNail`\)\. AWS Lambda also allows you to specify a partial ARN \(for example, `account-id:Thumbnail`\)\. Note that the length constraint applies only to the ARN\. If you specify only the function name, it is limited to 64 characters in length\.   
 Length Constraints: Minimum length of 1\. Maximum length of 170\.  
 Pattern: `(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_\.]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
- ** Qualifier **   
+ ** [Qualifier](#API_GetFunction_RequestSyntax) **   <a name="SSS-GetFunction-request-Qualifier"></a>
 Use this optional parameter to specify a function version or an alias name\. If you specify function version, the API uses qualified function ARN for the request and returns information about the specific Lambda function version\. If you specify an alias name, the API uses the alias ARN and returns information about the function version to which the alias points\. If you don't provide this parameter, the API uses unqualified function ARN and returns information about the `$LATEST` version of the Lambda function\.   
 Length Constraints: Minimum length of 1\. Maximum length of 128\.  
 Pattern: `(|[a-zA-Z0-9$_-]+)` 
@@ -38,50 +38,51 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "Code": { 
-      "Location": "string",
-      "RepositoryType": "string"
+   "[Code](#SSS-GetFunction-response-Code)": { 
+      "[Location](API_FunctionCodeLocation.md#SSS-Type-FunctionCodeLocation-Location)": "string",
+      "[RepositoryType](API_FunctionCodeLocation.md#SSS-Type-FunctionCodeLocation-RepositoryType)": "string"
    },
-   "Concurrency": { 
-      "ReservedConcurrentExecutions": number
+   "[Concurrency](#SSS-GetFunction-response-Concurrency)": { 
+      "[ReservedConcurrentExecutions](API_Concurrency.md#SSS-Type-Concurrency-ReservedConcurrentExecutions)": number
    },
-   "Configuration": { 
-      "CodeSha256": "string",
-      "CodeSize": number,
-      "DeadLetterConfig": { 
-         "TargetArn": "string"
+   "[Configuration](#SSS-GetFunction-response-Configuration)": { 
+      "[CodeSha256](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-CodeSha256)": "string",
+      "[CodeSize](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-CodeSize)": number,
+      "[DeadLetterConfig](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-DeadLetterConfig)": { 
+         "[TargetArn](API_DeadLetterConfig.md#SSS-Type-DeadLetterConfig-TargetArn)": "string"
       },
-      "Description": "string",
-      "Environment": { 
-         "Error": { 
-            "ErrorCode": "string",
-            "Message": "string"
+      "[Description](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-Description)": "string",
+      "[Environment](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-Environment)": { 
+         "[Error](API_EnvironmentResponse.md#SSS-Type-EnvironmentResponse-Error)": { 
+            "[ErrorCode](API_EnvironmentError.md#SSS-Type-EnvironmentError-ErrorCode)": "string",
+            "[Message](API_EnvironmentError.md#SSS-Type-EnvironmentError-Message)": "string"
          },
-         "Variables": { 
+         "[Variables](API_EnvironmentResponse.md#SSS-Type-EnvironmentResponse-Variables)": { 
             "string" : "string" 
          }
       },
-      "FunctionArn": "string",
-      "FunctionName": "string",
-      "Handler": "string",
-      "KMSKeyArn": "string",
-      "LastModified": "string",
-      "MasterArn": "string",
-      "MemorySize": number,
-      "Role": "string",
-      "Runtime": "string",
-      "Timeout": number,
-      "TracingConfig": { 
-         "Mode": "string"
+      "[FunctionArn](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-FunctionArn)": "string",
+      "[FunctionName](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-FunctionName)": "string",
+      "[Handler](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-Handler)": "string",
+      "[KMSKeyArn](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-KMSKeyArn)": "string",
+      "[LastModified](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-LastModified)": "string",
+      "[MasterArn](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-MasterArn)": "string",
+      "[MemorySize](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-MemorySize)": number,
+      "[RevisionId](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-RevisionId)": "string",
+      "[Role](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-Role)": "string",
+      "[Runtime](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-Runtime)": "string",
+      "[Timeout](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-Timeout)": number,
+      "[TracingConfig](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-TracingConfig)": { 
+         "[Mode](API_TracingConfigResponse.md#SSS-Type-TracingConfigResponse-Mode)": "string"
       },
-      "Version": "string",
-      "VpcConfig": { 
-         "SecurityGroupIds": [ "string" ],
-         "SubnetIds": [ "string" ],
-         "VpcId": "string"
+      "[Version](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-Version)": "string",
+      "[VpcConfig](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-VpcConfig)": { 
+         "[SecurityGroupIds](API_VpcConfigResponse.md#SSS-Type-VpcConfigResponse-SecurityGroupIds)": [ "string" ],
+         "[SubnetIds](API_VpcConfigResponse.md#SSS-Type-VpcConfigResponse-SubnetIds)": [ "string" ],
+         "[VpcId](API_VpcConfigResponse.md#SSS-Type-VpcConfigResponse-VpcId)": "string"
       }
    },
-   "Tags": { 
+   "[Tags](#SSS-GetFunction-response-Tags)": { 
       "string" : "string" 
    }
 }
@@ -93,20 +94,20 @@ If the action is successful, the service sends back an HTTP 200 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** Code **   
+ ** [Code](#API_GetFunction_ResponseSyntax) **   <a name="SSS-GetFunction-response-Code"></a>
 The object for the Lambda function location\.  
 Type: [FunctionCodeLocation](API_FunctionCodeLocation.md) object
 
- ** Concurrency **   
+ ** [Concurrency](#API_GetFunction_ResponseSyntax) **   <a name="SSS-GetFunction-response-Concurrency"></a>
 The concurrent execution limit set for this function\. For more information, see [Managing Concurrency](concurrent-executions.md)\.  
 Type: [Concurrency](API_Concurrency.md) object
 
- ** Configuration **   
+ ** [Configuration](#API_GetFunction_ResponseSyntax) **   <a name="SSS-GetFunction-response-Configuration"></a>
 A complex type that describes function metadata\.  
 Type: [FunctionConfiguration](API_FunctionConfiguration.md) object
 
- ** Tags **   
-Returns the list of tags associated with the function\.  
+ ** [Tags](#API_GetFunction_ResponseSyntax) **   <a name="SSS-GetFunction-response-Tags"></a>
+Returns the list of tags associated with the function\. For more information, see [Tagging Lambda Functions](http://docs.aws.amazon.com/lambda/latest/dg/tagging.html) in the **AWS Lambda Developer Guide**\.  
 Type: String to string map
 
 ## Errors<a name="API_GetFunction_Errors"></a>

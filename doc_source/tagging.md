@@ -43,6 +43,9 @@ To remove tags from an existing function, open the function, choose the **Tags**
 
 When you create a new Lambda function using the [CreateFunction](API_CreateFunction.md) command, you can add tags by populating the `Tags` parameter\. Specify multiple tag values by enclosing them in quotation marks, as shown below:
 
+**Note**  
+If you have not already created the `adminuser` profile, see [Set Up the AWS Command Line Interface \(AWS CLI\)](setup-awscli.md)\.
+
 ```
 $ aws lambda create-function \
 --region  region  \
@@ -126,9 +129,9 @@ The following restrictions apply to tags:
 
 + Maximum number of tags per resource—50
 
-+ Maximum key length—127 Unicode characters in UTF\-8
++ Maximum key length—128 Unicode characters in UTF\-8
 
-+ Maximum value length—255 Unicode characters in UTF\-8
++ Maximum value length—256 Unicode characters in UTF\-8
 
 + Tag keys and values are case sensitive\.
 

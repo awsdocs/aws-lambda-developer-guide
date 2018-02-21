@@ -89,7 +89,7 @@ If you are following other tutorial topics in this guide, the specific tutorials
 
 1. Verify the resulting `project-dir.zip` file in the `project-dir/build/distributions` subdirectory\.
 
-1. Now you can upload the \.zip file, your deployment package to AWS Lambda to create a Lambda function and test it by manually invoking it using sample event data\. For instruction, see  [Step 2\.3: \(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\.
+1. Now you can upload the \.zip file, your deployment package to AWS Lambda to create a Lambda function and test it by manually invoking it using sample event data\. For instruction, see  [\(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\.
 
 ## Example 2: Creating \.zip Using Gradle Using Local Jars<a name="create-deployment-pkg-zip-java-without-central-repository"></a>
 

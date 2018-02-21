@@ -85,7 +85,7 @@ The deployment package is a \.zip file containing your Lambda function code\. Fo
    };
    ```
 **Note**  
-The code sample is compliant with the Node\.js runtimes v6\.10 or v4\.3\. For more information, see [Programming Model \(Node\.js\)](programming-model.md)
+The code sample is compliant with the Node\.js runtimes v6\.10 or v4\.3\. For more information, see [Programming Model\(Node\.js\)](programming-model.md)
 
 1. Save the file as `CloudTrailEventProcessing.js`\. 
 

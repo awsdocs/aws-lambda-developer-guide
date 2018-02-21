@@ -1,6 +1,6 @@
 # UntagResource<a name="API_UntagResource"></a>
 
-Removes tags from a Lambda function\. Requires the function ARN \(Amazon Resource Name\)\. 
+Removes tags from a Lambda function\. Requires the function ARN \(Amazon Resource Name\)\. For more information, see [Tagging Lambda Functions](http://docs.aws.amazon.com/lambda/latest/dg/tagging.html) in the **AWS Lambda Developer Guide**\. 
 
 ## Request Syntax<a name="API_UntagResource_RequestSyntax"></a>
 
@@ -12,12 +12,12 @@ DELETE /2017-03-31/tags/ARN?tagKeys=TagKeys HTTP/1.1
 
 The request requires the following URI parameters\.
 
- ** Resource **   
-The ARN \(Amazon Resource Name\) of the function\.  
+ ** [Resource](#API_UntagResource_RequestSyntax) **   <a name="SSS-UntagResource-request-Resource"></a>
+The ARN \(Amazon Resource Name\) of the function\. For more information, see [Tagging Lambda Functions](http://docs.aws.amazon.com/lambda/latest/dg/tagging.html) in the **AWS Lambda Developer Guide**\.  
 Pattern: `arn:aws:lambda:[a-z]{2}-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
- ** TagKeys **   
-The list of tag keys to be deleted from the function\.
+ ** [TagKeys](#API_UntagResource_RequestSyntax) **   <a name="SSS-UntagResource-request-TagKeys"></a>
+The list of tag keys to be deleted from the function\. For more information, see [Tagging Lambda Functions](http://docs.aws.amazon.com/lambda/latest/dg/tagging.html) in the **AWS Lambda Developer Guide**\.
 
 ## Request Body<a name="API_UntagResource_RequestBody"></a>
 

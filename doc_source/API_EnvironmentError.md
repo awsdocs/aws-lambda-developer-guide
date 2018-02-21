@@ -4,12 +4,12 @@ The parent object that contains error information associated with your configura
 
 ## Contents<a name="API_EnvironmentError_Contents"></a>
 
- **ErrorCode**   
+ **ErrorCode**   <a name="SSS-Type-EnvironmentError-ErrorCode"></a>
 The error code returned by the environment error object\.  
 Type: String  
 Required: No
 
- **Message**   
+ **Message**   <a name="SSS-Type-EnvironmentError-Message"></a>
 The message returned by the environment error object\.  
 Type: String  
 Required: No

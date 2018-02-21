@@ -4,7 +4,7 @@ From the **Filter View** list, choose the language you want to use for your Lamb
 
 ## Node\.js<a name="with-on-demand-custom-android-example-deployment-pkg-nodejs"></a>
 
-Follow the instructions to create a AWS Lambda function deployment package\. 
+Follow the instructions to create an AWS Lambda function deployment package\. 
 
 1. Open a text editor, and then copy the following code\. 
 
@@ -18,7 +18,7 @@ Follow the instructions to create a AWS Lambda function deployment package\.
    }
    ```
 **Note**  
-The code sample is compliant with the Node\.js runtimes v6\.10 or v4\.3\. For more information, see [Programming Model \(Node\.js\)](programming-model.md)
+The code sample is compliant with the Node\.js runtimes v6\.10 or v4\.3\. For more information, see [Programming Model\(Node\.js\)](programming-model.md)
 
 1. Save the file as `AndroidBackendLambdaFunction.js`\. 
 

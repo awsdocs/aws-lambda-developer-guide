@@ -1,11 +1,11 @@
 # DeadLetterConfig<a name="API_DeadLetterConfig"></a>
 
-The parent object that contains the target ARN \(Amazon Resource Name\) of an Amazon SQS queue or Amazon SNS topic\.
+The Amazon Resource Name \(ARN\) of an Amazon SQS queue or Amazon SNS topic you specify as your Dead Letter Queue \(DLQ\)\. For more information, see [Dead Letter Queues](dlq.md)\. 
 
 ## Contents<a name="API_DeadLetterConfig_Contents"></a>
 
- **TargetArn**   
-The Amazon Resource Name \(ARN\) of an Amazon SQS queue or Amazon SNS topic you specify as your Dead Letter Queue \(DLQ\)\.  
+ **TargetArn**   <a name="SSS-Type-DeadLetterConfig-TargetArn"></a>
+The Amazon Resource Name \(ARN\) of an Amazon SQS queue or Amazon SNS topic you specify as your Dead Letter Queue \(DLQ\)\. [Dead Letter Queues](dlq.md)\. For more information, see [Dead Letter Queues](dlq.md)\.   
 Type: String  
 Pattern: `(arn:aws:[a-z0-9-.]+:.*)|()`   
 Required: No

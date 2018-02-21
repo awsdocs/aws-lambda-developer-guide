@@ -6,7 +6,7 @@ In this tutorial, you create a Lambda function to consume events from an Kinesis
 
 +  First, you perform the necessary setup to create a Lambda function and then you test it by invoking it manually using sample event data \(you don't need an Kinesis stream\)\. 
 
-+ Second, you create an Kinesis stream \(event source\)\. You add an event source mapping in AWS Lambda to associate the stream with your Lambda function\. AWS Lambda starts polling the stream, you add test records to the stream using the Kinesis API, and then you verify that AWS Lambda executed your Lambda function\.
++ Second, you create a Kinesis stream \(event source\)\. You add an event source mapping in AWS Lambda to associate the stream with your Lambda function\. AWS Lambda starts polling the stream, you add test records to the stream using the Kinesis API, and then you verify that AWS Lambda executed your Lambda function\.
 
 **Important**  
 Both the Lambda function and the Kinesis stream must be in the same AWS region\. This tutorial assumes that you create these resources in the `us-west-2` region\.

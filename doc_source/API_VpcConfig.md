@@ -4,13 +4,13 @@ If your Lambda function accesses resources in a VPC, you provide this parameter 
 
 ## Contents<a name="API_VpcConfig_Contents"></a>
 
- **SecurityGroupIds**   
+ **SecurityGroupIds**   <a name="SSS-Type-VpcConfig-SecurityGroupIds"></a>
 A list of one or more security groups IDs in your VPC\.  
 Type: Array of strings  
 Array Members: Maximum number of 5 items\.  
 Required: No
 
- **SubnetIds**   
+ **SubnetIds**   <a name="SSS-Type-VpcConfig-SubnetIds"></a>
 A list of one or more subnet IDs in your VPC\.  
 Type: Array of strings  
 Array Members: Maximum number of 16 items\.  

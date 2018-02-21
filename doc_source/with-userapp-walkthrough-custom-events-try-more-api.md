@@ -62,7 +62,7 @@ The Lambda CLI `get-function` command returns Lambda function metadata and a pre
 ```
 $ aws lambda get-function \
 --function-name helloworld \
---region us-west-2 \
+--region region \
 --profile adminuser
 ```
 
@@ -95,7 +95,7 @@ If you want the function configuration information only \(not the presigned URL\
 ```
 $ aws lambda get-function-configuration \
  --function-name helloworld \
- --region us-west-2 \
+ --region region \
 --profile adminuser
 ```
 

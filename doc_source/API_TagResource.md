@@ -1,6 +1,6 @@
 # TagResource<a name="API_TagResource"></a>
 
-Creates a list of tags \(key\-value pairs\) on the Lambda function\. Requires the Lambda function ARN \(Amazon Resource Name\)\. If a key is specified without a value, Lambda creates a tag with the specified key and a value of null\. 
+Creates a list of tags \(key\-value pairs\) on the Lambda function\. Requires the Lambda function ARN \(Amazon Resource Name\)\. If a key is specified without a value, Lambda creates a tag with the specified key and a value of null\. For more information, see [Tagging Lambda Functions](http://docs.aws.amazon.com/lambda/latest/dg/tagging.html) in the **AWS Lambda Developer Guide**\. 
 
 ## Request Syntax<a name="API_TagResource_RequestSyntax"></a>
 
@@ -9,7 +9,7 @@ POST /2017-03-31/tags/ARN HTTP/1.1
 Content-type: application/json
 
 {
-   "Tags": { 
+   "[Tags](#SSS-TagResource-request-Tags)": { 
       "string" : "string" 
    }
 }
@@ -19,16 +19,16 @@ Content-type: application/json
 
 The request requires the following URI parameters\.
 
- ** Resource **   
-The ARN \(Amazon Resource Name\) of the Lambda function\.  
+ ** [Resource](#API_TagResource_RequestSyntax) **   <a name="SSS-TagResource-request-Resource"></a>
+The ARN \(Amazon Resource Name\) of the Lambda function\. For more information, see [Tagging Lambda Functions](http://docs.aws.amazon.com/lambda/latest/dg/tagging.html) in the **AWS Lambda Developer Guide**\.  
 Pattern: `arn:aws:lambda:[a-z]{2}-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
 ## Request Body<a name="API_TagResource_RequestBody"></a>
 
 The request accepts the following data in JSON format\.
 
- ** Tags **   
-The list of tags \(key\-value pairs\) you are assigning to the Lambda function\.  
+ ** [Tags](#API_TagResource_RequestSyntax) **   <a name="SSS-TagResource-request-Tags"></a>
+The list of tags \(key\-value pairs\) you are assigning to the Lambda function\. For more information, see [Tagging Lambda Functions](http://docs.aws.amazon.com/lambda/latest/dg/tagging.html) in the **AWS Lambda Developer Guide**\.  
 Type: String to string map  
 Required: Yes
 

@@ -8,14 +8,12 @@ You can monitor metrics for Lambda and view logs by using the Lambda console, th
 
 1. Sign in to the AWS Management Console and open the AWS Lambda console at [https://console\.aws\.amazon\.com/lambda/](https://console.aws.amazon.com/lambda/)\.
 
-1. If you have not created a Lambda function before, see [Getting Started](getting-started.md)\.
-
 1. On the **Functions ** page, choose the function name and then choose the **Monitoring** tab\.  
 ![\[Events\]](http://docs.aws.amazon.com/lambda/latest/dg/images/metrics-functions-list.png)![\[Events\]](http://docs.aws.amazon.com/lambda/latest/dg/)![\[Events\]](http://docs.aws.amazon.com/lambda/latest/dg/)
 
    A graphical representation of the metrics for the Lambda function are shown\.
 
-1. Choose **View logs in CloudWatch** to view the logs\.
+1. Choose **Jump to logs** to view the logs\.
 
 **To access metrics using the CloudWatch console**
 

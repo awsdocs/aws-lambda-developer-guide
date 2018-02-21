@@ -3,9 +3,9 @@
 **Note**  
 This feature is available as part of a public beta and is subject to change at any time\.
 
-[AWS SAM](http://docs.aws.amazon.com/lambda/latest/dg/deploying-lambda-apps.html#Using the AWS Serverless Application Model (AWS SAM)) is a fast and easy way of deploying your serverless applications, allowing you to write simple templates to describe your functions and their event sources \(Amazon API Gateway, Amazon S3, Kinesis, and so on\)\. Based on AWS SAM, SAM Local is an AWS CLI tool that provides an environment for you to develop, test, and analyze your serverless applications locally before uploading them to the Lambda runtime\. Whether you're developing on Linux, Mac, or Microsoft Windows, you can use SAM Local to create a local testing environment that simulates the AWS runtime environment\. Doing so helps you address issues such as performance\. Working with SAM Local also allows faster, iterative development of your Lambda function code because there is no need to redeploy your application package to the AWS Lambda runtime\. For more information, see [Building a Simple Application Using SAM Local](#sam-cli-simple-app)\.
+[AWS SAM](https://docs.aws.amazon.com/lambda/latest/dg/deploying-lambda-apps.html#Using the AWS Serverless Application Model (AWS SAM)) is a fast and easy way of deploying your serverless applications, allowing you to write simple templates to describe your functions and their event sources \(Amazon API Gateway, Amazon S3, Kinesis, and so on\)\. Based on AWS SAM, SAM Local is an AWS CLI tool that provides an environment for you to develop, test, and analyze your serverless applications locally before uploading them to the Lambda runtime\. Whether you're developing on Linux, Mac, or Microsoft Windows, you can use SAM Local to create a local testing environment that simulates the AWS runtime environment\. Doing so helps you address issues such as performance\. Working with SAM Local also allows faster, iterative development of your Lambda function code because there is no need to redeploy your application package to the AWS Lambda runtime\. For more information, see [Building a Simple Application Using SAM Local](#sam-cli-simple-app)\.
 
-SAM Local works with [AWS SAM](http://docs.aws.amazon.com/lambda/latest/dg/deploying-lambda-apps.html#Using the AWS Serverless Application Model (AWS SAM)), allowing you to invoke functions defined in SAM templates, whether directly or through API Gateway endpoints\. By using SAM Local features, you can analyze your serverless application's performance in your own testing environment and update accordingly\. The following examples outline additional advantages of using SAM Local with sample operation code\. For instance, you can do the following: 
+SAM Local works with [AWS SAM](https://docs.aws.amazon.com/lambda/latest/dg/deploying-lambda-apps.html#Using the AWS Serverless Application Model (AWS SAM)), allowing you to invoke functions defined in SAM templates, whether directly or through API Gateway endpoints\. By using SAM Local features, you can analyze your serverless application's performance in your own testing environment and update accordingly\. The following examples outline additional advantages of using SAM Local with sample operation code\. For instance, you can do the following: 
 
 + Generate sample function payloads \(for example, an Amazon S3 event\)\.
 
@@ -30,9 +30,9 @@ SAM Local works with [AWS SAM](http://docs.aws.amazon.com/lambda/latest/dg/deplo
 
   ```
   Ratings:
-                  Type: AWS::Serverless::Function
-                  Properties:
-                  Handler: ratings.handler
+      Type: AWS::Serverless::Function
+         Properties:
+             Handler: ratings.handler
                   Runtime: python3.6
                   Events:
                   Api:
@@ -99,6 +99,8 @@ SAM Local supports the following AWS runtimes:
 + python 3\.6
 
 + java8
+
++ go 1\.x
 
 If you have not already installed SAM Local, see [Install SAM Local](sam-cli-requirements.md)\.
 
@@ -232,7 +234,7 @@ Next, copy and paste the following code into the *products\.js* file\.
 
 exports.handler = (event, context, callback) => {
 
-    let id = event.pathParameters.product || false;
+    let id =  (event.pathParameters || {}).product || false;
     switch(event.httpMethod){
 
         case "GET":
