@@ -101,5 +101,6 @@ If you see an expand arrow \(**↗**\) in the upper\-right corner of the table, 
 |  `s3:GetObject`  Required only if you are specifying an S3 bucket and object key, the deployment package, or key when creating a Lambda function\.  |  `arn:aws:s3:::bucket-name/key-name`   | N/A | 
 | **API:** [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md) **Required Permissions:** `lambda:UpdateFunctionConfiguration` |  `arn:aws:lambda:region:account-id:function:function-name`  | N/A | 
 |  `iam:PassRole`  The user creating the function must have permissions for this action on the IAM role that the user specifies as the execution role at the time of updating a Lambda function\. This is the role AWS Lambda assumes to execute the Lambda function\. The user must have permissions to pass the role to AWS Lambda\.  |  arn:aws:iam::account\-id: role/execution\-role\-name  | N/A | 
-|  `ec2:DescribeSecurityGroups`  Required only if you are specifying VPC configuration information when creating a Lambda function\.  |  \* | N/A | 
-| ec2:DescribeSubnets Required only if you are specifying VPC configuration information when creating a Lambda function\. |  \* | N/A | 
+|  `ec2:DescribeSecurityGroups`  Required only if you are specifying VPC configuration information when creating a Lambda function\.  |  \* | N/A |
+|  `ec2:DescribeSubnets` Required only if you are specifying VPC configuration information when creating a Lambda function\. |  \* | N/A |
+|  `ec2:DescribeVpcs`  Required only if you are specifying VPC configuration information when creating a Lambda function\.  |  \* | N/A |
