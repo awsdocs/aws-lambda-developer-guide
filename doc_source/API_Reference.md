@@ -10,7 +10,7 @@ You can use the AWS CLI to explore the AWS Lambda API\. This guide provides seve
 
 Because AWS SDKs use the CA certificates from your computer, changes to the certificates on the AWS servers can cause connection failures when you attempt to use an SDK\. You can prevent these failures by keeping your computer's CA certificates and operating system up\-to\-date\. If you encounter this issue in a corporate environment and do not manage your own computer, you might need to ask an administrator to assist with the update process\. The following list shows minimum operating system and Java versions:
 
-Microsoft Windows versions that have updates from January 2005 or later installed contain at least one of the required CAs in their trust list\. 
++ Microsoft Windows versions that have updates from January 2005 or later installed contain at least one of the required CAs in their trust list\. 
 
 + Mac OS X 10\.4 with Java for Mac OS X 10\.4 Release 5 \(February 2007\), Mac OS X 10\.5 \(October 2007\), and later versions contain at least one of the required CAs in their trust list\. 
 
