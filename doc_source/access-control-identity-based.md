@@ -193,9 +193,9 @@ To enable a user to click the links to CloudWatch Logs in the AWS Lambda console
             "Sid": "CloudWatchLogsPerms",
             "Effect": "Allow",
             "Action": [
-                "cloudwatchlog:DescribeLogGroups",
-                "cloudwatchlog:DescribeLogStreams",
-                "cloudwatchlog:GetLogEvents"
+                "logs:DescribeLogGroups",
+                "logs:DescribeLogStreams",
+                "logs:GetLogEvents"
 
               ],
             "Resource": "arn:aws:logs:region:account-id:log-group:/aws/lambda/*"
