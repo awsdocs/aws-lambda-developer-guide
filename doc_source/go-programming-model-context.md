@@ -58,9 +58,10 @@ import (
  
 func LongRunningHandler(ctx context.Context) string {
         deadline, _ := ctx.Deadline()
+        timer := time.After(time.Until(deadline).Truncate(500 * time.Millisecond))
         for {
                 select {
-                case <- time.Until(deadline).Truncate(100 * time.Millisecond):
+                case <- timer:
                         return "Finished before timing out."
                 default:
                         log.Print("hello!")
