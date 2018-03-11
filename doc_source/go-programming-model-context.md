@@ -32,7 +32,7 @@ import (
  
 func CognitoHandler(ctx context.Context) {
         lc, _ := lambdacontext.FromContext(ctx)
-        log.Print(lc.Identity.CognitoPoolID)
+        log.Print(lc.Identity.CognitoIdentityPoolID)
 }
  
 func main() {
@@ -40,7 +40,7 @@ func main() {
 }
 ```
 
-In the example above, `lc` is the variable used to consume the information that the context object captured and `log.Print(lc.Identity.CognitoPoolID)` prints that information, in this case, the CognitoPoolID\.
+In the example above, `lc` is the variable used to consume the information that the context object captured and `log.Print(lc.Identity.CognitoIdentityPoolID)` prints that information, in this case, the CognitoIdentityPoolID\.
 
 ### Monitoring Execution Time of a Function<a name="go-programming-model-monitoring-execution-time"></a>
 
