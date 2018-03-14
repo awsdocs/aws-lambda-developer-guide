@@ -12,14 +12,14 @@
 
      + In **Select Role Type**, choose **AWS Service Roles**, and then choose **CloudFormation**\. Choose **Next: Permissions**\.
 
-     + In **Attach permissions policies**, use the search bar to find and then choose **AWSLambdaExecute**\. Choose **Next: Review**\. 
+     + In **Attach permissions policies**, use the search bar to find and then choose **AWSLambdaExecute**\. Choose **Next: Review**\.
 
-     + In **Role Name**, use a name that is unique within your AWS account \(for example, **cloudformation\-lambda\-execution\-role**\) and then choose **Create role**\. 
+     + In **Role Name**, use a name that is unique within your AWS account \(for example, **cloudformation\-lambda\-execution\-role**\) and then choose **Create role**\.
 
-     + Open the role you just created and under the **Permissions** tab, choose **Add inline policy**\. 
+     + Open the role you just created and under the **Permissions** tab, choose **Add inline policy**\.
 
-     + In **Create Policy** choose the **JSON** tab and enter the following: 
-**Note**  
+     + In **Create Policy** choose the **JSON** tab and enter the following:
+**Note**
 Make sure to replace the *region* and *id* placeholders with your region and account id\.
 
        ```
@@ -138,7 +138,7 @@ Make sure to replace the *region* and *id* placeholders with your region and acc
        }
        ```
 
-     + Choose **Validate Policy** and then choose **Apply Policy**\. 
+     + Choose **Validate Policy** and then choose **Apply Policy**\.
 
 ## Step 1: Set Up Your Repository<a name="setup-repository"></a>
 
@@ -151,7 +151,7 @@ To set up your repository, do the following:
   ```
   var time = require('time');
   exports.handler = (event, context, callback) => {
-      var currentTime = new time.Date(); 
+      var currentTime = new time.Date();
       currentTime.setTimezone("America/Los_Angeles");
       callback(null, {
           statusCode: '200',
@@ -193,12 +193,12 @@ To set up your repository, do the following:
       install:
         commands:
           - npm install time
-          - aws cloudformation package --template-file samTemplate.yaml --s3-bucket bucket-name 
-                                       --output-template-file NewSamTemplate.yaml
+          - aws cloudformation package --template-file samTemplate.yaml --s3-bucket bucket-name
+                                       --output-template-file outputSamTemplate.yaml
     artifacts:
       type: zip
       files:
-        - samTemplate.yaml
+        - outputSamTemplate.yaml
     ```
 
     Note that you need to supply the `--s3-bucket` parameter value with the name of the your Amazon S3 bucket, similar to the step you would take if you were manually going to package the deployment package with SAM, as discussed in the [Packaging](serverless-deploy-wt.md#serverless-pack) step of the previous tutorial\.
@@ -231,8 +231,8 @@ Follow the steps following to create your AWS CodePipeline\.
 
 1. In **Build specification** choose `Use the buildspec.yml in the source code root directory`
 
-1. Choose **Save build project**\. 
-**Note**  
+1. Choose **Save build project**\.
+**Note**
 A service role for AWS CodeBuild will automatically be created on your behalf\.
 
    Choose **Next step**\.
@@ -247,7 +247,7 @@ A service role for AWS CodeBuild will automatically be created on your behalf\.
 
 1. In **Change set name:** enter **MyChangeSet**\.
 
-1. In **Template file:** enter **samTemplate\.yaml**\.
+1. In **Template file:** enter **outputSamTemplate\.yaml**\.
 
 1. In **Capabilities:** choose **CAPABILITY\_IAM**\.
 
@@ -255,7 +255,7 @@ A service role for AWS CodeBuild will automatically be created on your behalf\.
 
 1. Choose **Create role**\. Choose **Next** and then choose **Allow\.** Choose **Next step**\.
 
-1. Review your pipeline and then choose **Create pipeline**\. 
+1. Review your pipeline and then choose **Create pipeline**\.
 
 ## Step 3: Update the Generated Service Policy<a name="update-policy"></a>
 
@@ -293,7 +293,7 @@ Use the following steps to complete your Beta stage\.
 
 1. Choose **Edit**\.
 
-1. Choose the   
+1. Choose the
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/edit-pencil.png)
 
     icon next to **MyBetaStack**\.
@@ -302,7 +302,7 @@ Use the following steps to complete your Beta stage\.
 
 1. In **Deployment provider\***, if not already selected, choose **AWS CloudFormation**\.
 
-1. In **Action mode\* ** choose **Execute a change set**\. This is similar to the step you would take if you were manually going to deploy the package, as discussed in the [Deployment](serverless-deploy-wt.md#serv-deploy) step of the previous tutorial\. `CreateChangeSet` transforms the SAM template to the full AWS CloudFormation format and `deployChangeSet` deploys the AWS CloudFormation template\. 
+1. In **Action mode\* ** choose **Execute a change set**\. This is similar to the step you would take if you were manually going to deploy the package, as discussed in the [Deployment](serverless-deploy-wt.md#serv-deploy) step of the previous tutorial\. `CreateChangeSet` transforms the SAM template to the full AWS CloudFormation format and `deployChangeSet` deploys the AWS CloudFormation template\.
 
 1. In **Stack name\* ** enter or choose **MyBetaStack**\.
 
@@ -314,11 +314,11 @@ Use the following steps to complete your Beta stage\.
 
 1. Choose **Save and continue**\.
 
- Your pipeline is ready\. Any git push to the branch you connected to this pipeline is going to trigger a deployment\. To test your pipeline and deploy your application for the first time, do one of the following: 
+ Your pipeline is ready\. Any git push to the branch you connected to this pipeline is going to trigger a deployment\. To test your pipeline and deploy your application for the first time, do one of the following:
 
 + Perform a git push to the branch connected to your pipeline\.
 
-+ Go the AWS CodePipeline console, choose the name of the pipeline you created and then choose **Release change**\. 
++ Go the AWS CodePipeline console, choose the name of the pipeline you created and then choose **Release change**\.
 
 ## Next Step<a name="automating-deployment-next-step1"></a>
 
