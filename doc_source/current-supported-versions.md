@@ -8,7 +8,7 @@ The underlying AWS Lambda execution environment is based on the following:
 
 +  Linux kernel version – 4\.9\.75\-25\.55\.amzn1\.x86\_64 
 
- If you are using any native binaries in your code, make sure they are compiled in this environment\. Note that only 64\-bit binaries are supported on AWS Lambda\.
+ If you are using any native binaries in your code, make sure they are compiled in this environment with no CPU optimizations\. Usage of CPU optimizations that are only available on certain EC2 instances may lead to unpredictable behavior as functions execute on heterogenuous hardware. Note that only 64\-bit binaries are supported on AWS Lambda\.
 
 AWS Lambda supports the following runtime versions:
 
