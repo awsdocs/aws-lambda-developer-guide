@@ -13,7 +13,7 @@ The Lambda service has preinstalled the AWS SDK for Python\.
 + **Advanced scenario** – If you are writing code that uses other resources, such as a graphics library for image processing, or you want to use the AWS CLI instead of the console, you need to first create the Lambda function deployment package, and then use the console or the CLI to upload the package\.
 
 **Note**  
-After you create a deployment package, you may either upload it directly or upload the \.zip file first to an Amazon S3 bucket in the same AWS region where you want to create the Lambda function, and then specify the bucket name and object key name when you create the Lambda function using the console or the AWS CLI\.
+After you create a deployment package, you may either upload it directly (up to 50 MB) or upload the \.zip file first to an Amazon S3 bucket in the same AWS region where you want to create the Lambda function, and then specify the bucket name and object key name when you create the Lambda function using the console or the AWS CLI\.
 
 The following is an example procedure to create a deployment package \(outside the console\)\. 
 
