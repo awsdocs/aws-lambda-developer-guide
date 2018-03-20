@@ -49,6 +49,14 @@ The following table lists service limits for deploying a Lambda function\.
 | Size of code/dependencies that you can zip into a deployment package \(uncompressed \.zip/\.jar size\)\. Each Lambda function receives an additional 500MB of non\-persistent disk space in its own `/tmp` directory\. The `/tmp` directory can be used for loading additional resources like dependency libraries or data sets during function initialization\.  | 250 MB | 
 | Total size of environment variables set | 4 KB | 
 
+
+**AWS Lambda Console Limits**
+
+| Item | Default Limit | 
+| --- | --- | 
+| Size of Lambda function deployment package that can be edited inline | 3 MB | 
+| Number of test events per function | 10 | 
+
 ## AWS Lambda Limit Errors<a name="limits-troubleshooting"></a>
 
 Functions that exceed any of the limits listed in the previous limits tables will fail with an `exceeded limits` exception\. These limits are fixed and cannot be changed at this time\. For example, if you receive the exception `CodeStorageExceededException` or an error message similar to `"Code storage limit exceeded"` from AWS Lambda, you need to reduce the size of your code storage\.
