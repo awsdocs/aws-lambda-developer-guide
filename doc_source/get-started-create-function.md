@@ -6,7 +6,7 @@ Follow the steps in this section to create a simple Lambda function\.
 
 1. Sign in to the AWS Management Console and open the AWS Lambda console\.
 
-1. Note that AWS Lambda offers a simple `Hello World` function upon introduction under the **How it works** label and includes a **Run** option, allowing you to invoke the function as a general introduction\. This tutorial introduces additonal options you have to create, test and update your Lambda functions, as well as other features provided by the Lambda console and provides links to each, inviting you to explore each one in depth\. 
+1. Note that AWS Lambda offers a simple `Hello World` function upon introduction under the **How it works** label and includes a **Run** option, allowing you to invoke the function as a general introduction\. This tutorial introduces additional options you have to create, test and update your Lambda functions, as well as other features provided by the Lambda console and provides links to each, inviting you to explore each one in depth\. 
 
    Choose **Create a function** under the **Get Started** section to proceed\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/gs-1-10.png)
