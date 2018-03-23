@@ -54,7 +54,7 @@ Next, open a command prompt and type the following:
 
 ```
 aws cloudformation package \
-   --template-file file path/example.yaml \
+   --template-file file-path/example.yaml \
    --output-template-file serverless-output.yaml \
    --s3-bucket s3-bucket-name
 ```
