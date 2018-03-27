@@ -24,7 +24,19 @@ You can optionally set the concurrent execution limit for a function\. You may c
 
 + Functions scale automatically based on incoming request rate, but not all resources in your architecture may be able to do so\. For example, relational databases have limits on how many concurrent connections they can handle\. You can set the concurrent execution limit for a function to align with the values its downstream resources support\.
 
-+ If your function connects to VPC based resources, each concurrent execution consumes one IP within the assigned subnet\. You can set the concurrent execution limit for a function to match the subnet size limits you have\.
++ If your function connects to VPC based resources, you must make sure your subnets have adeqaute address capacity to support the ENI scaling requirements of your function\. You can estimate the approximate ENI capacity with the following formula.
+
+  ```
+  Concurrent executions * (Memory in GB / 3 GB)
+  ```
+
+  Where: 
+
+  + **Concurrent execution** – This is the projected concurrency of your workload\. Use the information in [Understanding Scaling Behavior](scaling.md) to determine this value
+
+  + **Memory in GB** – The amount of memory you configured for your Lambda function in Gigabytes\.
+
+You can set the concurrent execution limit for a function to match the subnet size limits you have\.
 
 + If you need a function to stop processing any invocations, you can choose to set the concurrency to 0 and throttle all incoming executions\.
 
