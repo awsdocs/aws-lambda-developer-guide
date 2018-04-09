@@ -3,39 +3,22 @@
 The following is a list of example events published by the supported AWS services\. For more information about the supported AWS event sources, see [Supported Event Sources](invoking-lambda-function.md)\.
 
 **Sample Events**
-
 + [AWS CloudFormation Create Request Sample Event](#eventsources-cloudformation-create-request)
-
 + [Amazon SES Email Receiving Sample Event](#eventsources-ses-email-receiving)
-
 + [Scheduled Event Sample Event](#eventsources-scheduled-event)
-
 + [Amazon CloudWatch Logs Sample Event](#eventsources-cloudwatch-logs)
-
 + [Amazon SNS Sample Event](#eventsources-sns)
-
 + [Amazon DynamoDB Update Sample Event](#eventsources-ddb-update)
-
 + [Amazon Cognito Sync Trigger Sample Event](#eventsources-cognito-sync-trigger)
-
 + [Amazon Kinesis Data Streams Sample Event](#eventsources-kinesis-streams)
-
 + [Amazon S3 Put Sample Event](#eventsources-s3-put)
-
 + [Amazon S3 Delete Sample Event](#eventsources-s3-delete)
-
 + [Amazon Lex Sample Event](#eventsources-lex)
-
 + [API Gateway Proxy Request Event](#eventsources-api-gateway-request)
-
 + [API Gateway Proxy Response Event](#eventsources-api-gateway-response)
-
 + [CloudFront Event](#eventsources-cloudfront)
-
 + [AWS Config Event](#eventsources-config)
-
 + [AWS IoT Button Event](#eventsources-iot-button)
-
 + [Kinesis Data Firehose Event](#eventsources-kinesis-firehose)
 
 **AWS CloudFormation Create Request Sample Event**  <a name="eventsources-cloudformation-create-request"></a>

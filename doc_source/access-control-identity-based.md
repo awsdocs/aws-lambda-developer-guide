@@ -6,11 +6,8 @@ This topic provides examples of identity\-based policies in which an account adm
  We recommend that you first review the introductory topics that explain the basic concepts and options available for you to manage access to your AWS Lambda resources\. For more information, see [Overview of Managing Access Permissions to Your AWS Lambda Resources](access-control-overview.md)\.
 
 The sections in this topic cover the following:
-
 + [Permissions Required to Use the AWS Lambda Console](#additional-console-required-permissions) 
-
 + [AWS Managed \(Predefined\) Policies for AWS Lambda](#access-policy-examples-aws-managed) 
-
 + [Customer Managed Policy Examples](#access-policy-examples-for-sdk-cli) 
 
 The following shows an example of a permissions policy\.
@@ -40,9 +37,7 @@ The following shows an example of a permissions policy\.
 ```
 
  The policy has two statements: 
-
 +  The first statement grants permissions for the AWS Lambda action \(`lambda:CreateFunction`\) on a resource by using the Amazon Resource Name \(ARN\)  for the Lambda function\. Currently, AWS Lambda doesn't support permissions for this particular action at the resource\-level\. Therefore, the policy specifies a wildcard character \(\*\) as the `Resource` value\. 
-
 + The second statement grants permissions for the IAM action \(`iam:PassRole`\) on IAM roles\. The wildcard character \(\*\) at the end of the `Resource` value means that the statement allows permission for the `iam:PassRole` action on any IAM role\. To limit this permission to a specific role, replace the wildcard character \(\*\) in the resource ARN with the specific role name\. 
 
 The policy doesn't specify the `Principal` element because in an identity\-based policy you don't specify the principal who gets the permission\. When you attach policy to a user, the user is the implicit principal\. When you attach a permission policy to an IAM role, the principal identified in the role's trust policy gets the permissions\.
@@ -58,11 +53,8 @@ The AWS Lambda console provides an integrated environment for you to create and 
 AWS addresses many common use cases by providing standalone IAM policies that are created and administered by AWS\. Managed policies grant necessary permissions for common use cases so you can avoid having to investigate what permissions are needed\. For more information, see [AWS Managed Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#aws-managed-policies) in the *IAM User Guide*\.
 
 The following AWS managed policies, which you can attach to users in your account, are specific to AWS Lambda and are grouped by use case scenario:
-
 + **AWSLambdaReadOnlyAccess** – Grants read\-only access to AWS Lambda resources\. Note that this policy doesn't grant permission for the `lambda:InvokeFunction` action\. If you want a user to invoke a Lambda function, you can also attach the `AWSLambdaRole` AWS managed policy\.
-
 + **AWSLambdaFullAccess** – Grants full access to AWS Lambda resources\.
-
 + **AWSLambdaRole** – Grants permissions to invoke any Lambda function\. 
 
 **Note**  
@@ -82,7 +74,7 @@ We recommend that you use two browser windows: one to create the user and grant 
 
  For examples that show how to create an IAM role that you can use as an execution role for your Lambda function, see [Creating IAM Roles](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create.html) in the *IAM User Guide*\.
 
-
+**Topics**
 + [Step 1: Create an IAM User](#console-permissions-list-functions)
 + [Step 2: Allow a User to List Lambda Functions](#console-permissions-list-functions1)
 + [Step 3: Allow a User to View Details of a Lambda Function](#console-permissions-view-details)

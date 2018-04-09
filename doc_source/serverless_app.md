@@ -1,6 +1,6 @@
 # Using the AWS Serverless Application Model \(AWS SAM\)<a name="serverless_app"></a>
 
-The AWS Serverless Application Model \(AWS SAM\) is a model to define serverless applications\. AWS SAM is natively supported by AWS CloudFormation and defines simplified syntax for expressing serverless resources\. The specification currently covers APIs, Lambda functions and Amazon DynamoDB tables\. The specification is available under Apache 2\.0 for AWS partners and customers to adopt and extend within their own toolsets\. For details on the specification, see the [AWS Serverless Application Model](https://github.com/awslabs/serverless-application-model)\.
+The AWS Serverless Application Model \(AWS SAM\) is a model to define serverless applications\. AWS SAM is natively supported by AWS CloudFormation and defines simplified syntax for expressing serverless resources\. The specification currently covers APIs, Lambda functions and Amazon DynamoDB tables\. SAM is available under Apache 2\.0 for AWS partners and customers to adopt and extend within their own toolsets\. For details on the specification, see the [AWS Serverless Application Model](https://github.com/awslabs/serverless-application-model)\.
 
 ## Serverless Resources Within AWS SAM<a name="serverless_app_resources"></a>
 

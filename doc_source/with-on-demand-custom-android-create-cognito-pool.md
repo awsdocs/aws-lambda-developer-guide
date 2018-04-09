@@ -9,9 +9,7 @@ For more information about IAM roles, see [IAM Roles](http://docs.aws.amazon.com
 1. Using the IAM User Sign\-In URL, sign in to the Amazon Cognito console as **adminuser**\. 
 
 1. Create a new identity pool called `JavaFunctionAndroidEventHandlerPool`\. Before you follow the procedure to create an identity pool, note the following:
-
    + The identity pool you are creating must allow access to unauthenticated identities because our example mobile application does not require a user log in \(the application users are unauthenticated\)\. Therefore, make sure to select the **Enable access to unauthenticated identities** option\.
-
    + The unauthenticated application users need permission to invoke the Lambda function\. To enable this, you will add the following statement to the permission policy associated with the unauthenticated identities \(it allows permission for the for the `lambda:InvokeFunction` action on the specific Lambda function \(you must update the resource ARN by providing your account ID\)\. 
 
      ```

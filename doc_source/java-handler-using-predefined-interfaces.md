@@ -133,11 +133,8 @@ public class Response {
 ```
 
 You can create a Lambda function from this code and test the end\-to\-end experience as follows:
-
 + Using the preceding code, create a deployment package\. For more information, see [Creating a Deployment Package \(Java\)](lambda-java-how-to-create-deployment-package.md)
-
 + Upload the deployment package to AWS Lambda and create your Lambda function\.
-
 + Test the Lambda function using either the console or CLI\. You can specify any sample JSON data that conform to the getter and setter in your `Request` class, for example:
 
   ```
@@ -156,9 +153,7 @@ You can create a Lambda function from this code and test the end\-to\-end experi
   ```
 
 Follow instructions provided in the getting started \(see  [\(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\)\. Note the following differences:
-
 + When you create a deployment package, don't forget the `aws-lambda-java-core` library dependency\.
-
 + When you create the Lambda function specify `example.Hello` \(*package*\.*class*\) as the handler value\.
 
 ## Example 2: Creating Handler with Stream Input/Output \(Leverage the `RequestStreamHandler` Interface\)<a name="java-handler-using-predefined-interfaces-stream-handler-class"></a>
@@ -197,11 +192,8 @@ public class Hello implements RequestStreamHandler {
 ```
 
 You can create a Lambda function from this code and test the end\-to\-end experience as follows:
-
 + Use the preceding code to create deployment package\.
-
 + Upload the deployment package to AWS Lambda and create your Lambda function\.
-
 + Test the Lambda function using either the console or CLI\. You can specify any sample string data, for example:
 
   ```
@@ -211,7 +203,5 @@ You can create a Lambda function from this code and test the end\-to\-end experi
   The Lambda function will return `TEST` in response\. 
 
 Follow instructions provided in the getting started \(see  [\(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\)\. Note the following differences:
-
 + When you create a deployment package, don't forget the `aws-lambda-java-core` library dependency\.
-
 + When you create the Lambda function specify `example.Hello` \(*package*\.*class*\) as the handler value\.

@@ -20,3 +20,9 @@ We recommend that you use versioning and aliases to deploy your Lambda functions
 
 For detailed information, see the following topics\.
 
+**Topics**
++ [Versioning](versioning-intro.md)
++ [Aliases](aliases-intro.md)
++ [Versioning, Aliases, and Resource Policies](versioning-aliases-permissions.md)
++ [Managing Versioning](how-to-manage-versioning.md)
++ [Traffic Shifting Using Aliases](lambda-traffic-shifting-using-aliases.md)

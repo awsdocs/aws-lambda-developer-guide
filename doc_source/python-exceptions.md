@@ -27,7 +27,6 @@ When you invoke this Lambda function, it will raise an exception and AWS Lambda 
  Note that the stack trace is returned as the `stackTrace` JSON array of stack trace elements\. 
 
 How you get the error information back depends on the invocation type that the client specifies at the time of function invocation: 
-
 + If a client specifies the `RequestResponse` invocation type \(that is, synchronous execution\), it returns the result to the client that made the invoke call\. 
 
   For example, the console always use the `RequestResponse` invocation type, so the console will display the error in the **Execution result** section as shown:  
@@ -35,7 +34,6 @@ How you get the error information back depends on the invocation type that the c
 
   The same information is also sent to CloudWatch and the **Log output** section shows the same logs\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/exception-shown-in-console20.png)
-
 + If a client specifies the `Event` invocation type \(that is, asynchronous execution\), AWS Lambda will not return anything\. Instead, it logs the error information to CloudWatch Logs\. You can also see the error metrics in CloudWatch Metrics\.
 
 Depending on the event source, AWS Lambda may retry the failed Lambda function\. For example, if Kinesis is the event source, AWS Lambda will retry the failed invocation until the Lambda function succeeds or the records in the stream expire\. 
@@ -53,9 +51,7 @@ Depending on the event source, AWS Lambda may retry the failed Lambda function\.
 You can create custom error handling to raise an exception directly from your Lambda function and handle it directly \(Retry or Catch\) within an AWS Step Functions State Machine\. For more information, see [Handling Error Conditions Using a State Machine](http://docs.aws.amazon.com/step-functions/latest/dg/tutorial-handling-error-conditions.html)\. 
 
 Consider a `CreateAccount` [state](http://docs.aws.amazon.com/step-functions/latest/dg/awl-ref-states.html) is a [task](http://docs.aws.amazon.com/step-functions/latest/dg/awl-ref-states-task.html) that writes a customer's details to a database using a Lambda function\.
-
 + If the task succeeds, an account is created and a welcome email is sent\.
-
 + If a user tries to create an account for a username that already exists, the Lambda function raises an error, causing the state machine to suggest a different username and to retry the account\-creation process\.
 
 The following code samples demonstrate how to do this\. Note that custom errors in Python must extend the `Exception` class\.

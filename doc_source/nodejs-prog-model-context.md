@@ -1,13 +1,9 @@
 # The Context Object \(Node\.js\)<a name="nodejs-prog-model-context"></a>
 
 While a Lambda function is executing, it can interact with AWS Lambda to get useful runtime information such as:
-
 + How much time is remaining before AWS Lambda terminates your Lambda function \(timeout is one of the Lambda function configuration properties\)\.
-
 + The CloudWatch log group and log stream associated with the Lambda function that is executing\.
-
 + The AWS request ID returned to the client that invoked the Lambda function\. You can use the request ID for any follow up inquiry with AWS support\.
-
 + If the Lambda function is invoked through AWS Mobile SDK, you can learn more about the mobile application calling the Lambda function\.
 
 AWS Lambda provides this information via the `context` object that the service passes as the second parameter to your Lambda function handler\. For more information, see [Lambda Function Handler \(Node\.js\)](nodejs-prog-model-handler.md)\.
@@ -71,7 +67,7 @@ context.getRemainingTimeInMillis();
 The `context` object provides the following property that you can update:
 
 **callbackWaitsForEmptyEventLoop**  
-The default value is true\. This property is useful only to modify the default behavior of the callback\. By default, the callback will wait until the Node\.js runtime event loop is empty before freezing the process and returning the results to the caller\. You can set this property to false to request AWS Lambda to freeze the process soon after the `callback` is called, even if there are events in the event loop\. AWS Lambda will freeze the process, any state data and the events in the Node\.js event loop \(any remaining events in the event loop processed when the Lambda function is called next and if AWS Lambda chooses to use the frozen process\)\. For more information about callback, see [Using the Callback Parameter](nodejs-prog-model-handler.md#nodejs-prog-model-handler-callback)\.
+The default value is true\. This property is useful only to modify the default behavior of the callback\. By default, the callback will wait until the event loop is empty before freezing the process and returning the results to the caller\. You can set this property to false to request AWS Lambda to freeze the process soon after the `callback` is called, even if there are events in the event loop\. AWS Lambda will freeze the process, any state data and the events in the event loop \(any remaining events in the event loop processed when the Lambda function is called next and if AWS Lambda chooses to use the frozen process\)\. For more information about callback, see [Using the Callback Parameter](nodejs-prog-model-handler.md#nodejs-prog-model-handler-callback)\.
 
 In addition, the `context` object provides the following properties that you can use obtain runtime information:
 
@@ -100,37 +96,24 @@ The value is null if your Lambda function is unable to create a log stream, whic
 
 **identity**  
 Information about the Amazon Cognito identity provider when invoked through the AWS Mobile SDK\. It can be null\.  
-
 + **identity\.cognitoIdentityId**
-
 + **identity\.cognitoIdentityPoolId**
 For more information about the exact values for a specific mobile platform, see [Identity Context](http://docs.aws.amazon.com/mobile/sdkforios/developerguide/lambda.html#identitycontext) in the *AWS Mobile SDK for iOS Developer Guide*, and [Identity Context](http://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/lambda.html#identity-context) in the AWS Mobile SDK for Android Developer Guide\.
 
 **clientContext**  
 Information about the client application and device when invoked through the AWS Mobile SDK\. It can be null\. Using `clientContext`, you can get the following information:  
-
 + **clientContext\.client\.installation\_id**
-
 + **clientContext\.client\.app\_title**
-
 + **clientContext\.client\.app\_version\_name**
-
 + **clientContext\.client\.app\_version\_code**
-
 + **clientContext\.client\.app\_package\_name**
-
 + **clientContext\.Custom**
 
   Custom values set by the mobile client application\.
-
 + **clientContext\.env\.platform\_version**
-
 + **clientContext\.env\.platform**
-
 + **clientContext\.env\.make**
-
 + **clientContext\.env\.model**
-
 + **clientContext\.env\.locale**
 
 For more information about the exact values for a specific mobile platform, see [Client Context](http://docs.aws.amazon.com/mobile/sdkforios/developerguide/lambda.html#clientcontext) in the *AWS Mobile SDK for iOS Developer Guide*, and [Client Context](http://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/lambda.html#client-context) in the *AWS Mobile SDK for Android Developer Guide*\.

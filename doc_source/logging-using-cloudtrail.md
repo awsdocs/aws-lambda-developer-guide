@@ -7,39 +7,24 @@ AWS Lambda is integrated with AWS CloudTrail, a service that captures API calls 
 When CloudTrail logging is enabled in your AWS account, API calls made to AWS Lambda actions are tracked in log files\. AWS Lambda records are written together with other AWS service records in a log file\. CloudTrail determines when to create and write to a new file based on a time period and file size\.
 
 The following actions are supported:
-
 + [AddPermission](API_AddPermission.md)
-
 + [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
-
 + [CreateFunction](API_CreateFunction.md)
 
   \(The `ZipFile` parameter is omitted from the CloudTrail logs for `CreateFunction`\.\)
-
 + [DeleteEventSourceMapping](API_DeleteEventSourceMapping.md)
-
 + [DeleteFunction](API_DeleteFunction.md)
-
 + [GetEventSourceMapping](API_GetEventSourceMapping.md)
-
 + [GetFunction](API_GetFunction.md)
-
 + [GetFunctionConfiguration](API_GetFunctionConfiguration.md)
-
 + [GetPolicy](API_GetPolicy.md)
-
 + [ListEventSourceMappings](API_ListEventSourceMappings.md)
-
 + [ListFunctions](API_ListFunctions.md)
-
 + [RemovePermission](API_RemovePermission.md)
-
 + [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md)
-
 + [UpdateFunctionCode](API_UpdateFunctionCode.md)
 
   \(The `ZipFile` parameter is omitted from the CloudTrail logs for `UpdateFunctionCode`\.\)
-
 + [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)
 
 Every log entry contains information about who generated the request\. The user identity information in the log helps you determine whether the request was made with root or IAM user credentials, with temporary security credentials for a role or federated user, or by another AWS service\. For more information, see the **userIdentity** field in the [CloudTrail Event Reference](http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference.html)\.

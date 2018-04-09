@@ -1,9 +1,7 @@
 # Step 2\.3: Create the Lambda Function and Test It Manually<a name="with-on-demand-https-example-upload-deployment-pkg_1"></a>
 
 In this section, you do the following:
-
 + Create a Lambda function by uploading the deployment package\. 
-
 + Test the Lambda function by invoking it manually and passing sample event data\. 
 
 ## Step 2\.3\.1: Create a Lambda Function \(Upload the Deployment Package\)<a name="walkthrough-on-demand-https-events-adminuser-create-test-function-upload-zip-test-upload_1"></a>
@@ -12,7 +10,7 @@ In this step, you upload the deployment package using the AWS CLI\.
 
 At the command prompt, run the following Lambda CLI `create-function` command using the **adminuser** profile\. 
 
-You need to update the command by providing the \.zip file path and the execution role ARN\. The `--runtime` parameter value can be `python3.6`, `python2.7`, `nodejs6.10`, `nodejs4.3`, or `java8`, depending on the language you used to author your code\.
+You need to update the command by providing the \.zip file path and the execution role ARN\. The `--runtime` parameter value can be `python3.6`, `python2.7`, `nodejs8.10`, `nodejs6.10` or `nodejs4.3`, or `java8`, depending on the language you used to author your code\.
 
 ```
 $ aws lambda create-function \

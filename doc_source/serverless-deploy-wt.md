@@ -1,8 +1,8 @@
 # Create Your Own Serverless Application<a name="serverless-deploy-wt"></a>
 
-In the following tutorial, you create a simple serverless application that consists of a single function that returns the name of an Amazon S3 bucket you specify as an environment variable\. Follow these steps:
+In the following tutorial, you create a simple serverless application that consists of a single Node\.js function that returns the name of an Amazon S3 bucket you specify as an environment variable\. Follow these steps:
 
-1. Copy and paste the following into a text file and save it as `index.js` 
+1. Copy and paste the following Node\.js code into a text file and save it as `index.js`\. This represents your Lambda function\. 
 
    ```
    var AWS = require('aws-sdk');
@@ -14,7 +14,7 @@ In the following tutorial, you create a simple serverless application that consi
    }
    ```
 
-1. Paste the following into a text file and save it as `example.yaml`\. Note that the `Runtime` parameter uses `nodejs6.10` but you can specify `nodejs4.3`\.
+1. Paste the following into a text file and save it as `example.yaml`\. Note that the `Runtime` parameter uses `nodejs6.10` but you can also specify `nodejs8.10` or `nodejs4.3`\.
 
    ```
    AWSTemplateFormatVersion: '2010-09-09'
@@ -33,9 +33,7 @@ In the following tutorial, you create a simple serverless application that consi
 1. Create a folder called *examplefolder* and place the `example.yaml` file and the `index.js` file inside the folder\.
 
    Your *example* folder now contains the following two files that you can then use to package the serverless application:
-
    + `example.yaml`
-
    +  `index.js` 
 
 ## Packaging and Deployment<a name="serverless-deploy"></a>
@@ -91,17 +89,12 @@ You can export a serverless application and re\-deploy it to, for example, a dif
 1. Sign in to the AWS Management Console and open the AWS Lambda console at [https://console\.aws\.amazon\.com/lambda/](https://console.aws.amazon.com/lambda/)\.
 
 1. Do any of the following: 
-
    + **Create a function using a Lambda blueprint** – Choose a blueprint and follow the steps to create a Lambda function\. For an example, see [Create a Simple Lambda Function](get-started-create-function.md)\. When you reach the **Review** page, choose **Export function**\.
-
    + **Create a function** – Choose **Create function**, and then create your function\. After your Lambda function is created, you can export it by selecting the function\. Choose **Actions**, then choose **Export function**\. 
-
    + **Open an existing Lambda function** – Open the function by choosing the **Function name**, choose **Actions**, choose **Export function**\.
 
 1. In the **Export your function** window, you have the following options:
-
    + Choose **Download AWS SAM file**, which defines the Lambda function and other resources that comprise your serverless application\.
-
    + Choose **Download deployment package**, which contains your Lambda function code and any dependent libraries\.
 
 Use the AWS SAM file and the ZIP deployment package and follow the steps in [Packaging and Deployment](#serverless-deploy) to re\-deploy the serverless application\.

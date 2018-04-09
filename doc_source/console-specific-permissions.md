@@ -8,7 +8,7 @@ The following sections describe required additional permissions for different in
 
 If you are new to managing permissions, we recommend that you start with the example walkthrough where you create an IAM user, grant the user incremental permissions, and verify the permissions work using the AWS Lambda console \(see [Customer Managed Policy Examples](access-control-identity-based.md#access-policy-examples-for-sdk-cli)\)\. 
 
-
+**Topics**
 + [Amazon API Gateway](#console-permissions-api-gateway)
 + [Amazon CloudWatch Events](#console-permissions-cloudwatch-events)
 + [Amazon CloudWatch Logs](#console-permissions-cloudwatch-logs)

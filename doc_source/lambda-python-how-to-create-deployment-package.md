@@ -1,15 +1,13 @@
 # Creating a Deployment Package \(Python\)<a name="lambda-python-how-to-create-deployment-package"></a>
 
-To create a Lambda function you first create a Lambda function deployment package, a \.zip file consisting of your code and any dependencies\. 
+To create a Lambda function you first create a Lambda function deployment package, a \.zip file consisting of your code and any dependencies\. You will then need to set the appropriate security permissions for the zip package\. For more information, see [Authentication and Access Control for AWS Lambda](lambda-auth-and-access-control.md) policies\.
 
 You can create a deployment package yourself or write your code directly in the Lambda console, in which case the console creates the deployment package for you and uploads it, creating your Lambda function\. Note the following to determine if you can use the console to create your Lambda function:
-
 + **Simple scenario** – If your custom code requires only the AWS SDK library, then you can use the inline editor in the AWS Lambda console\. Using the console, you can edit and upload your code to AWS Lambda\. The console will zip up your code with the relevant configuration information into a deployment package that the Lambda service can run\. 
 
   You can also test your code in the console by manually invoking it using sample event data\. 
 **Note**  
 The Lambda service has preinstalled the AWS SDK for Python\.
-
 + **Advanced scenario** – If you are writing code that uses other resources, such as a graphics library for image processing, or you want to use the AWS CLI instead of the console, you need to first create the Lambda function deployment package, and then use the console or the CLI to upload the package\.
 
 **Note**  
@@ -55,7 +53,6 @@ AWS Lambda includes the AWS SDK for Python \(Boto 3\), so you don't need to incl
 ## Create Deployment Package Using a Python Environment Created with Virtualenv<a name="deployment-pkg-for-virtualenv"></a>
 
 This section explains how to create a deployment package if you are using a Python environment that you created with the Virtualenv tool\. Consider the following example: 
-
 + Created the following isolated Python environment using the Virtualenv tool and activated the environment:
 
   ```
@@ -63,19 +60,16 @@ This section explains how to create a deployment package if you are using a Pyth
   ```
 
   You can activate the environment on Windows, OS X, and Linux as follows:
-
   + On Windows, you activate using the `activate.bat`:
 
     ```
     path\to\my\virtual-env\Scripts\activate.bat  
     ```
-
   + On OS X and Linux, you source the `activate` script:
 
     ```
     source path/to/my/virtual-env/bin/activate
     ```
-
 + Also, to install the **requests** package in the activated environment, do the following: :
 
   ```

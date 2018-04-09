@@ -101,11 +101,8 @@ https://your_account_alias.signin.aws.amazon.com/console/
 To verify the sign\-in link for IAM users for your account, open the IAM console and check under **IAM users sign\-in link:** on the dashboard\.
 
 For more information about IAM, see the following:
-
 + [AWS Identity and Access Management \(IAM\)](https://aws.amazon.com/iam/)
-
 + [Getting Started](http://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started.html)
-
 + [IAM User Guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/)
 
 ### Next Step<a name="setting-up-next-step"></a>

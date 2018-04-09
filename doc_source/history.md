@@ -3,14 +3,13 @@
 The following table describes the important changes to the *AWS Lambda Developer Guide*\. 
 
 **Relevant Dates to this History:**
-
 + **Current product version**: 2015\-03\-31
-
-+ **Last documentation update**: January 25, 2018
++ **Last documentation update**: April 2, 2018
 
 
 | Change | Description | Date | 
 | --- | --- | --- | 
+| Runtime support for Node\.js runtime 8\.10 |  AWS Lambda now supports Node\.js runtime version 8\.10\. For more information, see [Programming Model\(Node\.js\)](programming-model.md)\.  | April 2, 2018 | 
 | Function and alias revision IDs |  AWS Lambda now supports revision IDs on your function versions and aliases\. You can use these IDs to track and apply conditional updates when you are updating your function version or alias resources\.  | January 25, 2018 | 
 | Runtime support for Go and \.NET 2\.0  |  AWS Lambda has added runtime support for Go and \.NET 2\.0\. For more information, see [Programming Model for Authoring Lambda Functions in Go](go-programming-model.md) and [Programming Model for Authoring Lambda Functions in C\#](dotnet-programming-model.md)\.  | January 15, 2018 | 
 | Console Redesign  |  AWS Lambda has introduced a new Lambda console to simplify your experience and added a Cloud9 Code Editor to enhance your ability debug and revise your function code\. For more information, see [Creating Functions Using the AWS Lambda Console Editor](code-editor.md)\.  | November 30,2017 | 
@@ -29,7 +28,7 @@ The following table describes the important changes to the *AWS Lambda Developer
 | AWS Lambda adds Amazon Lex as a supported event source\.  |  Using Lambda and Amazon Lex, you can quickly build chat bots for various services like Slack and Facebook\. For more information, see [Amazon Lex](invoking-lambda-function.md#supported-event-source-lex)\.  | November 30, 2016 | 
 | US West \(N\. California\) Region  |  AWS Lambda is now available in the US West \(N\. California\) Region\. For more information about Lambda regions and endpoints, see [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html#lambda_region) in the *AWS General Reference*\.  | November 21, 2016 | 
 | Introduced the AWS Serverless Application Model for creating and deploying Lambda\-based applications and using environment variables for Lambda function configuration settings\. |  AWS Lambda introduces the following features in this release\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/lambda/latest/dg/history.html)  | November 18, 2016 | 
-| Added a tutorial under [Getting Started](getting-started.md) for creating an Amazon API Gateway endpoint using the Lambda console  |  The tutorial instructs how to seamlessly integrate a Lambda function with an API via new features introduced in [Configure Proxy Integration for a Proxy Resource](http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-set-up-simple-proxy.html)\. For more information, see [Step 3: Create a Simple Microservice using Lambda and API Gateway](with-on-demand-https-example-configure-event-source_1.md)\.  | August 29, 2016 | 
+| Added a tutorial under [Getting Started](getting-started.md) for creating an Amazon API Gateway endpoint using the Lambda console  |  The tutorial instructs how to seamlessly integrate a Lambda function with an API via new features introduced in [Configure Proxy Integration for a Proxy Resource](http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-set-up-simple-proxy.html)\. For more information, see [Create a Simple Microservice using Lambda and API Gateway](with-on-demand-https-example-configure-event-source_1.md)\.  | August 29, 2016 | 
 | Asia Pacific \(Seoul\) Region  |  AWS Lambda is now available in the Asia Pacific \(Seoul\) Region\. For more information about Lambda regions and endpoints, see [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html#lambda_region) in the *AWS General Reference*\.  | August 29, 2016 | 
 | Asia Pacific \(Sydney\) Region  |  Lambda is now available in the Asia Pacific \(Sydney\) Region\. For more information about Lambda regions and endpoints, see [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html#lambda_region) in the *AWS General Reference*\.  | June 23, 2016 | 
 | Updates to the Lambda console  |  The Lambda console has been updated to simplify the role\-creation process\. For more information, see [Create a Simple Lambda Function](get-started-create-function.md)\.  | June 23, 2016 | 

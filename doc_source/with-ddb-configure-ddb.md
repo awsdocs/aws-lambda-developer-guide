@@ -1,11 +1,8 @@
 # Step 3: Add an Event Source \(Create a DynamoDB Stream and Associate It with Your Lambda Function\)<a name="with-ddb-configure-ddb"></a>
 
 In this section, you do the following:
-
 + Create an Amazon DynamoDB table with a stream enabled\.
-
 + Create an event source mapping in AWS Lambda\. This event source mapping associates the DynamoDB stream with your Lambda function\. After you create this event source mapping, AWS Lambda starts polling the stream\.
-
 + Test the end\-to\-end experience\. As you perform table updates, DynamoDB writes event records to the stream\. As AWS Lambda polls the stream, it detects new records in the stream and executes your Lambda function on your behalf by passing events to the function\. 
 **Note**  
 The following example assumes you have a user \(`adminuser`\) with administrator privileges\. When you follow the procedure, create a user with name `adminuser`\.

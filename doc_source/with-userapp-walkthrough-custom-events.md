@@ -3,7 +3,6 @@
 In this tutorial, you use the AWS CLI to create and invoke a Lambda function and explore other AWS Lambda APIs\.
 
 You'll do the following:
-
 +  Create a Lambda function to process an event it receives as a parameter\. You use the following example Node\.js code to create your Lambda function\.
 
   ```
@@ -18,10 +17,9 @@ You'll do the following:
   };
   ```
 **Note**  
-The code sample is compliant with the Node\.js runtime v4\.3\. For more information, see [Programming Model\(Node\.js\)](programming-model.md)
+The code sample is compliant with the Node\.js runtime v4\.3 or higher\. For more information, see [Programming Model\(Node\.js\)](programming-model.md)
 
   The function is simple\. It processes incoming event data by logging it \(these logs are available in Amazon CloudWatch\), and in the request\-response model, you can request the log data be returned in the response\.
-
 +  Simulate a user application that sends an event to your Lambda function by invoking your Lambda function manually using the following sample event data\.
 
   ```

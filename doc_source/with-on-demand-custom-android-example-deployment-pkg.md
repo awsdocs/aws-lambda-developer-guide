@@ -102,8 +102,7 @@ public class HelloPojo {
 }
 ```
 
-Save the preceding code in a file \(`HelloPojo.java`\)\. Your can now create a deployment package\. You need to include the following dependency: 
-
+Save the preceding code in a file \(`HelloPojo.java`\)\. Create a deployment package\. You need to include the following dependency: 
 + `aws-lambda-java-core`
 
 Your deployment package can be a \.zip file or a standalone \.jar\. You can use any build and packaging tool you are familiar with to create a deployment package\. For examples of how to use the Maven build tool to create a standalone \.jar, see [Creating a \.jar Deployment Package Using Maven without any IDE \(Java\)](java-create-jar-pkg-maven-no-ide.md) and [Creating a \.jar Deployment Package Using Maven and Eclipse IDE \(Java\)](java-create-jar-pkg-maven-and-eclipse.md)\. For an example of how to use the Gradle build tool to create a \.zip file, see [Creating a \.zip Deployment Package \(Java\)](create-deployment-pkg-zip-java.md)\.

@@ -5,20 +5,15 @@
 AWS Lambda provides API operations that you can use to create and update Lambda functions by providing a deployment package as a ZIP file\. However, this mechanism might not be convenient for automating deployment steps for functions, or coordinating deployments and updates to other elements of a serverless application \(like event sources and downstream resources\)\. For example, in order to deploy an Amazon SNS trigger, you need to update the function, the Amazon SNS topic, the mapping between the function and the topic, and any other downstream resources required by your function such as a DynamoDB table\.
 
 You can deploy your serverless applications in the following ways:
-
 + **AWS CLI** \- Using the `aws cloudformation deploy` command\. For more information, see [Deployment](serverless-deploy-wt.md#serv-deploy), which is included in a tutorial on creating a severless application\. For more information, see [Create Your Own Serverless Application](serverless-deploy-wt.md)\. Lambda also offers other AWS CLI operations for you to deploy your serverless applications: 
-
   + [CreateFunction](API_CreateFunction.md)
-
   + [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)
-
 + **AWS CloudFormation** \- You can use AWS CloudFormation to specify, deploy, and configure serverless applications\. AWS CloudFormation is a service that helps you model and set up your AWS resources so that you can spend less time managing those resources and more time focusing on your applications that run in AWS\. You create a template that describes all of the AWS resources that you want \(like Lambda functions and DynamoDB tables\), and AWS CloudFormation takes care of provisioning and configuring those resources for you\. You don't need to individually create and configure AWS resources and figure out what's dependent on what—AWS CloudFormation handles all of that\. For more information, see [AWS CloudFormation Concepts](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-whatis-concepts.html#d0e3897) in the *AWS CloudFormation User Guide*\.
-
 + **AWS SAM** \- AWS SAM supports special resource types that simplify how to express functions, APIs, mappings, and DynamoDB tables for serverless applications, as well as some features for these services like environment variables\. The AWS CloudFormation description of these resources conforms to the [AWS Serverless Application Model](https://github.com/awslabs/serverless-application-model)\. In order to deploy your application, simply specify the resources you need as part of your application, along with their associated permissions policies in an AWS CloudFormation template file \(written in either JSON or YAML\), package your deployment artifacts, and deploy the template\. For more information, see [Using the AWS Serverless Application Model \(AWS SAM\)](serverless_app.md)
 
 Before you learn about the AWS Serverless Model \(AWS SAM\), we suggest you read the following section, which discusses Lambda function versioning, aliases and how to shift traffic to function revisions, which is a pivotal aspect to serverless application development\. For more information, see [AWS Lambda Function Versioning and Aliases](versioning-aliases.md)\.
 
-
+**Topics**
 + [AWS Lambda Function Versioning and Aliases](versioning-aliases.md)
 + [Using the AWS Serverless Application Model \(AWS SAM\)](serverless_app.md)
 + [Automating Deployment of Lambda\-based Applications](automating-deployment.md)

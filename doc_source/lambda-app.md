@@ -1,17 +1,14 @@
 # Building Lambda Functions<a name="lambda-app"></a>
 
-You upload your application code in the form of one or more *Lambda functions* to AWS Lambda, a compute service, and the service can run the code on your behalf\. AWS Lambda takes care of provisioning and managing the servers to run the code upon invocation\.
+You upload your application code in the form of one or more *Lambda functions* to AWS Lambda, a compute service\. In turn, AWS Lambda executes the code on your behalf\. AWS Lambda takes care of provisioning and managing the servers to run the code upon invocation\.
 
 Typically, the lifecycle for an AWS Lambda\-based application includes authoring code, deploying code to AWS Lambda, and then monitoring and troubleshooting\. The following are general questions that come up in each of these lifecycle phases:
-
 + **Authoring code for your Lambda function** – What languages are supported? Is there a programming model that I need to follow? How do I package my code and dependencies for uploading to AWS Lambda? What tools are available?
 
    
-
 + **Uploading code and creating Lambda functions** – How do I upload my code package to AWS Lambda? How do I tell AWS Lambda where to begin executing my code? How do I specify compute requirements like memory and timeout? 
 
    
-
 + **Monitoring and troubleshooting** – For my Lambda function that is in production, what metrics are available? If there are any failures, how do I get logs or troubleshoot issues?
 
 The following sections provide introductory information and the Example section at the end provides working examples for you to explore\.
@@ -19,9 +16,7 @@ The following sections provide introductory information and the Example section 
 ## Authoring Code for Your Lambda Function<a name="lambda-app-author"></a>
 
 You can author your Lambda function code in the languages that are supported by AWS Lambda\. For a list of supported languages, see [Lambda Execution Environment and Available Libraries](current-supported-versions.md)\. There are tools for authoring code, such as the AWS Lambda console, Eclipse IDE, and Visual Studio IDE\. But the available tools and options depend on the following:
-
 + Language you choose to write your Lambda function code\. 
-
 + Libraries that you use in your code\. AWS Lambda runtime provides some of the libraries and you must upload any additional libraries that you use\. 
 
 The following table lists languages, and the available tools and options that you can use\.
@@ -46,7 +41,10 @@ After you familiarize yourself with AWS Lambda, see the [Use Cases](use-cases.md
 
 To create a Lambda function, you first package your code and dependencies in a deployment package\. Then, you upload the deployment package to AWS Lambda to create your Lambda function\. 
 
-
+**Topics**
++ [Creating a Deployment Package](#lambda-app-structure-code)
++ [Uploading a Deployment Package](#lambda-app-upload-deployment-pkg)
++ [Testing a Lambda Function](#lambda-app-test-code)
 
 ### Creating a Deployment Package – Organizing Code and Dependencies<a name="lambda-app-structure-code"></a>
 
@@ -63,11 +61,8 @@ In addition to providing your deployment package, you can provide configuration 
 ### Testing a Lambda Function<a name="lambda-app-test-code"></a>
 
 If your Lambda function is designed to process events of a specific type, you can use sample event data to test your Lambda function using one of the following methods:
-
 + Test your Lambda function in the console\. 
-
 + Test your Lambda function using the AWS CLI\. You can use the `Invoke` method to invoke your Lambda function and pass in sample event data\.
-
 + Test your Lambda function locally using [Test Your Serverless Applications Locally Using SAM Local \(Public Beta\)](test-sam-local.md)\.
 
 The console provides sample event data\. The same data is also provided in the [Sample Events Published by Event Sources](eventsources.md) topic, which you can use in the AWS CLI to invoke your Lambda function\.
@@ -81,11 +76,9 @@ To help you troubleshoot failures in a function, Lambda logs all requests handle
 ## AWS Lambda\-Based Application Examples<a name="lambda-app-examples"></a>
 
 This guide provides several examples with step\-by\-step instructions\. If you are new to AWS Lambda, we recommend you try the following exercises:
-
 + [Getting Started](getting-started.md) – The Getting Started exercise provides a console\-based experience\. Sample code is provided for your preferred runtimes\. You can also code within the console, using the [Code Editor](https://docs.aws.amazon.com/lambda/latest/dg/code-editor.html) and upload it to AWS Lambda, and test it using sample event data provided in the console\.
 
    
-
 + [Use Cases](use-cases.md) – If you cannot author your code using the console, you must create your own deployment packages and use the AWS CLI \(or SDKs\) to create your Lambda function\. For more information, see [Authoring Code for Your Lambda Function](#lambda-app-author)\. Most examples in the Use Cases section use the AWS CLI\. If you are new to AWS Lambda, we recommend that you try one of these exercises\. 
 
 ## Related Topics<a name="building-apps-related-topics"></a>

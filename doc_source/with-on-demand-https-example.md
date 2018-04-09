@@ -3,17 +3,12 @@
 In this example you create a simple API \(`DynamoDBOperations`\) using Amazon API Gateway\. An Amazon API Gateway is a collection of resources and methods\. For this tutorial, you create one resource \(`DynamoDBManager`\) and define one method \(`POST`\) on it\. The method is backed by a Lambda function \(`LambdaFunctionForAPIGateway`\)\. That is, when you invoke the method through an HTTPS endpoint, Amazon API Gateway invokes the Lambda function\.
 
 The `POST` method on the `DynamoDBManager` resource supports the following DynamoDB operations:
-
 + Create, update, and delete an item\.
-
 + Read an item\.
-
 + Scan an item\.
-
 + Other operations \(echo, ping\), not related to DynamoDB, that you can use for testing\.
 
 The request payload you send in the `POST` request identifies the DynamoDB operation and provides necessary data\. For example: 
-
 + The following is a sample request payload for a DynamoDB put item operation:
 
   ```
@@ -28,7 +23,6 @@ The request payload you send in the `POST` request identifies the DynamoDB opera
       }
   }
   ```
-
 + The following is a sample request payload for a DynamoDB read item operation:
 
   ```
@@ -42,8 +36,7 @@ The request payload you send in the `POST` request identifies the DynamoDB opera
       }
   }
   ```
-
-+ The following is a sample request payload for a the `echo` operation\. You will then send HTTPS PUT request to the endpoint, using the following data in the request body\. 
++ The following is a sample request payload for an `echo` operation\. You send an HTTPS PUT request to the endpoint, using the following data in the request body\. 
 
   ```
   {

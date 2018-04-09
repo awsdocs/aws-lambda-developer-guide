@@ -18,7 +18,7 @@ Note the **Encryption configuration** section\. You will learn more about using 
 
 You can also use the AWS CLI to create Lambda functions that contain environment variables\. For more details, see the [CreateFunction](API_CreateFunction.md) and [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md) APIs\. Environment variables are also supported when creating and updating functions using AWS CloudFormation\. Environment variables can also be used to configure settings specific to the language runtime or a library included in your function\. For example, you can modify `PATH` to specify a directory where executables are stored\. You can also set runtime\-specific environment variables, such as `PYTHONPATH` for Python or `NODE_PATH` for Node\.js\. 
 
-The following example creates a new Lambda function that sets the `LD_LIBRARY_PATH` environment variable, which is used to specify a directory where shared libraries are dynamically loaded at runtime\. In this example, the Lambda function code uses the shared library in the `/usr/bin/test/lib64` directory\. Note that the `Runtime` parameter uses `nodejs6.10` but you can also specify `nodejs4.3`\. 
+The following example creates a new Lambda function that sets the `LD_LIBRARY_PATH` environment variable, which is used to specify a directory where shared libraries are dynamically loaded at runtime\. In this example, the Lambda function code uses the shared library in the `/usr/bin/test/lib64` directory\. Note that the `Runtime` parameter uses `nodejs6.10` but you can also specify `nodejs8.10` or `nodejs4.3`\. 
 
 ```
 aws lambda create-function \
@@ -37,9 +37,7 @@ aws lambda create-function \
 There is no limit to the number of environment variables you can create as long as the total size of the set does not exceed 4 KB\.
 
 Other requirements include:
-
 + Must start with letters *\[a\-zA\-Z\]*\. 
-
 + Can only contain alphanumeric characters and underscores *\(\[a\-zA\-Z0\-9\_\]*\. 
 
 In addition, there are a specific set of keys that AWS Lambda reserves\. If you try to set values for any of these reserved keys, you will receive an error message indicating that the action is not allowed\. For more information on these keys, see [Environment Variables Available to Lambda Functions](current-supported-versions.md#lambda-environment-variables)\.

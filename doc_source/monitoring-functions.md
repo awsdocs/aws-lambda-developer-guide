@@ -3,9 +3,7 @@
 AWS Lambda automatically monitors Lambda functions on your behalf, reporting metrics through Amazon CloudWatch\. To help you monitor your code as it executes, Lambda automatically tracks the number of requests, the latency per request, and the number of requests resulting in an error and publishes the associated CloudWatch metrics\. You can leverage these metrics to set CloudWatch custom alarms\. For more information about CloudWatch, see the [Amazon CloudWatch User Guide](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/)\.
 
 You can view request rates and error rates for each of your Lambda functions by using the AWS Lambda console, the CloudWatch console, and other Amazon Web Services \(AWS\) resources\. The following topics describe Lambda CloudWatch metrics and how to access them\.
-
 + [Accessing Amazon CloudWatch Metrics for AWS Lambda](monitoring-functions-access-metrics.md)
-
 + [AWS Lambda Metrics](monitoring-functions-metrics.md)
 
 You can insert logging statements into your code to help you validate that your code is working as expected\. Lambda automatically integrates with Amazon CloudWatch Logs and pushes all logs from your code to a CloudWatch Logs group associated with a Lambda function \(/aws/lambda/*<function name>*\)\. To learn more about log groups and accessing them through the CloudWatch console, see the [Monitoring System, Application, and Custom Log Files](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatchLogs.html) in the *Amazon CloudWatch User Guide*\. For information about how to access CloudWatch log entries, see [Accessing Amazon CloudWatch Logs for AWS Lambda](monitoring-functions-logs.md)\.
@@ -28,14 +26,12 @@ If your Lambda function code is executing, but you don't see any log data being 
    You can test your code locally as you would any other Node\.js function, or you can test it within the Lambda console using the console's test invoke functionality, or you can use the AWS CLI `Invoke` command\. Each time the code is executed in response to an event, it writes a log entry into the log group associated with a Lambda function, which is /aws/lambda/*<function name>*\. 
 
    Following are some examples of errors that might show up in the logs:
-
    + If you see a stack trace in your log, there is probably an error in your code\. Review your code and debug the error that the stack trace refers to\.
-
    + If you see a `permissions denied` error in the log, the IAM role you have provided as an execution role may not have the necessary permissions\. Check the IAM role and verify that it has all of the necessary permissions to access any AWS resources that your code references\. To ensure that you have correctly set up the execution role, see [Manage Permissions: Using an IAM Role \(Execution Role\)](intro-permission-model.md#lambda-intro-execution-role)\. 
-
    +  If you see a `timeout exceeded` error in the log, your timeout setting exceeds the run time of your function code\. This may be because the timeout is too low, or the code is taking too long to execute\.  
+   +  If you see a `memory exceeded` error in the log, your memory setting is too low\. Set it to a higher value\. For information about memory size limits, see [CreateFunction](API_CreateFunction.md)\. When you change the memory setting, it can also change how you are charged for [AWS Lambda product website](https://aws.amazon.com/lambda/pricing) duration\.
 
-   +  If you see a `memory exceeded` error in the log, your memory setting is too low\. Set it to a higher value\. For information about memory size limits, see [CreateFunction](API_CreateFunction.md)\. When you change the memory setting, it can also change how you are charged for duration\. For information about pricing, see the [AWS Lambda product website](https://aws.amazon.com/lambda/)\.
+      For information about pricing, see the [AWS Lambda product website](https://aws.amazon.com/lambda)\.
 
 1. Check your Lambda function and verify that it is receiving requests\. 
 

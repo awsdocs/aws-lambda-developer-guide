@@ -10,7 +10,6 @@ AWS Lambda does not support connecting to resources within Dedicated Tenancy VPC
 ## Configuring a Lambda Function for Amazon VPC Access<a name="vpc-configuring"></a>
 
 You add VPC information to your Lambda function configuration using the `VpcConfig` parameter, either at the time you create a Lambda function \(see [CreateFunction](API_CreateFunction.md)\), or you can add it to the existing Lambda function configuration \(see [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)\)\. Following are AWS CLI examples:
-
 + The `create-function` CLI command specifies the `--vpc-config` parameter to provide VPC information at the time you create a Lambda function\. Note that the `--runtime` parameter specifies `python3.6`\. You can also use `python2.7`\.
 
   ```
@@ -25,7 +24,6 @@ You add VPC information to your Lambda function configuration using the `VpcConf
   ```
 **Note**  
 The Lambda function execution role must have permissions to create, describe and delete ENIs\. AWS Lambda provides a permissions policy, `AWSLambdaVPCAccessExecutionRole`, with permissions for the necessary EC2 actions \(`ec2:CreateNetworkInterface`, ` ec2:DescribeNetworkInterfaces`, and `ec2:DeleteNetworkInterface`\) that you can use when creating a role\. You can review the policy in the IAM console\. Do not delete this role immediately after your Lambda function execution\. There is a delay between the time your Lambda function executes and ENI deletion\. If you do delete the role immediately after function execution, you are responsible for deleting the ENIs\.
-
 + The `update-function-configuration` CLI command specifies the `--vpc-config` parameter to add VPC information to an existing Lambda function configuration\.
 
   ```
@@ -43,11 +41,9 @@ The Lambda function execution role must have permissions to create, describe and
   ```
 
 Note the following additional considerations:
-
 + When you add VPC configuration to a Lambda function, it can only access resources in that VPC\. If a Lambda function needs to access both VPC resources and the public Internet, the VPC needs to have a Network Address Translation \(NAT\) instance inside the VPC\. 
 
    
-
 + When a Lambda function is configured to run within a VPC, it incurs an additional ENI start\-up penalty\. This means address resolution may be delayed when trying to connect to network resources\.
 
 ## Internet Access for Lambda Functions<a name="vpc-internet"></a>
@@ -60,7 +56,6 @@ If your Lambda function needs Internet access, do not attach it to a public subn
 ## Guidelines for Setting Up VPC\-Enabled Lambda Functions<a name="vpc-setup-guidelines"></a>
 
 Your Lambda function automatically scales based on the number of events it processes\. The following are general guidelines for setting up VPC\-enabled Lambda functions to support the scaling behavior\. 
-
 + If your Lambda function accesses a VPC, you must make sure that your VPC has sufficient ENI capacity to support the scale requirements of your Lambda function\. You can use the following formula to approximately determine the ENI capacity\.
 
   ```
@@ -68,13 +63,10 @@ Your Lambda function automatically scales based on the number of events it proce
   ```
 
   Where: 
-
   + **Projected peak concurrent execution** – Use the information in  [Managing Concurrency](concurrent-executions.md) to determine this value\.
-
   + **Memory** – The amount of memory you configured for your Lambda function\. 
 
    
-
 + The subnets you specify should have sufficient available IP addresses to match the number of ENIs\.
 
    

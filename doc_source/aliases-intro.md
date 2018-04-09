@@ -5,13 +5,11 @@ You can create one or more aliases for your Lambda function\. An* AWS Lambda ali
 By using aliases, you can access the Lambda function an alias is pointing to \(for example, to invoke the function\) without the caller having to know the specific version the alias is pointing to\.
 
 AWS Lambda aliases enable the following use cases:
-
 + **Easier support for promotion of new versions of Lambda functions and rollback when needed** – After initially creating a Lambda function \(the `$LATEST` version\), you can publish a version 1 of it\. By creating an alias named PROD that points to version 1, you can now use the PROD alias to invoke version 1 of the Lambda function\. 
 
   Now, you can update the code \(the `$LATEST` version\) with all of your improvements, and then publish another stable and improved version \(version 2\)\. You can promote version 2 to production by remapping the PROD alias so that it points to version 2\. If you find something wrong, you can easily roll back the production version to version 1 by remapping the PROD alias so that it points to version 1\.
 **Note**  
 In this context, the terms *promotion* and *roll back* refer to the remapping of aliases to different function versions\.
-
 + **Simplify management of event source mappings** – Instead of using Amazon Resource Names \(ARNs\) for Lambda function in event source mappings, you can use an alias ARN\. This approach means that you don't need to update your event source mappings when you promote a new version or roll back to a previous version\. 
 
 An AWS Lambda alias is a resource similar to a Lambda function\. However, you can't create an alias independently\. You create an alias for an existing Lambda function\. If a Lambda function is a resource, you can think of an AWS Lambda alias as a subresource that is associated with a Lambda function\. 
@@ -21,13 +19,11 @@ Both the Lambda function and alias are AWS Lambda resources, and like all other 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/alias_intro_2_10.png)
 
 You can access the function using either the function ARN or the alias ARN\.
-
 + Because the function version for an unqualified function always maps to `$LATEST`, you can access it using the qualified or unqualified function ARN\. The following shows a qualified function ARN with the `$LATEST` version suffix\.
 
   ```
   arn:aws:lambda:aws-region:acct-id:function:helloworld:$LATEST
   ```
-
 + When using any of the alias ARNs, you are using a qualified ARN\. Each alias ARN has an alias name suffix\.
 
   ```
@@ -37,15 +33,10 @@ You can access the function using either the function ARN or the alias ARN\.
   ```
 
 AWS Lambda provides the following API operations for you to create and manages aliases:
-
 + [CreateAlias](API_CreateAlias.md)
-
 + [UpdateAlias](API_UpdateAlias.md)
-
 + [GetAlias](API_GetAlias.md)
-
 + [ListAliases](API_ListAliases.md)
-
 + [DeleteAlias](API_DeleteAlias.md)
 
 ## Example: Using Aliases to Manage Lambda Function Versions<a name="aliases-intro-example"></a>

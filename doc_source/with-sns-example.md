@@ -3,11 +3,8 @@
  In this tutorial, you create a Lambda function in one AWS account to subscribe to an Amazon SNS topic in a separate AWS account\. 
 
  The tutorial is divided into three main sections: 
-
 +  First, you perform the necessary setup to create a Lambda function\. 
-
 + Second, you create an Amazon SNS topic in a separate AWS account\. 
-
 + Third, you grant permissions from each account in order for the Lambda function to subscribe to the Amazon SNS topic\. Then, you test the end\-to\-end setup\. 
 
 **Important**  

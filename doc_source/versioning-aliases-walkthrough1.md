@@ -29,9 +29,7 @@ This example uses the us\-west\-2 \(US West Oregon\) region to create the Lambda
    1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 
    1. Follow the steps in [IAM Roles](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *IAM User Guide* to create an IAM role \(execution role\)\. As you follow the steps to create a role, note the following: 
-
       + For **Select Role Type**, choose **AWS Service Roles**, and then choose **AWS Lambda**\.
-
       + For **Attach Policy**, choose the policy named **AWSLambdaBasicExecutionRole**\. 
 
    1. Write down the Amazon Resource Name \(ARN\) of the IAM role\. You need this value when you create your Lambda function in the next step\.
@@ -163,10 +161,8 @@ The response returns the configuration information showing `$LATEST` as the func
 
 For information about using the AWS Lambda console to manage versioning, see [Managing Versioning Using the AWS Management Console, the AWS CLI, or Lambda API Operations](how-to-manage-versioning.md)\.
 
-## Granting Permissions in a Push Model<a name="versioning-permissions-cli"></a>[Event Source Mapping](java-invocation-options.md#intro-invocation-modes)
-
+## Granting Permissions in a Push Model<a name="versioning-permissions-cli"></a>[Event Source Mapping](invocation-options.md#intro-invocation-modes)
 + We recommend that you specify an existing Lambda function alias in the mapping configuration \(see [Introduction to AWS Lambda Aliases](aliases-intro.md)\)\. For example, if the event source is Amazon S3, you specify the alias ARN in the bucket notification configuration so that Amazon S3 can invoke the alias when it detects specific events\.
-
 + In the push model, you grant event sources permissions using a resource policy that you attach to your Lambda function\. In versioning, the permissions you add are specific to the qualifier that you specify in the `AddPermission` request \(see [Versioning, Aliases, and Resource Policies](versioning-aliases-permissions.md)\)\. 
 
   For example, the following AWS CLI command grants Amazon S3 permissions to invoke the PROD alias of the `helloworld` Lambda function \(note that the `--qualifier` parameter specifies the alias name\)\. 

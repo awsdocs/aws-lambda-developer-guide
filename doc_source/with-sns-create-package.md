@@ -18,7 +18,7 @@ From the **Filter View** list, choose the language you want to use for your Lamb
    };
    ```
 **Note**  
-The code sample is compliant with the Node\.js runtimes v6\.10 or v4\.3\. For more information, see [Programming Model\(Node\.js\)](programming-model.md)
+The code sample is compliant with the Node\.js runtimes v4\.3 or higher\. For more information, see [Programming Model\(Node\.js\)](programming-model.md)
 
 1. Save the file as ` index.js`\.
 
@@ -57,9 +57,7 @@ public class LogEvent implements RequestHandler<SNSEvent, Object> {
 ```
 
 Using the preceding code \(in a file named `LambdaWithSNS.java`\), create a deployment package\. Make sure that you add the following dependencies: 
-
 + `aws-lambda-java-core`
-
 + `aws-lambda-java-events` 
 
 For more information, see [Programming Model for Authoring Lambda Functions in Java](java-programming-model.md)\.
@@ -82,7 +80,7 @@ After you verify that your deployment package is created, go to the next step to
        "github.com/aws/aws-lambda-go/events”
    )
    
-   func handler(ctx context.Context, events.SNSEvent snsEvent) {
+   func handler(ctx context.Context, snsEvent events.SNSEvent) {
        for _, record := range snsEvent.Records {
            snsRecord := record.SNS
    

@@ -3,23 +3,22 @@
 **Note**  
 This feature is available as part of a public beta and is subject to change at any time\.
 
-[AWS SAM](https://docs.aws.amazon.com/lambda/latest/dg/deploying-lambda-apps.html#Using the AWS Serverless Application Model (AWS SAM)) is a fast and easy way of deploying your serverless applications, allowing you to write simple templates to describe your functions and their event sources \(Amazon API Gateway, Amazon S3, Kinesis, and so on\)\. Based on AWS SAM, SAM Local is an AWS CLI tool that provides an environment for you to develop, test, and analyze your serverless applications locally before uploading them to the Lambda runtime\. Whether you're developing on Linux, Mac, or Microsoft Windows, you can use SAM Local to create a local testing environment that simulates the AWS runtime environment\. Doing so helps you address issues such as performance\. Working with SAM Local also allows faster, iterative development of your Lambda function code because there is no need to redeploy your application package to the AWS Lambda runtime\. For more information, see [Building a Simple Application Using SAM Local](#sam-cli-simple-app)\.
+[AWS SAM](https://docs.aws.amazon.com/lambda/latest/dg/deploying-lambda-apps.html#Using the AWS Serverless Application Model (AWS SAM)) is a fast and easy way of deploying your serverless applications, allowing you to write simple templates to describe your functions and their event sources \(Amazon API Gateway, Amazon S3, Kinesis, and so on\)\. 
+
+Based on AWS SAM, SAM Local is an AWS CLI tool that provides an environment for you to develop, test, and analyze your serverless applications locally before uploading them to the Lambda runtime\. Whether you're developing on Linux, Mac, or Microsoft Windows, you can use SAM Local to create a local testing environment that simulates the AWS runtime environment\. Doing so helps you address issues such as performance\. Working with SAM Local also allows faster, iterative development of your Lambda function code because there is no need to redeploy your application package to the AWS Lambda runtime\. For more information, see [Building a Simple Application Using SAM Local](#sam-cli-simple-app)\.
 
 SAM Local works with [AWS SAM](https://docs.aws.amazon.com/lambda/latest/dg/deploying-lambda-apps.html#Using the AWS Serverless Application Model (AWS SAM)), allowing you to invoke functions defined in SAM templates, whether directly or through API Gateway endpoints\. By using SAM Local features, you can analyze your serverless application's performance in your own testing environment and update accordingly\. The following examples outline additional advantages of using SAM Local with sample operation code\. For instance, you can do the following: 
-
 + Generate sample function payloads \(for example, an Amazon S3 event\)\.
 
   ```
   $ sam local generate-event s3 --bucket bucket-name  --key key-name
                   > event_file.json
   ```
-
 + Test a sample function payload locally with your Lambda functions\.
 
   ```
   $ sam local invoke function-name -e event_file.json
   ```
-
 + Spawn a local API Gateway to test HTTP request and response functionality\. By using the hot reloading feature, you can test and iterate your functions without having to restart or reload them to the AWS runtime\.
 
   ```
@@ -61,9 +60,7 @@ SAM Local works with [AWS SAM](https://docs.aws.amazon.com/lambda/latest/dg/depl
   ERROR: Function ExampleFunction returned an invalid response (must include one of: body, headers
                       or statusCode in the response object)
   ```
-
 + Validate that any runtime constraints, such as maximum memory use or timeout limits of your Lambda function invocations, are honored\.
-
 + Inspect AWS Lambda runtime logs, and also any customized logging output specified in your Lambda function code \(for example, `console.log`\)\. SAM Local automatically displays this output\. The following shows an example\.
 
   ```
@@ -75,31 +72,21 @@ SAM Local works with [AWS SAM](https://docs.aws.amazon.com/lambda/latest/dg/depl
                   Duration: 12.78 ms      Billed Duration: 100 ms Memory Size: 128 MB
                   Max Memory Used: 29 MB
   ```
-
 + Honor security credentials that you've established by using the AWS CLI\. Doing so means your Lambda function can make remote calls to the AWS services that make up your serverless application\. If you have not installed the AWS CLI, see [Installing the AWS Command Line Interface](http://docs.aws.amazon.com/cli/latest/userguide/)\.
 
   As with the AWS CLI and SDKs, SAM Local looks for credentials in the following order:
-
   + Environment variables \(*AWS\_ACCESS\_KEY\_ID*, *AWS\_SECRET\_ACCESS\_KEY*\)
-
   + The AWS credentials file, located at `~/.aws/credentials` on Linux, MacOS, or Unix, or at `C:\Users\USERNAME \.aws\credentials` on Windows\)
-
   + Instance profile credentials, if running on an Amazon EC2 instance with an assigned instance role
 
 ## Supported Runtimes<a name="test-sam-cli-supported-runtimes"></a>
 
 SAM Local supports the following AWS runtimes:
-
 + node\.js 4\.3
-
 + node\.js 6\.10
-
 + python 2\.7
-
 + python 3\.6
-
 + java8
-
 + go 1\.x
 
 If you have not already installed SAM Local, see [Install SAM Local](sam-cli-requirements.md)\.
@@ -107,11 +94,9 @@ If you have not already installed SAM Local, see [Install SAM Local](sam-cli-req
 ## Getting Started Using SAM Local<a name="sam-cli-what-is"></a>
 
 SAM Local consists of the following CLI operations:
-
 + **start\-api**: Creates a local HTTP server hosting all of your Lambda functions\. When accessed by using a browser or the CLI, this operation launches a Docker container locally to invoke your function\. It reads the `CodeUri` property of the `AWS::Serverless::Function` resource to find the path in your file system containing the Lambda function code\. This path can be the project's root directory for interpreted languages like Node\.js or Python, a build directory that stores your compiled artifacts, or for Java, a `.jar` file\.
 
   If you use an interpreted language, local changes are made available within the same Docker container\. This approach means you can reinvoke your Lambda function with no need for redeployment\. For compiled languages or projects requiring complex packing support, we recommend that you run your own build solution and point AWS SAM to the directory that contains the build dependency files needed\. 
-
 + **invoke**: Invokes a local Lambda function once and terminates after invocation completes\.
 
   ```
@@ -124,7 +109,6 @@ SAM Local consists of the following CLI operations:
   # For more options
   $ sam local invoke --help
   ```
-
 + **generate\-event**: Generates mock serverless events\. Using these, you can develop and test locally on functions that respond to asynchronous events such as those from Amazon S3, Kinesis, and DynamoDB\. The following displays the command options available to the `generate-event` operation\.
 
   ```
@@ -146,13 +130,12 @@ SAM Local consists of the following CLI operations:
   OPTIONS:
      --help, -h  show help
   ```
-
 + **validate:** Validates your template against the official [AWS Serverless Application Model specification](https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md)\. The following is an example\. 
 
   ```
   $ sam validate
   ERROR: Resource "HelloWorld", property "Runtime": Invalid value node. 
-  Valid values are "nodejs4.3", "nodejs6.10", "java8", "python2.7",
+  Valid values are "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7",
   "python3.6"(line: 11; col: 6)
   
   # Let's fix that error...
@@ -161,7 +144,6 @@ SAM Local consists of the following CLI operations:
   $ sam validate
   Valid!
   ```
-
 + **package** and **deploy**: `sam package` and `sam deploy` implicitly call AWS CloudFormation's [package](http://docs.aws.amazon.com/cli/latest/reference/cloudformation/package.html) and [deploy](http://docs.aws.amazon.com/cli/latest/reference/cloudformation/deploy.html) commands\. For more information on packaging and deployment of SAM applications, see [Packaging and Deployment](serverless-deploy-wt.md#serverless-deploy)\.
 
   The following demonstrates how to use the `package` and `deploy` commands in SAM Local\.
@@ -220,11 +202,8 @@ Resources:
 ```
 
 The preceding example configures the following RESTful API endpoints:
-
 + Create a new product with a `PUT` request to /products\.
-
 + List all products with a `GET` request to /products\.
-
 + Read, update, or delete a product with `GET`, `PUT` or `DELETE` request to /products/\{product\}\.
 
 Next, copy and paste the following code into the *products\.js* file\.

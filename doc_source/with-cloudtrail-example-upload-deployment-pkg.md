@@ -1,9 +1,7 @@
 # Step 2\.3: Create the Lambda Function and Test It Manually<a name="with-cloudtrail-example-upload-deployment-pkg"></a>
 
 In this section, you do the following:
-
 + Create a Lambda function by uploading the deployment package\. 
-
 + Test the Lambda function by invoking it manually\. 
 
   In this step, you use a sample S3 event that identifies your bucket name and the sample object \(that is, an example CloudTrail log\)\. In the next section you configure your S3 bucket notification to publish object\-created events and test the end\-to\-end experience\.
@@ -13,7 +11,7 @@ In this section, you do the following:
 In this step, you upload the deployment package using the AWS CLI and provide configuration information when you create the Lambda function using the `adminuser` `profile`\. For more information on setting up the `admin` profile and using the AWS CLI, see [Set Up the AWS Command Line Interface \(AWS CLI\)](setup-awscli.md)\.
 
 **Note**  
-You need to update the command by providing the \.zip file path \(*//file\-path/CloudTrailEventProcessing\.zip \\*\) and the execution role ARN \(*execution\-role\-arn*\)\. If you used the sample code provided earlier in this tutorial, set the `--runtime` parameter value to `nodejs6.10` or `nodejs4.3`\.   
+You need to update the command by providing the \.zip file path \(*//file\-path/CloudTrailEventProcessing\.zip \\*\) and the execution role ARN \(*execution\-role\-arn*\)\. If you used the sample code provided earlier in this tutorial, set the `--runtime` parameter value to `nodejs8.10`, `nodejs6.10` or `nodejs4.3`\. The sample following uses `nodejs6.10`\.   
 You can author your Lambda functions in Java or Python too\. If you use another language, change the `--runtime` parameter value to `java8`, `python3.6` or `python2.7` as needed\.
 
 ```

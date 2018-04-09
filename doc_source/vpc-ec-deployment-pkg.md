@@ -50,9 +50,7 @@ The `from __future__` statement enables you to write code that is compatible wit
 1. Save the file as `app.py`\. 
 
 1. Install the following library dependencies using **pip**:
-
    + `pymemcache` – The Lambda function code uses this library to create a `HashClient` object to set and get items from memcache \(see [pymemcache](https://pypi.python.org/pypi/pymemcache)\)\. 
-
    + `elasticache-auto-discovery` – The Lambda function uses this library to get the nodes in your Amazon ElastiCache cluster \(see [elasticache\-auto\-discovery](https://pypi.python.org/pypi/elasticache-auto-discovery)\)\.
 
 1. Zip all of these files into a file named `app.zip` to create your deployment package\. For step\-by\-step instructions, see [Creating a Deployment Package \(Python\)](lambda-python-how-to-create-deployment-package.md)\. 

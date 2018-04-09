@@ -1,9 +1,7 @@
 # Step 2\.3: Create the Lambda Function and Test It Manually<a name="with-dynamodb-create-function"></a>
 
 In this section, you do the following:
-
 + Create a Lambda function by uploading the deployment package\. 
-
 + Test the Lambda function by invoking it manually\. Instead of creating an event source, you use sample DynamoDB event data\. 
 
 In the next section, you create an DynamoDB stream and test the end\-to\-end experience\.
@@ -14,7 +12,7 @@ In this step, you upload the deployment package using the AWS CLI\.
 
 At the command prompt, run the following Lambda CLI `create-function` command using the **adminuser** profile\. If you have already created this profile, see [Set Up an AWS Account](setup.md)
 
-You need to update the command by providing the \.zip file path and the execution role ARN\. The `--runtime` parameter value can be `python3.6`, `python2.7`, `nodejs6.10` `nodejs4.3`, or `java8`, depending on the language you used to author your code\.
+You need to update the command by providing the \.zip file path and the execution role ARN\. The `--runtime` parameter value can be `python3.6`, `python2.7`, `nodejs8.10`, `nodejs6.10` or `nodejs4.3`, or `java8`, depending on the language you used to author your code\.
 
 ```
 $ aws lambda create-function \
@@ -154,9 +152,7 @@ In this step, you invoke your Lambda function manually using the `invoke` AWS La
 1. Verify the output in the `outputfile.txt` file\.
 
    You can monitor the activity of your Lambda function in the AWS Lambda console\. 
-
    + The AWS Lambda console shows a graphical representation of some of the CloudWatch metrics in the **Cloudwatch Metrics at a glance** section for your function\. Sign in to the AWS Management Console at [https://console\.aws\.amazon\.com/](https://console.aws.amazon.com/)\.
-
    +  For each graph you can also click the **logs** link to view the CloudWatch logs directly\.
 
 ### Next Step<a name="with-ddb-manual-invoke-next-step"></a>

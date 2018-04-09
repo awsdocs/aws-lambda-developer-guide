@@ -127,7 +127,6 @@ The following is an example response:
 ```
 
 Set `content-type` of the `POST` method response and integration response to JSON as follows: 
-
 + Run the following command to set the `POST` method response to JSON\. This is the response type that your API method returns\.
 
   ```
@@ -138,7 +137,6 @@ Set `content-type` of the `POST` method response and integration response to JSO
   --status-code 200 \
   --response-models "{\"application/json\": \"Empty\"}"
   ```
-
 + Run the following command to set the `POST` method integration response to JSON\. This is the response type that Lambda function returns\.
 
   ```

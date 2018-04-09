@@ -15,9 +15,7 @@ AWS Lambda is an ideal compute platform for many application scenarios, provided
 When using AWS Lambda, you are responsible only for your code\. AWS Lambda manages the compute fleet that offers a balance of memory, CPU, network, and other resources\. This is in exchange for flexibility, which means you cannot log in to compute instances, or customize the operating system or language runtime\. These constraints enable AWS Lambda to perform operational and administrative activities on your behalf, including provisioning capacity, monitoring fleet health, applying security patches, deploying your code, and monitoring and logging your Lambda functions\.
 
 If you need to manage your own compute resources, Amazon Web Services also offers other compute services to meet your needs\. 
-
 + Amazon Elastic Compute Cloud \(Amazon EC2\) service offers flexibility and a wide range of EC2 instance types to choose from\. It gives you the option to customize operating systems, network and security settings, and the entire software stack, but you are responsible for provisioning capacity, monitoring fleet health and performance, and using Availability Zones for fault tolerance\.
-
 + Elastic Beanstalk offers an easy\-to\-use service for deploying and scaling applications onto Amazon EC2 in which you retain ownership and full control over the underlying EC2 instances\.
 
 ## Are You a First\-time User of AWS Lambda?<a name="welcome-first-time-user"></a>
@@ -35,11 +33,7 @@ If you are a first\-time user of AWS Lambda, we recommend that you read the foll
 Beyond the Getting Started exercise, you can explore the various use cases, each of which is provided with a tutorial that walks you through an example scenario\. Depending on your application needs \(for example, whether you want event driven Lambda function invocation or on\-demand invocation\), you can follow specific tutorials that meet your specific needs\. For more information, see [Use Cases](use-cases.md)\.
 
 The following topics provide additional information about AWS Lambda:
-
 + [AWS Lambda Function Versioning and Aliases](versioning-aliases.md)
-
 + [Using Amazon CloudWatch](monitoring-functions.md)
-
 + [Best Practices for Working with AWS Lambda Functions](best-practices.md)
-
 + [AWS Lambda Limits](limits.md)

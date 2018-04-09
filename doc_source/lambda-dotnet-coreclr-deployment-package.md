@@ -59,9 +59,7 @@ So, for example, if you wanted to create a console project, you would do the fol
 1. Enter the following command: `dotnet new console -o myproject`
 
    This will create the following files in your *example* directory:
-
    + Program\.cs, which is where you write your Lambda function code\. 
-
    + MyProject\.csproj, an XML file that lists the files and dependencies that comprise your\.NET application\.
 
 AWS Lambda offers additional templates via the [Amazon\.Lambda\.Templates](https://www.nuget.org/packages/Amazon.Lambda.Templates) nuget package\. To install this package, run the following command:
@@ -138,7 +136,6 @@ string - Optional
 ```
 
 These are optional values you can set when you create your Lambda function and will then be automatically written to the `aws-lambda-tools-defaults.json` file, which is built as part of the function\-creation process\. The following explains what they mean: 
-
 + **\-\-profile: **Your execution role\.
 
   To create an IAM role \(execution role\): 
@@ -146,11 +143,8 @@ These are optional values you can set when you create your Lambda function and w
   1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 
   1. Follow the steps in [IAM Roles](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *IAM User Guide* to create an IAM role \(execution role\)\. As you follow the steps to create a role, note the following: 
-
      + In **Select Role Type**, choose **AWS Service Roles**, and then choose **AWS Lambda**\.
-
      + In **Attach Policy**, choose the policy that best fits your Lambda function's requirements\. If it's not interacting with any other AWS services, you would would choose **AWSLambdaBasicExecutionRole**\. However, say your Lambda function is interacting with Kinesis, then you would choose the **AWSLambdaKinesisExecutionRole**\. 
-
 + **\-\-region: **The Amazon Region in which your function will reside\.
 
  For example, to create a Lambda function, run the following command, substituting the values of the `--region` parameter with the region of your choice and `--profile` with your IAM profile: 
@@ -168,7 +162,6 @@ This should create a directory structure similar to the following:
 ```
 
 Under the `src/myfunction` directory, examine the following files:
-
 + **aws\-lambda\-tools\-default\.json**: This is where you specify the command line options when deploying your Lambda function\. For example:
 
   ```
@@ -181,7 +174,6 @@ Under the `src/myfunction` directory, examine the following files:
     "function-timeout" : 30,
     "function-handler" : "MyFunction::MyFunction.Function::FunctionHandler"
   ```
-
 + **Function\.cs**: Your Lambda handler function code\. It's a C\# template that includes the default `Amazon.Lambda.Core` library and a default `LambdaSerializer` attribute\. For more information on serialization requirements and options, see [Serializing Lambda Functions](#lambda-dotnet-add-serializer)\. It also includes a sample function that you can edit to apply your Lambda function code\. 
 
   ```
@@ -207,7 +199,6 @@ Under the `src/myfunction` directory, examine the following files:
       }
   }
   ```
-
 + **MyFunction\.csproj**: An [MSBuild](https://msdn.microsoft.com/en-us/library/dd393574.aspx) file that lists the files and assemblies that comprise your application\. Note specifically that it includes the `Amazon.Lambda.Tools` package, the extension that makes available the Lambda templates described previously\.
 
   ```
@@ -228,11 +219,9 @@ Under the `src/myfunction` directory, examine the following files:
   
   </Project>
   ```
-
 + **Readme**: Use this file to document your Lambda function\.
 
 Under the `myfunction/test directory, examine the following files:`
-
 + **myFunction\.Tests\.csproj**: As noted above, this is an [MSBuild](https://msdn.microsoft.com/en-us/library/dd393574.aspx) file that lists the files and assemblies that comprise your test project\. Note also that it includes the `Amazon.Lambda.Core` library, allowing you to seamlesssly integrate any Lambda templates required to test your function\.
 
   ```
@@ -243,7 +232,6 @@ Under the `myfunction/test directory, examine the following files:`
     
      ...
   ```
-
 + **FunctionTest\.cs**: The same C\# code template file that it is included in the `src` directory\. Edit this file to mirror your function's production code and test it before uploading your Lambda function to a production environment\.
 
   ```
@@ -306,15 +294,11 @@ REPORT RequestId: id  Duration: 0.99 ms       Billed Duration: 100 ms         Me
 ## Serializing Lambda Functions<a name="lambda-dotnet-add-serializer"></a>
 
 For any Lambda functions that use input or output types other than a `Stream` object, you will need to add a serialization library to your application\. You can do this in the following ways:
-
 + Use Json\.NET\. Lambda will provide an implementation for JSON serializer using JSON\.NET as a [NuGet](https://www.nuget.org) package\.
-
 + Create your own serialization library by implementing the `ILambdaSerializer` interface, which is available as part of the `Amazon.Lambda.Core` library\. The interface defines two methods:
-
   + `T Deserialize<T>(Stream requestStream);`
 
      You implement this method to deserialize the request payload from the `Invoke` API into the object that is passed to the Lambda function handler\.
-
   + `T Serialize<T>(T response, Stream responseStream);`\.
 
      You implement this method to serialize the result returned from the Lambda function handler into the response payload that is returned by the `Invoke` API\.

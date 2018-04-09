@@ -1,23 +1,16 @@
 # Building a Pipeline for Your Serverless Application<a name="build-pipeline"></a>
 
  In the following tutorial, you will create an AWS CodePipeline that automates the deployment of your serverless application\.  First, you will need to set up a **source stage** to trigger your pipeline\. For the purposes of this tutorial:
-
 + We will use GitHub\. For instructions on how to create a GitHub repository, see [Create a Repository in GitHub](https://help.github.com/articles/create-a-repo/)\.
-
 + You will need to create an AWS CloudFormation role and add the **AWSLambdaExecute** policy to that role, as outlined below:
 
   1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 
   1. Follow the steps in [Creating a Role to Delegate Permissions to an AWS Service](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide* to create an IAM role \(execution role\) and go to the **To create a role for an AWS service** section\. As you follow the steps to create a role, note the following:
-
      + In **Select Role Type**, choose **AWS Service Roles**, and then choose **CloudFormation**\. Choose **Next: Permissions**\.
-
      + In **Attach permissions policies**, use the search bar to find and then choose **AWSLambdaExecute**\. Choose **Next: Review**\. 
-
      + In **Role Name**, use a name that is unique within your AWS account \(for example, **cloudformation\-lambda\-execution\-role**\) and then choose **Create role**\. 
-
      + Open the role you just created and under the **Permissions** tab, choose **Add inline policy**\. 
-
      + In **Create Policy** choose the **JSON** tab and enter the following: 
 **Note**  
 Make sure to replace the *region* and *id* placeholders with your region and account id\.
@@ -137,7 +130,6 @@ Make sure to replace the *region* and *id* placeholders with your region and acc
        	"Version": "2012-10-17"
        }
        ```
-
      + Choose **Validate Policy** and then choose **Apply Policy**\. 
 
 ## Step 1: Set Up Your Repository<a name="setup-repository"></a>
@@ -145,7 +137,6 @@ Make sure to replace the *region* and *id* placeholders with your region and acc
 You can use any of the Lambda supported runtimes when setting up a repository\. The following example uses Node\.js\.
 
 To set up your repository, do the following:
-
 + Add an *index\.js file* containing the code following:
 
   ```
@@ -159,7 +150,6 @@ To set up your repository, do the following:
       });
   };
   ```
-
 + Add a *samTemplate\.yaml* file, containing the content following\. This is the SAM template that defines the resources in your application\. This SAM template defines a Lambda function that is triggered by API Gateway\. Note that the `runtime` parameter uses `nodejs6.10` but you can also specify `nodejs4.3`\. For more information about AWS SAM see [AWS Serverless Application Model](https://github.com/awslabs/serverless-application-model)\.
 
   ```
@@ -180,11 +170,8 @@ To set up your repository, do the following:
               Path: /TimeResource
               Method: GET
   ```
-
 + Add a *buildspec\.yml* file\. A build spec is a collection of build commands and related settings, in YAML format, that AWS CodeBuild uses to run a build\. For more information, see [Build Specification Reference for AWS CodeBuild](http://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html)\. In this example, the build action will be:
-
   + Use [npm](https://www.npmjs.com/) to install the time package\.
-
   + Run the `Package` command to prepare your deployment package for subsequent deployment steps in your pipeline\. For more information on the package command, see [Uploading Local Artifacts to an S3 Bucket](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-cli-package.html)
 
     ```
@@ -194,11 +181,12 @@ To set up your repository, do the following:
         commands:
           - npm install time
           - aws cloudformation package --template-file samTemplate.yaml --s3-bucket bucket-name 
-                                       --output-template-file NewSamTemplate.yaml
+                                       --output-template-file outputSamTemplate.yaml
     artifacts:
       type: zip
       files:
         - samTemplate.yaml
+        - outputSamTemplate.yaml
     ```
 
     Note that you need to supply the `--s3-bucket` parameter value with the name of the your Amazon S3 bucket, similar to the step you would take if you were manually going to package the deployment package with SAM, as discussed in the [Packaging](serverless-deploy-wt.md#serverless-pack) step of the previous tutorial\.
@@ -247,7 +235,7 @@ A service role for AWS CodeBuild will automatically be created on your behalf\.
 
 1. In **Change set name:** enter **MyChangeSet**\.
 
-1. In **Template file:** enter **samTemplate\.yaml**\.
+1. In **Template file:** enter **outputSamTemplate\.yaml**\.
 
 1. In **Capabilities:** choose **CAPABILITY\_IAM**\.
 
@@ -315,9 +303,7 @@ Use the following steps to complete your Beta stage\.
 1. Choose **Save and continue**\.
 
  Your pipeline is ready\. Any git push to the branch you connected to this pipeline is going to trigger a deployment\. To test your pipeline and deploy your application for the first time, do one of the following: 
-
 + Perform a git push to the branch connected to your pipeline\.
-
 + Go the AWS CodePipeline console, choose the name of the pipeline you created and then choose **Release change**\. 
 
 ## Next Step<a name="automating-deployment-next-step1"></a>

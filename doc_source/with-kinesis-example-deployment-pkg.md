@@ -63,9 +63,7 @@ return null;
 If the handler returns normally without exceptions, Lambda considers the input batch of records as processed successfully and begins reading new records in the stream\. If the handler throws an exception, Lambda considers the input batch of records as not processed and invokes the function with the same batch of records again\. 
 
 Using the preceding code \(in a file named `ProcessKinesisEvents.java`\), create a deployment package\. Make sure that you add the following dependencies: 
-
 + `aws-lambda-java-core`
-
 + `aws-lambda-java-events` 
 
 For more information, see [Programming Model for Authoring Lambda Functions in Java](java-programming-model.md)\.
@@ -126,9 +124,7 @@ namespace KinesisStreams
 ```
 
 To create a deployment package, follow the steps outlined in [\.NET Core CLI](lambda-dotnet-coreclr-deployment-package.md)\. In doing so, note the following after you've created your \.NET project: 
-
 + Rename the default *Program\.cs file* with a file name of your choice, such as *ProcessingKinesisEvents\.cs*\. 
-
 + Replace the default contents of the renamed *Program\.cs* file with the code example above\.
 
 After you verify that your deployment package is created, go to the next step to create an IAM role \(execution role\)\. You specify this role at the time you create your Lambda function\. 
