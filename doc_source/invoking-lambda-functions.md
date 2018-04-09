@@ -31,13 +31,15 @@ The diagram illustrates the following sequence:
 1. AWS Lambda executes the Lambda function, specifying the event as a parameter\.
 
 Note the following:
-+ The event source mapping is maintained within the event source service, Amazon S3 in this scenario\. This is true for all supported AWS event sources except the stream\-based sources \(Kinesis and DynamoDB streams\)\. The next example explains stream\-based event sources\.
-+ The event source \(Amazon S3\) invokes the Lambda function \(referred to as the *push model*\)\. Again, this is true for all supported AWS services except the stream\-based event sources\.
++ The event source mapping is maintained within the event source service, Amazon S3 in this scenario\. This is true for all supported AWS event sources except the poll\-based sources \(Kinesis and DynamoDB streams or Amazon SQS queues\)\. The next example explains poll\-based event sources\.
++ The event source \(Amazon S3\) invokes the Lambda function \(referred to as the *push model*\)\. Again, this is true for all supported AWS services except the poll\-based event sources\.
 + In order for the event source \(Amazon S3\) to invoke your Lambda function, you must grant permissions using the permissions policy attached to the Lambda function\.
 
 ## Example 2: AWS Lambda Pulls Events from an Kinesis Stream and Invokes a Lambda Function<a name="example-lambda-pulls-kinesis-streams-events-invokes-function"></a>
 
-For stream\-based event sources, AWS Lambda polls the stream and invokes the Lambda function when records are detected on the stream\. These stream sources are special in that event source mapping information is stored in Lambda\. AWS Lambda provides an API for you to create and manage these event source mappings\. 
+For poll\-based event sources, AWS Lambda polls the source and then invokes the Lambda function when records are detected on that source\. For poll\-based sources, event source mapping information is stored in AWS Lambda\. AWS Lambda provides an API for you to create and manage these event source mappings\. 
++ [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
++ [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md)
 
 The following diagram shows how a custom application writes records to a Kinesis stream\.
 
@@ -54,6 +56,6 @@ The diagram illustrates the following sequence:
 Note the following:
 + When working with stream\-based event sources, the following is true:
   + You create event source mappings in AWS Lambda\.
-  + AWS Lambda invokes the Lambda function \(referred to as the *pull model*\)\.
+  + AWS Lambda invokes the Lambda function synchronously \(referred to as the *pull model*\)\.
 + AWS Lambda does not need permission to invoke your Lambda function, therefore you don't need to add any permissions to the permissions policy attached to your Lambda function\. 
 + Your Lambda role needs permission to read from the stream\.

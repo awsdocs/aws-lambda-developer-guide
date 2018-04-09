@@ -7,6 +7,8 @@ The use cases for AWS Lambda can be grouped into the following categories:
 
    [Using AWS Lambda with Kinesis](with-kinesis.md) 
 
+   [Using AWS Lambda with Amazon SQS](with-sqs.md) 
+
    [Using AWS Lambda with Amazon DynamoDB](with-ddb.md) 
 
    [Using AWS Lambda with AWS CloudTrail](with-cloudtrail.md) 

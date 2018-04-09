@@ -3,7 +3,7 @@
 This topic lists the supported AWS services that you can configure as event sources for AWS Lambda functions\. After you preconfigure the event source mapping, your Lambda function gets invoked automatically when these event sources detect events\. For more information about invocation modes, see [Event Source Mapping](invocation-options.md#intro-invocation-modes)\.
 
 For all of the event sources listed in this topic, note the following:
-+ Event sources maintain the event source mapping, except for the stream\-based services \(Amazon Kinesis Data Streams and Amazon DynamoDB Streams\)\. For the stream\-based services, AWS Lambda maintains the event source mapping\. AWS Lambda provides the [CreateEventSourceMapping](API_CreateEventSourceMapping.md) operation for you to create and manage the event source mapping\. For more information, see [Event Source Mapping](invocation-options.md#intro-invocation-modes)\.
++ Event sources maintain the event source mapping, except for the poll\-based services \(Amazon Kinesis Data Streams, Amazon DynamoDB Streams and Amazon Simple Queue Service\)\. For the poll\-based services, AWS Lambda maintains the event source mapping\. AWS Lambda provides the [CreateEventSourceMapping](API_CreateEventSourceMapping.md) operation for you to create and manage the event source mapping\. For more information, see [Event Source Mapping](invocation-options.md#intro-invocation-modes)\.
 
    
 + The invocation type that these event sources use when invoking a Lambda function is also preconfigured\. For example, Amazon S3 always invokes a Lambda function asynchronously and Amazon Cognito invokes a Lambda function synchronously\. The only time you can control the invocation type is when you are invoking the Lambda function yourself using the [Invoke](API_Invoke.md) operation \(for example, invoking a Lambda function on demand from your custom application\)\.
@@ -23,6 +23,7 @@ For examples of events that are published by these event sources, see [Sample Ev
 + [Amazon Kinesis Data Streams](#supported-event-source-kinesis-streams)
 + [Amazon Simple Notification Service](#supported-event-source-sns)
 + [Amazon Simple Email Service](#supported-event-source-ses)
++ [Amazon Simple Queue Service](#supported-event-source-sqs)
 + [Amazon Cognito](#supported-event-source-cognito)
 + [AWS CloudFormation](#supported-event-source-cloudformation)
 + [Amazon CloudWatch Logs](#supported-event-source-cloudwatch-logs)
@@ -53,7 +54,7 @@ Error handling for a given event source depends on how Lambda is invoked\. Amazo
 
 You can use Lambda functions as triggers for your Amazon DynamoDB table\. Triggers are custom actions you take in response to updates made to the DynamoDB table\. To create a trigger, first you enable Amazon DynamoDB Streams for your table\. AWS Lambda polls the stream and your Lambda function processes any updates published to the stream\.
 
-This is a stream\-based event source\. For stream\-based service, you create event source mapping in AWS Lambda, identifying the stream to poll and which Lambda function to invoke\.
+This is a stream\-based event source\. For a stream\-based service, you create event source mapping in AWS Lambda, identifying the stream to poll and which Lambda function to invoke\.
 
 For an example DynamoDB event, see [Step 2\.3\.2: Test the Lambda Function \(Invoke Manually\)](with-dynamodb-create-function.md#with-dbb-invoke-manually) and [Amazon DynamoDB Update Sample Event](eventsources.md#eventsources-ddb-update)\. For general format, see [GetRecord](http://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Operations_Amazon_DynamoDB_Streams.htmlAPI_GetRecords.html) in the *Amazon DynamoDB API Reference*\. For an example use case, see [Using AWS Lambda with Amazon DynamoDB](with-ddb.md)\.
 
@@ -63,7 +64,7 @@ Error handling for a given event source depends on how Lambda is invoked\. Dynam
 
 You can configure AWS Lambda to automatically poll your stream and process any new records such as website click streams, financial transactions, social media feeds, IT logs, and location\-tracking events\. Then, AWS Lambda polls the stream periodically \(once per second\) for new records\.
 
-For stream\-based service, you create event source mapping in AWS Lambda, identifying the stream to poll and which Lambda function to invoke\.
+For stream\-based services, you create event source mapping in AWS Lambda, identifying the stream to poll and which Lambda function to invoke\.
 
 For an example event, see [Step 2\.3: Create the Lambda Function and Test It Manually](with-kinesis-example-upload-deployment-pkg.md) and [Amazon Kinesis Data Streams Sample Event](eventsources.md#eventsources-kinesis-streams)\. For an example use case, see [Using AWS Lambda with Kinesis](with-kinesis.md)\.
 
@@ -92,6 +93,20 @@ You configure event source mapping using the rule configuration in Amazon SES\. 
 + For Lambda function examples, see [Lambda Function Examples](http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-lambda-example-functions.html)\.
 
 Error handling for a given event source depends on how Lambda is invoked\. Amazon SES invokes your Lambda function asynchronously\. For more information on how errors are retried, see [Understanding Retry Behavior](retries-on-errors.md)\.
+
+## Amazon Simple Queue Service<a name="supported-event-source-sqs"></a>
+
+Amazon Simple Queue Service \(Amazon SQS\) allows you to build asynchronous workflows\. For more information about Amazon SQS, see [Amazon Simple Queue Service](https://aws.amazon.com/sqs/)\. When you use Amazon SQS to receive messages, you can configure Amazon SQS to poll for these messages as they arrive and then pass the event to a Lambda function invocation\. To view a sample event, see [Amazon SQS Event](eventsources.md#eventsources-sqs)\.
+
+To set up Amazon Simple Queue Service as an event source for AWS Lambda, you first create an Amazon SQS queue and select custom values for the queue parameters\. The following parameters will impact Amazon SQS's polling behavior:
++ **Visibility Timeout**: May impact the period between retries\.
++ **TimeToWait**: Will determine long poll duration, the default of which is 20 seconds\. Reducing this value may increase empty queue costs\.
+
+ For more information, see [What is Amazon Simple Queue Service?](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/Welcome.html)\. You then create your AWS Lambda function by adding your function code that handles processing of the Amazon SQS queue messages\. Finally, you can configure AWS Lambda to respond to new messages available on Amazon SQS queues using the following API operations:
++ [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
++ [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md)
+
+Error handling for a given event source depends on how Lambda is invoked\. Amazon SQS invokes your Lambda function asynchronously\. For more information on how errors are retried, see [Understanding Retry Behavior](retries-on-errors.md)\.
 
 ## Amazon Cognito<a name="supported-event-source-cognito"></a>
 
