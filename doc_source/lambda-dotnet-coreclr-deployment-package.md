@@ -150,7 +150,7 @@ These are optional values you can set when you create your Lambda function and w
  For example, to create a Lambda function, run the following command, substituting the values of the `--region` parameter with the region of your choice and `--profile` with your IAM profile: 
 
 ```
-dotnet new lambda.EmptyFunction --name MyFunction --iam-profile default --region region
+dotnet new lambda.EmptyFunction --name MyFunction --profile default --region region
 ```
 
 This should create a directory structure similar to the following:
@@ -166,13 +166,13 @@ Under the `src/myfunction` directory, examine the following files:
 
   ```
   "profile":"iam profile"",
-    "region" : "region",
-    "configuration" : "Release",
-    "framework" : "netcoreapp2.0",
-    "function-runtime":"dotnetcore2.0",
-    "function-memory-size" : 256,
-    "function-timeout" : 30,
-    "function-handler" : "MyFunction::MyFunction.Function::FunctionHandler"
+  "region" : "region",
+  "configuration" : "Release",
+  "framework" : "netcoreapp2.0",
+  "function-runtime":"dotnetcore2.0",
+  "function-memory-size" : 256,
+  "function-timeout" : 30,
+  "function-handler" : "MyFunction::MyFunction.Function::FunctionHandler"
   ```
 + **Function\.cs**: Your Lambda handler function code\. It's a C\# template that includes the default `Amazon.Lambda.Core` library and a default `LambdaSerializer` attribute\. For more information on serialization requirements and options, see [Serializing Lambda Functions](#lambda-dotnet-add-serializer)\. It also includes a sample function that you can edit to apply your Lambda function code\. 
 
