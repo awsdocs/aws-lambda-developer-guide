@@ -61,7 +61,7 @@ Resources:
             BatchSize: 100
             StartingPosition: TRIM_HORIZON
 
-   DynamoDBTable:
+   Table:
      Type: AWS::DynamoDB::Table
      Properties: 
        AttributeDefinitions: 
