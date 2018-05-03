@@ -16,7 +16,7 @@ The following is a list of example events published by the supported AWS service
 + [Amazon Lex Sample Event](#eventsources-lex)
 + [API Gateway Proxy Request Event](#eventsources-api-gateway-request)
 + [API Gateway Proxy Response Event](#eventsources-api-gateway-response)
-+ [Amazon SQS Event](#eventsources-sqs)
+
 + [CloudFront Event](#eventsources-cloudfront)
 + [AWS Config Event](#eventsources-config)
 + [AWS IoT Button Event](#eventsources-iot-button)
@@ -453,86 +453,8 @@ The following is a list of example events published by the supported AWS service
 }
 ```
 
-**Amazon SQS Event**  <a name="eventsources-sqs"></a>
-
 ```
-{
-  "messages": [
-    {
-      "messageId" : "MessageID_1",
-      "receiptHandle" : "MessageReceiptHandle",
-      "body" : "Message Body",
-      "md5OfBody" : "fce0ea8dd236ccb3ed9b37dae260836f",
-      "md5OfMessageAttributes" : "582c92c5c5b6ac403040a4f3ab3115c9",
-      "attributes" : {
-        "ApproximateReceiveCount" : "2",
-        "SentTimestamp" : "1520621625029",
-        "SenderId" : "AROAIWPX5BD2BHG722MW4:sender",
-        "ApproximateFirstReceiveTimestamp" : "1520621634884"
-      },
-      "messageAttributes" : {
-        "Attribute3" : {
-          "stringValue" : null,
-          "binaryValue" : "1100",
-          "stringListValues" : [ ],
-          "binaryListValues" : [ ],
-          "dataType" : "Binary"
-        },
-        "Attribute2" : {
-          "stringValue" : "123",
-          "binaryValue" : null,
-          "stringListValues" : [ ],
-          "binaryListValues" : [ ],
-          "dataType" : "Number"
-        },
-        "Attribute1" : {
-          "stringValue" : "AttributeValue1",
-          "binaryValue" : null,
-          "stringListValues" : [ ],
-          "binaryListValues" : [ ],
-          "dataType" : "String"
-        }
-      }
-    },
-    {
-      "messageId" : "MessageID_2",
-      "receiptHandle" : "MessageReceiptHandle",
-      "body" : "Message Body",
-      "md5OfBody" : "fce0ea8dd236ccb3ed9b37dae260836f",
-      "md5OfMessageAttributes" : "582c92c5c5b6ac403040a4f3ab3115c9",
-      "attributes" : {
-        "ApproximateReceiveCount" : "5",
-        "SentTimestamp" : "1520621625030",
-        "SenderId" : "AROAIWPX5BD2BHG722MW4:sender",
-        "ApproximateFirstReceiveTimestamp" : "1520621634900"
-      },
-      "messageAttributes" : {
-        "Attribute2" : {
-          "stringValue" : "123",
-          "binaryValue" : null,
-          "stringListValues" : [ ],
-          "binaryListValues" : [ ],
-          "dataType" : "Number"
-        }
-      }
-    },
-    {
-      "messageId" : "MessageID_2",
-      "receiptHandle" : "MessageReceiptHandle",
-      "body" : "Message Body",
-      "md5OfBody" : "fce0ea8dd236ccb3ed9b37dae260836f",
-      "md5OfMessageAttributes" : "582c92c5c5b6ac403040a4f3ab3115c9",
-      "attributes" : {
-        "ApproximateReceiveCount" : "5",
-        "SentTimestamp" : "1520621625030",
-        "SenderId" : "AROAIWPX5BD2BHG722MW4:sender",
-        "ApproximateFirstReceiveTimestamp" : "1520621634900"
-      },
-      "messageAttributes" : { }
-    }
-  ],
-  "queueUrl": "https://sqs.us-east-2.amazonaws.com/123456789012/MyQueue"
-}
+
 ```
 
 **API Gateway Proxy Response Event**  <a name="eventsources-api-gateway-response"></a>
