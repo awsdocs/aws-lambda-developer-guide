@@ -21,7 +21,7 @@ As explained in [Lambda Functions](lambda-introduction-function.md), once you've
 | Ephemeral disk capacity \("/tmp" space\) | 512 MB | 
 | Number of file descriptors  | 1,024 | 
 | Number of processes and threads \(combined total\) | 1,024 | 
-| Maximum execution duration per request | 300 seconds | 
+| Maximum execution duration per request | 300 seconds (5 minutes) | 
 | [Invoke](API_Invoke.md) request body payload size \(RequestResponse/synchronous invocation\) | 6 MB | 
 | [Invoke](API_Invoke.md) request body payload size \(Event/asynchronous invocation\) | 128 KB | 
 
