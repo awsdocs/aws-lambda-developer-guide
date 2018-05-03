@@ -5,7 +5,7 @@ You can create a Kinesis stream to continuously capture and store terabytes of d
 You can subscribe Lambda functions to automatically read batches of records off your Kinesis stream and process them if records are detected on the stream\. AWS Lambda then polls the stream periodically \(once per second\) for new records\.
 
 Note the following about how the Kinesis and AWS Lambda integration works:
-+ **stream\-based model** – This is a model \(see [Event Source Mapping](invocation-options.md#intro-invocation-modes)\), where AWS Lambda polls the stream and, when it detects new records, invokes your Lambda function by passing the new records as a parameter\. 
++ **Stream\-based model** – This is a model \(see [Event Source Mapping](invocation-options.md#intro-invocation-modes)\), where AWS Lambda polls the stream and, when it detects new records, invokes your Lambda function by passing the new records as a parameter\. 
 
   In a stream\-based model, you maintain event source mapping in AWS Lambda\. The event source mapping describes which stream maps to which Lambda function\. AWS Lambda provides an API \([CreateEventSourceMapping](API_CreateEventSourceMapping.md)\) that you can use to create the mapping\. You can also use the AWS Lambda console to create event source mappings\. 
 + **Synchronous invocation** – AWS Lambda invokes a Lambda function using the `RequestResponse` invocation type \(synchronous invocation\) by polling the Kinesis Stream\. For more information about invocation types, see [Invocation Types](invocation-options.md)\. 

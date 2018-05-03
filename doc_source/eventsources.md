@@ -16,7 +16,10 @@ The following is a list of example events published by the supported AWS service
 + [Amazon Lex Sample Event](#eventsources-lex)
 + [API Gateway Proxy Request Event](#eventsources-api-gateway-request)
 + [API Gateway Proxy Response Event](#eventsources-api-gateway-response)
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of f005f04... merging mainline
 + [CloudFront Event](#eventsources-cloudfront)
 + [AWS Config Event](#eventsources-config)
 + [AWS IoT Button Event](#eventsources-iot-button)
@@ -453,9 +456,6 @@ The following is a list of example events published by the supported AWS service
 }
 ```
 
-```
-
-```
 
 **API Gateway Proxy Response Event**  <a name="eventsources-api-gateway-response"></a>
 
