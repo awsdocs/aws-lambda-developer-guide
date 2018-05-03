@@ -6,3 +6,4 @@ AWS Lambda will only deprecate runtime versions that are marked as EOL \(End of 
 | Runtime | Version | 
 | --- | --- | 
 | Node\.js |  0\.10  | 
+| Node\.js |  4\.3  | 

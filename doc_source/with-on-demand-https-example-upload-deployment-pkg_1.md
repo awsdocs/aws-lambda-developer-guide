@@ -10,7 +10,7 @@ In this step, you upload the deployment package using the AWS CLI\.
 
 At the command prompt, run the following Lambda CLI `create-function` command using the **adminuser** profile\. 
 
-You need to update the command by providing the \.zip file path and the execution role ARN\. The `--runtime` parameter value can be `python3.6`, `python2.7`, `nodejs8.10`, `nodejs6.10` or `nodejs4.3`, or `java8`, depending on the language you used to author your code\.
+You need to update the command by providing the \.zip file path and the execution role ARN\. The `--runtime` parameter value can be `python3.6`, `python2.7`, `nodejs8.10` or `nodejs6.10`, or `java8`, depending on the language you used to author your code\.
 
 ```
 $ aws lambda create-function \
@@ -87,8 +87,8 @@ Invoke the function manually using the sample event data\. We recommend that you
    --invocation-type Event \
    --function-name LambdaFunctionOverHttps \
    --region region \
-   --payload file://file-path/input.txt \
-   --profile adminuser 
+   --payload fileb://file-path/input.txt \
+   --profile adminuser \
    outputfile.txt
    ```
 **Note**  

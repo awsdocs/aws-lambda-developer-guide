@@ -127,7 +127,7 @@ The deployment package is a \.zip file containing your Lambda function code and 
    };
    ```
 **Note**  
-The code sample is compliant with the Node\.js runtimes v6\.10 or v4\.3\. For more information, see [Programming Model\(Node\.js\)](programming-model.md)
+The code sample is compliant with the Node\.js runtimes v6\.10 or v8\.10\. For more information, see [Programming Model\(Node\.js\)](programming-model.md)
 
 1. Review the preceding code and note the following:
    + The function knows the source bucket name and the key name of the object from the event data it receives as parameters\. If the object is a \.jpg, the code creates a thumbnail and saves it to the target bucket\. 

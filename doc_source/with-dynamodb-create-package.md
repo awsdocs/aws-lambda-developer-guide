@@ -20,7 +20,7 @@ From the **Filter View** list, choose the language you want to use for your Lamb
    };
    ```
 **Note**  
-The code sample is compliant with the Node\.js runtimes v4\.3 or higher\. For more information, see [Programming Model\(Node\.js\)](programming-model.md)
+The code sample is compliant with the Node\.js runtimes v6\.10 or 8\.10\. For more information, see [Programming Model\(Node\.js\)](programming-model.md)
 
 1. Save the file as ` ProcessDynamoDBStream.js`\.
 

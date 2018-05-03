@@ -57,7 +57,7 @@ Create an IAM role \(execution role\) that you can specify at the time you creat
 
 In this section, you create a Lambda function containing an environment variable that specifies an Amazon S3 bucket named `Test`\. When invoked, the function simply returns the name of the Amazon S3 bucket\. Then you update the configuration by changing the Amazon S3 bucket name to `Prod` and when invoked again, the function returns the updated name of the Amazon S3 bucket\. 
 
-To create the Lambda function, open a command prompt and run the following Lambda AWS CLI `create-function` command\. You need to provide the \.zip file path and the execution role ARN\. Note that the `Runtime` parameter uses `nodejs6.10` but you can also specify `nodejs4.3`\.
+To create the Lambda function, open a command prompt and run the following Lambda AWS CLI `create-function` command\. You need to provide the \.zip file path and the execution role ARN\. Note that the `Runtime` parameter uses `nodejs6.10` but you can also specify `nodejs8.10`\.
 
 ```
 aws lambda  create-function \

@@ -106,7 +106,7 @@ $ aws apigateway put-integration \
 --http-method POST \
 --type AWS \
 --integration-http-method POST \
---uri arn:aws:apigateway:aws-region:lambda:path/2015-03-31/functions/arn:aws:lambda:aws-region:aws-acct-id:function:your-lambda-function-name/invocations
+--uri arn:aws:apigateway:aws-region:lambda:path/2015-03-31/functions/arn:aws:lambda:aws-region:aws-acct-id:function:LambdaFunctionOverHttps/invocations
 ```
 
 **Note**  
@@ -121,7 +121,7 @@ The following is an example response:
 {
     "httpMethod": "POST",
     "type": "AWS",
-    "uri": "arn:aws:apigateway:region:lambda:path/2015-03-31/functions/arn:aws:lambda:region:aws-acct-id:function:LambdaFunctionForAPIGateway/invocations",
+    "uri": "arn:aws:apigateway:region:lambda:path/2015-03-31/functions/arn:aws:lambda:region:aws-acct-id:function:LambdaFunctionOverHttps/invocations",
     "cacheNamespace": "resource-id"
 }
 ```
@@ -171,7 +171,7 @@ The following is an example response:
 
 Now that you have an API created using Amazon API Gateway and you've deployed it, you can test\. First, you need to add permissions so that Amazon API Gateway can invoke your Lambda function when you send HTTPS request to the `POST` method\.
 
-To do this, you need to add a permissions to the permissions policy associated with your Lambda function\. Run the following `add-permission` AWS Lambda command to grant the Amazon API Gateway service principal \(`apigateway.amazonaws.com`\) permissions to invoke your Lambda function \(`LambdaFunctionForAPIGateway`\)\. 
+To do this, you need to add a permissions to the permissions policy associated with your Lambda function\. Run the following `add-permission` AWS Lambda command to grant the Amazon API Gateway service principal \(`apigateway.amazonaws.com`\) permissions to invoke your Lambda function \(`LambdaFunctionOverHttps`\)\. 
 
 ```
 $ aws lambda add-permission \
@@ -197,9 +197,9 @@ $ aws lambda add-permission \
 
 You grant this permission so that your deployed API has permissions to invoke the Lambda function\. Note that the `--source-arn` specifies a `prod` which is the stage name we used when deploying the API\.
 
-## Step 3\.7: Test Sending an HTTPS Request<a name="with-on-demand-https-example-configure-event-source-test-end-to-end"></a>
+## Step 3\.7: Test Sending a HTTPS Request<a name="with-on-demand-https-example-configure-event-source-test-end-to-end"></a>
 
-In this step, you are ready to send an HTTPS request to the `POST` method endpoint\. You can use either Curl or a method \(`test-invoke-method`\) provided by Amazon API Gateway\.
+In this step, you are ready to send a HTTPS request to the `POST` method endpoint\. You can use either Curl or a method \(`test-invoke-method`\) provided by Amazon API Gateway\.
 
 If you want to test operations that your Lambda function supports on a DynamoDB table, first you need to create a table in Amazon DynamoDB `LambdaTable (Id)`, where Id is the hash key of string type\.
 

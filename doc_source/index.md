@@ -29,7 +29,6 @@ Amazon's trademarks and trade dress may not be used in
             + [The Context Object (Node.js)](nodejs-prog-model-context.md)
             + [Logging (Node.js)](nodejs-prog-model-logging.md)
             + [Function Errors (Node.js)](nodejs-prog-mode-exceptions.md)
-            + [Using the Earlier Node.js Runtime v0.10.42](nodejs-prog-model-using-old-runtime.md)
          + [Programming Model for Authoring Lambda Functions in Java](java-programming-model.md)
             + [Lambda Function Handler (Java)](java-programming-model-handler-types.md)
                + [Handler Input/Output Types (Java)](java-programming-model-req-resp.md)

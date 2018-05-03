@@ -150,7 +150,7 @@ To set up your repository, do the following:
       });
   };
   ```
-+ Add a *samTemplate\.yaml* file, containing the content following\. This is the SAM template that defines the resources in your application\. This SAM template defines a Lambda function that is triggered by API Gateway\. Note that the `runtime` parameter uses `nodejs6.10` but you can also specify `nodejs4.3`\. For more information about AWS SAM see [AWS Serverless Application Model](https://github.com/awslabs/serverless-application-model)\.
++ Add a *samTemplate\.yaml* file, containing the content following\. This is the SAM template that defines the resources in your application\. This SAM template defines a Lambda function that is triggered by API Gateway\. Note that the `runtime` parameter uses `nodejs6.10` but you can also specify `nodejs8.10`\. For more information about AWS SAM see [AWS Serverless Application Model](https://github.com/awslabs/serverless-application-model)\.
 
   ```
   AWSTemplateFormatVersion: '2010-09-09'

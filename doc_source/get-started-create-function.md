@@ -28,7 +28,7 @@ The console shows the **Get Started** page only if you do not have any Lambda fu
 
 1. In **Author from scratch**, do the following:
    + In **Name\***, specify your Lambda function name\.
-   + In **Runtime\***, leave the default `Node.js 6.10`\.
+   + In **Runtime\***, choose `Python 3.6`\.
    + In **Role\***, choose **Create new role from templates\(s\):**
    + In **Role name\***, enter a name for your role\.
    + Leave the **Policy templates** field blank\. For the purposes of this introduction, your Lambda function will have the necessary execution permissions\.

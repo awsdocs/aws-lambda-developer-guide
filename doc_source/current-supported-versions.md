@@ -4,12 +4,12 @@ The underlying AWS Lambda execution environment is based on the following:
 + Public Amazon Linux AMI version \(AMI name: amzn\-ami\-hvm\-2017\.03\.1\.20170812\-x86\_64\-gp2\) which can be accessed [ here](https://console.aws.amazon.com/ec2/v2/home#Images:visibility=public-images;search=amzn-ami-hvm-2017.03.1.20170812-x86_64-gp2)\.  
 
   For information about using an AMI, see [Amazon Machine Images \(AMI\)](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html) in the *Amazon EC2 User Guide for Linux Instances*\.
-+  Linux kernel version – 4\.9\.75\-25\.55\.amzn1\.x86\_64 
++  Linux kernel version – 4\.9\.85\-38\.58\.amzn1\.x86\_64 
 
  If you are using any native binaries in your code, make sure they are compiled in this environment\. Note that only 64\-bit binaries are supported on AWS Lambda\.
 
 AWS Lambda supports the following runtime versions:
-+ Node\.js – v8\.10, 4\.3\.2 and 6\.10\.3
++ Node\.js – v8\.10, v6\.10 or v4\.3
 + Java – Java 8
 + Python – Python 3\.6 and 2\.7
 + \.NET Core – \.NET Core 1\.0\.1 and \.NET Core 2\.0
@@ -19,10 +19,10 @@ AWS Lambda supports the following runtime versions:
 Not all runtimes are available on the Public Amazon Linux AMI version or its yum repositories\. You may need to download and install them manually from their respective public sites\.
 
 The following libraries are available in the AWS Lambda execution environment, regardless of the supported runtime you use, so you don't need to include them:
-+  AWS SDK – [AWS SDK for JavaScript](http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/) version 2\.205\.0 
-+ AWS SDK for Python 2\.7 \(Boto 3\) version 3\-1\.6\.3 botocore\-1\.9\.3
++  AWS SDK – [AWS SDK for JavaScript](http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/) version 2\.221\.1 
++ AWS SDK for Python 2\.7 \(Boto 3\) version 3\-1\.7\.0 botocore\-1\.9\.3
 
-  AWS SDK for Python 3\.6 \(Boto 3\) version 3\-1\.6\.3 botocore\-1\.9\.3
+  AWS SDK for Python 3\.6 \(Boto 3\) version 3\-1\.7\.0 botocore\-1\.9\.3
 + Amazon Linux build of `java-1.8.0-openjdk` for Java\.
 
 For an example of using the `boto` libraries in your Lambda function, see [Accessing Resources from a Lambda Function](accessing-resources.md)\.

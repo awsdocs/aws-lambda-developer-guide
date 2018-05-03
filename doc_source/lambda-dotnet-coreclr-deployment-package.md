@@ -149,6 +149,9 @@ These are optional values you can set when you create your Lambda function and w
 
  For example, to create a Lambda function, run the following command, substituting the values of the `--region` parameter with the region of your choice and `--profile` with your IAM profile: 
 
+**Note**  
+For more information on Lambda function requirements, see [CreateFunction](API_CreateFunction.md)
+
 ```
 dotnet new lambda.EmptyFunction --name MyFunction --iam-profile default --region region
 ```
@@ -162,7 +165,7 @@ This should create a directory structure similar to the following:
 ```
 
 Under the `src/myfunction` directory, examine the following files:
-+ **aws\-lambda\-tools\-default\.json**: This is where you specify the command line options when deploying your Lambda function\. For example:
++ **aws\-lambda\-tools\-defaults\.json**: This is where you specify the command line options when deploying your Lambda function\. For example:
 
   ```
   "profile":"iam profile"",

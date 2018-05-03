@@ -14,12 +14,13 @@ exports.myHandler = function(event, context) {
   + **Event**, or *asynchronous execution*: AWS Lambda will discard any results of the function call\. 
 **Note**  
 If you discover that your Lambda function does not process the event using asynchronous invocation, you can investigate the failure using [Dead Letter Queues](dlq.md)\.
-+ `event` – AWS Lambda uses this parameter to pass in event data to the handler\. Event sources can range from a supported AWS service or custom applications that invoke your Lambda function\. For examples, see [Sample Events Published by Event Sources](eventsources.md) 
+
+     Event sources can range from a supported AWS service or custom applications that invoke your Lambda function\. For examples, see [Sample Events Published by Event Sources](eventsources.md) 
 + `context` – AWS Lambda uses this parameter to provide details of your Lambda function's execution\. For more information, see [The Context Object \(Node\.js\)](nodejs-prog-model-context.md)\.
 
 ## Using the Callback Parameter<a name="nodejs-prog-model-handler-callback"></a>
 
-The Node\.js runtimes v4\.3, v6\.10 and v8\.10 support the optional `callback` parameter\. You can use it to explicitly return information back to the caller\. The general syntax is:
+The Node\.js runtimes v6\.10 and v8\.10 support the optional `callback` parameter\. You can use it to explicitly return information back to the caller\. The general syntax is:
 
 ```
 callback(Error error, Object result);
@@ -89,14 +90,11 @@ exports.myHandler = async function(event, context) {
 }
 ```
 
-**Note**  
-If you are using the **deprecated** runtime v0\.10\.42, you need to use the context methods \(done, succeed, and fail\) to properly terminate the Lambda function\. For more information, see [Using the Earlier Node\.js Runtime v0\.10\.42](nodejs-prog-model-using-old-runtime.md)\.
-
 **To upload and test this code as a Lambda function \(console\)**
 
 1. In the console, create a Lambda function using the following information:
    + Use the hello\-world blueprint\. 
-   + The sample uses **nodejs6\.10** as the **runtime** but you can also select **nodejs8\.10** or **nodejs4\.3**\. The code samples provided will work for any version\.
+   + The sample uses **nodejs6\.10** as the **runtime** but you can also select **nodejs8\.10**\. The code samples provided will work for any version\.
 
    For instructions to create a Lambda function using the console, see [Create a Simple Lambda Function](get-started-create-function.md)\.
 

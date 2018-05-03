@@ -14,7 +14,7 @@ In the following tutorial, you create a simple serverless application that consi
    }
    ```
 
-1. Paste the following into a text file and save it as `example.yaml`\. Note that the `Runtime` parameter uses `nodejs6.10` but you can also specify `nodejs8.10` or `nodejs4.3`\.
+1. Paste the following into a text file and save it as `example.yaml`\. Note that the `Runtime` parameter uses `nodejs6.10` but you can also specify `nodejs8.10`\.
 
    ```
    AWSTemplateFormatVersion: '2010-09-09'
