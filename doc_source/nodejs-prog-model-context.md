@@ -24,9 +24,9 @@ exports.handler = function(event, context, callback) {
     console.log('value3 =', event.key3);
     console.log('remaining time =', context.getRemainingTimeInMillis());
     console.log('functionName =', context.functionName);
-    console.log('AWSrequestID =', context.awsRequestId);
-    console.log('logGroupName =', context.log_group_name);
-    console.log('logStreamName =', context.log_stream_name);
+    console.log('awsRequestId =', context.awsRequestId);
+    console.log('logGroupName =', context.logGroupName);
+    console.log('logStreamName =', context.logStreamName);
     console.log('clientContext =', context.clientContext);
     if (typeof context.identity !== 'undefined') {
         console.log('Cognito
