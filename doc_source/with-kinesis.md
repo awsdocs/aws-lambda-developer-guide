@@ -11,6 +11,10 @@ Note the following about how the Kinesis and AWS Lambda integration works:
 + **Synchronous invocation** – AWS Lambda invokes a Lambda function using the `RequestResponse` invocation type \(synchronous invocation\) by polling the Kinesis Stream\. For more information about invocation types, see [Invocation Types](invocation-options.md)\. 
 + **Event structure** – The event your Lambda function receives is a collection of records AWS Lambda reads from your stream\. When you configure event source mapping, the batch size you specify is the maximum number of records that you want your Lambda function to receive per invocation\.
 
+While AWS Lambda will only poll for records once per second, it can be invoked multiple times per second provided that:
++ There were more records retrieved during the poll than the batch size will allow for a single invocation\.
++ The processing time for the function allowed it to complete before 1 second had elapsed\.
+
 Regardless of what invokes a Lambda function, AWS Lambda always executes a Lambda function on your behalf\. If your Lambda function needs to access any AWS resources, you need to grant the relevant permissions to access those resources\. You also need to grant AWS Lambda permissions to poll your Kinesis stream\. You grant all of these permissions to an IAM role \(execution role\) that AWS Lambda can assume to poll the stream and execute the Lambda function on your behalf\. You create this role first and then enable it at the time you create the Lambda function\. For more information, see [Manage Permissions: Using an IAM Role \(Execution Role\)](intro-permission-model.md#lambda-intro-execution-role)\.
 
 The following diagram illustrates the application flow:

@@ -16,6 +16,3 @@ In this step, you will use the console to test the Lambda function\. In addition
    ```
 
 1. After entering the text above choose **Save and test**\.
-
-**Next Step**  
-[Step 3\.3: \(Optional\) Try Other Blueprints](get-started-step3-optional.md)

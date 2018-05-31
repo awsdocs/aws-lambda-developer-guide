@@ -179,7 +179,7 @@ Follow the instructions to create a AWS Lambda function deployment package\.
    func handler(ctx context.Context, kinesisEvent events.KinesisEvent) {
        for _, record := range kinesisEvent.Records {
            kinesisRecord := record.Kinesis
-           dataBytes := kinesisRecordData.Data
+           dataBytes := kinesisRecord.Data
            dataText := string(dataBytes)
    
            fmt.Printf("%s Data = %s \n", record.EventName, dataText) 

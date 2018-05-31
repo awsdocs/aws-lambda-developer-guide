@@ -115,7 +115,7 @@ Error handling for a given event source depends on how Lambda is invoked\. AWS C
 
  You can use AWS Lambda functions to perform custom analysis on Amazon CloudWatch Logs using CloudWatch Logs subscriptions\. CloudWatch Logs subscriptions provide access to a real\-time feed of log events from CloudWatch Logs and deliver it to your AWS Lambda function for custom processing, analysis, or loading to other systems\. For more information about CloudWatch Logs, see [Monitoring Log Files](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatchLogs.html)\.
 
-You maintain event source mapping in Amazon CloudWatch Logs using the log subscription configuration\. For more information, see [Real\-time Processing of Log Data with Subscriptions \(Example 2: AWS Lambda\)](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/Subscriptions.html#LambdaFunctionExample) in the *Amazon CloudWatch User Guide*\.
+You maintain event source mapping in Amazon CloudWatch Logs using the log subscription configuration\. For more information, see [Real\-time Processing of Log Data with Subscriptions \(Example 2: AWS Lambda\)](http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SubscriptionFilters.html#LambdaFunctionExample) in the *Amazon CloudWatch User Guide*\.
 
 For an example event, see [Amazon CloudWatch Logs Sample Event](eventsources.md#eventsources-cloudwatch-logs)\.
 

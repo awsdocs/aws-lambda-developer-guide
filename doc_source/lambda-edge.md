@@ -10,7 +10,7 @@ Lambda@Edge lets you run Lambda functions to customize content that CloudFront d
 
 You can also generate responses to viewers without ever sending the request to the origin\.
 
-You write Lambda functions for CloudFront in Node\.js 6\.10\. With Lambda@Edge, you can build a variety of solutions, for example:
+With Lambda@Edge, you can build a variety of solutions, for example:
 + Inspect cookies to rewrite URLs to different versions of a site for A/B testing\.
 + Send different objects to your users based on the `User-Agent` header, which contains information about the device that submitted the request\. For example, you can send images in different resolutions to users based on their devices\.
 + Inspect headers or authorized tokens, inserting a corresponding header and allowing access control before forwarding a request to the origin\.

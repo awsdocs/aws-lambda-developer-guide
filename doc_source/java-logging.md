@@ -127,7 +127,7 @@ This section provides examples of using Custom Appender for Log4j and the `Lambd
 
     ```
      <?xml version="1.0" encoding="UTF-8"?>
-    <Configuration packages="com.amazonaws.services.lambda.runtime.log4j2.LambdaAppender">
+    <Configuration packages="com.amazonaws.services.lambda.runtime.log4j2">
       <Appenders>
         <Lambda name="Lambda">
           <PatternLayout>
