@@ -55,7 +55,9 @@ After you build the project, the resulting \.zip file \(that is, your deployment
        from compileJava
        from processResources              
        into('lib') {
-           from configurations.runtime.Classpath
+
+           from configurations.runtimeClasspath       
+
        }           
    }
    
