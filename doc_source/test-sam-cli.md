@@ -207,7 +207,7 @@ Resources:
 ```
 
 The preceding example configures the following RESTful API endpoints:
-+ Create a new product with a `PUT` request to /products\.
++ Create a new product with a `POST` request to /products\.
 + List all products with a `GET` request to /products\.
 + Read, update, or delete a product with `GET`, `PUT` or `DELETE` request to /products/\{product\}\.
 
