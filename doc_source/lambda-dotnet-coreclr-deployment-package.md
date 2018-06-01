@@ -153,7 +153,7 @@ These are optional values you can set when you create your Lambda function and w
 For more information on Lambda function requirements, see [CreateFunction](API_CreateFunction.md)
 
 ```
-dotnet new lambda.EmptyFunction --name MyFunction --iam-profile default --region region
+dotnet new lambda.EmptyFunction --name MyFunction --profile default --region region
 ```
 
 This should create a directory structure similar to the following:

@@ -45,7 +45,7 @@ You will use `pip` to install dependencies/libraries\. For information to instal
 
 1. Zip the content of the `project-dir` directory, which is your deployment package\. 
 **Important**  
-Zip the directory *content*, not the directory\. The contents of the Zip file are available as the current working directory of the Lambda function\. For example: */project\-dir/codefile\.py/lib/yourlibraries*
+Zip the directory *content* contained within the directory, not the directory itself\. The contents of the Zip file are available as the current working directory of the Lambda function\. For example: */project\-dir/codefile\.py/lib/yourlibraries*\. In this case, you zip the content contained within */project\-dir*\.
 
 **Note**  
 AWS Lambda includes the AWS SDK for Python \(Boto 3\), so you don't need to include it in your deployment package\. However, if you want to use a version of Boto3 other than the one included by default, you can include it in your deployment package\.

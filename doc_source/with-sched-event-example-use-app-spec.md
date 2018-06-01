@@ -47,10 +47,10 @@ Resources:
       Dimensions:
         - Name: FunctionName
           Value: !Ref CheckWebsitePeriodically
-      EvaluationPeriods: String
+      EvaluationPeriods: 1
       MetricName: Errors
       Namespace: AWS/Lambda
-      Period: '60'
+      Period: 60
       Statistic: Sum
       Threshold: '1'
 ```

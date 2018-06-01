@@ -281,10 +281,7 @@ Use the following steps to complete your Beta stage\.
 
 1. Choose **Edit**\.
 
-1. Choose the   
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/edit-pencil.png)
-
-    icon next to **MyBetaStack**\.
+1. Choose the **\+** icon next to **MyBetaStack**\.
 
 1. In **Action category:**, if not already selected, choose **Deploy**\.
 

@@ -21,8 +21,16 @@ By default, the concurrent execution limit is enforced against the sum of the co
 You can optionally set the concurrent execution limit for a function\. You may choose to do this for a few reasons:
 + The default behavior means a surge of concurrent executions in one function prevents the function you have isolated with an execution limit from getting throttled\. By setting a concurrent execution limit on a function, you are reserving the specified concurrent execution value for that function\.
 + Functions scale automatically based on incoming request rate, but not all resources in your architecture may be able to do so\. For example, relational databases have limits on how many concurrent connections they can handle\. You can set the concurrent execution limit for a function to align with the values of its downstream resources support\.
-+ If your function connects to VPC based resources, each concurrent execution consumes one IP within the assigned subnet\. You can set the concurrent execution limit for a function to match the subnet size limits you have\.
-+ If you need a function to stop processing any invocations, you can choose to set the concurrency to 0 and throttle all incoming executions\.
++ If your function connects to VPC based resources, you must make sure your subnets have adequate address capacity to support the ENI scaling requirements of your function\. You can estimate the approximate ENI capacity with the following formula:
+
+  Where:
+  + **Concurrent execution** – This is the projected concurrency of your workload\. Use the information in [Understanding Scaling Behavior](scaling.md)to determine this value\.
+  + **Memory in GB** – The amount of memory you configured for your Lambda function\.
+
+You can set the concurrent execution limit for a function to match the subnet size limits you have\.
+
+**Note**  
+If you need a function to stop processing any invocations, you can choose to set the concurrency to 0 and throttle all incoming executions\.
 
 By setting a concurrency limit on a function, Lambda guarantees that allocation will be applied specifically to that function, regardless of the amount of traffic processing remaining functions\. If that limit is exceeded, the function will be throttled\. How that function behaves when throttled will depend on the event source\. For more information, see [Throttling Behavior](#throttling-behavior)\.
 
