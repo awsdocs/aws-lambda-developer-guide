@@ -6,7 +6,7 @@ The underlying AWS Lambda execution environment is based on the following:
   For information about using an AMI, see [Amazon Machine Images \(AMI\)](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 +  Linux kernel version – 4\.9\.85\-38\.58\.amzn1\.x86\_64 
 
- If you are using any native binaries in your code, make sure they are compiled in this environment\. Note that only 64\-bit binaries are supported on AWS Lambda\.
+ If you are using any native binaries in your code, make sure they are compiled against the package and library versions from this AMI and kernel\. Note that only 64\-bit binaries are supported on AWS Lambda and that the specific CPU make and model might vary and change over time.
 
 AWS Lambda supports the following runtime versions:
 + Node\.js – v8\.10, v6\.10 or v4\.3
