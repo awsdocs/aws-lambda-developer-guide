@@ -14,14 +14,14 @@ In this section, we introduce you to the fundamental concepts of a typical Lambd
 There are three key tools that you use to interact with the AWS Lambda service, described below\. We will cover tools for building AWS Lambda\-based applications in further sections\.
 + **Lambda Console: ** Provides a way for you to graphically design your Lambda\-based application, author or update your Lambda function code, and configure event, downstream resources and IAM permissions that your function requires\. It also includes advanced configuration options, outlined in [Advanced Topics](advanced.md)\.
 + **AWS CLI: **A command\-line interface you can use to leverage Lambda's API operations, such as creating functions and mapping event sources\. For a full list of Lambda's API operations, see [Actions](API_Operations.md)\.
-+ **SAM Local: **A command\-line interface you can use to develop, test, and analyze your serverless applications locally before uploading them to the Lambda runtime\. For more information, see [Test Your Serverless Applications Locally Using SAM Local \(Public Beta\)](test-sam-local.md)\.
++ **SAM CLI: **A command\-line interface you can use to develop, test, and analyze your serverless applications locally before uploading them to the Lambda runtime\. For more information, see [Test Your Serverless Applications Locally Using SAM CLI \(Public Beta\)](test-sam-cli.md)\.
 
 ## Before you begin<a name="lambda-application-fundamentals-before-you-begin"></a>
 
 In order to use the tutorials offered at the end of this section, make sure you have done the following:
 + [Set Up an AWS Account](setup.md) 
 + [Set Up the AWS Command Line Interface \(AWS CLI\)](setup-awscli.md)
-+ Followed the steps to use SAM Local, including [Docker](https://www.docker.com), outlined here: [Install SAM Local](sam-cli-requirements.md)\. 
++ Followed the steps to use SAM CLI, including [Docker](https://www.docker.com), outlined here: [Install SAM CLI](sam-cli-requirements.md)\. 
 
 ### Next Step<a name="setting-up-next-step-account"></a>
 [Set Up an AWS Account](setup.md)

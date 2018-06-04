@@ -84,7 +84,7 @@ Your request would then look like this:
 And the response would look like this:
 
 ```
-# request
+# response
 {
     "Answer": "Jim is 33 years old!"
 }
@@ -109,9 +109,11 @@ The following lists valid handler signatures\. `TIn` and `TOut` represent types 
 + 
 + 
 
-## Using Global State to Maximize Performance<a name="go-programming-model-handler-execution-environment-reuse"></a>
+## Using Global State<a name="go-programming-model-handler-execution-environment-reuse"></a>
 
-To maximize performance, you should declare and modify global variables that are independent of your function's handler code\. In addition, your handler may declare an `init` function that is executed when your handler is loaded\. This behaves the same in AWS Lambda as it does in standard Go programs\. A single instance of your Lambda function will never handle multiple events simultaneously\. This means, for example, that you may safely change global state, assured that those changes will require a new Execution Context and will not introduce locking or unstable behavior from function invocations directed at the previous Execution Context\. For more information, see [Best Practices for Working with AWS Lambda Functions](best-practices.md)\.
+You can declare and modify global variables that are independent of your Lambda function's handler code\. In addition, your handler may declare an `init` function that is executed when your handler is loaded\. This behaves the same in AWS Lambda as it does in standard Go programs\. A single instance of your Lambda function will never handle multiple events simultaneously\. This means, for example, that you may safely change global state, assured that those changes will require a new Execution Context and will not introduce locking or unstable behavior from function invocations directed at the previous Execution Context\. For more information, see the following:
++ [AWS Lambda Execution Model](running-lambda-code.md)
++ [Best Practices for Working with AWS Lambda Functions](best-practices.md)
 
 ```
 package main

@@ -2,9 +2,9 @@
 
 Adds a permission to the resource policy associated with the specified AWS Lambda function\. You use resource policies to grant permissions to event sources that use *push* model\. In a *push* model, event sources \(such as Amazon S3 and custom applications\) invoke your Lambda function\. Each permission you add to the resource policy allows an event source, permission to invoke the Lambda function\. 
 
-For information about the push model, see [Lambda Functions](http://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html)\. 
+For information about the push model, see [Lambda Functions](https://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html)\. 
 
-If you are using versioning, the permissions you add are specific to the Lambda function version or alias you specify in the `AddPermission` request via the `Qualifier` parameter\. For more information about versioning, see [AWS Lambda Function Versioning and Aliases](http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html)\. 
+If you are using versioning, the permissions you add are specific to the Lambda function version or alias you specify in the `AddPermission` request via the `Qualifier` parameter\. For more information about versioning, see [AWS Lambda Function Versioning and Aliases](https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html)\. 
 
 This operation requires permission for the `lambda:AddPermission` action\.
 
@@ -50,7 +50,7 @@ Pattern: `(|[a-zA-Z0-9$_-]+)`
 The request accepts the following data in JSON format\.
 
  ** [Action](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-Action"></a>
-The AWS Lambda action you want to allow in this statement\. Each Lambda action is a string starting with `lambda:` followed by the API name \(see [Actions](http://docs.aws.amazon.com/lambda/latest/dg/API_Operations.html)\) \. For example, `lambda:CreateFunction`\. You can use wildcard \(`lambda:*`\) to grant permission for all AWS Lambda actions\.   
+The AWS Lambda action you want to allow in this statement\. Each Lambda action is a string starting with `lambda:` followed by the API name \(see [Actions](https://docs.aws.amazon.com/lambda/latest/dg/API_Operations.html)\) \. For example, `lambda:CreateFunction`\. You can use wildcard \(`lambda:*`\) to grant permission for all AWS Lambda actions\.   
 Type: String  
 Pattern: `(lambda:[*]|lambda:[a-zA-Z]+|[*])`   
 Required: Yes
@@ -147,12 +147,12 @@ HTTP Status Code: 429
 ## See Also<a name="API_AddPermission_SeeAlso"></a>
 
 For more information about using this API in one of the language\-specific AWS SDKs, see the following:
-+  [AWS Command Line Interface](http://docs.aws.amazon.com/goto/aws-cli/lambda-2015-03-31/AddPermission) 
-+  [AWS SDK for \.NET](http://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/AddPermission) 
-+  [AWS SDK for C\+\+](http://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/AddPermission) 
-+  [AWS SDK for Go](http://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/AddPermission) 
-+  [AWS SDK for Java](http://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/AddPermission) 
-+  [AWS SDK for JavaScript](http://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/AddPermission) 
-+  [AWS SDK for PHP V3](http://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/AddPermission) 
-+  [AWS SDK for Python](http://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/AddPermission) 
-+  [AWS SDK for Ruby V2](http://docs.aws.amazon.com/goto/SdkForRubyV2/lambda-2015-03-31/AddPermission) 
++  [AWS Command Line Interface](https://docs.aws.amazon.com/goto/aws-cli/lambda-2015-03-31/AddPermission) 
++  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/AddPermission) 
++  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/AddPermission) 
++  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/AddPermission) 
++  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/AddPermission) 
++  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/AddPermission) 
++  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/AddPermission) 
++  [AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/AddPermission) 
++  [AWS SDK for Ruby V2](https://docs.aws.amazon.com/goto/SdkForRubyV2/lambda-2015-03-31/AddPermission) 

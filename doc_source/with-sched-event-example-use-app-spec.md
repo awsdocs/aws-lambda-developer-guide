@@ -15,7 +15,7 @@ The following contains the SAM template for this application\. Copy the text bel
 ```
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Parameters: 
+Parameters:
   NotificationEmail:
     Type: String
 Resources:
@@ -47,10 +47,10 @@ Resources:
       Dimensions:
         - Name: FunctionName
           Value: !Ref CheckWebsitePeriodically
-      EvaluationPeriods: String
+      EvaluationPeriods: 1
       MetricName: Errors
       Namespace: AWS/Lambda
-      Period: '60'
+      Period: 60
       Statistic: Sum
       Threshold: '1'
 ```

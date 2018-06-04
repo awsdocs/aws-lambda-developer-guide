@@ -21,7 +21,7 @@ AWS Lambda also offers predefined condition keys to a limited set of API operati
   "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": " DeleteEventSourceMappingPolicy",
+            "Sid": "DeleteEventSourceMappingPolicy",
             "Effect": "Allow",
             "Action": [
                 "lambda:DeleteEventSourceMapping"

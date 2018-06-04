@@ -8,8 +8,7 @@ Follow the steps in this section to create a simple Lambda function\.
 
 1. Note that AWS Lambda offers a simple `Hello World` function upon introduction under the **How it works** label and includes a **Run** option, allowing you to invoke the function as a general introduction\. This tutorial introduces additonal options you have to create, test and update your Lambda functions, as well as other features provided by the Lambda console and provides links to each, inviting you to explore each one in depth\. 
 
-   Choose **Create a function** under the **Get Started** section to proceed\.  
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/gs-1-10.png)
+   Choose **Create a function** under the **Get Started** section to proceed\.
 **Note**  
 The console shows the **Get Started** page only if you do not have any Lambda functions created\. If you have created functions already, you will see the **Lambda > Functions** page\. On the list page, choose **Create a function** to go to the **Create function** page\. 
 
@@ -29,7 +28,7 @@ The console shows the **Get Started** page only if you do not have any Lambda fu
 1. In **Author from scratch**, do the following:
    + In **Name\***, specify your Lambda function name\.
    + In **Runtime\***, choose `Python 3.6`\.
-   + In **Role\***, choose **Create new role from templates\(s\):**
+   + In **Role\***, choose **Create new role from template\(s\):**
    + In **Role name\***, enter a name for your role\.
    + Leave the **Policy templates** field blank\. For the purposes of this introduction, your Lambda function will have the necessary execution permissions\.
 **Note**  
@@ -47,7 +46,7 @@ For an in\-depth look at AWS Lambda's security polices, see [Authentication and 
       + Starting position
 
    1. For this example, do not configure a trigger\.
-   + In **Function code** note that code authored in Node\.js is provided\. It returns a simple "Hello from Lambda" greeting\.
+   + In **Function code** note that code is provided\. It returns a simple "Hello from Lambda" greeting\.
    + **Handler** shows **lambda\_function\.lambda\_handler** value\. It is the *filename*\.*handler\-function*\. The console saves the sample code in the `lambda_function.py` file and in the code `lambda_handler` is the function name that receives the event as a parameter when the Lambda function is invoked\. For more information, see [Lambda Function Handler \(Python\)](python-programming-model-handler-types.md)\.
    + Note the embedded IDE \(Integrated Development Environment\)\. To learn more, see [Creating Functions Using the AWS Lambda Console Editor](code-editor.md)\.
 
@@ -78,6 +77,8 @@ Follow the steps to invoke your Lambda function using the sample event data prov
    ```
 
    You can change key and values in the sample JSON, but don't change the event structure\. If you do change any keys and values, you must update the sample code accordingly\. Choose **Save and test**\.
+**Note**  
+If you choose to delete the test event, go to the **Configure test event** page and then choose **Delete**\.
 
 1. AWS Lambda executes your function on your behalf\. The `handler` in your Lambda function receives and then processes the sample event\.
 

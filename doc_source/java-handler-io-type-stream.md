@@ -24,7 +24,7 @@ import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
 import com.amazonaws.services.lambda.runtime.Context; 
 
 public class Hello implements RequestStreamHandler{
-    public static void handler(InputStream inputStream, OutputStream outputStream, Context context) throws IOException {
+    public void handler(InputStream inputStream, OutputStream outputStream, Context context) throws IOException {
         int letter;
         while((letter = inputStream.read()) != -1)
         {

@@ -8,7 +8,7 @@ All the exercises in this guide assume that you are using administrator user cre
    + [Getting Set Up with the AWS Command Line Interface](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-set-up.html)
    + [Configuring the AWS Command Line Interface](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html)
 
-1. Add a named profile for the administrator user in the AWS CLI config file\. You use this profile when executing the AWS CLI commands\. 
+1. Add a named profile for the administrator user in the [AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cli-config-files.html)\. You use this profile when executing the AWS CLI commands\. For more information on creating this profile, see [Named Profiles\.](https://docs.aws.amazon.com/cli/latest/userguide/cli-multiple-profiles.html)
 
    ```
    [profile adminuser]
@@ -32,4 +32,4 @@ All the exercises in this guide assume that you are using administrator user cre
      ```
 
 ## Next Step<a name="setting-up-next-step-sam"></a>
-[Install SAM Local](sam-cli-requirements.md)
+[Install SAM CLI](sam-cli-requirements.md)

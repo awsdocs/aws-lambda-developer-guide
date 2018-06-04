@@ -63,7 +63,7 @@ In addition to providing your deployment package, you can provide configuration 
 If your Lambda function is designed to process events of a specific type, you can use sample event data to test your Lambda function using one of the following methods:
 + Test your Lambda function in the console\. 
 + Test your Lambda function using the AWS CLI\. You can use the `Invoke` method to invoke your Lambda function and pass in sample event data\.
-+ Test your Lambda function locally using [Test Your Serverless Applications Locally Using SAM Local \(Public Beta\)](test-sam-local.md)\.
++ Test your Lambda function locally using [Test Your Serverless Applications Locally Using SAM CLI \(Public Beta\)](test-sam-cli.md)\.
 
 The console provides sample event data\. The same data is also provided in the [Sample Events Published by Event Sources](eventsources.md) topic, which you can use in the AWS CLI to invoke your Lambda function\.
 
