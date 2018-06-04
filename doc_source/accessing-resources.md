@@ -30,7 +30,7 @@ For convenience, AWS Lambda includes versions of the AWS SDK as part of the exec
 
 ## Accessing non AWS Services<a name="accessing-non-aws-services"></a>
 
-You can include any SDK to access any service as part of your Lambda function\. For more details, see [Creating a Deployment Package](deployment-package-v2.md)\. For example, you can include the [SDK for Twilio](https://www.twilio.com/docs/libraries) to access information from your Twilio account\. You can use [Environment Variables](env_variables.md) for storing the credential information for the SDKs after encrypting the credentials\. 
+You can include any SDK to access any service as part of your Lambda function\. For example, you can include the [SDK for Twilio](https://www.twilio.com/docs/libraries) to access information from your Twilio account\. You can use [Environment Variables](env_variables.md) for storing the credential information for the SDKs after encrypting the credentials\. 
 
 ## Accessing Private Services or Resources<a name="accessing-private-resources"></a>
 

@@ -1,11 +1,8 @@
 # Step 1: Prepare<a name="with-cloudtrail-example-prepare"></a>
 
 In this section you do the following:
-
 + Sign up for an AWS account and set up the AWS CLI\. 
-
 + Turn on CloudTrail in your account\. 
-
 + Create an SNS topic and subscribe to it\.
 
 Follow the steps in the following sections to walk through the setup process\.
@@ -16,9 +13,7 @@ In this tutorial, we assume that you are setting the resources in the `us-west-2
 ## Step 1\.1: Sign Up for AWS and Set Up the AWS CLI<a name="with-cloudtrail-example-prepare-setup-cli"></a>
 
 Make sure you have completed the following steps:
-
 + Signed up for an AWS account and created an administrator user in the account \(called **adminuser**\)\. For instructions, see [Set Up an AWS Account](setup.md)\. 
-
 + Installed and set up the AWS CLI\. For instructions, see [Set Up the AWS Command Line Interface \(AWS CLI\)](setup-awscli.md)\.
 
 ## Step 1\.2: Turn on CloudTrail<a name="with-cloudtrail-example-prepare-create-buckets"></a>

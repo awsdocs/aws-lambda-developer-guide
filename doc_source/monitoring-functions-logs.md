@@ -21,9 +21,6 @@ There is no additional charge for using Lambda logs; however, standard CloudWatc
 1. Choose **Jump to logs** to view the logs\.
 
 For more information on accessing CloudWatch Logs, see the following guides:
-
 + [Amazon CloudWatch User Guide](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/)
-
 + [Amazon CloudWatch Logs API Reference](http://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/)
-
 + [Monitoring Log Files](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatchLogs.html) in the *Amazon CloudWatch User Guide*

@@ -1,8 +1,10 @@
 # Dead Letter Queues<a name="dlq"></a>
 
-By default, a failed Lambda function invoked asynchronously is retried twice, and then the event is discarded\. Using Dead Letter Queues \(DLQ\), you can indicate to Lambda that unprocessed events should be sent to an Amazon SQS queue or Amazon SNS topic instead, where you can take further action\. 
+Any Lambda function invoked **asynchronously** is retried twice before the event is discarded\. If the retries fail and you're unsure why, use Dead Letter Queues \(DLQ\) to direct unprocessed events to an [Amazon SQS](http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/Welcome.html) queue or an [ Amazon SNS ](lcome.html)topic to analyze the failure\. 
 
-You configure a DLQ by specifying a target Amazon Resource Name \(ARN\) on a Lambda function's `DeadLetterConfig` parameter of an Amazon SNS topic or an Amazon SQS queue where you want the event payload delivered, as shown in the following code\. For more information about creating an Amazon SNS topic, see [Create an SNS Topic](http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html)\. For more information about creating an Amazon SQS queue, see [Tutorial: Creating an Amazon SQS Queue](http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-create-queue.html)\.
+ AWS Lambda directs events that cannot be processed to the specified [Amazon SNS topic](http://docs.aws.amazon.com/sns/latest/gsg/CreateTopic.html) topic or [Amazon SQS queue](http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-create-queue.html)\. Functions that don't specify a DLQ will discard events after they have exhausted their retries\. For more information about retry policies, see [Understanding Retry Behavior](retries-on-errors.md)\.
+
+You configure a DLQ by specifying the Amazon Resource Name *TargetArn* value on the Lambda function's `DeadLetterConfig` parameter \(whether it's an [Amazon SQS](http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-create-queue.html) queue or an [Amazon SNS](http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html) topic\)\. 
 
 ```
 {
@@ -26,7 +28,7 @@ You configure a DLQ by specifying a target Amazon Resource Name \(ARN\) on a Lam
 }
 ```
 
- Lambda directs events that cannot be processed to the Amazon SNS topic or Amazon SQS queue that you’ve configured for the Lambda function\. Functions without an associated DLQ discard events after they have exhausted their retries\. For more information about retry policies, see [Understanding Retry Behavior](retries-on-errors.md)\. You need to explicitly provide receive/delete/sendMessage access to your DLQ resource as part of the execution role for your Lambda function\. The payload written to the DLQ target ARN is the original event payload with no modifications to the message body\. The attributes of the message, described below, contain information to help you understand why the event wasn’t processed: 
+ You need to explicitly provide receive/delete/sendMessage access to your DLQ resource as part of the [execution role](intro-permission-model.html) for your Lambda function\. The payload written to the DLQ target ARN is the original event payload with no modifications to the message body\. The attributes of the message, described next, contain information to help you understand why the event wasn’t processed: 
 
 
 | Name | Type | Value | 
@@ -35,6 +37,6 @@ You configure a DLQ by specifying a target Amazon Resource Name \(ARN\) on a Lam
 | ErrorCode | Number | 3\-digit HTTP error code | 
 | ErrorMessage | String | Error message \(truncated to 1 KB\)  | 
 
-If for some reason, the event payload consistently fails to reach the target ARN, Lambda increments a CloudWatch metric called `DeadLetterErrors` and then deletes the event payload\. 
+If the event payload consistently fails to reach the target ARN, AWS Lambda increments a [CloudWatch metric](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring//viewing_metrics_with_cloudwatch.html) called `DeadLetterErrors` and then deletes the event payload\. 
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/DLQ.png)

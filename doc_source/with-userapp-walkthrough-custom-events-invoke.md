@@ -62,11 +62,9 @@ Because you invoked the function using the `RequestResponse` invocation type, th
 You are able to execute this function because you are using the same AWS account to create and invoke the Lambda function\. However, if you want to grant cross\-account permissions to another AWS account or grant permissions to another an AWS service to execute the function, you must add a permissions to the access permissions policy associated with the function\. The Amazon S3 tutorial, which uses Amazon S3 as the event source \(see [Tutorial: Using AWS Lambda with Amazon S3](with-s3-example.md)\), grants such permissions to Amazon S3 to invoke the function\.
 
 You can monitor the activity of your Lambda function in the AWS Lambda console\. 
-
 + Sign in to the AWS Management Console and open the AWS Lambda console at [https://console\.aws\.amazon\.com/lambda/](https://console.aws.amazon.com/lambda/)\.
 
   The AWS Lambda console shows a graphical representation of some of the CloudWatch metrics in the **Cloudwatch Metrics at a glance** section for your function\.
-
 + For each graph, you can also choose the **logs** link to view the CloudWatch logs directly\.
 
 ## Next Step<a name="with-userapp-walkthrough-custom-events-invoke-next-step"></a>

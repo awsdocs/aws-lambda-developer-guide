@@ -24,7 +24,7 @@ Follow the instructions to create an AWS Lambda function deployment package\.
    };
    ```
 **Note**  
-The code sample is compliant with the Node\.js runtimes v6\.10 or v4\.3\. For more information, see [Programming Model\(Node\.js\)](programming-model.md)
+The code sample is compliant with the Node\.js runtimes v8\.10 or v6\.10 For more information, see [Programming Model\(Node\.js\)](programming-model.md)
 
 1. Save the file as `ProcessKinesisRecords.js`\. 
 
@@ -63,9 +63,7 @@ return null;
 If the handler returns normally without exceptions, Lambda considers the input batch of records as processed successfully and begins reading new records in the stream\. If the handler throws an exception, Lambda considers the input batch of records as not processed and invokes the function with the same batch of records again\. 
 
 Using the preceding code \(in a file named `ProcessKinesisEvents.java`\), create a deployment package\. Make sure that you add the following dependencies: 
-
 + `aws-lambda-java-core`
-
 + `aws-lambda-java-events` 
 
 For more information, see [Programming Model for Authoring Lambda Functions in Java](java-programming-model.md)\.
@@ -126,9 +124,7 @@ namespace KinesisStreams
 ```
 
 To create a deployment package, follow the steps outlined in [\.NET Core CLI](lambda-dotnet-coreclr-deployment-package.md)\. In doing so, note the following after you've created your \.NET project: 
-
 + Rename the default *Program\.cs file* with a file name of your choice, such as *ProcessingKinesisEvents\.cs*\. 
-
 + Replace the default contents of the renamed *Program\.cs* file with the code example above\.
 
 After you verify that your deployment package is created, go to the next step to create an IAM role \(execution role\)\. You specify this role at the time you create your Lambda function\. 
@@ -183,7 +179,7 @@ Follow the instructions to create a AWS Lambda function deployment package\.
    func handler(ctx context.Context, kinesisEvent events.KinesisEvent) {
        for _, record := range kinesisEvent.Records {
            kinesisRecord := record.Kinesis
-           dataBytes := kinesisRecordData.Data
+           dataBytes := kinesisRecord.Data
            dataText := string(dataBytes)
    
            fmt.Printf("%s Data = %s \n", record.EventName, dataText) 

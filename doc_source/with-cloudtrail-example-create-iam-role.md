@@ -50,11 +50,8 @@ For more information about the execution role, see [Manage Permissions: Using an
 1. Note the permissions policy name because you will use it in the next step\. 
 
 1. Follow the steps in [Creating a Role to Delegate Permissions to an AWS Service](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide* to create an IAM role and then attach the permissions policy you just created to the role\. As you follow the steps to create a role, note the following:
-
    + In **Role Name**, use a name that is unique within your AWS account \(for example, **lambda\-cloudtrail\-execution\-role**\)\. 
-
    + In **Select Role Type**, choose **AWS Service Roles**, and then choose **AWS Lambda**\.
-
    + In **Attach Policy**, choose the policy you created in the previous step\.
 
 ## Next Step<a name="with-cloudtrail-example-create-iam-role-next-step"></a>

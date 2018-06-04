@@ -1,11 +1,8 @@
 # Step 2\.2: Create the Execution Role \(IAM Role\)<a name="with-s3-example-create-iam-role"></a>
 
 In this section, you create an IAM role using the following predefined role type and access permissions policy:
-
 + AWS service role of the type **AWS Lambda** – This role grants AWS Lambda permissions to assume the role\. 
-
 + **AWSLambdaExecute** access permissions policy that you attach to the role\. 
-
 + Add a custom policy which allocates permissions for you to add objects to your Amazon S3 bucket\. For more information, see [Creating a Role to Delegate Permissions to an AWS Service](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide* to create an IAM role \(execution role\)\. 
 
  For more information about IAM roles, see [IAM Roles](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *IAM User Guide*\. Use the following procedure to create the IAM role\.

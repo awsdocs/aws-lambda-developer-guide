@@ -1,11 +1,9 @@
-# Invocation Types<a name="java-invocation-options"></a>
+# Invocation Types<a name="invocation-options"></a>
 
 AWS Lambda supports synchronous and asynchronous invocation of a Lambda function\. You can control the invocation type only when you invoke a Lambda function \(referred to as *on\-demand invocation*\)\. The following examples illustrate on\-demand invocations:
-
 + Your custom application invokes a Lambda function\.
 
    
-
 + You manually invoke a Lambda function \(for example, using the AWS CLI\) for testing purposes\.
 
 In both cases, you invoke your Lambda function using the [Invoke](API_Invoke.md) operation, and you can specify the invocation type as synchronous or asynchronous\. 
@@ -19,14 +17,12 @@ In AWS Lambda, Lambda functions and event sources are the core components in AWS
 Each event source mapping identifies the type of events to publish and the Lambda function to invoke when events occur\. The specific Lambda function then receives the event information as a parameter, your Lambda function code can then process the event\. 
 
 Note the following about the event sources\. These event sources can be any of the following:
-
 + **AWS services** – These are the supported AWS services that can be preconfigured to work with AWS Lambda\. You can group these services as regular AWS services or stream\-based services\. Amazon Kinesis Data Streams and Amazon DynamoDB Streams are stream\-based event sources, all others AWS services do not use stream\-based event sources\. Where you maintain the event source mapping and how the Lambda function is invoked depends on whether or not you're using a stream\-based event source\.
-
 + **Custom applications** – You can have your custom applications publish events and invoke a Lambda function\.
 
 You may be wondering—where do I keep the event mapping information? Do I keep it within the event source or within AWS Lambda? The following sections explain event source mapping for each of these event source categories\. These sections also explain how the Lambda function is invoked and how you manage permissions to allow invocation of your Lambda function\. 
 
-
+**Topics**
 + [Event Source Mapping for AWS Services](#non-streaming-event-source-mapping)
 + [Event Source Mapping for AWS Stream\-Based Services](#streaming-event-source-mapping)
 + [Event Source Mapping for Custom Applications](#custom-app-event-source-mapping)
@@ -34,9 +30,7 @@ You may be wondering—where do I keep the event mapping information? Do I keep 
 ### Event Source Mapping for AWS Services<a name="non-streaming-event-source-mapping"></a>
 
 Except for the stream\-based AWS services \(Amazon Kinesis Data Streams and DynamoDB streams\), other supported AWS services publish events and can also invoke your Lambda function \(referred to as the *push model*\)\. In the push model, note the following:
-
 + Event source mappings are maintained within the event source\. Relevant API support in the event sources enables you to create and manage event source mappings\. For example, Amazon S3 provides the bucket notification configuration API\. Using this API, you can configure an event source mapping that identifies the bucket events to publish and the Lambda function to invoke\.
-
 + Because the event sources invoke your Lambda function, you need to grant the event source the necessary permissions using a resource\-based policy \(referred to as the *Lambda function policy*\)\. For more information, see [AWS Lambda Permissions Model](intro-permission-model.md)\.
 
 The following example illustrates how this model works\.
@@ -60,16 +54,14 @@ The diagram illustrates the flow:
 ### Event Source Mapping for AWS Stream\-Based Services<a name="streaming-event-source-mapping"></a>
 
 The Amazon Kinesis Data Streams and DynamoDB streams are the stream\-based services that you can preconfigure to use with AWS Lambda\. After you do the necessary event source mapping, AWS Lambda polls the streams and invokes your Lambda function \(referred to as the *pull model*\)\. In the pull model, note the following:
-
 + The event source mappings are maintained within the AWS Lambda\. AWS Lambda provides the relevant APIs to create and manage event source mappings\. For more information, see [CreateEventSourceMapping](API_CreateEventSourceMapping.md)\. 
-
 + AWS Lambda needs your permission to poll the stream and read records\. You grant these permissions via the execution role, using the permissions policy associated with role that you specify when you create your Lambda function\. AWS Lambda does not need any permissions to invoke your Lambda function\. 
 
 The following example illustrates how this model works\.
 
 **Example – AWS Lambda Pulls Events from an Kinesis Stream and Invokes a Lambda Function**  
 The following diagram shows a custom application that writes records to an Kinesis stream and how AWS Lambda polls the stream\. When AWS Lambda detects a new record on the stream, it invokes your Lambda function\.  
-Suppose you have a custom application that writes records to an Kinesis stream\. You want to invoke a Lambda function when new records are detected on the stream\. You create a Lambda function and the necessary event source mapping in AWS Lambda\.   
+Suppose you have a custom application that writes records to a Kinesis stream\. You want to invoke a Lambda function when new records are detected on the stream\. You create a Lambda function and the necessary event source mapping in AWS Lambda\.   
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/kinesis-pull-10.png)
 The diagram illustrates the following sequence:  

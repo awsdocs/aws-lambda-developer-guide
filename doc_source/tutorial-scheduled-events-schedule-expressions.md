@@ -24,9 +24,7 @@ For example:
 |  Invoke Lambda function every seven days  |  <pre>rate(7 days)</pre>  | 
 
 Note the following: 
-
 + Rate frequencies of less than one minute are not supported\.
-
 + For a singular value the unit must be singular \(for example, `rate(1 day)`\), otherwise plural \(for example, `rate(5 days)`\)\.
 
  
@@ -84,7 +82,5 @@ The following table lists common examples of cron expressions\.
 |  Invoke a Lambda function at 9 a\.m\. \(UTC\) the first Monday of each month  |  <pre>cron(0 9 ? * 2#1 *)</pre>  | 
 
 Note the following: 
-
 + Cron expressions that lead to rates faster than one minute are not supported\.
-
 + One of the day\-of\-month or day\-of\-week values must be a question mark \(`?`\)\.

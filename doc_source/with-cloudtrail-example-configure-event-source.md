@@ -1,21 +1,15 @@
 # Step 3: Add Event Source \(Configure Amazon S3 to Publish Events\)<a name="with-cloudtrail-example-configure-event-source"></a>
 
  In this section, you add the remaining configuration so Amazon S3 can publish object\-created events to AWS Lambda and invoke your Lambda function\. You will do the following:
-
 + Add permissions to the Lambda function's access policy to allow Amazon S3 to invoke the function\.
-
 +  Add notification configuration to your source bucket\. In the notification configuration, you provide the following: 
-
   + Event type for which you want Amazon S3 to publish events\. For this tutorial, you specify the `s3:ObjectCreated:*` event type\.
-
   + Lambda function to invoke\.
 
 ## Step 3\.1: Add Permissions to the Lambda Function's Access Permissions Policy<a name="with-cloudtrail-example-configure-event-source-add-permission"></a>
 
 1. Run the following Lambda CLI `add-permission` command to grant Amazon S3 service principal \(`s3.amazonaws.com`\) permissions to perform the `lambda:InvokeFunction` action\. Note that permission is granted to Amazon S3 to invoke the function only if the following conditions are met:
-
    + An object\-created event is detected on a specific bucket\.
-
    + The bucket is owned by a specific AWS account\. If a bucket owner deletes a bucket, some other AWS account can create a bucket with the same name\. This condition ensures that only a specific AWS account can invoke your Lambda function\.
 **Note**  
 If you have not already created the `adminuser` profile, see [Set Up the AWS Command Line Interface \(AWS CLI\)](setup-awscli.md)\.
@@ -43,9 +37,7 @@ If you have not already created the `adminuser` profile, see [Set Up the AWS Com
 ## Step 3\.2: Configure Notification on the Bucket<a name="with-cloudtrail-example-configure-event-source-add-notif-config"></a>
 
 Add notification configuration on the *examplebucket* to request Amazon S3 to publish object\-created events to Lambda\. In the configuration, you specify the following:
-
 + Event type – For this tutorial, these can be any event types that create objects\.
-
 + Lambda function ARN – This is your Lambda function that you want Amazon S3 to invoke\. The ARN is of the following form:
 
   ```

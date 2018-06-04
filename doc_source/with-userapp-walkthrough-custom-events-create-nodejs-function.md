@@ -16,7 +16,7 @@ Follow the instructions to create an AWS Lambda function deployment package\.
    };
    ```
 **Note**  
-The code sample is compliant with the Node\.js runtimes v6\.10 ore v4\.3\. For more information, see [Programming Model\(Node\.js\)](programming-model.md)
+The code sample is compliant with the Node\.js runtimes 6\.10 or 8\.10\. For more information, see [Programming Model\(Node\.js\)](programming-model.md)
 
 1. Save the file as `helloworld.js`\.
 

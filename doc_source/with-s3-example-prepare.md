@@ -1,17 +1,13 @@
 # Step 1: Prepare<a name="with-s3-example-prepare"></a>
 
 In this section, you do the following:
-
 + Sign up for an AWS account and set up the AWS CLI\. 
-
 + Create two buckets \(*source* and `sourceresized` bucket\) with a sample \.jpg object \(`HappyFace.jpg`\) in the source bucket\. For instructions, see the following procedure\. 
 
 ## Step 1\.1: Sign Up for AWS and Set Up the AWS CLI<a name="with-s3-example-prepare-setup-cli"></a>
 
 Make sure you have completed the following steps:
-
 + Signed up for an AWS account and created an administrator user in the account \(called **adminuser**\)\. For instructions, see [Set Up an AWS Account](setup.md)\. 
-
 + Installed and set up the AWS CLI\. For instructions, see [Set Up the AWS Command Line Interface \(AWS CLI\)](setup-awscli.md)\.
 
 ## Step 1\.2: Create Buckets and Upload a Sample Object<a name="with-s3-example-prepare-create-buckets"></a>
