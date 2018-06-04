@@ -5,7 +5,7 @@ A Lambda function is one of the resources in AWS Lambda\. You can add permission
 **Important**  
 Before you create resource\-based policies, we recommend that you first review the introductory topics that explain the basic concepts and options available for you to manage access to your AWS Lambda resources\. For more information, see [Overview of Managing Access Permissions to Your AWS Lambda Resources](access-control-overview.md)\.
 
-Lambda function policies are primarily used when you are setting up an event source in AWS Lambda to grant a service or an event source permissions to invoke your Lambda function \(see [Invoke](API_Invoke.md)\)\. An exception to this is when an event source \(for example, Amazon DynamoDB or Kinesis\) uses the pull model, where permissions are managed in the Lambda function execution role instead\. For more information, see [Event Source Mapping](java-invocation-options.md#intro-invocation-modes)\. 
+Lambda function policies are primarily used when you are setting up an event source in AWS Lambda to grant a service or an event source permissions to invoke your Lambda function \(see [Invoke](API_Invoke.md)\)\. An exception to this is when an event source \(for example, Amazon DynamoDB or Kinesis\) uses the pull model, where permissions are managed in the Lambda function execution role instead\. For more information, see [Event Source Mapping](invocation-options.md#intro-invocation-modes)\. 
 
 Lambda function policies also make it easy to grant cross\-account permissions to invoke your Lambda function\. Suppose you want to grant cross\-account permissions \(for example, permissions to Amazon S3\) to invoke your Lambda function\. Instead of creating an IAM role to grant cross\-account permissions, you can add the relevant permissions in a Lambda function policy\. 
 
@@ -13,11 +13,8 @@ Lambda function policies also make it easy to grant cross\-account permissions t
 If the custom application and the Lambda function it invokes belong to the same AWS account, you don't need to grant explicit permissions using the policy attached to the Lambda function\.
 
  AWS Lambda provides the following API operations to manage a permissions policy associated with a Lambda function:
-
 + [AddPermission](API_AddPermission.md)
-
 + [GetPolicy](API_GetPolicy.md)
-
 + [RemovePermission](API_RemovePermission.md)
 
 **Note**  
@@ -25,7 +22,7 @@ The AWS Lambda console is the easiest way to manage event sources and their perm
 
 You can use the console to view your function policy by choosing the **Triggers** tab on your function's details page and then choosing **View function policy**\. The console doesn't support directly modifying permissions in a function policy\. You must use either the AWS CLI or the AWS SDKs\. The following are AWS CLI examples of the API operations listed earlier in this topic:
 
-
+**Topics**
 + [Example 1: Allow Amazon S3 to Invoke a Lambda Function](#access-control-resource-based-example-s3-invoke-function)
 + [Example 2: Allow Amazon API Gateway to Invoke a Lambda Function](#access-control-resource-based-example-apigateway-invoke-function)
 + [Example 3: Allow a User Application Created by Another AWS Account to Invoke a Lambda Function \(Cross\-Account Scenario\)](#access-control-resource-based-example-cross-account-scenario)
@@ -36,15 +33,11 @@ You can use the console to view your function policy by choosing the **Triggers*
 ## Example 1: Allow Amazon S3 to Invoke a Lambda Function<a name="access-control-resource-based-example-s3-invoke-function"></a>
 
 To grant Amazon S3 permission to invoke a Lambda function, you configure permissions as follows:
-
 + Specify `s3.amazonaws.com` as the `principal` value\.
-
 + Specify `lambda:InvokeFunction` as the `action` for which you are granting permissions\.
 
 To ensure that the event is generated from a specific bucket that is owned by a specific AWS account, you also specify the following:
-
 + Specify the bucket ARN as the `source-arn` value to restrict events from a specific bucket\.
-
 + Specify the AWS account ID that owns the bucket, to ensure that the named bucket is owned by the account\.
 
 The following example AWS CLI command adds a permission to the `helloworld` Lambda function policy granting Amazon S3 permissions to invoke the function\. 
@@ -76,16 +69,13 @@ In response, AWS Lambda returns the following JSON code\. The `Statement` value 
 }
 ```
 
-For information about the push model, see [Event Source Mapping](java-invocation-options.md#intro-invocation-modes)\.
+For information about the push model, see [Event Source Mapping](invocation-options.md#intro-invocation-modes)\.
 
 ## Example 2: Allow Amazon API Gateway to Invoke a Lambda Function<a name="access-control-resource-based-example-apigateway-invoke-function"></a>
 
 To grant permissions to allow Amazon API Gateway to invoke a Lambda function, do the following:
-
 + Specify `apigateway.amazonaws.com` as the `principal` value\.
-
 + Specify `lambda:InvokeFunction` as the action for which you are granting permissions\.
-
 + Specify the API Gateway endpoint ARN as the `source-arn` value\.
 
 The following example AWS CLI command adds a permission to the `helloworld` Lambda function policy granting API Gateway permissions to invoke the function\. 

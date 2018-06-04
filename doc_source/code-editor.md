@@ -29,11 +29,8 @@ You can use the **Environment** window in the code editor to create, open, and m
 **To open multiple files and show their contents in the editor pane**, choose the files in the **Environment** window\. Right\-click the selection, and then choose **Open**\.
 
 **To create a new file**, do one of the following:
-
 + In the **Environment** window, right\-click the folder where you want the new file to go, and then choose **New File**\. Type the file's name and extension, and then press Enter\.
-
 + Choose **File, New File** on the menu bar\. When you're ready to save the file, choose **File, Save** or **File, Save As** on the menu bar\. Then use the **Save As** dialog box that displays to name the file and choose where to save it\.
-
 + In the tab buttons bar in the editor pane, choose the **\+** button, and then choose **New File**\. When you're ready to save the file, choose **File, Save** or **File, Save As** on the menu bar\. Then use the **Save As** dialog box that displays to name the file and choose where to save it\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/code-editor/code-editor-env-new.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/)
 
@@ -68,16 +65,12 @@ Use the *tab buttons bar* to select, view, and create files\.
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/code-editor/code-editor-tab-buttons-bar.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/)
 
 **To display an open file's contents**, do one of the following:
-
 + Choose the file's tab\.
-
 + Choose the drop\-down menu button in the tab buttons bar, and then choose the file's name\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/code-editor/code-editor-drop-down-list.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/)
 
 **To close an open file**, do one of the following:
-
 + Choose the **X** icon in the file's tab\.
-
 + Choose the file's tab\. Then choose the drop\-down menu button in the tab buttons bar, and choose **Close Pane**\.
 
 **To close multiple open files**, choose the drop\-down menu in the tab buttons bar, and then choose **Close All Tabs in All Panes** or **Close All But Current Tab** as needed\.
@@ -145,9 +138,7 @@ To change code editor settings, choose the **Preferences** gear icon in the menu
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/code-editor/code-editor-menu-bar-preferences.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/)
 
 For a list of what the settings do, see the following references in the *AWS Cloud9 User Guide*\.
-
 + [Project Setting Changes You Can Make](https://docs.aws.amazon.com/cloud9/latest/user-guide/settings-project.html#settings-project-change)
-
 + [User Setting Changes You Can Make](https://docs.aws.amazon.com/cloud9/latest/user-guide/settings-user.html#settings-user-change)
 
 Note that some of the settings listed in those references are not available in the code editor\.

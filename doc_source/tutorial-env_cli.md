@@ -3,31 +3,22 @@
 This section will illustrate how you can modify a Lambda function's behavior through configuration changes that require no changes to the Lambda function code\. 
 
 In this tutorial, you will do the following: 
-
 + Create a deployment package with sample code that returns the value of an environment variable that specifies the name of an Amazon S3 bucket\.
-
 + Invoke a Lambda function and verify that the Amazon S3 bucket name that is returned matches the value set by the environment variable\.
-
 + Update the Lambda function by changing the Amazon S3 bucket name specified by the environment variable\.
-
 + Invoke the Lambda function again and verify that the Amazon S3 bucket name that is returned matches the updated value\.
 
 ## Step 1: Prepare<a name="with-env-prepare"></a>
 
 Make sure you have completed the following steps:
-
 + Signed up for an AWS account and created an administrator user in the account \(called **adminuser**\)\. For instructions, see [Set Up an AWS Account](setup.md) 
-
 + Installed and set up the AWS CLI\. For instructions, see [Set Up the AWS Command Line Interface \(AWS CLI\)](setup-awscli.md)
 
 ## Step 2: Set Up the Lambda Environment<a name="env-test-function"></a>
 
 In this section, you do the following:
-
 + Create the Lambda function deployment package using the sample code provided\.
-
 + Create a Lambda execution role\.
-
 + Create the Lambda function by uploading the deployment package, and then test it by invoking it manually\.
 
 ### Step 2\.1: Create the Deployment Package<a name="env-create-package"></a>
@@ -57,9 +48,7 @@ Create an IAM role \(execution role\) that you can specify at the time you creat
 1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 
 1. Follow the steps in [IAM Roles](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *IAM User Guide* to create an IAM role \(execution role\)\. As you follow the steps to create a role, note the following: 
-
    + In **Select Role Type**, choose **AWS Service Roles**, and then choose **AWS Lambda**\.
-
    + In **Attach Policy**, choose the policy named **AWSLambdaBasicExecutionRole**\. 
 
 1. Write down the Amazon Resource Name \(ARN\) of the IAM role\. You need this value when you create your Lambda function in the next step\.
@@ -68,7 +57,7 @@ Create an IAM role \(execution role\) that you can specify at the time you creat
 
 In this section, you create a Lambda function containing an environment variable that specifies an Amazon S3 bucket named `Test`\. When invoked, the function simply returns the name of the Amazon S3 bucket\. Then you update the configuration by changing the Amazon S3 bucket name to `Prod` and when invoked again, the function returns the updated name of the Amazon S3 bucket\. 
 
-To create the Lambda function, open a command prompt and run the following Lambda AWS CLI `create-function` command\. You need to provide the \.zip file path and the execution role ARN\. Note that the `Runtime` parameter uses `nodejs6.10` but you can also specify `nodejs4.3`\.
+To create the Lambda function, open a command prompt and run the following Lambda AWS CLI `create-function` command\. You need to provide the \.zip file path and the execution role ARN\. Note that the `Runtime` parameter uses `nodejs6.10` but you can also specify `nodejs8.10`\.
 
 ```
 aws lambda  create-function \

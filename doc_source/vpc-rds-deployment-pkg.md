@@ -59,7 +59,6 @@ We recommend that `pymysql.connect()` is executed outside the handler, as shown,
 1. Save the file as `app.py`\. 
 
 1. Install the following library dependencies using **pip**:
-
    + `pymysql` – The Lambda function code uses this library to access your MySQL instance \(see [PyMySQL](https://pypi.python.org/pypi/PyMySQL)\) \.
 
 1. Create a config file that contains the following information and save it as `rds_config.py`:

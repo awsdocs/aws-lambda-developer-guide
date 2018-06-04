@@ -5,6 +5,6 @@ A \.NET Core Lambda deployment package is a zip file of your function's compiled
 **Note**  
 Although it is possible to create the deployment package with the `dotnet publish` command, we suggest you create the deployment package with either the [AWS Toolkit for Visual Studio](lambda-dotnet-create-deployment-package-toolkit.md) or the [\.NET Core CLI](lambda-dotnet-coreclr-deployment-package.md)\. These are tools optimized specifically for Lambda to ensure the `lambda-project.runtimeconfig.json` file exists and optimizes the package bundle, including the removal of any non\-Linux\-based dependencies\. 
 
-
+**Topics**
 + [\.NET Core CLI](lambda-dotnet-coreclr-deployment-package.md)
 + [AWS Toolkit for Visual Studio](lambda-dotnet-create-deployment-package-toolkit.md)

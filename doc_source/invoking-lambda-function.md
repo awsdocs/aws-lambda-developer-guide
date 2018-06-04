@@ -1,17 +1,14 @@
 # Supported Event Sources<a name="invoking-lambda-function"></a>
 
-This topic lists the supported AWS services that you can configure as event sources for AWS Lambda functions\. After you preconfigure the event source mapping, your Lambda function gets invoked automatically when these event sources detect events\. For more information about invocation modes, see [Event Source Mapping](java-invocation-options.md#intro-invocation-modes)\.
+This topic lists the supported AWS services that you can configure as event sources for AWS Lambda functions\. After you preconfigure the event source mapping, your Lambda function gets invoked automatically when these event sources detect events\. For more information about invocation modes, see [Event Source Mapping](invocation-options.md#intro-invocation-modes)\.
 
 For all of the event sources listed in this topic, note the following:
-
-+ Event sources maintain the event source mapping, except for the stream\-based services \(Amazon Kinesis Data Streams and Amazon DynamoDB Streams\)\. For the stream\-based services, AWS Lambda maintains the event source mapping\. AWS Lambda provides the [CreateEventSourceMapping](API_CreateEventSourceMapping.md) operation for you to create and manage the event source mapping\. For more information, see [Event Source Mapping](java-invocation-options.md#intro-invocation-modes)\.
++ Event sources maintain the event source mapping, except for the stream\-based services \(Amazon Kinesis Data Streams and Amazon DynamoDB Streams\)\. For the stream\-based services, AWS Lambda maintains the event source mapping\. AWS Lambda provides the [CreateEventSourceMapping](API_CreateEventSourceMapping.md) operation for you to create and manage the event source mapping\. For more information, see [Event Source Mapping](invocation-options.md#intro-invocation-modes)\.
 
    
-
 + The invocation type that these event sources use when invoking a Lambda function is also preconfigured\. For example, Amazon S3 always invokes a Lambda function asynchronously and Amazon Cognito invokes a Lambda function synchronously\. The only time you can control the invocation type is when you are invoking the Lambda function yourself using the [Invoke](API_Invoke.md) operation \(for example, invoking a Lambda function on demand from your custom application\)\.
 
    
-
 + In order to process AWS events, your Lambda functions may need to include additional libraries, depending on the programming language used to create the function\. Functions written in Node\.js or Python do not require any additional libraries\. For C\#, you need to include [AWS Lambda for \.NET Core](https://github.com/aws/aws-lambda-dotnet)\. For Java, you need to include [aws\-lambda\-java\-libs](https://github.com/aws/aws-lambda-java-libs)\.
 **Important**  
 Each of the included packages should be used without modification\. Removing dependencies, adding conflicting dependencies, or selectively including classes from the packages can result in unexpected behavior\. 
@@ -20,7 +17,7 @@ You can also invoke a Lambda function on demand\. For details, see [Other Event 
 
 For examples of events that are published by these event sources, see [Sample Events Published by Event Sources](eventsources.md)\.
 
-
+**Topics**
 + [Amazon S3](#supported-event-source-s3)
 + [Amazon DynamoDB](#supported-event-source-dynamo-db)
 + [Amazon Kinesis Data Streams](#supported-event-source-kinesis-streams)
@@ -58,7 +55,7 @@ You can use Lambda functions as triggers for your Amazon DynamoDB table\. Trigge
 
 This is a stream\-based event source\. For stream\-based service, you create event source mapping in AWS Lambda, identifying the stream to poll and which Lambda function to invoke\.
 
-For an example DynamoDB event, see [Step 2\.3\.2: Test the Lambda Function \(Invoke Manually\)](with-dynamodb-create-function.md#with-dbb-invoke-manually) and [Amazon DynamoDB Update Sample Event](eventsources.md#eventsources-ddb-update)\. For general format, see [GetRecord](http://docs.aws.amazon.com/dynamodbstreams/latest/APIReference/API_GetRecords.html) in the *Amazon DynamoDB API Reference*\. For an example use case, see [Using AWS Lambda with Amazon DynamoDB](with-ddb.md)\.
+For an example DynamoDB event, see [Step 2\.3\.2: Test the Lambda Function \(Invoke Manually\)](with-dynamodb-create-function.md#with-dbb-invoke-manually) and [Amazon DynamoDB Update Sample Event](eventsources.md#eventsources-ddb-update)\. For general format, see [GetRecord](http://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Operations_Amazon_DynamoDB_Streams.htmlAPI_GetRecords.html) in the *Amazon DynamoDB API Reference*\. For an example use case, see [Using AWS Lambda with Amazon DynamoDB](with-ddb.md)\.
 
 Error handling for a given event source depends on how Lambda is invoked\. DynamoDB is a stream\-based event source\. For more information on how errors are retried, see [Understanding Retry Behavior](retries-on-errors.md)\.
 
@@ -91,9 +88,7 @@ Error handling for a given event source depends on how Lambda is invoked\. Amazo
 Amazon Simple Email Service \(Amazon SES\) is a cost\-effective email service\. With Amazon SES, in addition to sending emails, you can also use the service to receive messages\. For more information about Amazon SES, see [Amazon Simple Email Service](https://aws.amazon.com/ses/)\. When you use Amazon SES to receive messages, you can configure Amazon SES to call your Lambda function when messages arrive\. The service can then invoke your Lambda function by passing in the incoming email event, which in reality is an Amazon SES message in an Amazon SNS event, as a parameter\. For example scenarios, see [Considering Your Use Case for Amazon SES Email Receiving](http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-consider-use-case.html)\.
 
 You configure event source mapping using the rule configuration in Amazon SES\. The following topics provide additional information in the *Amazon Simple Email Service Developer Guide*:
-
 + For sample events, see [Lambda Action](http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-lambda.html) and [Amazon SES Email Receiving Sample Event](eventsources.md#eventsources-ses-email-receiving)\.
-
 + For Lambda function examples, see [Lambda Function Examples](http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-lambda-example-functions.html)\.
 
 Error handling for a given event source depends on how Lambda is invoked\. Amazon SES invokes your Lambda function asynchronously\. For more information on how errors are retried, see [Understanding Retry Behavior](retries-on-errors.md)\.
@@ -120,7 +115,7 @@ Error handling for a given event source depends on how Lambda is invoked\. AWS C
 
  You can use AWS Lambda functions to perform custom analysis on Amazon CloudWatch Logs using CloudWatch Logs subscriptions\. CloudWatch Logs subscriptions provide access to a real\-time feed of log events from CloudWatch Logs and deliver it to your AWS Lambda function for custom processing, analysis, or loading to other systems\. For more information about CloudWatch Logs, see [Monitoring Log Files](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatchLogs.html)\.
 
-You maintain event source mapping in Amazon CloudWatch Logs using the log subscription configuration\. For more information, see [Real\-time Processing of Log Data with Subscriptions \(Example 2: AWS Lambda\)](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/Subscriptions.html#LambdaFunctionExample) in the *Amazon CloudWatch User Guide*\.
+You maintain event source mapping in Amazon CloudWatch Logs using the log subscription configuration\. For more information, see [Real\-time Processing of Log Data with Subscriptions \(Example 2: AWS Lambda\)](http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SubscriptionFilters.html#LambdaFunctionExample) in the *Amazon CloudWatch User Guide*\.
 
 For an example event, see [Amazon CloudWatch Logs Sample Event](eventsources.md#eventsources-cloudwatch-logs)\.
 
@@ -169,11 +164,8 @@ Error handling for a given event source depends on how Lambda is invoked\. AWS C
 ## Amazon Alexa<a name="supported-event-source-echo"></a>
 
 You can use Lambda functions to build services that give new skills to Alexa, the Voice assistant on Amazon Echo\. The Alexa Skills Kit provides the APIs, tools, and documentation to create these new skills, powered by your own services running as Lambda functions\. Amazon Echo users can access these new skills by asking Alexa questions or making requests\. For more information, see:
-
 + [Getting Started with Alexa Skills Kit](https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit/getting-started-guide)\.
-
 + [alexa\-skills\-kit\-sdk\-for\-nodejs ](https://github.com/alexa/alexa-skills-kit-sdk-for-nodejs)
-
 + [alexa\-skills\-kit\-java ](https://github.com/amzn/alexa-skills-kit-java)
 
 Error handling for a given event source depends on how Lambda is invoked\. Amazon Echo is configured to invoke a Lambda function synchronously\. For more information on how errors are retried, see [Understanding Retry Behavior](retries-on-errors.md)\.
@@ -188,16 +180,14 @@ Error handling for a given event source depends on how Lambda is invoked\. Amazo
 
 ## Amazon API Gateway<a name="supported-event-source-api-gateway"></a>
 
-You can invoke a Lambda function over HTTPS\. You can do this by defining a custom REST API and endpoint using Amazon API Gateway\. You map individual API operations, such as `GET` and `PUT`, to specific Lambda functions\. When you send an HTTPS request to the API endpoint, the Amazon API Gateway service invokes the corresponding Lambda function\.
+You can invoke a Lambda function over HTTPS\. You can do this by defining a custom REST API endpoint using Amazon API Gateway\. You map individual API operations, such as `GET` and `PUT`, to specific Lambda functions\. When you send an HTTPS request to the API endpoint, the Amazon API Gateway service invokes the corresponding Lambda function\.
 
 For more information, see [Make Synchronous Calls to Lambda Functions](http://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started.html)\. For an example use case, see [Using AWS Lambda with Amazon API Gateway \(On\-Demand Over HTTPS\)](with-on-demand-https.md)\.
 
 Error handling for a given event source depends on how Lambda is invoked\. Amazon API Gateway is configured to invoke a Lambda function synchronously\. For more information on how errors are retried, see [Understanding Retry Behavior](retries-on-errors.md)\.
 
 In addition, you can also use Lambda functions with other AWS services that publish data to one of the supported AWS event sources listed in this topic\. For example, you can:
-
 + Trigger Lambda functions in response to CloudTrail updates because it records all API access events to an Amazon S3 bucket\.
-
 + Trigger Lambda functions in response to CloudWatch alarms because it publishes alarm events to an Amazon SNS topic\.
 
 ## AWS IoT Button<a name="supported-event-source-iot-button"></a>
@@ -211,13 +201,9 @@ Error handling for a given event source depends on how Lambda is invoked\. AWS I
 ## Amazon CloudFront<a name="supported-event-source-cloudfront"></a>
 
 Lambda@Edge lets you run Lambda functions at AWS Regions and Amazon CloudFront edge locations in response to CloudFront events, without provisioning or managing servers\. You can use Lambda functions to change CloudFront requests and responses at the following points:
-
 + After CloudFront receives a request from a viewer \(viewer request\)
-
 + Before CloudFront forwards the request to the origin \(origin request\)
-
 + After CloudFront receives the response from the origin \(origin response\)
-
 + Before CloudFront forwards the response to the viewer \(viewer response\)
 
 For more information, see [AWS Lambda@Edge](lambda-edge.md)

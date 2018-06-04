@@ -11,11 +11,8 @@ The deployment package is a \.zip file containing your Lambda function code and 
 1. Install the Node\.js platform\. For more information, see the [Node\.js](https://nodejs.org/) website\.
 
 1. Install dependencies\. The code examples use the following libraries:
-
    + AWS SDK for JavaScript in Node\.js
-
    + gm, GraphicsMagick for node\.js
-
    + Async utility module
 
    The AWS Lambda runtime already has the AWS SDK for JavaScript in Node\.js, so you only need to install the other libraries\. Open a command prompt, navigate to the `examplefolder`, and install the libraries using the `npm` command, which is part of Node\.js\.
@@ -130,14 +127,11 @@ The deployment package is a \.zip file containing your Lambda function code and 
    };
    ```
 **Note**  
-The code sample is compliant with the Node\.js runtimes v6\.10 or v4\.3\. For more information, see [Programming Model\(Node\.js\)](programming-model.md)
+The code sample is compliant with the Node\.js runtimes v6\.10 or v8\.10\. For more information, see [Programming Model\(Node\.js\)](programming-model.md)
 
 1. Review the preceding code and note the following:
-
    + The function knows the source bucket name and the key name of the object from the event data it receives as parameters\. If the object is a \.jpg, the code creates a thumbnail and saves it to the target bucket\. 
-
    + The code assumes that the destination bucket exists and its name is a concatenation of the source bucket name followed by the string `resized`\. For example, if the source bucket identified in the event data is `examplebucket`, the code assumes you have an `examplebucketresized` destination bucket\.
-
    + For the thumbnail it creates, the code derives its key name as the concatenation of the string `resized-` followed by the source object key name\. For example, if the source object key is `sample.jpg`, the code creates a thumbnail object that has the key `resized-sample.jpg`\.
 
 1. Save the file as `CreateThumbnail.js` in `examplefolder`\. After you complete this step, you will have the following folder structure:
@@ -293,9 +287,7 @@ public class S3EventProcessorCreateThumbnail implements
 Amazon S3 invokes your Lambda function using the `Event` invocation type, where AWS Lambda executes the code asynchronously\. What you return does not matter\. However, in this case we are implementing an interface that requires us to specify a return type, so in this example the handler uses `String` as the return type\. 
 
 Using the preceding code \(in a file named `S3EventProcessorCreateThumbnail.java`\), create a deployment package\. Make sure that you add the following dependencies: 
-
 + `aws-lambda-java-core `
-
 + `aws-lambda-java-events` 
 
 These can be found at [aws\-lambda\-java\-libs](https://github.com/aws/aws-lambda-java-libs)\.
@@ -392,7 +384,7 @@ AWS Lambda includes the AWS SDK for Python \(Boto 3\), so you don't need to incl
 
    `zip -r9 ~/CreateThumbnail.zip * `
 **Note**  
-To include all hidden files, use the following option: `zip -r9 ~/CreateThumbnail.zip .`
+To include all hidden files, use the following option: `zip -r9 ~/CreateThumbnail.zip `
 
 1. Add your python code to the \.zip file
 

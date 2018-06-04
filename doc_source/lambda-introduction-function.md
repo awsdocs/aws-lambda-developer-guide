@@ -7,9 +7,6 @@ In subsequent sections, we cover how the functions you create get invoked, and h
 To begin, we introduce you to the topic that explains the fundamentals of building a Lambda function, [Building Lambda Functions](lambda-app.md)\.
 
 Other topics in the section include:
-
 + [Configuring Lambda Functions](resource-model.md)
-
 + [Accessing Resources from a Lambda Function](accessing-resources.md)
-
 + [AWS Lambda Execution Model](running-lambda-code.md)

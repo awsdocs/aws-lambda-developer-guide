@@ -11,9 +11,7 @@
  Each call to `LambdaLogger.log()` results in a CloudWatch Logs event, provided the event size is within the allowed limits\. For information about CloudWatch Logs limits, see [CloudWatch Logs Limits](http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/cloudwatch_limits_cwl.html) in the *Amazon CloudWatch User Guide*\. For an example, see [Example 2: Writing Logs Using LambdaLogger \(Java\)](#java-wt-logging)\.
 
 In addition, you can also use the following statements in your Lambda function code to generate log entries:
-
 + System\.out\(\)
-
 + System\.err\(\)
 
 However, note that AWS Lambda treats each line returned by `System.out` and `System.err` as a separate event\. This works well when each output line corresponds to a single log entry\. When a log entry has multiple lines of output, AWS Lambda attempts to parse them using line breaks to identify separate events\. For example, the following logs the two words \("Hello" and "world"\) as two separate events:
@@ -25,11 +23,8 @@ System.out.println("Hello \n world");
 ## How to Find Logs<a name="how-to-find-logs-java"></a>
 
 You can find the logs that your Lambda function writes, as follows:
-
 + Find logs in CloudWatch Logs\. The `context` object \(in the `aws-lambda-java-core` library\) provides the `getLogStreamName()` and the `getLogGroupName()` methods\. Using these methods, you can find the specific log stream where logs are written\.
-
 + If you invoke a Lambda function via the console, the invocation type is always `RequestResponse` \(that is, synchronous execution\) and the console displays the logs that the Lambda function writes using the `LambdaLogger` object\. AWS Lambda also returns logs from `System.out` and `System.err` methods\.
-
 + If you invoke a Lambda function programmatically, you can add the `LogType` parameter to retrieve the last 4 KB of log data that is written to CloudWatch Logs\. For more information, see [Invoke](API_Invoke.md)\. AWS Lambda returns this log information in the `x-amz-log-results` header in the response\. If you use the AWS Command Line Interface to invoke the function, you can specify the `--log-type` parameter with value `Tail`\. 
 
 ## Logging Examples \(Java\)<a name="logging-java-examples"></a>
@@ -37,9 +32,7 @@ You can find the logs that your Lambda function writes, as follows:
 This section provides examples of using Custom Appender for Log4j and the `LambdaLogger` objects for logging information\. 
 
 ### Example 1: Writing Logs Using Log4J v2\.8<a name="java-wt-logging-using-log4j2.8"></a>
-
 + The following shows how to build your artifact with Maven to correctly include the Log4j v2\.8 plugins: 
-
   + For Maven pom\.xml:
 
     ```
@@ -63,7 +56,6 @@ This section provides examples of using Custom Appender for Log4j and the `Lambd
       ....
     </dependencies>
     ```
-
   + If using the Maven shade plugin, set the plugin configuration as follows:
 
     ```
@@ -99,7 +91,6 @@ This section provides examples of using Custom Appender for Log4j and the `Lambd
       ...
     </plugins>
     ```
-
   + The following Java code example shows how to use Log4j with Lambda:
 
     ```
@@ -132,12 +123,11 @@ This section provides examples of using Custom Appender for Log4j and the `Lambd
         }
     }
     ```
-
   + The example preceding uses the following log4j2\.xml file to load properties
 
     ```
      <?xml version="1.0" encoding="UTF-8"?>
-    <Configuration packages="com.amazonaws.services.lambda.runtime.log4j2.LambdaAppender">
+    <Configuration packages="com.amazonaws.services.lambda.runtime.log4j2">
       <Appenders>
         <Lambda name="Lambda">
           <PatternLayout>
@@ -188,21 +178,14 @@ The following is sample of log entries in CloudWatch Logs\.
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/logging-java-lambda-logger-10.png)
 
 Note:
-
 + AWS Lambda parses the log string in each of the `System.out.println()` and `System.err.println()` statements logs as two separate events \(note the two down arrows in the screenshot\) because of the line break\.
-
 + The `LambdaLogger.log()` produce one CloudWatch event\.
 
 You can do the following to test the code:
-
 + Using the code, create a deployment package\. 
-
 + Upload the deployment package to AWS Lambda to create your Lambda function\. 
-
 + To test your Lambda function use a string \("this is a test"\) as sample event\. The handler code receives the sample event but does nothing with it\. It only shows how to write logs\.
 
 Follow the instructions provided in the Getting Started\. For more information, see  [\(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\. Note the following differences:
-
 + When you create a deployment package, don't forget the `aws-lambda-java-core` library dependency\. 
-
 + When you create the Lambda function, specify `example.Hello::myHandler (package.class::method)` as the handler value\.

@@ -1,9 +1,7 @@
 # Understanding Scaling Behavior<a name="scaling"></a>
 
 Concurrent executions refers to the number of executions of your function code that are happening at any given time\. You can estimate the concurrent execution count, but the concurrent execution count will differ depending on whether or not your Lambda function is processing events from a stream\-based event source\. 
-
 + **Stream\-based event sources** for Lambda functions that process Kinesis or DynamoDB streams the number of shards is the unit of concurrency\. If your stream has 100 active shards, there will be at most 100 Lambda function invocations running concurrently\. This is because Lambda processes each shard’s events in sequence\. 
-
 + **Event sources that aren't stream\-based** – If you create a Lambda function to process events from event sources that aren't stream\-based \(for example, Lambda can process every event from other sources, like Amazon S3 or API Gateway\), each published event is a unit of work, in parallel, up to your account limits\. Therefore, the number of events \(or requests\) these event sources publish influences the concurrency\. You can use the this formula to estimate your concurrent Lambda function invocations:
 
   ```
@@ -49,6 +47,7 @@ The table below outlines the immediate concurrency increase per region:
 | EU \(Frankfurt\) | 1000 | 
 | EU \(London\) | 500 | 
 | EU \(Ireland\) | 3000 | 
+| EU \(Paris\) | 500 | 
 | AWS GovCloud \(US\) | 500 | 
 | US East \(Ohio\) | 500 | 
 | US West \(N\. California\) | 500 | 

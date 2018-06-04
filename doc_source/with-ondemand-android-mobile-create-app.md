@@ -5,9 +5,7 @@ Now you can create a simple Android mobile application that generates events and
 The following instructions have been verified using Android studio\.
 
 1. Create a new Android project called `AndroidEventGenerator` using the following configuration:
-
    + Select the **Phone and Tablet** platform\.
-
    + Choose **Blank Activity**\.
 
 1. In the build\.gradle \(`Module:app`\) file, add the following in the `dependencies` section:
@@ -35,7 +33,6 @@ The following instructions have been verified using Android studio\.
    ```
 
 1. In the `package` section, add the following two classes \(`RequestClass` and `ResponseClass`\)\. Note that the POJO is same as the POJO you created in your Lambda function in the preceding section\.
-
    + `RequestClass`\. The instances of this class act as the POJO \(Plain Old Java Object\) for event data which consists of first and last name\. If you are using Java example for your Lambda function you created in the preceding section, this POJO is same as the POJO you created in your Lambda function code\.
 
      ```
@@ -69,7 +66,6 @@ The following instructions have been verified using Android studio\.
          }
      }
      ```
-
    + `ResponseClass`
 
      ```
@@ -158,7 +154,5 @@ The `@LambdaFunction` annotation in the code maps the specific client method to 
    ```
 
 1. Run the code and verify it as follows:
-
    + The `Toast.makeText()` displays the response returned\.
-
    + Verify that CloudWatch Logs shows the log created by the Lambda function\. It should show the event data \(first name and last name\)\. You can also verify this in the AWS Lambda console\.

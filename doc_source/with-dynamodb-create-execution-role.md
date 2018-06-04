@@ -1,9 +1,7 @@
 # Step 2\.2: Create the Execution Role \(IAM Role\)<a name="with-dynamodb-create-execution-role"></a>
 
 In this section, you create an IAM role using the following predefined role type and access policy:
-
 + AWS service role of the type **Lambda** – This role grants AWS Lambda permissions to call other AWS services\. 
-
 + **AWSLambdaDynamoDBExecutionRole** – This contains the DynamoDB permissions policy that you attach to augment Lambda's basic execution policy and allows the two services to interoperate under your Lambda function's account\.
 
  For more information about IAM roles, see [IAM Roles](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *IAM User Guide* as well as the steps in [Creating a Role to Delegate Permissions to an AWS Service](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide* to create an IAM role \(execution role\)\. 

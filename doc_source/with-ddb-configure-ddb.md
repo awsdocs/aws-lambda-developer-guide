@@ -1,11 +1,8 @@
 # Step 3: Add an Event Source \(Create a DynamoDB Stream and Associate It with Your Lambda Function\)<a name="with-ddb-configure-ddb"></a>
 
 In this section, you do the following:
-
 + Create an Amazon DynamoDB table with a stream enabled\.
-
 + Create an event source mapping in AWS Lambda\. This event source mapping associates the DynamoDB stream with your Lambda function\. After you create this event source mapping, AWS Lambda starts polling the stream\.
-
 + Test the end\-to\-end experience\. As you perform table updates, DynamoDB writes event records to the stream\. As AWS Lambda polls the stream, it detects new records in the stream and executes your Lambda function on your behalf by passing events to the function\. 
 **Note**  
 The following example assumes you have a user \(`adminuser`\) with administrator privileges\. When you follow the procedure, create a user with name `adminuser`\.
@@ -14,13 +11,13 @@ The following example assumes you have a user \(`adminuser`\) with administrator
 
   1. Use your AWS account email address and password to sign in as the *[AWS account root user](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html)* to the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 **Note**  
-We strongly recommend that you adhere to the best practice of using the **Administrator** user below and securely lock away the root user credentials\. Sign in as the root user only to perform a few [account and service management tasks](http://docs.aws.amazon.com/general/latest/gr/aws_tasks-that-require-root.html)\.
+We strongly recommend that you adhere to the best practice of using the **Administrator** IAM user below and securely lock away the root user credentials\. Sign in as the root user only to perform a few [account and service management tasks](http://docs.aws.amazon.com/general/latest/gr/aws_tasks-that-require-root.html)\.
 
   1. In the navigation pane of the console, choose **Users**, and then choose **Add user**\.
 
-  1. For **User name**, type ** Administrator**\.
+  1. For **User name**, type **Administrator**\.
 
-  1. Select the check box next to **AWS Management Console access**, select **Custom password**, and then type the new user's password in the text box\. You can optionally select **Require password reset** to force the user to select a new password the next time the user signs in\.
+  1. Select the check box next to **AWS Management Console access**, select **Custom password**, and then type the new user's password in the text box\. You can optionally select **Require password reset** to force the user to create a new password the next time the user signs in\.
 
   1. Choose **Next: Permissions**\.
 
@@ -28,11 +25,11 @@ We strongly recommend that you adhere to the best practice of using the **Admini
 
   1. Choose **Create group**\.
 
-  1. In the **Create group** dialog box, type ** Administrators**\.
+  1. In the **Create group** dialog box, type **Administrators**\.
 
   1. For **Filter**, choose **Job function**\.
 
-  1. In the policy list, select the check box for ** AdministratorAccess**\. Then choose **Create group**\.
+  1. In the policy list, select the check box for **AdministratorAccess**\. Then choose **Create group**\.
 
   1. Back in the list of groups, select the check box for your new group\. Choose **Refresh** if necessary to see the group in the list\.
 

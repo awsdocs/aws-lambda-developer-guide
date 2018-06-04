@@ -18,7 +18,7 @@ Follow the instructions to create an AWS Lambda function deployment package\.
    }
    ```
 **Note**  
-The code sample is compliant with the Node\.js runtimes v6\.10 or v4\.3\. For more information, see [Programming Model\(Node\.js\)](programming-model.md)
+The code sample is compliant with the Node\.js runtimes v6\.10 or v8\.10\. For more information, see [Programming Model\(Node\.js\)](programming-model.md)
 
 1. Save the file as `AndroidBackendLambdaFunction.js`\. 
 
@@ -102,8 +102,7 @@ public class HelloPojo {
 }
 ```
 
-Save the preceding code in a file \(`HelloPojo.java`\)\. Your can now create a deployment package\. You need to include the following dependency: 
-
+Save the preceding code in a file \(`HelloPojo.java`\)\. Create a deployment package\. You need to include the following dependency: 
 + `aws-lambda-java-core`
 
 Your deployment package can be a \.zip file or a standalone \.jar\. You can use any build and packaging tool you are familiar with to create a deployment package\. For examples of how to use the Maven build tool to create a standalone \.jar, see [Creating a \.jar Deployment Package Using Maven without any IDE \(Java\)](java-create-jar-pkg-maven-no-ide.md) and [Creating a \.jar Deployment Package Using Maven and Eclipse IDE \(Java\)](java-create-jar-pkg-maven-and-eclipse.md)\. For an example of how to use the Gradle build tool to create a \.zip file, see [Creating a \.zip Deployment Package \(Java\)](create-deployment-pkg-zip-java.md)\.

@@ -13,11 +13,8 @@ In this step, you invoke the Lambda function manually using the `invoke` command
    ```
 
 1. Verify that the Lambda function executed successfully as follows:
-
    + Review the output\.txt file\.
-
    + Review the results in the AWS Lambda console\.
-
    + Verify the results in CloudWatch Logs\.
 
 **What Next?**  

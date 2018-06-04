@@ -4,7 +4,7 @@ Your deployment package can be a \.zip file or a standalone jar; it is your choi
 
 We provide examples of using Maven to create standalone jars and using Gradle to create a \.zip file\. For more information, see the following topics:
 
-
+**Topics**
 + [Creating a \.jar Deployment Package Using Maven without any IDE \(Java\)](java-create-jar-pkg-maven-no-ide.md)
 + [Creating a \.jar Deployment Package Using Maven and Eclipse IDE \(Java\)](java-create-jar-pkg-maven-and-eclipse.md)
 + [Creating a \.zip Deployment Package \(Java\)](create-deployment-pkg-zip-java.md)

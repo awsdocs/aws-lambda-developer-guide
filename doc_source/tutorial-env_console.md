@@ -2,7 +2,7 @@
 
 Along with specifying configuration settings for your Lambda function, you can also use environment variables to store sensitive information, such as a database password, using [AWS Key Management Service](http://docs.aws.amazon.com/kms/latest/developerguide/) and the Lambda console's encryption helpers\. For more information, see [Environment Variable Encryption](env_variables.md#env_encrypt)\. The following example shows you how to do this and also how to use KMS to decrypt that information\.
 
-This tutorial will demonstrate how you can use the Lambda console to encrypt an environment variable containing sensitive information\.
+This tutorial will demonstrate how you can use the Lambda console to encrypt an environment variable containing sensitive information\. Note that if you are updating an existing function, you can skip ahead to the instruction step outlining how to Expand the ** Environment Variables ** section of [Step 2: Configure the Lambda Function](#tutorial-env-configure-function)\.
 
 ## Step 1: Create the Lambda Function<a name="tutorial-env-create-function"></a>
 
@@ -13,26 +13,22 @@ This tutorial will demonstrate how you can use the Lambda console to encrypt an 
 1. In **Select blueprint**, choose the **Author from scratch** button\.
 
 1. In **Basic information**, do the following:
-
    + In **Name\***, specify your Lambda function name\.
-
    + In **Role\***, choose **Choose an existing role**\.
-
    + In **Existing role\***, choose **lambda\_basic\_execution**\.
 **Note**  
 If the policy of the execution role does not have the `decrypt` permission, you will need add it\.
-
    + Choose **Create function**\.
 
 ## Step 2: Configure the Lambda Function<a name="tutorial-env-configure-function"></a>
 
-1. Under **Configuration**, in **Runtime**, specify **nodejs6\.10** or **nodejs4\.3**\.
+1. Under **Configuration**, specify the **Runtime** of your choice\.
 
 1. Under the **Lambda function code** section you can take advantage of the **Edit code inline** option to replace the Lambda function handler code with your custom code\. 
 
-1. Choose the **Triggers** tab\. Under the **Triggers** page, you can optionally choose a service that automatically triggers your Lambda function by choosing the **Add trigger** button and then choosing the gray box with ellipses \(\.\.\.\) to display a list of available services\. For this example, do not configure a trigger and choose **Configuration**\.
+1. Note the **Triggers** tab\. Under the **Triggers** page, you can optionally choose a service that automatically triggers your Lambda function by choosing the **Add trigger** button and then choosing the gray box with ellipses \(\.\.\.\) to display a list of available services\. For this example, do not configure a trigger and choose **Configuration**\.
 
-1. Choose the **Monitoring** tab\. This page will provide immediate CloudWatch metrics for your Lambda function invocations, as well as links to other helpful guides, including [Using AWS X\-Ray](lambda-x-ray.md)\. 
+1. Note the **Monitoring** tab\. This page will provide immediate CloudWatch metrics for your Lambda function invocations, as well as links to other helpful guides, including [Using AWS X\-Ray](lambda-x-ray.md)\. 
 
 1. Expand the **Environment variables** section\.
 

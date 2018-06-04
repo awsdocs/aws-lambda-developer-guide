@@ -38,13 +38,13 @@ The Getting Started exercises and tutorials in this guide assume you have a user
 
 1. Use your AWS account email address and password to sign in as the *[AWS account root user](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html)* to the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 **Note**  
-We strongly recommend that you adhere to the best practice of using the **Administrator** user below and securely lock away the root user credentials\. Sign in as the root user only to perform a few [account and service management tasks](http://docs.aws.amazon.com/general/latest/gr/aws_tasks-that-require-root.html)\.
+We strongly recommend that you adhere to the best practice of using the **Administrator** IAM user below and securely lock away the root user credentials\. Sign in as the root user only to perform a few [account and service management tasks](http://docs.aws.amazon.com/general/latest/gr/aws_tasks-that-require-root.html)\.
 
 1. In the navigation pane of the console, choose **Users**, and then choose **Add user**\.
 
-1. For **User name**, type ** Administrator**\.
+1. For **User name**, type **Administrator**\.
 
-1. Select the check box next to **AWS Management Console access**, select **Custom password**, and then type the new user's password in the text box\. You can optionally select **Require password reset** to force the user to select a new password the next time the user signs in\.
+1. Select the check box next to **AWS Management Console access**, select **Custom password**, and then type the new user's password in the text box\. You can optionally select **Require password reset** to force the user to create a new password the next time the user signs in\.
 
 1. Choose **Next: Permissions**\.
 
@@ -52,11 +52,11 @@ We strongly recommend that you adhere to the best practice of using the **Admini
 
 1. Choose **Create group**\.
 
-1. In the **Create group** dialog box, type ** Administrators**\.
+1. In the **Create group** dialog box, type **Administrators**\.
 
 1. For **Filter**, choose **Job function**\.
 
-1. In the policy list, select the check box for ** AdministratorAccess**\. Then choose **Create group**\.
+1. In the policy list, select the check box for **AdministratorAccess**\. Then choose **Create group**\.
 
 1. Back in the list of groups, select the check box for your new group\. Choose **Refresh** if necessary to see the group in the list\.
 
@@ -101,11 +101,8 @@ https://your_account_alias.signin.aws.amazon.com/console/
 To verify the sign\-in link for IAM users for your account, open the IAM console and check under **IAM users sign\-in link:** on the dashboard\.
 
 For more information about IAM, see the following:
-
 + [AWS Identity and Access Management \(IAM\)](https://aws.amazon.com/iam/)
-
 + [Getting Started](http://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started.html)
-
 + [IAM User Guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/)
 
 ### Next Step<a name="setting-up-next-step"></a>

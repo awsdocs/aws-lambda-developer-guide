@@ -17,11 +17,8 @@ When you complete the wizard and create your function, Lambda automatically crea
 1. On the **Configure function** page, do the following:
 
    1. Review the preconfigured Lambda function configuration information, including:
-
       + **Runtime** is `Node.js 6.10`
-
       + Code authored in JavaScript is provided\. The code performs DynamoDB operations based on the method called and payload provided\.
-
       + **Handler** shows `index.handler`\. The format is: `filename.handler-function` 
 
    1. Enter the function name `MyLambdaMicroservice` in **Name**\.

@@ -19,14 +19,18 @@ By default, AWS Lambda limits the total concurrent executions across all functio
 By default, the concurrent execution limit is enforced against the sum of the concurrent executions of all functions\. The shared concurrent execution pool is referred to as the unreserved concurrency allocation\. If you haven’t set up any function\-level concurrency limit, then the unreserved concurrency limit is the same as the account level concurrency limit\. Any increases to the account level limit have a corresponding increase in the unreserved concurrency limit\. You can view the unreserved concurrency allocation for a function by using the [GetAccountSettings](API_GetAccountSettings.md) API or using the AWS Lambda console\. Functions that are being accounted against the shared concurrent execution pool will not show any concurrency value when queried using the [GetFunctionConfiguration](API_GetFunctionConfiguration.md) API\.
 
 You can optionally set the concurrent execution limit for a function\. You may choose to do this for a few reasons:
-
 + The default behavior means a surge of concurrent executions in one function prevents the function you have isolated with an execution limit from getting throttled\. By setting a concurrent execution limit on a function, you are reserving the specified concurrent execution value for that function\.
++ Functions scale automatically based on incoming request rate, but not all resources in your architecture may be able to do so\. For example, relational databases have limits on how many concurrent connections they can handle\. You can set the concurrent execution limit for a function to align with the values of its downstream resources support\.
++ If your function connects to VPC based resources, you must make sure your subnets have adequate address capacity to support the ENI scaling requirements of your function\. You can estimate the approximate ENI capacity with the following formula:
 
-+ Functions scale automatically based on incoming request rate, but not all resources in your architecture may be able to do so\. For example, relational databases have limits on how many concurrent connections they can handle\. You can set the concurrent execution limit for a function to align with the values its downstream resources support\.
+  Where:
+  + **Concurrent execution** – This is the projected concurrency of your workload\. Use the information in [Understanding Scaling Behavior](scaling.md)to determine this value\.
+  + **Memory in GB** – The amount of memory you configured for your Lambda function\.
 
-+ If your function connects to VPC based resources, each concurrent execution consumes one IP within the assigned subnet\. You can set the concurrent execution limit for a function to match the subnet size limits you have\.
+You can set the concurrent execution limit for a function to match the subnet size limits you have\.
 
-+ If you need a function to stop processing any invocations, you can choose to set the concurrency to 0 and throttle all incoming executions\.
+**Note**  
+If you need a function to stop processing any invocations, you can choose to set the concurrency to 0 and throttle all incoming executions\.
 
 By setting a concurrency limit on a function, Lambda guarantees that allocation will be applied specifically to that function, regardless of the amount of traffic processing remaining functions\. If that limit is exceeded, the function will be throttled\. How that function behaves when throttled will depend on the event source\. For more information, see [Throttling Behavior](#throttling-behavior)\.
 
@@ -53,7 +57,6 @@ To set a concurrency limit for your Lambda function using the Lambda console, do
 ### Setting Concurrency Limits Per Function \(CLI\)<a name="per-function-concurrency-cli"></a>
 
 To set a concurrency limit for your Lambda function using the AWS CLI, do the following:
-
 + Use the [PutFunctionConcurrency](API_PutFunctionConcurrency.md) operation and pass in the function name and concurrency limit you want allocated to this function:
 
   ```
@@ -62,7 +65,6 @@ To set a concurrency limit for your Lambda function using the AWS CLI, do the fo
   ```
 
 To remove a concurrency limit for your Lambda function using the AWS CLI, do the following:
-
 + Use the [DeleteFunctionConcurrency](API_DeleteFunctionConcurrency.md) operation and pass in the function name:
 
   ```
@@ -70,7 +72,6 @@ To remove a concurrency limit for your Lambda function using the AWS CLI, do the
   ```
 
 To view a concurrency limit for your Lambda function using the AWS CLI, do the following:
-
 + Use the [GetFunction](API_GetFunctionConfiguration.md) operation and pass in the function name:
 
   ```
@@ -83,23 +84,17 @@ Setting the per function concurrency can impact the concurrency pool available t
 ## Throttling Behavior<a name="throttling-behavior"></a>
 
 On reaching the concurrency limit associated with a function, any further invocation requests to that function are throttled, i\.e\. the invocation doesn't execute your function\. Each throttled invocation increases the Amazon CloudWatch `Throttles` metric for the function\. AWS Lambda handles throttled invocation requests differently, depending on their source: 
-
 + **Event sources that aren't stream\-based: **Some of these event sources invoke a Lambda function synchronously, and others invoke it asynchronously\. Handling is different for each: 
-
   + **Synchronous invocation:** If the function is invoked synchronously and is throttled, Lambda returns a 429 error and the invoking service is responsible for retries\. The `ThrottledReason` error code explains whether you ran into a function level throttle \(if specified\) or an account level throttle \(see note below\)\. Each service may have its own retry policy\. For example, CloudWatch Logs retries the failed batch up to five times with delays between retries\. For a list of event sources and their invocation type, see [Supported Event Sources](invoking-lambda-function.md)\. 
 **Note**  
 If you invoke the function directly through the AWS SDKs using the `RequestResponse` invocation mode, your client receives the 429 error and you can retry the invocation\. 
-
-  + **Asynchronous invocation:** If your Lambda function is invoked asynchronously and is throttled, AWS Lambda automatically retries the throttled event for up to six hours, with delays between retries\. Remember, asynchronous events are queued before they are used to invoke the Lambda function\. 
-
+  + **Asynchronous invocation:** If your Lambda function is invoked asynchronously and is throttled, AWS Lambda automatically retries the throttled event for up to six hours, with delays between retries\. Remember, asynchronous events are queued before they are used to invoke the Lambda function\. You can configure a Dead Letter Queue \(DLQ\) to investigate why your function was throttled\. For more information, see [Dead Letter Queues](dlq.md)\.
 + **Stream\-based event sources:** For stream\-based event sources \(Kinesis and DynamoDB streams\), AWS Lambda polls your stream and invokes your Lambda function\. When your Lambda function is throttled, Lambda attempts to process the throttled batch of records until the time the data expires\. This time period can be up to seven days for Kinesis\. The throttled request is treated as blocking per shard, and Lambda doesn't read any new records from the shard until the throttled batch of records either expires or succeeds\. If there is more than one shard in the stream, Lambda continues invoking on the non\-throttled shards until one gets through\. 
 
 ## Monitoring Your Concurrency Usage<a name="monitoring-concurrent-usage"></a>
 
 To understand your concurrent execution usage, AWS Lambda provides the following metrics:
-
 + **ConcurrentExecutions:** This shows you the concurrent executions at an account level, and for any function with a custom concurrency limit\.
-
 + **UnreservedConcurrentExecutions:** This shows you the total concurrent executions for functions assigned to the default “unreserved” concurrency pool\.
 
 To learn about these metrics and how to access them, see [Using Amazon CloudWatch](monitoring-functions.md)\. 

@@ -28,9 +28,7 @@ Which will return:
 You can create custom error handling to raise an exception directly from your Lambda function and handle it directly \(Retry or Catch\) within an AWS Step Functions State Machine\. For more information, see [Handling Error Conditions Using a State Machine](http://docs.aws.amazon.com/step-functions/latest/dg/tutorial-handling-error-conditions.html)\. 
 
 Consider a `CreateAccount` [state](http://docs.aws.amazon.com/step-functions/latest/dg/awl-ref-states.html) is a [task](http://docs.aws.amazon.com/step-functions/latest/dg/awl-ref-states-task.html) that writes a customer's details to a database using a Lambda function\.
-
 + If the task succeeds, an account is created and a welcome email is sent\.
-
 + If a user tries to create an account for a username that already exists, the Lambda function raises an error, causing the state machine to suggest a different username and to retry the account\-creation process\.
 
 The following code samples demonstrate how to do this\. 

@@ -1,9 +1,7 @@
 # Step 2\.3: Create the Lambda Function and Invoke It Manually \(Using Sample Event Data\)<a name="with-on-demand-custom-android-example-upload-deployment-pkg"></a>
 
 In this section, you do the following:
-
 + Create a Lambda function, by uploading the deployment package\. 
-
 + Test the Lambda function by invoking it manually\. Instead of creating an event source, you use sample event data\. In the next section, you create an Android mobile app and test the end\-to\-end experience\.
 
 ## Step 2\.3\.1: Create a Lambda Function \(Upload the Deployment Package\)<a name="walkthrough-on-demand-custom-android-events-adminuser-create-test-function-upload-zip-test-upload"></a>
@@ -12,7 +10,7 @@ In this step, you upload the deployment package using the AWS CLI\.
 
 At the command prompt, run the following Lambda CLI `create-function` command using the *adminuser* `profile`\. 
 
-You need to update the command by providing the \.zip file path and the execution role ARN\. The `--runtime` parameter value can be `nodejs6.10`, `nodejs4.3`, or `java8`, depending on the language you chose to author your code\.
+You need to update the command by providing the \.zip file path and the execution role ARN\. The `--runtime` parameter value can be `nodejs8.10`, `nodejs6.10`, or `java8`, depending on the language you chose to author your code\.
 
 ```
 $ aws lambda create-function \
@@ -47,7 +45,6 @@ Invoke the function manually using the sample event data\. We recommend that you
    ```
 
 1. Verify the results in the console\.
-
    + **Execution result** should be `Succeeded` with the following return value:
 
      ```
@@ -55,7 +52,6 @@ Invoke the function manually using the sample event data\. We recommend that you
        "greetings": "Hello first-name, last-name."
      }
      ```
-
    + Review the **Summary** and the **Log output** sections\.
 
 **To test the Lambda function \(AWS CLI\)**

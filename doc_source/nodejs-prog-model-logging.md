@@ -3,31 +3,41 @@
  Your Lambda function can contain logging statements\. AWS Lambda writes these logs to CloudWatch\. If you use the Lambda console to invoke your Lambda function, the console displays the same logs\.
 
  The following Node\.js statements generate log entries: 
-
 + `console.log()`
-
 + `console.error()`
-
 + `console.warn()`
-
 + `console.info()`
 
- For example, consider the following Node\.js code example\. 
+ For example, consider the following Node\.js code examples: 
++ The first sample can be written using either runtime version 6\.10 or 4\.3\. 
 
-```
-console.log('Loading function');
+  ```
+  console.log('Loading function');
+  
+  exports.handler = function(event, context, callback) {
+      //console.log('Received event:', JSON.stringify(event, null, 2));
+      console.log('value1 =', event.key1);
+      console.log('value2 =', event.key2);
+      console.log('value3 =', event.key3);
+      callback(null, event.key1); // Echo back the first key value
+      
+  };
+  ```
++ The second sample uses the Node\.js `async` feature, available only in runtime versions 8\.10 or later\.
 
-exports.handler = function(event, context, callback) {
-    //console.log('Received event:', JSON.stringify(event, null, 2));
-    console.log('value1 =', event.key1);
-    console.log('value2 =', event.key2);
-    console.log('value3 =', event.key3);
-    callback(null, event.key1); // Echo back the first key value
-    
-};
-```
+  ```
+  console.log('Loading function');
+  
+  exports.handler = async function(event) {
+      //console.log('Received event:', JSON.stringify(event, null, 2));
+      console.log('value1 =', event.key1);
+      console.log('value2 =', event.key2);
+      console.log('value3 =', event.key3);
+      return event.key1 // Echo back the first key value   
+  };
+  ```
 
- The screenshot shows an example  **Log output**  section in Lambda console, you can also find these logs in CloudWatch\. For more information, see [Accessing Amazon CloudWatch Logs for AWS Lambda](monitoring-functions-logs.md)\. 
+In either case, the following screenshot shows an example **Log output** section in the Lambda console\. You can examine the same information in CloudWatch Logs\. For more information, see [Accessing Amazon CloudWatch Logs for AWS Lambda](monitoring-functions-logs.md)\. 
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/logging-nodejs-console-output.png)
 
@@ -44,11 +54,8 @@ For step\-by\-step instructions, see [Getting Started](getting-started.md)\.
 ## Finding Logs<a name="nodejs-prog-model-logging-finding-logs"></a>
 
 You can find the logs that your Lambda function writes, as follows:
-
 + **In the AWS Lambda console** – The ** Log output**  section in the AWS Lambda console shows the logs\. 
-
 + **In the response header, when you invoke a Lambda function programmatically** – If you invoke a Lambda function programmatically, you can add the `LogType` parameter to retrieve the last 4 KB of log data that is written to CloudWatch Logs\. AWS Lambda returns this log information in the `x-amz-log-results` header in the response\. For more information, see [Invoke](http://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html)\.
 
   If you use AWS CLI to invoke the function, you can specify the` --log-type parameter` with value `Tail` to retrieve the same information\.
-
 + **In CloudWatch Logs** – To find your logs in CloudWatch you need to know the log group name and log stream name\. You can get that information by adding the `context.logGroupName`, and `context.logStreamName` methods in your code\. When you run your Lambda function, the resulting logs in the console or CLI will show you the log group name and log stream name\. 

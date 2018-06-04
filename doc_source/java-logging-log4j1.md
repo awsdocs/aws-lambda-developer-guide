@@ -59,23 +59,15 @@ The following is sample of log entries in CloudWatch Logs\.
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/logging-java-log4j-10.png)
 
 Note:
-
 + AWS Lambda parses the log string in each of the `System.out.println()` and `System.err.println()` statements logs as two separate events \(note the two down arrows in the screenshot\) because of the line break\.
-
 + The Log4j methods \(`log.debug()` and `log.error()`\) produce one CloudWatch event\.
-
 + AWS Lambda runtime adds the `AWSRequestId` in the [MDC](https://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/MDC.html) to the log4j context \(see [Class MDC for log4j v 1\.2 and Class ThreadContext](https://logging.apache.org/log4j/2.x/log4j-api/apidocs/org/apache/logging/log4j/ThreadContext.html)\)\. To get this value in the log as shown, we added `%X{AWSRequestId}` in the conversion pattern in the `log4.properties` file\.
 
 You can do the following to test the code:
-
 + Using the code, create a deployment package\. In your project, don't forget to add the `log4j.properties` file in the *project\-dir*/src/main/resources/ directory\.
-
 + Upload the deployment package to AWS Lambda to create your Lambda function\. 
-
 + To test your Lambda function use a string \("this is a test"\) as sample event\. The handler code receives the sample event but does nothing with it\. It only shows how to write logs\.
 
 Follow the instructions provided in the Getting Started\. For more information, see  [\(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\. Note the following differences:
-
 + When you create a deployment package, don't forget the `aws-lambda-java-log4j` dependency for Log4j 1\.2 dependency\. 
-
 + When you create the Lambda function, specify `example.Hello::myHandler (package.class::method)` as the handler value\.

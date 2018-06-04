@@ -3,9 +3,7 @@
  In this tutorial, you create a Lambda function to consume events from a DynamoDB stream\. 
 
  The tutorial is divided into two main sections: 
-
 +  First, you perform the necessary setup to create a Lambda function and then you test it by invoking it manually using sample event data\. 
-
 + Second, you create an DynamoDB stream\-enabled table and add an event source mapping in AWS Lambda to associate the stream with your Lambda function\. AWS Lambda starts polling the stream\. Then, you test the end\-to\-end setup\. As you create, update, and delete items from the table, Amazon DynamoDB writes records to the stream\. AWS Lambda detects the new records as it polls the stream and executes your Lambda function on your behalf\. 
 
 **Important**  

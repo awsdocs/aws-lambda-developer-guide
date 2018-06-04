@@ -1,18 +1,14 @@
 # The Context Object \(Python\)<a name="python-context-object"></a>
 
-
+**Topics**
 + [Example](#python-context-object-example)
 + [The Context Object Methods \(Python\)](#python-context-object-methods)
 + [The Context Object Attributes \(Python\)](#python-context-object-props)
 
 While a Lambda function is executing, it can interact with the AWS Lambda service to get useful runtime information such as:
-
 + How much time is remaining before AWS Lambda terminates your Lambda function \(timeout is one of the Lambda function configuration properties\)\.
-
 + The CloudWatch log group and log stream associated with the Lambda function that is executing\.
-
 + The AWS request ID returned to the client that invoked the Lambda function\. You can use the request ID for any follow up inquiry with AWS support\. 
-
 +  If the Lambda function is invoked through AWS Mobile SDK, you can learn more about the mobile application calling the Lambda function\. 
 
 AWS Lambda provides this information via the `context` object that the service passes as the second parameter to your Lambda function handler\. For more information, see [Lambda Function Handler \(Python\)](python-programming-model-handler-types.md)\. 
@@ -83,28 +79,19 @@ The value is null if your Lambda function is unable to create a log stream, whic
 
 **identity**  
 Information about the Amazon Cognito identity provider when invoked through the AWS Mobile SDK\. It can be null\.  
-
 + **identity\.cognito\_identity\_id**
-
 + **identity\.cognito\_identity\_pool\_id**
 
 **client\_context**  
 Information about the client application and device when invoked through the AWS Mobile SDK\. It can be null\.  
-
 + **client\_context\.client\.installation\_id**
-
 + **client\_context\.client\.app\_title**
-
 + **client\_context\.client\.app\_version\_name**
-
 + **client\_context\.client\.app\_version\_code**
-
 + **client\_context\.client\.app\_package\_name**
-
 + **client\_context\.custom**
 
   A `dict` of custom values set by the mobile client application\.
-
 + **client\_context\.env**
 
   A `dict` of environment information provided by the AWS Mobile SDK\.
