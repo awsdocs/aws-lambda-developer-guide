@@ -99,7 +99,7 @@ The following example shows CloudTrail log entries for the `GetFunction` and `De
 ```
 
 **Note**  
-The `eventName` may include date and version information, such as `"GetFunction20150331"`, but it is still referring to the same public API\.
+The `eventName` may include date and version information, such as `"GetFunction20150331"`, but it is still referring to the same public API\. For more information, see [ Services Supported by CloudTrail Event History](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/view-cloudtrail-events-supported-services.html#view-cloudtrail-events-supported-apis-lambda) in the *AWS CloudTrail User Guide*\. 
 
 ## Using CloudTrail to Track Function Invocations<a name="tracking-function-invocations"></a>
 

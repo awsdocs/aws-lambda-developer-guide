@@ -15,6 +15,8 @@ While AWS Lambda will only poll for records once per second, it can be invoked m
 + There were more records retrieved during the poll than the batch size will allow for a single invocation\.
 + The processing time for the function allowed it to complete before 1 second had elapsed\.
 
+This means that the limiting factor on how many records your function can process is defined by how quickly it can process records, not how often Lambda polls for new records\.
+
 Regardless of what invokes a Lambda function, AWS Lambda always executes a Lambda function on your behalf\. If your Lambda function needs to access any AWS resources, you need to grant the relevant permissions to access those resources\. You also need to grant AWS Lambda permissions to poll your Kinesis stream\. You grant all of these permissions to an IAM role \(execution role\) that AWS Lambda can assume to poll the stream and execute the Lambda function on your behalf\. You create this role first and then enable it at the time you create the Lambda function\. For more information, see [Manage Permissions: Using an IAM Role \(Execution Role\)](intro-permission-model.md#lambda-intro-execution-role)\.
 
 The following diagram illustrates the application flow:

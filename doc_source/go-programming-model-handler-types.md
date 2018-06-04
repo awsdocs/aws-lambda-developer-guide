@@ -84,7 +84,7 @@ Your request would then look like this:
 And the response would look like this:
 
 ```
-# request
+# response
 {
     "Answer": "Jim is 33 years old!"
 }
