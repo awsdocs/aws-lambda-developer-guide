@@ -52,8 +52,7 @@ $ aws lambda list-event-source-mappings \
 --region region \
 --function-name ProcessKinesisRecords \
 --event-source kinesis-stream-arn \
---profile adminuser \
---debug
+--profile adminuser
 ```
 
 In the response, you can verify the status value is `enabled`\. 

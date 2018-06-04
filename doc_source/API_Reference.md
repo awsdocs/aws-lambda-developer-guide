@@ -9,6 +9,10 @@ You can use the AWS CLI to explore the AWS Lambda API\. This guide provides seve
 ## Certificate Errors When Using an SDK<a name="cert-errors"></a>
 
 Because AWS SDKs use the CA certificates from your computer, changes to the certificates on the AWS servers can cause connection failures when you attempt to use an SDK\. You can prevent these failures by keeping your computer's CA certificates and operating system up\-to\-date\. If you encounter this issue in a corporate environment and do not manage your own computer, you might need to ask an administrator to assist with the update process\. The following list shows minimum operating system and Java versions:
+<<<<<<< HEAD
+=======
+
+>>>>>>> ed591af2f95b408f11ae50c321a00d298f13ba98
 + Microsoft Windows versions that have updates from January 2005 or later installed contain at least one of the required CAs in their trust list\. 
 + Mac OS X 10\.4 with Java for Mac OS X 10\.4 Release 5 \(February 2007\), Mac OS X 10\.5 \(October 2007\), and later versions contain at least one of the required CAs in their trust list\. 
 + Red Hat Enterprise Linux 5 \(March 2007\), 6, and 7 and CentOS 5, 6, and 7 all contain at least one of the required CAs in their default trusted CA list\. 
@@ -23,4 +27,5 @@ Root certificates from the first two authorities are available from [Amazon Trus
 
 **Topics**
 + [Actions](API_Operations.md)
+
 + [Data Types](API_Types.md)
