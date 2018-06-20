@@ -72,7 +72,7 @@ To remove a concurrency limit for your Lambda function using the AWS CLI, do the
   ```
 
 To view a concurrency limit for your Lambda function using the AWS CLI, do the following:
-+ Use the [GetFunction](API_GetFunctionConfiguration.md) operation and pass in the function name:
++ Use the [GetFunction](API_GetFunction.md) operation and pass in the function name:
 
   ```
   aws lambda get-function --function-name function-name  
