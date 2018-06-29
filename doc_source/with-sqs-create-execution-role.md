@@ -25,7 +25,7 @@ If the Amazon SQS queue and Lambda function are associated with different user a
                   "sqs:ReceiveMessage",
                   "sqs:GetQueueAttributes"
               ],
-              "Resource": “arn:aws:sqs:region:123456789012:test-queue“
+              "Resource": "arn:aws:sqs:region:123456789012:test-queue"
           }
       ]
   }
