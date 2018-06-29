@@ -42,7 +42,7 @@ Resources:
       CodeUri: s3://bucketName/codepackage.zip
       Environment:
         Variables:
-          TABLE_NAME: !Ref Table
+          TABLE_NAME: !Ref DynamoDBTable
   DeleteFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -52,7 +52,7 @@ Resources:
       CodeUri: s3://bucketName/codepackage.zip
       Environment:
         Variables:
-          TABLE_NAME: !Ref Table
+          TABLE_NAME: !Ref DynamoDBTable
       Events:
         Stream:
           Type: DynamoDB

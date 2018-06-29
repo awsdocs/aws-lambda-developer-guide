@@ -30,7 +30,7 @@ Length Constraints: Minimum length of 1\. Maximum length of 128\.
 Pattern: `(|[a-zA-Z0-9$_-]+)` 
 
  ** [RevisionId](#API_RemovePermission_RequestSyntax) **   <a name="SSS-RemovePermission-request-RevisionId"></a>
-An optional value you can use to ensure you are updating the latest update of the function version or alias\. If the `RevisionID` you pass doesn't match the latest `RevisionId` of the function or alias, it will fail with an error message, advising you to retrieve the latest function version or alias `RevisionID` using either [GetFunction](API_GetFunction.md) or [GetAlias](API_GetAlias.md)\.
+An optional value you can use to ensure you are updating the latest update of the function version or alias\. If the `RevisionID` you pass doesn't match the latest `RevisionId` of the function or alias, it will fail with an error message, advising you to retrieve the latest function version or alias `RevisionID` using either [GetFunction](https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunction.html) or [GetAlias](https://docs.aws.amazon.com/lambda/latest/dg/API_GetAlias.html) operations\.
 
  ** [StatementId](#API_RemovePermission_RequestSyntax) **   <a name="SSS-RemovePermission-request-StatementId"></a>
 Statement ID of the permission to remove\.  

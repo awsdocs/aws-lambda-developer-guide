@@ -1,8 +1,6 @@
 # AddPermission<a name="API_AddPermission"></a>
 
-Adds a permission to the resource policy associated with the specified AWS Lambda function\. You use resource policies to grant permissions to event sources that use *push* model\. In a *push* model, event sources \(such as Amazon S3 and custom applications\) invoke your Lambda function\. Each permission you add to the resource policy allows an event source, permission to invoke the Lambda function\. 
-
-For information about the push model, see [Lambda Functions](https://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html)\. 
+Adds a permission to the resource policy associated with the specified AWS Lambda function\. You use resource policies to grant permissions to event sources that use the *push* model\. In a *push* model, event sources \(such as Amazon S3 and custom applications\) invoke your Lambda function\. Each permission you add to the resource policy allows an event source permission to invoke the Lambda function\. 
 
 If you are using versioning, the permissions you add are specific to the Lambda function version or alias you specify in the `AddPermission` request via the `Qualifier` parameter\. For more information about versioning, see [AWS Lambda Function Versioning and Aliases](https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html)\. 
 
@@ -69,7 +67,7 @@ Pattern: `.*`
 Required: Yes
 
  ** [RevisionId](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-RevisionId"></a>
-An optional value you can use to ensure you are updating the latest update of the function version or alias\. If the `RevisionID` you pass doesn't match the latest `RevisionId` of the function or alias, it will fail with an error message, advising you to retrieve the latest function version or alias `RevisionID` using either [GetFunction](API_GetFunction.md) or [GetAlias](API_GetAlias.md)\.  
+An optional value you can use to ensure you are updating the latest update of the function version or alias\. If the `RevisionID` you pass doesn't match the latest `RevisionId` of the function or alias, it will fail with an error message, advising you to retrieve the latest function version or alias `RevisionID` using either [GetFunction](https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunction.html) or [GetAlias](https://docs.aws.amazon.com/lambda/latest/dg/API_GetAlias.html) operations\.  
 Type: String  
 Required: No
 

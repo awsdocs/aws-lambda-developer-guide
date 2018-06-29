@@ -21,10 +21,10 @@ v4\.3 has been deprecated\. For more information on AWS Lambda's policy on depre
 Not all runtimes are available on the Public Amazon Linux AMI version or its yum repositories\. You may need to download and install them manually from their respective public sites\.
 
 The following libraries are available in the AWS Lambda execution environment, regardless of the supported runtime you use, so you don't need to include them:
-+  AWS SDK – [AWS SDK for JavaScript](http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/) version 2\.233\.1 
-+ AWS SDK for Python 2\.7 \(Boto 3\) version 3\-1\.7\.14 botocore\-1\.10\.14
++  AWS SDK – [AWS SDK for JavaScript](http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/) version 2\.249\.1 
++ AWS SDK for Python 2\.7 \(Boto 3\) version 3\-1\.7\.30 botocore\-1\.10\.30
 
-  AWS SDK for Python 3\.6 \(Boto 3\) version 3\-1\.7\.14 botocore\-1\.10\.14
+  AWS SDK for Python 3\.6 \(Boto 3\) version 3\-1\.7\.30 botocore\-1\.10\.30
 + Amazon Linux build of `java-1.8.0-openjdk` for Java\.
 
 For an example of using the `boto` libraries in your Lambda function, see [Accessing Resources from a Lambda Function](accessing-resources.md)\.

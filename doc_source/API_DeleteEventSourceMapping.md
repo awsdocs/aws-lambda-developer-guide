@@ -51,12 +51,12 @@ Type: Integer
 Valid Range: Minimum value of 1\. Maximum value of 10000\.
 
  ** [EventSourceArn](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-EventSourceArn"></a>
-The Amazon Resource Name \(ARN\) of the Amazon Kinesis stream that is the source of events\.  
+The Amazon Resource Name \(ARN\) of the Amazon Kinesis or DynamoDB stream that is the source of events\.  
 Type: String  
 Pattern: `arn:aws:([a-zA-Z0-9\-])+:([a-z]{2}-[a-z]+-\d{1})?:(\d{12})?:(.*)` 
 
  ** [FunctionArn](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-FunctionArn"></a>
-The Lambda function to invoke when AWS Lambda detects an event on the stream\.  
+The Lambda function to invoke when AWS Lambda detects an event on the poll\-based source\.  
 Type: String  
 Pattern: `arn:aws:lambda:[a-z]{2}-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
@@ -65,7 +65,7 @@ The UTC time string indicating the last time the event mapping was updated\.
 Type: Timestamp
 
  ** [LastProcessingResult](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-LastProcessingResult"></a>
-The result of the last AWS Lambda invocation of your Lambda function\.  
+The result of the last AWS Lambda invocation of your Lambda function\. This value will be null if an SQS queue is the event source\.  
 Type: String
 
  ** [State](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-State"></a>
@@ -84,6 +84,10 @@ Type: String
 
  **InvalidParameterValueException**   
 One of the parameters in the request is invalid\. For example, if you provided an IAM role for AWS Lambda to assume in the `CreateFunction` or the `UpdateFunctionConfiguration` API, that AWS Lambda is unable to assume you will get this exception\.  
+HTTP Status Code: 400
+
+ **ResourceInUseException**   
+The operation conflicts with the resource's availability\. For example, you attempted to update an EventSoure Mapping in CREATING, or tried to delete a EventSoure mapping currently in the UPDATING state\.   
 HTTP Status Code: 400
 
  **ResourceNotFoundException**   

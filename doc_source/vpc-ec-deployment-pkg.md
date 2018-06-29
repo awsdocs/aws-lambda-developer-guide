@@ -44,7 +44,7 @@ The `from __future__` statement enables you to write code that is compatible wit
        else:
            raise Exception("Value is not the same as we put :(. Expected %s got %s" %(uuid_inserted, uuid_obtained))
    
-       return "Fetched value from memcache: " + uuid_obtained("utf-8"
+       return "Fetched value from memcache: " + uuid_obtained.decode("utf-8")
    ```
 
 1. Save the file as `app.py`\. 

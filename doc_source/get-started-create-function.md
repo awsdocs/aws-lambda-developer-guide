@@ -76,7 +76,7 @@ Follow the steps to invoke your Lambda function using the sample event data prov
    }
    ```
 
-   You can change key and values in the sample JSON, but don't change the event structure\. If you do change any keys and values, you must update the sample code accordingly\. Choose **Save and test**\.
+   You can change key and values in the sample JSON, but don't change the event structure\. If you do change any keys and values, you must update the sample code accordingly\. 
 **Note**  
 If you choose to delete the test event, go to the **Configure test event** page and then choose **Delete**\.
 

@@ -48,9 +48,9 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.KinesisEvent;
 import com.amazonaws.services.lambda.runtime.events.KinesisEvent.KinesisEventRecord;
 
-public class ProcessKinesisEvents implements RequestHandler<KinesisEvent, Void>{
+public class ProcessKinesisRecords implements RequestHandler<KinesisEvent, Void>{
 @Override
-public Void handleRequest(KinesisEvent event, Context context)
+public Void recordHandler(KinesisEvent event, Context context)
 {
 for(KinesisEventRecord rec : event.getRecords()) {
 System.out.println(new String(rec.getKinesis().getData().array()));
@@ -189,7 +189,7 @@ Follow the instructions to create a AWS Lambda function deployment package\.
 
 1. Save the file as `ProcessKinesisRecords.go`\. 
 
-1.  Zip the `ProcessKinesisRecords.go` file as `ProcessKinesisRecords.zip`\. 
+1. Using the preceding code, create a deployment package\. For instructions, see [Creating a Deployment Package \(Go\)](lambda-go-how-to-create-deployment-package.md)\.
 
 ### Next Step<a name="create-deployment-pkg-go-next-step"></a>
 

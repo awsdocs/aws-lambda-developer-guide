@@ -83,12 +83,12 @@ Type: Integer
 Valid Range: Minimum value of 1\. Maximum value of 10000\.
 
  ** [EventSourceArn](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-EventSourceArn"></a>
-The Amazon Resource Name \(ARN\) of the Amazon Kinesis stream that is the source of events\.  
+The Amazon Resource Name \(ARN\) of the Amazon Kinesis or DynamoDB stream that is the source of events\.  
 Type: String  
 Pattern: `arn:aws:([a-zA-Z0-9\-])+:([a-z]{2}-[a-z]+-\d{1})?:(\d{12})?:(.*)` 
 
  ** [FunctionArn](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-FunctionArn"></a>
-The Lambda function to invoke when AWS Lambda detects an event on the stream\.  
+The Lambda function to invoke when AWS Lambda detects an event on the poll\-based source\.  
 Type: String  
 Pattern: `arn:aws:lambda:[a-z]{2}-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
@@ -97,7 +97,7 @@ The UTC time string indicating the last time the event mapping was updated\.
 Type: Timestamp
 
  ** [LastProcessingResult](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-LastProcessingResult"></a>
-The result of the last AWS Lambda invocation of your Lambda function\.  
+The result of the last AWS Lambda invocation of your Lambda function\. This value will be null if an SQS queue is the event source\.  
 Type: String
 
  ** [State](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-State"></a>
@@ -121,6 +121,10 @@ HTTP Status Code: 400
  **ResourceConflictException**   
 The resource already exists\.  
 HTTP Status Code: 409
+
+ **ResourceInUseException**   
+The operation conflicts with the resource's availability\. For example, you attempted to update an EventSoure Mapping in CREATING, or tried to delete a EventSoure mapping currently in the UPDATING state\.   
+HTTP Status Code: 400
 
  **ResourceNotFoundException**   
 The resource \(for example, a Lambda function or access policy statement\) specified in the request does not exist\.  

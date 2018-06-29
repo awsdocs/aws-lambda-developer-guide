@@ -173,7 +173,7 @@ The `from __future__` statement enables you to write code that is compatible wit
            fmt.Printf("Processing request data for event ID %s, type %s.\n", record.EventID, record.EventName)
    
            // Print new values for attributes of type String
-           for name, value := range record.DynamoDB.NewImage {
+           for name, value := range record.Change.NewImage {
                if value.DataType() == events.DataTypeString {
                    fmt.Printf("Attribute name: %s, value: %s\n", name, value.String())
                }

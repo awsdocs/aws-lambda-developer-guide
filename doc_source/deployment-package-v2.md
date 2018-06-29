@@ -36,6 +36,9 @@ Zip packages uploaded with incorrect permissions may cause execution failure\. A
   + The first command changes all files in `/tmp/package_contents` to have read/write permissions to owners, read to group and global\.
   + The second command cascades the same permissions for directories\.
 
+**Note**  
+If you are running on a Windows environment, we recommend using [7\-Zip](https://www.7-zip.org/download.html) instead of `zipinfo`\.
+
 Once you have done that, set the requisite IAM permissions on the package\. For more information, see [Authentication and Access Control for AWS Lambda](lambda-auth-and-access-control.md) policies\. 
 + [Creating a Deployment Package \(Node\.js\)](nodejs-create-deployment-pkg.md)
 + [Creating a Deployment Package \(C\#\)](lambda-dotnet-how-to-create-deployment-package.md)

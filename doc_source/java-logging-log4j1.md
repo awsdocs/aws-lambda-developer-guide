@@ -3,7 +3,7 @@
 **Note**  
 Support for the Log4j v1\.2 custom appender is marked for End\-Of\-Life\. It will not receive ongoing updates and is not recommended for use\. For more information, see [Log4j 1\.2](https://logging.apache.org/log4j/1.2/)
 
- AWS Lambda supports Log4j 1\.2 by providing a custom appender\. You can use the custom Log4j \(see [Apache log4j 1\.2](https://logging.apache.org/log4j/1.2/)\) appender provided by Lambda for logging from your lambda functions\. Every call to Log4j methods, such as `log.debug()` or `log.error()`, will result in a CloudWatch Logs event\. The custom appender is called `LambdaAppender` and must be used in the `log4j.properties` file\. You must include the `aws-lambda-java-log4j` artifact \(`artifactId:aws-lambda-java-log4j`\) in the deployment package \(\.jar file\)\. For an example, see [Example: Writing Logs Using Log4J v1\.2 \(Not Recommended\) ](#java-wt-logging-using-log4j)\.
+ AWS Lambda supports Log4j 1\.2 by providing a custom appender\. You can use the custom Log4j \(see [Apache log4j 1\.2](https://logging.apache.org/log4j/1.2/)\) appender provided by Lambda for logging from your lambda functions\. Every call to Log4j methods, such as `log.info()` or `log.error()`, will result in a CloudWatch Logs event\. The custom appender is called `LambdaAppender` and must be used in the `log4j.properties` file\. You must include the `aws-lambda-java-log4j` artifact \(`artifactId:aws-lambda-java-log4j`\) in the deployment package \(\.jar file\)\. For an example, see [Example: Writing Logs Using Log4J v1\.2 \(Not Recommended\) ](#java-wt-logging-using-log4j)\.
 
 ## Example: Writing Logs Using Log4J v1\.2 \(Not Recommended\)<a name="java-wt-logging-using-log4j"></a>
 
@@ -30,8 +30,7 @@ public class Hello {
        // System.err: One log statement but with a line break (AWS Lambda writes two events to CloudWatch).
         System.err.println("log data from stderr. \n this is a continuation of system.err");
 
-        // Use log4j to log the same thing as above and AWS Lambda will log only one event in CloudWatch.
-        log.debug("log data from log4j debug \n this is continuation of log4j debug");
+       
 
         log.error("log data from log4j err. \n this is a continuation of log4j.err");
         
@@ -46,22 +45,13 @@ The example uses the following log4j\.properties file \(*project\-dir*/src/main/
 
 ```
 log = .
-log4j.rootLogger = DEBUG, LAMBDA
+log4j.rootLogger = INFO, LAMBDA
 
 #Define the LAMBDA appender
 log4j.appender.LAMBDA=com.amazonaws.services.lambda.runtime.log4j.LambdaAppender
 log4j.appender.LAMBDA.layout=org.apache.log4j.PatternLayout
 log4j.appender.LAMBDA.layout.conversionPattern=%d{yyyy-MM-dd HH:mm:ss} <%X{AWSRequestId}> %-5p %c{1}:%m%n
 ```
-
-The following is sample of log entries in CloudWatch Logs\. 
-
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/logging-java-log4j-10.png)
-
-Note:
-+ AWS Lambda parses the log string in each of the `System.out.println()` and `System.err.println()` statements logs as two separate events \(note the two down arrows in the screenshot\) because of the line break\.
-+ The Log4j methods \(`log.debug()` and `log.error()`\) produce one CloudWatch event\.
-+ AWS Lambda runtime adds the `AWSRequestId` in the [MDC](https://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/MDC.html) to the log4j context \(see [Class MDC for log4j v 1\.2 and Class ThreadContext](https://logging.apache.org/log4j/2.x/log4j-api/apidocs/org/apache/logging/log4j/ThreadContext.html)\)\. To get this value in the log as shown, we added `%X{AWSRequestId}` in the conversion pattern in the `log4.properties` file\.
 
 You can do the following to test the code:
 + Using the code, create a deployment package\. In your project, don't forget to add the `log4j.properties` file in the *project\-dir*/src/main/resources/ directory\.

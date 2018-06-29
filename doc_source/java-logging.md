@@ -4,7 +4,7 @@
 
 ## Custom Appender for Log4j™ 2<a name="java-logging-log4j2"></a>
 
- AWS Lambda recommends Log4j 2 to provide a custom appender\. You can use the custom Log4j \(see [Apache log4j](https://logging.apache.org/log4j/2.x/)\) appender provided by Lambda for logging from your lambda functions\. Every call to Log4j methods, such as `log.debug()` or `log.error()`, will result in a CloudWatch Logs event\. The custom appender is called `LambdaAppender` and must be used in the `log4j2.xml` file\. You must include the `aws-lambda-java-log4j2` artifact \(`artifactId:aws-lambda-java-log4j2`\) in the deployment package \(\.jar file\)\. For an example, see [Example 1: Writing Logs Using Log4J v2\.8 ](#java-wt-logging-using-log4j2.8)\.
+ AWS Lambda recommends Log4j 2 to provide a custom appender\. You can use the custom Log4j \(see [Apache log4j](https://logging.apache.org/log4j/2.x/)\) appender provided by Lambda for logging from your lambda functions\. Every call to Log4j methods, such as `log.info()` or `log.error()`, will result in a CloudWatch Logs event\. The custom appender is called `LambdaAppender` and must be used in the `log4j2.xml` file\. You must include the `aws-lambda-java-log4j2` artifact \(`artifactId:aws-lambda-java-log4j2`\) in the deployment package \(\.jar file\)\. For an example, see [Example 1: Writing Logs Using Log4J v2\.8 ](#java-wt-logging-using-log4j2.8)\.
 
 ## LambdaLogger\.log\(\)<a name="java-logging-lambdalogger"></a>
 
@@ -112,9 +112,7 @@ This section provides examples of using Custom Appender for Log4j and the `Lambd
            // System.err: One log statement but with a line break (AWS Lambda writes two events to CloudWatch).
             System.err.println("log data from stderr. \n this is a continuation of system.err");
     
-            // Use log4j to log the same thing as above and AWS Lambda will log only one event in CloudWatch.
-            logger.debug("log data from log4j debug \n this is continuation of log4j debug");
-    
+          
             logger.error("log data from log4j err. \n this is a continuation of log4j.err");
     
             // Return will include the log stream name so you can look
@@ -136,7 +134,7 @@ This section provides examples of using Custom Appender for Log4j and the `Lambd
         </Lambda>
       </Appenders>
       <Loggers>
-        <Root level="debug">
+        <Root level="info">
           <AppenderRef ref="Lambda" />
         </Root>
       </Loggers>

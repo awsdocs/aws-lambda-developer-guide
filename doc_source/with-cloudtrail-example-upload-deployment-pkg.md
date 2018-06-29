@@ -86,7 +86,7 @@ Note that one of events in this log has `sns.amazonaws.com` as the `eventSource`
                "principalId":"account-id",
                "arn":"arn:aws:iam::account-id:root",
                "accountId":"account-id",
-               "accessKeyId":"access-key-id",
+               "accessKeyId": "access key id",
                "sessionContext":{  
                   "attributes":{  
                      "mfaAuthenticated":"false",

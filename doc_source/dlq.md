@@ -28,7 +28,11 @@ You configure a DLQ by specifying the Amazon Resource Name *TargetArn* value on 
 }
 ```
 
- You need to explicitly provide receive/delete/sendMessage access to your DLQ resource as part of the [execution role](intro-permission-model.html) for your Lambda function\. The payload written to the DLQ target ARN is the original event payload with no modifications to the message body\. The attributes of the message, described next, contain information to help you understand why the event wasn’t processed: 
+In addition, you need to add permissions to the [execution role](intro-permission-model.html) of your Lambda function, depending on which service you have directed unprocessed events:
++ **For Amazon SQS:**[ SendMessage](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html) 
++ **For Amazon SNS:**[ Publish](https://docs.aws.amazon.com/sns/latest/api/API_Publish.html) 
+
+The payload written to the DLQ target ARN is the original event payload with no modifications to the message body\. The attributes of the message, described next, contain information to help you understand why the event wasn’t processed: 
 
 
 | Name | Type | Value | 
@@ -40,3 +44,6 @@ You configure a DLQ by specifying the Amazon Resource Name *TargetArn* value on 
 If the event payload consistently fails to reach the target ARN, AWS Lambda increments a [CloudWatch metric](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring//viewing_metrics_with_cloudwatch.html) called `DeadLetterErrors` and then deletes the event payload\. 
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/DLQ.png)
+
+**Note**  
+If you are using Amazon SQS as an event source, we recommend configuring a DLQ on the Amazon SQS queue itself and not the Lambda function\. For more information, see [Amazon SQS Dead\-Letter Queues](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html)\.

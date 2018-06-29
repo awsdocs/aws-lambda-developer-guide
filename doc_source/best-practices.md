@@ -46,6 +46,11 @@ The following are recommended best practices for using AWS Lambda:
 + **Use most\-restrictive permissions when setting IAM policies\.** Understand the resources and operations your Lambda function needs, and limit the execution role to these permissions\. For more information, see [Authentication and Access Control for AWS Lambda](lambda-auth-and-access-control.md)\. 
 + **Be familiar with [AWS Lambda Limits](limits.md)\.** Payload size, file descriptors and /tmp space are often overlooked when determining runtime resource limits\. 
 + **Delete Lambda functions that you are no longer using\.** By doing so, the unused functions won't needlessly count against your deployment package size limit\.
++ **If you are using Amazon Simple Queue Service** as an event source, make sure the value of the function's expected execution time does not exceed the [Visibility Timeout](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html) value on the queue\. This applies both [CreateFunction](API_CreateFunction.md) and [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)\. 
+  + In the case of **CreateFunction**, AWS Lambda will fail the function creation process\.
+  + In the case of **UpdateFunctionConfiguration**, it could result in duplicate invocations of the function\.
+
+   In the case of 
 
 ## Alarming and Metrics<a name="alarming-metrics"></a>
 + **Use [AWS Lambda Metrics](monitoring-functions-metrics.md) and [ CloudWatch Alarms](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html)** instead of creating or updating a metric from within your Lambda function code\. It's a much more efficient way to track the health of your Lambda functions, allowing you to catch issues early in the development process\. For instance, you can configure an alarm based on the expected duration of your Lambda function execution time in order to address any bottlenecks or latencies attributable to your function code\.
@@ -56,7 +61,7 @@ The following are recommended best practices for using AWS Lambda:
 **Note**  
 When there are not enough records to process, instead of waiting, the stream processing function will be invoked with a smaller number of records\.
 + **Increase Kinesis stream processing throughput by adding shards\.** A Kinesis stream is composed of one or more shards\. Lambda will poll each shard with at most one concurrent invocation\. For example, if your stream has 100 active shards, there will be at most 100 Lambda function invocations running concurrently\. Increasing the number of shards will directly increase the number of maximum concurrent Lambda function invocations and can increase your Kinesis stream processing throughput\. If you are increasing the number of shards in a Kinesis stream, make sure you have picked a good partition key \(see [Partition Keys](http://docs.aws.amazon.com/streams/latest/dev/key-concepts.html#partition-key)\) for your data, so that related records end up on the same shards and your data is well distributed\. 
-+ **Use [Amazon CloudWatch](http://docs.aws.amazon.com/streams/latest/dev/monitoring-with-cloudwatch.html)** on IteratorAge to determine if your Kinesis stream is being processed\. For example, configure a CloudWatch alarm with a maximum setting to 300000 \(30 seconds\)\.
++ **Use [Amazon CloudWatch](http://docs.aws.amazon.com/streams/latest/dev/monitoring-with-cloudwatch.html)** on IteratorAge to determine if your Kinesis stream is being processed\. For example, configure a CloudWatch alarm with a maximum setting to 30000 \(30 seconds\)\.
 
 ## Async Invokes<a name="async-invoke"></a>
 + **Create and use [Dead Letter Queues](dlq.md) **to address and replay async function errors\. 

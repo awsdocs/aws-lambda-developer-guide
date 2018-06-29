@@ -17,9 +17,11 @@ For more information, see [Docker Lambda](https://github.com/lambci/docker-lambd
 
 ## Installing SAM CLI<a name="sam-cli-requirements-cli"></a>
 
-You can run SAM CLI on Linux, Mac, and Windows environments\. The easiest way to install SAM CLI is to use [pip](https://pypi.org/project/pip/)\.
+The easiest way to install SAM CLI is to use [pip](https://pypi.org/project/pip/)\.
 
-To use pip, you must have [Python 2\.7](https://www.python.org/downloads/release/python-2715/) installed and pointed to in your system's Environment path\. 
+You can run SAM CLI on Linux, Mac, or Windows environments\. The easiest way to install SAM CLI is to use [pip](https://pypi.org/project/pip/)\.
+
+To use pip, you must have [Python 2\.7](https://www.python.org/downloads/release/python-2715/) installed and added to your system's Environment path\. 
 
 **Note**  
 In a Windows environment, you run pip from the `\Python27\Scripts` directory\.
@@ -39,8 +41,6 @@ You should see something similar to the following:
 ```
 SAM CLI, version 0.3.0
 ```
-
-If pip doesn't work for you, you can download the latest binary and start using SAM CLI immediately\. You can find the binaries under the Releases section in the [SAM CLI GitHub Repository](https://github.com/awslabs/aws-sam-cli/releases)\.
 
 To begin using the SAM CLI with your serverless applications, see [Test Your Serverless Applications Locally Using SAM CLI \(Public Beta\)](test-sam-cli.md) 
 

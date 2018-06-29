@@ -19,7 +19,7 @@ GET /2015-03-31/event-source-mappings/?EventSourceArn=EventSourceArn&FunctionNam
 The request requires the following URI parameters\.
 
  ** [EventSourceArn](#API_ListEventSourceMappings_RequestSyntax) **   <a name="SSS-ListEventSourceMappings-request-EventSourceArn"></a>
-The Amazon Resource Name \(ARN\) of the Amazon Kinesis stream\. \(This parameter is optional\.\)  
+The Amazon Resource Name \(ARN\) of the Amazon Kinesis or DynamoDB stream\. \(This parameter is optional\.\)  
 Pattern: `arn:aws:([a-zA-Z0-9\-])+:([a-z]{2}-[a-z]+-\d{1})?:(\d{12})?:(.*)` 
 
  ** [FunctionName](#API_ListEventSourceMappings_RequestSyntax) **   <a name="SSS-ListEventSourceMappings-request-FunctionName"></a>
