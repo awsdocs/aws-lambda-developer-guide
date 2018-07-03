@@ -75,7 +75,7 @@ In addition, the `context` object provides the following properties that you can
 Name of the Lambda function that is executing\.
 
 **functionVersion**  
-The Lambda function version that is executing\. If an alias is used to invoke the function, then `function_version` will be the version the alias points to\.
+The Lambda function version that is executing\. If an alias is used to invoke the function, then `functionVersion` will be the version the alias points to\.
 
 **invokedFunctionArn**  
 The ARN used to invoke this function\. It can be a function ARN or an alias ARN\. An unqualified ARN executes the `$LATEST` version and aliases execute the function version it is pointing to\. 
