@@ -1,6 +1,6 @@
 # Creating a \.zip Deployment Package \(Java\)<a name="create-deployment-pkg-zip-java"></a>
 
-This section provides examples of creating \.zip file as your deployment package\. You can use any build and packaging tool you like to create this zip\. Regardless of the tools you use, the resulting \.zip file must have the following structure:
+This section provides examples of creating \.zip file as your deployment package\. You can use any build and packaging tool you like to create this zip, though the examples below uses Gradle\. Regardless of the tools you use, the resulting \.zip file must have the following structure:
 + All compiled class files and resource files at the root level\. 
 + All required jars to run the code in the `/lib` directory\.
 
