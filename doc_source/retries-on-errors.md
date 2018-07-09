@@ -23,9 +23,9 @@ If any of these failures occur, your function will throw an exception\. How the 
      
 + **Poll\-based \(or pull model\) event sources that are stream\-based**: These consist of Kinesis Data Streams or DynamoDB\. When a Lambda function invocation fails, AWS Lambda attempts to process the erring batch of records until the time the data expires, which can be up to seven days\. 
 
-  The exception is treated as blocking, and AWS Lambda will not read any new records from the stream until the failed batch of records either expires or is processed successfully\. This ensures that AWS Lambda processes the stream events in order\.
+  The exception is treated as blocking, and AWS Lambda will not read any new records from the shard until the failed batch of records either expires or is processed successfully\. This ensures that AWS Lambda processes the stream events in order\.
 + **Poll\-based event sources that are not stream\-based:** This consists of Amazon Simple Queue Service\. If you configure an Amazon SQS queue as an event source, AWS Lambda will poll a batch of records in the queue and invoke your Lambda function\. If it fails, AWS Lambda will continue to process other messages in the batch\. Meanwhile, AWS Lambda will continue to retry processing the failed message until one of the following happens: 
-  + **The message is ultimately invoked successfuly:** In this case, the message is removed from the queue\.
+  + **The message is ultimately invoked successfully:** In this case, the message is removed from the queue\.
   + **The message retention period expires:** In this case, the message is either discarded or if you have configured an [Amazon SQS Dead Letter Queue](http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-dead-letter-queue.html), the failure information will be directed there for you to analyze\. 
 
 If you don't require ordered processing of events, the advantage of using Amazon SQS queues is that AWS Lambda will continue to process new messages, regardless of a failed invocation of a previous message\. In other words, processing of new messages will not be blocked\. 

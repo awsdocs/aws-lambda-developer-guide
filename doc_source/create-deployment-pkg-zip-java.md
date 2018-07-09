@@ -118,7 +118,7 @@ task buildZip(type: Zip) {
     from compileJava
     from processResources              
     into('lib') {
-        from configurations.runtime
+        from configurations.compile.Classpath
     }           
 }
 

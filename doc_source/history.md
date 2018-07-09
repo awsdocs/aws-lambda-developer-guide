@@ -1,16 +1,22 @@
 # Document History<a name="history"></a>
 
-The following table describes the important changes to the *AWS Lambda Developer Guide*\. 
-
-**Relevant Dates to this History:**
+The following table describes the important changes to the *AWS Lambda Developer Guide* after May 2018\. For notification about updates to this documentation, you can subscribe to an RSS feed\.
 + **Current product version**: 2015\-03\-31
-+ **Last documentation update**: June 28, 2018
++ **Last documentation update**: July 5, 2018
+
+| Change | Description | Date | 
+| --- |--- |--- |
+| Updates now available over RSS | You can now subscribe to an RSS feed to receive notifications to the *AWS Lambda Developer Guide*\. | July 5, 2018 | 
+| Support for Amazon SQS as event source | AWS Lambda now supports Amazon Simple Queue Service \(Amazon SQS\) as an event source\. For more information, see [Invoking Lambda Functions](http://docs.aws.amazon.com/lambda/latest/dg/invoking-lambda-functions.html)\. | June 28, 2018 | 
+| China \(Ningxia\) Region | AWS Lambda is now available in the China \(Ningxia\) Region\. For more information about Lambda regions and endpoints, see [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html#lambda_region) in the *AWS General Reference*\. | June 28, 2018 | 
+
+## Earlier Updates<a name="history-earlier-updates"></a>
+
+The following table describes the important changes in each release of the *AWS Lambda Developer Guide* before June 2018\.
 
 
 | Change | Description | Date | 
 | --- | --- | --- | 
-| Support for Amazon SQS as event source |  AWS Lambda now supports Amazon Simple Queue Service as an event source\. For more information, see [Invoking Lambda Functions](invoking-lambda-functions.md)\.  | June 28, 2018 | 
-| China \(Ningxia\) Region  |  AWS Lambda is now available in the China \(Ningxia\) Region\. For more information about Lambda regions and endpoints, see [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html#lambda_region) in the *AWS General Reference*\.  | June 28, 2018 | 
 | Runtime support for Node\.js runtime 8\.10 |  AWS Lambda now supports Node\.js runtime version 8\.10\. For more information, see [Programming Model\(Node\.js\)](programming-model.md)\.  | April 2, 2018 | 
 | Function and alias revision IDs |  AWS Lambda now supports revision IDs on your function versions and aliases\. You can use these IDs to track and apply conditional updates when you are updating your function version or alias resources\.  | January 25, 2018 | 
 | Runtime support for Go and \.NET 2\.0  |  AWS Lambda has added runtime support for Go and \.NET 2\.0\. For more information, see [Programming Model for Authoring Lambda Functions in Go](go-programming-model.md) and [Programming Model for Authoring Lambda Functions in C\#](dotnet-programming-model.md)\.  | January 15, 2018 | 

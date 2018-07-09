@@ -9,7 +9,7 @@ In order for AWS Lambda to poll, process and delete messages on the Amazon SQS q
 You can do this in either of the following two ways:
 
 **Note**  
-If the Amazon SQS queue and Lambda function are associated with different user accounts, you must use a **resource\-based policy** to enable cross\-account access\.
+If the Amazon SQS queue and Lambda function are associated with different AWS accounts, you must use a **resource\-based policy** to enable cross\-account access\.
 + **Identity\-based policy**: Add an inline policy to the execution role that grants the permissions for the required actions listed previously, as shown in the following example:
 
   ```

@@ -5,20 +5,18 @@ Concurrent executions refers to the number of executions of your function code t
   + Amazon Kinesis Data Streams
   + Amazon DynamoDB
 
-  For Lambda functions that process Kinesis or DynamoDB streams the number of shards is the unit of concurrency\. If your stream has 100 active shards, there will be at most 100 Lambda function invocations running concurrently\. This is because Lambda processes each shard’s events in sequence\. 
-
-  **Poll\-based event sources that are not stream\-based**: For Lambda functions that process Amazon SQS queues, AWS Lambda will automatically scale the polling on the queue until the maximum concurrency level is reached, where each message batch can be considered a single concurrent unit\. AWS Lambda's automatic scaling behavior is designed to keep polling costs low when a queue is empty while simultaneously enabling you to achieve high throughput when the queue is being used heavily\. 
+  For Lambda functions that process Kinesis or DynamoDB streams the number of shards is the unit of concurrency\. If your stream has 100 active shards, there will be at most 100 Lambda function invocations running concurrently\. This is because Lambda processes each shard’s events in sequence\. **Poll\-based event sources that are not stream\-based**: For Lambda functions that process Amazon SQS queues, AWS Lambda will automatically scale the polling on the queue until the maximum concurrency level is reached, where each message batch can be considered a single concurrent unit\. AWS Lambda's automatic scaling behavior is designed to keep polling costs low when a queue is empty while simultaneously enabling you to achieve high throughput when the queue is being used heavily\. 
 
   Here is how it works:
   + When an Amazon SQS event source mapping is initially enabled, or when messages first appear after a period without traffic, Lambda begins polling the Amazon SQS queue using five clients, each making [long poll](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-long-polling.html) requests in parallel\.
   + Lambda monitors the number of [inflight messages](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html#inflight-messages), and when it detects that this number is increasing, it will increase the polling frequency by 20 [ReceiveMessage](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_ReceiveMessage.html) requests per minute and the function concurrency by 60 calls per minute\. As long as the queue remains busy, scale up continues until at least one of the following occurs:
-  + Polling frequency reaches 100 simultaneous ReceiveMessage requests and function invocation concurrency reaches 1,000\.
-  + The account concurrency maximum has been reached\.
-  + The per\-function concurrency limit of the function attached to the SQS queue \(if any\) has been reached\.
-**Note**  
-[Account\-level limits](http://docs.aws.amazon.com/lambda/latest/dg/limits.html) are impacted by other functions in the account, and per\-function concurrency applies to all events sent to a function\. For more information, see [Managing Concurrency](concurrent-executions.md)\.
+    + Polling frequency reaches 100 simultaneous ReceiveMessage requests and function invocation concurrency reaches 1,000\.
+    + The account concurrency maximum has been reached\.
+    + The per\-function concurrency limit of the function attached to the SQS queue \(if any\) has been reached\.
 
   When AWS Lambda detects that the number of inflight messages is decreasing, it will decrease the polling frequency by 10 ReceiveMessage requests per minute and decrease the concurrency used to invoke your function by 30 calls per minute\. 
+**Note**  
+[Account\-level limits](http://docs.aws.amazon.com/lambda/latest/dg/limits.html) are impacted by other functions in the account, and per\-function concurrency applies to all events sent to a function\. For more information, see [Managing Concurrency](concurrent-executions.md)\.
 + **Event sources that aren't stream\-based** – If you create a Lambda function to process events from event sources that aren't stream\-based \(for example, Lambda can process every event from other sources, like Amazon S3 or API Gateway\), each published event is a unit of work, in parallel, up to your account limits\. Therefore, the number of events \(or requests\) these event sources publish influences the concurrency\. You can use the this formula to estimate your concurrent Lambda function invocations:
 
   ```
@@ -60,6 +58,7 @@ The table below outlines the immediate concurrency increase per region:
 | Asia Pacific \(Singapore\) | 500 | 
 | Asia Pacific \(Sydney\) | 500 | 
 | China \(Beijing\) | 500 | 
+| China \(Ningxia\) | 500 | 
 | Canada \(Central\) | 500 | 
 | EU \(Frankfurt\) | 1000 | 
 | EU \(London\) | 500 | 
@@ -71,6 +70,5 @@ The table below outlines the immediate concurrency increase per region:
 | US West \(Oregon\) | 3000 | 
 | US East \(N\. Virginia\) | 3000 | 
 | South America \(São Paulo\) | 500 | 
-| AWS GovCloud \(US\)  | 500  | 
 
 To learn how to view and manage the concurrent executions for your function, see [Managing Concurrency](concurrent-executions.md)

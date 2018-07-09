@@ -120,7 +120,7 @@ The runtime environment for the Lambda function you are uploading\.
 To use the Python runtime v3\.6, set the value to "python3\.6"\. To use the Python runtime v2\.7, set the value to "python2\.7"\. To use the Node\.js runtime v8\.10, set the value to "nodejs8\.10"\. To use Node\.js runtime version v6\.10, set the value to "nodejs6\.10"\. To use the \.NET Core runtime v1\.0, set the value to "dotnetcore1\.0"\. To use the \.NET Core runtime v2\.0, set the value to "dotnetcore2\.0"\.  
 Node v0\.10\.42 and node v4\.3 are currently marked as deprecated\. You must migrate existing functions to the newer Node\.js runtime versions available on AWS Lambda \(nodejs8\.10, nodejs6\.10\) as soon as possible\. Failure to do so will result in an invalid parameter error being returned\. Note that you will have to follow this procedure for each region that contains functions written in the Node v0\.10\.42 runtime\.
 Type: String  
-Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | java8 | python2.7 | python3.6 | dotnetcore1.0 | dotnetcore2.0 | nodejs4.3-edge | go1.x`   
+Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | java8 | python2.7 | python3.6 | dotnetcore1.0 | dotnetcore2.0 | nodejs4.3-edge | go1.x`   
 Required: Yes
 
  ** [Tags](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-Tags"></a>
@@ -264,7 +264,7 @@ Pattern: `arn:aws:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+`
  ** [Runtime](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-Runtime"></a>
 The runtime environment for the Lambda function\.  
 Type: String  
-Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | java8 | python2.7 | python3.6 | dotnetcore1.0 | dotnetcore2.0 | nodejs4.3-edge | go1.x` 
+Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | java8 | python2.7 | python3.6 | dotnetcore1.0 | dotnetcore2.0 | nodejs4.3-edge | go1.x` 
 
  ** [Timeout](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-Timeout"></a>
 The function execution time at which Lambda should terminate the function\. Because the execution time has cost implications, we recommend you set this value based on your expected execution time\. The default is 3 seconds\.  

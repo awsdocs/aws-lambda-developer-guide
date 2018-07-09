@@ -1,6 +1,6 @@
 # AliasRoutingConfiguration<a name="API_AliasRoutingConfiguration"></a>
 
-The parent object that implements what percentage of traffic will invoke each function version\. For more information, see [Traffic Shifting Using Aliases](lambda-traffic-shifting-using-aliases.md)\.
+The parent object that implements what percentage of traffic will invoke each function version\. For more information, see [Traffic Shifting Using Aliases](lambda-traffic-shifting-using-aliases.md)\. The maximum number of stream records that can be sent to your Lambda function for a single invocation\. ng\-using\-aliases"/>\.
 
 ## Contents<a name="API_AliasRoutingConfiguration_Contents"></a>
 

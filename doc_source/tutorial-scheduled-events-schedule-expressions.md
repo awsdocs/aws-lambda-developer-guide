@@ -82,5 +82,6 @@ The following table lists common examples of cron expressions\.
 |  Invoke a Lambda function at 9 a\.m\. \(UTC\) the first Monday of each month  |  <pre>cron(0 9 ? * 2#1 *)</pre>  | 
 
 Note the following: 
++ The previous examples assume you are using the AWS CLI\. If you are using the Lambda console, do not include the `cron` prefix to your expression\.
 + Cron expressions that lead to rates faster than one minute are not supported\.
 + One of the day\-of\-month or day\-of\-week values must be a question mark \(`?`\)\.

@@ -13,7 +13,7 @@ If your Lambda function code is executing, but you don't see any log data being 
 
 ## AWS Lambda Troubleshooting Scenarios<a name="monitoring-functions-troubleshooting"></a>
 
- This sections describes examples of how to monitor and troubleshoot your Lambda functions using the logging and monitoring capabilities of CloudWatch\. 
+ This section describes examples of how to monitor and troubleshoot your Lambda functions using the logging and monitoring capabilities of CloudWatch\. 
 
 ### Troubleshooting Scenario 1: Lambda Function Not Working as Expected<a name="monitoring-functions-troubleshooting-one"></a>
 
