@@ -72,26 +72,36 @@ After you verify that your deployment package is created, go to the next step to
 
 ## Go<a name="with-sns-example-deployment-pkg-go"></a>
 
-1. Open a text editor, and then copy the following code\. 
+1. Open a text editor, and then copy the following code\.
 
    ```
+   package main
+
    import (
-       "strings"
-       "github.com/aws/aws-lambda-go/events”
+           "context"
+           "fmt"
+
+           "github.com/aws/aws-lambda-go/events"
    )
-   
+
    func handler(ctx context.Context, snsEvent events.SNSEvent) {
-       for _, record := range snsEvent.Records {
-           snsRecord := record.SNS
-   
-           fmt.Printf("[%s %s] Message = %s \n", record.EventSource, snsRecord.Timestamp, snsRecord.Message) 
-       }
+           for _, record := range snsEvent.Records {
+               snsRecord := record.SNS
+
+               fmt.Printf("[%s %s] Message = %s \n", record.EventSource, snsRecord.Timestamp, snsRecord.Message)
+           }
    }
+
+  func main() {
+          lambda.Start(handler)
+  }
    ```
 
 1. Save the file as ` lambda_handler.go`\.
 
-1. Zip the ` lambda_handler.go` file as ` LambdaWithSNS.zip`\. 
+1. Build go executable for Linux with ` GOOS=linux go build -o lambda_handler lambda_handler.go`\.
+
+1. Zip the executable ` lambda_handler` file as ` LambdaWithSNS.zip`\.
 
 ### Next Step<a name="sns-create-deployment-pkg-python-next-step"></a>
 
