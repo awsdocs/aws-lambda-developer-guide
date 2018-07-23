@@ -30,8 +30,8 @@ You can build \.NET\-based Lambda applications using the Lambda plugin to the [A
        "profile":"iam-execution-profile"",
        "region" : "region",
        "configuration" : "Release",
-       "framework" : "netcoreapp2.0",
-       "function-runtime":"dotnetcore2.0",
+       "framework" : "netcoreapp2.1",
+       "function-runtime":"dotnetcore2.1",
        "function-memory-size" : 256,
        "function-timeout" : 30,
        "function-handler" : "Assembly::Namespace.Class::Function" 

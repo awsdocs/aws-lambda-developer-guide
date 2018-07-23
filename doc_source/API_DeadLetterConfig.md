@@ -7,7 +7,7 @@ The Amazon Resource Name \(ARN\) of an Amazon SQS queue or Amazon SNS topic you 
  **TargetArn**   <a name="SSS-Type-DeadLetterConfig-TargetArn"></a>
 The Amazon Resource Name \(ARN\) of an Amazon SQS queue or Amazon SNS topic you specify as your Dead Letter Queue \(DLQ\)\. [Dead Letter Queues](dlq.md)\. For more information, see [Dead Letter Queues](dlq.md)\.   
 Type: String  
-Pattern: `(arn:aws:[a-z0-9-.]+:.*)|()`   
+Pattern: `(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()`   
 Required: No
 
 ## See Also<a name="API_DeadLetterConfig_SeeAlso"></a>

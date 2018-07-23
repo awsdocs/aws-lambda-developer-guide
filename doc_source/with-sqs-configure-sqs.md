@@ -24,7 +24,7 @@ To create a mapping between the specified Amazon SQS queue and the Lambda functi
 ```
 $ aws lambda create-event-source-mapping \
 --region us-east-1 \
---function-name ProcessSQSMessage \
+--function-name ProcessSQSRecord \
 --event-source SQS-queue-arn \
 --batch-size 1 \
 --profile adminuser
@@ -35,7 +35,7 @@ You can get the list of event source mappings by running the following command\.
 ```
 $ aws lambda list-event-source-mappings \
 --region us-east-1 \
---function-name ProcessSQSMessage \
+--function-name ProcessSQSRecord \
 --event-source SQS-queue-arn \
 --profile adminuser
 ```

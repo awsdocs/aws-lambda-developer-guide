@@ -14,7 +14,7 @@ AWS Lambda supports the following runtime versions:
 v4\.3 has been deprecated\. For more information on AWS Lambda's policy on deprecated runtimes, see [Runtime Support Policy](runtime-support-policy.md)\.
 + Java – Java 8
 + Python – Python 3\.6 and 2\.7
-+ \.NET Core – \.NET Core 1\.0\.1 and \.NET Core 2\.0
++ \.NET Core – \.NET Core 1\.0\.1, \.NET Core 2\.0 and \.NET Core 2\.1
 + Go – Go 1\.x
 
 **Note**  

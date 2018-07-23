@@ -21,10 +21,10 @@ The easiest way to install SAM CLI is to use [pip](https://pypi.org/project/pip/
 
 You can run SAM CLI on Linux, Mac, or Windows environments\. The easiest way to install SAM CLI is to use [pip](https://pypi.org/project/pip/)\.
 
-To use pip, you must have [Python 2\.7](https://www.python.org/downloads/release/python-2715/) installed and added to your system's Environment path\. 
+To use pip, you must have [Python ](https://://www.python.org/) installed and added to your system's Environment path\. 
 
 **Note**  
-In a Windows environment, you run pip from the `\Python27\Scripts` directory\.
+In a Windows environment, you run pip from the `python-version\Scripts` directory\.
 
 ```
 pip install aws-sam-cli

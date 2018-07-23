@@ -17,36 +17,37 @@ Options:
   -o, --output        Location to place the generated output.
   -i, --install       Installs a source or a template pack.
   -u, --uninstall     Uninstalls a source or a template pack.
+  --nuget-source      Specifies a NuGet source to use during install.
   --type              Filters templates based on available types. Predefined values are "project", "item" or "other".
   --force             Forces content to be generated even if it would change existing files.
-  -lang, --language   Specifies the language of the template to create.
+  -lang, --language   Filters templates based on language and specifies the language of the template to create.
 
 
-Templates                                         Short Name                          Language          Tags            
------------------------------------------------------------------------------------------------------------------------------
-Console Application                               console                             [C#], F#, VB      Common/Console  
-Class library                                     classlib                            [C#], F#, VB      Common/Library  
-Unit Test Project                                 mstest                              [C#], F#, VB      Test/MSTest     
-xUnit Test Project                                xunit                               [C#], F#, VB      Test/xUnit      
-ASP.NET Core Empty                                web                                 [C#], F#          Web/Empty       
-ASP.NET Core Web App (Model-View-Controller)      mvc                                 [C#], F#          Web/MVC         
-ASP.NET Core Web App                              razor                               [C#]              Web/MVC/Razor Pages
-ASP.NET Core with Angular                         angular                             [C#]              Web/MVC/SPA     
-ASP.NET Core with React.js                        react                               [C#]              Web/MVC/SPA     
-ASP.NET Core with React.js and Redux              reactredux                          [C#]              Web/MVC/SPA     
-ASP.NET Core Web API                              webapi                              [C#], F#          Web/WebAPI      
-global.json file                                  globaljson                                            Config          
-NuGet Config                                      nugetconfig                                           Config          
-Web Config                                        webconfig                                             Config          
-Solution File                                     sln                                                   Solution        
-Razor Page                                        page                                                  Web/ASP.NET     
-MVC ViewImports                                   viewimports                                           Web/ASP.NET     
-MVC ViewStart                                     viewstart                                             Web/ASP.NET     
-
+Templates                                         Short Name         Language          Tags                             
+----------------------------------------------------------------------------------------------------------------------------
+Console Application                               console            [C#], F#, VB      Common/Console                   
+Class library                                     classlib           [C#], F#, VB      Common/Library                   
+Unit Test Project                                 mstest             [C#], F#, VB      Test/MSTest                      
+xUnit Test Project                                xunit              [C#], F#, VB      Test/xUnit                       
+Razor Page                                        page               [C#]              Web/ASP.NET                      
+MVC ViewImports                                   viewimports        [C#]              Web/ASP.NET                      
+MVC ViewStart                                     viewstart          [C#]              Web/ASP.NET                      
+ASP.NET Core Empty                                web                [C#], F#          Web/Empty                        
+ASP.NET Core Web App (Model-View-Controller)      mvc                [C#], F#          Web/MVC                          
+ASP.NET Core Web App                              razor              [C#]              Web/MVC/Razor Pages              
+ASP.NET Core with Angular                         angular            [C#]              Web/MVC/SPA                      
+ASP.NET Core with React.js                        react              [C#]              Web/MVC/SPA                      
+ASP.NET Core with React.js and Redux              reactredux         [C#]              Web/MVC/SPA                      
+Razor Class Library                               razorclasslib      [C#]              Web/Razor/Library/Razor Class Library
+ASP.NET Core Web API                              webapi             [C#], F#          Web/WebAPI                       
+global.json file                                  globaljson                           Config                           
+NuGet Config                                      nugetconfig                          Config                           
+Web Config                                        webconfig                            Config                           
+Solution File                                     sln                                  Solution                         
 
 Examples:
-    dotnet new mvc --auth None --framework netcoreapp1.1                                                                      
-    dotnet new mvc --framework netcoreapp1.1      
+    dotnet new mvc --auth Individual
+    dotnet new viewstart
     dotnet new --help
 ```
 
@@ -64,7 +65,7 @@ So, for example, if you wanted to create a console project, you would do the fol
 
 AWS Lambda offers additional templates via the [Amazon\.Lambda\.Templates](https://www.nuget.org/packages/Amazon.Lambda.Templates) nuget package\. To install this package, run the following command:
 
-The trailing `::*` in the command signals to install the latest version\. Once the install is complete, the Lambda templates show up as part of `dotnet new`\. To verify this, again run the following command:
+Once the install is complete, the Lambda templates show up as part of `dotnet new`\. To verify this, again run the following command:
 
 You should now see the following:
 
@@ -79,47 +80,53 @@ Options:
   -o, --output        Location to place the generated output.
   -i, --install       Installs a source or a template pack.
   -u, --uninstall     Uninstalls a source or a template pack.
+  --nuget-source      Specifies a NuGet source to use during install.
   --type              Filters templates based on available types. Predefined values are "project", "item" or "other".
   --force             Forces content to be generated even if it would change existing files.
-  -lang, --language   Specifies the language of the template to create.
+  -lang, --language   Filters templates based on language and specifies the language of the template to create.
 
 
-Templates                                         Short Name                          Language          Tags            
------------------------------------------------------------------------------------------------------------------------------
-Lambda Detect Image Labels                        lambda.DetectImageLabels            [C#]              AWS/Lambda/Function
-Lambda Empty Function                             lambda.EmptyFunction                [C#]              AWS/Lambda/Function
-Lex Book Trip Sample                              lambda.LexBookTripSample            [C#]              AWS/Lambda/Function
-Lambda Simple DynamoDB Function                   lambda.DynamoDB                     [C#]              AWS/Lambda/Function
-Lambda Simple Kinesis Firehose Function           lambda.KinesisFirehose              [C#]              AWS/Lambda/Function
-Lambda Simple Kinesis Function                    lambda.Kinesis                      [C#]              AWS/Lambda/Function
-Lambda Simple S3 Function                         lambda.S3                           [C#]              AWS/Lambda/Function
-Lambda ASP.NET Core Web API                       lambda.AspNetCoreWebAPI             [C#]              AWS/Lambda/Serverless
-Lambda DynamoDB Blog API                          lambda.DynamoDBBlogAPI              [C#]              AWS/Lambda/Serverless
-Lambda Empty Serverless                           lambda.EmptyServerless              [C#]              AWS/Lambda/Serverless
-Step Functions Hello World                        lambda.StepFunctionsHelloWorld      [C#]              AWS/Lambda/Serverless
-Console Application                               console                             [C#], F#, VB      Common/Console  
-Class library                                     classlib                            [C#], F#, VB      Common/Library  
-Unit Test Project                                 mstest                              [C#], F#, VB      Test/MSTest     
-xUnit Test Project                                xunit                               [C#], F#, VB      Test/xUnit      
-ASP.NET Core Empty                                web                                 [C#], F#          Web/Empty       
-ASP.NET Core Web App (Model-View-Controller)      mvc                                 [C#], F#          Web/MVC         
-ASP.NET Core Web App                              razor                               [C#]              Web/MVC/Razor Pages
-ASP.NET Core with Angular                         angular                             [C#]              Web/MVC/SPA     
-ASP.NET Core with React.js                        react                               [C#]              Web/MVC/SPA     
-ASP.NET Core with React.js and Redux              reactredux                          [C#]              Web/MVC/SPA     
-ASP.NET Core Web API                              webapi                              [C#], F#          Web/WebAPI      
-global.json file                                  globaljson                                            Config          
-NuGet Config                                      nugetconfig                                           Config          
-Web Config                                        webconfig                                             Config          
-Solution File                                     sln                                                   Solution        
-Razor Page                                        page                                                  Web/ASP.NET     
-MVC ViewImports                                   viewimports                                           Web/ASP.NET     
-MVC ViewStart                                     viewstart                                             Web/ASP.NET     
-
+Templates                                                 Short Name                              Language          Tags
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+Order Flowers Chatbot Tutorial                            lambda.OrderFlowersChatbot              [C#]              AWS/Lambda/Function
+Lambda Detect Image Labels                                lambda.DetectImageLabels                [C#], F#          AWS/Lambda/Function
+Lambda Empty Function                                     lambda.EmptyFunction                    [C#], F#          AWS/Lambda/Function
+Lex Book Trip Sample                                      lambda.LexBookTripSample                [C#]              AWS/Lambda/Function
+Lambda Simple DynamoDB Function                           lambda.DynamoDB                         [C#], F#          AWS/Lambda/Function
+Lambda Simple Kinesis Firehose Function                   lambda.KinesisFirehose                  [C#]              AWS/Lambda/Function
+Lambda Simple Kinesis Function                            lambda.Kinesis                          [C#], F#          AWS/Lambda/Function
+Lambda Simple S3 Function                                 lambda.S3                               [C#], F#          AWS/Lambda/Function
+Lambda ASP.NET Core Web API                               serverless.AspNetCoreWebAPI             [C#], F#          AWS/Lambda/Serverless
+Lambda ASP.NET Core Web Application with Razor Pages      serverless.AspNetCoreWebApp             [C#]              AWS/Lambda/Serverless
+Serverless Detect Image Labels                            serverless.DetectImageLabels            [C#], F#          AWS/Lambda/Serverless
+Lambda DynamoDB Blog API                                  serverless.DynamoDBBlogAPI              [C#]              AWS/Lambda/Serverless
+Lambda Empty Serverless                                   serverless.EmptyServerless              [C#], F#          AWS/Lambda/Serverless
+Lambda Giraffe Web App                                    serverless.Giraffe                      F#                AWS/Lambda/Serverless
+Serverless Simple S3 Function                             serverless.S3                           [C#], F#          AWS/Lambda/Serverless
+Step Functions Hello World                                serverless.StepFunctionsHelloWorld      [C#], F#          AWS/Lambda/Serverless
+Console Application                                       console                                 [C#], F#, VB      Common/Console
+Class library                                             classlib                                [C#], F#, VB      Common/Library
+Unit Test Project                                         mstest                                  [C#], F#, VB      Test/MSTest
+xUnit Test Project                                        xunit                                   [C#], F#, VB      Test/xUnit
+Razor Page                                                page                                    [C#]              Web/ASP.NET
+MVC ViewImports                                           viewimports                             [C#]              Web/ASP.NET
+MVC ViewStart                                             viewstart                               [C#]              Web/ASP.NET
+ASP.NET Core Empty                                        web                                     [C#], F#          Web/Empty
+ASP.NET Core Web App (Model-View-Controller)              mvc                                     [C#], F#          Web/MVC
+ASP.NET Core Web App                                      razor                                   [C#]              Web/MVC/Razor Pages
+ASP.NET Core with Angular                                 angular                                 [C#]              Web/MVC/SPA
+ASP.NET Core with React.js                                react                                   [C#]              Web/MVC/SPA
+ASP.NET Core with React.js and Redux                      reactredux                              [C#]              Web/MVC/SPA
+Razor Class Library                                       razorclasslib                           [C#]              Web/Razor/Library/Razor Class Library
+ASP.NET Core Web API                                      webapi                                  [C#], F#          Web/WebAPI
+global.json file                                          globaljson                                                Config
+NuGet Config                                              nugetconfig                                               Config
+Web Config                                                webconfig                                                 Config
+Solution File                                             sln                                                       Solution
 
 Examples:
     dotnet new mvc --auth Individual
-    dotnet new console
+    dotnet new viewimports --namespace
     dotnet new --help
 ```
 
@@ -171,8 +178,8 @@ Under the `src/myfunction` directory, examine the following files:
   "profile":"iam profile"",
     "region" : "region",
     "configuration" : "Release",
-    "framework" : "netcoreapp2.0",
-    "function-runtime":"dotnetcore2.0",
+    "framework" : "netcoreapp2.1",
+    "function-runtime":"dotnetcore2.1",
     "function-memory-size" : 256,
     "function-timeout" : 30,
     "function-handler" : "MyFunction::MyFunction.Function::FunctionHandler"
@@ -208,16 +215,16 @@ Under the `src/myfunction` directory, examine the following files:
   <Project Sdk="Microsoft.NET.Sdk">
   
     <PropertyGroup>
-      <TargetFramework>netcoreapp2.0</TargetFramework>
+      <TargetFramework>netcoreapp2.1</TargetFramework>
     </PropertyGroup>
   
     <ItemGroup>
-      <PackageReference Include="Amazon.Lambda.Core" Version="2.0.0" />
-      <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="1.1.0" />
+      <PackageReference Include="Amazon.Lambda.Core" Version="1.0.0 " />
+      <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="1.3.0" />
     </ItemGroup>
   
     <ItemGroup>
-      <DotNetCliToolReference Include="Amazon.Lambda.Tools" Version="2.0.0" />
+      <DotNetCliToolReference Include="Amazon.Lambda.Tools" Version="2.2.0" />
     </ItemGroup>
   
   </Project>
@@ -231,7 +238,7 @@ Under the `myfunction/test directory, examine the following files:`
   <Project Sdk="Microsoft.NET.Sdk">
      ... 
   
-      <PackageReference Include="Amazon.Lambda.Core" Version="2.0.0" />
+      <PackageReference Include="Amazon.Lambda.Core" Version="1.0.0 " />
     
      ...
   ```
@@ -311,8 +318,8 @@ You use whichever serializer you wish by adding it as a dependency to your `MyPr
 ```
 ...
  <ItemGroup>
-    <PackageReference Include="Amazon.Lambda.Core" Version="2.0.0" />
-    <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="1.0.1" />
+    <PackageReference Include="Amazon.Lambda.Core" Version="1.0.0" />
+    <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="1.3.0" />
   </ItemGroup>
 ```
 

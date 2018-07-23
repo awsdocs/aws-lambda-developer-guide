@@ -2,10 +2,11 @@
 
 The following table describes the important changes to the *AWS Lambda Developer Guide* after May 2018\. For notification about updates to this documentation, you can subscribe to an RSS feed\.
 + **Current product version**: 2015\-03\-31
-+ **Last documentation update**: July 5, 2018
++ **Last documentation update**: July 9, 2018
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| Support for \.NET Core 2\.1\.0 runtime in AWS Lambda | AWS Lambda now supports \.NET Core 2\.1\.0 runtime\. For more information, see [\.NET Core CLI](http://docs.aws.amazon.com/lambda/latest/dg/lambda-dotnet-coreclr-deployment-package.html)\. | July 9, 2018 | 
 | Updates now available over RSS | You can now subscribe to an RSS feed to receive notifications to the *AWS Lambda Developer Guide*\. | July 5, 2018 | 
 | Support for Amazon SQS as event source | AWS Lambda now supports Amazon Simple Queue Service \(Amazon SQS\) as an event source\. For more information, see [Invoking Lambda Functions](http://docs.aws.amazon.com/lambda/latest/dg/invoking-lambda-functions.html)\. | June 28, 2018 | 
 | China \(Ningxia\) Region | AWS Lambda is now available in the China \(Ningxia\) Region\. For more information about Lambda regions and endpoints, see [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html#lambda_region) in the *AWS General Reference*\. | June 28, 2018 | 

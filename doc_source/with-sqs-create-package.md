@@ -52,14 +52,14 @@ The following is example Java code that receives an Amazon SQS event message as 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.SQSEvent;
-import com.amazonaws.services.lambda.runtime.events.SQSEvent.SQSEventRecord;
+import com.amazonaws.services.lambda.runtime.events.SQSEvent.SQSMessage;
 
         public class ProcessSQSEvents implements RequestHandler<SQSEvent, Void>{
             @Override
             public Void handleRequest(SQSEvent event, Context context)
             {
-                for(SQSEventRecord rec : event.getRecords()) {
-                    System.out.println(new String(rec.getSQS().getBody());
+                for(SQSMessage msg : event.getRecords() {
+                    System.out.println(new String(msg.getSQS().getBody());
                 }
                 return null;
             }
@@ -68,7 +68,7 @@ import com.amazonaws.services.lambda.runtime.events.SQSEvent.SQSEventRecord;
 
 If the handler returns normally without exceptions, Lambda considers the message processed successfully and begins reading new messages in the queue\. Once a message is processed successfully, it is automatically deleted from the queue\. If the handler throws an exception, Lambda considers the input of messages as not processed and invokes the function with the same batch of messages\. 
 
-Using the preceding code \(in a file named `ProcessSQSMessage.java`\), create a deployment package\. Make sure that you add the following dependencies: 
+Using the preceding code \(in a file named `ProcessSQSRecord.java`\), create a deployment package\. Make sure that you add the following dependencies: 
 + `aws-lambda-java-core`
 + `aws-lambda-java-events` 
 

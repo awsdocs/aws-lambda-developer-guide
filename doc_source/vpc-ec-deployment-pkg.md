@@ -55,5 +55,8 @@ The `from __future__` statement enables you to write code that is compatible wit
 
 1. Zip all of these files into a file named `app.zip` to create your deployment package\. For step\-by\-step instructions, see [Creating a Deployment Package \(Python\)](lambda-python-how-to-create-deployment-package.md)\. 
 
+**Note**  
+To use Python Redis, see [Python Redis](https://redislabs.com/lp/python-redis/)\.
+
 **Next Step**  
 [Step 2\.2: Create the Execution Role \(IAM Role\)](vpc-ec-create-iam-role.md)

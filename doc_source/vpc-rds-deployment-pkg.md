@@ -49,7 +49,7 @@ The following example Python code runs a SELECT query against the Employee table
                item_count += 1
                logger.info(row)
                #print(row)
-       
+        conn.commit()
    
        return "Added %d items from RDS MySQL table" %(item_count)
    ```

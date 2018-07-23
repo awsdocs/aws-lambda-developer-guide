@@ -20,7 +20,7 @@ Follow the instructions to create an AWS Lambda function deployment package\.
            var payload = new Buffer(record.kinesis.data, 'base64').toString('ascii');
            console.log('Decoded payload:', payload);
        });
-       callback(null, "message");
+       callback(null, payload);
    };
    ```
 **Note**  

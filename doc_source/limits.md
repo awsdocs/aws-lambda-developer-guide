@@ -32,7 +32,36 @@ As explained in [Lambda Functions](lambda-introduction-function.md), once you've
 | --- | --- | 
 | Concurrent executions \(see [Managing Concurrency](concurrent-executions.md)\)  | 1000 | 
 
-**To request a limit increase for concurrent execution**
+AWS Lambda will dynamically scale capacity in response to increased traffic, subject to the concurrent executions limit noted previously\. To handle any burst in traffic, AWS Lambda will immediately increase your concurrently executing functions by a predetermined amount, dependent on which region it's executed, as noted below:
+
+
+****  
+
+| Region | Immediate Concurrency Increase \(function executions\) | 
+| --- | --- | 
+| Asia Pacific \(Tokyo\) | 1000 | 
+| Asia Pacific \(Seoul\) | 500 | 
+| Asia Pacific \(Mumbai\) | 500 | 
+| Asia Pacific \(Singapore\) | 500 | 
+| Asia Pacific \(Sydney\) | 500 | 
+| China \(Beijing\) | 500 | 
+| China \(Ningxia\) | 500 | 
+| Canada \(Central\) | 500 | 
+| EU \(Frankfurt\) | 1000 | 
+| EU \(London\) | 500 | 
+| EU \(Ireland\) | 3000 | 
+| EU \(Paris\) | 500 | 
+| AWS GovCloud \(US\) | 500 | 
+| US East \(Ohio\) | 500 | 
+| US West \(N\. California\) | 500 | 
+| US West \(Oregon\) | 3000 | 
+| US East \(N\. Virginia\) | 3000 | 
+| South America \(São Paulo\) | 500 | 
+
+**Note**  
+If the default **Immediate Concurrency Increase** value is not sufficient to accommodate the traffic surge, AWS Lambda will continue to increase the number of concurrent function executions by **500 per minute** until your account safety limit has been reached or the number of concurrently executing functions is sufficient to successfully process the increased load\. Some event sources, such as Amazon Simple Queue Service, DynamoDB or Amazon Kinesis may have their own scaling limitations\. For more information, see [Understanding Scaling Behavior](scaling.md)\.
+
+**To request a limit increase for concurrent executions:**
 
 1. Open the [AWS Support Center](https://console.aws.amazon.com/support/home#/) page, sign in, if necessary, and then click **Create case**\.
 

@@ -16,7 +16,7 @@ From the **Filter View** list, choose the language you want to use for your Lamb
            console.log(record.eventName);
            console.log('DynamoDB Record: %j', record.dynamodb);
        });
-       callback(null, "message");
+       callback(null, "message"); 
    };
    ```
 **Note**  

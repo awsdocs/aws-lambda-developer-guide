@@ -6,6 +6,9 @@ Attaching an [Amazon SQS queue ](https://docs.aws.amazon.com/AWSSimpleQueueServi
 
  Most Amazon SQS capabilities, such as DLQ, retry limits, and other features, work as expected\. Once set up as an event source, AWS Lambda polls your Amazon SQS queue and when it detects new messages, invokes a Lambda function by passing the new message\(s\) as a parameter\. Lambda calls SQS [ReceiveMessage](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_ReceiveMessage.html) and, once your function completes successfully, calls the SQS [DeleteMessage](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_DeleteMessage.html) API on your behalf\. You are billed for these APIs calls, just as if you had made them yourself\. For more information on how Lambda scales to process messages in your Amazon SQS queue, see [Understanding Scaling Behavior](scaling.md)\.
 
+**Note**  
+When using Amazon SQS as an event source, configure a DLQ on the Amazon SQS queue itself and not the Lambda function\. For more information, see [Amazon SQS Dead\-Letter Queues](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html)\.
+
 You can also customize your Amazon SQS queue attributes to control how and when your Lambda function is invoked using the following Amazon SQS options:
 + [Visibility Timeouts](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html)
 + [Delay Queues](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-delay-queues.html)

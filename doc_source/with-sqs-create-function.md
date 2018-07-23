@@ -17,10 +17,10 @@ You need to update the command by providing the \.zip file path and the executio
 ```
 $ aws lambda create-function \
 --region us-east-1 \
---function-name ProcessSQSMessage \
---zip-file fileb://file-path/ProcessSQSMessage.zip \
+--function-name ProcessSQSRecord \
+--zip-file fileb://file-path/ProcessSQSRecord.zip \
 --role role-arn \
---handler ProcessSQSMessage.handler \
+--handler ProcessSQSRecord.handler \
 --runtime runtime-value \
 --profile adminuser
 ```
@@ -40,7 +40,8 @@ In this step, you invoke your Lambda function manually using the `invoke` AWS La
 1. Copy the following JSON into a file and save it as `input.txt`\. 
 
    ```
-       "Records": [
+   {
+   	"Records": [
            {
                "messageId": "c80e8021-a70a-42c7-a470-796e1186f753",
                "receiptHandle": "AQEBJQ+/u6NsnT5t8Q/VbVxgdUl4TMKZ5FqhksRdIQvLBhwNvADoBxYSOVeCBXdnS9P+erlTtwEALHsnBXynkfPLH3BOUqmgzP25U8kl8eHzq6RAlzrSOfTO8ox9dcp6GLmW33YjO3zkq5VRYyQlJgLCiAZUpY2D4UQcE5D1Vm8RoKfbE+xtVaOctYeINjaQJ1u3mWx9T7tork3uAlOe1uyFjCWU5aPX/1OHhWCGi2EPPZj6vchNqDOJC/Y2k1gkivqCjz1CZl6FlZ7UVPOx3AMoszPuOYZ+Nuqpx2uCE2MHTtMHD8PVjlsWirt56oUr6JPp9aRGo6bitPIOmi4dX0FmuMKD6u/JnuZCp+AXtJVTmSHS8IXt/twsKU7A+fiMK01NtD5msNgVPoe9JbFtlGwvTQ==",
@@ -66,7 +67,7 @@ In this step, you invoke your Lambda function manually using the `invoke` AWS La
    ```
    $ aws lambda invoke \
    --invocation-type RequestResponse \
-   --function-name ProcessSQSMessage \
+   --function-name ProcessSQSRecord \
    --region us-east-1 \
    --payload file://file-path/input.txt \
    --profile adminuser \

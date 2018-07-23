@@ -529,6 +529,7 @@ The following is a list of example events published by the supported AWS service
 **Amazon SQS Event**  <a name="eventsources-sqs"></a>
 
 ```
+{
      "Records": [
         {
             "messageId": "c80e8021-a70a-42c7-a470-796e1186f753",

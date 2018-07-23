@@ -19,6 +19,7 @@ Additionally, note that AWS Lambda provides the following:
   + **Amazon\.Lambda\.DynamoDBEvents **
   + **Amazon\.Lambda\.KinesisEvents **
   + **Amazon\.Lambda\.S3Events **
+  + **Amazon\.Lambda\.SQSEvents **
   + **Amazon\.Lambda\.SNSEvents **
 
 These packages are available at [Nuget Packages](https://www.nuget.org/packages/)\.
