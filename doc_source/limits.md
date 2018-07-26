@@ -59,7 +59,7 @@ AWS Lambda will dynamically scale capacity in response to increased traffic, sub
 | South America \(São Paulo\) | 500 | 
 
 **Note**  
-If the default **Immediate Concurrency Increase** value is not sufficient to accommodate the traffic surge, AWS Lambda will continue to increase the number of concurrent function executions by **500 per minute** until your account safety limit has been reached or the number of concurrently executing functions is sufficient to successfully process the increased load\. Some event sources, such as Amazon Simple Queue Service, DynamoDB or Amazon Kinesis may have their own scaling limitations\. For more information, see [Understanding Scaling Behavior](scaling.md)\.
+If the default **Immediate Concurrency Increase** value is not sufficient to accommodate the traffic surge, AWS Lambda will continue to increase the number of concurrent function executions by **500 per minute** until your account safety limit has been reached or the number of concurrently executing functions is sufficient to successfully process the increased load\. For more information, see [Understanding Scaling Behavior](scaling.md)\.
 
 **To request a limit increase for concurrent executions:**
 

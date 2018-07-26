@@ -24,7 +24,7 @@ Note the following about how Amazon Simple Queue Service and AWS Lambda integrat
 + [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md)
 
 When using these operations to map your Lambda function to an Amazon SQS queue, note the following configuration parameters:
-+ **BatchSize**: The largest number of records that AWS Lambda will retrieve from each [ReceiveMessage](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_ReceiveMessage.html) call\. The maximum batch size supported by Amazon Simple Queue Service is up to 10 queue messages per batch\.
++ **BatchSize**: The number of records that AWS Lambda will retrieve from each [ReceiveMessage](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_ReceiveMessage.html) call\. Both the default and maximum batch size supported by Amazon Simple Queue Service is up to 10 queue messages per batch\.
 + **Enabled**: A flag to signal AWS Lambda that it should start polling your specified Amazon SQS queue\. 
 + **EventSourceArn**: The ARN \(Amazon Resource Name\) of your Amazon SQS queue that AWS Lambda is monitoring for new messages\. 
 + **FunctionName**: The Lambda function to invoke when AWS Lambda detects new messages on your configured Amazon SQS queue\. 

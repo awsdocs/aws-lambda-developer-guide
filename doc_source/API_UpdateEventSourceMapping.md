@@ -33,7 +33,7 @@ The event source mapping identifier\.
 The request accepts the following data in JSON format\.
 
  ** [BatchSize](#API_UpdateEventSourceMapping_RequestSyntax) **   <a name="SSS-UpdateEventSourceMapping-request-BatchSize"></a>
-The maximum number of stream records that can be sent to your Lambda function for a single invocation\. If you are using an SQS queue as an event source, the maximum value is 10\.  
+The largest number of records that AWS Lambda will retrieve from your event source at the time of invoking your function\. Your function receives an event with all the retrieved records\.  
 Type: Integer  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.  
 Required: No

@@ -52,14 +52,14 @@ import (
         "fmt"
         "github.com/aws/aws-lambda-go/lambda"
 )
- 
+ ``
 type MyEvent struct {
-        Name string 'json:"What is your name?"'
-        Age int     'json:"How old are you?"'
+        Name string `json:"What is your name?"`
+        Age int     `json:"How old are you?"`
 }
  
 type MyResponse struct {
-        Message string 'json:"Answer:"'
+        Message string `json:"Answer:"`
 }
  
 func HandleLambdaEvent(event MyEvent) (MyResponse, error) {
@@ -137,10 +137,10 @@ func init() {
         myObjects = result.Contents
 }
  
-func LambdaHandler() int {
+func LambdaHandler() (int, error) {
         invokeCount = invokeCount + 1
         log.Print(myObjects)
-        return invokeCount
+        return invokeCount, nil
 }
  
 func main() {

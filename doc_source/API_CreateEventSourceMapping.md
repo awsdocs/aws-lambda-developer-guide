@@ -39,7 +39,7 @@ The request does not use any URI parameters\.
 The request accepts the following data in JSON format\.
 
  ** [BatchSize](#API_CreateEventSourceMapping_RequestSyntax) **   <a name="SSS-CreateEventSourceMapping-request-BatchSize"></a>
-The largest number of records that AWS Lambda will retrieve from your event source at the time of invoking your function\. Your function receives an event with all the retrieved records\. The default for Amazon Kinesis and Amazon DynamoDB is 100 records\.  
+The largest number of records that AWS Lambda will retrieve from your event source at the time of invoking your function\. Your function receives an event with all the retrieved records\. The default for Amazon Kinesis and Amazon DynamoDB is 100 records\. Both the default and maximum for Amazon SQS are 10 messages\.  
 Type: Integer  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.  
 Required: No
