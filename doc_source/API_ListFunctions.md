@@ -33,7 +33,7 @@ The region from which the functions are replicated\. For example, if you specify
 Pattern: `ALL|[a-z]{2}(-gov)?-[a-z]+-\d{1}` 
 
  ** [MaxItems](#API_ListFunctions_RequestSyntax) **   <a name="SSS-ListFunctions-request-MaxItems"></a>
-Optional integer\. Specifies the maximum number of AWS Lambda functions to return in response\. This parameter value must be greater than 0\.  
+Optional integer\. Specifies the maximum number of AWS Lambda functions to return in response\. This parameter value must be greater than 0\. The absolute maximum of AWS Lambda functions that can be returned is 50.
 Valid Range: Minimum value of 1\. Maximum value of 10000\.
 
 ## Request Body<a name="API_ListFunctions_RequestBody"></a>
