@@ -17,13 +17,13 @@ The following are recommended best practices for using AWS Lambda:
   exports.myHandler = function(event, context, callback) {
   	var foo = event.foo;
   	var bar = event.bar;
-  	var result = MyLambdaFunction (foo, bar);
+  	var result = myCoreLogic(foo, bar);
    
   	callback(null, result);
   }
    
-  function MyLambdaFunction (foo, bar) {
-  	// MyLambdaFunction logic here
+  function myCoreLogic(foo, bar) {
+  	// core logic here
   }
   ```
 + **Take advantage of Execution Context reuse to improve the performance of your function\. ** Make sure any externalized configuration or dependencies that your code retrieves are stored and referenced locally after initial execution\. Limit the re\-initialization of variables/objects on every invocation\. Instead use static initialization/constructor, global/static variables and singletons\. Keep alive and reuse connections \(HTTP, database, etc\.\) that were established during a previous invocation\. 
