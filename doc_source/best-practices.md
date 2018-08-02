@@ -46,7 +46,7 @@ The following are recommended best practices for using AWS Lambda:
 + **Use most\-restrictive permissions when setting IAM policies\.** Understand the resources and operations your Lambda function needs, and limit the execution role to these permissions\. For more information, see [Authentication and Access Control for AWS Lambda](lambda-auth-and-access-control.md)\. 
 + **Be familiar with [AWS Lambda Limits](limits.md)\.** Payload size, file descriptors and /tmp space are often overlooked when determining runtime resource limits\. 
 + **Delete Lambda functions that you are no longer using\.** By doing so, the unused functions won't needlessly count against your deployment package size limit\.
-+ **If you are using Amazon Simple Queue Service** as an event source, make sure the value of the function's expected execution time does not exceed the [Visibility Timeout](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html) value on the queue\. This applies both [CreateFunction](API_CreateFunction.md) and [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)\. 
++ **If you are using Amazon Simple Queue Service** as an event source, make sure the value of the function's expected execution time does not exceed the [Visibility Timeout](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html) value on the queue\. This applies both to [CreateFunction](API_CreateFunction.md) and [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)\. 
   + In the case of **CreateFunction**, AWS Lambda will fail the function creation process\.
   + In the case of **UpdateFunctionConfiguration**, it could result in duplicate invocations of the function\.
 

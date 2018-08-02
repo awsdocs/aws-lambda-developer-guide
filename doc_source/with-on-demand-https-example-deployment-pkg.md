@@ -150,7 +150,7 @@ The `from __future__` statement enables you to write code that is compatible wit
 
 1. Save the file as `LambdaFunctionOverHttps.go`\. 
 
-1.  Zip the `LambdaFunctionOverHttps.go` file as `LambdaFunctionOverHttps.zip`\. 
+1.  Your deployment package is a zip file comprised of a Go executable\. For instructions on how to create one, see [Creating a Deployment Package \(Go\)](lambda-go-how-to-create-deployment-package.md) 
 
 ### Next Step<a name="create-deployment-pkg-go-next-step1"></a>
 

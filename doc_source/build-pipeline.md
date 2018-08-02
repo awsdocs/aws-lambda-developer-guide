@@ -150,7 +150,7 @@ To set up your repository, do the following:
       });
   };
   ```
-+ Add a *samTemplate\.yaml* file, containing the content following\. This is4 the SAM template that defines the resources in your application\. This SAM template defines a Lambda function that is triggered by API Gateway\. Note that the `runtime` parameter uses `nodejs6.10` but you can also specify `nodejs8.10`\. For more information about AWS SAM see [AWS Serverless Application Model](https://github.com/awslabs/serverless-application-model)\.
++ Add a *samTemplate\.yaml* file, containing the content following\. This is for the SAM template that defines the resources in your application\. This SAM template defines a Lambda function that is triggered by API Gateway\. Note that the `runtime` parameter uses `nodejs6.10` but you can also specify `nodejs8.10`\. For more information about AWS SAM see [AWS Serverless Application Model](https://github.com/awslabs/serverless-application-model)\.
 
   ```
   AWSTemplateFormatVersion: '2010-09-09'
@@ -175,12 +175,12 @@ To set up your repository, do the following:
   + Run the `Package` command to prepare your deployment package for subsequent deployment steps in your pipeline\. For more information on the package command, see [Uploading Local Artifacts to an S3 Bucket](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-cli-package.html)
 
     ```
-    version: 0.1
+    version: 0.2
     phases:
       install:
         commands:
           - npm install time
-          - aws cloudformation package --template-file samTemplate.yaml --s3-bucket bucket-name 
+          - aws cloudformation package --template-file samTemplate.yaml --kms-key-id kms-key-id --s3-bucket bucket-name 
                                        --output-template-file outputSamTemplate.yaml
     artifacts:
       type: zip

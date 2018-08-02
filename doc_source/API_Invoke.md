@@ -30,7 +30,8 @@ The request requires the following URI parameters\.
 
  ** [ClientContext](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-ClientContext"></a>
 Using the `ClientContext` you can pass client\-specific information to the Lambda function you are invoking\. You can then process the client information in your Lambda function as you choose through the context variable\. For an example of a `ClientContext` JSON, see [PutEvents](https://docs.aws.amazon.com/mobileanalytics/latest/ug/PutEvents.html) in the *Amazon Mobile Analytics API Reference and User Guide*\.  
-The ClientContext JSON must be base64\-encoded and has a maximum size of 3583 bytes\.
+The ClientContext JSON must be base64\-encoded and has a maximum size of 3583 bytes\.  
+ `ClientContext` information is returned only if you use the synchronous \(`RequestResponse`\) invocation type\.
 
  ** [FunctionName](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-FunctionName"></a>
 The Lambda function name\.  

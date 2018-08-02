@@ -7,15 +7,13 @@ From the **Filter View** list, choose the language you want to use for your Lamb
 The following is example code that receives an Amazon SQS event message as input and processes it\. For illustration, the code writes some of the incoming event data to CloudWatch Logs\. 
 
 ```
-async function handler (event, context) {
-  const records = event.Records
-  event.Records.forEach(function(record) {
-        var body = record.body;
-        console.log(body);
-    });
-  return {}
+exports.handler = async function(event, context) {
+  event.Records.forEach(record => {
+    const { body } = record;
+    console.log(body);
+  });
+  return {};
 }
-module.exports.handler = handler
 ```
 
 **Note**  
@@ -24,13 +22,11 @@ The previous code sample is compliant with Node\.js v8\.10\.
 To use Node\.js v6\.10, using the following code:
 
 ```
-exports.handler = function(event, context, callback) {
-    //console.log(JSON.stringify(event, null, 2));
-    event.Records.forEach(function(record) {
-        var body = record.body;
-        console.log(body);
-    });
-    callback(null, "message");
+event.Records.forEach(function(record) {
+    var body = record.body;
+    console.log(body);
+  });
+  callback(null, "message");
 };
 ```
 
@@ -59,7 +55,7 @@ import com.amazonaws.services.lambda.runtime.events.SQSEvent.SQSMessage;
             public Void handleRequest(SQSEvent event, Context context)
             {
                 for(SQSMessage msg : event.getRecords() {
-                    System.out.println(new String(msg.getSQS().getBody());
+                    System.out.println(new String(msg.getSQS().getBody()));
                 }
                 return null;
             }

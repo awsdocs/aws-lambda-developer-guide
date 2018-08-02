@@ -23,4 +23,12 @@ The following diagram illustrates the application flow:
 
 1. AWS Lambda executes the Lambda function by assuming the execution role you specified at the time you created the Lambda function\.
 
-For a tutorial that walks you through an example setup, see [Tutorial: Using AWS Lambda with Amazon DynamoDB](with-ddb-example.md)\.
+## Options for Creating the Application \(Using AWS CLI and AWS SAM\)<a name="with-ddb-two-options"></a>
+
+The following topcis provide step\-by\-step instructions using both the AWS CLI and AWS SAM\. 
++ **Using AWS CLI** – you setup the example application using a series of AWS CLI commands\. Each CLI command makes API calls to specific AWS service\. This provides an instructive way to discover and learn about the underlying APIs\.
+
+  For instructions to setup AWS CLI, see [Installing the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/installing.html) in the AWS Command Line Interface User Guide\.
+
+   
++ **Using AWS SAM** – Instead of running a series of AWS CLI commands to setup your application, you can create a configuration file describing your application\. You can then deploy the application in one or two commands\. This helps in a production environment, where you want to quickly make application configuration changes and quickly re\-deploy application updates, because you make configuration changes only in one file\.

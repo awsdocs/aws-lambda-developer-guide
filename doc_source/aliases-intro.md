@@ -1,6 +1,6 @@
 # Introduction to AWS Lambda Aliases<a name="aliases-intro"></a>
 
-You can create one or more aliases for your Lambda function\. An* AWS Lambda alias* is like a pointer to a specific Lambda function version\. For more information about versioning, see [Introduction to AWS Lambda Versioning](versioning-intro.md)\. 
+You can create one or more aliases for your Lambda function\. An AWS Lambda alias is like a pointer to a specific Lambda function version\. For more information about versioning, see [Introduction to AWS Lambda Versioning](versioning-intro.md)\. 
 
 By using aliases, you can access the Lambda function an alias is pointing to \(for example, to invoke the function\) without the caller having to know the specific version the alias is pointing to\.
 
@@ -32,7 +32,7 @@ You can access the function using either the function ARN or the alias ARN\.
   arn:aws:lambda:aws-region:acct-id:function:helloworld:DEV
   ```
 
-AWS Lambda provides the following API operations for you to create and manages aliases:
+AWS Lambda provides the following API operations for you to create and manage aliases:
 + [CreateAlias](API_CreateAlias.md)
 + [UpdateAlias](API_UpdateAlias.md)
 + [GetAlias](API_GetAlias.md)
