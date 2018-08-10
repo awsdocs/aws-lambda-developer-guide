@@ -1,6 +1,6 @@
 # Sample Events Published by Event Sources<a name="eventsources"></a>
 
-The following is a list of example events published by the supported AWS services\. For more information about the supported AWS event sources, see [Supported Event Sources](invoking-lambda-function.md)\.
+The following is a list of example events published by the supported AWS services\. For more information about the supported AWS event sources, see [Supported Event Sources](invoking-lambda-function.md)\.  Note: JSON keys may vary in case between AWS event sources.
 
 **Sample Events**
 + [AWS CloudFormation Create Request Sample Event](#eventsources-cloudformation-create-request)
