@@ -14,7 +14,7 @@ After a Lambda function is executed, AWS Lambda maintains the Execution Context 
 + Each Execution Context provides 500MB of additional disk space in the `/tmp` directory\. The directory content remains when the Execution Context is frozen, providing transient cache that can be used for multiple invocations\. You can add extra code to check if the cache has the data that you stored\. For information on deployment limits, see [AWS Lambda Limits](limits.md)\.
 
    
-+ Background processes or callbacks initiated by your Lambda function that did not complete when the function ended resume if AWS Lambda chooses to reuse the Execution Context\. You should make sure any background processes or callbacks \(in case of Node\.js\) in your code are complete before the code exits\.
++ Background processes or callbacks initiated by your Lambda function that did not complete when the function ended resume if AWS Lambda chooses to reuse the Execution Context\. You should make sure any background processes or callbacks in your code are complete before the code exits\.
 
 **Note**  
 When you write your Lambda function code, do not assume that AWS Lambda automatically reuses the Execution Context for subsequent function invocations\. Other factors may dictate a need for AWS Lambda to create a new Execution Context, which can lead to unexpected results, such as database connection failures\. As mentioned previously, add logic to your Lambda function code to check for the existence of an Execution Context\.
