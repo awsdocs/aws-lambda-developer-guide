@@ -12,9 +12,11 @@ In the syntax, note the following:
 + `event` – AWS Lambda uses this parameter to pass in event data to the handler\. This parameter is usually of the Python `dict` type\. It can also be `list`, `str`, `int`, `float`, or `NoneType` type\. 
 + `context` – AWS Lambda uses this parameter to provide runtime information to your handler\. This parameter is of the `LambdaContext` type\.
 + Optionally, the handler can return a value\. What happens to the returned value depends on the invocation type you use when invoking the Lambda function:
-  + If you use the `RequestResponse` invocation type \(synchronous execution\), AWS Lambda returns the result of the Python function call to the client invoking the Lambda function \(in the HTTP response to the invocation request, serialized into JSON\)\. For example, AWS Lambda console uses the `RequestResponse` invocation type, so when you invoke the function using the console, the console will display the returned value\.
+  + If you use the `RequestResponse` invocation type \(synchronous execution\), AWS Lambda returns the result of the Python function call to the client invoking the Lambda function \(in the HTTP response to the invocation request, serialized into JSON via `json.dumps`\)\. For example, AWS Lambda console uses the `RequestResponse` invocation type, so when you invoke the function using the console, the console will display the returned value\.
 
-    If the handler returns `NONE`, AWS Lambda returns null\.
+    If the handler returns objects that can't be serialized by `json.dumps`, the Lambda runtime will crash and the invocation will fail.
+
+    If the handler returns `None`, as Python functions with a `return` statement implicitly do, this gets serializes this as JSON `null`\.
   + If you use the `Event` invocation type \(asynchronous execution\), the value is discarded\.
 
 For example, consider the following Python example code\. 
