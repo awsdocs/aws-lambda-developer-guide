@@ -4,6 +4,9 @@ Environment variables for Lambda functions enable you to dynamically pass settin
 
 You can use environment variables to help libraries know what directory to install files in, where to store outputs, store connection and logging settings, and more\. By separating these settings from the application logic, you don't need to update your function code when you need to change the function behavior based on different settings\. 
 
+**Note**  
+This feature is not yet available in AWS regions based in China \(Beijing or Ningxia\)\. Deploying a Lambda function that contains Environment Variables will result in an `InvalidParameterException`\.
+
 ## Setting Up<a name="env_setting_up"></a>
 
 Suppose you want a Lambda function to behave differently as it moves through lifecycle stages from development to deployment\. For example, the dev, test, and production stages can contain databases that the function needs to connect to that require different connection information and use different table names\. You can create environment variables to reference the database names, connection information or table names and set the value for the function based on the stage in which it’s executing \(for example, development, test, production\) while your function code remains unchanged\. 

@@ -6,7 +6,7 @@ Follow the steps in this section to create a simple Lambda function\.
 
 1. Sign in to the AWS Management Console and open the AWS Lambda console\.
 
-1. Note that AWS Lambda offers a simple `Hello World` function upon introduction under the **How it works** label and includes a **Run** option, allowing you to invoke the function as a general introduction\. This tutorial introduces additonal options you have to create, test and update your Lambda functions, as well as other features provided by the Lambda console and provides links to each, inviting you to explore each one in depth\. 
+1. Note that AWS Lambda offers a simple `Hello World` function upon introduction under the **How it works** label and includes a **Run** option, allowing you to invoke the function as a general introduction\. This tutorial introduces additional options you have to create, test and update your Lambda functions, as well as other features provided by the Lambda console and provides links to each, inviting you to explore each one in depth\. 
 
    Choose **Create a function** under the **Get Started** section to proceed\.
 **Note**  
@@ -80,7 +80,9 @@ Follow the steps to invoke your Lambda function using the sample event data prov
 **Note**  
 If you choose to delete the test event, go to the **Configure test event** page and then choose **Delete**\.
 
-1. AWS Lambda executes your function on your behalf\. The `handler` in your Lambda function receives and then processes the sample event\.
+1. Choose **Create** and then choose **Test**\. Each user can create up to 10 test events per function\. Those test events are not available to other users\.
+
+1. AWS Lambda executes your function on your behalf\. The `handler` in your Lambda function receives and then processes the sample event\. 
 
 1. Upon successful execution, view results in the console\.   
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/getting-started-v2-execution-result.png)

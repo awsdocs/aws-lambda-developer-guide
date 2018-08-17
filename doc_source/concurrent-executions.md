@@ -24,7 +24,7 @@ You can optionally set the concurrent execution limit for a function\. You may c
 + If your function connects to VPC based resources, you must make sure your subnets have adequate address capacity to support the ENI scaling requirements of your function\. You can estimate the approximate ENI capacity with the following formula:
 
   Where:
-  + **Concurrent execution** – This is the projected concurrency of your workload\. Use the information in [Understanding Scaling Behavior](scaling.md)to determine this value\.
+  + **Concurrent execution** – This is the projected concurrency of your workload\. Use the information in [Understanding Scaling Behavior](scaling.md) to determine this value\.
   + **Memory in GB** – The amount of memory you configured for your Lambda function\.
 
 You can set the concurrent execution limit for a function to match the subnet size limits you have\.

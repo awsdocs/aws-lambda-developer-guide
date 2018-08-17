@@ -8,7 +8,7 @@ In addition, you can use the AWS Serverless Application Model to express resourc
 
 For more information, see [Deploying Lambda\-based Applications](deploying-lambda-apps.md)\.
 
-## Specification for DynamoDB Application<a name="ddb-tutorial-spec"></a>
+## Specification for DynamoDB Application<a name="kinesis-tutorial-spec"></a>
 
 The following contains the SAM template for this application\. Copy the text below to a \.yaml file and save it next to the ZIP package you created previously\. Note that the `Handler` and `Runtime` parameter values should match the ones you used when you created the function in the previous section\. 
 

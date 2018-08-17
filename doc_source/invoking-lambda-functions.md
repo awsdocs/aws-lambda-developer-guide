@@ -60,7 +60,7 @@ Note the following:
 + AWS Lambda does not need permission to invoke your Lambda function, therefore you don't need to add any permissions to the permissions policy attached to your Lambda function\. 
 + Your Lambda role needs permission to read from the stream\.
 
-## Example 3: AWS Lambda Pulls Events from an Amazon SQS Queue and Invokes a Lambda Function<a name="example-lambda-pulls-kinesis-streams-events-invokes-function"></a>
+## Example 3: AWS Lambda Pulls Events from an Amazon SQS Queue and Invokes a Lambda Function<a name="example-lambda-pulls-sqs-events-invokes-function"></a>
 
 For poll\-based event sources, AWS Lambda polls the source and then invokes the Lambda function when records are detected on that source\. For poll\-based sources, event source mapping information is stored in AWS Lambda\. AWS Lambda provides an API for you to create and manage these event source mappings\. 
 + [CreateEventSourceMapping](API_CreateEventSourceMapping.md)

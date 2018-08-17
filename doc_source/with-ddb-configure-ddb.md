@@ -21,13 +21,13 @@ We strongly recommend that you adhere to the best practice of using the **Admini
 
   1. Choose **Next: Permissions**\.
 
-  1. On the **Set permissions for user** page, choose **Add user to group**\.
+  1. On the **Set permissions** page, choose **Add user to group**\.
 
   1. Choose **Create group**\.
 
-  1. In the **Create group** dialog box, type **Administrators**\.
+  1. In the **Create group** dialog box, for **Group name** type **Administrators**\.
 
-  1. For **Filter**, choose **Job function**\.
+  1. For **Filter policies**, select the check box for **AWS managed \- job function**\.
 
   1. In the policy list, select the check box for **AdministratorAccess**\. Then choose **Create group**\.
 

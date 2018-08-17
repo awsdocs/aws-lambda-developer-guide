@@ -54,7 +54,7 @@ import com.amazonaws.services.lambda.runtime.events.SQSEvent.SQSMessage;
             @Override
             public Void handleRequest(SQSEvent event, Context context)
             {
-                for(SQSMessage msg : event.getRecords() {
+                for(SQSMessage msg : event.getRecords()){
                     System.out.println(new String(msg.getSQS().getBody()));
                 }
                 return null;
