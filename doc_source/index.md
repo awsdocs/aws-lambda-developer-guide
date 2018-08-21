@@ -218,7 +218,7 @@ Amazon's trademarks and trade dress may not be used in
       + [The AWS X-Ray Daemon in the Lambda Environment](lambda-x-ray-daemon.md)
 + [Administering Lambda-based Applications](admin-lambda-apps.md)
    + [Tagging Lambda Functions](tagging.md)
-   + [Logging AWS Lambda API Calls By Using AWS CloudTrail](logging-using-cloudtrail.md)
+   + [Logging AWS Lambda API Calls with AWS CloudTrail](logging-using-cloudtrail.md)
    + [Authentication and Access Control for AWS Lambda](lambda-auth-and-access-control.md)
       + [Overview of Managing Access Permissions to Your AWS Lambda Resources](access-control-overview.md)
       + [Using Identity-Based Policies (IAM Policies) for AWS Lambda](access-control-identity-based.md)

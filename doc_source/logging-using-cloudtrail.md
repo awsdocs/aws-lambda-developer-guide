@@ -1,12 +1,20 @@
-# Logging AWS Lambda API Calls By Using AWS CloudTrail<a name="logging-using-cloudtrail"></a>
+# Logging AWS Lambda API Calls with AWS CloudTrail<a name="logging-using-cloudtrail"></a>
 
-AWS Lambda is integrated with AWS CloudTrail, a service that captures API calls made by or on behalf of AWS Lambda in your AWS account and delivers the log files to an Amazon S3 bucket that you specify\. CloudTrail captures API calls made from the AWS Lambda console or from the AWS Lambda API\. Using the information collected by CloudTrail, you can determine what request was made to AWS Lambda, the source IP address from which the request was made, who made the request, when it was made, and so on\. To learn more about CloudTrail, including how to configure and enable it, see the [http://docs.aws.amazon.com/awscloudtrail/latest/userguide/](http://docs.aws.amazon.com/awscloudtrail/latest/userguide/)\.
+AWS Lambda is integrated with AWS CloudTrail, a service that provides a record of actions taken by a user, role, or an AWS service in AWS Lambda\. CloudTrail captures API calls for AWS Lambda as events\. The calls captured include calls from the AWS Lambda console and code calls to the AWS Lambda API operations\. If you create a trail, you can enable continuous delivery of CloudTrail events to an Amazon S3 bucket, including events for AWS Lambda\. If you don't configure a trail, you can still view the most recent events in the CloudTrail console in **Event history**\. Using the information collected by CloudTrail, you can determine the request that was made to AWS Lambda, the IP address from which the request was made, who made the request, when it was made, and additional details\. 
+
+To learn more about CloudTrail, including how to configure and enable it, see the [AWS CloudTrail User Guide](http://docs.aws.amazon.com/awscloudtrail/latest/userguide/)\.
 
 ## AWS Lambda Information in CloudTrail<a name="service-name-info-in-cloudtrail"></a>
 
-When CloudTrail logging is enabled in your AWS account, API calls made to AWS Lambda actions are tracked in log files\. AWS Lambda records are written together with other AWS service records in a log file\. CloudTrail determines when to create and write to a new file based on a time period and file size\.
+CloudTrail is enabled on your AWS account when you create the account\. When supported event activity occurs in AWS Lambda, that activity is recorded in a CloudTrail event along with other AWS service events in **Event history**\. You can view, search, and download recent events in your AWS account\. For more information, see [Viewing Events with CloudTrail Event History](http://docs.aws.amazon.com/awscloudtrail/latest/userguide/view-cloudtrail-events.html)\. 
 
-The following actions are supported:
+For an ongoing record of events in your AWS account, including events for AWS Lambda, create a trail\. A *trail* enables CloudTrail to deliver log files to an Amazon S3 bucket\. By default, when you create a trail in the console, the trail applies to all AWS Regions\. The trail logs events from all Regions in the AWS partition and delivers the log files to the Amazon S3 bucket that you specify\. Additionally, you can configure other AWS services to further analyze and act upon the event data collected in CloudTrail logs\. For more information, see the following: 
++ [Overview for Creating a Trail](http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-and-update-a-trail.html)
++ [CloudTrail Supported Services and Integrations](http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-aws-service-specific-topics.html#cloudtrail-aws-service-specific-topics-integrations)
++ [Configuring Amazon SNS Notifications for CloudTrail](http://docs.aws.amazon.com/awscloudtrail/latest/userguide/getting_notifications_top_level.html)
++ [Receiving CloudTrail Log Files from Multiple Regions](http://docs.aws.amazon.com/awscloudtrail/latest/userguide/receive-cloudtrail-log-files-from-multiple-regions.html) and [Receiving CloudTrail Log Files from Multiple Accounts](http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-receive-logs-from-multiple-accounts.html)
+
+AWS Lambda supports logging the following actions as events in CloudTrail log files:
 + [AddPermission](API_AddPermission.md)
 + [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
 + [CreateFunction](API_CreateFunction.md)
@@ -103,4 +111,4 @@ The `eventName` may include date and version information, such as `"GetFunction2
 
 ## Using CloudTrail to Track Function Invocations<a name="tracking-function-invocations"></a>
 
-CloudTrail also logs data events\. You can turn on data event logging so that you log an event every time Lambda functions are invoked\. This helps you understand what identities are invoking the functions and the frequency of their invocations\. This feature is not enabled by default and incurs additional charges if enabled\. You can do this using the AWS CloudTrail console or [Invoke](API_Invoke.md) CLI operation\. For more information on this option, see [ Logging Data and Management Events for Trails](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html)\.
+CloudTrail also logs data events\. You can turn on data event logging so that you log an event every time Lambda functions are invoked\. This helps you understand what identities are invoking the functions and the frequency of their invocations\. You can do this using the AWS CloudTrail console or [Invoke](API_Invoke.md) CLI operation\. For more information on this option, see [ Logging Data and Management Events for Trails](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html)\.
