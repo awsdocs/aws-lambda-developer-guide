@@ -22,7 +22,8 @@ The previous code sample is compliant with Node\.js v8\.10\.
 To use Node\.js v6\.10, using the following code:
 
 ```
-event.Records.forEach(function(record) {
+exports.handler = function(event, context, callback) {
+  event.Records.forEach(function(record) {
     var body = record.body;
     console.log(body);
   });
