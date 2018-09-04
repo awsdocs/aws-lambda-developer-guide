@@ -4,6 +4,6 @@ AWS Lambda integrates with many of the administration tools that AWS offers, inc
 
 The sections below offer guidance on how to organize and track your Lambda function invocations and introduce you to the AWS Security Model for how to secure your Lambda\-based applications:
 + [Tagging Lambda Functions](tagging.md)
-+ [Logging AWS Lambda API Calls By Using AWS CloudTrail](logging-using-cloudtrail.md)
++ [Logging AWS Lambda API Calls with AWS CloudTrail](logging-using-cloudtrail.md)
 + [Authentication and Access Control for AWS Lambda](lambda-auth-and-access-control.md)
 + [Managing Concurrency](concurrent-executions.md)

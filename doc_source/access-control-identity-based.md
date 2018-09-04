@@ -124,7 +124,7 @@ A user can select a Lambda function and view details of the function \(such as a
                   "lambda:ListAliases",
                   "lambda:GetFunction",
                   "lambda:GetFunctionConfiguration",
-                  "lambda:ListEventSourceMapping",
+                  "lambda:ListEventSourceMappings",
                   "lambda:GetPolicy"
               ],
               "Resource": "*"

@@ -30,7 +30,7 @@ Resources:
             BatchSize: 10
 
   MySqsQueue:
-Type: AWS::SQS::Queue
+	Type: AWS::SQS::Queue
 ```
 
 ## Deploying the Serverless Application<a name="with-sqs-example-use-app-spec-deploy"></a>

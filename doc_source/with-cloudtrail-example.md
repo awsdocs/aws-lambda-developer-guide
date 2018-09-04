@@ -1,6 +1,6 @@
 # Tutorial: Using AWS Lambda with AWS CloudTrail<a name="with-cloudtrail-example"></a>
 
-Suppose you have turned on AWS CloudTrail for your AWS account to maintain records \(logs\) of AWS API calls made on your account and you want to be notified anytime an API call is made to create an SNS topic\. As API calls are made in your account, CloudTrail writes logs to an Amazon S3 bucket that you configured\. In this scenario, you want Amazon S3 to publish the object\-created events to AWS Lambda and invoke your Lambda function as CloudTrail creates log objects\. 
+In this scenario, AWS CloudTrail will maintain records \(logs\) of AWS API calls made on your account and notify you anytime an API call is made to create an SNS topic\. As API calls are made in your account, CloudTrail writes logs to an Amazon S3 bucket that you configured\. In this scenario, you want Amazon S3 to publish the object\-created events to AWS Lambda and invoke your Lambda function as CloudTrail creates log objects\. 
 
 When Amazon S3 invokes your Lambda function, it passes an S3 event identifying, among other things, the bucket name and key name of the object that CloudTrail created\. Your Lambda function can read the log object, and it knows the API calls that were reported in the log\.
 

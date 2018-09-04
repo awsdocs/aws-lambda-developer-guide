@@ -14,7 +14,7 @@ First, you launch an RDS MySQL instance in your default VPC with ExampleDB datab
 This tutorial uses the RDS MySQL DB engine launched in the default VPC in the us\-east\-1 region\.
 
 You can launch an RDS MySQL instance using one of the following methods:
-+ Follow the instructions at [Creating a MySQL DB Instance and Connecting to a Database on a MySQL DB Instance](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.MySQL.html) in the *Amazon Relational Database Service User Guide*\.
++ Follow the instructions at [Creating a MySQL DB Instance and Connecting to a Database on a MySQL DB Instance](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.MySQL.html) in the *Amazon RDS User Guide*\.
 + Use the following AWS CLI command:
 
   ```

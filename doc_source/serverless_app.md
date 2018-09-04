@@ -250,7 +250,7 @@ If none of these are supplied, a default execution role is created with Lambda b
 **Note**  
 In addition to using the serverless resources, you can also use conventional AWS CloudFormation syntax for expressing resources in the same template\. Any resources not included in the current SAM model can still be created in the AWS CloudFormation template using AWS CloudFormation syntax\. In addition, you can use AWS CloudFormation syntax to express serverless resources as an alternative to using the SAM model\. For information about specifying a Lambda function using conventional CloudFormation syntax as part of your SAM template, see [AWS::Lambda::Function](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html) in the AWS CloudFormation User Guide\.
 
-### <a name="w3ab1c19c17b4c16"></a>
+### <a name="w4ab1c19c17b4c16"></a>
 
 For a list of complete serverless application examples, see [Examples of How to Use AWS Lambda](use-cases.md)\.
 

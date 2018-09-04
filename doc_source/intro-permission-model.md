@@ -16,7 +16,7 @@ The following sections describe permissions management\.
 **Topics**
 + [Manage Permissions: Using an IAM Role \(Execution Role\)](#lambda-intro-execution-role)
 + [Manage Permissions: Using a Lambda Function Policy](#intro-permission-model-access-policy)
-+ [Suggested Reading](#w3ab1c67c11c20c21)
++ [Suggested Reading](#w4ab1c67c11c20c21)
 
 ## Manage Permissions: Using an IAM Role \(Execution Role\)<a name="lambda-intro-execution-role"></a>
 
@@ -60,7 +60,7 @@ Instead of using a Lambda function policy, you can create another IAM role that 
 
 For more information about Lambda function policies, see [Using Resource\-Based Policies for AWS Lambda \(Lambda Function Policies\)](access-control-resource-based.md)\. For more information about Lambda permissions, see [Authentication and Access Control for AWS Lambda](lambda-auth-and-access-control.md)\.
 
-## Suggested Reading<a name="w3ab1c67c11c20c21"></a>
+## Suggested Reading<a name="w4ab1c67c11c20c21"></a>
 
 The next topic is [Lambda Execution Environment and Available Libraries](current-supported-versions.md)\.
 

@@ -4,7 +4,7 @@ The underlying AWS Lambda execution environment is based on the following:
 + Public Amazon Linux AMI version \(AMI name: amzn\-ami\-hvm\-2017\.03\.1\.20170812\-x86\_64\-gp2\) which can be accessed [ here](https://console.aws.amazon.com/ec2/v2/home#Images:visibility=public-images;search=amzn-ami-hvm-2017.03.1.20170812-x86_64-gp2)\.  
 
   For information about using an AMI, see [Amazon Machine Images \(AMI\)](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html) in the *Amazon EC2 User Guide for Linux Instances*\.
-+  Linux kernel version – 4\.9\.93\-41\.60\.amzn1\.x86\_64 
++  Linux kernel version – 4\.9\.119\-44\.140\.amzn1\.x86\_64 
 
  If you are using any native binaries in your code, make sure they are compiled against the package and library versions from this AMI and kernel\. Note that only 64\-bit binaries are supported on AWS Lambda and that the specific CPU make and model is subject to continual updates\.
 

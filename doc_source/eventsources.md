@@ -2,6 +2,9 @@
 
 The following is a list of example events published by the supported AWS services\. For more information about the supported AWS event sources, see [Supported Event Sources](invoking-lambda-function.md)\.
 
+**Note**  
+JSON keys may vary in case between AWS event sources\.
+
 **Sample Events**
 + [AWS CloudFormation Create Request Sample Event](#eventsources-cloudformation-create-request)
 + [Amazon SES Email Receiving Sample Event](#eventsources-ses-email-receiving)
@@ -331,6 +334,7 @@ The following is a list of example events published by the supported AWS service
 **Amazon Kinesis Data Streams Sample Event**  <a name="eventsources-kinesis-streams"></a>
 
 ```
+{
      
   "Records": [
     {
