@@ -12,12 +12,12 @@ Follow the steps in this section to create a simple Lambda function\.
 **Note**  
 The console shows the **Get Started** page only if you do not have any Lambda functions created\. If you have created functions already, you will see the **Lambda > Functions** page\. On the list page, choose **Create a function** to go to the **Create function** page\. 
 
-1. On the **Create function** page, you are presented with three options: 
+1. On the **Create function** page, you are presented with three options:
    + **Author from scratch**
    + **Blueprints**
    + **Serverless Application Repository**
 
-    For more information on using the Serverless Application Repository, see [What Is the AWS Serverless Application Repository?](http://docs.aws.amazon.com/serverlessrepo/latest/devguide//what-is-serverlessrepo.html) 
+   For more information on using the Serverless Application Repository, see [What Is the AWS Serverless Application Repository?](http://docs.aws.amazon.com/serverlessrepo/latest/devguide//what-is-serverlessrepo.html)
 
    1. If you'd like to review the blueprints, choose the **Blueprints** button, which will display the available blueprints\. You can also use the **Filter** to search for specific blueprints\. For example: 
       + Enter **S3** in **Filter** to get only the list of blueprints available to process Amazon S3 events\.
@@ -40,12 +40,12 @@ For an in\-depth look at AWS Lambda's security polices, see [Authentication and 
 
    In the **Add triggers** panel, you can optionally choose a service that automatically triggers your Lambda function by choosing one of the service options listed\.
 
-   1. Depending on which service you select, you are prompted to provide relevant information for that service\. For example, if you select DynamoDB, you need to provide the following: 
-      + The name of the DynamoDB table
-      + Batch size
-      + Starting position
+   Depending on which service you select, you are prompted to provide relevant information for that service\. For example, if you select DynamoDB, you need to provide the following: 
+   + The name of the DynamoDB table
+   + Batch size
+   + Starting position
 
-   1. For this example, do not configure a trigger\.
+   For this example, do not configure a trigger\.
    + In **Function code** note that code is provided\. It returns a simple "Hello from Lambda" greeting\.
    + **Handler** shows **lambda\_function\.lambda\_handler** value\. It is the *filename*\.*handler\-function*\. The console saves the sample code in the `lambda_function.py` file and in the code `lambda_handler` is the function name that receives the event as a parameter when the Lambda function is invoked\. For more information, see [Lambda Function Handler \(Python\)](python-programming-model-handler-types.md)\.
    + Note the embedded IDE \(Integrated Development Environment\)\. To learn more, see [Creating Functions Using the AWS Lambda Console Editor](code-editor.md)\.

@@ -6,6 +6,10 @@ For an overview of the service, see [What Is AWS Lambda?](welcome.md)\.
 
 You can use the AWS CLI to explore the AWS Lambda API\. This guide provides several tutorials that use the AWS CLI\.
 
+**Topics**
++ [Actions](API_Operations.md)
++ [Data Types](API_Types.md)
+
 ## Certificate Errors When Using an SDK<a name="cert-errors"></a>
 
 Because AWS SDKs use the CA certificates from your computer, changes to the certificates on the AWS servers can cause connection failures when you attempt to use an SDK\. You can prevent these failures by keeping your computer's CA certificates and operating system up\-to\-date\. If you encounter this issue in a corporate environment and do not manage your own computer, you might need to ask an administrator to assist with the update process\. The following list shows minimum operating system and Java versions:
@@ -20,7 +24,3 @@ When accessing the AWS Lambda management console or AWS Lambda API endpoints, wh
 + Starfield Class 2 Certification Authority
 
 Root certificates from the first two authorities are available from [Amazon Trust Services](https://www.amazontrust.com/repository/), but keeping your computer up\-to\-date is the more straightforward solution\. To learn more about ACM\-provided certificates, see [AWS Certificate Manager FAQs\.](https://aws.amazon.com/certificate-manager/faqs/#certificates) 
-
-**Topics**
-+ [Actions](API_Operations.md)
-+ [Data Types](API_Types.md)

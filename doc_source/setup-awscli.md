@@ -32,4 +32,5 @@ All the exercises in this guide assume that you are using administrator user cre
      ```
 
 ## Next Step<a name="setting-up-next-step-sam"></a>
-[Install SAM CLI](sam-cli-requirements.md)
+
+ [Install SAM CLI](sam-cli-requirements.md) 

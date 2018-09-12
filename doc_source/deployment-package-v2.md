@@ -45,3 +45,4 @@ Once you have done that, set the requisite IAM permissions on the package\. For 
 + [Creating a Deployment Package \(Go\)](lambda-go-how-to-create-deployment-package.md)
 + [Creating a Deployment Package \(Java\)](lambda-java-how-to-create-deployment-package.md)
 + [Creating a Deployment Package \(Python\)](lambda-python-how-to-create-deployment-package.md)
++ [Creating a Deployment Package \(PowerShell\)](lambda-powershell-how-to-create-deployment-package.md)

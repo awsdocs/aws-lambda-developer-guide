@@ -4,7 +4,9 @@ AWS Lambda automatically monitors Lambda functions on your behalf, reporting met
 
 You can insert logging statements into your code to help you validate that your code is working as expected\. Lambda automatically integrates with CloudWatch Logs and pushes all logs from your code to a CloudWatch Logs group associated with a Lambda function, which is named /aws/lambda/*<function name>*\. To learn more about log groups and accessing them through the CloudWatch console, see the [Monitoring System, Application, and Custom Log Files](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatchLogs.html) in the *Amazon CloudWatch User Guide*\. 
 
-You can view logs for Lambda by using the Lambda console, the CloudWatch console, the AWS CLI, or the CloudWatch API\. The following procedure show you how to view the logs by using the Lambda console\. If you have not created a Lambda function before, see [Getting Started](getting-started.md)\.
+You can view logs for Lambda by using the Lambda console, the CloudWatch console, the AWS CLI, or the CloudWatch API\. The following procedure show you how to view the logs by using the Lambda console\. 
+
+If you have not created a Lambda function before, see [Getting Started](getting-started.md)\.
 
 **Note**  
 There is no additional charge for using Lambda logs; however, standard CloudWatch Logs charges apply\. For more information, see [CloudWatch Pricing\.](https://aws.amazon.com/cloudwatch/pricing/)

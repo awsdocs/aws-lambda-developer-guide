@@ -8,7 +8,7 @@ AWS Lambda also supports creating aliases for each of your Lambda function versi
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/alias_intro_2_10.png)
 
-Aliases enable you to abstract the process of promoting new Lambda function versions into production from the mapping of the Lambda function version and its event source\.  
+Aliases enable you to abstract the process of promoting new Lambda function versions into production from the mapping of the Lambda function version and its event source\.
 
 For example, suppose Amazon S3 is the event source that invokes your Lambda function when new objects are created in a bucket\. When Amazon S3 is your event source, you store the event source mapping information in the bucket notification configuration\. In that configuration, you can identify the Lambda function ARN that Amazon S3 can invoke\. However, in this case each time you publish a new version of your Lambda function you need to update the notification configuration so that Amazon S3 invokes the correct version\. 
 

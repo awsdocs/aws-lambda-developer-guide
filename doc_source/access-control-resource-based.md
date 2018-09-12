@@ -20,7 +20,7 @@ If the custom application and the Lambda function it invokes belong to the same 
 **Note**  
 The AWS Lambda console is the easiest way to manage event sources and their permissions in a Lambda function policy\. If the AWS service console for the event source supports configuring event source mapping, you can use that console too\. As you configure new event sources or modify existing event sources, the console automatically modifies the permissions policy associated with the Lambda function\. 
 
-You can use the console to view your function policy by choosing the **Triggers** tab on your function's details page and then choosing **View function policy**\. The console doesn't support directly modifying permissions in a function policy\. You must use either the AWS CLI or the AWS SDKs\. The following are AWS CLI examples of the API operations listed earlier in this topic:
+You can use the console to view your function policy under the **Configuration** tab and then choosing the **key** icon\. The console doesn't support directly modifying permissions in a function policy\. You must use either the AWS CLI or the AWS SDKs\. The following are AWS CLI examples of the API operations listed earlier in this topic:
 
 **Topics**
 + [Example 1: Allow Amazon S3 to Invoke a Lambda Function](#access-control-resource-based-example-s3-invoke-function)

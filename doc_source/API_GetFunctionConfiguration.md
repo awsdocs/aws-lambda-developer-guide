@@ -20,7 +20,7 @@ The request requires the following URI parameters\.
 The name of the Lambda function for which you want to retrieve the configuration information\.  
  You can specify a function name \(for example, `Thumbnail`\) or you can specify Amazon Resource Name \(ARN\) of the function \(for example, `arn:aws:lambda:us-west-2:account-id:function:ThumbNail`\)\. AWS Lambda also allows you to specify a partial ARN \(for example, `account-id:Thumbnail`\)\. Note that the length constraint applies only to the ARN\. If you specify only the function name, it is limited to 64 characters in length\.   
 Length Constraints: Minimum length of 1\. Maximum length of 170\.  
-Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_\.]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
+Pattern: `(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_\.]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [Qualifier](#API_GetFunctionConfiguration_RequestSyntax) **   <a name="SSS-GetFunctionConfiguration-request-Qualifier"></a>
 Using this optional parameter you can specify a function version or an alias name\. If you specify function version, the API uses qualified function ARN and returns information about the specific function version\. If you specify an alias name, the API uses the alias ARN and returns information about the function version to which the alias points\.  
@@ -107,13 +107,13 @@ Type: [EnvironmentResponse](API_EnvironmentResponse.md) object
  ** [FunctionArn](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-FunctionArn"></a>
 The Amazon Resource Name \(ARN\) assigned to the function\.  
 Type: String  
-Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_\.]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
+Pattern: `arn:aws:lambda:[a-z]{2}-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_\.]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [FunctionName](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-FunctionName"></a>
 The name of the function\. Note that the length constraint applies only to the ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
 Type: String  
 Length Constraints: Minimum length of 1\. Maximum length of 170\.  
-Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_\.]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
+Pattern: `(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_\.]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [Handler](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-Handler"></a>
 The function Lambda calls to begin executing your function\.  
@@ -124,7 +124,7 @@ Pattern: `[^\s]+`
  ** [KMSKeyArn](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-KMSKeyArn"></a>
 The Amazon Resource Name \(ARN\) of the KMS key used to encrypt your function's environment variables\. If empty, it means you are using the AWS Lambda default service key\.  
 Type: String  
-Pattern: `(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()` 
+Pattern: `(arn:aws:[a-z0-9-.]+:.*)|()` 
 
  ** [LastModified](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-LastModified"></a>
 The time stamp of the last time you updated the function\. The time stamp is conveyed as a string complying with ISO\-8601 in this way YYYY\-MM\-DDThh:mm:ssTZD \(e\.g\., 1997\-07\-16T19:20:30\+01:00\)\. For more information, see [Date and Time Formats](https://www.w3.org/TR/NOTE-datetime)\.  
@@ -133,7 +133,7 @@ Type: String
  ** [MasterArn](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-MasterArn"></a>
 Returns the ARN \(Amazon Resource Name\) of the master function\.  
 Type: String  
-Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
+Pattern: `arn:aws:lambda:[a-z]{2}-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [MemorySize](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-MemorySize"></a>
 The memory size, in MB, you configured for the function\. Must be a multiple of 64 MB\.  
@@ -147,7 +147,7 @@ Type: String
  ** [Role](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-Role"></a>
 The Amazon Resource Name \(ARN\) of the IAM role that Lambda assumes when it executes your function to access any other Amazon Web Services \(AWS\) resources\.  
 Type: String  
-Pattern: `arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+` 
+Pattern: `arn:aws:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+` 
 
  ** [Runtime](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-Runtime"></a>
 The runtime environment for the Lambda function\.  

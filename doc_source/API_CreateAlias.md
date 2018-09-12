@@ -29,7 +29,7 @@ The request requires the following URI parameters\.
  ** [FunctionName](#API_CreateAlias_RequestSyntax) **   <a name="SSS-CreateAlias-request-FunctionName"></a>
 Name of the Lambda function for which you want to create an alias\. Note that the length constraint applies only to the ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
-Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
+Pattern: `(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
 ## Request Body<a name="API_CreateAlias_RequestBody"></a>
 
@@ -89,7 +89,7 @@ The following data is returned in JSON format by the service\.
  ** [AliasArn](#API_CreateAlias_ResponseSyntax) **   <a name="SSS-CreateAlias-response-AliasArn"></a>
 Lambda function ARN that is qualified using the alias name as the suffix\. For example, if you create an alias called `BETA` that points to a helloworld function version, the ARN is `arn:aws:lambda:aws-regions:acct-id:function:helloworld:BETA`\.  
 Type: String  
-Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
+Pattern: `arn:aws:lambda:[a-z]{2}-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [Description](#API_CreateAlias_ResponseSyntax) **   <a name="SSS-CreateAlias-response-Description"></a>
 Alias description\.  

@@ -209,7 +209,7 @@ Under the `src/myfunction` directory, examine the following files:
       }
   }
   ```
-+ **MyFunction\.csproj**: An [MSBuild](https://msdn.microsoft.com/en-us/library/dd393574.aspx) file that lists the files and assemblies that comprise your application\. Note specifically that it includes the `Amazon.Lambda.Tools` package, the extension that makes available the Lambda templates described previously\.
++ **MyFunction\.csproj**: An [MSBuild](https://msdn.microsoft.com/en-us/library/dd393574.aspx) file that lists the files and assemblies that comprise your application\.
 
   ```
   <Project Sdk="Microsoft.NET.Sdk">
@@ -221,10 +221,6 @@ Under the `src/myfunction` directory, examine the following files:
     <ItemGroup>
       <PackageReference Include="Amazon.Lambda.Core" Version="1.0.0 " />
       <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="1.3.0" />
-    </ItemGroup>
-  
-    <ItemGroup>
-      <DotNetCliToolReference Include="Amazon.Lambda.Tools" Version="2.2.0" />
     </ItemGroup>
   
   </Project>
@@ -275,10 +271,23 @@ Under the `myfunction/test directory, examine the following files:`
   }
   ```
 
-Once your function has passed its tests, you can build and deploy it by running the following commands from the parent `example` directory:
+Once your function has passed its tests, you can build and deploy using the Amazon\.Lambda\.Tools \.NET Core Global Tool\. To install the \.NET Core Global Tool run the following command\.
 
 ```
-dotnet restore
+dotnet tool install -g Amazon.Lambda.Tools
+```
+
+If you already have the tool installed you can make sure you are using the latest version with the following command\.
+
+```
+dotnet tool update -g Amazon.Lambda.Tools
+```
+
+For more information about the Amazon\.Lambda\.Tools \.NET Core Global see its [GitHub repository](https://github.com/aws/aws-extensions-for-dotnet-cli)\.
+
+With the Amazon\.Lambda\.Tools installed you can deploy your function with the following command:
+
+```
 dotnet lambda deploy-function MyFunction –-function-role role
 ```
 

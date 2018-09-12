@@ -6,7 +6,7 @@ In this tutorial, you do the following:
 + Invoke the Lambda function manually and verify that it accessed the ElastiCache cluster in your VPC\.
 
 **Important**  
-This tutorial uses the default Amazon VPC in the us\-east\-1 region in your account\. For more information about Amazon VPC, see [How to Get Started with Amazon VPC](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Introduction.html#howto) in the *Amazon VPC User Guide*\. 
+This tutorial uses the default Amazon VPC in the us\-east\-1 region in your account\. For more information about Amazon VPC, see [How to Get Started with Amazon VPC](http://docs.aws.amazon.com/vpc/latest/userguide/VPC_Introduction.html#howto) in the *Amazon VPC User Guide*\. 
 
 **Next Step**  
 [Step 1: Create an ElastiCache Cluster](vpc-ec-create-ec-cluster.md)

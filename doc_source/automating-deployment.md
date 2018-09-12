@@ -10,4 +10,4 @@ The sections below demonstrate how to incorporate all these tools to incorporate
 
 ## Next Step<a name="automating-deployment-next-step"></a>
 
-[Building a Pipeline for Your Serverless Application](build-pipeline.md)
+ [Building a Pipeline for Your Serverless Application](build-pipeline.md) 

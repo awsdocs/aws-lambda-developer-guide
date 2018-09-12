@@ -305,4 +305,4 @@ Use the following steps to complete your Beta stage\.
 
 ## Next Step<a name="automating-deployment-next-step1"></a>
 
-[Gradual Code Deployment](automating-updates-to-serverless-apps.md)
+ [Gradual Code Deployment](automating-updates-to-serverless-apps.md) 

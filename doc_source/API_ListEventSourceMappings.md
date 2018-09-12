@@ -20,13 +20,13 @@ The request requires the following URI parameters\.
 
  ** [EventSourceArn](#API_ListEventSourceMappings_RequestSyntax) **   <a name="SSS-ListEventSourceMappings-request-EventSourceArn"></a>
 The Amazon Resource Name \(ARN\) of the Amazon Kinesis or DynamoDB stream\. \(This parameter is optional\.\)  
-Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)` 
+Pattern: `arn:aws:([a-zA-Z0-9\-])+:([a-z]{2}-[a-z]+-\d{1})?:(\d{12})?:(.*)` 
 
  ** [FunctionName](#API_ListEventSourceMappings_RequestSyntax) **   <a name="SSS-ListEventSourceMappings-request-FunctionName"></a>
 The name of the Lambda function\.  
  You can specify the function name \(for example, `Thumbnail`\) or you can specify Amazon Resource Name \(ARN\) of the function \(for example, `arn:aws:lambda:us-west-2:account-id:function:ThumbNail`\)\. If you are using versioning, you can also provide a qualified function ARN \(ARN that is qualified with function version or alias name as suffix\)\. AWS Lambda also allows you to specify only the function name with the account ID qualifier \(for example, `account-id:Thumbnail`\)\. Note that the length constraint applies only to the ARN\. If you specify only the function name, it is limited to 64 characters in length\.   
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
-Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
+Pattern: `(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [Marker](#API_ListEventSourceMappings_RequestSyntax) **   <a name="SSS-ListEventSourceMappings-request-Marker"></a>
 Optional string\. An opaque pagination token returned from a previous `ListEventSourceMappings` operation\. If present, specifies to continue the list from where the returning call left off\. 

@@ -2,10 +2,10 @@
 
 Typically, you create resources inside Amazon Virtual Private Cloud \(Amazon VPC\) so that they cannot be accessed over the public Internet\. These resources could be AWS service resources, such as Amazon Redshift data warehouses, Amazon ElastiCache clusters, or Amazon RDS instances\. They could also be your own services running on your own EC2 instances\. By default, resources within a VPC are not accessible from within a Lambda function\. 
 
-AWS Lambda runs your function code securely within a VPC by default\. However, to enable your Lambda function to access resources inside your private VPC, you must provide additional VPC\-specific configuration information that includes VPC subnet IDs and security group IDs\. AWS Lambda uses this information to set up elastic network interfaces [\(ENIs\)](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_ElasticNetworkInterfaces.html) that enable your function to connect securely to other resources within your private VPC\.
+AWS Lambda runs your function code securely within a VPC by default\. However, to enable your Lambda function to access resources inside your private VPC, you must provide additional VPC\-specific configuration information that includes VPC subnet IDs and security group IDs\. AWS Lambda uses this information to set up elastic network interfaces [\(ENIs\)](http://docs.aws.amazon.com/vpc/latest/userguide/VPC_ElasticNetworkInterfaces.html) that enable your function to connect securely to other resources within your private VPC\.
 
 **Important**  
-AWS Lambda does not support connecting to resources within Dedicated Tenancy VPCs\. For more information, see [Dedicated VPCs](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/dedicated-instance.html)\.
+AWS Lambda does not support connecting to resources within Dedicated Tenancy VPCs\. For more information, see [Dedicated VPCs](http://docs.aws.amazon.com/vpc/latest/userguide/dedicated-instance.html)\.
 
 ## Configuring a Lambda Function for Amazon VPC Access<a name="vpc-configuring"></a>
 
@@ -48,7 +48,7 @@ Note the following additional considerations:
 
 ## Internet Access for Lambda Functions<a name="vpc-internet"></a>
 
-AWS Lambda uses the VPC information you provide to set up [ENIs](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_ElasticNetworkInterfaces.html) that allow your Lambda function to access VPC resources\. Each ENI is assigned a private IP address from the IP address range within the Subnets you specify, but is not assigned any public IP addresses\. *Therefore, if your Lambda function requires Internet access \(for example, to access AWS services that don't have VPC endpoints \), you can configure a NAT instance inside your VPC or you can use the Amazon VPC NAT gateway*\. For more information, see [NAT Gateways](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html) in the *Amazon VPC User Guide*\. You cannot use an Internet gateway attached to your VPC, since that requires the ENI to have public IP addresses\. 
+AWS Lambda uses the VPC information you provide to set up [ENIs](http://docs.aws.amazon.com/vpc/latest/userguide/VPC_ElasticNetworkInterfaces.html) that allow your Lambda function to access VPC resources\. Each ENI is assigned a private IP address from the IP address range within the Subnets you specify, but is not assigned any public IP addresses\. *Therefore, if your Lambda function requires Internet access \(for example, to access AWS services that don't have VPC endpoints \), you can configure a NAT instance inside your VPC or you can use the Amazon VPC NAT gateway*\. For more information, see [NAT Gateways](http://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html) in the *Amazon VPC User Guide*\. You cannot use an Internet gateway attached to your VPC, since that requires the ENI to have public IP addresses\. 
 
 **Important**  
 If your Lambda function needs Internet access, do not attach it to a public subnet or to a private subnet without Internet access\. Instead, attach it only to private subnets with Internet access through a NAT instance or an Amazon VPC NAT gateway\. 

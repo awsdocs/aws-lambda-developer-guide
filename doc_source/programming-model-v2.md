@@ -25,3 +25,4 @@ The following language specific topics provide detailed information:
 + [Programming Model for Authoring Lambda Functions in C\#](dotnet-programming-model.md)
 + [Programming Model for Authoring Lambda Functions in Python](python-programming-model.md)
 + [Programming Model for Authoring Lambda Functions in Go](go-programming-model.md)
++ [Programming Model for Authoring Lambda Functions in PowerShell](powershell-programming-model.md)

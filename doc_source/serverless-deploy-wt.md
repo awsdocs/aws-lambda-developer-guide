@@ -33,7 +33,7 @@ In the following tutorial, you create a simple serverless application that consi
 1. Create a folder called *examplefolder* and place the `example.yaml` file and the `index.js` file inside the folder\.
 
    Your *example* folder now contains the following two files that you can then use to package the serverless application:
-   + `example.yaml`
+   +  `example.yaml` 
    +  `index.js` 
 
 ## Packaging and Deployment<a name="serverless-deploy"></a>

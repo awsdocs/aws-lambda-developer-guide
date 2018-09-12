@@ -106,4 +106,5 @@ For more information about IAM, see the following:
 + [IAM User Guide](http://docs.aws.amazon.com/IAM/latest/UserGuide/)
 
 ### Next Step<a name="setting-up-next-step"></a>
-[Set Up the AWS Command Line Interface \(AWS CLI\)](setup-awscli.md)
+
+ [Set Up the AWS Command Line Interface \(AWS CLI\)](setup-awscli.md) 

@@ -80,8 +80,7 @@ Invoke the function manually using sample Kinesis event data\. We recommend that
    --function-name ProcessKinesisRecords \
    --region region \
    --payload file://file-path/input.txt \
-   --profile adminuser 
-   outputfile.txt
+   --profile adminuser
    ```
 **Note**  
 In this tutorial example, the message is saved in the `outputfile.txt` file\. If you request synchronous execution \(`RequestResponse` as the invocation type\), the function returns the string message in the response body\.   

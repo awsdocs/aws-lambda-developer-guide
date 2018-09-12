@@ -39,6 +39,6 @@ By default, your service or API must be accessible over the public internet for 
 AWS Lambda runs your function code securely within a VPC by default\. However, to enable your Lambda function to access resources inside your private VPC, you must provide additional VPC\-specific configuration information that includes VPC subnet IDs and security group IDs\. AWS Lambda uses this information to set up elastic network interfaces \(ENIs\) that enable your function to connect securely to other resources within your private VPC\. 
 
 **Important**  
-AWS Lambda does not support connecting to resources within Dedicated Tenancy VPCs\. For more information, see [Dedicated VPCs](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/dedicated-instance.html)\. 
+AWS Lambda does not support connecting to resources within Dedicated Tenancy VPCs\. For more information, see [Dedicated VPCs](http://docs.aws.amazon.com/vpc/latest/userguide/dedicated-instance.html)\. 
 
 To learn how to configure a Lambda function to access resources within a VPC, see [Configuring a Lambda Function to Access Resources in an Amazon VPC](vpc.md)

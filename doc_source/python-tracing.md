@@ -54,13 +54,13 @@ def get_object_from_s3(bucket_name, bucket_key):
 ```
 
 **Note**  
-The X\-Ray SDK for Python allows you to patch the following modules:   
+The X\-Ray SDK for Python allows you to patch the following modules:  
 botocore
 boto3
 requests
 sqlite3
 mysql
- You can use `patch_all()` to patch all of them at once\. 
+You can use `patch_all()` to patch all of them at once\. 
 
 Following is what a trace emitted by the code preceding looks like \(synchronous invocation\): 
 

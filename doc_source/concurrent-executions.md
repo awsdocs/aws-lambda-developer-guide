@@ -23,6 +23,10 @@ You can optionally set the concurrent execution limit for a function\. You may c
 + Functions scale automatically based on incoming request rate, but not all resources in your architecture may be able to do so\. For example, relational databases have limits on how many concurrent connections they can handle\. You can set the concurrent execution limit for a function to align with the values of its downstream resources support\.
 + If your function connects to VPC based resources, you must make sure your subnets have adequate address capacity to support the ENI scaling requirements of your function\. You can estimate the approximate ENI capacity with the following formula:
 
+  ```
+  Concurrent executions * (Memory in GB / 3 GB)
+  ```
+
   Where:
   + **Concurrent execution** – This is the projected concurrency of your workload\. Use the information in [Understanding Scaling Behavior](scaling.md) to determine this value\.
   + **Memory in GB** – The amount of memory you configured for your Lambda function\.
@@ -84,7 +88,7 @@ Setting the per function concurrency can impact the concurrency pool available t
 ## Throttling Behavior<a name="throttling-behavior"></a>
 
 On reaching the concurrency limit associated with a function, any further invocation requests to that function are throttled, i\.e\. the invocation doesn't execute your function\. Each throttled invocation increases the Amazon CloudWatch `Throttles` metric for the function\. AWS Lambda handles throttled invocation requests differently, depending on their source: 
-+ **Event sources that aren't stream\-based: **Some of these event sources invoke a Lambda function synchronously, and others invoke it asynchronously\. Handling is different for each: 
++ **Event sources that aren't stream\-based: **Some of these event sources invoke a Lambda function synchronously, and others invoke it asynchronously\. Handling is different for each:
   + **Synchronous invocation:** If the function is invoked synchronously and is throttled, Lambda returns a 429 error and the invoking service is responsible for retries\. The `ThrottledReason` error code explains whether you ran into a function level throttle \(if specified\) or an account level throttle \(see note below\)\. Each service may have its own retry policy\. For a list of event sources and their invocation type, see [Supported Event Sources](invoking-lambda-function.md)\. 
 **Note**  
 If you invoke the function directly through the AWS SDKs using the `RequestResponse` invocation mode, your client receives the 429 error and you can retry the invocation\. 

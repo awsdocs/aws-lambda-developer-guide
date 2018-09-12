@@ -34,37 +34,37 @@ This example uses the us\-west\-2 \(US West Oregon\) region to create the Lambda
 
    1. Write down the Amazon Resource Name \(ARN\) of the IAM role\. You need this value when you create your Lambda function in the next step\.
 
-Create a Lambda function \(`helloworld`\)\. 
+1. Create a Lambda function \(`helloworld`\)\. 
 
-```
-aws lambda create-function \
---region region \
---function-name helloworld \
---zip-file fileb://file-path/helloworld.zip \
---role arn:aws:iam::account-id:role/lambda_basic_execution \
---handler helloworld.handler \
---runtime nodejs6.10 \
---profile adminuser
-```
+   ```
+   aws lambda create-function \
+   --region region \
+   --function-name helloworld \
+   --zip-file fileb://file-path/helloworld.zip \
+   --role arn:aws:iam::account-id:role/lambda_basic_execution \
+   --handler helloworld.handler \
+   --runtime nodejs6.10 \
+   --profile adminuser
+   ```
 
-The response returns the configuration information showing `$LATEST` as the function version as shown in the following example response\.
+   The response returns the configuration information showing `$LATEST` as the function version as shown in the following example response\.
 
-```
-{
-    "CodeSha256": "OjRFuuHKizEE8tHFIMsI+iHR6BPAfJ5S0rW31Mh6jKg=",
-    "FunctionName": "helloworld",
-    "CodeSize": 287,
-    "MemorySize": 128,
-    "FunctionArn": "arn:aws:lambda:us-west-2:account-id:function:helloworld",
-    "Version": "$LATEST",
-    "Role": "arn:aws:iam::account-id:role/lambda_basic_execution",
-    "Timeout": 3,
-    "LastModified": "2015-09-30T18:39:53.873+0000",
-    "Handler": "helloworld.handler",
-    "Runtime": "nodejs6.10",
-    "Description": ""
-}
-```
+   ```
+   {
+       "CodeSha256": "OjRFuuHKizEE8tHFIMsI+iHR6BPAfJ5S0rW31Mh6jKg=",
+       "FunctionName": "helloworld",
+       "CodeSize": 287,
+       "MemorySize": 128,
+       "FunctionArn": "arn:aws:lambda:us-west-2:account-id:function:helloworld",
+       "Version": "$LATEST",
+       "Role": "arn:aws:iam::account-id:role/lambda_basic_execution",
+       "Timeout": 3,
+       "LastModified": "2015-09-30T18:39:53.873+0000",
+       "Handler": "helloworld.handler",
+       "Runtime": "nodejs6.10",
+       "Description": ""
+   }
+   ```
 
 1. Create an alias \(`DEV`\) that points to the `$LATEST` version of the `helloworld` Lambda function\.
 
@@ -161,7 +161,9 @@ The response returns the configuration information showing `$LATEST` as the func
 
 For information about using the AWS Lambda console to manage versioning, see [Managing Versioning Using the AWS Management Console, the AWS CLI, or Lambda API Operations](how-to-manage-versioning.md)\.
 
-## Granting Permissions in a Push Model<a name="versioning-permissions-cli"></a>[Event Source Mapping](invocation-options.md#intro-invocation-modes)
+## Granting Permissions in a Push Model<a name="versioning-permissions-cli"></a>
+
+In a push model \(see [Event Source Mapping](invocation-options.md#intro-invocation-modes)\), event sources such as Amazon S3 invoke your Lambda function\. These event sources maintain a mapping that identifies the function version or alias that they invoke when events occur\. Note the following:
 + We recommend that you specify an existing Lambda function alias in the mapping configuration \(see [Introduction to AWS Lambda Aliases](aliases-intro.md)\)\. For example, if the event source is Amazon S3, you specify the alias ARN in the bucket notification configuration so that Amazon S3 can invoke the alias when it detects specific events\.
 + In the push model, you grant event sources permissions using a resource policy that you attach to your Lambda function\. In versioning, the permissions you add are specific to the qualifier that you specify in the `AddPermission` request \(see [Versioning, Aliases, and Resource Policies](versioning-aliases-permissions.md)\)\. 
 

@@ -31,6 +31,7 @@ The following table lists languages, and the available tools and options that yo
 | C\# | [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/lambda/latest/dg/lambda-app.html) | 
 | Python | [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/lambda/latest/dg/lambda-app.html) | 
 | Go | [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/lambda/latest/dg/lambda-app.html) | 
+| PowerShell | [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/lambda/latest/dg/lambda-app.html) | 
 
 In addition, regardless of the language you choose, there is a pattern to writing Lambda function code\. For example, how you write the handler method of your Lambda function \(that is, the method that AWS Lambda first calls when it begins executing the code\), how you pass events to the handler, what statements you can use in your code to generate logs in CloudWatch Logs, how to interact with AWS Lambda runtime and obtain information such as the time remaining before timeout, and how to handle exceptions\. The [Programming Model](programming-model-v2.md) section provides information for each of the supported languages\.
 

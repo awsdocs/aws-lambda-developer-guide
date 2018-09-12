@@ -1,6 +1,6 @@
 # AWS Toolkit for Visual Studio<a name="lambda-dotnet-create-deployment-package-toolkit"></a>
 
-You can build \.NET\-based Lambda applications using the Lambda plugin to the [AWS Toolkit for Visual Studio]()\. The plugin is available as part of a [Nuget](https://www.nuget.org/packages/Amazon.Lambda/) package\.
+You can build \.NET\-based Lambda applications using the Lambda plugin to the [AWS Toolkit for Visual Studio](https://aws.amazon.com/visualstudio/)\. The plugin is available as part of a [Nuget](https://www.nuget.org/packages/Amazon.Lambda/) package\.
 
 ## Step 1: Create and Build a Project<a name="dotnet-vs-create-project"></a>
 

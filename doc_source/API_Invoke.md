@@ -37,7 +37,7 @@ The ClientContext JSON must be base64\-encoded and has a maximum size of 3583 by
 The Lambda function name\.  
  You can specify a function name \(for example, `Thumbnail`\) or you can specify Amazon Resource Name \(ARN\) of the function \(for example, `arn:aws:lambda:us-west-2:account-id:function:ThumbNail`\)\. AWS Lambda also allows you to specify a partial ARN \(for example, `account-id:Thumbnail`\)\. Note that the length constraint applies only to the ARN\. If you specify only the function name, it is limited to 64 characters in length\.   
 Length Constraints: Minimum length of 1\. Maximum length of 170\.  
-Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_\.]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
+Pattern: `(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_\.]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [InvocationType](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-InvocationType"></a>
 By default, this operation assumes a synchronous \(`RequestResponse`\) invocation type\. If the Lambda function you invoke is expected to have a long\-running execution time, your client may time out before execution completes\. To avoid this, update the client timeout\. If you are invoking the Lambda function via an SDK, please refer to the SDK documentation at the end of this section to learn more about configuring the timeout for your specific runtime\.  

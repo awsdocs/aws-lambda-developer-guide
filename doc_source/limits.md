@@ -1,10 +1,10 @@
 # AWS Lambda Limits<a name="limits"></a>
 
-As explained in [Lambda Functions](lambda-introduction-function.md), once you've packaged up your custom code, including any dependencies, and uploaded it to AWS Lambda, you have created a *Lambda function*\. But there are limits that AWS Lambda imposes that include, for example, the size of your deployment package or the amount of memory your Lambda function is allocated per invocation\. In addition: 
+As explained in [Lambda Functions](lambda-introduction-function.md), once you've packaged up your custom code, including any dependencies, and uploaded it to AWS Lambda, you have created a *Lambda function*\. But there are limits that AWS Lambda imposes that include, for example, the size of your deployment package or the amount of memory your Lambda function is allocated per invocation\. In addition:
 + IAM limits may impact your Lambda function\. For more information, see [Limitations on IAM Entities and Objects](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html)\.
 + If you’re using Lambda@Edge, additional limits apply\. For more information, see [Limits on Lambda@Edge](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html#limits-lambda-at-edge) in the Amazon CloudFront Developer Guide\.
 
- This section discusses those AWS Lambda limits\.
+This section discusses those AWS Lambda limits\.
 
 **Topics**
 + [AWS Lambda Limits](#limits-list)
@@ -81,7 +81,7 @@ The following table lists service limits for deploying a Lambda function\.
 | --- | --- | 
 | Lambda function deployment package size \(compressed \.zip/\.jar file\) | 50 MB | 
 | Total size of all the deployment packages that can be uploaded per region | 75 GB | 
-| Size of code/dependencies that you can zip into a deployment package \(uncompressed \.zip/\.jar size\)\. Each Lambda function receives an additional 512MB of non\-persistent disk space in its own `/tmp` directory\. The `/tmp` directory can be used for loading additional resources like dependency libraries or data sets during function initialization\.  | 250 MB | 
+| Size of code/dependencies that you can zip into a deployment package \(uncompressed \.zip/\.jar size\)\.  Each Lambda function receives an additional 512MB of non\-persistent disk space in its own `/tmp` directory\. The `/tmp` directory can be used for loading additional resources like dependency libraries or data sets during function initialization\.   | 250 MB | 
 | Total size of environment variables set | 4 KB | 
 
 **Note**  

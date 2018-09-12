@@ -17,7 +17,7 @@ The request requires the following URI parameters\.
  ** [FunctionName](#API_DeleteAlias_RequestSyntax) **   <a name="SSS-DeleteAlias-request-FunctionName"></a>
 The Lambda function name for which the alias is created\. Deleting an alias does not delete the function version to which it is pointing\. Note that the length constraint applies only to the ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
-Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
+Pattern: `(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [Name](#API_DeleteAlias_RequestSyntax) **   <a name="SSS-DeleteAlias-request-Name"></a>
 Name of the alias to delete\.  

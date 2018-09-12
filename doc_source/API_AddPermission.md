@@ -31,7 +31,7 @@ The request requires the following URI parameters\.
 Name of the Lambda function whose resource policy you are updating by adding a new permission\.  
  You can specify a function name \(for example, `Thumbnail`\) or you can specify Amazon Resource Name \(ARN\) of the function \(for example, `arn:aws:lambda:us-west-2:account-id:function:ThumbNail`\)\. AWS Lambda also allows you to specify partial ARN \(for example, `account-id:Thumbnail`\)\. Note that the length constraint applies only to the ARN\. If you specify only the function name, it is limited to 64 characters in length\.   
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
-Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
+Pattern: `(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [Qualifier](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-Qualifier"></a>
 You can use this optional query parameter to describe a qualified ARN using a function version or an alias name\. The permission will then apply to the specific qualified ARN\. For example, if you specify function version 2 as the qualifier, then permission applies only when request is made using qualified function ARN:  
@@ -81,7 +81,7 @@ Required: No
 This is optional; however, when granting permission to invoke your function, you should specify this field with the Amazon Resource Name \(ARN\) as its value\. This ensures that only events generated from the specified source can invoke the function\.  
 If you add a permission without providing the source ARN, any AWS account that creates a mapping to your function ARN can send events to invoke your Lambda function\.
 Type: String  
-Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)`   
+Pattern: `arn:aws:([a-zA-Z0-9\-])+:([a-z]{2}-[a-z]+-\d{1})?:(\d{12})?:(.*)`   
 Required: No
 
  ** [StatementId](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-StatementId"></a>

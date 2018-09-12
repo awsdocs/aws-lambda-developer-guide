@@ -16,7 +16,7 @@ To view a full list of Lambda\-supported event sources and their respective invo
 
 ## Event Source Mapping<a name="intro-invocation-modes"></a>
 
-Lambda functions and event sources are the core components of AWS Lambda\.  An event source is the entity that publishes events, and a Lambda function is the custom code that processes the events\. Supported event sources are the AWS services that can be preconfigured to work with AWS Lambda\. The configuration is referred to as *event source mapping*, which maps an event source to a Lambda function\. It enables automatic invocation of your Lambda function when events occur\. 
+Lambda functions and event sources are the core components of AWS Lambda\. An event source is the entity that publishes events, and a Lambda function is the custom code that processes the events\. Supported event sources are the AWS services that can be preconfigured to work with AWS Lambda\. The configuration is referred to as *event source mapping*, which maps an event source to a Lambda function\. It enables automatic invocation of your Lambda function when events occur\. 
 
 Each event source mapping identifies the type of events to publish and the Lambda function to invoke when events occur\. The specific Lambda function then receives the event information as a parameter and your Lambda function code then processes the event\. 
 

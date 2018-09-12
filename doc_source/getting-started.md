@@ -24,4 +24,5 @@ In order to use the tutorials offered at the end of this section, make sure you 
 + Followed the steps to use SAM CLI, including [Docker](https://www.docker.com), outlined here: [Install SAM CLI](sam-cli-requirements.md)\. 
 
 ### Next Step<a name="setting-up-next-step-account"></a>
-[Set Up an AWS Account](setup.md)
+
+ [Set Up an AWS Account](setup.md) 
