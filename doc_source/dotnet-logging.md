@@ -30,7 +30,7 @@ In the C\# programming model, there are three ways to log data in your function:
   }
   ```
 
-  Each call to `LambdaLogger.Log` results in a CloudWatch Logs event, provided the event size is within the allowed limits\. For information about CloudWatch Logs limits, see [CloudWatch Logs Limits](http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/cloudwatch_limits_cwl.html) in the *Amazon CloudWatch User Guide*\.
+  Each call to `LambdaLogger.Log` results in a CloudWatch Logs event, provided the event size is within the allowed limits\. For information about CloudWatch Logs limits, see [CloudWatch Logs Limits](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/cloudwatch_limits_cwl.html) in the *Amazon CloudWatch User Guide*\.
 + Use the logger in `ILambdaContext`\. The `ILambdaContext` object \(if specified\) in your method contains a `Logger` property that represents a LambdaLogger\. The following is an example of using this method: 
 
   ```

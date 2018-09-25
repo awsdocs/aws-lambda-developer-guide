@@ -4,6 +4,10 @@ The \.NET Core CLI offers a cross\-platform way for you to create \.NET\-based L
 
 In the \.NET CLI, you use the `new` command to create \.NET projects from a command line\. This is particularly useful if you want to create a platform\-independent project outside of Visual Studio\. To view a list of the available project types, open a command line and navigate to where you installed the \.NET Core runtime and enter the following:
 
+```
+dotnet new -all
+```
+
 You should see the following:
 
 ```
@@ -65,7 +69,15 @@ So, for example, if you wanted to create a console project, you would do the fol
 
 AWS Lambda offers additional templates via the [Amazon\.Lambda\.Templates](https://www.nuget.org/packages/Amazon.Lambda.Templates) nuget package\. To install this package, run the following command:
 
+```
+dotnet new -i Amazon.Lambda.Templates
+```
+
 Once the install is complete, the Lambda templates show up as part of `dotnet new`\. To verify this, again run the following command:
+
+```
+dotnet new -all
+```
 
 You should now see the following:
 
@@ -132,6 +144,10 @@ Examples:
 
 To examine details about a particular template, use the following command:
 
+```
+dotnet new lambda.EmptyFunction --help
+```
+
 Note the following:
 
 ```
@@ -142,19 +158,19 @@ string - Optional
 string - Optional
 ```
 
-These are optional values you can set when you create your Lambda function and will then be automatically written to the `aws-lambda-tools-defaults.json` file, which is built as part of the function\-creation process\. The following explains what they mean: 
+These are optional values you can set when you create your Lambda function and will then be automatically written to the `aws-lambda-tools-defaults.json` file, which is built as part of the function\-creation process\. The following explains what they mean:
 + **\-\-profile: **Your execution role\.
 
   To create an IAM role \(execution role\): 
 
   1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 
-  1. Follow the steps in [IAM Roles](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *IAM User Guide* to create an IAM role \(execution role\)\. As you follow the steps to create a role, note the following: 
+  1. Follow the steps in [IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *IAM User Guide* to create an IAM role \(execution role\)\. As you follow the steps to create a role, note the following: 
      + In **Select Role Type**, choose **AWS Service Roles**, and then choose **AWS Lambda**\.
      + In **Attach Policy**, choose the policy that best fits your Lambda function's requirements\. If it's not interacting with any other AWS services, you would would choose **AWSLambdaBasicExecutionRole**\. However, say your Lambda function is interacting with Kinesis, then you would choose the **AWSLambdaKinesisExecutionRole**\. 
 + **\-\-region: **The Amazon Region in which your function will reside\.
 
- For example, to create a Lambda function, run the following command, substituting the values of the `--region` parameter with the region of your choice and `--profile` with your IAM profile: 
+For example, to create a Lambda function, run the following command, substituting the values of the `--region` parameter with the region of your choice and `--profile` with your IAM profile: 
 
 **Note**  
 For more information on Lambda function requirements, see [CreateFunction](API_CreateFunction.md)
@@ -235,7 +251,6 @@ Under the `myfunction/test directory, examine the following files:`
      ... 
   
       <PackageReference Include="Amazon.Lambda.Core" Version="1.0.0 " />
-    
      ...
   ```
 + **FunctionTest\.cs**: The same C\# code template file that it is included in the `src` directory\. Edit this file to mirror your function's production code and test it before uploading your Lambda function to a production environment\.

@@ -25,7 +25,7 @@ The following diagram illustrates the application flow:
 
 ## Options for Creating the Application \(Using AWS CLI and AWS SAM\)<a name="with-ddb-two-options"></a>
 
-The following topcis provide step\-by\-step instructions using both the AWS CLI and AWS SAM\. 
+The following topics provide step\-by\-step instructions using both the AWS CLI and AWS SAM\. 
 + **Using AWS CLI** – you setup the example application using a series of AWS CLI commands\. Each CLI command makes API calls to specific AWS service\. This provides an instructive way to discover and learn about the underlying APIs\.
 
   For instructions to setup AWS CLI, see [Installing the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/installing.html) in the AWS Command Line Interface User Guide\.

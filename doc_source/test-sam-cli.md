@@ -76,7 +76,7 @@ SAM CLI also offers the `sam init` command, which, when run, provides a fully\-f
                   Duration: 12.78 ms      Billed Duration: 100 ms Memory Size: 128 MB
                   Max Memory Used: 29 MB
   ```
-+ Honor security credentials that you've established by using the AWS CLI\. Doing so means your Lambda function can make remote calls to the AWS services that make up your serverless application\. If you have not installed the AWS CLI, see [Installing the AWS Command Line Interface](http://docs.aws.amazon.com/cli/latest/userguide/)\.
++ Honor security credentials that you've established by using the AWS CLI\. Doing so means your Lambda function can make remote calls to the AWS services that make up your serverless application\. If you have not installed the AWS CLI, see [Installing the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/)\.
 
   As with the AWS CLI and SDKs, SAM CLI looks for credentials in the following order:
   + Environment variables \(*AWS\_ACCESS\_KEY\_ID*, *AWS\_SECRET\_ACCESS\_KEY*\)
@@ -119,6 +119,8 @@ SAM CLI consists of the following CLI operations:
   + **Start the local Lambda endpoint:** Start the local Lambda endpoint by running the following command in the directory that contains your AWS SAM template:
 
     `sam local start-lambda`
+
+    This command starts a local endpoint at http://127\.0\.0\.1:3001 that emulates the AWS Lambda service, and you can run your automated tests against this local Lambda endpoint\. When you send an invoke to this endpoint using the AWS CLI or SDK, it will locally execute the Lambda function specified in the request and return a response\.
   + **Run integration tests against the local Lambda endpoint:** In your integration testing, you can use the AWS SDK to invoke your Lambda function with test data, wait for a response and assert that the response is what you expect\. To run the integration test locally, you should configure the AWS SDK to send the [Invoke](API_Invoke.md) API call to the local Lambda endpoint started in the previous step\. The following is a Python example \(AWS SDKs for other languages have similar configurations\):
 
     ```
@@ -385,7 +387,7 @@ For compiled languages or projects requiring complex packaging support, we recom
 
 #### Debugging Functions Written in Python<a name="sam-cli-debugging-python"></a>
 
-Unlike Node\.js, \.NET or Java, Python requires you to enable remote debugging in your Lambda function code\. If you enable debugging \(using the `--debug-port` or `-d` options mentioned above\) for a function that uses one of the Python runtimes \(2\.7 or 3\.6\), SAM CLI maps through that port from your host machine to the Lambda container\. To enable remote debugging, use a Python package such as [remote\-pdb](https://pypi.python.org/pypi/remote-pdb)\. 
+Unlike Node\.js, \.NET or Java, Python requires you to enable remote debugging in your Lambda function code\. If you enable debugging \(using the `--debug-port` or `-d` options mentioned above\) for a function that uses one of the Python runtimes \(2\.7 or 3\.6\), SAM CLI maps through that port from your host machine to the Lambda container\. To enable remote debugging, use a Python package such as [remote\-pdb](https://pypi.python.org/pypi/remote-pdb)\.
 
 **Important**  
 When configuring the host, the debugger listens in on your code, so make sure to use `0.0.0.0` and not `127.0.0.1`\.

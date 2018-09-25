@@ -53,7 +53,7 @@ In IAM:
 
 In Amazon S3:
 + A bucket – In this tutorial, the bucket name is *examplebucket*\. When you turn the trail on in the CloudTrail console, you specify this bucket for CloudTrail to save the logs\. 
-+ Notification configuration on the *examplebucket* – In the configuration, you direct Amazon S3 to publish object\-created events to Lambda, by invoking your Lambda function\. For more information about the Amazon S3 notification feature, see [Setting Up Notification of Bucket Events](http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in *Amazon Simple Storage Service Developer Guide*\.
++ Notification configuration on the *examplebucket* – In the configuration, you direct Amazon S3 to publish object\-created events to Lambda, by invoking your Lambda function\. For more information about the Amazon S3 notification feature, see [Setting Up Notification of Bucket Events](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in *Amazon Simple Storage Service Developer Guide*\.
 + Sample CloudTrail log object \(`ExampleCloudTrailLog.json`\) in *examplebucket* bucket – In the first half of this exercise, you create and test your Lambda function by manually invoking it using a sample S3 event\. This sample event identifies *examplebucket* as the bucket name and this sample object key name\. Your Lambda function then reads the object and sends you email notifications using an SNS topic\. 
 
 In Amazon SNS

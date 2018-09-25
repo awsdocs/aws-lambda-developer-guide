@@ -30,10 +30,10 @@ Note the following:
   + **context: **[The Context Object \(Go\) ](go-programming-model-context.md)\.
   + **fmt:** The Go [Formatting](https://golang.org/pkg/fmt/) object used to format the return value of your function\.
   + **github\.com/aws/aws\-lambda\-go/lambda:** As mentioned previously, implements the Lambda programming model for Go\.
-+ **func HandleRequest\(ctx context\.Context, name string\) \(string, error\)**: This is your Lambda handler signature and includes the code which will be executed\. In addition, the parameters included denote the following: 
++ **func HandleRequest\(ctx context\.Context, name MyEvent\) \(string, error\)**: This is your Lambda handler signature and includes the code which will be executed\. In addition, the parameters included denote the following: 
   + **ctx context\.Context**: Provides runtime information for your Lambda function invocation\. `ctx` is the variable you declare to leverage the information available via [The Context Object \(Go\) ](go-programming-model-context.md)\.
-  + **name string**: An input type with a variable name of `name` whose value will be returned in the `return` statement\.
-  + **string error**: Returns standard [error](https://golang.org/pkg/builtin/#error) information\. For more information on custom error handling, see [Function Errors \(Go\) ](go-programming-model-errors.md)\.
+  + **name MyEvent**: An input type with a variable name of `name` whose value will be returned in the `return` statement\.
+  + **string, error**: Returns standard [error](https://golang.org/pkg/builtin/#error) information\. For more information on custom error handling, see [Function Errors \(Go\) ](go-programming-model-errors.md)\.
   + **return fmt\.Sprintf\("Hello %s\!", name\), nil**: Simply returns a formatted "Hello" greeting with the name you supplied in the handler signature\. `nil` indicates there were no errors and the function executed successfully\.
 + **func main\(\)**: The entry point that executes your Lambda function code\. This is required\.
 
@@ -101,13 +101,45 @@ You have several options when building a Lambda function handler in Go, but you 
 
 The following lists valid handler signatures\. `TIn` and `TOut` represent types compatible with the *encoding/json* standard library\. For more information, see [func Unmarshal](https://golang.org/pkg/encoding/json/#Unmarshal) to learn how these types are deserialized\.
 + 
+
+  ```
+  func ()
+  ```
 + 
+
+  ```
+  func () error
+  ```
 + 
+
+  ```
+  func (TIn), error
+  ```
 + 
+
+  ```
+  func () (TOut, error)
+  ```
 + 
+
+  ```
+  func (context.Context) error
+  ```
 + 
+
+  ```
+  func (context.Context, TIn) error
+  ```
 + 
+
+  ```
+  func (context.Context) (TOut, error)
+  ```
 + 
+
+  ```
+  func (context.Context, TIn) (TOut, error)
+  ```
 
 ## Using Global State<a name="go-programming-model-handler-execution-environment-reuse"></a>
 

@@ -23,4 +23,4 @@ The code sample is compliant with the Node\.js runtimes 6\.10 or 8\.10\. For mor
 1. Zip the `helloworld.js` file as `helloworld.zip`\. 
 
 **Note**  
-To see more examples of using other AWS services within your function, including calling other Lambda functions, see [AWS SDK for JavaScript](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/frames.html)
+To see more examples of using other AWS services within your function, including calling other Lambda functions, see [AWS SDK for JavaScript](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/frames.html)

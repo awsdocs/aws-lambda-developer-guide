@@ -11,7 +11,7 @@ events (or requests) per second * function duration
 For example, consider a Lambda function that processes Amazon S3 events\. Suppose that the Lambda function takes on average three seconds and Amazon S3 publishes 10 events per second\. Then, you will have 30 concurrent executions of your Lambda function\.
 
 The number of concurrent executions for poll\-based event sources also depends on additional factors, as noted following:
-+ **Poll\-based event sources that are stream\-based**
++  **Poll\-based event sources that are stream\-based** 
   + Amazon Kinesis Data Streams
   + Amazon DynamoDB
 
@@ -23,7 +23,7 @@ The number of concurrent executions for poll\-based event sources also depends o
 
   As the influx of messages to a queue increases, AWS Lambda automatically scales up polling activity until the number of concurrent function executions reaches 1000, the account concurrency limit, or the \(optional\) function concurrency limit, whichever is lower\. Amazon Simple Queue Service supports an initial burst of 5 concurrent function invocations and increases concurrency by 60 concurrent invocations per minute\.
 **Note**  
-[Account\-level limits](http://docs.aws.amazon.com/lambda/latest/dg/limits.html) are impacted by other functions in the account, and per\-function concurrency applies to all events sent to a function\. For more information, see [Managing Concurrency](concurrent-executions.md)\.
+[Account\-level limits](https://docs.aws.amazon.com/lambda/latest/dg/limits.html) are impacted by other functions in the account, and per\-function concurrency applies to all events sent to a function\. For more information, see [Managing Concurrency](concurrent-executions.md)\.
 
 ## Request Rate<a name="concurrent-executions-request-rate"></a>
 
@@ -35,9 +35,9 @@ request rate = number of concurrent executions / function duration
 
 For example, if there are five active shards on a stream \(that is, you have five Lambda functions running in parallel\) and your Lambda function takes about two seconds, the request rate is 2\.5 requests/second\.
 
-## Scaling<a name="scaling-behavior"></a>
+## Automatic Scaling<a name="scaling-behavior"></a>
 
-AWS Lambda will dynamically scale capacity in response to increased traffic, subject to your account's [Account Level Concurrent Execution Limit](concurrent-executions.md#concurrent-execution-safety-limit)\. To handle any burst in traffic, Lambda will immediately increase your concurrently executing functions by a predetermined amount, dependent on which region it's executed\.
+AWS Lambda will dynamically scale capacity in response to increased traffic, subject to your account's [Account Level Concurrent Execution Limit](concurrent-executions.md#concurrent-execution-safety-limit)\. To handle bursts in traffic, Lambda automatically increases a function's capacity when it is under load\.
 
  If the default **Immediate Concurrency Increase** value is not sufficient to accommodate the traffic surge, AWS Lambda will continue to increase the number of concurrent function executions by **500 per minute** until your account safety limit has been reached or the number of concurrently executing functions is sufficient to successfully process the increased load\. 
 

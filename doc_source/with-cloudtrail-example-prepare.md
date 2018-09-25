@@ -20,7 +20,7 @@ Make sure you have completed the following steps:
 
 In the AWS CloudTrail console, turn on the trail in your account by specifying *examplebucket* in the `us-west-2` region for CloudTrail to save logs\. When configuring the trail, do not enable SNS notification\. 
 
-For instructions, see [Creating and Updating Your Trail](http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-and-update-a-trail.html) in the *AWS CloudTrail User Guide*\.
+For instructions, see [Creating and Updating Your Trail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-and-update-a-trail.html) in the *AWS CloudTrail User Guide*\.
 
 **Note**  
 Although you turn CloudTrail on now, you do not perform any additional configuration for your Lambda function to process the real CloudTrail logs in the first half of this exercise\. Instead, you will use sample CloudTrail log objects \(that you will upload\) and sample S3 events to manually invoke and test your Lambda function\. In the second half of this tutorial, you perform additional configuration steps that enable your Lambda function to process the CloudTrail logs\. 
@@ -33,11 +33,11 @@ Follow the procedure to create an SNS topic in the `us-west-2` region and subscr
 
 1. Create an SNS topic\. 
 
-   For instructions, see [Create a Topic](http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html) in the *Amazon Simple Notification Service Developer Guide*\.
+   For instructions, see [Create a Topic](https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html) in the *Amazon Simple Notification Service Developer Guide*\.
 
 1. Subscribe to the topic by providing an email address as the endpoint\. 
 
-   For instructions, see [Subscribe to a Topic](http://docs.aws.amazon.com/sns/latest/dg/SubscribeTopic.html) in the *Amazon Simple Notification Service Developer Guide*\.
+   For instructions, see [Subscribe to a Topic](https://docs.aws.amazon.com/sns/latest/dg/SubscribeTopic.html) in the *Amazon Simple Notification Service Developer Guide*\.
 
 1. Note down the topic ARN\. You will need the value in the following sections\.
 

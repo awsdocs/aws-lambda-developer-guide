@@ -152,7 +152,7 @@ You can create a Lambda function from this code and test the end\-to\-end experi
   }
   ```
 
-Follow instructions provided in the getting started \(see  [\(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\)\. Note the following differences:
+Follow instructions provided in the getting started \(see [\(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\)\. Note the following differences:
 + When you create a deployment package, don't forget the `aws-lambda-java-core` library dependency\.
 + When you create the Lambda function specify `example.Hello` \(*package*\.*class*\) as the handler value\.
 
@@ -202,6 +202,6 @@ You can create a Lambda function from this code and test the end\-to\-end experi
 
   The Lambda function will return `TEST` in response\. 
 
-Follow instructions provided in the getting started \(see  [\(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\)\. Note the following differences:
+Follow instructions provided in the getting started \(see [\(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\)\. Note the following differences:
 + When you create a deployment package, don't forget the `aws-lambda-java-core` library dependency\.
 + When you create the Lambda function specify `example.Hello` \(*package*\.*class*\) as the handler value\.

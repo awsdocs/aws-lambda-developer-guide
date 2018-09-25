@@ -56,9 +56,9 @@ The diagram illustrates the flow:
 ### Event Source Mapping for AWS Poll\-Based Services<a name="streaming-event-source-mapping"></a>
 
 AWS Lambda supports the following poll\-based services:
-+ [Amazon Kinesis](http://docs.aws.amazon.com/kinesis/latest/dev/)
-+ [Amazon DynamoDB](http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/)
-+ [Amazon SQS](http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/)
++ [Amazon Kinesis](https://docs.aws.amazon.com/kinesis/latest/dev/)
++ [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/)
++ [Amazon SQS](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/)
 
 Once you have configured the necessary [CreateEventSourceMapping](API_CreateEventSourceMapping.md), AWS Lambda polls the event source and invokes your Lambda function \(referred to as the *pull model*\)\. In the pull model, note the following:
 + The event source mappings are maintained within the AWS Lambda\. AWS Lambda provides the relevant APIs to create and manage event source mappings\. For more information, see [CreateEventSourceMapping](API_CreateEventSourceMapping.md)\. 
@@ -67,8 +67,8 @@ Once you have configured the necessary [CreateEventSourceMapping](API_CreateEven
 The following example illustrates how this model works\.
 
 **Example – AWS Lambda Pulls Events from an Amazon Kinesis Stream and Invokes a Lambda Function**  
-The following diagram shows a custom application that writes records to an Kinesis stream and how AWS Lambda polls the stream\. When AWS Lambda detects a new record on the stream, it invokes your Lambda function\.  
-Suppose you have a custom application that writes records to an Amazon Kinesis stream\. You want to invoke a Lambda function when new records are detected on the stream\. You create a Lambda function and the necessary event source mapping in AWS Lambda\.   
+The following diagram shows a custom application that writes records to a Kinesis stream and how AWS Lambda polls the stream\. When AWS Lambda detects a new record on the stream, it invokes your Lambda function\.  
+Suppose you have a custom application that writes records to a Kinesis stream\. You want to invoke a Lambda function when new records are detected on the stream\. You create a Lambda function and the necessary event source mapping in AWS Lambda\.   
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/kinesis-pull-10.png)
 The diagram illustrates the following sequence:  

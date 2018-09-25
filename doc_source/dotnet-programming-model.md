@@ -1,6 +1,6 @@
 # Programming Model for Authoring Lambda Functions in C\#<a name="dotnet-programming-model"></a>
 
-The following sections explain how [common programming patterns and core concepts](http://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html) apply when authoring Lambda function code in C\#\.
+The following sections explain how [common programming patterns and core concepts](https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html) apply when authoring Lambda function code in C\#\.
 
 **Topics**
 + [Lambda Function Handler \(C\#\)](dotnet-programming-model-handler-types.md)

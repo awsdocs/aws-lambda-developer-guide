@@ -18,8 +18,6 @@ The same applies when you need to roll back to a previous version of your Lambda
 
 We recommend that you use versioning and aliases to deploy your Lambda functions when building applications with multiple dependencies and developers involved\. 
 
-For detailed information, see the following topics\.
-
 **Topics**
 + [Versioning](versioning-intro.md)
 + [Aliases](aliases-intro.md)

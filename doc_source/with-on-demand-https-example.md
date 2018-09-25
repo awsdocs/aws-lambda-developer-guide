@@ -55,7 +55,7 @@ API Gateway offers advanced capabilities, such as:
 **Pass through the entire request** – A Lambda function can receive the entire HTTP request \(instead of just the request body\) and set the HTTP response \(instead of just the response body\) using the `AWS_PROXY` integration type\.
 **Catch\-all methods** – Map all methods of an API resource to a single Lambda function with a single mapping, using the `ANY` catch\-all method\.
 **Catch\-all resources** – Map all sub\-paths of a resource to a Lambda function without any additional configuration using the new path parameter \(`{proxy+})`\.
-To learn more about these API Gateway features, see [Configure Proxy Integration for a Proxy Resource](http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-set-up-simple-proxy.html)\.
+To learn more about these API Gateway features, see [Configure Proxy Integration for a Proxy Resource](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-set-up-simple-proxy.html)\.
 
 ## Next Step<a name="with-on-demand-https-example-impl-summary-next-step"></a>
 

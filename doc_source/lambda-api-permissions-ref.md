@@ -7,7 +7,7 @@ To specify an action, use the `lambda:` prefix followed by the API operation nam
 **Note**  
 Permissions for the AWS Lambda `Invoke` API in the following table can also be granted by using resource\-based policies\. For more information, see [Using Resource\-Based Policies for AWS Lambda \(Lambda Function Policies\)](access-control-resource-based.md)\.
 
-You can use AWS\-wide condition keys in your AWS Lambda policies to express conditions\. For a complete list of AWS\-wide keys, see [Available Keys for Conditions](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#AvailableKeys) in the *IAM User Guide*\. 
+You can use AWS\-wide condition keys in your AWS Lambda policies to express conditions\. For a complete list of AWS\-wide keys, see [Available Keys for Conditions](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#AvailableKeys) in the *IAM User Guide*\. 
 
 AWS Lambda also offers predefined condition keys to a limited set of API operations\. For example, you can: 
 + Restrict access based on the Lambda function ARN \(Amazon Resource Name\) to the following operations: 

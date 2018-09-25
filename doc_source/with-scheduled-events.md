@@ -2,7 +2,7 @@
 
 You can create a Lambda function and direct AWS Lambda to execute it on a regular schedule\. You can specify a fixed rate \(for example, execute a Lambda function every hour or 15 minutes\), or you can specify a Cron expression\. For more information on expressions schedules, see [Schedule Expressions Using Rate or Cron](tutorial-scheduled-events-schedule-expressions.md)\. 
 
-This functionality is available when you create a Lambda function using the AWS Lambda console or the AWS CLI\. To configure it using the AWS CLI, see [Run an AWS Lambda Function on a Schedule Using the AWS CLI](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/RunLambdaSchedule.html)\. The console provides **CloudWatch Events** as an event source\. At the time of creating a Lambda function, you choose this event source and specify a time interval\. 
+This functionality is available when you create a Lambda function using the AWS Lambda console or the AWS CLI\. To configure it using the AWS CLI, see [Run an AWS Lambda Function on a Schedule Using the AWS CLI](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/RunLambdaSchedule.html)\. The console provides **CloudWatch Events** as an event source\. At the time of creating a Lambda function, you choose this event source and specify a time interval\. 
 
  If you have made any manual changes to the permissions on your function, you may need to reapply the scheduled event access to your function\. You can do that by using the following CLI command\. 
 

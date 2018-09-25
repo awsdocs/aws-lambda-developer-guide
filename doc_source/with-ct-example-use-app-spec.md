@@ -6,7 +6,7 @@ You can use AWS CloudFormation to easily specify, deploy, and configure serverle
 
 In addition, you can use the AWS Serverless Application Model to express resources that comprise the serverless application\. These resource types, such as Lambda functions and APIs, are fully supported by AWS CloudFormation and make it easier for you to define and deploy your serverless application\.
 
-For more information, see [Deploying Lambda\-based Applications](deploying-lambda-apps.md)\.
+For more information, see [AWS Lambda Applications](deploying-lambda-apps.md)\.
 
 ## Specification for Amazon API Gateway Application<a name="ct-tutorial-spec"></a>
 

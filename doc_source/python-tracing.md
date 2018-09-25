@@ -1,6 +1,6 @@
 # Python<a name="python-tracing"></a>
 
-In Python, you can have Lambda emit subsegments to X\-Ray to show you information about downstream calls to other AWS services made by your function\. To do so, you first need to include the [the AWS X\-Ray SDK for Python](http://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-python.html) in your deployment package\. In addition, you can patch the `boto3` \(or `botocore` if you are using sessions\), so any client you create to access other AWS services will automatically be traced by X\-Ray\.
+In Python, you can have Lambda emit subsegments to X\-Ray to show you information about downstream calls to other AWS services made by your function\. To do so, you first need to include the [the AWS X\-Ray SDK for Python](https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-python.html) in your deployment package\. In addition, you can patch the `boto3` \(or `botocore` if you are using sessions\), so any client you create to access other AWS services will automatically be traced by X\-Ray\.
 
 ```
 import boto3

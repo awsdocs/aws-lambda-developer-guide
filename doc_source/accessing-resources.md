@@ -1,4 +1,4 @@
-# Accessing Resources from a Lambda Function<a name="accessing-resources"></a>
+# Accessing AWS Resources from a Lambda Function<a name="accessing-resources"></a>
 
 Lambda does not enforce any restrictions on your function logic – if you can code for it, you can run it within a Lambda function\. As part of your function, you may need to call other APIs, or access other AWS services like databases\. 
 
@@ -7,7 +7,6 @@ Lambda does not enforce any restrictions on your function logic – if you can c
 To access other AWS services, you can use the AWS SDK \([Node\.js](https://aws.amazon.com/sdk-for-node-js/), [Java](https://aws.amazon.com/sdk-for-java/), [Python](https://aws.amazon.com/sdk-for-python/), [C\#\)](https://aws.amazon.com/sdk-for-net/) or [Go](https://aws.amazon.com/sdk-for-go/), AWS Lambda will automatically set the credentials required by the SDK to those of the IAM role associated with your function – you do not need to take any additional steps\. For example, here’s sample code using the Python SDK for accessing an S3 object\.:
 
 ```
-                
 import boto3
 import botocore
 
@@ -39,6 +38,6 @@ By default, your service or API must be accessible over the public internet for 
 AWS Lambda runs your function code securely within a VPC by default\. However, to enable your Lambda function to access resources inside your private VPC, you must provide additional VPC\-specific configuration information that includes VPC subnet IDs and security group IDs\. AWS Lambda uses this information to set up elastic network interfaces \(ENIs\) that enable your function to connect securely to other resources within your private VPC\. 
 
 **Important**  
-AWS Lambda does not support connecting to resources within Dedicated Tenancy VPCs\. For more information, see [Dedicated VPCs](http://docs.aws.amazon.com/vpc/latest/userguide/dedicated-instance.html)\. 
+AWS Lambda does not support connecting to resources within Dedicated Tenancy VPCs\. For more information, see [Dedicated VPCs](https://docs.aws.amazon.com/vpc/latest/userguide/dedicated-instance.html)\. 
 
 To learn how to configure a Lambda function to access resources within a VPC, see [Configuring a Lambda Function to Access Resources in an Amazon VPC](vpc.md)

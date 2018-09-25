@@ -16,7 +16,7 @@ The following sections describe permissions management\.
 **Topics**
 + [Manage Permissions: Using an IAM Role \(Execution Role\)](#lambda-intro-execution-role)
 + [Manage Permissions: Using a Lambda Function Policy](#intro-permission-model-access-policy)
-+ [Suggested Reading](#w4aac35c13c21c23)
++ [Suggested Reading](#w4aac35b9c21c23)
 
 ## Manage Permissions: Using an IAM Role \(Execution Role\)<a name="lambda-intro-execution-role"></a>
 
@@ -26,7 +26,7 @@ Each Lambda function has an IAM role \(execution role\) associated with it\. You
    
 + If the event source is poll\-based \(Amazon Kinesis Data Streams, DynamoDB, Amazon SQS\), AWS Lambda polls these resources on your behalf\. AWS Lambda needs permissions to poll either the stream or queue to read new records\. To enable this, you need to grant AWS Lambda permissions to access the new records\. In turn, AWS Lambda will invoke any Lambda function subscribed to this event source to process the event\. 
 
-For more information about IAM roles, see [Roles \(Delegation and Federation\)](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *IAM User Guide*\. 
+For more information about IAM roles, see [Roles \(Delegation and Federation\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *IAM User Guide*\. 
 
 **Important**  
 The user that creates the IAM role is, in effect, passing permissions to AWS Lambda to assume this role\. This requires the user to have permissions for the `iam:PassRole` action\. If you are a user with administrator priviledges creating this role, you don't need to do anything extra to set up permissions for the `iam:PassRole` action because the administrator user has full permissions, including the `iam:PassRole` action\.
@@ -60,7 +60,7 @@ Instead of using a Lambda function policy, you can create another IAM role that 
 
 For more information about Lambda function policies, see [Using Resource\-Based Policies for AWS Lambda \(Lambda Function Policies\)](access-control-resource-based.md)\. For more information about Lambda permissions, see [Authentication and Access Control for AWS Lambda](lambda-auth-and-access-control.md)\.
 
-## Suggested Reading<a name="w4aac35c13c21c23"></a>
+## Suggested Reading<a name="w4aac35b9c21c23"></a>
 
 The next topic is [Lambda Execution Environment and Available Libraries](current-supported-versions.md)\.
 

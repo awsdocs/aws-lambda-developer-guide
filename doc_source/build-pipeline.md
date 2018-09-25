@@ -1,12 +1,12 @@
 # Building a Pipeline for Your Serverless Application<a name="build-pipeline"></a>
 
- In the following tutorial, you will create an AWS CodePipeline that automates the deployment of your serverless application\.  First, you will need to set up a **source stage** to trigger your pipeline\. For the purposes of this tutorial:
+ In the following tutorial, you will create an AWS CodePipeline that automates the deployment of your serverless application\. First, you will need to set up a **source stage** to trigger your pipeline\. For the purposes of this tutorial:
 + We will use GitHub\. For instructions on how to create a GitHub repository, see [Create a Repository in GitHub](https://help.github.com/articles/create-a-repo/)\.
 + You will need to create an AWS CloudFormation role and add the **AWSLambdaExecute** policy to that role, as outlined below:
 
   1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 
-  1. Follow the steps in [Creating a Role to Delegate Permissions to an AWS Service](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide* to create an IAM role \(execution role\) and go to the **To create a role for an AWS service** section\. As you follow the steps to create a role, note the following:
+  1. Follow the steps in [Creating a Role to Delegate Permissions to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide* to create an IAM role \(execution role\) and go to the **To create a role for an AWS service** section\. As you follow the steps to create a role, note the following:
      + In **Select Role Type**, choose **AWS Service Roles**, and then choose **CloudFormation**\. Choose **Next: Permissions**\.
      + In **Attach permissions policies**, use the search bar to find and then choose **AWSLambdaExecute**\. Choose **Next: Review**\. 
      + In **Role Name**, use a name that is unique within your AWS account \(for example, **cloudformation\-lambda\-execution\-role**\) and then choose **Create role**\. 
@@ -170,9 +170,9 @@ To set up your repository, do the following:
               Path: /TimeResource
               Method: GET
   ```
-+ Add a *buildspec\.yml* file\. A build spec is a collection of build commands and related settings, in YAML format, that AWS CodeBuild uses to run a build\. For more information, see [Build Specification Reference for AWS CodeBuild](http://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html)\. In this example, the build action will be:
++ Add a *buildspec\.yml* file\. A build spec is a collection of build commands and related settings, in YAML format, that AWS CodeBuild uses to run a build\. For more information, see [Build Specification Reference for AWS CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html)\. In this example, the build action will be:
   + Use [npm](https://www.npmjs.com/) to install the time package\.
-  + Run the `Package` command to prepare your deployment package for subsequent deployment steps in your pipeline\. For more information on the package command, see [Uploading Local Artifacts to an S3 Bucket](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-cli-package.html)
+  + Run the `Package` command to prepare your deployment package for subsequent deployment steps in your pipeline\. For more information on the package command, see [Uploading Local Artifacts to an S3 Bucket](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-cli-package.html)
 
     ```
     version: 0.2
@@ -249,7 +249,7 @@ A service role for AWS CodeBuild will automatically be created on your behalf\.
 
 ****
 
-Complete the following steps to allow CodeBuild to upload build artifacts to your Amazon S3 bucket\.
+Complete the following steps to allow AWS CodeBuild to upload build artifacts to your Amazon S3 bucket\.
 
 1. Go to the IAM Management Console\.
 

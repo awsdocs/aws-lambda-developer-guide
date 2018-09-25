@@ -3,8 +3,8 @@
 The underlying AWS Lambda execution environment is based on the following:
 + The public Amazon Linux AMI version \(AMI name: amzn\-ami\-hvm\-2017\.03\.1\.20170812\-x86\_64\-gp2\), which you can access in the [Amazon EC2 Management Console](https://console.aws.amazon.com/ec2/v2/home#Images:visibility=public-images;search=amzn-ami-hvm-2017.03.1.20170812-x86_64-gp2)\.
 
-  For information about using an AMI, see [Amazon Machine Images \(AMI\)](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html) in the *Amazon EC2 User Guide for Linux Instances*\.
-+  Linux kernel version – 4\.9\.119\-44\.140\.amzn1\.x86\_64\. 
+  For information about using an AMI, see [Amazon Machine Images \(AMI\)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html) in the *Amazon EC2 User Guide for Linux Instances*\.
++  Linux kernel version – 4\.14\.62\-84\.118\.amzn2\.x86\_64\. 
 
 If you're using any native binaries in your code, make sure that they're compiled against the package and library versions from this AMI and kernel\. Note that only 64\-bit binaries are supported on AWS Lambda, and that the specific CPU make and model is subject to continual updates\.
 
@@ -23,13 +23,13 @@ v4\.3 has been deprecated\. For more information on AWS Lambda's policy on depre
 Not all runtimes are available on the public Amazon Linux AMI version or its yum repositories\. You might need to download and install them manually from their respective public sites\.
 
 The following libraries are available in the AWS Lambda execution environment, regardless of the supported runtime you use, so you don't need to include them:
-+  AWS SDK – [AWS SDK for JavaScript](http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/) version 2\.290\.0 
++  AWS SDK – [AWS SDK for JavaScript](https://docs.aws.amazon.com/AWSJavaScriptSDK/guide/) version 2\.290\.0 
 + AWS SDK for Python 2\.7 \(Boto 3\) version 3\-1\.7\.74 botocore\-1\.10\.74
 
   AWS SDK for Python 3\.6 \(Boto 3\) version 3\-1\.7\.74 botocore\-1\.10\.74
 + Amazon Linux build of `java-1.8.0-openjdk` for Java
 
-For an example of using the `boto` libraries in your Lambda function, see [Accessing Resources from a Lambda Function](accessing-resources.md)\.
+For an example of using the `boto` libraries in your Lambda function, see [Accessing AWS Resources from a Lambda Function](accessing-resources.md)\.
 
 ## Environment Variables Available to Lambda Functions<a name="lambda-environment-variables"></a>
 

@@ -47,7 +47,7 @@ Create an IAM role \(execution role\) that you can specify at the time you creat
 
 1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 
-1. Follow the steps in [IAM Roles](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *IAM User Guide* to create an IAM role \(execution role\)\. As you follow the steps to create a role, note the following: 
+1. Follow the steps in [IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *IAM User Guide* to create an IAM role \(execution role\)\. As you follow the steps to create a role, note the following: 
    + In **Select Role Type**, choose **AWS Service Roles**, and then choose **AWS Lambda**\.
    + In **Attach Policy**, choose the policy named **AWSLambdaBasicExecutionRole**\. 
 

@@ -1,4 +1,4 @@
-# Understanding Retry Behavior<a name="retries-on-errors"></a>
+# AWS Lambda Retry Behavior<a name="retries-on-errors"></a>
 
 A Lambda function can fail for any of the following reasons:
 + The function times out while trying to reach an endpoint\.
@@ -13,7 +13,7 @@ If any of these failures occur, your function will throw an exception\. How the 
 + **Event sources that aren't stream\-based** – Some of these event sources are set up to invoke a Lambda function synchronously and others invoke it asynchronously\. Accordingly, exceptions are handled as follows:
 
    
-  + **Synchronous invocation** – The invoking application receives a 429 error and is responsible for retries\. For a list of supported event sources and the invocation types they use, see [Supported Event Sources](http://docs.aws.amazon.com/lambda/latest/dg/invoking-lambda-function.html)\. These event sources may have additional retries built into the integration\. 
+  + **Synchronous invocation** – The invoking application receives a 429 error and is responsible for retries\. For a list of supported event sources and the invocation types they use, see [Supported Event Sources](https://docs.aws.amazon.com/lambda/latest/dg/invoking-lambda-function.html)\. These event sources may have additional retries built into the integration\. 
 
     If you invoked the Lambda function directly through AWS SDKs, your client receives the error and can choose to retry\.
 
@@ -26,7 +26,7 @@ If any of these failures occur, your function will throw an exception\. How the 
   The exception is treated as blocking, and AWS Lambda will not read any new records from the shard until the failed batch of records either expires or is processed successfully\. This ensures that AWS Lambda processes the stream events in order\.
 + **Poll\-based event sources that are not stream\-based:** This consists of Amazon Simple Queue Service\. If you configure an Amazon SQS queue as an event source, AWS Lambda will poll a batch of records in the queue and invoke your Lambda function\. If the invocation fails or times out, every message in the batch will be returned to the queue, and each will be available for processing once the [Visibility Timeout](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html) period expires\. \(Visibility timeouts are a period of time during which Amazon Simple Queue Service prevents other consumers from receiving and processing the message\)\.
 
-   Once an invocation successfully processes a batch, each message in that batch will be removed from the queue\. When a message is not successfully processed, it is either discarded or if you have configured an [Amazon SQS Dead Letter Queue](http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-dead-letter-queue.html), the failure information will be directed there for you to analyze\. 
+   Once an invocation successfully processes a batch, each message in that batch will be removed from the queue\. When a message is not successfully processed, it is either discarded or if you have configured an [Amazon SQS Dead Letter Queue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-dead-letter-queue.html), the failure information will be directed there for you to analyze\. 
 
 If you don't require ordered processing of events, the advantage of using Amazon SQS queues is that AWS Lambda will continue to process new messages, regardless of a failed invocation of a previous message\. In other words, processing of new messages will not be blocked\. 
 

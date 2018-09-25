@@ -20,7 +20,7 @@ If you discover that your Lambda function does not process the event using async
 
      Event sources can range from a supported AWS service or custom applications that invoke your Lambda function\. For examples, see [Sample Events Published by Event Sources](eventsources.md)\. For a simple sample, see [Example](#nodejs-prog-model-handler-example)\. 
 + `context` – AWS Lambda uses this parameter to provide details of your Lambda function's execution\. For more information, see [The Context Object \(Node\.js\)](nodejs-prog-model-context.md)\.
-+ `callback` \(optional\)– See [Using the Callback Parameter](#nodejs-prog-model-handler-callback)\.
++ `callback` \(optional\) – See [Using the Callback Parameter](#nodejs-prog-model-handler-callback)\.
 
 ## Using the Callback Parameter<a name="nodejs-prog-model-handler-callback"></a>
 
@@ -34,7 +34,11 @@ Where:
 + `error` – is an optional parameter that you can use to provide results of the failed Lambda function execution\. When a Lambda function succeeds, you can pass null as the first parameter\.
 +  `result` – is an optional parameter that you can use to provide the result of a successful function execution\. The result provided must be `JSON.stringify` compatible\. If an error is provided, this parameter is ignored\. 
 
- If you don't use `callback` in your code, AWS Lambda will call it implicitly and the return value is `null`\. When the callback is called \(explicitly or implicitly\), AWS Lambda continues the Lambda function invocation until the event loop is empty\.  The following are example callbacks: 
+If you don't use `callback` in your code, AWS Lambda will call it implicitly and the return value is `null`\.
+
+When the callback is called \(explicitly or implicitly\), AWS Lambda continues the Lambda function invocation until the event loop is empty\. 
+
+The following are example callbacks:
 
 ```
 callback();     // Indicates success but no information returned to the caller.
@@ -43,13 +47,13 @@ callback(null, "success");  // Indicates success with information returned to th
 callback(error);    //  Indicates error with error information returned to the caller.
 ```
 
- AWS Lambda treats any non\-null value for the `error` parameter as a handled exception\.  Note the following: 
+AWS Lambda treats any non\-null value for the `error` parameter as a handled exception\. 
+
+Note the following:
 + Regardless of the invocation type specified at the time of the Lambda function invocation \(see [Invoke](API_Invoke.md)\), the callback method automatically logs the string representation of non\-null values of `error` to the Amazon CloudWatch Logs stream associated with the Lambda function\. 
 + If the Lambda function was invoked synchronously \(using the `RequestResponse` invocation type\), the callback returns a response body as follows:
   + If `error` is null, the response body is set to the string representation of `result`\. 
   + If the `error` is not null, the `error` value will be populated in the response body\. 
-
- 
 
 **Note**  
 When the `callback(error, null)` \(and `callback(error)`\) is called, Lambda will log the first 256 KB of the error object\. For a larger error object, AWS Lambda truncates the log and displays the text `Truncated by Lambda` next to the error object\.

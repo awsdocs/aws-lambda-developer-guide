@@ -1,6 +1,6 @@
 # Programming Model for Authoring Lambda Functions in Java<a name="java-programming-model"></a>
 
-The following sections explain how [common programming patterns and core concepts](http://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html) apply when authoring Lambda function code in Java\.
+The following sections explain how [common programming patterns and core concepts](https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html) apply when authoring Lambda function code in Java\.
 
 **Topics**
 + [Lambda Function Handler \(Java\)](java-programming-model-handler-types.md)

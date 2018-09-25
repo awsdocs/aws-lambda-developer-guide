@@ -15,6 +15,6 @@ With Lambda@Edge, you can build a variety of solutions, for example:
 + Send different objects to your users based on the `User-Agent` header, which contains information about the device that submitted the request\. For example, you can send images in different resolutions to users based on their devices\.
 + Inspect headers or authorized tokens, inserting a corresponding header and allowing access control before forwarding a request to the origin\.
 + Add, delete, and modify headers, and rewrite the URL path to direct users to different objects in the cache\.
-+ Generate new HTTP responses to do things like redirect unauthenticated users to login pages, or create and deliver static webpages right from the edge\. For more information, see [Using Lambda Functions to Generate HTTP Responses to Viewer and Origin Requests](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/http-response-generation.html) in the *Amazon CloudFront Developer Guide*\.
++ Generate new HTTP responses to do things like redirect unauthenticated users to login pages, or create and deliver static webpages right from the edge\. For more information, see [Using Lambda Functions to Generate HTTP Responses to Viewer and Origin Requests](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/http-response-generation.html) in the *Amazon CloudFront Developer Guide*\.
 
 For more information about using Lambda@Edge, see [Using CloudFront with Lambda@Edge](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-at-the-edge.html)\. 

@@ -4,7 +4,7 @@
 
 You can use AWS Lambda to run your code in response to events, such as changes to data in an Amazon S3 bucket or an Amazon DynamoDB table; to run your code in response to HTTP requests using Amazon API Gateway; or invoke your code using API calls made using AWS SDKs\. With these capabilities, you can use Lambda to easily build data processing triggers for AWS services like Amazon S3 and Amazon DynamoDB, process streaming data stored in Kinesis, or create your own back end that operates at AWS scale, performance, and security\.
 
-You can also build [serverless](https://aws.amazon.com/serverless) applications composed of functions that are triggered by events and automatically deploy them using AWS CodePipeline and AWS CodeBuild\. For more information, see [Deploying Lambda\-based Applications](deploying-lambda-apps.md)\.
+You can also build [serverless](https://aws.amazon.com/serverless) applications composed of functions that are triggered by events and automatically deploy them using AWS CodePipeline and AWS CodeBuild\. For more information, see [AWS Lambda Applications](deploying-lambda-apps.md)\.
 
 For more information about the AWS Lambda execution environment, see [Lambda Execution Environment and Available Libraries](current-supported-versions.md)\. For information about how AWS Lambda determines compute resources required to execute your code, see [Configuring Lambda Functions](resource-model.md)\.
 
@@ -24,11 +24,11 @@ If you are a first\-time user of AWS Lambda, we recommend that you read the foll
 
 1. **Read the product overview and watch the introductory video to understand sample use cases\.** These resources are available on the [AWS Lambda webpage](https://aws.amazon.com/lambda/)\.
 
-1. **Review the “Lambda Functions” section of this guide\.** To understand the programming model and deployment options for a Lambda function there are core concepts you should be familiar with\. This section explains these concepts and provides details of how they work in different languages that you can use to author your Lambda function code\. For more information, see [Lambda Functions](lambda-introduction-function.md)\.
+1. **Review the “Lambda Functions” section of this guide\.** To understand the programming model and deployment options for a Lambda function there are core concepts you should be familiar with\. This section explains these concepts and provides details of how they work in different languages that you can use to author your Lambda function code\. For more information, see [Working with Lambda Functions](lambda-introduction-function.md)\.
 
 1. **Try the console\-based Getting Started exercise\.** The exercise provides instructions for you to create and test your first Lambda function using the console\. You also learn about the console provided blueprints to quickly create your Lambda functions\. For more information, see [Getting Started](getting-started.md)\.
 
-1. **Read the "Deploying Applications with AWS Lambda" section of this guide\. **This section introduces various AWS Lambda components you work with to create an end\-to\-end experience\. For more information, see [Deploying Lambda\-based Applications](deploying-lambda-apps.md)\.
+1. **Read the "Deploying Applications with AWS Lambda" section of this guide\. **This section introduces various AWS Lambda components you work with to create an end\-to\-end experience\. For more information, see [AWS Lambda Applications](deploying-lambda-apps.md)\.
 
 Beyond the Getting Started exercise, you can explore the various use cases, each of which is provided with a tutorial that walks you through an example scenario\. Depending on your application needs \(for example, whether you want event driven Lambda function invocation or on\-demand invocation\), you can follow specific tutorials that meet your specific needs\. For more information, see [Use Cases](use-cases.md)\.
 

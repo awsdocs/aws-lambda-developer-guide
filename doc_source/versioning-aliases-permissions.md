@@ -10,8 +10,6 @@ You can invoke for example the `helloworld` function version 1 using any of the 
   ```
   arn:aws:lambda:aws-region:acct-id:function:helloworld:1
   ```
-**Note**  
-An unqualified function ARN \(a function ARN without a version or alias suffix\) maps to the `$LATEST` version\.
 + Using the BETA alias ARN as shown following\.
 
   ```

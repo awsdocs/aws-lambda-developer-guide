@@ -160,7 +160,7 @@ stream/streamName"
 }
 ```
 
-## <a name="w4aac35c13c25c23"></a>
+## <a name="w4aac35b9c25c23"></a>
 
 The following templates are selected depending upon which blueprint you choose\. You can also select them from the dropdown to add extra permissions:
 

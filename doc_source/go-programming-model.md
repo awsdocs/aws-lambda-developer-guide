@@ -1,6 +1,6 @@
 # Programming Model for Authoring Lambda Functions in Go<a name="go-programming-model"></a>
 
-The following sections explain how [common programming patterns and core concepts](http://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html) apply when authoring Lambda function code in [Go](https://golang.org/)\.
+The following sections explain how [common programming patterns and core concepts](https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html) apply when authoring Lambda function code in [Go](https://golang.org/)\.
 
 **Topics**
 + [Lambda Function Handler \(Go\)](go-programming-model-handler-types.md)

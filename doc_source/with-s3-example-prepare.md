@@ -21,7 +21,7 @@ Both the source bucket and your Lambda function must be in the same AWS region\.
 
 1. Create two buckets\. The target bucket name must be *source* followed by **resized**, where *source* is the name of the bucket you want to use for the source\. For example, `mybucket` and `mybucketresized`\.
 
-   For instructions, see [Create a Bucket](http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html) in the *Amazon Simple Storage Service Getting Started Guide*\.
+   For instructions, see [Create a Bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html) in the *Amazon Simple Storage Service Getting Started Guide*\.
 
 1. In the source bucket, upload a \.jpg object, `HappyFace.jpg`\. 
 

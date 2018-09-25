@@ -1,6 +1,6 @@
 # AWS Lambda Limits<a name="limits"></a>
 
-As explained in [Lambda Functions](lambda-introduction-function.md), once you've packaged up your custom code, including any dependencies, and uploaded it to AWS Lambda, you have created a *Lambda function*\. But there are limits that AWS Lambda imposes that include, for example, the size of your deployment package or the amount of memory your Lambda function is allocated per invocation\. In addition:
+As explained in [Working with Lambda Functions](lambda-introduction-function.md), once you've packaged up your custom code, including any dependencies, and uploaded it to AWS Lambda, you have created a *Lambda function*\. But there are limits that AWS Lambda imposes that include, for example, the size of your deployment package or the amount of memory your Lambda function is allocated per invocation\. In addition:
 + IAM limits may impact your Lambda function\. For more information, see [Limitations on IAM Entities and Objects](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html)\.
 + If you’re using Lambda@Edge, additional limits apply\. For more information, see [Limits on Lambda@Edge](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html#limits-lambda-at-edge) in the Amazon CloudFront Developer Guide\.
 

@@ -127,7 +127,7 @@ Note that one of events in this log has `sns.amazonaws.com` as the `eventSource`
 
 1. Save the following JSON \(an example S3 event\) in a file, `input.txt`\. Note the bucket name and the object key name values\.
 
-   You provide this sample event when you invoke your Lambda function\. For more information about the S3 event structure, see [Event Message Structure](http://docs.aws.amazon.com/AmazonS3/latest/dev/notification-content-structure.html) in the *Amazon Simple Storage Service Developer Guide*\. 
+   You provide this sample event when you invoke your Lambda function\. For more information about the S3 event structure, see [Event Message Structure](https://docs.aws.amazon.com/AmazonS3/latest/dev/notification-content-structure.html) in the *Amazon Simple Storage Service Developer Guide*\. 
 
    ```
    {

@@ -4,7 +4,7 @@ This topic describes the AWS Lambda namespace, metrics, and dimensions\. AWS Lam
 
 CloudWatch is basically a metrics repository\. A metric is the fundamental concept in CloudWatch and represents a time\-ordered set of data points\. You \(or AWS services\) publish metrics data points into CloudWatch and you retrieve statistics about those data points as an ordered set of time\-series data\.
 
-Metrics are uniquely defined by a name, a namespace, and one or more dimensions\. Each data point has a time stamp, and, optionally, a unit of measure\. When you request statistics, the returned data stream is identified by namespace, metric name, and dimension\. For more information about CloudWatch, see the [http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/)\. 
+Metrics are uniquely defined by a name, a namespace, and one or more dimensions\. Each data point has a time stamp, and, optionally, a unit of measure\. When you request statistics, the returned data stream is identified by namespace, metric name, and dimension\. For more information about CloudWatch, see the [https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/)\. 
 
 ## AWS Lambda CloudWatch Metrics<a name="lambda-cloudwatch-metrics"></a>
 
@@ -27,16 +27,3 @@ When calculating the error rate on Lambda function invocations, it’s important
 Lambda emits `Invocations=1` when the function is executed\. If the Lambda function is not executed, nothing is emitted\.
 Lambda emits a data point for `Errors` for each invoke request\. `Errors=0` means that there is no function execution error\. `Errors=1` means that there is a function execution error\.
 Lambda emits a data point for `Throttles` for each invoke request\. `Throttles=0` means there is no invocation throttle\. `Throttles=1` means there is an invocation throttle\.
-
-## AWS Lambda CloudWatch Dimensions<a name="lambda-cloudwatch-dimensions"></a>
-
-You can use the dimensions in the following table to refine the metrics returned for your Lambda functions\. 
-
-
-| Dimension | Description | 
-| --- | --- | 
-| FunctionName |  Filters the metric data by Lambda function\.  | 
-| Resource |  Filters the metric data by Lambda function resource, such as function version or alias\.  | 
-| Version |  Filters the data you request for a Lambda version\.  | 
-| Alias |  Filters the data you request for a Lambda alias\.  | 
-| Executed Version |  Filters the metric data by Lambda function versions\. This only applies to alias invocations\.  | 

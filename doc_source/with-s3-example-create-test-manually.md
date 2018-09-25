@@ -3,7 +3,7 @@
 In this section, you do the following:
 + Create a Lambda function deployment package using the sample code provided\.
 **Note**  
-To see more examples of using other AWS services within your function, including calling other Lambda functions, see [AWS SDK for JavaScript](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/frames.html)
+To see more examples of using other AWS services within your function, including calling other Lambda functions, see [AWS SDK for JavaScript](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/frames.html)
 + Create an IAM role \(execution role\)\. At the time you upload the deployment package, you need to specify an IAM role \(execution role\) that Lambda can assume to execute the function on your behalf\. 
 + Create the Lambda function by uploading the deployment package, and then test it by invoking it manually using sample Amazon S3 event data\.
 

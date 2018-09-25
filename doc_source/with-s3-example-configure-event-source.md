@@ -38,7 +38,7 @@ Add notification configuration on the source bucket to request Amazon S3 to publ
 + Event type – For this tutorial, select the `ObjectCreated (All)` Amazon S3 event type\.
 + Lambda function – This is your Lambda function that you want Amazon S3 to invoke\. 
 
-For instructions on adding notification configuration to a bucket, see [Enabling Event Notifications](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-event-notifications.html) in the *Amazon Simple Storage Service Console User Guide*\.
+For instructions on adding notification configuration to a bucket, see [Enabling Event Notifications](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-event-notifications.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
 ## Step 3\.3: Test the Setup<a name="with-s3-example-configure-event-source-test-end-to-end"></a>
 

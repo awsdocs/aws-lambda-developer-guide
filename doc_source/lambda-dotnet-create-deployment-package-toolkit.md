@@ -19,7 +19,7 @@ You can build \.NET\-based Lambda applications using the Lambda plugin to the [A
 
      1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 
-     1. Follow the steps in [Creating a Role to Delegate Permissions to an AWS Service](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide* to create an IAM role \(execution role\)\. As you follow the steps to create a role, note the following:
+     1. Follow the steps in [Creating a Role to Delegate Permissions to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide* to create an IAM role \(execution role\)\. As you follow the steps to create a role, note the following:
         + In **Role Name**, use a name that is unique within your AWS account\. 
         + In **Select Role Type**, choose **AWS Service Roles**, and then choose a service role that grants that service permissions to assume the role\.
         + In **Attach Policy**, choose a permissions policy that is suitable to execute your Lambda function\.

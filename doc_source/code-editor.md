@@ -127,7 +127,7 @@ To expand the code editor to the edges of the web browser window, choose the **T
 
 To shrink the code editor to its original size, choose the **Toggle fullscreen** button again\.
 
-In fullscreen mode, an additional and menu are displayed on the menu bar: **Save** and **Test**\. Choosing **Save** saves the function code\. Choosing **Test** or **Configure Events** enables you to create or edit the function's test events\. 
+In fullscreen mode, additional options are displayed on the menu bar: **Save** and **Test**\. Choosing **Save** saves the function code\. Choosing **Test** or **Configure Events** enables you to create or edit the function's test events\. 
 
 ## Working with Preferences<a name="code-editor-prefs"></a>
 

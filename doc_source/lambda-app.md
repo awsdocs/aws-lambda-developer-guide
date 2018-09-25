@@ -57,7 +57,7 @@ When you create Lambda functions using the console, the console creates the depl
 
 AWS Lambda provides the [CreateFunction](API_CreateFunction.md) operation, which is what you use to create a Lambda function\. You can use the AWS Lambda console, AWS CLI, and AWS SDKs to create a Lambda function\. Internally, all of these interfaces call the `CreateFunction` operation\. 
 
-In addition to providing your deployment package, you can provide configuration information when you create your Lambda function including the compute requirements of your Lambda function, the name of the handler method in your Lambda function, and the runtime, which depends on the language you chose to author your code\. For more information, see [Lambda Functions](lambda-introduction-function.md)\.
+In addition to providing your deployment package, you can provide configuration information when you create your Lambda function including the compute requirements of your Lambda function, the name of the handler method in your Lambda function, and the runtime, which depends on the language you chose to author your code\. For more information, see [Working with Lambda Functions](lambda-introduction-function.md)\.
 
 ### Testing a Lambda Function<a name="lambda-app-test-code"></a>
 

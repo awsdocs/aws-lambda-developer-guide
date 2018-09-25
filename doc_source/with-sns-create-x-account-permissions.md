@@ -90,4 +90,4 @@ Do not use the \-\-source\-account parameter to add a source account to the Lamb
 **Note**  
 Alternatively, you could supply a JSON string directly to the `message` parameter, but using a text file allows for line breaks in the message\.
 
-For more information on Amazon SNS, see [What is Amazon Simple Notification Service?](http://docs.aws.amazon.com/sns/latest/dg/)
+For more information on Amazon SNS, see [What is Amazon Simple Notification Service?](https://docs.aws.amazon.com/sns/latest/dg/)

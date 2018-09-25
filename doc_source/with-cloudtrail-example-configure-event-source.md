@@ -50,7 +50,7 @@ Add notification configuration on the *examplebucket* to request Amazon S3 to pu
   arn:aws:lambda:us-west-2:account-id:function:CloudTrailEventProcessing
   ```
 
-For instructions on adding notification configuration to a bucket, see [Enabling Event Notifications](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/SettingBucketNotifications.html) in the *Amazon Simple Storage Service Console User Guide*\.
+For instructions on adding notification configuration to a bucket, see [Enabling Event Notifications](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/SettingBucketNotifications.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
 ## Step 3\.3: Test the Setup<a name="with-cloudtrail-example-final-integration-test-no-iam"></a>
 

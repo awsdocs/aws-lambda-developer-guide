@@ -8,7 +8,7 @@
 
 ## LambdaLogger\.log\(\)<a name="java-logging-lambdalogger"></a>
 
- Each call to `LambdaLogger.log()` results in a CloudWatch Logs event, provided the event size is within the allowed limits\. For information about CloudWatch Logs limits, see [CloudWatch Logs Limits](http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/cloudwatch_limits_cwl.html) in the *Amazon CloudWatch User Guide*\. For an example, see [Example 2: Writing Logs Using LambdaLogger \(Java\)](#java-wt-logging)\.
+ Each call to `LambdaLogger.log()` results in a CloudWatch Logs event, provided the event size is within the allowed limits\. For information about CloudWatch Logs limits, see [CloudWatch Logs Limits](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/cloudwatch_limits_cwl.html) in the *Amazon CloudWatch User Guide*\. For an example, see [Example 2: Writing Logs Using LambdaLogger \(Java\)](#java-wt-logging)\.
 
 In addition, you can also use the following statements in your Lambda function code to generate log entries:
 + System\.out\(\)
@@ -184,6 +184,6 @@ You can do the following to test the code:
 + Upload the deployment package to AWS Lambda to create your Lambda function\. 
 + To test your Lambda function use a string \("this is a test"\) as sample event\. The handler code receives the sample event but does nothing with it\. It only shows how to write logs\.
 
-Follow the instructions provided in the Getting Started\. For more information, see  [\(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\. Note the following differences:
+Follow the instructions provided in the Getting Started\. For more information, see [\(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\. Note the following differences:
 + When you create a deployment package, don't forget the `aws-lambda-java-core` library dependency\. 
 + When you create the Lambda function, specify `example.Hello::myHandler (package.class::method)` as the handler value\.

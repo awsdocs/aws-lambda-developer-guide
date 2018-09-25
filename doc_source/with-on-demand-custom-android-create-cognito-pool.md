@@ -2,7 +2,7 @@
 
 In this section, you create an Amazon Cognito identity pool\. The identity pool has two IAM roles\. You update the IAM role for unauthenticated users and grant permissions to execute the `AndroidBackendLambdaFunction` Lambda function\. 
 
-For more information about IAM roles, see [IAM Roles](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *IAM User Guide*\. For more information about Amazon Cognito services, see the [Amazon Cognito](https://aws.amazon.com/cognito/) product detail page\. 
+For more information about IAM roles, see [IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *IAM User Guide*\. For more information about Amazon Cognito services, see the [Amazon Cognito](https://aws.amazon.com/cognito/) product detail page\. 
 
 **To create an identity pool**
 
@@ -53,7 +53,7 @@ For more information about IAM roles, see [IAM Roles](http://docs.aws.amazon.com
      }
      ```
 **Note**  
- You can update policy at the time of creating the identity pool\. You can also update the policy after you create the identity pool, in which case make sure you write down the IAM role name for the unauthenticated users from the Amazon Cognito console\. Then, go to the IAM console and search for the specific role and edit the access permissions policy\. 
+ You can update the policy at the time of creating the identity pool\. You can also update the policy after you create the identity pool, in which case make sure you write down the IAM role name for the unauthenticated users from the Amazon Cognito console\. Then, go to the IAM console and search for the specific role and edit the access permissions policy\. 
 
    For instructions about how to create an identity pool, log in to the [Amazon Cognito console](https://console.aws.amazon.com/cognito/home) and follow the **New Identity Pool** wizard\.
 

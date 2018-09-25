@@ -92,7 +92,7 @@ The following instructions have been verified using Android studio\.
 
 1. In the same package, create interface called `MyInterface` for invoking the `AndroidBackendLambdaFunction` Lambda function\. 
 **Note**  
-The `@LambdaFunction` annotation in the code maps the specific client method to the same\-name Lambda function\. For more information about this annotation, see [AWS Lambda](http://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/lambda.html) in the *AWS Mobile SDK for Android Developer Guide*\.
+The `@LambdaFunction` annotation in the code maps the specific client method to the same\-name Lambda function\. For more information about this annotation, see [AWS Lambda](https://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/lambda.html) in the *AWS Mobile SDK for Android Developer Guide*\.
 
    ```
    package com.example.....lambdaeventgenerator;
