@@ -5,7 +5,6 @@ The parent object returned that contains your environment's configuration settin
 ## Contents<a name="API_EnvironmentResponse_Contents"></a>
 
  **Error**   <a name="SSS-Type-EnvironmentResponse-Error"></a>
-The parent object that contains error information associated with your configuration settings\.  
 Type: [EnvironmentError](API_EnvironmentError.md) object  
 Required: No
 

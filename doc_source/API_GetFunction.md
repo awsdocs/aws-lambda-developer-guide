@@ -20,7 +20,7 @@ The request requires the following URI parameters\.
 The Lambda function name\.  
  You can specify a function name \(for example, `Thumbnail`\) or you can specify Amazon Resource Name \(ARN\) of the function \(for example, `arn:aws:lambda:us-west-2:account-id:function:ThumbNail`\)\. AWS Lambda also allows you to specify a partial ARN \(for example, `account-id:Thumbnail`\)\. Note that the length constraint applies only to the ARN\. If you specify only the function name, it is limited to 64 characters in length\.   
 Length Constraints: Minimum length of 1\. Maximum length of 170\.  
-Pattern: `(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_\.]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
+Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_\.]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [Qualifier](#API_GetFunction_RequestSyntax) **   <a name="SSS-GetFunction-request-Qualifier"></a>
 Use this optional parameter to specify a function version or an alias name\. If you specify function version, the API uses qualified function ARN for the request and returns information about the specific Lambda function version\. If you specify an alias name, the API uses the alias ARN and returns information about the function version to which the alias points\. If you don't provide this parameter, the API uses unqualified function ARN and returns information about the `$LATEST` version of the Lambda function\.   
@@ -95,7 +95,6 @@ If the action is successful, the service sends back an HTTP 200 response\.
 The following data is returned in JSON format by the service\.
 
  ** [Code](#API_GetFunction_ResponseSyntax) **   <a name="SSS-GetFunction-response-Code"></a>
-The object for the Lambda function location\.  
 Type: [FunctionCodeLocation](API_FunctionCodeLocation.md) object
 
  ** [Concurrency](#API_GetFunction_ResponseSyntax) **   <a name="SSS-GetFunction-response-Concurrency"></a>
@@ -103,7 +102,6 @@ The concurrent execution limit set for this function\. For more information, see
 Type: [Concurrency](API_Concurrency.md) object
 
  ** [Configuration](#API_GetFunction_ResponseSyntax) **   <a name="SSS-GetFunction-response-Configuration"></a>
-A complex type that describes function metadata\.  
 Type: [FunctionConfiguration](API_FunctionConfiguration.md) object
 
  ** [Tags](#API_GetFunction_ResponseSyntax) **   <a name="SSS-GetFunction-response-Tags"></a>
@@ -125,7 +123,6 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-   
 HTTP Status Code: 429
 
 ## See Also<a name="API_GetFunction_SeeAlso"></a>

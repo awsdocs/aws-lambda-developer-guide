@@ -115,7 +115,6 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-   
 HTTP Status Code: 429
 
 ## See Also<a name="API_ListFunctions_SeeAlso"></a>

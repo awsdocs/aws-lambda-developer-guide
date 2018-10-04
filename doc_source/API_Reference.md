@@ -1,6 +1,6 @@
 # API Reference<a name="API_Reference"></a>
 
-This section contains the AWS Lambda API Reference documentation\. When making the API calls, you will need to authenticate your request by providing a signature\. AWS Lambda supports signature version 4\. For more information, see [Signature Version 4 Signing Process](http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) in the *Amazon Web Services General Reference*\. 
+This section contains the AWS Lambda API Reference documentation\. When making the API calls, you will need to authenticate your request by providing a signature\. AWS Lambda supports signature version 4\. For more information, see [Signature Version 4 Signing Process](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) in the *Amazon Web Services General Reference*\. 
 
 For an overview of the service, see [What Is AWS Lambda?](welcome.md)\. 
 

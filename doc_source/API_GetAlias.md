@@ -17,7 +17,7 @@ The request requires the following URI parameters\.
  ** [FunctionName](#API_GetAlias_RequestSyntax) **   <a name="SSS-GetAlias-request-FunctionName"></a>
 Function name for which the alias is created\. An alias is a subresource that exists only in the context of an existing Lambda function so you must specify the function name\. Note that the length constraint applies only to the ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
-Pattern: `(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
+Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [Name](#API_GetAlias_RequestSyntax) **   <a name="SSS-GetAlias-request-Name"></a>
 Name of the alias for which you want to retrieve information\.  
@@ -57,7 +57,7 @@ The following data is returned in JSON format by the service\.
  ** [AliasArn](#API_GetAlias_ResponseSyntax) **   <a name="SSS-GetAlias-response-AliasArn"></a>
 Lambda function ARN that is qualified using the alias name as the suffix\. For example, if you create an alias called `BETA` that points to a helloworld function version, the ARN is `arn:aws:lambda:aws-regions:acct-id:function:helloworld:BETA`\.  
 Type: String  
-Pattern: `arn:aws:lambda:[a-z]{2}-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
+Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [Description](#API_GetAlias_ResponseSyntax) **   <a name="SSS-GetAlias-response-Description"></a>
 Alias description\.  
@@ -99,7 +99,6 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-   
 HTTP Status Code: 429
 
 ## See Also<a name="API_GetAlias_SeeAlso"></a>
