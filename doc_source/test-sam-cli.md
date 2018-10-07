@@ -14,14 +14,24 @@ SAM CLI also offers the `sam init` command, which, when run, provides a fully\-f
  The following examples outline additional advantages of using SAM CLI with sample operation code\. For instance, you can do the following: 
 + Generate sample function payloads \(for example, an Amazon S3 event\)\.
 
+  A new or updated object placed into S3
   ```
-  $ sam local generate-event s3 --bucket bucket-name  --key key-name
-                  > event_file.json
+  $ sam local generate-event s3 put --bucket bucket-name  --key key-name
+                  > create_object_event_file.json
   ```
+  
+  An object removed from S3
+  ```
+  $ sam local generate-event s3 delete --bucket bucket-name  --key key-name
+                  > remove_object_event_file.json
+  ```
+
+
 + Test a sample function payload locally with your Lambda functions\.
 
   ```
-  $ sam local invoke function-name -e event_file.json
+  $ sam local invoke function-name -e create_object_event_file.json
+  $ sam local invoke function-name -e remove_object_event_file.json
   ```
 + Spawn a local API Gateway to test HTTP request and response functionality\. By using the hot reloading feature, you can test and iterate your functions without having to restart or reload them to the AWS runtime\.
 
