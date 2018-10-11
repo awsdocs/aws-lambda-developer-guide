@@ -16,6 +16,3 @@ In this step, you create an AWS Identity and Access Management \(IAM\) role usin
    + In **Attach Policy**, choose **AWSLambdaVPCAccessExecutionRole**\. The permissions in this policy are sufficient for the Lambda function in this tutorial\.
 
 1. Write down the role ARN\. You will need it in the next step when you create your Lambda function\.
-
-**Next Step**  
-[Step 2\.3: Create the Lambda Function \(Upload the Deployment Package\)](vpc-ec-upload-deployment-pkg.md)

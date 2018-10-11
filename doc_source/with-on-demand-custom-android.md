@@ -11,7 +11,7 @@ Protect against Distributed Denial of Service attacks\.
 Provide a caching layer to cache response from your Lambda function\. 
 
 Note the following about how the mobile application and AWS Lambda integration works: 
-+ **Push\-event model** – This is a model \(see [Event Source Mapping](invocation-options.md#intro-invocation-modes)\), where the app invokes the Lambda function by passing the event data as parameter\. 
++ **Push\-event model** – This is a model \(see [AWS Lambda Event Source Mapping](intro-invocation-modes.md)\), where the app invokes the Lambda function by passing the event data as parameter\. 
 + **Synchronous or asynchronous invocation** – The app can invoke the Lambda function and get a response back in real time by specifying `RequestResponse` as the invocation type \(or use the `Event` invocation type for asynchronous invocation\)\. For information about invocation types, see [Manage Permissions: Using a Lambda Function Policy](intro-permission-model.md#intro-permission-model-access-policy)\. 
 + **Event structure** – The event your Lambda function receives is defined by your application, and your Lambda function is the custom code written to process the specific event type\. 
 

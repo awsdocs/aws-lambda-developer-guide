@@ -163,7 +163,7 @@ For information about using the AWS Lambda console to manage versioning, see [Ma
 
 ## Granting Permissions in a Push Model<a name="versioning-permissions-cli"></a>
 
-In a push model \(see [Event Source Mapping](invocation-options.md#intro-invocation-modes)\), event sources such as Amazon S3 invoke your Lambda function\. These event sources maintain a mapping that identifies the function version or alias that they invoke when events occur\. Note the following:
+In a push model \(see [AWS Lambda Event Source Mapping](intro-invocation-modes.md)\), event sources such as Amazon S3 invoke your Lambda function\. These event sources maintain a mapping that identifies the function version or alias that they invoke when events occur\. Note the following:
 + We recommend that you specify an existing Lambda function alias in the mapping configuration \(see [Introduction to AWS Lambda Aliases](aliases-intro.md)\)\. For example, if the event source is Amazon S3, you specify the alias ARN in the bucket notification configuration so that Amazon S3 can invoke the alias when it detects specific events\.
 + In the push model, you grant event sources permissions using a resource policy that you attach to your Lambda function\. In versioning, the permissions you add are specific to the qualifier that you specify in the `AddPermission` request \(see [Versioning, Aliases, and Resource Policies](versioning-aliases-permissions.md)\)\. 
 

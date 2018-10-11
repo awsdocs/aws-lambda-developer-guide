@@ -19,8 +19,8 @@ The same applies when you need to roll back to a previous version of your Lambda
 We recommend that you use versioning and aliases to deploy your Lambda functions when building applications with multiple dependencies and developers involved\. 
 
 **Topics**
-+ [Versioning](versioning-intro.md)
-+ [Aliases](aliases-intro.md)
++ [Introduction to AWS Lambda Versioning](versioning-intro.md)
++ [Introduction to AWS Lambda Aliases](aliases-intro.md)
 + [Versioning, Aliases, and Resource Policies](versioning-aliases-permissions.md)
-+ [Managing Versioning](how-to-manage-versioning.md)
++ [Managing Versioning Using the AWS Management Console, the AWS CLI, or Lambda API Operations](how-to-manage-versioning.md)
 + [Traffic Shifting Using Aliases](lambda-traffic-shifting-using-aliases.md)

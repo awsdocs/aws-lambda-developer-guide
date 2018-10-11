@@ -16,7 +16,7 @@ When granting permissions, you decide who is getting the permissions, the resour
 
 ## AWS Lambda Resources and Operations<a name="access-control-resources"></a>
 
- In AWS Lambda, the primary resources are a Lambda *function* and an *event source mapping*\. You create an event source mapping in the AWS Lambda pull model to associate a Lambda function with an event source\. For more information, see [Event Source Mapping](invocation-options.md#intro-invocation-modes)\.
+In AWS Lambda, the primary resources are a Lambda *function* and an *event source mapping*\. You create an event source mapping in the AWS Lambda pull model to associate a Lambda function with an event source\. For more information, see [AWS Lambda Event Source Mapping](intro-invocation-modes.md)\.
 
 AWS Lambda also supports additional resource types, *alias* and *version*\. However, you can create aliases and versions only in the context of an existing Lambda function\. These are referred to as *subresources*\. 
 
@@ -93,7 +93,7 @@ For more information about using identity\-based policies with Lambda, see [Usin
 Each Lambda function can have resource\-based permissions policies associated with it\. For Lambda, a Lambda function is the primary resource and these policies are referred to as *Lambda function policies*\. You can use a Lambda function policy to grant cross\-account permissions as an alternative to using identity\-based policies with IAM roles\. For example, you can grant Amazon S3 permissions to invoke your Lambda function by simply adding permissions to the Lambda function policy instead of creating an IAM role\.
 
 **Important**  
-Lambda function policies are primarily used when you are setting up an event source in AWS Lambda to grant a service or an event source permissions to invoke your Lambda function \(see [Invoke](API_Invoke.md)\)\. An exception to this is when an event source \(for example, Amazon DynamoDB or Kinesis\) uses the pull model, where permissions are managed in the Lambda function execution role instead\. For more information, see [Event Source Mapping](invocation-options.md#intro-invocation-modes)\.
+Lambda function policies are primarily used when you are setting up an event source in AWS Lambda to grant a service or an event source permissions to invoke your Lambda function \(see [Invoke](API_Invoke.md)\)\. An exception to this is when an event source \(for example, Amazon DynamoDB or Kinesis\) uses the pull model, where permissions are managed in the Lambda function execution role instead\. For more information, see [AWS Lambda Event Source Mapping](intro-invocation-modes.md)\.
 
 The following is an example Lambda function policy that has one statement\. The statement allows the Amazon S3 service principal permission for the `lambda:InvokeFunction` action on a Lambda function called HelloWorld\. The condition ensures that the bucket where the event occurred is owned by the same account that owns the Lambda function\.
 

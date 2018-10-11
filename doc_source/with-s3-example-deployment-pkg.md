@@ -2,7 +2,7 @@
 
 From the **Filter View** list, choose the language you want to use for your Lambda function\. The appropriate section appears with code and specific instructions for creating a deployment package\.
 
-## Node\.js<a name="with-s3-example-deployment-pkg-nodejs"></a>
+## Node\.js 8<a name="with-s3-example-deployment-pkg-nodejs"></a>
 
 The deployment package is a \.zip file containing your Lambda function code and dependencies\. 
 
@@ -126,8 +126,6 @@ The deployment package is a \.zip file containing your Lambda function code and 
        );
    };
    ```
-**Note**  
-The code sample is compliant with the Node\.js runtimes v8\.10, v6\.10 or v4\.3\. For more information, see [Programming Model\(Node\.js\)](programming-model.md)
 
 1. Review the preceding code and note the following:
    + The function knows the source bucket name and the key name of the object from the event data it receives as parameters\. If the object is a \.jpg, the code creates a thumbnail and saves it to the target bucket\. 
@@ -150,7 +148,7 @@ The code sample is compliant with the Node\.js runtimes v8\.10, v6\.10 or v4\.3\
 
  [Step 2\.2: Create the Execution Role \(IAM Role\)](with-s3-example-create-iam-role.md) 
 
-## Java<a name="with-s3-example-deployment-pkg-java"></a>
+## Java 8<a name="with-s3-example-deployment-pkg-java"></a>
 
 The following is example Java code that reads incoming Amazon S3 events and creates a thumbnail\. Note that it implements the `RequestHandler` interface provided in the `aws-lambda-java-core` library\. Therefore, at the time you create a Lambda function you specify the class as the handler \(that is, `example.S3EventProcessorCreateThumbnail`\)\. For more information about using interfaces to provide a handler, see [Leveraging Predefined Interfaces for Creating Handler \(Java\)](java-handler-using-predefined-interfaces.md)\.
 
@@ -302,15 +300,13 @@ After you verify that your deployment package is created, go to the next step to
 
  [Step 2\.2: Create the Execution Role \(IAM Role\)](with-s3-example-create-iam-role.md) 
 
-## Python<a name="with-s3-example-deployment-pkg-python"></a>
+## Python 3<a name="with-s3-example-deployment-pkg-python"></a>
 
-In this section, you create an example Python function and install dependencies\. The code sample is compliant with Python runtime versions 3\.6 or 2\.7\. The steps assume the 3\.6 runtime but you can use either one\. 
+In this section, you create an example Python function and install dependencies\.
 
 1. Open a text editor, and copy the following code\. The code uploads the resized image to a different bucket with the same image name, as shown following:
 
    `source-bucket/image.png` \-> `source-bucketresized/image.png` 
-**Note**  
-The `from __future__` statement enables you to write code that is compatible with Python 2 or 3\. If you are using runtime version 3\.6, it is not necessary to include it\.
 
    ```
    from __future__ import print_function
@@ -342,31 +338,9 @@ The `from __future__` statement enables you to write code that is compatible wit
 
 1. Save the file as `CreateThumbnail.py`\.
 
-1. If your source code is on a local host, copy it over\.
+1. Create a virtual environment\.
 
-   `scp -i key.pem /path/to/my_code.py ec2-user@public-ip-address:~/CreateThumbnail.py`
-
-1. Connect to a 64\-bit Amazon Linux instance via SSH\.
-
-   `ssh -i key.pem ec2-user@public-ip-address `
-
-1. Install Python 3\.6 and virtualenv using the following steps:
-
-   1. `sudo yum install -y gcc zlib zlib-devel openssl openssl-devel`
-
-   1. `wget [https://www\.python\.org/ftp/python/3\.6\.1/Python\-3\.6\.1\.tgz](https://www.python.org/ftp/python/3.6.1/Python-3.6.1.tgz)`
-
-   1. `tar -xzvf Python-3.6.1.tgz`
-
-   1. `cd Python-3.6.1 && ./configure && make`
-
-   1. `sudo make install`
-
-   1. `sudo /usr/local/bin/pip3 install virtualenv`
-
-1. Choose the virtual environment that was installed via pip3
-
-   `/usr/local/bin/virtualenv ~/shrink_venv`
+   `virtualenv ~/shrink_venv`
 
    `source ~/shrink_venv/bin/activate `
 
@@ -378,13 +352,11 @@ The `from __future__` statement enables you to write code that is compatible wit
 **Note**  
 AWS Lambda includes the AWS SDK for Python \(Boto 3\), so you don't need to include it in your deployment package, but you can optionally include it for local testing\.
 
-1. Add the contents of `lib` and `lib64` site\-packages to your \.zip file\. Note that the following steps assume you used Python runtime version 3\.6\. If you used version 2\.7 you will need to update accordingly\.
+1. Add the contents of `lib` and `lib64` site\-packages to your \.zip file\.
 
    `cd $VIRTUAL_ENV/lib/python3.6/site-packages`
 
    `zip -r9 ~/CreateThumbnail.zip . `
-**Note**  
-To include all hidden files, use the following option: `zip -r9 ~/CreateThumbnail.zip `
 
 1. Add your python code to the \.zip file
 

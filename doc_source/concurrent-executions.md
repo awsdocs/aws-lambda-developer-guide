@@ -100,6 +100,6 @@ If you invoke the function directly through the AWS SDKs using the `RequestRespo
 
 To understand your concurrent execution usage, AWS Lambda provides the following metrics:
 + **ConcurrentExecutions:** This shows you the concurrent executions at an account level, and for any function with a custom concurrency limit\.
-+ **UnreservedConcurrentExecutions:** This shows you the total concurrent executions for functions assigned to the default “unreserved” concurrency pool\.
++ **UnreservedConcurrentExecutions:** This shows you the total concurrent executions for functions assigned to the default unreserved concurrency pool\.
 
 To learn about these metrics and how to access them, see [Using Amazon CloudWatch](monitoring-functions.md)\. 

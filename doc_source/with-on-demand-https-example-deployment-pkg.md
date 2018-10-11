@@ -2,7 +2,7 @@
 
 From the **Filter View** list, choose the language you want to use for your Lambda function\. The appropriate section appears with code and specific instructions for creating a deployment package\.
 
-## Node\.js<a name="with-kinesis-example-deployment-pkg-nodejs1"></a>
+## Node\.js 6<a name="with-kinesis-example-deployment-pkg-nodejs1"></a>
 
 Follow the instructions to create an AWS Lambda function deployment package\. 
 
@@ -57,8 +57,6 @@ Follow the instructions to create an AWS Lambda function deployment package\.
        }
    };
    ```
-**Note**  
-The code sample is compliant with the Node\.js runtimes v6\.10 or v4\.3\. For more information, see [Programming Model\(Node\.js\)](programming-model.md)
 
 1. Save the file as `LambdaFunctionOverHttps.js`\. 
 
@@ -68,13 +66,11 @@ The code sample is compliant with the Node\.js runtimes v6\.10 or v4\.3\. For mo
 
  [Step 2\.2: Create the Execution Role \(IAM Role\)](with-on-demand-https-example-create-iam-role.md) 
 
-## Python<a name="with-kinesis-example-deployment-pkg-python1"></a>
+## Python 3<a name="with-kinesis-example-deployment-pkg-python1"></a>
 
- Follow the instructions to create an AWS Lambda function deployment package\. 
+Follow the instructions to create an AWS Lambda function deployment package\. 
 
 1.  Open a text editor, and then copy the following code\. 
-**Note**  
-The `from __future__` statement enables you to write code that is compatible with Python 2 or 3\. If are you using runtime version 3\.6, it is not necessary to include it\.
 
    ```
    from __future__ import print_function

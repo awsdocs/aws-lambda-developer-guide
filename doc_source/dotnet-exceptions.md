@@ -4,7 +4,7 @@ When an exception occurs in your Lambda function, Lambda will report the excepti
 + Initialization \(Lambda loading your code, validating the handler string, and creating an instance of your class if it is non\-static\)\.
 + The Lambda function invocation\.
 
-The serialized exception information is returned as the payload as a modeled JSON object and outputted to CloudWatch logs\. 
+The serialized exception information is returned as the payload as a modeled JSON object and outputted to CloudWatch logs\.
 
 In the initialization phase, exceptions can be thrown for invalid handler strings, a rule\-breaking type or method \(see [Lambda Function Handler Restrictions ](dotnet-programming-model-handler-types.md#dotnet-handler-restrictions)\), or any other validation method \(such as forgetting the serializer attribute and having a POCO as your input or output type\)\. These exceptions are of type `LambdaException`\. For example: 
 
@@ -16,7 +16,7 @@ In the initialization phase, exceptions can be thrown for invalid handler string
 }
 ```
 
-If your constructor throws an exception, the error type is also of type `LambdaException`, but the exception thrown during construction is provided in the `cause` property, which is itself a modeled exception object: 
+If your constructor throws an exception, the error type is also of type `LambdaException`, but the exception thrown during construction is provided in the `cause` property, which is itself a modeled exception object:
 
 ```
 {

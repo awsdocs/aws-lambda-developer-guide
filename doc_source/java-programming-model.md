@@ -7,8 +7,7 @@ The following sections explain how [common programming patterns and core concept
 + [The Context Object \(Java\)](java-context-object.md)
 + [Logging \(Java\)](java-logging.md)
 + [Function Errors \(Java\)](java-exceptions.md)
-+ [Using Earlier Custom Appender for Log4j™ 1\.2 \(Not Recommended\)](java-logging-log4j1.md)
-+ [\(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)
++ [Create a Lambda Function Authored in Java](get-started-step4-optional.md)
 
 Additionally, note that AWS Lambda provides the following libraries:
 + **aws\-lambda\-java\-core** – This library provides the Context object, `RequestStreamHandler`, and the `RequestHandler` interfaces\. The `Context` object \([The Context Object \(Java\)](java-context-object.md)\) provides runtime information about your Lambda function\. The predefined interfaces provide one way of defining your Lambda function handler\. For more information, see [Leveraging Predefined Interfaces for Creating Handler \(Java\)](java-handler-using-predefined-interfaces.md)\.

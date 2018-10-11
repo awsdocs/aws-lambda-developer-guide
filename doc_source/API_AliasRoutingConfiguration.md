@@ -1,11 +1,11 @@
 # AliasRoutingConfiguration<a name="API_AliasRoutingConfiguration"></a>
 
-The parent object that implements what percentage of traffic will invoke each function version\. For more information, see [Traffic Shifting Using Aliases](lambda-traffic-shifting-using-aliases.md)\. The maximum number of stream records that can be sent to your Lambda function for a single invocation\. 
+The alias's [traffic shifting](https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html) configuration\.
 
 ## Contents<a name="API_AliasRoutingConfiguration_Contents"></a>
 
  **AdditionalVersionWeights**   <a name="SSS-Type-AliasRoutingConfiguration-AdditionalVersionWeights"></a>
-Set this value to dictate what percentage of traffic will invoke the updated function version\. If set to an empty string, 100 percent of traffic will invoke `function-version`\. For more information, see [Traffic Shifting Using Aliases](lambda-traffic-shifting-using-aliases.md)\.  
+The name of the second alias, and the percentage of traffic that is routed to it\.  
 Type: String to double map  
 Key Length Constraints: Minimum length of 1\. Maximum length of 1024\.  
 Key Pattern: `[0-9]+`   

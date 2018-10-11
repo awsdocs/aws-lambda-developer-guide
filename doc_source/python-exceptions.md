@@ -40,7 +40,7 @@ Depending on the event source, AWS Lambda may retry the failed Lambda function\.
 
 **To test the preceding Python code \(console\)**
 
-1. In the console, create a Lambda function using the hello\-world blueprint\. In **runtime**, choose either **Python 3\.6** or **Python 2\.7**\. In **Handler**, replace `lambda_function.lambda_handler` with `lambda_function.always_failed_handler`\. For instructions on how to do this, see  [Create a Simple Lambda Function](get-started-create-function.md)\. 
+1. In the console, create a Lambda function using the hello\-world blueprint\. In **runtime**, choose Python 3\.6\. In **Handler**, replace `lambda_function.lambda_handler` with `lambda_function.always_failed_handler`\. For instructions on how to do this, see [Create a Simple Lambda Function](get-started-create-function.md)\. 
 
 1. Replace the template code with the code provided in this section\.
 
@@ -58,7 +58,7 @@ The following code samples demonstrate how to do this\. Note that custom errors 
 
 ```
 class AccountAlreadyExistsException(Exception): pass
-            
+
 def create_account(event, context):
     raise AccountAlreadyExistsException('Account is in use!')
 ```

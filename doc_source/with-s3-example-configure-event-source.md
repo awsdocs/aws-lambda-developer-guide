@@ -36,7 +36,7 @@ In this step, you add the remaining configuration so that Amazon S3 can publish 
 
 Add notification configuration on the source bucket to request Amazon S3 to publish object\-created events to Lambda\. In the configuration, you specify the following:
 + Event type – For this tutorial, select the `ObjectCreated (All)` Amazon S3 event type\.
-+ Lambda function – This is your Lambda function that you want Amazon S3 to invoke\. 
++ Lambda function – This is your Lambda function that you want Amazon S3 to invoke\.
 
 For instructions on adding notification configuration to a bucket, see [Enabling Event Notifications](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-event-notifications.html) in the *Amazon Simple Storage Service Console User Guide*\.
 

@@ -10,7 +10,3 @@ In this tutorial, you create a Lambda function to consume events from an Kinesis
 Both the Lambda function and the Kinesis stream must be in the same AWS region\. This tutorial assumes that you create these resources in the `us-west-2` region\.
 
 In this tutorial, you use the AWS Command Line Interface to perform AWS Lambda operations such as creating a Lambda function, creating a stream, and adding records to the stream\. You use the AWS Lambda console to manually invoke the function before you create a Kinesis stream\. You verify return values and logs in the console UI\. 
-
-## Next Step<a name="with-kinesis-example-impl-summary-next-step"></a>
-
-[Step 1: Prepare](with-kinesis-example-prepare.md)

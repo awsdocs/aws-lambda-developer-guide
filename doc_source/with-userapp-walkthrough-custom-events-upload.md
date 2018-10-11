@@ -1,6 +1,6 @@
 # Step 2\.3: Create a Lambda Function<a name="with-userapp-walkthrough-custom-events-upload"></a>
 
-Execute the following Lambda CLI `create-function` command to create a Lambda function\. You provide the deployment package and IAM role ARN as parameters\. Note that the `Runtime` parameter uses `nodejs6.10` but you can also specify `nodejs8.10`\. 
+Execute the following Lambda CLI `create-function` command to create a Lambda function\. You provide the deployment package and IAM role ARN as parameters\.
 
 ```
 $ aws lambda create-function \
@@ -9,7 +9,7 @@ $ aws lambda create-function \
 --zip-file fileb://file-path/helloworld.zip \
 --role role-arn \
 --handler helloworld.handler \
---runtime nodejs6.10 \
+--runtime nodejs8.10 \
 --profile adminuser
 ```
 
@@ -31,7 +31,7 @@ For more information, see [CreateFunction](API_CreateFunction.md)\. AWS Lambda c
     "Role": "arn:aws:iam::account-id:role/LambdaExecRole",
     "Timeout": 3,
     "LastModified": "2015-04-07T22:02:58.854+0000",
-    "Runtime": "nodejs6.10",
+    "Runtime": "nodejs.10",
     "Description": ""
 }
 ```

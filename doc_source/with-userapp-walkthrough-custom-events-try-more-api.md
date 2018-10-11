@@ -42,7 +42,6 @@ To illustrate the use of pagination, the command specifies the optional `--max-i
         ...
       ],
        "NextMarker": null
-
 }
 ```
 
@@ -86,7 +85,6 @@ The following is an example response\.
         "Runtime": "nodejs6.10",
         "Description": ""
     }
-
 }
 ```
 

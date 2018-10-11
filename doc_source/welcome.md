@@ -24,11 +24,11 @@ If you are a first\-time user of AWS Lambda, we recommend that you read the foll
 
 1. **Read the product overview and watch the introductory video to understand sample use cases\.** These resources are available on the [AWS Lambda webpage](https://aws.amazon.com/lambda/)\.
 
-1. **Review the “Lambda Functions” section of this guide\.** To understand the programming model and deployment options for a Lambda function there are core concepts you should be familiar with\. This section explains these concepts and provides details of how they work in different languages that you can use to author your Lambda function code\. For more information, see [Working with Lambda Functions](lambda-introduction-function.md)\.
+1. **Review the [Lambda Functions](lambda-introduction-function.md) section of this guide\.** To understand the programming model and deployment options for a Lambda function there are core concepts you should be familiar with\. This section explains these concepts and provides details of how they work in different languages that you can use to author your Lambda function code\.
 
 1. **Try the console\-based Getting Started exercise\.** The exercise provides instructions for you to create and test your first Lambda function using the console\. You also learn about the console provided blueprints to quickly create your Lambda functions\. For more information, see [Getting Started](getting-started.md)\.
 
-1. **Read the "Deploying Applications with AWS Lambda" section of this guide\. **This section introduces various AWS Lambda components you work with to create an end\-to\-end experience\. For more information, see [AWS Lambda Applications](deploying-lambda-apps.md)\.
+1. **Read the [Deploying Applications with AWS Lambda](deploying-lambda-apps.md) section of this guide\. **This section introduces various AWS Lambda components you work with to create an end\-to\-end experience\.
 
 Beyond the Getting Started exercise, you can explore the various use cases, each of which is provided with a tutorial that walks you through an example scenario\. Depending on your application needs \(for example, whether you want event driven Lambda function invocation or on\-demand invocation\), you can follow specific tutorials that meet your specific needs\. For more information, see [Use Cases](use-cases.md)\.
 

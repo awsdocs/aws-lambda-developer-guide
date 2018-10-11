@@ -20,8 +20,6 @@
 When setting a rate expression, the first execution is immediate and subsequent executions occur based on the rate schedule\. In the preceding example, the subsequent execution rate would be every minute\.
 
      For more information on expressions schedules, see [Schedule Expressions Using Rate or Cron](tutorial-scheduled-events-schedule-expressions.md)\.
-
-      
    + In **Enable trigger**, we recommend that you leave the trigger in a disabled state until you have tested it\. 
    + Note the **Lambda function code** section\. This is sample code that you can configure after you create the function\. In addition, the console will also allow you to select runtimes that Lambda supports and add your custom code\.
 **Important**  

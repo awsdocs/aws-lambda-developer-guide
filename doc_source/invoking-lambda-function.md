@@ -1,14 +1,10 @@
 # Supported Event Sources<a name="invoking-lambda-function"></a>
 
-This topic lists the supported AWS services that you can configure as event sources for AWS Lambda functions\. After you preconfigure the event source mapping, your Lambda function gets invoked automatically when these event sources detect events\. For more information about invocation modes, see [Event Source Mapping](invocation-options.md#intro-invocation-modes)\.
+This topic lists the supported AWS services that you can configure as event sources for AWS Lambda functions\. After you preconfigure the event source mapping, your Lambda function gets invoked automatically when these event sources detect events\. For more information about invocation modes, see [AWS Lambda Event Source Mapping](intro-invocation-modes.md)\.
 
 For all of the event sources listed in this topic, note the following:
-+ Event sources maintain the event source mapping, except for the poll\-based services \(Amazon Kinesis Data Streams, Amazon DynamoDB Streams and Amazon Simple Queue Service\)\. For the poll\-based services, AWS Lambda maintains the event source mapping\. AWS Lambda provides the [CreateEventSourceMapping](API_CreateEventSourceMapping.md) operation for you to create and manage the event source mapping\. For more information, see [Event Source Mapping](invocation-options.md#intro-invocation-modes)\.
-
-   
++ Event sources maintain the event source mapping, except for the poll\-based services \(Amazon Kinesis Data Streams, Amazon DynamoDB Streams and Amazon Simple Queue Service\)\. For the poll\-based services, AWS Lambda maintains the event source mapping\. AWS Lambda provides the [CreateEventSourceMapping](API_CreateEventSourceMapping.md) operation for you to create and manage the event source mapping\. For more information, see [AWS Lambda Event Source Mapping](intro-invocation-modes.md)\.
 + The invocation type that these event sources use when invoking a Lambda function is also preconfigured\. For example, Amazon S3 always invokes a Lambda function asynchronously and Amazon Cognito invokes a Lambda function synchronously\. The only time you can control the invocation type is when you are invoking the Lambda function yourself using the [Invoke](API_Invoke.md) operation \(for example, invoking a Lambda function on demand from your custom application\)\.
-
-   
 + In order to process AWS events, your Lambda functions may need to include additional libraries, depending on the programming language used to create the function\. Functions written in Node\.js or Python do not require any additional libraries\. For C\#, you need to include [AWS Lambda for \.NET Core](https://github.com/aws/aws-lambda-dotnet)\. For Java, you need to include [aws\-lambda\-java\-libs](https://github.com/aws/aws-lambda-java-libs)\.
 **Important**  
 Each of the included packages should be used without modification\. Removing dependencies, adding conflicting dependencies, or selectively including classes from the packages can result in unexpected behavior\. 
@@ -188,7 +184,7 @@ Error handling for a given event source depends on how Lambda is invoked\. Amazo
 
 Amazon Lex is an AWS service for building conversational interfaces into applications using voice and text\. Amazon Lex provides pre\-build integration with AWS Lambda, allowing you to create Lambda functions for use as code hook with your Amazon Lex bot\. In your intent configuration, you can identify your Lambda function to perform initialization/validation, fulfillment, or both\. 
 
-For more information, see [Using Lambda Functions](https://docs.aws.amazon.com/lex/latest/dg//using-lambda.html)\. For an example use case, see [Exercise 1: Create Amazon Lex Bot Using a Blueprint](https://docs.aws.amazon.com/lex/latest/dg/gs-bp.html)\.
+For more information, see [Using Lambda Functions](https://docs.aws.amazon.com/lex/latest/dg/using-lambda.html)\. For an example use case, see [Exercise 1: Create Amazon Lex Bot Using a Blueprint](https://docs.aws.amazon.com/lex/latest/dg/gs-bp.html)\.
 
 Error handling for a given event source depends on how Lambda is invoked\. Amazon Lex is configured to invoke a Lambda function synchronously\. For more information on how errors are retried, see [AWS Lambda Retry Behavior](retries-on-errors.md)\.
 

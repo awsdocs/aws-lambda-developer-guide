@@ -10,12 +10,12 @@ AWS Lambda does not support connecting to resources within Dedicated Tenancy VPC
 ## Configuring a Lambda Function for Amazon VPC Access<a name="vpc-configuring"></a>
 
 You add VPC information to your Lambda function configuration using the `VpcConfig` parameter, either at the time you create a Lambda function \(see [CreateFunction](API_CreateFunction.md)\), or you can add it to the existing Lambda function configuration \(see [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)\)\. Following are AWS CLI examples:
-+ The `create-function` CLI command specifies the `--vpc-config` parameter to provide VPC information at the time you create a Lambda function\. Note that the `--runtime` parameter specifies `python3.6`\. You can also use `python2.7`\.
++ The `create-function` CLI command specifies the `--vpc-config` parameter to provide VPC information at the time you create a Lambda function\.
 
   ```
-  $  aws lambda create-function \
+  $ aws lambda create-function \
   --function-name ExampleFunction \
-  --runtime python3.6 \
+  --runtime go1.x \
   --role execution-role-arn \
   --zip-file fileb://path/app.zip \
   --handler app.handler \
@@ -46,7 +46,7 @@ Note the following additional considerations:
 
 ## Internet Access for Lambda Functions<a name="vpc-internet"></a>
 
-AWS Lambda uses the VPC information you provide to set up [ENIs](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ElasticNetworkInterfaces.html) that allow your Lambda function to access VPC resources\. Each ENI is assigned a private IP address from the IP address range within the Subnets you specify, but is not assigned any public IP addresses\. *Therefore, if your Lambda function requires Internet access \(for example, to access AWS services that don't have VPC endpoints \), you can configure a NAT instance inside your VPC or you can use the Amazon VPC NAT gateway*\. For more information, see [NAT Gateways](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html) in the *Amazon VPC User Guide*\. You cannot use an Internet gateway attached to your VPC, since that requires the ENI to have public IP addresses\. 
+AWS Lambda uses the VPC information you provide to set up [ENIs](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ElasticNetworkInterfaces.html) that allow your Lambda function to access VPC resources\. Each ENI is assigned a private IP address from the IP address range within the Subnets you specify, but is not assigned any public IP addresses\. Therefore, if your Lambda function requires Internet access \(for example, to access AWS services that don't have VPC endpoints \), you can configure a NAT instance inside your VPC or you can use the Amazon VPC NAT gateway\. For more information, see [NAT Gateways](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html) in the *Amazon VPC User Guide*\. You cannot use an Internet gateway attached to your VPC, since that requires the ENI to have public IP addresses\. 
 
 **Important**  
 If your Lambda function needs Internet access, do not attach it to a public subnet or to a private subnet without Internet access\. Instead, attach it only to private subnets with Internet access through a NAT instance or an Amazon VPC NAT gateway\. 
@@ -54,18 +54,17 @@ If your Lambda function needs Internet access, do not attach it to a public subn
 ## Guidelines for Setting Up VPC\-Enabled Lambda Functions<a name="vpc-setup-guidelines"></a>
 
 Your Lambda function automatically scales based on the number of events it processes\. The following are general guidelines for setting up VPC\-enabled Lambda functions to support the scaling behavior\. 
-+ If your Lambda function accesses a VPC, you must make sure that your VPC has sufficient ENI capacity to support the scale requirements of your Lambda function\. You can use the following formula to approximately determine the ENI capacity\.
++ If your Lambda function accesses a VPC, you must make sure that your VPC has sufficient ENI capacity to support the scale requirements of your Lambda function\. You can use the following formula to approximately determine the ENI requirements\.
 
   ```
   Projected peak concurrent executions * (Memory in GB / 3GB)
   ```
 
   Where: 
-  + **Projected peak concurrent execution** – Use the information in  [Managing Concurrency](concurrent-executions.md) to determine this value\.
+  + **Projected peak concurrent execution** – Use the information in [Managing Concurrency](concurrent-executions.md) to determine this value\.
   + **Memory** – The amount of memory you configured for your Lambda function\. 
 + The subnets you specify should have sufficient available IP addresses to match the number of ENIs\.
 
   We also recommend that you specify at least one subnet in each Availability Zone in your Lambda function configuration\. By specifying subnets in each of the Availability Zones, your Lambda function can run in another Availability Zone if one goes down or runs out of IP addresses\. 
 
-**Note**  
-If your VPC does not have sufficient ENIs or subnet IPs, your Lambda function will not scale as requests increase, and you will see an increase in function failures\. AWS Lambda currently does not log errors to CloudWatch Logs that are caused by insufficient ENIs or IP addresses\. If you see an increase in errors without corresponding CloudWatch Logs, you can invoke the Lambda function synchronously to get the error responses \(for example, test your Lambda function in the AWS Lambda console because the console invokes your Lambda function synchronously and displays errors\)\.
+If your VPC does not have sufficient ENIs or subnet IPs, your Lambda function will not scale as requests increase, and you will see an increase in invocation errors \(`EC2ThrottledException`\)\. For asynchronous invocation, if you see an increase in errors without corresponding CloudWatch Logs, invoke the Lambda function synchronously in the console to get the error responses\.

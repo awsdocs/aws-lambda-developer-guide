@@ -31,6 +31,3 @@ You can launch an RDS MySQL instance using one of the following methods:
   ```
 
 Write down the database name, user name, and password\. You also need the host address \(endpoint\) of the DB instance, which you can get from the RDS console \(you might need to wait until the instance status is available and the Endpoint value appears in the console\)\.
-
-**Next Step**  
-[Step 2: Create a Lambda Function](vpc-rds-create-lambda-function.md)

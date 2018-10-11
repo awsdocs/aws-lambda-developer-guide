@@ -17,7 +17,7 @@ The console shows the **Get Started** page only if you do not have any Lambda fu
    + **Blueprints**
    + **Serverless Application Repository**
 
-   For more information on using the Serverless Application Repository, see [What Is the AWS Serverless Application Repository?](https://docs.aws.amazon.com/serverlessrepo/latest/devguide//what-is-serverlessrepo.html)
+   For more information on using the Serverless Application Repository, see [What Is the AWS Serverless Application Repository?](https://docs.aws.amazon.com/serverlessrepo/latest/devguide/what-is-serverlessrepo.html)
 
    1. If you'd like to review the blueprints, choose the **Blueprints** button, which will display the available blueprints\. You can also use the **Filter** to search for specific blueprints\. For example: 
       + Enter **S3** in **Filter** to get only the list of blueprints available to process Amazon S3 events\.

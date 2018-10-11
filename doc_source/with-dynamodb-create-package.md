@@ -2,7 +2,7 @@
 
 From the **Filter View** list, choose the language you want to use for your Lambda function\. The appropriate section appears with code and specific instructions for creating a deployment package\.
 
-## Node\.js<a name="with-ddb-example-deployment-pkg-nodejs"></a>
+## Node\.js 8<a name="with-ddb-example-deployment-pkg-nodejs"></a>
 
 1. Open a text editor, and then copy the following code\. 
 
@@ -19,8 +19,6 @@ From the **Filter View** list, choose the language you want to use for your Lamb
        callback(null, "message"); 
    };
    ```
-**Note**  
-The code sample is compliant with the Node\.js runtimes v6\.10 or 8\.10\. For more information, see [Programming Model\(Node\.js\)](programming-model.md)
 
 1. Save the file as ` ProcessDynamoDBStream.js`\.
 
@@ -30,7 +28,7 @@ The code sample is compliant with the Node\.js runtimes v6\.10 or 8\.10\. For mo
 
  [Step 2\.2: Create the Execution Role \(IAM Role\)](with-dynamodb-create-execution-role.md) 
 
-## Java<a name="with-ddb-example-deployment-pkg-java"></a>
+## Java 8<a name="with-ddb-example-deployment-pkg-java"></a>
 
 In the following code, `handleRequest` is the handler that AWS Lambda invokes and provides event data\. The handler uses the predefined `DynamodbEvent` class, which is defined in the `aws-lambda-java-events` library\. 
 
@@ -132,11 +130,9 @@ After you verify that your deployment package is created, go to the next step to
 
  [Step 2\.2: Create the Execution Role \(IAM Role\)](with-dynamodb-create-execution-role.md) 
 
-## Python<a name="with-ddb-example-deployment-pkg-python"></a>
+## Python 3<a name="with-ddb-example-deployment-pkg-python"></a>
 
 1. Open a text editor, and then copy the following code\. 
-**Note**  
-The `from __future__` statement enables you to write code that is compatible with Python 2 or 3\. If you are using runtime version 3\.6, it is not necessary to include it\.
 
    ```
    from __future__ import print_function

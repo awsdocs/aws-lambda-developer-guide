@@ -1,30 +1,30 @@
 # FunctionCode<a name="API_FunctionCode"></a>
 
-The code for the Lambda function\.
+The code for the Lambda function\. You can specify either an S3 location, or upload a deployment package directly\.
 
 ## Contents<a name="API_FunctionCode_Contents"></a>
 
  **S3Bucket**   <a name="SSS-Type-FunctionCode-S3Bucket"></a>
-Amazon S3 bucket name where the \.zip file containing your deployment package is stored\. This bucket must reside in the same AWS region where you are creating the Lambda function\.  
+An Amazon S3 bucket in the same region as your function\.  
 Type: String  
 Length Constraints: Minimum length of 3\. Maximum length of 63\.  
 Pattern: `^[0-9A-Za-z\.\-_]*(?<!\.)$`   
 Required: No
 
  **S3Key**   <a name="SSS-Type-FunctionCode-S3Key"></a>
-The Amazon S3 object \(the deployment package\) key name you want to upload\.  
+The Amazon S3 key of the deployment package\.  
 Type: String  
 Length Constraints: Minimum length of 1\. Maximum length of 1024\.  
 Required: No
 
  **S3ObjectVersion**   <a name="SSS-Type-FunctionCode-S3ObjectVersion"></a>
-The Amazon S3 object \(the deployment package\) version you want to upload\.  
+For versioned objects, the version of the deployment package object to use\.  
 Type: String  
 Length Constraints: Minimum length of 1\. Maximum length of 1024\.  
 Required: No
 
  **ZipFile**   <a name="SSS-Type-FunctionCode-ZipFile"></a>
-The contents of your zip file containing your deployment package\. If you are using the web API directly, the contents of the zip file must be base64\-encoded\. If you are using the AWS SDKs or the AWS CLI, the SDKs or CLI will do the encoding for you\. For more information about creating a \.zip file, see [Execution Permissions](https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role.html) in the **AWS Lambda Developer Guide**\.   
+The base64\-encoded contents of your zip file containing your deployment package\. AWS SDK and AWS CLI clients handle the encoding for you\.  
 Type: Base64\-encoded binary data object  
 Required: No
 

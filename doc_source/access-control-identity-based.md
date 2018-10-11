@@ -6,9 +6,9 @@ This topic provides examples of identity\-based policies in which an account adm
  We recommend that you first review the introductory topics that explain the basic concepts and options available for you to manage access to your AWS Lambda resources\. For more information, see [Overview of Managing Access Permissions to Your AWS Lambda Resources](access-control-overview.md)\.
 
 The sections in this topic cover the following:
-+ [Permissions Required to Use the AWS Lambda Console](#additional-console-required-permissions) 
-+ [AWS Managed \(Predefined\) Policies for AWS Lambda](#access-policy-examples-aws-managed) 
-+ [Customer Managed Policy Examples](#access-policy-examples-for-sdk-cli) 
++ [Permissions Required to Use the AWS Lambda Console](#additional-console-required-permissions)
++ [AWS Managed \(Predefined\) Policies for AWS Lambda](#access-policy-examples-aws-managed)
++ [Customer Managed Policy Examples](#access-policy-examples-for-sdk-cli)
 
 The following shows an example of a permissions policy\.
 
@@ -57,7 +57,6 @@ The following AWS managed policies, which you can attach to users in your accoun
 + **AWSLambdaFullAccess** – Grants full access to AWS Lambda resources\.
 + **AWSLambdaRole** – Grants permissions to invoke any Lambda function\. 
 
-**Note**  
 You can review these permissions policies by signing in to the IAM console and searching for specific policies there\.
 
 In addition, there are other AWS\-managed policies that are suitable for use with IAM role \(execution role\) you specify at the time of creating a Lambda function\. For more information, see [AWS Lambda Permissions Model](intro-permission-model.md)\.

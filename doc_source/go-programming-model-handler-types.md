@@ -179,7 +179,3 @@ func main() {
         lambda.Start(LambdaHandler)
 }
 ```
-
-## Next Step<a name="go-programming-model-next-step-context"></a>
-
-[The Context Object \(Go\) ](go-programming-model-context.md)

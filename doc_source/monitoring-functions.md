@@ -50,16 +50,3 @@ If your Lambda function code is executing, but you don't see any log data being 
 1. Use logs to investigate the source of the execution bottleneck
 
    You can test your code locally, as you would with any other Node\.js function, or you can test it within Lambda using the test invoke capability on the Lambda console, or using the `asyncInvoke` command by using AWS CLI\. Each time the code is executed in response to an event, it writes a log entry into the log group associated with a Lambda function, which is named aws/lambda/*<function name>*\. Add logging statements around various parts of your code, such as callouts to other services, to see how much time it takes to execute different parts of your code\. 
-
-## AWS Lambda CloudWatch Dimensions<a name="lambda-cloudwatch-dimensions"></a>
-
-You can use the dimensions in the following table to refine the metrics returned for your Lambda functions\. 
-
-
-| Dimension | Description | 
-| --- | --- | 
-| FunctionName |  Filters the metric data by Lambda function\.  | 
-| Resource |  Filters the metric data by Lambda function resource, such as function version or alias\.  | 
-| Version |  Filters the data you request for a Lambda version\.  | 
-| Alias |  Filters the data you request for a Lambda alias\.  | 
-| Executed Version |  Filters the metric data by Lambda function versions\. This only applies to alias invocations\.  | 

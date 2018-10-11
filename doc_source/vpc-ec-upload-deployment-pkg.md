@@ -4,10 +4,7 @@ In this step, you create the Lambda function \(`AccessMemCache`\) using the `cre
 
 At the command prompt, run the following Lambda CLI `create-function` command using the **adminuser** profile\. 
 
-You need to update the following `create-function` command by providing the \.zip file path and the execution role ARN\. The `--runtime` parameter value can be `python3.6`, `python2.7`, `nodejs` and `java8`, depending on the language you used to author your code\. 
-
-**Note**  
-At this time, example code for the Lambda function is provided only in Python\.
+You need to update the following `create-function` command by providing the \.zip file path and the execution role ARN\.
 
 ```
 $ aws lambda create-function \
@@ -32,6 +29,3 @@ Optionally, you can upload the \.zip file to an Amazon S3 bucket in the same AWS
 
 **Note**  
 You can also create the Lambda function using the AWS Lambda console\. When creating the function, choose a VPC for the Lambda and then select the subnets and security groups from the provided fields\. 
-
-**Next Step**  
-[Step 3: Test the Lambda Function \(Invoke Manually\)](vpc-ec-invoke-lambda-function.md)

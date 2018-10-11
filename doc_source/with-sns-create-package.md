@@ -2,7 +2,7 @@
 
 From the **Filter View** list, choose the language you want to use for your Lambda function\. The appropriate section appears with code and specific instructions for creating a deployment package\.
 
-## Node\.js<a name="with-sns-example-deployment-pkg-nodejs"></a>
+## Node\.js 8<a name="with-sns-example-deployment-pkg-nodejs"></a>
 
 1. Open a text editor, and then copy the following code\. 
 
@@ -17,8 +17,6 @@ From the **Filter View** list, choose the language you want to use for your Lamb
        callback(null, "Success");
    };
    ```
-**Note**  
-The code sample is compliant with the Node\.js runtimes v6\.10 or v8\.10\. For more information, see [Programming Model\(Node\.js\)](programming-model.md)
 
 1. Save the file as ` index.js`\.
 
@@ -28,7 +26,7 @@ The code sample is compliant with the Node\.js runtimes v6\.10 or v8\.10\. For m
 
  [Step 2\.2: Create the Execution Role \(IAM Role\)](with-sns-example-create-iam-role.md) 
 
-## Java<a name="with-sns-example-deployment-pkg-java"></a>
+## Java 8<a name="with-sns-example-deployment-pkg-java"></a>
 
 Open a text editor, and then copy the following code\. 
 
@@ -109,7 +107,7 @@ After you verify that your deployment package is created, go to the next step to
 
  [Step 2\.2: Create the Execution Role \(IAM Role\)](with-sns-example-create-iam-role.md) 
 
-## Python<a name="with-sns-example-deployment-pkg-python"></a>
+## Python 3<a name="with-sns-example-deployment-pkg-python"></a>
 
 1. Open a text editor, and then copy the following code\. 
 **Note**  

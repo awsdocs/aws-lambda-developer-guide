@@ -11,6 +11,7 @@ The [AWS Serverless Application Model](serverless_app.md) \(AWS SAM\) is an exte
 The [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/) and SAM CLI are command line tools for managing Lambda application stacks\. In addition to commands for managing application stacks with the AWS CloudFormation API, the AWS CLI supports [higher\-level commands](serverless-deploy-wt.md#serv-deploy) that simplify tasks like uploading deployment packages and updating templates\. The SAM CLI provides additional functionality, including template validation and [local testing with Docker](test-sam-cli.md)\.
 
 **Topics**
++ [Managing Applications in the AWS Lambda Console](applications-console.md)
 + [Using the AWS Serverless Application Model \(AWS SAM\)](serverless_app.md)
 + [Test Your Serverless Applications Locally Using SAM CLI \(Public Beta\)](test-sam-cli.md)
 + [Automating Deployment of Lambda Applications](automating-deployment.md)

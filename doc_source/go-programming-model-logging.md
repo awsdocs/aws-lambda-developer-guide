@@ -56,7 +56,3 @@ You can find the logs that your Lambda function writes, as follows:
 
   If you use AWS CLI to invoke the function, you can specify the` --log-type parameter` with value `Tail` to retrieve the same information\.
 + **In CloudWatch Logs** – To find your logs in CloudWatch you need to know the log group name and log stream name\. You can use the `context.logGroupName`, and `context.logStreamName` global variables in [The Context Object \(Go\) ](#go-programming-model-logging) library to get this information\. When you run your Lambda function, the resulting logs in the console or CLI will show you the log group name and log stream name\. 
-
-## Next Step<a name="go-programming-model-next-step-errors"></a>
-
-[Function Errors \(Go\) ](go-programming-model-errors.md)

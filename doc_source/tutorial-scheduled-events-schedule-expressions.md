@@ -27,8 +27,6 @@ Note the following:
 + Rate frequencies of less than one minute are not supported\.
 + For a singular value the unit must be singular \(for example, `rate(1 day)`\), otherwise plural \(for example, `rate(5 days)`\)\.
 
- 
-
 **Cron expression**
 
 ```

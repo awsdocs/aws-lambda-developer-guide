@@ -38,9 +38,9 @@ This example has one function called `my_handler`\. The function returns a messa
 
    For instructions, see [Creating a Deployment Package \(Python\)](lambda-python-how-to-create-deployment-package.md)\. 
 
-1. Upload the \.zip file using either the console or AWS CLI to create a Lambda function\. You specify the function name in the Python code to be used as the handler when you create a Lambda function\. For instructions to create a Lambda function using the console, see  [Create a Simple Lambda Function](get-started-create-function.md)\. In this example, the handler is `hello_python.my_handler` \(*file\-name*\.*function\-name*\)\. Note that the [Getting Started](getting-started.md) uses a blueprint that provides sample code for a Lambda function\. In this case you already have a deployment package\. Therefore, in the configure function step you choose to upload a zip\.
+1. Upload the \.zip file using either the console or AWS CLI to create a Lambda function\. You specify the function name in the Python code to be used as the handler when you create a Lambda function\. For instructions to create a Lambda function using the console, see [Create a Simple Lambda Function](get-started-create-function.md)\. In this example, the handler is `hello_python.my_handler` \(*file\-name*\.*function\-name*\)\. Note that the [Getting Started](getting-started.md) uses a blueprint that provides sample code for a Lambda function\. In this case you already have a deployment package\. Therefore, in the configure function step you choose to upload a zip\.
 
-   The following `create-function` AWS CLI command creates a Lambda function\. Among other parameters, it specifies the `--handler` parameter to specify the handler name\. Note that the `--runtime` parameter specifies `python3.6`\. You can also use `python2.7`\. For a complete description of the `create-function` command and its parameters, see [CreateFunction](API_CreateFunction.md)
+   The following `create-function` AWS CLI command creates a Lambda function\. Among other parameters, it specifies the `--handler` parameter to specify the handler name\. For a complete description of the `create-function` command and its parameters, see [CreateFunction](API_CreateFunction.md)
 
    ```
    aws lambda create-function \

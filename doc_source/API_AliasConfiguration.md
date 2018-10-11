@@ -36,7 +36,7 @@ Type: String
 Required: No
 
  **RoutingConfig**   <a name="SSS-Type-AliasConfiguration-RoutingConfig"></a>
-Specifies an additional function versions the alias points to, allowing you to dictate what percentage of traffic will invoke each version\. For more information, see [Traffic Shifting Using Aliases](lambda-traffic-shifting-using-aliases.md)\.  
+Specifies an additional function versions the alias points to, allowing you to dictate what percentage of traffic will invoke each version\.  
 Type: [AliasRoutingConfiguration](API_AliasRoutingConfiguration.md) object  
 Required: No
 

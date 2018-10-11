@@ -96,4 +96,4 @@ Now, to create a deployment package you do the following:
 **Note**  
 If you don't find the packages in the `site-packages` directory in your virtual environment, you might find it in the `dist-packages` directory\.
 
-For an example of creating a Python deployment package, see [Python](with-s3-example-deployment-pkg.md#with-s3-example-deployment-pkg-python)\. 
+For an example of creating a Python deployment package, see [Python 3](with-s3-example-deployment-pkg.md#with-s3-example-deployment-pkg-python)\. 

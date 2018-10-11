@@ -1,35 +1,23 @@
 # Lambda Execution Environment and Available Libraries<a name="current-supported-versions"></a>
 
-The underlying AWS Lambda execution environment is based on the following:
-+ The public Amazon Linux AMI version \(AMI name: amzn\-ami\-hvm\-2017\.03\.1\.20170812\-x86\_64\-gp2\), which you can access in the [Amazon EC2 Management Console](https://console.aws.amazon.com/ec2/v2/home#Images:visibility=public-images;search=amzn-ami-hvm-2017.03.1.20170812-x86_64-gp2)\.
+The underlying AWS Lambda execution environment includes the following software and libraries\.
++ Operating system – Amazon Linux
++ AMI – [amzn\-ami\-hvm\-2017\.03\.1\.20170812\-x86\_64\-gp2](https://console.aws.amazon.com/ec2/v2/home#Images:visibility=public-images;search=amzn-ami-hvm-2017.03.1.20170812-x86_64-gp2)
++ Linux kernel – 4\.14\.62\-84\.118\.amzn2\.x86\_64
++ AWS SDK for JavaScript – 2\.290\.0
++ SDK for Python \(Boto 3\) – 3\-1\.7\.74 botocore\-1\.10\.74
 
-  For information about using an AMI, see [Amazon Machine Images \(AMI\)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html) in the *Amazon EC2 User Guide for Linux Instances*\.
-+  Linux kernel version – 4\.14\.62\-84\.118\.amzn2\.x86\_64\. 
+The execution environment uses NTP to synchronize the system clock\. If you're using any native binaries in your code, make sure that they're compiled against the package and library versions from this AMI and kernel\. Only 64\-bit binaries are supported, and that the specific CPU make and model is subject to change\.
 
-If you're using any native binaries in your code, make sure that they're compiled against the package and library versions from this AMI and kernel\. Note that only 64\-bit binaries are supported on AWS Lambda, and that the specific CPU make and model is subject to continual updates\.
-
-AWS Lambda supports the following runtime versions:
-+ Node\.js – v8\.10, v6\.10 or v4\.3
-**Note**  
-v4\.3 has been deprecated\. For more information on AWS Lambda's policy on deprecated runtimes, see [Runtime Support Policy](runtime-support-policy.md)\.
-+ Java – Java 8
-+ Python – Python 3\.6 and 2\.7
-+ \.NET Core – \.NET Core 1\.0\.1, \.NET Core 2\.0, and \.NET Core 2\.1
-**Note**  
-\.NET Core 2\.1 also includes support for PowerShell Core 6\.0\.
+AWS Lambda supports the following runtimes\.
++ Node\.js – Node\.js 6\.10, Node\.js 8\.10
++ Java – Java 8 \(java\-1\.8\.0\-openjdk\)
++ Python – Python 2\.7, Python 3\.6
++ C\# – \.NET Core 1\.0\.1, \.NET Core 2\.0, and \.NET Core 2\.1
++ PowerShell – \.NET Core 2\.1
 + Go – Go 1\.x
 
-**Note**  
-Not all runtimes are available on the public Amazon Linux AMI version or its yum repositories\. You might need to download and install them manually from their respective public sites\.
-
-The following libraries are available in the AWS Lambda execution environment, regardless of the supported runtime you use, so you don't need to include them:
-+  AWS SDK – [AWS SDK for JavaScript](https://docs.aws.amazon.com/AWSJavaScriptSDK/guide/) version 2\.290\.0 
-+ AWS SDK for Python 2\.7 \(Boto 3\) version 3\-1\.7\.74 botocore\-1\.10\.74
-
-  AWS SDK for Python 3\.6 \(Boto 3\) version 3\-1\.7\.74 botocore\-1\.10\.74
-+ Amazon Linux build of `java-1.8.0-openjdk` for Java
-
-For an example of using the `boto` libraries in your Lambda function, see [Accessing AWS Resources from a Lambda Function](accessing-resources.md)\.
+Not all runtime languages are available on the public Amazon Linux AMI version or its yum repositories\. You might need to download and install them manually from their respective public sites\.
 
 ## Environment Variables Available to Lambda Functions<a name="lambda-environment-variables"></a>
 

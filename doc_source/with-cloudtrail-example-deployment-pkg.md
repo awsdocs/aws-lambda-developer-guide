@@ -4,7 +4,7 @@ The deployment package is a \.zip file containing your Lambda function code\. Fo
 
 `npm install async`
 
-## Node\.js<a name="with-cloudtrail-example-deployment-pkg-nodejs"></a>
+## Node\.js 8<a name="with-cloudtrail-example-deployment-pkg-nodejs"></a>
 
 1. Open a text editor, and then copy the following code\. 
 
@@ -84,8 +84,6 @@ The deployment package is a \.zip file containing your Lambda function code\. Fo
        });
    };
    ```
-**Note**  
-The code sample is compliant with the Node\.js runtimes v8\.10 or v6\.10\. For more information, see [Programming Model\(Node\.js\)](programming-model.md)
 
 1. Save the file as `CloudTrailEventProcessing.js`\. 
 

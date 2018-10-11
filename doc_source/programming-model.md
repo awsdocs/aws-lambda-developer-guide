@@ -4,9 +4,8 @@ AWS Lambda currently supports the following Node\.js runtimes:
 + Node\.js runtime v8\.10 \(runtime = nodejs8\.10\)
 + Node\.js runtime v6\.10 \(runtime = nodejs6\.10\)
 + Node\.js runtime v4\.3 \(runtime = nodejs4\.3\)\*
-+ Node\.js runtime v0\.10\.42 \(runtime = nodejs\)\*
-**Important**  
-\*Node v0\.10\.42 and Node v4\.3 are deprecated\. For more information, see [Runtime Support Policy](runtime-support-policy.md)\. You must migrate existing functions to the newer Node\.js runtime versions available on AWS Lambda \(nodejs\.8\.10 or nodejs6\.10\) as soon as possible\. 
+
+  \*[Deprecated](runtime-support-policy.md)
 
 When you create a Lambda function, you specify the runtime that you want to use\. For more information, see `runtime` parameter of [CreateFunction](API_CreateFunction.md)\. 
 

@@ -64,12 +64,12 @@ If you disable the event source mapping, AWS Lambda stops polling the Kinesis st
 
 You're all done\! Now *adminuser* can test the setup as follows:
 
-1. Using the following AWS CLI command, add event records to your Kinesis stream\. The `--data` value is a base64\-encoded value of the `"Hello, this is a test."` string\. You can run the same command more than once to add multiple records to the stream\. 
+1. Using the following AWS CLI command, add event records to your Kinesis stream\. The `--data` value is a base64\-encoded value of the `"Hello, this is a test."` string\. You can run the same command more than once to add multiple records to the stream\.
 
    ```
    $ aws kinesis put-record \
    --stream-name examplestream \
-   --data "This is a test. final" \
+   --data "SGVsbG8sIHRoaXMgaXMgYSB0ZXN0Lg==" \
    --partition-key shardId-000000000000 \
    --region region \
    --profile adminuser

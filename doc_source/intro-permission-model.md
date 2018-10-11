@@ -2,21 +2,14 @@
 
 For the end\-to\-end AWS Lambda\-based applications to work, you have to manage various permissions\. For example:
 + For event sources, except for the stream\-based services \(Amazon Kinesis Data Streams and DynamoDB\) or Amazon SQS queues, you must grant the event source permissions to invoke your AWS Lambda function\. 
-
-   
 + For poll\-based event sources \(Amazon Kinesis Data Streams and DynamoDB streams and Amazon SQS queues\), AWS Lambda polls the resource on your behalf and reads new records\. To enable this, you need to grant AWS Lambda permissions to access the new records\. In turn, AWS Lambda will invoke any Lambda function subscribed to this event source to process the event\.
-
-   
 + For any other event source that will invoke your Lambda function directly, you must grant that event source permissions to invoke your AWS Lambda function\. 
-
-   
 
 The following sections describe permissions management\.
 
 **Topics**
 + [Manage Permissions: Using an IAM Role \(Execution Role\)](#lambda-intro-execution-role)
 + [Manage Permissions: Using a Lambda Function Policy](#intro-permission-model-access-policy)
-+ [Suggested Reading](#w4aac35b9c21c23)
 
 ## Manage Permissions: Using an IAM Role \(Execution Role\)<a name="lambda-intro-execution-role"></a>
 
@@ -55,13 +48,6 @@ You can also grant cross\-account permissions using the function policy\. For ex
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/push-user-cross-account-app-example-10.png)
 
-**Note**  
 Instead of using a Lambda function policy, you can create another IAM role that grants the event sources \(for example, Amazon S3 or DynamoDB\) permissions to invoke your Lambda function\. However, you might find that resource policies are easier to set up and make it easier for you to track which event sources have permissions to invoke your Lambda function\.
 
 For more information about Lambda function policies, see [Using Resource\-Based Policies for AWS Lambda \(Lambda Function Policies\)](access-control-resource-based.md)\. For more information about Lambda permissions, see [Authentication and Access Control for AWS Lambda](lambda-auth-and-access-control.md)\.
-
-## Suggested Reading<a name="w4aac35b9c21c23"></a>
-
-The next topic is [Lambda Execution Environment and Available Libraries](current-supported-versions.md)\.
-
-We recommend you review [Building Lambda Functions](lambda-app.md), try the [Getting Started](getting-started.md) exercise, and then explore the [Use Cases](use-cases.md)\. Each use case provides step\-by\-step instructions for you to set up the end\-to\-end experience\.

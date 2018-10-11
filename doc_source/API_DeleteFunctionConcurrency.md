@@ -1,6 +1,6 @@
 # DeleteFunctionConcurrency<a name="API_DeleteFunctionConcurrency"></a>
 
-Removes concurrent execution limits from this function\. For more information, see [Managing Concurrency](concurrent-executions.md)\.
+Removes concurrent execution limits from this function\. For more information, see [Managing Concurrency](https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html)\.
 
 ## Request Syntax<a name="API_DeleteFunctionConcurrency_RequestSyntax"></a>
 
@@ -13,7 +13,13 @@ DELETE /2017-10-31/functions/FunctionName/concurrency HTTP/1.1
 The request requires the following URI parameters\.
 
  ** [FunctionName](#API_DeleteFunctionConcurrency_RequestSyntax) **   <a name="SSS-DeleteFunctionConcurrency-request-FunctionName"></a>
-The name of the function you are removing concurrent execution limits from\. For more information, see [Managing Concurrency](concurrent-executions.md)\.  
+The name of the lambda function\.  
+
+**Name formats**
++  **Function name** \- `MyFunction`\.
++  **Function ARN** \- `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`\.
++  **Partial ARN** \- `123456789012:function:MyFunction`\.
+The length constraint applies only to the full ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 

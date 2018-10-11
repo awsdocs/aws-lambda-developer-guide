@@ -36,7 +36,7 @@ Where:
 
 If you don't use `callback` in your code, AWS Lambda will call it implicitly and the return value is `null`\.
 
-When the callback is called \(explicitly or implicitly\), AWS Lambda continues the Lambda function invocation until the event loop is empty\. 
+When the callback is called \(explicitly or implicitly\), AWS Lambda continues the Lambda function invocation until the event loop is empty\.
 
 The following are example callbacks:
 
@@ -92,9 +92,9 @@ If you want to use the `async` feature provided by the v8\.10 runtime, consider 
 exports.myHandler = async function(event, context) {
    console.log("value1 = " + event.key1);
    console.log("value2 = " + event.key2);  
-   return "some success message”;
+   return "some success message";
    // or 
-   // throw new Error(“some error type”); 
+   // throw new Error("some error type"); 
 }
 ```
 

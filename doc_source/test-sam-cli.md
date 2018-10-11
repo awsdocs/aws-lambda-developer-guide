@@ -387,7 +387,7 @@ For compiled languages or projects requiring complex packaging support, we recom
 
 #### Debugging Functions Written in Python<a name="sam-cli-debugging-python"></a>
 
-Unlike Node\.js, \.NET or Java, Python requires you to enable remote debugging in your Lambda function code\. If you enable debugging \(using the `--debug-port` or `-d` options mentioned above\) for a function that uses one of the Python runtimes \(2\.7 or 3\.6\), SAM CLI maps through that port from your host machine to the Lambda container\. To enable remote debugging, use a Python package such as [remote\-pdb](https://pypi.python.org/pypi/remote-pdb)\.
+Unlike Node\.js, \.NET or Java, Python requires you to enable remote debugging in your Lambda function code\. If you enable debugging \(using the `--debug-port` or `-d` options mentioned above\) for a function that uses one of the Python runtimes, SAM CLI maps through that port from your host machine to the Lambda container\. To enable remote debugging, use a Python package such as [remote\-pdb](https://pypi.python.org/pypi/remote-pdb)\.
 
 **Important**  
 When configuring the host, the debugger listens in on your code, so make sure to use `0.0.0.0` and not `127.0.0.1`\.
@@ -424,14 +424,14 @@ This command works for all AWS Lambda functions; not just the ones you deploy us
   sam logs -n HelloWorldFunction --stack-name mystack --filter "error"
   ```
 
-  In the output, SAM CLI will underline all occurrences of the word “error” so you can easily locate the filter keyword within the log output\.
+  In the output, SAM CLI will underline all occurrences of the word error so you can easily locate the filter keyword within the log output\.
 + **Filter logs**: Use the `--filter` option to quickly find logs that match terms, phrases or values in your log events:
 
   ```
   sam logs -n HelloWorldFunction --stack-name mystack --filter "error"
   ```
 
-  In the output, SAM CLI will underline all occurrences of the word “error” so you can easily locate the filter keyword within the log output\.
+  In the output, SAM CLI will underline all occurrences of the word error so you can easily locate the filter keyword within the log output\.
 + **Error highlighting**: When your Lambda function crashes or times out, SAM CLI will highlight the timeout message in red\. This will help you easily locate specific executions that are timing out within a giant stream of log output\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/ErrorHighlighting.png)
 + **JSON pretty printing**: If your log messages print JSON strings, SAM CLI will automatically pretty print the JSON to help you visually parse and understand the JSON\.  

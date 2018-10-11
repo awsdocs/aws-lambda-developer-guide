@@ -50,7 +50,7 @@ In this example input is of type Integer and output is of type String\. If you p
 
 In the example Java code, the first handler parameter is the input to the handler \(myHandler\), which can be event data \(published by an event source such as Amazon S3\) or custom input you provide such as an Integer object \(as in this example\) or any custom data object\. 
 
-For instructions to create a Lambda function using this Java code, see [\(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\.
+For instructions to create a Lambda function using this Java code, see [Create a Lambda Function Authored in Java](get-started-step4-optional.md)\.
 
 ## Handler Overload Resolution<a name="java-programming-model-handler-types-overload-resolution"></a>
 

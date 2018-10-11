@@ -11,12 +11,12 @@ In this section, you use CLI commands to set permissions across the Lambda funct
 
    Note the topic arn that is returned by the command\. You will need it when you add permissions to the Lambda function to subscribe to the topic\.
 
-1. From account B, create the Lambda function\. For the runtime parameter, select either `nodejs8.10` or `nodejs6.10`, `python3.6`, `python2.7` or `java8`, depending on the code sample you selected when you created your deployment package\.
+1. From account B, create the Lambda function\. For the runtime parameter, select `nodejs8.10`, `python3.6`, `go1.x` or `java8`, depending on the code sample you selected when you created your deployment package\.
 
    ```
    aws lambda create-function \
        --function-name SNS-X-Account \
-       --runtime runtime language \
+       --runtime runtime \
        --role role arn \
        --handler handler-name \
        --description "SNS X Account Test Function" \

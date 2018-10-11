@@ -12,7 +12,7 @@ In this step, you upload the deployment package using the AWS CLI\.
 
 At the command prompt, run the following Lambda CLI `create-function` command using the **adminuser** profile\. For more information on setting this up, see [Configuring the AWS CLI](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html)\.
 
-You need to update the command by providing the \.zip file path and the execution role ARN\. The `--runtime` parameter value can be `python3.6`, `python2.7`, `nodejs8.10`, `nodejs6.10`, `nodejs4.3`, or `java8`, depending on the language you used to author your code\.
+You need to update the command by providing the \.zip file path and the execution role ARN\. The `--runtime` parameter value can be `python3.6`, `nodejs8.10`, `dotnetcore2.1`, `go1.x`, or `java8`, depending on the language you used to author your code\.
 
 ```
 $ aws lambda create-function \

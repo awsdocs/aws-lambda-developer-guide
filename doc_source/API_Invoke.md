@@ -1,16 +1,15 @@
 # Invoke<a name="API_Invoke"></a>
 
-Invokes a specific Lambda function\. For an example, see [Create the Lambda Function and Test It Manually](https://docs.aws.amazon.com/lambda/latest/dg/with-dynamodb-create-function.html#with-dbb-invoke-manually)\. 
+Invokes a Lambda function\. For an example, see [Create the Lambda Function and Test It Manually](https://docs.aws.amazon.com/lambda/latest/dg/with-dynamodb-create-function.html#with-dbb-invoke-manually)\. 
 
-If you are using the versioning feature, you can invoke the specific function version by providing function version or alias name that is pointing to the function version using the `Qualifier` parameter in the request\. If you don't provide the `Qualifier` parameter, the `$LATEST` version of the Lambda function is invoked\.
+Specify just a function name to invoke the latest version of the function\. To invoke a published version, use the `Qualifier` parameter to specify a [version or alias](https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html)\.
 
- If you use the `RequestResponse` \(synchronous\) invocation option, the function will be invoked only once\. If you use the `Event` \(asynchronous\) invocation option, the function will be invoked at least once in response to an event and the function must be idempotent to handle this\.
+If you use the `RequestResponse` \(synchronous\) invocation option, the function will be invoked only once\. If you use the `Event` \(asynchronous\) invocation option, the function will be invoked at least once in response to an event and the function must be idempotent to handle this\.
 
- For information about the versioning feature, see [AWS Lambda Function Versioning and Aliases](https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html)\. 
+For functions with a long timeout, your client may be disconnected during synchronous invocation while it waits for a response\. Configure your HTTP client, SDK, firewall, proxy, or operating system to allow for long connections with timeout or keep\-alive settings\.
 
 This operation requires permission for the `lambda:InvokeFunction` action\.
 
-**Note**  
 The `TooManyRequestsException` noted below will return the following: `ConcurrentInvocationLimitExceeded` will be returned if you have no functions with reserved concurrency and have exceeded your account concurrent limit or if a function without reserved concurrency exceeds the account's unreserved concurrency limit\. `ReservedFunctionConcurrentInvocationLimitExceeded` will be returned when a function with reserved concurrency exceeds its configured concurrency limit\. 
 
 ## Request Syntax<a name="API_Invoke_RequestSyntax"></a>
@@ -34,14 +33,21 @@ The ClientContext JSON must be base64\-encoded and has a maximum size of 3583 by
  `ClientContext` information is returned only if you use the synchronous \(`RequestResponse`\) invocation type\.
 
  ** [FunctionName](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-FunctionName"></a>
-The Lambda function name\.  
- You can specify a function name \(for example, `Thumbnail`\) or you can specify Amazon Resource Name \(ARN\) of the function \(for example, `arn:aws:lambda:us-west-2:account-id:function:ThumbNail`\)\. AWS Lambda also allows you to specify a partial ARN \(for example, `account-id:Thumbnail`\)\. Note that the length constraint applies only to the ARN\. If you specify only the function name, it is limited to 64 characters in length\.   
+The name of the lambda function\.  
+
+**Name formats**
++  **Function name** \- `MyFunction`\.
++  **Function ARN** \- `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`\.
++  **Partial ARN** \- `123456789012:function:MyFunction`\.
+The length constraint applies only to the full ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
 Length Constraints: Minimum length of 1\. Maximum length of 170\.  
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_\.]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [InvocationType](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-InvocationType"></a>
-By default, this operation assumes a synchronous \(`RequestResponse`\) invocation type\. If the Lambda function you invoke is expected to have a long\-running execution time, your client may time out before execution completes\. To avoid this, update the client timeout\. If you are invoking the Lambda function via an SDK, please refer to the SDK documentation at the end of this section to learn more about configuring the timeout for your specific runtime\.  
- You can optionally request asynchronous execution by specifying `Event` as the `InvocationType`\. You can also use this parameter to request AWS Lambda to not execute the function but do some verification, such as if the caller is authorized to invoke the function and if the inputs are valid\. You request this by specifying `DryRun` as the `InvocationType`\. This is useful in a cross\-account scenario when you want to verify access to a function without running it\.   
+Choose from the following options\.  
++  `RequestResponse` \(default\) \- Invoke the function synchronously\. Keep the connection open until the function returns a response or times out\.
++  `Event` \- Invoke the function asynchronously\. Send events that fail multiple times to the function's dead\-letter queue \(if configured\)\.
++  `DryRun` \- Validate parameter values and verify that the user or role has permission to invoke the function\.
 Valid Values:` Event | RequestResponse | DryRun` 
 
  ** [LogType](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-LogType"></a>
@@ -82,7 +88,7 @@ The HTTP status code will be in the 200 range for successful request\. For the `
 The response returns the following HTTP headers\.
 
  ** [ExecutedVersion](#API_Invoke_ResponseSyntax) **   <a name="SSS-Invoke-response-ExecutedVersion"></a>
-The function version that has been executed\. This value is returned only if the invocation type is `RequestResponse`\. For more information, see [Traffic Shifting Using Aliases](lambda-traffic-shifting-using-aliases.md)\.  
+The function version that has been executed\. This value is returned only if the invocation type is `RequestResponse`\. For more information, see [Traffic Shifting Using Aliases](https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html)\.  
 Length Constraints: Minimum length of 1\. Maximum length of 1024\.  
 Pattern: `(\$LATEST|[0-9]+)` 
 

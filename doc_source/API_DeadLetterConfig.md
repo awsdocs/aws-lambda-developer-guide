@@ -1,11 +1,11 @@
 # DeadLetterConfig<a name="API_DeadLetterConfig"></a>
 
-The Amazon Resource Name \(ARN\) of an Amazon SQS queue or Amazon SNS topic you specify as your Dead Letter Queue \(DLQ\)\. For more information, see [Dead Letter Queues](dlq.md)\. 
+The [dead letter queue](https://docs.aws.amazon.com/lambda/latest/dg/dlq.html) for failed asynchronous invocations\.
 
 ## Contents<a name="API_DeadLetterConfig_Contents"></a>
 
  **TargetArn**   <a name="SSS-Type-DeadLetterConfig-TargetArn"></a>
-The Amazon Resource Name \(ARN\) of an Amazon SQS queue or Amazon SNS topic you specify as your Dead Letter Queue \(DLQ\)\. [Dead Letter Queues](dlq.md)\. For more information, see [Dead Letter Queues](dlq.md)\.   
+The Amazon Resource Name \(ARN\) of an Amazon SQS queue or Amazon SNS topic\.  
 Type: String  
 Pattern: `(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()`   
 Required: No

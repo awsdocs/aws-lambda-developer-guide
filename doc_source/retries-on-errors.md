@@ -30,4 +30,4 @@ If any of these failures occur, your function will throw an exception\. How the 
 
 If you don't require ordered processing of events, the advantage of using Amazon SQS queues is that AWS Lambda will continue to process new messages, regardless of a failed invocation of a previous message\. In other words, processing of new messages will not be blocked\. 
 
-For more information about invocation modes, see [Event Source Mapping](invocation-options.md#intro-invocation-modes)\.
+For more information about invocation modes, see [AWS Lambda Event Source Mapping](intro-invocation-modes.md)\.

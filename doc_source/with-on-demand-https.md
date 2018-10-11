@@ -8,7 +8,7 @@ You can invoke AWS Lambda functions over HTTPS\. You can do this by defining a c
 + Provide a caching layer to cache response from your Lambda function\. 
 
 Note the following about how the Amazon API Gateway and AWS Lambda integration works:
-+ **Push\-event model** – This is a model \(see [Event Source Mapping](invocation-options.md#intro-invocation-modes)\), where Amazon API Gateway invokes the Lambda function by passing data in the request body as parameter to the Lambda function\. 
++ **Push\-event model** – This is a model \(see [AWS Lambda Event Source Mapping](intro-invocation-modes.md)\), where Amazon API Gateway invokes the Lambda function by passing data in the request body as parameter to the Lambda function\. 
 + **Synchronous invocation** – The Amazon API Gateway can invoke the Lambda function and get a response back in real time by specifying `RequestResponse` as the invocation type\. For information about invocation types, see [Invocation Types](invocation-options.md)\. 
 + **Event structure** – The event your Lambda function receives is the body from the HTTPS request that Amazon API Gateway receives and your Lambda function is the custom code written to process the specific event type\. 
 

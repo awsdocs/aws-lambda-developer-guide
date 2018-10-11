@@ -27,7 +27,13 @@ Content-type: application/json
 The request requires the following URI parameters\.
 
  ** [FunctionName](#API_CreateAlias_RequestSyntax) **   <a name="SSS-CreateAlias-request-FunctionName"></a>
-Name of the Lambda function for which you want to create an alias\. Note that the length constraint applies only to the ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
+The name of the lambda function\.  
+
+**Name formats**
++  **Function name** \- `MyFunction`\.
++  **Function ARN** \- `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`\.
++  **Partial ARN** \- `123456789012:function:MyFunction`\.
+The length constraint applies only to the full ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
@@ -56,7 +62,7 @@ Pattern: `(?!^[0-9]+$)([a-zA-Z0-9-_]+)`
 Required: Yes
 
  ** [RoutingConfig](#API_CreateAlias_RequestSyntax) **   <a name="SSS-CreateAlias-request-RoutingConfig"></a>
-Specifies an additional version your alias can point to, allowing you to dictate what percentage of traffic will invoke each version\. For more information, see [Traffic Shifting Using Aliases](lambda-traffic-shifting-using-aliases.md)\.  
+Specifies an additional version your alias can point to, allowing you to dictate what percentage of traffic will invoke each version\. For more information, see [Traffic Shifting Using Aliases](https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html)\.  
 Type: [AliasRoutingConfiguration](API_AliasRoutingConfiguration.md) object  
 Required: No
 
@@ -113,7 +119,7 @@ Represents the latest updated revision of the function or alias\.
 Type: String
 
  ** [RoutingConfig](#API_CreateAlias_ResponseSyntax) **   <a name="SSS-CreateAlias-response-RoutingConfig"></a>
-Specifies an additional function versions the alias points to, allowing you to dictate what percentage of traffic will invoke each version\. For more information, see [Traffic Shifting Using Aliases](lambda-traffic-shifting-using-aliases.md)\.  
+Specifies an additional function versions the alias points to, allowing you to dictate what percentage of traffic will invoke each version\.  
 Type: [AliasRoutingConfiguration](API_AliasRoutingConfiguration.md) object
 
 ## Errors<a name="API_CreateAlias_Errors"></a>

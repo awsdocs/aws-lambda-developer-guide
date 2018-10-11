@@ -2,7 +2,7 @@
 
 From the **Filter View** list, choose the language you want to use for your Lambda function\. The appropriate section appears with code and specific instructions for creating a deployment package\.
 
-## Node\.js<a name="with-kinesis-example-deployment-pkg-nodejs"></a>
+## Node\.js 8<a name="with-kinesis-example-deployment-pkg-nodejs"></a>
 
 The following is example Node\.js code that receives Kinesis event records as input and processes them\. For illustration, the code writes some of the incoming event data to CloudWatch Logs\.
 
@@ -23,8 +23,6 @@ Follow the instructions to create an AWS Lambda function deployment package\.
        
    };
    ```
-**Note**  
-The code sample is compliant with the Node\.js runtimes v8\.10 or v6\.10 For more information, see [Programming Model\(Node\.js\)](programming-model.md)
 
 1. Save the file as `ProcessKinesisRecords.js`\. 
 
@@ -34,7 +32,7 @@ The code sample is compliant with the Node\.js runtimes v8\.10 or v6\.10 For mor
 
  [Step 2\.2: Create the Execution Role \(IAM Role\)](with-kinesis-example-create-iam-role.md) 
 
-## Java<a name="with-kinesis-example-deployment-pkg-java"></a>
+## Java 8<a name="with-kinesis-example-deployment-pkg-java"></a>
 
 The following is example Java code that receives Kinesis event record data as a input and processes it\. For illustration, the code writes some of the incoming event data to CloudWatch Logs\. 
 
@@ -133,15 +131,13 @@ After you verify that your deployment package is created, go to the next step to
 
  [Step 2\.2: Create the Execution Role \(IAM Role\)](with-kinesis-example-create-iam-role.md) 
 
-## Python<a name="with-kinesis-example-deployment-pkg-python"></a>
+## Python 3<a name="with-kinesis-example-deployment-pkg-python"></a>
 
- The following is example Python code that receives Kinesis event record data as input and processes it\. For illustration, the code writes to some of the incoming event data to CloudWatch Logs\. 
+ The following is example Python code that receives Kinesis event record data as input and processes it\. For illustration, the code writes to some of the incoming event data to CloudWatch Logs\.
 
-Follow the instructions to create a AWS Lambda function deployment package\. 
+Follow the instructions to create a AWS Lambda function deployment package\.
 
-1.  Open a text editor, and then copy the following code\. 
-**Note**  
-The `from __future__` statement enables you to write code that is compatible with Python 2 or 3\. If you are using runtime version 3\.6, is not necessary to include it\.
+1.  Open a text editor, and then copy the following code\.
 
    ```
    from __future__ import print_function
@@ -156,7 +152,7 @@ The `from __future__` statement enables you to write code that is compatible wit
 
 1. Save the file as `ProcessKinesisRecords.py`\. 
 
-1.  Zip the `ProcessKinesisRecords.py` file as `ProcessKinesisRecords.zip`\. 
+1. Zip the `ProcessKinesisRecords.py` file as `ProcessKinesisRecords.zip`\.
 
 ### Next Step<a name="create-deployment-pkg-python-next-step"></a>
 
@@ -173,7 +169,7 @@ Follow the instructions to create a AWS Lambda function deployment package\.
    ```
    import (
        "strings"
-       "github.com/aws/aws-lambda-go/events”
+       "github.com/aws/aws-lambda-go/events"
    )
    
    func handler(ctx context.Context, kinesisEvent events.KinesisEvent) {

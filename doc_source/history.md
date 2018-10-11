@@ -1,11 +1,11 @@
 # AWS Lambda Releases<a name="history"></a>
 
-The following table describes the important changes to the *AWS Lambda Developer Guide* after May 2018\. For notification about updates to this documentation, you can subscribe to an RSS feed\.
-+ **Current product version**: 2015\-03\-31
-+ **Last documentation update**: September 11, 2018
+The following table describes the important changes to the *AWS Lambda Developer Guide* after May 2018\. For notification about updates to this documentation, subscribe to the [RSS feed](https://docs.aws.amazon.com/lambda/latest/dg/lambda-updates.rss)\.
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [View Lambda applications in the console](#history) | You can view the status of your Lambda applications on the [Applications](https://docs.aws.amazon.com/lambda/latest/dg/applications-console.html) page in the Lambda console\. This page shows the status of the AWS CloudFormation stack\. It includes links to pages where you can view more information about the resources in the stack\. You can also view aggregate metrics for the application and create custom monitoring dashboards\. | October 11, 2018 | 
+| [Function execution timeout limit](#history) | To allow for long\-running functions, the maximum configurable execution timeout increased from 5 minutes to 15 minutes\. See [AWS Lambda Limits](https://docs.aws.amazon.com/lambda/latest/dg/limits.html) for details\. | October 10, 2018 | 
 | [Support for PowerShell Core language in AWS Lambda](#history) | AWS Lambda now supports the PowerShell Core language\. For more information, see [Programming Model for Authoring Lambda Functions in PowerShell](https://docs.aws.amazon.com/lambda/latest/dg/powershell-programming-model.html)\. | September 11, 2018 | 
 | [Support for \.NET Core 2\.1\.0 runtime in AWS Lambda](#history) | AWS Lambda now supports the \.NET Core 2\.1\.0 runtime\. For more information, see [\.NET Core CLI](https://docs.aws.amazon.com/lambda/latest/dg/lambda-dotnet-coreclr-deployment-package.html)\. | July 9, 2018 | 
 | [Updates now available over RSS](#history) | You can now subscribe to an RSS feed to receive notifications to the *AWS Lambda Developer Guide*\. | July 5, 2018 | 
