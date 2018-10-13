@@ -15,7 +15,7 @@ SAM CLI also offers the `sam init` command, which, when run, provides a fully\-f
 + Generate sample function payloads \(for example, an Amazon S3 event\)\.
 
   ```
-  $ sam local generate-event s3 --bucket bucket-name  --key key-name
+  $ sam local generate-event s3 put --bucket bucket-name  --key key-name
                   > event_file.json
   ```
 + Test a sample function payload locally with your Lambda functions\.
