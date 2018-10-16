@@ -51,7 +51,7 @@ You can use Lambda functions as triggers for your Amazon DynamoDB table\. Trigge
 
 This is a stream\-based event source\. For a stream\-based service, you create event source mapping in AWS Lambda, identifying the stream to poll and which Lambda function to invoke\.
 
-For an example DynamoDB event, see [Step 2\.3\.2: Test the Lambda Function \(Invoke Manually\)](with-dynamodb-create-function.md#with-dbb-invoke-manually) and [Amazon DynamoDB Update Sample Event](eventsources.md#eventsources-ddb-update)\. For general format, see [GetRecord](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Operations_Amazon_DynamoDB_Streams.htmlAPI_GetRecords.html) in the *Amazon DynamoDB API Reference*\. For an example use case, see [Using AWS Lambda with Amazon DynamoDB](with-ddb.md)\.
+For an example DynamoDB event, see [Test the Lambda Function](with-ddb-example.md#with-dbb-invoke-manually) and [Amazon DynamoDB Update Sample Event](eventsources.md#eventsources-ddb-update)\. For general format, see [GetRecord](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Operations_Amazon_DynamoDB_Streams.htmlAPI_GetRecords.html) in the *Amazon DynamoDB API Reference*\. For an example use case, see [Using AWS Lambda with Amazon DynamoDB](with-ddb.md)\.
 
 Error handling for a given event source depends on how Lambda is invoked\. DynamoDB is a stream\-based event source\. For more information on how errors are retried, see [AWS Lambda Retry Behavior](retries-on-errors.md)\.
 
@@ -61,7 +61,7 @@ You can configure AWS Lambda to automatically poll your stream and process any n
 
 For stream\-based services, you create event source mapping in AWS Lambda, identifying the stream to poll and which Lambda function to invoke\.
 
-For an example event, see [Step 2\.3: Create the Lambda Function and Test It Manually](with-kinesis-example-upload-deployment-pkg.md) and [Amazon Kinesis Data Streams Sample Event](eventsources.md#eventsources-kinesis-streams)\. For an example use case, see [Using AWS Lambda with Kinesis](with-kinesis.md)\.
+For an example event, see [Amazon Kinesis Data Streams Sample Event](eventsources.md#eventsources-kinesis-streams)\. For an example use case, see [Using AWS Lambda with Kinesis](with-kinesis.md)\.
 
 Error handling for a given event source depends on how Lambda is invoked\. Amazon Kinesis Data Streams is a stream\-based event source\. For more information on how errors are retried, see [AWS Lambda Retry Behavior](retries-on-errors.md)\.
 
@@ -155,7 +155,7 @@ You can also set up AWS Lambda to invoke your code on a regular, scheduled basis
 
 You maintain event source mapping in Amazon CloudWatch Events by using a rule target definition\. For more information, see the [PutTargets](https://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_PutTargets.html) operation in the *Amazon CloudWatch Events API Reference*\.
 
-For an example use case, see [Using AWS Lambda with Scheduled Events](with-scheduled-events.md)\.
+For an example use case, see [Using AWS Lambda with Amazon CloudWatch Events](with-scheduled-events.md)\.
 
 For an example event, see [Scheduled Event Sample Event](eventsources.md#eventsources-scheduled-event)\.
 
@@ -192,7 +192,7 @@ Error handling for a given event source depends on how Lambda is invoked\. Amazo
 
 You can invoke a Lambda function over HTTPS\. You can do this by defining a custom REST API endpoint using Amazon API Gateway\. You map individual API operations, such as `GET` and `PUT`, to specific Lambda functions\. When you send an HTTPS request to the API endpoint, the Amazon API Gateway service invokes the corresponding Lambda function\.
 
-For more information, see [Make Synchronous Calls to Lambda Functions](https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started.html)\. For an example use case, see [Using AWS Lambda with Amazon API Gateway \(On\-Demand Over HTTPS\)](with-on-demand-https.md)\.
+For more information, see [Make Synchronous Calls to Lambda Functions](https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started.html)\. For an example use case, see [Using AWS Lambda with Amazon API Gateway](with-on-demand-https.md)\.
 
 Error handling for a given event source depends on how Lambda is invoked\. Amazon API Gateway is configured to invoke a Lambda function synchronously\. For more information on how errors are retried, see [AWS Lambda Retry Behavior](retries-on-errors.md)\.
 
@@ -232,4 +232,4 @@ In addition to invoking Lambda functions using event sources, you can also invok
 
  For example, user applications can also generate events \(build your own custom event sources\)\. User applications such as client, mobile, or web applications can publish events and invoke Lambda functions using the AWS SDKs or AWS Mobile SDKs such as the AWS Mobile SDK for Android\. 
 
-For more information, see [Tools for Amazon Web Services](https://aws.amazon.com/tools/)\. For an example tutorial, see [Using AWS Lambda with Amazon API Gateway \(On\-Demand Over HTTPS\)](with-on-demand-https.md)\.
+For more information, see [Tools for Amazon Web Services](https://aws.amazon.com/tools/)\. For an example tutorial, see [Using AWS Lambda with Amazon API Gateway](with-on-demand-https.md)\.

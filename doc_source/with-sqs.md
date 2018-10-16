@@ -33,13 +33,21 @@ Lambda uses [long polling](https://docs.aws.amazon.com/AWSSimpleQueueService/lat
 
 When Lambda reads a message from the queue, it stays in the queue but becomes hidden until Lambda deletes it\. If your function returns an error, or doesn't finish processing prior to the queue's [visibility timeout](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html), it becomes visible again, and Lambda sends it to your Lambda function again\. All messages in a failed batch return to the queue, so your function code must be able to process the same message multiple times without side effects\.
 
+**Topics**
++ [Configuring a Queue for Use With Lambda](#events-sqs-queueconfig)
++ [Configuring a Queue as an Event Source](#events-sqs-eventsource)
++ [Execution Role Permissions](#events-sqs-permissions)
++ [Tutorial: Using AWS Lambda with Amazon Simple Queue Service](with-sqs-example.md)
++ [Sample Amazon SQS Function Code](with-sqs-create-package.md)
++ [AWS Serverless Application Model Specification for a Amazon Simple Queue Service Application](with-sqs-example-use-app-spec.md)
+
 ## Configuring a Queue for Use With Lambda<a name="events-sqs-queueconfig"></a>
 
 [Create a standard Amazon SQS queue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/) to serve as an event source for your Lambda function\. Configure the queue to allow time for your Lambda function to process each batch of events, and for Lambda to retry in response to throttling errors as it scales up\.
 
-To allow your function time to process each batch of records, set the source queue's visiblity timeout to at least 3 times the [timeout](resource-model.md) that you configure on your function\. The extra time allows for Lambda to retry if your function execution is throttled while your function is processing a previous batch\.
+To allow your function time to process each batch of records, set the source queue's visiblity timeout to at least 6 times the [timeout](resource-model.md) that you configure on your function\. The extra time allows for Lambda to retry if your function execution is throttled while your function is processing a previous batch\.
 
-If a message fails processing multiple times, Amazon SQS can send it to a [dead letter queue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html)\. Configure a dead letter queue on your source queue to retain messages that failed processing for troubleshooting\. Set the `maxReceiveCount` on the queue's redrive policy to at least 3 to avoid sending messages to the dead letter queue due to throttling\.
+If a message fails processing multiple times, Amazon SQS can send it to a [dead letter queue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html)\. Configure a dead letter queue on your source queue to retain messages that failed processing for troubleshooting\. Set the `maxReceiveCount` on the queue's redrive policy to at least 5 to avoid sending messages to the dead letter queue due to throttling\.
 
 ## Configuring a Queue as an Event Source<a name="events-sqs-eventsource"></a>
 
@@ -62,7 +70,7 @@ An event source mapping tells Lambda to poll a stream or queue resource and invo
 
 1. Choose **Save**\.
 
-Configure your function timeout to allow enough time to process an entire batch of items\. If items take a long time to process, choose a smaller batch size\. Are large batch size can improve efficiency for workloads that are very fast or have a lot of overhead, but if your function returns an error, all items in the batch return to the queue\.
+Configure your function timeout to allow enough time to process an entire batch of items\. If items take a long time to process, choose a smaller batch size\. Are large batch size can improve efficiency for workloads that are very fast or have a lot of overhead, but if your function returns an error, all items in the batch return to the queue\. If you configure [reserved concurrency](concurrent-executions.md#per-function-concurrency) on your function, set a minimum of 5 concurrent executions to reduce the chance of throttling errors when Lambda invokes your function\.
 
 To configure an event source with the Lambda API or the AWS SDK, use the [CreateEventSourceMapping](API_CreateEventSourceMapping.md) and [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md) actions\.
 

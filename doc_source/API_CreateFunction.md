@@ -137,7 +137,7 @@ Valid Range: Minimum value of 1\.
 Required: No
 
  ** [TracingConfig](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-TracingConfig"></a>
-The parent object that contains your function's tracing settings\.  
+Set `Mode` to `Active` to sample and trace a subset of incoming requests with AWS X\-Ray\.  
 Type: [TracingConfig](API_TracingConfig.md) object  
 Required: No
 
@@ -310,6 +310,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
+Request throughput limit exceeded  
 HTTP Status Code: 429
 
 ## See Also<a name="API_CreateFunction_SeeAlso"></a>

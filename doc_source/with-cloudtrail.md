@@ -6,9 +6,6 @@ You can take advantage of Amazon S3's bucket notification feature and direct Ama
 
 In this scenario, CloudTrail writes access logs to your S3 bucket\. As for AWS Lambda, Amazon S3 is the event source so Amazon S3 publishes events to AWS Lambda and invokes your Lambda function\. 
 
-**Note**  
-Amazon S3 can only support one event destination\.
-
 For detailed information about how to configure Amazon S3 as the event source, see [Using AWS Lambda with Amazon S3](with-s3.md)\.
 
 The following diagram summarizes the flow:
@@ -27,4 +24,6 @@ The following diagram summarizes the flow:
 
 1. If the log includes a record with specific `eventType` and `eventSource` values, it publishes the event to your Amazon SNS topic\. In [Tutorial: Using AWS Lambda with AWS CloudTrail](with-cloudtrail-example.md), you subscribe to the SNS topic using the email protocol, so you get email notifications\.
 
-For a tutorial that walks you through an example scenario, see [Tutorial: Using AWS Lambda with AWS CloudTrail](with-cloudtrail-example.md)\. 
+**Topics**
++ [Tutorial: Using AWS Lambda with AWS CloudTrail](with-cloudtrail-example.md)
++ [Sample Function Code](with-cloudtrail-create-package.md)

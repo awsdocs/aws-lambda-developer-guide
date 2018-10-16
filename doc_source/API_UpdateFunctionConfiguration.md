@@ -105,9 +105,7 @@ Pattern: `arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+`
 Required: No
 
  ** [Runtime](#API_UpdateFunctionConfiguration_RequestSyntax) **   <a name="SSS-UpdateFunctionConfiguration-request-Runtime"></a>
-The runtime environment for the Lambda function\.  
-To use the Python runtime v3\.6, set the value to "python3\.6"\. To use the Python runtime v2\.7, set the value to "python2\.7"\. To use the Node\.js runtime v8\.10, set the value to "nodejs8 \.10"\. To use the Node\.js runtime v6\.10, set the value to "nodejs6\.10"\. To use the \.NET Core runtime v1\.0, set the value to "dotnetcore1\.0"\. To use the \.NET Core runtime v2\.0, set the value to "dotnetcore2\.0"\. To use the \.NET Core runtime v2\.1, set the value to "dotnetcore2\.1"\.  
-Node v0\.10\.42 and node v4\.3 are currently marked as deprecated\. You must migrate existing functions to the newer Node\.js runtime versions available on AWS Lambda \(nodejs6\.10 or nodejs8\.10\) as soon as possible\. Failure to do so will result in an invalid parameter error being returned\. Note that you will have to follow this procedure for each region that contains functions written in the Node v0\.10\.42 runtime\.
+The runtime version for the function\.  
 Type: String  
 Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | java8 | python2.7 | python3.6 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | nodejs4.3-edge | go1.x`   
 Required: No
@@ -119,11 +117,12 @@ Valid Range: Minimum value of 1\.
 Required: No
 
  ** [TracingConfig](#API_UpdateFunctionConfiguration_RequestSyntax) **   <a name="SSS-UpdateFunctionConfiguration-request-TracingConfig"></a>
-The parent object that contains your function's tracing settings\.  
+Set `Mode` to `Active` to sample and trace a subset of incoming requests with AWS X\-Ray\.  
 Type: [TracingConfig](API_TracingConfig.md) object  
 Required: No
 
  ** [VpcConfig](#API_UpdateFunctionConfiguration_RequestSyntax) **   <a name="SSS-UpdateFunctionConfiguration-request-VpcConfig"></a>
+Specify security groups and subnets in a VPC to which your Lambda function needs access\.  
 Type: [VpcConfig](API_VpcConfig.md) object  
 Required: No
 
@@ -291,6 +290,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
+Request throughput limit exceeded  
 HTTP Status Code: 429
 
 ## See Also<a name="API_UpdateFunctionConfiguration_SeeAlso"></a>

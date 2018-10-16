@@ -55,8 +55,7 @@ You can set this optional parameter to `Tail` in the request only if you specify
 Valid Values:` None | Tail` 
 
  ** [Qualifier](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-Qualifier"></a>
-You can use this optional parameter to specify a Lambda function version or alias name\. If you specify a function version, the API uses the qualified function ARN to invoke a specific Lambda function\. If you specify an alias name, the API uses the alias ARN to invoke the Lambda function version to which the alias points\.  
-If you don't provide this parameter, then the API uses unqualified function ARN which results in invocation of the `$LATEST` version\.  
+Specify a version or alias to invoke a published version of the function\.  
 Length Constraints: Minimum length of 1\. Maximum length of 128\.  
 Pattern: `(|[a-zA-Z0-9$_-]+)` 
 
@@ -107,6 +106,7 @@ In the event of a function error this field contains a message describing the er
 ## Errors<a name="API_Invoke_Errors"></a>
 
  **EC2AccessDeniedException**   
+Need additional permissions to configure VPC settings\.  
 HTTP Status Code: 502
 
  **EC2ThrottledException**   
@@ -142,7 +142,7 @@ The Subnet ID provided in the Lambda function VPC configuration is invalid\.
 HTTP Status Code: 502
 
  **InvalidZipFileException**   
-AWS Lambda could not unzip the function zip file\.  
+AWS Lambda could not unzip the deployment package\.  
 HTTP Status Code: 502
 
  **KMSAccessDeniedException**   
@@ -178,6 +178,7 @@ AWS Lambda was not able to set up VPC access for the Lambda function because one
 HTTP Status Code: 502
 
  **TooManyRequestsException**   
+Request throughput limit exceeded  
 HTTP Status Code: 429
 
  **UnsupportedMediaTypeException**   

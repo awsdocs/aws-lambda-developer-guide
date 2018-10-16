@@ -214,6 +214,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
+Request throughput limit exceeded  
 HTTP Status Code: 429
 
 ## See Also<a name="API_PublishVersion_SeeAlso"></a>

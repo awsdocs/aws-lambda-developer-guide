@@ -62,7 +62,7 @@ How you get the error information back depends on the invocation type that the c
 
    The same information is also sent to CloudWatch and the  **Log output**  section shows the same logs\.   
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/exception-shown-in-console20-nodejs.png)
-+ If a client specifies the  `Event` invocation type \(that is, asynchronous execution\), AWS Lambda will not return anything\. Instead, it logs the error information to [CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/logs/WhatIsCloudWatchLogs.html)\. You can also see the error metrics in [CloudWatch Metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/viewing_metrics_with_cloudwatch.html)\. 
++ If a client specifies the  `Event` invocation type \(that is, asynchronous execution\), AWS Lambda will not return anything\. Instead, it logs the error information to [CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html)\. You can also see the error metrics in [CloudWatch Metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/viewing_metrics_with_cloudwatch.html)\. 
 
  Depending on the event source, AWS Lambda may retry the failed Lambda function\. For example, if Kinesis is the event source, AWS Lambda will retry the failed invocation until the Lambda function succeeds or the records in the stream expire\. For more information on retries, see [AWS Lambda Retry Behavior](retries-on-errors.md)\.
 

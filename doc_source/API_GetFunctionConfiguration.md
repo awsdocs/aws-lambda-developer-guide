@@ -28,8 +28,7 @@ Length Constraints: Minimum length of 1\. Maximum length of 170\.
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_\.]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [Qualifier](#API_GetFunctionConfiguration_RequestSyntax) **   <a name="SSS-GetFunctionConfiguration-request-Qualifier"></a>
-Using this optional parameter you can specify a function version or an alias name\. If you specify function version, the API uses qualified function ARN and returns information about the specific function version\. If you specify an alias name, the API uses the alias ARN and returns information about the function version to which the alias points\.  
-If you don't specify this parameter, the API uses unqualified function ARN, and returns information about the `$LATEST` function version\.  
+Specify a version or alias to get details about a published version of the function\.  
 Length Constraints: Minimum length of 1\. Maximum length of 128\.  
 Pattern: `(|[a-zA-Z0-9$_-]+)` 
 
@@ -193,6 +192,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
+Request throughput limit exceeded  
 HTTP Status Code: 429
 
 ## See Also<a name="API_GetFunctionConfiguration_SeeAlso"></a>

@@ -13,73 +13,35 @@ To follow the procedures in this guide, you will need a command line terminal or
 this is output
 ```
 
+For long commands, an escape character \(`\`\) is used to split a command over multiple lines\.
+
 On Linux and macOS, use your preferred shell and package manager\. On Windows 10, you can [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows\-integrated version of Ubuntu and Bash\.
 
 ## Create the Execution Role<a name="with-sqs-create-execution-role"></a>
 
-At the time you upload the deployment package, you need to specify an IAM execution role \([Manage Permissions: Using an IAM Role \(Execution Role\)](intro-permission-model.md#lambda-intro-execution-role)\. For example, AWS Lambda needs permissions for Amazon SQS actions so it can poll the queue and read messages\. The example Lambda function writes some of the event data to CloudWatch, so it needs permissions for necessary CloudWatch actions\. 
+Create the [execution role](intro-permission-model.md#lambda-intro-execution-role) that gives your function permission to access AWS resources\.
 
-In order for AWS Lambda to poll, process and delete messages on the Amazon SQS queue you have configured, you need to set permissions for the following Amazon SQS actions:
-+ [ReceiveMessage](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_ReceiveMessage.html)
-+ [DeleteMessage](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_DeleteMessage.html)
-+ [GetQueueAttributes](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_GetQueueAttributes.html)
+**To create an execution role**
 
-You can do this in either of the following two ways:
+1. Open the [roles page](https://console.aws.amazon.com/iam/home#/roles) in the IAM console\.
+
+1. Choose **Create role**\.
+
+1. Create a role with the following properties\.
+   + **Trusted entity** – **AWS Lambda**\.
+   + **Permissions** – **AWSLambdaSQSQueueExecutionRole**\.
+   + **Role name** – **lambda\-sqs\-role**\.
+
+The **AWSLambdaSQSQueueExecutionRole** policy has the permissions that the function needs to read items from Amazon SQS and write logs to CloudWatch Logs\.
+
+## Create the Function<a name="with-sqs-create-function"></a>
+
+The following example code receives an Amazon SQS event input and processes the messages that it contains\. For illustration, the code writes some of the incoming event data to CloudWatch Logs\.
 
 **Note**  
-If the Amazon SQS queue and Lambda function are associated with different AWS accounts, you must use a **resource\-based policy** to enable cross\-account access\.
-+ **Identity\-based policy**: Add an inline policy to the execution role that grants the permissions for the required actions listed previously, as shown in the following example:
+For sample code in other languages, see [Sample Amazon SQS Function Code](with-sqs-create-package.md)\.
 
-  ```
-  {
-      "Version": "2012-10-17",
-      "Statement": [
-          {
-              "Sid": sid,
-              "Effect": "Allow",
-              "Action": [
-                  "sqs:DeleteMessage",
-                  "sqs:ChangeMessageVisibility",
-                  "sqs:ReceiveMessage",
-                  "sqs:GetQueueAttributes"
-              ],
-              "Resource": “arn:aws:sqs:region:123456789012:test-queue“
-          }
-      ]
-  }
-  ```
-
-  For more information, see [Overview of Managing Access Permissions to Your Amazon Simple Queue Service Resource](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-overview-of-managing-access.html)
-+ **Resource\-based policy**: Alternatively, you can use an Amazon SQS resource\-based policy\.
-
-  ```
-  {
-    "Version": "2012-10-17",
-    "Id": "arn:aws:sqs:region:123456789012:test-queue/mypolicy",
-    "Statement": [
-      {
-        "Sid": sid,
-        "Effect": "Allow",
-        "Principal": {
-          "AWS": "arn:aws:iam::123456789012:role/function-execution-role"
-        },
-        "Action": [
-          "SQS:GetQueueAttributes",
-          "SQS:ChangeMessageVisibility",
-          "SQS:DeleteMessage",
-          "SQS:ReceiveMessage"	
-        ],
-        "Resource": "arn:aws:sqs:region:123456789012:test-queue"
-      }
-    ]
-  }
-  ```
-
-## Create a Function<a name="with-sqs-create-test-function"></a>
-
-The following is example code that receives an Amazon SQS event message as input and processes it\. For illustration, the code writes some of the incoming event data to CloudWatch Logs\. 
-
-**Example ProcessSQSRecords\.js**  
+**Example index\.js**  
 
 ```
 exports.handler = async function(event, context) {
@@ -91,17 +53,25 @@ exports.handler = async function(event, context) {
 }
 ```
 
-Create the Lambda function by uploading the deployment package, and then test it by invoking it manually using sample Amazon SQS event data\. You provide both the deployment package and the IAM role at the time of creating a Lambda function\. You can also specify other configuration information, such as the function name, memory size, runtime environment to use, and the handler\. For more information about these parameters, see [CreateFunction](API_CreateFunction.md)\. After creating the Lambda function, you invoke it using sample Amazon Simple Queue Service event data\. 
+**To create the function**
 
-At the command prompt, run the following Lambda CLI `create-function` command\.
+1. Copy the sample code into a file named `index.js`\.
 
-You need to update the command by providing the \.zip file path and the execution role ARN\. 
+1. Create a deployment package\.
 
-```
-$ aws lambda create-function --function-name ProcessSQSRecord --zip-file fileb://ProcessSQSRecord.zip --role role-arn --handler ProcessSQSRecord.handler --runtime nodejs8.10
-```
+   ```
+   $ zip function.zip index.js
+   ```
 
-## Test the Function<a name="with-sqs-create-function"></a>
+1. Create a Lambda function with the `create-function` command\.
+
+   ```
+   $ aws lambda create-function --function-name ProcessSQSRecord \
+   --zip-file fileb://function.zip --handler index.handler --runtime nodejs8.10 \
+   --role role-arn
+   ```
+
+## Test the Function<a name="with-sqs-create-test-function"></a>
 
 Invoke your Lambda function manually using the `invoke` AWS Lambda CLI command and a sample Amazon Simple Queue Service event\.
 
@@ -135,7 +105,8 @@ If the handler returns normally without exceptions, Lambda considers the message
 1. Execute the following `invoke` command\. 
 
    ```
-   $ aws lambda invoke --invocation-type RequestResponse --function-name ProcessSQSRecord --payload file://input.txt outputfile.txt
+   $ aws lambda invoke --invocation-type RequestResponse --function-name ProcessSQSRecord \
+   --payload file://input.txt outputfile.txt
    ```
 
    The `invoke` command specifies `RequestResponse` as the invocation type, which requests synchronous execution\. For more information, see [Invocation Types](invocation-options.md)\. 
@@ -150,7 +121,7 @@ Create an Amazon SQS queue that the Lambda function can use as an event source\.
 
 1. Sign in to the AWS Management Console and open the Amazon SQS console at [https://console\.aws\.amazon\.com/sqs/](https://console.aws.amazon.com/sqs/)\.
 
-1. In the Amazon SQS console, create a queue\. 
+1. In the Amazon SQS console, create a queue\.
 
 1. Write down or otherwise record the identifying queue ARN \(Amazon Resource Name\)\. You need this in the next step when you associate the queue with your Lambda function\.
 
@@ -163,13 +134,15 @@ Test the end\-to\-end experience\. As you perform queue updates, Amazon Simple Q
 To create a mapping between the specified Amazon SQS queue and the Lambda function, run the following AWS CLI `create-event-source-mapping` command\. After the command executes, write down or otherwise record the UUID\. You'll need this UUID to refer to the event source mapping in any other commands, for example, if you choose to delete the event source mapping\.
 
 ```
-$ aws lambda create-event-source-mapping --function-name ProcessSQSRecord --event-source SQS-queue-arn --batch-size 1
+$ aws lambda create-event-source-mapping --function-name ProcessSQSRecord \
+--event-source SQS-queue-arn --batch-size 1
 ```
 
 You can get the list of event source mappings by running the following command\.
 
 ```
-$ aws lambda list-event-source-mappings --function-name ProcessSQSRecord --event-source SQS-queue-arn
+$ aws lambda list-event-source-mappings --function-name ProcessSQSRecord \
+--event-source SQS-queue-arn
 ```
 
 The list returns all of the event source mappings you created, and for each mapping it shows the `LastProcessingResult`, among other things\. This field is used to provide an informative message if there are any problems\. Values such as `No records processed` \(indicates that AWS Lambda has not started polling or that there are no records in the queue\) and `OK` \(indicates AWS Lambda successfully read records from the queue and invoked your Lambda function\) indicate that there no issues\. If there are issues, you receive an error message\.
@@ -182,4 +155,4 @@ Now you can test the setup as follows:
 
 1. AWS Lambda polls the queue and when it detects updates, it invokes your Lambda function by passing in the event data it finds in the queue\.
 
-1. Your function executes and creates logs in Amazon CloudWatch\. The **adminuser** can also verify the logs reported in the Amazon CloudWatch console\.
+1. Your function executes and creates logs in Amazon CloudWatch\. You can verify the logs reported in the Amazon CloudWatch console\.

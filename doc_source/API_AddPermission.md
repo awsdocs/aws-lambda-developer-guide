@@ -2,7 +2,7 @@
 
 Adds a permission to the resource policy associated with the specified AWS Lambda function\. You use resource policies to grant permissions to event sources that use the *push* model\. In a *push* model, event sources \(such as Amazon S3 and custom applications\) invoke your Lambda function\. Each permission you add to the resource policy allows an event source permission to invoke the Lambda function\. 
 
-If you are using versioning, the permissions you add are specific to the Lambda function version or alias you specify in the `AddPermission` request via the `Qualifier` parameter\. For more information about versioning, see [AWS Lambda Function Versioning and Aliases](https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html)\. 
+Permissions apply to the Amazon Resource Name \(ARN\) used to invoke the function, which can be unqualified \(the unpublished version of the function\), or include a version or alias\. If a client uses a version or alias to invoke a function, use the `Qualifier` parameter to apply permissions to that ARN\. For more information about versioning, see [AWS Lambda Function Versioning and Aliases](https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html)\. 
 
 This operation requires permission for the `lambda:AddPermission` action\.
 
@@ -39,12 +39,7 @@ Length Constraints: Minimum length of 1\. Maximum length of 140\.
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [Qualifier](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-Qualifier"></a>
-You can use this optional query parameter to describe a qualified ARN using a function version or an alias name\. The permission will then apply to the specific qualified ARN\. For example, if you specify function version 2 as the qualifier, then permission applies only when request is made using qualified function ARN:  
- `arn:aws:lambda:aws-region:acct-id:function:function-name:2`   
-If you specify an alias name, for example `PROD`, then the permission is valid only for requests made using the alias ARN:  
- `arn:aws:lambda:aws-region:acct-id:function:function-name:PROD`   
-If the qualifier is not specified, the permission is valid only when requests is made using unqualified function ARN\.  
- `arn:aws:lambda:aws-region:acct-id:function:function-name`   
+Specify a version or alias to add permissions to a published version of the function\.  
 Length Constraints: Minimum length of 1\. Maximum length of 128\.  
 Pattern: `(|[a-zA-Z0-9$_-]+)` 
 
@@ -66,7 +61,7 @@ Pattern: `[a-zA-Z0-9._\-]+`
 Required: No
 
  ** [Principal](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-Principal"></a>
-The principal who is getting this permission\. It can be Amazon S3 service Principal \(`s3.amazonaws.com`\) if you want Amazon S3 to invoke the function, an AWS account ID if you are granting cross\-account permission, or any valid AWS service principal such as `sns.amazonaws.com`\. For example, you might want to allow a custom application in another AWS account to push events to AWS Lambda by invoking your function\.   
+The principal who is getting this permission\. The principal can be an AWS service \(e\.g\. `s3.amazonaws.com` or `sns.amazonaws.com`\) for service triggers, or an account ID for cross\-account access\. If you specify a service as a principal, use the `SourceArn` parameter to limit who can invoke the function through that service\.  
 Type: String  
 Pattern: `.*`   
 Required: Yes
@@ -83,8 +78,8 @@ Pattern: `\d{12}`
 Required: No
 
  ** [SourceArn](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-SourceArn"></a>
-This is optional; however, when granting permission to invoke your function, you should specify this field with the Amazon Resource Name \(ARN\) as its value\. This ensures that only events generated from the specified source can invoke the function\.  
-If you add a permission without providing the source ARN, any AWS account that creates a mapping to your function ARN can send events to invoke your Lambda function\.
+The Amazon Resource Name of the invoker\.   
+If you add a permission to a service principal without providing the source ARN, any AWS account that creates a mapping to your function ARN can invoke your Lambda function\.
 Type: String  
 Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)`   
 Required: No
@@ -144,6 +139,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
+Request throughput limit exceeded  
 HTTP Status Code: 429
 
 ## See Also<a name="API_AddPermission_SeeAlso"></a>

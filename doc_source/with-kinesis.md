@@ -29,4 +29,7 @@ The following diagram illustrates the application flow:
 
 1. AWS Lambda executes the Lambda function by assuming the execution role you specified at the time you created the Lambda function\.
 
-For a tutorial that walks you through an example setup, see [Tutorial: Using AWS Lambda with Kinesis](with-kinesis-example.md)\.
+**Topics**
++ [Tutorial: Using AWS Lambda with Amazon Kinesis](with-kinesis-example.md)
++ [Sample Function Code](with-kinesis-create-package.md)
++ [AWS Serverless Application Model Specification for a Amazon Kinesis Application](with-kinesis-example-use-app-spec.md)

@@ -1,10 +1,6 @@
 # DeleteFunction<a name="API_DeleteFunction"></a>
 
-Deletes the specified Lambda function code and configuration\.
-
-If you are using the versioning feature and you don't specify a function version in your `DeleteFunction` request, AWS Lambda will delete the function, including all its versions, and any aliases pointing to the function versions\. To delete a specific function version, you must provide the function version via the `Qualifier` parameter\. For information about function versioning, see [AWS Lambda Function Versioning and Aliases](https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html)\. 
-
-When you delete a function the associated resource policy is also deleted\. You will need to delete the event source mappings explicitly\.
+Deletes a Lambda function\. To delete a specific function version, use the `Qualifier` parameter\. Otherwise, all versions and aliases are deleted\. Event source mappings are not deleted\.
 
 This operation requires permission for the `lambda:DeleteFunction` action\.
 
@@ -30,9 +26,7 @@ Length Constraints: Minimum length of 1\. Maximum length of 140\.
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [Qualifier](#API_DeleteFunction_RequestSyntax) **   <a name="SSS-DeleteFunction-request-Qualifier"></a>
-Using this optional parameter you can specify a function version \(but not the `$LATEST` version\) to direct AWS Lambda to delete a specific function version\. If the function version has one or more aliases pointing to it, you will get an error because you cannot have aliases pointing to it\. You can delete any function version but not the `$LATEST`, that is, you cannot specify `$LATEST` as the value of this parameter\. The `$LATEST` version can be deleted only when you want to delete all the function versions and aliases\.  
-You can only specify a function version, not an alias name, using this parameter\. You cannot delete a function version using its alias\.  
-If you don't specify this parameter, AWS Lambda will delete the function, including all of its versions and aliases\.  
+Specify a version to delete\. You cannot delete a version that is referenced by an alias\.  
 Length Constraints: Minimum length of 1\. Maximum length of 128\.  
 Pattern: `(|[a-zA-Z0-9$_-]+)` 
 
@@ -69,6 +63,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
+Request throughput limit exceeded  
 HTTP Status Code: 429
 
 ## See Also<a name="API_DeleteFunction_SeeAlso"></a>

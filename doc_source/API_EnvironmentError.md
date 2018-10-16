@@ -1,16 +1,16 @@
 # EnvironmentError<a name="API_EnvironmentError"></a>
 
-The parent object that contains error information associated with your configuration settings\.
+Error messages for environment variables that could not be applied\.
 
 ## Contents<a name="API_EnvironmentError_Contents"></a>
 
  **ErrorCode**   <a name="SSS-Type-EnvironmentError-ErrorCode"></a>
-The error code returned by the environment error object\.  
+The error code\.  
 Type: String  
 Required: No
 
  **Message**   <a name="SSS-Type-EnvironmentError-Message"></a>
-The message returned by the environment error object\.  
+The error message\.  
 Type: String  
 Required: No
 

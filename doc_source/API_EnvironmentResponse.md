@@ -1,15 +1,16 @@
 # EnvironmentResponse<a name="API_EnvironmentResponse"></a>
 
-The parent object returned that contains your environment's configuration settings or any error information associated with your configuration settings\.
+The results of a configuration update that applied environment variables\.
 
 ## Contents<a name="API_EnvironmentResponse_Contents"></a>
 
  **Error**   <a name="SSS-Type-EnvironmentResponse-Error"></a>
+Error messages for environment variables that could not be applied\.  
 Type: [EnvironmentError](API_EnvironmentError.md) object  
 Required: No
 
  **Variables**   <a name="SSS-Type-EnvironmentResponse-Variables"></a>
-The key\-value pairs returned that represent your environment's configuration settings or error information\.  
+Environment variable key\-value pairs\.  
 Type: String to string map  
 Key Pattern: `[a-zA-Z]([a-zA-Z0-9_])+`   
 Required: No

@@ -4,7 +4,7 @@ Lambda functions and event sources are the core components of AWS Lambda\. An ev
 
 Each event source mapping identifies the type of events to publish and the Lambda function to invoke when events occur\. The specific Lambda function then receives the event information as a parameter and your Lambda function code then processes the event\. 
 
-You can also create custom applications to include AWS resource events and invoke a Lambda function\. For more information, see [Using AWS Lambda with Custom User Applications](with-userapp.md)
+You can also create custom applications to include AWS resource events and invoke a Lambda function\. For more information, see [Using AWS Lambda with the AWS Command Line Interface](with-userapp.md)
 
 You may be wondering—where do I keep the event mapping information? Do I keep it within the event source or within AWS Lambda? The following sections explain event source mapping for each of these event source categories\. These sections also explain how the Lambda function is invoked and how you manage permissions to allow invocation of your Lambda function\. 
 

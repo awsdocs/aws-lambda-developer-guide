@@ -1,10 +1,8 @@
 # RemovePermission<a name="API_RemovePermission"></a>
 
-You can remove individual permissions from an resource policy associated with a Lambda function by providing a statement ID that you provided when you added the permission\.
+Removes permissions from a function\. You can remove individual permissions from an resource policy associated with a Lambda function by providing a statement ID that you provided when you added the permission\. When you remove permissions, disable the event source mapping or trigger configuration first to avoid errors\.
 
-If you are using versioning, the permissions you remove are specific to the Lambda function version or alias you specify in the `AddPermission` request via the `Qualifier` parameter\. For more information about versioning, see [AWS Lambda Function Versioning and Aliases](https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html)\. 
-
-Note that removal of a permission will cause an active event source to lose permission to the function\.
+Permissions apply to the Amazon Resource Name \(ARN\) used to invoke the function, which can be unqualified \(the unpublished version of the function\), or include a version or alias\. If a client uses a version or alias to invoke a function, use the `Qualifier` parameter to apply permissions to that ARN\. For more information about versioning, see [AWS Lambda Function Versioning and Aliases](https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html)\. 
 
 You need permission for the `lambda:RemovePermission` action\.
 
@@ -30,7 +28,7 @@ Length Constraints: Minimum length of 1\. Maximum length of 140\.
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [Qualifier](#API_RemovePermission_RequestSyntax) **   <a name="SSS-RemovePermission-request-Qualifier"></a>
-You can specify this optional parameter to remove permission associated with a specific function version or function alias\. If you don't specify this parameter, the API removes permission associated with the unqualified function ARN\.  
+Specify a version or alias to remove permissions from a published version of the function\.  
 Length Constraints: Minimum length of 1\. Maximum length of 128\.  
 Pattern: `(|[a-zA-Z0-9$_-]+)` 
 
@@ -75,6 +73,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
+Request throughput limit exceeded  
 HTTP Status Code: 429
 
 ## See Also<a name="API_RemovePermission_SeeAlso"></a>

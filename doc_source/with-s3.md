@@ -25,4 +25,7 @@ The following diagram summarizes the flow:
 
 1. The Lambda function executes\.
 
-For a tutorial that walks you through an example setup, see [Tutorial: Using AWS Lambda with Amazon S3](with-s3-example.md)\.
+**Topics**
++ [Tutorial: Using AWS Lambda with Amazon S3](with-s3-example.md)
++ [Sample Amazon Simple Storage Service Function Code](with-s3-example-deployment-pkg.md)
++ [Sample Amazon Simple Storage Service Application SAM Template](with-s3-example-use-app-spec.md)
