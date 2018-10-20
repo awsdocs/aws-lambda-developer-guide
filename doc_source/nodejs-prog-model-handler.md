@@ -27,7 +27,7 @@ If you discover that your Lambda function does not process the event using async
 The Node\.js runtimes v6\.10 and v8\.10 support the optional `callback` parameter\. You can use it to explicitly return information back to the caller\. The general syntax is:
 
 ```
-callback(Error error, Object result);
+callback(error, result);
 ```
 
 Where:
