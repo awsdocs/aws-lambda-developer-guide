@@ -1,15 +1,27 @@
 # Lambda Function Handler \(Node\.js\)<a name="nodejs-prog-model-handler"></a>
 
-AWS Lambda invokes your Lambda function via a `handler` object\. A `handler` represents the name of your Lambda function \(and serves as the entry point that AWS Lambda uses to execute your function code\. For example: 
+AWS Lambda invokes your Lambda function via a `handler` object\. A `handler` represents the name of your Lambda function \(and serves as the entry point that AWS Lambda uses to execute your function code\. For example:
 
+Using Node\.js v6\.10
 ```
-exports.myHandler = function(event, context, callback) {   
-    ... function code   
+exports.myHandler = function(event, context, callback) {
+    ... function code
     callback(null, "some success message");
-   // or 
-   // callback("some error type"); 
+    // or
+    // callback("some error type");
 }
 ```
+
+Using Node\.js v8\.10 supporting `async`/`await`
+```
+exports.myHandler = async function(event, context) {
+    ... function code
+    return "some success message";
+    // or
+    // throw new Error("some error type");
+}
+```
+
 + `myHandler` – This is the name of the function AWS Lambda invokes\. Suppose you save this code as `helloworld.js`\. Then, `myHandler` is the function that contains your Lambda function code and `helloworld` is the name of the file that represents your deployment package\. For more information, see [Creating a Deployment Package \(Node\.js\)](nodejs-create-deployment-pkg.md)\.
 
   AWS Lambda supports two invocation types:
@@ -58,27 +70,17 @@ Note the following:
 **Note**  
 When the `callback(error, null)` \(and `callback(error)`\) is called, Lambda will log the first 256 KB of the error object\. For a larger error object, AWS Lambda truncates the log and displays the text `Truncated by Lambda` next to the error object\.
 
-If you are using runtime version 8\.10, you can include the `async` keyword:
-
-```
-exports.myHandler = async function(event, context) {
-            ...
-            
-            // return information to the caller.  
-}
-```
-
 ## Example<a name="nodejs-prog-model-handler-example"></a>
 
 Consider the following Node\.js example code\. 
 
 ```
 exports.myHandler = function(event, context, callback) {
-   console.log("value1 = " + event.key1);
-   console.log("value2 = " + event.key2);  
-   callback(null, "some success message");
-   // or 
-   // callback("some error type"); 
+    console.log("value1 = " + event.key1);
+    console.log("value2 = " + event.key2);  
+    callback(null, "some success message");
+    // or 
+    // callback("some error type"); 
 }
 ```
 
@@ -90,11 +92,11 @@ If you want to use the `async` feature provided by the v8\.10 runtime, consider 
 
 ```
 exports.myHandler = async function(event, context) {
-   console.log("value1 = " + event.key1);
-   console.log("value2 = " + event.key2);  
-   return "some success message";
-   // or 
-   // throw new Error("some error type"); 
+    console.log("value1 = " + event.key1);
+    console.log("value2 = " + event.key2);  
+    return "some success message";
+    // or 
+    // throw new Error("some error type"); 
 }
 ```
 
