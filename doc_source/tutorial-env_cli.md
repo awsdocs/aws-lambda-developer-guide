@@ -27,15 +27,12 @@ The code sample below reads the environment variable of a Lambda function that r
 
 1. Open a text editor and copy the following code:
 
-   ```
-   var AWS = require('aws-sdk');
-        
-       exports.handler = function(event, context, callback) {
-           
-           var bucketName = process.env.S3_BUCKET;       
-       	callback(null, bucketName);        
-       }
-   ```
+```js
+exports.handler = function(event, context, callback) {
+  var bucketName = process.env.S3_BUCKET;
+  callback(null, bucketName);
+};
+```
 
 1.  Save the file as *index\.js*\. 
 
