@@ -15,8 +15,7 @@ SAM CLI also offers the `sam init` command, which, when run, provides a fully\-f
 + Generate sample function payloads \(for example, an Amazon S3 event\)\.
 
   ```
-  $ sam local generate-event s3 --bucket bucket-name  --key key-name
-                  > event_file.json
+  $ sam local generate-event s3 put > event_file.json
   ```
 + Test a sample function payload locally with your Lambda functions\.
 
@@ -154,22 +153,51 @@ SAM CLI consists of the following CLI operations:
 
   ```
   sam local generate-event
-  NAME:
-     sam local generate-event - Generates Lambda events (e.g. for S3/Kinesis etc) that can be piped to 'sam local invoke'
-  
-  USAGE:
-     sam local generate-event command [command options] [arguments...]
-  
-  COMMANDS:
-       s3        Generates a sample Amazon S3 event
-       sns       Generates a sample Amazon SNS event
-       kinesis   Generates a sample Amazon Kinesis event
-       dynamodb  Generates a sample Amazon DynamoDB event
-       api       Generates a sample Amazon API Gateway event
-       schedule  Generates a sample scheduled event
-  
-  OPTIONS:
-     --help, -h  show help
+  Usage: sam local generate-event [OPTIONS] COMMAND [ARGS]...
+
+    You can use this command to generate sample payloads from different event
+    sources such as S3, API Gateway, and SNS. These payloads contain the
+    information that the event sources send to your Lambda functions.
+
+    Generate the event that S3 sends to your Lambda function when a new object is uploaded
+    $ sam local generate-event s3 [put/delete]
+
+    You can even customize the event by adding parameter flags. To find which flags apply to your command,
+    run:
+
+    $ sam local generate-event s3 [put/delete] --help
+
+    Then you can add in those flags that you wish to customize using
+
+    $ sam local generate-event s3 [put/delete] --bucket <bucket> --key <key>
+
+    After you generate a sample event, you can use it to test your Lambda function locally
+    $ sam local generate-event s3 [put/delete] --bucket <bucket> --key <key> | sam local invoke <function logical id>
+
+  Options:
+    --help  Show this message and exit.
+
+  Commands:
+    alexa-skills-kit
+    alexa-smart-home
+    apigateway
+    batch
+    cloudformation
+    cloudfront
+    cloudwatch
+    codecommit
+    codepipeline
+    cognito
+    config
+    dynamodb
+    kinesis
+    lex
+    rekognition
+    s3
+    ses
+    sns
+    sqs
+    stepfunctions
   ```
 + **validate:** Validates your template against the official [AWS Serverless Application Model specification](https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md)\. The following is an example\. 
 
