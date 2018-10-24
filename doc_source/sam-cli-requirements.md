@@ -39,7 +39,7 @@ sam --version
 You should see something similar to the following:
 
 ```
-SAM CLI, version 0.3.0
+SAM CLI, version 0.6.1
 ```
 
 To begin using the SAM CLI with your serverless applications, see [Test Your Serverless Applications Locally Using SAM CLI \(Public Beta\)](test-sam-cli.md) 
