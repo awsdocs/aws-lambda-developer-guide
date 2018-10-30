@@ -1,6 +1,6 @@
 # AWS Toolkit for Visual Studio<a name="lambda-dotnet-create-deployment-package-toolkit"></a>
 
-You can build \.NET\-based Lambda applications using the Lambda plugin to the [AWS Toolkit for Visual Studio]()\. The plugin is available as part of a [Nuget](https://www.nuget.org/packages/Amazon.Lambda/) package\.
+You can build \.NET\-based Lambda applications using the Lambda plugin to the [AWS Toolkit for Visual Studio](https://aws.amazon.com/visualstudio/)\. The plugin is available as part of a [Nuget](https://www.nuget.org/packages/Amazon.Lambda/) package\.
 
 ## Step 1: Create and Build a Project<a name="dotnet-vs-create-project"></a>
 
@@ -19,7 +19,7 @@ You can build \.NET\-based Lambda applications using the Lambda plugin to the [A
 
      1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 
-     1. Follow the steps in [Creating a Role to Delegate Permissions to an AWS Service](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide* to create an IAM role \(execution role\)\. As you follow the steps to create a role, note the following:
+     1. Follow the steps in [Creating a Role to Delegate Permissions to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide* to create an IAM role \(execution role\)\. As you follow the steps to create a role, note the following:
         + In **Role Name**, use a name that is unique within your AWS account\. 
         + In **Select Role Type**, choose **AWS Service Roles**, and then choose a service role that grants that service permissions to assume the role\.
         + In **Attach Policy**, choose a permissions policy that is suitable to execute your Lambda function\.
@@ -30,8 +30,8 @@ You can build \.NET\-based Lambda applications using the Lambda plugin to the [A
        "profile":"iam-execution-profile"",
        "region" : "region",
        "configuration" : "Release",
-       "framework" : "netcoreapp2.0",
-       "function-runtime":"dotnetcore2.0",
+       "framework" : "netcoreapp2.1",
+       "function-runtime":"dotnetcore2.1",
        "function-memory-size" : 256,
        "function-timeout" : 30,
        "function-handler" : "Assembly::Namespace.Class::Function" 

@@ -4,9 +4,11 @@ When you create an AWS Lambda function in the console using one of the blueprint
 
 The following lists the permissions that are applied to each policy template in the **Policy templates** list\. The policy templates are named after the blueprints to which they correspond\. Lambda will automatically populate the placeholder items \(such as *region* and *accountID*\) with the appropriate information\. For more information on creating a Lambda function using policy templates, see [Create a Simple Lambda Function](get-started-create-function.md)\.
 
+## Standard Templates<a name="permission-templates-standard"></a>
+
 The following templates are automatically applied depending upon the type of Lambda function you are creating:
 
-## Basic: 'Basic Lambda Permissions'<a name="basic-execution"></a>
+### Basic: 'Basic Lambda Permissions'<a name="basic-execution"></a>
 
 ```
 {
@@ -31,7 +33,7 @@ The following templates are automatically applied depending upon the type of Lam
 }
 ```
 
-## VPCAccess: 'Lambda VPC Access Permissions'<a name="LambdaVPCAccessExecutionRole"></a>
+### VPCAccess: 'Lambda VPC Access Permissions'<a name="LambdaVPCAccessExecutionRole"></a>
 
 ```
 {
@@ -50,7 +52,7 @@ The following templates are automatically applied depending upon the type of Lam
 }
 ```
 
-## Kinesis: 'Lambda Kinesis stream poller permissions'<a name="KinesisExecutionRole"></a>
+### Kinesis: 'Lambda Kinesis stream poller permissions'<a name="KinesisExecutionRole"></a>
 
 ```
 {
@@ -80,7 +82,7 @@ stream/streamName"
 }
 ```
 
-## DynamoDB: 'Lambda DynamoDB stream poller permissions'<a name="DynamoDBExecutionRole"></a>
+### DynamoDB: 'Lambda DynamoDB stream poller permissions'<a name="DynamoDBExecutionRole"></a>
 
 ```
 {
@@ -105,7 +107,7 @@ stream/streamName"
 }
 ```
 
-## Edge: 'Basic Edge Lambda permissions'<a name="EdgeExecutionRole"></a>
+### Edge: 'Basic Edge Lambda permissions'<a name="EdgeExecutionRole"></a>
 
 ```
 {
@@ -126,7 +128,7 @@ stream/streamName"
 }
 ```
 
-## RedrivePolicySNS: ‘Dead letter queue SNS permissions’<a name="RedriveSNSExecutionRole"></a>
+### RedrivePolicySNS: ‘Dead letter queue SNS permissions’<a name="RedriveSNSExecutionRole"></a>
 
 ```
 {
@@ -143,7 +145,7 @@ stream/streamName"
 }
 ```
 
-## RedrivePolicySQS: 'Dead letter queue SQS permissions'<a name="RedriveSQSExecutionRole"></a>
+### RedrivePolicySQS: 'Dead letter queue SQS permissions'<a name="RedriveSQSExecutionRole"></a>
 
 ```
 {
@@ -160,11 +162,11 @@ stream/streamName"
 }
 ```
 
-## <a name="w3ab1c67c11c24c21"></a>
+## Blueprint Templates<a name="permission-templates-blueprint"></a>
 
-The following templates are selected depending upon which blueprint you choose\. You can also select them from the dropdown to add extra permissions:
+The following templates are selected when you choose a blueprint\. You can also select them from the dropdown to add extra permissions\.
 
-## CloudFormation: 'CloudFormation stack read\-only permissions'<a name="CloudFormationExecutionRole"></a>
+### CloudFormation: 'CloudFormation stack read\-only permissions'<a name="CloudFormationExecutionRole"></a>
 
 ```
 {
@@ -181,7 +183,7 @@ The following templates are selected depending upon which blueprint you choose\.
 }
 ```
 
-## AMI: 'AMI read\-only permissions'<a name="AMIExecutionRole"></a>
+### AMI: 'AMI read\-only permissions'<a name="AMIExecutionRole"></a>
 
 ```
 {
@@ -198,7 +200,7 @@ The following templates are selected depending upon which blueprint you choose\.
 }
 ```
 
-## KMS: 'KMS decryption permissions'<a name="KMSExecutionRole"></a>
+### KMS: 'KMS decryption permissions'<a name="KMSExecutionRole"></a>
 
 ```
 {
@@ -215,7 +217,7 @@ The following templates are selected depending upon which blueprint you choose\.
 }
 ```
 
-## S3: 'S3 object read\-only permissions'<a name="S3ExecutionRole"></a>
+### S3: 'S3 object read\-only permissions'<a name="S3ExecutionRole"></a>
 
 ```
 {
@@ -232,7 +234,7 @@ The following templates are selected depending upon which blueprint you choose\.
 }
 ```
 
-## Elasticsearch: 'Elasticsearch permissions'<a name="ElasticsearchExecutionRole"></a>
+### Elasticsearch: 'Elasticsearch permissions'<a name="ElasticsearchExecutionRole"></a>
 
 ```
 {
@@ -249,7 +251,7 @@ The following templates are selected depending upon which blueprint you choose\.
 }
 ```
 
-## SES: 'SES bounce permissions'<a name="SESExecutionRole"></a>
+### SES: 'SES bounce permissions'<a name="SESExecutionRole"></a>
 
 ```
 {
@@ -266,7 +268,7 @@ The following templates are selected depending upon which blueprint you choose\.
 }
 ```
 
-## TestHarness: 'Test Harness permissions'<a name="TestHarnessExecutionRole"></a>
+### TestHarness: 'Test Harness permissions'<a name="TestHarnessExecutionRole"></a>
 
 ```
 {
@@ -290,7 +292,7 @@ The following templates are selected depending upon which blueprint you choose\.
 }
 ```
 
-## Microservice: 'Simple Microservice permissions'<a name="MicroServiceExecutionRole"></a>
+### Microservice: 'Simple Microservice permissions'<a name="MicroServiceExecutionRole"></a>
 
 ```
 {
@@ -311,7 +313,7 @@ The following templates are selected depending upon which blueprint you choose\.
 }
 ```
 
-## VPN: 'VPN Connection Monitor permissions'<a name="VPNExecutionRole"></a>
+### VPN: 'VPN Connection Monitor permissions'<a name="VPNExecutionRole"></a>
 
 ```
 {
@@ -336,7 +338,7 @@ The following templates are selected depending upon which blueprint you choose\.
 }
 ```
 
-## SQS: 'SQS Poller permissions'<a name="SQSExecutionRole"></a>
+### SQS: 'SQS Poller permissions'<a name="SQSExecutionRole"></a>
 
 ```
 {
@@ -361,7 +363,7 @@ The following templates are selected depending upon which blueprint you choose\.
 }
 ```
 
-## IoTButton: 'AWS IoT Button permissions'<a name="IOTExecutionRole"></a>
+### IoTButton: 'AWS IoT Button permissions'<a name="IOTExecutionRole"></a>
 
 ```
 {
@@ -382,7 +384,7 @@ The following templates are selected depending upon which blueprint you choose\.
 }
 ```
 
-## RekognitionNoDataAccess:'Amazon Rekognition no data permissions'<a name="RekognitionNoDataAccessExecutionRole"></a>
+### RekognitionNoDataAccess:'Amazon Rekognition no data permissions'<a name="RekognitionNoDataAccessExecutionRole"></a>
 
 ```
 {
@@ -401,7 +403,7 @@ The following templates are selected depending upon which blueprint you choose\.
 }
 ```
 
-## RekognitionReadOnlyAccess: 'Amazon Rekognition read\-only permissions'<a name="RekognitionReadOnlyAccessExecutionRole"></a>
+### RekognitionReadOnlyAccess: 'Amazon Rekognition read\-only permissions'<a name="RekognitionReadOnlyAccessExecutionRole"></a>
 
 ```
 {
@@ -421,7 +423,7 @@ The following templates are selected depending upon which blueprint you choose\.
 }
 ```
 
-## RekognitionWriteOnlyAccess: 'Amazon Rekognition write\-only permissions'<a name="RekognitionWriteOnlyAccessExecutionRole"></a>
+### RekognitionWriteOnlyAccess: 'Amazon Rekognition write\-only permissions'<a name="RekognitionWriteOnlyAccessExecutionRole"></a>
 
 ```
 {

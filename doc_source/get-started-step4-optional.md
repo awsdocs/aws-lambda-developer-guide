@@ -1,4 +1,4 @@
-# \(Optional\) Create a Lambda Function Authored in Java<a name="get-started-step4-optional"></a>
+# Create a Lambda Function Authored in Java<a name="get-started-step4-optional"></a>
 
 The blueprints provide sample code authored either in Python or Node\.js\. You can easily modify the example using the inline editor in the console\. However, if you want to author code for your Lambda function in Java, there are no blueprints provided\. Also, there is no inline editor for you to write Java code in the AWS Lambda console\. 
 

@@ -43,29 +43,36 @@ The following example introduces how to use the context object to monitor how lo
 
 ```
 package main
- 
+
 import (
         "context"
         "log"
         "time"
         "github.com/aws/aws-lambda-go/lambda"
 )
- 
-func LongRunningHandler(ctx context.Context) string {
+
+func LongRunningHandler(ctx context.Context) (string, error) {
+
         deadline, _ := ctx.Deadline()
+        deadline = deadline.Add(-100 * time.Millisecond)
+        timeoutChannel := time.After(time.Until(deadline))
+
         for {
+
                 select {
-                case <- time.Until(deadline).Truncate(100 * time.Millisecond):
-                        return "Finished before timing out."
+
+                case <- timeoutChannel:
+                        return "Finished before timing out.", nil
+
                 default:
                         log.Print("hello!")
                         time.Sleep(50 * time.Millisecond)
                 }
         }
 }
- 
+
 func main() {
-        lambda.Start(LongRunningHandler)        
+        lambda.Start(LongRunningHandler)
 }
 ```
 
@@ -81,7 +88,3 @@ The Lambda context object also includes the following properties:
 + `ClientContext`: Information about the client application and device when invoked through the AWS Mobile SDK\. It can be null\.  Client context provides client information such as client ID, application title, version name, version code, and the application package name\.
 +  `Identity`: Noted in the preceding example\. Information about the Amazon Cognito identity provider when invoked through the AWS Mobile SDK\. It can be null\.
 + `InvokedFunctionArn`: The ARN used to invoke this function\. It can be function ARN or alias ARN\. An unqualified ARN executes the `$LATEST` version and aliases execute the function version it is pointing to\. 
-
-## Next Step<a name="go-programming-model-next-step-logging"></a>
-
-[Logging \(Go\) ](go-programming-model-logging.md)

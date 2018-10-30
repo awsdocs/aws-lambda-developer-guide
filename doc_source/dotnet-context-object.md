@@ -26,8 +26,8 @@ The context object properties are:
 ```
 public async Task Handler(ILambdaContext context)
 {
-    Console.Writeline("Function name: " + context.FunctionName);
-    Console.Writeline("RemainingTime: " + context.RemainingTime);
+    Console.WriteLine("Function name: " + context.FunctionName);
+    Console.WriteLine("RemainingTime: " + context.RemainingTime);
     await Task.Delay(TimeSpan.FromSeconds(0.42));
     Console.WriteLine("RemainingTime after sleep: " + context.RemainingTime);
 }

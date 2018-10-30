@@ -31,6 +31,7 @@ The following table lists languages, and the available tools and options that yo
 | C\# | [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/lambda/latest/dg/lambda-app.html) | 
 | Python | [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/lambda/latest/dg/lambda-app.html) | 
 | Go | [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/lambda/latest/dg/lambda-app.html) | 
+| PowerShell | [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/lambda/latest/dg/lambda-app.html) | 
 
 In addition, regardless of the language you choose, there is a pattern to writing Lambda function code\. For example, how you write the handler method of your Lambda function \(that is, the method that AWS Lambda first calls when it begins executing the code\), how you pass events to the handler, what statements you can use in your code to generate logs in CloudWatch Logs, how to interact with AWS Lambda runtime and obtain information such as the time remaining before timeout, and how to handle exceptions\. The [Programming Model](programming-model-v2.md) section provides information for each of the supported languages\.
 
@@ -56,14 +57,14 @@ When you create Lambda functions using the console, the console creates the depl
 
 AWS Lambda provides the [CreateFunction](API_CreateFunction.md) operation, which is what you use to create a Lambda function\. You can use the AWS Lambda console, AWS CLI, and AWS SDKs to create a Lambda function\. Internally, all of these interfaces call the `CreateFunction` operation\. 
 
-In addition to providing your deployment package, you can provide configuration information when you create your Lambda function including the compute requirements of your Lambda function, the name of the handler method in your Lambda function, and the runtime, which depends on the language you chose to author your code\. For more information, see [Lambda Functions](lambda-introduction-function.md)\.
+In addition to providing your deployment package, you can provide configuration information when you create your Lambda function including the compute requirements of your Lambda function, the name of the handler method in your Lambda function, and the runtime, which depends on the language you chose to author your code\. For more information, see [Working with Lambda Functions](lambda-introduction-function.md)\.
 
 ### Testing a Lambda Function<a name="lambda-app-test-code"></a>
 
 If your Lambda function is designed to process events of a specific type, you can use sample event data to test your Lambda function using one of the following methods:
 + Test your Lambda function in the console\. 
 + Test your Lambda function using the AWS CLI\. You can use the `Invoke` method to invoke your Lambda function and pass in sample event data\.
-+ Test your Lambda function locally using [Test Your Serverless Applications Locally Using SAM Local \(Public Beta\)](test-sam-local.md)\.
++ Test your Lambda function locally using [Test Your Serverless Applications Locally Using SAM CLI \(Public Beta\)](test-sam-cli.md)\.
 
 The console provides sample event data\. The same data is also provided in the [Sample Events Published by Event Sources](eventsources.md) topic, which you can use in the AWS CLI to invoke your Lambda function\.
 

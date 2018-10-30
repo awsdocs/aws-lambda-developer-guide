@@ -25,8 +25,8 @@ exports.handler = function(event, context, callback) {
     console.log('remaining time =', context.getRemainingTimeInMillis());
     console.log('functionName =', context.functionName);
     console.log('AWSrequestID =', context.awsRequestId);
-    console.log('logGroupName =', context.logGroupName);
-    console.log('logStreamName =', context.logStreamName);
+    console.log('logGroupName =', context.log_group_name);
+    console.log('logStreamName =', context.log_stream_name);
     console.log('clientContext =', context.clientContext);
     if (typeof context.identity !== 'undefined') {
         console.log('Cognito
@@ -98,7 +98,7 @@ The value is null if your Lambda function is unable to create a log stream, whic
 Information about the Amazon Cognito identity provider when invoked through the AWS Mobile SDK\. It can be null\.  
 + **identity\.cognitoIdentityId**
 + **identity\.cognitoIdentityPoolId**
-For more information about the exact values for a specific mobile platform, see [Identity Context](http://docs.aws.amazon.com/mobile/sdkforios/developerguide/lambda.html#identitycontext) in the *AWS Mobile SDK for iOS Developer Guide*, and [Identity Context](http://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/lambda.html#identity-context) in the AWS Mobile SDK for Android Developer Guide\.
+For more information about the exact values for a specific mobile platform, see [Identity Context](https://docs.aws.amazon.com/mobile/sdkforios/developerguide/lambda.html#identitycontext) in the *AWS Mobile SDK for iOS Developer Guide*, and [Identity Context](https://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/lambda.html#identity-context) in the AWS Mobile SDK for Android Developer Guide\.
 
 **clientContext**  
 Information about the client application and device when invoked through the AWS Mobile SDK\. It can be null\. Using `clientContext`, you can get the following information:  
@@ -116,4 +116,4 @@ Information about the client application and device when invoked through the AWS
 + **clientContext\.env\.model**
 + **clientContext\.env\.locale**
 
-For more information about the exact values for a specific mobile platform, see [Client Context](http://docs.aws.amazon.com/mobile/sdkforios/developerguide/lambda.html#clientcontext) in the *AWS Mobile SDK for iOS Developer Guide*, and [Client Context](http://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/lambda.html#client-context) in the *AWS Mobile SDK for Android Developer Guide*\.
+For more information about the exact values for a specific mobile platform, see [Client Context](https://docs.aws.amazon.com/mobile/sdkforios/developerguide/lambda.html#clientcontext) in the *AWS Mobile SDK for iOS Developer Guide*, and [Client Context](https://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/lambda.html#client-context) in the *AWS Mobile SDK for Android Developer Guide*\.

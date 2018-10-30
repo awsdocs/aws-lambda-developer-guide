@@ -22,9 +22,13 @@ In addition to these APIs, existing relevant APIs also support versioning relate
 
 For an example of how you can use the AWS CLI, see [Tutorial: Using AWS Lambda Aliases](versioning-aliases-walkthrough1.md)\.
 
-This section explains how you can use the AWS Lambda console to manage versioning\. In the AWS Lambda console, choose a function and then choose **Qualifiers**\. ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/versioning-console-10.png)
+This section explains how you can use the AWS Lambda console to manage versioning\. In the AWS Lambda console, choose a function and then choose **Qualifiers**\. 
 
-The expanded **Qualifiers** menu displays a **Versions** and **Aliases** tab, as shown in the following screen shot\. In the **Versions** pane, you can see a list of versions for the selected function\. If you have not previously published a version for the selected function, the **Versions** pane lists only the `$LATEST` version, as shown following\.![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/versioning-console-20.png)
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/versioning-console-10.png)
+
+The expanded **Qualifiers** menu displays a **Versions** and **Aliases** tab, as shown in the following screen shot\. In the **Versions** pane, you can see a list of versions for the selected function\. If you have not previously published a version for the selected function, the **Versions** pane lists only the `$LATEST` version, as shown following\.
+
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/versioning-console-20.png)
 
 Choose the **Aliases** tab to see a list of aliases for the function\. Initially, you won't have any aliases, as shown following\.
 

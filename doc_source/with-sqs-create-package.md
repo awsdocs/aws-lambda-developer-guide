@@ -1,43 +1,163 @@
-# Step 2\.1: Create a Lambda Function Deployment Package<a name="with-sqs-create-package"></a>
+# Sample Amazon SQS Function Code<a name="with-sqs-create-package"></a>
 
-From the **Filter View** list, choose the language you want to use for your Lambda function\. The appropriate section appears with code and specific instructions for creating a deployment package\.
+Sample code is available for the following languages\.
 
-## Java<a name="with-sqs-example-deployment-pkg-nodejs"></a>
+**Topics**
++ [Node\.js](#with-sqs-example-deployment-pkg-nodejs)
++ [Java](#with-sqs-example-deployment-pkg-java)
++ [C\#](#with-sqs-example-deployment-pkg-dotnet)
++ [Go](#with-sqs-example-deployment-pkg-go)
++ [Python](#with-sqs-example-deployment-pkg-python)
+
+## Node\.js<a name="with-sqs-example-deployment-pkg-nodejs"></a>
+
+The following is example code that receives an Amazon SQS event message as input and processes it\. For illustration, the code writes some of the incoming event data to CloudWatch Logs\. 
+
+**Example index\.js \(Node\.js 8\)**  
+
+```
+exports.handler = async function(event, context) {
+  event.Records.forEach(record => {
+    const { body } = record;
+    console.log(body);
+  });
+  return {};
+}
+```
+
+**Example index\.js \(Node\.js 6\)**  
+
+```
+event.Records.forEach(function(record) {
+    var body = record.body;
+    console.log(body);
+  });
+  callback(null, "message");
+};
+```
+
+Zip up the sample code to create a deployment package\. For instructions, see [Creating a Deployment Package \(Node\.js\)](nodejs-create-deployment-pkg.md)\.
+
+## Java<a name="with-sqs-example-deployment-pkg-java"></a>
 
 The following is example Java code that receives an Amazon SQS event message as input and processes it\. For illustration, the code writes some of the incoming event data to CloudWatch Logs\. 
 
- In the code, `handleRequest` is the handler\. The handler uses the predefined `SQSEvent` class that is defined in the `aws-lambda-java-events` library\. 
+In the code, `handleRequest` is the handler\. The handler uses the predefined `SQSEvent` class that is defined in the `aws-lambda-java-events` library\.
+
+**Example ProcessSQSRecord\.java**  
 
 ```
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.SQSEvent;
-import com.amazonaws.services.lambda.runtime.events.SQSEvent.SQSEventRecord;
+import com.amazonaws.services.lambda.runtime.events.SQSEvent.SQSMessage;
 
-        public class ProcessSQSEvents implements RequestHandler<SQSEvent, Void>{
-            @Override
-            public Void handleRequest(SQSEvent event, Context context)
-            {
-                for(SQSEventRecord rec : event.getRecords()) {
-                    System.out.println(new String(rec.getSQS().getBody());
-                }
-                return null;
-            }
+public class ProcessSQSEvents implements RequestHandler<SQSEvent, Void>{
+    @Override
+    public Void handleRequest(SQSEvent event, Context context)
+    {
+        for(SQSMessage msg : event.getRecords()){
+            System.out.println(new String(msg.getSQS().getBody()));
         }
+        return null;
+    }
+}
 ```
 
-If the handler returns normally without exceptions, Lambda considers the message processed successfully and begins reading new messages in the queue\. If the handler throws an exception, Lambda considers the input of messages as not processed and invokes the function with the same batch of messages\. 
-
-Using the preceding code \(in a file named `ProcessSQSMessage.java`\), create a deployment package\. Make sure that you add the following dependencies: 
+**Dependencies**
 + `aws-lambda-java-core`
-+ `aws-lambda-java-events` 
++ `aws-lambda-java-events`
 
-For more information, see [Programming Model for Authoring Lambda Functions in Java](java-programming-model.md)\.
+Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [Creating a Deployment Package \(Java\)](lambda-java-how-to-create-deployment-package.md)\.
 
-Your deployment package can be a \.zip file or a standalone \.jar\. You can use any build and packaging tool you are familiar with to create a deployment package\. For examples of how to use the Maven build tool to create a standalone \.jar, see [Creating a \.jar Deployment Package Using Maven without any IDE \(Java\)](java-create-jar-pkg-maven-no-ide.md) and [Creating a \.jar Deployment Package Using Maven and Eclipse IDE \(Java\)](java-create-jar-pkg-maven-and-eclipse.md)\. For an example of how to use the Gradle build tool to create a \.zip file, see [Creating a \.zip Deployment Package \(Java\)](create-deployment-pkg-zip-java.md)\.
+## C\#<a name="with-sqs-example-deployment-pkg-dotnet"></a>
 
-After you verify that your deployment package is created, go to the next step to create an IAM role \(execution role\)\. You specify this role at the time you create your Lambda function\. 
+The following is example C\# code that receives an Amazon SQS event message as input and processes it\. For illustration, the code writes some of the incoming event data to the console\. 
 
-### Next Step<a name="sqs-create-deployment-pkg-nodejs-next-step"></a>
+ In the code, `handleRequest` is the handler\. The handler uses the predefined `SQSEvent` class that is defined in the `AWS.Lambda.SQSEvents` library\. 
 
- [Step 2\.2: Create the Execution Role \(IAM Role\)](with-sqs-create-execution-role.md) 
+**Example ProcessingSQSRecords\.cs**  
+
+```
+[assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
+
+namespace SQSLambdaFunction
+{
+    public class SQSLambdaFunction
+    {
+        public string HandleSQSEvent(SQSEvent sqsEvent, ILambdaContext context)
+        {
+            Console.WriteLine($"Beginning to process {sqsEvent.Records.Count} records...");
+
+            foreach (var record in sqsEvent.Records)
+            {
+                Console.WriteLine($"Message ID: {record.MessageId}");
+                Console.WriteLine($"Event Source: {record.EventSource}");
+
+                Console.WriteLine($"Record Body:");
+                Console.WriteLine(record.Body);
+            }
+
+            Console.WriteLine("Processing complete.");
+
+            return $"Processed {sqsEvent.Records.Count} records.";
+        }
+    }
+}
+```
+
+Replace the `Program.cs` in a \.NET Core project with the above sample\. For instructions, see [\.NET Core CLI](lambda-dotnet-coreclr-deployment-package.md)\.
+
+## Go<a name="with-sqs-example-deployment-pkg-go"></a>
+
+The following is example Go code that receives an Amazon SQS event message as input and processes it\. For illustration, the code writes some of the incoming event data to CloudWatch Logs\. 
+
+ In the code, `handler` is the handler\. The handler uses the predefined `SQSEvent` class that is defined in the `aws-lambda-go-events` library\. 
+
+**Example ProcessSQSRecords\.go**  
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/aws/aws-lambda-go/events"
+    "github.com/aws/aws-lambda-go/lambda"
+)
+
+func handler(ctx context.Context, sqsEvent events.SQSEvent) error {
+    for _, message := range sqsEvent.Records {
+        fmt.Printf("The message %s for event source %s = %s \n", message.MessageId, message.EventSource, message.Body)
+    }
+
+    return nil
+}
+
+func main() {
+    lambda.Start(handler)
+}
+```
+
+Build the executable with `go build` and create a deployment package\. For instructions, see [Creating a Deployment Package \(Go\)](lambda-go-how-to-create-deployment-package.md)\.
+
+## Python<a name="with-sqs-example-deployment-pkg-python"></a>
+
+The following is example Python code that accepts an Amazon SQS record as input and processes it\. For illustration, the code writes to some of the incoming event data to CloudWatch Logs\. 
+
+Follow the instructions to create a AWS Lambda function deployment package\. 
+
+**Example ProcessSQSRecords\.py**  
+
+```
+from __future__ import print_function
+
+def lambda_handler(event, context):
+    for record in event['Records']:
+       print ("test")
+       payload=record["body"]
+       print(str(payload))
+```
+
+Zip up the sample code to create a deployment package\. For instructions, see [Creating a Deployment Package \(Python\)](lambda-python-how-to-create-deployment-package.md)\.

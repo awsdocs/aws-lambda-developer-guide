@@ -1,12 +1,15 @@
 # Invoke<a name="API_Invoke"></a>
 
-Invokes a specific Lambda function\. For an example, see [Create the Lambda Function and Test It Manually](http://docs.aws.amazon.com/lambda/latest/dg/with-dynamodb-create-function.html#with-dbb-invoke-manually)\. 
+Invokes a Lambda function\. For an example, see [Create the Lambda Function and Test It Manually](https://docs.aws.amazon.com/lambda/latest/dg/with-dynamodb-create-function.html#with-dbb-invoke-manually)\. 
 
-If you are using the versioning feature, you can invoke the specific function version by providing function version or alias name that is pointing to the function version using the `Qualifier` parameter in the request\. If you don't provide the `Qualifier` parameter, the `$LATEST` version of the Lambda function is invoked\. Invocations occur at least once in response to an event and functions must be idempotent to handle this\. For information about the versioning feature, see [AWS Lambda Function Versioning and Aliases](http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html)\. 
+Specify just a function name to invoke the latest version of the function\. To invoke a published version, use the `Qualifier` parameter to specify a [version or alias](https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html)\.
+
+If you use the `RequestResponse` \(synchronous\) invocation option, the function will be invoked only once\. If you use the `Event` \(asynchronous\) invocation option, the function will be invoked at least once in response to an event and the function must be idempotent to handle this\.
+
+For functions with a long timeout, your client may be disconnected during synchronous invocation while it waits for a response\. Configure your HTTP client, SDK, firewall, proxy, or operating system to allow for long connections with timeout or keep\-alive settings\.
 
 This operation requires permission for the `lambda:InvokeFunction` action\.
 
-**Note**  
 The `TooManyRequestsException` noted below will return the following: `ConcurrentInvocationLimitExceeded` will be returned if you have no functions with reserved concurrency and have exceeded your account concurrent limit or if a function without reserved concurrency exceeds the account's unreserved concurrency limit\. `ReservedFunctionConcurrentInvocationLimitExceeded` will be returned when a function with reserved concurrency exceeds its configured concurrency limit\. 
 
 ## Request Syntax<a name="API_Invoke_RequestSyntax"></a>
@@ -25,17 +28,26 @@ Payload
 The request requires the following URI parameters\.
 
  ** [ClientContext](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-ClientContext"></a>
-Using the `ClientContext` you can pass client\-specific information to the Lambda function you are invoking\. You can then process the client information in your Lambda function as you choose through the context variable\. For an example of a `ClientContext` JSON, see [PutEvents](http://docs.aws.amazon.com/mobileanalytics/latest/ug/PutEvents.html) in the *Amazon Mobile Analytics API Reference and User Guide*\.  
-The ClientContext JSON must be base64\-encoded and has a maximum size of 3583 bytes\.
+Using the `ClientContext` you can pass client\-specific information to the Lambda function you are invoking\. You can then process the client information in your Lambda function as you choose through the context variable\. For an example of a `ClientContext` JSON, see [PutEvents](https://docs.aws.amazon.com/mobileanalytics/latest/ug/PutEvents.html) in the *Amazon Mobile Analytics API Reference and User Guide*\.  
+The ClientContext JSON must be base64\-encoded and has a maximum size of 3583 bytes\.  
+ `ClientContext` information is returned only if you use the synchronous \(`RequestResponse`\) invocation type\.
 
  ** [FunctionName](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-FunctionName"></a>
-The Lambda function name\.  
- You can specify a function name \(for example, `Thumbnail`\) or you can specify Amazon Resource Name \(ARN\) of the function \(for example, `arn:aws:lambda:us-west-2:account-id:function:ThumbNail`\)\. AWS Lambda also allows you to specify a partial ARN \(for example, `account-id:Thumbnail`\)\. Note that the length constraint applies only to the ARN\. If you specify only the function name, it is limited to 64 characters in length\.   
+The name of the lambda function\.  
+
+**Name formats**
++  **Function name** \- `MyFunction`\.
++  **Function ARN** \- `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`\.
++  **Partial ARN** \- `123456789012:function:MyFunction`\.
+The length constraint applies only to the full ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
 Length Constraints: Minimum length of 1\. Maximum length of 170\.  
-Pattern: `(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_\.]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
+Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_\.]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [InvocationType](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-InvocationType"></a>
-By default, the `Invoke` API assumes `RequestResponse` invocation type\. You can optionally request asynchronous execution by specifying `Event` as the `InvocationType`\. You can also use this parameter to request AWS Lambda to not execute the function but do some verification, such as if the caller is authorized to invoke the function and if the inputs are valid\. You request this by specifying `DryRun` as the `InvocationType`\. This is useful in a cross\-account scenario when you want to verify access to a function without running it\.   
+Choose from the following options\.  
++  `RequestResponse` \(default\) \- Invoke the function synchronously\. Keep the connection open until the function returns a response or times out\.
++  `Event` \- Invoke the function asynchronously\. Send events that fail multiple times to the function's dead\-letter queue \(if configured\)\.
++  `DryRun` \- Validate parameter values and verify that the user or role has permission to invoke the function\.
 Valid Values:` Event | RequestResponse | DryRun` 
 
  ** [LogType](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-LogType"></a>
@@ -43,8 +55,7 @@ You can set this optional parameter to `Tail` in the request only if you specify
 Valid Values:` None | Tail` 
 
  ** [Qualifier](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-Qualifier"></a>
-You can use this optional parameter to specify a Lambda function version or alias name\. If you specify a function version, the API uses the qualified function ARN to invoke a specific Lambda function\. If you specify an alias name, the API uses the alias ARN to invoke the Lambda function version to which the alias points\.  
-If you don't provide this parameter, then the API uses unqualified function ARN which results in invocation of the `$LATEST` version\.  
+Specify a version or alias to invoke a published version of the function\.  
 Length Constraints: Minimum length of 1\. Maximum length of 128\.  
 Pattern: `(|[a-zA-Z0-9$_-]+)` 
 
@@ -76,12 +87,12 @@ The HTTP status code will be in the 200 range for successful request\. For the `
 The response returns the following HTTP headers\.
 
  ** [ExecutedVersion](#API_Invoke_ResponseSyntax) **   <a name="SSS-Invoke-response-ExecutedVersion"></a>
-The function version that has been executed\. This value is returned only if the invocation type is `RequestResponse`\. For more information, see [Traffic Shifting Using Aliases](lambda-traffic-shifting-using-aliases.md)\.  
+The function version that has been executed\. This value is returned only if the invocation type is `RequestResponse`\. For more information, see [Traffic Shifting Using Aliases](https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html)\.  
 Length Constraints: Minimum length of 1\. Maximum length of 1024\.  
 Pattern: `(\$LATEST|[0-9]+)` 
 
  ** [FunctionError](#API_Invoke_ResponseSyntax) **   <a name="SSS-Invoke-response-FunctionError"></a>
-Indicates whether an error occurred while executing the Lambda function\. If an error occurred this field will have one of two values; `Handled` or `Unhandled`\. `Handled` errors are errors that are reported by the function while the `Unhandled` errors are those detected and reported by AWS Lambda\. Unhandled errors include out of memory errors and function timeouts\. For information about how to report an `Handled` error, see [Programming Model](http://docs.aws.amazon.com/lambda/latest/dg/programming-model.html)\. 
+Indicates whether an error occurred while executing the Lambda function\. If an error occurred this field will have one of two values; `Handled` or `Unhandled`\. `Handled` errors are errors that are reported by the function while the `Unhandled` errors are those detected and reported by AWS Lambda\. Unhandled errors include out of memory errors and function timeouts\. For information about how to report an `Handled` error, see [Programming Model](https://docs.aws.amazon.com/lambda/latest/dg/programming-model.html)\. 
 
  ** [LogResult](#API_Invoke_ResponseSyntax) **   <a name="SSS-Invoke-response-LogResult"></a>
  It is the base64\-encoded logs for the Lambda function invocation\. This is present only if the invocation type is `RequestResponse` and the logs were requested\. 
@@ -95,7 +106,7 @@ In the event of a function error this field contains a message describing the er
 ## Errors<a name="API_Invoke_Errors"></a>
 
  **EC2AccessDeniedException**   
-  
+Need additional permissions to configure VPC settings\.  
 HTTP Status Code: 502
 
  **EC2ThrottledException**   
@@ -131,7 +142,7 @@ The Subnet ID provided in the Lambda function VPC configuration is invalid\.
 HTTP Status Code: 502
 
  **InvalidZipFileException**   
-AWS Lambda could not unzip the function zip file\.  
+AWS Lambda could not unzip the deployment package\.  
 HTTP Status Code: 502
 
  **KMSAccessDeniedException**   
@@ -151,7 +162,7 @@ Lambda was unable to decrypt the environment variables because the KMS key was n
 HTTP Status Code: 502
 
  **RequestTooLargeException**   
-The request payload exceeded the `Invoke` request body JSON input limit\. For more information, see [Limits](http://docs.aws.amazon.com/lambda/latest/dg/limits.html)\.   
+The request payload exceeded the `Invoke` request body JSON input limit\. For more information, see [Limits](https://docs.aws.amazon.com/lambda/latest/dg/limits.html)\.   
 HTTP Status Code: 413
 
  **ResourceNotFoundException**   
@@ -167,7 +178,7 @@ AWS Lambda was not able to set up VPC access for the Lambda function because one
 HTTP Status Code: 502
 
  **TooManyRequestsException**   
-   
+Request throughput limit exceeded  
 HTTP Status Code: 429
 
  **UnsupportedMediaTypeException**   
@@ -177,12 +188,12 @@ HTTP Status Code: 415
 ## See Also<a name="API_Invoke_SeeAlso"></a>
 
 For more information about using this API in one of the language\-specific AWS SDKs, see the following:
-+  [AWS Command Line Interface](http://docs.aws.amazon.com/goto/aws-cli/lambda-2015-03-31/Invoke) 
-+  [AWS SDK for \.NET](http://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/Invoke) 
-+  [AWS SDK for C\+\+](http://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/Invoke) 
-+  [AWS SDK for Go](http://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/Invoke) 
-+  [AWS SDK for Java](http://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/Invoke) 
-+  [AWS SDK for JavaScript](http://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/Invoke) 
-+  [AWS SDK for PHP V3](http://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/Invoke) 
-+  [AWS SDK for Python](http://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/Invoke) 
-+  [AWS SDK for Ruby V2](http://docs.aws.amazon.com/goto/SdkForRubyV2/lambda-2015-03-31/Invoke) 
++  [AWS Command Line Interface](https://docs.aws.amazon.com/goto/aws-cli/lambda-2015-03-31/Invoke) 
++  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/Invoke) 
++  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/Invoke) 
++  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/Invoke) 
++  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/Invoke) 
++  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/Invoke) 
++  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/Invoke) 
++  [AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/Invoke) 
++  [AWS SDK for Ruby V2](https://docs.aws.amazon.com/goto/SdkForRubyV2/lambda-2015-03-31/Invoke) 

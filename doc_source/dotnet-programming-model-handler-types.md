@@ -62,7 +62,7 @@ Unless your function input and output parameters are of type `System.IO.Stream`,
             "type": "platform",
             "version": "1.0.1"
         },
-        "Amazon.Lambda.Serialization.Json": "1.0.0"
+        "Amazon.Lambda.Serialization.Json": "1.3.0"
     },
     "frameworks": {
         "netcoreapp1.0": {

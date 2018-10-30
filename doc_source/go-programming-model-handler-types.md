@@ -30,10 +30,10 @@ Note the following:
   + **context: **[The Context Object \(Go\) ](go-programming-model-context.md)\.
   + **fmt:** The Go [Formatting](https://golang.org/pkg/fmt/) object used to format the return value of your function\.
   + **github\.com/aws/aws\-lambda\-go/lambda:** As mentioned previously, implements the Lambda programming model for Go\.
-+ **func HandleRequest\(ctx context\.Context, name string\) \(string, error\)**: This is your Lambda handler signature and includes the code which will be executed\. In addition, the parameters included denote the following: 
++ **func HandleRequest\(ctx context\.Context, name MyEvent\) \(string, error\)**: This is your Lambda handler signature and includes the code which will be executed\. In addition, the parameters included denote the following: 
   + **ctx context\.Context**: Provides runtime information for your Lambda function invocation\. `ctx` is the variable you declare to leverage the information available via [The Context Object \(Go\) ](go-programming-model-context.md)\.
-  + **name string**: An input type with a variable name of `name` whose value will be returned in the `return` statement\.
-  + **string error**: Returns standard [error](https://golang.org/pkg/builtin/#error) information\. For more information on custom error handling, see [Function Errors \(Go\) ](go-programming-model-errors.md)\.
+  + **name MyEvent**: An input type with a variable name of `name` whose value will be returned in the `return` statement\.
+  + **string, error**: Returns standard [error](https://golang.org/pkg/builtin/#error) information\. For more information on custom error handling, see [Function Errors \(Go\) ](go-programming-model-errors.md)\.
   + **return fmt\.Sprintf\("Hello %s\!", name\), nil**: Simply returns a formatted "Hello" greeting with the name you supplied in the handler signature\. `nil` indicates there were no errors and the function executed successfully\.
 + **func main\(\)**: The entry point that executes your Lambda function code\. This is required\.
 
@@ -52,14 +52,14 @@ import (
         "fmt"
         "github.com/aws/aws-lambda-go/lambda"
 )
- 
+ ``
 type MyEvent struct {
-        Name string 'json:"What is your name?"'
-        Age int     'json:"How old are you?"'
+        Name string `json:"What is your name?"`
+        Age int     `json:"How old are you?"`
 }
  
 type MyResponse struct {
-        Message string 'json:"Answer:"'
+        Message string `json:"Answer:"`
 }
  
 func HandleLambdaEvent(event MyEvent) (MyResponse, error) {
@@ -84,7 +84,7 @@ Your request would then look like this:
 And the response would look like this:
 
 ```
-# request
+# response
 {
     "Answer": "Jim is 33 years old!"
 }
@@ -101,17 +101,51 @@ You have several options when building a Lambda function handler in Go, but you 
 
 The following lists valid handler signatures\. `TIn` and `TOut` represent types compatible with the *encoding/json* standard library\. For more information, see [func Unmarshal](https://golang.org/pkg/encoding/json/#Unmarshal) to learn how these types are deserialized\.
 + 
-+ 
-+ 
-+ 
-+ 
-+ 
-+ 
+
+  ```
+  func ()
+  ```
 + 
 
-## Using Global State to Maximize Performance<a name="go-programming-model-handler-execution-environment-reuse"></a>
+  ```
+  func () error
+  ```
++ 
 
-To maximize performance, you should declare and modify global variables that are independent of your function's handler code\. In addition, your handler may declare an `init` function that is executed when your handler is loaded\. This behaves the same in AWS Lambda as it does in standard Go programs\. A single instance of your Lambda function will never handle multiple events simultaneously\. This means, for example, that you may safely change global state, assured that those changes will require a new Execution Context and will not introduce locking or unstable behavior from function invocations directed at the previous Execution Context\. For more information, see [Best Practices for Working with AWS Lambda Functions](best-practices.md)\.
+  ```
+  func (TIn), error
+  ```
++ 
+
+  ```
+  func () (TOut, error)
+  ```
++ 
+
+  ```
+  func (context.Context) error
+  ```
++ 
+
+  ```
+  func (context.Context, TIn) error
+  ```
++ 
+
+  ```
+  func (context.Context) (TOut, error)
+  ```
++ 
+
+  ```
+  func (context.Context, TIn) (TOut, error)
+  ```
+
+## Using Global State<a name="go-programming-model-handler-execution-environment-reuse"></a>
+
+You can declare and modify global variables that are independent of your Lambda function's handler code\. In addition, your handler may declare an `init` function that is executed when your handler is loaded\. This behaves the same in AWS Lambda as it does in standard Go programs\. A single instance of your Lambda function will never handle multiple events simultaneously\. This means, for example, that you may safely change global state, assured that those changes will require a new Execution Context and will not introduce locking or unstable behavior from function invocations directed at the previous Execution Context\. For more information, see the following:
++ [AWS Lambda Execution Model](running-lambda-code.md)
++ [Best Practices for Working with AWS Lambda Functions](best-practices.md)
 
 ```
 package main
@@ -135,17 +169,13 @@ func init() {
         myObjects = result.Contents
 }
  
-func LambdaHandler() int {
+func LambdaHandler() (int, error) {
         invokeCount = invokeCount + 1
         log.Print(myObjects)
-        return invokeCount
+        return invokeCount, nil
 }
  
 func main() {
         lambda.Start(LambdaHandler)
 }
 ```
-
-## Next Step<a name="go-programming-model-next-step-context"></a>
-
-[The Context Object \(Go\) ](go-programming-model-context.md)

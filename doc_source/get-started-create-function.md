@@ -6,19 +6,18 @@ Follow the steps in this section to create a simple Lambda function\.
 
 1. Sign in to the AWS Management Console and open the AWS Lambda console\.
 
-1. Note that AWS Lambda offers a simple `Hello World` function upon introduction under the **How it works** label and includes a **Run** option, allowing you to invoke the function as a general introduction\. This tutorial introduces additonal options you have to create, test and update your Lambda functions, as well as other features provided by the Lambda console and provides links to each, inviting you to explore each one in depth\. 
+1. Note that AWS Lambda offers a simple `Hello World` function upon introduction under the **How it works** label and includes a **Run** option, allowing you to invoke the function as a general introduction\. This tutorial introduces additional options you have to create, test and update your Lambda functions, as well as other features provided by the Lambda console and provides links to each, inviting you to explore each one in depth\. 
 
-   Choose **Create a function** under the **Get Started** section to proceed\.  
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/gs-1-10.png)
+   Choose **Create a function** under the **Get Started** section to proceed\.
 **Note**  
 The console shows the **Get Started** page only if you do not have any Lambda functions created\. If you have created functions already, you will see the **Lambda > Functions** page\. On the list page, choose **Create a function** to go to the **Create function** page\. 
 
-1. On the **Create function** page, you are presented with three options: 
+1. On the **Create function** page, you are presented with three options:
    + **Author from scratch**
    + **Blueprints**
    + **Serverless Application Repository**
 
-    For more information on using the Serverless Application Repository, see [What Is the AWS Serverless Application Repository?](http://docs.aws.amazon.com/serverlessrepo/latest/devguide//what-is-serverlessrepo.html) 
+   For more information on using the Serverless Application Repository, see [What Is the AWS Serverless Application Repository?](https://docs.aws.amazon.com/serverlessrepo/latest/devguide/what-is-serverlessrepo.html)
 
    1. If you'd like to review the blueprints, choose the **Blueprints** button, which will display the available blueprints\. You can also use the **Filter** to search for specific blueprints\. For example: 
       + Enter **S3** in **Filter** to get only the list of blueprints available to process Amazon S3 events\.
@@ -28,8 +27,8 @@ The console shows the **Get Started** page only if you do not have any Lambda fu
 
 1. In **Author from scratch**, do the following:
    + In **Name\***, specify your Lambda function name\.
-   + In **Runtime\***, leave the default `Node.js 6.10`\.
-   + In **Role\***, choose **Create new role from templates\(s\):**
+   + In **Runtime\***, choose `Python 3.6`\.
+   + In **Role\***, choose **Create new role from template\(s\):**
    + In **Role name\***, enter a name for your role\.
    + Leave the **Policy templates** field blank\. For the purposes of this introduction, your Lambda function will have the necessary execution permissions\.
 **Note**  
@@ -41,13 +40,13 @@ For an in\-depth look at AWS Lambda's security polices, see [Authentication and 
 
    In the **Add triggers** panel, you can optionally choose a service that automatically triggers your Lambda function by choosing one of the service options listed\.
 
-   1. Depending on which service you select, you are prompted to provide relevant information for that service\. For example, if you select DynamoDB, you need to provide the following: 
-      + The name of the DynamoDB table
-      + Batch size
-      + Starting position
+   Depending on which service you select, you are prompted to provide relevant information for that service\. For example, if you select DynamoDB, you need to provide the following: 
+   + The name of the DynamoDB table
+   + Batch size
+   + Starting position
 
-   1. For this example, do not configure a trigger\.
-   + In **Function code** note that code authored in Node\.js is provided\. It returns a simple "Hello from Lambda" greeting\.
+   For this example, do not configure a trigger\.
+   + In **Function code** note that code is provided\. It returns a simple "Hello from Lambda" greeting\.
    + **Handler** shows **lambda\_function\.lambda\_handler** value\. It is the *filename*\.*handler\-function*\. The console saves the sample code in the `lambda_function.py` file and in the code `lambda_handler` is the function name that receives the event as a parameter when the Lambda function is invoked\. For more information, see [Lambda Function Handler \(Python\)](python-programming-model-handler-types.md)\.
    + Note the embedded IDE \(Integrated Development Environment\)\. To learn more, see [Creating Functions Using the AWS Lambda Console Editor](code-editor.md)\.
 
@@ -77,9 +76,13 @@ Follow the steps to invoke your Lambda function using the sample event data prov
    }
    ```
 
-   You can change key and values in the sample JSON, but don't change the event structure\. If you do change any keys and values, you must update the sample code accordingly\. Choose **Save and test**\.
+   You can change key and values in the sample JSON, but don't change the event structure\. If you do change any keys and values, you must update the sample code accordingly\. 
+**Note**  
+If you choose to delete the test event, go to the **Configure test event** page and then choose **Delete**\.
 
-1. AWS Lambda executes your function on your behalf\. The `handler` in your Lambda function receives and then processes the sample event\.
+1. Choose **Create** and then choose **Test**\. Each user can create up to 10 test events per function\. Those test events are not available to other users\.
+
+1. AWS Lambda executes your function on your behalf\. The `handler` in your Lambda function receives and then processes the sample event\. 
 
 1. Upon successful execution, view results in the console\.   
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/getting-started-v2-execution-result.png)

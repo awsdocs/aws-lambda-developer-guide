@@ -4,7 +4,7 @@ To create a Lambda function you first create a Lambda function deployment packag
 
 After you create a deployment package, you may either upload it directly or upload the \.zip file first to an Amazon S3 bucket in the same AWS region where you want to create the Lambda function, and then specify the bucket name and object key name when you create the Lambda function using the console or the AWS CLI\.
 
- For Lambda functions written in Go, download the Lambda library for Go by navigating to the Go runtime directory and enter the following command:  `go get github.com/aws/aws-lambda-go` 
+For Lambda functions written in Go, download the Lambda library for Go by navigating to the Go runtime directory and enter the following command: `go get github.com/aws/aws-lambda-go/lambda` 
 
 Then use following command to build, package and deploy a Go Lambda function via the CLI\. Note that your *function\-name *must match the name of your *Lambda handler* name\. 
 

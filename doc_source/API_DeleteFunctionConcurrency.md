@@ -1,6 +1,6 @@
 # DeleteFunctionConcurrency<a name="API_DeleteFunctionConcurrency"></a>
 
-Removes concurrent execution limits from this function\. For more information, see [Managing Concurrency](concurrent-executions.md)\.
+Removes concurrent execution limits from this function\. For more information, see [Managing Concurrency](https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html)\.
 
 ## Request Syntax<a name="API_DeleteFunctionConcurrency_RequestSyntax"></a>
 
@@ -13,9 +13,15 @@ DELETE /2017-10-31/functions/FunctionName/concurrency HTTP/1.1
 The request requires the following URI parameters\.
 
  ** [FunctionName](#API_DeleteFunctionConcurrency_RequestSyntax) **   <a name="SSS-DeleteFunctionConcurrency-request-FunctionName"></a>
-The name of the function you are removing concurrent execution limits from\. For more information, see [Managing Concurrency](concurrent-executions.md)\.  
+The name of the lambda function\.  
+
+**Name formats**
++  **Function name** \- `MyFunction`\.
++  **Function ARN** \- `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`\.
++  **Partial ARN** \- `123456789012:function:MyFunction`\.
+The length constraint applies only to the full ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
-Pattern: `(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
+Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
 ## Request Body<a name="API_DeleteFunctionConcurrency_RequestBody"></a>
 
@@ -46,18 +52,18 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-   
+Request throughput limit exceeded  
 HTTP Status Code: 429
 
 ## See Also<a name="API_DeleteFunctionConcurrency_SeeAlso"></a>
 
 For more information about using this API in one of the language\-specific AWS SDKs, see the following:
-+  [AWS Command Line Interface](http://docs.aws.amazon.com/goto/aws-cli/lambda-2015-03-31/DeleteFunctionConcurrency) 
-+  [AWS SDK for \.NET](http://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/DeleteFunctionConcurrency) 
-+  [AWS SDK for C\+\+](http://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/DeleteFunctionConcurrency) 
-+  [AWS SDK for Go](http://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/DeleteFunctionConcurrency) 
-+  [AWS SDK for Java](http://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/DeleteFunctionConcurrency) 
-+  [AWS SDK for JavaScript](http://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/DeleteFunctionConcurrency) 
-+  [AWS SDK for PHP V3](http://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/DeleteFunctionConcurrency) 
-+  [AWS SDK for Python](http://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/DeleteFunctionConcurrency) 
-+  [AWS SDK for Ruby V2](http://docs.aws.amazon.com/goto/SdkForRubyV2/lambda-2015-03-31/DeleteFunctionConcurrency) 
++  [AWS Command Line Interface](https://docs.aws.amazon.com/goto/aws-cli/lambda-2015-03-31/DeleteFunctionConcurrency) 
++  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/DeleteFunctionConcurrency) 
++  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/DeleteFunctionConcurrency) 
++  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/DeleteFunctionConcurrency) 
++  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/DeleteFunctionConcurrency) 
++  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/DeleteFunctionConcurrency) 
++  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/DeleteFunctionConcurrency) 
++  [AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/DeleteFunctionConcurrency) 
++  [AWS SDK for Ruby V2](https://docs.aws.amazon.com/goto/SdkForRubyV2/lambda-2015-03-31/DeleteFunctionConcurrency) 

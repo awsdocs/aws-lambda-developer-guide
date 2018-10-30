@@ -1,6 +1,6 @@
 # UpdateAlias<a name="API_UpdateAlias"></a>
 
-Using this API you can update the function version to which the alias points and the alias description\. For more information, see [Introduction to AWS Lambda Aliases](http://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html)\.
+Using this API you can update the function version to which the alias points and the alias description\. For more information, see [Introduction to AWS Lambda Aliases](https://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html)\.
 
 This requires permission for the lambda:UpdateAlias action\.
 
@@ -27,9 +27,15 @@ Content-type: application/json
 The request requires the following URI parameters\.
 
  ** [FunctionName](#API_UpdateAlias_RequestSyntax) **   <a name="SSS-UpdateAlias-request-FunctionName"></a>
-The function name for which the alias is created\. Note that the length constraint applies only to the ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
+The name of the lambda function\.  
+
+**Name formats**
++  **Function name** \- `MyFunction`\.
++  **Function ARN** \- `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`\.
++  **Partial ARN** \- `123456789012:function:MyFunction`\.
+The length constraint applies only to the full ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
-Pattern: `(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
+Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [Name](#API_UpdateAlias_RequestSyntax) **   <a name="SSS-UpdateAlias-request-Name"></a>
 The alias name\.  
@@ -54,12 +60,12 @@ Pattern: `(\$LATEST|[0-9]+)`
 Required: No
 
  ** [RevisionId](#API_UpdateAlias_RequestSyntax) **   <a name="SSS-UpdateAlias-request-RevisionId"></a>
-An optional value you can use to ensure you are updating the latest update of the function version or alias\. If the `RevisionID` you pass doesn't match the latest `RevisionId` of the function or alias, it will fail with an error message, advising you to retrieve the latest function version or alias `RevisionID` using either [GetFunction](API_GetFunction.md) or [GetAlias](API_GetAlias.md)\.  
+An optional value you can use to ensure you are updating the latest update of the function version or alias\. If the `RevisionID` you pass doesn't match the latest `RevisionId` of the function or alias, it will fail with an error message, advising you retrieve the latest function version or alias `RevisionID` using either [GetFunction](API_GetFunction.md) or [GetAlias](API_GetAlias.md)\.  
 Type: String  
 Required: No
 
  ** [RoutingConfig](#API_UpdateAlias_RequestSyntax) **   <a name="SSS-UpdateAlias-request-RoutingConfig"></a>
-Specifies an additional version your alias can point to, allowing you to dictate what percentage of traffic will invoke each version\. For more information, see [Traffic Shifting Using Aliases](lambda-traffic-shifting-using-aliases.md)\.  
+Specifies an additional version your alias can point to, allowing you to dictate what percentage of traffic will invoke each version\. For more information, see [Traffic Shifting Using Aliases](https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html)\.  
 Type: [AliasRoutingConfiguration](API_AliasRoutingConfiguration.md) object  
 Required: No
 
@@ -92,7 +98,7 @@ The following data is returned in JSON format by the service\.
  ** [AliasArn](#API_UpdateAlias_ResponseSyntax) **   <a name="SSS-UpdateAlias-response-AliasArn"></a>
 Lambda function ARN that is qualified using the alias name as the suffix\. For example, if you create an alias called `BETA` that points to a helloworld function version, the ARN is `arn:aws:lambda:aws-regions:acct-id:function:helloworld:BETA`\.  
 Type: String  
-Pattern: `arn:aws:lambda:[a-z]{2}-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
+Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [Description](#API_UpdateAlias_ResponseSyntax) **   <a name="SSS-UpdateAlias-response-Description"></a>
 Alias description\.  
@@ -116,7 +122,7 @@ Represents the latest updated revision of the function or alias\.
 Type: String
 
  ** [RoutingConfig](#API_UpdateAlias_ResponseSyntax) **   <a name="SSS-UpdateAlias-response-RoutingConfig"></a>
-Specifies an additional function versions the alias points to, allowing you to dictate what percentage of traffic will invoke each version\. For more information, see [Traffic Shifting Using Aliases](lambda-traffic-shifting-using-aliases.md)\.  
+Specifies an additional function versions the alias points to, allowing you to dictate what percentage of traffic will invoke each version\.  
 Type: [AliasRoutingConfiguration](API_AliasRoutingConfiguration.md) object
 
 ## Errors<a name="API_UpdateAlias_Errors"></a>
@@ -138,18 +144,18 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-   
+Request throughput limit exceeded  
 HTTP Status Code: 429
 
 ## See Also<a name="API_UpdateAlias_SeeAlso"></a>
 
 For more information about using this API in one of the language\-specific AWS SDKs, see the following:
-+  [AWS Command Line Interface](http://docs.aws.amazon.com/goto/aws-cli/lambda-2015-03-31/UpdateAlias) 
-+  [AWS SDK for \.NET](http://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/UpdateAlias) 
-+  [AWS SDK for C\+\+](http://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/UpdateAlias) 
-+  [AWS SDK for Go](http://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/UpdateAlias) 
-+  [AWS SDK for Java](http://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/UpdateAlias) 
-+  [AWS SDK for JavaScript](http://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/UpdateAlias) 
-+  [AWS SDK for PHP V3](http://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/UpdateAlias) 
-+  [AWS SDK for Python](http://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/UpdateAlias) 
-+  [AWS SDK for Ruby V2](http://docs.aws.amazon.com/goto/SdkForRubyV2/lambda-2015-03-31/UpdateAlias) 
++  [AWS Command Line Interface](https://docs.aws.amazon.com/goto/aws-cli/lambda-2015-03-31/UpdateAlias) 
++  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/UpdateAlias) 
++  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/UpdateAlias) 
++  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/UpdateAlias) 
++  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/UpdateAlias) 
++  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/UpdateAlias) 
++  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/UpdateAlias) 
++  [AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/UpdateAlias) 
++  [AWS SDK for Ruby V2](https://docs.aws.amazon.com/goto/SdkForRubyV2/lambda-2015-03-31/UpdateAlias) 

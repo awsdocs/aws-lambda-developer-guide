@@ -3,7 +3,7 @@
 Amazon S3 can publish events \(for example, when an object is created in a bucket\) to AWS Lambda and invoke your Lambda function by passing the event data as a parameter\. This integration enables you to write Lambda functions that process Amazon S3 events\. In Amazon S3, you add bucket notification configuration that identifies the type of event that you want Amazon S3 to publish and the Lambda function that you want to invoke\. 
 
 Note the following about how the Amazon S3 and AWS Lambda integration works:
-+ **Non\-stream based \(async\) model** – This is a model \(see [Event Source Mapping](invocation-options.md#intro-invocation-modes)\), where Amazon S3 monitors a bucket and invokes the Lambda function by passing the event data as a parameter\. In a push model, you maintain event source mapping within Amazon S3 using the bucket notification configuration\. In the configuration, you specify the event types that you want Amazon S3 to monitor and which AWS Lambda function you want Amazon S3 to invoke\. For more information, see [Configuring Amazon S3 Event Notifications](http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the *Amazon Simple Storage Service Developer Guide*\.
++ **Non\-stream based \(async\) model** – This is a model \(see [AWS Lambda Event Source Mapping](intro-invocation-modes.md)\), where Amazon S3 monitors a bucket and invokes the Lambda function by passing the event data as a parameter\. In a push model, you maintain event source mapping within Amazon S3 using the bucket notification configuration\. In the configuration, you specify the event types that you want Amazon S3 to monitor and which AWS Lambda function you want Amazon S3 to invoke\. For more information, see [Configuring Amazon S3 Event Notifications](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the *Amazon Simple Storage Service Developer Guide*\.
 + **Asynchronous invocation** – AWS Lambda invokes a Lambda function using the `Event` invocation type \(asynchronous invocation\)\. For more information about invocation types, see [Invocation Types](invocation-options.md)\. 
 + **Event structure** – The event your Lambda function receives is for a single object and it provides information, such as the bucket name and object key name\. 
 
@@ -25,4 +25,7 @@ The following diagram summarizes the flow:
 
 1. The Lambda function executes\.
 
-For a tutorial that walks you through an example setup, see [Tutorial: Using AWS Lambda with Amazon S3](with-s3-example.md)\.
+**Topics**
++ [Tutorial: Using AWS Lambda with Amazon S3](with-s3-example.md)
++ [Sample Amazon Simple Storage Service Function Code](with-s3-example-deployment-pkg.md)
++ [Sample Amazon Simple Storage Service Application SAM Template](with-s3-example-use-app-spec.md)

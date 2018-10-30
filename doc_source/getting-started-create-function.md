@@ -12,5 +12,4 @@ As you follow the steps, you will also familiarize yourself with the AWS Lambda 
 
 First, you need to sign up for an AWS account and create an administrator user in your account\. For instructions, see [Set Up an AWS Account](setup.md)\.
 
-**Next Step**  
-[Create a Simple Lambda Function](get-started-create-function.md)
+Next, [Create a Simple Lambda Function](get-started-create-function.md) 

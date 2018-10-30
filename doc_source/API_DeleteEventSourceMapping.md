@@ -51,21 +51,21 @@ Type: Integer
 Valid Range: Minimum value of 1\. Maximum value of 10000\.
 
  ** [EventSourceArn](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-EventSourceArn"></a>
-The Amazon Resource Name \(ARN\) of the Amazon Kinesis stream that is the source of events\.  
+The Amazon Resource Name \(ARN\) of the Amazon Kinesis or DynamoDB stream that is the source of events\.  
 Type: String  
-Pattern: `arn:aws:([a-zA-Z0-9\-])+:([a-z]{2}-[a-z]+-\d{1})?:(\d{12})?:(.*)` 
+Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)` 
 
  ** [FunctionArn](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-FunctionArn"></a>
-The Lambda function to invoke when AWS Lambda detects an event on the stream\.  
+The Lambda function to invoke when AWS Lambda detects an event on the poll\-based source\.  
 Type: String  
-Pattern: `arn:aws:lambda:[a-z]{2}-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
+Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [LastModified](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-LastModified"></a>
 The UTC time string indicating the last time the event mapping was updated\.  
 Type: Timestamp
 
  ** [LastProcessingResult](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-LastProcessingResult"></a>
-The result of the last AWS Lambda invocation of your Lambda function\.  
+The result of the last AWS Lambda invocation of your Lambda function\. This value will be null if an SQS queue is the event source\.  
 Type: String
 
  ** [State](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-State"></a>
@@ -86,6 +86,10 @@ Type: String
 One of the parameters in the request is invalid\. For example, if you provided an IAM role for AWS Lambda to assume in the `CreateFunction` or the `UpdateFunctionConfiguration` API, that AWS Lambda is unable to assume you will get this exception\.  
 HTTP Status Code: 400
 
+ **ResourceInUseException**   
+The operation conflicts with the resource's availability\. For example, you attempted to update an EventSoure Mapping in CREATING, or tried to delete a EventSoure mapping currently in the UPDATING state\.   
+HTTP Status Code: 400
+
  **ResourceNotFoundException**   
 The resource \(for example, a Lambda function or access policy statement\) specified in the request does not exist\.  
 HTTP Status Code: 404
@@ -95,18 +99,18 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-   
+Request throughput limit exceeded  
 HTTP Status Code: 429
 
 ## See Also<a name="API_DeleteEventSourceMapping_SeeAlso"></a>
 
 For more information about using this API in one of the language\-specific AWS SDKs, see the following:
-+  [AWS Command Line Interface](http://docs.aws.amazon.com/goto/aws-cli/lambda-2015-03-31/DeleteEventSourceMapping) 
-+  [AWS SDK for \.NET](http://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/DeleteEventSourceMapping) 
-+  [AWS SDK for C\+\+](http://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/DeleteEventSourceMapping) 
-+  [AWS SDK for Go](http://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/DeleteEventSourceMapping) 
-+  [AWS SDK for Java](http://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/DeleteEventSourceMapping) 
-+  [AWS SDK for JavaScript](http://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/DeleteEventSourceMapping) 
-+  [AWS SDK for PHP V3](http://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/DeleteEventSourceMapping) 
-+  [AWS SDK for Python](http://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/DeleteEventSourceMapping) 
-+  [AWS SDK for Ruby V2](http://docs.aws.amazon.com/goto/SdkForRubyV2/lambda-2015-03-31/DeleteEventSourceMapping) 
++  [AWS Command Line Interface](https://docs.aws.amazon.com/goto/aws-cli/lambda-2015-03-31/DeleteEventSourceMapping) 
++  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/DeleteEventSourceMapping) 
++  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/DeleteEventSourceMapping) 
++  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/DeleteEventSourceMapping) 
++  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/DeleteEventSourceMapping) 
++  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/DeleteEventSourceMapping) 
++  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/DeleteEventSourceMapping) 
++  [AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/DeleteEventSourceMapping) 
++  [AWS SDK for Ruby V2](https://docs.aws.amazon.com/goto/SdkForRubyV2/lambda-2015-03-31/DeleteEventSourceMapping) 

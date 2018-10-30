@@ -42,7 +42,7 @@ Resources:
       CodeUri: s3://bucketName/codepackage.zip
       Environment:
         Variables:
-          TABLE_NAME: !Ref Table
+          TABLE_NAME: !Ref DynamoDBTable
   DeleteFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -52,7 +52,7 @@ Resources:
       CodeUri: s3://bucketName/codepackage.zip
       Environment:
         Variables:
-          TABLE_NAME: !Ref Table
+          TABLE_NAME: !Ref DynamoDBTable
       Events:
         Stream:
           Type: DynamoDB
@@ -248,11 +248,105 @@ Resources:
 If none of these are supplied, a default execution role is created with Lambda basic execution permissions\.
 
 **Note**  
-In addition to using the serverless resources, you can also use conventional AWS CloudFormation syntax for expressing resources in the same template\. Any resources not included in the current SAM model can still be created in the AWS CloudFormation template using AWS CloudFormation syntax\. In addition, you can use AWS CloudFormation syntax to express serverless resources as an alternative to using the SAM model\. For information about specifying a Lambda function using conventional CloudFormation syntax as part of your SAM template, see [AWS::Lambda::Function](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html) in the AWS CloudFormation User Guide\.
+In addition to using the serverless resources, you can also use conventional AWS CloudFormation syntax for expressing resources in the same template\. Any resources not included in the current SAM model can still be created in the AWS CloudFormation template using AWS CloudFormation syntax\. In addition, you can use AWS CloudFormation syntax to express serverless resources as an alternative to using the SAM model\. For information about specifying a Lambda function using conventional CloudFormation syntax as part of your SAM template, see [AWS::Lambda::Function](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html) in the AWS CloudFormation User Guide\.
 
-### <a name="w3ab1c19c17b4c16"></a>
+### <a name="w4aac23c33b5c17"></a>
 
 For a list of complete serverless application examples, see [Examples of How to Use AWS Lambda](use-cases.md)\.
+
+## Create a Simple App \(sam init\)<a name="serv-app-sam-init"></a>
+
+To get started with a project in SAM, you can use the `sam init` command provided by the SAM CLI to get a fully deployable, boilerplate serverless application in any of the supported runtimes\. `sam init `provides a quick way for you to get started with creating a Lambda\-based application and augment into a production application by using other commands in the SAM CLI\. 
+
+To use `sam init`, navigate to a directory where where you want the serverless application to be created\. Using the SAM CLI, run the following command \(using the runtime of your choice\. The following example uses Python for demonstration purposes\.\): 
+
+```
+$ sam init --runtime python
+[+] Initializing project structure...
+[SUCCESS] - Read sam-app/README.md for further instructions on how to proceed
+[*] Project initialization is now complete
+```
+
+This will create a folder in the current directory titled *sam\-app*\. This folder will contain an AWS SAM template, along with your function code file and a README file that provides further guidance on how to proceed with your SAM application\. The SAM template defines the AWS Resources that your application will need to run in the AWS Cloud\.
+
+The folder structure will include the following:
++ A `hello_world` directory that includes an app\.py file that contains sample code:
+
+  ```
+  import json
+  
+  import requests
+  
+  
+  def lambda_handler(event, context):
+      """Sample pure Lambda function
+  
+      Arguments:
+          event LambdaEvent -- Lambda Event received from Invoke API
+          context LambdaContext -- Lambda Context runtime methods and attributes
+  
+      Returns:
+          dict -- {'statusCode': int, 'body': dict}
+      """
+  
+      ip = requests.get('http://checkip.amazonaws.com/')
+  
+      return {
+          "statusCode": 200,
+          "body": json.dumps({
+              'message': 'hello world',
+              'location': ip.text.replace('\n', ''),
+          })
+      }
+  ```
++ A sample `template` YAML file that describes your SAM application: 
+
+  ```
+  AWSTemplateFormatVersion: '2010-09-09'
+  Transform: AWS::Serverless-2016-10-31
+  Description: >
+      sam-app
+  
+      Sample SAM Template for sam-app
+      
+  # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+  Globals:
+      Function:
+          Timeout: 3
+  
+  
+  Resources:
+  
+      HelloWorldFunction:
+          Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+          Properties:
+              CodeUri: hello_world/build/
+              Handler: app.lambda_handler
+              Runtime: python2.7
+              Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
+                  Variables:
+                      PARAM1: VALUE
+              Events:
+                  HelloWorld:
+                      Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+                      Properties:
+                          Path: /hello
+                          Method: get
+  
+  Outputs:
+  
+      HelloWorldApi:
+        Description: "API Gateway endpoint URL for Prod stage for Hello World function"
+        Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
+  
+      HelloWorldFunction:
+        Description: "Hello World Lambda Function ARN"
+        Value: !GetAtt HelloWorldFunction.Arn
+  
+      HelloWorldFunctionIamRole:
+        Description: "Implicit IAM Role created for Hello World function"
+        Value: !GetAtt HelloWorldFunctionRole.Arn
+  ```
 
 ## Next Step<a name="serv-app-next-step"></a>
 

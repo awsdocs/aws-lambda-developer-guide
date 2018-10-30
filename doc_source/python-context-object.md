@@ -75,15 +75,15 @@ The name of the CloudWatch log group where you can find logs written by your Lam
 
 **log\_stream\_name**  
  The name of the CloudWatch log stream where you can find logs written by your Lambda function\. The log stream may or may not change for each invocation of the Lambda function\.  
-The value is null if your Lambda function is unable to create a log stream, which can happen if the execution role that grants necessary permissions to the Lambda function does not include permissions for the CloudWatch Logs actions\.
+The value is none if your Lambda function is unable to create a log stream, which can happen if the execution role that grants necessary permissions to the Lambda function does not include permissions for the CloudWatch Logs actions\.
 
 **identity**  
-Information about the Amazon Cognito identity provider when invoked through the AWS Mobile SDK\. It can be null\.  
+Information about the Amazon Cognito identity provider when invoked through the AWS Mobile SDK\. It can be none\.  
 + **identity\.cognito\_identity\_id**
 + **identity\.cognito\_identity\_pool\_id**
 
 **client\_context**  
-Information about the client application and device when invoked through the AWS Mobile SDK\. It can be null\.  
+Information about the client application and device when invoked through the AWS Mobile SDK\. It can be none\.  
 + **client\_context\.client\.installation\_id**
 + **client\_context\.client\.app\_title**
 + **client\_context\.client\.app\_version\_name**

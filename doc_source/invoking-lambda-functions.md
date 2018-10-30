@@ -35,7 +35,7 @@ Note the following:
 + The event source \(Amazon S3\) invokes the Lambda function \(referred to as the *push model*\)\. Again, this is true for all supported AWS services except the poll\-based event sources\.
 + In order for the event source \(Amazon S3\) to invoke your Lambda function, you must grant permissions using the permissions policy attached to the Lambda function\.
 
-## Example 2: AWS Lambda Pulls Events from an Kinesis Stream and Invokes a Lambda Function<a name="example-lambda-pulls-kinesis-streams-events-invokes-function"></a>
+## Example 2: AWS Lambda Pulls Events from a Kinesis Stream and Invokes a Lambda Function<a name="example-lambda-pulls-kinesis-streams-events-invokes-function"></a>
 
 For poll\-based event sources, AWS Lambda polls the source and then invokes the Lambda function when records are detected on that source\. For poll\-based sources, event source mapping information is stored in AWS Lambda\. AWS Lambda provides an API for you to create and manage these event source mappings\. 
 + [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
@@ -59,3 +59,28 @@ Note the following:
   + AWS Lambda invokes the Lambda function synchronously \(referred to as the *pull model*\)\.
 + AWS Lambda does not need permission to invoke your Lambda function, therefore you don't need to add any permissions to the permissions policy attached to your Lambda function\. 
 + Your Lambda role needs permission to read from the stream\.
+
+## Example 3: AWS Lambda Pulls Events from an Amazon SQS Queue and Invokes a Lambda Function<a name="example-lambda-pulls-sqs-events-invokes-function"></a>
+
+For poll\-based event sources, AWS Lambda polls the source and then invokes the Lambda function when records are detected on that source\. For poll\-based sources, event source mapping information is stored in AWS Lambda\. AWS Lambda provides an API for you to create and manage these event source mappings\. 
++ [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
++ [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md)
+
+The following diagram shows how a custom application writes records to an Amazon SQS queue: 
+
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sqs-queue.png)
+
+The diagram illustrates the following sequence:
+
+1. The custom application writes records to an Amazon SQS queue\.
+
+1. AWS Lambda continuously polls the queue, and invokes the Lambda function when the service detects new records\. AWS Lambda knows which queue to poll and which Lambda function to invoke based on the event source mapping you create in Lambda\.
+
+1. The Lambda function is invoked with the incoming event\.
+
+Note the following:
++ When working with poll\-based events, the following is true:
+  + You create event source mappings in AWS Lambda\.
+  + AWS Lambda invokes the Lambda function synchronously \(referred to as the *pull model*\)\.
++ AWS Lambda does not need permission to invoke your Lambda function, therefore you don't need to add any permissions to the permissions policy attached to your Lambda function\. 
++ Your Lambda role needs permission to read from the queue and queue attributes\.

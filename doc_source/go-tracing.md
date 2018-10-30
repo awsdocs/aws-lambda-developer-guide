@@ -6,9 +6,21 @@ You can use the [X\-Ray SDK for Go](https://github.com/aws/aws-xray-sdk-go) with
 
 Use the following command to install the X\-Ray SDK for Go\. \(The SDK's non\-testing dependencies will be included\)\.
 
+```
+go get -u github.com/aws/aws-xray-sdk-go/...
+```
+
 If you want to include the test dependencies, use the following command:
 
+```
+go get -u -t github.com/aws/aws-xray-sdk-go/...
+```
+
 You can also use [Glide](https://github.com/Masterminds/glide/blob/master/README.md) to manage dependencies\.
+
+```
+glide install
+```
 
 ## Configuring the X\-Ray SDK for Go<a name="go-tracing-configuring-sdk"></a>
 

@@ -45,7 +45,7 @@ You will use `pip` to install dependencies/libraries\. For information to instal
 
 1. Zip the content of the `project-dir` directory, which is your deployment package\. 
 **Important**  
-Zip the directory *content*, not the directory\. The contents of the Zip file are available as the current working directory of the Lambda function\. For example: */project\-dir/codefile\.py/lib/yourlibraries*
+Zip the directory *content* contained within the directory, not the directory itself\. The contents of the Zip file are available as the current working directory of the Lambda function\. For example: */project\-dir/codefile\.py/lib/yourlibraries*\. In this case, you zip the content contained within */project\-dir*\.
 
 **Note**  
 AWS Lambda includes the AWS SDK for Python \(Boto 3\), so you don't need to include it in your deployment package\. However, if you want to use a version of Boto3 other than the one included by default, you can include it in your deployment package\.
@@ -70,10 +70,10 @@ This section explains how to create a deployment package if you are using a Pyth
     ```
     source path/to/my/virtual-env/bin/activate
     ```
-+ Also, to install the **requests** package in the activated environment, do the following: :
++ Also, to install the **requests** package in the activated environment, do the following:
 
   ```
-  pip install requests  
+  pip install requests
   ```
 
 Now, to create a deployment package you do the following:
@@ -96,4 +96,4 @@ Now, to create a deployment package you do the following:
 **Note**  
 If you don't find the packages in the `site-packages` directory in your virtual environment, you might find it in the `dist-packages` directory\.
 
-For an example of creating a Python deployment package, see [Python](with-s3-example-deployment-pkg.md#with-s3-example-deployment-pkg-python)\. 
+For an example of creating a Python deployment package, see [Python 3](with-s3-example-deployment-pkg.md#with-s3-example-deployment-pkg-python)\. 
