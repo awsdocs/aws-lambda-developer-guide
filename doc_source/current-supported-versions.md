@@ -39,7 +39,7 @@ The following is a list of environment variables that are part of the AWS Lambda
 | AWS\_LAMBDA\_FUNCTION\_MEMORY\_SIZE | Yes | The size of the Lambda function in MB\. | 
 | AWS\_LAMBDA\_FUNCTION\_VERSION | Yes | The version of the Lambda function\. | 
 | AWS\_ACCESS\_KEY AWS\_ACCESS\_KEY\_ID AWS\_SECRET\_KEY AWS\_SECRET\_ACCESS\_KEY AWS\_SESSION\_TOKEN AWS\_SECURITY\_TOKEN  | Yes | The security credentials that are required to execute the Lambda function, depending on which runtime is used\. Different runtimes use a subset of these keys\. They are generated via an IAM execution role that's specified for the function\. | 
-| PATH | No | Contains /usr/local/bin, /usr/bin or /bin for running executables\. | 
+| PATH | No | Contains /var/lang/bin, /usr/local/bin, /usr/bin and /bin for running executables\. | 
 | LANG | No | Set to en\_US\.UTF\-8\. This is the locale of the runtime\.  | 
 | LD\_LIBRARY\_PATH | No | Contains /lib64, /usr/lib64, LAMBDA\_TASK\_ROOT, LAMBDA\_TASK\_ROOT/lib\. Used to store helper libraries and function code\. | 
 | NODE\_PATH | No | Set for the Node\.js runtime\. It contains LAMBDA\_RUNTIME\_DIR, LAMBDA\_RUNTIME\_DIR/node\_modules, LAMBDA\_TASK\_ROOT\. | 
