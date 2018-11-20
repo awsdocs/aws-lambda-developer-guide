@@ -1,4 +1,4 @@
-# Logging \(PowerShell\)<a name="powershell-logging"></a>
+# AWS Lambda Function Logging in PowerShell<a name="powershell-logging"></a>
 
 Your Lambda function can contain logging statements and, in turn, AWS Lambda writes these logs to CloudWatch Logs\. 
 

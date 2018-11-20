@@ -1,4 +1,4 @@
-# Function Errors \(C\#\)<a name="dotnet-exceptions"></a>
+# AWS Lambda Function Errors in C\#<a name="dotnet-exceptions"></a>
 
 When an exception occurs in your Lambda function, Lambda will report the exception information back to you\. Exceptions can occur in two different places: 
 + Initialization \(Lambda loading your code, validating the handler string, and creating an instance of your class if it is non\-static\)\.

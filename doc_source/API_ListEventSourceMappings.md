@@ -1,10 +1,6 @@
 # ListEventSourceMappings<a name="API_ListEventSourceMappings"></a>
 
-Returns a list of event source mappings you created using the `CreateEventSourceMapping` \(see [CreateEventSourceMapping](API_CreateEventSourceMapping.md)\)\. 
-
-For each mapping, the API returns configuration information\. You can optionally specify filters to retrieve specific event source mappings\.
-
-This operation requires permission for the `lambda:ListEventSourceMappings` action\.
+Lists event source mappings\. Specify an `EventSourceArn` to only show event source mappings for a single event source\.
 
 ## Request Syntax<a name="API_ListEventSourceMappings_RequestSyntax"></a>
 
@@ -17,26 +13,29 @@ GET /2015-03-31/event-source-mappings/?EventSourceArn=EventSourceArn&FunctionNam
 The request requires the following URI parameters\.
 
  ** [EventSourceArn](#API_ListEventSourceMappings_RequestSyntax) **   <a name="SSS-ListEventSourceMappings-request-EventSourceArn"></a>
-The Amazon Resource Name \(ARN\) of the Amazon Kinesis or DynamoDB stream\. \(This parameter is optional\.\)  
+The Amazon Resource Name \(ARN\) of the event source\.  
++  **Amazon Kinesis** \- The ARN of the data stream or a stream consumer\.
++  **Amazon DynamoDB Streams** \- The ARN of the stream\.
++  **Amazon Simple Queue Service** \- The ARN of the queue\.
 Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)` 
 
  ** [FunctionName](#API_ListEventSourceMappings_RequestSyntax) **   <a name="SSS-ListEventSourceMappings-request-FunctionName"></a>
-The name of the lambda function\.  
+The name of the Lambda function\.  
 
 **Name formats**
 +  **Function name** \- `MyFunction`\.
 +  **Function ARN** \- `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`\.
 +  **Version or Alias ARN** \- `arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD`\.
 +  **Partial ARN** \- `123456789012:function:MyFunction`\.
-The length constraint applies only to the full ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
+The length constraint applies only to the full ARN\. If you specify only the function name, it's limited to 64 characters in length\.  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [Marker](#API_ListEventSourceMappings_RequestSyntax) **   <a name="SSS-ListEventSourceMappings-request-Marker"></a>
-Optional string\. An opaque pagination token returned from a previous `ListEventSourceMappings` operation\. If present, specifies to continue the list from where the returning call left off\. 
+A pagination token returned by a previous call\.
 
  ** [MaxItems](#API_ListEventSourceMappings_RequestSyntax) **   <a name="SSS-ListEventSourceMappings-request-MaxItems"></a>
-Optional integer\. Specifies the maximum number of event sources to return in response\. This value must be greater than 0\.  
+The maximum number of event source mappings to return\.  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.
 
 ## Request Body<a name="API_ListEventSourceMappings_RequestBody"></a>
@@ -73,11 +72,11 @@ If the action is successful, the service sends back an HTTP 200 response\.
 The following data is returned in JSON format by the service\.
 
  ** [EventSourceMappings](#API_ListEventSourceMappings_ResponseSyntax) **   <a name="SSS-ListEventSourceMappings-response-EventSourceMappings"></a>
-An array of `EventSourceMappingConfiguration` objects\.  
+A list of event source mappings\.  
 Type: Array of [EventSourceMappingConfiguration](API_EventSourceMappingConfiguration.md) objects
 
  ** [NextMarker](#API_ListEventSourceMappings_ResponseSyntax) **   <a name="SSS-ListEventSourceMappings-response-NextMarker"></a>
-A string, present if there are more event source mappings\.  
+A pagination token that's returned when the response doesn't contain all event source mappings\.  
 Type: String
 
 ## Errors<a name="API_ListEventSourceMappings_Errors"></a>

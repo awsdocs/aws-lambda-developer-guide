@@ -28,11 +28,11 @@ exports.handler = function(event, context) {
 };
 ```
 
-Zip up the sample code to create a deployment package\. For instructions, see [Creating a Deployment Package \(Node\.js\)](nodejs-create-deployment-pkg.md)\.
+Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Node\.js](nodejs-create-deployment-pkg.md)\.
 
 ## Java 8<a name="with-kinesis-example-deployment-pkg-java"></a>
 
-The following is example Java code that receives Kinesis event record data as a input and processes it\. For illustration, the code writes some of the incoming event data to CloudWatch Logs\. 
+The following is example Java code that receives Kinesis event record data as input and processes it\. For illustration, the code writes some of the incoming event data to CloudWatch Logs\. 
 
 In the code, `recordHandler` is the handler\. The handler uses the predefined `KinesisEvent` class that is defined in the `aws-lambda-java-events` library\.
 
@@ -65,11 +65,11 @@ If the handler returns normally without exceptions, Lambda considers the input b
 + `aws-lambda-java-events`
 + `aws-java-sdk-s3`
 
-Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [Creating a Deployment Package \(Java\)](lambda-java-how-to-create-deployment-package.md)\.
+Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Java](lambda-java-how-to-create-deployment-package.md)\.
 
 ## C\#<a name="with-kinesis-example-deployment-pkg-dotnet"></a>
 
-The following is example C\# code that receives Kinesis event record data as a input and processes it\. For illustration, the code writes some of the incoming event data to CloudWatch Logs\. 
+The following is example C\# code that receives Kinesis event record data as input and processes it\. For illustration, the code writes some of the incoming event data to CloudWatch Logs\. 
 
  In the code, `HandleKinesisRecord` is the handler\. The handler uses the predefined `KinesisEvent` class that is defined in the `Amazon.Lambda.KinesisEvents` library\. 
 
@@ -133,7 +133,7 @@ def lambda_handler(event, context):
        print("Decoded payload: " + str(payload))
 ```
 
-Zip up the sample code to create a deployment package\. For instructions, see [Creating a Deployment Package \(Python\)](lambda-python-how-to-create-deployment-package.md)\.
+Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Python](lambda-python-how-to-create-deployment-package.md)\.
 
 ## Go<a name="with-kinesis-example-deployment-pkg-go"></a>
 
@@ -158,4 +158,4 @@ func handler(ctx context.Context, kinesisEvent events.KinesisEvent) {
 }
 ```
 
-Build the executable with `go build` and create a deployment package\. For instructions, see [Creating a Deployment Package \(Go\)](lambda-go-how-to-create-deployment-package.md)\.
+Build the executable with `go build` and create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Go](lambda-go-how-to-create-deployment-package.md)\.

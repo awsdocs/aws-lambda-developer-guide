@@ -4,7 +4,6 @@ Typically, you create resources inside Amazon Virtual Private Cloud \(Amazon VPC
 
 AWS Lambda runs your function code securely within a VPC by default\. However, to enable your Lambda function to access resources inside your private VPC, you must provide additional VPC\-specific configuration information that includes VPC subnet IDs and security group IDs\. AWS Lambda uses this information to set up elastic network interfaces [\(ENIs\)](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ElasticNetworkInterfaces.html) that enable your function to connect securely to other resources within your private VPC\.
 
-**Important**  
 AWS Lambda does not support connecting to resources within Dedicated Tenancy VPCs\. For more information, see [Dedicated VPCs](https://docs.aws.amazon.com/vpc/latest/userguide/dedicated-instance.html)\.
 
 ## Configuring a Lambda Function for Amazon VPC Access<a name="vpc-configuring"></a>

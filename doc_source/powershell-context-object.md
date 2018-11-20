@@ -1,4 +1,4 @@
-# The Context Object \(PowerShell\)<a name="powershell-context-object"></a>
+# AWS Lambda Context Object in PowerShell<a name="powershell-context-object"></a>
 
 You can gain useful information on how your Lambda function is interacting with the AWS Lambda runtime by using the predefined `$LambdaContext` variable\. This variable provides runtime details, such as the CloudWatch log stream that's associated with the function or the ID of the client that called your functions\.
 
@@ -13,7 +13,7 @@ The context object properties are:
 + `ClientContext`: Information about the client application and device when invoked through the AWS Mobile SDK\. It can be null\. Client context provides client information—such as the client ID, application title, version name, version code, and application package name\.
 +  `Identity`: Information about the Amazon Cognito identity provider when invoked through the AWS Mobile SDK\. It can be null\.
 + `RemainingTime`: The remaining execution time until the function is terminated\. When you create the Lambda function, you set the maximum time limit, which specifies when AWS Lambda terminates the function execution\. You can use information about the remaining time of function execution to specify function behavior when nearing the timeout\. This is a `TimeSpan` field\.
-+ `Logger`: The Lambda logger that's associated with the ILambdaContext object\. For more information, see [Logging \(PowerShell\)](powershell-logging.md)\.
++ `Logger`: The Lambda logger that's associated with the ILambdaContext object\. For more information, see [AWS Lambda Function Logging in PowerShell](powershell-logging.md)\.
 
 The following PowerShell code snippet shows a simple handler function that prints some of the context information\. 
 

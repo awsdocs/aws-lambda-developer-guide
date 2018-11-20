@@ -1,4 +1,4 @@
-# The Context Object \(Java\)<a name="java-context-object"></a>
+# AWS Lambda Context Object in Java<a name="java-context-object"></a>
 
 You interact with AWS Lambda execution environment via the context parameter\. The context object allows you to access useful information available within the Lambda execution environment\. For example, you can use the context parameter to determine the CloudWatch log stream associated with the function, or use the clientContext property of the context object to learn more about the application calling the Lambda function \(when invoked through the AWS Mobile SDK\)\.
 
@@ -13,7 +13,7 @@ The context object properties are:
 + `getClientContext()`: Information about the client application and device when invoked through the AWS Mobile SDK\. It can be null\.  Client context provides client information such as client ID, application title, version name, version code, and the application package name\.
 +  `getIdentity()`: Information about the Amazon Cognito identity provider when invoked through the AWS Mobile SDK\. It can be null\.
 + `getRemainingTimeInMillis()`: Remaining execution time till the function will be terminated, in milliseconds\. At the time you create the Lambda function you set maximum time limit, at which time AWS Lambda will terminate the function execution\. Information about the remaining time of function execution can be used to specify function behavior when nearing the timeout\.
-+ `getLogger()`: Returns the Lambda logger associated with the Context object\. For more information, see [Logging \(Java\)](java-logging.md)\.
++ `getLogger()`: Returns the Lambda logger associated with the Context object\. For more information, see [AWS Lambda Function Logging in Java](java-logging.md)\.
 
  The following Java code snippet shows a handler function that prints some of the context information\. 
 
@@ -29,7 +29,7 @@ public static void handler(InputStream inputStream, OutputStream outputStream, C
 }
 ```
 
-## Example: Using Context Object \(Java\)<a name="java-wt-context-object"></a>
+## Example: Using the Context Object<a name="java-wt-context-object"></a>
 
 The following Java code example shows how to use the `Context` object to retrieve runtime information of your Lambda function, while it is running\. 
 

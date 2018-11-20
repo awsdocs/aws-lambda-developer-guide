@@ -1,10 +1,6 @@
 # UpdateEventSourceMapping<a name="API_UpdateEventSourceMapping"></a>
 
-You can update an event source mapping\. This is useful if you want to change the parameters of the existing mapping without losing your position in the stream\. You can change which function will receive the stream records, but to change the stream itself, you must create a new mapping\.
-
-If you disable the event source mapping, AWS Lambda stops polling\. If you enable again, it will resume polling from the time it had stopped polling, so you don't lose processing of any records\. However, if you delete event source mapping and create it again, it will reset\.
-
-This operation requires permission for the `lambda:UpdateEventSourceMapping` action\.
+Updates an event source mapping\. You can change the function that AWS Lambda invokes, or pause invocation and resume later from the same location\.
 
 ## Request Syntax<a name="API_UpdateEventSourceMapping_RequestSyntax"></a>
 
@@ -24,32 +20,35 @@ Content-type: application/json
 The request requires the following URI parameters\.
 
  ** [UUID](#API_UpdateEventSourceMapping_RequestSyntax) **   <a name="SSS-UpdateEventSourceMapping-request-UUID"></a>
-The event source mapping identifier\.
+The identifier of the event source mapping\.
 
 ## Request Body<a name="API_UpdateEventSourceMapping_RequestBody"></a>
 
 The request accepts the following data in JSON format\.
 
  ** [BatchSize](#API_UpdateEventSourceMapping_RequestSyntax) **   <a name="SSS-UpdateEventSourceMapping-request-BatchSize"></a>
-The largest number of records that AWS Lambda will retrieve from your event source at the time of invoking your function\. Your function receives an event with all the retrieved records\.  
+The maximum number of items to retrieve in a single batch\.  
++  **Amazon Kinesis** \- Default 100\. Max 10,000\.
++  **Amazon DynamoDB Streams** \- Default 100\. Max 1,000\.
++  **Amazon Simple Queue Service** \- Default 10\. Max 10\.
 Type: Integer  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.  
 Required: No
 
  ** [Enabled](#API_UpdateEventSourceMapping_RequestSyntax) **   <a name="SSS-UpdateEventSourceMapping-request-Enabled"></a>
-Specifies whether AWS Lambda should actively poll the stream or not\. If disabled, AWS Lambda will not poll the stream\.  
+Disables the event source mapping to pause polling and invocation\.  
 Type: Boolean  
 Required: No
 
  ** [FunctionName](#API_UpdateEventSourceMapping_RequestSyntax) **   <a name="SSS-UpdateEventSourceMapping-request-FunctionName"></a>
-The name of the lambda function\.  
+The name of the Lambda function\.  
 
 **Name formats**
 +  **Function name** \- `MyFunction`\.
 +  **Function ARN** \- `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`\.
 +  **Version or Alias ARN** \- `arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD`\.
 +  **Partial ARN** \- `123456789012:function:MyFunction`\.
-The length constraint applies only to the full ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
+The length constraint applies only to the full ARN\. If you specify only the function name, it's limited to 64 characters in length\.  
 Type: String  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
@@ -80,38 +79,38 @@ If the action is successful, the service sends back an HTTP 202 response\.
 The following data is returned in JSON format by the service\.
 
  ** [BatchSize](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-BatchSize"></a>
-The largest number of records that AWS Lambda will retrieve from your event source at the time of invoking your function\. Your function receives an event with all the retrieved records\.  
+The maximum number of items to retrieve in a single batch\.  
 Type: Integer  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.
 
  ** [EventSourceArn](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-EventSourceArn"></a>
-The Amazon Resource Name \(ARN\) of the Amazon Kinesis or DynamoDB stream that is the source of events\.  
+The Amazon Resource Name \(ARN\) of the event source\.  
 Type: String  
 Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)` 
 
  ** [FunctionArn](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-FunctionArn"></a>
-The Lambda function to invoke when AWS Lambda detects an event on the poll\-based source\.  
+The ARN of the Lambda function\.  
 Type: String  
 Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [LastModified](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-LastModified"></a>
-The UTC time string indicating the last time the event mapping was updated\.  
+The date that the event source mapping was last updated, in Unix time seconds\.  
 Type: Timestamp
 
  ** [LastProcessingResult](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-LastProcessingResult"></a>
-The result of the last AWS Lambda invocation of your Lambda function\. This value will be null if an SQS queue is the event source\.  
+The result of the last AWS Lambda invocation of your Lambda function\.  
 Type: String
 
  ** [State](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-State"></a>
-The state of the event source mapping\. It can be `Creating`, `Enabled`, `Disabled`, `Enabling`, `Disabling`, `Updating`, or `Deleting`\.  
+The state of the event source mapping\. It can be one of the following: `Creating`, `Enabling`, `Enabled`, `Disabling`, `Disabled`, `Updating`, or `Deleting`\.  
 Type: String
 
  ** [StateTransitionReason](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-StateTransitionReason"></a>
-The reason the event source mapping is in its current state\. It is either user\-requested or an AWS Lambda\-initiated state transition\.  
+The cause of the last state change, either `User initiated` or `Lambda initiated`\.  
 Type: String
 
  ** [UUID](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-UUID"></a>
-The AWS Lambda assigned opaque identifier for the mapping\.  
+The identifier of the event source mapping\.  
 Type: String
 
 ## Errors<a name="API_UpdateEventSourceMapping_Errors"></a>

@@ -322,14 +322,10 @@ Add notification configuration on the source bucket to request Amazon S3 to publ
 1. Choose **Properties**\.
 
 1. Under **Events**, configure a notification with the following settings\.
-
-   1. **Name** – **lambda\-trigger**\.
-
-   1. **Events** – **ObjectCreate \(All\)**\.
-
-   1. **Send to** – **Lambda function**\.
-
-   1. **Lambda** – **CreateThumbnail**\.
+   + **Name** – **lambda\-trigger**\.
+   + **Events** – **ObjectCreate \(All\)**\.
+   + **Send to** – **Lambda function**\.
+   + **Lambda** – **CreateThumbnail**\.
 
 For more information on event configuration, see [Enabling Event Notifications](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-event-notifications.html) in the *Amazon Simple Storage Service Console User Guide*\.
 

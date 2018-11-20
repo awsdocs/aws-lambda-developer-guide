@@ -1,4 +1,4 @@
-# Logging \(Python\)<a name="python-logging"></a>
+# AWS Lambda Function Logging in Python<a name="python-logging"></a>
 
 Your Lambda function can contain logging statements\. AWS Lambda writes these logs to CloudWatch\. If you use the Lambda console to invoke your Lambda function, the console displays the same logs\. 
 

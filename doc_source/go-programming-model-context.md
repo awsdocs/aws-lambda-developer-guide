@@ -1,11 +1,11 @@
-# The Context Object \(Go\)<a name="go-programming-model-context"></a>
+# AWS Lambda Context Object in Go<a name="go-programming-model-context"></a>
 
 While a Lambda function is executing, it can interact with AWS Lambda to get useful runtime information such as:
 + How much time is remaining before AWS Lambda terminates your Lambda function \(timeout is one of the Lambda function configuration properties\)\.
 + The [CloudWatch](https://aws.amazon.com/documentation/cloudwatch/) log group and log stream associated with the Lambda function that is executing\.
 + The AWS request ID returned to the client that invoked the Lambda function\. You can use the request ID for any follow up inquiry with AWS support\.
 + If the Lambda function is invoked through AWS Mobile SDK, you can learn more about the mobile application calling the Lambda function\.
-+ In addition to the options listed below, you can also use the AWS X\-Ray SDK for [Go](go-tracing.md) to identify critical code paths, trace their performance and capture the data for analysis\. 
++ In addition to the options listed below, you can also use the AWS X\-Ray SDK for [Instrumenting Go Code in AWS Lambda](go-tracing.md) to identify critical code paths, trace their performance and capture the data for analysis\. 
 
 AWS Lambda provides this information via the `context.Context` object that the service passes as a parameter to your Lambda function handler\. For more information, see [Valid Handler Signatures ](go-programming-model-handler-types.md#go-programming-model-handler-types-signatures)\.
 

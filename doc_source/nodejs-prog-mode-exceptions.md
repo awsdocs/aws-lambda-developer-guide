@@ -1,4 +1,4 @@
-# Function Errors \(Node\.js\)<a name="nodejs-prog-mode-exceptions"></a>
+# AWS Lambda Function Errors in Node\.js<a name="nodejs-prog-mode-exceptions"></a>
 
  If your Lambda function notifies AWS Lambda that it failed to execute properly, Lambda will attempt to convert the error object to a String\. Consider the following example:
 

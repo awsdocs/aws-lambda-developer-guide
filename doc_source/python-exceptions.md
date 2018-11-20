@@ -1,4 +1,4 @@
-# Function Errors \(Python\)<a name="python-exceptions"></a>
+# AWS Lambda Function Errors in Python<a name="python-exceptions"></a>
 
 If your Lambda function raises an exception, AWS Lambda recognizes the failure and serializes the exception information into JSON and returns it\. Consider the following example:
 
@@ -40,7 +40,7 @@ Depending on the event source, AWS Lambda may retry the failed Lambda function\.
 
 **To test the preceding Python code \(console\)**
 
-1. In the console, create a Lambda function using the hello\-world blueprint\. In **runtime**, choose Python 3\.6\. In **Handler**, replace `lambda_function.lambda_handler` with `lambda_function.always_failed_handler`\. For instructions on how to do this, see [Create a Simple Lambda Function](get-started-create-function.md)\. 
+1. In the console, create a Lambda function using the hello\-world blueprint\. In **runtime**, choose Python 3\.7\. In **Handler**, replace `lambda_function.lambda_handler` with `lambda_function.always_failed_handler`\. For instructions on how to do this, see [Create a Simple Lambda Function](get-started-create-function.md)\. 
 
 1. Replace the template code with the code provided in this section\.
 

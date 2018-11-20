@@ -1,4 +1,4 @@
-# The Context Object \(Node\.js\)<a name="nodejs-prog-model-context"></a>
+# AWS Lambda Context Object in Node\.js<a name="nodejs-prog-model-context"></a>
 
 While a Lambda function is executing, it can interact with AWS Lambda to get useful runtime information such as:
 + How much time is remaining before AWS Lambda terminates your Lambda function \(timeout is one of the Lambda function configuration properties\)\.
@@ -6,7 +6,7 @@ While a Lambda function is executing, it can interact with AWS Lambda to get use
 + The AWS request ID returned to the client that invoked the Lambda function\. You can use the request ID for any follow up inquiry with AWS support\.
 + If the Lambda function is invoked through AWS Mobile SDK, you can learn more about the mobile application calling the Lambda function\.
 
-AWS Lambda provides this information via the `context` object that the service passes as the second parameter to your Lambda function handler\. For more information, see [Lambda Function Handler \(Node\.js\)](nodejs-prog-model-handler.md)\.
+AWS Lambda provides this information via the `context` object that the service passes as the second parameter to your Lambda function handler\. For more information, see [AWS Lambda Function Handler in Node\.js](nodejs-prog-model-handler.md)\.
 
  The following sections provide an example Lambda function that uses the `context` object, and then lists all of the available methods and attributes\. 
 
@@ -46,7 +46,7 @@ The handler code in this example logs some of the runtime information of the Lam
 
 1. Test the function, and then you can also update the code to get more context information\.
 
-## The Context Object Methods \(Node\.js\)<a name="nodejs-prog-model-context-methods"></a>
+## Context Object Methods<a name="nodejs-prog-model-context-methods"></a>
 
 The context object provides the following methods\. 
 
@@ -62,7 +62,7 @@ The general syntax is:
 context.getRemainingTimeInMillis();
 ```
 
-## The Context Object Properties \(Node\.js\)<a name="nodejs-prog-model-context-properties"></a>
+## Context Object Properties<a name="nodejs-prog-model-context-properties"></a>
 
 The `context` object provides the following property that you can update:
 

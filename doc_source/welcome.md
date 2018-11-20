@@ -6,7 +6,7 @@ You can use AWS Lambda to run your code in response to events, such as changes t
 
 You can also build [serverless](https://aws.amazon.com/serverless) applications composed of functions that are triggered by events and automatically deploy them using AWS CodePipeline and AWS CodeBuild\. For more information, see [AWS Lambda Applications](deploying-lambda-apps.md)\.
 
-For more information about the AWS Lambda execution environment, see [Lambda Execution Environment and Available Libraries](current-supported-versions.md)\. For information about how AWS Lambda determines compute resources required to execute your code, see [Configuring Lambda Functions](resource-model.md)\.
+For more information about the AWS Lambda execution environment, see [Lambda Execution Environment and Available Libraries](current-supported-versions.md)\. For information about how AWS Lambda determines compute resources required to execute your code, see [Basic AWS Lambda Function Configuration](resource-model.md)\.
 
 ## When Should I Use AWS Lambda?<a name="when-to-use-cloud-functions"></a>
 
@@ -17,6 +17,8 @@ When using AWS Lambda, you are responsible only for your code\. AWS Lambda manag
 If you need to manage your own compute resources, Amazon Web Services also offers other compute services to meet your needs\. 
 + Amazon Elastic Compute Cloud \(Amazon EC2\) service offers flexibility and a wide range of EC2 instance types to choose from\. It gives you the option to customize operating systems, network and security settings, and the entire software stack, but you are responsible for provisioning capacity, monitoring fleet health and performance, and using Availability Zones for fault tolerance\.
 + Elastic Beanstalk offers an easy\-to\-use service for deploying and scaling applications onto Amazon EC2 in which you retain ownership and full control over the underlying EC2 instances\.
+
+Lambda is a highly available service\. For more information, see the [AWS Lambda Service Level Agreement](https://aws.amazon.com/lambda/sla/)\.
 
 ## Are You a First\-time User of AWS Lambda?<a name="welcome-first-time-user"></a>
 

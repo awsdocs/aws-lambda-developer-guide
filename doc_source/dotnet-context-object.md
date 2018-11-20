@@ -1,4 +1,4 @@
-# The Context Object \(C\#\)<a name="dotnet-context-object"></a>
+# AWS Lambda Context Object in C\#<a name="dotnet-context-object"></a>
 
 You can gain useful information on how your Lambda function is interacting with the AWS Lambda runtime by adding the `ILambdaContext` parameter to your method\. In return, AWS Lambda provides runtime details such as the CloudWatch log stream associated with the function or the id of the client that called your functions, which you access via the properties provided by the context object\.
 
@@ -19,7 +19,7 @@ The context object properties are:
 + `ClientContext`: Information about the client application and device when invoked through the AWS Mobile SDK\. It can be null\.  Client context provides client information such as client ID, application title, version name, version code, and the application package name\.
 +  `Identity`: Information about the Amazon Cognito identity provider when invoked through the AWS Mobile SDK\. It can be null\.
 + `RemainingTime`: Remaining execution time till the function will be terminated\. At the time you create the Lambda function you set maximum time limit, at which time AWS Lambda will terminate the function execution\. Information about the remaining time of function execution can be used to specify function behavior when nearing the timeout\. This is a `TimeSpan` field\.
-+ `Logger`: The Lambda logger associated with the ILambdaContext object\. For more information, see [Logging \(C\#\)](dotnet-logging.md)\.
++ `Logger`: The Lambda logger associated with the ILambdaContext object\. For more information, see [AWS Lambda Function Logging in C\#](dotnet-logging.md)\.
 
  The following C\# code snippet shows a simple handler function that prints some of the context information\. 
 

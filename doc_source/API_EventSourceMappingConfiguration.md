@@ -1,49 +1,49 @@
 # EventSourceMappingConfiguration<a name="API_EventSourceMappingConfiguration"></a>
 
-Describes mapping between an Amazon Kinesis or DynamoDB stream and a Lambda function\.
+A mapping between an AWS resource and an AWS Lambda function\. See [CreateEventSourceMapping](API_CreateEventSourceMapping.md) for details\.
 
 ## Contents<a name="API_EventSourceMappingConfiguration_Contents"></a>
 
  **BatchSize**   <a name="SSS-Type-EventSourceMappingConfiguration-BatchSize"></a>
-The largest number of records that AWS Lambda will retrieve from your event source at the time of invoking your function\. Your function receives an event with all the retrieved records\.  
+The maximum number of items to retrieve in a single batch\.  
 Type: Integer  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.  
 Required: No
 
  **EventSourceArn**   <a name="SSS-Type-EventSourceMappingConfiguration-EventSourceArn"></a>
-The Amazon Resource Name \(ARN\) of the Amazon Kinesis or DynamoDB stream that is the source of events\.  
+The Amazon Resource Name \(ARN\) of the event source\.  
 Type: String  
 Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)`   
 Required: No
 
  **FunctionArn**   <a name="SSS-Type-EventSourceMappingConfiguration-FunctionArn"></a>
-The Lambda function to invoke when AWS Lambda detects an event on the poll\-based source\.  
+The ARN of the Lambda function\.  
 Type: String  
 Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
 Required: No
 
  **LastModified**   <a name="SSS-Type-EventSourceMappingConfiguration-LastModified"></a>
-The UTC time string indicating the last time the event mapping was updated\.  
+The date that the event source mapping was last updated, in Unix time seconds\.  
 Type: Timestamp  
 Required: No
 
  **LastProcessingResult**   <a name="SSS-Type-EventSourceMappingConfiguration-LastProcessingResult"></a>
-The result of the last AWS Lambda invocation of your Lambda function\. This value will be null if an SQS queue is the event source\.  
+The result of the last AWS Lambda invocation of your Lambda function\.  
 Type: String  
 Required: No
 
  **State**   <a name="SSS-Type-EventSourceMappingConfiguration-State"></a>
-The state of the event source mapping\. It can be `Creating`, `Enabled`, `Disabled`, `Enabling`, `Disabling`, `Updating`, or `Deleting`\.  
+The state of the event source mapping\. It can be one of the following: `Creating`, `Enabling`, `Enabled`, `Disabling`, `Disabled`, `Updating`, or `Deleting`\.  
 Type: String  
 Required: No
 
  **StateTransitionReason**   <a name="SSS-Type-EventSourceMappingConfiguration-StateTransitionReason"></a>
-The reason the event source mapping is in its current state\. It is either user\-requested or an AWS Lambda\-initiated state transition\.  
+The cause of the last state change, either `User initiated` or `Lambda initiated`\.  
 Type: String  
 Required: No
 
  **UUID**   <a name="SSS-Type-EventSourceMappingConfiguration-UUID"></a>
-The AWS Lambda assigned opaque identifier for the mapping\.  
+The identifier of the event source mapping\.  
 Type: String  
 Required: No
 

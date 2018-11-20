@@ -1,4 +1,4 @@
-# Logging \(Go\)<a name="go-programming-model-logging"></a>
+# AWS Lambda Function Logging in Go<a name="go-programming-model-logging"></a>
 
 Your Lambda function can contain logging statements\. AWS Lambda writes these logs to CloudWatch\. If you use the Lambda console to invoke your Lambda function, the console displays the same logs\. 
 
@@ -55,4 +55,4 @@ You can find the logs that your Lambda function writes, as follows:
 + **In the response header, when you invoke a Lambda function programmatically** – If you invoke a Lambda function programmatically, you can add the `LogType` parameter to retrieve the last 4 KB of log data that is written to CloudWatch Logs\. AWS Lambda returns this log information in the `x-amz-log-results` header in the response\. For more information, see [Invoke](API_Invoke.md)\.
 
   If you use AWS CLI to invoke the function, you can specify the` --log-type parameter` with value `Tail` to retrieve the same information\.
-+ **In CloudWatch Logs** – To find your logs in CloudWatch you need to know the log group name and log stream name\. You can use the `context.logGroupName`, and `context.logStreamName` global variables in [The Context Object \(Go\) ](#go-programming-model-logging) library to get this information\. When you run your Lambda function, the resulting logs in the console or CLI will show you the log group name and log stream name\. 
++ **In CloudWatch Logs** – To find your logs in CloudWatch you need to know the log group name and log stream name\. You can use the `context.logGroupName`, and `context.logStreamName` global variables in [AWS Lambda Context Object in Go](#go-programming-model-logging) library to get this information\. When you run your Lambda function, the resulting logs in the console or CLI will show you the log group name and log stream name\. 

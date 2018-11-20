@@ -1,9 +1,4 @@
-# The Context Object \(Python\)<a name="python-context-object"></a>
-
-**Topics**
-+ [Example](#python-context-object-example)
-+ [The Context Object Methods \(Python\)](#python-context-object-methods)
-+ [The Context Object Attributes \(Python\)](#python-context-object-props)
+# AWS Lambda Context Object in Python<a name="python-context-object"></a>
 
 While a Lambda function is executing, it can interact with the AWS Lambda service to get useful runtime information such as:
 + How much time is remaining before AWS Lambda terminates your Lambda function \(timeout is one of the Lambda function configuration properties\)\.
@@ -11,7 +6,7 @@ While a Lambda function is executing, it can interact with the AWS Lambda servic
 + The AWS request ID returned to the client that invoked the Lambda function\. You can use the request ID for any follow up inquiry with AWS support\. 
 +  If the Lambda function is invoked through AWS Mobile SDK, you can learn more about the mobile application calling the Lambda function\. 
 
-AWS Lambda provides this information via the `context` object that the service passes as the second parameter to your Lambda function handler\. For more information, see [Lambda Function Handler \(Python\)](python-programming-model-handler-types.md)\. 
+AWS Lambda provides this information via the `context` object that the service passes as the second parameter to your Lambda function handler\. For more information, see [AWS Lambda Function Handler in Python](python-programming-model-handler-types.md)\. 
 
 The following sections provide an example Lambda function that uses the `context` object, and then lists all of the available methods and attributes\.
 
@@ -43,14 +38,14 @@ The handler code in this example simply prints some of the runtime information\.
 
 The following sections provide a list of available `context` object methods and attributes that you can use to get runtime information of your Lambda function\.
 
-## The Context Object Methods \(Python\)<a name="python-context-object-methods"></a>
+## Context Object Methods<a name="python-context-object-methods"></a>
 
 The context object provides the following methods:
 
 **get\_remaining\_time\_in\_millis\(\)**  
  Returns the remaining execution time, in milliseconds, until AWS Lambda terminates the function\. 
 
-## The Context Object Attributes \(Python\)<a name="python-context-object-props"></a>
+## Context Object Attributes<a name="python-context-object-props"></a>
 
 The context object provides the following attributes:
 
@@ -96,4 +91,4 @@ Information about the client application and device when invoked through the AWS
 
   A `dict` of environment information provided by the AWS Mobile SDK\.
 
-In addition to the options listed above, you can also use the AWS X\-Ray SDK for [Python](python-tracing.md) to identify critical code paths, trace their performance and capture the data for analysis\. 
+In addition to the options listed above, you can also use the AWS X\-Ray SDK for [Instrumenting Python Code in AWS Lambda](python-tracing.md) to identify critical code paths, trace their performance and capture the data for analysis\. 

@@ -1,4 +1,4 @@
-# Node\.js<a name="nodejs-tracing"></a>
+# Instrumenting Node\.js Code in AWS Lambda<a name="nodejs-tracing"></a>
 
 In Node\.js, you can have Lambda emit subsegments to X\-Ray to show you information about downstream calls to other AWS services made by your function\. To do so, you first need to include the [the AWS X\-Ray SDK for Node\.js](https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-nodejs.html) in your deployment package\. In addition, wrap your AWS SDK `require` statement in the following manner:
 
@@ -21,10 +21,8 @@ var AWS = AWSXRay.captureAWS(require('aws-sdk'));
 
 s3 = new AWS.S3({signatureVersion: 'v4'});
 
- 
 exports.handler = (event, context, callback) => {
- 
-    
+
     var params = {Bucket: BUCKET_NAME, Key: BUCKET_KEY, Body: BODY};
  
     s3.putObject(params, function(err, data) {

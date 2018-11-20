@@ -47,7 +47,7 @@ You can build \.NET\-based Lambda applications using the Lambda plugin to the [A
 
 1. In the **Advanced Function Details** window, do the following: 
    + Specify the **Role Name:**, the IAM role mentioned previously\.
-   + \(Optional\) In **Environment::** specify any environment variables you wish to use\. For more information, see [Environment Variables](env_variables.md)\.
+   + \(Optional\) In **Environment::** specify any environment variables you wish to use\. For more information, see [AWS Lambda Environment Variables](env_variables.md)\.
    + \(Optional\) Specify the **Memory \(MB\):** or **Timeout \(Secs\):** configurations\.
    + \(Optional\) Specify any **VPC:** configurations if your Lambda function needs to access resources running inside a VPC\. For more information, see [Configuring a Lambda Function to Access Resources in an Amazon VPC](vpc.md)\.
    + Choose **Next** and then choose **Upload** to deploy your application\.

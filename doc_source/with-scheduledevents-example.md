@@ -85,7 +85,7 @@ Configure an alarm in Amazon CloudWatch that monitors the Lambda function and se
 
 **To create an alarm**
 
-1. Open the [Amazon SNS console](https://console.aws.amazon.com/sns)\.
+1. Open the [CloudWatch console](https://console.aws.amazon.com/cloudwatch)\.
 
 1. Choose **Alarms**\.
 

@@ -31,6 +31,6 @@ All the exercises in this guide assume that you are using administrator user cre
      aws lambda list-functions --profile adminuser
      ```
 
-## Next Step<a name="setting-up-next-step-sam"></a>
+## Next Step<a name="setting-up-next-step-create-function"></a>
 
  [Install SAM CLI](sam-cli-requirements.md) 

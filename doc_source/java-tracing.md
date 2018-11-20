@@ -1,4 +1,4 @@
-# Java<a name="java-tracing"></a>
+# Instrumenting Java Code in AWS Lambda<a name="java-tracing"></a>
 
 In Java, you can have Lambda emit subsegments to X\-Ray to show you information regarding downstream calls to other AWS services made by your function\. To take advantage of this capability, include the [AWS X\-Ray SDK for Java](https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-java.html) in your deployment package\. No code changes are needed\. As long as you are using an AWS SDK version 1\.11\.48 or later, there is no need to add any additional code lines for downstream calls from your function to be traced\. 
 

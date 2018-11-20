@@ -32,8 +32,10 @@ In addition, you need to add permissions to the [execution role](intro-permissio
 + **For Amazon SQS:**[ SendMessage](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html) 
 + **For Amazon SNS:**[ Publish](https://docs.aws.amazon.com/sns/latest/api/API_Publish.html) 
 
-The payload written to the DLQ target ARN is the original event payload with no modifications to the message body\. The attributes of the message, described next, contain information to help you understand why the event wasn’t processed:
+The payload written to the DLQ target ARN is the original event payload with no modifications to the message body\. The attributes of the message contain information to help you understand why the event wasn’t processed: 
 
+
+**DLQ Message Attributes**  
 
 | Name | Type | Value | 
 | --- | --- | --- | 
@@ -41,8 +43,8 @@ The payload written to the DLQ target ARN is the original event payload with no 
 | ErrorCode | Number | 3\-digit HTTP error code | 
 | ErrorMessage | String | Error message \(truncated to 1 KB\)  | 
 
-If the event payload consistently fails to reach the target ARN, AWS Lambda increments a [CloudWatch metric](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/viewing_metrics_with_cloudwatch.html) called `DeadLetterErrors` and then deletes the event payload\.
+DLQ messages can fail to reach their target due to permissions issues, or if the total size of the message exceeds the limit for the target queue or topic\. For example, if an Amazon SNS notification with a body close to 256 KB triggers a function that results in an error, the additional event data added by Amazon SNS, combined with the attributes added by Lambda, can cause the message to exceed the maximum size allowed in the DLQ\. When it can't write to the DLQ, Lambda deletes the event and emits the [DeadLetterErrors](monitoring-functions-metrics.md) metric\.
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/DLQ.png)
 
-If you are using Amazon SQS as an event source, we recommend configuring a DLQ on the Amazon SQS queue itself and not the Lambda function\. For more information, see [Amazon SQS Dead\-Letter Queues](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html)\.
+If you are using Amazon SQS as an event source, configure a DLQ on the Amazon SQS queue itself and not the Lambda function\. For more information, see [Using AWS Lambda with Amazon SQS](with-sqs.md)\.
