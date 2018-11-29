@@ -6,7 +6,7 @@ AWS Lambda limits the amount of compute and storage resources that you can use t
 | Resource | Default Limit | 
 | --- | --- | 
 | [Concurrent executions](concurrent-executions.md) | 1000 | 
-| Function storage per region | 75 GB | 
+| Function and layer storage | 75 GB | 
 
 For details on how Lambda scales your function concurrency in response to traffic, see [Understanding Scaling Behavior](scaling.md)\.
 
@@ -18,8 +18,9 @@ The following limits apply to function configuration, deployments, and execution
 | Function [memory allocation](resource-model.md) | 128 MB to 3008 MB, in 64 MB increments\. | 
 | Function [timeout](resource-model.md) | 900 seconds \(15 minutes\) | 
 | Function [environment variables](env_variables.md) | 4 KB | 
+| Function [layers](configuration-layers.md) | 5 layers | 
 | [Invocation payload](invoking-lambda-functions.md) \(request and response\) |  6 MB \(synchronous\) 256 KB \(asynchronous\)  | 
-| [Deployment package](deployment-package-v2.md) size |  50 MB \(zipped\) 256 MB \(unzipped\) 3 MB \(console editor\)  | 
+| [Deployment package](deployment-package-v2.md) size |  50 MB \(zipped\) 250 MB \(unzipped, including layers\) 3 MB \(console editor\)  | 
 | Test events \(console editor\) | 10 | 
 | `/tmp` directory storage | 512 MB | 
 | File descriptors | 1024 | 

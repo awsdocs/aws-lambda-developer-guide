@@ -104,7 +104,7 @@ exports.myHandler = async function(event, context) {
    + Use the hello\-world blueprint\. 
    + The sample uses **nodejs6\.10** as the **runtime** but you can also select **nodejs8\.10**\. The code samples provided will work for any version\.
 
-   For instructions to create a Lambda function using the console, see [Create a Simple Lambda Function](get-started-create-function.md)\.
+   For instructions to create a Lambda function using the console, see [Create a Lambda Function with the Console](getting-started-create-function.md)\.
 
 1. Replace the template code with the code provided in this section and create the function\.
 

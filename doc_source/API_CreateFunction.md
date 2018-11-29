@@ -29,6 +29,7 @@ Content-type: application/json
    "[FunctionName](#SSS-CreateFunction-request-FunctionName)": "string",
    "[Handler](#SSS-CreateFunction-request-Handler)": "string",
    "[KMSKeyArn](#SSS-CreateFunction-request-KMSKeyArn)": "string",
+   "[Layers](#SSS-CreateFunction-request-Layers)": [ "string" ],
    "[MemorySize](#SSS-CreateFunction-request-MemorySize)": number,
    "[Publish](#SSS-CreateFunction-request-Publish)": boolean,
    "[Role](#SSS-CreateFunction-request-Role)": "string",
@@ -102,6 +103,13 @@ Type: String
 Pattern: `(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()`   
 Required: No
 
+ ** [Layers](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-Layers"></a>
+A list of [function layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) to add to the function's execution environment\.  
+Type: Array of strings  
+Length Constraints: Minimum length of 1\. Maximum length of 140\.  
+Pattern: `arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+:[0-9]+`   
+Required: No
+
  ** [MemorySize](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-MemorySize"></a>
 The amount of memory that your function has access to\. Increasing the function's memory also increases it's CPU allocation\. The default value is 128 MB\. The value must be a multiple of 64 MB\.  
 Type: Integer  
@@ -122,7 +130,7 @@ Required: Yes
  ** [Runtime](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-Runtime"></a>
 The runtime version for the function\.  
 Type: String  
-Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | java8 | python2.7 | python3.6 | python3.7 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | nodejs4.3-edge | go1.x`   
+Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | java8 | python2.7 | python3.6 | python3.7 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | nodejs4.3-edge | go1.x | ruby2.5 | provided`   
 Required: Yes
 
  ** [Tags](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-Tags"></a>
@@ -173,6 +181,12 @@ Content-type: application/json
    "[Handler](#SSS-CreateFunction-response-Handler)": "string",
    "[KMSKeyArn](#SSS-CreateFunction-response-KMSKeyArn)": "string",
    "[LastModified](#SSS-CreateFunction-response-LastModified)": "string",
+   "[Layers](#SSS-CreateFunction-response-Layers)": [ 
+      { 
+         "[Arn](API_Layer.md#SSS-Type-Layer-Arn)": "string",
+         "[CodeSize](API_Layer.md#SSS-Type-Layer-CodeSize)": number
+      }
+   ],
    "[MasterArn](#SSS-CreateFunction-response-MasterArn)": "string",
    "[MemorySize](#SSS-CreateFunction-response-MemorySize)": number,
    "[RevisionId](#SSS-CreateFunction-response-RevisionId)": "string",
@@ -241,8 +255,12 @@ Type: String
 Pattern: `(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()` 
 
  ** [LastModified](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-LastModified"></a>
-The date and time that the function was last updated, in [ISO\-8601 format](https://www.w3.org/TR/NOTE-datetime) \(YYYY\-MM\-DDThh:mm:ssTZD\)\.  
+The date and time that the function was last updated, in [ISO\-8601 format](https://www.w3.org/TR/NOTE-datetime) \(YYYY\-MM\-DDThh:mm:ss\.sTZD\)\.  
 Type: String
+
+ ** [Layers](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-Layers"></a>
+A list of [function layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\.  
+Type: Array of [Layer](API_Layer.md) objects
 
  ** [MasterArn](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-MasterArn"></a>
 The ARN of the master function\.  
@@ -266,7 +284,7 @@ Pattern: `arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+`
  ** [Runtime](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-Runtime"></a>
 The runtime environment for the Lambda function\.  
 Type: String  
-Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | java8 | python2.7 | python3.6 | python3.7 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | nodejs4.3-edge | go1.x` 
+Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | java8 | python2.7 | python3.6 | python3.7 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | nodejs4.3-edge | go1.x | ruby2.5 | provided` 
 
  ** [Timeout](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-Timeout"></a>
 The amount of time that Lambda allows a function to run before terminating it\.  

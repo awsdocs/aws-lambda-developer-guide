@@ -6,10 +6,13 @@ To keep secrets out of your function code, store them in the function's configur
 
 [Versions and aliases](versioning-aliases.md) are secondary resources that you can create to manage function deployment and invocation\. Publish versions of your function to store its code and configuration as a separate resource that cannot be changed, and create an alias that points to a specific version\. Then you can configure your clients to invoke a function alias, and update the alias when you want to point the client to a new version, instead of updating the client\.
 
+As you add libraries and other dependencies to your function, creating and uploading a deployment package can slow down development\. Use [layers](configuration-layers.md) to manage your function's dependencies independently and keep your deployment package small\. You can also use layers to share your own libraries with other customers and use publicly available layers with your functions\.
+
 To use your Lambda function with AWS resources in an Amazon VPC, configure it with security groups and subnets to [create a VPC connection](vpc.md)\. Lambda uses [elastic network interfaces](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ElasticNetworkInterfaces.html) \(ENIs\) to create the connection, so you need to ensure that your account has enough ENI capacity to handle the number of connections made as your function scales up under load\.
 
 **Topics**
 + [Basic AWS Lambda Function Configuration](resource-model.md)
 + [AWS Lambda Environment Variables](env_variables.md)
 + [AWS Lambda Function Versioning and Aliases](versioning-aliases.md)
++ [AWS Lambda Layers](configuration-layers.md)
 + [Configuring a Lambda Function to Access Resources in an Amazon VPC](vpc.md)

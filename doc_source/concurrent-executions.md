@@ -54,7 +54,7 @@ To set a concurrency limit for your Lambda function using the Lambda console, do
 
 1. Sign in to the AWS Management Console and open the AWS Lambda console\.
 
-1. Whether you are creating a new Lambda function or updating an existing function, the process of setting a concurrency limit is the same\. If you are new to Lambda and are unfamiliar with creating a function, see [Create a Simple Lambda Function](get-started-create-function.md)\.
+1. Whether you are creating a new Lambda function or updating an existing function, the process of setting a concurrency limit is the same\. If you are new to Lambda and are unfamiliar with creating a function, see [Create a Lambda Function with the Console](getting-started-create-function.md)\.
 
 1. Under the **Configuration** tab, choose **Concurrency**\. In **Reserve concurrency**, set the value to the maximum of concurrent executions you want reserved for the function\. Note that when you set this value, the **Unreserved account concurrency** value will automatically be updated to display the remaining number of concurrent executions available for all other functions in the account\. Also note that if you want to block invocation of this function, set the value to 0\. To remove a dedicated allotment value for this account, choose **Use unreserved account concurrency**\.
 

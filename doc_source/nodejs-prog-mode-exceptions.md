@@ -68,7 +68,7 @@ How you get the error information back depends on the invocation type that the c
 
 **To test the preceding Node\.js code \(console\)**
 
-1. In the console, create a Lambda function using the hello\-world blueprint\. In **runtime**, choose **Node\.js**  and, in **Role**, choose **Basic execution role**\. For instructions on how to do this, see [Create a Simple Lambda Function](get-started-create-function.md)\. 
+1. In the console, create a Lambda function using the hello\-world blueprint\. In **runtime**, choose **Node\.js**  and, in **Role**, choose **Basic execution role**\. For instructions on how to do this, see [Create a Lambda Function with the Console](getting-started-create-function.md)\. 
 
 1. Replace the template code with the code provided in this section\.
 

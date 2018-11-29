@@ -1,19 +1,19 @@
 # AWS Lambda Context Object in PowerShell<a name="powershell-context-object"></a>
 
-You can gain useful information on how your Lambda function is interacting with the AWS Lambda runtime by using the predefined `$LambdaContext` variable\. This variable provides runtime details, such as the CloudWatch log stream that's associated with the function or the ID of the client that called your functions\.
+When Lambda runs your function, it passes context information by making a `$LambdaContext` variable available to the [handler](powershell-programming-model-handler-types.md)\. This variable provides methods and properties with information about the invocation, function, and execution environment\.
 
-The context object properties are:
-+ `MemoryLimitInMB`: The memory limit, in MB, that you configured for the Lambda function\.
-+ `FunctionName`: The name of the Lambda function that's running\.
-+ `FunctionVersion`: The Lambda function version that's executing\. If an alias is used to invoke the function, then `FunctionVersion` is the version the alias points to\.
-+ `InvokedFunctionArn`: The Amazon Resource Name \(ARN\) that's used to invoke this function\. It can be a function ARN or an alias ARN\. An unqualified ARN executes the `$LATEST` version, and aliases execute the function version that it's pointing to\. 
-+  `AwsRequestId`: The AWS request ID that's associated with the request\. This is the ID returned to the client that invoked this Lambda function\. You can use the request ID for any follow\-up inquiry with AWS Support\. Note that if AWS Lambda retries the function \(for example, in a situation where the Lambda function that's processing Kinesis records throws an exception\), the request ID remains the same\.
-+ `LogStreamName`: The CloudWatch log stream name for the particular Lambda function execution\. It can be null if the IAM user that's provided doesn't have permission for CloudWatch actions\.
-+ `LogGroupName`: The CloudWatch log group name associated with the Lambda function that's invoked\. It can be null if the IAM user provided doesn't have permission for CloudWatch actions\.
-+ `ClientContext`: Information about the client application and device when invoked through the AWS Mobile SDK\. It can be null\. Client context provides client information—such as the client ID, application title, version name, version code, and application package name\.
-+  `Identity`: Information about the Amazon Cognito identity provider when invoked through the AWS Mobile SDK\. It can be null\.
-+ `RemainingTime`: The remaining execution time until the function is terminated\. When you create the Lambda function, you set the maximum time limit, which specifies when AWS Lambda terminates the function execution\. You can use information about the remaining time of function execution to specify function behavior when nearing the timeout\. This is a `TimeSpan` field\.
-+ `Logger`: The Lambda logger that's associated with the ILambdaContext object\. For more information, see [AWS Lambda Function Logging in PowerShell](powershell-logging.md)\.
+**Context Properties**
++ `FunctionName` – The name of the Lambda function\.
++ `FunctionVersion` – The [version](versioning-aliases.md) of the function\.
++ `InvokedFunctionArn` – The Amazon Resource Name \(ARN\) used to invoke the function\. Indicates if the invoker specified a version number or alias\.
++ `MemoryLimitInMB` – The amount of memory configured on the function\.
++ `AwsRequestId` – The identifier of the invocation request\.
++ `LogGroupName` – The log group for the function\.
++ `LogStreamName` – The log stream for the function instance\.
++ `RemainingTime` – The number of milliseconds left before the execution times out\.
++ `Identity` – \(mobile apps\) Information about the Amazon Cognito identity that authorized the request\.
++ `ClientContext` – \(mobile apps\) Client context provided to the Lambda invoker by the client application\.
++ `Logger` – The [logger object](powershell-logging.md) for the function\.
 
 The following PowerShell code snippet shows a simple handler function that prints some of the context information\. 
 

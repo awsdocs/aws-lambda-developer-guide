@@ -45,7 +45,7 @@ In either case, the following screenshot shows an example **Log output** sectio
 
 **To test the preceding Node\.js code in AWS Lambda console**
 
-1. In the console, create a Lambda function using the hello\-world blueprint\. Make sure to select the Node\.js as the **runtime**\. For instructions on how to do this, see [Create a Simple Lambda Function](get-started-create-function.md)\.
+1. In the console, create a Lambda function using the hello\-world blueprint\. Make sure to select the Node\.js as the **runtime**\. For instructions on how to do this, see [Create a Lambda Function with the Console](getting-started-create-function.md)\.
 
 1. Test the Lambda function using the **Sample event template** called **Hello World** provided in the Lambda console\. You can also update the code and try other logging methods and properties discussed in this section\.
 

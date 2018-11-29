@@ -2,7 +2,7 @@
 
 When you create an AWS Lambda function in the console using one of the blueprints, Lambda allows you to create a role for your function from a list of Lambda policy templates\. By selecting one of these templates, your Lambda function automatically creates the role with the requisite permissions attached to that policy\. 
 
-The following lists the permissions that are applied to each policy template in the **Policy templates** list\. The policy templates are named after the blueprints to which they correspond\. Lambda will automatically populate the placeholder items \(such as *region* and *accountID*\) with the appropriate information\. For more information on creating a Lambda function using policy templates, see [Create a Simple Lambda Function](get-started-create-function.md)\.
+The following lists the permissions that are applied to each policy template in the **Policy templates** list\. The policy templates are named after the blueprints to which they correspond\. Lambda will automatically populate the placeholder items \(such as *region* and *accountID*\) with the appropriate information\. For more information on creating a Lambda function using policy templates, see [Create a Lambda Function with the Console](getting-started-create-function.md)\.
 
 ## Standard Templates<a name="permission-templates-standard"></a>
 

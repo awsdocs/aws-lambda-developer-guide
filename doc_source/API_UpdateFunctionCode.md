@@ -108,6 +108,12 @@ Content-type: application/json
    "[Handler](#SSS-UpdateFunctionCode-response-Handler)": "string",
    "[KMSKeyArn](#SSS-UpdateFunctionCode-response-KMSKeyArn)": "string",
    "[LastModified](#SSS-UpdateFunctionCode-response-LastModified)": "string",
+   "[Layers](#SSS-UpdateFunctionCode-response-Layers)": [ 
+      { 
+         "[Arn](API_Layer.md#SSS-Type-Layer-Arn)": "string",
+         "[CodeSize](API_Layer.md#SSS-Type-Layer-CodeSize)": number
+      }
+   ],
    "[MasterArn](#SSS-UpdateFunctionCode-response-MasterArn)": "string",
    "[MemorySize](#SSS-UpdateFunctionCode-response-MemorySize)": number,
    "[RevisionId](#SSS-UpdateFunctionCode-response-RevisionId)": "string",
@@ -176,8 +182,12 @@ Type: String
 Pattern: `(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()` 
 
  ** [LastModified](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-LastModified"></a>
-The date and time that the function was last updated, in [ISO\-8601 format](https://www.w3.org/TR/NOTE-datetime) \(YYYY\-MM\-DDThh:mm:ssTZD\)\.  
+The date and time that the function was last updated, in [ISO\-8601 format](https://www.w3.org/TR/NOTE-datetime) \(YYYY\-MM\-DDThh:mm:ss\.sTZD\)\.  
 Type: String
+
+ ** [Layers](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-Layers"></a>
+A list of [function layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\.  
+Type: Array of [Layer](API_Layer.md) objects
 
  ** [MasterArn](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-MasterArn"></a>
 The ARN of the master function\.  
@@ -201,7 +211,7 @@ Pattern: `arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+`
  ** [Runtime](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-Runtime"></a>
 The runtime environment for the Lambda function\.  
 Type: String  
-Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | java8 | python2.7 | python3.6 | python3.7 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | nodejs4.3-edge | go1.x` 
+Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | java8 | python2.7 | python3.6 | python3.7 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | nodejs4.3-edge | go1.x | ruby2.5 | provided` 
 
  ** [Timeout](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-Timeout"></a>
 The amount of time that Lambda allows a function to run before terminating it\.  
