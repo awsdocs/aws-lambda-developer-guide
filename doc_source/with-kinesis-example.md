@@ -77,7 +77,7 @@ exports.handler = function(event, context) {
 1. Create a Lambda function with the `create-function` command\.
 
    ```
-   $ aws lambda create-function --function-name ProcessKinesisRecord \
+   $ aws lambda create-function --function-name ProcessKinesisRecords \
    --zip-file fileb://function.zip --handler index.handler --runtime nodejs8.10 \
    --role role-arn
    ```
@@ -105,7 +105,7 @@ Invoke your Lambda function manually using the `invoke` AWS Lambda CLI command a
                "invokeIdentityArn": "arn:aws:iam::account-id:role/testLEBRole",
                "eventVersion": "1.0",
                "eventName": "aws:kinesis:record",
-               "eventSourceARN": "arn:aws:kinesis:us-west-2:35667example:stream/examplestream",
+               "eventSourceARN": "arn:aws:kinesis:us-west-2:35667example:stream/lambda-stream",
                "awsRegion": "us-west-2"
            }
        ]
@@ -132,7 +132,7 @@ $ aws kinesis create-stream --stream-name lambda-stream --shard-count 1
 Run the following `describe-stream` command to get the stream ARN\.
 
 ```
-$ aws kinesis describe-stream --stream-name examplestream
+$ aws kinesis describe-stream --stream-name lambda-stream
 arn:aws:kinesis:us-east-2:123456789012:stream/lambda-stream
 ```
 
@@ -162,7 +162,7 @@ In the response, you can verify the status value is `enabled`\. Event source map
 To test the event source mapping, add event records to your Kinesis stream\. The `--data` value is a base64\-encoded value of the `"Hello, this is a test."` string\. You can run the same command more than once to add multiple records to the stream\.
 
 ```
-$ aws kinesis put-record --stream-name examplestream \
+$ aws kinesis put-record --stream-name lambda-stream \
 --data "SGVsbG8sIHRoaXMgaXMgYSB0ZXN0Lg==" --partition-key shardId-000000000000
 ```
 
