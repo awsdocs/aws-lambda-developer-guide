@@ -46,6 +46,12 @@ A runtime can support a single version of a language, multiple versions of a lan
 |  \.NET Core 2\.0  |  `dotnetcore2.0`  |  C\#  | 
 |  \.NET Core 1\.0  |  `dotnetcore1.0`  |  C\#  | 
 
+**Ruby Runtimes**  
+
+| Name | Identifier | 
+| --- | --- | 
+|  Ruby 2\.5  |  `ruby2.5`  | 
+
 **Topics**
 + [Lambda Execution Environment and Available Libraries](current-supported-versions.md)
 + [AWS Lambda Execution Context](running-lambda-code.md)
