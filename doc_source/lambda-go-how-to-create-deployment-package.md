@@ -1,4 +1,4 @@
-# Creating a Deployment Package \(Go\)<a name="lambda-go-how-to-create-deployment-package"></a>
+# AWS Lambda Deployment Package in Go<a name="lambda-go-how-to-create-deployment-package"></a>
 
 To create a Lambda function you first create a Lambda function deployment package, a \.zip file consisting of your code and any dependencies\. 
 

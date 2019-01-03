@@ -24,6 +24,7 @@ Content-type: application/json
    },
    "[Handler](#SSS-UpdateFunctionConfiguration-request-Handler)": "string",
    "[KMSKeyArn](#SSS-UpdateFunctionConfiguration-request-KMSKeyArn)": "string",
+   "[Layers](#SSS-UpdateFunctionConfiguration-request-Layers)": [ "string" ],
    "[MemorySize](#SSS-UpdateFunctionConfiguration-request-MemorySize)": number,
    "[RevisionId](#SSS-UpdateFunctionConfiguration-request-RevisionId)": "string",
    "[Role](#SSS-UpdateFunctionConfiguration-request-Role)": "string",
@@ -87,6 +88,13 @@ Type: String
 Pattern: `(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()`   
 Required: No
 
+ ** [Layers](#API_UpdateFunctionConfiguration_RequestSyntax) **   <a name="SSS-UpdateFunctionConfiguration-request-Layers"></a>
+A list of [function layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) to add to the function's execution environment\.  
+Type: Array of strings  
+Length Constraints: Minimum length of 1\. Maximum length of 140\.  
+Pattern: `arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+:[0-9]+`   
+Required: No
+
  ** [MemorySize](#API_UpdateFunctionConfiguration_RequestSyntax) **   <a name="SSS-UpdateFunctionConfiguration-request-MemorySize"></a>
 The amount of memory, in MB, your Lambda function is given\. AWS Lambda uses this memory size to infer the amount of CPU allocated to your function\. Your function use\-case determines your CPU and memory requirements\. For example, a database operation might need less memory compared to an image processing function\. The default value is 128 MB\. The value must be a multiple of 64 MB\.  
 Type: Integer  
@@ -107,7 +115,7 @@ Required: No
  ** [Runtime](#API_UpdateFunctionConfiguration_RequestSyntax) **   <a name="SSS-UpdateFunctionConfiguration-request-Runtime"></a>
 The runtime version for the function\.  
 Type: String  
-Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | java8 | python2.7 | python3.6 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | nodejs4.3-edge | go1.x`   
+Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | java8 | python2.7 | python3.6 | python3.7 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | nodejs4.3-edge | go1.x | ruby2.5 | provided`   
 Required: No
 
  ** [Timeout](#API_UpdateFunctionConfiguration_RequestSyntax) **   <a name="SSS-UpdateFunctionConfiguration-request-Timeout"></a>
@@ -153,6 +161,12 @@ Content-type: application/json
    "[Handler](#SSS-UpdateFunctionConfiguration-response-Handler)": "string",
    "[KMSKeyArn](#SSS-UpdateFunctionConfiguration-response-KMSKeyArn)": "string",
    "[LastModified](#SSS-UpdateFunctionConfiguration-response-LastModified)": "string",
+   "[Layers](#SSS-UpdateFunctionConfiguration-response-Layers)": [ 
+      { 
+         "[Arn](API_Layer.md#SSS-Type-Layer-Arn)": "string",
+         "[CodeSize](API_Layer.md#SSS-Type-Layer-CodeSize)": number
+      }
+   ],
    "[MasterArn](#SSS-UpdateFunctionConfiguration-response-MasterArn)": "string",
    "[MemorySize](#SSS-UpdateFunctionConfiguration-response-MemorySize)": number,
    "[RevisionId](#SSS-UpdateFunctionConfiguration-response-RevisionId)": "string",
@@ -221,8 +235,12 @@ Type: String
 Pattern: `(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()` 
 
  ** [LastModified](#API_UpdateFunctionConfiguration_ResponseSyntax) **   <a name="SSS-UpdateFunctionConfiguration-response-LastModified"></a>
-The date and time that the function was last updated, in [ISO\-8601 format](https://www.w3.org/TR/NOTE-datetime) \(YYYY\-MM\-DDThh:mm:ssTZD\)\.  
+The date and time that the function was last updated, in [ISO\-8601 format](https://www.w3.org/TR/NOTE-datetime) \(YYYY\-MM\-DDThh:mm:ss\.sTZD\)\.  
 Type: String
+
+ ** [Layers](#API_UpdateFunctionConfiguration_ResponseSyntax) **   <a name="SSS-UpdateFunctionConfiguration-response-Layers"></a>
+A list of [function layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\.  
+Type: Array of [Layer](API_Layer.md) objects
 
  ** [MasterArn](#API_UpdateFunctionConfiguration_ResponseSyntax) **   <a name="SSS-UpdateFunctionConfiguration-response-MasterArn"></a>
 The ARN of the master function\.  
@@ -246,7 +264,7 @@ Pattern: `arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+`
  ** [Runtime](#API_UpdateFunctionConfiguration_ResponseSyntax) **   <a name="SSS-UpdateFunctionConfiguration-response-Runtime"></a>
 The runtime environment for the Lambda function\.  
 Type: String  
-Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | java8 | python2.7 | python3.6 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | nodejs4.3-edge | go1.x` 
+Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | java8 | python2.7 | python3.6 | python3.7 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | nodejs4.3-edge | go1.x | ruby2.5 | provided` 
 
  ** [Timeout](#API_UpdateFunctionConfiguration_ResponseSyntax) **   <a name="SSS-UpdateFunctionConfiguration-response-Timeout"></a>
 The amount of time that Lambda allows a function to run before terminating it\.  

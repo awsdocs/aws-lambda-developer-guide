@@ -8,10 +8,7 @@ To begin, we introduce you to the topic that explains the fundamentals of buildi
 
 **Topics**
 + [Building Lambda Functions](lambda-app.md)
-+ [Configuring Lambda Functions](resource-model.md)
-+ [Environment Variables](env_variables.md)
-+ [AWS Lambda Function Versioning and Aliases](versioning-aliases.md)
++ [Creating Functions Using the AWS Lambda Console Editor](code-editor.md)
++ [Programming Model](programming-model-v2.md)
++ [Creating a Deployment Package](deployment-package-v2.md)
 + [Accessing AWS Resources from a Lambda Function](accessing-resources.md)
-+ [Configuring a Lambda Function to Access Resources in an Amazon VPC](vpc.md)
-+ [AWS Lambda Execution Model](running-lambda-code.md)
-+ [Lambda Execution Environment and Available Libraries](current-supported-versions.md)

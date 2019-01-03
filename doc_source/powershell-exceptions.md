@@ -1,4 +1,4 @@
-# Function Errors \(PowerShell\)<a name="powershell-exceptions"></a>
+# AWS Lambda Function Errors in PowerShell<a name="powershell-exceptions"></a>
 
 If your Lambda function has a terminating error, AWS Lambda recognizes the failure, serializes the error information into JSON, and returns it\.
 

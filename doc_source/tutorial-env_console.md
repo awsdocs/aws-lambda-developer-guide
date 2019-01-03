@@ -13,9 +13,9 @@ This tutorial will demonstrate how you can use the Lambda console to encrypt an 
 1. In **Select blueprint**, choose the **Author from scratch** button\.
 
 1. In **Basic information**, do the following:
-   + In **Name\***, specify your Lambda function name\.
-   + In **Role\***, choose **Choose an existing role**\.
-   + In **Existing role\***, choose **lambda\_basic\_execution**\.
+   + In **Name**, specify your Lambda function name\.
+   + In **Role**, choose **Choose an existing role**\.
+   + In **Existing role**, choose **lambda\_basic\_execution**\.
 **Note**  
 If the policy of the execution role does not have the `decrypt` permission, you will need add it\.
    + Choose **Create function**\.

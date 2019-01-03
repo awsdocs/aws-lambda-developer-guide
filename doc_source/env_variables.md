@@ -1,11 +1,8 @@
-# Environment Variables<a name="env_variables"></a>
+# AWS Lambda Environment Variables<a name="env_variables"></a>
 
 Environment variables for Lambda functions enable you to dynamically pass settings to your function code and libraries, without making changes to your code\. Environment variables are key\-value pairs that you create and modify as part of your function configuration, using either the AWS Lambda Console, the AWS Lambda CLI or the AWS Lambda SDK\. AWS Lambda then makes these key value pairs available to your Lambda function code using standard APIs supported by the language, like `process.env` for Node\.js functions\. 
 
 You can use environment variables to help libraries know what directory to install files in, where to store outputs, store connection and logging settings, and more\. By separating these settings from the application logic, you don't need to update your function code when you need to change the function behavior based on different settings\. 
-
-**Note**  
-This feature is not yet available in AWS regions based in China \(Beijing or Ningxia\)\. Deploying a Lambda function that contains Environment Variables will result in an `InvalidParameterException`\.
 
 ## Setting Up<a name="env_setting_up"></a>
 
@@ -24,15 +21,11 @@ You can also use the AWS CLI to create Lambda functions that contain environment
 The following example creates a new Lambda function that sets the `LD_LIBRARY_PATH` environment variable, which is used to specify a directory where shared libraries are dynamically loaded at runtime\. In this example, the Lambda function code uses the shared library in the `/usr/bin/test/lib64` directory\. Note that the `Runtime` parameter uses `nodejs6.10` but you can also specify `nodejs8.10`\. 
 
 ```
-aws lambda create-function \
-    --region us-east-1
-    --function-name myTestFunction
-    --zip-file fileb://path/package.zip
-    --role role-arn
-    --environment Variables="{LD_LIBRARY_PATH=/usr/bin/test/lib64}"
-    --handler index.handler
-    --runtime nodejs6.10
-    --profile default
+$ aws lambda create-function --function-name myTestFunction \
+    --zip-file fileb://package.zip \
+    --role role-arn \
+    --environment Variables="{LD_LIBRARY_PATH=/usr/bin/test/lib64}" \
+    --handler index.handler --runtime nodejs6.10
 ```
 
 ## Rules for Naming Environment Variables<a name="env_limits"></a>

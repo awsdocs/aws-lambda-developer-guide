@@ -36,7 +36,7 @@ For example, if there are five active shards on a stream \(that is, you have fiv
 
 ## Automatic Scaling<a name="scaling-behavior"></a>
 
-AWS Lambda dynamically scales function execution in response to increased traffic, up to your [concurrency limit](limits.md#limits-list)\. Under sustained load, your function's concurrency bursts to an initial level between 500 and 3000 concurrent executions that varies per region\. After the initial burst, the function's capacity increases by an additional 500 concurrent executions each minute until either the load is accommodated, or the total concurrency of all functions in the region hits the limit\.
+AWS Lambda dynamically scales function execution in response to increased traffic, up to your [concurrency limit](limits.md)\. Under sustained load, your function's concurrency bursts to an initial level between 500 and 3000 concurrent executions that varies per region\. After the initial burst, the function's capacity increases by an additional 500 concurrent executions each minute until either the load is accommodated, or the total concurrency of all functions in the region hits the limit\.
 
 
 ****  
@@ -52,7 +52,7 @@ AWS Lambda dynamically scales function execution in response to increased traffi
 | EU \(Ireland\) | 3000 | 
 | South America \(São Paulo\) | 500 | 
 | China \(Beijing\), China \(Ningxia\) | 500 | 
-| AWS GovCloud \(US\) | 500 | 
+| AWS GovCloud \(US\-West\) | 500 | 
 
 **Note**  
 If your function is connected to a VPC, the [Amazon VPC network interface limit](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_vpc) can prevent it from scaling\. For more information, see [Configuring a Lambda Function to Access Resources in an Amazon VPC](vpc.md)\.

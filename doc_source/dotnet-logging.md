@@ -1,4 +1,4 @@
-# Logging \(C\#\)<a name="dotnet-logging"></a>
+# AWS Lambda Function Logging in C\#<a name="dotnet-logging"></a>
 
 Your Lambda function can contain logging statements and, in turn, AWS Lambda writes these logs to CloudWatch Logs\. 
 

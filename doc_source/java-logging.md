@@ -1,4 +1,4 @@
-# Logging \(Java\)<a name="java-logging"></a>
+# AWS Lambda Function Logging in Java<a name="java-logging"></a>
 
  Your Lambda function can contain logging statements\. AWS Lambda writes these logs to CloudWatch\. We recommend you use one of the following to write logs\.
 

@@ -296,7 +296,7 @@ Amazon S3 invokes your Lambda function using the `Event` invocation type, where 
 + `aws-lambda-java-events`
 + `aws-java-sdk-s3`
 
-Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [Creating a Deployment Package \(Java\)](lambda-java-how-to-create-deployment-package.md)\.
+Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Java](lambda-java-how-to-create-deployment-package.md)\.
 
 ## Python 3<a name="with-s3-example-deployment-pkg-python"></a>
 
@@ -352,7 +352,7 @@ AWS Lambda includes the AWS SDK for Python \(Boto 3\), so you don't need to incl
 
 1. Add the contents of `lib` and `lib64` site\-packages to your \.zip file\.
 
-   `cd $VIRTUAL_ENV/lib/python3.6/site-packages`
+   `cd $VIRTUAL_ENV/lib/python3.7/site-packages`
 
    `zip -r9 ~/CreateThumbnail.zip . `
 

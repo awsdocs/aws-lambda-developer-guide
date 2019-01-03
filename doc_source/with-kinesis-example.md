@@ -1,6 +1,14 @@
 # Tutorial: Using AWS Lambda with Amazon Kinesis<a name="with-kinesis-example"></a>
 
-In this tutorial, you create a Lambda function to consume events from an Kinesis stream\.
+In this tutorial, you create a Lambda function to consume events from a Kinesis stream\. The following diagram illustrates the application flow:
+
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/kinesis-pull-10.png)
+
+1. Custom app writes records to the stream\.
+
+1. AWS Lambda polls the stream and, when it detects new records in the stream, invokes your Lambda function\.
+
+1. AWS Lambda executes the Lambda function by assuming the execution role you specified at the time you created the Lambda function\.
 
 ## Prerequisites<a name="with-kinesis-prepare"></a>
 

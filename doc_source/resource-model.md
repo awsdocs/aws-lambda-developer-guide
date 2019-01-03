@@ -1,4 +1,4 @@
-# Configuring Lambda Functions<a name="resource-model"></a>
+# Basic AWS Lambda Function Configuration<a name="resource-model"></a>
 
 A Lambda function consists of code and any associated dependencies\. In addition, a Lambda function also has configuration information associated with it\. Initially, you specify the configuration information when you create a Lambda function\. Lambda provides an API for you to update some of the configuration data\.
 

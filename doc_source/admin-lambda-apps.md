@@ -10,5 +10,4 @@ The sections below offer guidance on how to organize and track your Lambda funct
 + [Tagging Lambda Functions](tagging.md)
 + [Managing Concurrency](concurrent-executions.md)
 + [Best Practices for Working with AWS Lambda Functions](best-practices.md)
-+ [Runtime Support Policy](runtime-support-policy.md)
 + [AWS Lambda Limits](limits.md)

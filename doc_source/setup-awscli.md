@@ -1,6 +1,6 @@
-# Set Up the AWS Command Line Interface \(AWS CLI\)<a name="setup-awscli"></a>
+# Set Up the AWS CLI<a name="setup-awscli"></a>
 
-All the exercises in this guide assume that you are using administrator user credentials \(`adminuser`\) in your account to perform the operations\. For instructions on creating an administrator user in your AWS account, see [Set Up an AWS Account and Create an Administrator User](setup.md#setting-up), and then follow the steps to download and configure the AWS Command Line Interface \(AWS CLI\)\.
+All the exercises in this guide assume that you are using administrator user credentials in your account to perform the operations\. For instructions on creating an administrator user in your AWS account, see [Set Up an AWS Account and Create an Administrator User](setup.md#setting-up), and then follow the steps to download and configure the AWS Command Line Interface \(AWS CLI\)\.
 
 **To set up the AWS CLI**
 
@@ -30,7 +30,3 @@ All the exercises in this guide assume that you are using administrator user cre
      ```
      aws lambda list-functions --profile adminuser
      ```
-
-## Next Step<a name="setting-up-next-step-sam"></a>
-
- [Install SAM CLI](sam-cli-requirements.md) 

@@ -5,7 +5,7 @@ This section provides examples of creating \.zip file as your deployment package
 + All required jars to run the code in the `/lib` directory\.
 
 **Note**  
-You can also build a standalone \.jar \(also a zipped file\) as your deployment package\. For examples of creating standalone \.jar using Maven, see [Creating a Deployment Package \(Java\)](lambda-java-how-to-create-deployment-package.md)\.
+You can also build a standalone \.jar \(also a zipped file\) as your deployment package\. For examples of creating standalone \.jar using Maven, see [AWS Lambda Deployment Package in Java](lambda-java-how-to-create-deployment-package.md)\.
 
 The following examples use Gradle build and deployment tool to create the \.zip\.
 

@@ -29,7 +29,7 @@ exports.lambda_handler = function(event, context, callback) {
 };
 ```
 
-Zip up the sample code to create a deployment package\. For instructions, see [Creating a Deployment Package \(Node\.js\)](nodejs-create-deployment-pkg.md)\.
+Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Node\.js](nodejs-create-deployment-pkg.md)\.
 
 ## Java 8<a name="with-ddb-example-deployment-pkg-java"></a>
 
@@ -67,7 +67,7 @@ If the handler returns normally without exceptions, Lambda considers the input b
 + `aws-lambda-java-core`
 + `aws-lambda-java-events`
 
-Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [Creating a Deployment Package \(Java\)](lambda-java-how-to-create-deployment-package.md)\.
+Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Java](lambda-java-how-to-create-deployment-package.md)\.
 
 ## C\#<a name="with-ddb-example-deployment-pkg-dotnet"></a>
 
@@ -137,6 +137,8 @@ def lambda_handler(event, context):
     print('Successfully processed %s records.' % str(len(event['Records'])))
 ```
 
+Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Python](lambda-python-how-to-create-deployment-package.md)\.
+
 ## Go<a name="with-ddb-example-deployment-pkg-go"></a>
 
 The following example processes messages from DynamoDB, and logs their contents\. 
@@ -165,4 +167,4 @@ func handleRequest(ctx context.Context, e events.DynamoDBEvent) {
 }
 ```
 
-Zip up the sample code to create a deployment package\. For instructions, see [Creating a Deployment Package \(Python\)](lambda-python-how-to-create-deployment-package.md)\.
+Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Python](lambda-python-how-to-create-deployment-package.md)\.

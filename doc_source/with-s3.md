@@ -28,4 +28,4 @@ The following diagram summarizes the flow:
 **Topics**
 + [Tutorial: Using AWS Lambda with Amazon S3](with-s3-example.md)
 + [Sample Amazon Simple Storage Service Function Code](with-s3-example-deployment-pkg.md)
-+ [Sample Amazon Simple Storage Service Application SAM Template](with-s3-example-use-app-spec.md)
++ [AWS SAM Template for an Amazon S3 Application](with-s3-example-use-app-spec.md)

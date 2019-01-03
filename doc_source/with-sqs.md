@@ -1,8 +1,8 @@
 # Using AWS Lambda with Amazon SQS<a name="with-sqs"></a>
 
-You can use a AWS Lambda function to process messages in a [standard Amazon Simple Queue Service queue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/standard-queues.html)\. With Amazon SQS, you can offload tasks from one component of your application by sending them to a queue and processing them asynchronously\.
+You can use an AWS Lambda function to process messages in a [standard Amazon Simple Queue Service \(Amazon SQS\) queue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/standard-queues.html)\. With Amazon SQS, you can offload tasks from one component of your application by sending them to a queue and processing them asynchronously\.
 
-Lambda polls the queue and invokes your function [synchronously](invocation-options.md) with an event that contains queue messagess\. Lambda reads messages in batches and invokes your function once for each batch\. When your function successfully processes a batch, Lambda deletes its messages from the queue\.
+Lambda polls the queue and invokes your function [synchronously](invocation-options.md) with an event that contains queue messages\. Lambda reads messages in batches and invokes your function once for each batch\. When your function successfully processes a batch, Lambda deletes its messages from the queue\.
 
 **Example Amazon SQS Message Event**  
 
@@ -29,9 +29,9 @@ Lambda polls the queue and invokes your function [synchronously](invocation-opti
 }
 ```
 
-Lambda uses [long polling](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-long-polling.html) to poll a queue until it becomes active\. When messages are available, Lambda increases the rate at which it reads batches and invokes your function until it hits a concurrency limit\. For more information on how Lambda scales to process messages in your Amazon SQS queue, see [Understanding Scaling Behavior](scaling.md)\.
+Lambda uses [long polling](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-long-polling.html) to poll a queue until it becomes active\. When messages are available, Lambda increases the rate at which it reads batches, and invokes your function until it reaches a concurrency limit\. For more information on how Lambda scales to process messages in your Amazon SQS queue, see [Understanding Scaling Behavior](scaling.md)\.
 
-When Lambda reads a message from the queue, it stays in the queue but becomes hidden until Lambda deletes it\. If your function returns an error, or doesn't finish processing prior to the queue's [visibility timeout](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html), it becomes visible again, and Lambda sends it to your Lambda function again\. All messages in a failed batch return to the queue, so your function code must be able to process the same message multiple times without side effects\.
+When Lambda reads a message from the queue, it stays in the queue but becomes hidden until Lambda deletes it\. If your function returns an error, or doesn't finish processing before the queue's [visibility timeout](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html), it becomes visible again\. Then Lambda sends it to your Lambda function again\. All messages in a failed batch return to the queue, so your function code must be able to process the same message multiple times without side effects\.
 
 **Topics**
 + [Configuring a Queue for Use With Lambda](#events-sqs-queueconfig)
@@ -39,21 +39,21 @@ When Lambda reads a message from the queue, it stays in the queue but becomes hi
 + [Execution Role Permissions](#events-sqs-permissions)
 + [Tutorial: Using AWS Lambda with Amazon Simple Queue Service](with-sqs-example.md)
 + [Sample Amazon SQS Function Code](with-sqs-create-package.md)
-+ [AWS Serverless Application Model Specification for a Amazon Simple Queue Service Application](with-sqs-example-use-app-spec.md)
++ [AWS SAM Template for an Amazon SQS Application](with-sqs-example-use-app-spec.md)
 
 ## Configuring a Queue for Use With Lambda<a name="events-sqs-queueconfig"></a>
 
-[Create a standard Amazon SQS queue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/) to serve as an event source for your Lambda function\. Configure the queue to allow time for your Lambda function to process each batch of events, and for Lambda to retry in response to throttling errors as it scales up\.
+[Create a standard Amazon SQS queue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/) to serve as an event source for your Lambda function\. Then configure the queue to allow time for your Lambda function to process each batch of events—and for Lambda to retry in response to throttling errors as it scales up\.
 
-To allow your function time to process each batch of records, set the source queue's visiblity timeout to at least 6 times the [timeout](resource-model.md) that you configure on your function\. The extra time allows for Lambda to retry if your function execution is throttled while your function is processing a previous batch\.
+To allow your function time to process each batch of records, set the source queue's visibility timeout to at least 6 times the [timeout](resource-model.md) that you configure on your function\. The extra time allows for Lambda to retry if your function execution is throttled while your function is processing a previous batch\.
 
-If a message fails processing multiple times, Amazon SQS can send it to a [dead letter queue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html)\. Configure a dead letter queue on your source queue to retain messages that failed processing for troubleshooting\. Set the `maxReceiveCount` on the queue's redrive policy to at least 5 to avoid sending messages to the dead letter queue due to throttling\.
+If a message fails processing multiple times, Amazon SQS can send it to a [dead letter queue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html)\. Configure a dead letter queue on your source queue to retain messages that failed processing for troubleshooting\. Set the `maxReceiveCount` on the queue's redrive policy to at least **5** to avoid sending messages to the dead letter queue due to throttling\.
 
 ## Configuring a Queue as an Event Source<a name="events-sqs-eventsource"></a>
 
-An event source mapping tells Lambda to poll a stream or queue resource and invoke a Lambda function when items are available\. When Lambda invokes the target function, the event may contain multiple items, up to a configurable maximum batch size\.
+Create an event source mapping to tell Lambda to send items from your queue to a Lambda function\. You can create multiple event source mappings to process items from multiple queues with a single function\. When Lambda invokes the target function, the event can contain multiple items, up to a configurable maximum batch size\.
 
-**To add an Amazon SQS queue event source mapping**
+**To add an event source mapping for an Amazon SQS queue**
 
 1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
 
@@ -62,15 +62,15 @@ An event source mapping tells Lambda to poll a stream or queue resource and invo
 1. Under **Add triggers**, choose **SQS**\.
 
 1. Under **Configure triggers**, configure the event source\.
-   + **SQS queue** – The source queue\.
-   + **Batch size** – The maximum number of items to read from the queue, and send to your function, in a single invocation\.
-   + **Enabled** – Uncheck to disable the event source\.
+   + **SQS queue** – Specify the source queue\.
+   + **Batch size** – Specify the maximum number of items to read from the queue and send to your function, in a single invocation\.
+   + **Enabled** – Clear the check box to disable the event source\.
 
 1. Choose **Add**\.
 
 1. Choose **Save**\.
 
-Configure your function timeout to allow enough time to process an entire batch of items\. If items take a long time to process, choose a smaller batch size\. Are large batch size can improve efficiency for workloads that are very fast or have a lot of overhead, but if your function returns an error, all items in the batch return to the queue\. If you configure [reserved concurrency](concurrent-executions.md#per-function-concurrency) on your function, set a minimum of 5 concurrent executions to reduce the chance of throttling errors when Lambda invokes your function\.
+Configure your function timeout to allow enough time to process an entire batch of items\. If items take a long time to process, choose a smaller batch size\. A large batch size can improve efficiency for workloads that are very fast or have a lot of overhead\. However, if your function returns an error, all items in the batch return to the queue\. If you configure [reserved concurrency](concurrent-executions.md#per-function-concurrency) on your function, set a minimum of 5 concurrent executions to reduce the chance of throttling errors when Lambda invokes your function\.
 
 To configure an event source with the Lambda API or the AWS SDK, use the [CreateEventSourceMapping](API_CreateEventSourceMapping.md) and [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md) actions\.
 

@@ -70,7 +70,7 @@ exports.handler = function(event, context, callback) {
 1. Create a Lambda function with the `create-function` command\.
 
    ```
-   $ aws lambda create-function --function-name ProcessDynamoDBRecord \
+   $ aws lambda create-function --function-name ProcessDynamoDBRecords \
    --zip-file fileb://function.zip --handler index.handler --runtime nodejs8.10 \
    --role role-arn
    ```
@@ -177,9 +177,7 @@ In this step, you invoke your Lambda function manually using the `invoke` AWS La
 Execute the following `invoke` command\. 
 
 ```
-$ aws lambda invoke --function-name ProcessDynamoDBStream \
---invocation-type RequestResponse --payload file://input.txt \
-outputfile.txt
+$ aws lambda invoke --function-name ProcessDynamoDBRecords --payload file://input.txt outputfile.txt
 ```
 
 The function returns the string message \(message in the `context.succeed()` in the code\) in the response body\. 
@@ -223,9 +221,8 @@ Create an event source mapping in AWS Lambda\. This event source mapping associa
 Run the following AWS CLI `create-event-source-mapping` command\. After the command executes, note down the UUID\. You'll need this UUID to refer to the event source mapping in any commands, for example, when deleting the event source mapping\.
 
 ```
-$ aws lambda create-event-source-mapping --function-name ProcessDynamoDBStream \
---event-source DynamoDB-stream-arn \
---batch-size 100 --starting-position TRIM_HORIZON
+$ aws lambda create-event-source-mapping --function-name ProcessDynamoDBRecords \
+ --batch-size 100 --starting-position LATEST --event-source DynamoDB-stream-arn
 ```
 
  This creates a mapping between the specified DynamoDB stream and the Lambda function\. You can associate a DynamoDB stream with multiple Lambda functions, and associate the same Lambda function with multiple streams\. However, the Lambda functions will share the read throughput for the stream they share\. 
@@ -233,11 +230,16 @@ $ aws lambda create-event-source-mapping --function-name ProcessDynamoDBStream \
 You can get the list of event source mappings by running the following command\.
 
 ```
-$ aws lambda list-event-source-mappings --function-name ProcessDynamoDBStream \
---event-source DynamoDB-stream-arn
+$ aws lambda list-event-source-mappings
 ```
 
 The list returns all of the event source mappings you created, and for each mapping it shows the `LastProcessingResult`, among other things\. This field is used to provide an informative message if there are any problems\. Values such as `No records processed` \(indicates that AWS Lambda has not started polling or that there are no records in the stream\) and `OK` \(indicates AWS Lambda successfully read records from the stream and invoked your Lambda function\) indicate that there no issues\. If there are issues, you receive an error message\.
+
+If you have a lot of event source mappings, use the function name parameter to narrow down the results\.
+
+```
+$ aws lambda list-event-source-mappings --function-name ProcessDynamoDBRecords
+```
 
 ## Test the Setup<a name="with-ddb-final-integration-test-no-iam"></a>
 

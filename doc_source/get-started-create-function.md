@@ -27,7 +27,7 @@ The console shows the **Get Started** page only if you do not have any Lambda fu
 
 1. In **Author from scratch**, do the following:
    + In **Name\***, specify your Lambda function name\.
-   + In **Runtime\***, choose `Python 3.6`\.
+   + In **Runtime\***, choose `Python 3.7`\.
    + In **Role\***, choose **Create new role from template\(s\):**
    + In **Role name\***, enter a name for your role\.
    + Leave the **Policy templates** field blank\. For the purposes of this introduction, your Lambda function will have the necessary execution permissions\.
@@ -47,14 +47,14 @@ For an in\-depth look at AWS Lambda's security polices, see [Authentication and 
 
    For this example, do not configure a trigger\.
    + In **Function code** note that code is provided\. It returns a simple "Hello from Lambda" greeting\.
-   + **Handler** shows **lambda\_function\.lambda\_handler** value\. It is the *filename*\.*handler\-function*\. The console saves the sample code in the `lambda_function.py` file and in the code `lambda_handler` is the function name that receives the event as a parameter when the Lambda function is invoked\. For more information, see [Lambda Function Handler \(Python\)](python-programming-model-handler-types.md)\.
+   + **Handler** shows **lambda\_function\.lambda\_handler** value\. It is the *filename*\.*handler\-function*\. The console saves the sample code in the `lambda_function.py` file and in the code `lambda_handler` is the function name that receives the event as a parameter when the Lambda function is invoked\. For more information, see [AWS Lambda Function Handler in Python](python-programming-model-handler-types.md)\.
    + Note the embedded IDE \(Integrated Development Environment\)\. To learn more, see [Creating Functions Using the AWS Lambda Console Editor](code-editor.md)\.
 
 1. Other configuration options on this page include:
-   + **Environment variables** – for Lambda functions enable you to dynamically pass settings to your function code and libraries, without making changes to your code\. For more information, see [Environment Variables](env_variables.md)\.
+   + **Environment variables** – for Lambda functions enable you to dynamically pass settings to your function code and libraries, without making changes to your code\. For more information, see [AWS Lambda Environment Variables](env_variables.md)\.
    + **Tags** – are key\-value pairs that you attach to AWS resources to better organize them\. For more information, see [Tagging Lambda Functions](tagging.md)\.
    + **Execution role** – which allows you to administer security on your function, using defined roles and policies or creating new ones\. For more information, see [Authentication and Access Control for AWS Lambda](lambda-auth-and-access-control.md)\.
-   + **Basic settings** – allows you to dictate the memory allocation and timeout limit for your Lambda function\. For more information, see [AWS Lambda Limits](limits.md#limits-list)\.
+   + **Basic settings** – allows you to dictate the memory allocation and timeout limit for your Lambda function\. For more information, see [AWS Lambda Limits](limits.md)\.
    + **Network** – allows you to select a VPC your function will access\. For more information, see [Configuring a Lambda Function to Access Resources in an Amazon VPC](vpc.md)\.
    + **Debugging and error handling** – allows you to select a [Dead Letter Queues](dlq.md) resource to analyze failed function invocation retries\. It also allows you to enable active tracing\. For more information, see [Using AWS X\-Ray](lambda-x-ray.md)\. 
    + **Concurrency** – allows you to allocate a specific limit of concurrent executions allowed for this function\. For more information, see [Function Level Concurrent Execution Limit](concurrent-executions.md#per-function-concurrency)\. 
@@ -106,7 +106,7 @@ The console always uses the `RequestResponse` invocation type \(synchronous invo
    + Invocation count shows the number of invocations during this interval\.
    + Invocation duration shows how long it took for your Lambda function to run\. It shows minimum, maximum, and average time of execution\.
    + Invocation errors show the number of times your Lambda function failed\. You can compare the number of times your function executed and how many times it failed \(if any\)\.
-   + Throttled invocation metrics show whether AWS Lambda throttled your Lambda function invocation\. For more information, see [AWS Lambda Limits](limits.md#limits-list)\.
+   + Throttled invocation metrics show whether AWS Lambda throttled your Lambda function invocation\. For more information, see [AWS Lambda Limits](limits.md)\.
    + Concurrent execution metrics show the number of concurrent invocations of your Lambda function\. For more information, see [Managing Concurrency](concurrent-executions.md)\.
    + The AWS Lambda console shows these CloudWatch metrics for your convenience\. You can see these metrics in the Amazon CloudWatch console by clicking any of these metrics\.
 

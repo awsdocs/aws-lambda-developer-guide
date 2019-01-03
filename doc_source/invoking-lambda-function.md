@@ -61,7 +61,7 @@ You can configure AWS Lambda to automatically poll your stream and process any n
 
 For stream\-based services, you create event source mapping in AWS Lambda, identifying the stream to poll and which Lambda function to invoke\.
 
-For an example event, see [Amazon Kinesis Data Streams Sample Event](eventsources.md#eventsources-kinesis-streams)\. For an example use case, see [Using AWS Lambda with Kinesis](with-kinesis.md)\.
+For an example event, see [Amazon Kinesis Data Streams Sample Event](eventsources.md#eventsources-kinesis-streams)\. For an example use case, see [Using AWS Lambda with Amazon Kinesis](with-kinesis.md)\.
 
 Error handling for a given event source depends on how Lambda is invoked\. Amazon Kinesis Data Streams is a stream\-based event source\. For more information on how errors are retried, see [AWS Lambda Retry Behavior](retries-on-errors.md)\.
 

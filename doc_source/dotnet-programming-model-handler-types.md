@@ -1,4 +1,4 @@
-# Lambda Function Handler \(C\#\)<a name="dotnet-programming-model-handler-types"></a>
+# AWS Lambda Function Handler in C\#<a name="dotnet-programming-model-handler-types"></a>
 
 When you create a Lambda function, you specify a handler that AWS Lambda can invoke when the service executes the function on your behalf\. 
 
@@ -50,7 +50,7 @@ All other types, as listed below, require you to specify a serializer\.
 + For asynchronous invocations the return\-type will be ignored by Lambda\. The return type may be set to void in such cases\.
 + If you are using \.NET asynchronous programming, the return type can be Task and Task<T> types and use `async` and `await` keywords\. For more information, see [Using Async in C\# Functions with AWS Lambda](#dot-net-async)\.
 
-Unless your function input and output parameters are of type `System.IO.Stream`, you will need to serialize them\. AWS Lambda provides a default serializer that can be applied at the assembly or method level of your application, or you can define your own by implementing the `ILambdaSerializer` interface provided by the `Amazon.Lambda.Core` library\. For more information, see [Creating a Deployment Package \(C\#\)](lambda-dotnet-how-to-create-deployment-package.md)\.
+Unless your function input and output parameters are of type `System.IO.Stream`, you will need to serialize them\. AWS Lambda provides a default serializer that can be applied at the assembly or method level of your application, or you can define your own by implementing the `ILambdaSerializer` interface provided by the `Amazon.Lambda.Core` library\. For more information, see [AWS Lambda Deployment Package in C\#](lambda-dotnet-how-to-create-deployment-package.md)\.
 
  To add the default serializer attribute to a method, first add a dependency on `Amazon.Lambda.Serialization.Json` in your `project.json` file\. 
 

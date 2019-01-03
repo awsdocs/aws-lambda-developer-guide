@@ -1,4 +1,4 @@
-# Lambda Function Handler \(Node\.js\)<a name="nodejs-prog-model-handler"></a>
+# AWS Lambda Function Handler in Node\.js<a name="nodejs-prog-model-handler"></a>
 
 AWS Lambda invokes your Lambda function via a `handler` object\. A `handler` represents the name of your Lambda function \(and serves as the entry point that AWS Lambda uses to execute your function code\. For example: 
 
@@ -10,7 +10,7 @@ exports.myHandler = function(event, context, callback) {
    // callback("some error type"); 
 }
 ```
-+ `myHandler` – This is the name of the function AWS Lambda invokes\. Suppose you save this code as `helloworld.js`\. Then, `myHandler` is the function that contains your Lambda function code and `helloworld` is the name of the file that represents your deployment package\. For more information, see [Creating a Deployment Package \(Node\.js\)](nodejs-create-deployment-pkg.md)\.
++ `myHandler` – This is the name of the function AWS Lambda invokes\. Suppose you save this code as `helloworld.js`\. Then, `myHandler` is the function that contains your Lambda function code and `helloworld` is the name of the file that represents your deployment package\. For more information, see [AWS Lambda Deployment Package in Node\.js](nodejs-create-deployment-pkg.md)\.
 
   AWS Lambda supports two invocation types:
   + **RequestResponse**, or *synchronous execution*: AWS Lambda returns the result of the function call to the client invoking the Lambda function\. If the handler code of your Lambda function does not specify a return value, AWS Lambda will automatically return `null` for that value\. For a simple sample, see [Example](#nodejs-prog-model-handler-example)\.
@@ -19,7 +19,7 @@ exports.myHandler = function(event, context, callback) {
 If you discover that your Lambda function does not process the event using asynchronous invocation, you can investigate the failure using [Dead Letter Queues](dlq.md)\.
 
      Event sources can range from a supported AWS service or custom applications that invoke your Lambda function\. For examples, see [Sample Events Published by Event Sources](eventsources.md)\. For a simple sample, see [Example](#nodejs-prog-model-handler-example)\. 
-+ `context` – AWS Lambda uses this parameter to provide details of your Lambda function's execution\. For more information, see [The Context Object \(Node\.js\)](nodejs-prog-model-context.md)\.
++ `context` – AWS Lambda uses this parameter to provide details of your Lambda function's execution\. For more information, see [AWS Lambda Context Object in Node\.js](nodejs-prog-model-context.md)\.
 + `callback` \(optional\) – See [Using the Callback Parameter](#nodejs-prog-model-handler-callback)\.
 
 ## Using the Callback Parameter<a name="nodejs-prog-model-handler-callback"></a>
@@ -104,7 +104,7 @@ exports.myHandler = async function(event, context) {
    + Use the hello\-world blueprint\. 
    + The sample uses **nodejs6\.10** as the **runtime** but you can also select **nodejs8\.10**\. The code samples provided will work for any version\.
 
-   For instructions to create a Lambda function using the console, see [Create a Simple Lambda Function](get-started-create-function.md)\.
+   For instructions to create a Lambda function using the console, see [Create a Lambda Function with the Console](getting-started-create-function.md)\.
 
 1. Replace the template code with the code provided in this section and create the function\.
 

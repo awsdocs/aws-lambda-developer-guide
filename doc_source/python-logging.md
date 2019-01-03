@@ -1,4 +1,4 @@
-# Logging \(Python\)<a name="python-logging"></a>
+# AWS Lambda Function Logging in Python<a name="python-logging"></a>
 
 Your Lambda function can contain logging statements\. AWS Lambda writes these logs to CloudWatch\. If you use the Lambda console to invoke your Lambda function, the console displays the same logs\. 
 
@@ -41,7 +41,7 @@ The console uses the `RequestResponse` invocation type \(synchronous invocation\
 
 **To test the preceding Python code \(console\)**
 
-1. In the console, create a Lambda function using the hello\-world\-python blueprint\. In **runtime**, choose **Python 2\.7**\. In **Handler**, replace `lambda_function.lambda_handler` with `lambda_function.my_other_logging_handler` and in **Role**, choose **Basic execution role**\. You also replace the code provided by the blueprint by the code in this section\. For step\-by\-step instructions to create a Lambda function using the console, see [Create a Simple Lambda Function](get-started-create-function.md)\. 
+1. In the console, create a Lambda function using the hello\-world\-python blueprint\. In **runtime**, choose **Python 2\.7**\. In **Handler**, replace `lambda_function.lambda_handler` with `lambda_function.my_other_logging_handler` and in **Role**, choose **Basic execution role**\. You also replace the code provided by the blueprint by the code in this section\. For step\-by\-step instructions to create a Lambda function using the console, see [Create a Lambda Function with the Console](getting-started-create-function.md)\. 
 
 1. Replace the template code with the code provided in this section\.
 

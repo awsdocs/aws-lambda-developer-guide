@@ -5,7 +5,7 @@ The use cases for AWS Lambda can be grouped into the following categories:
 
    [Using AWS Lambda with Amazon S3](with-s3.md) 
 
-   [Using AWS Lambda with Kinesis](with-kinesis.md) 
+   [Using AWS Lambda with Amazon Kinesis](with-kinesis.md) 
 
    [Using AWS Lambda with Amazon SQS](with-sqs.md) 
 
