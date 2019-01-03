@@ -27,8 +27,6 @@ Note the following:
 + Rate frequencies of less than one minute are not supported\.
 + For a singular value the unit must be singular \(for example, `rate(1 day)`\), otherwise plural \(for example, `rate(5 days)`\)\.
 
- 
-
 **Cron expression**
 
 ```
@@ -63,7 +61,7 @@ The following table describes the wildcard characters\.
 |  \*  |  Specifies *All values*  |  If used in the Day\-of\-month field, it means all days in the month\.  | 
 |  ?  |  No specified value  |  Used in conjunction with another specified value\. For example, if a specific date is specified, but you don't care what day of the week it falls on\.  | 
 |  \-  |  Specifies ranges  |  `10-12` would mean 10, 11 and 12  | 
-|  ,  |  Specifies additional values  |  `SUN, MON, TUE` means Sunday, Monday and Tuesday  | 
+|  ,  |  Specifies additional values  |  `SUN,MON,TUE` means Sunday, Monday and Tuesday  | 
 |  /  |  Specifies increments  |  `5/10` means 5, 15, 25, 35, etc\.  | 
 
 The following table lists common examples of cron expressions\.

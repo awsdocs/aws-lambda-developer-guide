@@ -1,17 +1,17 @@
 # VpcConfig<a name="API_VpcConfig"></a>
 
-If your Lambda function accesses resources in a VPC, you provide this parameter identifying the list of security group IDs and subnet IDs\. These must belong to the same VPC\. You must provide at least one security group and one subnet ID\.
+The VPC security groups and subnets attached to a Lambda function\.
 
 ## Contents<a name="API_VpcConfig_Contents"></a>
 
  **SecurityGroupIds**   <a name="SSS-Type-VpcConfig-SecurityGroupIds"></a>
-A list of one or more security groups IDs in your VPC\.  
+A list of VPC security groups IDs\.  
 Type: Array of strings  
 Array Members: Maximum number of 5 items\.  
 Required: No
 
  **SubnetIds**   <a name="SSS-Type-VpcConfig-SubnetIds"></a>
-A list of one or more subnet IDs in your VPC\.  
+A list of VPC subnet IDs\.  
 Type: Array of strings  
 Array Members: Maximum number of 16 items\.  
 Required: No

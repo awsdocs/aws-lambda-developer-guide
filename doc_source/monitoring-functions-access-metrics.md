@@ -1,6 +1,6 @@
 # Accessing Amazon CloudWatch Metrics for AWS Lambda<a name="monitoring-functions-access-metrics"></a>
 
-AWS Lambda automatically monitors functions on your behalf, reporting metrics through Amazon CloudWatch\. These metrics include total requests, latency, and error rates\. For more information about Lambda metrics, see [AWS Lambda Metrics](monitoring-functions-metrics.md)\. For more information about CloudWatch, see the [Amazon CloudWatch User Guide](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/)\. 
+AWS Lambda automatically monitors functions on your behalf, reporting metrics through Amazon CloudWatch\. These metrics include total requests, duration, and error rates\. For more information about Lambda metrics, see [AWS Lambda Metrics](monitoring-functions-metrics.md)\. For more information about CloudWatch, see the [Amazon CloudWatch User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/)\. 
 
 You can monitor metrics for Lambda and view logs by using the Lambda console, the CloudWatch console, the AWS CLI, or the CloudWatch API\. The following procedures show you how to access metrics using these different methods\.
 
@@ -28,10 +28,10 @@ You can monitor metrics for Lambda and view logs by using the Lambda console, th
 1. \(Optional\) In the graph pane, choose a statistic and a time period, and then create a CloudWatch alarm using these settings\.
 
 **To access metrics using the AWS CLI**  
-Use the [http://docs.aws.amazon.com/cli/latest/reference/cloudwatch/list-metrics.html](http://docs.aws.amazon.com/cli/latest/reference/cloudwatch/list-metrics.html) and [http://docs.aws.amazon.com/cli/latest/reference/cloudwatch/get-metric-statistics.html](http://docs.aws.amazon.com/cli/latest/reference/cloudwatch/get-metric-statistics.html) commands\.
+Use the [https://docs.aws.amazon.com/cli/latest/reference/cloudwatch/list-metrics.html](https://docs.aws.amazon.com/cli/latest/reference/cloudwatch/list-metrics.html) and [https://docs.aws.amazon.com/cli/latest/reference/cloudwatch/get-metric-statistics.html](https://docs.aws.amazon.com/cli/latest/reference/cloudwatch/get-metric-statistics.html) commands\.
 
 **To access metrics using the CloudWatch CLI**  
-Use the [http://docs.aws.amazon.com/AmazonCloudWatch/latest/cli/cli-mon-list-metrics.html](http://docs.aws.amazon.com/AmazonCloudWatch/latest/cli/cli-mon-list-metrics.html) and [http://docs.aws.amazon.com/AmazonCloudWatch/latest/cli/cli-mon-get-stats.html](http://docs.aws.amazon.com/AmazonCloudWatch/latest/cli/cli-mon-get-stats.html) commands\.
+Use the [https://docs.aws.amazon.com/AmazonCloudWatch/latest/cli/cli-mon-list-metrics.html](https://docs.aws.amazon.com/AmazonCloudWatch/latest/cli/cli-mon-list-metrics.html) and [https://docs.aws.amazon.com/AmazonCloudWatch/latest/cli/cli-mon-get-stats.html](https://docs.aws.amazon.com/AmazonCloudWatch/latest/cli/cli-mon-get-stats.html) commands\.
 
 **To access metrics using the CloudWatch API**  
-Use the [http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html](http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html) and [http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html](http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html) operations\.
+Use the [https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html) and [https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html) operations\.

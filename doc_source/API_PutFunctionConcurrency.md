@@ -1,6 +1,6 @@
 # PutFunctionConcurrency<a name="API_PutFunctionConcurrency"></a>
 
-Sets a limit on the number of concurrent executions available to this function\. It is a subset of your account's total concurrent execution limit per region\. Note that Lambda automatically reserves a buffer of 100 concurrent executions for functions without any reserved concurrency limit\. This means if your account limit is 1000, you have a total of 900 available to allocate to individual functions\. For more information, see [Managing Concurrency](concurrent-executions.md)\.
+Sets a limit on the number of concurrent executions available to this function\. It is a subset of your account's total concurrent execution limit per region\. Note that Lambda automatically reserves a buffer of 100 concurrent executions for functions without any reserved concurrency limit\. This means if your account limit is 1000, you have a total of 900 available to allocate to individual functions\. For more information, see [Managing Concurrency](https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html)\.
 
 ## Request Syntax<a name="API_PutFunctionConcurrency_RequestSyntax"></a>
 
@@ -18,16 +18,22 @@ Content-type: application/json
 The request requires the following URI parameters\.
 
  ** [FunctionName](#API_PutFunctionConcurrency_RequestSyntax) **   <a name="SSS-PutFunctionConcurrency-request-FunctionName"></a>
-The name of the function you are setting concurrent execution limits on\. For more information, see [Managing Concurrency](concurrent-executions.md)\.  
+The name of the lambda function\.  
+
+**Name formats**
++  **Function name** \- `MyFunction`\.
++  **Function ARN** \- `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`\.
++  **Partial ARN** \- `123456789012:function:MyFunction`\.
+The length constraint applies only to the full ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
-Pattern: `(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
+Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
 ## Request Body<a name="API_PutFunctionConcurrency_RequestBody"></a>
 
 The request accepts the following data in JSON format\.
 
  ** [ReservedConcurrentExecutions](#API_PutFunctionConcurrency_RequestSyntax) **   <a name="SSS-PutFunctionConcurrency-request-ReservedConcurrentExecutions"></a>
-The concurrent execution limit reserved for this function\. For more information, see [Managing Concurrency](concurrent-executions.md)\.  
+The concurrent execution limit reserved for this function\.  
 Type: Integer  
 Valid Range: Minimum value of 0\.  
 Required: Yes
@@ -50,7 +56,7 @@ If the action is successful, the service sends back an HTTP 200 response\.
 The following data is returned in JSON format by the service\.
 
  ** [ReservedConcurrentExecutions](#API_PutFunctionConcurrency_ResponseSyntax) **   <a name="SSS-PutFunctionConcurrency-response-ReservedConcurrentExecutions"></a>
-The number of concurrent executions reserved for this function\. For more information, see [Managing Concurrency](concurrent-executions.md)\.  
+The number of concurrent executions reserved for this function\. For more information, see [Managing Concurrency](https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html)\.  
 Type: Integer  
 Valid Range: Minimum value of 0\.
 
@@ -69,7 +75,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-   
+Request throughput limit exceeded  
 HTTP Status Code: 429
 
 ## See Also<a name="API_PutFunctionConcurrency_SeeAlso"></a>

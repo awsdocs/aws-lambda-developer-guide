@@ -1,23 +1,23 @@
 # VpcConfigResponse<a name="API_VpcConfigResponse"></a>
 
-VPC configuration associated with your Lambda function\.
+The VPC security groups and subnets attached to a Lambda function\.
 
 ## Contents<a name="API_VpcConfigResponse_Contents"></a>
 
  **SecurityGroupIds**   <a name="SSS-Type-VpcConfigResponse-SecurityGroupIds"></a>
-A list of security group IDs associated with the Lambda function\.  
+A list of VPC security groups IDs\.  
 Type: Array of strings  
 Array Members: Maximum number of 5 items\.  
 Required: No
 
  **SubnetIds**   <a name="SSS-Type-VpcConfigResponse-SubnetIds"></a>
-A list of subnet IDs associated with the Lambda function\.  
+A list of VPC subnet IDs\.  
 Type: Array of strings  
 Array Members: Maximum number of 16 items\.  
 Required: No
 
  **VpcId**   <a name="SSS-Type-VpcConfigResponse-VpcId"></a>
-The VPC ID associated with you Lambda function\.  
+The ID of the VPC\.  
 Type: String  
 Required: No
 
