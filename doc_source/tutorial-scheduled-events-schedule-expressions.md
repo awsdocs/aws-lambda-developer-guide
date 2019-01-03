@@ -27,8 +27,6 @@ Note the following:
 + Rate frequencies of less than one minute are not supported\.
 + For a singular value the unit must be singular \(for example, `rate(1 day)`\), otherwise plural \(for example, `rate(5 days)`\)\.
 
- 
-
 **Cron expression**
 
 ```
@@ -63,7 +61,7 @@ The following table describes the wildcard characters\.
 |  \*  |  Specifies *All values*  |  If used in the Day\-of\-month field, it means all days in the month\.  | 
 |  ?  |  No specified value  |  Used in conjunction with another specified value\. For example, if a specific date is specified, but you don't care what day of the week it falls on\.  | 
 |  \-  |  Specifies ranges  |  `10-12` would mean 10, 11 and 12  | 
-|  ,  |  Specifies additional values  |  `SUN, MON, TUE` means Sunday, Monday and Tuesday  | 
+|  ,  |  Specifies additional values  |  `SUN,MON,TUE` means Sunday, Monday and Tuesday  | 
 |  /  |  Specifies increments  |  `5/10` means 5, 15, 25, 35, etc\.  | 
 
 The following table lists common examples of cron expressions\.
@@ -82,5 +80,6 @@ The following table lists common examples of cron expressions\.
 |  Invoke a Lambda function at 9 a\.m\. \(UTC\) the first Monday of each month  |  <pre>cron(0 9 ? * 2#1 *)</pre>  | 
 
 Note the following: 
++ The previous examples assume you are using the AWS CLI\. If you are using the Lambda console, do not include the `cron` prefix to your expression\.
 + Cron expressions that lead to rates faster than one minute are not supported\.
 + One of the day\-of\-month or day\-of\-week values must be a question mark \(`?`\)\.

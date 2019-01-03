@@ -15,9 +15,6 @@ In this step, you create an ElastiCache cluster in the default Amazon VPC in us\
 
    You can look up the default VPC security group in the VPC console under **Security Groups**\. Your example Lambda function will add and retrieve an item from this cluster\.
 
-   You can also launch a cache cluster using the Amazon ElastiCache console\. For instructions, see [Getting Started with Amazon ElastiCache](http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/GettingStarted.html) in the *Amazon ElastiCache User Guide*\.
+   You can also launch a cache cluster using the Amazon ElastiCache console\. For instructions, see [Getting Started with Amazon ElastiCache](https://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/GettingStarted.html) in the *Amazon ElastiCache User Guide*\.
 
 1. Write down the configuration endpoint for the cache cluster that you launched\. You can get this from the Amazon ElastiCache console\. You will specify this value in your Lambda function code in the next section\.
-
-**Next Step**  
-[Step 2: Create a Lambda Function ](vpc-ec-create-lambda-function.md)

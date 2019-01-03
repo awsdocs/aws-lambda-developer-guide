@@ -1,10 +1,5 @@
 # Step 2\.1: Create a Deployment Package<a name="vpc-rds-deployment-pkg"></a>
 
-**Note**  
-At this time, example code for the Lambda function is provided only in Python\.
-
-## Python<a name="vpc-rds-deployment-pkg-python"></a>
-
 The following example Python code runs a SELECT query against the Employee table in the MySQL RDS instance that you created in the VPC\. The code creates a table in the ExampleDB database, adds sample records, and retrieves those records\. 
 
 1. Open a text editor, and then copy the following code\.
@@ -49,7 +44,7 @@ The following example Python code runs a SELECT query against the Employee table
                item_count += 1
                logger.info(row)
                #print(row)
-       
+        conn.commit()
    
        return "Added %d items from RDS MySQL table" %(item_count)
    ```
@@ -71,6 +66,3 @@ We recommend that `pymysql.connect()` is executed outside the handler, as shown,
    ```
 
 1. Zip all of these files into a file named `app.zip` to create your deployment package\. For step\-by\-step instructions, see [Creating a Deployment Package \(Python\)](lambda-python-how-to-create-deployment-package.md)\. 
-
-**Next Step**  
-[Step 2\.2: Create the Execution Role \(IAM Role\)](vpc-rds-create-iam-role.md)

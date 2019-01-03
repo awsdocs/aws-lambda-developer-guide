@@ -3,7 +3,7 @@
 Every AWS resource is owned by an AWS account, and permissions to create or access a resource are governed by permissions policies\. An account administrator can attach permissions policies to IAM identities \(that is, users, groups, and roles\), and some services \(such as AWS Lambda\) also support attaching permissions policies to resources\.
 
 **Note**  
-An *account administrator* \(or administrator user\) is a user with administrator privileges\. For more information, see [IAM Best Practices](http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html) in the *IAM User Guide*\.
+An *account administrator* \(or administrator user\) is a user with administrator privileges\. For more information, see [IAM Best Practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html) in the *IAM User Guide*\.
 
 When granting permissions, you decide who is getting the permissions, the resources they get permissions for, and the specific actions that you want to allow on those resources\.
 
@@ -16,7 +16,7 @@ When granting permissions, you decide who is getting the permissions, the resour
 
 ## AWS Lambda Resources and Operations<a name="access-control-resources"></a>
 
- In AWS Lambda, the primary resources are a Lambda *function* and an *event source mapping*\. You create an event source mapping in the AWS Lambda pull model to associate a Lambda function with an event source\. For more information, see [Event Source Mapping](invocation-options.md#intro-invocation-modes)\.
+In AWS Lambda, the primary resources are a Lambda *function* and an *event source mapping*\. You create an event source mapping in the AWS Lambda pull model to associate a Lambda function with an event source\. For more information, see [AWS Lambda Event Source Mapping](intro-invocation-modes.md)\.
 
 AWS Lambda also supports additional resource types, *alias* and *version*\. However, you can create aliases and versions only in the context of an existing Lambda function\. These are referred to as *subresources*\. 
 
@@ -46,7 +46,7 @@ A *resource owner* is the AWS account that created the resource\. That is, the r
 A *permissions policy* describes who has access to what\. The following section explains the available options for creating permissions policies\.
 
 **Note**  
-This section discusses using IAM in the context of AWS Lambda\. It doesn't provide detailed information about the IAM service\. For complete IAM documentation, see [What Is IAM?](http://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) in the *IAM User Guide*\. For information about IAM policy syntax and descriptions, see [AWS IAM Policy Reference](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in the *IAM User Guide*\.
+This section discusses using IAM in the context of AWS Lambda\. It doesn't provide detailed information about the IAM service\. For complete IAM documentation, see [What Is IAM?](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) in the *IAM User Guide*\. For information about IAM policy syntax and descriptions, see [AWS IAM Policy Reference](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in the *IAM User Guide*\.
 
 Policies attached to an IAM identity are referred to as *identity\-based* policies \(IAM polices\) and policies attached to a resource are referred to as *resource\-based* policies\. AWS Lambda supports both identity\-based \(IAM policies\) and resource\-based policies\.
 
@@ -66,7 +66,7 @@ You can attach policies to IAM identities\. For example, you can do the followin
 
   1. Account B administrator can then delegate permissions to assume the role to any users in Account B\. Doing this allows users in Account B to create or access resources in Account A\. The principal in the trust policy can also be an AWS service principal if you want to grant an AWS service permissions to assume the role\.
 
-   For more information about using IAM to delegate permissions, see [Access Management](http://docs.aws.amazon.com/IAM/latest/UserGuide/access.html) in the *IAM User Guide*\. 
+   For more information about using IAM to delegate permissions, see [Access Management](https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html) in the *IAM User Guide*\. 
 
 The following is an example policy that grants permissions for the `lambda:ListFunctions` action on all resources\. In the current implementation, Lambda doesn't support identifying specific resources using the resource ARNs \(also referred to as resource\-level permissions\) for some of the API actions, so you must specify a wildcard character \(\*\)\.
 
@@ -86,14 +86,14 @@ The following is an example policy that grants permissions for the `lambda:ListF
 }
 ```
 
-For more information about using identity\-based policies with Lambda, see [Using Identity\-Based Policies \(IAM Policies\) for AWS Lambda](access-control-identity-based.md)\. For more information about users, groups, roles, and permissions, see [Identities \(Users, Groups, and Roles\)](http://docs.aws.amazon.com/IAM/latest/UserGuide/id.html) in the *IAM User Guide*\. 
+For more information about using identity\-based policies with Lambda, see [Using Identity\-Based Policies \(IAM Policies\) for AWS Lambda](access-control-identity-based.md)\. For more information about users, groups, roles, and permissions, see [Identities \(Users, Groups, and Roles\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html) in the *IAM User Guide*\. 
 
 ### Resource\-Based Policies \(Lambda Function Policies\)<a name="access-control-manage-access-resource-based"></a>
 
 Each Lambda function can have resource\-based permissions policies associated with it\. For Lambda, a Lambda function is the primary resource and these policies are referred to as *Lambda function policies*\. You can use a Lambda function policy to grant cross\-account permissions as an alternative to using identity\-based policies with IAM roles\. For example, you can grant Amazon S3 permissions to invoke your Lambda function by simply adding permissions to the Lambda function policy instead of creating an IAM role\.
 
 **Important**  
-Lambda function policies are primarily used when you are setting up an event source in AWS Lambda to grant a service or an event source permissions to invoke your Lambda function \(see [Invoke](API_Invoke.md)\)\. An exception to this is when an event source \(for example, Amazon DynamoDB or Kinesis\) uses the pull model, where permissions are managed in the Lambda function execution role instead\. For more information, see [Event Source Mapping](invocation-options.md#intro-invocation-modes)\.
+Lambda function policies are primarily used when you are setting up an event source in AWS Lambda to grant a service or an event source permissions to invoke your Lambda function \(see [Invoke](API_Invoke.md)\)\. An exception to this is when an event source \(for example, Amazon DynamoDB or Kinesis\) uses the pull model, where permissions are managed in the Lambda function execution role instead\. For more information, see [AWS Lambda Event Source Mapping](intro-invocation-modes.md)\.
 
 The following is an example Lambda function policy that has one statement\. The statement allows the Amazon S3 service principal permission for the `lambda:InvokeFunction` action on a Lambda function called HelloWorld\. The condition ensures that the bucket where the event occurred is owned by the same account that owns the Lambda function\.
 
@@ -124,7 +124,7 @@ The following is an example Lambda function policy that has one statement\. The 
 }
 ```
 
-For more information about using resource\-based policies with Lambda, see [Using Resource\-Based Policies for AWS Lambda \(Lambda Function Policies\)](access-control-resource-based.md)\. For additional information about using IAM roles \(identity\-based policies\) as opposed to resource\-based policies, see [How IAM Roles Differ from Resource\-based Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_compare-resource-policies.html) in the *IAM User Guide*\.
+For more information about using resource\-based policies with Lambda, see [Using Resource\-Based Policies for AWS Lambda \(Lambda Function Policies\)](access-control-resource-based.md)\. For additional information about using IAM roles \(identity\-based policies\) as opposed to resource\-based policies, see [How IAM Roles Differ from Resource\-based Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_compare-resource-policies.html) in the *IAM User Guide*\.
 
 ## Specifying Policy Elements: Actions, Effects, Resources, and Principals<a name="access-control-specify-lambda-actions"></a>
 
@@ -136,12 +136,12 @@ The following are the most basic policy elements:
 + **Effect** – You specify the effect when the user requests the specific action—this can be either allow or deny\. If you don't explicitly grant access to \(allow\) a resource, access is implicitly denied\. You can also explicitly deny access to a resource, which you might do to make sure that a user cannot access it, even if a different policy grants access\.
 + **Principal** – In identity\-based policies \(IAM policies\), the user that the policy is attached to is the implicit principal\. For resource\-based policies, you specify the user, account, service, or other entity that you want to receive permissions \(applies to resource\-based policies only\)\. 
 
-To learn more about IAM policy syntax and descriptions, see [AWS IAM Policy Reference](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in the *IAM User Guide*\.
+To learn more about IAM policy syntax and descriptions, see [AWS IAM Policy Reference](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in the *IAM User Guide*\.
 
 For a table showing all of the AWS Lambda API actions and the resources that they apply to, see [Lambda API Permissions: Actions, Resources, and Conditions Reference](lambda-api-permissions-ref.md)\. 
 
 ## Specifying Conditions in a Policy<a name="specifying-conditions"></a>
 
-When you grant permissions, you can use the IAM policy language to specify the conditions when a policy should take effect\. For example, you might want a policy to be applied only after a specific date\. For more information about specifying conditions in a policy language, see [Condition](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#Condition) in the *IAM User Guide*\.
+When you grant permissions, you can use the IAM policy language to specify the conditions when a policy should take effect\. For example, you might want a policy to be applied only after a specific date\. For more information about specifying conditions in a policy language, see [Condition](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#Condition) in the *IAM User Guide*\.
 
-To express conditions, you use predefined condition keys\. There are no condition keys specific to Lambda\. However, there are AWS\-wide condition keys that you can use as appropriate\. For a complete list of AWS\-wide keys, see [Available Keys for Conditions](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#AvailableKeys) in the *IAM User Guide*\.
+To express conditions, you use predefined condition keys\. There are no condition keys specific to Lambda\. However, there are AWS\-wide condition keys that you can use as appropriate\. For a complete list of AWS\-wide keys, see [Available Keys for Conditions](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#AvailableKeys) in the *IAM User Guide*\.

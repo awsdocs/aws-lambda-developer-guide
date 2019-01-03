@@ -1,4 +1,4 @@
-# Function Errors \(Python\)<a name="python-exceptions"></a>
+# AWS Lambda Function Errors in Python<a name="python-exceptions"></a>
 
 If your Lambda function raises an exception, AWS Lambda recognizes the failure and serializes the exception information into JSON and returns it\. Consider the following example:
 
@@ -40,7 +40,7 @@ Depending on the event source, AWS Lambda may retry the failed Lambda function\.
 
 **To test the preceding Python code \(console\)**
 
-1. In the console, create a Lambda function using the hello\-world blueprint\. In **runtime**, choose either **Python 3\.6** or **Python 2\.7**\. In **Handler**, replace `lambda_function.lambda_handler` with `lambda_function.always_failed_handler`\. For instructions on how to do this, see  [Create a Simple Lambda Function](get-started-create-function.md)\. 
+1. In the console, create a Lambda function using the hello\-world blueprint\. In **runtime**, choose Python 3\.7\. In **Handler**, replace `lambda_function.lambda_handler` with `lambda_function.always_failed_handler`\. For instructions on how to do this, see [Create a Lambda Function with the Console](getting-started-create-function.md)\. 
 
 1. Replace the template code with the code provided in this section\.
 
@@ -48,9 +48,9 @@ Depending on the event source, AWS Lambda may retry the failed Lambda function\.
 
 ## Function Error Handling<a name="python-custom-errors"></a>
 
-You can create custom error handling to raise an exception directly from your Lambda function and handle it directly \(Retry or Catch\) within an AWS Step Functions State Machine\. For more information, see [Handling Error Conditions Using a State Machine](http://docs.aws.amazon.com/step-functions/latest/dg/tutorial-handling-error-conditions.html)\. 
+You can create custom error handling to raise an exception directly from your Lambda function and handle it directly \(Retry or Catch\) within an AWS Step Functions State Machine\. For more information, see [Handling Error Conditions Using a State Machine](https://docs.aws.amazon.com/step-functions/latest/dg/tutorial-handling-error-conditions.html)\. 
 
-Consider a `CreateAccount` [state](http://docs.aws.amazon.com/step-functions/latest/dg/awl-ref-states.html) is a [task](http://docs.aws.amazon.com/step-functions/latest/dg/awl-ref-states-task.html) that writes a customer's details to a database using a Lambda function\.
+Consider a `CreateAccount` [state](https://docs.aws.amazon.com/step-functions/latest/dg/awl-ref-states.html) is a [task](https://docs.aws.amazon.com/step-functions/latest/dg/awl-ref-states-task.html) that writes a customer's details to a database using a Lambda function\.
 + If the task succeeds, an account is created and a welcome email is sent\.
 + If a user tries to create an account for a username that already exists, the Lambda function raises an error, causing the state machine to suggest a different username and to retry the account\-creation process\.
 
@@ -58,7 +58,7 @@ The following code samples demonstrate how to do this\. Note that custom errors 
 
 ```
 class AccountAlreadyExistsException(Exception): pass
-            
+
 def create_account(event, context):
     raise AccountAlreadyExistsException('Account is in use!')
 ```
@@ -85,7 +85,7 @@ You can configure Step Functions to catch the error using a `Catch` rule\. Lambd
 }
 ```
 
-At runtime, AWS Step Functions catches the error, [transitioning](http://docs.aws.amazon.com/step-functions/latest/dg/concepts-transitions.html) to the `SuggestAccountName` state as specified in the `Next` transition\.
+At runtime, AWS Step Functions catches the error, [transitioning](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-transitions.html) to the `SuggestAccountName` state as specified in the `Next` transition\.
 
 Custom error handling makes it easier to create [serverless](https://aws.amazon.com/serverless) applications\. This feature integrates with all the languages supported by the Lambda [Programming Model](programming-model-v2.md), allowing you to design your application in the programming languages of your choice, mixing and matching as you go\.
 

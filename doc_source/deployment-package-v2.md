@@ -1,8 +1,14 @@
 # Creating a Deployment Package<a name="deployment-package-v2"></a>
 
 To create a Lambda function you first create a Lambda function deployment package, a \.zip or \.jar file consisting of your code and any dependencies\. When creating the zip, include only the code and its dependencies, not the containing folder\. You will then need to set the appropriate security permissions for the zip package\.
++ [AWS Lambda Deployment Package in Node\.js](nodejs-create-deployment-pkg.md)
++ [AWS Lambda Deployment Package in Python](lambda-python-how-to-create-deployment-package.md)
++ [AWS Lambda Deployment Package in Java](lambda-java-how-to-create-deployment-package.md)
++ [AWS Lambda Deployment Package in Go](lambda-go-how-to-create-deployment-package.md)
++ [AWS Lambda Deployment Package in C\#](lambda-dotnet-how-to-create-deployment-package.md)
++ [AWS Lambda Deployment Package in PowerShell](lambda-powershell-how-to-create-deployment-package.md)
 
-## Permissions Polices on Lambda Deployment Packages<a name="lambda-zip-package-permission-policies"></a>
+## Permissions Policies on Lambda Deployment Packages<a name="lambda-zip-package-permission-policies"></a>
 
 Zip packages uploaded with incorrect permissions may cause execution failure\. AWS Lambda requires global read permissions on code files and any dependent libraries that comprise your deployment package\. To ensure permissions are not restricted to your user account, you can check using the following samples:
 + **Linux/Unix/OSX environments**: Use `zipinfo` as shown in the sample below:
@@ -36,9 +42,7 @@ Zip packages uploaded with incorrect permissions may cause execution failure\. A
   + The first command changes all files in `/tmp/package_contents` to have read/write permissions to owners, read to group and global\.
   + The second command cascades the same permissions for directories\.
 
+**Note**  
+If you are running on a Windows environment, we recommend using [7\-Zip](https://www.7-zip.org/download.html) instead of `zipinfo`\.
+
 Once you have done that, set the requisite IAM permissions on the package\. For more information, see [Authentication and Access Control for AWS Lambda](lambda-auth-and-access-control.md) policies\. 
-+ [Creating a Deployment Package \(Node\.js\)](nodejs-create-deployment-pkg.md)
-+ [Creating a Deployment Package \(C\#\)](lambda-dotnet-how-to-create-deployment-package.md)
-+ [Creating a Deployment Package \(Go\)](lambda-go-how-to-create-deployment-package.md)
-+ [Creating a Deployment Package \(Java\)](lambda-java-how-to-create-deployment-package.md)
-+ [Creating a Deployment Package \(Python\)](lambda-python-how-to-create-deployment-package.md)

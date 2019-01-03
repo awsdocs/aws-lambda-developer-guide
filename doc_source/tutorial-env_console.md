@@ -1,6 +1,6 @@
 # Create a Lambda Function Using Environment Variables To Store Sensitive Information<a name="tutorial-env_console"></a>
 
-Along with specifying configuration settings for your Lambda function, you can also use environment variables to store sensitive information, such as a database password, using [AWS Key Management Service](http://docs.aws.amazon.com/kms/latest/developerguide/) and the Lambda console's encryption helpers\. For more information, see [Environment Variable Encryption](env_variables.md#env_encrypt)\. The following example shows you how to do this and also how to use KMS to decrypt that information\.
+Along with specifying configuration settings for your Lambda function, you can also use environment variables to store sensitive information, such as a database password, using [AWS Key Management Service](https://docs.aws.amazon.com/kms/latest/developerguide/) and the Lambda console's encryption helpers\. For more information, see [Environment Variable Encryption](env_variables.md#env_encrypt)\. The following example shows you how to do this and also how to use KMS to decrypt that information\.
 
 This tutorial will demonstrate how you can use the Lambda console to encrypt an environment variable containing sensitive information\. Note that if you are updating an existing function, you can skip ahead to the instruction step outlining how to Expand the ** Environment Variables ** section of [Step 2: Configure the Lambda Function](#tutorial-env-configure-function)\.
 
@@ -13,9 +13,9 @@ This tutorial will demonstrate how you can use the Lambda console to encrypt an 
 1. In **Select blueprint**, choose the **Author from scratch** button\.
 
 1. In **Basic information**, do the following:
-   + In **Name\***, specify your Lambda function name\.
-   + In **Role\***, choose **Choose an existing role**\.
-   + In **Existing role\***, choose **lambda\_basic\_execution**\.
+   + In **Name**, specify your Lambda function name\.
+   + In **Role**, choose **Choose an existing role**\.
+   + In **Existing role**, choose **lambda\_basic\_execution**\.
 **Note**  
 If the policy of the execution role does not have the `decrypt` permission, you will need add it\.
    + Choose **Create function**\.
