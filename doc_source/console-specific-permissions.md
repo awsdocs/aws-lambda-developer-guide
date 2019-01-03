@@ -20,7 +20,7 @@ If you are new to managing permissions, we recommend that you start with the exa
 + [AWS IoT](#console-permissions-iot)
 
 **Note**  
-All of these permissions policies grant the specific AWS services permissions to invoke a Lambda function\. The user who is configuring this integration must have permissions to invoke the Lambda function\. Otherwise, the user can't set the configuration\. You can attach the `AWSLambdaRole` AWS managed \(predefined\) permissions policy to the user to provide these permissions\.
+All of these permissions policies grant the specific AWS services permissions to invoke a Lambda function\. The user who is configuring this integration must have permissions to invoke the Lambda function\. Otherwise, the user can't set the configuration\. You can attach the `AWSLambdaRole` managed policy to the user to provide these permissions\.
 
 ## Amazon API Gateway<a name="console-permissions-api-gateway"></a>
 

@@ -3,7 +3,7 @@
 ## Contents<a name="API_Concurrency_Contents"></a>
 
  **ReservedConcurrentExecutions**   <a name="SSS-Type-Concurrency-ReservedConcurrentExecutions"></a>
-The number of concurrent executions reserved for this function\. For more information, see [Managing Concurrency](concurrent-executions.md)\.  
+The number of concurrent executions reserved for this function\. For more information, see [Managing Concurrency](https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html)\.  
 Type: Integer  
 Valid Range: Minimum value of 0\.  
 Required: No

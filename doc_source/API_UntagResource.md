@@ -14,7 +14,7 @@ The request requires the following URI parameters\.
 
  ** [Resource](#API_UntagResource_RequestSyntax) **   <a name="SSS-UntagResource-request-Resource"></a>
 The ARN \(Amazon Resource Name\) of the function\. For more information, see [Tagging Lambda Functions](https://docs.aws.amazon.com/lambda/latest/dg/tagging.html) in the **AWS Lambda Developer Guide**\.  
-Pattern: `arn:aws:lambda:[a-z]{2}-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
+Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [TagKeys](#API_UntagResource_RequestSyntax) **   <a name="SSS-UntagResource-request-TagKeys"></a>
 The list of tag keys to be deleted from the function\. For more information, see [Tagging Lambda Functions](https://docs.aws.amazon.com/lambda/latest/dg/tagging.html) in the **AWS Lambda Developer Guide**\.
@@ -48,7 +48,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-   
+Request throughput limit exceeded  
 HTTP Status Code: 429
 
 ## See Also<a name="API_UntagResource_SeeAlso"></a>

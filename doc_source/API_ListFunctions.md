@@ -17,23 +17,18 @@ GET /2015-03-31/functions/?FunctionVersion=FunctionVersion&Marker=Marker&MasterR
 The request requires the following URI parameters\.
 
  ** [FunctionVersion](#API_ListFunctions_RequestSyntax) **   <a name="SSS-ListFunctions-request-FunctionVersion"></a>
-Optional string\. If not specified, only the unqualified functions ARNs \(Amazon Resource Names\) will be returned\.  
-Valid value:  
- `ALL`: Will return all versions, including `$LATEST` which will have fully qualified ARNs \(Amazon Resource Names\)\.  
+Set to `ALL` to list all published versions\. If not specified, only the latest unpublished version ARN is returned\.  
 Valid Values:` ALL` 
 
  ** [Marker](#API_ListFunctions_RequestSyntax) **   <a name="SSS-ListFunctions-request-Marker"></a>
 Optional string\. An opaque pagination token returned from a previous `ListFunctions` operation\. If present, indicates where to continue the listing\. 
 
  ** [MasterRegion](#API_ListFunctions_RequestSyntax) **   <a name="SSS-ListFunctions-request-MasterRegion"></a>
-Optional string\. If not specified, will return only regular function versions \(i\.e\., non\-replicated versions\)\.  
-Valid values are:  
-The region from which the functions are replicated\. For example, if you specify `us-east-1`, only functions replicated from that region will be returned\.  
- `ALL`: Will return all functions from any region\. If specified, you also must specify a valid FunctionVersion parameter\.  
+Specify a region \(e\.g\. `us-east-2`\) to only list functions that were created in that region, or `ALL` to include functions replicated from any region\. If specified, you also must specify the `FunctionVersion`\.  
 Pattern: `ALL|[a-z]{2}(-gov)?-[a-z]+-\d{1}` 
 
  ** [MaxItems](#API_ListFunctions_RequestSyntax) **   <a name="SSS-ListFunctions-request-MaxItems"></a>
-Optional integer\. Specifies the maximum number of AWS Lambda functions to return in response\. This parameter value must be greater than 0\.  
+Optional integer\. Specifies the maximum number of AWS Lambda functions to return in response\. This parameter value must be greater than 0\. The absolute maximum of AWS Lambda functions that can be returned is 50\.  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.
 
 ## Request Body<a name="API_ListFunctions_RequestBody"></a>
@@ -69,6 +64,12 @@ Content-type: application/json
          "[Handler](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-Handler)": "string",
          "[KMSKeyArn](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-KMSKeyArn)": "string",
          "[LastModified](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-LastModified)": "string",
+         "[Layers](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-Layers)": [ 
+            { 
+               "[Arn](API_Layer.md#SSS-Type-Layer-Arn)": "string",
+               "[CodeSize](API_Layer.md#SSS-Type-Layer-CodeSize)": number
+            }
+         ],
          "[MasterArn](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-MasterArn)": "string",
          "[MemorySize](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-MemorySize)": number,
          "[RevisionId](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-RevisionId)": "string",
@@ -115,7 +116,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-   
+Request throughput limit exceeded  
 HTTP Status Code: 429
 
 ## See Also<a name="API_ListFunctions_SeeAlso"></a>

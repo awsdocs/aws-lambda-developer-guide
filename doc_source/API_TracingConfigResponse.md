@@ -1,11 +1,11 @@
 # TracingConfigResponse<a name="API_TracingConfigResponse"></a>
 
-Parent object of the tracing information associated with your Lambda function\.
+The function's AWS X\-Ray tracing configuration\.
 
 ## Contents<a name="API_TracingConfigResponse_Contents"></a>
 
  **Mode**   <a name="SSS-Type-TracingConfigResponse-Mode"></a>
-The tracing mode associated with your Lambda function\.  
+The tracing mode\.  
 Type: String  
 Valid Values:` Active | PassThrough`   
 Required: No

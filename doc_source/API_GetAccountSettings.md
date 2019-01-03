@@ -1,8 +1,6 @@
 # GetAccountSettings<a name="API_GetAccountSettings"></a>
 
-Returns a customer's account settings\.
-
-You can use this operation to retrieve Lambda limits information, such as code size and concurrency limits\. For more information about limits, see [AWS Lambda Limits](https://docs.aws.amazon.com/lambda/latest/dg/limits.html)\. You can also retrieve resource usage statistics, such as code storage usage and function count\.
+Retrieves details about your account's [limits](https://docs.aws.amazon.com/lambda/latest/dg/limits.html) and usage in a region\.
 
 ## Request Syntax<a name="API_GetAccountSettings_RequestSyntax"></a>
 
@@ -46,11 +44,11 @@ If the action is successful, the service sends back an HTTP 200 response\.
 The following data is returned in JSON format by the service\.
 
  ** [AccountLimit](#API_GetAccountSettings_ResponseSyntax) **   <a name="SSS-GetAccountSettings-response-AccountLimit"></a>
-Provides limits of code size and concurrency associated with the current account and region\.  
+Limits related to concurrency and code storage\.  
 Type: [AccountLimit](API_AccountLimit.md) object
 
  ** [AccountUsage](#API_GetAccountSettings_ResponseSyntax) **   <a name="SSS-GetAccountSettings-response-AccountUsage"></a>
-Provides code size usage and function count associated with the current account and region\.  
+The number of functions and amount of storage in use\.  
 Type: [AccountUsage](API_AccountUsage.md) object
 
 ## Errors<a name="API_GetAccountSettings_Errors"></a>
@@ -60,7 +58,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-   
+Request throughput limit exceeded  
 HTTP Status Code: 429
 
 ## See Also<a name="API_GetAccountSettings_SeeAlso"></a>

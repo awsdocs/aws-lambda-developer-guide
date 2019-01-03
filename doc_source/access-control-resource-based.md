@@ -5,9 +5,9 @@ A Lambda function is one of the resources in AWS Lambda\. You can add permission
 **Important**  
 Before you create resource\-based policies, we recommend that you first review the introductory topics that explain the basic concepts and options available for you to manage access to your AWS Lambda resources\. For more information, see [Overview of Managing Access Permissions to Your AWS Lambda Resources](access-control-overview.md)\.
 
-Lambda function policies are primarily used when you are setting up an event source in AWS Lambda to grant a service or an event source permissions to invoke your Lambda function \(see [Invoke](API_Invoke.md)\)\. An exception to this is when an event source \(for example, Amazon DynamoDB or Kinesis\) uses the pull model, where permissions are managed in the Lambda function execution role instead\. For more information, see [Event Source Mapping](invocation-options.md#intro-invocation-modes)\. 
+Lambda function policies are primarily used when you are setting up an event source in AWS Lambda to grant a service or an event source permissions to invoke your Lambda function \(see [Invoke](API_Invoke.md)\)\. An exception to this is when an event source \(for example, Amazon DynamoDB or Kinesis\) uses the pull model, where permissions are managed in the Lambda function execution role instead\. For more information, see [AWS Lambda Event Source Mapping](intro-invocation-modes.md)\. 
 
-Lambda function policies also make it easy to grant cross\-account permissions to invoke your Lambda function\. Suppose you want to grant cross\-account permissions \(for example, permissions to Amazon S3\) to invoke your Lambda function\. Instead of creating an IAM role to grant cross\-account permissions, you can add the relevant permissions in a Lambda function policy\. 
+Lambda function policies also make it easy to grant cross\-account permissions to invoke your Lambda function\. Suppose you want to grant cross\-account permissions \(for example, permissions to Amazon S3\) to invoke your Lambda function\. Instead of creating an IAM role to grant cross\-account permissions, you can add the relevant permissions in a Lambda function policy\.
 
 **Note**  
 If the custom application and the Lambda function it invokes belong to the same AWS account, you don't need to grant explicit permissions using the policy attached to the Lambda function\.
@@ -20,7 +20,7 @@ If the custom application and the Lambda function it invokes belong to the same 
 **Note**  
 The AWS Lambda console is the easiest way to manage event sources and their permissions in a Lambda function policy\. If the AWS service console for the event source supports configuring event source mapping, you can use that console too\. As you configure new event sources or modify existing event sources, the console automatically modifies the permissions policy associated with the Lambda function\. 
 
-You can use the console to view your function policy by choosing the **Triggers** tab on your function's details page and then choosing **View function policy**\. The console doesn't support directly modifying permissions in a function policy\. You must use either the AWS CLI or the AWS SDKs\. The following are AWS CLI examples of the API operations listed earlier in this topic:
+You can use the console to view your function policy under the **Configuration** tab and then choosing the **key** icon\. The console doesn't support directly modifying permissions in a function policy\. You must use either the AWS CLI or the AWS SDKs\. The following are AWS CLI examples of the API operations listed earlier in this topic:
 
 **Topics**
 + [Example 1: Allow Amazon S3 to Invoke a Lambda Function](#access-control-resource-based-example-s3-invoke-function)
@@ -69,7 +69,7 @@ In response, AWS Lambda returns the following JSON code\. The `Statement` value 
 }
 ```
 
-For information about the push model, see [Event Source Mapping](invocation-options.md#intro-invocation-modes)\.
+For information about the push model, see [AWS Lambda Event Source Mapping](intro-invocation-modes.md)\.
 
 ## Example 2: Allow Amazon API Gateway to Invoke a Lambda Function<a name="access-control-resource-based-example-apigateway-invoke-function"></a>
 

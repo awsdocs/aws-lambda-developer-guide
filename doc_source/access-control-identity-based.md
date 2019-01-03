@@ -6,9 +6,9 @@ This topic provides examples of identity\-based policies in which an account adm
  We recommend that you first review the introductory topics that explain the basic concepts and options available for you to manage access to your AWS Lambda resources\. For more information, see [Overview of Managing Access Permissions to Your AWS Lambda Resources](access-control-overview.md)\.
 
 The sections in this topic cover the following:
-+ [Permissions Required to Use the AWS Lambda Console](#additional-console-required-permissions) 
-+ [AWS Managed \(Predefined\) Policies for AWS Lambda](#access-policy-examples-aws-managed) 
-+ [Customer Managed Policy Examples](#access-policy-examples-for-sdk-cli) 
++ [Permissions Required to Use the AWS Lambda Console](#additional-console-required-permissions)
++ [AWS Managed \(Predefined\) Policies for AWS Lambda](#access-policy-examples-aws-managed)
++ [Customer Managed Policy Examples](#access-policy-examples-for-sdk-cli)
 
 The following shows an example of a permissions policy\.
 
@@ -50,14 +50,13 @@ The AWS Lambda console provides an integrated environment for you to create and 
 
 ## AWS Managed \(Predefined\) Policies for AWS Lambda<a name="access-policy-examples-aws-managed"></a>
 
-AWS addresses many common use cases by providing standalone IAM policies that are created and administered by AWS\. Managed policies grant necessary permissions for common use cases so you can avoid having to investigate what permissions are needed\. For more information, see [AWS Managed Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#aws-managed-policies) in the *IAM User Guide*\.
+AWS addresses many common use cases by providing standalone IAM policies that are created and administered by AWS\. Managed policies grant necessary permissions for common use cases so you can avoid having to investigate what permissions are needed\. For more information, see [AWS Managed Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#aws-managed-policies) in the *IAM User Guide*\.
 
 The following AWS managed policies, which you can attach to users in your account, are specific to AWS Lambda and are grouped by use case scenario:
 + **AWSLambdaReadOnlyAccess** – Grants read\-only access to AWS Lambda resources\. Note that this policy doesn't grant permission for the `lambda:InvokeFunction` action\. If you want a user to invoke a Lambda function, you can also attach the `AWSLambdaRole` AWS managed policy\.
 + **AWSLambdaFullAccess** – Grants full access to AWS Lambda resources\.
 + **AWSLambdaRole** – Grants permissions to invoke any Lambda function\. 
 
-**Note**  
 You can review these permissions policies by signing in to the IAM console and searching for specific policies there\.
 
 In addition, there are other AWS\-managed policies that are suitable for use with IAM role \(execution role\) you specify at the time of creating a Lambda function\. For more information, see [AWS Lambda Permissions Model](intro-permission-model.md)\.
@@ -72,7 +71,7 @@ You can use the console to verify the effects of each policy as you attach the p
 
 We recommend that you use two browser windows: one to create the user and grant permissions, and the other to sign in to the AWS Management Console using the user's credentials and verify permissions as you grant them to the user\.
 
- For examples that show how to create an IAM role that you can use as an execution role for your Lambda function, see [Creating IAM Roles](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create.html) in the *IAM User Guide*\.
+ For examples that show how to create an IAM role that you can use as an execution role for your Lambda function, see [Creating IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create.html) in the *IAM User Guide*\.
 
 **Topics**
 + [Step 1: Create an IAM User](#console-permissions-list-functions)
@@ -86,7 +85,7 @@ We recommend that you use two browser windows: one to create the user and grant 
 
 First, you need to create an IAM user, add the user to an IAM group with administrative permissions, and then grant administrative permissions to the IAM user that you created\. You can then access AWS using a special URL and that IAM user's credentials\. 
 
-For instructions, see [Creating Your First IAM User and Administrators Group](http://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html) in the *IAM User Guide*\. 
+For instructions, see [Creating Your First IAM User and Administrators Group](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html) in the *IAM User Guide*\. 
 
 ### Step 2: Allow a User to List Lambda Functions<a name="console-permissions-list-functions1"></a>
 
@@ -124,7 +123,7 @@ A user can select a Lambda function and view details of the function \(such as a
                   "lambda:ListAliases",
                   "lambda:GetFunction",
                   "lambda:GetFunctionConfiguration",
-                  "lambda:ListEventSourceMapping",
+                  "lambda:ListEventSourceMappings",
                   "lambda:GetPolicy"
               ],
               "Resource": "*"

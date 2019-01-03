@@ -1,6 +1,6 @@
 # AccountLimit<a name="API_AccountLimit"></a>
 
-Provides limits of code size and concurrency associated with the current account and region\.
+Provides limits of code size and concurrency associated with the current account and region\. For more information or to request a limit increase for concurrent executions, see [Lambda Limits](https://docs.aws.amazon.com/lambda/latest/dg/limits.html)\. 
 
 ## Contents<a name="API_AccountLimit_Contents"></a>
 
@@ -15,7 +15,7 @@ Type: Long
 Required: No
 
  **ConcurrentExecutions**   <a name="SSS-Type-AccountLimit-ConcurrentExecutions"></a>
-Number of simultaneous executions of your function per region\. For more information or to request a limit increase for concurrent executions, see [Lambda Function Concurrent Executions](https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html)\. The default limit is 1000\.  
+Number of simultaneous executions of your function per region\. The default limit is 1000\.  
 Type: Integer  
 Required: No
 
@@ -25,7 +25,7 @@ Type: Long
 Required: No
 
  **UnreservedConcurrentExecutions**   <a name="SSS-Type-AccountLimit-UnreservedConcurrentExecutions"></a>
-The number of concurrent executions available to functions that do not have concurrency limits set\. For more information, see [Managing Concurrency](concurrent-executions.md)\.  
+The number of concurrent executions available to functions that do not have concurrency limits set\. For more information, see [Managing Concurrency](https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html)\.  
 Type: Integer  
 Valid Range: Minimum value of 0\.  
 Required: No

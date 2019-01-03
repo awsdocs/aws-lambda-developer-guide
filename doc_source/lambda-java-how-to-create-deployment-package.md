@@ -1,4 +1,4 @@
-# Creating a Deployment Package \(Java\)<a name="lambda-java-how-to-create-deployment-package"></a>
+# AWS Lambda Deployment Package in Java<a name="lambda-java-how-to-create-deployment-package"></a>
 
 Your deployment package can be a \.zip file or a standalone jar; it is your choice\. You can use any build and packaging tool you are familiar with to create a deployment package\. 
 

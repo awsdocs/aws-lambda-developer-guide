@@ -9,7 +9,7 @@ To enable tracing on your Lambda function using the Lambda CLI, you must first a
 + Find the execution role for your Lambda function\.
 + Attach the following managed policy: `AWSXrayWriteOnlyAccess`
 
-To learn more about these policies, see [AWS X\-Ray](http://docs.aws.amazon.com/xray/latest/devguide/)\.
+To learn more about these policies, see [AWS X\-Ray](https://docs.aws.amazon.com/xray/latest/devguide/)\.
 
 If you are changing the tracing mode to active using the Lambda console, tracing permissions are added automatically, as explained in the next section\.
 

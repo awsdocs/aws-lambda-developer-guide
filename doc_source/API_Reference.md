@@ -1,10 +1,14 @@
 # API Reference<a name="API_Reference"></a>
 
-This section contains the AWS Lambda API Reference documentation\. When making the API calls, you will need to authenticate your request by providing a signature\. AWS Lambda supports signature version 4\. For more information, see [Signature Version 4 Signing Process](http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) in the *Amazon Web Services General Reference*\. 
+This section contains the AWS Lambda API Reference documentation\. When making the API calls, you will need to authenticate your request by providing a signature\. AWS Lambda supports signature version 4\. For more information, see [Signature Version 4 Signing Process](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) in the *Amazon Web Services General Reference*\. 
 
 For an overview of the service, see [What Is AWS Lambda?](welcome.md)\. 
 
 You can use the AWS CLI to explore the AWS Lambda API\. This guide provides several tutorials that use the AWS CLI\.
+
+**Topics**
++ [Actions](API_Operations.md)
++ [Data Types](API_Types.md)
 
 ## Certificate Errors When Using an SDK<a name="cert-errors"></a>
 
@@ -20,7 +24,3 @@ When accessing the AWS Lambda management console or AWS Lambda API endpoints, wh
 + Starfield Class 2 Certification Authority
 
 Root certificates from the first two authorities are available from [Amazon Trust Services](https://www.amazontrust.com/repository/), but keeping your computer up\-to\-date is the more straightforward solution\. To learn more about ACM\-provided certificates, see [AWS Certificate Manager FAQs\.](https://aws.amazon.com/certificate-manager/faqs/#certificates) 
-
-**Topics**
-+ [Actions](API_Operations.md)
-+ [Data Types](API_Types.md)

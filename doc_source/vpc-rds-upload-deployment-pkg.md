@@ -6,9 +6,6 @@ At the command prompt, run the following Lambda CLI `create-function` command us
 
 You need to update the following `create-function` command by providing the \.zip file path and the execution role ARN\. The `--runtime` parameter value can be `python2.7`, `nodejs`, or `java8`, depending on the language you used to author your code\. 
 
-**Note**  
-At this time, example code for the Lambda function is provided only in Python\. You can use either `python3.6` or `python2.7` for the `--runtime` parameter\.
-
 ```
 $ aws lambda create-function \
 --region us-east-1 \

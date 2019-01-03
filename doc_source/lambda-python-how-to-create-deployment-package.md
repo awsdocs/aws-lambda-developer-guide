@@ -1,99 +1,224 @@
-# Creating a Deployment Package \(Python\)<a name="lambda-python-how-to-create-deployment-package"></a>
+# AWS Lambda Deployment Package in Python<a name="lambda-python-how-to-create-deployment-package"></a>
 
-To create a Lambda function you first create a Lambda function deployment package, a \.zip file consisting of your code and any dependencies\. You will then need to set the appropriate security permissions for the zip package\. For more information, see [Authentication and Access Control for AWS Lambda](lambda-auth-and-access-control.md) policies\.
+A deployment package is a ZIP archive that contains your function code and dependencies\. You need to create a deployment package if you use the Lambda API to manage functions, or if your code uses libraries other than the AWS SDK\. Other libraries and dependencies need to be included in the deployment package\. You can upload the package directly to Lambda, or you can use an Amazon S3 bucket, and then upload it to Lambda\.
 
-You can create a deployment package yourself or write your code directly in the Lambda console, in which case the console creates the deployment package for you and uploads it, creating your Lambda function\. Note the following to determine if you can use the console to create your Lambda function:
-+ **Simple scenario** – If your custom code requires only the AWS SDK library, then you can use the inline editor in the AWS Lambda console\. Using the console, you can edit and upload your code to AWS Lambda\. The console will zip up your code with the relevant configuration information into a deployment package that the Lambda service can run\. 
-
-  You can also test your code in the console by manually invoking it using sample event data\. 
-**Note**  
-The Lambda service has preinstalled the AWS SDK for Python\.
-+ **Advanced scenario** – If you are writing code that uses other resources, such as a graphics library for image processing, or you want to use the AWS CLI instead of the console, you need to first create the Lambda function deployment package, and then use the console or the CLI to upload the package\.
+If you use the Lambda [console editor](code-editor.md) to author your function, the console manages the deployment package\. You can use this method as long as you don't need to add any libraries\. You can also use it to update a function that already has libraries in the deployment package, as long as the total size doesn't exceed 3 MB\.
 
 **Note**  
-After you create a deployment package, you may either upload it directly or upload the \.zip file first to an Amazon S3 bucket in the same AWS region where you want to create the Lambda function, and then specify the bucket name and object key name when you create the Lambda function using the console or the AWS CLI\.
+You can use the AWS SAM CLI `build` command to create a deployment package for your Python function code and dependencies\. See [Building Applications with Dependencies](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-build.html) in the AWS SAM Developer Guide for instructions\.
 
-The following is an example procedure to create a deployment package \(outside the console\)\. 
+**Topics**
++ [Without Additional Dependencies](#python-package-codeonly)
++ [With Additional Dependencies](#python-package-dependencies)
++ [With a Virtual Environment](#python-package-venv)
 
+## Without Additional Dependencies<a name="python-package-codeonly"></a>
+
+To create or update a function with the Lambda API, create an archive that contains your function code and upload it with the AWS CLI\.
+
+**To update a Python function with no dependencies**
+
+1. Create a ZIP archive\.
+
+   ```
+   ~/my-function$ zip function.zip function.py
+   ```
+
+1. Use the `update-function-code` command to upload the package\.
+
+   ```
+   ~/my-function$ aws lambda update-function-code --function-name python37 --zip-file fileb://function.zip
+   {
+       "FunctionName": "python37",
+       "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:python37",
+       "Runtime": "python3.7",
+       "Role": "arn:aws:iam::123456789012:role/lambda-role",
+       "Handler": "function.handler",
+       "CodeSize": 815,
+       "Description": "",
+       "Timeout": 3,
+       "MemorySize": 128,
+       "LastModified": "2018-11-20T20:41:16.647+0000",
+       "CodeSha256": "GcZ05oeHoJi61VpQj7vCLPs8DwCXmX5sE/fE2IHsizc=",
+       "Version": "$LATEST",
+       "VpcConfig": {
+           "SubnetIds": [],
+           "SecurityGroupIds": [],
+           "VpcId": ""
+       },
+       "TracingConfig": {
+           "Mode": "Active"
+       },
+       "RevisionId": "d1e983e3-ca8e-434b-8dc1-7add83d72ebd"
+   }
+   ```
+
+## With Additional Dependencies<a name="python-package-dependencies"></a>
+
+If your function depends on libraries other than the SDK for Python \(Boto 3\), install them to a local directory with [pip](https://pypi.org/project/pip/), and include them in your deployment package\.
+
+**To update a Python function with dependencies**
+
+1. Create a directory for dependencies\.
+
+   ```
+   ~/my-function$ mkdir package
+   ```
+
+1. Install libraries in the package directory with the `--target` option\.
+
+   ```
+   ~/my-function$ cd package
+   ~/my-function/package$ pip install Pillow --target .
+   Collecting Pillow
+     Using cached https://files.pythonhosted.org/packages/62/8c/230204b8e968f6db00c765624f51cfd1ecb6aea57b25ba00b240ee3fb0bd/Pillow-5.3.0-cp37-cp37m-manylinux1_x86_64.whl
+   Installing collected packages: Pillow
+   Successfully installed Pillow-5.3.0
+   ```
+
+1. Create a ZIP archive\.
+
+   ```
+   package$ zip -r9 ../function.zip .
+     adding: PIL/ (stored 0%)
+     adding: PIL/.libs/ (stored 0%)
+     adding: PIL/.libs/libfreetype-7ce95de6.so.6.16.1 (deflated 65%)
+     adding: PIL/.libs/libjpeg-3fe7dfc0.so.9.3.0 (deflated 72%)
+     adding: PIL/.libs/liblcms2-a6801db4.so.2.0.8 (deflated 67%)
+   ...
+   ```
+
+1. Add your function code to the archive\.
+
+   ```
+   ~/my-function/package$ cd ../
+   ~/my-function$ zip -g function.zip function.py
+     adding: function.py (deflated 56%)
+   ```
+
+1. Update the function code\.
+
+   ```
+   ~/my-function$ aws lambda update-function-code --function-name python37 --zip-file fileb://function.zip
+   {
+       "FunctionName": "python37",
+       "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:python37",
+       "Runtime": "python3.7",
+       "Role": "arn:aws:iam::123456789012:role/lambda-role",
+       "Handler": "function.handler",
+       "CodeSize": 2269409,
+       "Description": "",
+       "Timeout": 3,
+       "MemorySize": 128,
+       "LastModified": "2018-11-20T20:51:35.871+0000",
+       "CodeSha256": "GcZ05oeHoJi61VpQj7vCLPs8DwCXmX5sE/fE2IHsizc=",
+       "Version": "$LATEST",
+       "VpcConfig": {
+           "SubnetIds": [],
+           "SecurityGroupIds": [],
+           "VpcId": ""
+       },
+       "TracingConfig": {
+           "Mode": "Active"
+       },
+       "RevisionId": "a9c05ffd-8ad6-4d22-b6cd-d34a00c1702c"
+   }
+   ```
+
+## With a Virtual Environment<a name="python-package-venv"></a>
+
+In some cases, you may need to use a [virtual environment](https://virtualenv.pypa.io/en/latest/) to install dependencies for your function\. This can occur if your function or its dependencies have dependencies on native libraries, or if you used Homebrew to install Python\.
+
+**To update a Python function with a virtual environment**
+
+1. Create a virtual environment\.
+
+   ```
+   ~/my-function$ virtualenv v-env
+   Using base prefix '~/.local/python-3.7.0'
+   New python executable in v-env/bin/python3.7
+   Also creating executable in v-env/bin/python
+   Installing setuptools, pip, wheel...
+   done.
+   ```
+
+1. Activate the environment\.
+
+   ```
+   ~/my-function$ source v-env/bin/activate
+   (v-env) ~/my-function$
+   ```
+
+   For the Windows command line, the activation script is in the Scripts directory\.
+
+   ```
+   > v-env\Scripts\activate.bat
+   ```
+
+1. Install libraries with pip\.
+
+   ```
+   ~/my-function$ pip install Pillow
+   Collecting Pillow
+     Using cached https://files.pythonhosted.org/packages/62/8c/230204b8e968f6db00c765624f51cfd1ecb6aea57b25ba00b240ee3fb0bd/Pillow-5.3.0-cp37-cp37m-manylinux1_x86_64.whl
+   Installing collected packages: Pillow
+   Successfully installed Pillow-5.3.0
+   ```
+
+1. Deactivate the virtual environment\.
+
+   ```
+   (v-env)~/my-function$ deactivate
+   ```
+
+1. Create a ZIP archive with the contents of the `site-packages` directory\.
+
+   ```
+   ~/my-function$ cd v-env/lib/python3.7/site-packages/  
+   ~/my-function/v-env/lib/python3.7/site-packages$ zip -r9 ../function.zip .
+     adding: easy_install.py (deflated 17%)
+     adding: PIL/ (stored 0%)
+     adding: PIL/.libs/ (stored 0%)
+     adding: PIL/.libs/libfreetype-7ce95de6.so.6.16.1 (deflated 65%)
+     adding: PIL/.libs/libjpeg-3fe7dfc0.so.9.3.0 (deflated 72%)
+   ...
+   ```
 **Note**  
-This should work for most standard installations of Python and pip when using pure Python modules in your Lambda function\. If you are including modules that have native dependencies or have Python installed with Homebrew on OS X, you should see the next section which provides instructions to create a deployment package when using Virtualenv\. For more information, see [Create Deployment Package Using a Python Environment Created with Virtualenv](#deployment-pkg-for-virtualenv) and the [Virtualenv](http://virtualenv.readthedocs.io/en/latest/) website\.
+In some cases, libraries may also be installed in the `dist-packages` directory\.
 
-You will use `pip` to install dependencies/libraries\. For information to install `pip`, go to [Installation](https://pip.pypa.io/en/stable/installing/)\. 
-
-1. You create a directory, for example `project-dir`\. 
-
-1. Save all of your Python source files \(the \.py files\) at the root level of this directory\.
-
-1. Install any libraries using **pip**\. Again, you install these libraries at the root level of the directory\.
+1. Add your function code to the archive\.
 
    ```
-   pip install module-name -t /path/to/project-dir
+   ~/my-function/v-env/lib/python3.7/site-packages$ cd ../../../../
+   ~/my-function$ zip -g function.zip function.py
+     adding: function.py (deflated 56%)
    ```
 
-   For example, the following command installs the `requests` HTTP library in the `project-dir` directory\.
+1. Update the function code\.
 
    ```
-   pip install requests -t /path/to/project-dir
+   ~/my-function$ aws lambda update-function-code --function-name python37 --zip-file fileb://function.zip
+   {
+       "FunctionName": "python37",
+       "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:python37",
+       "Runtime": "python3.7",
+       "Role": "arn:aws:iam::123456789012:role/lambda-role",
+       "Handler": "function.handler",
+       "CodeSize": 5912988,
+       "Description": "",
+       "Timeout": 3,
+       "MemorySize": 128,
+       "LastModified": "2018-11-20T21:08:26.326+0000",
+       "CodeSha256": "A2P0NUWq1J+LtSbkuP8tm9uNYqs1TAa3M76ptmZCw5g=",
+       "Version": "$LATEST",
+       "VpcConfig": {
+           "SubnetIds": [],
+           "SecurityGroupIds": [],
+           "VpcId": ""
+       },
+       "TracingConfig": {
+           "Mode": "Active"
+       },
+       "RevisionId": "5afdc7dc-2fcb-4ca8-8f24-947939ca707f"
+   }
    ```
-
-   If using Mac OS X and you have Python installed using Homebrew \(see [Homebrew](http://brew.sh/)\), the preceding command will not work\. A simple workaround is to add a `setup.cfg` file in your `/path/to/project-dir` with the following content\.
-
-   ```
-   [install]
-   prefix=
-   ```
-
-1. Zip the content of the `project-dir` directory, which is your deployment package\. 
-**Important**  
-Zip the directory *content* contained within the directory, not the directory itself\. The contents of the Zip file are available as the current working directory of the Lambda function\. For example: */project\-dir/codefile\.py/lib/yourlibraries*\. In this case, you zip the content contained within */project\-dir*\.
-
-**Note**  
-AWS Lambda includes the AWS SDK for Python \(Boto 3\), so you don't need to include it in your deployment package\. However, if you want to use a version of Boto3 other than the one included by default, you can include it in your deployment package\.
-
-## Create Deployment Package Using a Python Environment Created with Virtualenv<a name="deployment-pkg-for-virtualenv"></a>
-
-This section explains how to create a deployment package if you are using a Python environment that you created with the Virtualenv tool\. Consider the following example: 
-+ Created the following isolated Python environment using the Virtualenv tool and activated the environment:
-
-  ```
-  virtualenv path/to/my/virtual-env
-  ```
-
-  You can activate the environment on Windows, OS X, and Linux as follows:
-  + On Windows, you activate using the `activate.bat`:
-
-    ```
-    path\to\my\virtual-env\Scripts\activate.bat  
-    ```
-  + On OS X and Linux, you source the `activate` script:
-
-    ```
-    source path/to/my/virtual-env/bin/activate
-    ```
-+ Also, to install the **requests** package in the activated environment, do the following: :
-
-  ```
-  pip install requests  
-  ```
-
-Now, to create a deployment package you do the following:
-
-1. First, create \.zip file with your Python code you want to upload to AWS Lambda\. 
-
-1. Add the libraries from preceding activated virtual environment to the \.zip file\. That is, you add the content of the following directory to the \.zip file \(note again that you add the content of the directory and not the directory itself\)\.
-
-   For Windows the directory is:
-
-   ```
-   %VIRTUAL_ENV%\Lib\site-packages 
-   ```
-
-   For OS X, Linux, the directory is:
-
-   ```
-   $VIRTUAL_ENV/lib/python3.6/site-packages
-   ```
-**Note**  
-If you don't find the packages in the `site-packages` directory in your virtual environment, you might find it in the `dist-packages` directory\.
-
-For an example of creating a Python deployment package, see [Python](with-s3-example-deployment-pkg.md#with-s3-example-deployment-pkg-python)\. 

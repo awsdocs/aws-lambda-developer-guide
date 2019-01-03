@@ -1,11 +1,11 @@
 # Environment<a name="API_Environment"></a>
 
-The parent object that contains your environment's configuration settings\.
+A function's environment variable settings\.
 
 ## Contents<a name="API_Environment_Contents"></a>
 
  **Variables**   <a name="SSS-Type-Environment-Variables"></a>
-The key\-value pairs that represent your environment's configuration settings\.  
+Environment variable key\-value pairs\.  
 Type: String to string map  
 Key Pattern: `[a-zA-Z]([a-zA-Z0-9_])+`   
 Required: No
