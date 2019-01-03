@@ -2,7 +2,6 @@
 
 AWS Lambda limits the amount of compute and storage resources that you can use to run and store functions\. The following limits apply per\-region and can be increased\. To request an increase, use the [Support Center console](https://console.aws.amazon.com/support/v1#/case/create?issueType=service-limit-increase)\.
 
-
 | Resource | Default Limit | 
 | --- | --- | 
 | [Concurrent executions](concurrent-executions.md) | 1000 | 
