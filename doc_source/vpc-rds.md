@@ -85,13 +85,13 @@ logger.setLevel(logging.INFO)
 try:
     conn = pymysql.connect(rds_host, user=name, passwd=password, db=db_name, connect_timeout=5)
 except:
-    logger.error("ERROR: Unexpected error: Could not connect to MySql instance.")
+    logger.error("ERROR: Unexpected error: Could not connect to MySQL instance.")
     sys.exit()
 
-logger.info("SUCCESS: Connection to RDS mysql instance succeeded")
+logger.info("SUCCESS: Connection to RDS MySQL instance succeeded")
 def handler(event, context):
     """
-    This function fetches content from mysql RDS instance
+    This function fetches content from MySQL RDS instance
     """
 
     item_count = 0
@@ -119,7 +119,7 @@ A second file contains connection information for the function\.
 **Example rds\_config\.py**  
 
 ```
-#config file containing credentials for rds mysql instance
+#config file containing credentials for RDS MySQL instance
 db_username = "username"
 db_password = "password"
 db_name = "ExampleDB"
