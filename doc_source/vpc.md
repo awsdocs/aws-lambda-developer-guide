@@ -48,7 +48,7 @@ Note the following additional considerations:
 AWS Lambda uses the VPC information you provide to set up [ENIs](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ElasticNetworkInterfaces.html) that allow your Lambda function to access VPC resources\. Each ENI is assigned a private IP address from the IP address range within the Subnets you specify, but is not assigned any public IP addresses\. Therefore, if your Lambda function requires Internet access \(for example, to access AWS services that don't have VPC endpoints \), you can configure a NAT instance inside your VPC or you can use the Amazon VPC NAT gateway\. For more information, see [NAT Gateways](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html) in the *Amazon VPC User Guide*\. You cannot use an Internet gateway attached to your VPC, since that requires the ENI to have public IP addresses\. 
 
 **Important**  
-If your Lambda function needs Internet access, do not attach it to a public subnet or to a private subnet without Internet access\. Instead, attach it only to private subnets with Internet access through a NAT instance or an Amazon VPC NAT gateway\. 
+The Lambda does not get assigned a public IP address, and therefore cannot talk outside your VPC without using NAT (Network Address Translation). If your Lambda function needs Internet access, or to call AWS services, do not attach it to a public subnet or to a private subnet without Internet access\. Instead, attach it only to private subnets with Internet access through a NAT instance or an Amazon VPC NAT gateway\. 
 
 ## Guidelines for Setting Up VPC\-Enabled Lambda Functions<a name="vpc-setup-guidelines"></a>
 
