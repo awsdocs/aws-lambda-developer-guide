@@ -241,7 +241,7 @@ If you want a user to be able to create an IAM role when the user is creating a 
     "Action": [
         "iam:CreateRole",
         "iam:CreatePolicy",
-        "iam:PutRolePolicy
+        "iam:PutRolePolicy",
         "iam:AttachRolePolicy"
     ],
     "Resource": "arn:aws:iam::account-id:role/*"
