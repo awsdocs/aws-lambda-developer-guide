@@ -39,7 +39,7 @@ Your Lambda function uses an S3 event that provides the bucket name and key name
 
 ## Prerequisites<a name="with-cloudtrail-prepare"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started with AWS Lambda](getting-started.md) to create your first Lambda function\.
 
 To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
@@ -60,7 +60,7 @@ For instructions, see [Creating and Updating Your Trail](https://docs.aws.amazon
 
 ## Create the Execution Role<a name="with-cloudtrail-create-execution-role"></a>
 
-Create the [execution role](intro-permission-model.md#lambda-intro-execution-role) that gives your function permission to access AWS resources\.
+Create the [execution role](lambda-intro-execution-role.md) that gives your function permission to access AWS resources\.
 
 **To create an execution role**
 
@@ -189,106 +189,27 @@ exports.handler = function(event, context, callback) {
 
 **To create the function**
 
-1. Copy the sample code into a file named `index.js`\.
+1. Copy the sample code into a file named `index.js` in a folder named `lambda-cloudtrail`\.
+
+1. Install `async` with npm\.
+
+   ```
+   ~/lambda-cloudtrail$ npm install async
+   ```
 
 1. Create a deployment package\.
 
    ```
-   $ zip function.zip index.js
+   ~/lambda-cloudtrail$ zip -r function.zip .
    ```
 
 1. Create a Lambda function with the `create-function` command\.
 
    ```
    $ aws lambda create-function --function-name CloudTrailEventProcessing \
-   --zip-file fileb://function.zip --handler index.handler --runtime nodejs8.10 \
-   --role role-arn
-   --timeout 10 --memory-size 1024
+   --zip-file fileb://function.zip --handler index.handler --runtime nodejs8.10 --timeout 10 --memory-size 1024 \
+   --role arn:aws:iam::123456789012:role/lambda-cloudtrail-role
    ```
-
-## Test the Lambda Function<a name="walkthrough-cloudtrail-events-adminuser-create-test-function-upload-zip-test-manual-invoke"></a>
-
-In this section, you invoke the Lambda function manually using sample Amazon S3 event data\. When the Lambda function executes, it reads the S3 object \(a sample CloudTrail log\) from the bucket identified in the S3 event data, and then it publishes an event to your SNS topic if the sample CloudTrail log reports use a specific API\. For this tutorial, the API is the SNS API used to create a topic\. That is, the CloudTrail log reports a record identifying `sns.amazonaws.com` as the `eventSource`, and `CreateTopic` as the `eventName`\.
-
-Note that one of events in this log has `sns.amazonaws.com` as the `eventSource` and `CreateTopic` as the `eventName`\. Your Lambda function reads the logs and if it finds an event of this type, it publishes the event to the Amazon SNS topic that you created and then you receive one email when you invoke the Lambda function manually\.
-
-**Example input\.txt**  
-
-```
-{  
-   "Records":[  
-      {  
-         "eventVersion":"1.02",
-         "userIdentity":{  
-            "type":"Root",
-            "principalId":"account-id",
-            "arn":"arn:aws:iam::account-id:root",
-            "accountId":"account-id",
-            "accessKeyId":"access-key-id",
-            "sessionContext":{  
-               "attributes":{  
-                  "mfaAuthenticated":"false",
-                  "creationDate":"2015-01-24T22:41:54Z"
-               }
-            }
-         },
-         "eventTime":"2015-01-24T23:26:50Z",
-         "eventSource":"sns.amazonaws.com",
-         "eventName":"CreateTopic",
-         "awsRegion":"us-west-2",
-         "sourceIPAddress":"205.251.233.176",
-         "userAgent":"console.amazonaws.com",
-         "requestParameters":{  
-            "name":"dropmeplease"
-         },
-         "responseElements":{  
-            "topicArn":"arn:aws:sns:us-west-2:account-id:exampletopic"
-         },
-         "requestID":"3fdb7834-9079-557e-8ef2-350abc03536b",
-         "eventID":"17b46459-dada-4278-b8e2-5a4ca9ff1a9c",
-         "eventType":"AwsApiCall",
-         "recipientAccountId":"account-id"
-      },
-      {  
-         "eventVersion":"1.02",
-         "userIdentity":{  
-            "type":"Root",
-            "principalId":"account-id",
-            "arn":"arn:aws:iam::account-id:root",
-            "accountId":"account-id",
-            "accessKeyId": "access key id",
-            "sessionContext":{  
-               "attributes":{  
-                  "mfaAuthenticated":"false",
-                  "creationDate":"2015-01-24T22:41:54Z"
-               }
-            }
-         },
-         "eventTime":"2015-01-24T23:27:02Z",
-         "eventSource":"sns.amazonaws.com",
-         "eventName":"GetTopicAttributes",
-         "awsRegion":"us-west-2",
-         "sourceIPAddress":"205.251.233.176",
-         "userAgent":"console.amazonaws.com",
-         "requestParameters":{  
-            "topicArn":"arn:aws:sns:us-west-2:account-id:exampletopic"
-         },
-         "responseElements":null,
-         "requestID":"4a0388f7-a0af-5df9-9587-c5c98c29cbec",
-         "eventID":"ec5bb073-8fa1-4d45-b03c-f07b9fc9ea18",
-         "eventType":"AwsApiCall",
-         "recipientAccountId":"account-id"
-      }
-   ]
-}
-```
-
-Manually invoke the Lambda function using AWS CLI as follows:
-
-```
-$ aws lambda  invoke --function-name CloudTrailEventProcessing \
---payload file://input.txt outputfile.txt
-```
 
 ## Add Permissions to the Function Policy<a name="with-cloudtrail-example-configure-event-source-add-permission"></a>
 

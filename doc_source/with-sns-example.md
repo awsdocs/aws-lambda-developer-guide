@@ -4,7 +4,7 @@ You can use a Lambda function in one AWS account to subscribe to an Amazon SNS t
 
 ## Prerequisites<a name="with-sns-prepare"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started with AWS Lambda](getting-started.md) to create your first Lambda function\.
 
 To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
@@ -31,7 +31,7 @@ Note the topic ARN that is returned by the command\. You will need it when you a
 
 ## Create the Execution Role<a name="with-sns-example-create-iam-role"></a>
 
-From account B, create the [execution role](intro-permission-model.md#lambda-intro-execution-role) that gives your function permission to access AWS resources\.
+From account B, create the [execution role](lambda-intro-execution-role.md) that gives your function permission to access AWS resources\.
 
 **To create an execution role**
 

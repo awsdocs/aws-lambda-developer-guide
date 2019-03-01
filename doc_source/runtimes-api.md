@@ -94,7 +94,7 @@ curl -X POST "http://${AWS_LAMBDA_RUNTIME_API}/2018-06-01/runtime/invocation/$RE
 
 If the runtime encounters an error during initialization, it posts an error message to the initialization error path\.
 
-**Example Initialization Error Request**
+**Example Initialization Error Request**  
 
 ```
 ERROR="{\"errorMessage\" : \"Failed to load function.\", \"errorType\" : \"InvalidFunctionException\"}"

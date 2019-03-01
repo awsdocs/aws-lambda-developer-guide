@@ -5,3 +5,4 @@ AWS Lambda will automatically track the behavior of your Lambda function invocat
 **Topics**
 + [Using Amazon CloudWatch](monitoring-functions.md)
 + [Using AWS X\-Ray](lambda-x-ray.md)
++ [Logging AWS Lambda API Calls with AWS CloudTrail](logging-using-cloudtrail.md)

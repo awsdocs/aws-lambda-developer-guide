@@ -57,7 +57,7 @@ If you use your own key, you will be billed per [AWS Key Management Service Pric
 If you’re using the default KMS service key for Lambda, then no additional IAM permissions are required in your function execution role – your role will just work automatically without changes\. If you’re supplying your own \(custom\) KMS key, then you’ll need to add `kms:Decrypt` to your execution role\. In addition, the user that will be creating and updating the Lambda function must have permissions to use the KMS key\. For more information on KMS keys, see the [Using Key Policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)\.
 
 **Note**  
-AWS Lambda authorizes your function to use the default KMS key through a user grant, which it adds when the role is first selected\. If you re\-create a function's execution role \(that is, delete and create a role of the same name\) and the role does not have `kms:Decrypt` permissions, you will need to refresh the role's grant\. You can do so by toggling the function's execution role after the role has been re\-created in the console\. 
+AWS Lambda authorizes your function to use the default KMS key through a user grant, which it adds when you assign the role to the function\. If you delete the role and create a new role with the same name, you need to refresh the role's grant\. Refresh the grant by re\-assigning the role to the function\. 
 
 ### Storing Sensitive Information<a name="env-storing-sensitive-data"></a>
 
@@ -73,7 +73,3 @@ If your function configuration exceeds 4KB, or you use environment variable keys
 Lambda was unable to configure access to your environment variables because the KMS key used is disabled. 
             Please check your KMS key settings.
 ```
-
-### Next Step<a name="env-next-step"></a>
-
-[Create a Lambda Function Using Environment Variables](tutorial-env_cli.md)
