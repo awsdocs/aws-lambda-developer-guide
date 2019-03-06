@@ -93,7 +93,7 @@ Configure an alarm in Amazon CloudWatch that monitors the Lambda function and se
 
 1. Choose **Alarms**\.
 
-1. Create an with the following settings\.
+1. Create an alarm with the following settings\.
    + **Metrics** – **lambda\-canary Errors**\.
 
      Search for **lambda canary errors** to find the metric\.
