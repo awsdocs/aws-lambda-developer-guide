@@ -9,7 +9,7 @@ In this tutorial, you do the following:
 
 ## Prerequisites<a name="with-scheduled-events-prepare"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started with AWS Lambda](getting-started.md) to create your first Lambda function\.
 
 ## Create a Lambda Function<a name="tutorial-scheduled-events-create-function"></a>
 

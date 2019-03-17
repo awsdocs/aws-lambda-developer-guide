@@ -7,7 +7,7 @@ Layers let you keep your deployment package small, which makes development easie
 **Note**  
 A function can use up to 5 layers at a time\. The total unzipped size of the function and all layers can't exceed the unzipped deployment package size limit of 250 MB\. For more information, see [AWS Lambda Limits](limits.md)\.
 
-You can create layers, or use layers published by AWS and other AWS customers\. Layers support [resource\-based policies](#configuration-layers-permissions) for granting permission specific AWS accounts, [AWS Organizations](https://docs.aws.amazon.com/organizations/latest/userguide/), or all accounts\.
+You can create layers, or use layers published by AWS and other AWS customers\. Layers support [resource\-based policies](#configuration-layers-permissions) for granting permission to specific AWS accounts, [AWS Organizations](https://docs.aws.amazon.com/organizations/latest/userguide/), or all accounts\.
 
 Layers are extracted to the `/opt` directory in the function execution environment\. Each runtime looks for libraries in a different location under `/opt`, depending on the language\. [Structure your layer](#configuration-layers-path) so that function code can access libraries without additional configuration\.
 
@@ -183,10 +183,18 @@ To include libraries in a layer, place them in one of the folders supported by y
 
   ```
   json.zip
-  └ ruby/gems/2.5.0/json
+  └ ruby/gems/2.5.0/
+                 | build_info
+                 | cache
+                 | doc
+                 | extensions
+                 | gems
+                 | └ json-2.1.0
+                 └ specifications
+                   └ json-2.1.0.gemspec
   ```
 + **All** – `bin` \(`PATH`\), `lib` \(`LD_LIBRARY_PATH`\)  
-**Example JQuery**  
+**Example JQ**  
 
   ```
   jq.zip
@@ -201,29 +209,12 @@ Layer usage permissions are managed on the resource\. To configure a function wi
 
 To grant layer\-usage permission to another account, add a statement to the layer version's permissions policy with the `add-layer-version-permission` command\. In each statement, you can grant permission to a single account, all accounts, or an organization\.
 
-The following example grants all accounts in an organization permission to use version 3 of a layer\.
-
 ```
-$ aws lambda add-layer-version-permission --layer-name my-layer \
---statement-id engineering-org --version-number 3 --principal '*' \
---action lambda:GetLayerVersion --organization-id o-t194hfs8cz
-{
-    "Statement": "{\"Sid\":\"engineering-org\",\"Effect\":\"Allow\",\"Principal\":\"*\",\"Action\":\"lambda:GetLayerVersion\",\"Resource\":\"arn:aws:lambda:us-west-2:123456789012:layer:my-layer:3\",\"Condition\":{\"StringEquals\":{\"aws:PrincipalOrgID\":\"o-t194hfs8cz\"}}}",
-    "RevisionId": "b0cd9796-d4eb-4564-939f-de7fe0b42236"
-}
+$ aws lambda add-layer-version-permission --layer-name xray-sdk-nodejs --statement-id xaccount \
+--action lambda:GetLayerVersion  --principal 210987654321 --version-number 1 --output text
+e210ffdc-e901-43b0-824b-5fcd0dd26d16    {"Sid":"xaccount","Effect":"Allow","Principal":{"AWS":"arn:aws:iam::210987654321:root"},"Action":"lambda:GetLayerVersion","Resource":"arn:aws:lambda:us-east-2:123456789012:layer:xray-sdk-nodejs:1"}
 ```
-
-To grant permission to all AWS accounts, use `*` for the principal, and omit the organization ID\. To grant permission to a single account, use the account number for the principal\. For multiple accounts or organizations, add multiple statements\.
 
 Permissions only apply to a single version of a layer\. Repeat the procedure each time you create a new layer version\.
 
-Use the `get-layer-version-policy` command to view the permissions on a layer, and `remove-layer-version-permission` to remove statements from the policy\.
-
-```
-$ aws lambda get-layer-version-policy --layer-name my-layer --version-number 3
-{
-    "Statement": "{\"Sid\":\"engineering-org\",\"Effect\":\"Allow\",\"Principal\":\"*\",\"Action\":\"lambda:GetLayerVersion\",\"Resource\":\"arn:aws:lambda:us-west-2:123456789012:layer:my-layer:3\",\"Condition\":{\"StringEquals\":{\"aws:PrincipalOrgID\":\"o-t194hfs8cz\"}}}",
-    "RevisionId": "b0cd9796-d4eb-4564-939f-de7fe0b42236"
-}
-$ aws lambda remove-layer-version-permission --layer-name my-layer --version-number 3 --statement-id engineering-org
-```
+For more examples, see [Granting Layer Access to Other Accounts](access-control-resource-based.md#permissions-resource-xaccountlayer)\.

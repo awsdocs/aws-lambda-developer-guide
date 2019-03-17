@@ -119,7 +119,7 @@ You configure event source mapping in AWS CloudFormation using stack definition\
 
 For an example event, see [AWS CloudFormation Create Request Sample Event](eventsources.md#eventsources-cloudformation-create-request)\. Note that this event is actually a AWS CloudFormation message in an Amazon SNS event\.
 
-Error handling for a given event source depends on how Lambda is invoked\. AWS CloudFormation invokes your Lambda function synchronously\. For more information on how errors are retried, see [AWS Lambda Retry Behavior](retries-on-errors.md)\.
+Error handling for a given event source depends on how Lambda is invoked\. AWS CloudFormation invokes your Lambda function asynchronously\. For more information on how errors are retried, see [AWS Lambda Retry Behavior](retries-on-errors.md)\.
 
 ## Amazon CloudWatch Logs<a name="supported-event-source-cloudwatch-logs"></a>
 
@@ -145,9 +145,9 @@ Error handling for a given event source depends on how Lambda is invoked\. Amazo
 
 You can create a trigger for an AWS CodeCommit repository so that events in the repository will invoke a Lambda function\. For example, you can invoke a Lambda function when a branch or tag is created or when a push is made to an existing branch\. For more information, see [Manage Triggers for an AWS CodeCommit Repository](https://docs.aws.amazon.com/codecommit/latest/userguide/how-to-notify.html)\.
 
-You maintain the event source mapping in AWS CodeCommit by using a repository trigger\. For more information, see the [PutRepositoryTriggers](https://docs.aws.amazon.com/codecommit/latest/APIReference/API_PutRepositoryTriggers.html) operation\.
+You maintain the event source mapping in CodeCommit by using a repository trigger\. For more information, see the [PutRepositoryTriggers](https://docs.aws.amazon.com/codecommit/latest/APIReference/API_PutRepositoryTriggers.html) operation\.
 
-Error handling for a given event source depends on how Lambda is invoked\. AWS CodeCommit invokes your Lambda function asynchronously\. For more information on how errors are retried, see [AWS Lambda Retry Behavior](retries-on-errors.md)\.
+Error handling for a given event source depends on how Lambda is invoked\. CodeCommit invokes your Lambda function asynchronously\. For more information on how errors are retried, see [AWS Lambda Retry Behavior](retries-on-errors.md)\.
 
 ## Scheduled Events \(powered by Amazon CloudWatch Events\)<a name="supported-event-source-scheduled-events"></a>
 

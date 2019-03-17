@@ -43,7 +43,7 @@ The following are recommended best practices for using AWS Lambda:
 
   By analyzing the `Max Memory Used:` field, you can determine if your function needs more memory or if you over\-provisioned your function's memory size\. 
 + **Load test your Lambda function** to determine an optimum timeout value\. It is important to analyze how long your function runs so that you can better determine any problems with a dependency service that may increase the concurrency of the function beyond what you expect\. This is especially important when your Lambda function makes network calls to resources that may not handle Lambda's scaling\. 
-+ **Use most\-restrictive permissions when setting IAM policies\.** Understand the resources and operations your Lambda function needs, and limit the execution role to these permissions\. For more information, see [Authentication and Access Control for AWS Lambda](lambda-auth-and-access-control.md)\. 
++ **Use most\-restrictive permissions when setting IAM policies\.** Understand the resources and operations your Lambda function needs, and limit the execution role to these permissions\. For more information, see [AWS Lambda Permissions](lambda-permissions.md)\. 
 + **Be familiar with [AWS Lambda Limits](limits.md)\.** Payload size, file descriptors and /tmp space are often overlooked when determining runtime resource limits\. 
 + **Delete Lambda functions that you are no longer using\.** By doing so, the unused functions won't needlessly count against your deployment package size limit\.
 + **If you are using Amazon Simple Queue Service** as an event source, make sure the value of the function's expected execution time does not exceed the [Visibility Timeout](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html) value on the queue\. This applies both to [CreateFunction](API_CreateFunction.md) and [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)\.
@@ -62,7 +62,7 @@ When there are not enough records to process, instead of waiting, the stream pro
 + **Use [Amazon CloudWatch](https://docs.aws.amazon.com/streams/latest/dev/monitoring-with-cloudwatch.html)** on IteratorAge to determine if your Kinesis stream is being processed\. For example, configure a CloudWatch alarm with a maximum setting to 30000 \(30 seconds\)\.
 
 ## Async Invokes<a name="async-invoke"></a>
-+ **Create and use [Dead Letter Queues](dlq.md) **to address and replay async function errors\. 
++ **Create and use [AWS Lambda Function Dead Letter Queues](dlq.md) **to address and replay async function errors\. 
 
 ## Lambda VPC<a name="lambda-vpc"></a>
 + The following diagram guides you through a decision tree as to whether you should use a VPC \(Virtual Private Cloud\):   

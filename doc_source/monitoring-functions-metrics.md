@@ -22,6 +22,14 @@ The `AWS/Lambda` namespace includes the following metrics\.
 | ConcurrentExecutions  |  Emitted as an aggregate metric for all functions in the account, and for functions that have a custom concurrency limit specified\. Not applicable for versions or aliases\. Measures the sum of concurrent executions for a given function at a given point in time\. Must be viewed as an average metric if aggregated across a time period\.  Units: Count  | 
 | UnreservedConcurrentExecutions |  Emitted as an aggregate metric for all functions in the account only\. Not applicable for functions, versions, or aliases\. Represents the sum of the concurrency of the functions that do not have a custom concurrency limit specified\. Must be viewed as an average metric if aggregated across a time period\.  Units: Count | 
 
+**To access metrics using the CloudWatch console**
+
+1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
+
+1. In the navigation pane, choose **Metrics**\.
+
+1. In the **CloudWatch Metrics by Category** pane, choose **Lambda Metrics**\.
+
 **Errors/Invocations Ratio**  
 When calculating the error rate on Lambda function invocations, it’s important to distinguish between an invocation request and an actual invocation\. It is possible for the error rate to exceed the number of billed Lambda function invocations\. Lambda reports an invocation metric only if the Lambda function code is executed\. If the invocation request yields a throttling or other initialization error that prevents the Lambda function code from being invoked, Lambda will report an error, but it does not log an invocation metric\.  
 Lambda emits `Invocations=1` when the function is executed\. If the Lambda function is not executed, nothing is emitted\.

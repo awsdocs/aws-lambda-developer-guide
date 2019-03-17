@@ -6,7 +6,7 @@ In this tutorial, you manage and invoke Lambda functions with the AWS CLI\.
 
 ## Prerequisites<a name="with-userapp-walkthrough-custom-events-deploy"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started with AWS Lambda](getting-started.md) to create your first Lambda function\.
 
 To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
@@ -21,7 +21,7 @@ On Linux and macOS, use your preferred shell and package manager\. On Windows 10
 
 ## Create the Execution Role<a name="with-userapp-walkthrough-custom-events-create-iam-role"></a>
 
-Create the [execution role](intro-permission-model.md#lambda-intro-execution-role) that gives your function permission to access AWS resources\.
+Create the [execution role](lambda-intro-execution-role.md) that gives your function permission to access AWS resources\.
 
 **To create an execution role**
 
@@ -68,7 +68,7 @@ exports.handler = function(event, context, callback) {
    ```
    $ aws lambda create-function --function-name helloworld \
    --zip-file fileb://function.zip --handler index.handler --runtime nodejs8.10 \
-   --role role-arn
+   --role arn:aws:iam::123456789012:role/lambda-cli-role
    {
        "FunctionName": "helloworld",
        "CodeSize": 351,

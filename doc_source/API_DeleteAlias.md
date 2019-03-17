@@ -1,8 +1,6 @@
 # DeleteAlias<a name="API_DeleteAlias"></a>
 
-Deletes the specified Lambda function alias\. For more information, see [Introduction to AWS Lambda Aliases](https://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html)\.
-
-This requires permission for the lambda:DeleteAlias action\.
+Deletes a Lambda function [alias](https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html)\.
 
 ## Request Syntax<a name="API_DeleteAlias_RequestSyntax"></a>
 
@@ -15,7 +13,7 @@ DELETE /2015-03-31/functions/FunctionName/aliases/Name HTTP/1.1
 The request requires the following URI parameters\.
 
  ** [FunctionName](#API_DeleteAlias_RequestSyntax) **   <a name="SSS-DeleteAlias-request-FunctionName"></a>
-The name of the lambda function\.  
+The name of the Lambda function\.  
 
 **Name formats**
 +  **Function name** \- `MyFunction`\.
@@ -26,7 +24,7 @@ Length Constraints: Minimum length of 1\. Maximum length of 140\.
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [Name](#API_DeleteAlias_RequestSyntax) **   <a name="SSS-DeleteAlias-request-Name"></a>
-Name of the alias to delete\.  
+The name of the alias\.  
 Length Constraints: Minimum length of 1\. Maximum length of 128\.  
 Pattern: `(?!^[0-9]+$)([a-zA-Z0-9-_]+)` 
 
@@ -55,7 +53,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-Request throughput limit exceeded  
+Request throughput limit exceeded\.  
 HTTP Status Code: 429
 
 ## See Also<a name="API_DeleteAlias_SeeAlso"></a>
@@ -65,6 +63,7 @@ For more information about using this API in one of the language\-specific AWS S
 +  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/DeleteAlias) 
 +  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/DeleteAlias) 
 +  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/DeleteAlias) 
++  [AWS SDK for Go \- Pilot](https://docs.aws.amazon.com/goto/SdkForGoPilot/lambda-2015-03-31/DeleteAlias) 
 +  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/DeleteAlias) 
 +  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/DeleteAlias) 
 +  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/DeleteAlias) 

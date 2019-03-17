@@ -1,6 +1,6 @@
 # DeleteEventSourceMapping<a name="API_DeleteEventSourceMapping"></a>
 
-Deletes an event source mapping\.
+Deletes an [event source mapping](https://docs.aws.amazon.com/lambda/latest/dg/intro-invocation-modes.html)\. You can get the identifier of a mapping from the output of [ListEventSourceMappings](API_ListEventSourceMappings.md)\.
 
 ## Request Syntax<a name="API_DeleteEventSourceMapping_RequestSyntax"></a>
 
@@ -85,7 +85,7 @@ One of the parameters in the request is invalid\. For example, if you provided a
 HTTP Status Code: 400
 
  **ResourceInUseException**   
-The operation conflicts with the resource's availability\. For example, you attempted to update an EventSoure Mapping in CREATING, or tried to delete a EventSoure mapping currently in the UPDATING state\.   
+The operation conflicts with the resource's availability\. For example, you attempted to update an EventSource Mapping in CREATING, or tried to delete a EventSource mapping currently in the UPDATING state\.   
 HTTP Status Code: 400
 
  **ResourceNotFoundException**   
@@ -97,7 +97,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-Request throughput limit exceeded  
+Request throughput limit exceeded\.  
 HTTP Status Code: 429
 
 ## See Also<a name="API_DeleteEventSourceMapping_SeeAlso"></a>
@@ -107,6 +107,7 @@ For more information about using this API in one of the language\-specific AWS S
 +  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/DeleteEventSourceMapping) 
 +  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/DeleteEventSourceMapping) 
 +  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/DeleteEventSourceMapping) 
++  [AWS SDK for Go \- Pilot](https://docs.aws.amazon.com/goto/SdkForGoPilot/lambda-2015-03-31/DeleteEventSourceMapping) 
 +  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/DeleteEventSourceMapping) 
 +  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/DeleteEventSourceMapping) 
 +  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/DeleteEventSourceMapping) 
