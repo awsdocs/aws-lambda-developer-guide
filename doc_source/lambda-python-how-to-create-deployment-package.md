@@ -176,7 +176,6 @@ In some cases, you may need to use a [virtual environment](https://virtualenv.py
 1. Create a ZIP archive with the contents of the library\.
 
    ```
-<<<<<<< HEAD
    ~/my-function$ zip -r9 function.zip ./v-env/lib/python3.7/site-packages
      adding: v-env/lib/python3.7/site-packages/easy_install.py (deflated 17%)
      adding: v-env/lib/python3.7/site-packages/PIL/ (stored 0%)
@@ -187,19 +186,6 @@ In some cases, you may need to use a [virtual environment](https://virtualenv.py
    ```
 
   Depending on the library, dependencies may appear in either `site-packages` or `dist-packages`, and the first folder in the virtual environment may be `lib` or `lib64`\. You can use the `pip show` command to locate a specific package\.
-=======
-   ~/my-function$ cd v-env/lib/python3.7/site-packages/  
-   ~/my-function/v-env/lib/python3.7/site-packages$ zip -r9 ../../../../function.zip .
-     adding: easy_install.py (deflated 17%)
-     adding: PIL/ (stored 0%)
-     adding: PIL/.libs/ (stored 0%)
-     adding: PIL/.libs/libfreetype-7ce95de6.so.6.16.1 (deflated 65%)
-     adding: PIL/.libs/libjpeg-3fe7dfc0.so.9.3.0 (deflated 72%)
-   ...
-   ```
-
-   Depending on the library, dependencies may appear in either `site-packages` or `dist-packages`, and the first folder in the virtual environment may be `lib` or `lib64`\. You can use the `pip show` command to locate a specific package\.
->>>>>>> master
 
   **Note**  
   In some cases, libraries may also be installed in the `dist-packages` directory\.
