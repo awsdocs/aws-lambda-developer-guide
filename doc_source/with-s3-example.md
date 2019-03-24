@@ -215,7 +215,7 @@ The deployment package is a \.zip file containing your Lambda function code and 
 
   ```
   $ aws lambda create-function --function-name CreateThumbnail \
-  --zip-file fileb://function.zip --handler index.handler --runtime nodejs8.10 \
+  --zip-file fileb://function.zip --handler function/index.handler --runtime nodejs8.10 \
   --timeout 10 --memory-size 1024 \
   --role arn:aws:iam::123456789012:role/lambda-s3-role
   ```
