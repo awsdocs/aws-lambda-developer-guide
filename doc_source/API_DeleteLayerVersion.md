@@ -1,6 +1,6 @@
 # DeleteLayerVersion<a name="API_DeleteLayerVersion"></a>
 
-Deletes a version of a function layer\.
+Deletes a version of an [AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\. Deleted versions can no longer be viewed or added to functions\. To avoid breaking functions, a copy of the version remains in Lambda until no functions refer to it\.
 
 ## Request Syntax<a name="API_DeleteLayerVersion_RequestSyntax"></a>
 
@@ -13,7 +13,7 @@ DELETE /2018-10-31/layers/LayerName/versions/VersionNumber HTTP/1.1
 The request requires the following URI parameters\.
 
  ** [LayerName](#API_DeleteLayerVersion_RequestSyntax) **   <a name="SSS-DeleteLayerVersion-request-LayerName"></a>
-The name of the layer\.  
+The name or Amazon Resource Name \(ARN\) of the layer\.  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
 Pattern: `(arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+)|[a-zA-Z0-9-_]+` 
 
@@ -41,7 +41,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-Request throughput limit exceeded  
+Request throughput limit exceeded\.  
 HTTP Status Code: 429
 
 ## See Also<a name="API_DeleteLayerVersion_SeeAlso"></a>
@@ -51,6 +51,7 @@ For more information about using this API in one of the language\-specific AWS S
 +  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/DeleteLayerVersion) 
 +  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/DeleteLayerVersion) 
 +  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/DeleteLayerVersion) 
++  [AWS SDK for Go \- Pilot](https://docs.aws.amazon.com/goto/SdkForGoPilot/lambda-2015-03-31/DeleteLayerVersion) 
 +  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/DeleteLayerVersion) 
 +  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/DeleteLayerVersion) 
 +  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/DeleteLayerVersion) 

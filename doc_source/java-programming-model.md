@@ -26,4 +26,4 @@ Additionally, note that AWS Lambda provides the following libraries:
 **Note**  
 Support for the Log4j v1\.2 custom appender is marked for End\-Of\-Life\. It will not receive ongoing updates and is not recommended for use\.
 
- These libraries are available through the [Maven Central Repository](https://maven.apache.org/) and can also be found on [GitHub](https://github.com/)\.
+ These libraries are available through the [Maven Central Repository](https://search.maven.org/search?q=g:com.amazonaws) and can also be found on [GitHub](https://github.com/aws/aws-lambda-java-libs)\.

@@ -1,8 +1,8 @@
 # DeleteFunction<a name="API_DeleteFunction"></a>
 
-Deletes a Lambda function\. To delete a specific function version, use the `Qualifier` parameter\. Otherwise, all versions and aliases are deleted\. Event source mappings are not deleted\.
+Deletes a Lambda function\. To delete a specific function version, use the `Qualifier` parameter\. Otherwise, all versions and aliases are deleted\.
 
-This operation requires permission for the `lambda:DeleteFunction` action\.
+To delete Lambda event source mappings that invoke a function, use [DeleteEventSourceMapping](API_DeleteEventSourceMapping.md)\. For AWS services and resources that invoke your function directly, delete the trigger in the service where you originally configured it\.
 
 ## Request Syntax<a name="API_DeleteFunction_RequestSyntax"></a>
 
@@ -15,18 +15,18 @@ DELETE /2015-03-31/functions/FunctionName?Qualifier=Qualifier HTTP/1.1
 The request requires the following URI parameters\.
 
  ** [FunctionName](#API_DeleteFunction_RequestSyntax) **   <a name="SSS-DeleteFunction-request-FunctionName"></a>
-The name of the lambda function\.  
+The name of the Lambda function or version\.  
 
 **Name formats**
-+  **Function name** \- `MyFunction`\.
-+  **Function ARN** \- `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`\.
-+  **Partial ARN** \- `123456789012:function:MyFunction`\.
-The length constraint applies only to the full ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
++  **Function name** \- `my-function` \(name\-only\), `my-function:1` \(with version\)\.
++  **Function ARN** \- `arn:aws:lambda:us-west-2:123456789012:function:my-function`\.
++  **Partial ARN** \- `123456789012:function:my-function`\.
+You can append a version number or alias to any of the formats\. The length constraint applies only to the full ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [Qualifier](#API_DeleteFunction_RequestSyntax) **   <a name="SSS-DeleteFunction-request-Qualifier"></a>
-Specify a version to delete\. You cannot delete a version that is referenced by an alias\.  
+Specify a version to delete\. You can't delete a version that's referenced by an alias\.  
 Length Constraints: Minimum length of 1\. Maximum length of 128\.  
 Pattern: `(|[a-zA-Z0-9$_-]+)` 
 
@@ -63,7 +63,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-Request throughput limit exceeded  
+Request throughput limit exceeded\.  
 HTTP Status Code: 429
 
 ## See Also<a name="API_DeleteFunction_SeeAlso"></a>
@@ -73,6 +73,7 @@ For more information about using this API in one of the language\-specific AWS S
 +  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/DeleteFunction) 
 +  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/DeleteFunction) 
 +  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/DeleteFunction) 
++  [AWS SDK for Go \- Pilot](https://docs.aws.amazon.com/goto/SdkForGoPilot/lambda-2015-03-31/DeleteFunction) 
 +  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/DeleteFunction) 
 +  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/DeleteFunction) 
 +  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/DeleteFunction) 

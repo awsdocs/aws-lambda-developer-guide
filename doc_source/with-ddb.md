@@ -73,7 +73,7 @@ Lambda reads records from the stream and invokes your function [synchronously](i
 
 Lambda polls shards in your DynamoDB Streams stream for records at a base rate of 4 times per second\. When records are available, Lambda invokes your function and waits for the result\. If processing succeeds, Lambda resumes polling until it receives more records\.
 
-If your function returns an error, Lambda retries the batch until processing succeeds or the data expires\. Until the issue is resolved, no data in the shard is processed\. Handle and record processing errors in your code to avoid stalled shards and potential data loss\.
+If your function returns an error, Lambda retries the batch until processing succeeds or the data expires\. Until the issue is resolved, no data in the shard is processed\. Handle any record processing errors in your code to avoid stalled shards and potential data loss\.
 
 **Topics**
 + [Creating an Event Source Mapping](#services-dynamodb-eventsourcemapping)
@@ -114,10 +114,10 @@ To manage the event source configuration later, choose the trigger in the design
 
 ## Execution Role Permissions<a name="events-dynamodb-permissions"></a>
 
-Lambda needs the following permissions to manage resources related to your DynamoDB Streams stream\. Add them to your function's [execution role](intro-permission-model.md#lambda-intro-execution-role)\.
+Lambda needs the following permissions to manage resources related to your DynamoDB Streams stream\. Add them to your function's [execution role](lambda-intro-execution-role.md)\.
 + [dynamodb:DescribeStream](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_streams_DescribeStream.html)
 + [dynamodb:GetRecords](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_streams_GetRecords.html)
 + [dynamodb:GetShardIterator](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_streams_GetShardIterator.html)
 + [dynamodb:ListStreams](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_streams_ListStreams.html)
 
-The `AWSLambdaDynamoDBExecutionRole` managed policy includes these permissions\. For more information, see [Manage Permissions: Using an IAM Role \(Execution Role\)](intro-permission-model.md#lambda-intro-execution-role)\.
+The `AWSLambdaDynamoDBExecutionRole` managed policy includes these permissions\. For more information, see [AWS Lambda Execution Role](lambda-intro-execution-role.md)\.

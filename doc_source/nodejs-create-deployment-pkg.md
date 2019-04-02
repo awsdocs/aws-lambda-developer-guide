@@ -1,6 +1,6 @@
 # AWS Lambda Deployment Package in Node\.js<a name="nodejs-create-deployment-pkg"></a>
 
-To create a Lambda function you first create a Lambda function deployment package, a \.zip file consisting of your code and any dependencies\. As noted previously, you need to set the appropriate security permissions for the zip package\. For more information, see [Authentication and Access Control for AWS Lambda](lambda-auth-and-access-control.md) policies\.
+To create a Lambda function you first create a Lambda function deployment package, a \.zip file consisting of your code and any dependencies\.
 
 You can create a deployment package yourself or write your code directly in the Lambda console, in which case the console creates the deployment package for you and uploads it, creating your Lambda function\. Note the following to determine if you can use the console to create your Lambda function:
 + **Simple scenario** – If your custom code requires only the AWS SDK library, then you can use the inline editor in the AWS Lambda console\. Using the console, you can edit and upload your code to AWS Lambda\. The console will zip up your code with the relevant configuration information into a deployment package that the Lambda service can run\. 

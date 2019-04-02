@@ -19,7 +19,7 @@ Upon completing this tutorial, you will have the following Amazon S3, Lambda, an
 
 ## Prerequisites<a name="with-s3-prepare"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started with AWS Lambda](getting-started.md) to create your first Lambda function\.
 
 To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
@@ -34,7 +34,7 @@ On Linux and macOS, use your preferred shell and package manager\. On Windows 10
 
 ## Create the Execution Role<a name="with-s3-create-execution-role"></a>
 
-Create the [execution role](intro-permission-model.md#lambda-intro-execution-role) that gives your function permission to access AWS resources\.
+Create the [execution role](lambda-intro-execution-role.md) that gives your function permission to access AWS resources\.
 
 **To create an execution role**
 
@@ -208,7 +208,7 @@ The deployment package is a \.zip file containing your Lambda function code and 
    /node_modules/async
    ```
 
-1. Zip the index\.js file and the node\_modules folder as `CreateThumbnail.zip`\.
+1. Zip the index\.js file and the node\_modules folder as `function.zip`\.
 
 **To create the function**
 + Create a Lambda function with the `create-function` command\.
@@ -216,8 +216,8 @@ The deployment package is a \.zip file containing your Lambda function code and 
   ```
   $ aws lambda create-function --function-name CreateThumbnail \
   --zip-file fileb://function.zip --handler index.handler --runtime nodejs8.10 \
-  --role role-arn \
-  --timeout 10 --memory-size 1024
+  --timeout 10 --memory-size 1024 \
+  --role arn:aws:iam::123456789012:role/lambda-s3-role
   ```
 
 The preceding command specifies a 10\-second timeout value as the function configuration\. Depending on the size of objects you upload, you might need to increase the timeout value using the following AWS CLI command\.
