@@ -8,7 +8,7 @@ Lambda handles retries in the following manner, depending on the source of the i
 + **Event sources that aren't stream\-based** – Some of these event sources are set up to invoke a Lambda function synchronously and others invoke it asynchronously\. Accordingly, exceptions are handled as follows:
   + **Synchronous invocation** – Lambda includes the `FunctionError` field in the response body, with details about the error in the `X-Amz-Function-Error` header\. The status code is 200 for function errors\. Lambda only returns error status codes if there is an issue with the request, function, or permissions that prevents the handler from processing the event\. See [Invoke Errors](API_Invoke.md#API_Invoke_Errors) for details\.
 
-    [AWS service triggers](invoking-lambda-function.md) can retry depending on the service\. If you invoke the Lambda function directly from your application, you can choose whether to retry or not\.
+    [AWS service triggers](lambda-services.md) can retry depending on the service\. If you invoke the Lambda function directly from your application, you can choose whether to retry or not\.
   + **Asynchronous invocation** – Asynchronous events are queued before being used to invoke the Lambda function\. If AWS Lambda is unable to fully process the event, it will automatically retry the invocation twice, with delays between retries\. Configure a [dead letter queue](dlq.md) for your function to capture requests that fail all three attempts\.
 + **Poll\-based event sources that are stream\-based** – These consist of Kinesis Data Streams or DynamoDB\. When a Lambda function invocation fails, AWS Lambda attempts to process the erring batch of records until the time the data expires, which can be up to seven days\. 
 

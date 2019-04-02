@@ -16,7 +16,7 @@ The console provides the following graphs\.
 **Lambda Monitoring Graphs**
 + **Invocations** – The number of times the function was invoked in each 5 minute period\.
 + **Duration** – Average, minimum, and maximum execution times\.
-+ **Errors, Availability \(%\)** – The number of errors, and the percentage of executions that completed without error\.
++ **Error count and success rate \(%\)** – The number of errors, and the percentage of executions that completed without error\.
 + **Throttles** – The number of times execution failed due to concurrency limits\.
 + **IteratorAge** – For stream event sources, the age of the last item in the batch when Lambda receives it and invokes the function\.
 + **DeadLetterErrors** – The number of events that Lambda attempted to write to a dead letter queue, but failed\.

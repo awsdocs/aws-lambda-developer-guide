@@ -5,7 +5,9 @@ The underlying AWS Lambda execution environment includes the following software 
 + AMI – [amzn\-ami\-hvm\-2017\.03\.1\.20170812\-x86\_64\-gp2](https://console.aws.amazon.com/ec2/v2/home#Images:visibility=public-images;search=amzn-ami-hvm-2017.03.1.20170812-x86_64-gp2)
 + Linux kernel – 4\.14\.77\-70\.59\.amzn1\.x86\_64
 + AWS SDK for JavaScript – 2\.290\.0
-+ SDK for Python \(Boto 3\) – 3\-1\.7\.74 botocore\-1\.10\.74
++ SDK for Python \(Boto 3\)
+  + Python 3\.6 – boto3\-1\.7\.74 botocore\-1\.10\.74
+  + Python 3\.7 – boto3\-1\.9\.42 botocore\-1\.12\.42
 
 Not all runtime languages are available on the Amazon Linux AMI or its yum repositories\. If you use Amazon Linux for development, you might need to download and install them manually from their respective public sites\.
 
@@ -19,7 +21,7 @@ The following is a list of environment variables that are part of the AWS Lambda
 | Key | Reserved | Value | 
 | --- | --- | --- | 
 |  `_HANDLER`  |  Yes  |  The handler location configured on the function\.  | 
-|   `AWS_REGION`   |  Yes  |  The AWS region where the Lambda function is executed\.  | 
+|  `AWS_REGION`  |  Yes  |  The AWS region where the Lambda function is executed\.  | 
 |  `AWS_EXECUTION_ENV`  |  Yes  |  The [runtime identifier](lambda-runtimes.md), prefixed by `AWS_Lambda_`\. For example, `AWS_Lambda_java8`\.  | 
 |  `AWS_LAMBDA_FUNCTION_NAME`  |  Yes  |  The name of the function\.  | 
 |  `AWS_LAMBDA_FUNCTION_MEMORY_SIZE`  |  Yes  |  The amount of memory available to the function in MB\.  | 

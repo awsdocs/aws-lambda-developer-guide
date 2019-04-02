@@ -21,7 +21,7 @@ When Lambda runs your function, it passes a context object to the [handler](pyth
   + `client.app_title`
   + `client.app_version_name`
   + `client.app_version_code`
-  + `cclient.app_package_name`
+  + `client.app_package_name`
   + `custom` – A `dict` of custom values set by the mobile client application\.
   + `env` – A `dict` of environment information provided by the AWS SDK\.
 

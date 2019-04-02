@@ -32,7 +32,7 @@ If you are a first\-time user of AWS Lambda, we recommend that you read the foll
 
 1. **Read the [Deploying Applications with AWS Lambda](deploying-lambda-apps.md) section of this guide\. **This section introduces various AWS Lambda components you work with to create an end\-to\-end experience\.
 
-Beyond the Getting Started exercise, you can explore the various use cases, each of which is provided with a tutorial that walks you through an example scenario\. Depending on your application needs \(for example, whether you want event driven Lambda function invocation or on\-demand invocation\), you can follow specific tutorials that meet your specific needs\. For more information, see [Use Cases](use-cases.md)\.
+Beyond the Getting Started exercise, you can explore the various use cases, each of which is provided with a tutorial that walks you through an example scenario\. Depending on your application needs \(for example, whether you want event driven Lambda function invocation or on\-demand invocation\), you can follow specific tutorials that meet your specific needs\. For more information, see [Using AWS Lambda With Other Services](lambda-services.md)\.
 
 The following topics provide additional information about AWS Lambda:
 + [AWS Lambda Function Versioning and Aliases](versioning-aliases.md)

@@ -40,6 +40,8 @@ The diagram illustrates the flow:
 ## Event Source Mapping for AWS Poll\-Based Services<a name="streaming-event-source-mapping"></a>
 
 AWS Lambda supports the following poll\-based services:
+
+**Services that Lambda reads events from**
 + [Amazon Kinesis](with-kinesis.md)
 + [Amazon DynamoDB](with-ddb.md)
 + [Amazon Simple Queue Service](with-sqs.md)

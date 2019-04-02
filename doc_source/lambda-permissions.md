@@ -11,7 +11,7 @@ Use [resource\-based policies](access-control-resource-based.md) to give other a
 
 To manage permissions for users and applications in your accounts, [use the managed policies that Lambda provides](access-control-identity-based.md), or write your own\. The Lambda console uses multiple services to get information about your function's configuration and triggers\. You can use the managed policies as\-is, or as a starting point for more restrictive policies\.
 
-You can restrict user permissions by the resource an action affects and, in some cases, by additional conditions\. For example, you can specify a pattern for the Amazon Resource Name \(ARN\) of a function that requires a user to include their user name in the name of functions that they create\. Additionally, you can add a condition that requires that the user configure their function to use a specific layer to pull in logging software\. For the resources and conditions that are supported by each action, see [Resources and Conditions](lambda-api-permissions-ref.md)\.
+You can restrict user permissions by the resource an action affects and, in some cases, by additional conditions\. For example, you can specify a pattern for the Amazon Resource Name \(ARN\) of a function that requires a user to include their user name in the name of functions that they create\. Additionally, you can add a condition that requires that the user configure functions to use a specific layer to, for example, pull in logging software\. For the resources and conditions that are supported by each action, see [Resources and Conditions](lambda-api-permissions-ref.md)\.
 
 For more information about IAM, see [What Is IAM?](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) in the *IAM User Guide*\.
 

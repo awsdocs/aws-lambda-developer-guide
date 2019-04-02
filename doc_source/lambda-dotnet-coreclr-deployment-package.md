@@ -159,16 +159,8 @@ string - Optional
 ```
 
 These are optional values you can set when you create your Lambda function and will then be automatically written to the `aws-lambda-tools-defaults.json` file, which is built as part of the function\-creation process\. The following explains what they mean:
-+ **\-\-profile: **Your execution role\.
-
-  To create an IAM role \(execution role\): 
-
-  1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
-
-  1. Follow the steps in [IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *IAM User Guide* to create an IAM role \(execution role\)\. As you follow the steps to create a role, note the following: 
-     + In **Select Role Type**, choose **AWS Service Roles**, and then choose **AWS Lambda**\.
-     + In **Attach Policy**, choose the policy that best fits your Lambda function's requirements\. If it's not interacting with any other AWS services, you would would choose **AWSLambdaBasicExecutionRole**\. However, say your Lambda function is interacting with Kinesis, then you would choose the **AWSLambdaKinesisExecutionRole**\. 
-+ **\-\-region: **The Amazon Region in which your function will reside\.
++ **\-\-profile** – Your [execution role](lambda-intro-execution-role.md)\.
++ **\-\-region** – The Region in which your function will reside\.
 
 For example, to create a Lambda function, run the following command, substituting the values of the `--region` parameter with the region of your choice and `--profile` with your IAM profile: 
 

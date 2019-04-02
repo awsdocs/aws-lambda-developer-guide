@@ -7,7 +7,7 @@ Layers let you keep your deployment package small, which makes development easie
 **Note**  
 A function can use up to 5 layers at a time\. The total unzipped size of the function and all layers can't exceed the unzipped deployment package size limit of 250 MB\. For more information, see [AWS Lambda Limits](limits.md)\.
 
-You can create layers, or use layers published by AWS and other AWS customers\. Layers support [resource\-based policies](#configuration-layers-permissions) for granting permissions to specific AWS accounts, [AWS Organizations](https://docs.aws.amazon.com/organizations/latest/userguide/), or all accounts\.
+You can create layers, or use layers published by AWS and other AWS customers\. Layers support [resource\-based policies](#configuration-layers-permissions) for granting layer usage permissions to specific AWS accounts, [AWS Organizations](https://docs.aws.amazon.com/organizations/latest/userguide/), or all accounts\.
 
 Layers are extracted to the `/opt` directory in the function execution environment\. Each runtime looks for libraries in a different location under `/opt`, depending on the language\. [Structure your layer](#configuration-layers-path) so that function code can access libraries without additional configuration\.
 
@@ -149,7 +149,7 @@ The link in the response lets you download the layer archive and is valid for 10
 $ aws lambda delete-layer-version --layer-name my-layer --version-number 1
 ```
 
-When you delete a layer version, you can no longer configure functions to use it\. However, any function that already uses the version continues to have access to it\.
+When you delete a layer version, you can no longer configure functions to use it\. However, any function that already uses the version continues to have access to it\. Version numbers are never re\-used for a layer name\.
 
 ## Including Library Dependencies in a Layer<a name="configuration-layers-path"></a>
 

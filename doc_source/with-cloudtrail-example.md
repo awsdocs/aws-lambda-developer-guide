@@ -2,6 +2,22 @@
 
 In this scenario, AWS CloudTrail will maintain records \(logs\) of AWS API calls made on your account and notify you anytime an API call is made to create an SNS topic\. As API calls are made in your account, CloudTrail writes logs to an Amazon S3 bucket that you configured\. In this scenario, you want Amazon S3 to publish the object\-created events to AWS Lambda and invoke your Lambda function as CloudTrail creates log objects\. 
 
+The following diagram summarizes the flow:
+
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/wt-cloudtrail-100.png)
+
+1. AWS CloudTrail saves logs to an S3 bucket \(object\-created event\)\.
+
+1. Amazon S3 detects the object\-created event\.
+
+1. Amazon S3 publishes the `s3:ObjectCreated:*` event to AWS Lambda by invoking the Lambda function, as specified in the bucket notification configuration\. Because the Lambda function's access permissions policy includes permissions for Amazon S3 to invoke the function, Amazon S3 can invoke the function\.
+
+1. AWS Lambda executes the Lambda function by assuming the execution role that you specified at the time you created the Lambda function\.
+
+1. The Lambda function reads the Amazon S3 event it receives as a parameter, determines where the CloudTrail object is, reads the CloudTrail object, and then it processes the log records in the CloudTrail object\.
+
+1. If the log includes a record with specific `eventType` and `eventSource` values, it publishes the event to your Amazon SNS topic\. In [Tutorial: Using AWS Lambda with AWS CloudTrail](#with-cloudtrail-example), you subscribe to the SNS topic using the email protocol, so you get email notifications\.
+
 When Amazon S3 invokes your Lambda function, it passes an S3 event identifying, among other things, the bucket name and key name of the object that CloudTrail created\. Your Lambda function can read the log object, and it knows the API calls that were reported in the log\.
 
 Each object CloudTrail creates in your S3 bucket is a JSON object, with one or more event records\. Each record, among other things, provides `eventSource` and `eventName`\. 
@@ -18,7 +34,7 @@ Each object CloudTrail creates in your S3 bucket is a JSON object, with one or m
             "eventTime":"2014-12-16T19:17:43Z",
             "eventSource":"sns.amazonaws.com", 
             "eventName":"CreateTopic",
-            "awsRegion":"us-west-2",
+            "awsRegion":"us-east-2",
             "sourceIPAddress":"72.21.198.64",
              ...
          },
@@ -54,7 +70,7 @@ On Linux and macOS, use your preferred shell and package manager\. On Windows 10
 
 ## Turn on CloudTrail<a name="with-cloudtrail-example-prepare-create-buckets"></a>
 
-In the AWS CloudTrail console, turn on the trail in your account by specifying *examplebucket* in the `us-west-2` region for CloudTrail to save logs\. When configuring the trail, do not enable SNS notifications\. 
+In the AWS CloudTrail console, turn on the trail in your account by specifying a bucket for CloudTrail to save logs\. When configuring the trail, do not enable SNS notifications\. 
 
 For instructions, see [Creating and Updating Your Trail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-and-update-a-trail.html) in the *AWS CloudTrail User Guide*\.
 
@@ -89,14 +105,14 @@ Create the [execution role](lambda-intro-execution-role.md) that gives your func
            "Action": [
              "s3:GetObject"
            ],
-           "Resource": "arn:aws:s3:::examplebucket/*"
+           "Resource": "arn:aws:s3:::my-bucket/*"
          },
          {
            "Effect": "Allow",
            "Action": [
              "sns:Publish"
            ],
-           "Resource": "your sns topic ARN"
+           "Resource": "arn:aws:sns:us-west-2:123456789012:my-topic"
          }
        ]
      }
@@ -117,8 +133,8 @@ var async = require('async');
 
 var EVENT_SOURCE_TO_TRACK = /sns.amazonaws.com/;  
 var EVENT_NAME_TO_TRACK   = /CreateTopic/; 
-var DEFAULT_SNS_REGION  = 'us-west-2';
-var SNS_TOPIC_ARN       = 'The ARN of your SNS topic';
+var DEFAULT_SNS_REGION  = 'us-east-2';
+var SNS_TOPIC_ARN       = 'arn:aws:sns:us-west-2:123456789012:my-topic';
 
 var s3 = new aws.S3();
 var sns = new aws.SNS({
@@ -222,8 +238,8 @@ Add permissions to the Lambda function's resource policy to allow Amazon S3 to i
    ```
    $ aws lambda add-permission --function-name CloudTrailEventProcessing \
    --statement-id Id-1 --action "lambda:InvokeFunction" --principal s3.amazonaws.com \
-   --source-arn arn:aws:s3:::examplebucket \
-   --source-account examplebucket-owner-account-id
+   --source-arn arn:aws:s3:::my-bucket \
+   --source-account 123456789012
    ```
 
 1. Verify the function's access policy with the `get-policy` command\.
@@ -234,12 +250,12 @@ Add permissions to the Lambda function's resource policy to allow Amazon S3 to i
 
 ## Configure Notification on the Bucket<a name="with-cloudtrail-example-configure-event-source-add-notif-config"></a>
 
-Add notification configuration on the *examplebucket* to request Amazon S3 to publish object\-created events to Lambda\. In the configuration, you specify the following:
+Add notification configuration on the bucket to request Amazon S3 to publish object\-created events to Lambda\. In the configuration, you specify the following:
 + Event type – Any event types that create objects\.
 + Lambda function ARN – This is your Lambda function that you want Amazon S3 to invoke\.
 
   ```
-  arn:aws:lambda:us-west-2:123456789012:function:CloudTrailEventProcessing
+  arn:aws:lambda:us-east-2:123456789012:function:CloudTrailEventProcessing
   ```
 
 For instructions on adding notification configuration to a bucket, see [Enabling Event Notifications](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/SettingBucketNotifications.html) in the *Amazon Simple Storage Service Console User Guide*\.

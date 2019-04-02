@@ -64,21 +64,21 @@ To set a concurrency limit for your Lambda function using the AWS CLI, do the fo
 + Use the [PutFunctionConcurrency](API_PutFunctionConcurrency.md) operation and pass in the function name and concurrency limit you want allocated to this function:
 
   ```
-  $ aws lambda put-function-concurrency --function-name function-name --reserved-concurrent-executions limit value
+  $ aws lambda put-function-concurrency --function-name my-function --reserved-concurrent-executions 100
   ```
 
 To remove a concurrency limit for your Lambda function using the AWS CLI, do the following:
 + Use the [DeleteFunctionConcurrency](API_DeleteFunctionConcurrency.md) operation and pass in the function name:
 
   ```
-  $ aws lambda delete-function-concurrency --function-name function-name  
+  $ aws lambda delete-function-concurrency --function-name my-function  
   ```
 
 To view a concurrency limit for your Lambda function using the AWS CLI, do the following:
 + Use the [GetFunction](API_GetFunction.md) operation and pass in the function name:
 
   ```
-  $ aws lambda get-function --function-name function-name  
+  $ aws lambda get-function --function-name my-function  
   ```
 
 Setting the per function concurrency can impact the concurrency pool available to other functions\. We recommend restricting the permissions to the [PutFunctionConcurrency](API_PutFunctionConcurrency.md) API and [DeleteFunctionConcurrency](API_DeleteFunctionConcurrency.md) API to administrative users so that the number of users who can make these changes is limited\.
@@ -87,9 +87,7 @@ Setting the per function concurrency can impact the concurrency pool available t
 
 On reaching the concurrency limit associated with a function, any further invocation requests to that function are throttled, i\.e\. the invocation doesn't execute your function\. Each throttled invocation increases the Amazon CloudWatch `Throttles` metric for the function\. AWS Lambda handles throttled invocation requests differently, depending on their source: 
 + **Event sources that aren't stream\-based: **Some of these event sources invoke a Lambda function synchronously, and others invoke it asynchronously\. Handling is different for each:
-  + **Synchronous invocation:** If the function is invoked synchronously and is throttled, Lambda returns a 429 error and the invoking service is responsible for retries\. The `ThrottledReason` error code explains whether you ran into a function level throttle \(if specified\) or an account level throttle \(see note below\)\. Each service may have its own retry policy\. For a list of event sources and their invocation type, see [Supported Event Sources](invoking-lambda-function.md)\. 
-**Note**  
-If you invoke the function directly through the AWS SDKs using the `RequestResponse` invocation mode, your client receives the 429 error and you can retry the invocation\. 
+  + **Synchronous invocation:** If the function is invoked synchronously and is throttled, Lambda returns a 429 error and the invoking service is responsible for retries\. The `ThrottledReason` error code explains whether you ran into a function level throttle \(if specified\) or an account level throttle \(see note below\)\. Each service may have its own retry policy\. For a list of event sources and their invocation type, see [Using AWS Lambda With Other Services](lambda-services.md)\. 
   + **Asynchronous invocation:** If your Lambda function is invoked asynchronously and is throttled, AWS Lambda automatically retries the throttled event for up to six hours, with delays between retries\.
 + **Poll\-based event sources that are also stream\-based:** such as [Amazon Kinesis](https://docs.aws.amazon.com/kinesis/latest/dev/) or [Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/), AWS Lambda polls your stream and invokes your Lambda function\. When your Lambda function is throttled, Lambda attempts to process the throttled batch of records until the time the data expires\. This time period can be up to seven days for Amazon Kinesis\. The throttled request is treated as blocking per shard, and Lambda doesn't read any new records from the shard until the throttled batch of records either expires or succeeds\. If there is more than one shard in the stream, Lambda continues invoking on the non\-throttled shards until one gets through\. 
 + **Poll\-based event sources that are not stream\-based:** such as [Amazon Simple Queue Service](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-getting-started.html), AWS Lambda polls your queue and invokes your Lambda function\. When your Lambda function is throttled, Lambda attempts to process the throttled batch of records until it is succesfully invoked \(in which case the message is automatically deleted from the queue\) or until the MessageRetentionPeriod set for the queue expires\. 

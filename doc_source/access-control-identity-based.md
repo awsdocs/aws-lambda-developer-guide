@@ -227,6 +227,6 @@ To ensure that the condition applies, verify that no other statements grant the 
 
 You can apply any of the preceding policies and statements to a role, which you can then share with another account to give it access to your Lambda resources\. Unlike an IAM user, a role doesn't have credentials for authentication\. Instead, it has a *trust policy* that specifies who can assume the role and use its permissions\.
 
-You can use cross\-account roles to give accounts that you trust access to Lambda actions and resources\. If you just want to grant permission to invoke a function or use a layer, use resource\-based policies instead\.
+You can use cross\-account roles to give accounts that you trust access to Lambda actions and resources\. If you just want to grant permission to invoke a function or use a layer, use [resource\-based policies](access-control-resource-based.md) instead\.
 
 For more information, see [IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *IAM User Guide*\.

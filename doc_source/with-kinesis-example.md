@@ -186,7 +186,7 @@ In the response, you can verify the status value is `enabled`\. Event source map
 
 ## Test the Setup<a name="with-kinesis-example-configure-event-source-test-end-to-end"></a>
 
-To test the event source mapping, add event records to your Kinesis stream\. The `--data` value will be base64\-encoded  when it is added to the Kinesis stream. You can run the same command more than once to add multiple records to the stream\.
+To test the event source mapping, add event records to your Kinesis stream\. The `--data` value is a string that the CLI encodes to base64 prior to sending it to Kinesis\. You can run the same command more than once to add multiple records to the stream\.
 
 ```
 $ aws kinesis put-record --stream-name lambda-stream --partition-key 1 \

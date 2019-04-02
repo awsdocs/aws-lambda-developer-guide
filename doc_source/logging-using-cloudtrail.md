@@ -69,7 +69,7 @@ The following example shows CloudTrail log entries for the `GetFunction` and `De
       "sourceIPAddress": "127.0.0.1",
       "userAgent": "Python-httplib2/0.8 (gzip)",
       "errorCode": "AccessDenied",
-      "errorMessage": "User: arn:aws:iam::999999999999:user/myUserName" is not authorized to perform: lambda:GetFunction on resource: arn:aws:lambda:us-west-2:999999999999:function:other-acct-function",
+      "errorMessage": "User: arn:aws:iam::999999999999:user/myUserName is not authorized to perform: lambda:GetFunction on resource: arn:aws:lambda:us-west-2:999999999999:function:other-acct-function",
       "requestParameters": null,
       "responseElements": null,
       "requestID": "7aebcd0f-cda1-11e4-aaa2-e356da31e4ff",

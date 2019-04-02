@@ -2,6 +2,21 @@
 
 Your Lambda function comes with a CloudWatch Logs log group, with a log stream for each instance of your function\. The runtime sends details about each invocation to the log stream, and relays logs and other output from your function's code\.
 
+To write to your function's log, use `puts`\. The following example logs the values of environment variables and the event object\.
+
+**Example lambda\_function\.rb**  
+
+```
+# lambda_function.rb
+
+def handler(event:, context:)
+    puts "## ENVIRONMENT VARIABLES"
+    puts ENV.to_a
+    puts "## EVENT"
+    puts event.to_a
+end
+```
+
 **To view your Lambda function's logs**
 
 1. Open the [Logs page of the CloudWatch console](https://console.aws.amazon.com/cloudwatch/home?#logs:)\.

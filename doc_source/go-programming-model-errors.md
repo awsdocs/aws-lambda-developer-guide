@@ -21,7 +21,7 @@ func main() {
 }
 ```
 
-Which will return:
+Which returns the following:
 
 ```
 {

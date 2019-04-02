@@ -156,4 +156,4 @@ In this step, you invoke the Lambda function manually using the `invoke` command
    + Review the results in the AWS Lambda console\.
    + Verify the results in CloudWatch Logs\.
 
-Now that you have created a Lambda function that accesses a database in your VPC, you can have the function invoked in response to events\. For information about configuring event sources and examples, see [Use Cases](use-cases.md)\.
+Now that you have created a Lambda function that accesses a database in your VPC, you can have the function invoked in response to events\. For information about configuring event sources and examples, see [Using AWS Lambda With Other Services](lambda-services.md)\.

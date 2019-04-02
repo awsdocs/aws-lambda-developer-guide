@@ -13,5 +13,5 @@ The [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/) and [AWS SAM CL
 **Topics**
 + [Managing Applications in the AWS Lambda Console](applications-console.md)
 + [Using the AWS Serverless Application Model \(AWS SAM\)](serverless_app.md)
-+ [Building a Pipeline for Your Serverless Application](build-pipeline.md)
++ [Building a Continuous Delivery Pipeline for a Lambda Application with AWS CodePipeline](build-pipeline.md)
 + [Best Practices for Working with AWS Lambda Functions](best-practices.md)
