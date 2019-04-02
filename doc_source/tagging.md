@@ -1,12 +1,10 @@
 # Tagging Lambda Functions<a name="tagging"></a>
 
 Lambda functions can span multiple applications across separate regions\. To simplify the process of tracking the frequency and cost of each function invocation, you can use tags\. Tags are key\-value pairs that you attach to AWS resources to better organize them\. They are particularly useful when you have many resources of the same type, which in the case of AWS Lambda, is a function\. By using tags, customers with hundreds of Lambda functions can easily access and analyze a specific set by filtering on those that contain the same tag\. Two of the key advantages of tagging your Lambda functions are:
-
 + **Grouping and Filtering:** By applying tags, you can use the Lambda console or CLI to isolate a list of Lambda functions contained within a specific application or billing department\. For more information, see [Filtering on Tagged Lambda Functions](#tag-filtering)\. 
-
 + **Cost allocation:** Because Lambda's support for tagging is integrated with AWS Billing, you can break down bills into dynamic categories and map functions to specific cost centers\. For example, if you tag all Lambda functions with a "Department" key, then all AWS Lambda costs can be broken down by department\. You can then provide an individual department value, such "Department 1" or "Department 2" to direct the function invocation cost to the appropriate cost center\. Cost allocation is surfaced via detailed billing reports, making it easier for you to categorize and track your AWS costs\. 
 
-
+**Topics**
 + [Tagging Lambda Functions for Billing](#tagging-for-billing)
 + [Applying Tags to Lambda Functions](#how-to-tag)
 + [Filtering on Tagged Lambda Functions](#tag-filtering)
@@ -14,9 +12,9 @@ Lambda functions can span multiple applications across separate regions\. To sim
 
 ## Tagging Lambda Functions for Billing<a name="tagging-for-billing"></a>
 
-You can use tags to organize your AWS bill to reflect your own cost structure\. To do this, you can add tag keys whose values will be included in the cost allocation report\. For more information about setting up a cost allocation report that includes the tag keys you select to be included as line items in the report, see [The Monthly Cost Allocation Report](http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/configurecostallocreport.html) in *About AWS Account Billing*\. 
+You can use tags to organize your AWS bill to reflect your own cost structure\. To do this, you can add tag keys whose values will be included in the cost allocation report\. For more information about setting up a cost allocation report that includes the tag keys you select to be included as line items in the report, see [The Monthly Cost Allocation Report](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/configurecostallocreport.html) in *About AWS Account Billing*\. 
 
-To see the cost of your combined resources, you can organize your billing information based on functions that have the same tag key values\. For example, you can tag several Lambda functions with a specific application name, and then organize your billing information to see the total cost of that application across several services\. For more information, see [Using Cost Allocation Tags](http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html) in the *AWS Billing and Cost Management User Guide*\. 
+To see the cost of your combined resources, you can organize your billing information based on functions that have the same tag key values\. For example, you can tag several Lambda functions with a specific application name, and then organize your billing information to see the total cost of that application across several services\. For more information, see [Using Cost Allocation Tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html) in the *AWS Billing and Cost Management User Guide*\. 
 
 **Important**  
 In AWS Lambda the only resource that can be tagged is a function\. You cannot tag an alias or a specific function version\. Any invocation of a function's alias or version will be billed as an invocation of the original function\.
@@ -24,9 +22,7 @@ In AWS Lambda the only resource that can be tagged is a function\. You cannot ta
 ## Applying Tags to Lambda Functions<a name="how-to-tag"></a>
 
 How you tag your Lambda functions depends on how you create the function\. You can apply them using the Lambda console or CLI, as explained in the following sections: 
-
 + [Applying Tags to Lambda Functions Using the Console](#how-to-tag-console)
-
 + [Applying Tags to Lambda Functions Using the CLI](#how-to-tag-cli)
 
 ### Applying Tags to Lambda Functions Using the Console<a name="how-to-tag-console"></a>
@@ -44,7 +40,7 @@ To remove tags from an existing function, open the function, choose the **Tags**
 When you create a new Lambda function using the [CreateFunction](API_CreateFunction.md) command, you can add tags by populating the `Tags` parameter\. Specify multiple tag values by enclosing them in quotation marks, as shown below:
 
 **Note**  
-If you have not already created the `adminuser` profile, see [Set Up the AWS Command Line Interface \(AWS CLI\)](setup-awscli.md)\.
+If you have not already created the `adminuser` profile, see [Set Up the AWS CLI](gettingstarted-tools.md#setup-awscli)\.
 
 ```
 $ aws lambda create-function \
@@ -102,7 +98,6 @@ You are limited to a maximum of 50 tags per Lambda function\. If you delete the 
 ### Filtering Lambda Functions Using the CLI<a name="tag-filtering-cli"></a>
 
 If you want to view the tags that are applied to a specific Lambda function, you can use either of the following Lambda API commands:
-
 + [ListTags](API_ListTags.md): You supply your Lambda function ARN \(Amazon Resource Name\) to view a list of the tags associated with this function:
 
   ```
@@ -111,7 +106,6 @@ If you want to view the tags that are applied to a specific Lambda function, you
   --region region \
   --profile adminuser
   ```
-
 + [GetFunction](API_GetFunction.md): You supply your Lambda function name to a view a list of the tags associated with this function:
 
   ```
@@ -126,15 +120,9 @@ You can also use the AWS Tagging Service’s [GetResources](http://docs.aws.amaz
 ## Tag Restrictions<a name="tag-restrictions"></a>
 
 The following restrictions apply to tags:
-
 + Maximum number of tags per resource—50
-
 + Maximum key length—128 Unicode characters in UTF\-8
-
 + Maximum value length—256 Unicode characters in UTF\-8
-
 + Tag keys and values are case sensitive\.
-
 + Do not use the `aws:` prefix in your tag names or values because it is reserved for AWS use\. You can't edit or delete tag names or values with this prefix\. Tags with this prefix do not count against your tags per resource limit\.
-
 + If your tagging schema will be used across multiple services and resources, remember that other services may have restrictions on allowed characters\. Generally allowed characters are: letters, spaces, and numbers representable in UTF\-8, plus the following special characters: \+ \- = \. \_ : / @\.

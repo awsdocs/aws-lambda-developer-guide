@@ -2,40 +2,27 @@
 
 The following is a list of example events published by the supported AWS services\. For more information about the supported AWS event sources, see [Supported Event Sources](invoking-lambda-function.md)\.
 
+**Note**  
+JSON keys may vary in case between AWS event sources\.
+
 **Sample Events**
-
 + [AWS CloudFormation Create Request Sample Event](#eventsources-cloudformation-create-request)
-
 + [Amazon SES Email Receiving Sample Event](#eventsources-ses-email-receiving)
-
 + [Scheduled Event Sample Event](#eventsources-scheduled-event)
-
 + [Amazon CloudWatch Logs Sample Event](#eventsources-cloudwatch-logs)
-
 + [Amazon SNS Sample Event](#eventsources-sns)
-
 + [Amazon DynamoDB Update Sample Event](#eventsources-ddb-update)
-
 + [Amazon Cognito Sync Trigger Sample Event](#eventsources-cognito-sync-trigger)
-
 + [Amazon Kinesis Data Streams Sample Event](#eventsources-kinesis-streams)
-
 + [Amazon S3 Put Sample Event](#eventsources-s3-put)
-
 + [Amazon S3 Delete Sample Event](#eventsources-s3-delete)
-
 + [Amazon Lex Sample Event](#eventsources-lex)
-
 + [API Gateway Proxy Request Event](#eventsources-api-gateway-request)
-
 + [API Gateway Proxy Response Event](#eventsources-api-gateway-response)
-
++ [Amazon SQS Event](#eventsources-sqs)
 + [CloudFront Event](#eventsources-cloudfront)
-
 + [AWS Config Event](#eventsources-config)
-
 + [AWS IoT Button Event](#eventsources-iot-button)
-
 + [Kinesis Data Firehose Event](#eventsources-kinesis-firehose)
 
 **AWS CloudFormation Create Request Sample Event**  <a name="eventsources-cloudformation-create-request"></a>
@@ -65,24 +52,97 @@ The following is a list of example events published by the supported AWS service
 {
   "Records": [
     {
-      "EventVersion": "1.0",
-      "EventSource": "aws:sns",
-      "EventSubscriptionArn": "arn:aws:sns:us-west-2:123456789000:ses_messages:26a58451-3392-4ab6-a829-d65c2968421a",
-      "Sns":
-      {
-        "MessageId": "483eae4c-4fb0-57e5-a5f9-ff9b08612bef",
-        "Signature": "Uy3tn/qAQg/sXARGk2DRddd31ZtyDE+B1IzRla/KA75BaerApJqN+H59q69z8H+pRx0AyUwOD1K0huBYdDRbAMVOUsMgZgdcNjj0gSfFg8uZvTuKaqTaWj4E0hmzoemHENWeuswuq3l6xoPcAJ9fHd2yFhX+792AV++i/8P4EKv/9I4j8Ejs3OxMRN49gkWefKbv4/avyHOdSaFTnXV0rGLmPb103dtjeY4K05PTKvUlPerN+MdRTvHrjApvqDvP0NEVyYBU4zFZQ6GnFcFnHtTk44c3NH/dVi6Gf9VrX8V1id5VSZICYiIG1iaUZ0b676IhRh8znzjMDWaczOBwkA==",
-        "Type": "Notification",
-        "TopicArn": "arn:aws:sns:us-west-2:123456789000:ses_messages",
-        "MessageAttributes": {},
-        "SignatureVersion": "1",
-        "Timestamp": "2017-07-05T20:01:21.366Z",
-        "SigningCertUrl": "https://sns.us-west-2.amazonaws.com/SimpleNotificationService-b95095beb82e8f6a046b3aafc7f4149a.pem",
-        "Message":"{\"notificationType\":\"Delivery\",\"mail\":{\"timestamp\":\"2017-07-05T20:01:20.773Z\",\"source\":\"jeff@amazon.com\",\"sourceArn\":\"arn:aws:ses:us-west-2:123456789000:identity/jeff@amazon.com\",\"sourceIp\":\"205.251.233.183\",\"sendingAccountId\":\"123456789000\",\"messageId\":\"0101015d1457bd85-2ff839b3-c119-4311-b90c-5ce39eff3026-000000\",\"destination\":[\"jeff@amazon.com\"]},\"delivery\":{\"timestamp\":\"2017-07-05T20:01:21.302Z\",\"processingTimeMillis\":529,\"recipients\":[\"jeff@amazon.com\"],\"smtpResponse\":\"250 ok: Message 122614849 accepted\",\"remoteMtaIp\":\"207.171.188.9\",\"reportingMTA\":\"a27-42.smtp-out.us-west-2.amazonses.com\"}}",
-        "UnsubscribeUrl": "https://sns.us-west-2.amazonaws.com/?Action=Unsubscribe&eifjccgihujihfhrchunfnglreichbrcljrnlvtbeked
-        SubscriptionArn=arn:aws:sns:us-west-2:123456789000:ses_messages:26a58451-3392-4ab6-a829-d65c2968421a",
-        "Subject": null
-      }
+      "eventVersion": "1.0",
+      "ses": {
+        "mail": {
+          "commonHeaders": {
+            "from": [
+              "Jane Doe <janedoe@example.com>"
+            ],
+            "to": [
+              "johndoe@example.com"
+            ],
+            "returnPath": "janedoe@example.com",
+            "messageId": "<0123456789example.com>",
+            "date": "Wed, 7 Oct 2015 12:34:56 -0700",
+            "subject": "Test Subject"
+          },
+          "source": "janedoe@example.com",
+          "timestamp": "1970-01-01T00:00:00.000Z",
+          "destination": [
+            "johndoe@example.com"
+          ],
+          "headers": [
+            {
+              "name": "Return-Path",
+              "value": "<janedoe@example.com>"
+            },
+            {
+              "name": "Received",
+              "value": "from mailer.example.com (mailer.example.com [203.0.113.1]) by inbound-smtp.us-west-2.amazonaws.com with SMTP id o3vrnil0e2ic for johndoe@example.com; Wed, 07 Oct 2015 12:34:56 +0000 (UTC)"
+            },
+            {
+              "name": "DKIM-Signature",
+              "value": "v=1; a=rsa-sha256; c=relaxed/relaxed; d=example.com; s=example; h=mime-version:from:date:message-id:subject:to:content-type; bh=jX3F0bCAI7sIbkHyy3mLYO28ieDQz2R0P8HwQkklFj4=; b=sQwJ+LMe9RjkesGu+vqU56asvMhrLRRYrWCbV"
+            },
+            {
+              "name": "MIME-Version",
+              "value": "1.0"
+            },
+            {
+              "name": "From",
+              "value": "Jane Doe <janedoe@example.com>"
+            },
+            {
+              "name": "Date",
+              "value": "Wed, 7 Oct 2015 12:34:56 -0700"
+            },
+            {
+              "name": "Message-ID",
+              "value": "<0123456789example.com>"
+            },
+            {
+              "name": "Subject",
+              "value": "Test Subject"
+            },
+            {
+              "name": "To",
+              "value": "johndoe@example.com"
+            },
+            {
+              "name": "Content-Type",
+              "value": "text/plain; charset=UTF-8"
+            }
+          ],
+          "headersTruncated": false,
+          "messageId": "o3vrnil0e2ic28tr"
+        },
+        "receipt": {
+          "recipients": [
+            "johndoe@example.com"
+          ],
+          "timestamp": "1970-01-01T00:00:00.000Z",
+          "spamVerdict": {
+            "status": "PASS"
+          },
+          "dkimVerdict": {
+            "status": "PASS"
+          },
+          "processingTimeMillis": 574,
+          "action": {
+            "type": "Lambda",
+            "invocationType": "Event",
+            "functionArn": "arn:aws:lambda:us-west-2:012345678912:function:Example"
+          },
+          "spfVerdict": {
+            "status": "PASS"
+          },
+          "virusVerdict": {
+            "status": "PASS"
+          }
+        }
+      },
+      "eventSource": "aws:ses"
     }
   ]
 }
@@ -274,6 +334,7 @@ The following is a list of example events published by the supported AWS service
 **Amazon Kinesis Data Streams Sample Event**  <a name="eventsources-kinesis-streams"></a>
 
 ```
+{
      
   "Records": [
     {
@@ -466,6 +527,31 @@ The following is a list of example events published by the supported AWS service
   "stageVariables": {
     "stageVarName": "stageVarValue"
   }
+}
+```
+
+**Amazon SQS Event**  <a name="eventsources-sqs"></a>
+
+```
+{
+     "Records": [
+        {
+            "messageId": "c80e8021-a70a-42c7-a470-796e1186f753",
+            "receiptHandle": "AQEBJQ+/u6NsnT5t8Q/VbVxgdUl4TMKZ5FqhksRdIQvLBhwNvADoBxYSOVeCBXdnS9P+erlTtwEALHsnBXynkfPLH3BOUqmgzP25U8kl8eHzq6RAlzrSOfTO8ox9dcp6GLmW33YjO3zkq5VRYyQlJgLCiAZUpY2D4UQcE5D1Vm8RoKfbE+xtVaOctYeINjaQJ1u3mWx9T7tork3uAlOe1uyFjCWU5aPX/1OHhWCGi2EPPZj6vchNqDOJC/Y2k1gkivqCjz1CZl6FlZ7UVPOx3AMoszPuOYZ+Nuqpx2uCE2MHTtMHD8PVjlsWirt56oUr6JPp9aRGo6bitPIOmi4dX0FmuMKD6u/JnuZCp+AXtJVTmSHS8IXt/twsKU7A+fiMK01NtD5msNgVPoe9JbFtlGwvTQ==",
+            "body": "{\"foo\":\"bar\"}",
+            "attributes": {
+                "ApproximateReceiveCount": "3",
+                "SentTimestamp": "1529104986221",
+                "SenderId": "594035263019",
+                "ApproximateFirstReceiveTimestamp": "1529104986230"
+            },
+            "messageAttributes": {},
+            "md5OfBody": "9bb58f26192e4ba00f01e2e7b136bbd8",
+            "eventSource": "aws:sqs",
+            "eventSourceARN": "arn:aws:sqs:us-west-2:594035263019:NOTFIFOQUEUE",
+            "awsRegion": "us-west-2"
+        }
+    ]
 }
 ```
 
