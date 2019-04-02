@@ -1,10 +1,6 @@
 # GetFunction<a name="API_GetFunction"></a>
 
-Returns the configuration information of the Lambda function and a presigned URL link to the \.zip file you uploaded with [CreateFunction](API_CreateFunction.md) so you can download the \.zip file\. Note that the URL is valid for up to 10 minutes\. The configuration information is the same information you provided as parameters when uploading the function\.
-
-Use the `Qualifier` parameter to retrieve a published version of the function\. Otherwise, returns the unpublished version \(`$LATEST`\)\. For more information, see [AWS Lambda Function Versioning and Aliases](https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html)\.
-
-This operation requires permission for the `lambda:GetFunction` action\.
+Returns information about the function or function version, with a link to download the deployment package that's valid for 10 minutes\. If you specify a function version, only details that are specific to that version are returned\.
 
 ## Request Syntax<a name="API_GetFunction_RequestSyntax"></a>
 
@@ -17,13 +13,13 @@ GET /2015-03-31/functions/FunctionName?Qualifier=Qualifier HTTP/1.1
 The request requires the following URI parameters\.
 
  ** [FunctionName](#API_GetFunction_RequestSyntax) **   <a name="SSS-GetFunction-request-FunctionName"></a>
-The name of the lambda function\.  
+The name of the Lambda function, version, or alias\.  
 
 **Name formats**
-+  **Function name** \- `MyFunction`\.
-+  **Function ARN** \- `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`\.
-+  **Partial ARN** \- `123456789012:function:MyFunction`\.
-The length constraint applies only to the full ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
++  **Function name** \- `my-function` \(name\-only\), `my-function:v1` \(with alias\)\.
++  **Function ARN** \- `arn:aws:lambda:us-west-2:123456789012:function:my-function`\.
++  **Partial ARN** \- `123456789012:function:my-function`\.
+You can append a version number or alias to any of the formats\. The length constraint applies only to the full ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
 Length Constraints: Minimum length of 1\. Maximum length of 170\.  
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_\.]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
@@ -71,6 +67,12 @@ Content-type: application/json
       "[Handler](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-Handler)": "string",
       "[KMSKeyArn](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-KMSKeyArn)": "string",
       "[LastModified](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-LastModified)": "string",
+      "[Layers](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-Layers)": [ 
+         { 
+            "[Arn](API_Layer.md#SSS-Type-Layer-Arn)": "string",
+            "[CodeSize](API_Layer.md#SSS-Type-Layer-CodeSize)": number
+         }
+      ],
       "[MasterArn](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-MasterArn)": "string",
       "[MemorySize](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-MemorySize)": number,
       "[RevisionId](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-RevisionId)": "string",
@@ -100,19 +102,19 @@ If the action is successful, the service sends back an HTTP 200 response\.
 The following data is returned in JSON format by the service\.
 
  ** [Code](#API_GetFunction_ResponseSyntax) **   <a name="SSS-GetFunction-response-Code"></a>
-The function's code\.  
+The deployment package of the function or version\.  
 Type: [FunctionCodeLocation](API_FunctionCodeLocation.md) object
 
  ** [Concurrency](#API_GetFunction_ResponseSyntax) **   <a name="SSS-GetFunction-response-Concurrency"></a>
-The concurrent execution limit set for this function\. For more information, see [Managing Concurrency](https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html)\.  
+The function's [reserved concurrency](https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html)\.  
 Type: [Concurrency](API_Concurrency.md) object
 
  ** [Configuration](#API_GetFunction_ResponseSyntax) **   <a name="SSS-GetFunction-response-Configuration"></a>
-The function's configuration\.  
+The configuration of the function or version\.  
 Type: [FunctionConfiguration](API_FunctionConfiguration.md) object
 
  ** [Tags](#API_GetFunction_ResponseSyntax) **   <a name="SSS-GetFunction-response-Tags"></a>
-Returns the list of tags associated with the function\. For more information, see [Tagging Lambda Functions](https://docs.aws.amazon.com/lambda/latest/dg/tagging.html) in the **AWS Lambda Developer Guide**\.  
+The function's [tags](https://docs.aws.amazon.com/lambda/latest/dg/tagging.html)\.  
 Type: String to string map
 
 ## Errors<a name="API_GetFunction_Errors"></a>
@@ -130,7 +132,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-Request throughput limit exceeded  
+Request throughput limit exceeded\.  
 HTTP Status Code: 429
 
 ## See Also<a name="API_GetFunction_SeeAlso"></a>
@@ -140,6 +142,7 @@ For more information about using this API in one of the language\-specific AWS S
 +  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/GetFunction) 
 +  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/GetFunction) 
 +  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/GetFunction) 
++  [AWS SDK for Go \- Pilot](https://docs.aws.amazon.com/goto/SdkForGoPilot/lambda-2015-03-31/GetFunction) 
 +  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/GetFunction) 
 +  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/GetFunction) 
 +  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/GetFunction) 

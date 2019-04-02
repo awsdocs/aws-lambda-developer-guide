@@ -8,20 +8,7 @@ In this tutorial, you will do the following:
 + Update the Lambda function by changing the Amazon S3 bucket name specified by the environment variable\.
 + Invoke the Lambda function again and verify that the Amazon S3 bucket name that is returned matches the updated value\.
 
-## Step 1: Prepare<a name="with-env-prepare"></a>
-
-Make sure you have completed the following steps:
-+ Signed up for an AWS account and created an administrator user in the account \(called **adminuser**\)\. For instructions, see [Set Up an AWS Account](setup.md) 
-+ Installed and set up the AWS CLI\. For instructions, see [Set Up the AWS Command Line Interface \(AWS CLI\)](setup-awscli.md)
-
-## Step 2: Set Up the Lambda Environment<a name="env-test-function"></a>
-
-In this section, you do the following:
-+ Create the Lambda function deployment package using the sample code provided\.
-+ Create a Lambda execution role\.
-+ Create the Lambda function by uploading the deployment package, and then test it by invoking it manually\.
-
-### Step 2\.1: Create the Deployment Package<a name="env-create-package"></a>
+## Set Up the Lambda Environment<a name="env-test-function"></a>
 
 The code sample below reads the environment variable of a Lambda function that returns the name of an Amazon S3 bucket\.
 
@@ -41,7 +28,7 @@ The code sample below reads the environment variable of a Lambda function that r
 
 1. Zip the *index\.js\.* file as *Test\_Environment\_Variables\.zip*\.
 
-### Step 2\.2: Create an Execution Role<a name="env-create-exec-role"></a>
+## Create an Execution Role<a name="env-create-exec-role"></a>
 
 Create an IAM role \(execution role\) that you can specify at the time you create your Lambda function\. 
 
@@ -53,7 +40,7 @@ Create an IAM role \(execution role\) that you can specify at the time you creat
 
 1. Write down the Amazon Resource Name \(ARN\) of the IAM role\. You need this value when you create your Lambda function in the next step\.
 
-### Step 2\.3 Create the Lambda function and Test It<a name="with-env-create-function"></a>
+## Create the Lambda function and Test It<a name="with-env-create-function"></a>
 
 In this section, you create a Lambda function containing an environment variable that specifies an Amazon S3 bucket named `Test`\. When invoked, the function simply returns the name of the Amazon S3 bucket\. Then you update the configuration by changing the Amazon S3 bucket name to `Prod` and when invoked again, the function returns the updated name of the Amazon S3 bucket\. 
 

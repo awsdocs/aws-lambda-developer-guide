@@ -15,15 +15,17 @@ s3Client = AWS.S3();
 
 After following these steps, any call made from your function using `s3Client` results in an X\-Ray subsegment that represents that call\. As an example, you can run the Node\.js function following to see how the trace looks in X\-Ray:
 
+**Example index\.js**  
+
 ```
 var AWSXRay = require('aws-xray-sdk-core');
 var AWS = AWSXRay.captureAWS(require('aws-sdk'));
 
-s3 = new AWS.S3({signatureVersion: 'v4'});
+var s3 = new AWS.S3();
 
 exports.handler = (event, context, callback) => {
 
-    var params = {Bucket: BUCKET_NAME, Key: BUCKET_KEY, Body: BODY};
+    var params = {Bucket: process.env.BUCKET_NAME, Key: process.env.BUCKET_KEY, Body: process.env.BODY};
  
     s3.putObject(params, function(err, data) {
         if (err)
