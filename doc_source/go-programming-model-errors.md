@@ -25,8 +25,9 @@ Which will return:
 
 ```
 {
-            "errorMessage": "something went wrong!"
-            }
+  "errorMessage": "something went wrong!",
+  "errorType": "errorString"
+}
 ```
 
 ## Function Error Handling<a name="python-custom-errors"></a>

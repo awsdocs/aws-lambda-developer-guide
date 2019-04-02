@@ -8,7 +8,6 @@ AWS Lambda aliases enable the following use cases:
 + **Easier support for promotion of new versions of Lambda functions and rollback when needed** – After initially creating a Lambda function \(the `$LATEST` version\), you can publish a version 1 of it\. By creating an alias named PROD that points to version 1, you can now use the PROD alias to invoke version 1 of the Lambda function\. 
 
   Now, you can update the code \(the `$LATEST` version\) with all of your improvements, and then publish another stable and improved version \(version 2\)\. You can promote version 2 to production by remapping the PROD alias so that it points to version 2\. If you find something wrong, you can easily roll back the production version to version 1 by remapping the PROD alias so that it points to version 1\.
-
 + **Simplify management of event source mappings** – Instead of using Amazon Resource Names \(ARNs\) for Lambda function in event source mappings, you can use an alias ARN\. This approach means that you don't need to update your event source mappings when you promote a new version or roll back to a previous version\. 
 
 Both the Lambda function and alias are AWS Lambda resources, and like all other AWS resources they both have unique ARNs\. The following example shows a Lambda function \(the `$LATEST` version\), with one published version\. Each version has an alias pointing to it\.

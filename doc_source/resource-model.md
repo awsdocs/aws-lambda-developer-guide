@@ -22,8 +22,8 @@ A Lambda function consists of code and any associated dependencies\. In addition
   ```
   $ aws lambda update-function-configuration --function-name myfunction --memory-size 256
   ```
-+ **Timeout** – You pay for the AWS resources that are used to run your Lambda function\. To prevent your Lambda function from running indefinitely, you specify a timeout\. When the specified timeout is reached, AWS Lambda terminates execution of your Lambda function\. We recommend you set this value based on your expected execution time\. The default for functions created in the console is 3 seconds\.
++ **Timeout** – You pay for the AWS resources that are used to run your Lambda function\. To prevent your Lambda function from running indefinitely, you specify a timeout\. When the specified timeout is reached, AWS Lambda terminates execution of your Lambda function\. We recommend you set this value based on your expected execution time\. The default timeout is 3 seconds\.
 **Note**  
 You can invoke a Lambda function synchronously either by calling the `Invoke` operation or by using an AWS SDK in your preferred runtime\. If you anticipate a long\-running Lambda function, your client may time out before function execution completes\. To avoid this, update the client timeout or your SDK configuration\. For more information, see [Invoke](API_Invoke.md)\. 
-+ **Execution role** – This is the role that AWS Lambda assumes when it executes the Lambda function on your behalf\. For more information, see [AWS Lambda Permissions Model](intro-permission-model.md)\.
++ **Execution role** – The role that AWS Lambda assumes when it executes the Lambda function\. For more information, see [AWS Lambda Execution Role](lambda-intro-execution-role.md)\.
 + **Handler name** – The handler method is the entry point that executes your Lambda function code and any event source dependencies that you have included as part of your Lambda function\. This setting appears in the function code editor\.

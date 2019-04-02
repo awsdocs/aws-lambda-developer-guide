@@ -2,10 +2,10 @@
 
 Concurrent executions refers to the number of executions of your function code that are happening at any given time\. You can estimate the concurrent execution count, but the concurrent execution count will differ depending on whether or not your Lambda function is processing events from a poll\-based event source\. 
 
- If you create a Lambda function to process events from event sources that aren't poll\-based \(for example, Lambda can process every event from other sources, like Amazon S3 or API Gateway\), each published event is a unit of work, in parallel, up to your account limits\. Therefore, the number of events \(or requests\) these event sources publish influences the concurrency\. You can use the this formula to estimate your concurrent Lambda function invocations:
+If you create a Lambda function to process events from event sources that aren't poll\-based \(for example, Lambda can process every event from other sources, like Amazon S3 or API Gateway\), each published event is a unit of work, in parallel, up to your account limits\. Therefore, the number of invocations these event sources make influences the concurrency\. You can use the this formula to estimate the capacity used by your function:
 
 ```
-events (or requests) per second * function duration
+invocations per second * average execution duration in seconds
 ```
 
 For example, consider a Lambda function that processes Amazon S3 events\. Suppose that the Lambda function takes on average three seconds and Amazon S3 publishes 10 events per second\. Then, you will have 30 concurrent executions of your Lambda function\.
@@ -26,7 +26,7 @@ The number of concurrent executions for poll\-based event sources also depends o
 
 ## Request Rate<a name="concurrent-executions-request-rate"></a>
 
-Request rate refers to the rate at which your Lambda function is invoked\. For all services except the stream\-based services, the request rate is the rate at which the event sources generate the events\. For stream\-based services, AWS Lambda calculates the request rate as follows:
+Request rate refers to the rate at which your Lambda function is invoked\. For all services except the poll\-based services, the request rate is the rate at which the event sources generate the events\. For poll\-based services, AWS Lambda calculates the request rate as follows:
 
 ```
 request rate = number of concurrent executions / function duration
@@ -47,7 +47,7 @@ AWS Lambda dynamically scales function execution in response to increased traffi
 | US West \(Oregon\), US East \(N\. Virginia\) | 3000 | 
 | Asia Pacific \(Seoul\), Asia Pacific \(Mumbai\), Asia Pacific \(Singapore\), Asia Pacific \(Sydney\) | 500 | 
 | Asia Pacific \(Tokyo\) | 1000 | 
-| EU \(London\), EU \(Paris\) | 500 | 
+| EU \(London\), EU \(Paris\), EU \(Stockholm\) | 500 | 
 | EU \(Frankfurt\) | 1000 | 
 | EU \(Ireland\) | 3000 | 
 | South America \(São Paulo\) | 500 | 
