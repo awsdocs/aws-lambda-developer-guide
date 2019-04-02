@@ -142,7 +142,7 @@ To set up your repository, do the following:
   ```
   var time = require('time');
   exports.handler = (event, context, callback) => {
-      var currentTime = new time.Date(); 
+      var currentTime = new time.Date();
       currentTime.setTimezone("America/Los_Angeles");
       callback(null, {
           statusCode: '200',
@@ -180,12 +180,11 @@ To set up your repository, do the following:
       install:
         commands:
           - npm install time
-          - aws cloudformation package --template-file samTemplate.yaml --kms-key-id kms-key-id --s3-bucket bucket-name 
+          - aws cloudformation package --template-file samTemplate.yaml --s3-bucket bucket-name
                                        --output-template-file outputSamTemplate.yaml
     artifacts:
       type: zip
       files:
-        - samTemplate.yaml
         - outputSamTemplate.yaml
     ```
 
@@ -239,7 +238,7 @@ A service role for AWS CodeBuild is automatically created on your behalf\.
 
 1. Choose **Create role**, choose **Next**, choose **Allow**, and then choose **Next step**\.
 
-1. Review your pipeline and then choose **Create pipeline**\. 
+1. Review your pipeline and then choose **Create pipeline**\.
 
 ## Step 3: Update the Generated Service Policy<a name="update-policy"></a>
 
