@@ -1,4 +1,4 @@
-# Invoking Lambda Functions<a name="invoking-lambda-functions"></a>
+# Invoking AWS Lambda Functions<a name="invoking-lambda-functions"></a>
 
  When building applications on AWS Lambda, including [serverless](https://aws.amazon.com/serverless) applications, the core components are Lambda functions and event sources\. An *event source* is the AWS service or custom application that publishes events, and a *Lambda function* is the custom code that processes the events\. To illustrate, consider the following scenarios:
 + **File processing** – Suppose you have a photo sharing application\. People use your application to upload photos, and the application stores these user photos in an Amazon S3 bucket\. Then, your application creates a thumbnail version of each user's photos and displays them on the user's profile page\. In this scenario, you may choose to create a Lambda function that creates a thumbnail automatically\. Amazon S3 is one of the supported AWS event sources that can publish *object\-created events* and invoke your Lambda function\. Your Lambda function code can read the photo object from the S3 bucket, create a thumbnail version, and then save it in another S3 bucket\. 
@@ -26,7 +26,7 @@ The diagram illustrates the following sequence:
 
 1. Amazon S3 detects the object created event\.
 
-1. Amazon S3 invokes your Lambda function using the permissions provided by the execution role\. For more information on execution roles, see [Authentication and Access Control for AWS Lambda](lambda-auth-and-access-control.md)\. Amazon S3 knows which Lambda function to invoke based on the event source mapping that is stored in the bucket notification configuration\. 
+1. Amazon S3 invokes your Lambda function using the permissions provided by the execution role\. For more information on execution roles, see [AWS Lambda Permissions](lambda-permissions.md)\. Amazon S3 knows which Lambda function to invoke based on the event source mapping that is stored in the bucket notification configuration\. 
 
 1. AWS Lambda executes the Lambda function, specifying the event as a parameter\.
 
@@ -60,7 +60,7 @@ Note the following:
 + AWS Lambda does not need permission to invoke your Lambda function, therefore you don't need to add any permissions to the permissions policy attached to your Lambda function\. 
 + Your Lambda role needs permission to read from the stream\.
 
-## Example 3: AWS Lambda Pulls Events from an Amazon SQS Queue and Invokes a Lambda Function<a name="example-lambda-pulls-kinesis-streams-events-invokes-function"></a>
+## Example 3: AWS Lambda Pulls Events from an Amazon SQS Queue and Invokes a Lambda Function<a name="example-lambda-pulls-sqs-events-invokes-function"></a>
 
 For poll\-based event sources, AWS Lambda polls the source and then invokes the Lambda function when records are detected on that source\. For poll\-based sources, event source mapping information is stored in AWS Lambda\. AWS Lambda provides an API for you to create and manage these event source mappings\. 
 + [CreateEventSourceMapping](API_CreateEventSourceMapping.md)

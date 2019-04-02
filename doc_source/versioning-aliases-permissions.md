@@ -10,15 +10,13 @@ You can invoke for example the `helloworld` function version 1 using any of the 
   ```
   arn:aws:lambda:aws-region:acct-id:function:helloworld:1
   ```
-**Note**  
-An unqualified function ARN \(a function ARN without a version or alias suffix\) maps to the `$LATEST` version\.
 + Using the BETA alias ARN as shown following\.
 
   ```
   arn:aws:lambda:aws-region:acct-id:function:helloworld:BETA
   ```
 
-In a *push* model, event sources \(such as Amazon S3 and custom applications\) can invoke any of the Lambda function versions as long you grant the necessary permissions to these event sources by using an access policy associated with the Lambda function\. For more information about the push model, see [Event Source Mapping](invocation-options.md#intro-invocation-modes)\. 
+In a *push* model, event sources \(such as Amazon S3 and custom applications\) can invoke any of the Lambda function versions as long you grant the necessary permissions to these event sources by using an access policy associated with the Lambda function\. For more information about the push model, see [AWS Lambda Event Source Mapping](intro-invocation-modes.md)\. 
 
 Assuming that you grant permission, the next question is, "can an event source invoke a function version using any of the associated ARNs?" The answer is, it depends on how you identified function in your add permissions request \(see [AddPermission](API_AddPermission.md)\)\. The key to understanding this is that the permission you grant apply only to the ARN used in the add permission request:
 + If you use a qualified function name \(such as `helloworld:1`\), the permission is valid for invoking the `helloworld` function version 1 *only* using its qualified ARN \(using any other ARNs results in a permission error\)\. 

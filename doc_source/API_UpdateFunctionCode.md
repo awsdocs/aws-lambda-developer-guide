@@ -1,10 +1,8 @@
 # UpdateFunctionCode<a name="API_UpdateFunctionCode"></a>
 
-Updates the code for the specified Lambda function\. This operation must only be used on an existing Lambda function and cannot be used to update the function configuration\.
+Updates a Lambda function's code\.
 
-If you are using the versioning feature, note this API will always update the $LATEST version of your Lambda function\. For information about the versioning feature, see [AWS Lambda Function Versioning and Aliases](https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html)\. 
-
-This operation requires permission for the `lambda:UpdateFunctionCode` action\.
+The function's code is locked when you publish a version\. You can't modify the code of a published version, only the unpublished version\.
 
 ## Request Syntax<a name="API_UpdateFunctionCode_RequestSyntax"></a>
 
@@ -28,8 +26,13 @@ Content-type: application/json
 The request requires the following URI parameters\.
 
  ** [FunctionName](#API_UpdateFunctionCode_RequestSyntax) **   <a name="SSS-UpdateFunctionCode-request-FunctionName"></a>
-The existing Lambda function name whose code you want to replace\.  
- You can specify a function name \(for example, `Thumbnail`\) or you can specify Amazon Resource Name \(ARN\) of the function \(for example, `arn:aws:lambda:us-west-2:account-id:function:ThumbNail`\)\. AWS Lambda also allows you to specify a partial ARN \(for example, `account-id:Thumbnail`\)\. Note that the length constraint applies only to the ARN\. If you specify only the function name, it is limited to 64 characters in length\.   
+The name of the Lambda function\.  
+
+**Name formats**
++  **Function name** \- `my-function`\.
++  **Function ARN** \- `arn:aws:lambda:us-west-2:123456789012:function:my-function`\.
++  **Partial ARN** \- `123456789012:function:my-function`\.
+The length constraint applies only to the full ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
@@ -38,41 +41,41 @@ Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}
 The request accepts the following data in JSON format\.
 
  ** [DryRun](#API_UpdateFunctionCode_RequestSyntax) **   <a name="SSS-UpdateFunctionCode-request-DryRun"></a>
-This boolean parameter can be used to test your request to AWS Lambda to update the Lambda function and publish a version as an atomic operation\. It will do all necessary computation and validation of your code but will not upload it or a publish a version\. Each time this operation is invoked, the `CodeSha256` hash value of the provided code will also be computed and returned in the response\.  
+Set to true to validate the request parameters and access permissions without modifying the function code\.  
 Type: Boolean  
 Required: No
 
  ** [Publish](#API_UpdateFunctionCode_RequestSyntax) **   <a name="SSS-UpdateFunctionCode-request-Publish"></a>
-This boolean parameter can be used to request AWS Lambda to update the Lambda function and publish a version as an atomic operation\.  
+Set to true to publish a new version of the function after updating the code\. This has the same effect as calling [PublishVersion](API_PublishVersion.md) separately\.  
 Type: Boolean  
 Required: No
 
  ** [RevisionId](#API_UpdateFunctionCode_RequestSyntax) **   <a name="SSS-UpdateFunctionCode-request-RevisionId"></a>
-An optional value you can use to ensure you are updating the latest update of the function version or alias\. If the `RevisionID` you pass doesn't match the latest `RevisionId` of the function or alias, it will fail with an error message, advising you to retrieve the latest function version or alias `RevisionID` using either using either [GetFunction](https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunction.html) or [GetAlias](https://docs.aws.amazon.com/lambda/latest/dg/API_GetAlias.html) operations\.  
+Only update the function if the revision ID matches the ID that's specified\. Use this option to avoid modifying a function that has changed since you last read it\.  
 Type: String  
 Required: No
 
  ** [S3Bucket](#API_UpdateFunctionCode_RequestSyntax) **   <a name="SSS-UpdateFunctionCode-request-S3Bucket"></a>
-Amazon S3 bucket name where the \.zip file containing your deployment package is stored\. This bucket must reside in the same AWS Region where you are creating the Lambda function\.  
+An Amazon S3 bucket in the same AWS Region as your function\. The bucket can be in a different AWS account\.  
 Type: String  
 Length Constraints: Minimum length of 3\. Maximum length of 63\.  
 Pattern: `^[0-9A-Za-z\.\-_]*(?<!\.)$`   
 Required: No
 
  ** [S3Key](#API_UpdateFunctionCode_RequestSyntax) **   <a name="SSS-UpdateFunctionCode-request-S3Key"></a>
-The Amazon S3 object \(the deployment package\) key name you want to upload\.  
+The Amazon S3 key of the deployment package\.  
 Type: String  
 Length Constraints: Minimum length of 1\. Maximum length of 1024\.  
 Required: No
 
  ** [S3ObjectVersion](#API_UpdateFunctionCode_RequestSyntax) **   <a name="SSS-UpdateFunctionCode-request-S3ObjectVersion"></a>
-The Amazon S3 object \(the deployment package\) version you want to upload\.  
+For versioned objects, the version of the deployment package object to use\.  
 Type: String  
 Length Constraints: Minimum length of 1\. Maximum length of 1024\.  
 Required: No
 
  ** [ZipFile](#API_UpdateFunctionCode_RequestSyntax) **   <a name="SSS-UpdateFunctionCode-request-ZipFile"></a>
-The contents of your zip file containing your deployment package\. If you are using the web API directly, the contents of the zip file must be base64\-encoded\. If you are using the AWS SDKs or the AWS CLI, the SDKs or CLI will do the encoding for you\. For more information about creating a \.zip file, see [Execution Permissions](https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role.html)\.   
+The base64\-encoded contents of the deployment package\. AWS SDK and AWS CLI clients handle the encoding for you\.  
 Type: Base64\-encoded binary data object  
 Required: No
 
@@ -103,6 +106,12 @@ Content-type: application/json
    "[Handler](#SSS-UpdateFunctionCode-response-Handler)": "string",
    "[KMSKeyArn](#SSS-UpdateFunctionCode-response-KMSKeyArn)": "string",
    "[LastModified](#SSS-UpdateFunctionCode-response-LastModified)": "string",
+   "[Layers](#SSS-UpdateFunctionCode-response-Layers)": [ 
+      { 
+         "[Arn](API_Layer.md#SSS-Type-Layer-Arn)": "string",
+         "[CodeSize](API_Layer.md#SSS-Type-Layer-CodeSize)": number
+      }
+   ],
    "[MasterArn](#SSS-UpdateFunctionCode-response-MasterArn)": "string",
    "[MemorySize](#SSS-UpdateFunctionCode-response-MemorySize)": number,
    "[RevisionId](#SSS-UpdateFunctionCode-response-RevisionId)": "string",
@@ -128,83 +137,87 @@ If the action is successful, the service sends back an HTTP 200 response\.
 The following data is returned in JSON format by the service\.
 
  ** [CodeSha256](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-CodeSha256"></a>
-It is the SHA256 hash of your function deployment package\.  
+The SHA256 hash of the function's deployment package\.  
 Type: String
 
  ** [CodeSize](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-CodeSize"></a>
-The size, in bytes, of the function \.zip file you uploaded\.  
+The size of the function's deployment package, in bytes\.  
 Type: Long
 
  ** [DeadLetterConfig](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-DeadLetterConfig"></a>
-The parent object that contains the target ARN \(Amazon Resource Name\) of an Amazon SQS queue or Amazon SNS topic\. For more information, see [Dead Letter Queues](dlq.md)\.   
+The function's dead letter queue\.  
 Type: [DeadLetterConfig](API_DeadLetterConfig.md) object
 
  ** [Description](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-Description"></a>
-The user\-provided description\.  
+The function's description\.  
 Type: String  
 Length Constraints: Minimum length of 0\. Maximum length of 256\.
 
  ** [Environment](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-Environment"></a>
-The parent object that contains your environment's configuration settings\.  
+The function's environment variables\.  
 Type: [EnvironmentResponse](API_EnvironmentResponse.md) object
 
  ** [FunctionArn](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-FunctionArn"></a>
-The Amazon Resource Name \(ARN\) assigned to the function\.  
+The function's Amazon Resource Name \(ARN\)\.  
 Type: String  
 Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_\.]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [FunctionName](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-FunctionName"></a>
-The name of the function\. Note that the length constraint applies only to the ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
+The name of the function\.  
 Type: String  
 Length Constraints: Minimum length of 1\. Maximum length of 170\.  
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_\.]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [Handler](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-Handler"></a>
-The function Lambda calls to begin executing your function\.  
+The function that Lambda calls to begin executing your function\.  
 Type: String  
 Length Constraints: Maximum length of 128\.  
 Pattern: `[^\s]+` 
 
  ** [KMSKeyArn](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-KMSKeyArn"></a>
-The Amazon Resource Name \(ARN\) of the KMS key used to encrypt your function's environment variables\. If empty, it means you are using the AWS Lambda default service key\.  
+The KMS key that's used to encrypt the function's environment variables\. This key is only returned if you've configured a customer\-managed CMK\.  
 Type: String  
 Pattern: `(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()` 
 
  ** [LastModified](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-LastModified"></a>
-The time stamp of the last time you updated the function\. The time stamp is conveyed as a string complying with ISO\-8601 in this way YYYY\-MM\-DDThh:mm:ssTZD \(e\.g\., 1997\-07\-16T19:20:30\+01:00\)\. For more information, see [Date and Time Formats](https://www.w3.org/TR/NOTE-datetime)\.  
+The date and time that the function was last updated, in [ISO\-8601 format](https://www.w3.org/TR/NOTE-datetime) \(YYYY\-MM\-DDThh:mm:ss\.sTZD\)\.  
 Type: String
 
+ ** [Layers](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-Layers"></a>
+The function's [ layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\.  
+Type: Array of [Layer](API_Layer.md) objects
+
  ** [MasterArn](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-MasterArn"></a>
-Returns the ARN \(Amazon Resource Name\) of the master function\.  
+For Lambda@Edge functions, the ARN of the master function\.  
 Type: String  
 Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [MemorySize](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-MemorySize"></a>
-The memory size, in MB, you configured for the function\. Must be a multiple of 64 MB\.  
+The memory that's allocated to the function\.  
 Type: Integer  
 Valid Range: Minimum value of 128\. Maximum value of 3008\.
 
  ** [RevisionId](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-RevisionId"></a>
-Represents the latest updated revision of the function or alias\.  
+The latest updated revision of the function or alias\.  
 Type: String
 
  ** [Role](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-Role"></a>
-The Amazon Resource Name \(ARN\) of the IAM role that Lambda assumes when it executes your function to access any other Amazon Web Services \(AWS\) resources\.  
+The function's execution role\.  
 Type: String  
 Pattern: `arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+` 
 
  ** [Runtime](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-Runtime"></a>
 The runtime environment for the Lambda function\.  
 Type: String  
-Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | java8 | python2.7 | python3.6 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | nodejs4.3-edge | go1.x` 
+Valid Values:` nodejs6.10 | nodejs8.10 | java8 | python2.7 | python3.6 | python3.7 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | go1.x | ruby2.5 | provided` 
 
  ** [Timeout](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-Timeout"></a>
-The function execution time at which Lambda should terminate the function\. Because the execution time has cost implications, we recommend you set this value based on your expected execution time\. The default is 3 seconds\.  
+The amount of time that Lambda allows a function to run before stopping it\.  
 Type: Integer  
 Valid Range: Minimum value of 1\.
 
  ** [TracingConfig](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-TracingConfig"></a>
-The parent object that contains your function's tracing settings\.  
+The function's AWS X\-Ray tracing configuration\.  
 Type: [TracingConfigResponse](API_TracingConfigResponse.md) object
 
  ** [Version](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-Version"></a>
@@ -214,13 +227,13 @@ Length Constraints: Minimum length of 1\. Maximum length of 1024\.
 Pattern: `(\$LATEST|[0-9]+)` 
 
  ** [VpcConfig](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-VpcConfig"></a>
-VPC configuration associated with your Lambda function\.  
+The function's networking configuration\.  
 Type: [VpcConfigResponse](API_VpcConfigResponse.md) object
 
 ## Errors<a name="API_UpdateFunctionCode_Errors"></a>
 
  **CodeStorageExceededException**   
-You have exceeded your maximum total code size per account\. [Limits](https://docs.aws.amazon.com/lambda/latest/dg/limits.html)   
+You have exceeded your maximum total code size per account\. [Learn more](https://docs.aws.amazon.com/lambda/latest/dg/limits.html)   
 HTTP Status Code: 400
 
  **InvalidParameterValueException**   
@@ -240,7 +253,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-   
+Request throughput limit exceeded\.  
 HTTP Status Code: 429
 
 ## See Also<a name="API_UpdateFunctionCode_SeeAlso"></a>
@@ -250,6 +263,7 @@ For more information about using this API in one of the language\-specific AWS S
 +  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/UpdateFunctionCode) 
 +  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/UpdateFunctionCode) 
 +  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/UpdateFunctionCode) 
++  [AWS SDK for Go \- Pilot](https://docs.aws.amazon.com/goto/SdkForGoPilot/lambda-2015-03-31/UpdateFunctionCode) 
 +  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/UpdateFunctionCode) 
 +  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/UpdateFunctionCode) 
 +  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/UpdateFunctionCode) 

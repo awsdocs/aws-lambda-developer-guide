@@ -12,9 +12,9 @@ Lambda functions can span multiple applications across separate regions\. To sim
 
 ## Tagging Lambda Functions for Billing<a name="tagging-for-billing"></a>
 
-You can use tags to organize your AWS bill to reflect your own cost structure\. To do this, you can add tag keys whose values will be included in the cost allocation report\. For more information about setting up a cost allocation report that includes the tag keys you select to be included as line items in the report, see [The Monthly Cost Allocation Report](http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/configurecostallocreport.html) in *About AWS Account Billing*\. 
+You can use tags to organize your AWS bill to reflect your own cost structure\. To do this, you can add tag keys whose values will be included in the cost allocation report\. For more information about setting up a cost allocation report that includes the tag keys you select to be included as line items in the report, see [The Monthly Cost Allocation Report](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/configurecostallocreport.html) in *About AWS Account Billing*\. 
 
-To see the cost of your combined resources, you can organize your billing information based on functions that have the same tag key values\. For example, you can tag several Lambda functions with a specific application name, and then organize your billing information to see the total cost of that application across several services\. For more information, see [Using Cost Allocation Tags](http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html) in the *AWS Billing and Cost Management User Guide*\. 
+To see the cost of your combined resources, you can organize your billing information based on functions that have the same tag key values\. For example, you can tag several Lambda functions with a specific application name, and then organize your billing information to see the total cost of that application across several services\. For more information, see [Using Cost Allocation Tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html) in the *AWS Billing and Cost Management User Guide*\. 
 
 **Important**  
 In AWS Lambda the only resource that can be tagged is a function\. You cannot tag an alias or a specific function version\. Any invocation of a function's alias or version will be billed as an invocation of the original function\.
@@ -40,7 +40,7 @@ To remove tags from an existing function, open the function, choose the **Tags**
 When you create a new Lambda function using the [CreateFunction](API_CreateFunction.md) command, you can add tags by populating the `Tags` parameter\. Specify multiple tag values by enclosing them in quotation marks, as shown below:
 
 **Note**  
-If you have not already created the `adminuser` profile, see [Set Up the AWS Command Line Interface \(AWS CLI\)](setup-awscli.md)\.
+If you have not already created the `adminuser` profile, see [Set Up the AWS CLI](gettingstarted-tools.md#setup-awscli)\.
 
 ```
 $ aws lambda create-function \

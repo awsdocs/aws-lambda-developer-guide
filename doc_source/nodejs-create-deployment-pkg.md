@@ -1,6 +1,6 @@
-# Creating a Deployment Package \(Node\.js\)<a name="nodejs-create-deployment-pkg"></a>
+# AWS Lambda Deployment Package in Node\.js<a name="nodejs-create-deployment-pkg"></a>
 
-To create a Lambda function you first create a Lambda function deployment package, a \.zip file consisting of your code and any dependencies\. As noted previously, you need to set the appropriate security permissions for the zip package\. For more information, see [Authentication and Access Control for AWS Lambda](lambda-auth-and-access-control.md) policies\.
+To create a Lambda function you first create a Lambda function deployment package, a \.zip file consisting of your code and any dependencies\.
 
 You can create a deployment package yourself or write your code directly in the Lambda console, in which case the console creates the deployment package for you and uploads it, creating your Lambda function\. Note the following to determine if you can use the console to create your Lambda function:
 + **Simple scenario** – If your custom code requires only the AWS SDK library, then you can use the inline editor in the AWS Lambda console\. Using the console, you can edit and upload your code to AWS Lambda\. The console will zip up your code with the relevant configuration information into a deployment package that the Lambda service can run\. 
@@ -41,4 +41,4 @@ Then, specify the \.zip file name as your deployment package at the time you cre
 
 If you want to include your own binaries, including native ones, just package them in the Zip file you upload and then reference them \(including the relative path within the Zip file you created\) when you call them from Node\.js or from other processes that you’ve previously started\. Ensure that you include the following at the start of your function code: `process.env[‘PATH’] = process.env[‘PATH’] + ‘:’ + process.env[‘LAMBDA_TASK_ROOT’]`
 
-For more information on including native binaries in your Lambda function package, see [Running Executables in AWS Lambda](https://aws.amazon.com/blogs/compute/running-executables-in-aws-lambda/)\. Also note that you need to supply the requisite permissions to the contents of the Zip file\. For more information, see [Permissions Polices on Lambda Deployment Packages](deployment-package-v2.md#lambda-zip-package-permission-policies)\. 
+For more information on including native binaries in your Lambda function package, see [Running Executables in AWS Lambda](https://aws.amazon.com/blogs/compute/running-executables-in-aws-lambda/)\. Also note that you need to supply the requisite permissions to the contents of the Zip file\. For more information, see [Permissions Policies on Lambda Deployment Packages](deployment-package-v2.md#lambda-zip-package-permission-policies)\. 

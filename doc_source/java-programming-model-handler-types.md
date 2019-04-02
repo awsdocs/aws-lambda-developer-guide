@@ -1,4 +1,4 @@
-# Lambda Function Handler \(Java\)<a name="java-programming-model-handler-types"></a>
+# AWS Lambda Function Handler in Java<a name="java-programming-model-handler-types"></a>
 
 At the time you create a Lambda function you specify a handler that AWS Lambda can invoke when the service executes the Lambda function on your behalf\. 
 
@@ -29,7 +29,7 @@ In the syntax, note the following:
   + You can also write your own POJO class\. AWS Lambda will automatically serialize and deserialize input and output JSON based on the POJO type\. 
 
   For more information, see [Handler Input/Output Types \(Java\)](java-programming-model-req-resp.md)\.
-+ You can omit the `Context` object from the handler method signature if it isn't needed\. For more information, see [The Context Object \(Java\)](java-context-object.md)\.
++ You can omit the `Context` object from the handler method signature if it isn't needed\. For more information, see [AWS Lambda Context Object in Java](java-context-object.md)\.
 
 For example, consider the following Java example code\. 
 
@@ -50,7 +50,7 @@ In this example input is of type Integer and output is of type String\. If you p
 
 In the example Java code, the first handler parameter is the input to the handler \(myHandler\), which can be event data \(published by an event source such as Amazon S3\) or custom input you provide such as an Integer object \(as in this example\) or any custom data object\. 
 
-For instructions to create a Lambda function using this Java code, see [\(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\.
+For instructions to create a Lambda function using this Java code, see [Create a Lambda Function Authored in Java](get-started-step4-optional.md)\.
 
 ## Handler Overload Resolution<a name="java-programming-model-handler-types-overload-resolution"></a>
 
@@ -69,4 +69,4 @@ The following topics provide more information about the handler\.
 + For information about using predefined interfaces to create a handler, see [Leveraging Predefined Interfaces for Creating Handler \(Java\)](java-handler-using-predefined-interfaces.md)\. 
 
   If you implement these interfaces, you can validate your handler method signature at compile time\. 
-+ If your Lambda function throws an exception, AWS Lambda records metrics in CloudWatch indicating that an error occurred\. For more information, see [Function Errors \(Java\)](java-exceptions.md)\.
++ If your Lambda function throws an exception, AWS Lambda records metrics in CloudWatch indicating that an error occurred\. For more information, see [AWS Lambda Function Errors in Java](java-exceptions.md)\.

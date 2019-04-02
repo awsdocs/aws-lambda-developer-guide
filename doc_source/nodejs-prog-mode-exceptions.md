@@ -1,4 +1,4 @@
-# Function Errors \(Node\.js\)<a name="nodejs-prog-mode-exceptions"></a>
+# AWS Lambda Function Errors in Node\.js<a name="nodejs-prog-mode-exceptions"></a>
 
  If your Lambda function notifies AWS Lambda that it failed to execute properly, Lambda will attempt to convert the error object to a String\. Consider the following example:
 
@@ -44,7 +44,7 @@ Again, when this Lambda function is invoked, it will notify AWS Lambda that func
 
 ```
 {
-  "errorMessage": "Acccount is in use!",
+  "errorMessage": "Account is in use!",
   "errorType": "Error",
   "stackTrace": [
     "exports.handler (/var/task/index.js:10:17)"
@@ -62,13 +62,13 @@ How you get the error information back depends on the invocation type that the c
 
    The same information is also sent to CloudWatch and the  **Log output**  section shows the same logs\.   
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/exception-shown-in-console20-nodejs.png)
-+ If a client specifies the  `Event` invocation type \(that is, asynchronous execution\), AWS Lambda will not return anything\. Instead, it logs the error information to [CloudWatch Logs](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring//logs/WhatIsCloudWatchLogs.html)\. You can also see the error metrics in [CloudWatch Metrics](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring//viewing_metrics_with_cloudwatch.html)\. 
++ If a client specifies the  `Event` invocation type \(that is, asynchronous execution\), AWS Lambda will not return anything\. Instead, it logs the error information to [CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html)\. You can also see the error metrics in [CloudWatch Metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/viewing_metrics_with_cloudwatch.html)\. 
 
- Depending on the event source, AWS Lambda may retry the failed Lambda function\. For example, if Kinesis is the event source, AWS Lambda will retry the failed invocation until the Lambda function succeeds or the records in the stream expire\. For more information on retries, see [Understanding Retry Behavior](retries-on-errors.md)\.
+ Depending on the event source, AWS Lambda may retry the failed Lambda function\. For example, if Kinesis is the event source, AWS Lambda will retry the failed invocation until the Lambda function succeeds or the records in the stream expire\. For more information on retries, see [AWS Lambda Retry Behavior](retries-on-errors.md)\.
 
 **To test the preceding Node\.js code \(console\)**
 
-1. In the console, create a Lambda function using the hello\-world blueprint\. In **runtime**, choose **Node\.js**  and, in **Role**, choose **Basic execution role**\. For instructions on how to do this, see [Create a Simple Lambda Function](get-started-create-function.md)\. 
+1. In the console, create a Lambda function using the hello\-world blueprint\. In **runtime**, choose **Node\.js**  and, in **Role**, choose **Basic execution role**\. For instructions on how to do this, see [Create a Lambda Function with the Console](getting-started-create-function.md)\. 
 
 1. Replace the template code with the code provided in this section\.
 
@@ -76,9 +76,9 @@ How you get the error information back depends on the invocation type that the c
 
 ## Function Error Handling<a name="nodejs-prog-model-custom-exceptions"></a>
 
-You can create custom error handling to raise an exception directly from your Lambda function and handle it directly \(Retry or Catch\) within an AWS Step Functions State Machine\. For more information, see [Handling Error Conditions Using a State Machine](http://docs.aws.amazon.com/step-functions/latest/dg/tutorial-handling-error-conditions.html)\. 
+You can create custom error handling to raise an exception directly from your Lambda function and handle it directly \(Retry or Catch\) within an AWS Step Functions State Machine\. For more information, see [Handling Error Conditions Using a State Machine](https://docs.aws.amazon.com/step-functions/latest/dg/tutorial-handling-error-conditions.html)\. 
 
-Consider a `CreateAccount` [state](http://docs.aws.amazon.com/step-functions/latest/dg/awl-ref-states.html) is a [task](http://docs.aws.amazon.com/step-functions/latest/dg/awl-ref-states-task.html) that writes a customer's details to a database using a Lambda function\.
+Consider a `CreateAccount` [state](https://docs.aws.amazon.com/step-functions/latest/dg/awl-ref-states.html) is a [task](https://docs.aws.amazon.com/step-functions/latest/dg/awl-ref-states-task.html) that writes a customer's details to a database using a Lambda function\.
 + If the task succeeds, an account is created and a welcome email is sent\.
 + If a user tries to create an account for a username that already exists, the Lambda function raises an error, causing the state machine to suggest a different username and to retry the account\-creation process\.
 
@@ -119,7 +119,7 @@ You can configure Step Functions to catch the error using a `Catch` rule:
 }
 ```
 
-At runtime, AWS Step Functions catches the error, [transitioning](http://docs.aws.amazon.com/step-functions/latest/dg/concepts-transitions.html) to the `SuggestAccountName` state as specified in the `Next` transition\.
+At runtime, AWS Step Functions catches the error, [transitioning](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-transitions.html) to the `SuggestAccountName` state as specified in the `Next` transition\.
 
 **Note**  
 The name property of the `Error` object must match the `ErrorEquals` value\.
