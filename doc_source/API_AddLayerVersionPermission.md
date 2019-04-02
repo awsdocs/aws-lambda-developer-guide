@@ -1,6 +1,6 @@
 # AddLayerVersionPermission<a name="API_AddLayerVersionPermission"></a>
 
-Adds permissions to the resource\-based policy of a version of a function layer\. Use this action to grant layer usage permission to other accounts\. You can grant permission to a single account, all AWS accounts, or all accounts in an organization\.
+Adds permissions to the resource\-based policy of a version of an [AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\. Use this action to grant layer usage permission to other accounts\. You can grant permission to a single account, all AWS accounts, or all accounts in an organization\.
 
 To revoke permission, call [RemoveLayerVersionPermission](API_RemoveLayerVersionPermission.md) with the statement ID that you specified when you added it\.
 
@@ -23,7 +23,7 @@ Content-type: application/json
 The request requires the following URI parameters\.
 
  ** [LayerName](#API_AddLayerVersionPermission_RequestSyntax) **   <a name="SSS-AddLayerVersionPermission-request-LayerName"></a>
-The name of the layer\.  
+The name or Amazon Resource Name \(ARN\) of the layer\.  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
 Pattern: `(arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+)|[a-zA-Z0-9-_]+` 
 
@@ -95,7 +95,7 @@ One of the parameters in the request is invalid\. For example, if you provided a
 HTTP Status Code: 400
 
  **PolicyLengthExceededException**   
-Lambda function access policy is limited to 20 KB\.  
+The permissions policy for the resource is too large\. [Learn more](https://docs.aws.amazon.com/lambda/latest/dg/limits.html)   
 HTTP Status Code: 400
 
  **PreconditionFailedException**   
@@ -115,7 +115,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-Request throughput limit exceeded  
+Request throughput limit exceeded\.  
 HTTP Status Code: 429
 
 ## See Also<a name="API_AddLayerVersionPermission_SeeAlso"></a>
@@ -125,6 +125,7 @@ For more information about using this API in one of the language\-specific AWS S
 +  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/AddLayerVersionPermission) 
 +  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/AddLayerVersionPermission) 
 +  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/AddLayerVersionPermission) 
++  [AWS SDK for Go \- Pilot](https://docs.aws.amazon.com/goto/SdkForGoPilot/lambda-2015-03-31/AddLayerVersionPermission) 
 +  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/AddLayerVersionPermission) 
 +  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/AddLayerVersionPermission) 
 +  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/AddLayerVersionPermission) 

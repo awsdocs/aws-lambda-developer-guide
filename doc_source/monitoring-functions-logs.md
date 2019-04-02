@@ -11,16 +11,13 @@ There is no additional charge for using Lambda logs; however, standard CloudWatc
 
 **To view logs using the Lambda console**
 
-1. Sign in to the AWS Management Console and open the AWS Lambda console at [https://console\.aws\.amazon\.com/lambda/](https://console.aws.amazon.com/lambda/)\.
+1. Open the [Lambda console](https://console.aws.amazon.com/lambda)\.
 
-1. On the **Functions ** page, choose the function name and then choose the **Monitoring** tab\.  
+1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+
+1. Choose **Monitoring**\.  
 ![\[Events\]](http://docs.aws.amazon.com/lambda/latest/dg/images/metrics-functions-list.png)![\[Events\]](http://docs.aws.amazon.com/lambda/latest/dg/)![\[Events\]](http://docs.aws.amazon.com/lambda/latest/dg/)
 
    A graphical representation of the metrics for the Lambda function are shown\.
 
-1. Choose **Jump to logs** to view the logs\.
-
-For more information on accessing CloudWatch Logs, see the following guides:
-+ [Amazon CloudWatch User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/)
-+ [Amazon CloudWatch Logs API Reference](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/)
-+ [Monitoring Log Files](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatchLogs.html) in the *Amazon CloudWatch User Guide*
+1. Choose **View logs in CloudWatch**\.

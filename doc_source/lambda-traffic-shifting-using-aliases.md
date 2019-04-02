@@ -4,11 +4,10 @@ By default, an alias points to a single Lambda function version\. When the alias
 
 For example, you can specify that only 2 percent of incoming traffic is routed to the new version while you analyze its readiness for a production environment, while the remaining 98 percent is routed to the original version\. As the new version matures, you can gradually update the ratio as necessary until you have determined the new version is stable\. You can then update the alias to route all traffic to the new version\. 
 
-**Note**  
-You can point an alias to a maximum of two Lambda function versions\. In addition:   
-Both versions should have the same [Dead Letter Queues](dlq.md) configuration \(or no DLQ configuration\)\.
-Both versions should have the same IAM execution role\.
-When pointing an alias to more than one version, the alias cannot point to `$LATEST`\.
+You can point an alias to a maximum of two Lambda function versions\. In addition: 
++ Both versions must have the same IAM execution role\.
++ Both versions must have the same [AWS Lambda Function Dead Letter Queues](dlq.md) configuration, or no DLQ configuration\.
++ When pointing an alias to more than one version, the alias cannot point to `$LATEST`\.
 
 ## Traffic Shifting Using an Alias \(CLI\)<a name="lambda-weighted-aliases-cli"></a>
 
@@ -26,11 +25,11 @@ aws lambda update-alias --name alias name --function-name function-name \
 --routing-config AdditionalVersionWeights={"2"=0.05}
 ```
 
-To route all traffic to version 2, again use the `UpdateAlias` operation to change the `function-version` property to point to version 2\. Then set the `routing-config` parameter to an empty string, as shown following\.
+To route all traffic to version 2, again use the `UpdateAlias` operation to change the `function-version` property to point to version 2\. In the same command, reset the routing configuration\.
 
 ```
 aws lambda update-alias --name alias name --function-name function-name \ 
---function-version 2 --routing-config ''
+--function-version 2 --routing-config AdditionalVersionWeights={}
 ```
 
 ## Traffic Shifting Using an Alias \(Console\)<a name="lambda-traffic-shifting-aliases-console"></a>

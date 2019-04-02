@@ -25,7 +25,7 @@ By importing the `log` module, Lambda will write additional logging information 
 
 You can also analyze the logs in CloudWatch\. For more information, see [Accessing Amazon CloudWatch Logs for AWS Lambda](monitoring-functions-logs.md)\.
 
-Instead of using the `log` module, you can use `print` statements in your code as shown below:
+Instead of using the `log` module, you can use `Print` statements in your code as shown below:
 
 ```
 package main
@@ -44,7 +44,7 @@ func main() {
 }
 ```
 
-In this case only the text passed to the print method is sent to CloudWatch\. The log entries will not have additional information that the `log.Print` function returns\. In addition, any logger that writes to `stdout` or `stderror` will seamlessly integrate with a Go function and those logs will automatically be sent to CloudWatch logs\. 
+In this case only the text passed to the `Print` method is sent to CloudWatch\. The log entries will not have additional information that the `log.Print` function returns\. In addition, any logger that writes to `stdout` or `stderror` will seamlessly integrate with a Go function and those logs will automatically be sent to CloudWatch logs\. 
 
 The console uses the `RequestResponse` invocation type \(synchronous invocation\) when invoking the function\. And therefore it gets the return value \("Hello from Lambda\!"\) back from AWS Lambda\.
 

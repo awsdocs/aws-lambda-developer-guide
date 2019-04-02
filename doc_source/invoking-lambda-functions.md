@@ -26,7 +26,7 @@ The diagram illustrates the following sequence:
 
 1. Amazon S3 detects the object created event\.
 
-1. Amazon S3 invokes your Lambda function using the permissions provided by the execution role\. For more information on execution roles, see [Authentication and Access Control for AWS Lambda](lambda-auth-and-access-control.md)\. Amazon S3 knows which Lambda function to invoke based on the event source mapping that is stored in the bucket notification configuration\. 
+1. Amazon S3 invokes your Lambda function using the permissions provided by the execution role\. For more information on execution roles, see [AWS Lambda Permissions](lambda-permissions.md)\. Amazon S3 knows which Lambda function to invoke based on the event source mapping that is stored in the bucket notification configuration\. 
 
 1. AWS Lambda executes the Lambda function, specifying the event as a parameter\.
 

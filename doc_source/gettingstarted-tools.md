@@ -1,6 +1,10 @@
-# Set Up the AWS CLI<a name="setup-awscli"></a>
+# Command Line Tools<a name="gettingstarted-tools"></a>
 
-All the exercises in this guide assume that you are using administrator user credentials in your account to perform the operations\. For instructions on creating an administrator user in your AWS account, see [Set Up an AWS Account and Create an Administrator User](setup.md#setting-up), and then follow the steps to download and configure the AWS Command Line Interface \(AWS CLI\)\.
+Install the AWS Command Line Interface to manage and use Lambda functions from the command line\. Tutorials in this guide use the AWS CLI, which has commands for all Lambda API actions\. Some functionality is not available in the Lambda console and can only be accessed with the AWS CLI or the AWS SDK\.
+
+The AWS SAM CLI is a separate command line tool that you can use to manage and test AWS SAM applications\. In addition to commands for uploading artifacts and launching AWS CloudFormation stacks that are also available in the AWS CLI, the SAM CLI provides additional commands for validating templates and running applications locally in a Docker container\.
+
+## Set Up the AWS CLI<a name="setup-awscli"></a>
 
 **To set up the AWS CLI**
 
@@ -23,10 +27,16 @@ All the exercises in this guide assume that you are using administrator user cre
    + Try the help command to verify that the AWS CLI is installed on your computer:
 
      ```
-     aws help
+     $ aws help
      ```
    + Try a Lambda command to verify the user can reach AWS Lambda\. This command lists Lambda functions in the account, if any\. The AWS CLI uses the `adminuser` credentials to authenticate the request\.
 
      ```
-     aws lambda list-functions --profile adminuser
+     $ aws lambda list-functions
      ```
+
+## AWS Serverless Application Model CLI<a name="sam-cli-requirements"></a>
+
+The AWS SAM CLI is a command line tool that operates on an AWS SAM template and application code\. With the AWS SAM CLI, you can invoke Lambda functions locally, create a deployment package for your serverless application, deploy your serverless application to the AWS Cloud, and so on\. 
+
+For more details about installing the AWS SAM CLI, see [ Installing the AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html) in the *AWS Serverless Application Model Developer Guide*\.

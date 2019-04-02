@@ -6,7 +6,7 @@ A runtime is responsible for running the function's setup code, reading the hand
 
 Your custom runtime runs in the standard Lambda [execution environment](current-supported-versions.md)\. It can be a shell script, a script in a language that's included in Amazon Linux, or a binary executable file that's compiled in Amazon Linux\.
 
-For a working example of a custom runtime, see [Tutorial – Publishing a Custom Runtime](runtimes-walkthrough.md)\.
+To get started with custom runtimes, see [Tutorial – Publishing a Custom Runtime](runtimes-walkthrough.md)\. You can also explore a custom runtime implemented in C\+\+ at [awslabs/aws\-lambda\-cpp](https://github.com/awslabs/aws-lambda-cpp) on GitHub\.
 
 **Topics**
 + [Using a Custom Runtime](#runtimes-custom-use)
@@ -28,7 +28,7 @@ If there's a file named `bootstrap` in your deployment package, Lambda executes 
 
 ## Building a Custom Runtime<a name="runtimes-custom-build"></a>
 
-A custom runtime's entry point is an executable file named `bootstrap`\. The bootstrap file can be the runtime, or it can invoke another file that creates the runtime\. The following example uses a bundled version of Node\.js to execute a JavaScript runtime\.
+A custom runtime's entry point is an executable file named `bootstrap`\. The bootstrap file can be the runtime, or it can invoke another file that creates the runtime\. The following example uses a bundled version of Node\.js to execute a JavaScript runtime in a separate file named `runtime.js`\.
 
 **Example bootstrap**  
 
@@ -49,6 +49,16 @@ Your runtime code is responsible for completing some initialization tasks\. Then
   See [Environment Variables Available to Lambda Functions](current-supported-versions.md#lambda-environment-variables) for a full list of available variables\.
 + **Initialize the function** – Load the handler file and run any global or static code that it contains\. Functions should create static resources like SDK clients and database connections once, and reuse them for multiple invocations\.
 + **Handle errors** – If an error occurs, call the [initialization error](runtimes-api.md#runtimes-api-initerror) API and exit immediately\.
+
+Initialization counts towards billed execution time and timeout\. When an execution triggers the initialization of a new instance of your function, you can see the initialization time in the logs and [AWS X\-Ray trace](lambda-x-ray.md)\.
+
+**Example Log**  
+
+```
+REPORT RequestId: f8ac1208... Init Duration: 48.26 ms   Duration: 237.17 ms   Billed Duration: 300 ms   Memory Size: 128 MB   Max Memory Used: 26 MB
+```
+
+![\[Initialization time in an X-Ray trace.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/runtimes-custom-init.png)
 
 While it runs, a runtime uses the [Lambda runtime interface](runtimes-api.md) to manage incoming events and report errors\. After completing initialization tasks, the runtime processes incoming events in a loop\.
 

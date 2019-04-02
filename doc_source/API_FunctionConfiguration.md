@@ -1,6 +1,6 @@
 # FunctionConfiguration<a name="API_FunctionConfiguration"></a>
 
-A Lambda function's configuration settings\.
+Details about a function's configuration\.
 
 ## Contents<a name="API_FunctionConfiguration_Contents"></a>
 
@@ -10,7 +10,7 @@ Type: String
 Required: No
 
  **CodeSize**   <a name="SSS-Type-FunctionConfiguration-CodeSize"></a>
-The size of the function's deployment package in bytes\.  
+The size of the function's deployment package, in bytes\.  
 Type: Long  
 Required: No
 
@@ -31,7 +31,7 @@ Type: [EnvironmentResponse](API_EnvironmentResponse.md) object
 Required: No
 
  **FunctionArn**   <a name="SSS-Type-FunctionConfiguration-FunctionArn"></a>
-The function's Amazon Resource Name\.  
+The function's Amazon Resource Name \(ARN\)\.  
 Type: String  
 Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_\.]+(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
 Required: No
@@ -44,14 +44,14 @@ Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}
 Required: No
 
  **Handler**   <a name="SSS-Type-FunctionConfiguration-Handler"></a>
-The function Lambda calls to begin executing your function\.  
+The function that Lambda calls to begin executing your function\.  
 Type: String  
 Length Constraints: Maximum length of 128\.  
 Pattern: `[^\s]+`   
 Required: No
 
  **KMSKeyArn**   <a name="SSS-Type-FunctionConfiguration-KMSKeyArn"></a>
-The KMS key used to encrypt the function's environment variables\. Only returned if you've configured a customer managed CMK\.  
+The KMS key that's used to encrypt the function's environment variables\. This key is only returned if you've configured a customer\-managed CMK\.  
 Type: String  
 Pattern: `(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()`   
 Required: No
@@ -62,24 +62,24 @@ Type: String
 Required: No
 
  **Layers**   <a name="SSS-Type-FunctionConfiguration-Layers"></a>
-A list of [function layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\.  
+The function's [ layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\.  
 Type: Array of [Layer](API_Layer.md) objects  
 Required: No
 
  **MasterArn**   <a name="SSS-Type-FunctionConfiguration-MasterArn"></a>
-The ARN of the master function\.  
+For Lambda@Edge functions, the ARN of the master function\.  
 Type: String  
 Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
 Required: No
 
  **MemorySize**   <a name="SSS-Type-FunctionConfiguration-MemorySize"></a>
-The memory allocated to the function  
+The memory that's allocated to the function\.  
 Type: Integer  
 Valid Range: Minimum value of 128\. Maximum value of 3008\.  
 Required: No
 
  **RevisionId**   <a name="SSS-Type-FunctionConfiguration-RevisionId"></a>
-Represents the latest updated revision of the function or alias\.  
+The latest updated revision of the function or alias\.  
 Type: String  
 Required: No
 
@@ -92,11 +92,11 @@ Required: No
  **Runtime**   <a name="SSS-Type-FunctionConfiguration-Runtime"></a>
 The runtime environment for the Lambda function\.  
 Type: String  
-Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | java8 | python2.7 | python3.6 | python3.7 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | nodejs4.3-edge | go1.x | ruby2.5 | provided`   
+Valid Values:` nodejs6.10 | nodejs8.10 | java8 | python2.7 | python3.6 | python3.7 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | go1.x | ruby2.5 | provided`   
 Required: No
 
  **Timeout**   <a name="SSS-Type-FunctionConfiguration-Timeout"></a>
-The amount of time that Lambda allows a function to run before terminating it\.  
+The amount of time that Lambda allows a function to run before stopping it\.  
 Type: Integer  
 Valid Range: Minimum value of 1\.  
 Required: No
@@ -123,5 +123,6 @@ Required: No
 For more information about using this API in one of the language\-specific AWS SDKs, see the following:
 +  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/FunctionConfiguration) 
 +  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/FunctionConfiguration) 
++  [AWS SDK for Go \- Pilot](https://docs.aws.amazon.com/goto/SdkForGoPilot/lambda-2015-03-31/FunctionConfiguration) 
 +  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/FunctionConfiguration) 
 +  [AWS SDK for Ruby V2](https://docs.aws.amazon.com/goto/SdkForRubyV2/lambda-2015-03-31/FunctionConfiguration) 
