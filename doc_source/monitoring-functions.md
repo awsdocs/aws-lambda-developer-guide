@@ -9,7 +9,7 @@ You can view request rates and error rates for each of your Lambda functions by 
 You can insert logging statements into your code to help you validate that your code is working as expected\. Lambda automatically integrates with Amazon CloudWatch Logs and pushes all logs from your code to a CloudWatch Logs group associated with a Lambda function \(/aws/lambda/*<function name>*\)\. To learn more about log groups and accessing them through the CloudWatch console, see the [Monitoring System, Application, and Custom Log Files](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatchLogs.html) in the *Amazon CloudWatch User Guide*\. For information about how to access CloudWatch log entries, see [Accessing Amazon CloudWatch Logs for AWS Lambda](monitoring-functions-logs.md)\.
 
 **Note**  
-If your Lambda function code is executing, but you don't see any log data being generated after several minutes, this could mean your execution role for the Lambda function did not grant permissions to write log data to CloudWatch Logs\. For information about how to make sure that you have set up the execution role correctly to grant these permissions, see [Manage Permissions: Using an IAM Role \(Execution Role\)](intro-permission-model.md#lambda-intro-execution-role)\.
+If your Lambda function code is executing, but you don't see any log data being generated after several minutes, this could mean your execution role for the Lambda function did not grant permissions to write log data to CloudWatch Logs\. For information about how to make sure that you have set up the execution role correctly to grant these permissions, see [AWS Lambda Execution Role](lambda-intro-execution-role.md)\.
 
 ## AWS Lambda Troubleshooting Scenarios<a name="monitoring-functions-troubleshooting"></a>
 
@@ -27,7 +27,7 @@ If your Lambda function code is executing, but you don't see any log data being 
 
    Following are some examples of errors that might show up in the logs:
    + If you see a stack trace in your log, there is probably an error in your code\. Review your code and debug the error that the stack trace refers to\.
-   + If you see a `permissions denied` error in the log, the IAM role you have provided as an execution role may not have the necessary permissions\. Check the IAM role and verify that it has all of the necessary permissions to access any AWS resources that your code references\. To ensure that you have correctly set up the execution role, see [Manage Permissions: Using an IAM Role \(Execution Role\)](intro-permission-model.md#lambda-intro-execution-role)\.
+   + If you see a `permissions denied` error in the log, the IAM role you have provided as an execution role may not have the necessary permissions\. Check the IAM role and verify that it has all of the necessary permissions to access any AWS resources that your code references\. To ensure that you have correctly set up the execution role, see [AWS Lambda Execution Role](lambda-intro-execution-role.md)\.
    +  If you see a `timeout exceeded` error in the log, your function was terminated because it did not return prior to the configured timeout\. This may be because the timeout is too low, or the code is taking too long to execute\.
    +  If you see a `memory exceeded` error in the log, your memory setting is too low\. Set it to a higher value\. For information about memory size limits, see [CreateFunction](API_CreateFunction.md)\.
 

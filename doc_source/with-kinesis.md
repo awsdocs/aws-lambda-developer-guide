@@ -11,18 +11,35 @@ Lambda reads records from the data stream and invokes your function [synchronous
     "Records": [
         {
             "kinesis": {
-                "partitionKey": "partitionKey-3",
                 "kinesisSchemaVersion": "1.0",
-                "data": "SGVsbG8sIHRoaXMgaXMgYSB0ZXN0IDEyMy4=",
-                "sequenceNumber": "49545115243490985018280067714973144582180062593244200961"
+                "partitionKey": "1",
+                "sequenceNumber": "49590338271490256608559692538361571095921575989136588898",
+                "data": "SGVsbG8sIHRoaXMgaXMgYSB0ZXN0Lg==",
+                "approximateArrivalTimestamp": 1545084650.987
             },
             "eventSource": "aws:kinesis",
-            "eventID": "shardId-000000000000:49545115243490985018280067714973144582180062593244200961",
-            "invokeIdentityArn": "arn:aws:iam::account-id:role/testLEBRole",
             "eventVersion": "1.0",
+            "eventID": "shardId-000000000006:49590338271490256608559692538361571095921575989136588898",
             "eventName": "aws:kinesis:record",
-            "eventSourceARN": "arn:aws:kinesis:us-west-2:35667example:stream/examplestream",
-            "awsRegion": "us-west-2"
+            "invokeIdentityArn": "arn:aws:iam::123456789012:role/lambda-role",
+            "awsRegion": "us-east-2",
+            "eventSourceARN": "arn:aws:kinesis:us-east-2:123456789012:stream/lambda-stream"
+        },
+        {
+            "kinesis": {
+                "kinesisSchemaVersion": "1.0",
+                "partitionKey": "1",
+                "sequenceNumber": "49590338271490256608559692540925702759324208523137515618",
+                "data": "VGhpcyBpcyBvbmx5IGEgdGVzdC4=",
+                "approximateArrivalTimestamp": 1545084711.166
+            },
+            "eventSource": "aws:kinesis",
+            "eventVersion": "1.0",
+            "eventID": "shardId-000000000006:49590338271490256608559692540925702759324208523137515618",
+            "eventName": "aws:kinesis:record",
+            "invokeIdentityArn": "arn:aws:iam::123456789012:role/lambda-role",
+            "awsRegion": "us-east-2",
+            "eventSourceARN": "arn:aws:kinesis:us-east-2:123456789012:stream/lambda-stream"
         }
     ]
 }
@@ -54,11 +71,11 @@ Stream consumers use HTTP/2 to reduce latency by pushing records to Lambda over 
 
 ```
 $ aws kinesis register-stream-consumer --consumer-name con1 \
---stream-arn arn:aws:kinesis:us-east-2:123456789012:stream/mystream
+--stream-arn arn:aws:kinesis:us-east-2:123456789012:stream/lambda-stream
 {
     "Consumer": {
         "ConsumerName": "con1",
-        "ConsumerARN": "arn:aws:kinesis:us-east-2:123456789012:stream/mystream/consumer/con1:1540591608",
+        "ConsumerARN": "arn:aws:kinesis:us-east-2:123456789012:stream/lambda-stream/consumer/con1:1540591608",
         "ConsumerStatus": "CREATING",
         "ConsumerCreationTimestamp": 1540591608.0
     }
@@ -113,11 +130,11 @@ To create the event source mapping with the AWS CLI, use the [CreateEventSourceM
 ```
 $ aws lambda create-event-source-mapping --function-name my-function --no-enabled \
 --batch-size 500 --starting-position AT_TIMESTAMP --starting-position-timestamp 1541139109 \
---event-source-arn arn:aws:kinesis:us-east-2:123456789012:stream/my-stream
+--event-source-arn arn:aws:kinesis:us-east-2:123456789012:stream/lambda-stream
 {
     "UUID": "2b733gdc-8ac3-cdf5-af3a-1827b3b11284",
     "BatchSize": 500,
-    "EventSourceArn": "arn:aws:kinesis:us-east-2:123456789012:stream/lambda-kinesis-stream",
+    "EventSourceArn": "arn:aws:kinesis:us-east-2:123456789012:stream/lambda-stream",
     "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
     "LastModified": 1541139209.351,
     "LastProcessingResult": "No records processed",
@@ -133,7 +150,7 @@ $ aws lambda update-event-source-mapping --uuid 2b733gdc-8ac3-cdf5-af3a-1827b3b1
 {
     "UUID": "2b733gdc-8ac3-cdf5-af3a-1827b3b1128",
     "BatchSize": 500,
-    "EventSourceArn": "arn:aws:kinesis:us-east-2:123456789012:stream/lambda-kinesis-stream",
+    "EventSourceArn": "arn:aws:kinesis:us-east-2:123456789012:stream/lambda-stream",
     "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
     "LastModified": 1541190239.996,
     "LastProcessingResult": "No records processed",
@@ -149,7 +166,7 @@ $ aws lambda delete-event-source-mapping --uuid 2b733gdc-8ac3-cdf5-af3a-1827b3b1
 {
     "UUID": "2b733gdc-8ac3-cdf5-af3a-1827b3b11284",
     "BatchSize": 500,
-    "EventSourceArn": "arn:aws:kinesis:us-east-2:123456789012:stream/lambda-kinesis-stream",
+    "EventSourceArn": "arn:aws:kinesis:us-east-2:123456789012:stream/lambda-stream",
     "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
     "LastModified": 1541190240.0,
     "LastProcessingResult": "No records processed",
@@ -160,7 +177,7 @@ $ aws lambda delete-event-source-mapping --uuid 2b733gdc-8ac3-cdf5-af3a-1827b3b1
 
 ## Execution Role Permissions<a name="events-kinesis-permissions"></a>
 
-Lambda needs the following permissions to manage resources that are related to your Kinesis data stream\. Add them to your function's [execution role](intro-permission-model.md#lambda-intro-execution-role)\.
+Lambda needs the following permissions to manage resources that are related to your Kinesis data stream\. Add them to your function's [execution role](lambda-intro-execution-role.md)\.
 + [kinesis:DescribeStream](https://docs.aws.amazon.com/kinesis/latest/APIReference/API_DescribeStream.html)
 + [kinesis:DescribeStreamSummary](https://docs.aws.amazon.com/kinesis/latest/APIReference/API_DescribeStreamSummary.html)
 + [kinesis:GetRecords](https://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetRecords.html)
@@ -169,7 +186,7 @@ Lambda needs the following permissions to manage resources that are related to y
 + [kinesis:ListStreams](https://docs.aws.amazon.com/kinesis/latest/APIReference/API_ListStreams.html)
 + [kinesis:SubscribeToShard](https://docs.aws.amazon.com/kinesis/latest/APIReference/API_SubscribeToShard.html)
 
-The `AWSLambdaKinesisExecutionRole` managed policy includes these permissions\. For more information, see [Manage Permissions: Using an IAM Role \(Execution Role\)](intro-permission-model.md#lambda-intro-execution-role)\.
+The `AWSLambdaKinesisExecutionRole` managed policy includes these permissions\. For more information, see [AWS Lambda Execution Role](lambda-intro-execution-role.md)\.
 
 ## Amazon CloudWatch Metrics<a name="events-kinesis-metrics"></a>
 

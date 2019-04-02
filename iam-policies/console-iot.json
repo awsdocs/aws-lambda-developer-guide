@@ -1,0 +1,33 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "IoTperms",
+            "Effect": "Allow",
+            "Action": [
+                "iot:GetTopicRule",
+                "iot:CreateTopicRule",
+                "iot:ReplaceTopicRule"
+            ],
+            "Resource": "arn:aws:iot:us-east-2:123456789012:*"
+        },
+        {
+            "Sid": "IoTlistTopicRulePerms",
+            "Effect": "Allow",
+            "Action": [
+                "iot:ListTopicRules"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "LambdaPerms",
+            "Effect": "Allow",
+            "Action": [
+                "lambda:AddPermission",
+                "lambda:RemovePermission",
+                "lambda:GetPolicy"
+            ],
+            "Resource": "arn:aws:lambda:us-east-2:123456789012:function:*"
+        }
+    ]
+}

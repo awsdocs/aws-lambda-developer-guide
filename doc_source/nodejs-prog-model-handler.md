@@ -1,6 +1,6 @@
 # AWS Lambda Function Handler in Node\.js<a name="nodejs-prog-model-handler"></a>
 
-AWS Lambda invokes your Lambda function via a `handler` object\. A `handler` represents the name of your Lambda function \(and serves as the entry point that AWS Lambda uses to execute your function code\. For example: 
+AWS Lambda invokes your Lambda function via a `handler` object\. A `handler` represents the name of your Lambda function and serves as the entry point that AWS Lambda uses to execute your function code\. For example: 
 
 ```
 exports.myHandler = function(event, context, callback) {   
@@ -16,7 +16,7 @@ exports.myHandler = function(event, context, callback) {
   + **RequestResponse**, or *synchronous execution*: AWS Lambda returns the result of the function call to the client invoking the Lambda function\. If the handler code of your Lambda function does not specify a return value, AWS Lambda will automatically return `null` for that value\. For a simple sample, see [Example](#nodejs-prog-model-handler-example)\.
   + **Event**, or *asynchronous execution*: AWS Lambda will discard any results of the function call\. 
 **Note**  
-If you discover that your Lambda function does not process the event using asynchronous invocation, you can investigate the failure using [Dead Letter Queues](dlq.md)\.
+If you discover that your Lambda function does not process the event using asynchronous invocation, you can investigate the failure using [AWS Lambda Function Dead Letter Queues](dlq.md)\.
 
      Event sources can range from a supported AWS service or custom applications that invoke your Lambda function\. For examples, see [Sample Events Published by Event Sources](eventsources.md)\. For a simple sample, see [Example](#nodejs-prog-model-handler-example)\. 
 + `context` – AWS Lambda uses this parameter to provide details of your Lambda function's execution\. For more information, see [AWS Lambda Context Object in Node\.js](nodejs-prog-model-context.md)\.

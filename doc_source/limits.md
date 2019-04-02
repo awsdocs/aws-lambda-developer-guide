@@ -18,12 +18,13 @@ The following limits apply to function configuration, deployments, and execution
 | Function [memory allocation](resource-model.md) | 128 MB to 3008 MB, in 64 MB increments\. | 
 | Function [timeout](resource-model.md) | 900 seconds \(15 minutes\) | 
 | Function [environment variables](env_variables.md) | 4 KB | 
+| Function [resource\-based policy](configuration-layers.md) | 20 KB | 
 | Function [layers](configuration-layers.md) | 5 layers | 
 | [Invocation payload](invoking-lambda-functions.md) \(request and response\) |  6 MB \(synchronous\) 256 KB \(asynchronous\)  | 
-| [Deployment package](deployment-package-v2.md) size |  50 MB \(zipped\) 250 MB \(unzipped, including layers\) 3 MB \(console editor\)  | 
+| [Deployment package](deployment-package-v2.md) size |  50 MB \(zipped, for direct upload\) 250 MB \(unzipped, including layers\) 3 MB \(console editor\)  | 
 | Test events \(console editor\) | 10 | 
 | `/tmp` directory storage | 512 MB | 
 | File descriptors | 1024 | 
 | Execution processes/threads | 1024 | 
 
-Limits for other services, such as AWS Identity and Access Management, Amazon CloudFront \(Lambda@Edge\), and Amazon Virtual Private Cloud, can impact your Lambda functions\. For more information, see [AWS Service Limits](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html)\.
+Limits for other services, such as AWS Identity and Access Management, Amazon CloudFront \(Lambda@Edge\), and Amazon Virtual Private Cloud, can impact your Lambda functions\. For more information, see [AWS Service Limits](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html) and [Using AWS Lambda With Other Services](use-cases.md)\.

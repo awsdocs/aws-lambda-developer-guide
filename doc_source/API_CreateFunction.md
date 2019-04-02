@@ -1,8 +1,14 @@
 # CreateFunction<a name="API_CreateFunction"></a>
 
-Creates a new Lambda function\. The function configuration is created from the request parameters, and the code for the function is provided by a \.zip file\. The function name is case\-sensitive\.
+Creates a Lambda function\. To create a function, you need a [deployment package](https://docs.aws.amazon.com/lambda/latest/dg/deployment-package-v2.html) and an [execution role](https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role)\. The deployment package contains your function code\. The execution role grants the function permission to use AWS services, such as Amazon CloudWatch Logs for log streaming and AWS X\-Ray for request tracing\.
 
-This operation requires permission for the `lambda:CreateFunction` action\.
+A function has an unpublished version, and can have published versions and aliases\. The unpublished version changes when you update your function's code and configuration\. A published version is a snapshot of your function code and configuration that can't be changed\. An alias is a named resource that maps to a version, and can be changed to map to a different version\. Use the `Publish` parameter to create version `1` of your function from its initial configuration\.
+
+The other parameters let you configure version\-specific and function\-level settings\. You can modify version\-specific settings later with [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)\. Function\-level settings apply to both the unpublished and published versions of the function, and include tags \([TagResource](API_TagResource.md)\) and per\-function concurrency limits \([PutFunctionConcurrency](API_PutFunctionConcurrency.md)\)\.
+
+If another account or an AWS service invokes your function, use [AddPermission](API_AddPermission.md) to grant permission by creating a resource\-based IAM policy\. You can grant permissions at the function level, on a version, or on an alias\.
+
+To invoke your function directly, use [Invoke](API_Invoke.md)\. To invoke your function in response to events in other AWS services, create an event source mapping \([CreateEventSourceMapping](API_CreateEventSourceMapping.md)\), or configure a function trigger in the other service\. For more information, see [Invoking Functions](https://docs.aws.amazon.com/lambda/latest/dg/invoking-lambda-functions.html)\.
 
 ## Request Syntax<a name="API_CreateFunction_RequestSyntax"></a>
 
@@ -62,7 +68,7 @@ Type: [FunctionCode](API_FunctionCode.md) object
 Required: Yes
 
  ** [DeadLetterConfig](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-DeadLetterConfig"></a>
-A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing\. For more information, see [Dead Letter Queues](https://docs.aws.amazon.com/lambda/latest/dg/dlq.html)\.   
+A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing\. For more information, see [Dead Letter Queues](https://docs.aws.amazon.com/lambda/latest/dg/dlq.html)\.  
 Type: [DeadLetterConfig](API_DeadLetterConfig.md) object  
 Required: No
 
@@ -78,12 +84,12 @@ Type: [Environment](API_Environment.md) object
 Required: No
 
  ** [FunctionName](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-FunctionName"></a>
-The name of the lambda function\.  
+The name of the Lambda function\.  
 
 **Name formats**
-+  **Function name** \- `MyFunction`\.
-+  **Function ARN** \- `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`\.
-+  **Partial ARN** \- `123456789012:function:MyFunction`\.
++  **Function name** \- `my-function`\.
++  **Function ARN** \- `arn:aws:lambda:us-west-2:123456789012:function:my-function`\.
++  **Partial ARN** \- `123456789012:function:my-function`\.
 The length constraint applies only to the full ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
 Type: String  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
@@ -91,27 +97,27 @@ Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}
 Required: Yes
 
  ** [Handler](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-Handler"></a>
-The name of the method within your code that Lambda calls to execute your function\. For more information, see [Programming Model](https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html)\.  
+The name of the method within your code that Lambda calls to execute your function\. The format includes the file name\. It can also include namespaces and other qualifiers, depending on the runtime\. For more information, see [Programming Model](https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html)\.  
 Type: String  
 Length Constraints: Maximum length of 128\.  
 Pattern: `[^\s]+`   
 Required: Yes
 
  ** [KMSKeyArn](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-KMSKeyArn"></a>
-The ARN of the KMS key used to encrypt your function's environment variables\. If not provided, AWS Lambda will use a default service key\.  
+The ARN of the AWS Key Management Service \(AWS KMS\) key that's used to encrypt your function's environment variables\. If it's not provided, AWS Lambda uses a default service key\.  
 Type: String  
 Pattern: `(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()`   
 Required: No
 
  ** [Layers](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-Layers"></a>
-A list of [function layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) to add to the function's execution environment\.  
+A list of [function layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) to add to the function's execution environment\. Specify each layer by its ARN, including the version\.  
 Type: Array of strings  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
 Pattern: `arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+:[0-9]+`   
 Required: No
 
  ** [MemorySize](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-MemorySize"></a>
-The amount of memory that your function has access to\. Increasing the function's memory also increases it's CPU allocation\. The default value is 128 MB\. The value must be a multiple of 64 MB\.  
+The amount of memory that your function has access to\. Increasing the function's memory also increases its CPU allocation\. The default value is 128 MB\. The value must be a multiple of 64 MB\.  
 Type: Integer  
 Valid Range: Minimum value of 128\. Maximum value of 3008\.  
 Required: No
@@ -122,24 +128,24 @@ Type: Boolean
 Required: No
 
  ** [Role](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-Role"></a>
-The Amazon Resource Name \(ARN\) of the function's [execution role](https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role)\.  
+The Amazon Resource Name \(ARN\) of the function's execution role\.  
 Type: String  
 Pattern: `arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+`   
 Required: Yes
 
  ** [Runtime](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-Runtime"></a>
-The runtime version for the function\.  
+The identifier of the function's [runtime](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)\.  
 Type: String  
-Valid Values:` nodejs | nodejs6.10 | nodejs8.10 | java8 | python2.7 | python3.6 | python3.7 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | nodejs4.3-edge | go1.x | ruby2.5 | provided`   
+Valid Values:` nodejs6.10 | nodejs8.10 | java8 | python2.7 | python3.6 | python3.7 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | go1.x | ruby2.5 | provided`   
 Required: Yes
 
  ** [Tags](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-Tags"></a>
-The list of tags \(key\-value pairs\) assigned to the new function\. For more information, see [Tagging Lambda Functions](https://docs.aws.amazon.com/lambda/latest/dg/tagging.html) in the **AWS Lambda Developer Guide**\.  
+A list of [tags](https://docs.aws.amazon.com/lambda/latest/dg/tagging.html) to apply to the function\.  
 Type: String to string map  
 Required: No
 
  ** [Timeout](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-Timeout"></a>
-The amount of time that Lambda allows a function to run before terminating it\. The default is 3 seconds\. The maximum allowed value is 900 seconds\.  
+The amount of time that Lambda allows a function to run before stopping it\. The default is 3 seconds\. The maximum allowed value is 900 seconds\.  
 Type: Integer  
 Valid Range: Minimum value of 1\.  
 Required: No
@@ -150,7 +156,7 @@ Type: [TracingConfig](API_TracingConfig.md) object
 Required: No
 
  ** [VpcConfig](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-VpcConfig"></a>
-If your Lambda function accesses resources in a VPC, you provide this parameter identifying the list of security group IDs and subnet IDs\. These must belong to the same VPC\. You must provide at least one security group and one subnet ID\.  
+For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC\. When you connect a function to a VPC, it can only access resources and the internet through that VPC\. For more information, see [VPC Settings](https://docs.aws.amazon.com/lambda/latest/dg/vpc.html)\.  
 Type: [VpcConfig](API_VpcConfig.md) object  
 Required: No
 
@@ -216,7 +222,7 @@ The SHA256 hash of the function's deployment package\.
 Type: String
 
  ** [CodeSize](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-CodeSize"></a>
-The size of the function's deployment package in bytes\.  
+The size of the function's deployment package, in bytes\.  
 Type: Long
 
  ** [DeadLetterConfig](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-DeadLetterConfig"></a>
@@ -233,7 +239,7 @@ The function's environment variables\.
 Type: [EnvironmentResponse](API_EnvironmentResponse.md) object
 
  ** [FunctionArn](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-FunctionArn"></a>
-The function's Amazon Resource Name\.  
+The function's Amazon Resource Name \(ARN\)\.  
 Type: String  
 Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_\.]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
@@ -244,13 +250,13 @@ Length Constraints: Minimum length of 1\. Maximum length of 170\.
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_\.]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [Handler](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-Handler"></a>
-The function Lambda calls to begin executing your function\.  
+The function that Lambda calls to begin executing your function\.  
 Type: String  
 Length Constraints: Maximum length of 128\.  
 Pattern: `[^\s]+` 
 
  ** [KMSKeyArn](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-KMSKeyArn"></a>
-The KMS key used to encrypt the function's environment variables\. Only returned if you've configured a customer managed CMK\.  
+The KMS key that's used to encrypt the function's environment variables\. This key is only returned if you've configured a customer\-managed CMK\.  
 Type: String  
 Pattern: `(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()` 
 
@@ -259,21 +265,21 @@ The date and time that the function was last updated, in [ISO\-8601 format](http
 Type: String
 
  ** [Layers](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-Layers"></a>
-A list of [function layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\.  
+The function's [ layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\.  
 Type: Array of [Layer](API_Layer.md) objects
 
  ** [MasterArn](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-MasterArn"></a>
-The ARN of the master function\.  
+For Lambda@Edge functions, the ARN of the master function\.  
 Type: String  
 Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [MemorySize](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-MemorySize"></a>
-The memory allocated to the function  
+The memory that's allocated to the function\.  
 Type: Integer  
 Valid Range: Minimum value of 128\. Maximum value of 3008\.
 
  ** [RevisionId](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-RevisionId"></a>
-Represents the latest updated revision of the function or alias\.  
+The latest updated revision of the function or alias\.  
 Type: String
 
  ** [Role](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-Role"></a>
@@ -284,10 +290,10 @@ Pattern: `arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+`
  ** [Runtime](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-Runtime"></a>
 The runtime environment for the Lambda function\.  
 Type: String  
-Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | java8 | python2.7 | python3.6 | python3.7 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | nodejs4.3-edge | go1.x | ruby2.5 | provided` 
+Valid Values:` nodejs6.10 | nodejs8.10 | java8 | python2.7 | python3.6 | python3.7 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | go1.x | ruby2.5 | provided` 
 
  ** [Timeout](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-Timeout"></a>
-The amount of time that Lambda allows a function to run before terminating it\.  
+The amount of time that Lambda allows a function to run before stopping it\.  
 Type: Integer  
 Valid Range: Minimum value of 1\.
 
@@ -308,7 +314,7 @@ Type: [VpcConfigResponse](API_VpcConfigResponse.md) object
 ## Errors<a name="API_CreateFunction_Errors"></a>
 
  **CodeStorageExceededException**   
-You have exceeded your maximum total code size per account\. [Limits](https://docs.aws.amazon.com/lambda/latest/dg/limits.html)   
+You have exceeded your maximum total code size per account\. [Learn more](https://docs.aws.amazon.com/lambda/latest/dg/limits.html)   
 HTTP Status Code: 400
 
  **InvalidParameterValueException**   
@@ -328,7 +334,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-Request throughput limit exceeded  
+Request throughput limit exceeded\.  
 HTTP Status Code: 429
 
 ## See Also<a name="API_CreateFunction_SeeAlso"></a>
@@ -338,6 +344,7 @@ For more information about using this API in one of the language\-specific AWS S
 +  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/CreateFunction) 
 +  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/CreateFunction) 
 +  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/CreateFunction) 
++  [AWS SDK for Go \- Pilot](https://docs.aws.amazon.com/goto/SdkForGoPilot/lambda-2015-03-31/CreateFunction) 
 +  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/CreateFunction) 
 +  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/CreateFunction) 
 +  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/CreateFunction) 

@@ -44,7 +44,7 @@ Again, when this Lambda function is invoked, it will notify AWS Lambda that func
 
 ```
 {
-  "errorMessage": "Acccount is in use!",
+  "errorMessage": "Account is in use!",
   "errorType": "Error",
   "stackTrace": [
     "exports.handler (/var/task/index.js:10:17)"

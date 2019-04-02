@@ -1,6 +1,6 @@
 # GetLayerVersion<a name="API_GetLayerVersion"></a>
 
-Returns information about a version of a function layer, with a link to download the layer archive that's valid for 10 minutes\.
+Returns information about a version of an [AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html), with a link to download the layer archive that's valid for 10 minutes\.
 
 ## Request Syntax<a name="API_GetLayerVersion_RequestSyntax"></a>
 
@@ -13,7 +13,7 @@ GET /2018-10-31/layers/LayerName/versions/VersionNumber HTTP/1.1
 The request requires the following URI parameters\.
 
  ** [LayerName](#API_GetLayerVersion_RequestSyntax) **   <a name="SSS-GetLayerVersion-request-LayerName"></a>
-The name of the layer\.  
+The name or Amazon Resource Name \(ARN\) of the layer\.  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
 Pattern: `(arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+)|[a-zA-Z0-9-_]+` 
 
@@ -56,7 +56,7 @@ The following data is returned in JSON format by the service\.
 The layer's compatible runtimes\.  
 Type: Array of strings  
 Array Members: Maximum number of 5 items\.  
-Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | java8 | python2.7 | python3.6 | python3.7 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | nodejs4.3-edge | go1.x | ruby2.5 | provided` 
+Valid Values:` nodejs6.10 | nodejs8.10 | java8 | python2.7 | python3.6 | python3.7 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | go1.x | ruby2.5 | provided` 
 
  ** [Content](#API_GetLayerVersion_ResponseSyntax) **   <a name="SSS-GetLayerVersion-response-Content"></a>
 Details about the layer version\.  
@@ -72,7 +72,7 @@ Type: String
 Length Constraints: Minimum length of 0\. Maximum length of 256\.
 
  ** [LayerArn](#API_GetLayerVersion_ResponseSyntax) **   <a name="SSS-GetLayerVersion-response-LayerArn"></a>
-The Amazon Resource Name \(ARN\) of the function layer\.  
+The ARN of the layer\.  
 Type: String  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
 Pattern: `arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+` 
@@ -84,7 +84,7 @@ Length Constraints: Minimum length of 1\. Maximum length of 140\.
 Pattern: `arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+:[0-9]+` 
 
  ** [LicenseInfo](#API_GetLayerVersion_ResponseSyntax) **   <a name="SSS-GetLayerVersion-response-LicenseInfo"></a>
-The layer's open\-source license\.  
+The layer's software license\.  
 Type: String  
 Length Constraints: Maximum length of 512\.
 
@@ -107,7 +107,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-Request throughput limit exceeded  
+Request throughput limit exceeded\.  
 HTTP Status Code: 429
 
 ## See Also<a name="API_GetLayerVersion_SeeAlso"></a>
@@ -117,6 +117,7 @@ For more information about using this API in one of the language\-specific AWS S
 +  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/GetLayerVersion) 
 +  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/GetLayerVersion) 
 +  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/GetLayerVersion) 
++  [AWS SDK for Go \- Pilot](https://docs.aws.amazon.com/goto/SdkForGoPilot/lambda-2015-03-31/GetLayerVersion) 
 +  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/GetLayerVersion) 
 +  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/GetLayerVersion) 
 +  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/GetLayerVersion) 

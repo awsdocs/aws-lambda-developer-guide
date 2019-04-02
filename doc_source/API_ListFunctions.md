@@ -1,10 +1,8 @@
 # ListFunctions<a name="API_ListFunctions"></a>
 
-Returns a list of your Lambda functions\. For each function, the response includes the function configuration information\. You must use [GetFunction](API_GetFunction.md) to retrieve the code for your function\.
+Returns a list of Lambda functions, with the version\-specific configuration of each\.
 
-This operation requires permission for the `lambda:ListFunctions` action\.
-
-If you are using the versioning feature, you can list all of your functions or only `$LATEST` versions\. For information about the versioning feature, see [AWS Lambda Function Versioning and Aliases](https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html)\. 
+Set `FunctionVersion` to `ALL` to include all published versions of each function in addition to the unpublished version\. To get more information about a function or version, use [GetFunction](API_GetFunction.md)\.
 
 ## Request Syntax<a name="API_ListFunctions_RequestSyntax"></a>
 
@@ -17,18 +15,18 @@ GET /2015-03-31/functions/?FunctionVersion=FunctionVersion&Marker=Marker&MasterR
 The request requires the following URI parameters\.
 
  ** [FunctionVersion](#API_ListFunctions_RequestSyntax) **   <a name="SSS-ListFunctions-request-FunctionVersion"></a>
-Set to `ALL` to list all published versions\. If not specified, only the latest unpublished version ARN is returned\.  
+Set to `ALL` to include entries for all published versions of each function\.  
 Valid Values:` ALL` 
 
  ** [Marker](#API_ListFunctions_RequestSyntax) **   <a name="SSS-ListFunctions-request-Marker"></a>
-Optional string\. An opaque pagination token returned from a previous `ListFunctions` operation\. If present, indicates where to continue the listing\. 
+Specify the pagination token that's returned by a previous request to retrieve the next page of results\.
 
  ** [MasterRegion](#API_ListFunctions_RequestSyntax) **   <a name="SSS-ListFunctions-request-MasterRegion"></a>
-Specify a region \(e\.g\. `us-east-2`\) to only list functions that were created in that region, or `ALL` to include functions replicated from any region\. If specified, you also must specify the `FunctionVersion`\.  
+For Lambda@Edge functions, the AWS Region of the master function\. For example, `us-east-2` or `ALL`\. If specified, you must set `FunctionVersion` to `ALL`\.  
 Pattern: `ALL|[a-z]{2}(-gov)?-[a-z]+-\d{1}` 
 
  ** [MaxItems](#API_ListFunctions_RequestSyntax) **   <a name="SSS-ListFunctions-request-MaxItems"></a>
-Optional integer\. Specifies the maximum number of AWS Lambda functions to return in response\. This parameter value must be greater than 0\. The absolute maximum of AWS Lambda functions that can be returned is 50\.  
+Specify a value between 1 and 50 to limit the number of functions in the response\.  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.
 
 ## Request Body<a name="API_ListFunctions_RequestBody"></a>
@@ -102,7 +100,7 @@ A list of Lambda functions\.
 Type: Array of [FunctionConfiguration](API_FunctionConfiguration.md) objects
 
  ** [NextMarker](#API_ListFunctions_ResponseSyntax) **   <a name="SSS-ListFunctions-response-NextMarker"></a>
-A string, present if there are more functions\.  
+The pagination token that's included if more results are available\.  
 Type: String
 
 ## Errors<a name="API_ListFunctions_Errors"></a>
@@ -116,7 +114,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-Request throughput limit exceeded  
+Request throughput limit exceeded\.  
 HTTP Status Code: 429
 
 ## See Also<a name="API_ListFunctions_SeeAlso"></a>
@@ -126,6 +124,7 @@ For more information about using this API in one of the language\-specific AWS S
 +  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/ListFunctions) 
 +  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/ListFunctions) 
 +  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/ListFunctions) 
++  [AWS SDK for Go \- Pilot](https://docs.aws.amazon.com/goto/SdkForGoPilot/lambda-2015-03-31/ListFunctions) 
 +  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/ListFunctions) 
 +  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/ListFunctions) 
 +  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/ListFunctions) 

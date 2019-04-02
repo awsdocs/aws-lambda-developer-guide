@@ -2,7 +2,7 @@
 
 An AWS Lambda application is a combination of Lambda functions, event sources, and other resources that work together to perform tasks\. You can use AWS CloudFormation and other tools to collect your application's components into a single package that can be deployed and managed as one resource\. Applications make your Lambda projects portable and enable you to integrate with additional developer tools, such as AWS CodePipeline, AWS CodeBuild, and the AWS Serverless Application Model command line interface \(SAM CLI\)\.
 
-The [AWS Serverless Application Repository](https://docs.aws.amazon.com/serverlessrepo/latest/devguide/) provides a collection of Lambda applications that you can deploy in your account with a few clicks\. The repository includes both ready\-to\-use applications and samples that you can use a starting point for your own projects\. You can also submit your own projects for inclusion\.
+The [AWS Serverless Application Repository](https://docs.aws.amazon.com/serverlessrepo/latest/devguide/) provides a collection of Lambda applications that you can deploy in your account with a few clicks\. The repository includes both ready\-to\-use applications and samples that you can use as a starting point for your own projects\. You can also submit your own projects for inclusion\.
 
 [AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-whatis-concepts.html) enables you to create a template that defines your application's resources and lets you manage the application as a *stack*\. You can more safely add or modify resources in your application stack\. If any part of an update fails, AWS CloudFormation automatically rolls back to the previous configuration\. With AWS CloudFormation parameters, you can create multiple environments for your application from the same template\.
 
@@ -14,3 +14,4 @@ The [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/) and [AWS SAM CL
 + [Managing Applications in the AWS Lambda Console](applications-console.md)
 + [Using the AWS Serverless Application Model \(AWS SAM\)](serverless_app.md)
 + [Building a Pipeline for Your Serverless Application](build-pipeline.md)
++ [Best Practices for Working with AWS Lambda Functions](best-practices.md)

@@ -4,7 +4,7 @@ Lambda does not enforce any restrictions on your function logic – if you can c
 
 ## Accessing AWS Services<a name="accessing-aws-services"></a>
 
-To access other AWS services, you can use the AWS SDK \([Node\.js](https://aws.amazon.com/sdk-for-node-js/), [Java](https://aws.amazon.com/sdk-for-java/), [Python](https://aws.amazon.com/sdk-for-python/), [C\#\)](https://aws.amazon.com/sdk-for-net/) or [Go](https://aws.amazon.com/sdk-for-go/), AWS Lambda will automatically set the credentials required by the SDK to those of the IAM role associated with your function – you do not need to take any additional steps\. For example, here’s sample code using the Python SDK for accessing an S3 object\.:
+To access other AWS services, you can use the AWS SDK\. AWS Lambda automatically sets the credentials required by the SDK to those of the IAM role associated with your function – you do not need to take any additional steps\. For example, here’s sample code using the Python SDK for accessing an S3 object\.
 
 ```
 import boto3
@@ -24,7 +24,6 @@ except botocore.exceptions.ClientError as e:
         raise
 ```
 
-**Note**  
 For convenience, AWS Lambda includes versions of the AWS SDK as part of the execution environment so you don’t have to include it\. See [Lambda Execution Environment and Available Libraries](current-supported-versions.md) for the version of the included SDK\. We recommend including your own copy of the AWS SDK for production applications so you can control your dependencies\.
 
 ## Accessing non AWS Services<a name="accessing-non-aws-services"></a>

@@ -1,6 +1,6 @@
 # Building a Pipeline for Your Serverless Application<a name="build-pipeline"></a>
 
- In the following tutorial, you create an AWS CodePipeline that automates the deployment of your serverless application\. First, you need to set up a **source stage** to trigger your pipeline\. For the purposes of this tutorial:
+ In the following tutorial, you create an AWS CodePipeline pipeline that automates the deployment of your serverless application\. First, you need to set up a **source stage** to trigger your pipeline\. For the purposes of this tutorial:
 + We're using GitHub\. For instructions on how to create a GitHub repository, see [Create a Repository in GitHub](https://help.github.com/articles/create-a-repo/)\.
 + You need to create an AWS CloudFormation role and add the **AWSLambdaExecute** policy to that role, as outlined in the following steps:
 
@@ -191,11 +191,9 @@ To set up your repository, do the following:
 
 ## Step 2: Create Your Pipeline<a name="create-pipeline1"></a>
 
-****
+**To create a pipeline**
 
-Follow these steps to create your AWS CodePipeline\.
-
-1. Sign in to the AWS Management Console and open the AWS CodePipeline console\.
+1. Sign in to the AWS Management Console and open the CodePipeline console\.
 
 1. Choose **Get Started Now**\.
 
@@ -299,4 +297,4 @@ Use the following steps to complete your beta stage\.
 
  Your pipeline is ready\. Any `git push` to the branch that you connected to this pipeline is going to trigger a deployment\. To test your pipeline and deploy your application for the first time, do one of the following: 
 + Perform a `git push` to the branch that's connected to your pipeline\.
-+ Go the AWS CodePipeline console, choose the name of the pipeline you created, and then choose **Release change**\. 
++ Go the CodePipeline console, choose the name of the pipeline you created, and then choose **Release change**\. 

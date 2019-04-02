@@ -8,22 +8,38 @@ Lambda polls the queue and invokes your function [synchronously](invocation-opti
 
 ```
 {
-     "Records": [
+    "Records": [
         {
-            "messageId": "c80e8021-a70a-42c7-a470-796e1186f753",
-            "receiptHandle": "AQEBJQ+/u6NsnT5t8Q/VbVxgdUl4TMKZ5FqhksRdIQvLBhwNvADoBxYSOVeCBXdnS9P+erlTtwEALHsnBXynkfPLH3BOUqmgzP25U8kl8eHzq6RAlzrSOfTO8ox9dcp6GLmW33YjO3zkq5VRYyQlJgLCiAZUpY2D4UQcE5D1Vm8RoKfbE+xtVaOctYeINjaQJ1u3mWx9T7tork3uAlOe1uyFjCWU5aPX/1OHhWCGi2EPPZj6vchNqDOJC/Y2k1gkivqCjz1CZl6FlZ7UVPOx3AMoszPuOYZ+Nuqpx2uCE2MHTtMHD8PVjlsWirt56oUr6JPp9aRGo6bitPIOmi4dX0FmuMKD6u/JnuZCp+AXtJVTmSHS8IXt/twsKU7A+fiMK01NtD5msNgVPoe9JbFtlGwvTQ==",
-            "body": "{\"foo\":\"bar\"}",
+            "messageId": "059f36b4-87a3-44ab-83d2-661975830a7d",
+            "receiptHandle": "AQEBwJnKyrHigUMZj6rYigCgxlaS3SLy0a...",
+            "body": "test",
             "attributes": {
-                "ApproximateReceiveCount": "3",
-                "SentTimestamp": "1529104986221",
-                "SenderId": "594035263019",
-                "ApproximateFirstReceiveTimestamp": "1529104986230"
+                "ApproximateReceiveCount": "1",
+                "SentTimestamp": "1545082649183",
+                "SenderId": "AIDAIENQZJOLO23YVJ4VO",
+                "ApproximateFirstReceiveTimestamp": "1545082649185"
             },
             "messageAttributes": {},
-            "md5OfBody": "9bb58f26192e4ba00f01e2e7b136bbd8",
+            "md5OfBody": "098f6bcd4621d373cade4e832627b4f6",
             "eventSource": "aws:sqs",
-            "eventSourceARN": "arn:aws:sqs:us-west-2:123456789012:MyQueue",
-            "awsRegion": "us-west-2"
+            "eventSourceARN": "arn:aws:sqs:us-east-2:123456789012:my-queue",
+            "awsRegion": "us-east-2"
+        },
+        {
+            "messageId": "2e1424d4-f796-459a-8184-9c92662be6da",
+            "receiptHandle": "AQEBzWwaftRI0KuVm4tP+/7q1rGgNqicHq...",
+            "body": "test",
+            "attributes": {
+                "ApproximateReceiveCount": "1",
+                "SentTimestamp": "1545082650636",
+                "SenderId": "AIDAIENQZJOLO23YVJ4VO",
+                "ApproximateFirstReceiveTimestamp": "1545082650649"
+            },
+            "messageAttributes": {},
+            "md5OfBody": "098f6bcd4621d373cade4e832627b4f6",
+            "eventSource": "aws:sqs",
+            "eventSourceARN": "arn:aws:sqs:us-east-2:123456789012:my-queue",
+            "awsRegion": "us-east-2"
         }
     ]
 }
@@ -76,9 +92,9 @@ To configure an event source with the Lambda API or the AWS SDK, use the [Create
 
 ## Execution Role Permissions<a name="events-sqs-permissions"></a>
 
-Lambda needs the following permissions to manage messages in your Amazon SQS queue\. Add them to your function's [execution role](intro-permission-model.md#lambda-intro-execution-role)\.
+Lambda needs the following permissions to manage messages in your Amazon SQS queue\. Add them to your function's [execution role](lambda-intro-execution-role.md)\.
 + [sqs:ReceiveMessage](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_ReceiveMessage.html)
 + [sqs:DeleteMessage](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_DeleteMessage.html)
 + [sqs:GetQueueAttributes](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_GetQueueAttributes.html)
 
-For more information, see [Manage Permissions: Using an IAM Role \(Execution Role\)](intro-permission-model.md#lambda-intro-execution-role)\.
+For more information, see [AWS Lambda Execution Role](lambda-intro-execution-role.md)\.
