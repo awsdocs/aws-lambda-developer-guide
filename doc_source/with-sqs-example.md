@@ -4,7 +4,7 @@ In this tutorial, you create a Lambda function to consume messages from an [Amaz
 
 ## Prerequisites<a name="with-sqs-prepare"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started with AWS Lambda](getting-started.md) to create your first Lambda function\.
 
 To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
@@ -19,7 +19,7 @@ On Linux and macOS, use your preferred shell and package manager\. On Windows 10
 
 ## Create the Execution Role<a name="with-sqs-create-execution-role"></a>
 
-Create the [execution role](intro-permission-model.md#lambda-intro-execution-role) that gives your function permission to access AWS resources\.
+Create the [execution role](lambda-intro-execution-role.md) that gives your function permission to access AWS resources\.
 
 **To create an execution role**
 
@@ -68,7 +68,7 @@ exports.handler = async function(event, context) {
    ```
    $ aws lambda create-function --function-name ProcessSQSRecord \
    --zip-file fileb://function.zip --handler index.handler --runtime nodejs8.10 \
-   --role role-arn
+   --role arn:aws:iam::123456789012:role/lambda-sqs-role
    ```
 
 ## Test the Function<a name="with-sqs-create-test-function"></a>
@@ -81,22 +81,22 @@ If the handler returns normally without exceptions, Lambda considers the message
 
    ```
    {
-   	"Records": [
+       "Records": [
            {
-               "messageId": "c80e8021-a70a-42c7-a470-796e1186f753",
-               "receiptHandle": "AQEBJQ+/u6NsnT5t8Q/VbVxgdUl4TMKZ5FqhksRdIQvLBhwNvADoBxYSOVeCBXdnS9P+erlTtwEALHsnBXynkfPLH3BOUqmgzP25U8kl8eHzq6RAlzrSOfTO8ox9dcp6GLmW33YjO3zkq5VRYyQlJgLCiAZUpY2D4UQcE5D1Vm8RoKfbE+xtVaOctYeINjaQJ1u3mWx9T7tork3uAlOe1uyFjCWU5aPX/1OHhWCGi2EPPZj6vchNqDOJC/Y2k1gkivqCjz1CZl6FlZ7UVPOx3AMoszPuOYZ+Nuqpx2uCE2MHTtMHD8PVjlsWirt56oUr6JPp9aRGo6bitPIOmi4dX0FmuMKD6u/JnuZCp+AXtJVTmSHS8IXt/twsKU7A+fiMK01NtD5msNgVPoe9JbFtlGwvTQ==",
-               "body": "{\"foo\":\"bar\"}",
+               "messageId": "059f36b4-87a3-44ab-83d2-661975830a7d",
+               "receiptHandle": "AQEBwJnKyrHigUMZj6rYigCgxlaS3SLy0a...",
+               "body": "test",
                "attributes": {
-                   "ApproximateReceiveCount": "3",
-                   "SentTimestamp": "1529104986221",
-                   "SenderId": "594035263019",
-                   "ApproximateFirstReceiveTimestamp": "1529104986230"
+                   "ApproximateReceiveCount": "1",
+                   "SentTimestamp": "1545082649183",
+                   "SenderId": "AIDAIENQZJOLO23YVJ4VO",
+                   "ApproximateFirstReceiveTimestamp": "1545082649185"
                },
                "messageAttributes": {},
-               "md5OfBody": "9bb58f26192e4ba00f01e2e7b136bbd8",
+               "md5OfBody": "098f6bcd4621d373cade4e832627b4f6",
                "eventSource": "aws:sqs",
-               "eventSourceARN": "arn:aws:sqs:us-west-2:594035263019:NOTFIFOQUEUE",
-               "awsRegion": "us-west-2"
+               "eventSourceARN": "arn:aws:sqs:us-east-2:123456789012:my-queue",
+               "awsRegion": "us-east-2"
            }
        ]
    }
@@ -134,8 +134,8 @@ Test the end\-to\-end experience\. As you perform queue updates, Amazon Simple Q
 To create a mapping between the specified Amazon SQS queue and the Lambda function, run the following AWS CLI `create-event-source-mapping` command\. After the command executes, write down or otherwise record the UUID\. You'll need this UUID to refer to the event source mapping in any other commands, for example, if you choose to delete the event source mapping\.
 
 ```
-$ aws lambda create-event-source-mapping --function-name ProcessSQSRecord \
---event-source SQS-queue-arn --batch-size 1
+$ aws lambda create-event-source-mapping --function-name ProcessSQSRecord  --batch-size 10 \
+--event-source SQS-queue-arn
 ```
 
 You can get the list of event source mappings by running the following command\.

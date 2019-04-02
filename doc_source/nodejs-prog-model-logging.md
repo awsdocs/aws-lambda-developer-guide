@@ -49,7 +49,7 @@ In either case, the following screenshot shows an example **Log output** sectio
 
 1. Test the Lambda function using the **Sample event template** called **Hello World** provided in the Lambda console\. You can also update the code and try other logging methods and properties discussed in this section\.
 
-For step\-by\-step instructions, see [Getting Started](getting-started.md)\.
+For step\-by\-step instructions, see [Getting Started with AWS Lambda](getting-started.md)\.
 
 ## Finding Logs<a name="nodejs-prog-model-logging-finding-logs"></a>
 

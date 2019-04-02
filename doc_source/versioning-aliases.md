@@ -2,9 +2,9 @@
 
 By using versioning, you can manage your in\-production function code in AWS Lambda better\. When you use versioning in AWS Lambda, you can publish one or more versions of your Lambda function\. As a result, you can work with different variations of your Lambda function in your development workflow, such as development, beta, and production\. 
 
-Each Lambda function version has a unique Amazon Resource Name \(ARN\)\. After you publish a version, it is immutable \(that is, it can't be changed\)\.
+Each Lambda function version has a unique Amazon Resource Name \(ARN\)\. After you publish a version, it can't be changed\.
 
-AWS Lambda also supports creating aliases for each of your Lambda function versions\. Conceptually, an AWS Lambda alias is a pointer to a specific Lambda function version\. It's also a resource similar to a Lambda function, and each alias has a unique ARN\. Each alias maintains an ARN for the function version to which it points\. An alias can only point to a function version, not to another alias\. Unlike versions, which are immutable, aliases are mutable \(that is, they can be changed\)\. You can update aliases to point to different versions of functions\.
+AWS Lambda also supports creating aliases for each of your Lambda function versions\. Conceptually, an AWS Lambda alias is a pointer to a specific Lambda function version\. It's also a resource similar to a Lambda function, and each alias has a unique ARN\. Each alias maintains an ARN for the function version to which it points\. An alias can only point to a function version, not to another alias\. Unlike versions, aliases can be modified\. You can update aliases to point to different versions of functions\.
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/alias_intro_2_10.png)
 

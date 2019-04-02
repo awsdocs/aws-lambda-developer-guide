@@ -3,7 +3,7 @@
 ## Contents<a name="API_Concurrency_Contents"></a>
 
  **ReservedConcurrentExecutions**   <a name="SSS-Type-Concurrency-ReservedConcurrentExecutions"></a>
-The number of concurrent executions reserved for this function\. For more information, see [Managing Concurrency](https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html)\.  
+The number of concurrent executions that are reserved for this function\. For more information, see [Managing Concurrency](https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html)\.  
 Type: Integer  
 Valid Range: Minimum value of 0\.  
 Required: No
@@ -13,5 +13,6 @@ Required: No
 For more information about using this API in one of the language\-specific AWS SDKs, see the following:
 +  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/Concurrency) 
 +  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/Concurrency) 
++  [AWS SDK for Go \- Pilot](https://docs.aws.amazon.com/goto/SdkForGoPilot/lambda-2015-03-31/Concurrency) 
 +  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/Concurrency) 
 +  [AWS SDK for Ruby V2](https://docs.aws.amazon.com/goto/SdkForRubyV2/lambda-2015-03-31/Concurrency) 

@@ -1,0 +1,24 @@
+{
+   "Version":"2012-10-17",
+   "Statement":[
+      {
+         "Effect":"Allow",
+         "Action":"lambda:InvokeFunction",
+         "Resource":"arn:aws:lambda:us-east-2:123456789012:function:my-function*"
+      },
+      {
+         "Effect":"Allow",
+         "Action":"kinesis:ListStreams",
+         "Resource":"arn:aws:kinesis:us-east-2:123456789012:stream/*"
+      },
+      {
+         "Effect":"Allow",
+         "Action":[
+            "kinesis:DescribeStream",
+            "kinesis:GetRecords",
+            "kinesis:GetShardIterator"
+         ],
+         "Resource":"arn:aws:kinesis:us-east-2:123456789012:stream/myStream"
+      }
+   ]
+}

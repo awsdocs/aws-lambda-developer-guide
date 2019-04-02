@@ -6,6 +6,8 @@ When your function is invoked, Lambda attempts to re\-use the execution environm
 
 A runtime can support a single version of a language, multiple versions of a language, or multiple languages\. Runtimes specific to a language or framework version are [deprecated](runtime-support-policy.md) when the version reaches end of life\.
 
+To use other languages in Lambda, you can implement a [custom runtime](runtimes-custom.md)\. The Lambda execution environment provides a [runtime interface](runtimes-api.md) for getting invocation events and sending responses\. You can deploy a custom runtime alongside your function code, or in a [layer](configuration-layers.md)\.
+
 
 **Node\.js Runtimes**  
 
@@ -15,13 +17,6 @@ A runtime can support a single version of a language, multiple versions of a lan
 |  Node\.js 6\.10  |  `nodejs6.10`  | 
 
 
-**Java Runtimes**  
-
-| Name | Identifier | JDK | 
-| --- | --- | --- | 
-|  Java 8  |  `java8`  |  java\-1\.8\.0\-openjdk  | 
-
-
 **Python Runtimes**  
 
 | Name | Identifier | 
@@ -29,6 +24,20 @@ A runtime can support a single version of a language, multiple versions of a lan
 |  Python 3\.6  |  `python3.6`  | 
 |  Python 3\.7  |  `python3.7`  | 
 |  Python 2\.7  |  `python2.7`  | 
+
+
+**Ruby Runtimes**  
+
+| Name  | Identifier  | 
+| --- | --- | 
+|  Ruby 2\.5  |  `ruby2.5`  | 
+
+
+**Java Runtimes**  
+
+| Name | Identifier | JDK | 
+| --- | --- | --- | 
+|  Java 8  |  `java8`  |  java\-1\.8\.0\-openjdk  | 
 
 
 **Go Runtimes**  
@@ -45,12 +54,6 @@ A runtime can support a single version of a language, multiple versions of a lan
 |  \.NET Core 2\.1  |  `dotnetcore2.1`  |  C\# PowerShell Core 6\.0  | 
 |  \.NET Core 2\.0  |  `dotnetcore2.0`  |  C\#  | 
 |  \.NET Core 1\.0  |  `dotnetcore1.0`  |  C\#  | 
-
-**Ruby Runtimes**  
-
-| Name | Identifier | 
-| --- | --- | 
-|  Ruby 2\.5  |  `ruby2.5`  | 
 
 **Topics**
 + [Lambda Execution Environment and Available Libraries](current-supported-versions.md)
