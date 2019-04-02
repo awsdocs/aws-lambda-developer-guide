@@ -186,11 +186,11 @@ In the response, you can verify the status value is `enabled`\. Event source map
 
 ## Test the Setup<a name="with-kinesis-example-configure-event-source-test-end-to-end"></a>
 
-To test the event source mapping, add event records to your Kinesis stream\. The `--data` value is a base64\-encoded value of the `"Hello, this is a test."` string\. You can run the same command more than once to add multiple records to the stream\.
+To test the event source mapping, add event records to your Kinesis stream\. The `--data` value will be base64\-encoded  when it is added to the Kinesis stream. You can run the same command more than once to add multiple records to the stream\.
 
 ```
 $ aws kinesis put-record --stream-name lambda-stream --partition-key 1 \
---data "SGVsbG8sIHRoaXMgaXMgYSB0ZXN0Lg=="
+--data "Hello, this is a test."
 ```
 
 Lambda uses the execution role to read records from the stream\. Then it invokes your Lambda function, passing in batches of records\. The function decodes data from each record and logs it, sending the output to CloudWatch Logs\. View the logs in the [CloudWatch console](https://console.aws.amazon.com/cloudwatch)\.
