@@ -48,7 +48,7 @@ import com.amazonaws.services.lambda.runtime.events.KinesisEvent.KinesisEventRec
 
 public class ProcessKinesisRecords implements RequestHandler<KinesisEvent, Void>{
   @Override
-  public Void recordHandler(KinesisEvent event, Context context)
+  public Void handleRequest(KinesisEvent event, Context context)
   {
     for(KinesisEventRecord rec : event.getRecords()) {
       System.out.println(new String(rec.getKinesis().getData().array()));
