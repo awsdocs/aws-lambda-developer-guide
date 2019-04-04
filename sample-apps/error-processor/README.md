@@ -75,7 +75,7 @@ Choose a node in the main function graph and then choose **View traces** to see 
 Finally, view the logs and traces that the function stores in Amazon S3.
 
 *To view the output*
-1. Open the [applications page](https://console.aws.amazon.com/lambda/home#/applications/lambda-error-processor) in the Lambda console.
+1. Open the [applications page](https://console.aws.amazon.com/lambda/home#/applications) in the Lambda console.
 2. Choose **lambda-error-processor**.
 
   ![Application](/sample-apps/error-processor/images/errorprocessor-application.png)
