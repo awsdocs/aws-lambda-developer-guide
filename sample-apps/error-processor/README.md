@@ -1,6 +1,12 @@
 # Error Processing with CloudWatch Logs and X-Ray
 This sample application triggers a Lambda function when CloudWatch Logs detects the word ERROR in a log stream. The function downloads the full log stream, and the X-Ray trace for the request that caused the error, and stores both in S3.
 
+This project contains the following resources-
+- cloudwatch-logs - A Node.js function that retrieves logs and traces, and stores them in Amazon S3.
+- random-error - A Node.js function that generates errors at random.
+- error-processor.yaml - A CloudFormation template that creates an application with the above functions.
+- install.sh, deploy.sh, etc. - Shell scripts that use the AWS CLI to deploy the application.
+
 # Requirements
 - NPM
 - Bash
@@ -68,7 +74,7 @@ Choose a node in the main function graph and then choose **View traces** to see 
 
 Finally, view the logs and traces that the function stores in Amazon S3.
 
-*View the output*
+*To view the output*
 1. Open the [lambda-error-processor application](https://console.aws.amazon.com/lambda/home#/applications/lambda-error-processor) in the Lambda console.
 
   ![Application](/sample-apps/error-processor/images/errorprocessor-application.png)
