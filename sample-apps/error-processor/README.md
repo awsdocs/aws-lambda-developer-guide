@@ -75,14 +75,15 @@ Choose a node in the main function graph and then choose **View traces** to see 
 Finally, view the logs and traces that the function stores in Amazon S3.
 
 *To view the output*
-1. Open the [lambda-error-processor application](https://console.aws.amazon.com/lambda/home#/applications/lambda-error-processor) in the Lambda console.
+1. Open the [applications page](https://console.aws.amazon.com/lambda/home#/applications/lambda-error-processor) in the Lambda console.
+2. Choose **lambda-error-processor**.
 
   ![Application](/sample-apps/error-processor/images/errorprocessor-application.png)
 
-2. Choose **bucket**.
-3. Choose **errors**.
-4. Choose a request ID.
-5. For each file, check the box next to the filename and then choose **Download**.
+3. Choose **bucket**.
+4. Choose **errors**.
+5. Choose a request ID.
+6. For each file, check the box next to the filename and then choose **Download**.
 
 # Cleanup
 To delete the application, run the cleanup script.
