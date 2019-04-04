@@ -1,5 +1,5 @@
 # Error Processing with CloudWatch Logs and X-Ray
-This sample application triggers a Lambda function when CloudWatch Logs detects the word ERROR in a log stream. The function downloads the full log stream, and the X-Ray trace for the request that caused the error, and stores both in S3.
+This sample application triggers a Lambda function when CloudWatch Logs detects the word ERROR in a log stream. The function downloads the full log stream, and the X-Ray trace for the request that caused the error, and stores both in an Amazon S3 bucket.
 
 This project contains the following resources-
 - cloudwatch-logs - A Node.js function that retrieves logs and traces, and stores them in Amazon S3.
