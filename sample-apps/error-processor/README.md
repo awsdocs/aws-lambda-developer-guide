@@ -5,7 +5,7 @@ This project contains the following resources-
 - cloudwatch-logs - A Node.js function that retrieves logs and traces, and stores them in Amazon S3.
 - random-error - A Node.js function that generates errors at random.
 - error-processor.yaml - A CloudFormation template that creates an application with the above functions.
-- install.sh, deploy.sh, etc. - Shell scripts that use the AWS CLI to deploy the application.
+- install.sh, deploy.sh, etc. - Shell scripts that use the AWS CLI to deploy and manage the application.
 
 # Requirements
 - NPM
