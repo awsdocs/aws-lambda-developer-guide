@@ -8,9 +8,9 @@ This project contains the following resources-
 - install.sh, deploy.sh, etc. - Shell scripts that use the AWS CLI to deploy and manage the application.
 
 # Requirements
-- NPM
-- Bash
-- AWS CLI
+- [Node.js 8 with NPM](https://nodejs.org/en/download/releases/)
+- Bash shell. For Linux and macOS, this is included by default. On Windows 10, you can install the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows-integrated version of Ubuntu and Bash.
+- [The AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html).
 
 # Setup
 Download or clone this repository.
