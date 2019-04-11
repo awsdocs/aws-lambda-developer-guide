@@ -7,6 +7,9 @@ This project contains the following resources-
 - error-processor.yaml - A CloudFormation template that creates an application with the above functions.
 - install.sh, deploy.sh, etc. - Shell scripts that use the AWS CLI to deploy and manage the application.
 
+
+![Architecture](/sample-apps/error-processor/images/sample-errorprocessor.png)
+
 Follow the instructions below to deploy the sample application. For more information on the application's architecture and implementation, see [Error Processor Sample Application for AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/sample-errorprocessor.html) in the developer guide.
 
 # Requirements
