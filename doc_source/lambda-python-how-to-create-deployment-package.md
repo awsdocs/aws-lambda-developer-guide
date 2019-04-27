@@ -62,7 +62,7 @@ If your function depends on libraries other than the SDK for Python \(Boto 3\), 
 1. Install libraries in a new, project-local `package` directory with `pip`'s `--target` option\.
 
    ```
-   ~/my-function$ pip install Pillow --target ./package
+   ~/my-function$ pip install --target ./package Pillow
    Collecting Pillow
      Using cached https://files.pythonhosted.org/packages/62/8c/230204b8e968f6db00c765624f51cfd1ecb6aea57b25ba00b240ee3fb0bd/Pillow-5.3.0-cp37-cp37m-manylinux1_x86_64.whl
    Installing collected packages: Pillow
@@ -75,18 +75,20 @@ If your function depends on libraries other than the SDK for Python \(Boto 3\), 
 1. Create a ZIP archive of the dependencies\.
 
    ```
-   my-function$ zip -r9 function.zip ./package
-     adding: package/PIL/ (stored 0%)
-     adding: package/PIL/.libs/ (stored 0%)
-     adding: package/PIL/.libs/libfreetype-7ce95de6.so.6.16.1 (deflated 65%)
-     adding: package/PIL/.libs/libjpeg-3fe7dfc0.so.9.3.0 (deflated 72%)
-     adding: package/PIL/.libs/liblcms2-a6801db4.so.2.0.8 (deflated 67%)
+   ~/my-function$ cd package
+   ~/my-function/package$ zip -r9 ${OLDPWD}/function.zip .
+     adding: PIL/ (stored 0%)
+     adding: PIL/.libs/ (stored 0%)
+     adding: PIL/.libs/libfreetype-7ce95de6.so.6.16.1 (deflated 65%)
+     adding: PIL/.libs/libjpeg-3fe7dfc0.so.9.3.0 (deflated 72%)
+     adding: PIL/.libs/liblcms2-a6801db4.so.2.0.8 (deflated 67%)
    ...
    ```
 
 1. Add your actual function code to the archive\.
 
    ```
+   ~/my-function/package$ cd $OLDPWD
    ~/my-function$ zip -g function.zip function.py
      adding: function.py (deflated 56%)
    ```
@@ -160,7 +162,7 @@ In some cases, you may need to use a [virtual environment](https://virtualenv.py
 1. Install libraries with pip\.
 
    ```
-   ~/my-function$ pip install Pillow
+   (v-env) ~/my-function$ pip install Pillow
    Collecting Pillow
      Using cached https://files.pythonhosted.org/packages/62/8c/230204b8e968f6db00c765624f51cfd1ecb6aea57b25ba00b240ee3fb0bd/Pillow-5.3.0-cp37-cp37m-manylinux1_x86_64.whl
    Installing collected packages: Pillow
@@ -170,18 +172,19 @@ In some cases, you may need to use a [virtual environment](https://virtualenv.py
 1. Deactivate the virtual environment\.
 
    ```
-   (v-env)~/my-function$ deactivate
+   (v-env) ~/my-function$ deactivate
    ```
 
 1. Create a ZIP archive with the contents of the library\.
 
    ```
-   ~/my-function$ zip -r9 function.zip ./v-env/lib/python3.7/site-packages
-     adding: v-env/lib/python3.7/site-packages/easy_install.py (deflated 17%)
-     adding: v-env/lib/python3.7/site-packages/PIL/ (stored 0%)
-     adding: v-env/lib/python3.7/site-packages/PIL/.libs/ (stored 0%)
-     adding: v-env/lib/python3.7/site-packages/PIL/.libs/libfreetype-7ce95de6.so.6.16.1 (deflated 65%)
-     adding: v-env/lib/python3.7/site-packages/PIL/.libs/libjpeg-3fe7dfc0.so.9.3.0 (deflated 72%)
+   ~/my-function$ cd v-env/lib/python3.7/site-packages
+   ~/my-function/v-env/lib/python3.7/site-packages$ zip -r9 ${OLDPWD}/function.zip .
+     adding: easy_install.py (deflated 17%)
+     adding: PIL/ (stored 0%)
+     adding: PIL/.libs/ (stored 0%)
+     adding: PIL/.libs/libfreetype-7ce95de6.so.6.16.1 (deflated 65%)
+     adding: PIL/.libs/libjpeg-3fe7dfc0.so.9.3.0 (deflated 72%)
    ...
    ```
 
@@ -193,6 +196,7 @@ In some cases, you may need to use a [virtual environment](https://virtualenv.py
 1. Add your actual function code to the archive\.
 
    ```
+   ~/my-function/v-env/lib/python3.7/site-packages$ cd $OLDPWD
    ~/my-function$ zip -g function.zip function.py
      adding: function.py (deflated 56%)
    ```
