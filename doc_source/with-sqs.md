@@ -67,7 +67,7 @@ If a message fails processing multiple times, Amazon SQS can send it to a [dead 
 
 ## Configuring a Queue as an Event Source<a name="events-sqs-eventsource"></a>
 
-Create an event source mapping to tell Lambda to send items from your queue to a Lambda function\. You can create multiple event source mappings to process items from multiple queues with a single function\. When Lambda invokes the target function, the event can contain multiple items, up to a configurable maximum batch size\.
+Create an event source mapping to tell Lambda to send items from your queue to a Lambda function\. You can create multiple event source mappings to process items from multiple queues with a single function\. When Lambda invokes the target function, the event can contain multiple items, up to a configurable maximum batch size of 10\. Please note that this limit is imposed by [AWS SQS](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-limits.html)\.
 
 **To add an event source mapping for an Amazon SQS queue**
 
