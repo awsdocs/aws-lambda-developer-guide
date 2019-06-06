@@ -159,7 +159,7 @@ $ aws lambda list-functions --max-items 10 \
 
 ### Retrieve a Lambda Function<a name="with-userapp-walkthrough-custom-events-get-configuration"></a>
 
-The Lambda CLI `get-function` command returns Lambda function metadata and a presigned URL that you can use to download the function's deployment packagen\.
+The Lambda CLI `get-function` command returns Lambda function metadata and a presigned URL that you can use to download the function's deployment package\.
 
 ```
 $ aws lambda get-function --function-name helloworld

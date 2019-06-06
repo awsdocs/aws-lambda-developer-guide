@@ -1,8 +1,8 @@
 # Using AWS Lambda with Amazon CloudWatch Logs<a name="services-cloudwatchlogs"></a>
 
-You can use a Lambda function to monitor and analyze logs from an Amazon CloudWatch Logs log stream\. Create subscriptions for one or more log streams to invoke a function when logs are created or match an optional pattern\. Use the function to send a notification or persist the log to a database or storage\.
+You can use a Lambda function to monitor and analyze logs from an Amazon CloudWatch Logs log stream\. Create [subscriptions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/Subscriptions.html) for one or more log streams to invoke a function when logs are created or match an optional pattern\. Use the function to send a notification or persist the log to a database or storage\.
 
-CloudWatch Logs invokes your function asynchronously with an event that contains encrypted log data\.
+CloudWatch Logs invokes your function asynchronously with an event that contains encoded log data\.
 
 **Example Amazon CloudWatch Logs Message Event**  
 
@@ -14,7 +14,7 @@ CloudWatch Logs invokes your function asynchronously with an event that contains
 }
 ```
 
-When decrypted, the log data is a JSON document with the following structure\.
+When decoded, the log data is a JSON document with the following structure\.
 
 **Example Amazon CloudWatch Logs Message Data \(decoded\)**  
 
@@ -37,4 +37,4 @@ When decrypted, the log data is a JSON document with the following structure\.
 }
 ```
 
-For more information, see [Real\-time Processing of Log Data with Subscriptions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/Subscriptions.html) in the *CloudWatch Logs Developer Guide*\.
+For a sample application that uses CloudWatch Logs as a trigger, see [Error Processor Sample Application for AWS Lambda](sample-errorprocessor.md)\.

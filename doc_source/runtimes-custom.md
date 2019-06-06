@@ -4,7 +4,7 @@ You can implement an AWS Lambda runtime in any programming language\. A runtime 
 
 A runtime is responsible for running the function's setup code, reading the handler name from an environment variable, and reading invocation events from the Lambda runtime API\. The runtime passes the event data to the function handler, and posts the response from the handler back to Lambda\.
 
-Your custom runtime runs in the standard Lambda [execution environment](current-supported-versions.md)\. It can be a shell script, a script in a language that's included in Amazon Linux, or a binary executable file that's compiled in Amazon Linux\.
+Your custom runtime runs in the standard Lambda [execution environment](lambda-runtimes.md)\. It can be a shell script, a script in a language that's included in Amazon Linux, or a binary executable file that's compiled in Amazon Linux\.
 
 To get started with custom runtimes, see [Tutorial – Publishing a Custom Runtime](runtimes-walkthrough.md)\. You can also explore a custom runtime implemented in C\+\+ at [awslabs/aws\-lambda\-cpp](https://github.com/awslabs/aws-lambda-cpp) on GitHub\.
 
@@ -46,7 +46,7 @@ Your runtime code is responsible for completing some initialization tasks\. Then
   + `LAMBDA_TASK_ROOT` – The directory that contains the function code\.
   + `AWS_LAMBDA_RUNTIME_API` – The host and port of the runtime API\.
 
-  See [Environment Variables Available to Lambda Functions](current-supported-versions.md#lambda-environment-variables) for a full list of available variables\.
+  See [Environment Variables Available to Lambda Functions](lambda-environment-variables.md) for a full list of available variables\.
 + **Initialize the function** – Load the handler file and run any global or static code that it contains\. Functions should create static resources like SDK clients and database connections once, and reuse them for multiple invocations\.
 + **Handle errors** – If an error occurs, call the [initialization error](runtimes-api.md#runtimes-api-initerror) API and exit immediately\.
 

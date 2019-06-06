@@ -76,8 +76,6 @@ To grant other accounts permission for multiple functions, or for actions that d
 
 To grant layer\-usage permission to another account, add a statement to the layer version's permissions policy with the `add-layer-version-permission` command\. In each statement, you can grant permission to a single account, all accounts, or an organization\.
 
-To grant layer\-usage permission to another account, add a statement to the layer version's permissions policy with the `add-layer-version-permission` command\. In each statement, you can grant permission to a single account, all accounts, or an organization\.
-
 ```
 $ aws lambda add-layer-version-permission --layer-name xray-sdk-nodejs --statement-id xaccount \
 --action lambda:GetLayerVersion  --principal 210987654321 --version-number 1 --output text

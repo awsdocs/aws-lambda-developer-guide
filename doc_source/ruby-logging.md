@@ -2,7 +2,7 @@
 
 Your Lambda function comes with a CloudWatch Logs log group, with a log stream for each instance of your function\. The runtime sends details about each invocation to the log stream, and relays logs and other output from your function's code\.
 
-To write to your function's log, use `puts`\. The following example logs the values of environment variables and the event object\.
+To output logs from your function code, you can use `puts` statements, or any logging library that writes to `stdout` or `stderr`\. The following example logs the values of environment variables and the event object\.
 
 **Example lambda\_function\.rb**  
 
@@ -17,6 +17,8 @@ def handler(event:, context:)
 end
 ```
 
+The Lambda console shows log output when you test a function on the function configuration page\. To view logs for all invocations, use the CloudWatch Logs console\.
+
 **To view your Lambda function's logs**
 
 1. Open the [Logs page of the CloudWatch console](https://console.aws.amazon.com/cloudwatch/home?#logs:)\.
@@ -25,12 +27,12 @@ end
 
 1. Choose the first stream in the list\.
 
-To output logs from your function code, you can use `puts` statements, or any logging library that writes to `stdout` or `stderr`\.
+Each log stream corresponds to an [instance of your function](running-lambda-code.md)\. New streams appear when you update your function and when additional instances are created to handle multiple concurrent invocations\. To find logs for specific invocations, you can instrument your function with X\-Ray and record details about the request and log stream in the trace\. For a sample application that correlates logs and traces with X\-Ray, see [Error Processor Sample Application for AWS Lambda](sample-errorprocessor.md)\.
 
 To get logs for an invocation from the command line, use the `--log-type` option\. The response includes a `LogResult` field that contains up to 4 KB of base64\-encoded logs from the invocation\.
 
 ```
-$ aws lambda invoke --function-name ruby-function out --log-type Tail
+$ aws lambda invoke --function-name my-function out --log-type Tail
 {
     "StatusCode": 200,
     "LogResult": "U1RBUlQgUmVxdWVzdElkOiA4N2QwNDRiOC1mMTU0LTExZTgtOGNkYS0yOTc0YzVlNGZiMjEgVmVyc2lvb...",
@@ -41,7 +43,7 @@ $ aws lambda invoke --function-name ruby-function out --log-type Tail
 You can use the `base64` utility to decode the logs\.
 
 ```
-$ aws lambda invoke --function-name ruby-function out --log-type Tail \
+$ aws lambda invoke --function-name my-function out --log-type Tail \
 --query 'LogResult' --output text |  base64 -d
 START RequestId: 8e827ab1-f155-11e8-b06d-018ab046158d Version: $LATEST
 Processing event...
@@ -50,3 +52,5 @@ REPORT RequestId: 8e827ab1-f155-11e8-b06d-018ab046158d  Duration: 29.40 ms      
 ```
 
 `base64` is available on Linux, macOS, and [Ubuntu on Windows](https://docs.microsoft.com/en-us/windows/wsl/install-win10)\. For macOS, the command is `base64 -D`\.
+
+Log groups are not deleted automatically when you delete a function\. To avoid storing logs indefinitely, delete the log group, or [configure a retention period](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#SettingLogRetention) after which logs are deleted automatically\.

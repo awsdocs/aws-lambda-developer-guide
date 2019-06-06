@@ -36,7 +36,7 @@ Other requirements include:
 + Must start with letters *\[a\-zA\-Z\]*\. 
 + Can only contain alphanumeric characters and underscores *\(\[a\-zA\-Z0\-9\_\]*\. 
 
-In addition, there are a specific set of keys that AWS Lambda reserves\. If you try to set values for any of these reserved keys, you will receive an error message indicating that the action is not allowed\. For more information on these keys, see [Environment Variables Available to Lambda Functions](current-supported-versions.md#lambda-environment-variables)\.
+In addition, there are a specific set of keys that AWS Lambda reserves\. If you try to set values for any of these reserved keys, you will receive an error message indicating that the action is not allowed\. For more information on these keys, see [Environment Variables Available to Lambda Functions](lambda-environment-variables.md)\.
 
 ## Environment Variables and Function Versioning<a name="env_versioning"></a>
 

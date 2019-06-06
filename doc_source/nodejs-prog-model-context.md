@@ -28,17 +28,16 @@ When Lambda runs your function, it passes a context object to the [handler](node
   + `env.model`
   + `env.locale`
   + `Custom` – Custom values set by the mobile application\.
-+ `callbackWaitsForEmptyEventLoop` – Set to false to send the response right away when the [callback](nodejs-prog-model-handler.md#nodejs-prog-model-handler-callback) executes, instead of waiting for the Node\.js event loop to be empty\. If false, any outstanding events will continue to run during the next invocation\.
++ `callbackWaitsForEmptyEventLoop` – Set to false to send the response right away when the [callback](nodejs-prog-model-handler.md#nodejs-handler-sync) executes, instead of waiting for the Node\.js event loop to be empty\. If false, any outstanding events will continue to run during the next invocation\.
 
-The following example shows a handler function that logs context information\.
+The following example function logs context information and returns the location of the logs\.
 
 **Example index\.js**  
 
 ```
-exports.handler = function(event, context, callback) {
-    console.log('remaining time =', context.getRemainingTimeInMillis());
-    console.log('functionName =', context.functionName);
-    console.log('AWSrequestID =', context.awsRequestId);
-    callback(null, context.functionName);
-};
+exports.handler = async function(event, context) {
+  console.log('Remaining time: ', context.getRemainingTimeInMillis())
+  console.log('Function name: ', context.functionName)
+  return context.logStreamName
+}
 ```

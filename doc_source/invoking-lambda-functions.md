@@ -6,7 +6,7 @@ When building applications on AWS Lambda the core components are Lambda function
 + **Websites** – Suppose you are creating a website and you want to host the backend logic on Lambda\. You can invoke your Lambda function over HTTP using Amazon API Gateway as the HTTP endpoint\. Now, your web client can invoke the API, and then API Gateway can route the request to Lambda\.
 + **Mobile applications** – Suppose you have a custom mobile application that produces events\. You can create a Lambda function to process events published by your custom application\. For example, in this scenario you can configure a Lambda function to process the clicks within your custom mobile application\. 
 
-AWS Lambda supports many AWS services as event sources\. For more information, see [Using AWS Lambda With Other Services](lambda-services.md)\. When you configure these event sources to trigger a Lambda function, the Lambda function is invoked automatically when events occur\. You define *event source mapping*, which is how you identify what events to track and which Lambda function to invoke\. 
+AWS Lambda supports many AWS services as event sources\. For more information, see [Using AWS Lambda with Other Services](lambda-services.md)\. When you configure these event sources to trigger a Lambda function, the Lambda function is invoked automatically when events occur\. You define *event source mapping*, which is how you identify what events to track and which Lambda function to invoke\. 
 
 The following are introductory examples of event sources and how the end\-to\-end experience works\.
 

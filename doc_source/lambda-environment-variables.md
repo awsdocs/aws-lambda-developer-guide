@@ -1,17 +1,4 @@
-# Lambda Execution Environment and Available Libraries<a name="current-supported-versions"></a>
-
-The underlying AWS Lambda execution environment includes the following software and libraries\.
-+ Operating system – Amazon Linux
-+ AMI – [amzn\-ami\-hvm\-2017\.03\.1\.20170812\-x86\_64\-gp2](https://console.aws.amazon.com/ec2/v2/home#Images:visibility=public-images;search=amzn-ami-hvm-2017.03.1.20170812-x86_64-gp2)
-+ Linux kernel – 4\.14\.77\-70\.59\.amzn1\.x86\_64
-+ AWS SDK for JavaScript – 2\.290\.0
-+ SDK for Python \(Boto 3\)
-  + Python 3\.6 – boto3\-1\.7\.74 botocore\-1\.10\.74
-  + Python 3\.7 – boto3\-1\.9\.42 botocore\-1\.12\.42
-
-Not all runtime languages are available on the Amazon Linux AMI or its yum repositories\. If you use Amazon Linux for development, you might need to download and install them manually from their respective public sites\.
-
-## Environment Variables Available to Lambda Functions<a name="lambda-environment-variables"></a>
+# Environment Variables Available to Lambda Functions<a name="lambda-environment-variables"></a>
 
 The following is a list of environment variables that are part of the AWS Lambda execution environment and made available to Lambda functions\. The table below indicates which ones are reserved by AWS Lambda and can't be changed, as well as which ones you can set when creating your Lambda function\. For more information on using environment variables with your Lambda function, see [AWS Lambda Environment Variables](env_variables.md)\. 
 

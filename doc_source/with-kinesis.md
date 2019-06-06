@@ -125,7 +125,7 @@ To manage the event source configuration later, choose the trigger in the design
 
 ## Event Source Mapping API<a name="services-kinesis-api"></a>
 
-To create the event source mapping with the AWS CLI, use the [CreateEventSourceMapping](API_CreateEventSourceMapping.md) API\. The following example uses the AWS CLI to map a function named `my-function` to a Kinesis data stream\. The data stream is specified by an Amazon Resource Name \(ARN\), with a batch size of 500 hundred, starting from the timestamp in Unix time\.
+To create the event source mapping with the AWS CLI, use the [CreateEventSourceMapping](API_CreateEventSourceMapping.md) API\. The following example uses the AWS CLI to map a function named `my-function` to a Kinesis data stream\. The data stream is specified by an Amazon Resource Name \(ARN\), with a batch size of 500, starting from the timestamp in Unix time\.
 
 ```
 $ aws lambda create-event-source-mapping --function-name my-function --no-enabled \

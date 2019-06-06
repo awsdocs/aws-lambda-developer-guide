@@ -80,7 +80,7 @@ def handler(event, context):
     Memcache is hosted using elasticache
     """
 
-    #Create a random UUID... this will the sample element we add to the cache.
+    #Create a random UUID... this will be the sample element we add to the cache.
     uuid_inserted = uuid.uuid4().hex
     #Put the UUID to the cache.
     memcache_client.set('uuid', uuid_inserted)
@@ -129,4 +129,4 @@ In this step, you invoke the Lambda function manually using the `invoke` command
    + Review the results in the AWS Lambda console\.
    + Verify the results in CloudWatch Logs\.
 
-Now that you have created a Lambda function that accesses an ElastiCache cluster in your VPC, you can have the function invoked in response to events\. For information about configuring event sources and examples, see [Using AWS Lambda With Other Services](lambda-services.md)\.
+Now that you have created a Lambda function that accesses an ElastiCache cluster in your VPC, you can have the function invoked in response to events\. For information about configuring event sources and examples, see [Using AWS Lambda with Other Services](lambda-services.md)\.

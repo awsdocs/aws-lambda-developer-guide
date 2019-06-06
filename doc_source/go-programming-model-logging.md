@@ -1,31 +1,8 @@
 # AWS Lambda Function Logging in Go<a name="go-programming-model-logging"></a>
 
-Your Lambda function can contain logging statements\. AWS Lambda writes these logs to CloudWatch\. If you use the Lambda console to invoke your Lambda function, the console displays the same logs\. 
+Your Lambda function comes with a CloudWatch Logs log group, with a log stream for each instance of your function\. The runtime sends details about each invocation to the log stream, and relays logs and other output from your function's code\.
 
-For example, consider the following example\. 
-
-```
-package main
- 
-import (
-        "log"       
-        "github.com/aws/aws-lambda-go/lambda"
-)
- 
-func HandleRequest() {
-        log.Print("Hello from Lambda")
-}
- 
-func main() {
-        lambda.Start(HandleRequest)
-}
-```
-
-By importing the `log` module, Lambda will write additional logging information such as the time stamp\.
-
-You can also analyze the logs in CloudWatch\. For more information, see [Accessing Amazon CloudWatch Logs for AWS Lambda](monitoring-functions-logs.md)\.
-
-Instead of using the `log` module, you can use `Print` statements in your code as shown below:
+To output logs from your function code, you can use methods on [the fmt package](fmt.Print), or any logging library that writes to `stdout` or `stderr`\. The following example uses `fmt.Print`\.
 
 ```
 package main
@@ -44,15 +21,61 @@ func main() {
 }
 ```
 
-In this case only the text passed to the `Print` method is sent to CloudWatch\. The log entries will not have additional information that the `log.Print` function returns\. In addition, any logger that writes to `stdout` or `stderror` will seamlessly integrate with a Go function and those logs will automatically be sent to CloudWatch logs\. 
+For more detailed logs, use [the log package](https://golang.org/pkg/log/)\.
 
-The console uses the `RequestResponse` invocation type \(synchronous invocation\) when invoking the function\. And therefore it gets the return value \("Hello from Lambda\!"\) back from AWS Lambda\.
+```
+package main
+ 
+import (
+        "log"       
+        "github.com/aws/aws-lambda-go/lambda"
+)
+ 
+func HandleRequest() {
+        log.Print("Event received.")
+}
+ 
+func main() {
+        lambda.Start(HandleRequest)
+}
+```
 
-## Finding Logs<a name="go-logging-finding-logs"></a>
+The output from `log` includes the timestamp and request ID\.
 
-You can find the logs that your Lambda function writes, as follows:
-+ **In the AWS Lambda console** – The ** Log output** section in the AWS Lambda console shows the logs\. 
-+ **In the response header, when you invoke a Lambda function programmatically** – If you invoke a Lambda function programmatically, you can add the `LogType` parameter to retrieve the last 4 KB of log data that is written to CloudWatch Logs\. AWS Lambda returns this log information in the `x-amz-log-results` header in the response\. For more information, see [Invoke](API_Invoke.md)\.
+The Lambda console shows log output when you test a function on the function configuration page\. To view logs for all invocations, use the CloudWatch Logs console\.
 
-  If you use AWS CLI to invoke the function, you can specify the` --log-type parameter` with value `Tail` to retrieve the same information\.
-+ **In CloudWatch Logs** – To find your logs in CloudWatch you need to know the log group name and log stream name\. You can use the `context.logGroupName`, and `context.logStreamName` global variables in [AWS Lambda Context Object in Go](#go-programming-model-logging) library to get this information\. When you run your Lambda function, the resulting logs in the console or CLI will show you the log group name and log stream name\. 
+**To view your Lambda function's logs**
+
+1. Open the [Logs page of the CloudWatch console](https://console.aws.amazon.com/cloudwatch/home?#logs:)\.
+
+1. Choose the log group for your function \(**/aws/lambda/*function\-name***\)\.
+
+1. Choose the first stream in the list\.
+
+Each log stream corresponds to an [instance of your function](running-lambda-code.md)\. New streams appear when you update your function and when additional instances are created to handle multiple concurrent invocations\. To find logs for specific invocations, you can instrument your function with X\-Ray and record details about the request and log stream in the trace\. For a sample application that correlates logs and traces with X\-Ray, see [Error Processor Sample Application for AWS Lambda](sample-errorprocessor.md)\.
+
+To get logs for an invocation from the command line, use the `--log-type` option\. The response includes a `LogResult` field that contains up to 4 KB of base64\-encoded logs from the invocation\.
+
+```
+$ aws lambda invoke --function-name my-function out --log-type Tail
+{
+    "StatusCode": 200,
+    "LogResult": "U1RBUlQgUmVxdWVzdElkOiA4N2QwNDRiOC1mMTU0LTExZTgtOGNkYS0yOTc0YzVlNGZiMjEgVmVyc2lvb...",
+    "ExecutedVersion": "$LATEST"
+}
+```
+
+You can use the `base64` utility to decode the logs\.
+
+```
+$ aws lambda invoke --function-name my-function out --log-type Tail \
+--query 'LogResult' --output text |  base64 -d
+START RequestId: 8e827ab1-f155-11e8-b06d-018ab046158d Version: $LATEST
+Processing event...
+END RequestId: 8e827ab1-f155-11e8-b06d-018ab046158d
+REPORT RequestId: 8e827ab1-f155-11e8-b06d-018ab046158d  Duration: 29.40 ms      Billed Duration: 100 ms         Memory Size: 128 MB     Max Memory Used: 19 MB
+```
+
+`base64` is available on Linux, macOS, and [Ubuntu on Windows](https://docs.microsoft.com/en-us/windows/wsl/install-win10)\. For macOS, the command is `base64 -D`\.
+
+Log groups are not deleted automatically when you delete a function\. To avoid storing logs indefinitely, delete the log group, or [configure a retention period](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#SettingLogRetention) after which logs are deleted automatically\.

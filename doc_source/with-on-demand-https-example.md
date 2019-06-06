@@ -120,7 +120,7 @@ The custom policy has the permissions that the function needs to write data to D
 
 ## Create the Function<a name="with-on-demand-https-example-create-function"></a>
 
-The following example code receives a Kinesis event input and processes the messages that it contains\. For illustration, the code writes some of the incoming event data to CloudWatch Logs\.
+The following example code receives a API Gateway event input and processes the messages that it contains\. For illustration, the code writes some of the incoming event data to CloudWatch Logs\.
 
 **Note**  
 For sample code in other languages, see [Sample Function Code](with-on-demand-https-create-package.md)\.

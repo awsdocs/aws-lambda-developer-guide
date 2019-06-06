@@ -5,9 +5,9 @@ The following sections explain how [common programming patterns and core concept
 
 **Java Runtimes**  
 
-| Name | Identifier | JDK | 
-| --- | --- | --- | 
-|  Java 8  |  `java8`  |  java\-1\.8\.0\-openjdk  | 
+| Name | Identifier | JDK | Operating System | 
+| --- | --- | --- | --- | 
+|  Java 8  |  `java8`  |  java\-1\.8\.0\-openjdk  |  Amazon Linux  | 
 
 **Topics**
 + [AWS Lambda Deployment Package in Java](lambda-java-how-to-create-deployment-package.md)

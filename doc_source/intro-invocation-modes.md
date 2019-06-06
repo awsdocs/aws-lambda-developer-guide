@@ -41,7 +41,7 @@ The diagram illustrates the flow:
 
 AWS Lambda supports the following poll\-based services:
 
-**Services that Lambda reads events from**
+**Services That Lambda Reads Events From**
 + [Amazon Kinesis](with-kinesis.md)
 + [Amazon DynamoDB](with-ddb.md)
 + [Amazon Simple Queue Service](with-sqs.md)

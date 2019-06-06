@@ -14,6 +14,7 @@ You write code for your Lambda function in one of the languages AWS Lambda suppo
  Your Lambda function code must be written in a stateless style, and have no affinity with the underlying compute infrastructure\. Your code should expect local file system access, child processes, and similar artifacts to be limited to the lifetime of the request\. Persistent state should be stored in Amazon S3, Amazon DynamoDB, or another cloud storage service\. Requiring functions to be stateless enables AWS Lambda to launch as many copies of a function as needed to scale to the incoming rate of events and requests\. These functions may not always run on the same compute instance from request to request, and a given instance of your Lambda function may be used more than once by AWS Lambda\. For more information, see [Best Practices for Working with AWS Lambda Functions](best-practices.md)\.
 + [Building Lambda Functions with Node\.js](programming-model.md)
 + [Building Lambda Functions with Python](python-programming-model.md)
++ [Building Lambda Functions with Ruby](lambda-ruby.md)
 + [Building Lambda Functions with Java](java-programming-model.md)
 + [Building Lambda Functions with Go](go-programming-model.md)
 + [Building Lambda Functions with C\#](dotnet-programming-model.md)
