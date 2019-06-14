@@ -98,4 +98,4 @@ To understand your concurrent execution usage, AWS Lambda provides the following
 + **ConcurrentExecutions:** This shows you the concurrent executions at an account level, and for any function with a custom concurrency limit\.
 + **UnreservedConcurrentExecutions:** This shows you the total concurrent executions for functions assigned to the default unreserved concurrency pool\.
 
-To learn about these metrics and how to access them, see [Using Amazon CloudWatch](monitoring-functions.md)\. 
+To learn about these metrics and how to access them, see [Monitoring and Troubleshooting Lambda Applications](troubleshooting.md)\. 

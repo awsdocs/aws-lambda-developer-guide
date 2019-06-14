@@ -14,6 +14,31 @@ exports.handler = async function(event, context) {
 };
 ```
 
+**Example Log Format**  
+
+```
+START RequestId: c793869b-ee49-115b-a5b6-4fd21e8dedac Version: $LATEST
+2019-06-07T19:11:20.562Z	c793869b-ee49-115b-a5b6-4fd21e8dedac	INFO	ENVIRONMENT VARIABLES
+{
+  "AWS_LAMBDA_FUNCTION_VERSION": "$LATEST",
+  "AWS_LAMBDA_LOG_GROUP_NAME": "/aws/lambda/my-function",
+  "AWS_LAMBDA_LOG_STREAM_NAME": "2019/06/07/[$LATEST]e6f4a0c4241adcd70c262d34c0bbc85c",
+  "AWS_EXECUTION_ENV": "AWS_Lambda_nodejs10.x",
+  "AWS_LAMBDA_FUNCTION_NAME": "my-function",
+  "PATH": "/var/lang/bin:/usr/local/bin:/usr/bin/:/bin:/opt/bin",
+  "NODE_PATH": "/opt/nodejs/node10/node_modules:/opt/nodejs/node_modules:/var/runtime/node_modules",
+  ...
+}
+2019-06-07T19:11:20.563Z	c793869b-ee49-115b-a5b6-4fd21e8dedac	INFO	EVENT
+{
+  "key": "value"
+}
+END RequestId: c793869b-ee49-115b-a5b6-4fd21e8dedac
+REPORT RequestId: c793869b-ee49-115b-a5b6-4fd21e8dedac	Duration: 170.19 ms	Billed Duration: 200 ms 	Memory Size: 128 MB	Max Memory Used: 73 MB
+```
+
+The Node\.js runtime logs the `START`, `END`, and `REPORT` lines for each invocation, and adds a timestamp, request ID, and log level to each entry logged by the function\.
+
 You can view logs in the Lambda console, in the CloudWatch Logs console, or from the command line\.
 
 ## Viewing Logs in the AWS Management Console<a name="nodejs-logging-console"></a>
@@ -48,10 +73,10 @@ You can use the `base64` utility to decode the logs\.
 ```
 $ aws lambda invoke --function-name my-function out --log-type Tail \
 --query 'LogResult' --output text |  base64 -d
-START RequestId: 8e827ab1-f155-11e8-b06d-018ab046158d Version: $LATEST
-Processing event...
-END RequestId: 8e827ab1-f155-11e8-b06d-018ab046158d
-REPORT RequestId: 8e827ab1-f155-11e8-b06d-018ab046158d  Duration: 29.40 ms      Billed Duration: 100 ms         Memory Size: 128 MB     Max Memory Used: 19 MB
+START RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8 Version: $LATEST
+  "AWS_SESSION_TOKEN": "AgoJb3JpZ2luX2VjELj...", "_X_AMZN_TRACE_ID": "Root=1-5d02e5ca-f5792818b6fe8368e5b51d50;Parent=191db58857df8395;Sampled=0"",ask/lib:/opt/lib",
+END RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8
+REPORT RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8  Duration: 79.67 ms      Billed Duration: 100 ms         Memory Size: 128 MB     Max Memory Used: 73 MB
 ```
 
 `base64` is available on Linux, macOS, and [Ubuntu on Windows](https://docs.microsoft.com/en-us/windows/wsl/install-win10)\. For macOS, the command is `base64 -D`\.

@@ -45,10 +45,10 @@ You can use the `base64` utility to decode the logs\.
 ```
 $ aws lambda invoke --function-name my-function out --log-type Tail \
 --query 'LogResult' --output text |  base64 -d
-START RequestId: 8e827ab1-f155-11e8-b06d-018ab046158d Version: $LATEST
-Processing event...
-END RequestId: 8e827ab1-f155-11e8-b06d-018ab046158d
-REPORT RequestId: 8e827ab1-f155-11e8-b06d-018ab046158d  Duration: 29.40 ms      Billed Duration: 100 ms         Memory Size: 128 MB     Max Memory Used: 19 MB
+START RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8 Version: $LATEST
+  "AWS_SESSION_TOKEN": "AgoJb3JpZ2luX2VjELj...", "_X_AMZN_TRACE_ID": "Root=1-5d02e5ca-f5792818b6fe8368e5b51d50;Parent=191db58857df8395;Sampled=0"",ask/lib:/opt/lib",
+END RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8
+REPORT RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8  Duration: 79.67 ms      Billed Duration: 100 ms         Memory Size: 128 MB     Max Memory Used: 73 MB
 ```
 
 `base64` is available on Linux, macOS, and [Ubuntu on Windows](https://docs.microsoft.com/en-us/windows/wsl/install-win10)\. For macOS, the command is `base64 -D`\.

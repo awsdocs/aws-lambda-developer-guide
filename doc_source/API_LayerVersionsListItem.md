@@ -8,7 +8,7 @@ Details about a version of an [AWS Lambda layer](https://docs.aws.amazon.com/lam
 The layer's compatible runtimes\.  
 Type: Array of strings  
 Array Members: Maximum number of 5 items\.  
-Valid Values:` nodejs6.10 | nodejs8.10 | java8 | python2.7 | python3.6 | python3.7 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | go1.x | ruby2.5 | provided`   
+Valid Values:` nodejs8.10 | nodejs10.x | java8 | python2.7 | python3.6 | python3.7 | dotnetcore1.0 | dotnetcore2.1 | go1.x | ruby2.5 | provided`   
 Required: No
 
  **CreatedDate**   <a name="SSS-Type-LayerVersionsListItem-CreatedDate"></a>

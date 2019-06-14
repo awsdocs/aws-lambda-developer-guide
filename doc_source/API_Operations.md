@@ -17,6 +17,7 @@ The following actions are supported:
 +  [GetFunction](API_GetFunction.md) 
 +  [GetFunctionConfiguration](API_GetFunctionConfiguration.md) 
 +  [GetLayerVersion](API_GetLayerVersion.md) 
++  [GetLayerVersionByArn](API_GetLayerVersionByArn.md) 
 +  [GetLayerVersionPolicy](API_GetLayerVersionPolicy.md) 
 +  [GetPolicy](API_GetPolicy.md) 
 +  [Invoke](API_Invoke.md) 

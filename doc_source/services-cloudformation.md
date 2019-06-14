@@ -94,7 +94,7 @@ Resources:
       Tracing: Active
 ```
 
-If the function that the custom resource invokes isn't defined in a template, you can get the source code for `cfn-response` from [cfn\-response Module](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-code.html#cfn-lambda-function-code-cfnresponsemodule) in the AWS CloudFormation User Guide\.
+If the function that the custom resource invokes isn't defined in a template, you can get the source code for `cfn-response` from [cfn\-response Module](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-lambda-function-code-cfnresponsemodule.html) in the AWS CloudFormation User Guide\.
 
 For a sample application that uses a custom resource to ensure that a function's log group is created before another resource that depends on it, see [Error Processor Sample Application for AWS Lambda](sample-errorprocessor.md)\.
 

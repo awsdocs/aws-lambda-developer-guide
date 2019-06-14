@@ -8,4 +8,4 @@ The following examples explain how to do this in the supported runtimes:
 + [Instrumenting Python Code in AWS Lambda](python-tracing.md)
 + [Instrumenting Node\.js Code in AWS Lambda](nodejs-tracing.md)
 + [Instrumenting Java Code in AWS Lambda](java-tracing.md)
-+ [](go-tracing.md)
++ [Instrumenting Go Code in AWS Lambda](go-tracing.md)

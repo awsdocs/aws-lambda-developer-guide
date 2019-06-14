@@ -56,7 +56,7 @@ The following data is returned in JSON format by the service\.
 The layer's compatible runtimes\.  
 Type: Array of strings  
 Array Members: Maximum number of 5 items\.  
-Valid Values:` nodejs6.10 | nodejs8.10 | java8 | python2.7 | python3.6 | python3.7 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | go1.x | ruby2.5 | provided` 
+Valid Values:` nodejs8.10 | nodejs10.x | java8 | python2.7 | python3.6 | python3.7 | dotnetcore1.0 | dotnetcore2.1 | go1.x | ruby2.5 | provided` 
 
  ** [Content](#API_GetLayerVersion_ResponseSyntax) **   <a name="SSS-GetLayerVersion-response-Content"></a>
 Details about the layer version\.  

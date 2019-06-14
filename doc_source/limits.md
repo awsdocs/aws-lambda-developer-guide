@@ -20,7 +20,7 @@ The following limits apply to function configuration, deployments, and execution
 | Function [environment variables](env_variables.md) | 4 KB | 
 | Function [resource\-based policy](access-control-resource-based.md) | 20 KB | 
 | Function [layers](configuration-layers.md) | 5 layers | 
-| Invocation frequency \(requests per second\) |  10x concurrent executions limit \([synchronous](invocation-options.md) – all sources\) 10x concurrent executions limit \(asynchronous – non\-AWS sources\) Unlimited \(asynchronous – [AWS service sources](lambda-services.md)\)  | 
+| Invocation frequency \(requests per second\) |  10 x concurrent executions limit \([synchronous](invocation-options.md) – all sources\) 10 x concurrent executions limit \(asynchronous – non\-AWS sources\) Unlimited \(asynchronous – [AWS service sources](lambda-services.md)\)  | 
 | [Invocation payload](invoking-lambda-functions.md) \(request and response\) |  6 MB \(synchronous\) 256 KB \(asynchronous\)  | 
 | [Deployment package](deployment-package-v2.md) size |  50 MB \(zipped, for direct upload\) 250 MB \(unzipped, including layers\) 3 MB \(console editor\)  | 
 | Test events \(console editor\) | 10 | 
