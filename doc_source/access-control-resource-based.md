@@ -1,156 +1,126 @@
-# Using Resource\-Based Policies for AWS Lambda \(Lambda Function Policies\)<a name="access-control-resource-based"></a>
+# Using Resource\-based Policies for AWS Lambda<a name="access-control-resource-based"></a>
 
-A Lambda function is one of the resources in AWS Lambda\. You can add permissions to the policy associated with a Lambda function\. Permissions policies attached to Lambda functions are referred to as *resource\-based policies* \(or *Lambda function policies* in Lambda\)\. You use Lambda function policies to manage Lambda function invocation permissions \(see [Invoke](API_Invoke.md)\)\. 
+AWS Lambda supports resource\-based permissions policies for Lambda functions and layers\. Resource\-based policies let you grant usage permission to other accounts on a per\-resource basis\. You also use a resource\-based policy to allow an AWS service to invoke your function\.
 
-**Important**  
-Before you create resource\-based policies, we recommend that you first review the introductory topics that explain the basic concepts and options available for you to manage access to your AWS Lambda resources\. For more information, see [Overview of Managing Access Permissions to Your AWS Lambda Resources](access-control-overview.md)\.
+For Lambda functions, you can [grant an account permission](#permissions-resource-xaccountinvoke) to invoke or manage a function\. You can add multiple statements to grant access to multiple accounts, or let any account invoke your function\. For functions that another AWS service invokes in response to activity in your account, you use the policy to [grant invoke permission to the service](#permissions-resource-serviceinvoke)\.
 
-Lambda function policies are primarily used when you are setting up an event source in AWS Lambda to grant a service or an event source permissions to invoke your Lambda function \(see [Invoke](API_Invoke.md)\)\. An exception to this is when an event source \(for example, Amazon DynamoDB or Kinesis\) uses the pull model, where permissions are managed in the Lambda function execution role instead\. For more information, see [Event Source Mapping](invocation-options.md#intro-invocation-modes)\. 
-
-Lambda function policies also make it easy to grant cross\-account permissions to invoke your Lambda function\. Suppose you want to grant cross\-account permissions \(for example, permissions to Amazon S3\) to invoke your Lambda function\. Instead of creating an IAM role to grant cross\-account permissions, you can add the relevant permissions in a Lambda function policy\. 
+For Lambda layers, you use a resource\-based policy on a version of the layer to let other accounts use it\. In addition to policies that grant permission to a single account or all accounts, for layers, you can also grant permission to all accounts in an organization\.
 
 **Note**  
-If the custom application and the Lambda function it invokes belong to the same AWS account, you don't need to grant explicit permissions using the policy attached to the Lambda function\.
+You can only update resource\-based policies for Lambda resources within the scope of the [AddPermission](API_AddPermission.md) and [AddLayerVersionPermission](API_AddLayerVersionPermission.md) API actions\. You can't author policies for your Lambda resources in JSON, or use conditions that don't map to parameters for those actions\.
 
- AWS Lambda provides the following API operations to manage a permissions policy associated with a Lambda function:
-+ [AddPermission](API_AddPermission.md)
-+ [GetPolicy](API_GetPolicy.md)
-+ [RemovePermission](API_RemovePermission.md)
-
-**Note**  
-The AWS Lambda console is the easiest way to manage event sources and their permissions in a Lambda function policy\. If the AWS service console for the event source supports configuring event source mapping, you can use that console too\. As you configure new event sources or modify existing event sources, the console automatically modifies the permissions policy associated with the Lambda function\. 
-
-You can use the console to view your function policy by choosing the **Triggers** tab on your function's details page and then choosing **View function policy**\. The console doesn't support directly modifying permissions in a function policy\. You must use either the AWS CLI or the AWS SDKs\. The following are AWS CLI examples of the API operations listed earlier in this topic:
+Resource\-based policies apply to a single function, version, alias, or layer version\. They grant permission to one or more services and accounts\. For trusted accounts that you want to have access to multiple resources, or to use API actions that resource\-based policies don't support, you can use [cross\-account roles](access-control-identity-based.md)\.
 
 **Topics**
-+ [Example 1: Allow Amazon S3 to Invoke a Lambda Function](#access-control-resource-based-example-s3-invoke-function)
-+ [Example 2: Allow Amazon API Gateway to Invoke a Lambda Function](#access-control-resource-based-example-apigateway-invoke-function)
-+ [Example 3: Allow a User Application Created by Another AWS Account to Invoke a Lambda Function \(Cross\-Account Scenario\)](#access-control-resource-based-example-cross-account-scenario)
-+ [Example 4: Retrieve a Lambda Function Policy](#access-control-resource-based-example-retrieve-function-policy)
-+ [Example 5: Remove Permissions from a Lambda Function Policy](#access-control-resource-based-example-remove-permissions-function-policy)
-+ [Example 6: Working with Lambda Function Versioning, Aliases, and Permissions](#access-control-resource-based-example-versioning-aliases-function-policy)
++ [Granting Function Access to AWS Services](#permissions-resource-serviceinvoke)
++ [Granting Function Access to Other Accounts](#permissions-resource-xaccountinvoke)
++ [Granting Layer Access to Other Accounts](#permissions-resource-xaccountlayer)
++ [Cleaning up Resource\-based Policies](#permissions-resource-cleanup)
 
-## Example 1: Allow Amazon S3 to Invoke a Lambda Function<a name="access-control-resource-based-example-s3-invoke-function"></a>
+## Granting Function Access to AWS Services<a name="permissions-resource-serviceinvoke"></a>
 
-To grant Amazon S3 permission to invoke a Lambda function, you configure permissions as follows:
-+ Specify `s3.amazonaws.com` as the `principal` value\.
-+ Specify `lambda:InvokeFunction` as the `action` for which you are granting permissions\.
+When you [use an AWS service to invoke your function](intro-invocation-modes.md#non-streaming-event-source-mapping), you grant permission in a statement on a resource\-based policy\. You can apply the statement to the function, or limit it to a single version or alias\.
 
-To ensure that the event is generated from a specific bucket that is owned by a specific AWS account, you also specify the following:
-+ Specify the bucket ARN as the `source-arn` value to restrict events from a specific bucket\.
-+ Specify the AWS account ID that owns the bucket, to ensure that the named bucket is owned by the account\.
+**Note**  
+When you add a trigger to your function with the Lambda console, the console updates the function's resource\-based policy to allow the service to invoke it\. To grant permissions to other accounts or services that aren't available in the Lambda console, use the AWS CLI\.
 
-The following example AWS CLI command adds a permission to the `helloworld` Lambda function policy granting Amazon S3 permissions to invoke the function\. 
+Add a statement with the `add-permission` command\. The simplest resource\-based policy statement allows a service to invoke a function\. The following command grants Amazon SNS permission to invoke a function named `my-function`\.
 
 ```
-aws lambda add-permission \
---region region \
---function-name helloworld \
---statement-id 1 \
---principal s3.amazonaws.com \
---action lambda:InvokeFunction \
---source-arn arn:aws:s3:::examplebucket \
---source-account 111111111111 \
---profile adminuser
+$ aws lambda add-permission --function-name my-function --action lambda:InvokeFunction --statement-id sns \
+--principal sns.amazonaws.com --output text
+{"Sid":"sns","Effect":"Allow","Principal":{"Service":"sns.amazonaws.com"},"Action":"lambda:InvokeFunction","Resource":"arn:aws:lambda:us-east-2:123456789012:function:my-function"}
 ```
 
-The example assumes that the `adminuser` \(who has full permissions\) is adding this permission\. Therefore, the `--profile` parameter specifies the `adminuser` profile\.
-
-In response, AWS Lambda returns the following JSON code\. The `Statement` value is a JSON string version of the statement added to the Lambda function policy\.
+This lets Amazon SNS invoke the function, but it doesn't restrict the Amazon SNS topic that triggers the invocation\. To ensure that your function is only invoked by a specific resource, specify the Amazon Resource Name \(ARN\) of the resource with the `source-arn` option\. The following command only allows Amazon SNS to invoke the function for subscriptions to a topic named `my-topic`\.
 
 ```
+$ aws lambda add-permission --function-name my-function --action lambda:InvokeFunction --statement-id sns-my-topic \
+--principal sns.amazonaws.com --source-arn arn:aws:sns:us-east-2:123456789012:my-topic
+```
+
+Some services can invoke functions in other accounts\. If you specify a source ARN that has your account ID in it, that isn't an issue\. For Amazon S3, however, the source is a bucket whose ARN doesn't have an account ID in it\. It's possible that you could delete the bucket and another account could create a bucket with the same name\. Use the `account-id` option to ensure that only resources in your account can invoke the function\.
+
+```
+$ aws lambda add-permission --function-name my-function --action lambda:InvokeFunction --statement-id s3-account \
+--principal s3.amazonaws.com --source-arn arn:aws:s3:::my-bucket-123456 --source-account 123456789012
+```
+
+## Granting Function Access to Other Accounts<a name="permissions-resource-xaccountinvoke"></a>
+
+To grant permissions to another AWS account, specify the account ID as the `principal`\. The following example grants account `210987654321` permission to invoke `my-function` with the `prod` alias\.
+
+```
+$ aws lambda add-permission --function-name my-function:prod --statement-id xaccount --action lambda:InvokeFunction \
+--principal 210987654321 --output text
+{"Sid":"xaccount","Effect":"Allow","Principal":{"AWS":"arn:aws:iam::210987654321:root"},"Action":"lambda:InvokeFunction","Resource":"arn:aws:lambda:us-east-2:123456789012:function:my-function"}
+```
+
+The [alias](aliases-intro.md) limits which version the other account can invoke\. It requires the other account to include the alias in the function ARN\.
+
+```
+$ aws lambda invoke --function-name arn:aws:lambda:us-west-2:123456789012:function:my-function:prod out
 {
-    "Statement": "{\"Condition\":{\"StringEquals\":{\"AWS:SourceAccount\":\"111111111111\"},
-                   \"ArnLike\":{\"AWS:SourceArn\":\"arn:aws:s3:::examplebucket\"}},
-                  \"Action\":[\"lambda:InvokeFunction\"],
-                  \"Resource\":\"arn:aws:lambda:us-west-2:111111111111:function:helloworld\",
-                  \"Effect\":\"Allow\",\"Principal\":{\"Service\":\"s3.amazonaws.com\"},
-                  \"Sid\":\"1\"}"
+    "StatusCode": 200,
+    "ExecutedVersion": "1"
 }
 ```
 
-For information about the push model, see [Event Source Mapping](invocation-options.md#intro-invocation-modes)\.
+You can then update the alias to point to new versions as needed\. When you update the alias, the other account doesn't need to change its code to use the new version, and it only has permission to invoke the version that you choose\.
 
-## Example 2: Allow Amazon API Gateway to Invoke a Lambda Function<a name="access-control-resource-based-example-apigateway-invoke-function"></a>
+You can grant cross\-account access for any API action that [operates on an existing function](lambda-api-permissions-ref.md#permissions-resources-function)\. For example, you could grant access to `lambda:ListAliases` to let an account get a list of aliases, or `lambda:GetFunction` to let them download your function code\. Add each permission separately, or use `lambda:*` to grant access to all actions for the specified function\.
 
-To grant permissions to allow Amazon API Gateway to invoke a Lambda function, do the following:
-+ Specify `apigateway.amazonaws.com` as the `principal` value\.
-+ Specify `lambda:InvokeFunction` as the action for which you are granting permissions\.
-+ Specify the API Gateway endpoint ARN as the `source-arn` value\.
+To grant other accounts permission for multiple functions, or for actions that don't operate on a function, use [roles](access-control-identity-based.md)\.
 
-The following example AWS CLI command adds a permission to the `helloworld` Lambda function policy granting API Gateway permissions to invoke the function\. 
+## Granting Layer Access to Other Accounts<a name="permissions-resource-xaccountlayer"></a>
 
-```
-aws lambda add-permission \
---region region \
---function-name helloworld \
---statement-id 5 \
---principal apigateway.amazonaws.com \
---action lambda:InvokeFunction \
---source-arn arn:aws:execute-api:region:account-id:api-id/stage/method/resource-path \
---profile adminuser
-```
-
-In response, AWS Lambda returns the following JSON code\. The `Statement` value is a JSON string version of the statement added to the Lambda function policy\.
+To grant layer\-usage permission to another account, add a statement to the layer version's permissions policy with the `add-layer-version-permission` command\. In each statement, you can grant permission to a single account, all accounts, or an organization\.
 
 ```
-{
-    "Statement": "{\"Condition\":{\"ArnLike\":{\"AWS:SourceArn\":\"arn:aws:apigateway:us-east-1::my-api-id:/test/petstorewalkthrough/pets\"}},
-                  \"Action\":[\"lambda:InvokeFunction\"],
-                  \"Resource\":\"arn:aws:lambda:us-west-2:account-id:function:helloworld\",
-                  \"Effect\":\"Allow\",
-                  \"Principal\":{\"Service\":\"apigateway.amazonaws.com\"},
-                  \"Sid\":\"5\"}"
-}
+$ aws lambda add-layer-version-permission --layer-name xray-sdk-nodejs --statement-id xaccount \
+--action lambda:GetLayerVersion  --principal 210987654321 --version-number 1 --output text
+e210ffdc-e901-43b0-824b-5fcd0dd26d16    {"Sid":"xaccount","Effect":"Allow","Principal":{"AWS":"arn:aws:iam::210987654321:root"},"Action":"lambda:GetLayerVersion","Resource":"arn:aws:lambda:us-east-2:123456789012:layer:xray-sdk-nodejs:1"}
 ```
 
-## Example 3: Allow a User Application Created by Another AWS Account to Invoke a Lambda Function \(Cross\-Account Scenario\)<a name="access-control-resource-based-example-cross-account-scenario"></a>
+Permissions only apply to a single version of a layer\. Repeat the procedure each time you create a new layer version\.
 
-To grant permissions to another AWS account \(that is, to create a cross\-account scenario\), you specify the AWS account ID as the `principal` value as shown in the following AWS CLI command: 
-
-```
-aws lambda add-permission \
---region region \
---function-name helloworld \
---statement-id 3 \
---principal 111111111111 \
---action lambda:InvokeFunction \
---profile adminuser
-```
-
-In response, AWS Lambda returns the following JSON code\. The `Statement` value is a JSON string version of the statement added to the Lambda function policy\.
+To grant permission to all accounts in an organization, use the `organization-id` option\. The following example grants all accounts in an organization permission to use version 3 of a layer\.
 
 ```
-{
-    "Statement": "{\"Action\":[\"lambda:InvokeFunction\"],
-                   \"Resource\":\"arn:aws:lambda:us-west-2:account-id:function:helloworld\",
-                   \"Effect\":\"Allow\",
-                   \"Principal\":{\"AWS\":\"account-id\"},
-                   \"Sid\":\"3\"}"
-}
+$ aws lambda add-layer-version-permission --layer-name my-layer \
+--statement-id engineering-org --version-number 3 --principal '*' \
+--action lambda:GetLayerVersion --organization-id o-t194hfs8cz --output text 
+b0cd9796-d4eb-4564-939f-de7fe0b42236    {"Sid":"engineering-org","Effect":"Allow","Principal":"*","Action":"lambda:GetLayerVersion","Resource":"arn:aws:lambda:us-east-2:123456789012:layer:my-layer:3","Condition":{"StringEquals":{"aws:PrincipalOrgID":"o-t194hfs8cz"}}}"
 ```
 
-## Example 4: Retrieve a Lambda Function Policy<a name="access-control-resource-based-example-retrieve-function-policy"></a>
+To grant permission to all AWS accounts, use `*` for the principal, and omit the organization ID\. For multiple accounts or organizations, add multiple statements\.
 
-To retrieve your Lambda function policy, you use the `get-policy` command: 
+## Cleaning up Resource\-based Policies<a name="permissions-resource-cleanup"></a>
 
-```
-aws lambda get-policy \
---function-name example \
---profile adminuser
-```
-
-## Example 5: Remove Permissions from a Lambda Function Policy<a name="access-control-resource-based-example-remove-permissions-function-policy"></a>
-
-To remove permissions from your Lambda function policy, you use the `remove-permission` command, specifying the function name and statement ID: 
+To view a function's resource\-based policy, use the `get-policy` command\.
 
 ```
-aws lambda remove-permission \
---function-name example \
---statement-id 1 \
---profile adminuser
+$ aws lambda get-policy --function-name my-function --output text
+{"Version":"2012-10-17","Id":"default","Statement":[{"Sid":"sns","Effect":"Allow","Principal":{"Service":"s3.amazonaws.com"},"Action":"lambda:InvokeFunction","Resource":"arn:aws:lambda:us-east-2:123456789012:function:my-function","Condition":{"ArnLike":{"AWS:SourceArn":"arn:aws:sns:us-east-2:123456789012:lambda*"}}}]}      7c681fc9-b791-4e91-acdf-eb847fdaa0f0
 ```
 
-## Example 6: Working with Lambda Function Versioning, Aliases, and Permissions<a name="access-control-resource-based-example-versioning-aliases-function-policy"></a>
+For versions and aliases, append the version number or alias to the function name\.
 
-For more information about permissions policies for Lambda function versions and aliases, see [Versioning, Aliases, and Resource Policies](versioning-aliases-permissions.md)\.
+```
+$ aws lambda get-policy --function-name my-function:PROD
+```
+
+To remove permissions from your function, use `remove-permission`\.
+
+```
+$ aws lambda remove-permission --function-name example --statement-id sns
+```
+
+Use the `get-layer-version-policy` command to view the permissions on a layer, and `remove-layer-version-permission` to remove statements from the policy\.
+
+```
+$ aws lambda get-layer-version-policy --layer-name my-layer --version-number 3 --output text
+b0cd9796-d4eb-4564-939f-de7fe0b42236    {"Sid":"engineering-org","Effect":"Allow","Principal":"*","Action":"lambda:GetLayerVersion","Resource":"arn:aws:lambda:us-west-2:123456789012:layer:my-layer:3","Condition":{"StringEquals":{"aws:PrincipalOrgID":"o-t194hfs8cz"}}}"
+
+$ aws lambda remove-layer-version-permission --layer-name my-layer --version-number 3 --statement-id engineering-org
+```

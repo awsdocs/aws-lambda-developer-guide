@@ -1,10 +1,10 @@
 # AddPermission<a name="API_AddPermission"></a>
 
-Adds a permission to the resource policy associated with the specified AWS Lambda function\. You use resource policies to grant permissions to event sources that use the *push* model\. In a *push* model, event sources \(such as Amazon S3 and custom applications\) invoke your Lambda function\. Each permission you add to the resource policy allows an event source permission to invoke the Lambda function\. 
+Grants an AWS service or another account permission to use a function\. You can apply the policy at the function level, or specify a qualifier to restrict access to a single version or alias\. If you use a qualifier, the invoker must use the full Amazon Resource Name \(ARN\) of that version or alias to invoke the function\.
 
-If you are using versioning, the permissions you add are specific to the Lambda function version or alias you specify in the `AddPermission` request via the `Qualifier` parameter\. For more information about versioning, see [AWS Lambda Function Versioning and Aliases](https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html)\. 
+To grant permission to another account, specify the account ID as the `Principal`\. For AWS services, the principal is a domain\-style identifier defined by the service, like `s3.amazonaws.com` or `sns.amazonaws.com`\. For AWS services, you can also specify the ARN or owning account of the associated resource as the `SourceArn` or `SourceAccount`\. If you grant permission to a service principal without specifying the source, other accounts could potentially configure resources in their account to invoke your Lambda function\.
 
-This operation requires permission for the `lambda:AddPermission` action\.
+This action adds a statement to a resource\-based permission policy for the function\. For more information about function policies, see [Lambda Function Policies](https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html)\. 
 
 ## Request Syntax<a name="API_AddPermission_RequestSyntax"></a>
 
@@ -28,18 +28,18 @@ Content-type: application/json
 The request requires the following URI parameters\.
 
  ** [FunctionName](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-FunctionName"></a>
-Name of the Lambda function whose resource policy you are updating by adding a new permission\.  
- You can specify a function name \(for example, `Thumbnail`\) or you can specify Amazon Resource Name \(ARN\) of the function \(for example, `arn:aws:lambda:us-west-2:account-id:function:ThumbNail`\)\. AWS Lambda also allows you to specify partial ARN \(for example, `account-id:Thumbnail`\)\. Note that the length constraint applies only to the ARN\. If you specify only the function name, it is limited to 64 characters in length\.   
+The name of the Lambda function, version, or alias\.  
+
+**Name formats**
++  **Function name** \- `my-function` \(name\-only\), `my-function:v1` \(with alias\)\.
++  **Function ARN** \- `arn:aws:lambda:us-west-2:123456789012:function:my-function`\.
++  **Partial ARN** \- `123456789012:function:my-function`\.
+You can append a version number or alias to any of the formats\. The length constraint applies only to the full ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
-Pattern: `(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
+Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [Qualifier](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-Qualifier"></a>
-You can use this optional query parameter to describe a qualified ARN using a function version or an alias name\. The permission will then apply to the specific qualified ARN\. For example, if you specify function version 2 as the qualifier, then permission applies only when request is made using qualified function ARN:  
- `arn:aws:lambda:aws-region:acct-id:function:function-name:2`   
-If you specify an alias name, for example `PROD`, then the permission is valid only for requests made using the alias ARN:  
- `arn:aws:lambda:aws-region:acct-id:function:function-name:PROD`   
-If the qualifier is not specified, the permission is valid only when requests is made using unqualified function ARN\.  
- `arn:aws:lambda:aws-region:acct-id:function:function-name`   
+Specify a version or alias to add permissions to a published version of the function\.  
 Length Constraints: Minimum length of 1\. Maximum length of 128\.  
 Pattern: `(|[a-zA-Z0-9$_-]+)` 
 
@@ -48,44 +48,43 @@ Pattern: `(|[a-zA-Z0-9$_-]+)`
 The request accepts the following data in JSON format\.
 
  ** [Action](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-Action"></a>
-The AWS Lambda action you want to allow in this statement\. Each Lambda action is a string starting with `lambda:` followed by the API name \(see [Actions](https://docs.aws.amazon.com/lambda/latest/dg/API_Operations.html)\) \. For example, `lambda:CreateFunction`\. You can use wildcard \(`lambda:*`\) to grant permission for all AWS Lambda actions\.   
+The action that the principal can use on the function\. For example, `lambda:InvokeFunction` or `lambda:GetFunction`\.  
 Type: String  
 Pattern: `(lambda:[*]|lambda:[a-zA-Z]+|[*])`   
 Required: Yes
 
  ** [EventSourceToken](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-EventSourceToken"></a>
-A unique token that must be supplied by the principal invoking the function\. This is currently only used for Alexa Smart Home functions\.  
+For Alexa Smart Home functions, a token that must be supplied by the invoker\.  
 Type: String  
 Length Constraints: Minimum length of 0\. Maximum length of 256\.  
 Pattern: `[a-zA-Z0-9._\-]+`   
 Required: No
 
  ** [Principal](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-Principal"></a>
-The principal who is getting this permission\. It can be Amazon S3 service Principal \(`s3.amazonaws.com`\) if you want Amazon S3 to invoke the function, an AWS account ID if you are granting cross\-account permission, or any valid AWS service principal such as `sns.amazonaws.com`\. For example, you might want to allow a custom application in another AWS account to push events to AWS Lambda by invoking your function\.   
+The AWS service or account that invokes the function\. If you specify a service, use `SourceArn` or `SourceAccount` to limit who can invoke the function through that service\.  
 Type: String  
 Pattern: `.*`   
 Required: Yes
 
  ** [RevisionId](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-RevisionId"></a>
-An optional value you can use to ensure you are updating the latest update of the function version or alias\. If the `RevisionID` you pass doesn't match the latest `RevisionId` of the function or alias, it will fail with an error message, advising you to retrieve the latest function version or alias `RevisionID` using either [GetFunction](https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunction.html) or [GetAlias](https://docs.aws.amazon.com/lambda/latest/dg/API_GetAlias.html) operations\.  
+Only update the policy if the revision ID matches the ID that's specified\. Use this option to avoid modifying a policy that has changed since you last read it\.  
 Type: String  
 Required: No
 
  ** [SourceAccount](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-SourceAccount"></a>
-This parameter is used for S3 and SES\. The AWS account ID \(without a hyphen\) of the source owner\. For example, if the `SourceArn` identifies a bucket, then this is the bucket owner's account ID\. You can use this additional condition to ensure the bucket you specify is owned by a specific account \(it is possible the bucket owner deleted the bucket and some other AWS account created the bucket\)\. You can also use this condition to specify all sources \(that is, you don't specify the `SourceArn`\) owned by a specific account\.   
+For AWS services, the ID of the account that owns the resource\. Use this instead of `SourceArn` to grant permission to resources that are owned by another account \(for example, all of an account's Amazon S3 buckets\)\. Or use it together with `SourceArn` to ensure that the resource is owned by the specified account\. For example, an Amazon S3 bucket could be deleted by its owner and recreated by another account\.  
 Type: String  
 Pattern: `\d{12}`   
 Required: No
 
  ** [SourceArn](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-SourceArn"></a>
-This is optional; however, when granting permission to invoke your function, you should specify this field with the Amazon Resource Name \(ARN\) as its value\. This ensures that only events generated from the specified source can invoke the function\.  
-If you add a permission without providing the source ARN, any AWS account that creates a mapping to your function ARN can send events to invoke your Lambda function\.
+For AWS services, the ARN of the AWS resource that invokes the function\. For example, an Amazon S3 bucket or Amazon SNS topic\.  
 Type: String  
-Pattern: `arn:aws:([a-zA-Z0-9\-])+:([a-z]{2}-[a-z]+-\d{1})?:(\d{12})?:(.*)`   
+Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)`   
 Required: No
 
  ** [StatementId](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-StatementId"></a>
-A unique statement identifier\.  
+A statement identifier that differentiates the statement from others in the same policy\.  
 Type: String  
 Length Constraints: Minimum length of 1\. Maximum length of 100\.  
 Pattern: `([a-zA-Z0-9-_]+)`   
@@ -109,7 +108,7 @@ If the action is successful, the service sends back an HTTP 201 response\.
 The following data is returned in JSON format by the service\.
 
  ** [Statement](#API_AddPermission_ResponseSyntax) **   <a name="SSS-AddPermission-response-Statement"></a>
-The permission statement you specified in the request\. The response returns the same as a string using a backslash \("\\"\) as an escape character in the JSON\.  
+The permission statement that's added to the function policy\.  
 Type: String
 
 ## Errors<a name="API_AddPermission_Errors"></a>
@@ -119,7 +118,7 @@ One of the parameters in the request is invalid\. For example, if you provided a
 HTTP Status Code: 400
 
  **PolicyLengthExceededException**   
-Lambda function access policy is limited to 20 KB\.  
+The permissions policy for the resource is too large\. [Learn more](https://docs.aws.amazon.com/lambda/latest/dg/limits.html)   
 HTTP Status Code: 400
 
  **PreconditionFailedException**   
@@ -139,7 +138,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-   
+Request throughput limit exceeded\.  
 HTTP Status Code: 429
 
 ## See Also<a name="API_AddPermission_SeeAlso"></a>
@@ -149,6 +148,7 @@ For more information about using this API in one of the language\-specific AWS S
 +  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/AddPermission) 
 +  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/AddPermission) 
 +  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/AddPermission) 
++  [AWS SDK for Go \- Pilot](https://docs.aws.amazon.com/goto/SdkForGoPilot/lambda-2015-03-31/AddPermission) 
 +  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/AddPermission) 
 +  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/AddPermission) 
 +  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/AddPermission) 

@@ -105,6 +105,6 @@ You can upload this code as your Lambda function and test as follows:
   { "firstName":"John", "lastName":"Doe" }
   ```
 
-For more information, see  [\(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\. Note the following differences:
+For more information, see [Create a Lambda Function Authored in Java](get-started-step4-optional.md)\. Note the following differences:
 + When you create a deployment package, don't forget the `aws-lambda-java-core` library dependency\.
 + When you create the Lambda function, specify `example.HelloPojo::handleRequest` \(*package*\.*class*::*method*\) as the handler value\.

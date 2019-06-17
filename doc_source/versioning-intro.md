@@ -88,17 +88,11 @@ We recommend that you publish a version at the same time that you create your La
 
 When you have multiple developers working on a project, you can have a scenario where developer A creates a Lambda function \(`$LATEST` version\)\. Before developer A publishes this version, developer B might update the code \(the deployment package\) associated with the `$LATEST` version\. In this case, you lose the original code that developer A uploaded\. When both developers add the `publish` parameter, it prevents the race condition described\.
 
-**Note**  
-The published versions are immutable\. That is, you can't change code or configuration information associated with a version\.
-
 Each version of a Lambda function is a unique resource with a Amazon Resource Name \(ARN\)\. The following example shows the ARN of version number 1 of the `helloworld` Lambda function\.
 
 ```
 arn:aws:lambda:aws-region:acct-id:function:helloworld:1
 ```
-
-**Note**  
-This ARN is qualified, where the version number is a suffix\. Published versions can have only qualified ARN\.
 
 You can publish multiple versions of a Lambda function\. Each time you publish a version, AWS Lambda copies `$LATEST` version \(code and configuration information\) to create a new version\. When you publish additional versions, AWS Lambda assigns a monotonically increasing sequence number for versioning, even if the function was deleted and recreated\. Version numbers are never reused, even for a function that has been deleted and recreated\. This approach means that the consumer of a function version can depend on the executable of that version to never change \(except if it's deleted\)\. 
 
@@ -110,25 +104,14 @@ If you want to reuse a qualifier, use aliases with your versions\. Aliases can b
 
 AWS Lambda maintains your latest function code in the `$LATEST` version\. When you update your function code, AWS Lambda replaces the code in the `$LATEST` version of the Lambda function\. For more information, see [UpdateFunctionCode](API_UpdateFunctionCode.md)\.
 
-Published versions are immutable\. You can't update code or configuration information associated with a published version\.
-
 You have the following options of publishing a new version as you update your Lambda function code:
 + **Publish a version in the same update code request** – Use the `UpdateFunctionCode` API operation \(recommended\)\.
 + **First update the code, and then explicitly publish a version** – Use the `PublishVersion` API operation\.
 
-You can update code and configuration information \(such as description, memory size, and execution timeout\) for the `$LATEST` version of the Lambda function\. However, published versions are immutable\. That is, you can't change code or configuration information\.
+You can update code and configuration information \(such as description, memory size, and execution timeout\) for the `$LATEST` version of the Lambda function\.
 
 ## Deleting a Lambda Function and a Specific Version<a name="versioning-intro-deleting-function-versions"></a>
 
 With versioning, you have the following choices:
 + **Delete a specific version** – You can delete a Lambda function version by specifying the version you want to delete in your `DeleteFunction` request\. If there are aliases that depend on this version, the request fails\. AWS Lambda deletes the version only if there are no aliases dependent on this version\. For more information about aliases, see [Introduction to AWS Lambda Aliases](aliases-intro.md)\.
 + **Delete the entire Lambda function \(all of its versions and aliases\)** – To delete the Lambda function and all of its versions, don't specify any version in your `DeleteFunction` request\. Doing this deletes the entire function including all of its versions and aliases\.
-
-**Important**  
-You can delete a specific function version, but you cannot delete the `$LATEST`\. 
-
-## Related Topics<a name="versioning-intro-related-topic"></a>
-
-[Introduction to AWS Lambda Aliases](aliases-intro.md)
-
-[Managing Versioning Using the AWS Management Console, the AWS CLI, or Lambda API Operations](how-to-manage-versioning.md)
