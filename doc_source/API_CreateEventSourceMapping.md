@@ -1,19 +1,11 @@
 # CreateEventSourceMapping<a name="API_CreateEventSourceMapping"></a>
 
-Identifies a stream as an event source for a Lambda function\. It can be either an Amazon Kinesis stream or an Amazon DynamoDB stream\. AWS Lambda invokes the specified function when records are posted to the stream\.
+Creates a mapping between an event source and an AWS Lambda function\. Lambda reads items from the event source and triggers the function\.
 
-This association between a stream source and a Lambda function is called the event source mapping\.
-
-**Important**  
-This event source mapping is relevant only in the AWS Lambda pull model, where AWS Lambda invokes the function\. For more information, see [AWS Lambda: How it Works](http://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html) in the *AWS Lambda Developer Guide*\.
-
-You provide mapping information \(for example, which stream to read from and which Lambda function to invoke\) in the request body\.
-
-Each event source, such as an Amazon Kinesis or a DynamoDB stream, can be associated with multiple AWS Lambda function\. A given Lambda function can be associated with multiple AWS event sources\.
-
-If you are using versioning, you can specify a specific function version or an alias via the function name parameter\. For more information about versioning, see [AWS Lambda Function Versioning and Aliases](http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html)\. 
-
-This operation requires permission for the `lambda:CreateEventSourceMapping` action\.
+For details about each event source type, see the following topics\.
++  [Using AWS Lambda with Amazon Kinesis](https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html) 
++  [Using AWS Lambda with Amazon SQS](https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html) 
++  [Using AWS Lambda with Amazon DynamoDB](https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html) 
 
 ## Request Syntax<a name="API_CreateEventSourceMapping_RequestSyntax"></a>
 
@@ -22,12 +14,12 @@ POST /2015-03-31/event-source-mappings/ HTTP/1.1
 Content-type: application/json
 
 {
-   "BatchSize": number,
-   "Enabled": boolean,
-   "EventSourceArn": "string",
-   "FunctionName": "string",
-   "StartingPosition": "string",
-   "StartingPositionTimestamp": number
+   "[BatchSize](#SSS-CreateEventSourceMapping-request-BatchSize)": number,
+   "[Enabled](#SSS-CreateEventSourceMapping-request-Enabled)": boolean,
+   "[EventSourceArn](#SSS-CreateEventSourceMapping-request-EventSourceArn)": "string",
+   "[FunctionName](#SSS-CreateEventSourceMapping-request-FunctionName)": "string",
+   "[StartingPosition](#SSS-CreateEventSourceMapping-request-StartingPosition)": "string",
+   "[StartingPositionTimestamp](#SSS-CreateEventSourceMapping-request-StartingPositionTimestamp)": number
 }
 ```
 
@@ -39,42 +31,51 @@ The request does not use any URI parameters\.
 
 The request accepts the following data in JSON format\.
 
- ** BatchSize **   
-The largest number of records that AWS Lambda will retrieve from your event source at the time of invoking your function\. Your function receives an event with all the retrieved records\. The default is 100 records\.  
+ ** [BatchSize](#API_CreateEventSourceMapping_RequestSyntax) **   <a name="SSS-CreateEventSourceMapping-request-BatchSize"></a>
+The maximum number of items to retrieve in a single batch\.  
++  **Amazon Kinesis** \- Default 100\. Max 10,000\.
++  **Amazon DynamoDB Streams** \- Default 100\. Max 1,000\.
++  **Amazon Simple Queue Service** \- Default 10\. Max 10\.
 Type: Integer  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.  
 Required: No
 
- ** Enabled **   
-Indicates whether AWS Lambda should begin polling the event source\. By default, `Enabled` is true\.   
+ ** [Enabled](#API_CreateEventSourceMapping_RequestSyntax) **   <a name="SSS-CreateEventSourceMapping-request-Enabled"></a>
+Disables the event source mapping to pause polling and invocation\.  
 Type: Boolean  
 Required: No
 
- ** EventSourceArn **   
-The Amazon Resource Name \(ARN\) of the Amazon Kinesis or the Amazon DynamoDB stream that is the event source\. Any record added to this stream could cause AWS Lambda to invoke your Lambda function, it depends on the `BatchSize`\. AWS Lambda POSTs the Amazon Kinesis event, containing records, to your Lambda function as JSON\.  
+ ** [EventSourceArn](#API_CreateEventSourceMapping_RequestSyntax) **   <a name="SSS-CreateEventSourceMapping-request-EventSourceArn"></a>
+The Amazon Resource Name \(ARN\) of the event source\.  
++  **Amazon Kinesis** \- The ARN of the data stream or a stream consumer\.
++  **Amazon DynamoDB Streams** \- The ARN of the stream\.
++  **Amazon Simple Queue Service** \- The ARN of the queue\.
 Type: String  
-Pattern: `arn:aws:([a-zA-Z0-9\-])+:([a-z]{2}-[a-z]+-\d{1})?:(\d{12})?:(.*)`   
+Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)`   
 Required: Yes
 
- ** FunctionName **   
-The Lambda function to invoke when AWS Lambda detects an event on the stream\.  
- You can specify the function name \(for example, `Thumbnail`\) or you can specify Amazon Resource Name \(ARN\) of the function \(for example, `arn:aws:lambda:us-west-2:account-id:function:ThumbNail`\)\.   
- If you are using versioning, you can also provide a qualified function ARN \(ARN that is qualified with function version or alias name as suffix\)\. For more information about versioning, see [AWS Lambda Function Versioning and Aliases](http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html)   
-AWS Lambda also allows you to specify only the function name with the account ID qualifier \(for example, `account-id:Thumbnail`\)\.   
-Note that the length constraint applies only to the ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
+ ** [FunctionName](#API_CreateEventSourceMapping_RequestSyntax) **   <a name="SSS-CreateEventSourceMapping-request-FunctionName"></a>
+The name of the Lambda function\.  
+
+**Name formats**
++  **Function name** \- `MyFunction`\.
++  **Function ARN** \- `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`\.
++  **Version or Alias ARN** \- `arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD`\.
++  **Partial ARN** \- `123456789012:function:MyFunction`\.
+The length constraint applies only to the full ARN\. If you specify only the function name, it's limited to 64 characters in length\.  
 Type: String  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
-Pattern: `(arn:aws:lambda:)?([a-z]{2}-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
+Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
 Required: Yes
 
- ** StartingPosition **   
-The position in the stream where AWS Lambda should start reading\. Valid only for Kinesis streams\. For more information, see [ShardIteratorType](http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType) in the *Amazon Kinesis API Reference*\.   
+ ** [StartingPosition](#API_CreateEventSourceMapping_RequestSyntax) **   <a name="SSS-CreateEventSourceMapping-request-StartingPosition"></a>
+The position in a stream from which to start reading\. Required for Amazon Kinesis and Amazon DynamoDB Streams sources\. `AT_TIMESTAMP` is only supported for Amazon Kinesis streams\.  
 Type: String  
 Valid Values:` TRIM_HORIZON | LATEST | AT_TIMESTAMP`   
-Required: Yes
+Required: No
 
- ** StartingPositionTimestamp **   
-The timestamp of the data record from which to start reading\. Used with [shard iterator type](http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType) AT\_TIMESTAMP\. If a record with this exact timestamp does not exist, the iterator returned is for the next \(later\) record\. If the timestamp is older than the current trim horizon, the iterator returned is for the oldest untrimmed data record \(TRIM\_HORIZON\)\. Valid only for Kinesis streams\.   
+ ** [StartingPositionTimestamp](#API_CreateEventSourceMapping_RequestSyntax) **   <a name="SSS-CreateEventSourceMapping-request-StartingPositionTimestamp"></a>
+With `StartingPosition` set to `AT_TIMESTAMP`, the time from which to start reading, in Unix time seconds\.  
 Type: Timestamp  
 Required: No
 
@@ -85,14 +86,14 @@ HTTP/1.1 202
 Content-type: application/json
 
 {
-   "BatchSize": number,
-   "EventSourceArn": "string",
-   "FunctionArn": "string",
-   "LastModified": number,
-   "LastProcessingResult": "string",
-   "State": "string",
-   "StateTransitionReason": "string",
-   "UUID": "string"
+   "[BatchSize](#SSS-CreateEventSourceMapping-response-BatchSize)": number,
+   "[EventSourceArn](#SSS-CreateEventSourceMapping-response-EventSourceArn)": "string",
+   "[FunctionArn](#SSS-CreateEventSourceMapping-response-FunctionArn)": "string",
+   "[LastModified](#SSS-CreateEventSourceMapping-response-LastModified)": number,
+   "[LastProcessingResult](#SSS-CreateEventSourceMapping-response-LastProcessingResult)": "string",
+   "[State](#SSS-CreateEventSourceMapping-response-State)": "string",
+   "[StateTransitionReason](#SSS-CreateEventSourceMapping-response-StateTransitionReason)": "string",
+   "[UUID](#SSS-CreateEventSourceMapping-response-UUID)": "string"
 }
 ```
 
@@ -102,39 +103,39 @@ If the action is successful, the service sends back an HTTP 202 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** BatchSize **   
-The largest number of records that AWS Lambda will retrieve from your event source at the time of invoking your function\. Your function receives an event with all the retrieved records\.  
+ ** [BatchSize](#API_CreateEventSourceMapping_ResponseSyntax) **   <a name="SSS-CreateEventSourceMapping-response-BatchSize"></a>
+The maximum number of items to retrieve in a single batch\.  
 Type: Integer  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.
 
- ** EventSourceArn **   
-The Amazon Resource Name \(ARN\) of the Amazon Kinesis stream that is the source of events\.  
+ ** [EventSourceArn](#API_CreateEventSourceMapping_ResponseSyntax) **   <a name="SSS-CreateEventSourceMapping-response-EventSourceArn"></a>
+The Amazon Resource Name \(ARN\) of the event source\.  
 Type: String  
-Pattern: `arn:aws:([a-zA-Z0-9\-])+:([a-z]{2}-[a-z]+-\d{1})?:(\d{12})?:(.*)` 
+Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)` 
 
- ** FunctionArn **   
-The Lambda function to invoke when AWS Lambda detects an event on the stream\.  
+ ** [FunctionArn](#API_CreateEventSourceMapping_ResponseSyntax) **   <a name="SSS-CreateEventSourceMapping-response-FunctionArn"></a>
+The ARN of the Lambda function\.  
 Type: String  
-Pattern: `arn:aws:lambda:[a-z]{2}-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
+Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
- ** LastModified **   
-The UTC time string indicating the last time the event mapping was updated\.  
+ ** [LastModified](#API_CreateEventSourceMapping_ResponseSyntax) **   <a name="SSS-CreateEventSourceMapping-response-LastModified"></a>
+The date that the event source mapping was last updated, in Unix time seconds\.  
 Type: Timestamp
 
- ** LastProcessingResult **   
+ ** [LastProcessingResult](#API_CreateEventSourceMapping_ResponseSyntax) **   <a name="SSS-CreateEventSourceMapping-response-LastProcessingResult"></a>
 The result of the last AWS Lambda invocation of your Lambda function\.  
 Type: String
 
- ** State **   
-The state of the event source mapping\. It can be `Creating`, `Enabled`, `Disabled`, `Enabling`, `Disabling`, `Updating`, or `Deleting`\.  
+ ** [State](#API_CreateEventSourceMapping_ResponseSyntax) **   <a name="SSS-CreateEventSourceMapping-response-State"></a>
+The state of the event source mapping\. It can be one of the following: `Creating`, `Enabling`, `Enabled`, `Disabling`, `Disabled`, `Updating`, or `Deleting`\.  
 Type: String
 
- ** StateTransitionReason **   
-The reason the event source mapping is in its current state\. It is either user\-requested or an AWS Lambda\-initiated state transition\.  
+ ** [StateTransitionReason](#API_CreateEventSourceMapping_ResponseSyntax) **   <a name="SSS-CreateEventSourceMapping-response-StateTransitionReason"></a>
+The cause of the last state change, either `User initiated` or `Lambda initiated`\.  
 Type: String
 
- ** UUID **   
-The AWS Lambda assigned opaque identifier for the mapping\.  
+ ** [UUID](#API_CreateEventSourceMapping_ResponseSyntax) **   <a name="SSS-CreateEventSourceMapping-response-UUID"></a>
+The identifier of the event source mapping\.  
 Type: String
 
 ## Errors<a name="API_CreateEventSourceMapping_Errors"></a>
@@ -156,27 +157,19 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-   
+Request throughput limit exceeded\.  
 HTTP Status Code: 429
 
 ## See Also<a name="API_CreateEventSourceMapping_SeeAlso"></a>
 
 For more information about using this API in one of the language\-specific AWS SDKs, see the following:
-
-+  [AWS Command Line Interface](http://docs.aws.amazon.com/goto/aws-cli/lambda-2015-03-31/CreateEventSourceMapping) 
-
-+  [AWS SDK for \.NET](http://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/CreateEventSourceMapping) 
-
-+  [AWS SDK for C\+\+](http://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/CreateEventSourceMapping) 
-
-+  [AWS SDK for Go](http://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/CreateEventSourceMapping) 
-
-+  [AWS SDK for Java](http://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/CreateEventSourceMapping) 
-
-+  [AWS SDK for JavaScript](http://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/CreateEventSourceMapping) 
-
-+  [AWS SDK for PHP V3](http://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/CreateEventSourceMapping) 
-
-+  [AWS SDK for Python](http://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/CreateEventSourceMapping) 
-
-+  [AWS SDK for Ruby V2](http://docs.aws.amazon.com/goto/SdkForRubyV2/lambda-2015-03-31/CreateEventSourceMapping) 
++  [AWS Command Line Interface](https://docs.aws.amazon.com/goto/aws-cli/lambda-2015-03-31/CreateEventSourceMapping) 
++  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/CreateEventSourceMapping) 
++  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/CreateEventSourceMapping) 
++  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/CreateEventSourceMapping) 
++  [AWS SDK for Go \- Pilot](https://docs.aws.amazon.com/goto/SdkForGoPilot/lambda-2015-03-31/CreateEventSourceMapping) 
++  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/CreateEventSourceMapping) 
++  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/CreateEventSourceMapping) 
++  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/CreateEventSourceMapping) 
++  [AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/CreateEventSourceMapping) 
++  [AWS SDK for Ruby V2](https://docs.aws.amazon.com/goto/SdkForRubyV2/lambda-2015-03-31/CreateEventSourceMapping) 

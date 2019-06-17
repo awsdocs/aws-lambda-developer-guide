@@ -1,22 +1,24 @@
-# Creating a \.zip Deployment Package \(Java\)<a name="create-deployment-pkg-zip-java"></a>
+# Creating a ZIP Deployment Package for a Java Function<a name="create-deployment-pkg-zip-java"></a>
 
-This section provides examples of creating \.zip file as your deployment package\. You can use any build and packaging tool you like to create this zip\. Regardless of the tools you use, the resulting \.zip file must have the following structure:
-
-+ All compiled class files and resource files at the root level\. 
-
+This section provides examples of creating \.zip file as your deployment package\. You can use any build and packaging tool you like to create a deployment package with the following structure\.
++ All compiled class files and resource files at the root level\.
 + All required jars to run the code in the `/lib` directory\.
-
 **Note**  
-You can also build a standalone \.jar \(also a zipped file\) as your deployment package\. For examples of creating standalone \.jar using Maven, see [Creating a Deployment Package \(Java\)](lambda-java-how-to-create-deployment-package.md)\.
+Lambda loads JARs in unicode alphabetical order\. If multiple JARs in the `lib` folder contain the same class, the first one is used\. You can use the following shell script to identify duplicate classes\.  
 
-The following examples use Gradle build and deployment tool to create the \.zip\.
+**Example test\-zip\.sh**  
 
-**Important**  
-Gradle version 2\.0 or later is required\.
+  ```
+  mkdir -p expanded
+  unzip path/to/my/function.zip -d expanded
+  find ./expanded/lib -name '*.jar' | xargs -n1 zipinfo -1 | grep '.*.class' | sort | uniq -c | sort
+  ```
+
+The following examples use Gradle build and deployment tool to create a deployment package\.
 
 ## Before You Begin<a name="create-deployment-pkg-zip-java-before-you-begin"></a>
 
-You will need to download Gradle\. For instructions, go to the gradle website, [https://gradle\.org/](https://gradle.org/) \.
+You will need to download Gradle version 2\.0 or later\. For instructions, go to the gradle website, [https://gradle\.org/](https://gradle.org/) \.
 
 ## Example 1: Creating \.zip Using Gradle and the Maven Central Repository<a name="create-deployment-pkg-zip-java-using-central-repository"></a>
 
@@ -57,14 +59,14 @@ After you build the project, the resulting \.zip file \(that is, your deployment
        from compileJava
        from processResources              
        into('lib') {
-           from configurations.runtime
+           from configurations.compileClasspath
        }           
    }
    
    build.dependsOn buildZip
    ```
 **Note**  
-The repositories section refers to Maven Central Repository\. At the build time, it fetches the dependencies \(that is, the two AWS Lambda libraries\) from Maven Central\.
+The repositories section refers to Maven Central Repository\. At build time, it fetches the dependencies \(that is, the two AWS Lambda libraries\) from Maven Central\.
 The `buildZip` task describes how to create the deployment package \.zip file\.   
 For example, if you unzip the resulting \.zip file you should find any of the compiled class files and resource files at the root level\. You should also find a `/lib` directory with the required jars for running the code\.
 If you are following other tutorial topics in this guide, the specific tutorials might require you to add more dependencies\. Make sure to add those dependencies as required\.
@@ -89,9 +91,9 @@ If you are following other tutorial topics in this guide, the specific tutorials
 
 1. Verify the resulting `project-dir.zip` file in the `project-dir/build/distributions` subdirectory\.
 
-1. Now you can upload the \.zip file, your deployment package to AWS Lambda to create a Lambda function and test it by manually invoking it using sample event data\. For instruction, see  [Step 2\.3: \(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\.
+1. Now you can upload the \.zip file, your deployment package to AWS Lambda to create a Lambda function and test it by manually invoking it using sample event data\. For instructions, see [Create a Lambda Function Authored in Java](get-started-step4-optional.md)\.
 
-## Example 2: Creating \.zip Using Gradle Using Local Jars<a name="create-deployment-pkg-zip-java-without-central-repository"></a>
+## Example 2: Creating \.zip Using Gradle With Local JARs<a name="create-deployment-pkg-zip-java-without-central-repository"></a>
 
 You may choose not to use the Maven Central repository\. Instead have all the dependencies in the project folder\. In this case your project folder \(`project-dir`\) will have the following structure:
 
@@ -120,7 +122,7 @@ task buildZip(type: Zip) {
     from compileJava
     from processResources              
     into('lib') {
-        from configurations.runtime
+        from configurations.compileClasspath
     }           
 }
 

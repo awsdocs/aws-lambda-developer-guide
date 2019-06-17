@@ -3,11 +3,8 @@
 When AWS Lambda executes the Lambda function, it invokes the handler\. The first parameter is the input to the handler which can be event data \(published by an event source\) or custom input you provide such as a string or any custom data object\. 
 
 AWS Lambda supports the following input/output types for a handler:
-
 + Simple Java types \(AWS Lambda supports the String, Integer, Boolean, Map, and List types\)
-
 + POJO \(Plain Old Java Object\) type
-
 + Stream type \(If you do not want to use POJOs or if Lambda's serialization approach does not meet your needs, you can use the byte stream implementation\. For more information, see [Example: Using Stream for Handler Input/Output \(Java\)](java-handler-io-type-stream.md)\.\)
 
 ## Handler Input/Output: String Type<a name="java-programming-model-req-resp-string"></a>
@@ -31,7 +28,7 @@ You can have similar handler functions for other simple Java types\.
 **Note**  
 When you invoke a Lambda function asynchronously, any return value by your Lambda function will be ignored\. Therefore you might want to set the return type to void to make this clear in your code\. For more information, see [Invoke](API_Invoke.md)\.
 
-To test an end\-to\-end example, see  [Step 2\.3: \(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\.
+To test an end\-to\-end example, see [Create a Lambda Function Authored in Java](get-started-step4-optional.md)\.
 
 ## Handler Input/Output: POJO Type<a name="java-programming-model-req-resp-pojo"></a>
 

@@ -1,8 +1,6 @@
 # GetEventSourceMapping<a name="API_GetEventSourceMapping"></a>
 
-Returns configuration information for the specified event source mapping \(see [CreateEventSourceMapping](API_CreateEventSourceMapping.md)\)\.
-
-This operation requires permission for the `lambda:GetEventSourceMapping` action\.
+Returns details about an event source mapping\. You can get the identifier of a mapping from the output of [ListEventSourceMappings](API_ListEventSourceMappings.md)\.
 
 ## Request Syntax<a name="API_GetEventSourceMapping_RequestSyntax"></a>
 
@@ -14,8 +12,8 @@ GET /2015-03-31/event-source-mappings/UUID HTTP/1.1
 
 The request requires the following URI parameters\.
 
- ** UUID **   
-The AWS Lambda assigned ID of the event source mapping\.
+ ** [UUID](#API_GetEventSourceMapping_RequestSyntax) **   <a name="SSS-GetEventSourceMapping-request-UUID"></a>
+The identifier of the event source mapping\.
 
 ## Request Body<a name="API_GetEventSourceMapping_RequestBody"></a>
 
@@ -28,14 +26,14 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "BatchSize": number,
-   "EventSourceArn": "string",
-   "FunctionArn": "string",
-   "LastModified": number,
-   "LastProcessingResult": "string",
-   "State": "string",
-   "StateTransitionReason": "string",
-   "UUID": "string"
+   "[BatchSize](#SSS-GetEventSourceMapping-response-BatchSize)": number,
+   "[EventSourceArn](#SSS-GetEventSourceMapping-response-EventSourceArn)": "string",
+   "[FunctionArn](#SSS-GetEventSourceMapping-response-FunctionArn)": "string",
+   "[LastModified](#SSS-GetEventSourceMapping-response-LastModified)": number,
+   "[LastProcessingResult](#SSS-GetEventSourceMapping-response-LastProcessingResult)": "string",
+   "[State](#SSS-GetEventSourceMapping-response-State)": "string",
+   "[StateTransitionReason](#SSS-GetEventSourceMapping-response-StateTransitionReason)": "string",
+   "[UUID](#SSS-GetEventSourceMapping-response-UUID)": "string"
 }
 ```
 
@@ -45,39 +43,39 @@ If the action is successful, the service sends back an HTTP 200 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** BatchSize **   
-The largest number of records that AWS Lambda will retrieve from your event source at the time of invoking your function\. Your function receives an event with all the retrieved records\.  
+ ** [BatchSize](#API_GetEventSourceMapping_ResponseSyntax) **   <a name="SSS-GetEventSourceMapping-response-BatchSize"></a>
+The maximum number of items to retrieve in a single batch\.  
 Type: Integer  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.
 
- ** EventSourceArn **   
-The Amazon Resource Name \(ARN\) of the Amazon Kinesis stream that is the source of events\.  
+ ** [EventSourceArn](#API_GetEventSourceMapping_ResponseSyntax) **   <a name="SSS-GetEventSourceMapping-response-EventSourceArn"></a>
+The Amazon Resource Name \(ARN\) of the event source\.  
 Type: String  
-Pattern: `arn:aws:([a-zA-Z0-9\-])+:([a-z]{2}-[a-z]+-\d{1})?:(\d{12})?:(.*)` 
+Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)` 
 
- ** FunctionArn **   
-The Lambda function to invoke when AWS Lambda detects an event on the stream\.  
+ ** [FunctionArn](#API_GetEventSourceMapping_ResponseSyntax) **   <a name="SSS-GetEventSourceMapping-response-FunctionArn"></a>
+The ARN of the Lambda function\.  
 Type: String  
-Pattern: `arn:aws:lambda:[a-z]{2}-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
+Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
- ** LastModified **   
-The UTC time string indicating the last time the event mapping was updated\.  
+ ** [LastModified](#API_GetEventSourceMapping_ResponseSyntax) **   <a name="SSS-GetEventSourceMapping-response-LastModified"></a>
+The date that the event source mapping was last updated, in Unix time seconds\.  
 Type: Timestamp
 
- ** LastProcessingResult **   
+ ** [LastProcessingResult](#API_GetEventSourceMapping_ResponseSyntax) **   <a name="SSS-GetEventSourceMapping-response-LastProcessingResult"></a>
 The result of the last AWS Lambda invocation of your Lambda function\.  
 Type: String
 
- ** State **   
-The state of the event source mapping\. It can be `Creating`, `Enabled`, `Disabled`, `Enabling`, `Disabling`, `Updating`, or `Deleting`\.  
+ ** [State](#API_GetEventSourceMapping_ResponseSyntax) **   <a name="SSS-GetEventSourceMapping-response-State"></a>
+The state of the event source mapping\. It can be one of the following: `Creating`, `Enabling`, `Enabled`, `Disabling`, `Disabled`, `Updating`, or `Deleting`\.  
 Type: String
 
- ** StateTransitionReason **   
-The reason the event source mapping is in its current state\. It is either user\-requested or an AWS Lambda\-initiated state transition\.  
+ ** [StateTransitionReason](#API_GetEventSourceMapping_ResponseSyntax) **   <a name="SSS-GetEventSourceMapping-response-StateTransitionReason"></a>
+The cause of the last state change, either `User initiated` or `Lambda initiated`\.  
 Type: String
 
- ** UUID **   
-The AWS Lambda assigned opaque identifier for the mapping\.  
+ ** [UUID](#API_GetEventSourceMapping_ResponseSyntax) **   <a name="SSS-GetEventSourceMapping-response-UUID"></a>
+The identifier of the event source mapping\.  
 Type: String
 
 ## Errors<a name="API_GetEventSourceMapping_Errors"></a>
@@ -95,27 +93,19 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-   
+Request throughput limit exceeded\.  
 HTTP Status Code: 429
 
 ## See Also<a name="API_GetEventSourceMapping_SeeAlso"></a>
 
 For more information about using this API in one of the language\-specific AWS SDKs, see the following:
-
-+  [AWS Command Line Interface](http://docs.aws.amazon.com/goto/aws-cli/lambda-2015-03-31/GetEventSourceMapping) 
-
-+  [AWS SDK for \.NET](http://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/GetEventSourceMapping) 
-
-+  [AWS SDK for C\+\+](http://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/GetEventSourceMapping) 
-
-+  [AWS SDK for Go](http://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/GetEventSourceMapping) 
-
-+  [AWS SDK for Java](http://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/GetEventSourceMapping) 
-
-+  [AWS SDK for JavaScript](http://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/GetEventSourceMapping) 
-
-+  [AWS SDK for PHP V3](http://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/GetEventSourceMapping) 
-
-+  [AWS SDK for Python](http://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/GetEventSourceMapping) 
-
-+  [AWS SDK for Ruby V2](http://docs.aws.amazon.com/goto/SdkForRubyV2/lambda-2015-03-31/GetEventSourceMapping) 
++  [AWS Command Line Interface](https://docs.aws.amazon.com/goto/aws-cli/lambda-2015-03-31/GetEventSourceMapping) 
++  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/GetEventSourceMapping) 
++  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/GetEventSourceMapping) 
++  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/GetEventSourceMapping) 
++  [AWS SDK for Go \- Pilot](https://docs.aws.amazon.com/goto/SdkForGoPilot/lambda-2015-03-31/GetEventSourceMapping) 
++  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/GetEventSourceMapping) 
++  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/GetEventSourceMapping) 
++  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/GetEventSourceMapping) 
++  [AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/GetEventSourceMapping) 
++  [AWS SDK for Ruby V2](https://docs.aws.amazon.com/goto/SdkForRubyV2/lambda-2015-03-31/GetEventSourceMapping) 
