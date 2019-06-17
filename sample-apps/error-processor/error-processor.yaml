@@ -38,6 +38,12 @@ Resources:
         Variables:
           bucket: !Ref bucket
       Tracing: Active
+      Events:
+        LogsSubscription:
+          Type: CloudWatchLogs
+          Properties:
+            LogGroupName: !Join [ "/", [ "/aws/lambda", !Ref randomerror ] ]
+            FilterPattern: ERROR
   randomerror:
     Type: AWS::Serverless::Function
     Properties:
@@ -88,18 +94,3 @@ Resources:
     Properties:
       ServiceToken: !GetAtt primer.Arn
       FunctionName: !Ref randomerror
-  subscription:
-    Type: AWS::Logs::SubscriptionFilter
-    DependsOn: cloudwatchlogspermission
-    Properties:
-      LogGroupName: !Join [ "/", [ "/aws/lambda", !Ref randomerror ] ]
-      FilterPattern: ERROR
-      DestinationArn: !GetAtt processor.Arn
-  cloudwatchlogspermission:
-    Type: AWS::Lambda::Permission
-    DependsOn: primerinvoke
-    Properties:
-      FunctionName: !GetAtt processor.Arn
-      Action: lambda:InvokeFunction
-      Principal: !Join [ ".", [ "logs", !Ref "AWS::Region", "amazonaws.com" ] ]
-      SourceAccount: !Ref AWS::AccountId
