@@ -1,0 +1,16 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "sns:ListSubscriptionsByTopic",
+                "sns:CreateTopic",
+                "sns:SetTopicAttributes",
+                "sns:Subscribe",
+                "sns:Publish"
+            ],
+            "Resource": "*"
+        }
+    ]
+}

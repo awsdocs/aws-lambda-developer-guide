@@ -1,161 +1,10 @@
-# Logging \(Java\)<a name="java-logging"></a>
+# AWS Lambda Function Logging in Java<a name="java-logging"></a>
 
- Your Lambda function can contain logging statements\. AWS Lambda writes these logs to CloudWatch\. We recommend you use one of the following to write logs\.
+Your Lambda function comes with a CloudWatch Logs log group, with a log stream for each instance of your function\. The runtime sends details about each invocation to the log stream, and relays logs and other output from your function's code\.
 
-## Custom Appender for Log4j™ 2<a name="java-logging-log4j2"></a>
+To output logs from your function code, you can use methods on [java\.lang\.System ](https://docs.oracle.com/javase/8/docs/api/java/lang/System.html), or any logging module that writes to `stdout` or `stderr`\. The following example uses `System.out.println`\.
 
- AWS Lambda recommends Log4j 2 to provide a custom appender\. You can use the custom Log4j \(see [Apache log4j](https://logging.apache.org/log4j/2.x/)\) appender provided by Lambda for logging from your lambda functions\. Every call to Log4j methods, such as `log.debug()` or `log.error()`, will result in a CloudWatch Logs event\. The custom appender is called `LambdaAppender` and must be used in the `log4j2.xml` file\. You must include the `aws-lambda-java-log4j2` artifact \(`artifactId:aws-lambda-java-log4j2`\) in the deployment package \(\.jar file\)\. For an example, see [Example 1: Writing Logs Using Log4J v2\.8 ](#java-wt-logging-using-log4j2.8)\.
-
-## LambdaLogger\.log\(\)<a name="java-logging-lambdalogger"></a>
-
- Each call to `LambdaLogger.log()` results in a CloudWatch Logs event, provided the event size is within the allowed limits\. For information about CloudWatch Logs limits, see [CloudWatch Logs Limits](http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/cloudwatch_limits_cwl.html) in the *Amazon CloudWatch User Guide*\. For an example, see [Example 2: Writing Logs Using LambdaLogger \(Java\)](#java-wt-logging)\.
-
-In addition, you can also use the following statements in your Lambda function code to generate log entries:
-
-+ System\.out\(\)
-
-+ System\.err\(\)
-
-However, note that AWS Lambda treats each line returned by `System.out` and `System.err` as a separate event\. This works well when each output line corresponds to a single log entry\. When a log entry has multiple lines of output, AWS Lambda attempts to parse them using line breaks to identify separate events\. For example, the following logs the two words \("Hello" and "world"\) as two separate events:
-
-```
-System.out.println("Hello \n world"); 
-```
-
-## How to Find Logs<a name="how-to-find-logs-java"></a>
-
-You can find the logs that your Lambda function writes, as follows:
-
-+ Find logs in CloudWatch Logs\. The `context` object \(in the `aws-lambda-java-core` library\) provides the `getLogStreamName()` and the `getLogGroupName()` methods\. Using these methods, you can find the specific log stream where logs are written\.
-
-+ If you invoke a Lambda function via the console, the invocation type is always `RequestResponse` \(that is, synchronous execution\) and the console displays the logs that the Lambda function writes using the `LambdaLogger` object\. AWS Lambda also returns logs from `System.out` and `System.err` methods\.
-
-+ If you invoke a Lambda function programmatically, you can add the `LogType` parameter to retrieve the last 4 KB of log data that is written to CloudWatch Logs\. For more information, see [Invoke](API_Invoke.md)\. AWS Lambda returns this log information in the `x-amz-log-results` header in the response\. If you use the AWS Command Line Interface to invoke the function, you can specify the `--log-type` parameter with value `Tail`\. 
-
-## Logging Examples \(Java\)<a name="logging-java-examples"></a>
-
-This section provides examples of using Custom Appender for Log4j and the `LambdaLogger` objects for logging information\. 
-
-### Example 1: Writing Logs Using Log4J v2\.8<a name="java-wt-logging-using-log4j2.8"></a>
-
-+ The following shows how to build your artifact with Maven to correctly include the Log4j v2\.8 plugins: 
-
-  + For Maven pom\.xml:
-
-    ```
-     <dependencies>
-      ...
-      <dependency>
-        <groupId>com.amazonaws</groupId>
-        <artifactId>aws-lambda-java-log4j2</artifactId>
-        <version>1.0.0</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
-        <artifactId>log4j-core</artifactId>
-        <version>2.8.2</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
-        <artifactId>log4j-api</artifactId>
-        <version>2.8.2</version>
-      </dependency>
-      ....
-    </dependencies>
-    ```
-
-  + If using the Maven shade plugin, set the plugin configuration as follows:
-
-    ```
-    <plugins>
-      ...
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-shade-plugin</artifactId>
-        <version>2.4.3</version>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-            <configuration>
-              <transformers>
-                <transformer
-                        implementation="com.github.edwgiz.mavenShadePlugin.log4j2CacheTransformer.PluginsCacheFileTransformer">
-                </transformer>
-              </transformers>
-            </configuration>
-          </execution>
-        </executions>
-        <dependencies>
-          <dependency>
-            <groupId>com.github.edwgiz</groupId>
-            <artifactId>maven-shade-plugin.log4j2-cachefile-transformer</artifactId>
-            <version>2.8.1</version>
-          </dependency>
-        </dependencies>
-      </plugin>
-      ...
-    </plugins>
-    ```
-
-  + The following Java code example shows how to use Log4j with Lambda:
-
-    ```
-    package example;
-    
-    import com.amazonaws.services.lambda.runtime.Context;
-    
-    import org.apache.logging.log4j.LogManager;
-    import org.apache.logging.log4j.Logger;
-    
-    public class Hello {
-        // Initialize the Log4j logger.
-        static final Logger logger = LogManager.getLogger(Hello.class);
-    
-        public String myHandler(String name, Context context) {
-            // System.out: One log statement but with a line break (AWS Lambda writes two events to CloudWatch).
-            System.out.println("log data from stdout \n this is continuation of system.out");
-    
-           // System.err: One log statement but with a line break (AWS Lambda writes two events to CloudWatch).
-            System.err.println("log data from stderr. \n this is a continuation of system.err");
-    
-            // Use log4j to log the same thing as above and AWS Lambda will log only one event in CloudWatch.
-            logger.debug("log data from log4j debug \n this is continuation of log4j debug");
-    
-            logger.error("log data from log4j err. \n this is a continuation of log4j.err");
-    
-            // Return will include the log stream name so you can look
-            // up the log later.
-            return String.format("Hello %s. log stream = %s", name, context.getLogStreamName());
-        }
-    }
-    ```
-
-  + The example preceding uses the following log4j2\.xml file to load properties
-
-    ```
-     <?xml version="1.0" encoding="UTF-8"?>
-    <Configuration packages="com.amazonaws.services.lambda.runtime.log4j2.LambdaAppender">
-      <Appenders>
-        <Lambda name="Lambda">
-          <PatternLayout>
-              <pattern>%d{yyyy-MM-dd HH:mm:ss} %X{AWSRequestId} %-5p %c{1}:%L - %m%n</pattern>
-          </PatternLayout>
-        </Lambda>
-      </Appenders>
-      <Loggers>
-        <Root level="debug">
-          <AppenderRef ref="Lambda" />
-        </Root>
-      </Loggers>
-    </Configuration>
-    ```
-
-### Example 2: Writing Logs Using LambdaLogger \(Java\)<a name="java-wt-logging"></a>
-
-The following Java code example writes logs using both the System methods and the `LambdaLogger` object to illustrate how they differ when AWS Lambda logs information to CloudWatch\. 
+**Example Hello\.java**  
 
 ```
 package example;
@@ -165,44 +14,151 @@ import com.amazonaws.services.lambda.runtime.LambdaLogger;
 
 public class Hello {
     public String myHandler(String name, Context context) {
-        
-         // System.out: One log statement but with a line break (AWS Lambda writes two events to CloudWatch).
-        System.out.println("log data from stdout \n this is continuation of system.out");
-        
-        // System.err: One log statement but with a line break (AWS Lambda writes two events to CloudWatch).
-        System.err.println("log data from stderr \n this is continuation of system.err");
+        System.out.println("Event received.");
+        return String.format("Hello %s.", name);
+    }
+}
+```
 
+The Lambda console shows log output when you test a function on the function configuration page\. To view logs for all invocations, use the CloudWatch Logs console\.
+
+**To view your Lambda function's logs**
+
+1. Open the [Logs page of the CloudWatch console](https://console.aws.amazon.com/cloudwatch/home?#logs:)\.
+
+1. Choose the log group for your function \(**/aws/lambda/*function\-name***\)\.
+
+1. Choose the first stream in the list\.
+
+Each log stream corresponds to an [instance of your function](running-lambda-code.md)\. New streams appear when you update your function and when additional instances are created to handle multiple concurrent invocations\. To find logs for specific invocations, you can instrument your function with X\-Ray and record details about the request and log stream in the trace\. For a sample application that correlates logs and traces with X\-Ray, see [Error Processor Sample Application for AWS Lambda](sample-errorprocessor.md)\.
+
+To get logs for an invocation from the command line, use the `--log-type` option\. The response includes a `LogResult` field that contains up to 4 KB of base64\-encoded logs from the invocation\.
+
+```
+$ aws lambda invoke --function-name my-function out --log-type Tail
+{
+    "StatusCode": 200,
+    "LogResult": "U1RBUlQgUmVxdWVzdElkOiA4N2QwNDRiOC1mMTU0LTExZTgtOGNkYS0yOTc0YzVlNGZiMjEgVmVyc2lvb...",
+    "ExecutedVersion": "$LATEST"
+}
+```
+
+You can use the `base64` utility to decode the logs\.
+
+```
+$ aws lambda invoke --function-name my-function out --log-type Tail \
+--query 'LogResult' --output text |  base64 -d
+START RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8 Version: $LATEST
+  "AWS_SESSION_TOKEN": "AgoJb3JpZ2luX2VjELj...", "_X_AMZN_TRACE_ID": "Root=1-5d02e5ca-f5792818b6fe8368e5b51d50;Parent=191db58857df8395;Sampled=0"",ask/lib:/opt/lib",
+END RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8
+REPORT RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8  Duration: 79.67 ms      Billed Duration: 100 ms         Memory Size: 128 MB     Max Memory Used: 73 MB
+```
+
+`base64` is available on Linux, macOS, and [Ubuntu on Windows](https://docs.microsoft.com/en-us/windows/wsl/install-win10)\. For macOS, the command is `base64 -D`\.
+
+Log groups are not deleted automatically when you delete a function\. To avoid storing logs indefinitely, delete the log group, or [configure a retention period](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#SettingLogRetention) after which logs are deleted automatically\.
+
+## LambdaLogger<a name="java-logging-lambdalogger"></a>
+
+Lambda provides a logger object that you can retrieve from the context object\. `LambdaLogger` supports multi\-line logs\. If you log a string that includes line breaks with `System.out.println`, each line break results in a separate entry in CloudWatch Logs\. If you use `LambdaLogger`, you get one entry with multiple lines\.
+
+The following example function logs context information\.
+
+**Example ContextLogger\.java**  
+
+```
+package example;
+import java.io.InputStream;
+import java.io.OutputStream;
+import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.LambdaLogger;
+
+public class ContextLogger {
+    public static void myHandler(InputStream inputStream, OutputStream outputStream, Context context) {
         LambdaLogger logger = context.getLogger();
-        // Write log to CloudWatch using LambdaLogger.
-        logger.log("log data from LambdaLogger \n this is continuation of logger.log");
+        int letter;
+        try {
+            while((letter = inputStream.read()) != -1)
+            {
+                outputStream.write(Character.toUpperCase(letter));
+            }
+            Thread.sleep(3000); // Intentional delay for testing the getRemainingTimeInMillis() result.
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         
-        // Return will include the log stream name so you can look 
+        logger.log("Log data from LambdaLogger \n with multiple lines");
+        // Print info from the context object
+        logger.log("Function name: " + context.getFunctionName());
+        logger.log("Max mem allocated: " + context.getMemoryLimitInMB());
+        logger.log("Time remaining in milliseconds: " + context.getRemainingTimeInMillis());
+
+        // Return the log stream name so you can look up the log later.
+        return String.format("Hello %s. log stream = %s", name, context.getLogStreamName());
+    }
+}
+```
+
+**Dependencies**
++ `aws-lambda-java-core`
+
+Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Java](lambda-java-how-to-create-deployment-package.md)\.
+
+## Custom Appender for Log4j 2<a name="java-logging-log4j2"></a>
+
+ AWS Lambda recommends Log4j 2 to provide a custom appender\. You can use the custom [Apache log4j](https://logging.apache.org/log4j/2.x/) appender provided by Lambda for logging from your functions\. The custom appender is called `LambdaAppender` and must be used in the `log4j2.xml` file\. You must include the `aws-lambda-java-log4j2` artifact \(`artifactId:aws-lambda-java-log4j2`\) in the deployment package\.
+
+**Example Hello\.java**  
+
+```
+package example;
+
+import com.amazonaws.services.lambda.runtime.Context;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+public class Hello {
+    // Initialize the Log4j logger.
+    static final Logger logger = LogManager.getLogger(Hello.class);
+
+    public String myHandler(String name, Context context) {
+        logger.error("log data from log4j err.");
+
+        // Return will include the log stream name so you can look
         // up the log later.
         return String.format("Hello %s. log stream = %s", name, context.getLogStreamName());
     }
 }
 ```
 
-The following is sample of log entries in CloudWatch Logs\. 
+The example preceding uses the following log4j2\.xml file to load properties
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/logging-java-lambda-logger-10.png)
+**Example log4j2\.xml**  
 
-Note:
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration packages="com.amazonaws.services.lambda.runtime.log4j2">
+  <Appenders>
+    <Lambda name="Lambda">
+      <PatternLayout>
+          <pattern>%d{yyyy-MM-dd HH:mm:ss} %X{AWSRequestId} %-5p %c{1}:%L - %m%n</pattern>
+      </PatternLayout>
+    </Lambda>
+  </Appenders>
+  <Loggers>
+    <Root level="info">
+      <AppenderRef ref="Lambda" />
+    </Root>
+  </Loggers>
+</Configuration>
+```
 
-+ AWS Lambda parses the log string in each of the `System.out.println()` and `System.err.println()` statements logs as two separate events \(note the two down arrows in the screenshot\) because of the line break\.
+**Dependencies**
++ `aws-lambda-java-log4j2`
++ `log4j-core`
++ `log4j-api`
 
-+ The `LambdaLogger.log()` produce one CloudWatch event\.
-
-You can do the following to test the code:
-
-+ Using the code, create a deployment package\. 
-
-+ Upload the deployment package to AWS Lambda to create your Lambda function\. 
-
-+ To test your Lambda function use a string \("this is a test"\) as sample event\. The handler code receives the sample event but does nothing with it\. It only shows how to write logs\.
-
-Follow the instructions provided in the Getting Started\. For more information, see  [\(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\. Note the following differences:
-
-+ When you create a deployment package, don't forget the `aws-lambda-java-core` library dependency\. 
-
-+ When you create the Lambda function, specify `example.Hello::myHandler (package.class::method)` as the handler value\.
+Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Java](lambda-java-how-to-create-deployment-package.md)\.
