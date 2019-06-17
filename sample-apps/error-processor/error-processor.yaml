@@ -45,7 +45,6 @@ Resources:
       Runtime: nodejs8.10
       CodeUri: random-error/.
       Description: Generate errors.
-      MemorySize: 128
       Timeout: 8
       Role: !GetAtt role.Arn
       Tracing: Active
