@@ -1,0 +1,36 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "CloudWatchLogsPerms",
+            "Effect": "Allow",
+            "Action": [
+                "logs:FilterLogEvents",
+                "logs:DescribeLogGroups",
+                "logs:PutSubscriptionFilter",
+                "logs:DescribeSubscriptionFilters",
+                "logs:DeleteSubscriptionFilter",
+                "logs:TestMetricFilter"
+            ],
+            "Resource": "arn:aws:logs:us-east-2:123456789012:*"
+        },
+        {
+            "Sid": "AddPermissionToFunctionPolicy",
+            "Effect": "Allow",
+            "Action": [
+                "lambda:AddPermission",
+                "lambda:RemovePermission",
+                "lambda:GetPolicy"
+            ],
+            "Resource": "arn:aws:lambda:us-east-2:123456789012:function:*"
+        },
+        {
+            "Sid": "ListEventSourceMappingsPerms",
+            "Effect": "Allow",
+            "Action": [
+                "lambda:ListEventSourceMappings"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
