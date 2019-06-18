@@ -25,7 +25,7 @@ The following managed policies provide permissions that are required to use Lamb
 
 When you use an [event source mapping](intro-invocation-modes.md) to invoke your function, Lambda uses the execution role to read event data\. For example, an event source mapping for Amazon Kinesis reads events from a data stream and sends them to your function in batches\. You can use event source mappings with the following services:
 
-**Services that Lambda reads events from**
+**Services That Lambda Reads Events From**
 + [Amazon Kinesis](with-kinesis.md)
 + [Amazon DynamoDB](with-ddb.md)
 + [Amazon Simple Queue Service](with-sqs.md)

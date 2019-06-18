@@ -1,6 +1,6 @@
-# Accessing Amazon CloudWatch Metrics for AWS Lambda<a name="monitoring-functions-access-metrics"></a>
+# Monitoring Functions in the AWS Lambda Console<a name="monitoring-functions-access-metrics"></a>
 
-AWS Lambda automatically monitors functions on your behalf, reporting metrics through Amazon CloudWatch\. These metrics include total requests, duration, and error rates\. 
+AWS Lambda automatically monitors functions on your behalf, reporting metrics through Amazon CloudWatch\. These metrics include total requests, duration, and error rates\.
 
 **To access metrics using the Lambda console**
 

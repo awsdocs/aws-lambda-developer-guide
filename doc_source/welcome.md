@@ -6,7 +6,7 @@ You can use AWS Lambda to run your code in response to events, such as changes t
 
 You can also build [serverless](https://aws.amazon.com/serverless) applications composed of functions that are triggered by events and automatically deploy them using CodePipeline and AWS CodeBuild\. For more information, see [AWS Lambda Applications](deploying-lambda-apps.md)\.
 
-For more information about the AWS Lambda execution environment, see [Lambda Execution Environment and Available Libraries](current-supported-versions.md)\. For information about how AWS Lambda determines compute resources required to execute your code, see [Basic AWS Lambda Function Configuration](resource-model.md)\.
+For more information about the AWS Lambda execution environment, see [AWS Lambda Runtimes](lambda-runtimes.md)\. For information about how AWS Lambda determines compute resources required to execute your code, see [AWS Lambda Function Configuration](resource-model.md)\.
 
 ## When Should I Use AWS Lambda?<a name="when-to-use-cloud-functions"></a>
 
@@ -32,10 +32,4 @@ If you are a first\-time user of AWS Lambda, we recommend that you read the foll
 
 1. **Read the [Deploying Applications with AWS Lambda](deploying-lambda-apps.md) section of this guide\. **This section introduces various AWS Lambda components you work with to create an end\-to\-end experience\.
 
-Beyond the Getting Started exercise, you can explore the various use cases, each of which is provided with a tutorial that walks you through an example scenario\. Depending on your application needs \(for example, whether you want event driven Lambda function invocation or on\-demand invocation\), you can follow specific tutorials that meet your specific needs\. For more information, see [Using AWS Lambda With Other Services](lambda-services.md)\.
-
-The following topics provide additional information about AWS Lambda:
-+ [AWS Lambda Function Versioning and Aliases](versioning-aliases.md)
-+ [Using Amazon CloudWatch](monitoring-functions.md)
-+ [Best Practices for Working with AWS Lambda Functions](best-practices.md)
-+ [AWS Lambda Limits](limits.md)
+Beyond the Getting Started exercise, you can explore the various use cases, each of which is provided with a tutorial that walks you through an example scenario\. Depending on your application needs \(for example, whether you want event driven Lambda function invocation or on\-demand invocation\), you can follow specific tutorials that meet your specific needs\. For more information, see [Using AWS Lambda with Other Services](lambda-services.md)\.

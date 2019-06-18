@@ -61,6 +61,6 @@ If your Lambda function is designed to process events of a specific type, you ca
 
 ## Monitoring and Troubleshooting<a name="lambda-app-monitor"></a>
 
-After your Lambda function is in production, AWS Lambda automatically monitors functions on your behalf, reporting metrics through Amazon CloudWatch\. For more information, see [Accessing Amazon CloudWatch Metrics for AWS Lambda](monitoring-functions-access-metrics.md)\.
+After your Lambda function is in production, AWS Lambda automatically monitors functions on your behalf, reporting metrics through Amazon CloudWatch\. For more information, see [Monitoring Functions in the AWS Lambda Console](monitoring-functions-access-metrics.md)\.
 
 To help you troubleshoot failures in a function, Lambda logs all requests handled by your function and also automatically stores logs that your code generates in Amazon CloudWatch Logs\. For more information, see [Accessing Amazon CloudWatch Logs for AWS Lambda](monitoring-functions-logs.md)\.

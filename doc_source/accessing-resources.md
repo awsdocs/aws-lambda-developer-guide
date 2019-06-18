@@ -24,7 +24,7 @@ except botocore.exceptions.ClientError as e:
         raise
 ```
 
-For convenience, AWS Lambda includes versions of the AWS SDK as part of the execution environment so you don’t have to include it\. See [Lambda Execution Environment and Available Libraries](current-supported-versions.md) for the version of the included SDK\. We recommend including your own copy of the AWS SDK for production applications so you can control your dependencies\.
+For convenience, AWS Lambda includes versions of the AWS SDK as part of the execution environment so you don’t have to include it\. See [AWS Lambda Runtimes](lambda-runtimes.md) for the version of the included SDK\. We recommend including your own copy of the AWS SDK for production applications so you can control your dependencies\.
 
 ## Accessing non AWS Services<a name="accessing-non-aws-services"></a>
 

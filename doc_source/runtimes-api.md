@@ -1,6 +1,6 @@
 # AWS Lambda Runtime Interface<a name="runtimes-api"></a>
 
-AWS Lambda provides an HTTP API for [custom runtimes](runtimes-custom.md) to receive invocation events from Lambda and send response data back within the Lambda [execution environment](current-supported-versions.md)\.
+AWS Lambda provides an HTTP API for [custom runtimes](runtimes-custom.md) to receive invocation events from Lambda and send response data back within the Lambda [execution environment](lambda-runtimes.md)\.
 
 The OpenAPI specification for the runtime API version **2018\-06\-01** is available here: [runtime\-api\.zip](samples/runtime-api.zip)
 

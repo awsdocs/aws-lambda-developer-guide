@@ -11,7 +11,7 @@ As you add libraries and other dependencies to your function, creating and uploa
 To use your Lambda function with AWS resources in an Amazon VPC, configure it with security groups and subnets to [create a VPC connection](vpc.md)\. Lambda uses [elastic network interfaces](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ElasticNetworkInterfaces.html) \(ENIs\) to create the connection, so you need to ensure that your account has enough ENI capacity to handle the number of connections made as your function scales up under load\.
 
 **Topics**
-+ [Basic AWS Lambda Function Configuration](resource-model.md)
++ [AWS Lambda Function Configuration](resource-model.md)
 + [Managing Concurrency](concurrent-executions.md)
 + [AWS Lambda Environment Variables](env_variables.md)
 + [AWS Lambda Function Versioning and Aliases](versioning-aliases.md)

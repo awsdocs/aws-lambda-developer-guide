@@ -201,7 +201,7 @@ To include libraries in a layer, place them in one of the folders supported by y
   └ bin/jq
   ```
 
-For more information about path settings in the Lambda execution environment, see [Lambda Execution Environment and Available Libraries](current-supported-versions.md)\.
+For more information about path settings in the Lambda execution environment, see [Environment Variables Available to Lambda Functions](lambda-environment-variables.md)\.
 
 ## Layer Permissions<a name="configuration-layers-permissions"></a>
 

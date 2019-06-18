@@ -5,9 +5,9 @@ The following sections explain how [common programming patterns and core concept
 
 **Go Runtimes**  
 
-| Name | Identifier | 
-| --- | --- | 
-|  Go 1\.x  |  `go1.x`  | 
+| Name | Identifier | Operating System | 
+| --- | --- | --- | 
+|  Go 1\.x  |  `go1.x`  |  Amazon Linux  | 
 
 **Topics**
 + [AWS Lambda Deployment Package in Go](lambda-go-how-to-create-deployment-package.md)

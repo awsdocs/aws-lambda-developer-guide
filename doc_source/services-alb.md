@@ -44,7 +44,7 @@ Your function processes the event and returns a response to the load balancer in
 ```
 {
     "statusCode": 200,
-    "statusDescription": "HTTP OK",
+    "statusDescription": "200 OK",
     "isBase64Encoded": False,
     "headers": {
         "Content-Type": "text/html"
