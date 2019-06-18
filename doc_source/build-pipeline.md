@@ -1,308 +1,260 @@
-# Building a Pipeline for Your Serverless Application<a name="build-pipeline"></a>
+# Building a Continuous Delivery Pipeline for a Lambda Application with AWS CodePipeline<a name="build-pipeline"></a>
 
- In the following tutorial, you will create an AWS CodePipeline that automates the deployment of your serverless application\. First, you will need to set up a **source stage** to trigger your pipeline\. For the purposes of this tutorial:
-+ We will use GitHub\. For instructions on how to create a GitHub repository, see [Create a Repository in GitHub](https://help.github.com/articles/create-a-repo/)\.
-+ You will need to create an AWS CloudFormation role and add the **AWSLambdaExecute** policy to that role, as outlined below:
+You can use AWS CodePipeline to create a continuous delivery pipeline for your Lambda application\. CodePipeline combines source control, build, and deployment resources to create a pipeline that runs whenever you make a change to your application's source code\.
 
-  1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
+In this tutorial, you create the following resources\.
++ **Repository** – A Git repository in AWS CodeCommit\. When you push a change, the pipeline copies the source code into an Amazon S3 bucket and passes it to the build project\.
++ **Build project** – An AWS CodeBuild build that gets the source code from the pipeline and packages the application\. The source includes a build specification with commands that install dependencies and prepare an AWS Serverless Application Model \(AWS SAM\) template for deployment\.
++ **Deployment configuration** – The pipeline's deployment stage defines a set of actions that take the AWS SAM template from the build output, create a change set in AWS CloudFormation, and execute the change set to update the application's AWS CloudFormation stack\.
++ **Roles** – The pipeline, build, and deployment each have a service role that allows them to manage AWS resources\. The console creates the pipeline and build roles when you create those resources\. You create the role that allows AWS CloudFormation to manage the application stack\.
 
-  1. Follow the steps in [Creating a Role to Delegate Permissions to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide* to create an IAM role \(execution role\) and go to the **To create a role for an AWS service** section\. As you follow the steps to create a role, note the following:
-     + In **Select Role Type**, choose **AWS Service Roles**, and then choose **CloudFormation**\. Choose **Next: Permissions**\.
-     + In **Attach permissions policies**, use the search bar to find and then choose **AWSLambdaExecute**\. Choose **Next: Review**\. 
-     + In **Role Name**, use a name that is unique within your AWS account \(for example, **cloudformation\-lambda\-execution\-role**\) and then choose **Create role**\. 
-     + Open the role you just created and under the **Permissions** tab, choose **Add inline policy**\. 
-     + In **Create Policy** choose the **JSON** tab and enter the following: 
-**Note**  
-Make sure to replace the *region* and *id* placeholders with your region and account id\.
+The pipeline maps a single branch in a repository to a single AWS CloudFormation stack\. You can create additional pipelines to add environments for other branches in the same repository\. You can also add stages to your pipeline for testing, staging, and manual approvals\. For more information about AWS CodePipeline, see [What is AWS CodePipeline](https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html)\.
 
-       ```
-       {
-       	"Statement": [
-       	  {
-       			"Action": [
-       				"s3:GetObject",
-       				"s3:GetObjectVersion",
-       				"s3:GetBucketVersioning"
-       			],
-       			"Resource": "*",
-       			"Effect": "Allow"
-       		},
-       		{
-       			"Action": [
-       				"s3:PutObject"
-       			],
-       			"Resource": [
-       				"arn:aws:s3:::codepipeline*"
-       			],
-       			"Effect": "Allow"
-       		},
-       		{
-       			"Action": [
-       				"lambda:*"
-       			],
-       			"Resource": [
-       				"arn:aws:lambda:region:id:function:*"
-       			],
-       			"Effect": "Allow"
-       		},
-       		{
-       			"Action": [
-       				"apigateway:*"
-       			],
-       			"Resource": [
-       				"arn:aws:apigateway:region::*"
-       			],
-       			"Effect": "Allow"
-       		},
-       		{
-       			"Action": [
-       				"iam:GetRole",
-       				"iam:CreateRole",
-       				"iam:DeleteRole",
-       				"iam:PutRolePolicy"
-       			],
-       			"Resource": [
-       				"arn:aws:iam::id:role/*"
-       			],
-       			"Effect": "Allow"
-       		},
-       		{
-       			"Action": [
-       				"iam:AttachRolePolicy",
-       				"iam:DeleteRolePolicy",
-       				"iam:DetachRolePolicy"
-       			],
-       			"Resource": [
-       				"arn:aws:iam::id:role/*"
-       			],
-       			"Effect": "Allow"
-       		},
-       		{
-       			"Action": [
-       				"iam:PassRole"
-       			],
-       			"Resource": [
-       				"*"
-       			],
-       			"Effect": "Allow"
-       		},
-       		{
-       			"Action": [
-       				"cloudformation:CreateChangeSet"
-       			],
-       			"Resource": [
-       				"arn:aws:cloudformation:region:aws:transform/Serverless-2016-10-31"
-       			],
-       			"Effect": "Allow"
-       		},
-       		{
-       			"Action": [
-       				"codedeploy:CreateApplication",
-       				"codedeploy:DeleteApplication",
-       				"codedeploy:RegisterApplicationRevision"
-       			],
-       			"Resource": [
-       				"arn:aws:codedeploy:region:id:application:*"
-       			],
-       			"Effect": "Allow"
-       		},
-       		{
-       			"Action": [
-       				"codedeploy:CreateDeploymentGroup",
-       				"codedeploy:CreateDeployment",
-       				"codedeploy:GetDeployment"
-       			],
-       			"Resource": [
-       				"arn:aws:codedeploy:region:id:deploymentgroup:*"
-       			],
-       			"Effect": "Allow"
-       		},
-       		{
-       			"Action": [
-       				"codedeploy:GetDeploymentConfig"
-       			],
-       			"Resource": [
-       				"arn:aws:codedeploy:region:id:deploymentconfig:*"
-       			],
-       			"Effect": "Allow"
-       		}
-       	],
-       	"Version": "2012-10-17"
-       }
-       ```
-     + Choose **Validate Policy** and then choose **Apply Policy**\. 
+**Topics**
++ [Prerequisites](#with-pipeline-prepare)
++ [Create an AWS CloudFormation Role](#with-pipeline-create-cfn-role)
++ [Set Up a Repository](#setup-repository)
++ [Create a Pipeline](#create-pipeline1)
++ [Update the Build Stage Role](#update-policy)
++ [Complete the Deployment Stage](#create-pipeline2)
 
-## Step 1: Set Up Your Repository<a name="setup-repository"></a>
+## Prerequisites<a name="with-pipeline-prepare"></a>
 
-You can use any of the Lambda supported runtimes when setting up a repository\. The following example uses Node\.js\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started with AWS Lambda](getting-started.md) to create your first Lambda function\.
 
-To set up your repository, do the following:
-+ Add an *index\.js file* containing the code following:
+To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
-  ```
-  var time = require('time');
-  exports.handler = (event, context, callback) => {
-      var currentTime = new time.Date(); 
-      currentTime.setTimezone("America/Los_Angeles");
-      callback(null, {
-          statusCode: '200',
-          body: 'The time in Los Angeles is: ' + currentTime.toString(),
-      });
-  };
-  ```
-+ Add a *samTemplate\.yaml* file, containing the content following\. This is for the SAM template that defines the resources in your application\. This SAM template defines a Lambda function that is triggered by API Gateway\. Note that the `runtime` parameter uses `nodejs6.10` but you can also specify `nodejs8.10`\. For more information about AWS SAM see [AWS Serverless Application Model](https://github.com/awslabs/serverless-application-model)\.
+```
+~/lambda-project$ this is a command
+this is output
+```
 
-  ```
-  AWSTemplateFormatVersion: '2010-09-09'
-  Transform: AWS::Serverless-2016-10-31
-  Description: Outputs the time
-  Resources:
-    TimeFunction:
-      Type: AWS::Serverless::Function
-      Properties:
-        Handler: index.handler
-        Runtime: nodejs6.10
-        CodeUri: ./
-        Events:
-          MyTimeApi:
-            Type: Api
-            Properties:
-              Path: /TimeResource
-              Method: GET
-  ```
-+ Add a *buildspec\.yml* file\. A build spec is a collection of build commands and related settings, in YAML format, that AWS CodeBuild uses to run a build\. For more information, see [Build Specification Reference for AWS CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html)\. In this example, the build action will be:
-  + Use [npm](https://www.npmjs.com/) to install the time package\.
-  + Run the `Package` command to prepare your deployment package for subsequent deployment steps in your pipeline\. For more information on the package command, see [Uploading Local Artifacts to an S3 Bucket](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-cli-package.html)
+For long commands, an escape character \(`\`\) is used to split a command over multiple lines\.
 
-    ```
-    version: 0.2
-    phases:
-      install:
-        commands:
-          - npm install time
-          - aws cloudformation package --template-file samTemplate.yaml --kms-key-id kms-key-id --s3-bucket bucket-name 
-                                       --output-template-file outputSamTemplate.yaml
-    artifacts:
-      type: zip
-      files:
-        - samTemplate.yaml
-        - outputSamTemplate.yaml
-    ```
+On Linux and macOS, use your preferred shell and package manager\. On Windows 10, you can [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows\-integrated version of Ubuntu and Bash\.
 
-    Note that you need to supply the `--s3-bucket` parameter value with the name of the your Amazon S3 bucket, similar to the step you would take if you were manually going to package the deployment package with SAM, as discussed in the [Packaging](serverless-deploy-wt.md#serverless-pack) step of the previous tutorial\.
+During the build phase, the build script uploads artifacts to Amazon Simple Storage Service \(Amazon S3\)\. You can use an existing bucket, or create a new bucket for the pipeline\. Use the AWS CLI to create a bucket\.
 
-## Step 2: Create Your Pipeline<a name="create-pipeline1"></a>
+```
+$ aws s3 mb s3://lambda-deployment-artifacts-123456789012
+```
 
-****
+## Create an AWS CloudFormation Role<a name="with-pipeline-create-cfn-role"></a>
 
-Follow the steps following to create your AWS CodePipeline\.
+Create a role that gives AWS CloudFormation permission to access AWS resources\.
 
-1. Sign in to the AWS Management Console and open the AWS CodePipeline console\.
+**To create an AWS CloudFormation role**
 
-1. Choose **Get Started Now**\.
+1. Open the [roles page](https://console.aws.amazon.com/iam/home#/roles) in the IAM console\.
 
-1. In **Pipeline name:** enter a name for your pipeline and then choose **Next step**\.
+1. Choose **Create role**\.
 
-1. In **Source provider:** choose **GitHub**\.
+1. Create a role with the following properties\.
+   + **Trusted entity** – **AWS CloudFormation**
+   + **Permissions** – **AWSLambdaExecute**
+   + **Role name** – **cfn\-lambda\-pipeline**
 
-1. Choose **Connect to GitHub:** and then choose the **Repository **and **Branch** you want to connect to\. Every git push to the branch you select will trigger your pipeline\. Choose **Next step**\.
+1. Open the role\. Under the **Permissions** tab, choose **Add inline policy**\. 
 
-1. Choose **AWS CodeBuild** as your **Build provider**\.
+1. In **Create Policy**, choose the **JSON** tab and add the following policy\.
 
-1. Choose **Create a new build project** and enter a project name\.
+   ```
+   {
+       "Statement": [
+           {
+               "Action": [
+                   "apigateway:*",
+                   "codedeploy:*",
+                   "lambda:*",
+                   "cloudformation:CreateChangeSet",
+                   "iam:GetRole",
+                   "iam:CreateRole",
+                   "iam:DeleteRole",
+                   "iam:PutRolePolicy",
+                   "iam:AttachRolePolicy",
+                   "iam:DeleteRolePolicy",
+                   "iam:DetachRolePolicy",
+                   "iam:PassRole",
+                   "s3:GetObjectVersion",
+                   "s3:GetBucketVersioning"
+               ],
+               "Resource": "*",
+               "Effect": "Allow"
+           }
+       ],
+       "Version": "2012-10-17"
+   }
+   ```
 
-1. Choose **Ubuntu** as the operating system\.
+## Set Up a Repository<a name="setup-repository"></a>
 
-1. Choose **Node\.js** as the runtime\.
+Create an AWS CodeCommit repository to store your project files\. For more information, see [Setting Up](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up.html) in the CodeCommit User Guide\.
 
-1. In **Version** choose `aws/codebuild/nodejs:version`
+**To create a repository**
 
-1. In **Build specification** choose `Use the buildspec.yml in the source code root directory`
+1. Open the [Developer Tools console](https://console.aws.amazon.com/codesuite/home)\.
 
-1. Choose **Save build project**\. 
-**Note**  
-A service role for AWS CodeBuild will automatically be created on your behalf\.
+1. Under **Source**, choose **Repositories**\.
 
-   Choose **Next step**\.
+1. Choose **Create repository**\.
 
-1. In **Deployment provider\* ** choose **AWS CloudFormation**\.
+1. Follow the instructions to create and clone a repository named **lambda\-pipeline\-repo**\.
 
-   By selecting this option, AWS CloudFormation commands will be used to deploy the SAM template\. For more information see [Serverless Resources Within AWS SAM](serverless_app.md#serverless_app_resources)\.
+Create the following files in the repository folder\.
 
-1. In **Action mode:** choose **Create or replace a change set**\.
+**Example index\.js**  
+A Lambda function that returns the current time\.  
 
-1. In **Stack name:** enter **MyBetaStack**\.
+```
+var time = require('time');
+exports.handler = (event, context, callback) => {
+    var currentTime = new time.Date(); 
+    currentTime.setTimezone("America/Los_Angeles");
+    callback(null, {
+        statusCode: '200',
+        body: 'The time in Los Angeles is: ' + currentTime.toString(),
+    });
+};
+```
 
-1. In **Change set name:** enter **MyChangeSet**\.
+**Example template\.yaml**  
+The [SAM template](serverless_app.md) that defines the application\.  
 
-1. In **Template file:** enter **outputSamTemplate\.yaml**\.
+```
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Outputs the time
+Resources:
+  TimeFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs8.10
+      CodeUri: ./
+      Events:
+        MyTimeApi:
+          Type: Api
+          Properties:
+            Path: /TimeResource
+            Method: GET
+```
 
-1. In **Capabilities:** choose **CAPABILITY\_IAM**\.
+**Example buildspec\.yml**  
+An [AWS CodeBuild build specification](https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html) that installs required packages and uploads the deployment package to Amazon S3\. Replace the highlighted text with the name of your bucket\.  
 
-1. In **Role** select the AWS CloudFormation role you created at the beginning of this tutorial and then choose **Next step**\.
+```
+version: 0.2
+phases:
+  install:
+    commands:
+      - npm install time
+      - export BUCKET=lambda-deployment-artifacts-123456789012
+      - aws cloudformation package --template-file template.yaml --s3-bucket $BUCKET --output-template-file outputtemplate.yaml
+artifacts:
+  type: zip
+  files:
+    - template.yaml
+    - outputtemplate.yaml
+```
 
-1. Choose **Create role**\. Choose **Next** and then choose **Allow\.** Choose **Next step**\.
+Commit and push the files to CodeCommit\.
 
-1. Review your pipeline and then choose **Create pipeline**\. 
+```
+~/lambda-pipeline-repo$ git add .
+~/lambda-pipeline-repo$ git commit -m "project files"
+~/lambda-pipeline-repo$ git push
+```
 
-## Step 3: Update the Generated Service Policy<a name="update-policy"></a>
+## Create a Pipeline<a name="create-pipeline1"></a>
 
-****
+Create a pipeline that deploys your application\. The pipeline monitors your repository for changes, runs an AWS CodeBuild build to create a deployment package, and deploys the application with AWS CloudFormation\. During the pipeline creation process, you also create the AWS CodeBuild build project\.
 
-Complete the following steps to allow AWS CodeBuild to upload build artifacts to your Amazon S3 bucket\.
+**To create a pipeline**
 
-1. Go to the IAM Management Console\.
+1. Open the [Developer Tools console](https://console.aws.amazon.com/codesuite/home)\.
 
-1. Choose **Roles**\.
+1. Under **Pipeline**, choose **Pipelines**\.
 
-1. Open the service role that was generated for your project, typically **code\-build\-*project\-name*\-service\-role**\.
+1. Choose **Create pipeline**\.
 
-1. Under the **Permissions** tab, choose **Add inline policy**\.
+1. Configure the pipeline settings and choose **Next**\.
+   + **Pipeline name** – **lambda\-pipeline**
+   + **Service role** – **New service role**
+   + **Artifact store** – **Default location**
 
-1. In **service**, choose **Choose a service**\.
+1. Configure source stage settings and choose **Next**\.
+   + **Source provider** – **AWS CodeCommit**
+   + **Repository name** – **lambda\-pipeline\-repo**
+   + **Branch name** – **master**
+   + **Change detection options** – **Amazon CloudWatch Events**
 
-1. In **Select a service below**, choose **S3**\.
+1. For **Build provider**, choose **AWS CodeBuild**, and then choose **Create project**\.
 
-1. In **Actions**, choose **Select actions**\.
+1. Configure build project settings and choose **Continue to CodePipeline**\.
+   + **Project name** – **lambda\-pipeline\-build**
+   + **Operating system** – **Ubuntu**
+   + **Runtime** – **Node\.js**
+   + **Runtime version** – **aws/codebuild/nodejs:8\.11\.0**
+   + **Image version** – **Latest**
+   + **Buildspec name** – **buildspec\.yml**
 
-1. Expand **Write** under **Access level groups** and then choose **PutObject**\.
+1. Choose **Next**\.
 
-1. Choose **Resources** and then choose the **Any** checkbox\.
+1. Configure deploy stage settings and choose **Next**\.
+   + **Deploy provider** – **AWS CloudFormation**
+   + **Action mode** – **Create or replace a change set**
+   + **Stack name** – **lambda\-pipeline\-stack**
+   + **Change set name** – **lambda\-pipeline\-changeset**
+   + **Template** – **BuildArtifact::outputtemplate\.yaml**
+   + **Capabilities** – **CAPABILITY\_IAM**
+   + **Role name** – **cfn\-lambda\-pipeline**
 
-1. Choose **Review policy**\.
+1. Choose **Create pipeline**\.
 
-1. Enter a **Name\*** and then choose **Create policy**\. Then return to the pipeline you created in the previous section\.
+The pipeline fails the first time it runs because it needs additional permissions\. In the next section, you add permissions to the role that's generated for your build stage\.\.
 
-## Step 4: Complete Your Beta Deployment Stage<a name="create-pipeline2"></a>
+## Update the Build Stage Role<a name="update-policy"></a>
 
-****
+During the build stage, AWS CodeBuild needs permission to upload the build output to your Amazon S3 bucket\.
 
-Use the following steps to complete your Beta stage\.
+**To update the role**
+
+1. Open the [roles page](https://console.aws.amazon.com/iam/home#/roles) in the IAM console\.
+
+1. Choose **code\-build\-lamba\-pipeline\-service\-role**\.
+
+1. Choose **Attach policies**\.
+
+1. Attach **AmazonS3FullAccess**\.
+
+## Complete the Deployment Stage<a name="create-pipeline2"></a>
+
+The deployment stage has an action that creates a change set for the AWS CloudFormation stack that manages your Lambda application\. Add a second action that executes the change set to complete the deployment\.
+
+**To update the deployment stage**
+
+1. Open your pipeline in the [Developer Tools console](https://console.aws.amazon.com/codesuite/home)\.
 
 1. Choose **Edit**\.
 
-1. Choose the **\+** icon next to **MyBetaStack**\.
+1. Next to **Deploy**, choose **Edit stage**\.
 
-1. In **Action category:**, if not already selected, choose **Deploy**\.
+1. Choose **Add action group**\.
 
-1. In **Deployment provider\***, if not already selected, choose **AWS CloudFormation**\.
+1. Configure deploy stage settings and choose **Next**\.
+   + **Action name** – **execute\-changeset**
+   + **Deploy provider** – **AWS CloudFormation**
+   + **Input artifacts** – **BuildArtifact**
+   + **Action mode** – **Execute a change set**
+   + **Stack name** – **lambda\-pipeline\-stack**
+   + **Change set name** – **lambda\-pipeline\-changeset**
 
-1. In **Action mode\* ** choose **Execute a change set**\. This is similar to the step you would take if you were manually going to deploy the package, as discussed in the [Deployment](serverless-deploy-wt.md#serv-deploy) step of the previous tutorial\. `CreateChangeSet` transforms the SAM template to the full AWS CloudFormation format and `deployChangeSet` deploys the AWS CloudFormation template\. 
+1. Choose **Save**\.
 
-1. In **Stack name\* ** enter or choose **MyBetaStack**\.
+1. Choose **Done**\.
 
-1. In **Change set name\* ** enter **MyChangeSet**\.
+1. Choose **Save**\.
 
-1. Choose **Add action**\.
+1. Choose **Release change** to run the pipeline\.
 
-1. Choose **Save pipeline changes**\.
-
-1. Choose **Save and continue**\.
-
- Your pipeline is ready\. Any git push to the branch you connected to this pipeline is going to trigger a deployment\. To test your pipeline and deploy your application for the first time, do one of the following: 
-+ Perform a git push to the branch connected to your pipeline\.
-+ Go the AWS CodePipeline console, choose the name of the pipeline you created and then choose **Release change**\. 
-
-## Next Step<a name="automating-deployment-next-step1"></a>
-
- [Gradual Code Deployment](automating-updates-to-serverless-apps.md) 
+Your pipeline is ready\. Push changes to the master branch to trigger a deployment\.

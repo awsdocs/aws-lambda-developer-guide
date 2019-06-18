@@ -1,4 +1,4 @@
-# Function Errors \(Go\)<a name="go-programming-model-errors"></a>
+# AWS Lambda Function Errors in Go<a name="go-programming-model-errors"></a>
 
 You can create custom error handling to raise an exception directly from your Lambda function and handle it directly\. 
 
@@ -21,12 +21,13 @@ func main() {
 }
 ```
 
-Which will return:
+Which returns the following:
 
 ```
 {
-            "errorMessage": "something went wrong!"
-            }
+  "errorMessage": "something went wrong!",
+  "errorType": "errorString"
+}
 ```
 
 ## Function Error Handling<a name="python-custom-errors"></a>

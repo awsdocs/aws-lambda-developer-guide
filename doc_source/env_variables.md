@@ -1,11 +1,8 @@
-# Environment Variables<a name="env_variables"></a>
+# AWS Lambda Environment Variables<a name="env_variables"></a>
 
 Environment variables for Lambda functions enable you to dynamically pass settings to your function code and libraries, without making changes to your code\. Environment variables are key\-value pairs that you create and modify as part of your function configuration, using either the AWS Lambda Console, the AWS Lambda CLI or the AWS Lambda SDK\. AWS Lambda then makes these key value pairs available to your Lambda function code using standard APIs supported by the language, like `process.env` for Node\.js functions\. 
 
 You can use environment variables to help libraries know what directory to install files in, where to store outputs, store connection and logging settings, and more\. By separating these settings from the application logic, you don't need to update your function code when you need to change the function behavior based on different settings\. 
-
-**Note**  
-This feature is not yet available in AWS regions based in China \(Beijing or Ningxia\)\. Deploying a Lambda function that contains Environment Variables will result in an `InvalidParameterException`\.
 
 ## Setting Up<a name="env_setting_up"></a>
 
@@ -24,15 +21,11 @@ You can also use the AWS CLI to create Lambda functions that contain environment
 The following example creates a new Lambda function that sets the `LD_LIBRARY_PATH` environment variable, which is used to specify a directory where shared libraries are dynamically loaded at runtime\. In this example, the Lambda function code uses the shared library in the `/usr/bin/test/lib64` directory\. Note that the `Runtime` parameter uses `nodejs6.10` but you can also specify `nodejs8.10`\. 
 
 ```
-aws lambda create-function \
-    --region us-east-1
-    --function-name myTestFunction
-    --zip-file fileb://path/package.zip
-    --role role-arn
-    --environment Variables="{LD_LIBRARY_PATH=/usr/bin/test/lib64}"
-    --handler index.handler
-    --runtime nodejs6.10
-    --profile default
+$ aws lambda create-function --function-name myTestFunction \
+    --zip-file fileb://package.zip \
+    --role role-arn \
+    --environment Variables="{LD_LIBRARY_PATH=/usr/bin/test/lib64}" \
+    --handler index.handler --runtime nodejs6.10
 ```
 
 ## Rules for Naming Environment Variables<a name="env_limits"></a>
@@ -43,7 +36,7 @@ Other requirements include:
 + Must start with letters *\[a\-zA\-Z\]*\. 
 + Can only contain alphanumeric characters and underscores *\(\[a\-zA\-Z0\-9\_\]*\. 
 
-In addition, there are a specific set of keys that AWS Lambda reserves\. If you try to set values for any of these reserved keys, you will receive an error message indicating that the action is not allowed\. For more information on these keys, see [Environment Variables Available to Lambda Functions](current-supported-versions.md#lambda-environment-variables)\.
+In addition, there are a specific set of keys that AWS Lambda reserves\. If you try to set values for any of these reserved keys, you will receive an error message indicating that the action is not allowed\. For more information on these keys, see [Environment Variables Available to Lambda Functions](lambda-environment-variables.md)\.
 
 ## Environment Variables and Function Versioning<a name="env_versioning"></a>
 
@@ -64,7 +57,7 @@ If you use your own key, you will be billed per [AWS Key Management Service Pric
 If you’re using the default KMS service key for Lambda, then no additional IAM permissions are required in your function execution role – your role will just work automatically without changes\. If you’re supplying your own \(custom\) KMS key, then you’ll need to add `kms:Decrypt` to your execution role\. In addition, the user that will be creating and updating the Lambda function must have permissions to use the KMS key\. For more information on KMS keys, see the [Using Key Policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)\.
 
 **Note**  
-AWS Lambda authorizes your function to use the default KMS key through a user grant, which it adds when the role is first selected\. If you re\-create a function's execution role \(that is, delete and create a role of the same name\) and the role does not have `kms:Decrypt` permissions, you will need to refresh the role's grant\. You can do so by toggling the function's execution role after the role has been re\-created in the console\. 
+AWS Lambda authorizes your function to use the default KMS key through a user grant, which it adds when you assign the role to the function\. If you delete the role and create a new role with the same name, you need to refresh the role's grant\. Refresh the grant by re\-assigning the role to the function\. 
 
 ### Storing Sensitive Information<a name="env-storing-sensitive-data"></a>
 
@@ -80,7 +73,3 @@ If your function configuration exceeds 4KB, or you use environment variable keys
 Lambda was unable to configure access to your environment variables because the KMS key used is disabled. 
             Please check your KMS key settings.
 ```
-
-### Next Step<a name="env-next-step"></a>
-
-[Create a Lambda Function Using Environment Variables](tutorial-env_cli.md)

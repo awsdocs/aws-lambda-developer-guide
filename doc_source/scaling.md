@@ -2,10 +2,10 @@
 
 Concurrent executions refers to the number of executions of your function code that are happening at any given time\. You can estimate the concurrent execution count, but the concurrent execution count will differ depending on whether or not your Lambda function is processing events from a poll\-based event source\. 
 
- If you create a Lambda function to process events from event sources that aren't poll\-based \(for example, Lambda can process every event from other sources, like Amazon S3 or API Gateway\), each published event is a unit of work, in parallel, up to your account limits\. Therefore, the number of events \(or requests\) these event sources publish influences the concurrency\. You can use the this formula to estimate your concurrent Lambda function invocations:
+If you create a Lambda function to process events from event sources that aren't poll\-based \(for example, Lambda can process every event from other sources, like Amazon S3 or API Gateway\), each published event is a unit of work, in parallel, up to your account limits\. Therefore, the number of invocations these event sources make influences the concurrency\. You can use the this formula to estimate the capacity used by your function:
 
 ```
-events (or requests) per second * function duration
+invocations per second * average execution duration in seconds
 ```
 
 For example, consider a Lambda function that processes Amazon S3 events\. Suppose that the Lambda function takes on average three seconds and Amazon S3 publishes 10 events per second\. Then, you will have 30 concurrent executions of your Lambda function\.
@@ -26,7 +26,7 @@ The number of concurrent executions for poll\-based event sources also depends o
 
 ## Request Rate<a name="concurrent-executions-request-rate"></a>
 
-Request rate refers to the rate at which your Lambda function is invoked\. For all services except the stream\-based services, the request rate is the rate at which the event sources generate the events\. For stream\-based services, AWS Lambda calculates the request rate as follows:
+Request rate refers to the rate at which your Lambda function is invoked\. For all services except the poll\-based services, the request rate is the rate at which the event sources generate the events\. For poll\-based services, AWS Lambda calculates the request rate as follows:
 
 ```
 request rate = number of concurrent executions / function duration
@@ -36,7 +36,15 @@ For example, if there are five active shards on a stream \(that is, you have fiv
 
 ## Automatic Scaling<a name="scaling-behavior"></a>
 
-AWS Lambda dynamically scales function execution in response to increased traffic, up to your [concurrency limit](limits.md#limits-list)\. Under sustained load, your function's concurrency bursts to an initial level between 500 and 3000 concurrent executions that varies per region\. After the initial burst, the function's capacity increases by an additional 500 concurrent executions each minute until either the load is accommodated, or the total concurrency of all functions in the region hits the limit\.
+AWS Lambda will dynamically scale capacity in response to increased traffic, subject to your account's [Account Level Concurrent Execution Limit](concurrent-executions.md#concurrent-execution-safety-limit)\. To handle any burst in traffic, Lambda will immediately increase your concurrently executing functions by a predetermined amount, dependent on which region it's executed \(see table below\)\.
+
+ If the default **Immediate Concurrency Increase** value, as noted in the table below, is not sufficient to accommodate the traffic surge, Lambda will continue to increase the number of concurrent function executions by 500 per minute until your account safety limit has been reached or the number of concurrently executing functions is sufficient to successfully process the increased load\.
+
+**Note**  
+Because Lambda depends on Amazon EC2 to provide Elastic Network Interfaces for VPC\-enabled Lambda functions, these functions are also subject to Amazon EC2's rate limits as they scale\. If Amazon EC2 rate limits prevent VPC\-enabled functions from adding 500 concurrent invocations per minute, please request a limit increase by following the instructions in [Limits](limits.md). When requesting the limit increase however, please use the **Use Case Description** field to include any throttling responses that you may have recieved from EC2, along with details about any previous limit increase\.  
+Beyond this rate \(i\.e\. for applications taking advantage of the full Immediate concurrency increase\), your application should handle Amazon EC2 throttling \(502 EC2ThrottledException\) through client\-side retry and backoff\. For more details, see [Error Retries and Exponential Backoff in AWS](http://docs.aws.amazon.com/general/latest/gr/api-retries.html)\.
+
+AWS Lambda dynamically scales function execution in response to increased traffic, up to your [concurrency limit](limits.md)\. Under sustained load, your function's concurrency bursts to an initial level between 500 and 3000 concurrent executions that varies per region\. After the initial burst, the function's capacity increases by an additional 500 concurrent executions each minute until either the load is accommodated, or the total concurrency of all functions in the region hits the limit\.
 
 
 ****  
@@ -47,12 +55,12 @@ AWS Lambda dynamically scales function execution in response to increased traffi
 | US West \(Oregon\), US East \(N\. Virginia\) | 3000 | 
 | Asia Pacific \(Seoul\), Asia Pacific \(Mumbai\), Asia Pacific \(Singapore\), Asia Pacific \(Sydney\) | 500 | 
 | Asia Pacific \(Tokyo\) | 1000 | 
-| EU \(London\), EU \(Paris\) | 500 | 
+| EU \(London\), EU \(Paris\), EU \(Stockholm\) | 500 | 
 | EU \(Frankfurt\) | 1000 | 
 | EU \(Ireland\) | 3000 | 
 | South America \(São Paulo\) | 500 | 
 | China \(Beijing\), China \(Ningxia\) | 500 | 
-| AWS GovCloud \(US\) | 500 | 
+| AWS GovCloud \(US\-West\) | 500 | 
 
 **Note**  
 If your function is connected to a VPC, the [Amazon VPC network interface limit](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_vpc) can prevent it from scaling\. For more information, see [Configuring a Lambda Function to Access Resources in an Amazon VPC](vpc.md)\.

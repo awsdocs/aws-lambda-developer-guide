@@ -1,11 +1,11 @@
-# Creating a Deployment Package \(PowerShell\)<a name="lambda-powershell-how-to-create-deployment-package"></a>
+# AWS Lambda Deployment Package in PowerShell<a name="lambda-powershell-how-to-create-deployment-package"></a>
 
 A PowerShell Lambda deployment package is a ZIP file that contains your PowerShell script, PowerShell modules that are required for your PowerShell script, and the assemblies needed to host PowerShell Core\.
 
 **AWSLambdaPSCore** is a PowerShell module that you can install from the [ PowerShell Gallery](https://www.powershellgallery.com/packages/AWSLambdaPSCore)\. You use this module to create your PowerShell Lambda deployment package\.
 
-**Note**  
-You're required to use the `#Requires` statement within your PowerShell scripts to indicate the modules that your scripts depend on\. This statement performs two important tasks\. 1\) It communicates to other developers which modules the script uses, and 2\) it identifies the dependent modules that AWS PowerShell tools need to package with the script, as part of the deployment\. For more information about the `#Requires` statement in PowerShell, see [ About Requires](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_requires?view=powershell-6)\. For more information about PowerShell deployment packages, see [Creating a Deployment Package \(PowerShell\)](#lambda-powershell-how-to-create-deployment-package)\.  
+You're required to use the `#Requires` statement within your PowerShell scripts to indicate the modules that your scripts depend on\. This statement performs two important tasks\. 1\) It communicates to other developers which modules the script uses, and 2\) it identifies the dependent modules that AWS PowerShell tools need to package with the script, as part of the deployment\. For more information about the `#Requires` statement in PowerShell, see [ About Requires](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_requires?view=powershell-6)\. For more information about PowerShell deployment packages, see [AWS Lambda Deployment Package in PowerShell](#lambda-powershell-how-to-create-deployment-package)\.
+
 When your PowerShell Lambda function uses the AWS PowerShell cmdlets, be sure to set a `#Requires` statement that references the `AWSPowerShell.NetCore` module, which supports PowerShell Core—and not the `AWSPowerShell` module, which only supports Windows PowerShell\. Also, be sure to use version 3\.3\.270\.0 or newer of `AWSPowerShell.NetCore`, which optimizes the cmdlet import process\. If you use an older version, you'll experience longer cold starts\. For more information, see [ AWS Tools for PowerShell](https://aws.amazon.com/documentation/powershell/?id=docs_gateway)\.
 
 Before you get started, you must first set up a PowerShell development environment\. For instructions on how to do this, see [Setting Up a PowerShell Development Environment](lambda-powershell-setup-dev-environment.md)\.
@@ -103,10 +103,10 @@ To create a new PowerShell script, upload it, and test it, follow this procedure
 
 1. **Test the Lambda function\.**
 
-   You can test the PowerShell Lambda function that you just published by using the **dotnet** command line interface \(CLI\) extension or the console\. The following dotnet CLI command is an example of how to test your function:
+   You can test the PowerShell Lambda function that you just published by using the **dotnet** CLI from a command prompt\. Use the `lambda invoke-function` command to invoke your function\.
 
    ```
-   dotnet lambda invoke-function MyFirstPSScript --region us-east-1
+   > dotnet lambda invoke-function MyFirstPSScript
    ```
 
    For more information about the dotnet CLI extension, see [\.NET Core CLI](lambda-dotnet-coreclr-deployment-package.md)\.

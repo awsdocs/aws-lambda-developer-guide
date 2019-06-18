@@ -1,4 +1,4 @@
-# Function Errors \(Java\)<a name="java-exceptions"></a>
+# AWS Lambda Function Errors in Java<a name="java-exceptions"></a>
 
 If your Lambda function throws an exception, AWS Lambda recognizes the failure and serializes the exception information into JSON and returns it\. Following is an example error message:
 

@@ -1,31 +1,31 @@
 # AccountLimit<a name="API_AccountLimit"></a>
 
-Provides limits of code size and concurrency associated with the current account and region\. For more information or to request a limit increase for concurrent executions, see [Lambda Limits](https://docs.aws.amazon.com/lambda/latest/dg/limits.html)\. 
+Limits that are related to concurrency and code storage\. All file and storage sizes are in bytes\.
 
 ## Contents<a name="API_AccountLimit_Contents"></a>
 
  **CodeSizeUnzipped**   <a name="SSS-Type-AccountLimit-CodeSizeUnzipped"></a>
-Size, in bytes, of code/dependencies that you can zip into a deployment package \(uncompressed zip/jar size\) for uploading\. The default limit is 250 MB\.  
+The maximum size of your function's code and layers when they're extracted\.  
 Type: Long  
 Required: No
 
  **CodeSizeZipped**   <a name="SSS-Type-AccountLimit-CodeSizeZipped"></a>
-Size, in bytes, of a single zipped code/dependencies package you can upload for your Lambda function\(\.zip/\.jar file\)\. Try using Amazon S3 for uploading larger files\. Default limit is 50 MB\.  
+The maximum size of a deployment package when it's uploaded directly to AWS Lambda\. Use Amazon S3 for larger files\.  
 Type: Long  
 Required: No
 
  **ConcurrentExecutions**   <a name="SSS-Type-AccountLimit-ConcurrentExecutions"></a>
-Number of simultaneous executions of your function per region\. The default limit is 1000\.  
+The maximum number of simultaneous function executions\.  
 Type: Integer  
 Required: No
 
  **TotalCodeSize**   <a name="SSS-Type-AccountLimit-TotalCodeSize"></a>
-Maximum size, in bytes, of a code package you can upload per region\. The default size is 75 GB\.   
+The amount of storage space that you can use for all deployment packages and layer archives\.  
 Type: Long  
 Required: No
 
  **UnreservedConcurrentExecutions**   <a name="SSS-Type-AccountLimit-UnreservedConcurrentExecutions"></a>
-The number of concurrent executions available to functions that do not have concurrency limits set\. For more information, see [Managing Concurrency](https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html)\.  
+The maximum number of simultaneous function executions, minus the capacity that's reserved for individual functions with [PutFunctionConcurrency](API_PutFunctionConcurrency.md)\.  
 Type: Integer  
 Valid Range: Minimum value of 0\.  
 Required: No
@@ -35,5 +35,6 @@ Required: No
 For more information about using this API in one of the language\-specific AWS SDKs, see the following:
 +  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/AccountLimit) 
 +  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/AccountLimit) 
++  [AWS SDK for Go \- Pilot](https://docs.aws.amazon.com/goto/SdkForGoPilot/lambda-2015-03-31/AccountLimit) 
 +  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/AccountLimit) 
 +  [AWS SDK for Ruby V2](https://docs.aws.amazon.com/goto/SdkForRubyV2/lambda-2015-03-31/AccountLimit) 

@@ -8,7 +8,7 @@ Sample code is available for the following languages\.
 
 ## Node\.js<a name="with-android-example-deployment-pkg-nodejs"></a>
 
-The following example uses data to generate a string reponse\.
+The following example uses data to generate a string response\.
 
 **Example index\.js**  
 
@@ -22,11 +22,11 @@ exports.handler = function(event, context, callback) {
 }
 ```
 
-Zip up the sample code to create a deployment package\. For instructions, see [Creating a Deployment Package \(Node\.js\)](nodejs-create-deployment-pkg.md)\.
+Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Node\.js](nodejs-create-deployment-pkg.md)\.
 
 ## Java<a name="with-on-demand-custom-android-example-deployment-pkg-java"></a>
 
-The following example uses data to generate a string reponse\.
+The following example uses data to generate a string response\.
 
 In the code, the `handler` \(`myHandler`\) uses the `RequestClass` and `ResponseClass` types for the input and output\. The code provides implementation for these types\.
 
@@ -100,4 +100,4 @@ public class HelloPojo {
 **Dependencies**
 + `aws-lambda-java-core`
 
-Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [Creating a Deployment Package \(Java\)](lambda-java-how-to-create-deployment-package.md)\.
+Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Java](lambda-java-how-to-create-deployment-package.md)\.

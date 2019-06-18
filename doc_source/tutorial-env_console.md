@@ -13,9 +13,9 @@ This tutorial will demonstrate how you can use the Lambda console to encrypt an 
 1. In **Select blueprint**, choose the **Author from scratch** button\.
 
 1. In **Basic information**, do the following:
-   + In **Name\***, specify your Lambda function name\.
-   + In **Role\***, choose **Choose an existing role**\.
-   + In **Existing role\***, choose **lambda\_basic\_execution**\.
+   + In **Name**, specify your Lambda function name\.
+   + In **Role**, choose **Choose an existing role**\.
+   + In **Existing role**, choose **lambda\_basic\_execution**\.
 **Note**  
 If the policy of the execution role does not have the `decrypt` permission, you will need add it\.
    + Choose **Create function**\.
@@ -32,7 +32,7 @@ If the policy of the execution role does not have the `decrypt` permission, you 
 
 1. Expand the **Environment variables** section\.
 
-1. Enter your key\-value pair\. Expand the **Encryption configuration** section\. Note that Lambda provides a default service key under **KMS key to encrypt at rest** which encrypts your information after it has been uploaded\. If the information you provided is sensitive, you can additionally check the **Enable helpers for encryption in transit** checkbox and supply a custom key\. This masks the value you entered and results in a call to AWS KMS to encrypt the value and return it as `Ciphertext`\. If you haven't created a KMS key for your account, you will be provided a link to the AWS IAM console to create one\. The account must have have `encrypt` and `decrypt` permissions for that key\. Note that the **Encrypt** button toggles to **Decrypt** after you choose it\. This affords you the option to update the information\. Once you have done that, choose the **Encrypt** button\.
+1. Enter your key\-value pair\. Expand the **Encryption configuration** section\. Note that Lambda provides a default service key under **KMS key to encrypt at rest** which encrypts your information after it has been uploaded\. If the information you provided is sensitive, you can additionally check the **Enable helpers for encryption in transit** checkbox and supply a custom key\. This masks the value you entered and results in a call to AWS KMS to encrypt the value and return it as `Ciphertext`\. If you haven't created a KMS key for your account, you will be provided a link to the AWS IAM console to create one\. The account must have `encrypt` and `decrypt` permissions for that key\. Note that the **Encrypt** button toggles to **Decrypt** after you choose it\. This affords you the option to update the information\. Once you have done that, choose the **Encrypt** button\.
 
    The **Code** button provides sample decrypt code specific to the runtime of your Lambda function that you can use with your application\.
 **Note**  

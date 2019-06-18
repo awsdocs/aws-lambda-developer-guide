@@ -1,6 +1,6 @@
-# Lambda@Edge<a name="lambda-edge"></a>
+# Using AWS Lambda with CloudFront Lambda@Edge<a name="lambda-edge"></a>
 
-Lambda@Edge lets you run Lambda functions to customize content that CloudFront delivers, executing the functions in AWS locations closer to the viewer\. The functions run in response to CloudFront events, without provisioning or managing servers\. You can use Lambda functions to change CloudFront requests and responses at the following points:
+Lambda@Edge lets you run Node\.js Lambda functions to customize content that CloudFront delivers, executing the functions in AWS locations closer to the viewer\. The functions run in response to CloudFront events, without provisioning or managing servers\. You can use Lambda functions to change CloudFront requests and responses at the following points:
 + After CloudFront receives a request from a viewer \(viewer request\)
 + Before CloudFront forwards the request to the origin \(origin request\)
 + After CloudFront receives the response from the origin \(origin response\)
@@ -9,6 +9,41 @@ Lambda@Edge lets you run Lambda functions to customize content that CloudFront d
 ![\[Conceptual graphic that shows how the CloudFront events that can trigger a Lambda function.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/cloudfront-events-that-trigger-lambda-functions.png)
 
 You can also generate responses to viewers without ever sending the request to the origin\.
+
+**Example CloudFront Message Event**  
+
+```
+{
+  "Records": [
+    {
+      "cf": {
+        "config": {
+          "distributionId": "EDFDVBD6EXAMPLE"
+        },
+        "request": {
+          "clientIp": "2001:0db8:85a3:0:0:8a2e:0370:7334",
+          "method": "GET",
+          "uri": "/picture.jpg",
+          "headers": {
+            "host": [
+              {
+                "key": "Host",
+                "value": "d111111abcdef8.cloudfront.net"
+              }
+            ],
+            "user-agent": [
+              {
+                "key": "User-Agent",
+                "value": "curl/7.51.0"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}
+```
 
 With Lambda@Edge, you can build a variety of solutions, for example:
 + Inspect cookies to rewrite URLs to different versions of a site for A/B testing\.

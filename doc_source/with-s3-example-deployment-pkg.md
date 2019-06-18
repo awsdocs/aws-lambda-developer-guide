@@ -14,18 +14,15 @@ The following example code receives an Amazon S3 event input and processes the m
 **Example index\.js**  
 
 ```
-// dependencies
 var async = require('async');
 var AWS = require('aws-sdk');
 var gm = require('gm')
             .subClass({ imageMagick: true }); // Enable ImageMagick integration.
 var util = require('util');
 
-// constants
 var MAX_WIDTH  = 100;
 var MAX_HEIGHT = 100;
 
-// get reference to S3 client 
 var s3 = new AWS.S3();
  
 exports.handler = function(event, context, callback) {
@@ -133,7 +130,7 @@ The deployment package is a \.zip file containing your Lambda function code and 
    The AWS Lambda runtime already has the AWS SDK for JavaScript in Node\.js, so you only need to install the other libraries\. Open a command prompt, navigate to the `examplefolder`, and install the libraries using the `npm` command, which is part of Node\.js\.
 
    ```
-   npm install async gm
+   $ npm install async gm
    ```
 
 1. Save the sample code to a file named index\.js\.
@@ -255,8 +252,6 @@ public class S3EventProcessorCreateThumbnail implements
             g.setPaint(Color.white);
             g.fillRect(0, 0, width, height);
             // Simple bilinear resize
-            // If you want higher quality algorithms, check this link:
-            // https://today.java.net/pub/a/today/2007/04/03/perils-of-image-getscaledinstance.html
             g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
                     RenderingHints.VALUE_INTERPOLATION_BILINEAR);
             g.drawImage(srcImage, 0, 0, width, height, null);
@@ -296,7 +291,7 @@ Amazon S3 invokes your Lambda function using the `Event` invocation type, where 
 + `aws-lambda-java-events`
 + `aws-java-sdk-s3`
 
-Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [Creating a Deployment Package \(Java\)](lambda-java-how-to-create-deployment-package.md)\.
+Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Java](lambda-java-how-to-create-deployment-package.md)\.
 
 ## Python 3<a name="with-s3-example-deployment-pkg-python"></a>
 
@@ -305,7 +300,6 @@ The following example code receives an Amazon S3 event input and processes the m
 **Example CreateThumbnail\.py**  
 
 ```
-from __future__ import print_function
 import boto3
 import os
 import sys
@@ -338,26 +332,24 @@ def handler(event, context):
 
 1. Create a virtual environment\.
 
-   `virtualenv ~/shrink_venv`
+   `$ virtualenv ~/shrink_venv`
 
-   `source ~/shrink_venv/bin/activate `
+   `$ source ~/shrink_venv/bin/activate `
 
 1. Install libraries in the virtual environment
 
-   `pip install Pillow `
+   `$ pip install Pillow`
 
-   `pip install boto3 `
-**Note**  
-AWS Lambda includes the AWS SDK for Python \(Boto 3\), so you don't need to include it in your deployment package, but you can optionally include it for local testing\.
+   `$ pip install boto3`
 
 1. Add the contents of `lib` and `lib64` site\-packages to your \.zip file\.
 
-   `cd $VIRTUAL_ENV/lib/python3.6/site-packages`
+   `$ cd $VIRTUAL_ENV/lib/python3.7/site-packages`
 
-   `zip -r9 ~/CreateThumbnail.zip . `
+   `$ zip -r ~/CreateThumbnail.zip . `
 
 1. Add your python code to the \.zip file
 
-   cd \~
+   `$ cd ~`
 
-   `zip -g CreateThumbnail.zip CreateThumbnail.py `
+   `$ zip -g CreateThumbnail.zip CreateThumbnail.py `

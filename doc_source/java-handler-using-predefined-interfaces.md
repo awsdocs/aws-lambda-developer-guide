@@ -1,6 +1,6 @@
 # Leveraging Predefined Interfaces for Creating Handler \(Java\)<a name="java-handler-using-predefined-interfaces"></a>
 
-You can use one of the predefined interfaces provided by the AWS Lambda Java core library \(`aws-lambda-java-core`\) to create your Lambda function handler, as an alternative to writing your own handler method with an arbitrary name and parameters\. For more information about handlers, see \(see [Lambda Function Handler \(Java\)](java-programming-model-handler-types.md)\)\.
+You can use one of the predefined interfaces provided by the AWS Lambda Java core library \(`aws-lambda-java-core`\) to create your Lambda function handler, as an alternative to writing your own handler method with an arbitrary name and parameters\. For more information about handlers, see \(see [AWS Lambda Function Handler in Java](java-programming-model-handler-types.md)\)\.
 
 You can implement one of the predefined interfaces, `RequestStreamHandler` or `RequestHandler` and provide implementation for the `handleRequest` method that the interfaces provide\. You implement one of these interfaces depending on whether you want to use standard Java types or custom POJO types for your handler input/output \(where AWS Lambda automatically serializes and deserializes the input and output to Match your data type\), or customize the serialization using the `Stream` type\.
 
@@ -133,7 +133,7 @@ public class Response {
 ```
 
 You can create a Lambda function from this code and test the end\-to\-end experience as follows:
-+ Using the preceding code, create a deployment package\. For more information, see [Creating a Deployment Package \(Java\)](lambda-java-how-to-create-deployment-package.md)
++ Using the preceding code, create a deployment package\. For more information, see [AWS Lambda Deployment Package in Java](lambda-java-how-to-create-deployment-package.md)
 + Upload the deployment package to AWS Lambda and create your Lambda function\.
 + Test the Lambda function using either the console or CLI\. You can specify any sample JSON data that conform to the getter and setter in your `Request` class, for example:
 

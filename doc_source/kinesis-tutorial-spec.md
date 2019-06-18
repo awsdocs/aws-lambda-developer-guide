@@ -1,6 +1,8 @@
-# AWS Serverless Application Model Specification for a Amazon DynamoDB Application<a name="kinesis-tutorial-spec"></a>
+# AWS SAM Template for a DynamoDB Application<a name="kinesis-tutorial-spec"></a>
 
-The following contains the SAM template for [tutorial application](with-ddb-example.md)\. Copy the text below to a \.yaml file and save it next to the ZIP package you created previously\. Note that the `Handler` and `Runtime` parameter values should match the ones you used when you created the function in the previous section\.
+You can build this application using [AWS SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/)\. To learn more about creating AWS SAM templates, see [ AWS SAM Template Basics](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-template-basics.html) in the *AWS Serverless Application Model Developer Guide*\.
+
+Below is a sample AWS SAM template for the [tutorial application](with-ddb-example.md)\. Copy the text below to a \.yaml file and save it next to the ZIP package you created previously\. Note that the `Handler` and `Runtime` parameter values should match the ones you used when you created the function in the previous section\.
 
 **Example template\.yaml**  
 
@@ -38,4 +40,4 @@ Resources:
         StreamViewType: NEW_IMAGE
 ```
 
-For information on how to package and deploy your serverless application using the package and deploy commands, see [Packaging and Deployment](serverless-deploy-wt.md#serverless-deploy)\.
+For information on how to package and deploy your serverless application using the package and deploy commands, see [Deploying Serverless Applications](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-deploying.html) in the *AWS Serverless Application Model Developer Guide*\.

@@ -49,7 +49,7 @@ You publish a version from the `$LATEST` and have another alias \(BETA\) point t
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/alias_scenario_2_20.png)
 
-**You next promote the Lambda function version in production to work with event sources in production environment\.**  
+**You then promote the Lambda function version in production to work with event sources in production environment\.**  
 After testing the BETA version of the function, you can define the production version by creating an alias that maps to version 1\. In this approach, you point your production event sources to this specific version\. You do this by creating a PROD alias and using the PROD alias ARN in all of your production event source mappings\.  
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/alias_scenario_2_30.png)

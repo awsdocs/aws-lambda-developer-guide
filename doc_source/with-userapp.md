@@ -6,7 +6,7 @@ In this tutorial, you manage and invoke Lambda functions with the AWS CLI\.
 
 ## Prerequisites<a name="with-userapp-walkthrough-custom-events-deploy"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started with AWS Lambda](getting-started.md) to create your first Lambda function\.
 
 To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
@@ -21,7 +21,7 @@ On Linux and macOS, use your preferred shell and package manager\. On Windows 10
 
 ## Create the Execution Role<a name="with-userapp-walkthrough-custom-events-create-iam-role"></a>
 
-Create the [execution role](intro-permission-model.md#lambda-intro-execution-role) that gives your function permission to access AWS resources\.
+Create the [execution role](lambda-intro-execution-role.md) that gives your function permission to access AWS resources\.
 
 **To create an execution role**
 
@@ -38,19 +38,16 @@ The **AWSLambdaBasicExecutionRole** policy has the permissions that the function
 
 ## Create the Function<a name="with-userapp-walkthrough-custom-events-upload"></a>
 
-The following example code receives an event as input and logs some of the incoming event data to CloudWatch Logs\.
+The following example logs the values of environment variables and the event object\.
 
 **Example index\.js**  
 
 ```
-console.log('Loading function');
-
-exports.handler = function(event, context, callback) {
-    console.log('value1 =', event.key1);
-    console.log('value2 =', event.key2);
-    console.log('value3 =', event.key3);
-    callback(null, "Success");
-};
+exports.handler = async function(event, context) {
+  console.log("ENVIRONMENT VARIABLES\n" + JSON.stringify(process.env, null, 2))
+  console.log("EVENT\n" + JSON.stringify(event, null, 2))
+  return context.logStreamName
+}
 ```
 
 **To create the function**
@@ -66,51 +63,105 @@ exports.handler = function(event, context, callback) {
 1. Create a Lambda function with the `create-function` command\.
 
    ```
-   $ aws lambda create-function --function-name helloworld \
-   --zip-file fileb://function.zip --handler index.handler --runtime nodejs8.10 \
-   --role role-arn
+   $ aws lambda create-function --function-name my-function \
+   --zip-file fileb://function.zip --handler index.handler --runtime nodejs10.x \
+   --role arn:aws:iam::123456789012:role/lambda-cli-role
    {
-       "FunctionName": "helloworld",
-       "CodeSize": 351,
-       "MemorySize": 128,
-       "FunctionArn": "function-arn",
+       "FunctionName": "cli",
+       "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
+       "Runtime": "nodejs10.x",
+       "Role": "arn:aws:iam::123456789012:role/lambda-cli-role",
        "Handler": "index.handler",
-       "Role": "arn:aws:iam::account-id:role/LambdaExecRole",
+       "CodeSize": 322,
+       "Description": "",
        "Timeout": 3,
-       "LastModified": "2015-04-07T22:02:58.854+0000",
-       "Runtime": "nodejs8.10",
-       "Description": ""
+       "MemorySize": 128,
+       "LastModified": "2019-06-13T23:56:27.308+0000",
+       "CodeSha256": "FpFMvUhayLkOoVBpNuNiIVML/tuGv2iJQ7t0yWVTU8c=",
+       "Version": "$LATEST",
+       "TracingConfig": {
+           "Mode": "PassThrough"
+       },
+       "RevisionId": "88ebe1e1-bfdf-4dc3-84de-3017268fa1ff"
    }
    ```
 
-Invoke your Lambda function using the invoke command\. 
+To get logs for an invocation from the command line, use the `--log-type` option\. The response includes a `LogResult` field that contains up to 4 KB of base64\-encoded logs from the invocation\.
 
 ```
-$ aws lambda invoke --function-name helloworld --log-type Tail \
---payload '{"key1":"value1", "key2":"value2", "key3":"value3"}' \
-outputfile.txt
+$ aws lambda invoke --function-name my-function out --log-type Tail
 {
-     "LogResult": "base64-encoded-log",
-     "StatusCode": 200 
+    "StatusCode": 200,
+    "LogResult": "U1RBUlQgUmVxdWVzdElkOiA4N2QwNDRiOC1mMTU0LTExZTgtOGNkYS0yOTc0YzVlNGZiMjEgVmVyc2lvb...",
+    "ExecutedVersion": "$LATEST"
 }
 ```
 
-By specifying the `--log-type` parameter, the command also requests the tail end of the log produced by the function\. The log data in the response is base64\-encoded\. Use the base64 program to decode the log\.
+You can use the `base64` utility to decode the logs\.
 
 ```
-$ echo base64-encoded-log | base64 --decode
-START RequestId: 16d25499-d89f-11e4-9e64-5d70fce44801
-2015-04-01T18:44:12.323Z    16d25499-d89f-11e4-9e64-5d70fce44801    value1 = value1
-2015-04-01T18:44:12.323Z    16d25499-d89f-11e4-9e64-5d70fce44801    value2 = value2
-2015-04-01T18:44:12.323Z    16d25499-d89f-11e4-9e64-5d70fce44801    value3 = value3
-2015-04-01T18:44:12.323Z    16d25499-d89f-11e4-9e64-5d70fce44801    result: "value1"
-END RequestId: 16d25499-d89f-11e4-9e64-5d70fce44801
-REPORT RequestId: 16d25499-d89f-11e4-9e64-5d70fce44801       
-Duration: 13.35 ms      Billed Duration: 100 ms   Memory Size: 128 MB  
-Max Memory Used: 9 MB
+$ aws lambda invoke --function-name my-function out --log-type Tail \
+--query 'LogResult' --output text |  base64 -d
+START RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8 Version: $LATEST
+  "AWS_SESSION_TOKEN": "AgoJb3JpZ2luX2VjELj...", "_X_AMZN_TRACE_ID": "Root=1-5d02e5ca-f5792818b6fe8368e5b51d50;Parent=191db58857df8395;Sampled=0"",ask/lib:/opt/lib",
+END RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8
+REPORT RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8  Duration: 79.67 ms      Billed Duration: 100 ms         Memory Size: 128 MB     Max Memory Used: 73 MB
 ```
 
-Because you invoked the function using the default invocation type \(`RequestResponse`\), the connection stays open until execution completes\. Lambda writes the response to the output file\.
+`base64` is available on Linux, macOS, and [Ubuntu on Windows](https://docs.microsoft.com/en-us/windows/wsl/install-win10)\. For macOS, the command is `base64 -D`\.
+
+To get full log events from the command line, you can include the log stream name in the output of your function, as shown in the preceding example\. The following example script invokes a function named `my-function` and downloads the last 5 log events\.
+
+**Example get\-logs\.sh**  
+This example requires that `my-function` returns a log stream ID\.  
+
+```
+aws lambda invoke --function-name my-function --payload '{"key": "value"}' out
+sed -i 's/"//g' out
+sleep 15
+aws logs get-log-events --log-group-name /aws/lambda/my-function --log-stream-name=file://out --limit 5
+```
+
+The script uses `sed` to remove quotes from the output file, and sleeps for 15 seconds to allow time for the logs to be available\. The output includes the response from Lambda, and the output from the `get-log-events` command\.
+
+```
+$ ./get-log.sh
+{
+    "StatusCode": 200,
+    "ExecutedVersion": "$LATEST"
+}
+{
+    "events": [
+        {
+            "timestamp": 1559763003171,
+            "message": "START RequestId: 4ce9340a-b765-490f-ad8a-02ab3415e2bf Version: $LATEST\n",
+            "ingestionTime": 1559763003309
+        },
+        {
+            "timestamp": 1559763003173,
+            "message": "2019-06-05T19:30:03.173Z\t4ce9340a-b765-490f-ad8a-02ab3415e2bf\tINFO\tENVIRONMENT VARIABLES\r{\r  \"AWS_LAMBDA_FUNCTION_VERSION\": \"$LATEST\",\r ...",
+            "ingestionTime": 1559763018353
+        },
+        {
+            "timestamp": 1559763003173,
+            "message": "2019-06-05T19:30:03.173Z\t4ce9340a-b765-490f-ad8a-02ab3415e2bf\tINFO\tEVENT\r{\r  \"key\": \"value\"\r}\n",
+            "ingestionTime": 1559763018353
+        },
+        {
+            "timestamp": 1559763003218,
+            "message": "END RequestId: 4ce9340a-b765-490f-ad8a-02ab3415e2bf\n",
+            "ingestionTime": 1559763018353
+        },
+        {
+            "timestamp": 1559763003218,
+            "message": "REPORT RequestId: 4ce9340a-b765-490f-ad8a-02ab3415e2bf\tDuration: 26.73 ms\tBilled Duration: 100 ms \tMemory Size: 128 MB\tMax Memory Used: 75 MB\t\n",
+            "ingestionTime": 1559763018353
+        }
+    ],
+    "nextForwardToken": "f/34783877304859518393868359594929986069206639495374241795",
+    "nextBackwardToken": "b/34783877303811383369537420289090800615709599058929582080"
+}
+```
 
 ## List the Lambda Functions in Your Account<a name="with-userapp-walkthrough-custom-events-list-functions"></a>
 
@@ -121,64 +172,86 @@ $ aws lambda list-functions --max-items 10
 {
     "Functions": [
         {
-            "FunctionName": "helloworld",
-            "MemorySize": 128,
-            "CodeSize": 412,
-            "FunctionArn": "arn:aws:lambda:us-east-1:account-id:function:ProcessKinesisRecords",
-            "Handler": "ProcessKinesisRecords.handler",
-            "Role": "arn:aws:iam::account-id:role/LambdaExecRole",
+            "FunctionName": "cli",
+            "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
+            "Runtime": "nodejs10.x",
+            "Role": "arn:aws:iam::123456789012:role/lambda-cli-role",
+            "Handler": "index.handler",
+            "CodeSize": 322,
+            "Description": "",
             "Timeout": 3,
-            "LastModified": "2015-02-22T21:03:01.172+0000",
-            "Runtime": "nodejs6.10",
-            "Description": ""
+            "MemorySize": 128,
+            "LastModified": "2019-06-13T23:56:27.308+0000",
+            "CodeSha256": "FpFMvUhayLkOoVBpNuNiIVML/tuGv2iJQ7t0yWVTU8c=",
+            "Version": "$LATEST",
+            "TracingConfig": {
+                "Mode": "PassThrough"
+            },
+            "RevisionId": "88ebe1e1-bfdf-4dc3-84de-3017268fa1ff"
         },
         {
-            "FunctionName": "ProcessKinesisRecords",
-            "MemorySize": 128,
-            "CodeSize": 412,
-            "FunctionArn": "arn:aws:lambda:us-east-1:account-id:function:ProcessKinesisRecords",
-            "Handler": "ProcessKinesisRecords.handler",
-            "Role": "arn:aws:iam::account-id:role/lambda-execute-test-kinesis",
+            "FunctionName": "random-error",
+            "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:random-error",
+            "Runtime": "nodejs8.10",
+            "Role": "arn:aws:iam::123456789012:role/lambda-role",
+            "Handler": "index.handler",
+            "CodeSize": 1572488,
+            "Description": "",
             "Timeout": 3,
-            "LastModified": "2015-02-22T21:03:01.172+0000",
-            "Runtime": "nodejs6.10",
-            "Description": ""
+            "MemorySize": 128,
+            "LastModified": "2019-03-20T21:17:52.564+0000",
+            "CodeSha256": "TSGmGwJEsBSaTZcViXJ/Xz3ntZUmSF7AURodpt2zAeo=",
+            "Version": "$LATEST",
+            "VpcConfig": {
+                "SubnetIds": [],
+                "SecurityGroupIds": [],
+                "VpcId": ""
+            },
+            "TracingConfig": {
+                "Mode": "Active"
+            },
+            "RevisionId": "2e4e549a-6259-4f8a-aacc-3e6614962812"
         },
         ...
       ],
-       "NextMarker": null
+      "NextToken": "eyJNYXJrZXIiOiBudWxsLCAiYm90b190cnVuY2F0ZV9hbW91bnQiOiAxMH0="
 }
 ```
 
-In response, Lambda returns a list of up to 10 functions\. If there are more functions you can retrieve, `NextMarker` provides a marker you can use in the next `list-functions` request; otherwise, the value is null\. The following `list-functions` AWS CLI command is an example that shows the `--marker` parameter\.
+In response, Lambda returns a list of up to 10 functions\. If there are more functions you can retrieve, `NextToken` provides a marker you can use in the next `list-functions` request\. The following `list-functions` AWS CLI command is an example that shows the `--starting-token` parameter\.
 
 ```
-$ aws lambda list-functions --max-items 10 \
---marker value-of-NextMarker-from-previous-response
+$ aws lambda list-functions --max-items 10 --starting-token eyJNYXJrZXIiOiBudWxsLCAiYm90b190cnVuY2F0ZV9hbW91bnQiOiAxMH0=
 ```
 
-### Retrieve a Lambda Function<a name="with-userapp-walkthrough-custom-events-get-configuration"></a>
+## Retrieve a Lambda Function<a name="with-userapp-walkthrough-custom-events-get-configuration"></a>
 
-The Lambda CLI `get-function` command returns Lambda function metadata and a presigned URL that you can use to download the function's deployment packagen\.
+The Lambda CLI `get-function` command returns Lambda function metadata and a presigned URL that you can use to download the function's deployment package\.
 
 ```
-$ aws lambda get-function --function-name helloworld
+$ aws lambda get-function --function-name my-function
 {
+    "Configuration": {
+        "FunctionName": "cli",
+        "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
+        "Runtime": "nodejs10.x",
+        "Role": "arn:aws:iam::123456789012:role/lambda-cli-role",
+        "Handler": "index.handler",
+        "CodeSize": 322,
+        "Description": "",
+        "Timeout": 3,
+        "MemorySize": 128,
+        "LastModified": "2019-06-13T23:56:27.308+0000",
+        "CodeSha256": "FpFMvUhayLkOoVBpNuNiIVML/tuGv2iJQ7t0yWVTU8c=",
+        "Version": "$LATEST",
+        "TracingConfig": {
+            "Mode": "PassThrough"
+        },
+        "RevisionId": "88ebe1e1-bfdf-4dc3-84de-3017268fa1ff"
+    },
     "Code": {
         "RepositoryType": "S3",
-        "Location": "pre-signed-url"
-    },
-    "Configuration": {
-        "FunctionName": "helloworld",
-        "MemorySize": 128,
-        "CodeSize": 287,
-        "FunctionArn": "arn:aws:lambda:us-west-2:account-id:function:helloworld",
-        "Handler": "index.handler",
-        "Role": "arn:aws:iam::account-id:role/LambdaExecRole",
-        "Timeout": 3,
-        "LastModified": "2015-04-07T22:02:58.854+0000",
-        "Runtime": "nodejs8.10",
-        "Description": ""
+        "Location": "https://awslambda-us-east-2-tasks.s3.us-east-2.amazonaws.com/snapshots/123456789012/my-function-4203078a-b7c9-4f35-..."
     }
 }
 ```
@@ -187,10 +260,10 @@ For more information, see [GetFunction](API_GetFunction.md)\.
 
 ## Clean Up<a name="with-userapp-walkthrough-custom-events-delete-function"></a>
 
-Execute the following `delete-function` command to delete the `helloworld` function\.
+Execute the following `delete-function` command to delete the `my-function` function\.
 
 ```
-$ aws lambda delete-function --function-name helloworld
+$ aws lambda delete-function --function-name my-function
 ```
 
 Delete the IAM role you created in the IAM console\. For information about deleting a role, see [Deleting Roles or Instance Profiles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_manage_delete.html) in the *IAM User Guide*\. 

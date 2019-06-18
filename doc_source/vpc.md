@@ -1,11 +1,10 @@
 # Configuring a Lambda Function to Access Resources in an Amazon VPC<a name="vpc"></a>
 
-Typically, you create resources inside Amazon Virtual Private Cloud \(Amazon VPC\) so that they cannot be accessed over the public Internet\. These resources could be AWS service resources, such as Amazon Redshift data warehouses, Amazon ElastiCache clusters, or Amazon RDS instances\. They could also be your own services running on your own EC2 instances\. By default, resources within a VPC are not accessible from within a Lambda function\. 
+You can configure a function to connect to a virtual private cloud \(VPC\) in your account\. Use Amazon Virtual Private Cloud \(Amazon VPC\) to create a private network for resources such as databases, cache instances, or internal services\. Connect your function to the VPC to access private resources during execution\.
 
 AWS Lambda runs your function code securely within a VPC by default\. However, to enable your Lambda function to access resources inside your private VPC, you must provide additional VPC\-specific configuration information that includes VPC subnet IDs and security group IDs\. AWS Lambda uses this information to set up elastic network interfaces [\(ENIs\)](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ElasticNetworkInterfaces.html) that enable your function to connect securely to other resources within your private VPC\.
 
-**Important**  
-AWS Lambda does not support connecting to resources within Dedicated Tenancy VPCs\. For more information, see [Dedicated VPCs](https://docs.aws.amazon.com/vpc/latest/userguide/dedicated-instance.html)\.
+Lambda functions cannot connect directly to a VPC with [dedicated instance tenancy](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html)\. To connect to resources in a dedicated VPC, [peer it to a second VPC with default tenancy](https://aws.amazon.com/premiumsupport/knowledge-center/lambda-dedicated-vpc/)\.
 
 ## Configuring a Lambda Function for Amazon VPC Access<a name="vpc-configuring"></a>
 
@@ -48,7 +47,6 @@ Note the following additional considerations:
 
 AWS Lambda uses the VPC information you provide to set up [ENIs](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ElasticNetworkInterfaces.html) that allow your Lambda function to access VPC resources\. Each ENI is assigned a private IP address from the IP address range within the Subnets you specify, but is not assigned any public IP addresses\. Therefore, if your Lambda function requires Internet access \(for example, to access AWS services that don't have VPC endpoints \), you can configure a NAT instance inside your VPC or you can use the Amazon VPC NAT gateway\. For more information, see [NAT Gateways](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html) in the *Amazon VPC User Guide*\. You cannot use an Internet gateway attached to your VPC, since that requires the ENI to have public IP addresses\. 
 
-**Important**  
 If your Lambda function needs Internet access, do not attach it to a public subnet or to a private subnet without Internet access\. Instead, attach it only to private subnets with Internet access through a NAT instance or an Amazon VPC NAT gateway\. 
 
 ## Guidelines for Setting Up VPC\-Enabled Lambda Functions<a name="vpc-setup-guidelines"></a>
@@ -67,4 +65,4 @@ Your Lambda function automatically scales based on the number of events it proce
 
   We also recommend that you specify at least one subnet in each Availability Zone in your Lambda function configuration\. By specifying subnets in each of the Availability Zones, your Lambda function can run in another Availability Zone if one goes down or runs out of IP addresses\. 
 
-If your VPC does not have sufficient ENIs or subnet IPs, your Lambda function will not scale as requests increase, and you will see an increase in invocation errors \(`EC2ThrottledException`\)\. For asynchronous invocation, if you see an increase in errors without corresponding CloudWatch Logs, invoke the Lambda function synchronously in the console to get the error responses\.
+If your VPC does not have sufficient ENIs or subnet IPs, your Lambda function will not scale as requests increase, and you will see an increase in invocation errors with EC2 error types like `EC2ThrottledException`\. For asynchronous invocation, if you see an increase in errors without corresponding CloudWatch Logs, invoke the Lambda function synchronously in the console to get the error responses\.
