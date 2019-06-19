@@ -1,16 +1,10 @@
-# Step 4: Deploy With AWS SAM and AWS CloudFormation<a name="with-s3-example-use-app-spec"></a>
+# AWS SAM Template for an Amazon S3 Application<a name="with-s3-example-use-app-spec"></a>
 
-In the previous section, you used AWS Lambda APIs to create and update a Lambda function by providing a deployment package as a ZIP file\. However, this mechanism may not be convenient for automating deployment steps for functions, or coordinating deployments and updates to other elements of a serverless application, like event sources and downstream resources\.
+You can build this application using [AWS SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/)\. To learn more about creating AWS SAM templates, see [ AWS SAM Template Basics](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-template-basics.html) in the *AWS Serverless Application Model Developer Guide*\.
 
-You can use AWS CloudFormation to easily specify, deploy, and configure serverless applications\. AWS CloudFormation is a service that helps you model and set up your Amazon Web Services resources so that you can spend less time managing those resources and more time focusing on your applications that run in AWS\. You create a template that describes all the AWS resources that you want \(like Lambda functions and DynamoDB tables\), and AWS CloudFormation takes care of provisioning and configuring those resources for you\.
+Below is a sample AWS SAM template for the Lambda application from the [tutorial](with-s3-example.md)\. Copy the text below to a \.yaml file and save it next to the ZIP package you created previously\. Note that the `Handler` and `Runtime` parameter values should match the ones you used when you created the function in the previous section\. 
 
-In addition, you can use the AWS Serverless Application Model to express resources that comprise the serverless application\. These resource types, such as Lambda functions and APIs, are fully supported by AWS CloudFormation and make it easier for you to define and deploy your serverless application\.
-
-For more information, see [Deploying Lambda\-based Applications](deploying-lambda-apps.md)\.
-
-## Specification for Amazon S3 Thumbnail Application<a name="s3-tutorial-spec"></a>
-
-The following contains the SAM template for this application\. Copy the text below to a \.yaml file and save it next to the ZIP package you created previously\. Note that the `Handler` and `Runtime` parameter values should match the ones you used when you created the function in the previous section\. 
+**Example template\.yaml**  
 
 ```
 AWSTemplateFormatVersion: '2010-09-09'
@@ -34,6 +28,4 @@ Resources:
     Type: AWS::S3::Bucket
 ```
 
-## Deploying the Serverless Application<a name="with-s3-example-use-app-spec-deploy"></a>
-
-For information on how to package and deploy your serverless application using the package and deploy commands, see [Packaging and Deployment](serverless-deploy-wt.md#serverless-deploy)\.
+For information on how to package and deploy your serverless application using the package and deploy commands, see [Deploying Serverless Applications](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-deploying.html) in the *AWS Serverless Application Model Developer Guide*\.

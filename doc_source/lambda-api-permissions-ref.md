@@ -1,106 +1,117 @@
-# Lambda API Permissions: Actions, Resources, and Conditions Reference<a name="lambda-api-permissions-ref"></a>
+# Resources and Conditions for Lambda Actions<a name="lambda-api-permissions-ref"></a>
 
-When you are setting up [Access Control](lambda-auth-and-access-control.md#access-control) and writing permissions policies that you can attach to an IAM identity \(identity\-based policies\), you can use the following table as a reference\. The table lists each AWS Lambda API operation, the corresponding actions for which you can grant permissions to perform the action, the AWS resource for which you can grant the permissions and condition keys for specified API actions\. You specify the actions in the policy's `Action` field, the resource value in the policy's `Resource` field and a condition key in the policy's `Condition keys` field\. 
+You can restrict the scope of a user's permissions by specifying resources and conditions in an IAM policy\. Each API action supports a combination of resource and condition types that varies depending on the behavior of the action\.
 
-To specify an action, use the `lambda:` prefix followed by the API operation name \(for example, `lambda:CreateFunction`\)\.
+Every IAM policy statement grants permission to an action that's performed on a resource\. When the action doesn't act on a named resource, or when you grant permission to perform the action on all resources, the value of the resource in the policy is a wildcard \(`*`\)\. For many API actions, you can restrict the resources that a user can modify by specifying the Amazon Resource Name \(ARN\) of a resource, or an ARN pattern that matches multiple resources\.
 
-**Note**  
-Permissions for the AWS Lambda `Invoke` API in the following table can also be granted by using resource\-based policies\. For more information, see [Using Resource\-Based Policies for AWS Lambda \(Lambda Function Policies\)](access-control-resource-based.md)\.
+To restrict permissions by resource, specify the resource by ARN\.
 
-You can use AWS\-wide condition keys in your AWS Lambda policies to express conditions\. For a complete list of AWS\-wide keys, see [Available Keys for Conditions](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#AvailableKeys) in the *IAM User Guide*\. 
+**Lambda Resource ARN Format**
++ Function – `arn:aws:lambda:us-west-2:123456789012:function:my-function`
++ Function version – `arn:aws:lambda:us-west-2:123456789012:function:my-function:1`
++ Function alias – `arn:aws:lambda:us-west-2:123456789012:function:my-function:TEST`
++ Event source mapping – `arn:aws:lambda:us-west-2:123456789012:event-source-mapping:fa123456-14a1-4fd2-9fec-83de64ad683de6d47`
++ Layer – `arn:aws:lambda:us-west-2:123456789012:layer:my-layer`
++ Layer version – `arn:aws:lambda:us-west-2:123456789012:layer:my-layer:1`
 
-AWS Lambda also offers predefined condition keys to a limited set of API operations\. For example, you can: 
+For example, the following policy allows a user in account `123456789012` to invoke a function named `my-function` in the US West \(Oregon\) Region\.
 
-+ Restrict access based on the Lambda function ARN \(Amazon Resource Name\) to the following operations: 
+**Example Invoke a Function Policy**  
 
-  + CreateEventSourceMapping
-
-  + DeleteEventSourceMapping
-
-  + UpdateEventSourceMapping
-
-  The following is an example policy that applies this condition:
-
-  ```
-  "Version": "2012-10-17",
+```
+{
+    "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": " DeleteEventSourceMappingPolicy",
+            "Sid": "Invoke",
             "Effect": "Allow",
             "Action": [
-                "lambda:DeleteEventSourceMapping"
+                "lambda:InvokeFunction"
             ],
-            "Resource": "arn:aws:lambda:region:account-id:event-source-mapping:UUID",
-            "Condition": {"StringEquals": {"lambda:FunctionArn": "arn:aws:lambda:region:account-id:function:function-name}}
+            "Resource": "arn:aws:lambda:us-west-2:123456789012:function:my-function"
         }
     ]
-  ```
+}
+```
 
-+ Restrict mapping based on the AWS service principal to the following operations:
+This is a special case where the action identifier \(`lambda:InvokeFunction`\) differs from the API operation \([Invoke](API_Invoke.md)\)\. For other actions, the action identifier is the operation name prefixed by `lambda:`\.
 
-  + AddPermission
+Conditions are an optional policy element that applies additional logic to determine if an action is allowed\. In addition to [common conditions](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html) supported by all actions, Lambda defines condition types that you can use to restrict the values of additional parameters on some actions\.
 
-  + RemovePermission
+For example, the `lambda:Principal` condition lets you restrict the service or account that a user can grant invocation access to on a function's resource\-based policy\. The following policy lets a user grant permission to SNS topics to invoke a function named `test`\.
 
-   The following is an example policy that applies this condition:
+**Example Manage Function Policy Permissions**  
 
-  ```
-   "Version": "2012-10-17",
+```
+{
+    "Version": "2012-10-17",
     "Statement": [
-       {
-          "Sid": "AddPermissionPolicy",
-          "Effect": "Allow",
-          "Action": [
-              "lambda:AddPermission"
-          ],
-          "Resource": "arn:aws:lambda:region:account-id:function:function-name",
-          "Condition": {"StringEquals": {"lambda:Principal": "s3.amazonaws.com"}}
-      }
-   ]
-  ```
+        {
+            "Sid": "ManageFunctionPolicy",
+            "Effect": "Allow",
+            "Action": [
+                "lambda:AddPermission",
+                "lambda:RemovePermission"
+            ],
+            "Resource": "arn:aws:lambda:us-west-2:123456789012:function:test:*",
+            "Condition": {
+                "StringEquals": {
+                    "lambda:Principal": "sns.amazonaws.com"
+                }
+            }
+        }
+    ]
+}
+```
 
-If you see an expand arrow \(**↗**\) in the upper\-right corner of the table, you can open the table in a new window\. To close the window, choose the close button \(**X**\) in the lower\-right corner\.
+The condition requires that the principal is Amazon SNS and not another service or account\. The resource pattern requires that the function name is `test` and includes a version number or alias\. For example, `test:v1`\.
+
+For more information on resources and conditions for Lambda and other AWS services, see [Actions, Resources, and Condition Keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html) in the *IAM User Guide*\.
+
+**Topics**
++ [Functions](#permissions-resources-function)
++ [Event Source Mappings](#permissions-resources-eventsource)
++ [Layers](#permissions-resources-layers)
+
+## Functions<a name="permissions-resources-function"></a>
+
+Actions that operate on a function can be restricted to a specific function by function, version, or alias ARN, as described in the following table\. Actions that don't support resource restrictions can only be granted for all resources \(`*`\)\.
 
 
-**AWS Lambda API and Required Permissions for Actions**  
+**Functions**  
 
-| API Actions | Resources | Condition Key | 
+| Action | Resource | Condition | 
 | --- | --- | --- | 
-|   **API:** [AddPermission](API_AddPermission.md) **Required Permission:** `lambda:AddPermission` |   `arn:aws:lambda:region:account-id:function:function-name`  | lambda:Principal | 
-|   **API:** [CreateAlias](API_CreateAlias.md) **Required Permission:** `lambda:CreateAlias`  |   `arn:aws:lambda:region:account-id:function:function-name`  | N/A  | 
-|   **API:** [CreateEventSourceMapping](API_CreateEventSourceMapping.md)  **Required Permissions:** `lambda:CreateEventSourceMapping`  | \* |   `lambda:FunctionArn` | 
-|  The following permissions should be added to the Lambda function execution role \(IAM role\)\. If you are mapping to an Kinesis stream event source, use: `kinesis:DescribeStreams`,` kinesis:DescribeStream`, `kinesis:ListStreams`, `kinesis:GetShardIterator`, and `Kinesis:GetRecords`  If you are mapping to a DynamoDB stream event source, use: `dynamodb:DescribeStreams`,` dynamodb:DescribeStream`, `dynamodb:ListStreams`, `dynamodb:GetShardIterator`, and `dynamodb:GetRecords`  \(To create an event source mapping in AWS Lambda, you need an existing Lambda function for which you are creating an event source mapping\. The execution role \(IAM role\) of the Lambda function must have permissions to access the API of the event source to which the Lambda function is being mapped\.   | `arn:aws:kinesis:region:account-id:stream/stream-name` | N/A | 
-|  **API:** [CreateFunction](API_CreateFunction.md) **Required Permissions:** `lambda:CreateFunction` |  arn:aws:lambda:region:account\-id: function:function\-name  | N/A  | 
-|  `iam:PassRole`  The user creating the function must have permissions for this action on the IAM role that the user specifies as the execution role at the time that the Lambda function is created\. This is the role that AWS Lambda assumes to execute the Lambda function\. The user must have permissions to pass the role to AWS Lambda\.  |   `arn:aws:iam::account-id:role/role-name`   | N/A | 
-|  `ec2:DescribeSecurityGroups`  Required only if you are specifying VPC configuration information when creating a Lambda function\.  |  \* | N/A | 
-|  `ec2:DescribeSubnets` Required only if you are specifying VPC configuration information when creating a Lambda function\.  | \* | N/A | 
-|  `s3:GetObject`  Required only if you have a deployment package stored in Amazon S3 and you are specifying an S3 bucket and object key when creating a Lambda function\.  |  `arn:aws:s3:::bucket-name/key-name`   | N/A | 
-| **API:** [DeleteAlias](API_DeleteAlias.md) **Required Permission:** `lambda:DeleteAlias`  |   `arn:aws:lambda:region:account-id:function:function-name`  | N/A | 
-| **API:** [DeleteEventSourceMapping](API_DeleteEventSourceMapping.md) **Required Permission:** `lambda:DeleteEventSourceMapping`  |  `arn:aws:lambda:region:account-id:event-source-mapping:UUID`  |   `lambda:FunctionArn` | 
-| **API:** [DeleteFunction](API_DeleteFunction.md) **Required Permission:** `lambda:DeleteFunction`  |   `arn:aws:lambda:region:account-id: function:function-name`  | N/A | 
-| **API:** [GetAccountSettings](API_GetAccountSettings.md) **Required Permission:** `lambda:GetAccountSettings`  |  \*  | N/A | 
-| **API:** [GetAlias](API_GetAlias.md) **Required Permission:** `lambda:GetAlias`  |  `arn:aws:lambda:region:account-id:function:function-name`  | N/A | 
-| **API:** [GetEventSourceMapping](API_GetEventSourceMapping.md) **Required Permission:** `lambda:GetEventSourceMapping`  |  \*  | N/A | 
-| **API:** [GetFunction](API_GetFunction.md) **Required Permission:** `lambda:GetFunction`  |  `arn:aws:lambda:region:account-id: function:function-name`  | N/A | 
-| **API:** [GetFunctionConfiguration](API_GetFunctionConfiguration.md) **Required Permission:** `lambda:GetFunctionConfiguration`  |   `arn:aws:lambda:region:account-id:function:function-name`  | N/A | 
-| **API:** [GetPolicy](API_GetPolicy.md) **Required Permission:** `lambda:GetPolicy` |   `arn:aws:lambda:region:account-id:function:function-name`  | N/A | 
-| **API:** [Invoke](API_Invoke.md) **Required Permission:** `lambda:InvokeFunction` |   `arn:aws:lambda:region:account-id: function:function-name`  | N/A | 
-| **API:** [ListAliases](API_ListAliases.md) Required Permission: lambda:ListAliases |  `arn:aws:lambda:region:account-id:function:function-name`  | N/A | 
-| **API:** [ListEventSourceMappings](API_ListEventSourceMappings.md) **Required Permission:** `lambda:ListEventSourceMappings`  |  \*  | N/A | 
-| **API:** [ListFunctions](API_ListFunctions.md)  **Required Permission:** `lambda:ListFunctions`  | \* | N/A | 
-| **API:** [ListTags](API_ListTags.md)  **Required Permission:** `lambda:ListTags`  |  `*`  |  N/A  | 
-| **API:** [ListVersionsByFunction](API_ListVersionsByFunction.md)  **Required Permission:** `lambda:ListVersionsByFunction` |  `arn:aws:lambda:region:account-id:function:function-name`  | N/A | 
-| **API:** [PublishVersion](API_PublishVersion.md)  **Required Permission:** `lambda:PublishVersion` |  `arn:aws:lambda:region:account-id:function:function-name`  | N/A | 
-| **API:** [RemovePermission](API_RemovePermission.md)  **Required Permission:** `lambda:RemovePermission`  |  `arn:aws:lambda:region:account-id:function:function-name`  |  `lambda:Principal`  | 
-| **API:** [TagResource](API_TagResource.md)  **Required Permission:** `lambda:TagResource`  |  `*`  |  N/A  | 
-| **API:** [UntagResource](API_UntagResource.md)  **Required Permission:** `lambda:UntagResource`  |  `*`  |  N/A  | 
-| **API:** [UpdateAlias](API_UpdateAlias.md) **Required Permission:** `lambda:UpdateAlias`  |  `arn:aws:lambda:region:account-id:function:function-name`  | N/A | 
-| **API:** [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md) **Required Permissions:** `lambda:UpdateEventSourceMapping`  |   `arn:aws:lambda:region:account-id:event-source-mapping:UUID`  |  `lambda:FunctionArn` | 
-|  `kinesis:DescribeStreams (needed by function role, not caller)`  | arn:aws:kinesis:region:account\-id:stream/stream\-name | N/A | 
-| **API:** [UpdateFunctionCode](API_UpdateFunctionCode.md) **Required Permissions:** `lambda:UpdateFunctionCode`  |   `arn:aws:lambda:region:account-id:function:function-name`  | N/A | 
-|  `s3:GetObject`  Required only if you are specifying an S3 bucket and object key, the deployment package, or key when creating a Lambda function\.  |  `arn:aws:s3:::bucket-name/key-name`   | N/A | 
-| **API:** [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md) **Required Permissions:** `lambda:UpdateFunctionConfiguration` |  `arn:aws:lambda:region:account-id:function:function-name`  | N/A | 
-|  `iam:PassRole`  The user creating the function must have permissions for this action on the IAM role that the user specifies as the execution role at the time of updating a Lambda function\. This is the role AWS Lambda assumes to execute the Lambda function\. The user must have permissions to pass the role to AWS Lambda\.  |  arn:aws:iam::account\-id: role/execution\-role\-name  | N/A | 
-|  `ec2:DescribeSecurityGroups`  Required only if you are specifying VPC configuration information when creating a Lambda function\.  |  \* | N/A |
-|  `ec2:DescribeSubnets` Required only if you are specifying VPC configuration information when creating a Lambda function\. |  \* | N/A |
-|  `ec2:DescribeVpcs`  Required only if you are specifying VPC configuration information when creating a Lambda function\.  |  \* | N/A |
+|   [AddPermission](API_AddPermission.md)  [RemovePermission](API_RemovePermission.md)  |  Function Function version Function alias  |  `lambda:Principal`  | 
+|   [Invoke](API_Invoke.md) **Permission:** `lambda:InvokeFunction`  |  Function Function version Function alias  |  None  | 
+|   [CreateFunction](API_CreateFunction.md)  [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)  |  Function  |  `lambda:Layer`  | 
+|   [CreateAlias](API_CreateAlias.md)  [DeleteAlias](API_DeleteAlias.md)  [DeleteFunction](API_DeleteFunction.md)  [DeleteFunctionConcurrency](API_DeleteFunctionConcurrency.md)  [GetAlias](API_GetAlias.md)  [GetFunction](API_GetFunction.md)  [GetFunctionConfiguration](API_GetFunctionConfiguration.md)  [GetPolicy](API_GetPolicy.md)  [ListAliases](API_ListAliases.md)  [ListVersionsByFunction](API_ListVersionsByFunction.md)  [PublishVersion](API_PublishVersion.md)  [PutFunctionConcurrency](API_PutFunctionConcurrency.md)  [UpdateAlias](API_UpdateAlias.md)  [UpdateFunctionCode](API_UpdateFunctionCode.md)  |  Function  |  None  | 
+|   [GetAccountSettings](API_GetAccountSettings.md)  [ListFunctions](API_ListFunctions.md)  [ListTags](API_ListTags.md)  [TagResource](API_TagResource.md)  [UntagResource](API_UntagResource.md)  |  `*`  |  None  | 
+
+## Event Source Mappings<a name="permissions-resources-eventsource"></a>
+
+For event source mappings, delete and update permissions can be restricted to a specific event source\. The `lambda:FunctionArn` condition lets you restrict which functions a user can configure an event source to invoke\.
+
+For these actions, the resource is the event source mapping, so Lambda provides a condition that lets you restrict permission based on the function that the event source mapping invokes\.
+
+
+**Event Source Mappings**  
+
+| Action | Resource | Condition | 
+| --- | --- | --- | 
+|   [DeleteEventSourceMapping](API_DeleteEventSourceMapping.md)  [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md)  |  Event source mapping  |   `lambda:FunctionArn`  | 
+|   [CreateEventSourceMapping](API_CreateEventSourceMapping.md)  |  `*`  |   `lambda:FunctionArn`   | 
+|   [GetEventSourceMapping](API_GetEventSourceMapping.md)  [ListEventSourceMappings](API_ListEventSourceMappings.md)  |  `*`  |  None  | 
+
+## Layers<a name="permissions-resources-layers"></a>
+
+Layer actions let you restrict the layers that a user can manage or use with a function\. Actions related to layer use and permissions act on a version of a layer, while `PublishLayerVersion` acts on a layer name\. You can use either with wildcards to restrict the layers that a user can work with by name\.
+
+
+**Layers**  
+
+| Action | Resource | Condition | 
+| --- | --- | --- | 
+|   [AddLayerVersionPermission](API_AddLayerVersionPermission.md)  [RemoveLayerVersionPermission](API_RemoveLayerVersionPermission.md)  [GetLayerVersion](API_GetLayerVersion.md)  [GetLayerVersionPolicy](API_GetLayerVersionPolicy.md)  [DeleteLayerVersion](API_DeleteLayerVersion.md)  |  Layer version  | None | 
+|   [PublishLayerVersion](API_PublishLayerVersion.md)  |  Layer  | None | 
+|   [ListLayers](API_ListLayers.md)  [ListLayerVersions](API_ListLayerVersions.md)  |   `*`   |  None  | 

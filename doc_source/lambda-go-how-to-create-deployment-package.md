@@ -1,12 +1,12 @@
-# Creating a Deployment Package \(Go\)<a name="lambda-go-how-to-create-deployment-package"></a>
+# AWS Lambda Deployment Package in Go<a name="lambda-go-how-to-create-deployment-package"></a>
 
-To create a Lambda function you first create a Lambda function deployment package, a \.zip file consisting of your code and any dependencies\. 
+To create a Lambda function you first create a Lambda function deployment package, a \.zip file consisting of your code (a Go executable) and any dependencies\. 
 
 After you create a deployment package, you may either upload it directly or upload the \.zip file first to an Amazon S3 bucket in the same AWS region where you want to create the Lambda function, and then specify the bucket name and object key name when you create the Lambda function using the console or the AWS CLI\.
 
- For Lambda functions written in Go, download the Lambda library for Go by navigating to the Go runtime directory and enter the following command:  `go get github.com/aws/aws-lambda-go` 
+For Lambda functions written in Go, download the Lambda library for Go by navigating to the Go runtime directory and enter the following command: `go get github.com/aws/aws-lambda-go/lambda` 
 
-Then use following command to build, package and deploy a Go Lambda function via the CLI\. Note that your *function\-name *must match the name of your *Lambda handler* name\. 
+Then use following command to build, package and deploy a Go Lambda function via the CLI\. Note that the *handler* parameter must match the name of the executable containing your Lambda handler\.
 
 ```
 GOOS=linux go build lambda_handler.go
@@ -14,12 +14,12 @@ zip handler.zip ./lambda_handler
 # --handler is the path to the executable inside the .zip
 aws lambda create-function \
   --region region \
-  --function-name lambda-handler \
+  --function-name function-name \
   --memory 128 \
   --role arn:aws:iam::account-id:role/execution_role \
   --runtime go1.x \
   --zip-file fileb://path-to-your-zip-file/handler.zip \
-  --handler lambda-handler
+  --handler lambda-handler-executable
 ```
 
 **Note**  

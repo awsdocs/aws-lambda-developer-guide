@@ -1,3 +1,0 @@
-# Step 5: Test the Lambda Function Again<a name="tutorial-scheduled-events-test-function-again"></a>
-
-Now test the Lambda function again\. This time, update the code by specifying either a non\-existing webpage URL or a text string\. This causes the function to return an error that AWS Lambda sends to CloudWatch error metrics\. CloudWatch posts this message to the Amazon SNS topic and you get an email notification\.
