@@ -1,19 +1,73 @@
-# Programming Model\(Node\.js\)<a name="programming-model"></a>
+# Building Lambda Functions with Node\.js<a name="programming-model"></a>
 
-AWS Lambda currently supports the following Node\.js runtimes:
-+ Node\.js runtime v8\.10 \(runtime = nodejs8\.10\) 
-+ Node\.js runtime v6\.10 \(runtime = nodejs6\.10\) 
-+ Node\.js runtime v4\.3 \(runtime = nodejs4\.3\)\* 
-+ Node\.js runtime v0\.10\.42 \(runtime = nodejs\)\* 
-**Important**  
-\*Node v0\.10\.42 and Node v4\.3 are currently marked as deprecated\. For more information, see [Runtime Support Policy](runtime-support-policy.md)\. You must migrate existing functions to the newer Node\.js runtime versions available on AWS Lambda \(nodejs\.8\.10 or nodejs6\.10\) as soon as possible\. 
+You can run JavaScript code with Node\.js in AWS Lambda\. Lambda provides [runtimes](lambda-runtimes.md) for Node\.js that execute your code to process events\. Your code runs in an environment that includes the AWS SDK for JavaScript, with credentials from an AWS Identity and Access Management \(IAM\) role that you manage\.
 
-When you create a Lambda function, you specify the runtime that you want to use\. For more information, see `runtime` parameter of [CreateFunction](API_CreateFunction.md)\. 
+Lambda supports the following Node\.js runtimes\.
 
-The following sections explain how [common programming patterns and core concepts](http://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html) apply when authoring Lambda function code in Node\.js\. The programming model described in the following sections applies to all supported runtime versions, except where indicated\. 
+
+**Node\.js Runtimes**  
+
+| Name | Identifier | Node\.js Version | AWS SDK for JavaScript | Operating System | 
+| --- | --- | --- | --- | --- | 
+|  Node\.js 10  |  `nodejs10.x`  |  10\.15  |  2\.437\.0  |  Amazon Linux 2  | 
+|  Node\.js 8\.10  |  `nodejs8.10`  |  8\.10  |  2\.290\.0  |  Amazon Linux  | 
+
+Lambda functions use an [execution role](lambda-intro-execution-role.md) to get permission to write logs to Amazon CloudWatch Logs and access other services and resources\. If you don't already have an execution role for function development, create one\.
+
+**To create an execution role**
+
+1. Open the [roles page](https://console.aws.amazon.com/iam/home#/roles) in the IAM console\.
+
+1. Choose **Create role**\.
+
+1. Create a role with the following properties\.
+   + **Trusted entity** – **Lambda**\.
+   + **Permissions** – **AWSLambdaBasicExecutionRole**\.
+   + **Role name** – **lambda\-role**\.
+
+   The **AWSLambdaBasicExecutionRole** policy has the permissions that the function needs to write logs to CloudWatch Logs\.
+
+You can add permissions to the role later, or swap it out for a different role that's specific to a single function\.
+
+**To create a Node\.js function**
+
+1. Open the [Lambda console](https://console.aws.amazon.com/lambda)\.
+
+1. Choose **Create function**\.
+
+1. Configure the following settings:
+   + **Name** – **my\-function**\.
+   + **Runtime** – **Node\.js 10\.x**\.
+   + **Role** – **Choose an existing role**\.
+   + **Existing role** – **lambda\-role**\.
+
+1. Choose **Create function**\.
+
+1. To configure a test event, choose **Test**\.
+
+1. For **Event name**, enter **test**\.
+
+1. Choose **Create**\.
+
+1. To execute the function, choose **Test**\.
+
+The console creates a Lambda function with a single source file named `index.js`\. You can edit this file and add more files in the built\-in [code editor](code-editor.md)\. Choose **Save** to save your changes, and choose **Test** to run your code\.
+
+**Note**  
+The Lambda console uses AWS Cloud9 to provide an integrated development environment in the browser\. You can also use AWS Cloud9 to develop Lambda functions in your own environment\. See [Working with AWS Lambda Functions](https://docs.aws.amazon.com/cloud9/latest/user-guide/lambda-functions.html) in the AWS Cloud9 user guide for more information\.
+
+`index.js` exports a function named `handler` that takes an event object and a context object\. This is the [handler function](nodejs-prog-model-handler.md) that Lambda calls when the function is invoked\. The Node\.js function runtime gets invocation events from Lambda and passes them to the handler\.
+
+Each time you save your function code, the Lambda console creates a deployment package, which is a ZIP archive that contains your function code\. As your function development progresses, you will want to store your function code in source control, add libraries, and automate deployments\. Start by [creating a deployment package](nodejs-create-deployment-pkg.md) and updating your code at the command line\.
+
+The function runtime passes a context object to the handler, in addition to the invocation event\. The [context object](nodejs-prog-model-context.md) contains additional information about the invocation, the function, and the execution environment\. Further information is available from environment variables\.
+
+Your Lambda function comes with a CloudWatch Logs log group\. The function runtime sends details about each invocation to CloudWatch Logs, and relays any [logs that your function outputs](nodejs-prog-model-logging.md) during invocation\. If your function [returns an error](nodejs-prog-mode-exceptions.md), Lambda formats the error and returns it to the invoker\.
 
 **Topics**
-+ [Lambda Function Handler \(Node\.js\)](nodejs-prog-model-handler.md)
-+ [The Context Object \(Node\.js\)](nodejs-prog-model-context.md)
-+ [Logging \(Node\.js\)](nodejs-prog-model-logging.md)
-+ [Function Errors \(Node\.js\)](nodejs-prog-mode-exceptions.md)
++ [AWS Lambda Function Handler in Node\.js](nodejs-prog-model-handler.md)
++ [AWS Lambda Deployment Package in Node\.js](nodejs-create-deployment-pkg.md)
++ [AWS Lambda Context Object in Node\.js](nodejs-prog-model-context.md)
++ [AWS Lambda Function Logging in Node\.js](nodejs-prog-model-logging.md)
++ [AWS Lambda Function Errors in Node\.js](nodejs-prog-mode-exceptions.md)
++ [Instrumenting Node\.js Code in AWS Lambda](nodejs-tracing.md)

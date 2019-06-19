@@ -1,0 +1,41 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PermissionForDescribeStream",
+            "Effect": "Allow",
+            "Action": [
+                "kinesis:DescribeStream"
+            ],
+            "Resource": "arn:aws:kinesis:us-east-2:123456789012:stream/*"
+        },
+        {
+            "Sid": "PermissionForListStreams",
+            "Effect": "Allow",
+            "Action": [
+                "kinesis:ListStreams"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "PermissionForGetFunctionPolicy",
+            "Effect": "Allow",
+            "Action": [
+                "lambda:GetPolicy"
+            ],
+            "Resource": "arn:aws:lambda:us-east-2:123456789012:function:*"
+        },
+        {
+            "Sid": "LambdaEventSourcePerms",
+            "Effect": "Allow",
+            "Action": [
+                "lambda:CreateEventSourceMapping",
+                "lambda:DeleteEventSourceMapping",
+                "lambda:GetEventSourceMapping",
+                "lambda:ListEventSourceMappings",
+                "lambda:UpdateEventSourceMapping"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
