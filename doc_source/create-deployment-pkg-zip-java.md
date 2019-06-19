@@ -1,7 +1,8 @@
 # Creating a ZIP Deployment Package for a Java Function<a name="create-deployment-pkg-zip-java"></a>
 
-This section provides examples of creating \.zip file as your deployment package\. You can use any build and packaging tool you like to create a deployment package with the following structure\.
+This section provides examples of creating \.zip file as your deployment package\. The deployment package must have the following structure\.
 + All compiled class files and resource files at the root level\.
+
 + All required jars to run the code in the `/lib` directory\.
 **Note**  
 Lambda loads JARs in unicode alphabetical order\. If multiple JARs in the `lib` folder contain the same class, the first one is used\. You can use the following shell script to identify duplicate classes\.  
@@ -14,7 +15,7 @@ Lambda loads JARs in unicode alphabetical order\. If multiple JARs in the `lib` 
   find ./expanded/lib -name '*.jar' | xargs -n1 zipinfo -1 | grep '.*.class' | sort | uniq -c | sort
   ```
 
-The following examples use Gradle build and deployment tool to create a deployment package\.
+You can use any build and packaging tool you like to create a deployment package. The following examples use Gradle build and deployment tool to create a deployment package\.
 
 ## Before You Begin<a name="create-deployment-pkg-zip-java-before-you-begin"></a>
 
