@@ -47,9 +47,9 @@ exports.handler = function(event, context, callback) {
         callback("Could not determine the image type.");
         return;
     }
-    var imageType = typeMatch[1];
+    var imageType = typeMatch[1].toLowerCase();
     if (imageType != "jpg" && imageType != "png") {
-        callback('Unsupported image type: ${imageType}');
+        callback(`Unsupported image type: ${imageType}`);
         return;
     }
 
