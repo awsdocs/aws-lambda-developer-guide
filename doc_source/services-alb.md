@@ -8,30 +8,32 @@ Elastic Load Balancing invokes your Lambda function synchronously with an event 
 
 ```
 {
-    'requestContext': {
-        'elb': {
-            'targetGroupArn': 'arn:aws:elasticloadbalancing:us-east-1:011685312445:targetgroup/lambda-target/d6190d154bc908a5'
+    "requestContext": {
+        "elb": {
+            "targetGroupArn": "arn:aws:elasticloadbalancing:us-east-2:123456789012:targetgroup/lambda-279XGJDqGZ5rsrHC2Fjr/49e9d65c45c6791a"
         }
     },
-    'httpMethod': 'GET',
-    'path': '/health',
-    'queryStringParameters': {},
-    'headers': {
-        'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-        'accept-encoding': 'gzip',
-        'accept-language': 'en-US,en;q=0.5',
-        'connection': 'keep-alive',
-        'cookie': 'cookie',
-        'host': 'lambda-846800462.elb.amazonaws.com',
-        'upgrade-insecure-requests': '1',
-        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:60.0) Gecko/20100101 Firefox/60.0',
-        'x-amzn-trace-id': 'Root=1-5bdb40ca-556d8b0c50dc66f0511bf520',
-        'x-forwarded-for': '72.21.198.66',
-        'x-forwarded-port': '80',
-        'x-forwarded-proto': 'http',
+    "httpMethod": "GET",
+    "path": "/lambda",
+    "queryStringParameters": {
+        "query": "1234ABCD"
     },
-    'body': '',
-    'isBase64Encoded': False
+    "headers": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
+        "accept-encoding": "gzip",
+        "accept-language": "en-US,en;q=0.9",
+        "connection": "keep-alive",
+        "host": "lambda-alb-123578498.us-east-2.elb.amazonaws.com",
+        "upgrade-insecure-requests": "1",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36",
+        "x-amzn-trace-id": "Root=1-5c536348-3d683b8b04734faae651f476",
+        "x-forwarded-for": "72.12.164.125",
+        "x-forwarded-port": "80",
+        "x-forwarded-proto": "http",
+        "x-imforwards": "20"
+    },
+    "body": "",
+    "isBase64Encoded": false
 }
 ```
 
@@ -42,14 +44,12 @@ Your function processes the event and returns a response to the load balancer in
 ```
 {
     "statusCode": 200,
-    "statusDescription": "HTTP OK",
+    "statusDescription": "200 OK",
     "isBase64Encoded": False,
     "headers": {
-        "server": "my-server",
-        "set-cookie": "name=value",
-        "Content-Type": "text/html; charset=utf-8"
+        "Content-Type": "text/html"
     },
-    "body": "Welcome"
+    "body": "<h1>Hello from Lambda!</h1>"
 }
 ```
 

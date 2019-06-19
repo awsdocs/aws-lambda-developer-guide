@@ -5,11 +5,10 @@ The following sections explain how [common programming patterns and core concept
 
 **\.NET Runtimes**  
 
-| Name | Identifier | Languages | 
-| --- | --- | --- | 
-|  \.NET Core 2\.1  |  `dotnetcore2.1`  |  C\# PowerShell Core 6\.0  | 
-|  \.NET Core 2\.0  |  `dotnetcore2.0`  |  C\#  | 
-|  \.NET Core 1\.0  |  `dotnetcore1.0`  |  C\#  | 
+| Name | Identifier | Languages | Operating System | 
+| --- | --- | --- | --- | 
+|  \.NET Core 2\.1  |  `dotnetcore2.1`  |  C\# PowerShell Core 6\.0  |  Amazon Linux  | 
+|  \.NET Core 1\.0  |  `dotnetcore1.0`  |  C\#  |  Amazon Linux  | 
 
 **Topics**
 + [AWS Lambda Deployment Package in C\#](lambda-dotnet-how-to-create-deployment-package.md)

@@ -13,7 +13,6 @@ When Lambda runs your function, it passes a context object to the [handler](pyth
 + `aws_request_id` – The identifier of the invocation request\.
 + `log_group_name` – The log group for the function\.
 + `log_stream_name` – The log stream for the function instance\.
-+ `deadline_ms` – The date that the execution times out, in Unix time milliseconds\.
 + `identity` – \(mobile apps\) Information about the Amazon Cognito identity that authorized the request\.
   + `cognito_identity_id` – The authenticated Amazon Cognito identity\.
   + `cognito_identity_pool_id` – The Amazon Cognito identity pool that authorized the invocation\.
@@ -22,7 +21,7 @@ When Lambda runs your function, it passes a context object to the [handler](pyth
   + `client.app_title`
   + `client.app_version_name`
   + `client.app_version_code`
-  + `cclient.app_package_name`
+  + `client.app_package_name`
   + `custom` – A `dict` of custom values set by the mobile client application\.
   + `env` – A `dict` of environment information provided by the AWS SDK\.
 

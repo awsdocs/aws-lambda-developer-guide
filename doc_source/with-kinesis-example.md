@@ -12,7 +12,7 @@ In this tutorial, you create a Lambda function to consume events from a Kinesis 
 
 ## Prerequisites<a name="with-kinesis-prepare"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started with AWS Lambda](getting-started.md) to create your first Lambda function\.
 
 To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
@@ -27,7 +27,7 @@ On Linux and macOS, use your preferred shell and package manager\. On Windows 10
 
 ## Create the Execution Role<a name="with-kinesis-example-create-iam-role"></a>
 
-Create the [execution role](intro-permission-model.md#lambda-intro-execution-role) that gives your function permission to access AWS resources\.
+Create the [execution role](lambda-intro-execution-role.md) that gives your function permission to access AWS resources\.
 
 **To create an execution role**
 
@@ -77,9 +77,9 @@ exports.handler = function(event, context) {
 1. Create a Lambda function with the `create-function` command\.
 
    ```
-   $ aws lambda create-function --function-name ProcessKinesisRecord \
+   $ aws lambda create-function --function-name ProcessKinesisRecords \
    --zip-file fileb://function.zip --handler index.handler --runtime nodejs8.10 \
-   --role role-arn
+   --role arn:aws:iam::123456789012:role/lambda-kinesis-role
    ```
 
 ## Test the Lambda Function<a name="walkthrough-kinesis-events-adminuser-create-test-function-upload-zip-test-manual-invoke"></a>
@@ -95,18 +95,19 @@ Invoke your Lambda function manually using the `invoke` AWS Lambda CLI command a
        "Records": [
            {
                "kinesis": {
-                   "partitionKey": "partitionKey-3",
                    "kinesisSchemaVersion": "1.0",
-                   "data": "SGVsbG8sIHRoaXMgaXMgYSB0ZXN0IDEyMy4=",
-                   "sequenceNumber": "49545115243490985018280067714973144582180062593244200961"
+                   "partitionKey": "1",
+                   "sequenceNumber": "49590338271490256608559692538361571095921575989136588898",
+                   "data": "SGVsbG8sIHRoaXMgaXMgYSB0ZXN0Lg==",
+                   "approximateArrivalTimestamp": 1545084650.987
                },
                "eventSource": "aws:kinesis",
-               "eventID": "shardId-000000000000:49545115243490985018280067714973144582180062593244200961",
-               "invokeIdentityArn": "arn:aws:iam::account-id:role/testLEBRole",
                "eventVersion": "1.0",
+               "eventID": "shardId-000000000006:49590338271490256608559692538361571095921575989136588898",
                "eventName": "aws:kinesis:record",
-               "eventSourceARN": "arn:aws:kinesis:us-west-2:35667example:stream/examplestream",
-               "awsRegion": "us-west-2"
+               "invokeIdentityArn": "arn:aws:iam::123456789012:role/lambda-kinesis-role",
+               "awsRegion": "us-east-2",
+               "eventSourceARN": "arn:aws:kinesis:us-east-2:123456789012:stream/lambda-stream"
            }
        ]
    }
@@ -115,8 +116,7 @@ Invoke your Lambda function manually using the `invoke` AWS Lambda CLI command a
 1. Use the `invoke` command to send the event to the function\.
 
    ```
-   $ aws lambda invoke --invocation-type RequestResponse \
-   --function-name ProcessKinesisRecords --payload file://input.txt out.txt
+   $ aws lambda invoke --function-name ProcessKinesisRecords --payload file://input.txt out.txt
    ```
 
    The response is saved to `out.txt`\.
@@ -132,8 +132,35 @@ $ aws kinesis create-stream --stream-name lambda-stream --shard-count 1
 Run the following `describe-stream` command to get the stream ARN\.
 
 ```
-$ aws kinesis describe-stream --stream-name examplestream
-arn:aws:kinesis:us-east-2:123456789012:stream/lambda-stream
+$ aws kinesis describe-stream --stream-name lambda-stream
+{
+    "StreamDescription": {
+        "Shards": [
+            {
+                "ShardId": "shardId-000000000000",
+                "HashKeyRange": {
+                    "StartingHashKey": "0",
+                    "EndingHashKey": "340282366920746074317682119384634633455"
+                },
+                "SequenceNumberRange": {
+                    "StartingSequenceNumber": "49591073947768692513481539594623130411957558361251844610"
+                }
+            }
+        ],
+        "StreamARN": "arn:aws:kinesis:us-west-2:123456789012:stream/lambda-stream",
+        "StreamName": "lambda-stream",
+        "StreamStatus": "ACTIVE",
+        "RetentionPeriodHours": 24,
+        "EnhancedMonitoring": [
+            {
+                "ShardLevelMetrics": []
+            }
+        ],
+        "EncryptionType": "NONE",
+        "KeyId": null,
+        "StreamCreationTimestamp": 1544828156.0
+    }
+}
 ```
 
 You use the stream ARN in the next step to associate the stream with your Lambda function\.
@@ -144,26 +171,26 @@ Run the following AWS CLI `add-event-source` command\.
 
 ```
 $ aws lambda create-event-source-mapping --function-name ProcessKinesisRecords \
---event-source  arn:aws:kinesis:us-east-2:123456789012:stream/lambda-stream \
---batch-size 100 --starting-position TRIM_HORIZON
+--event-source  arn:aws:kinesis:us-west-2:123456789012:stream/lambda-stream \
+--batch-size 100 --starting-position LATEST
 ```
 
 Note the mapping ID for later use\. You can get a list of event source mappings by running the `list-event-source-mappings` command\.
 
 ```
 $ aws lambda list-event-source-mappings --function-name ProcessKinesisRecords \
---event-source arn:aws:kinesis:us-east-2:123456789012:stream/lambda-stream
+--event-source arn:aws:kinesis:us-west-2:123456789012:stream/lambda-stream
 ```
 
 In the response, you can verify the status value is `enabled`\. Event source mappings can be disabled to pause polling temporarily losing any records\.
 
 ## Test the Setup<a name="with-kinesis-example-configure-event-source-test-end-to-end"></a>
 
-To test the event source mapping, add event records to your Kinesis stream\. The `--data` value is a base64\-encoded value of the `"Hello, this is a test."` string\. You can run the same command more than once to add multiple records to the stream\.
+To test the event source mapping, add event records to your Kinesis stream\. The `--data` value is a string that the CLI encodes to base64 prior to sending it to Kinesis\. You can run the same command more than once to add multiple records to the stream\.
 
 ```
-$ aws kinesis put-record --stream-name examplestream \
---data "SGVsbG8sIHRoaXMgaXMgYSB0ZXN0Lg==" --partition-key shardId-000000000000
+$ aws kinesis put-record --stream-name lambda-stream --partition-key 1 \
+--data "Hello, this is a test."
 ```
 
 Lambda uses the execution role to read records from the stream\. Then it invokes your Lambda function, passing in batches of records\. The function decodes data from each record and logs it, sending the output to CloudWatch Logs\. View the logs in the [CloudWatch console](https://console.aws.amazon.com/cloudwatch)\.

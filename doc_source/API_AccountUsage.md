@@ -1,16 +1,16 @@
 # AccountUsage<a name="API_AccountUsage"></a>
 
-Provides code size usage and function count associated with the current account and region\.
+The number of functions and amount of storage in use\.
 
 ## Contents<a name="API_AccountUsage_Contents"></a>
 
  **FunctionCount**   <a name="SSS-Type-AccountUsage-FunctionCount"></a>
-The number of your account's existing functions per region\.  
+The number of Lambda functions\.  
 Type: Long  
 Required: No
 
  **TotalCodeSize**   <a name="SSS-Type-AccountUsage-TotalCodeSize"></a>
-Total size, in bytes, of the account's deployment packages per region\.  
+The amount of storage space, in bytes, that's being used by deployment packages and layer archives\.  
 Type: Long  
 Required: No
 
@@ -19,5 +19,6 @@ Required: No
 For more information about using this API in one of the language\-specific AWS SDKs, see the following:
 +  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/AccountUsage) 
 +  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/AccountUsage) 
++  [AWS SDK for Go \- Pilot](https://docs.aws.amazon.com/goto/SdkForGoPilot/lambda-2015-03-31/AccountUsage) 
 +  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/AccountUsage) 
 +  [AWS SDK for Ruby V2](https://docs.aws.amazon.com/goto/SdkForRubyV2/lambda-2015-03-31/AccountUsage) 

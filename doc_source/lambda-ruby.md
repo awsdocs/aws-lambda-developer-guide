@@ -1,17 +1,17 @@
 # Building Lambda Functions with Ruby<a name="lambda-ruby"></a>
 
-You can run Ruby code in AWS Lambda\. Lambda provides a [runtime](lambda-runtimes.md) for Ruby that executes your code to process events\. Your code runs in an environment that includes the AWS SDK for Ruby, with credentials from an AWS Identity and Access Management \(IAM\) role that you manage\.
+You can run Ruby code in AWS Lambda\. Lambda provides [runtimes](lambda-runtimes.md) for Ruby that execute your code to process events\. Your code runs in an environment that includes the AWS SDK for Ruby, with credentials from an AWS Identity and Access Management \(IAM\) role that you manage\.
 
-Lambda supports the following Ruby runtimes:
+Lambda supports the following Ruby runtimes\.
 
 
 **Ruby Runtimes**  
 
-| Name  | Identifier  | 
-| --- | --- | 
-|  Ruby 2\.5  |  `ruby2.5`  | 
+| Name | Identifier | AWS SDK for Ruby | Operating System | 
+| --- | --- | --- | --- | 
+|  Ruby 2\.5  |  `ruby2.5`  |  3\.0\.1  |  Amazon Linux  | 
 
-If you don't already have an execution role for function development, create one\.
+Lambda functions use an [execution role](lambda-intro-execution-role.md) to get permission to write logs to Amazon CloudWatch Logs and access other services and resources\. If you don't already have an execution role for function development, create one\.
 
 **To create an execution role**
 
@@ -35,7 +35,7 @@ You can add permissions to the role later, or swap it out for a different role t
 1. Choose **Create function**\.
 
 1. Configure the following settings:
-   + **Name** – **ruby\-function**\.
+   + **Name** – **my\-function**\.
    + **Runtime** – **Ruby 2\.5**\.
    + **Role** – **Choose an existing role**\.
    + **Existing role** – **lambda\-role**\.
@@ -55,7 +55,7 @@ The console creates a Lambda function with a single source file named `lambda_fu
 **Note**  
 The Lambda console uses AWS Cloud9 to provide an integrated development environment in the browser\. You can also use AWS Cloud9 to develop Lambda functions in your own environment\. See [Working with AWS Lambda Functions](https://docs.aws.amazon.com/cloud9/latest/user-guide/lambda-functions.html) in the AWS Cloud9 user guide for more information\.
 
-`lambda_function.rb` defines a function named `lambda_handler` that takes an event object and a context object\. This is the [handler function](ruby-handler.md) that Lambda calls when the function is invoked\. The Ruby function runtime gets invocation events from Lambda and passes them to the handler\.
+`lambda_function.rb` exports a function named `lambda_handler` that takes an event object and a context object\. This is the [handler function](ruby-handler.md) that Lambda calls when the function is invoked\. The Ruby function runtime gets invocation events from Lambda and passes them to the handler\.
 
 Each time you save your function code, the Lambda console creates a deployment package, which is a ZIP archive that contains your function code\. As your function development progresses, you will want to store your function code in source control, add libraries, and automate deployments\. Start by [creating a deployment package](ruby-package.md) and updating your code at the command line\.
 

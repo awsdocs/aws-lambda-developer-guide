@@ -7,7 +7,7 @@ In this tutorial, you do the following:
 
 ## Prerequisites<a name="vpc-rds-prereqs"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started with AWS Lambda](getting-started.md) to create your first Lambda function\.
 
 To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
@@ -22,7 +22,7 @@ On Linux and macOS, use your preferred shell and package manager\. On Windows 10
 
 ## Create the Execution Role<a name="vpc-rds-create-iam-role"></a>
 
-Create the [execution role](intro-permission-model.md#lambda-intro-execution-role) that gives your function permission to access AWS resources\.
+Create the [execution role](lambda-intro-execution-role.md) that gives your function permission to access AWS resources\.
 
 **To create an execution role**
 
@@ -107,7 +107,7 @@ def handler(event, context):
             item_count += 1
             logger.info(row)
             #print(row)
-     conn.commit()
+    conn.commit()
 
     return "Added %d items from RDS MySQL table" %(item_count)
 ```
@@ -156,4 +156,4 @@ In this step, you invoke the Lambda function manually using the `invoke` command
    + Review the results in the AWS Lambda console\.
    + Verify the results in CloudWatch Logs\.
 
-Now that you have created a Lambda function that accesses a database in your VPC, you can have the function invoked in response to events\. For information about configuring event sources and examples, see [Use Cases](use-cases.md)\.
+Now that you have created a Lambda function that accesses a database in your VPC, you can have the function invoked in response to events\. For information about configuring event sources and examples, see [Using AWS Lambda with Other Services](lambda-services.md)\.

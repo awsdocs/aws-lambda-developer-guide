@@ -1,10 +1,14 @@
-# Tutorial: Using AWS Lambda as Mobile Application Backend<a name="with-android-example"></a>
+# Tutorial: Using AWS Lambda with the Mobile SDK for Android<a name="with-android-example"></a>
 
-In this tutorial, you create a simple Android mobile application\. The primary purpose of this tutorial is to show you how to hook up various components to enable an Android mobile application to invoke a Lambda function and process response\.
+In this tutorial, you create a simple Android mobile application that uses Amazon Cognito to get credentials and invokes a Lambda function\.
+
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/lambda-android.png)
+
+The mobile application retrieves AWS credentials from an Amazon Cognito identity pool and uses them to invoke a Lambda function with an event that contains request data\. The function processes the request and returns a response to the front\-end\.
 
 ## Prerequisites<a name="with-android-prepare"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started with AWS Lambda](getting-started.md) to create your first Lambda function\.
 
 To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
@@ -19,7 +23,7 @@ On Linux and macOS, use your preferred shell and package manager\. On Windows 10
 
 ## Create the Execution Role<a name="with-android-create-execution-role"></a>
 
-Create the [execution role](intro-permission-model.md#lambda-intro-execution-role) that gives your function permission to access AWS resources\.
+Create the [execution role](lambda-intro-execution-role.md) that gives your function permission to access AWS resources\.
 
 **To create an execution role**
 
@@ -36,7 +40,7 @@ The **AWSLambdaBasicExecutionRole** policy has the permissions that the function
 
 ## Create the Function<a name="with-android-example-create-function"></a>
 
-The following example uses data to generate a string reponse\.
+The following example uses data to generate a string response\.
 
 **Note**  
 For sample code in other languages, see [Sample Function Code](with-android-create-package.md)\.
@@ -68,7 +72,7 @@ exports.handler = function(event, context, callback) {
    ```
    $ aws lambda create-function --function-name AndroidBackendLambdaFunction \
    --zip-file fileb://function.zip --handler index.handler --runtime nodejs8.10 \
-   --role role-arn
+   --role arn:aws:iam::123456789012:role/lambda-android-role
    ```
 
 ## Test the Lambda Function<a name="walkthrough-on-demand-custom-android-events-adminuser-create-test-function-upload-zip-test-manual-invoke"></a>

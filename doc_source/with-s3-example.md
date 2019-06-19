@@ -19,7 +19,7 @@ Upon completing this tutorial, you will have the following Amazon S3, Lambda, an
 
 ## Prerequisites<a name="with-s3-prepare"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started with AWS Lambda](getting-started.md) to create your first Lambda function\.
 
 To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
@@ -32,9 +32,11 @@ For long commands, an escape character \(`\`\) is used to split a command over m
 
 On Linux and macOS, use your preferred shell and package manager\. On Windows 10, you can [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows\-integrated version of Ubuntu and Bash\.
 
+Install NPM to manage the function's dependencies\.
+
 ## Create the Execution Role<a name="with-s3-create-execution-role"></a>
 
-Create the [execution role](intro-permission-model.md#lambda-intro-execution-role) that gives your function permission to access AWS resources\.
+Create the [execution role](lambda-intro-execution-role.md) that gives your function permission to access AWS resources\.
 
 **To create an execution role**
 
@@ -53,7 +55,7 @@ The **AWSLambdaExecute** policy has the permissions that the function needs to m
 
 Follow the steps to create buckets and upload an object\.
 
-1. Open the Amazon S3 console\. 
+1. Open the [Amazon S3 console](https://console.aws.amazon.com/s3)\.
 
 1. Create two buckets\. The target bucket name must be *source* followed by **resized**, where *source* is the name of the bucket you want to use for the source\. For example, `mybucket` and `mybucketresized`\.
 
@@ -107,9 +109,9 @@ exports.handler = function(event, context, callback) {
         callback("Could not determine the image type.");
         return;
     }
-    var imageType = typeMatch[1];
+    var imageType = typeMatch[1].toLowerCase();
     if (imageType != "jpg" && imageType != "png") {
-        callback('Unsupported image type: ${imageType}');
+        callback(`Unsupported image type: ${imageType}`);
         return;
     }
 
@@ -174,41 +176,37 @@ exports.handler = function(event, context, callback) {
 };
 ```
 
+Review the preceding code and note the following:
++ The function knows the source bucket name and the key name of the object from the event data it receives as parameters\. If the object is a \.jpg, the code creates a thumbnail and saves it to the target bucket\. 
++ The code assumes that the destination bucket exists and its name is a concatenation of the source bucket name followed by the string `resized`\. For example, if the source bucket identified in the event data is `examplebucket`, the code assumes you have an `examplebucketresized` destination bucket\.
++ For the thumbnail it creates, the code derives its key name as the concatenation of the string `resized-` followed by the source object key name\. For example, if the source object key is `sample.jpg`, the code creates a thumbnail object that has the key `resized-sample.jpg`\.
+
 The deployment package is a \.zip file containing your Lambda function code and dependencies\. 
 
 **To create a deployment package**
 
-1. Create a folder \(`examplefolder`\), and then create a subfolder \(`node_modules`\)\. 
+1. Save the function code as `index.js` in a folder named `lambda-s3`\.
 
-1. Install the Node\.js platform\. For more information, see the [Node\.js](https://nodejs.org/) website\.
-
-1. Install dependencies\. The code examples use the following libraries:
-   + AWS SDK for JavaScript in Node\.js
-   + gm, GraphicsMagick for node\.js
-   + Async utility module
-
-   The AWS Lambda runtime already has the AWS SDK for JavaScript in Node\.js, so you only need to install the other libraries\. Open a command prompt, navigate to the `examplefolder`, and install the libraries using the `npm` command, which is part of Node\.js\.
+1. Install the GraphicsMagick and Async libraries with NPM\.
 
    ```
-   npm install async gm
+   lambda-s3$ npm install async gm
    ```
 
-1. Save the sample code to a file named index\.js\.
-
-1. Review the preceding code and note the following:
-   + The function knows the source bucket name and the key name of the object from the event data it receives as parameters\. If the object is a \.jpg, the code creates a thumbnail and saves it to the target bucket\. 
-   + The code assumes that the destination bucket exists and its name is a concatenation of the source bucket name followed by the string `resized`\. For example, if the source bucket identified in the event data is `examplebucket`, the code assumes you have an `examplebucketresized` destination bucket\.
-   + For the thumbnail it creates, the code derives its key name as the concatenation of the string `resized-` followed by the source object key name\. For example, if the source object key is `sample.jpg`, the code creates a thumbnail object that has the key `resized-sample.jpg`\.
-
-1. Save the file as `index.js` in `examplefolder`\. After you complete this step, you will have the following folder structure:
+   After you complete this step, you will have the following folder structure:
 
    ```
-   index.js
-   /node_modules/gm
-   /node_modules/async
+   lambda-s3
+   |- index.js
+   |- /node_modules/gm
+   └ /node_modules/async
    ```
 
-1. Zip the index\.js file and the node\_modules folder as `CreateThumbnail.zip`\.
+1. Create a deployment package with the function code and dependencies\.
+
+   ```
+   lambda-s3$ zip -r function.zip .
+   ```
 
 **To create the function**
 + Create a Lambda function with the `create-function` command\.
@@ -216,8 +214,8 @@ The deployment package is a \.zip file containing your Lambda function code and 
   ```
   $ aws lambda create-function --function-name CreateThumbnail \
   --zip-file fileb://function.zip --handler index.handler --runtime nodejs8.10 \
-  --role role-arn \
-  --timeout 10 --memory-size 1024
+  --timeout 10 --memory-size 1024 \
+  --role arn:aws:iam::123456789012:role/lambda-s3-role
   ```
 
 The preceding command specifies a 10\-second timeout value as the function configuration\. Depending on the size of objects you upload, you might need to increase the timeout value using the following AWS CLI command\.
@@ -235,43 +233,43 @@ In this step, you invoke the Lambda function manually using sample Amazon S3 eve
 1. Save the following Amazon S3 sample event data in a file and save it as `inputFile.txt`\. You need to update the JSON by providing your *sourcebucket* name and a \.jpg object key\.
 
    ```
-   {  
-      "Records":[  
-         {  
-            "eventVersion":"2.0",
-            "eventSource":"aws:s3",
-            "awsRegion":"us-west-2",
-            "eventTime":"1970-01-01T00:00:00.000Z",
-            "eventName":"ObjectCreated:Put",
-            "userIdentity":{  
-               "principalId":"AIDAJDPLRKLG7UEXAMPLE"
-            },
-            "requestParameters":{  
-               "sourceIPAddress":"127.0.0.1"
-            },
-            "responseElements":{  
-               "x-amz-request-id":"C3D13FE58DE4C810",
-               "x-amz-id-2":"FMyUVURIY8/IgAtTv8xRjskZQpcIZ9KG4V5Wp6S7S/JRWeUWerMUE5JgHvANOjpD"
-            },
-            "s3":{  
-               "s3SchemaVersion":"1.0",
-               "configurationId":"testConfigRule",
-               "bucket":{  
-                  "name":"sourcebucket",
-                  "ownerIdentity":{  
-                     "principalId":"A3NL1KOZZKExample"
-                  },
-                  "arn":"arn:aws:s3:::sourcebucket"
-               },
-               "object":{  
-                  "key":"HappyFace.jpg",
-                  "size":1024,
-                  "eTag":"d41d8cd98f00b204e9800998ecf8427e",
-                  "versionId":"096fKKXTRTtl3on89fVO.nfljtsv6qko"
-               }
-            }
+   {
+     "Records":[  
+       {  
+         "eventVersion":"2.0",
+         "eventSource":"aws:s3",
+         "awsRegion":"us-west-2",
+         "eventTime":"1970-01-01T00:00:00.000Z",
+         "eventName":"ObjectCreated:Put",
+         "userIdentity":{  
+           "principalId":"AIDAJDPLRKLG7UEXAMPLE"
+         },
+         "requestParameters":{  
+           "sourceIPAddress":"127.0.0.1"
+         },
+         "responseElements":{  
+           "x-amz-request-id":"C3D13FE58DE4C810",
+           "x-amz-id-2":"FMyUVURIY8/IgAtTv8xRjskZQpcIZ9KG4V5Wp6S7S/JRWeUWerMUE5JgHvANOjpD"
+         },
+         "s3":{  
+           "s3SchemaVersion":"1.0",
+           "configurationId":"testConfigRule",
+           "bucket":{  
+             "name":"sourcebucket",
+             "ownerIdentity":{  
+               "principalId":"A3NL1KOZZKExample"
+             },
+             "arn":"arn:aws:s3:::sourcebucket"
+           },
+           "object":{  
+             "key":"HappyFace.jpg",
+             "size":1024,
+             "eTag":"d41d8cd98f00b204e9800998ecf8427e",
+             "versionId":"096fKKXTRTtl3on89fVO.nfljtsv6qko"
+           }
          }
-      ]
+       }
+     ]
    }
    ```
 

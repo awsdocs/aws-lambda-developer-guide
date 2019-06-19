@@ -103,10 +103,10 @@ To create a new PowerShell script, upload it, and test it, follow this procedure
 
 1. **Test the Lambda function\.**
 
-   You can test the PowerShell Lambda function that you just published by using the **dotnet** command line interface \(CLI\) extension or the console\. The following dotnet CLI command is an example of how to test your function:
+   You can test the PowerShell Lambda function that you just published by using the **dotnet** CLI from a command prompt\. Use the `lambda invoke-function` command to invoke your function\.
 
    ```
-   dotnet lambda invoke-function MyFirstPSScript --region us-east-1
+   > dotnet lambda invoke-function MyFirstPSScript
    ```
 
    For more information about the dotnet CLI extension, see [\.NET Core CLI](lambda-dotnet-coreclr-deployment-package.md)\.

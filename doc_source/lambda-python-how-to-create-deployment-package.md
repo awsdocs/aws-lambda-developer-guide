@@ -1,6 +1,6 @@
 # AWS Lambda Deployment Package in Python<a name="lambda-python-how-to-create-deployment-package"></a>
 
-A deployment package is a ZIP archive that contains your function code and dependencies\. You need to create a deployment package if you use the Lambda API to manage functions, or if your code uses libraries other than the AWS SDK\. Other libraries and dependencies need to be included in the deployment package\. You can upload the package directly to Lambda, or you can use an Amazon S3 bucket, and then upload it to Lambda\.
+A deployment package is a ZIP archive that contains your function code and dependencies\. You need to create a deployment package if you use the Lambda API to manage functions, or to include libraries and dependencies other than the AWS SDK\. You can upload the package directly to Lambda, or you can use an Amazon S3 bucket, and then upload it to Lambda\.
 
 If you use the Lambda [console editor](code-editor.md) to author your function, the console manages the deployment package\. You can use this method as long as you don't need to add any libraries\. You can also use it to update a function that already has libraries in the deployment package, as long as the total size doesn't exceed 3 MB\.
 
@@ -8,11 +8,11 @@ If you use the Lambda [console editor](code-editor.md) to author your function, 
 You can use the AWS SAM CLI `build` command to create a deployment package for your Python function code and dependencies\. See [Building Applications with Dependencies](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-build.html) in the AWS SAM Developer Guide for instructions\.
 
 **Topics**
-+ [Without Additional Dependencies](#python-package-codeonly)
-+ [With Additional Dependencies](#python-package-dependencies)
++ [Updating a Function with No Dependencies](#python-package-codeonly)
++ [Updating a Function with Additional Dependencies](#python-package-dependencies)
 + [With a Virtual Environment](#python-package-venv)
 
-## Without Additional Dependencies<a name="python-package-codeonly"></a>
+## Updating a Function with No Dependencies<a name="python-package-codeonly"></a>
 
 To create or update a function with the Lambda API, create an archive that contains your function code and upload it with the AWS CLI\.
 
@@ -53,7 +53,7 @@ To create or update a function with the Lambda API, create an archive that conta
    }
    ```
 
-## With Additional Dependencies<a name="python-package-dependencies"></a>
+## Updating a Function with Additional Dependencies<a name="python-package-dependencies"></a>
 
 If your function depends on libraries other than the SDK for Python \(Boto 3\), install them to a local directory with [pip](https://pypi.org/project/pip/), and include them in your deployment package\.
 
@@ -171,11 +171,11 @@ In some cases, you may need to use a [virtual environment](https://virtualenv.py
    (v-env)~/my-function$ deactivate
    ```
 
-1. Create a ZIP archive with the contents of the `site-packages` directory\.
+1. Create a ZIP archive with the contents of the library\.
 
    ```
    ~/my-function$ cd v-env/lib/python3.7/site-packages/  
-   ~/my-function/v-env/lib/python3.7/site-packages$ zip -r9 ../function.zip .
+   ~/my-function/v-env/lib/python3.7/site-packages$ zip -r9 ../../../../function.zip .
      adding: easy_install.py (deflated 17%)
      adding: PIL/ (stored 0%)
      adding: PIL/.libs/ (stored 0%)
@@ -183,8 +183,8 @@ In some cases, you may need to use a [virtual environment](https://virtualenv.py
      adding: PIL/.libs/libjpeg-3fe7dfc0.so.9.3.0 (deflated 72%)
    ...
    ```
-**Note**  
-In some cases, libraries may also be installed in the `dist-packages` directory\.
+
+   Depending on the library, dependencies may appear in either `site-packages` or `dist-packages`, and the first folder in the virtual environment may be `lib` or `lib64`\. You can use the `pip show` command to locate a specific package\.
 
 1. Add your function code to the archive\.
 

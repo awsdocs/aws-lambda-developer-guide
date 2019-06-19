@@ -57,7 +57,7 @@ To learn more about these API Gateway features, see [Configure Proxy Integration
 
 ## Prerequisites<a name="with-on-demand-https-prepare"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started with AWS Lambda](getting-started.md) to create your first Lambda function\.
 
 To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
@@ -72,7 +72,7 @@ On Linux and macOS, use your preferred shell and package manager\. On Windows 10
 
 ## Create the Execution Role<a name="with-on-demand-https-create-execution-role"></a>
 
-Create the [execution role](intro-permission-model.md#lambda-intro-execution-role) that gives your function permission to access AWS resources\.
+Create the [execution role](lambda-intro-execution-role.md) that gives your function permission to access AWS resources\.
 
 **To create an execution role**
 
@@ -120,7 +120,7 @@ The custom policy has the permissions that the function needs to write data to D
 
 ## Create the Function<a name="with-on-demand-https-example-create-function"></a>
 
-The following example code receives a Kinesis event input and processes the messages that it contains\. For illustration, the code writes some of the incoming event data to CloudWatch Logs\.
+The following example code receives a API Gateway event input and processes the messages that it contains\. For illustration, the code writes some of the incoming event data to CloudWatch Logs\.
 
 **Note**  
 For sample code in other languages, see [Sample Function Code](with-on-demand-https-create-package.md)\.

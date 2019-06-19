@@ -19,4 +19,4 @@ func main() {
 }
 ```
 
-Lambda configures the following environment variables by default: [Environment Variables Available to Lambda Functions](current-supported-versions.md#lambda-environment-variables)\.
+Lambda configures the following environment variables by default: [Environment Variables Available to Lambda Functions](lambda-environment-variables.md)\.

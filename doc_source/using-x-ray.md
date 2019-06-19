@@ -11,7 +11,7 @@ Only services that currently integrate with X\-Ray show as standalone traces, ou
 
 X\-Ray displays three types of nodes on the service map for requests served by Lambda:
 + **Lambda service \(AWS::Lambda\)** – This type of node represents the time the request spent in the Lambda service\. Timing starts when Lambda first receives the request and ends when the request leaves the Lambda service\.
-+ **Lambda function \(AWS::Lambda::Function\) – **This type of node represents the Lambda function's execution time\.
++ **Lambda function \(AWS::Lambda::Function\)** – This type of node represents the Lambda function's execution time\.
 + **Downstream service calls** – In this type, each downstream service call from within the Lambda function is represented by a separate node\. 
 
 In the diagram following, the nodes represent \(from left to right\): The Lambda service, the user function, and a downstream call to Amazon S3:
@@ -23,7 +23,7 @@ For more information, see [Viewing the Service Map](https://docs.aws.amazon.com/
 ## Lambda as an AWS X\-Ray Trace<a name="lambda-request"></a>
 
 From the service map, you can zoom in to see a trace view of your Lambda function\. The trace will display in\-depth information regarding your function invocations, represented as segments and subsegments:
-+ ** Lambda service segment** – This segment represents different information depending on the event source used to invoke the function:
++ **Lambda service segment** – This segment represents different information depending on the event source used to invoke the function:
   + **Synchronous and stream event sources** – The service segment measures the time from when the Lambda service receives the request/event and ends when the request leaves the Lambda service \(after the final invocation for the request is completed\)\.
   + **Asynchronous** – The service segment represents the response time, that is, the time it took the Lambda service to return a 202 response to the client\.
 
@@ -36,4 +36,4 @@ From the service map, you can zoom in to see a trace view of your Lambda functio
   + **Custom subsegments** – Custom subsegments or user annotations that you can add to the Lambda function segment by using the X\-Ray SDK\. 
 
 **Note**  
-For each traced invocation, Lambda emits the Lambda service segment and all of its subsegments\. These segments are emitted regardless of the runtime and require you to use the XRay SDK for AWS API calls\. 
+For each traced invocation, Lambda emits the Lambda service segment and all of its subsegments\. These segments are emitted regardless of the runtime and require you to use the X\-Ray SDK for AWS API calls\. 

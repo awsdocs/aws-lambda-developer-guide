@@ -1,6 +1,6 @@
 # AWS Lambda Runtime Interface<a name="runtimes-api"></a>
 
-AWS Lambda provides an HTTP API for [custom runtimes](runtimes-custom.md) to receive invocation events from Lambda and send response data back within the Lambda [execution environment](current-supported-versions.md)\.
+AWS Lambda provides an HTTP API for [custom runtimes](runtimes-custom.md) to receive invocation events from Lambda and send response data back within the Lambda [execution environment](lambda-runtimes.md)\.
 
 The OpenAPI specification for the runtime API version **2018\-06\-01** is available here: [runtime\-api\.zip](samples/runtime-api.zip)
 
@@ -83,7 +83,7 @@ If the function returns an error, the runtime formats the error into a JSON docu
 ```
 REQUEST_ID=156cb537-e2d4-11e8-9b34-d36013741fb9
 ERROR="{\"errorMessage\" : \"Error parsing event data.\", \"errorType\" : \"InvalidEventDataException\"}"
-curl -X POST "http://${AWS_LAMBDA_RUNTIME_API}/2018-06-01/runtime/invocation/$REQUEST_ID/error"  -d "$ERROR"
+curl -X POST "http://${AWS_LAMBDA_RUNTIME_API}/2018-06-01/runtime/invocation/$REQUEST_ID/error" -d "$ERROR" --header "Lambda-Runtime-Function-Error-Type: Unhandled"
 ```
 
 ## Initialization Error<a name="runtimes-api-initerror"></a>
@@ -94,9 +94,9 @@ curl -X POST "http://${AWS_LAMBDA_RUNTIME_API}/2018-06-01/runtime/invocation/$RE
 
 If the runtime encounters an error during initialization, it posts an error message to the initialization error path\.
 
-**Example Initialization Error Request**
+**Example Initialization Error Request**  
 
 ```
 ERROR="{\"errorMessage\" : \"Failed to load function.\", \"errorType\" : \"InvalidFunctionException\"}"
-curl -X POST "http://${AWS_LAMBDA_RUNTIME_API}/2018-06-01/runtime/init/error"  -d "$ERROR"
+curl -X POST "http://${AWS_LAMBDA_RUNTIME_API}/2018-06-01/runtime/init/error" -d "$ERROR" --header "Lambda-Runtime-Function-Error-Type: Unhandled"
 ```
