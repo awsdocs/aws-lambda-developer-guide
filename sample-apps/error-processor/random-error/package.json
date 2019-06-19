@@ -1,0 +1,9 @@
+{
+  "name": "random-error",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "aws-xray-sdk-core": "1.1.2",
+    "chance": "1.0.16"
+  }
+}

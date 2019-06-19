@@ -97,19 +97,14 @@ package example;
  The `get` and `set` methods are required in order for the POJOs to work with AWS Lambda's built in JSON serializer\. The constructors that take no arguments are usually not required, however in this example we provided other constructors and therefore we need to explicitly provide the zero argument constructors\.
 
 You can upload this code as your Lambda function and test as follows:
-
 + Using the preceding code files, create a deployment package\.
-
 + Upload the deployment package to AWS Lambda and create your Lambda function\. You can do this using the console or AWS CLI\.
-
 + Invoke the Lambda function manually using the console or the CLI\. You can use provide sample JSON event data when you manually invoke your Lambda function\. For example: 
 
   ```
   { "firstName":"John", "lastName":"Doe" }
   ```
 
-For more information, see  [\(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\. Note the following differences:
-
+For more information, see [Create a Lambda Function Authored in Java](get-started-step4-optional.md)\. Note the following differences:
 + When you create a deployment package, don't forget the `aws-lambda-java-core` library dependency\.
-
 + When you create the Lambda function, specify `example.HelloPojo::handleRequest` \(*package*\.*class*::*method*\) as the handler value\.
