@@ -5,7 +5,7 @@ For each traced invocation, Lambda will emit the Lambda service segment and all 
 Note that any instrumentation code must be implemented inside the Lambda function handler and not as part of the initialization code\. 
 
 The following examples explain how to do this in the supported runtimes:
-+ [Node\.js](nodejs-tracing.md)
-+ [Java](java-tracing.md)
-+ [Python](python-tracing.md)
-+ [Go](go-tracing.md)
++ [Instrumenting Python Code in AWS Lambda](python-tracing.md)
++ [Instrumenting Node\.js Code in AWS Lambda](nodejs-tracing.md)
++ [Instrumenting Java Code in AWS Lambda](java-tracing.md)
++ [Instrumenting Go Code in AWS Lambda](go-tracing.md)

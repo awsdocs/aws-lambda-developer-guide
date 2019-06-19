@@ -6,26 +6,20 @@ Lambda functions can span multiple applications across separate regions\. To sim
 
 **Topics**
 + [Tagging Lambda Functions for Billing](#tagging-for-billing)
-+ [Applying Tags to Lambda Functions](#how-to-tag)
++ [Applying Tags to Lambda Functions Using the Console](#how-to-tag-console)
++ [Applying Tags to Lambda Functions Using the CLI](#how-to-tag-cli)
 + [Filtering on Tagged Lambda Functions](#tag-filtering)
 + [Tag Restrictions](#tag-restrictions)
 
 ## Tagging Lambda Functions for Billing<a name="tagging-for-billing"></a>
 
-You can use tags to organize your AWS bill to reflect your own cost structure\. To do this, you can add tag keys whose values will be included in the cost allocation report\. For more information about setting up a cost allocation report that includes the tag keys you select to be included as line items in the report, see [The Monthly Cost Allocation Report](http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/configurecostallocreport.html) in *About AWS Account Billing*\. 
+You can use tags to organize your AWS bill to reflect your own cost structure\. To do this, you can add tag keys whose values will be included in the cost allocation report\. For more information about setting up a cost allocation report that includes the tag keys you select to be included as line items in the report, see [The Monthly Cost Allocation Report](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/configurecostallocreport.html) in *About AWS Account Billing*\. 
 
-To see the cost of your combined resources, you can organize your billing information based on functions that have the same tag key values\. For example, you can tag several Lambda functions with a specific application name, and then organize your billing information to see the total cost of that application across several services\. For more information, see [Using Cost Allocation Tags](http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html) in the *AWS Billing and Cost Management User Guide*\. 
+To see the cost of your combined resources, you can organize your billing information based on functions that have the same tag key values\. For example, you can tag several Lambda functions with a specific application name, and then organize your billing information to see the total cost of that application across several services\. For more information, see [Using Cost Allocation Tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html) in the *AWS Billing and Cost Management User Guide*\. 
 
-**Important**  
 In AWS Lambda the only resource that can be tagged is a function\. You cannot tag an alias or a specific function version\. Any invocation of a function's alias or version will be billed as an invocation of the original function\.
 
-## Applying Tags to Lambda Functions<a name="how-to-tag"></a>
-
-How you tag your Lambda functions depends on how you create the function\. You can apply them using the Lambda console or CLI, as explained in the following sections: 
-+ [Applying Tags to Lambda Functions Using the Console](#how-to-tag-console)
-+ [Applying Tags to Lambda Functions Using the CLI](#how-to-tag-cli)
-
-### Applying Tags to Lambda Functions Using the Console<a name="how-to-tag-console"></a>
+## Applying Tags to Lambda Functions Using the Console<a name="how-to-tag-console"></a>
 
 You can add tags to your function under the **Tags** section in the **configuration** tab\. 
 
@@ -35,41 +29,30 @@ To remove tags from an existing function, open the function, choose the **Tags**
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/TagConsole2.png)
 
-### Applying Tags to Lambda Functions Using the CLI<a name="how-to-tag-cli"></a>
+## Applying Tags to Lambda Functions Using the CLI<a name="how-to-tag-cli"></a>
 
-When you create a new Lambda function using the [CreateFunction](API_CreateFunction.md) command, you can add tags by populating the `Tags` parameter\. Specify multiple tag values by enclosing them in quotation marks, as shown below:
-
-**Note**  
-If you have not already created the `adminuser` profile, see [Set Up the AWS Command Line Interface \(AWS CLI\)](setup-awscli.md)\.
+When you create a new Lambda function, you can include tags with the `--tags` option\.
 
 ```
-$ aws lambda create-function \
---region  region  \
---function-name  function-name
+$ aws lambda create-function --function-name my-function
+--handler index.js --runtime nodejs8.10 \
 --role role-arn \
---handler handler-name \
---runtime runtime-value \
---runtime runtime \
---tags "DEPARTMENT=Department A, Department B" \
---profile adminuser \
---timeout 10 \
---memory-size 1024
+--tags "DEPARTMENT=Department A"
 ```
 
-To apply or add more tags to an existing function, you can use the [TagResource](API_TagResource.md) API and supply it with the Lambda function ARN \(Amazon Resource Name\) along with the key\-value pairs that comprise your tags\. 
+To add tags to an existing function, use the `tag-resource` command\. 
 
 ```
 $ aws lambda tag-resource \
 --resource function arn \
---tags DEPARTMENT="Department C, Department D"
+--tags "DEPARTMENT=Department A"
 ```
 
-Conversely, if you want to remove any or all tags from a Lambda function, you use the [UntagResource](API_UntagResource.md) API and again supply the function ARN \(Amazon Resource Name\), along with a list of tag keys to be removed from the function\. 
+To remove tags, use the `untag-resource` command\. 
 
 ```
-$ aws lambda untag-resource \
---resource function arn \
---tagkeys list of tag keys to be removed
+$ aws lambda untag-resource --resource function arn \
+--tagkeys DEPARTMENT
 ```
 
 ## Filtering on Tagged Lambda Functions<a name="tag-filtering"></a>
@@ -101,21 +84,15 @@ If you want to view the tags that are applied to a specific Lambda function, you
 + [ListTags](API_ListTags.md): You supply your Lambda function ARN \(Amazon Resource Name\) to view a list of the tags associated with this function:
 
   ```
-  $ aws lambda list-tags \
-  --resource function arn \
-  --region region \
-  --profile adminuser
+  $ aws lambda list-tags --resource function arn
   ```
 + [GetFunction](API_GetFunction.md): You supply your Lambda function name to a view a list of the tags associated with this function:
 
   ```
-  $ aws lambda get-function \
-  --function-name function name \
-  --region region \
-  --profile adminuser
+  $ aws lambda get-function --function-name my-function
   ```
 
-You can also use the AWS Tagging Service’s [GetResources](http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html) API to filter your resources by tags\. The GetResources API receives up to 10 filters, with each filter containing a tag key and up to 10 tag values\. You provide GetResources with a ‘ResourceType’ to filter by specific resource types\. For more information about the AWS Tagging Service, see [Working with Resource Groups](http://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/resource-groups.html)\. 
+You can also use the AWS Tagging Service’s [GetResources](https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html) API to filter your resources by tags\. The GetResources API receives up to 10 filters, with each filter containing a tag key and up to 10 tag values\. You provide GetResources with a ‘ResourceType’ to filter by specific resource types\. For more information about the AWS Tagging Service, see [Working with Resource Groups](https://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/resource-groups.html)\. 
 
 ## Tag Restrictions<a name="tag-restrictions"></a>
 
