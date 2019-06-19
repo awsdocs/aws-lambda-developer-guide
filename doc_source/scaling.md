@@ -5,6 +5,7 @@ Concurrent executions refers to the number of executions of your function code t
 If you create a Lambda function to process events from event sources that aren't poll\-based \(for example, Lambda can process every event from other sources, like Amazon S3 or API Gateway\), each published event is a unit of work, in parallel, up to your account limits\. Therefore, the number of invocations these event sources make influences the concurrency\. You can use the this formula to estimate the capacity used by your function:
 
 ```
+
 invocations per second * average execution duration in seconds
 ```
 
