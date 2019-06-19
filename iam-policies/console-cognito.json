@@ -1,0 +1,44 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "CognitoPerms1",
+            "Effect": "Allow",
+            "Action": [
+                "cognito-identity:ListIdentityPools"
+            ],
+            "Resource": [
+                "arn:aws:cognito-identity:region:account-id:*"
+            ]
+        },
+        {
+            "Sid": "CognitoPerms2",
+            "Effect": "Allow",
+            "Action": [
+                "cognito-sync:GetCognitoEvents",
+                "cognito-sync:SetCognitoEvents"
+            ],
+            "Resource": [
+                "arn:aws:cognito-sync:region:account-id:*"
+            ]
+        },
+        {
+            "Sid": "AddPermissionToFunctionPolicy",
+            "Effect": "Allow",
+            "Action": [
+                "lambda:AddPermission",
+                "lambda:RemovePermission",
+                "lambda:GetPolicy"
+            ],
+            "Resource": "arn:aws:lambda:region:account-id:function:*"
+        },
+        {
+            "Sid": "ListEventSourcePerms",
+            "Effect": "Allow",
+            "Action": [
+                "lambda:ListEventSourceMappings"
+            ],
+            "Resource": "*"
+        }
+    ]
+}

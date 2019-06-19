@@ -1,0 +1,35 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "SNSPerms",
+            "Effect": "Allow",
+            "Action": [
+                "sns:ListSubscriptions",
+                "sns:ListSubscriptionsByTopic",
+                "sns:ListTopics",
+                "sns:Subscribe",
+                "sns:Unsubscribe"
+            ],
+            "Resource": "arn:aws:sns:us-east-2:123456789012:*"
+        },
+        {
+            "Sid": "AddPermissionToFunctionPolicy",
+            "Effect": "Allow",
+            "Action": [
+                "lambda:AddPermission",
+                "lambda:RemovePermission",
+                "lambda:GetPolicy"
+            ],
+            "Resource": "arn:aws:lambda:us-east-2:123456789012:function:*"
+        },
+        {
+            "Sid": "LambdaListESMappingsPerms",
+            "Effect": "Allow",
+            "Action": [
+                "lambda:ListEventSourceMappings"
+            ],
+            "Resource": "*"
+        }
+    ]
+}

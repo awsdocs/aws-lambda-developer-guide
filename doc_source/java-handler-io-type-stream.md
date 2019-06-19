@@ -43,6 +43,6 @@ You can do the following to test the code:
   test
   ```
 
-Follow instructions provided in the Getting Started\. For more information, see  [\(Optional\) Create a Lambda Function Authored in Java](get-started-step4-optional.md)\. Note the following differences:
+Follow instructions provided in the Getting Started\. For more information, see [Create a Lambda Function Authored in Java](get-started-step4-optional.md)\. Note the following differences:
 + When you create a deployment package, don't forget the `aws-lambda-java-core` library dependency\.
 + When you create the Lambda function, specify `example.Hello::handler` \(*package*\.*class*::*method*\) as the handler value\.

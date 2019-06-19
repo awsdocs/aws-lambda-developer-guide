@@ -1,44 +1,110 @@
-# Creating a Deployment Package \(Node\.js\)<a name="nodejs-create-deployment-pkg"></a>
+# AWS Lambda Deployment Package in Node\.js<a name="nodejs-create-deployment-pkg"></a>
 
-To create a Lambda function you first create a Lambda function deployment package, a \.zip file consisting of your code and any dependencies\. As noted previously, you need to set the appropriate security permissions for the zip package\. For more information, see [Authentication and Access Control for AWS Lambda](lambda-auth-and-access-control.md) policies\.
+A deployment package is a ZIP archive that contains your function code and dependencies\. You need to create a deployment package if you use the Lambda API to manage functions, or to include libraries and dependencies other than the AWS SDK\. You can upload the package directly to Lambda, or you can use an Amazon S3 bucket, and then upload it to Lambda\.
 
-You can create a deployment package yourself or write your code directly in the Lambda console, in which case the console creates the deployment package for you and uploads it, creating your Lambda function\. Note the following to determine if you can use the console to create your Lambda function:
-+ **Simple scenario** – If your custom code requires only the AWS SDK library, then you can use the inline editor in the AWS Lambda console\. Using the console, you can edit and upload your code to AWS Lambda\. The console will zip up your code with the relevant configuration information into a deployment package that the Lambda service can run\. 
-
-  You can also test your code in the console by manually invoking it using sample event data\. 
-**Note**  
-The Lambda service has preinstalled the AWS SDK for Node\.js\.
-+ **Advanced scenario** – If you are writing code that uses other resources, such as a graphics library for image processing, or you want to use the AWS CLI instead of the console, you need to first create the Lambda function deployment package, and then use the console or the CLI to upload the package\.
+If you use the Lambda [console editor](code-editor.md) to author your function, the console manages the deployment package\. You can use this method as long as you don't need to add any libraries\. You can also use it to update a function that already has libraries in the deployment package, as long as the total size doesn't exceed 3 MB\.
 
 **Note**  
-After you create a deployment package, you may either upload it directly or upload the \.zip file first to an Amazon S3 bucket in the same AWS region where you want to create the Lambda function, and then specify the bucket name and object key name when you create the Lambda function using the console or the AWS CLI\.
+To keep your deployment package size low, package your function's dependencies in layers\. Layers let you manage your dependencies independently, can be used by multiple functions, and can be shared with other accounts\. See [AWS Lambda Layers](configuration-layers.md) for details\.
 
-The following is an example procedure to create a deployment package \(outside the console\)\. Suppose you want to create a deployment package that includes a `filename.js` code file and your code uses the `async` library\. 
+ Files in your deployment package must have an appropriate file mode to run on Lambda\. For more information, see [Permissions Policies on Lambda Deployment Packages](deployment-package-v2.md#lambda-zip-package-permission-policies)\.
 
-1. Open a text editor, and write your code\. Save the file \(for example, `filename.js`\)\.
+**Topics**
++ [Updating a Function with No Dependencies](#nodejs-package-codeonly)
++ [Updating a Function with Additional Dependencies](#nodejs-package-dependencies)
 
-   You will use the file name to specify the handler at the time of creating the Lambda function\.
+## Updating a Function with No Dependencies<a name="nodejs-package-codeonly"></a>
 
-1. In the same directory, use npm to install the libraries that your code depends on\. For example, if your code uses the `async` library, use the following npm command\.
+To create or update a function with the Lambda API, create an archive that contains your function code and upload it with the AWS CLI\.
+
+**To update a Node\.js function with no dependencies**
+
+1. Create a ZIP archive\.
 
    ```
-   npm install async
+   ~/my-function$ zip function.zip index.js
    ```
 
-1. Your directory will then have the following structure:
+1. Use the `update-function-code` command to upload the package\.
 
    ```
-   filename.js
-   node_modules/async
-   node_modules/async/lib
-   node_modules/async/lib/async.js
-   node_modules/async/package.json
+   ~/my-function$ aws lambda update-function-code --function-name my-function --zip-file fileb://function.zip
+   {
+       "FunctionName": "my-function",
+       "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:my-function",
+       "Runtime": "nodejs10.x",
+       "Role": "arn:aws:iam::123456789012:role/lambda-role",
+       "Handler": "index.handler",
+       "CodeSize": 300,
+       "Description": "",
+       "Timeout": 3,
+       "MemorySize": 128,
+       "LastModified": "2018-11-23T21:00:10.248+0000",
+       "CodeSha256": "Qf0hMc1I2di6YFMi9aXm3JtGTmcDbjniEuiYonYptAk=",
+       "Version": "$LATEST",
+       "TracingConfig": {
+           "Mode": "Active"
+       },
+       "RevisionId": "983ed1e3-ca8e-434b-8dc1-7d72ebadd83d"
+   }
    ```
 
-1. Zip the content of the folder, that is your deployment package \(for example, `sample.zip`\)\.
+## Updating a Function with Additional Dependencies<a name="nodejs-package-dependencies"></a>
 
-Then, specify the \.zip file name as your deployment package at the time you create your Lambda function\.
+If your function depends on libraries other than the SDK for JavaScript, install them to a local directory with [NPM](https://www.npmjs.com/), and include them in your deployment package\. You can also include the SDK for JavaScript if you need a newer version than the one [included on the runtime](programming-model.md), or to ensure that the version doesn't change in the future\.
 
-If you want to include your own binaries, including native ones, just package them in the Zip file you upload and then reference them \(including the relative path within the Zip file you created\) when you call them from Node\.js or from other processes that you’ve previously started\. Ensure that you include the following at the start of your function code: `process.env[‘PATH’] = process.env[‘PATH’] + ‘:’ + process.env[‘LAMBDA_TASK_ROOT’]`
+**To update a Node\.js function with dependencies**
 
-For more information on including native binaries in your Lambda function package, see [Running Executables in AWS Lambda](https://aws.amazon.com/blogs/compute/running-executables-in-aws-lambda/)\. Also note that you need to supply the requisite permissions to the contents of the Zip file\. For more information, see [Permissions Polices on Lambda Deployment Packages](deployment-package-v2.md#lambda-zip-package-permission-policies)\. 
+1. Install libraries in the node\_modules directory with the `npm install` command\.
+
+   ```
+   ~/my-function$ npm install aws-xray-sdk
+   ```
+
+   This creates a folder structure similar to the following\.
+
+   ```
+   ~/my-function
+   ├── index.js
+   └── node_modules
+       ├── async
+       ├── async-listener
+       ├── atomic-batcher
+       ├── aws-sdk
+       ├── aws-xray-sdk
+       ├── aws-xray-sdk-core
+   ```
+
+1. Create a ZIP file containing the contents of your project folder\.
+
+   ```
+   ~/my-function$ zip -r function.zip .
+   ```
+
+1. Use the `update-function-code` command to upload the package\.
+
+   ```
+   ~/my-function$ aws lambda update-function-code --function-name my-function --zip-file fileb://function.zip
+   {
+       "FunctionName": "my-function",
+       "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:my-function",
+       "Runtime": "nodejs10.x",
+       "Role": "arn:aws:iam::123456789012:role/lambda-role",
+       "Handler": "index.handler",
+       "CodeSize": 300,
+       "Description": "",
+       "Timeout": 3,
+       "MemorySize": 128,
+       "LastModified": "2018-11-23T21:00:10.248+0000",
+       "CodeSha256": "Qf0hMc1I2di6YFMi9aXm3JtGTmcDbjniEuiYonYptAk=",
+       "Version": "$LATEST",
+       "TracingConfig": {
+           "Mode": "Active"
+       },
+       "RevisionId": "983ed1e3-ca8e-434b-8dc1-7d72ebadd83d"
+   }
+   ```
+
+In addition to code and libraries, your deployment package can also contain executable files and other resources\. For more information, see the following:
++ [Running Executables in AWS Lambda](https://aws.amazon.com/blogs/compute/running-executables-in-aws-lambda/)
++ [Using Packages and Native nodejs Modules in AWS Lambda ](https://aws.amazon.com/blogs/compute/nodejs-packages-in-lambda/)
