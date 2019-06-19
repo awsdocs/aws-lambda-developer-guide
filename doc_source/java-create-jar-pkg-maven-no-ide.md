@@ -2,7 +2,7 @@
 
 This section shows how to package your Java code into a deployment package using Maven at the command line\.
 
-
+**Topics**
 + [Before You Begin](#java-create-jar-pkg-maven-no-ide-pre-req)
 + [Project Structure Overview](#java-create-jar-pkg-maven-no-ide-overview)
 + [Step 1: Create Project](#java-create-jar-pkg-maven-no-ide-create-project)
@@ -46,7 +46,6 @@ Follow the steps in this section to create a Java project\.
 1. Create a project directory \(*project\-dir*\)\. 
 
 1. In the *project\-dir* directory, create the following:
-
    + Project Object Model file, `pom.xml`\. Add the following project information and configuration details for Maven to build the project\.
 
      ```

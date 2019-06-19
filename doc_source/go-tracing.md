@@ -1,14 +1,26 @@
-# Go<a name="go-tracing"></a>
+# Instrumenting Go Code in AWS Lambda<a name="go-tracing"></a>
 
-You can use the [X\-Ray SDK for Go](https://github.com/aws/aws-xray-sdk-go) with your Lambda function\. If your handler includes [The Context Object \(Go\) ](go-programming-model-context.md) as its first argument, that object can be passed to the X\-Ray SDK\. Lambda passes values through this context that the SDK can use to attach subsegments to the Lambda invoke service segment\. Subsegments created with the SDK will appear as a part of your Lambda traces\. 
+You can use the [X\-Ray SDK for Go](https://github.com/aws/aws-xray-sdk-go) with your Lambda function\. If your handler includes [AWS Lambda Context Object in Go](go-programming-model-context.md) as its first argument, that object can be passed to the X\-Ray SDK\. Lambda passes values through this context that the SDK can use to attach subsegments to the Lambda invoke service segment\. Subsegments created with the SDK will appear as a part of your Lambda traces\. 
 
 ## Installing the X\-Ray SDK for Go<a name="go-tracing-installing-sdk"></a>
 
 Use the following command to install the X\-Ray SDK for Go\. \(The SDK's non\-testing dependencies will be included\)\.
 
+```
+go get -u github.com/aws/aws-xray-sdk-go/...
+```
+
 If you want to include the test dependencies, use the following command:
 
+```
+go get -u -t github.com/aws/aws-xray-sdk-go/...
+```
+
 You can also use [Glide](https://github.com/Masterminds/glide/blob/master/README.md) to manage dependencies\.
+
+```
+glide install
+```
 
 ## Configuring the X\-Ray SDK for Go<a name="go-tracing-configuring-sdk"></a>
 

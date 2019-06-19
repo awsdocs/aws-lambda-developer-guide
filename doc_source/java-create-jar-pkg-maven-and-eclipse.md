@@ -2,7 +2,7 @@
 
 This section shows how to package your Java code into a deployment package using Eclipse IDE and Maven plugin for Eclipse\. 
 
-
+**Topics**
 + [Before You Begin](#java-create-jar-pkg-maven-and-eclipse-before-you-begin)
 + [Step 1: Create and Build a Project](#java-create-jar-pkg-maven-and-eclipse-create-project)
 
@@ -29,15 +29,10 @@ In this step, you start Eclipse and create a Maven project\. You will add the ne
    1. In the **New Maven Project** window, choose **Create a simple project**, and leave other default selections\.
 
    1. In the **New Maven Project**, **Configure project** windows, type the following **Artifact** information:
-
       + **Group Id**: doc\-examples
-
       + **Artifact Id**: lambda\-java\-example
-
       + **Version**: 0\.0\.1\-SNAPSHOT
-
       + **Packaging**: jar
-
       + **Name**: lambda\-java\-example
 
 1. Add the `aws-lambda-java-core` dependency to the `pom.xml` file\. 
@@ -61,9 +56,7 @@ If you are following other tutorial topics in this guide, the specific tutorials
    1. Open the context \(right\-click\) menu for the `src/main/java` subdirectory in the project, choose **New**, and then choose **Class**\.
 
    1. In the **New Java Class** window, type the following values:
-
       + **Package**: **example** 
-
       + **Name**: **Hello**
 **Note**  
 If you are following other tutorial topics in this guide, the specific tutorials might recommend different package name or class name\.
@@ -83,11 +76,8 @@ The resulting \.jar, `lambda-java-example-0.0.1-SNAPSHOT.jar`, is not the final 
    1. Open the context \(right\-click\) menu for the `pom.xml` file, choose **Maven**, and then choose **Add Plugin**\.
 
    1. In the **Add Plugin** window, type the following values:
-
       + **Group Id:** org\.apache\.maven\.plugins
-
       + **Artifact Id:** maven\-shade\-plugin
-
       + **Version:** 2\.3
 
    1. Now build again\.
