@@ -20,3 +20,4 @@ You write code for your Lambda function in one of the languages AWS Lambda suppo
 + [Building Lambda Functions with Go](go-programming-model.md)
 + [Building Lambda Functions with C\#](dotnet-programming-model.md)
 + [Building Lambda Functions with PowerShell](powershell-programming-model.md)
++ [Building Lambda Functions with Ruby](lambda-ruby.md)
