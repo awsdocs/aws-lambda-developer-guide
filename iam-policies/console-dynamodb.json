@@ -1,0 +1,44 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "DDBpermissions1",
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:DescribeStream",
+                "dynamodb:DescribeTable",
+                "dynamodb:UpdateTable"
+            ],
+            "Resource": "arn:aws:dynamodb:us-east-2:123456789012:table/*"
+        },
+        {
+            "Sid": "DDBpermissions2",
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:ListStreams",
+                "dynamodb:ListTables"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "LambdaGetPolicyPerm",
+            "Effect": "Allow",
+            "Action": [
+                "lambda:GetPolicy"
+            ],
+            "Resource": "arn:aws:lambda:us-east-2:123456789012:function:*"
+        },
+        {
+            "Sid": "LambdaEventSourcePerms",
+            "Effect": "Allow",
+            "Action": [
+                "lambda:CreateEventSourceMapping",
+                "lambda:DeleteEventSourceMapping",
+                "lambda:GetEventSourceMapping",
+                "lambda:ListEventSourceMappings",
+                "lambda:UpdateEventSourceMapping"
+            ],
+            "Resource": "*"
+        }
+    ]
+}

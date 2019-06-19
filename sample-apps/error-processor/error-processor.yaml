@@ -1,0 +1,104 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: An AWS Lambda application that uses Amazon CloudWatch Logs, AWS X-Ray, and AWS CloudFormation custom resources.
+Resources:
+  bucket:
+    Type: AWS::S3::Bucket
+  role:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -
+            Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AWSXrayFullAccess
+        - arn:aws:iam::aws:policy/AmazonS3FullAccess
+        - arn:aws:iam::aws:policy/CloudWatchLogsReadOnlyAccess
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaRole
+      Path: /service-role/
+  processor:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs8.10
+      CodeUri: processor/.
+      Description: Retrieve logs and trace for errors.
+      MemorySize: 128
+      Timeout: 40
+      Role: !GetAtt role.Arn
+      Environment:
+        Variables:
+          bucket: !Ref bucket
+      Tracing: Active
+  randomerror:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs8.10
+      CodeUri: random-error/.
+      Description: Generate errors.
+      Timeout: 8
+      Role: !GetAtt role.Arn
+      Tracing: Active
+  primer:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs8.10
+      InlineCode: |
+        var aws = require("aws-sdk");
+        var response = require('cfn-response');
+        exports.handler = function(event, context) {
+            console.log("REQUEST RECEIVED:\n" + JSON.stringify(event));
+            // For Delete requests, immediately send a SUCCESS response.
+            if (event.RequestType == "Delete") {
+                response.send(event, context, "SUCCESS");
+                return;
+            }
+            var responseStatus = "FAILED";
+            var responseData = {};
+            var functionName = event.ResourceProperties.FunctionName
+            var lambda = new aws.Lambda();
+            lambda.invoke({ FunctionName: functionName }, function(err, invokeResult) {
+                if (err) {
+                    responseData = {Error: "Invoke call failed"};
+                    console.log(responseData.Error + ":\n", err);
+                }
+                else responseStatus = "SUCCESS";
+                response.send(event, context, responseStatus, responseData);
+            });
+        };
+      Description: Invoke a function to create a log stream.
+      MemorySize: 128
+      Timeout: 8
+      Role: !GetAtt role.Arn
+      Tracing: Active
+  primerinvoke:
+    Type: AWS::CloudFormation::CustomResource
+    Version: "1.0"
+    Properties:
+      ServiceToken: !GetAtt primer.Arn
+      FunctionName: !Ref randomerror
+  subscription:
+    Type: AWS::Logs::SubscriptionFilter
+    DependsOn: cloudwatchlogspermission
+    Properties:
+      LogGroupName: !Join [ "/", [ "/aws/lambda", !Ref randomerror ] ]
+      FilterPattern: ERROR
+      DestinationArn: !GetAtt processor.Arn
+  cloudwatchlogspermission:
+    Type: AWS::Lambda::Permission
+    DependsOn: primerinvoke
+    Properties:
+      FunctionName: !GetAtt processor.Arn
+      Action: lambda:InvokeFunction
+      Principal: !Join [ ".", [ "logs", !Ref "AWS::Region", "amazonaws.com" ] ]
+      SourceAccount: !Ref AWS::AccountId

@@ -1,37 +1,25 @@
 # Data Types<a name="API_Types"></a>
 
 The following data types are supported:
-
 +  [AccountLimit](API_AccountLimit.md) 
-
 +  [AccountUsage](API_AccountUsage.md) 
-
 +  [AliasConfiguration](API_AliasConfiguration.md) 
-
 +  [AliasRoutingConfiguration](API_AliasRoutingConfiguration.md) 
-
 +  [Concurrency](API_Concurrency.md) 
-
 +  [DeadLetterConfig](API_DeadLetterConfig.md) 
-
 +  [Environment](API_Environment.md) 
-
 +  [EnvironmentError](API_EnvironmentError.md) 
-
 +  [EnvironmentResponse](API_EnvironmentResponse.md) 
-
 +  [EventSourceMappingConfiguration](API_EventSourceMappingConfiguration.md) 
-
 +  [FunctionCode](API_FunctionCode.md) 
-
 +  [FunctionCodeLocation](API_FunctionCodeLocation.md) 
-
 +  [FunctionConfiguration](API_FunctionConfiguration.md) 
-
++  [Layer](API_Layer.md) 
++  [LayersListItem](API_LayersListItem.md) 
++  [LayerVersionContentInput](API_LayerVersionContentInput.md) 
++  [LayerVersionContentOutput](API_LayerVersionContentOutput.md) 
++  [LayerVersionsListItem](API_LayerVersionsListItem.md) 
 +  [TracingConfig](API_TracingConfig.md) 
-
 +  [TracingConfigResponse](API_TracingConfigResponse.md) 
-
 +  [VpcConfig](API_VpcConfig.md) 
-
 +  [VpcConfigResponse](API_VpcConfigResponse.md) 

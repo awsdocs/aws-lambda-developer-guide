@@ -1,8 +1,8 @@
-# Java<a name="java-tracing"></a>
+# Instrumenting Java Code in AWS Lambda<a name="java-tracing"></a>
 
-In Java, you can have Lambda emit subsegments to X\-Ray to show you information regarding downstream calls to other AWS services made by your function\. To take advantage of this capability, include the [AWS X\-Ray SDK for Java](http://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-java.html) in your deployment package\. No code changes are needed\. As long as you are using an AWS SDK version 1\.11\.48 or later, there is no need to add any additional code lines for downstream calls from your function to be traced\. 
+In Java, you can have Lambda emit subsegments to X\-Ray to show you information regarding downstream calls to other AWS services made by your function\. To take advantage of this capability, include the [AWS X\-Ray SDK for Java](https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-java.html) in your deployment package\. No code changes are needed\. As long as you are using an AWS SDK version 1\.11\.48 or later, there is no need to add any additional code lines for downstream calls from your function to be traced\. 
 
-The AWS SDK will dynamically import the X\-Ray SDK to emit subsegments for downstream calls made by your function\. By using the X\-Ray SDK for Java, you can instrument your code in order to emit custom subsegments and or add annotatations to your X\-Ray segments\. 
+The AWS SDK will dynamically import the X\-Ray SDK to emit subsegments for downstream calls made by your function\. By using the X\-Ray SDK for Java, you can instrument your code in order to emit custom subsegments and or add annotations to your X\-Ray segments\. 
 
 The following example uses the X\-Ray SDK for Java to instrument a Lambda function to emit a custom subsegment and send custom annotation to X\-Ray:
 
