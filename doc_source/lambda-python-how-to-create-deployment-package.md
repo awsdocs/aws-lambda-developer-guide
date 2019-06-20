@@ -59,27 +59,24 @@ If your function depends on libraries other than the SDK for Python \(Boto 3\), 
 
 **To update a Python function with dependencies**
 
-1. Create a directory for dependencies\.
+1. Install libraries in a new, project-local `package` directory with `pip`'s `--target` option\.
 
    ```
-   ~/my-function$ mkdir package
-   ```
-
-1. Install libraries in the package directory with the `--target` option\.
-
-   ```
-   ~/my-function$ cd package
-   ~/my-function/package$ pip install Pillow --target .
+   ~/my-function$ pip install --target ./package Pillow
    Collecting Pillow
      Using cached https://files.pythonhosted.org/packages/62/8c/230204b8e968f6db00c765624f51cfd1ecb6aea57b25ba00b240ee3fb0bd/Pillow-5.3.0-cp37-cp37m-manylinux1_x86_64.whl
    Installing collected packages: Pillow
    Successfully installed Pillow-5.3.0
    ```
+   
+   **Note**  
+   In order for `--target` to work on [Debian-based systems](https://github.com/pypa/pip/issues/3826) (like Ubuntu), you may also need to pass the `--system` flag to prevent `distutils` errors.
 
-1. Create a ZIP archive\.
+1. Create a ZIP archive of the dependencies\.
 
    ```
-   package$ zip -r9 ../function.zip .
+   ~/my-function$ cd package
+   ~/my-function/package$ zip -r9 ${OLDPWD}/function.zip .
      adding: PIL/ (stored 0%)
      adding: PIL/.libs/ (stored 0%)
      adding: PIL/.libs/libfreetype-7ce95de6.so.6.16.1 (deflated 65%)
@@ -91,7 +88,7 @@ If your function depends on libraries other than the SDK for Python \(Boto 3\), 
 1. Add your function code to the archive\.
 
    ```
-   ~/my-function/package$ cd ../
+   ~/my-function/package$ cd $OLDPWD
    ~/my-function$ zip -g function.zip function.py
      adding: function.py (deflated 56%)
    ```
@@ -142,6 +139,13 @@ In some cases, you may need to use a [virtual environment](https://virtualenv.py
    done.
    ```
 
+   **Note**
+   If you plan on only supporting Python 3.3+ code with your Lambda function, or don't want to use the `virtualenv` module, the `venv` module included with your Python distribution provides the same (though slightly more limited) functionality:
+
+   ```
+   ~/my-function$ python3 -m venv v-env
+   ```
+
 1. Activate the environment\.
 
    ```
@@ -158,7 +162,7 @@ In some cases, you may need to use a [virtual environment](https://virtualenv.py
 1. Install libraries with pip\.
 
    ```
-   ~/my-function$ pip install Pillow
+   (v-env) ~/my-function$ pip install Pillow
    Collecting Pillow
      Using cached https://files.pythonhosted.org/packages/62/8c/230204b8e968f6db00c765624f51cfd1ecb6aea57b25ba00b240ee3fb0bd/Pillow-5.3.0-cp37-cp37m-manylinux1_x86_64.whl
    Installing collected packages: Pillow
@@ -168,14 +172,14 @@ In some cases, you may need to use a [virtual environment](https://virtualenv.py
 1. Deactivate the virtual environment\.
 
    ```
-   (v-env)~/my-function$ deactivate
+   (v-env) ~/my-function$ deactivate
    ```
 
 1. Create a ZIP archive with the contents of the library\.
 
    ```
-   ~/my-function$ cd v-env/lib/python3.7/site-packages/  
-   ~/my-function/v-env/lib/python3.7/site-packages$ zip -r9 ../../../../function.zip .
+   ~/my-function$ cd v-env/lib/python3.7/site-packages
+   ~/my-function/v-env/lib/python3.7/site-packages$ zip -r9 ${OLDPWD}/function.zip .
      adding: easy_install.py (deflated 17%)
      adding: PIL/ (stored 0%)
      adding: PIL/.libs/ (stored 0%)
@@ -184,12 +188,15 @@ In some cases, you may need to use a [virtual environment](https://virtualenv.py
    ...
    ```
 
-   Depending on the library, dependencies may appear in either `site-packages` or `dist-packages`, and the first folder in the virtual environment may be `lib` or `lib64`\. You can use the `pip show` command to locate a specific package\.
+  Depending on the library, dependencies may appear in either `site-packages` or `dist-packages`, and the first folder in the virtual environment may be `lib` or `lib64`\. You can use the `pip show` command to locate a specific package\.
+
+  **Note**  
+  In some cases, libraries may also be installed in the `dist-packages` directory\.
 
 1. Add your function code to the archive\.
 
    ```
-   ~/my-function/v-env/lib/python3.7/site-packages$ cd ../../../../
+   ~/my-function/v-env/lib/python3.7/site-packages$ cd $OLDPWD
    ~/my-function$ zip -g function.zip function.py
      adding: function.py (deflated 56%)
    ```
