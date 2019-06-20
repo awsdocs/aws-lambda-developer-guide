@@ -85,7 +85,7 @@ If your function depends on libraries other than the SDK for Python \(Boto 3\), 
    ...
    ```
 
-1. Add your actual function code to the archive\.
+1. Add your function code to the archive\.
 
    ```
    ~/my-function/package$ cd $OLDPWD
@@ -193,7 +193,7 @@ In some cases, you may need to use a [virtual environment](https://virtualenv.py
   **Note**  
   In some cases, libraries may also be installed in the `dist-packages` directory\.
 
-1. Add your actual function code to the archive\.
+1. Add your function code to the archive\.
 
    ```
    ~/my-function/v-env/lib/python3.7/site-packages$ cd $OLDPWD
