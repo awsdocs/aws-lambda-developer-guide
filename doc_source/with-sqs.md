@@ -22,7 +22,7 @@ Lambda polls the queue and invokes your function [synchronously](invocation-opti
             "messageAttributes": {},
             "md5OfBody": "098f6bcd4621d373cade4e832627b4f6",
             "eventSource": "aws:sqs",
-            "eventSourceARN": "arn:aws:sqs:us-east-2:123456789012:my-queue",
+            "eventSourceArn": "arn:aws:sqs:us-east-2:123456789012:my-queue",
             "awsRegion": "us-east-2"
         },
         {
@@ -38,7 +38,7 @@ Lambda polls the queue and invokes your function [synchronously](invocation-opti
             "messageAttributes": {},
             "md5OfBody": "098f6bcd4621d373cade4e832627b4f6",
             "eventSource": "aws:sqs",
-            "eventSourceARN": "arn:aws:sqs:us-east-2:123456789012:my-queue",
+            "eventSourceArn": "arn:aws:sqs:us-east-2:123456789012:my-queue",
             "awsRegion": "us-east-2"
         }
     ]
