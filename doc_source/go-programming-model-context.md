@@ -7,7 +7,7 @@ The Lambda context library provides the following global variables, methods, and
 **Global Variables**
 + `FunctionName` – The name of the Lambda function\.
 + `FunctionVersion` – The [version](versioning-aliases.md) of the function\.
-+ `MemoryLimitInMB` – The amount of memory configured on the function\.
++ `MemoryLimitInMB` – The amount of memory that's allocated for the function\.
 + `LogGroupName` – The log group for the function\.
 + `LogStreamName` – The log stream for the function instance\.
 
@@ -15,10 +15,10 @@ The Lambda context library provides the following global variables, methods, and
 + `Deadline` – Returns the date that the execution times out, in Unix time milliseconds\.
 
 **Context Properties**
-+ `InvokedFunctionArn` – The Amazon Resource Name \(ARN\) used to invoke the function\. Indicates if the invoker specified a version number or alias\.
++ `InvokedFunctionArn` – The Amazon Resource Name \(ARN\) that's used to invoke the function\. Indicates if the invoker specified a version number or alias\.
 + `AwsRequestID` – The identifier of the invocation request\.
 + `Identity` – \(mobile apps\) Information about the Amazon Cognito identity that authorized the request\.
-+ `ClientContext` – \(mobile apps\) Client context provided to the Lambda invoker by the client application\.
++ `ClientContext` – \(mobile apps\) Client context that's provided to Lambda by the client application\.
 
 ## Accessing Invoke Context Information<a name="go-programming-model-context-access"></a>
 

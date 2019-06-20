@@ -108,11 +108,11 @@ END RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8
 REPORT RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8  Duration: 79.67 ms      Billed Duration: 100 ms         Memory Size: 128 MB     Max Memory Used: 73 MB
 ```
 
-`base64` is available on Linux, macOS, and [Ubuntu on Windows](https://docs.microsoft.com/en-us/windows/wsl/install-win10)\. For macOS, the command is `base64 -D`\.
+The `base64` utility is available on Linux, macOS, and [Ubuntu on Windows](https://docs.microsoft.com/en-us/windows/wsl/install-win10)\. For macOS, the command is `base64 -D`\.
 
-To get full log events from the command line, you can include the log stream name in the output of your function, as shown in the preceding example\. The following example script invokes a function named `my-function` and downloads the last 5 log events\.
+To get full log events from the command line, you can include the log stream name in the output of your function, as shown in the preceding example\. The following example script invokes a function named `my-function` and downloads the last five log events\.
 
-**Example get\-logs\.sh**  
+**Example get\-logs\.sh Script**  
 This example requires that `my-function` returns a log stream ID\.  
 
 ```
@@ -122,7 +122,7 @@ sleep 15
 aws logs get-log-events --log-group-name /aws/lambda/my-function --log-stream-name=file://out --limit 5
 ```
 
-The script uses `sed` to remove quotes from the output file, and sleeps for 15 seconds to allow time for the logs to be available\. The output includes the response from Lambda, and the output from the `get-log-events` command\.
+The script uses `sed` to remove quotes from the output file, and sleeps for 15 seconds to allow time for the logs to be available\. The output includes the response from Lambda and the output from the `get-log-events` command\.
 
 ```
 $ ./get-log.sh

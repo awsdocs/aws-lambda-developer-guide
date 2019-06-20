@@ -103,6 +103,7 @@ Amazon's trademarks and trade dress may not be used in
       + [AWS SAM Template for a Kinesis Application](with-kinesis-example-use-app-spec.md)
    + [Using AWS Lambda with Amazon Kinesis Data Firehose](services-kinesisfirehose.md)
    + [Using AWS Lambda with Amazon Lex](services-lex.md)
+   + [Using AWS Lambda with Amazon RDS](services-rds.md)
    + [Using AWS Lambda with Amazon S3](with-s3.md)
       + [Tutorial: Using AWS Lambda with Amazon S3](with-s3-example.md)
       + [Sample Amazon Simple Storage Service Function Code](with-s3-example-deployment-pkg.md)

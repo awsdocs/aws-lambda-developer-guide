@@ -25,7 +25,7 @@ This code results in a type error\. Lambda catches the error and generates a JSO
 }
 ```
 
-When you invoke the function from the command line, the AWS CLI splits the response into two documents\. To indicate that a function error occured, the response displayed in the terminal includes a `FunctionError` field\. The response or error returned by the function is written to the output file\.
+When you invoke the function from the command line, the AWS CLI splits the response into two documents\. To indicate that a function error occurred, the response displayed in the terminal includes a `FunctionError` field\. The response or error returned by the function is written to the output file\.
 
 ```
 $ aws lambda invoke --function-name my-function out
@@ -46,7 +46,7 @@ $ cat out
 **Note**  
 The 200 \(success\) status code in the response from Lambda indicates that there wasn't an error with the request that you sent to Lambda\. For issues that result in an error status code, see [Errors](API_Invoke.md#API_Invoke_Errors)\.
 
-Lambda also records up to 256 KB of the error object in the function's logs\. To view logs when you invoke from the command line, use the `--log-type` option and decode the base64 string in the response\.
+Lambda also records up to 256 KB of the error object in the function's logs\. To view logs when you invoke the function from the command line, use the `--log-type` option and decode the base64 string in the response\.
 
 ```
 $ aws lambda invoke --function-name my-function out --log-type Tail \
@@ -68,4 +68,4 @@ REPORT RequestId: 5ce6a15a-f156-11e8-b8aa-25371a5ca2a3  Duration: 22.74 ms      
 
 For more information about logs, see [AWS Lambda Function Logging in Ruby](ruby-logging.md)\.
 
-Depending on the event source, AWS Lambda may retry the failed Lambda function\. For example, if Kinesis is the event source, AWS Lambda will retry the failed invocation until the Lambda function succeeds or the records in the stream expire\. For more information on retries, see [AWS Lambda Retry Behavior](retries-on-errors.md)\.
+Depending on the event source, AWS Lambda might retry the failed Lambda function\. For example, if Kinesis is the event source, AWS Lambda retres the failed invocation until the Lambda function succeeds or the records in the stream expire\. For more information on retries, see [AWS Lambda Retry Behavior](retries-on-errors.md)\.

@@ -5,7 +5,6 @@ Concurrent executions refers to the number of executions of your function code t
 If you create a Lambda function to process events from event sources that aren't poll\-based \(for example, Lambda can process every event from other sources, like Amazon S3 or API Gateway\), each published event is a unit of work, in parallel, up to your account limits\. Therefore, the number of invocations these event sources make influences the concurrency\. You can use this formula to estimate the capacity used by your function:
 
 ```
-
 invocations per second * average execution duration in seconds
 ```
 
@@ -21,9 +20,9 @@ The number of concurrent executions for poll\-based event sources also depends o
 
   When an Amazon SQS event source mapping is initially enabled, Lambda begins long\-polling the Amazon SQS queue\. Long polling helps reduce the cost of polling Amazon Simple Queue Service by reducing the number of empty responses, while providing optimal processing latency when messages arrive\.
 
-  As the influx of messages to a queue increases, AWS Lambda automatically scales up polling activity until the number of concurrent function executions reaches 1000, the account concurrency limit, or the \(optional\) function concurrency limit, whichever is lower\. Amazon Simple Queue Service supports an initial burst of 5 concurrent function invocations and increases concurrency by 60 concurrent invocations per minute\.
-**Note**  
-[Account\-level limits](https://docs.aws.amazon.com/lambda/latest/dg/limits.html) are impacted by other functions in the account, and per\-function concurrency applies to all events sent to a function\. For more information, see [Managing Concurrency](concurrent-executions.md)\.
+  When messages are available, Lambda initially launches up to 5 instances of your function, to handle 5 batches simultaneously\. Then, Lambda launches up to 60 more instances per minute, up to 1000 total, as long as you have concurrency available at the account and function level\.
+
+  [Account\-level limits](https://docs.aws.amazon.com/lambda/latest/dg/limits.html) are impacted by other functions in the account, and per\-function concurrency applies to all events sent to a function\. 
 
 ## Request Rate<a name="concurrent-executions-request-rate"></a>
 
@@ -36,14 +35,6 @@ request rate = number of concurrent executions / function duration
 For example, if there are five active shards on a stream \(that is, you have five Lambda functions running in parallel\) and your Lambda function takes about two seconds, the request rate is 2\.5 requests/second\.
 
 ## Automatic Scaling<a name="scaling-behavior"></a>
-
-AWS Lambda will dynamically scale capacity in response to increased traffic, subject to your account's [Account Level Concurrent Execution Limit](concurrent-executions.md#concurrent-execution-safety-limit)\. To handle any burst in traffic, Lambda will immediately increase your concurrently executing functions by a predetermined amount, dependent on which region it's executed \(see table below\)\.
-
- If the default **Immediate Concurrency Increase** value, as noted in the table below, is not sufficient to accommodate the traffic surge, Lambda will continue to increase the number of concurrent function executions by 500 per minute until your account safety limit has been reached or the number of concurrently executing functions is sufficient to successfully process the increased load\.
-
-**Note**  
-Because Lambda depends on Amazon EC2 to provide Elastic Network Interfaces for VPC\-enabled Lambda functions, these functions are also subject to Amazon EC2's rate limits as they scale\. If Amazon EC2 rate limits prevent VPC\-enabled functions from adding 500 concurrent invocations per minute, please request a limit increase by following the instructions in [Limits](limits.md). When requesting the limit increase however, please use the **Use Case Description** field to include any throttling responses that you may have recieved from EC2, along with details about any previous limit increase\.  
-Beyond this rate \(i\.e\. for applications taking advantage of the full Immediate concurrency increase\), your application should handle Amazon EC2 throttling \(502 EC2ThrottledException\) through client\-side retry and backoff\. For more details, see [Error Retries and Exponential Backoff in AWS](http://docs.aws.amazon.com/general/latest/gr/api-retries.html)\.
 
 AWS Lambda dynamically scales function execution in response to increased traffic, up to your [concurrency limit](limits.md)\. Under sustained load, your function's concurrency bursts to an initial level between 500 and 3000 concurrent executions that varies per region\. After the initial burst, the function's capacity increases by an additional 500 concurrent executions each minute until either the load is accommodated, or the total concurrency of all functions in the region hits the limit\.
 

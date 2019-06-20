@@ -1,29 +1,26 @@
 # AWS Lambda Deployment Package in Go<a name="lambda-go-how-to-create-deployment-package"></a>
 
-To create a Lambda function you first create a Lambda function deployment package, a \.zip file consisting of your code (a Go executable) and any dependencies\. 
+To create a Lambda function you first create a Lambda function deployment package, a \.zip file consisting of your code \(a Go executable\) and any dependencies\.
 
 After you create a deployment package, you may either upload it directly or upload the \.zip file first to an Amazon S3 bucket in the same AWS region where you want to create the Lambda function, and then specify the bucket name and object key name when you create the Lambda function using the console or the AWS CLI\.
 
-For Lambda functions written in Go, download the Lambda library for Go by navigating to the Go runtime directory and enter the following command: `go get github.com/aws/aws-lambda-go/lambda` 
-
-Then use following command to build, package and deploy a Go Lambda function via the CLI\. Note that the *handler* parameter must match the name of the executable containing your Lambda handler\.
+Download the Lambda library for Go with `go get`, and compile your executable\.
 
 ```
-GOOS=linux go build lambda_handler.go
-zip handler.zip ./lambda_handler
-# --handler is the path to the executable inside the .zip
-aws lambda create-function \
-  --region region \
-  --function-name function-name \
-  --memory 128 \
-  --role arn:aws:iam::account-id:role/execution_role \
-  --runtime go1.x \
-  --zip-file fileb://path-to-your-zip-file/handler.zip \
-  --handler lambda-handler-executable
+~/my-function$ go get github.com/aws/aws-lambda-go/lambda
+~/my-function$ GOOS=linux go build main.go
 ```
 
-**Note**  
-If you are using a non\-Linux environment, such as Windows or macOS, ensure that your handler function is compatible with the Lambda [Execution Context](http://docs.aws.amazon.com/lambda/latest/dg/running-lambda-code.html) by setting the `GOOS `\(Go Operating System\) environment variable to 'linux' when compiling your handler function code\.
+Setting `GOOS` to `linux` ensures that the compiled executable is compatible with the [Go runtime](lambda-runtimes.md), even if you compile it in a non\-Linux environment\.
+
+Create a deployment package by packaging the executable in a ZIP file, and use the AWS CLI to create a function\. The handler parameter must match the name of the executable containing your handler\.
+
+```
+~/my-function$ zip function.zip main
+~/my-function$ aws lambda create-function --function-name my-function --runtime go1.x \
+  --zip-file fileb://function.zip --handler main \
+  --role arn:aws:iam::123456789012:role/execution_role
+```
 
 ## Creating a Deployment Package on Windows<a name="lambda-go-how-to-create-deployment-package-windows"></a>
 

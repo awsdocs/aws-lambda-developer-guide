@@ -2,9 +2,9 @@
 
 Your Lambda function comes with a CloudWatch Logs log group, with a log stream for each instance of your function\. The runtime sends details about each invocation to the log stream, and relays logs and other output from your function's code\.
 
-To output logs from your function code, you can use methods on [the console object](https://developer.mozilla.org/en-US/docs/Web/API/Console), or any logging library that writes to `stdout` or `stderr`\. The following example logs the values of environment variables and the event object\.
+To output logs from your function code, you can use methods on the [console object](https://developer.mozilla.org/en-US/docs/Web/API/Console), or any logging library that writes to `stdout` or `stderr`\. The following example logs the values of environment variables and the event object\.
 
-**Example index\.js – logging**  
+**Example index\.js File – Logging**  
 
 ```
 exports.handler = async function(event, context) {
@@ -37,7 +37,7 @@ END RequestId: c793869b-ee49-115b-a5b6-4fd21e8dedac
 REPORT RequestId: c793869b-ee49-115b-a5b6-4fd21e8dedac	Duration: 170.19 ms	Billed Duration: 200 ms 	Memory Size: 128 MB	Max Memory Used: 73 MB
 ```
 
-The Node\.js runtime logs the `START`, `END`, and `REPORT` lines for each invocation, and adds a timestamp, request ID, and log level to each entry logged by the function\.
+The Node\.js runtime logs the `START`, `END`, and `REPORT` lines for each invocation\. It adds a timestamp, request ID, and log level to each entry logged by the function\.
 
 You can view logs in the Lambda console, in the CloudWatch Logs console, or from the command line\.
 
@@ -53,7 +53,7 @@ The Lambda console shows log output when you test a function on the function con
 
 1. Choose the first stream in the list\.
 
-Each log stream corresponds to an [instance of your function](running-lambda-code.md)\. New streams appear when you update your function and when additional instances are created to handle multiple concurrent invocations\. To find logs for specific invocations, you can instrument your function with X\-Ray and record details about the request and log stream in the trace\. For a sample application that correlates logs and traces with X\-Ray, see [Error Processor Sample Application for AWS Lambda](sample-errorprocessor.md)\.
+Each log stream corresponds to an [instance of your function](running-lambda-code.md)\. New streams appear when you update your function and when additional instances are created to handle multiple concurrent invocations\. To find logs for specific invocations, you can instrument your function with X\-Ray, and record details about the request and log stream in the trace\. For a sample application that correlates logs and traces with X\-Ray, see [Error Processor Sample Application for AWS Lambda](sample-errorprocessor.md)\.
 
 ## Using the AWS CLI<a name="nodejs-logging-cli"></a>
 
@@ -79,11 +79,11 @@ END RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8
 REPORT RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8  Duration: 79.67 ms      Billed Duration: 100 ms         Memory Size: 128 MB     Max Memory Used: 73 MB
 ```
 
-`base64` is available on Linux, macOS, and [Ubuntu on Windows](https://docs.microsoft.com/en-us/windows/wsl/install-win10)\. For macOS, the command is `base64 -D`\.
+The `base64` utility is available on Linux, macOS, and [Ubuntu on Windows](https://docs.microsoft.com/en-us/windows/wsl/install-win10)\. For macOS, the command is `base64 -D`\.
 
-To get full log events from the command line, you can include the log stream name in the output of your function, as shown in the preceding example\. The following example script invokes a function named `my-function` and downloads the last 5 log events\.
+To get full log events from the command line, you can include the log stream name in the output of your function, as shown in the preceding example\. The following example script invokes a function named `my-function` and downloads the last five log events\.
 
-**Example get\-logs\.sh**  
+**Example get\-logs\.sh Script**  
 This example requires that `my-function` returns a log stream ID\.  
 
 ```
@@ -93,7 +93,7 @@ sleep 15
 aws logs get-log-events --log-group-name /aws/lambda/my-function --log-stream-name=file://out --limit 5
 ```
 
-The script uses `sed` to remove quotes from the output file, and sleeps for 15 seconds to allow time for the logs to be available\. The output includes the response from Lambda, and the output from the `get-log-events` command\.
+The script uses `sed` to remove quotes from the output file, and sleeps for 15 seconds to allow time for the logs to be available\. The output includes the response from Lambda and the output from the `get-log-events` command\.
 
 ```
 $ ./get-log.sh
@@ -136,4 +136,4 @@ $ ./get-log.sh
 
 ## Deleting Logs<a name="nodejs-logging-delete"></a>
 
-Log groups are not deleted automatically when you delete a function\. To avoid storing logs indefinitely, delete the log group, or [configure a retention period](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#SettingLogRetention) after which logs are deleted automatically\.
+Log groups aren't deleted automatically when you delete a function\. To avoid storing logs indefinitely, delete the log group, or [configure a retention period](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#SettingLogRetention) after which logs are deleted automatically\.
