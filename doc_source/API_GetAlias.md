@@ -1,8 +1,6 @@
 # GetAlias<a name="API_GetAlias"></a>
 
-Returns the specified alias information such as the alias ARN, description, and function version it is pointing to\. For more information, see [Introduction to AWS Lambda Aliases](https://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html)\.
-
-This requires permission for the `lambda:GetAlias` action\.
+Returns details about a Lambda function [alias](https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html)\.
 
 ## Request Syntax<a name="API_GetAlias_RequestSyntax"></a>
 
@@ -15,12 +13,18 @@ GET /2015-03-31/functions/FunctionName/aliases/Name HTTP/1.1
 The request requires the following URI parameters\.
 
  ** [FunctionName](#API_GetAlias_RequestSyntax) **   <a name="SSS-GetAlias-request-FunctionName"></a>
-Function name for which the alias is created\. An alias is a subresource that exists only in the context of an existing Lambda function so you must specify the function name\. Note that the length constraint applies only to the ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
+The name of the Lambda function\.  
+
+**Name formats**
++  **Function name** \- `MyFunction`\.
++  **Function ARN** \- `arn:aws:lambda:us-west-2:123456789012:function:MyFunction`\.
++  **Partial ARN** \- `123456789012:function:MyFunction`\.
+The length constraint applies only to the full ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [Name](#API_GetAlias_RequestSyntax) **   <a name="SSS-GetAlias-request-Name"></a>
-Name of the alias for which you want to retrieve information\.  
+The name of the alias\.  
 Length Constraints: Minimum length of 1\. Maximum length of 128\.  
 Pattern: `(?!^[0-9]+$)([a-zA-Z0-9-_]+)` 
 
@@ -55,33 +59,33 @@ If the action is successful, the service sends back an HTTP 200 response\.
 The following data is returned in JSON format by the service\.
 
  ** [AliasArn](#API_GetAlias_ResponseSyntax) **   <a name="SSS-GetAlias-response-AliasArn"></a>
-Lambda function ARN that is qualified using the alias name as the suffix\. For example, if you create an alias called `BETA` that points to a helloworld function version, the ARN is `arn:aws:lambda:aws-regions:acct-id:function:helloworld:BETA`\.  
+The Amazon Resource Name \(ARN\) of the alias\.  
 Type: String  
 Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [Description](#API_GetAlias_ResponseSyntax) **   <a name="SSS-GetAlias-response-Description"></a>
-Alias description\.  
+A description of the alias\.  
 Type: String  
 Length Constraints: Minimum length of 0\. Maximum length of 256\.
 
  ** [FunctionVersion](#API_GetAlias_ResponseSyntax) **   <a name="SSS-GetAlias-response-FunctionVersion"></a>
-Function version to which the alias points\.  
+The function version that the alias invokes\.  
 Type: String  
 Length Constraints: Minimum length of 1\. Maximum length of 1024\.  
 Pattern: `(\$LATEST|[0-9]+)` 
 
  ** [Name](#API_GetAlias_ResponseSyntax) **   <a name="SSS-GetAlias-response-Name"></a>
-Alias name\.  
+The name of the alias\.  
 Type: String  
 Length Constraints: Minimum length of 1\. Maximum length of 128\.  
 Pattern: `(?!^[0-9]+$)([a-zA-Z0-9-_]+)` 
 
  ** [RevisionId](#API_GetAlias_ResponseSyntax) **   <a name="SSS-GetAlias-response-RevisionId"></a>
-Represents the latest updated revision of the function or alias\.  
+A unique identifier that changes when you update the alias\.  
 Type: String
 
  ** [RoutingConfig](#API_GetAlias_ResponseSyntax) **   <a name="SSS-GetAlias-response-RoutingConfig"></a>
-Specifies an additional function versions the alias points to, allowing you to dictate what percentage of traffic will invoke each version\. For more information, see [Traffic Shifting Using Aliases](lambda-traffic-shifting-using-aliases.md)\.  
+The [routing configuration](https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html) of the alias\.  
 Type: [AliasRoutingConfiguration](API_AliasRoutingConfiguration.md) object
 
 ## Errors<a name="API_GetAlias_Errors"></a>
@@ -99,7 +103,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-   
+Request throughput limit exceeded\.  
 HTTP Status Code: 429
 
 ## See Also<a name="API_GetAlias_SeeAlso"></a>
@@ -109,6 +113,7 @@ For more information about using this API in one of the language\-specific AWS S
 +  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/GetAlias) 
 +  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/GetAlias) 
 +  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/GetAlias) 
++  [AWS SDK for Go \- Pilot](https://docs.aws.amazon.com/goto/SdkForGoPilot/lambda-2015-03-31/GetAlias) 
 +  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/GetAlias) 
 +  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/GetAlias) 
 +  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/GetAlias) 

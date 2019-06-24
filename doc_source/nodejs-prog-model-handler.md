@@ -1,107 +1,99 @@
-# Lambda Function Handler \(Node\.js\)<a name="nodejs-prog-model-handler"></a>
+# AWS Lambda Function Handler in Node\.js<a name="nodejs-prog-model-handler"></a>
 
-AWS Lambda invokes your Lambda function via a `handler` object\. A `handler` represents the name of your Lambda function \(and serves as the entry point that AWS Lambda uses to execute your function code\. For example: 
+The handler is the method in your Lambda function that processes events\. When you invoke a function, the [runtime](lambda-runtimes.md) runs the handler method\. When the handler exits or returns a response, it becomes available to handle another event\.
 
-```
-exports.myHandler = function(event, context, callback) {   
-    ... function code   
-    callback(null, "some success message");
-   // or 
-   // callback("some error type"); 
-}
-```
-+ `myHandler` – This is the name of the function AWS Lambda invokes\. Suppose you save this code as `helloworld.js`\. Then, `myHandler` is the function that contains your Lambda function code and `helloworld` is the name of the file that represents your deployment package\. For more information, see [Creating a Deployment Package \(Node\.js\)](nodejs-create-deployment-pkg.md)\.
+The following example function logs the contents of the event object and returns the location of the logs\.
 
-  AWS Lambda supports two invocation types:
-  + **RequestResponse**, or *synchronous execution*: AWS Lambda returns the result of the function call to the client invoking the Lambda function\. If the handler code of your Lambda function does not specify a return value, AWS Lambda will automatically return `null` for that value\. For a simple sample, see [Example](#nodejs-prog-model-handler-example)\.
-  + **Event**, or *asynchronous execution*: AWS Lambda will discard any results of the function call\. 
-**Note**  
-If you discover that your Lambda function does not process the event using asynchronous invocation, you can investigate the failure using [Dead Letter Queues](dlq.md)\.
-
-     Event sources can range from a supported AWS service or custom applications that invoke your Lambda function\. For examples, see [Sample Events Published by Event Sources](eventsources.md)\. For a simple sample, see [Example](#nodejs-prog-model-handler-example)\. 
-+ `context` – AWS Lambda uses this parameter to provide details of your Lambda function's execution\. For more information, see [The Context Object \(Node\.js\)](nodejs-prog-model-context.md)\.
-+ `callback` \(optional\)– See [Using the Callback Parameter](#nodejs-prog-model-handler-callback)\.
-
-## Using the Callback Parameter<a name="nodejs-prog-model-handler-callback"></a>
-
-The Node\.js runtimes v6\.10 and v8\.10 support the optional `callback` parameter\. You can use it to explicitly return information back to the caller\. The general syntax is:
+**Example index\.js File**  
 
 ```
-callback(Error error, Object result);
-```
-
-Where:
-+ `error` – is an optional parameter that you can use to provide results of the failed Lambda function execution\. When a Lambda function succeeds, you can pass null as the first parameter\.
-+  `result` – is an optional parameter that you can use to provide the result of a successful function execution\. The result provided must be `JSON.stringify` compatible\. If an error is provided, this parameter is ignored\. 
-
- If you don't use `callback` in your code, AWS Lambda will call it implicitly and the return value is `null`\. When the callback is called \(explicitly or implicitly\), AWS Lambda continues the Lambda function invocation until the event loop is empty\.  The following are example callbacks: 
-
-```
-callback();     // Indicates success but no information returned to the caller.
-callback(null); // Indicates success but no information returned to the caller.
-callback(null, "success");  // Indicates success with information returned to the caller.
-callback(error);    //  Indicates error with error information returned to the caller.
-```
-
- AWS Lambda treats any non\-null value for the `error` parameter as a handled exception\.  Note the following: 
-+ Regardless of the invocation type specified at the time of the Lambda function invocation \(see [Invoke](API_Invoke.md)\), the callback method automatically logs the string representation of non\-null values of `error` to the Amazon CloudWatch Logs stream associated with the Lambda function\. 
-+ If the Lambda function was invoked synchronously \(using the `RequestResponse` invocation type\), the callback returns a response body as follows:
-  + If `error` is null, the response body is set to the string representation of `result`\. 
-  + If the `error` is not null, the `error` value will be populated in the response body\. 
-
- 
-
-**Note**  
-When the `callback(error, null)` \(and `callback(error)`\) is called, Lambda will log the first 256 KB of the error object\. For a larger error object, AWS Lambda truncates the log and displays the text `Truncated by Lambda` next to the error object\.
-
-If you are using runtime version 8\.10, you can include the `async` keyword:
-
-```
-exports.myHandler = async function(event, context) {
-            ...
-            
-            // return information to the caller.  
+exports.handler =  async function(event, context) {
+  console.log("EVENT: \n" + JSON.stringify(event, null, 2))
+  return context.logStreamName
 }
 ```
 
-## Example<a name="nodejs-prog-model-handler-example"></a>
+When you [configure a function](resource-model.md), the value of the handler setting is the file name and the name of the exported handler module, separated by a dot\. The default in the console and for examples in this guide is `index.handler`\. This indicates the `handler` module that's exported by `index.js`\.
 
-Consider the following Node\.js example code\. 
+The runtime passes three arguments to the handler method\. The first argument is the `event` object, which contains information from the invoker\. The invoker passes this information as a JSON\-formatted string when it calls [Invoke](API_Invoke.md)\. When an AWS service invokes your function, the event structure [varies by service](lambda-services.md)\.
+
+The second argument is the [context object](nodejs-prog-model-context.md), which contains information about the invocation, function, and execution environment\. In the preceding example, the function gets the name of the [log stream](nodejs-prog-model-logging.md) from the context object and returns it to the invoker\.
+
+The third argument, `callback`, is a function that you can call in [non\-async functions](#nodejs-handler-sync) to send a response\. The callback function takes two arguments: an `Error` and a response\. The response object must be compatible with `JSON.stringify`\.
+
+For async functions, you return a response, error, or promise to the runtime instead of using `callback`\.
+
+## Async Functions<a name="nodejs-handler-async"></a>
+
+For async functions, you can use `return` and `throw` to send a response or error, respectively\. Functions must use the `async` keyword to use these methods to return a response or error\.
+
+If your code performs an asynchronous task, return a promise to make sure that it finishes running\. When you resolve or reject the promise, Lambda sends the response or error to the invoker\.
+
+**Example index\.js File – HTTP Request with Async Function and Promises**  
 
 ```
-exports.myHandler = function(event, context, callback) {
-   console.log("value1 = " + event.key1);
-   console.log("value2 = " + event.key2);  
-   callback(null, "some success message");
-   // or 
-   // callback("some error type"); 
+const https = require('https')
+let url = "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html"
+
+exports.handler = async function(event) {
+  const promise = new Promise(function(resolve, reject) {
+    https.get(url, (res) => {
+        resolve(res.statusCode)
+      }).on('error', (e) => {
+        reject(Error(e))
+      })
+    })
+  return promise
 }
 ```
 
-This example has one function, *myHandler*
+For libraries that return a promise, you can return that promise directly to the runtime\.
 
-In the function, the `console.log()` statements log some of the incoming event data to CloudWatch Logs\. When the `callback` parameter is called, the Lambda function exits only after the event loop passed is empty\.
-
-If you want to use the `async` feature provided by the v8\.10 runtime, consider the following code sample:
+**Example index\.js File – AWS SDK with Async Function and Promises**  
 
 ```
-exports.myHandler = async function(event, context) {
-   console.log("value1 = " + event.key1);
-   console.log("value2 = " + event.key2);  
-   return "some success message”;
-   // or 
-   // throw new Error(“some error type”); 
+const AWS = require('aws-sdk')
+const s3 = new AWS.S3()
+
+exports.handler = async function(event) {
+  return s3.listBuckets().promise()
 }
 ```
 
-**To upload and test this code as a Lambda function \(console\)**
+## Non\-Async Functions<a name="nodejs-handler-sync"></a>
 
-1. In the console, create a Lambda function using the following information:
-   + Use the hello\-world blueprint\. 
-   + The sample uses **nodejs6\.10** as the **runtime** but you can also select **nodejs8\.10**\. The code samples provided will work for any version\.
+The following example function checks a URL and returns the status code to the invoker\.
 
-   For instructions to create a Lambda function using the console, see [Create a Simple Lambda Function](get-started-create-function.md)\.
+**Example index\.js File – HTTP Request with Callback**  
 
-1. Replace the template code with the code provided in this section and create the function\.
+```
+const https = require('https')
+let url = "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html"
 
-1. Test the Lambda function using the **Sample event template** called **Hello World** provided in the Lambda console\. 
+exports.handler =  function(event, context, callback) {
+  https.get(url, (res) => {
+    callback(null, res.statusCode)
+  }).on('error', (e) => {
+    callback(Error(e))
+  })
+}
+```
+
+For non\-async functions, function execution continues until the [event loop](https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/) is empty or the function times out\. The response isn't sent to the invoker until all event loop tasks are finished\. If the function times out, an error is returned instead\. You can configure the runtime to send the response immediately by setting [context\.callbackWaitsForEmptyEventLoop](nodejs-prog-model-context.md) to false\.
+
+In the following example, the response from Amazon S3 is returned to the invoker as soon as it's available\. The timeout running on the event loop is frozen, and it continues running the next time the function is invoked\.
+
+**Example index\.js File – callbackWaitsForEmptyEventLoop**  
+
+```
+const AWS = require('aws-sdk')
+const s3 = new AWS.S3()
+
+exports.handler = function(event, context, callback) {
+  context.callbackWaitsForEmptyEventLoop = false
+  s3.listBuckets(null, callback)
+  setTimeout(function () {
+    console.log('Timeout complete.')
+  }, 5000)
+}
+```

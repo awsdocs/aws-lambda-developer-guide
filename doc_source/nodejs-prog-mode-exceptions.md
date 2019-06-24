@@ -1,129 +1,62 @@
-# Function Errors \(Node\.js\)<a name="nodejs-prog-mode-exceptions"></a>
+# AWS Lambda Function Errors in Node\.js<a name="nodejs-prog-mode-exceptions"></a>
 
- If your Lambda function notifies AWS Lambda that it failed to execute properly, Lambda will attempt to convert the error object to a String\. Consider the following example:
+When your code raises an error, Lambda generates a JSON representation of the error\. This error document appears in the invocation log and, for synchronous invocations, in the output\.
+
+**Example index\.js File – Reference Error**  
 
 ```
-console.log('Loading function');
-
-exports.handler = function(event, context, callback) {
-    // This example code only throws error. 
-    var error = new Error("something is wrong");
-    callback(error);
-   
-};
+exports.handler = async function() {
+  return x + 10
+}
 ```
 
- When you invoke this Lambda function, it will notify AWS Lambda that function execution completed with an error and passes the error information to AWS Lambda\. AWS Lambda returns the error information back to the client: 
+This code results in a reference error\. Lambda catches the error and generates a JSON document with fields for the error message, the type, and the stack trace\.
 
 ```
 {
-  "errorMessage": "something is wrong",
-  "errorType": "Error",
-  "stackTrace": [
-    "exports.handler (/var/task/index.js:10:17)"
+  "errorType": "ReferenceError",
+  "errorMessage": "x is not defined",
+  "trace": [
+    "ReferenceError: x is not defined",
+    "    at Runtime.exports.handler (/var/task/index.js:2:3)",
+    "    at Runtime.handleOnce (/var/runtime/Runtime.js:63:25)",
+    "    at process._tickCallback (internal/process/next_tick.js:68:7)"
   ]
 }
 ```
 
-You would get the same result if you write the function using the async feature of Node\.js runtime version 8\.10\. For example:
+When you invoke the function from the command line, the AWS CLI splits the response into two documents\. To indicate that a function error occurred, the response displayed in the terminal includes a `FunctionError` field\. The response or error returned by the function is written to the output file\.
 
 ```
-exports.handler = async function(event, context) {                
-    function AccountAlreadyExistsError(message) {
-        this.name = "AccountAlreadyExistsError";
-        this.message = message;
-    }
-    AccountAlreadyExistsError.prototype = new Error();
- 
-    const error = new AccountAlreadyExistsError("Account is in use!");
-    throw error
-};
-```
-
-Again, when this Lambda function is invoked, it will notify AWS Lambda that function execution completed with an error and passes the error information to AWS Lambda\. AWS Lambda returns the error information back to the client:
-
-```
+$ aws lambda invoke --function-name my-function out
 {
-  "errorMessage": "Acccount is in use!",
-  "errorType": "Error",
-  "stackTrace": [
-    "exports.handler (/var/task/index.js:10:17)"
-  ]
+    "StatusCode": 200,
+    "FunctionError": "Unhandled",
+    "ExecutedVersion": "$LATEST"
 }
 ```
 
- Note that the error information is returned as the `stackTrace` JSON array of stack trace elements\. 
-
-How you get the error information back depends on the invocation type that the client specifies at the time of function invocation: 
-+ If a client specifies the `RequestResponse` invocation type \(that is, synchronous execution\), it returns the result to the client that made the invoke call\.
-
-  For example, the console always use the `RequestResponse` invocation type, so the console will display the error in the **Execution result** section as shown:  
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/exception-shown-in-console-nodejs.png)
-
-   The same information is also sent to CloudWatch and the  **Log output**  section shows the same logs\.   
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/exception-shown-in-console20-nodejs.png)
-+ If a client specifies the  `Event` invocation type \(that is, asynchronous execution\), AWS Lambda will not return anything\. Instead, it logs the error information to [CloudWatch Logs](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring//logs/WhatIsCloudWatchLogs.html)\. You can also see the error metrics in [CloudWatch Metrics](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring//viewing_metrics_with_cloudwatch.html)\. 
-
- Depending on the event source, AWS Lambda may retry the failed Lambda function\. For example, if Kinesis is the event source, AWS Lambda will retry the failed invocation until the Lambda function succeeds or the records in the stream expire\. For more information on retries, see [Understanding Retry Behavior](retries-on-errors.md)\.
-
-**To test the preceding Node\.js code \(console\)**
-
-1. In the console, create a Lambda function using the hello\-world blueprint\. In **runtime**, choose **Node\.js**  and, in **Role**, choose **Basic execution role**\. For instructions on how to do this, see [Create a Simple Lambda Function](get-started-create-function.md)\. 
-
-1. Replace the template code with the code provided in this section\.
-
-1. Test the Lambda function using the **Sample event template** called **Hello World** provided in the Lambda console\. 
-
-## Function Error Handling<a name="nodejs-prog-model-custom-exceptions"></a>
-
-You can create custom error handling to raise an exception directly from your Lambda function and handle it directly \(Retry or Catch\) within an AWS Step Functions State Machine\. For more information, see [Handling Error Conditions Using a State Machine](http://docs.aws.amazon.com/step-functions/latest/dg/tutorial-handling-error-conditions.html)\. 
-
-Consider a `CreateAccount` [state](http://docs.aws.amazon.com/step-functions/latest/dg/awl-ref-states.html) is a [task](http://docs.aws.amazon.com/step-functions/latest/dg/awl-ref-states-task.html) that writes a customer's details to a database using a Lambda function\.
-+ If the task succeeds, an account is created and a welcome email is sent\.
-+ If a user tries to create an account for a username that already exists, the Lambda function raises an error, causing the state machine to suggest a different username and to retry the account\-creation process\.
-
-The following code samples demonstrate how to do this\. Note that custom errors in Node\.js must extend the error prototype\.
+View the output file to see the error document\.
 
 ```
-exports.handler = function(event, context, callback) {                
-    function AccountAlreadyExistsError(message) {
-        this.name = "AccountAlreadyExistsError";
-        this.message = message;
-    }
-    AccountAlreadyExistsError.prototype = new Error();
- 
-    const error = new AccountAlreadyExistsError("Account is in use!");
-    callback(error);
-};
+$ cat out
+{"errorType":"ReferenceError","errorMessage":"x is not defined","trace":["ReferenceError: x is not defined"," at Runtime.exports.handler (/var/task/index.js:2:3)"," at Runtime.handleOnce (/var/runtime/Runtime.js:63:25)"," at process._tickCallback (internal/process/next_tick.js:68:7)"]}
 ```
-
-You can configure Step Functions to catch the error using a `Catch` rule:
-
-```
-{
-   "StartAt": "CreateAccount",
-   "States": {
-      "CreateAccount": {
-         "Type": "Task",
-         "Resource": "arn:aws:lambda:us-east-1:123456789012:function:CreateAccount",
-         "Next": "SendWelcomeEmail",
-         "Catch": [
-            {
-               "ErrorEquals": ["AccountAlreadyExistsError"],
-               "Next": "SuggestAccountName"
-            }
-         ]
-      },
-      …
-   }
-}
-```
-
-At runtime, AWS Step Functions catches the error, [transitioning](http://docs.aws.amazon.com/step-functions/latest/dg/concepts-transitions.html) to the `SuggestAccountName` state as specified in the `Next` transition\.
 
 **Note**  
-The name property of the `Error` object must match the `ErrorEquals` value\.
+The 200 \(success\) status code in the response from Lambda indicates that there wasn't an error with the request that you sent to Lambda\. For issues that result in an error status code, see [Errors](API_Invoke.md#API_Invoke_Errors)\.
 
-Custom error handling makes it easier to create [serverless](https://aws.amazon.com/serverless) applications\. This feature integrates with all the languages supported by the Lambda [Programming Model](programming-model-v2.md), allowing you to design your application in the programming languages of your choice, mixing and matching as you go\.
+Lambda also records up to 256 KB of the error object in the function's logs\. To view logs when you invoke the function from the command line, use the `--log-type` option and decode the base64 string in the response\.
 
-To learn more about creating your own serverless applications using AWS Step Functions and AWS Lambda, see [AWS Step Functions](https://aws.amazon.com/step-functions/)\. 
+```
+$ aws lambda invoke --function-name my-function out --log-type Tail \
+--query 'LogResult' --output text |  base64 -d
+START RequestId: 8bbbfb91-a3ff-4502-b1b7-cb8f6658de64 Version: $LATEST
+2019-06-05T22:11:27.082Z        8bbbfb91-a3ff-4502-b1b7-cb8f6658de64    ERROR   Invoke Error    {"errorType":"ReferenceError","errorMessage":"x is not defined","stack":["ReferenceError: x is not defined","    at Runtime.exports.handler (/var/task/index.js:2:3)","    at Runtime.handleOnce (/var/runtime/Runtime.js:63:25)","    at process._tickCallback (internal/process/next_tick.js:68:7)"]}
+END RequestId: 8bbbfb91-a3ff-4502-b1b7-cb8f6658de64
+REPORT RequestId: 8bbbfb91-a3ff-4502-b1b7-cb8f6658de64  Duration: 76.85 ms      Billed Duration: 100 ms         Memory Size: 128 MB     Max Memory Used: 74 MB
+```
+
+For more information about logs, see [AWS Lambda Function Logging in Node\.js](nodejs-prog-model-logging.md)\.
+
+Depending on the event source, AWS Lambda might retry the failed Lambda function\. For example, if Kinesis is the event source, AWS Lambda retres the failed invocation until the Lambda function succeeds or the records in the stream expire\. For more information on retries, see [AWS Lambda Retry Behavior](retries-on-errors.md)\.

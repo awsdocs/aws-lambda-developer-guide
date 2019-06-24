@@ -1,37 +1,30 @@
-# Accessing Amazon CloudWatch Metrics for AWS Lambda<a name="monitoring-functions-access-metrics"></a>
+# Monitoring Functions in the AWS Lambda Console<a name="monitoring-functions-access-metrics"></a>
 
-AWS Lambda automatically monitors functions on your behalf, reporting metrics through Amazon CloudWatch\. These metrics include total requests, latency, and error rates\. For more information about Lambda metrics, see [AWS Lambda Metrics](monitoring-functions-metrics.md)\. For more information about CloudWatch, see the [Amazon CloudWatch User Guide](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/)\. 
+AWS Lambda monitors functions on your behalf and sends metrics to Amazon CloudWatch\. The metrics include total requests, duration, and error rates\. The Lambda console creates graphs for these metrics and shows them on the **Monitoring** page for each function\.
 
-You can monitor metrics for Lambda and view logs by using the Lambda console, the CloudWatch console, the AWS CLI, or the CloudWatch API\. The following procedures show you how to access metrics using these different methods\.
+**To access the monitoring console**
 
-**To access metrics using the Lambda console**
+1. Open the [Lambda console](https://console.aws.amazon.com/lambda)\.
 
-1. Sign in to the AWS Management Console and open the AWS Lambda console at [https://console\.aws\.amazon\.com/lambda/](https://console.aws.amazon.com/lambda/)\.
+1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
 
-1. On the **Functions ** page, choose the function name and then choose the **Monitoring** tab\.  
-![\[Events\]](http://docs.aws.amazon.com/lambda/latest/dg/images/metrics-functions-list.png)![\[Events\]](http://docs.aws.amazon.com/lambda/latest/dg/)![\[Events\]](http://docs.aws.amazon.com/lambda/latest/dg/)
+1. Choose **Monitoring**\.  
+![\[Graphs of various CloudWatch metrics.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/metrics-functions-list.png)
 
-   A graphical representation of the metrics for the Lambda function are shown\.
+The console provides the following graphs\.
 
-1. Choose **Jump to logs** to view the logs\.
+**Lambda Monitoring Graphs**
++ **Invocations** – The number of times that the function was invoked in each 5\-minute period\.
++ **Duration** – The average, minimum, and maximum execution times\.
++ **Error count and success rate \(%\)** – The number of errors and the percentage of executions that completed without error\.
++ **Throttles** – The number of times that execution failed due to concurrency limits\.
++ **IteratorAge** – For stream event sources, the age of the last item in the batch when Lambda received it and invoked the function\.
++ **DeadLetterErrors** – The number of events that Lambda attempted to write to a dead\-letter queue, but failed\.
 
-**To access metrics using the CloudWatch console**
+To see the definition of a graph in CloudWatch, choose **View in metrics** from the menu in the top right of the graph\. For more information about the metrics that Lambda records, see [AWS Lambda Metrics](monitoring-functions-metrics.md)\.
 
-1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
+The console also shows reports from CloudWatch Logs Insights that are compiled from information in your function's logs\. You can add these reports to a custom dashboard in the CloudWatch Logs console\. Use the queries as a starting point for your own reports\.
 
-1. From the navigation bar, choose a region\.
+![\[AWS CloudWatch Logs Insights reports\]](http://docs.aws.amazon.com/lambda/latest/dg/images/console-monitoring-insights.png)
 
-1. In the navigation pane, choose **Metrics**\.
-
-1. In the **CloudWatch Metrics by Category** pane, choose **Lambda Metrics**\.
-
-1. \(Optional\) In the graph pane, choose a statistic and a time period, and then create a CloudWatch alarm using these settings\.
-
-**To access metrics using the AWS CLI**  
-Use the [http://docs.aws.amazon.com/cli/latest/reference/cloudwatch/list-metrics.html](http://docs.aws.amazon.com/cli/latest/reference/cloudwatch/list-metrics.html) and [http://docs.aws.amazon.com/cli/latest/reference/cloudwatch/get-metric-statistics.html](http://docs.aws.amazon.com/cli/latest/reference/cloudwatch/get-metric-statistics.html) commands\.
-
-**To access metrics using the CloudWatch CLI**  
-Use the [http://docs.aws.amazon.com/AmazonCloudWatch/latest/cli/cli-mon-list-metrics.html](http://docs.aws.amazon.com/AmazonCloudWatch/latest/cli/cli-mon-list-metrics.html) and [http://docs.aws.amazon.com/AmazonCloudWatch/latest/cli/cli-mon-get-stats.html](http://docs.aws.amazon.com/AmazonCloudWatch/latest/cli/cli-mon-get-stats.html) commands\.
-
-**To access metrics using the CloudWatch API**  
-Use the [http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html](http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html) and [http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html](http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html) operations\.
+To view a query, choose **View in CloudWatch Logs Insights** from the menu in the top right of the report\.

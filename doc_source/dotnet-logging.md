@@ -1,52 +1,82 @@
-# Logging \(C\#\)<a name="dotnet-logging"></a>
+# AWS Lambda Function Logging in C\#<a name="dotnet-logging"></a>
 
-Your Lambda function can contain logging statements and, in turn, AWS Lambda writes these logs to CloudWatch Logs\. 
+Your Lambda function comes with a CloudWatch Logs log group, with a log stream for each instance of your function\. The runtime sends details about each invocation to the log stream, and relays logs and other output from your function's code\.
 
-In the C\# programming model, there are three ways to log data in your function: 
-+ Use the static `Write` or `WriteLine` methods provided by the C\# `Console` class\. Anything written to standard out or standard error \- using Console\.Write or a similar method \- will be logged in CloudWatch Logs\. 
+To output logs from your function code, you can use methods on [the Console class](https://docs.microsoft.com/en-us/dotnet/api/system.console), or any logging library that writes to `stdout` or `stderr`\. The following example logs the request ID for an invocation\.
 
-  ```
-  public class ProductService
-  {
-     public async Task<Product> DescribeProduct(DescribeProductRequest request)
-      {
-         Console.WriteLine("DescribeProduct invoked with Id " + request.Id);
-         return await catalogService.DescribeProduct(request.Id);
-      }
-  }
-  ```
-+ Use the `Log` method on the `Amazon.Lambda.Core.LambdaLogger` class\. This is a static class that can be used anywhere in your application\. To use this, you must include the `Amazon.Lambda.Core ` library\. 
+```
+public class ProductService
+{
+   public async Task<Product> DescribeProduct(DescribeProductRequest request)
+    {
+       Console.WriteLine("DescribeProduct invoked with Id " + request.Id);
+       return await catalogService.DescribeProduct(request.Id);
+    }
+}
+```
 
-  ```
-  using Amazon.Lambda.Core;
-                              
-  public class ProductService
-  {
-     public async Task<Product> DescribeProduct(DescribeProductRequest request)
-     {
-         LambdaLogger.Log("DescribeProduct invoked with Id " + request.Id);
-         return await catalogService.DescribeProduct(request.Id);
-     }
-  }
-  ```
+Lambda also provides a logger class in the `Amazon.Lambda.Core ` library\. Use the `Log` method on the `Amazon.Lambda.Core.LambdaLogger` class to write logs\.
 
-  Each call to `LambdaLogger.Log` results in a CloudWatch Logs event, provided the event size is within the allowed limits\. For information about CloudWatch Logs limits, see [CloudWatch Logs Limits](http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/cloudwatch_limits_cwl.html) in the *Amazon CloudWatch User Guide*\.
-+ Use the logger in `ILambdaContext`\. The `ILambdaContext` object \(if specified\) in your method contains a `Logger` property that represents a LambdaLogger\. The following is an example of using this method: 
+```
+using Amazon.Lambda.Core;
+                            
+public class ProductService
+{
+   public async Task<Product> DescribeProduct(DescribeProductRequest request)
+   {
+       LambdaLogger.Log("DescribeProduct invoked with Id " + request.Id);
+       return await catalogService.DescribeProduct(request.Id);
+   }
+}
+```
 
-  ```
-  public class ProductService
-  {
-     public async Task<Product> DescribeProduct(DescribeProductRequest request, ILambdaContext context)
-     {
-         context.Logger.Log("DescribeProduct invoked with Id " + request.Id);
-         return await catalogService.DescribeProduct(request.Id);
-     }
-  }
-  ```
+An instance of this class is also available on [the context object](dotnet-context-object.md)\.
 
-## How to Find Logs<a name="how-to-find-logs-dotnet"></a>
+```
+public class ProductService
+{
+   public async Task<Product> DescribeProduct(DescribeProductRequest request, ILambdaContext context)
+   {
+       context.Logger.Log("DescribeProduct invoked with Id " + request.Id);
+       return await catalogService.DescribeProduct(request.Id);
+   }
+}
+```
 
-You can find the logs that your Lambda function writes, as follows:
-+ Find logs in CloudWatch Logs\. The `ILambdaContext` object provides the `LogStreamName` and the `LogGroupName` properties\. Using these properties, you can find the specific log stream where logs are written\.
-+ If you invoke a Lambda function via the console, the invocation type is always `RequestResponse` \(that is, synchronous execution\) and the console displays the logs that the Lambda function writes using the `LambdaLogger` object\. AWS Lambda also returns logs from `Console.Write` and `Console.WriteLine` methods\.
-+ If you invoke a Lambda function programmatically, you can add the `LogType` parameter to retrieve the last 4 KB of log data that is written to CloudWatch Logs\. For more information, see [Invoke](API_Invoke.md)\. AWS Lambda returns this log information in the `x-amz-log-results` header in the response\. If you use the AWS Command Line Interface to invoke the function, you can specify the `--log-type` parameter with value `Tail`\. 
+The Lambda console shows log output when you test a function on the function configuration page\. To view logs for all invocations, use the CloudWatch Logs console\.
+
+**To view your Lambda function's logs**
+
+1. Open the [Logs page of the CloudWatch console](https://console.aws.amazon.com/cloudwatch/home?#logs:)\.
+
+1. Choose the log group for your function \(**/aws/lambda/*function\-name***\)\.
+
+1. Choose the first stream in the list\.
+
+Each log stream corresponds to an [instance of your function](running-lambda-code.md)\. New streams appear when you update your function and when additional instances are created to handle multiple concurrent invocations\. To find logs for specific invocations, you can instrument your function with X\-Ray, and record details about the request and log stream in the trace\. For a sample application that correlates logs and traces with X\-Ray, see [Error Processor Sample Application for AWS Lambda](sample-errorprocessor.md)\.
+
+To get logs for an invocation from the command line, use the `--log-type` option\. The response includes a `LogResult` field that contains up to 4 KB of base64\-encoded logs from the invocation\.
+
+```
+$ aws lambda invoke --function-name my-function out --log-type Tail
+{
+    "StatusCode": 200,
+    "LogResult": "U1RBUlQgUmVxdWVzdElkOiA4N2QwNDRiOC1mMTU0LTExZTgtOGNkYS0yOTc0YzVlNGZiMjEgVmVyc2lvb...",
+    "ExecutedVersion": "$LATEST"
+}
+```
+
+You can use the `base64` utility to decode the logs\.
+
+```
+$ aws lambda invoke --function-name my-function out --log-type Tail \
+--query 'LogResult' --output text |  base64 -d
+START RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8 Version: $LATEST
+  "AWS_SESSION_TOKEN": "AgoJb3JpZ2luX2VjELj...", "_X_AMZN_TRACE_ID": "Root=1-5d02e5ca-f5792818b6fe8368e5b51d50;Parent=191db58857df8395;Sampled=0"",ask/lib:/opt/lib",
+END RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8
+REPORT RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8  Duration: 79.67 ms      Billed Duration: 100 ms         Memory Size: 128 MB     Max Memory Used: 73 MB
+```
+
+The `base64` utility is available on Linux, macOS, and [Ubuntu on Windows](https://docs.microsoft.com/en-us/windows/wsl/install-win10)\. For macOS, the command is `base64 -D`\.
+
+Log groups aren't deleted automatically when you delete a function\. To avoid storing logs indefinitely, delete the log group, or [configure a retention period](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#SettingLogRetention) after which logs are deleted automatically\.

@@ -1,57 +1,87 @@
-# Logging \(Python\)<a name="python-logging"></a>
+# AWS Lambda Function Logging in Python<a name="python-logging"></a>
 
-Your Lambda function can contain logging statements\. AWS Lambda writes these logs to CloudWatch\. If you use the Lambda console to invoke your Lambda function, the console displays the same logs\. 
+Your Lambda function comes with a CloudWatch Logs log group, with a log stream for each instance of your function\. The runtime sends details about each invocation to the log stream, and relays logs and other output from your function's code\.
 
-The following Python statements generate log entries:
-+ `print` statements\.
-+ `Logger` functions in the `logging` module \(for example, `logging.Logger.info` and `logging.Logger.error`\)\.
+To output logs from your function code, you can use [the print method](https://docs.python.org/3/library/functions.html#print), or any logging library that writes to `stdout` or `stderr`\. The following example logs the values of environment variables and the event object\.
 
-Both `print` and `logging.*` functions write logs to CloudWatch Logs but the `logging.*` functions write additional information to each log entry, such as time stamp and log level\.
-
-For example, consider the following Python code example\. 
+**Example lambda\_function\.py**  
 
 ```
+import json
+import os
+
+def lambda_handler(event, context):
+    print('## ENVIRONMENT VARIABLES')
+    print(os.environ)
+    print('## EVENT')
+    print(event)
+    return {
+        'statusCode': 200,
+        'body': json.dumps('Hello from Lambda!')
+    }
+```
+
+For more detailed logs, use the [logging library](https://docs.python.org/3/library/logging.html)\. 
+
+```
+import json
+import os
 import logging
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
-def my_logging_handler(event, context):
-    logger.info('got event{}'.format(event))
-    logger.error('something went wrong')
-    return 'Hello from Lambda!'
-```
 
-Because the code example uses the `logging` module to write message to the logs, you also get some additional information in the log such as the time stamp and the log levels\. The log level identifies the type of log, such as `[INFO]`, `[ERROR]`, and `[DEBUG]`\.
-
-You can also find these logs in CloudWatch\. For more information, see [Accessing Amazon CloudWatch Logs for AWS Lambda](monitoring-functions-logs.md)\.
-
-Instead of using the `logging` module, you can use the `print` statements in your code as shown in the following Python example:
-
-```
-from __future__ import print_function
 def lambda_handler(event, context):
-    print('this will also show up in cloud watch')
-    return 'Hello World!'
+    logger.info('## ENVIRONMENT VARIABLES')
+    logger.info(os.environ)
+    logger.info('## EVENT')
+    logger.info(event)
+    return {
+        'statusCode': 200,
+        'body': json.dumps('Hello from Lambda!')
+    }
 ```
 
-In this case only the text passed to the print method is sent to CloudWatch\. The log entries will not have additional information that the `logging.*` function returns\. The `from __future__` statement enables you to write code that is compatible with Python 2 or 3\.
+The output from `logger` includes the log level, timestamp, and request ID\.
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/python-logging-20.png)
+```
+[INFO]	2019-04-21T23:24:14.135Z	00d3cdad-8aaf-42b2-af4e-6f8b2cae00a5	## EVENT
+[INFO]	2019-04-21T23:24:14.135Z	00d3cdad-8aaf-42b2-af4e-6f8b2cae00a5	{'key1': 'value1', 'key2': 'value2', 'key3': 'value3'}
+```
 
-The console uses the `RequestResponse` invocation type \(synchronous invocation\) when invoking the function\. And therefore it gets the return value \("Hello world\!"\) back from AWS Lambda which the console displays\.
+The Lambda console shows log output when you test a function on the function configuration page\. To view logs for all invocations, use the CloudWatch Logs console\.
 
-**To test the preceding Python code \(console\)**
+**To view your Lambda function's logs**
 
-1. In the console, create a Lambda function using the hello\-world\-python blueprint\. In **runtime**, choose **Python 2\.7**\. In **Handler**, replace `lambda_function.lambda_handler` with `lambda_function.my_other_logging_handler` and in **Role**, choose **Basic execution role**\. You also replace the code provided by the blueprint by the code in this section\. For step\-by\-step instructions to create a Lambda function using the console, see  [Create a Simple Lambda Function](get-started-create-function.md)\. 
+1. Open the [Logs page of the CloudWatch console](https://console.aws.amazon.com/cloudwatch/home?#logs:)\.
 
-1. Replace the template code with the code provided in this section\.
+1. Choose the log group for your function \(**/aws/lambda/*function\-name***\)\.
 
-1. Test the Lambda function using the **Sample event template** called **Hello World** provided in the Lambda console\. 
+1. Choose the first stream in the list\.
 
-## Finding Logs<a name="python-logging-finding-logs"></a>
+Each log stream corresponds to an [instance of your function](running-lambda-code.md)\. New streams appear when you update your function and when additional instances are created to handle multiple concurrent invocations\. To find logs for specific invocations, you can instrument your function with X\-Ray, and record details about the request and log stream in the trace\. For a sample application that correlates logs and traces with X\-Ray, see [Error Processor Sample Application for AWS Lambda](sample-errorprocessor.md)\.
 
-You can find the logs that your Lambda function writes, as follows:
-+ **In the AWS Lambda console** – The ** Log output**  section in AWS Lambda console shows the logs\. 
-+ **In the response header, when you invoke a Lambda function programmatically** – If you invoke a Lambda function programmatically, you can add the `LogType` parameter to retrieve the last 4 KB of log data that is written to CloudWatch Logs\. AWS Lambda returns this log information in the `x-amz-log-results` header in the response\. For more information, see [Invoke](API_Invoke.md)\.
+To get logs for an invocation from the command line, use the `--log-type` option\. The response includes a `LogResult` field that contains up to 4 KB of base64\-encoded logs from the invocation\.
 
-  If you use AWS CLI to invoke the function, you can specify the` --log-type parameter` with value `Tail` to retrieve the same information\.
-+ **In CloudWatch Logs** – To find your logs in CloudWatch you need to know the log group name and log stream name\. You can use the `context.log_group_name` and `context.log_stream_name` properties in your code to get this information\. When you run your Lambda function, the resulting logs in the console or CLI will show you the log group name and log stream name\. 
+```
+$ aws lambda invoke --function-name my-function out --log-type Tail
+{
+    "StatusCode": 200,
+    "LogResult": "U1RBUlQgUmVxdWVzdElkOiA4N2QwNDRiOC1mMTU0LTExZTgtOGNkYS0yOTc0YzVlNGZiMjEgVmVyc2lvb...",
+    "ExecutedVersion": "$LATEST"
+}
+```
+
+You can use the `base64` utility to decode the logs\.
+
+```
+$ aws lambda invoke --function-name my-function out --log-type Tail \
+--query 'LogResult' --output text |  base64 -d
+START RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8 Version: $LATEST
+  "AWS_SESSION_TOKEN": "AgoJb3JpZ2luX2VjELj...", "_X_AMZN_TRACE_ID": "Root=1-5d02e5ca-f5792818b6fe8368e5b51d50;Parent=191db58857df8395;Sampled=0"",ask/lib:/opt/lib",
+END RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8
+REPORT RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8  Duration: 79.67 ms      Billed Duration: 100 ms         Memory Size: 128 MB     Max Memory Used: 73 MB
+```
+
+The `base64` utility is available on Linux, macOS, and [Ubuntu on Windows](https://docs.microsoft.com/en-us/windows/wsl/install-win10)\. For macOS, the command is `base64 -D`\.
+
+Log groups aren't deleted automatically when you delete a function\. To avoid storing logs indefinitely, delete the log group, or [configure a retention period](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#SettingLogRetention) after which logs are deleted automatically\.
