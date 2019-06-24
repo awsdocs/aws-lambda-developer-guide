@@ -96,6 +96,7 @@ Resources:
       DestinationArn: !GetAtt processor.Arn
   cloudwatchlogspermission:
     Type: AWS::Lambda::Permission
+    # Wait for randomerror to be invoked to ensure that the log stream exists.
     DependsOn: primerinvoke
     Properties:
       FunctionName: !GetAtt processor.Arn
