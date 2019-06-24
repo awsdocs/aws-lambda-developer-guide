@@ -33,8 +33,8 @@ Note the following:
 + **func HandleRequest\(ctx context\.Context, name MyEvent\) \(string, error\)**: This is your Lambda handler signature and includes the code which will be executed\. In addition, the parameters included denote the following: 
   + **ctx context\.Context**: Provides runtime information for your Lambda function invocation\. `ctx` is the variable you declare to leverage the information available via [AWS Lambda Context Object in Go](go-programming-model-context.md)\.
   + **name MyEvent**: An input type with a variable name of `name` whose value will be returned in the `return` statement\.
-  + **string, error**: Returns standard [error](https://golang.org/pkg/builtin/#error) information\. For more information on custom error handling, see [AWS Lambda Function Errors in Go](go-programming-model-errors.md)\.
-  + **return fmt\.Sprintf\("Hello %s\!", name\), nil**: Simply returns a formatted "Hello" greeting with the name you supplied in the handler signature\. `nil` indicates there were no errors and the function executed successfully\.
+  + **string, error**: Returns two values: string for success and standard [error](https://golang.org/pkg/builtin/#error) information\. For more information on custom error handling, see [AWS Lambda Function Errors in Go](go-programming-model-errors.md)\.
+  + **return fmt\.Sprintf\("Hello %s\!", name\), nil**: Simply returns a formatted "Hello" greeting with the name you supplied in the input event\. `nil` indicates there were no errors and the function executed successfully\.
 + **func main\(\)**: The entry point that executes your Lambda function code\. This is required\.
 
   By adding `lambda.Start(HandleRequest)` between `func main(){}` code brackets, your Lambda function will be executed\.
