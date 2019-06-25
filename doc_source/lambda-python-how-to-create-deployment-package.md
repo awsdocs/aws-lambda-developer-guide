@@ -5,12 +5,28 @@ A deployment package is a ZIP archive that contains your function code and depen
 If you use the Lambda [console editor](code-editor.md) to author your function, the console manages the deployment package\. You can use this method as long as you don't need to add any libraries\. You can also use it to update a function that already has libraries in the deployment package, as long as the total size doesn't exceed 3 MB\.
 
 **Note**  
-You can use the AWS SAM CLI `build` command to create a deployment package for your Python function code and dependencies\. See [Building Applications with Dependencies](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-build.html) in the AWS SAM Developer Guide for instructions\.
+You can use the AWS SAM CLI `build` command to create a deployment package for your Python function code and dependencies\. The AWS SAM CLI also provides an option to build your deployment package inside a Docker image that is compatible with the Lambda execution environment\. See [Building Applications with Dependencies](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-build.html) in the AWS SAM Developer Guide for instructions\.
 
 **Topics**
++ [Prerequisites](#python-package-prereqs)
 + [Updating a Function with No Dependencies](#python-package-codeonly)
 + [Updating a Function with Additional Dependencies](#python-package-dependencies)
 + [With a Virtual Environment](#python-package-venv)
+
+## Prerequisites<a name="python-package-prereqs"></a>
+
+These instructions assume that you already have a function\. If you haven't created a function yet, see [Building Lambda Functions with Python](python-programming-model.md)\.
+
+To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
+
+```
+~/lambda-project$ this is a command
+this is output
+```
+
+For long commands, an escape character \(`\`\) is used to split a command over multiple lines\.
+
+On Linux and macOS, use your preferred shell and package manager\. On Windows 10, you can [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows\-integrated version of Ubuntu and Bash\.
 
 ## Updating a Function with No Dependencies<a name="python-package-codeonly"></a>
 
@@ -59,7 +75,7 @@ If your function depends on libraries other than the SDK for Python \(Boto 3\), 
 
 **To update a Python function with dependencies**
 
-1. Install libraries in a new, project-local `package` directory with `pip`'s `--target` option\.
+1. Install libraries in a new, project\-local `package` directory with `pip`'s `--target` option\.
 
    ```
    ~/my-function$ pip install --target ./package Pillow
@@ -68,9 +84,8 @@ If your function depends on libraries other than the SDK for Python \(Boto 3\), 
    Installing collected packages: Pillow
    Successfully installed Pillow-5.3.0
    ```
-   
-   **Note**  
-   In order for `--target` to work on [Debian-based systems](https://github.com/pypa/pip/issues/3826) (like Ubuntu), you may also need to pass the `--system` flag to prevent `distutils` errors.
+**Note**  
+In order for `--target` to work on [Debian\-based systems](https://github.com/pypa/pip/issues/3826) like Ubuntu, you may also need to pass the `--system` flag to prevent `distutils` errors\.
 
 1. Create a ZIP archive of the dependencies\.
 
@@ -138,9 +153,8 @@ In some cases, you may need to use a [virtual environment](https://virtualenv.py
    Installing setuptools, pip, wheel...
    done.
    ```
-
-   **Note**
-   If you plan on only supporting Python 3.3+ code with your Lambda function, or don't want to use the `virtualenv` module, the `venv` module included with your Python distribution provides the same (though slightly more limited) functionality:
+**Note**  
+For Python 3\.3 and newer, you can use the built\-in [venv module](https://docs.python.org/3/library/venv.html) to create a virtual environment, instead of installing `virtualenv`\.  
 
    ```
    ~/my-function$ python3 -m venv v-env
@@ -178,7 +192,7 @@ In some cases, you may need to use a [virtual environment](https://virtualenv.py
 1. Create a ZIP archive with the contents of the library\.
 
    ```
-   ~/my-function$ cd v-env/lib/python3.7/site-packages
+   ~/my-function$ cd v-env/lib/python3.7/site-packages  
    ~/my-function/v-env/lib/python3.7/site-packages$ zip -r9 ${OLDPWD}/function.zip .
      adding: easy_install.py (deflated 17%)
      adding: PIL/ (stored 0%)
@@ -188,10 +202,7 @@ In some cases, you may need to use a [virtual environment](https://virtualenv.py
    ...
    ```
 
-  Depending on the library, dependencies may appear in either `site-packages` or `dist-packages`, and the first folder in the virtual environment may be `lib` or `lib64`\. You can use the `pip show` command to locate a specific package\.
-
-  **Note**  
-  In some cases, libraries may also be installed in the `dist-packages` directory\.
+   Depending on the library, dependencies may appear in either `site-packages` or `dist-packages`, and the first folder in the virtual environment may be `lib` or `lib64`\. You can use the `pip show` command to locate a specific package\.
 
 1. Add your function code to the archive\.
 

@@ -17,4 +17,12 @@ Deprecation occurs in two phases\. During the first phase, you can no longer cre
 
 In most cases, the end\-of\-life date of a language version or operating system is known well in advance\. If you have functions running on a runtime that will be deprecated in the next 60 days, Lambda notifies you by email that you should prepare by migrating your function to a supported runtime\. In some cases, such as security issues that require a backwards\-incompatible update, or software that doesn't support a long\-term support \(LTS\) schedule, advance notice might not be possible\.
 
+**Language and Framework Support Policies**
++ **Node\.js** – [github\.com](https://github.com/nodejs/Release#release-schedule)
++ **Python** – [devguide\.python\.org](https://devguide.python.org/#status-of-python-branches)
++ **Ruby** – [www\.ruby\-lang\.org](https://www.ruby-lang.org/en/downloads/branches/)
++ **Java** – [www\.oracle\.com](https://www.oracle.com/technetwork/java/java-se-support-roadmap.html)
++ **Go** – [golang\.org](https://golang.org/s/release)
++ **\.NET Core** – [dotnet\.microsoft\.com](https://dotnet.microsoft.com/platform/support/policy/dotnet-core)
+
 After a runtime is deprecated, Lambda might retire it completely at any time by disabling invocation\. Deprecated runtimes aren't eligible for security updates or technical support\. Before retiring a runtime, Lambda sends additional notifications to affected customers\. No runtimes are scheduled to be retired at this time\.

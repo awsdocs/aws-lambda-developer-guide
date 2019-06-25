@@ -152,11 +152,11 @@ The deployment package is a \.zip file containing your Lambda function code and 
 
 ## Java 8<a name="with-s3-example-deployment-pkg-java"></a>
 
-The following is example Java code that reads incoming Amazon S3 events and creates a thumbnail\. Note that it implements the `RequestHandler` interface provided in the `aws-lambda-java-core` library\. Therefore, at the time you create a Lambda function you specify the class as the handler \(that is, `example.S3EventProcessorCreateThumbnail`\)\. For more information about using interfaces to provide a handler, see [Leveraging Predefined Interfaces for Creating Handler \(Java\)](java-handler-using-predefined-interfaces.md)\.
+The following is example Java code that reads incoming Amazon S3 events and creates a thumbnail\. Note that it implements the `RequestHandler` interface provided in the `aws-lambda-java-core` library\. Therefore, at the time you create a Lambda function you specify the class as the handler \(that is, `example.handler`\)\. For more information about using interfaces to provide a handler, see [Leveraging Predefined Interfaces for Creating Handler \(Java\)](java-handler-using-predefined-interfaces.md)\.
 
 The `S3Event` type that the handler uses as the input type is one of the predefined classes in the `aws-lambda-java-events`  library that provides methods for you to easily read information from the incoming Amazon S3 event\. The handler returns a string as output\.
 
-**Example S3EventProcessorCreateThumbnail\.java**  
+**Example handler\.java**  
 
 ```
 package example;
@@ -185,7 +185,7 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 
-public class S3EventProcessorCreateThumbnail implements
+public class handler implements
         RequestHandler<S3Event, String> {
     private static final float MAX_WIDTH = 100;
     private static final float MAX_HEIGHT = 100;
@@ -199,7 +199,7 @@ public class S3EventProcessorCreateThumbnail implements
             S3EventNotificationRecord record = s3event.getRecords().get(0);
 
             String srcBucket = record.getS3().getBucket().getName();
-            
+
             // Object key may have spaces or unicode non-ASCII characters.
             String srcKey = record.getS3().getObject().getUrlDecodedKey();
 
@@ -273,13 +273,13 @@ public class S3EventProcessorCreateThumbnail implements
             // Uploading to S3 destination bucket
             System.out.println("Writing to: " + dstBucket + "/" + dstKey);
             try {
-	s3Client.putObject(dstBucket, dstKey, is, meta);
-	} 
+                s3Client.putObject(dstBucket, dstKey, is, meta);
+            }
             catch(AmazonServiceException e)
             {
-	System.err.println(e.getErrorMessage());
-	System.exit(1);
-	}
+                System.err.println(e.getErrorMessage());
+                System.exit(1);
+            }
             System.out.println("Successfully resized " + srcBucket + "/"
                     + srcKey + " and uploaded to " + dstBucket + "/" + dstKey);
             return "Ok";

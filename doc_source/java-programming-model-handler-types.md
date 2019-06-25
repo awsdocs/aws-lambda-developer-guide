@@ -36,19 +36,19 @@ For example, consider the following Java example code\.
 ```
 package example;
 
-import com.amazonaws.services.lambda.runtime.Context; 
+import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 public class Hello implements RequestHandler<Integer, String>{
-    public String myHandler(int myCount, Context context) {
-        return String.valueOf(myCount);
-    }
+  public String handleRequest(Integer myCount, Context context) {
+    return String.valueOf(myCount);
+  }
 }
 ```
 
-In this example input is of type Integer and output is of type String\. If you package this code and dependencies, and create your Lambda function, you specify `example.Hello::myHandler` \(*package*\.*class*::*method\-reference*\) as the handler\. 
+In this example input is of type Integer and output is of type String\. If you package this code and dependencies, and create your Lambda function, you specify `example.Hello` as the handler\. 
 
-In the example Java code, the first handler parameter is the input to the handler \(myHandler\), which can be event data \(published by an event source such as Amazon S3\) or custom input you provide such as an Integer object \(as in this example\) or any custom data object\. 
+In the example Java code, the first handler parameter is the input to the handler, which can be event data published by an event source such as Amazon S3, or custom input you provide such as an Integer object\. 
 
 For instructions to create a Lambda function using this Java code, see [Create a Lambda Function Authored in Java](get-started-step4-optional.md)\.
 
