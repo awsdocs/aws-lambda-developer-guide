@@ -59,7 +59,7 @@ After you build the project, the resulting \.zip file \(that is, your deployment
        from compileJava
        from processResources              
        into('lib') {
-           from configurations.compileClasspath
+           from configurations.runtimeClasspath
        }           
    }
    
@@ -122,7 +122,7 @@ task buildZip(type: Zip) {
     from compileJava
     from processResources              
     into('lib') {
-        from configurations.compileClasspath
+        from configurations.runtimeClasspath
     }           
 }
 
