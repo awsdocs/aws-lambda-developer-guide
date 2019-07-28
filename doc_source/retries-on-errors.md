@@ -1,22 +1,41 @@
-# AWS Lambda Retry Behavior<a name="retries-on-errors"></a>
+# Error Handling and Automatic Retries in AWS Lambda<a name="retries-on-errors"></a>
 
-Function invocation can result in an error for several reasons\. Your code might raise an exception, time out, or run out of memory\. The runtime executing your code might encounter an error and stop\. You might run out concurrency and be throttled\.
+When you invoke a function, two types of error can occur\. Invocation errors occur when the invocation request is rejected before your function receives it\. Function errors occur when your function's code or [runtime](lambda-runtimes.md) returns an error\. Depending on the type of error, the type of invocation, and the client or service that invokes the function, retry behavior and the strategy for managing errors varies\.
 
-When an error occurs, your code might have run completely, partially, or not at all\. In most cases, the client or service that invokes your function retries if it encounters an error, so your code must be able to process the same event repeatedly without unwanted effects\. If your function manages resources or writes to a database, you need to handle cases where the same request is made several times\.
+Issues with the request, caller, or account can cause invocation errors\. Invocation errors include an error type and status code in the response that indicate the cause of the error\.
 
-Lambda handles retries in the following manner, depending on the source of the invocation\.
-+ **Event sources that aren't stream\-based** – Some of these event sources are set up to invoke a Lambda function synchronously and others invoke it asynchronously\. Accordingly, exceptions are handled as follows:
-  + **Synchronous invocation** – Lambda includes the `FunctionError` field in the response body, with details about the error in the `X-Amz-Function-Error` header\. The status code is 200 for function errors\. Lambda only returns error status codes if there is an issue with the request, function, or permissions that prevents the handler from processing the event\. See [Invoke Errors](API_Invoke.md#API_Invoke_Errors) for details\.
+**Common Invocation Errors**
++ **Request** – The request event is too large or is not valid JSON; the function does not exist; a parameter value is the wrong type\.
++ **Caller** – The user or service does not have permission to invoke the function\.
++ **Account** – The maximum number of function instances are already running, or requests are being made too quickly\.
 
-    [AWS service triggers](lambda-services.md) can retry depending on the service\. If you invoke the Lambda function directly from your application, you can choose whether to retry or not\.
-  + **Asynchronous invocation** – Asynchronous events are queued before being used to invoke the Lambda function\. If AWS Lambda is unable to fully process the event, it will automatically retry the invocation twice, with delays between retries\. Configure a [dead letter queue](dlq.md) for your function to capture requests that fail all three attempts\.
-+ **Poll\-based event sources that are stream\-based** – These consist of Kinesis Data Streams or DynamoDB\. When a Lambda function invocation fails, AWS Lambda attempts to process the erring batch of records until the time the data expires, which can be up to seven days\. 
+Clients such as the AWS CLI and the AWS SDK retry on client timeouts, throttling errors \(429\) and other errors not caused by a bad request \(500 series\)\. For a full list of invocation errors, see [the Invoke API reference documentation](API_Invoke.md#API_Invoke_Errors)\.
 
-  The exception is treated as blocking, and AWS Lambda will not read any new records from the shard until the failed batch of records either expires or is processed successfully\. This ensures that AWS Lambda processes the stream events in order\.
-+ **Poll\-based event sources that are not stream\-based** – This consists of Amazon Simple Queue Service\. If you configure an Amazon SQS queue as an event source, AWS Lambda will poll a batch of records in the queue and invoke your Lambda function\. If the invocation fails or times out, every message in the batch will be returned to the queue, and each will be available for processing once the [Visibility Timeout](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html) period expires\. \(Visibility timeouts are a period of time during which Amazon Simple Queue Service prevents other consumers from receiving and processing the message\)\.
+Function errors occur when your function code or the runtime that it uses return an error\.
 
-  Once an invocation successfully processes a batch, each message in that batch will be removed from the queue\. When a message is not successfully processed, it is either discarded or if you have configured an [Amazon SQS Dead Letter Queue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-dead-letter-queue.html), the failure information will be directed there for you to analyze\.
+**Common Function Errors**
++ **Function** – Your function's code throws an exception or returns an error object\.
++ **Runtime** – The runtime terminated your function because it ran out of time, detected a syntax error, or failed to marshal the response object into JSON\. The function exited with an error code\.
 
-If you don't require ordered processing of events, the advantage of using Amazon SQS queues is that AWS Lambda will continue to process new messages, regardless of a failed invocation of a previous message\. In other words, processing of new messages will not be blocked\. 
+Unlike invocation errors, function errors do not cause Lambda to return a 400\-series or 500\-series status code\. If the function returns an error, Lambda indicates this by including a header named `X-Amz-Function-Error`, and a JSON\-formatted response with the error message and other details\. For examples of function errors in each language, see the following topics\.
++  [AWS Lambda Function Errors in Node\.js](nodejs-prog-mode-exceptions.md) 
++  [AWS Lambda Function Errors in Python](python-exceptions.md) 
++  [AWS Lambda Function Errors in Ruby](ruby-exceptions.md) 
++  [AWS Lambda Function Errors in Java](java-exceptions.md) 
++  [AWS Lambda Function Errors in Go](go-programming-model-errors.md) 
++  [AWS Lambda Function Errors in C\#](dotnet-exceptions.md) 
++  [AWS Lambda Function Errors in PowerShell](powershell-exceptions.md) 
 
-For more information about invocation modes, see [AWS Lambda Event Source Mapping](intro-invocation-modes.md)\.
+When you invoke a function directly, you determine the strategy for handling errors\. You can retry, send the event to a queue for debugging, or ignore the error\. Your function's code may have run completely, partially, or not at all\. If you retry, ensure that your function's code can handle the same event multiple times without causing duplicate transactions or other unwanted side effects\.
+
+When you invoke a function indirectly, you need to be aware of the retry behavior of the invoker and any service that the request encounters along the way\. This includes the following scenarios\.
++ **Asynchronous Invocation** – Lambda retries function errors twice\. If the function doesn't have enough capacity to handle all incoming requests, events may wait in the queue for hours or days to be sent to the function\. You can configure a dead\-letter queue on the function to capture events that were not successfully processed\. For more information, see [Asynchronous Invocation](invocation-async.md)\.
++ **Event Source Mappings** – Event source mappings that read from streams retry the entire batch of items\. Repeated errors block processing of the affected shard until the error is resolved or the items expire\. To detect stalled shards, you can monitor the [Iterator Age](monitoring-functions-metrics.md) metric\.
+
+  For event source mappings that read from a queue, you determine the length of time between retries and destination for failed events by configuring the visibility timeout and redrive policy on the source queue\. For more information, see [AWS Lambda Event Source Mapping](invocation-eventsourcemapping.md) and the service\-specific topics under [Using AWS Lambda with Other Services](lambda-services.md)\.
++ **AWS Services** – AWS services may invoke your function [synchronously](invocation-sync.md) or asynchronously\. For synchronous invocation, the service is responsible for retries\. For asynchronous invocation, the behavior is the same as when you invoke the function asynchronously\. For more information, see the service\-specific topics under [Using AWS Lambda with Other Services](lambda-services.md) and the invoking service's documentation\.
++ **Other Accounts and Clients** – When you grant access to other accounts, you can use [resource\-based policies](access-control-resource-based.md) to restrict the services or resources they can configure to invoke your function\. To protect your function from being overloaded, consider putting an API layer in front of your function with [Amazon API Gateway](with-on-demand-https.md)\.
+
+To help you deal with errors in Lambda applications, Lambda integrates with services like Amazon CloudWatch and AWS X\-Ray\. You can use a combination of logs, metrics, alarms, and tracing to quickly detect and identify issues in your function code, API, or other resources that support your application\. For more information, see [Monitoring and Troubleshooting Lambda Applications](troubleshooting.md)\.
+
+For a sample application that uses a CloudWatch Logs subscription, X\-Ray tracing, and a Lambda function to detect and process errors, see [Error Processor Sample Application for AWS Lambda](sample-errorprocessor.md)\.

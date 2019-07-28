@@ -63,7 +63,7 @@ Follow the steps in this section to create a Java project\.
          <dependency>
            <groupId>com.amazonaws</groupId>
            <artifactId>aws-lambda-java-core</artifactId>
-           <version>1.1.0</version>
+           <version>1.2.0</version>
          </dependency>
        </dependencies>
      
@@ -72,7 +72,7 @@ Follow the steps in this section to create a Java project\.
            <plugin>
              <groupId>org.apache.maven.plugins</groupId>
              <artifactId>maven-shade-plugin</artifactId>
-             <version>2.3</version>
+             <version>3.2.1</version>
              <configuration>
                <createDependencyReducedPom>false</createDependencyReducedPom>
              </configuration>

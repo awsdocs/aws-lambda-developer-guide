@@ -1,4 +1,4 @@
-# Create a Lambda Function Using Environment Variables To Store Sensitive Information<a name="tutorial-env_console"></a>
+# Encrypting Environment Variables Client\-Side in a Lambda Function<a name="tutorial-env_console"></a>
 
 Along with specifying configuration settings for your Lambda function, you can also use environment variables to store sensitive information, such as a database password, using [AWS Key Management Service](https://docs.aws.amazon.com/kms/latest/developerguide/) and the Lambda console's encryption helpers\. For more information, see [Environment Variable Encryption](env_variables.md#env_encrypt)\. The following example shows you how to do this and also how to use KMS to decrypt that information\.
 

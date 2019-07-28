@@ -14,7 +14,7 @@ A Lambda function consists of code and any associated dependencies\. In addition
 + **Code** – The code and dependencies of your function\. For scripting languages, you can edit your function code in the embedded [editor](code-editor.md)\. To add libraries, or for languages that the editor doesn't support, upload a [deployment package](deployment-package-v2.md)\.
 + **Runtime** – The [Lambda runtime](lambda-runtimes.md) that executes your function\.
 + **Handler** – The method that the runtime executes when your function is invoked\. The format for this value varies per language\. See [Programming Model](programming-model-v2.md) for more information\.
-+ **Environment variables** – Key\-value pairs that Lambda sets in the execution environment\. [Use environment variables](env_variables.md) to extend your function's configuration outside of code\.
++ **Environment variables** – Key\-value pairs that Lambda sets in the execution environment\. [ Use environment variables](env_variables.md) to extend your function's configuration outside of code\.
 + **Tags** – Key\-value pairs that Lambda attaches to your function resource\. [Use tags](tagging.md) to organize Lambda functions into groups for cost reporting and filtering in the Lambda console\.
 
   Tags apply to the entire function, including all versions and aliases\.
@@ -25,9 +25,9 @@ A Lambda function consists of code and any associated dependencies\. In addition
   Lambda allocates CPU power linearly in proportion to the amount of memory configured\. At 1,792 MB, a function has the equivalent of 1 full vCPU \(one vCPU\-second of credits per second\)\.
 + **Timeout** – The amount of time that Lambda allows a function to run before stopping it\. The default is 3 seconds\. The maximum allowed value is 900 seconds\.
 + **Virtual private cloud \(VPC\)** – If your function needs network access to resources that are not available over the internet, [configure it to connect to a VPC](vpc.md)\.
-+ **Dead letter queue \(DLQ\)** – If your function is invoked asynchronously, [choose a queue or topic](dlq.md) to receive failed invocations\.
++ **Dead letter queue \(DLQ\)** – If your function is invoked asynchronously, [choose a queue or topic](invocation-async.md#dlq) to receive failed invocations\.
 + **Enable active tracing** – Sample incoming requests and [trace sampled requests with AWS X\-Ray](lambda-x-ray.md)\.
-+ **Concurrency** – [Reserve concurrency for a function](concurrent-executions.md) to set the maximum number of simultaneous executions for a function, and reserves capacity for that concurrency level\.
++ **Concurrency** – [Reserve concurrency for a function](per-function-concurrency.md) to set the maximum number of simultaneous executions for a function, and reserves capacity for that concurrency level\.
 
   Reserved concurrency applies to the entire function, including all versions and aliases\.
 

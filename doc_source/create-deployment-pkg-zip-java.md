@@ -50,17 +50,17 @@ After you build the project, the resulting \.zip file \(that is, your deployment
    
    dependencies {
        compile (
-           'com.amazonaws:aws-lambda-java-core:1.1.0',
-           'com.amazonaws:aws-lambda-java-events:1.1.0'
+           'com.amazonaws:aws-lambda-java-core:1.2.0',
+           'com.amazonaws:aws-lambda-java-events:2.2.6'
        )
    }
    
    task buildZip(type: Zip) {
        from compileJava
-       from processResources              
+       from processResources
        into('lib') {
            from configurations.runtimeClasspath
-       }           
+       }
    }
    
    build.dependsOn buildZip
@@ -120,10 +120,10 @@ dependencies {
 
 task buildZip(type: Zip) {
     from compileJava
-    from processResources              
+    from processResources
     into('lib') {
         from configurations.runtimeClasspath
-    }           
+    }
 }
 
 build.dependsOn buildZip

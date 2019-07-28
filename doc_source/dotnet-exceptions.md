@@ -116,7 +116,7 @@ The method in which error information is conveyed depends on the invocation type
   For example, if you invoke a Lambda function using the Lambda console, the `RequestResponse` is always the invocation type and the console displays the error information returned by AWS Lambda in the **Execution result** section of the console\.
 + `Event` invocation type \(that is, asynchronous execution\): In this case AWS Lambda does not return anything\. Instead, it logs the error information in CloudWatch Logs and CloudWatch metrics\.
 
-Depending on the event source, AWS Lambda may retry the failed Lambda function\. For more information, see [AWS Lambda Retry Behavior](retries-on-errors.md)\. 
+Depending on the event source, AWS Lambda may retry the failed Lambda function\. For more information, see [Error Handling and Automatic Retries in AWS Lambda](retries-on-errors.md)\. 
 
 ## Function Error Handling<a name="dotnet-custom-errors"></a>
 

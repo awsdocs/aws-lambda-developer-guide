@@ -62,13 +62,13 @@ When there are not enough records to process, instead of waiting, the stream pro
 + **Use [Amazon CloudWatch](https://docs.aws.amazon.com/streams/latest/dev/monitoring-with-cloudwatch.html)** on IteratorAge to determine if your Kinesis stream is being processed\. For example, configure a CloudWatch alarm with a maximum setting to 30000 \(30 seconds\)\.
 
 ## Async Invokes<a name="async-invoke"></a>
-+ **Create and use [AWS Lambda Function Dead Letter Queues](dlq.md) **to address and replay async function errors\. 
++ **Create and use [AWS Lambda Function Dead Letter Queues](invocation-async.md#dlq) **to address and replay async function errors\. 
 
 ## Lambda VPC<a name="lambda-vpc"></a>
 + The following diagram guides you through a decision tree as to whether you should use a VPC \(Virtual Private Cloud\):   
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/VPC-flowchart4.png)
 + **Don't put your Lambda function in a VPC unless you have to\.** There is no benefit outside of using this to access resources you cannot expose publicly, like a private [Amazon Relational Database](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/) instance\. Services like Amazon Elasticsearch Service can be secured over IAM with access policies, so exposing the endpoint publicly is safe and wouldn't require you to run your function in the VPC to secure it\. 
-+ **Lambda creates elastic network interfaces [\(ENIs\)](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ElasticNetworkInterfaces.html)** in your VPC to access your internal resources\. Before requesting a concurrency increase, ensure you have enough ENI capacity \(the formula for this can be found here: [Configuring a Lambda Function to Access Resources in an Amazon VPC](vpc.md)\) and IP address space\. If you do not have enough ENI capacity, you will need to request an increase\. If you do not have enough IP address space, you may need to create a larger subnet\. 
-+ **Create dedicated Lambda subnets in your VPC: **
-  + This will make it easier to apply a custom route table for NAT Gateway traffic without changing your other private/public subnets\. For more information, see [Configuring a Lambda Function to Access Resources in an Amazon VPC](vpc.md)
++ **Lambda creates elastic network interfaces [\(ENIs\)](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ElasticNetworkInterfaces.html)** in your VPC to access your internal resources\. Before requesting a concurrency increase, ensure you have enough ENI capacity \(the formula for this can be found here: [Configuring a Lambda Function to Access Resources in an Amazon VPC](vpc.md)\) and IP address space\. If you do not have enough ENI capacity, you will need to request an increase\. If you do not have enough IP address space, you may need to create a larger subnet\.
++ **Create dedicated private subnets in your VPC: **
+  + This will make it easier to apply a custom route table for NAT Gateway traffic without changing your other subnets\. Lambda functions can only run in private subnets\. For more information, see [Configuring a Lambda Function to Access Resources in an Amazon VPC](vpc.md)
   + This also allows you to dedicate an address space to Lambda without sharing it with other resources\. 

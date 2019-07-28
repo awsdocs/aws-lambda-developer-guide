@@ -63,7 +63,7 @@ If the handler returns normally without exceptions, Lambda considers the input b
 **Dependencies**
 + `aws-lambda-java-core`
 + `aws-lambda-java-events`
-+ `aws-java-sdk-s3`
++ `aws-java-sdk`
 
 Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Java](lambda-java-how-to-create-deployment-package.md)\.
 

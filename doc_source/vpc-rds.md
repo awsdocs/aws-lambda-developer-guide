@@ -84,8 +84,9 @@ logger.setLevel(logging.INFO)
 
 try:
     conn = pymysql.connect(rds_host, user=name, passwd=password, db=db_name, connect_timeout=5)
-except:
+except pymysql.MySQLError as e:
     logger.error("ERROR: Unexpected error: Could not connect to MySQL instance.")
+    logger.error(e)
     sys.exit()
 
 logger.info("SUCCESS: Connection to RDS MySQL instance succeeded")
@@ -97,12 +98,12 @@ def handler(event, context):
     item_count = 0
 
     with conn.cursor() as cur:
-        cur.execute("create table Employee3 ( EmpID  int NOT NULL, Name varchar(255) NOT NULL, PRIMARY KEY (EmpID))")  
-        cur.execute('insert into Employee3 (EmpID, Name) values(1, "Joe")')
-        cur.execute('insert into Employee3 (EmpID, Name) values(2, "Bob")')
-        cur.execute('insert into Employee3 (EmpID, Name) values(3, "Mary")')
+        cur.execute("create table Employee ( EmpID  int NOT NULL, Name varchar(255) NOT NULL, PRIMARY KEY (EmpID))")  
+        cur.execute('insert into Employee (EmpID, Name) values(1, "Joe")')
+        cur.execute('insert into Employee (EmpID, Name) values(2, "Bob")')
+        cur.execute('insert into Employee (EmpID, Name) values(3, "Mary")')
         conn.commit()
-        cur.execute("select * from Employee3")
+        cur.execute("select * from Employee")
         for row in cur:
             item_count += 1
             logger.info(row)
@@ -132,13 +133,13 @@ Install dependencies with Pip and create a deployment package\. For instructions
 
 ## Create the Lambda Function<a name="vpc-rds-upload-deployment-pkg"></a>
 
-Create the Lambda function with the `create-function` command\.
+Create the Lambda function with the `create-function` command\. You can find the subnet IDs and security group ID for your default VPC in the [Amazon VPC console](https://console.aws.amazon.com/vpc)\.
 
 ```
 $ aws lambda create-function --function-name  CreateTableAddRecordsAndRead --runtime python3.7 \
 --zip-file fileb://app.zip --handler app.handler \
---role execution-role-arn \
---vpc-config SubnetIds=comma-separated-subnet-ids,SecurityGroupIds=default-vpc-security-group-id
+--role arn:aws:iam::123456789012:role/lambda-vpc-role \
+--vpc-config SubnetIds=subnet-0532bb6758ce7c71f,subnet-d6b7fda068036e11f,SecurityGroupIds=sg-0897d5f549934c2fb
 ```
 
 ## Test the Lambda Function<a name="vpc-rds-invoke-lambda-function"></a>

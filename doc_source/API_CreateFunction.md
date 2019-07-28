@@ -8,7 +8,7 @@ The other parameters let you configure version\-specific and function\-level set
 
 If another account or an AWS service invokes your function, use [AddPermission](API_AddPermission.md) to grant permission by creating a resource\-based IAM policy\. You can grant permissions at the function level, on a version, or on an alias\.
 
-To invoke your function directly, use [Invoke](API_Invoke.md)\. To invoke your function in response to events in other AWS services, create an event source mapping \([CreateEventSourceMapping](API_CreateEventSourceMapping.md)\), or configure a function trigger in the other service\. For more information, see [Invoking Functions](https://docs.aws.amazon.com/lambda/latest/dg/invoking-lambda-functions.html)\.
+To invoke your function directly, use [Invoke](API_Invoke.md)\. To invoke your function in response to events in other AWS services, create an event source mapping \([CreateEventSourceMapping](API_CreateEventSourceMapping.md)\), or configure a function trigger in the other service\. For more information, see [Invoking Functions](https://docs.aws.amazon.com/lambda/latest/dg/lambda-invocation.html)\.
 
 ## Request Syntax<a name="API_CreateFunction_RequestSyntax"></a>
 
@@ -68,7 +68,7 @@ Type: [FunctionCode](API_FunctionCode.md) object
 Required: Yes
 
  ** [DeadLetterConfig](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-DeadLetterConfig"></a>
-A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing\. For more information, see [Dead Letter Queues](https://docs.aws.amazon.com/lambda/latest/dg/dlq.html)\.  
+A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing\. For more information, see [Dead Letter Queues](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq)\.  
 Type: [DeadLetterConfig](API_DeadLetterConfig.md) object  
 Required: No
 

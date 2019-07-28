@@ -78,7 +78,7 @@ The processor function gets the request ID from the CloudWatch Logs event, and u
 The application is implemented in two Node\.js modules—an AWS CloudFormation template and supporting shell scripts\. The template creates the processor function, the random error function, and the following supporting resources\.
 + Execution role – An IAM role that grants the functions permission to access other AWS services\.
 + Primer function – An additional function that invokes the random error function to create a log group\.
-+ Custom resource – A AWS CloudFormation custom resource that invokes the primer function during deployment to ensure that the log group exists\.
++ Custom resource – An AWS CloudFormation custom resource that invokes the primer function during deployment to ensure that the log group exists\.
 + CloudWatch Logs subscription – A subscription for the log stream that triggers the processor function when the word ERROR is logged\.
 + Resource\-based policy – A permission statement on the processor function that allows CloudWatch Logs to invoke it\.
 + Amazon S3 bucket – A storage location for output from the processor function\.

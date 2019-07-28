@@ -6,7 +6,7 @@ For example, you can specify that only 2 percent of incoming traffic is routed t
 
 You can point an alias to a maximum of two Lambda function versions\. In addition: 
 + Both versions must have the same IAM execution role\.
-+ Both versions must have the same [AWS Lambda Function Dead Letter Queues](dlq.md) configuration, or no DLQ configuration\.
++ Both versions must have the same [AWS Lambda Function Dead Letter Queues](invocation-async.md#dlq) configuration, or no DLQ configuration\.
 + When pointing an alias to more than one version, the alias cannot point to `$LATEST`\.
 
 ## Traffic Shifting Using an Alias \(CLI\)<a name="lambda-weighted-aliases-cli"></a>

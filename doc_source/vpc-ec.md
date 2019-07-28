@@ -46,7 +46,7 @@ Create an ElastiCache cluster in your default VPC\.
    ```
    $ aws elasticache create-cache-cluster --cache-cluster-id ClusterForLambdaTest \
    --cache-node-type cache.m3.medium --engine memcached --num-cache-nodes 1 \
-   --security-group-ids your-default-vpc-security-group
+   --security-group-ids sg-0897d5f549934c2fb
    ```
 
    You can look up the default VPC security group in the VPC console under **Security Groups**\. Your example Lambda function will add and retrieve an item from this cluster\.
@@ -108,8 +108,8 @@ Create the Lambda function with the `create-function` command\.
 ```
 $ aws lambda create-function --function-name AccessMemCache --timeout 30 --memory-size 1024 \
 --zip-file fileb://function.zip --handler app.handler --runtime python3.7 \
---role execution-role-arn \
---vpc-config SubnetIds=comma-separated-vpc-subnet-ids,SecurityGroupIds=default-security-group-id
+--role arn:aws:iam::123456789012:role/lambda-vpc-role \
+--vpc-config SubnetIds=subnet-0532bb6758ce7c71f,subnet-d6b7fda068036e11f,SecurityGroupIds=sg-0897d5f549934c2fb
 ```
 
 You can find the subnet IDs and the default security group ID of your VPC from the VPC console\.

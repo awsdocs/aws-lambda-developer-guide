@@ -14,7 +14,7 @@ The following screenshots show how to modify your function's configuration using
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/env_vars2.png)
 
-Note the **Encryption configuration** section\. You will learn more about using this in the [Create a Lambda Function Using Environment Variables To Store Sensitive Information](tutorial-env_console.md) tutorial\.
+Note the **Encryption configuration** section\. You will learn more about using this in the [Encrypting Environment Variables Client\-Side in a Lambda Function](tutorial-env_console.md) tutorial\.
 
 You can also use the AWS CLI to create Lambda functions that contain environment variables\. For more details, see the [CreateFunction](API_CreateFunction.md) and [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md) APIs\. Environment variables are also supported when creating and updating functions using AWS CloudFormation\. Environment variables can also be used to configure settings specific to the language runtime or a library included in your function\. For example, you can modify `PATH` to specify a directory where executables are stored\. You can also set runtime\-specific environment variables, such as `PYTHONPATH` for Python or `NODE_PATH` for Node\.js\. 
 
@@ -63,7 +63,7 @@ AWS Lambda authorizes your function to use the default KMS key through a user gr
 
 As mentioned in the previous section, when you deploy your Lambda function, all the environment variables you've specified are encrypted by default after, but not during, the deployment process\. They are then decrypted automatically by AWS Lambda when the function is invoked\. If you need to store sensitive information in an environment variable, we strongly suggest you encrypt that information before deploying your Lambda function\.
 
- Fortunately, the Lambda console makes that easier for you by providing encryption helpers that leverage [AWS Key Management Service](https://docs.aws.amazon.com/kms/latest/developerguide/) to store that sensitive information as `Ciphertext`\. The Lambda console also provides decryption helper code to decrypt that information for use in your in Lambda function code\. For more information, see [Create a Lambda Function Using Environment Variables To Store Sensitive Information](tutorial-env_console.md)\.
+ Fortunately, the Lambda console makes that easier for you by providing encryption helpers that leverage [AWS Key Management Service](https://docs.aws.amazon.com/kms/latest/developerguide/) to store that sensitive information as `Ciphertext`\. The Lambda console also provides decryption helper code to decrypt that information for use in your in Lambda function code\. For more information, see [Encrypting Environment Variables Client\-Side in a Lambda Function](tutorial-env_console.md)\.
 
 ### Error scenarios<a name="env-errors"></a>
 

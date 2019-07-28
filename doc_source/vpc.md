@@ -6,6 +6,10 @@ AWS Lambda runs your function code securely within a VPC by default\. However, t
 
 Lambda functions cannot connect directly to a VPC with [dedicated instance tenancy](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html)\. To connect to resources in a dedicated VPC, [peer it to a second VPC with default tenancy](https://aws.amazon.com/premiumsupport/knowledge-center/lambda-dedicated-vpc/)\.
 
+**VPC Tutorials**
++ [Tutorial: Configuring a Lambda Function to Access Amazon RDS in an Amazon VPC](vpc-rds.md)
++ [Tutorial: Configuring a Lambda Function to Access Amazon ElastiCache in an Amazon VPC](vpc-ec.md)
+
 ## Execution Role and User Permissions<a name="vpc-permissions"></a>
 
 To connect to a VPC, your function's execution role must have the following permissions\.
@@ -72,7 +76,7 @@ Your Lambda function automatically scales based on the number of events it proce
   ```
 
   Where: 
-  + **Projected peak concurrent execution** – Use the information in [Managing Concurrency](concurrent-executions.md) to determine this value\.
+  + **Projected peak concurrent execution** – The number of [concurrent executions](scaling.md) that your function must support\.
   + **Memory** – The amount of memory you configured for your Lambda function\. 
 + The subnets you specify should have sufficient available IP addresses to match the number of ENIs\.
 

@@ -21,7 +21,7 @@ There are two modes of tracing for a Lambda function:
 + Pass Through: This is the default setting for all Lambda functions if you have added tracing permissions to your function's execution role\. This approach means the Lambda function is only traced if X\-Ray has been enabled on an upstream service, such as AWS Elastic Beanstalk\.
 + Active: When a Lambda function has this setting, Lambda automatically samples invocation requests, based on the sampling algorithm specified by X\-Ray\. 
 **Note**  
-X\-Ray applies a sampling algorithm to ensure that tracing is efficient, while still providing a representative sample of the requests that your application serves\. The default sampling algorithm is 1 request per minute, with 5 percent of requests sampled past that limit\. However, if the traffic volume to your function is low, you may see an increased rate of sampling\. 
+X\-Ray applies a sampling algorithm to ensure that tracing is efficient, while still providing a representative sample of the requests that your application serves\. The default sampling rule is 1 request per second and 5 percent of additional requests\. 
 
 You can change the tracing mode for your Lambda function by using either the Lambda Management Console or the Lambda [CreateFunction](API_CreateFunction.md) or [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md) API actions\. 
 

@@ -2,7 +2,7 @@
 
 Your Lambda function comes with a CloudWatch Logs log group, with a log stream for each instance of your function\. The runtime sends details about each invocation to the log stream, and relays logs and other output from your function's code\.
 
-To output logs from your function code, you can use [the print method](https://docs.python.org/3/library/functions.html#print), or any logging library that writes to `stdout` or `stderr`\. The following example logs the values of environment variables and the event object\.
+To output logs from your function code, you can use [the `print` method](https://docs.python.org/3/library/functions.html#print), or any logging library that writes to `stdout` or `stderr`\. The following example logs the values of environment variables and the event object\.
 
 **Example lambda\_function\.py**  
 

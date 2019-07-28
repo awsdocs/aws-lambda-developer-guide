@@ -15,4 +15,5 @@ The [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/) and [AWS SAM CL
 + [Using the AWS Serverless Application Model \(AWS SAM\)](serverless_app.md)
 + [Error Processor Sample Application for AWS Lambda](sample-errorprocessor.md)
 + [Building a Continuous Delivery Pipeline for a Lambda Application with AWS CodePipeline](build-pipeline.md)
++ [Common Lambda Application Types and Use Cases](applications-usecases.md)
 + [Best Practices for Working with AWS Lambda Functions](best-practices.md)

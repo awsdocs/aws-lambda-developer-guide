@@ -180,7 +180,7 @@ Execute the following `invoke` command\.
 $ aws lambda invoke --function-name ProcessDynamoDBRecords --payload file://input.txt outputfile.txt
 ```
 
-The function returns the string message \(message in the `context.succeed()` in the code\) in the response body\. 
+The function returns the string `message` in the response body\. 
 
 Verify the output in the `outputfile.txt` file\.
 

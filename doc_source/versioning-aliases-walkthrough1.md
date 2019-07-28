@@ -37,9 +37,9 @@ This example uses the us\-west\-2 \(US West Oregon\) region to create the Lambda
 1. Create a Lambda function \(`helloworld`\)\. 
 
    ```
-   aws lambda create-function --function-name helloworld --runtime nodejs6.10 \
+   aws lambda create-function --function-name helloworld --runtime nodejs10.x \
    --zip-file fileb://helloworld.zip --handler helloworld.handler \
-   --role arn:aws:iam::account-id:role/lambda_basic_execution \
+   --role arn:aws:iam::123456789012:role/lambda-role
    ```
 
    The response returns the configuration information showing `$LATEST` as the function version as shown in the following example response\.
@@ -56,7 +56,7 @@ This example uses the us\-west\-2 \(US West Oregon\) region to create the Lambda
        "Timeout": 3,
        "LastModified": "2015-09-30T18:39:53.873+0000",
        "Handler": "helloworld.handler",
-       "Runtime": "nodejs6.10",
+       "Runtime": "nodejs10.x",
        "Description": ""
    }
    ```
@@ -99,7 +99,7 @@ This example uses the us\-west\-2 \(US West Oregon\) region to create the Lambda
        "Timeout": 3,
        "LastModified": "2015-10-03T00:48:00.435+0000",
        "Handler": "helloworld.handler",
-       "Runtime": "nodejs6.10",
+       "Runtime": "nodejs10.x",
        "Description": ""
    }
    ```
@@ -130,25 +130,3 @@ This example uses the us\-west\-2 \(US West Oregon\) region to create the Lambda
    ```
 
    Now you have three aliases pointing to a different version of the Lambda function \(`DEV` alias points to the `$LATEST` version, `BETA` alias points to version 2, and the `PROD` alias points to version 1 of the Lambda function\.
-
-For information about using the AWS Lambda console to manage versioning, see [Managing Versioning Using the AWS Management Console, the AWS CLI, or Lambda API Operations](how-to-manage-versioning.md)\.
-
-## Granting Permissions in a Push Model<a name="versioning-permissions-cli"></a>
-
-In a push model \(see [AWS Lambda Event Source Mapping](intro-invocation-modes.md)\), event sources such as Amazon S3 invoke your Lambda function\. These event sources maintain a mapping that identifies the function version or alias that they invoke when events occur\. Note the following:
-+ We recommend that you specify an existing Lambda function alias in the mapping configuration \(see [Introduction to AWS Lambda Aliases](aliases-intro.md)\)\. For example, if the event source is Amazon S3, you specify the alias ARN in the bucket notification configuration so that Amazon S3 can invoke the alias when it detects specific events\.
-+ In the push model, you grant event sources permissions using a resource policy that you attach to your Lambda function\. In versioning, the permissions you add are specific to the qualifier that you specify in the `AddPermission` request \(see [Versioning, Aliases, and Resource Policies](versioning-aliases-permissions.md)\)\. 
-
-  For example, the following AWS CLI command grants Amazon S3 permissions to invoke the PROD alias of the `helloworld` Lambda function \(note that the `--qualifier` parameter specifies the alias name\)\. 
-
-  ```
-  aws lambda add-permission --function-name helloworld \
-  --qualifier PROD --statement-id 1 --principal s3.amazonaws.com --action lambda:InvokeFunction \
-  --source-arn arn:aws:s3:::examplebucket --source-account 111111111111
-  ```
-
-  In this case, Amazon S3 is now able to invoke the PROD alias and AWS Lambda can then execute the helloworld Lambda function version that the PROD alias points to\. For this to work, you must use the PROD alias ARN in the S3 bucket's notification configuration\. 
-
-  For information about how to handle Amazon S3 events, see [Tutorial: Using AWS Lambda with Amazon S3](with-s3-example.md)\.
-**Note**  
-If you use the AWS Lambda console to add an event source for your Lambda function, the console adds the necessary permissions for you\.

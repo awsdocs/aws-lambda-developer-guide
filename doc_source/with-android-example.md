@@ -262,7 +262,7 @@ The following instructions have been verified using Android studio\.
    }
    ```
 
-   The `@LambdaFunction` annotation in the code maps the specific client method to the same\-name Lambda function\. For more information about this annotation, see [AWS Lambda](https://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/lambda.html) in the *AWS Mobile SDK for Android Developer Guide*\.
+   The `@LambdaFunction` annotation in the code maps the specific client method to the same\-name Lambda function\.
 
 1. To keep the application simple, we are going to add code to invoke the Lambda function in the `onCreate()` event handler\. In `MainActivity`, add the following code toward the end of the `onCreate()` code\.
 

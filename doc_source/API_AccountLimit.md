@@ -1,11 +1,11 @@
 # AccountLimit<a name="API_AccountLimit"></a>
 
-Limits that are related to concurrency and code storage\. All file and storage sizes are in bytes\.
+Limits that are related to concurrency and storage\. All file and storage sizes are in bytes\.
 
 ## Contents<a name="API_AccountLimit_Contents"></a>
 
  **CodeSizeUnzipped**   <a name="SSS-Type-AccountLimit-CodeSizeUnzipped"></a>
-The maximum size of your function's code and layers when they're extracted\.  
+The maximum size of a function's deployment package and layers when they're extracted\.  
 Type: Long  
 Required: No
 

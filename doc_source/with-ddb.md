@@ -2,7 +2,7 @@
 
 You can use a AWS Lambda function to process records in a [Amazon DynamoDB Streams stream](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html)\. With DynamoDB Streams, you can trigger a Lambda function to perform additional work each time a DynamoDB table is updated\.
 
-Lambda reads records from the stream and invokes your function [synchronously](invocation-options.md) with an event that contains stream records\. Lambda reads records in batches and invokes your function to process records from the batch\.
+Lambda reads records from the stream and invokes your function [synchronously](invocation-sync.md) with an event that contains stream records\. Lambda reads records in batches and invokes your function to process records from the batch\.
 
 **Example DynamoDB Streams Record Event**  
 
@@ -97,11 +97,11 @@ To configure your function to read from DynamoDB Streams in the Lambda console, 
 
 1. Choose a function\.
 
-1. Under **Designer**, choose a trigger type to add a trigger to your function\.
+1. Under **Designer**, choose **Add trigger**\.
 
-1. Under **Configure triggers**, configure the required options and then choose **Add**\.
+1. Choose a trigger type\.
 
-1. Choose **Save**\.
+1. Configure the required options and then choose **Add**\.
 
 Lambda supports the following options for DynamoDB event sources\.
 
@@ -126,7 +126,7 @@ To manage event source mappings with the AWS CLI or AWS SDK, use the following A
 + [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md)
 + [DeleteEventSourceMapping](API_DeleteEventSourceMapping.md)
 
-The following example uses the AWS Command Line Interface to map a function named `my-function` to an DynamoDB Streams stream specified by Amazon Resource Name \(ARN\), with a batch size of 500
+The following example uses the AWS Command Line Interface to map a function named `my-function` to an DynamoDB Streams stream specified by Amazon Resource Name \(ARN\), with a batch size of 500\.
 
 ```
 $ aws lambda create-event-source-mapping --function-name my-function --batch-size 500 --starting-position LATEST \

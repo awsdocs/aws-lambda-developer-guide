@@ -14,9 +14,10 @@ Note that Lambda functions in PowerShell require PowerShell Core 6\.0\. Windows 
 
 Before you get started, you must first set up a PowerShell development environment\. For instructions on how to do this, see [Setting Up a PowerShell Development Environment](lambda-powershell-setup-dev-environment.md)\.
 
-To learn about how to use the AWSLambdaPSCore module to download sample PowerShell projects from templates, create PowerShell deployment packages, and deploy PowerShell functions to the AWS Cloud, see [Using the AWSLambdaPSCore Module](lambda-powershell-how-to-create-deployment-package.md#lambda-powershell-using-lam-mod-deployment-package)\.
+To learn about how to use the AWSLambdaPSCore module to download sample PowerShell projects from templates, create PowerShell deployment packages, and deploy PowerShell functions to the AWS Cloud, see [AWS Lambda Deployment Package in PowerShell](lambda-powershell-how-to-create-deployment-package.md)\.
 
 **Topics**
++ [Setting Up a PowerShell Development Environment](lambda-powershell-setup-dev-environment.md)
 + [AWS Lambda Deployment Package in PowerShell](lambda-powershell-how-to-create-deployment-package.md)
 + [AWS Lambda Function Handler in PowerShell](powershell-programming-model-handler-types.md)
 + [AWS Lambda Context Object in PowerShell](powershell-context-object.md)

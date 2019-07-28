@@ -2,7 +2,7 @@
 
 You can use an AWS Lambda function to process records in an [Amazon Kinesis data stream](https://docs.aws.amazon.com/kinesis/latest/dev/amazon-kinesis-streams.html)\. With Kinesis, you can collect data from many sources and process them with multiple consumers\. Lambda supports standard data stream iterators and HTTP/2 stream consumers\.
 
-Lambda reads records from the data stream and invokes your function [synchronously](invocation-options.md) with an event that contains stream records\. Lambda reads records in batches and invokes your function to process records from the batch\.
+Lambda reads records from the data stream and invokes your function [synchronously](invocation-sync.md) with an event that contains stream records\. Lambda reads records in batches and invokes your function to process records from the batch\.
 
 **Example Kinesis Record Event**  
 
@@ -74,7 +74,7 @@ $ aws kinesis register-stream-consumer --consumer-name con1 \
 
 To increase the speed at which your function processes records, add shards to your data stream\. Lambda processes records in each shard in order, and stops processing additional records in a shard if your function returns an error\. With more shards, there are more batches being processed at once, which lowers the impact of errors on concurrency\.
 
-If your function can't scale up to handle one concurrent execution per shard, [request a limit increase](limits.md) or [reserve concurrency](concurrent-executions.md) for your function\. The concurrency available to your function should match or exceed the number of shards in your Kinesis data stream\.
+If your function can't scale up to handle one concurrent execution per shard, [request a limit increase](limits.md) or [reserve concurrency](per-function-concurrency.md) for your function\. The concurrency available to your function should match or exceed the number of shards in your Kinesis data stream\.
 
 ## Execution Role Permissions<a name="events-kinesis-permissions"></a>
 
@@ -101,11 +101,11 @@ To configure your function to read from Kinesis in the Lambda console, create a 
 
 1. Choose a function\.
 
-1. Under **Designer**, choose a trigger type to add a trigger to your function\.
+1. Under **Designer**, choose **Add trigger**\.
 
-1. Under **Configure triggers**, configure the required options and then choose **Add**\.
+1. Choose a trigger type\.
 
-1. Choose **Save**\.
+1. Configure the required options and then choose **Add**\.
 
 Lambda supports the following options for Kinesis event sources\.
 

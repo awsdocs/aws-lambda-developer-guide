@@ -19,7 +19,7 @@ Resource\-based policies apply to a single function, version, alias, or layer ve
 
 ## Granting Function Access to AWS Services<a name="permissions-resource-serviceinvoke"></a>
 
-When you [use an AWS service to invoke your function](intro-invocation-modes.md#non-streaming-event-source-mapping), you grant permission in a statement on a resource\-based policy\. You can apply the statement to the function, or limit it to a single version or alias\.
+When you [use an AWS service to invoke your function](lambda-services.md), you grant permission in a statement on a resource\-based policy\. You can apply the statement to the function, or limit it to a single version or alias\.
 
 **Note**  
 When you add a trigger to your function with the Lambda console, the console updates the function's resource\-based policy to allow the service to invoke it\. To grant permissions to other accounts or services that aren't available in the Lambda console, use the AWS CLI\.
@@ -55,6 +55,8 @@ $ aws lambda add-permission --function-name my-function:prod --statement-id xacc
 --principal 210987654321 --output text
 {"Sid":"xaccount","Effect":"Allow","Principal":{"AWS":"arn:aws:iam::210987654321:root"},"Action":"lambda:InvokeFunction","Resource":"arn:aws:lambda:us-east-2:123456789012:function:my-function"}
 ```
+
+To limit access to a user, group, or role in another account, specify the full ARN of the identity as the principal\. For example, `arn:aws:iam::123456789012:user/developer`\.
 
 The [alias](aliases-intro.md) limits which version the other account can invoke\. It requires the other account to include the alias in the function ARN\.
 

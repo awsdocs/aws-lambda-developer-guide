@@ -11,7 +11,3 @@ To set up your development environment for writing PowerShell scripts, do the fo
    ```
    Install-Module AWSLambdaPSCore -Scope CurrentUser
    ```
-
-## Next Steps<a name="lambda-powershell-setup-dev-environment-next-steps"></a>
-+ To learn about writing Lambda functions in PowerShell, see [Building Lambda Functions with PowerShell](powershell-programming-model.md)\.
-+ To learn about using the AWSLambdaPSCore module to download sample PowerShell projects from templates, creating PowerShell deployment packages, and deploying PowerShell functions to the AWS Cloud, see [Using the AWSLambdaPSCore Module](lambda-powershell-how-to-create-deployment-package.md#lambda-powershell-using-lam-mod-deployment-package)\.

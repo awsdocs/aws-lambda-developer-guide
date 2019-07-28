@@ -44,20 +44,22 @@ The following is example Java code that receives an Amazon SQS event message as 
 
 In the code, `handleRequest` is the handler\. The handler uses the predefined `SQSEvent` class that is defined in the `aws-lambda-java-events` library\.
 
-**Example ProcessSQSRecord\.java**  
+**Example handler\.java**  
 
 ```
+package example;
+
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.SQSEvent;
 import com.amazonaws.services.lambda.runtime.events.SQSEvent.SQSMessage;
 
-public class ProcessSQSEvents implements RequestHandler<SQSEvent, Void>{
+public class handler implements RequestHandler<SQSEvent, Void>{
     @Override
     public Void handleRequest(SQSEvent event, Context context)
     {
         for(SQSMessage msg : event.getRecords()){
-            System.out.println(new String(msg.getSQS().getBody()));
+            System.out.println(new String(msg.getBody()));
         }
         return null;
     }

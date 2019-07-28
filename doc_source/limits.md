@@ -5,10 +5,10 @@ AWS Lambda limits the amount of compute and storage resources that you can use t
 
 | Resource | Default Limit | 
 | --- | --- | 
-| [Concurrent executions](concurrent-executions.md) | 1,000 | 
+| Concurrent executions | 1,000 | 
 | Function and layer storage | 75 GB | 
 
-For details on how Lambda scales your function concurrency in response to traffic, see [Understanding Scaling Behavior](scaling.md)\.
+For details on concurrency and how Lambda scales your function concurrency in response to traffic, see [AWS Lambda Function Scaling](scaling.md)\.
 
 The following limits apply to function configuration, deployments, and execution\. They cannot be changed\.
 
@@ -20,8 +20,9 @@ The following limits apply to function configuration, deployments, and execution
 | Function [environment variables](env_variables.md) | 4 KB | 
 | Function [resource\-based policy](access-control-resource-based.md) | 20 KB | 
 | Function [layers](configuration-layers.md) | 5 layers | 
-| Invocation frequency \(requests per second\) |  10 x concurrent executions limit \([synchronous](invocation-options.md) – all sources\) 10 x concurrent executions limit \(asynchronous – non\-AWS sources\) Unlimited \(asynchronous – [AWS service sources](lambda-services.md)\)  | 
-| [Invocation payload](invoking-lambda-functions.md) \(request and response\) |  6 MB \(synchronous\) 256 KB \(asynchronous\)  | 
+| Function [burst concurrency](scaling.md) | 500\-3000 \([varies per region](scaling.md)\) | 
+| Invocation frequency \(requests per second\) |  10 x concurrent executions limit \([synchronous](invocation-sync.md) – all sources\) 10 x concurrent executions limit \([asynchronous](invocation-async.md) – non\-AWS sources\) Unlimited \(asynchronous – [AWS service sources](lambda-services.md)\)  | 
+| [Invocation payload](lambda-invocation.md) \(request and response\) |  6 MB \(synchronous\) 256 KB \(asynchronous\)  | 
 | [Deployment package](deployment-package-v2.md) size |  50 MB \(zipped, for direct upload\) 250 MB \(unzipped, including layers\) 3 MB \(console editor\)  | 
 | Test events \(console editor\) | 10 | 
 | `/tmp` directory storage | 512 MB | 

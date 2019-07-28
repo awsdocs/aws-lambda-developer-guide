@@ -23,7 +23,7 @@ The following managed policies provide permissions that are required to use Lamb
 + **AWSLambdaVPCAccessExecutionRole** – Permission to manage elastic network interfaces to connect your function to a VPC\.
 + **AWSXrayWriteOnlyAccess** – Permission to upload trace data to X\-Ray\.
 
-When you use an [event source mapping](intro-invocation-modes.md) to invoke your function, Lambda uses the execution role to read event data\. For example, an event source mapping for Amazon Kinesis reads events from a data stream and sends them to your function in batches\. You can use event source mappings with the following services:
+When you use an [event source mapping](invocation-eventsourcemapping.md) to invoke your function, Lambda uses the execution role to read event data\. For example, an event source mapping for Amazon Kinesis reads events from a data stream and sends them to your function in batches\. You can use event source mappings with the following services:
 
 **Services That Lambda Reads Events From**
 + [Amazon Kinesis](with-kinesis.md)

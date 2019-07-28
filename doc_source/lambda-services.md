@@ -45,7 +45,7 @@ The Lambda runtime converts the event document into an object and passes it to y
 [Building Lambda Functions with Go](go-programming-model.md)
 [Building Lambda Functions with C\#](dotnet-programming-model.md)
 
-For services that generate a queue or data stream, you create an [event source mapping](intro-invocation-modes.md) in Lambda and grant Lambda permission to access the other service in the [execution role](lambda-intro-execution-role.md)\. Lambda reads data from the other service, creates an event, and invokes your function\.
+For services that generate a queue or data stream, you create an [event source mapping](invocation-eventsourcemapping.md) in Lambda and grant Lambda permission to access the other service in the [execution role](lambda-intro-execution-role.md)\. Lambda reads data from the other service, creates an event, and invokes your function\.
 
 **Services That Lambda Reads Events From**
 + [Amazon Kinesis](with-kinesis.md)
@@ -63,7 +63,7 @@ Other services invoke your function directly\. You grant the other service permi
 + [Amazon CloudFront \(Lambda@Edge\)](lambda-edge.md)
 + [Amazon Kinesis Data Firehose](services-kinesisfirehose.md)
 
-For asynchronous invocation, Lambda queues the event before passing it to your function\. The other service gets a success response as soon as the event is queued and isn't aware of what happens afterwards\. If an error occurs, Lambda handles [retries](retries-on-errors.md), and can send failed events to a [dead\-letter queue](dlq.md) that you configure\.
+For asynchronous invocation, Lambda queues the event before passing it to your function\. The other service gets a success response as soon as the event is queued and isn't aware of what happens afterwards\. If an error occurs, Lambda handles [retries](retries-on-errors.md), and can send failed events to a [dead\-letter queue](invocation-async.md#dlq) that you configure\.
 
 **Services That Invoke Lambda Functions Asynchronously**
 + [Amazon Simple Storage Service](with-s3.md)

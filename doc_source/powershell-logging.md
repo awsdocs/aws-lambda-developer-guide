@@ -2,10 +2,16 @@
 
 Your Lambda function comes with a CloudWatch Logs log group, with a log stream for each instance of your function\. The runtime sends details about each invocation to the log stream, and relays logs and other output from your function's code\.
 
-To output logs from your function code, you can use cmdlets on [Microsoft\.PowerShell\.Utility ](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility), or any logging module that writes to `stdout` or `stderr`\. The following example uses `Write-Host`\.
+To output logs from your function code, you can use cmdlets on [Microsoft\.PowerShell\.Utility ](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility), or any logging module that writes to `stdout` or `stderr`\. The following example uses `Write-Host` to log environment variables\.
+
+**Example function\.ps1**  
 
 ```
-Write-Host 'Event received.'
+#Requires -Modules @{ModuleName='AWSPowerShell.NetCore';ModuleVersion='3.3.365.0'}
+$var = (Get-ChildItem env:*).GetEnumerator() | Sort-Object Name
+$out = "`n"
+Foreach ($v in $var) {$out = $out + "{0} : {1}`n" -f $v.Name, $v.Value}
+Write-Host ( $out )
 ```
 
 The Lambda console shows log output when you test a function on the function configuration page\. To view logs for all invocations, use the CloudWatch Logs console\.

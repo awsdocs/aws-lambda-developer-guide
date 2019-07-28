@@ -105,11 +105,9 @@ If the handler returns normally without exceptions, Lambda considers the message
 1. Execute the following `invoke` command\. 
 
    ```
-   $ aws lambda invoke --invocation-type RequestResponse --function-name ProcessSQSRecord \
+   $ aws lambda invoke --function-name ProcessSQSRecord \
    --payload file://input.txt outputfile.txt
    ```
-
-   The `invoke` command specifies `RequestResponse` as the invocation type, which requests synchronous execution\. For more information, see [Invocation Types](invocation-options.md)\. 
 
 1. Verify the output in the `outputfile.txt` file\.
 

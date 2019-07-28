@@ -24,7 +24,7 @@ curl "http://${AWS_LAMBDA_RUNTIME_API}/2018-06-01/runtime/invocation/next"
 
 **Method** – **GET**
 
-Retrieves an invocation event\. The response body contains the payload from the invocation, which is a JSON document that contains event data from the function trigger\. The response headers contain additional data about the invocation\. 
+Retrieves an invocation event\. The response body contains the payload from the invocation, which is a JSON document that contains event data from the function trigger\. The response headers contain additional data about the invocation\.
 
 **Response Headers**
 + `Lambda-Runtime-Aws-Request-Id` – The request ID, which identifies the request that triggered the function invocation\.
@@ -41,6 +41,8 @@ Retrieves an invocation event\. The response body contains the payload from the 
   For example, `Root=1-5bef4de7-ad49b0e87f6ef6c87fc2e700;Parent=9a9197af755a6419;Sampled=1`\.
 + `Lambda-Runtime-Client-Context` – For invocations from the AWS Mobile SDK, data about the client application and device\.
 + `Lambda-Runtime-Cognito-Identity` – For invocations from the AWS Mobile SDK, data about the Amazon Cognito identity provider\.
+
+Call `/runtime/invocation/next` to get the invocation event, and pass it to the function handler for processing\. Do not set a timeout on the `GET` call\. Between when Lambda bootstraps the runtime and when the runtime has an event to return, the runtime process may be frozen for several seconds\.
 
 The request ID tracks the invocation within Lambda\. Use it to specify the invocation when you send the response\.
 

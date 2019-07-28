@@ -9,5 +9,5 @@ As a best practice, you should also create an AWS Identity and Access Management
 **Topics**
 + [Create a Lambda Function with the Console](getting-started-create-function.md)
 + [AWS Lambda Concepts](lambda-application-fundamentals.md)
-+ [Command Line Tools](gettingstarted-tools.md)
++ [Tools for Working With AWS Lambda](gettingstarted-tools.md)
 + [AWS Lambda Limits](limits.md)

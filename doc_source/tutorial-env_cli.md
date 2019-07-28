@@ -1,4 +1,4 @@
-# Create a Lambda Function Using Environment Variables<a name="tutorial-env_cli"></a>
+# Using Environment Variables in a Lambda Function<a name="tutorial-env_cli"></a>
 
 This section will illustrate how you can modify a Lambda function's behavior through configuration changes that require no changes to the Lambda function code\. 
 

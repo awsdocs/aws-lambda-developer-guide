@@ -48,7 +48,7 @@ The following is an example response for a `CreateFunction` API call\.
 
 For more information, see [CreateFunction](API_CreateFunction.md)\.
 
-In this response, AWS Lambda returns the unqualified ARN of the newly created function and also its version, `$LATEST`\. The response also shows that the `Version` is `$LATEST`\. The `CodeSha256` is the checksum of the deployment package that you uploaded\.
+In this response, AWS Lambda returns the unqualified ARN of the newly created function and also its version, `$LATEST`\. The `CodeSha256` is the checksum of the deployment package that you uploaded\.
 
 ## Publishing an AWS Lambda Function Version<a name="versioning-intro-publish-version"></a>
 

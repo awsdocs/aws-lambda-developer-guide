@@ -120,6 +120,37 @@ The handler string would be: `HelloWorldApp::Example.Hello::MyHandler`
 **Important**  
 If the method specified in your handler string is overloaded, you must provide the exact signature of the method Lambda should invoke\. AWS Lambda will reject an otherwise valid signature if the resolution would require selecting among multiple \(overloaded\) signatures\. 
 
+## Serializing Lambda Functions<a name="lambda-dotnet-add-serializer"></a>
+
+For any Lambda functions that use input or output types other than a `Stream` object, you will need to add a serialization library to your application\. You can do this in the following ways:
++ Use the `Amazon.Lambda.Serialization.Json` NuGet package\. This library uses JSON\.NET to handle serialization\.
++ Create your own serialization library by implementing the `ILambdaSerializer` interface, which is available as part of the `Amazon.Lambda.Core` library\. The interface defines two methods:
+  + `T Deserialize<T>(Stream requestStream);`
+
+     You implement this method to deserialize the request payload from the `Invoke` API into the object that is passed to the Lambda function handler\.
+  + `T Serialize<T>(T response, Stream responseStream);`\.
+
+     You implement this method to serialize the result returned from the Lambda function handler into the response payload that is returned by the `Invoke` API\.
+
+You use whichever serializer you wish by adding it as a dependency to your `MyProject.csproj` file\. 
+
+```
+...
+ <ItemGroup>
+    <PackageReference Include="Amazon.Lambda.Core" Version="1.0.0" />
+    <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="1.3.0" />
+  </ItemGroup>
+```
+
+You then add it to your AssemblyInfo\.cs file\. For example, if you are using the default Json\.NET serializer, this is what you would add:
+
+```
+[assembly:LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
+```
+
+**Note**  
+You can define a custom serialization attribute at the method level, which will override the default serializer specified at the assembly level\. For more information, see [Handling Standard Data Types](#dotnet-programming-model-handling-standard-types)\.
+
 ## Lambda Function Handler Restrictions<a name="dotnet-handler-restrictions"></a>
 
 Note that there are some restrictions on the handler signature\.

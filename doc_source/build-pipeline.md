@@ -6,6 +6,7 @@ In this tutorial, you create the following resources\.
 + **Repository** – A Git repository in AWS CodeCommit\. When you push a change, the pipeline copies the source code into an Amazon S3 bucket and passes it to the build project\.
 + **Build project** – An AWS CodeBuild build that gets the source code from the pipeline and packages the application\. The source includes a build specification with commands that install dependencies and prepare an AWS Serverless Application Model \(AWS SAM\) template for deployment\.
 + **Deployment configuration** – The pipeline's deployment stage defines a set of actions that take the AWS SAM template from the build output, create a change set in AWS CloudFormation, and execute the change set to update the application's AWS CloudFormation stack\.
++ **AWS CloudFormation stack** – The deployment stage uses a template to create a stack in AWS CloudFormation\. The template is a YAML\-formatted document that defines the resources of the Lambda application\. The application includes a Lambda function and an Amazon API Gateway API that invokes it\.
 + **Roles** – The pipeline, build, and deployment each have a service role that allows them to manage AWS resources\. The console creates the pipeline and build roles when you create those resources\. You create the role that allows AWS CloudFormation to manage the application stack\.
 
 The pipeline maps a single branch in a repository to a single AWS CloudFormation stack\. You can create additional pipelines to add environments for other branches in the same repository\. You can also add stages to your pipeline for testing, staging, and manual approvals\. For more information about AWS CodePipeline, see [What is AWS CodePipeline](https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html)\.
@@ -17,6 +18,7 @@ The pipeline maps a single branch in a repository to a single AWS CloudFormation
 + [Create a Pipeline](#create-pipeline1)
 + [Update the Build Stage Role](#update-policy)
 + [Complete the Deployment Stage](#create-pipeline2)
++ [Test The Application](#applications-pipeline-test)
 
 ## Prerequisites<a name="with-pipeline-prepare"></a>
 
@@ -129,7 +131,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      Runtime: nodejs8.10
+      Runtime: nodejs10.x
       CodeUri: ./
       Events:
         MyTimeApi:
@@ -146,6 +148,9 @@ An [AWS CodeBuild build specification](https://docs.aws.amazon.com/codebuild/lat
 version: 0.2
 phases:
   install:
+    runtime-versions:
+        nodejs: 10
+  build:
     commands:
       - npm install time
       - export BUCKET=lambda-deployment-artifacts-123456789012
@@ -193,8 +198,8 @@ Create a pipeline that deploys your application\. The pipeline monitors your rep
 1. Configure build project settings and choose **Continue to CodePipeline**\.
    + **Project name** – **lambda\-pipeline\-build**
    + **Operating system** – **Ubuntu**
-   + **Runtime** – **Node\.js**
-   + **Runtime version** – **aws/codebuild/nodejs:8\.11\.0**
+   + **Runtime** – **Standard**
+   + **Runtime version** – **aws/codebuild/standard:2\.0**
    + **Image version** – **Latest**
    + **Buildspec name** – **buildspec\.yml**
 
@@ -229,7 +234,7 @@ During the build stage, AWS CodeBuild needs permission to upload the build outpu
 
 ## Complete the Deployment Stage<a name="create-pipeline2"></a>
 
-The deployment stage has an action that creates a change set for the AWS CloudFormation stack that manages your Lambda application\. Add a second action that executes the change set to complete the deployment\.
+The deployment stage has an action that creates a change set for the AWS CloudFormation stack that manages your Lambda application\. A change set specifies the changes that are made to the stack, such as adding new resources and updating existing resources\. Change sets let you preview the changes that are made before making them, and add approval stages\. Add a second action that executes the change set to complete the deployment\.
 
 **To update the deployment stage**
 
@@ -243,13 +248,11 @@ The deployment stage has an action that creates a change set for the AWS CloudFo
 
 1. Configure deploy stage settings and choose **Next**\.
    + **Action name** – **execute\-changeset**
-   + **Deploy provider** – **AWS CloudFormation**
+   + **Action provider** – **AWS CloudFormation**
    + **Input artifacts** – **BuildArtifact**
    + **Action mode** – **Execute a change set**
    + **Stack name** – **lambda\-pipeline\-stack**
    + **Change set name** – **lambda\-pipeline\-changeset**
-
-1. Choose **Save**\.
 
 1. Choose **Done**\.
 
@@ -258,3 +261,27 @@ The deployment stage has an action that creates a change set for the AWS CloudFo
 1. Choose **Release change** to run the pipeline\.
 
 Your pipeline is ready\. Push changes to the master branch to trigger a deployment\.
+
+## Test The Application<a name="applications-pipeline-test"></a>
+
+The application includes an API Gateway API with a public endpoint that returns the current time\. Use the Lambda console to view the application and access the API\.
+
+**To test the application**
+
+1. Choose **Applications**\.
+
+1. Choose **lambda\-pipeline\-stack**\.
+
+1. Under **Resources**, expand **ServerlessRestApi**\.
+
+1. Choose **Prod API endpoint**\.
+
+1. Add **/TimeResource** to the end of the URL\. For example, `https://l193nqxdjj.execute-api.us-east-2.amazonaws.com/Prod/TimeResource`\.
+
+1. Open the URL\.
+
+The API returns the current time in the following format\.
+
+```
+The time in Los Angeles is: Thu Jun 27 2019 16:07:20 GMT-0700 (PDT)
+```

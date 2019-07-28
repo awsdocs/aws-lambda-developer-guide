@@ -4,6 +4,8 @@ You can build this application using [AWS SAM](https://docs.aws.amazon.com/serve
 
 Below is a sample AWS SAM template for the Lambda application from the [tutorial](with-sqs-example.md)\. Copy the text below to a \.yaml file and save it next to the ZIP package you created previously\. Note that the `Handler` and `Runtime` parameter values should match the ones you used when you created the function in the previous section\. 
 
+**Example template\.yaml**  
+
 ```
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
@@ -12,8 +14,8 @@ Resources:
   MySQSQueueFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: handler
-      Runtime: runtime
+      Handler: index.handler
+      Runtime: nodejs10.x
       Events:
         MySQSEvent:
           Type: SQS

@@ -1,6 +1,6 @@
 # EnvironmentResponse<a name="API_EnvironmentResponse"></a>
 
-The results of a configuration update that applied environment variables\.
+The results of an operation to update or read environment variables\. If the operation is successful, the response contains the environment variables\. If it failed, the response contains details about the error\.
 
 ## Contents<a name="API_EnvironmentResponse_Contents"></a>
 

@@ -4,14 +4,11 @@ AWS Lambda supports multiple languages through the use of runtimes\. You choose 
 
 **Amazon Linux**
 + AMI – [amzn\-ami\-hvm\-2018\.03\.0\.20181129\-x86\_64\-gp2](https://console.aws.amazon.com/ec2/v2/home#Images:visibility=public-images;search=amzn-ami-hvm-2018.03.0.20181129-x86_64-gp2)
-+ Linux kernel – 4\.14\.114\-93\.126\.amzn2\.x86\_64 or 4\.14\.114\-83\.126\.amzn1\.x86\_64
-
-**Note**  
-Lambda is upgrading to Amazon Linux 2018\.03\. See [Upcoming updates to the AWS Lambda and AWS Lambda@Edge execution environment](https://aws.amazon.com/blogs/compute/upcoming-updates-to-the-aws-lambda-execution-environment/) for details\.
++ Linux kernel – 4\.14\.123\-95\.109\.amzn2\.x86\_64 or 4\.14\.123\-86\.109\.amzn1\.x86\_64
 
 **Amazon Linux 2**
 + AMI – [amzn2\-ami\-hvm\-2\.0\.20190313\-x86\_64\-gp2](https://console.aws.amazon.com/ec2/v2/home#Images:visibility=public-images;search=amzn2-ami-hvm-2.0.20190313-x86_64-gp2)
-+ Linux kernel – 4\.14\.114\-93\.126\.amzn2\.x86\_64
++ Linux kernel – 4\.14\.123\-95\.109\.amzn2\.x86\_64
 
 When your function is invoked, Lambda attempts to re\-use the execution environment from a previous invocation if one is available\. This saves time preparing the execution environment, and allows you to save resources like database connections and temporary files in the [execution context](running-lambda-code.md) to avoid creating them every time your function runs\.
 

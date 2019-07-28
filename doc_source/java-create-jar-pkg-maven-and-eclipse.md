@@ -47,7 +47,7 @@ In this step, you start Eclipse and create a Maven project\. You will add the ne
 
       **Artifact Id:** aws\-lambda\-java\-core
 
-      **Version:** 1\.1\.0
+      **Version:** 1\.2\.0
 **Note**  
 If you are following other tutorial topics in this guide, the specific tutorials might require you to add more dependencies\. Make sure to add those dependencies as required\.
 
@@ -78,7 +78,7 @@ The resulting \.jar, `lambda-java-example-0.0.1-SNAPSHOT.jar`, is not the final 
    1. In the **Add Plugin** window, type the following values:
       + **Group Id:** org\.apache\.maven\.plugins
       + **Artifact Id:** maven\-shade\-plugin
-      + **Version:** 2\.3
+      + **Version:** 3\.2\.1
 
    1. Now build again\.
 

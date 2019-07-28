@@ -1,6 +1,6 @@
 # DeadLetterConfig<a name="API_DeadLetterConfig"></a>
 
-The [dead letter queue](https://docs.aws.amazon.com/lambda/latest/dg/dlq.html) for failed asynchronous invocations\.
+The [dead letter queue](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq) for failed asynchronous invocations\.
 
 ## Contents<a name="API_DeadLetterConfig_Contents"></a>
 

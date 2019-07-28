@@ -21,3 +21,5 @@ There is no additional charge for using Lambda logs; however, standard CloudWatc
    A graphical representation of the metrics for the Lambda function are shown\.
 
 1. Choose **View logs in CloudWatch**\.
+
+Lambda uses your function's permissions to upload logs to CloudWatch Logs\. If you don't see logs in the console, check your [execution role permissions](lambda-intro-execution-role.md)\.

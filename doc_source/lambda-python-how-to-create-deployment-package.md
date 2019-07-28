@@ -167,12 +167,6 @@ For Python 3\.3 and newer, you can use the built\-in [venv module](https://docs.
    (v-env) ~/my-function$
    ```
 
-   For the Windows command line, the activation script is in the Scripts directory\.
-
-   ```
-   > v-env\Scripts\activate.bat
-   ```
-
 1. Install libraries with pip\.
 
    ```

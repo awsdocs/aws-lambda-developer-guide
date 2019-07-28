@@ -379,6 +379,9 @@ $ aws lambda add-permission --function-name LambdaFunctionOverHttps \
 
 You must grant this permission to enable testing \(if you go to the Amazon API Gateway and choose **Test** to test the API method, you need this permission\)\. Note the `--source-arn` specifies a wildcard character \(\*\) as the stage value \(indicates testing only\)\. This allows you to test without deploying the API\.
 
+**Note**  
+If your function and API are in different regions, the region identifier in the source ARN must match the region of the function, not the region of the API\.
+
 Now, run the same command again, but this time you grant to your deployed API permissions to invoke the Lambda function\.
 
 ```

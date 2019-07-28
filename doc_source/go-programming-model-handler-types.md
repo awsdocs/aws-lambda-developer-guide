@@ -37,9 +37,7 @@ Note the following:
   + **return fmt\.Sprintf\("Hello %s\!", name\), nil**: Simply returns a formatted "Hello" greeting with the name you supplied in the input event\. `nil` indicates there were no errors and the function executed successfully\.
 + **func main\(\)**: The entry point that executes your Lambda function code\. This is required\.
 
-  By adding `lambda.Start(HandleRequest)` between `func main(){}` code brackets, your Lambda function will be executed\.
-**Note**  
-Per Go language standards, the opening bracket, `{` must be placed directly at end the of the `main` function signature\.
+  By adding `lambda.Start(HandleRequest)` between `func main(){}` code brackets, your Lambda function will be executed\. Per Go language standards, the opening bracket, `{` must be placed directly at end the of the `main` function signature\.
 
 ## Lambda Function Handler Using Structured Types<a name="go-programming-model-handler-types-structured"></a>
 
@@ -90,7 +88,7 @@ And the response would look like this:
 }
 ```
 
-For more information on handling events from AWS event sources, see [aws\-lambda\-go/events](https://github.com/aws/aws-lambda-go/tree/master/events)\.
+To be exported, field names in the event struct must be capitalized\. For more information on handling events from AWS event sources, see [aws\-lambda\-go/events](https://github.com/aws/aws-lambda-go/tree/master/events)\.
 
 ### Valid Handler Signatures<a name="go-programming-model-handler-types-signatures"></a>
 
