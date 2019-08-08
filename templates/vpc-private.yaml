@@ -1,0 +1,65 @@
+AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  PrivateVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 172.31.0.0/16
+      Tags:
+        - Key: Name
+          Value: !Ref AWS::StackName
+  PrivateSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref PrivateVPC
+      AvailabilityZone:
+        Fn::Select:
+         - 0
+         - Fn::GetAZs: ""
+      CidrBlock: 172.31.3.0/24
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: !Join ["-", [!Ref "AWS::StackName","subnet-a"]]
+  PrivateSubnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref PrivateVPC
+      AvailabilityZone:
+        Fn::Select:
+         - 1
+         - Fn::GetAZs: ""
+      CidrBlock: 172.31.2.0/24
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: !Join ["-", [!Ref "AWS::StackName","subnet-b"]]
+  PrivateRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref PrivateVPC
+  PrivateSubnet1RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PrivateSubnet1
+      RouteTableId: !Ref PrivateRouteTable
+  PrivateSubnet2RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PrivateSubnet2
+      RouteTableId: !Ref PrivateRouteTable
+Outputs:
+  PrivateVPCID:
+    Description: VPC ID
+    Value: !Ref PrivateVPC
+    Export:
+      Name: !Join ["-", [!Ref "AWS::StackName","vpc"]]
+  PrivateSubnet1ID:
+    Description: Private Subnet A ID
+    Value: !Ref PrivateSubnet1
+    Export:
+      Name: !Join ["-", [!Ref "AWS::StackName","subnet-a"]]
+  PrivateSubnet2ID:
+    Description: Private Subnet B ID
+    Value: !Ref PrivateSubnet2
+    Export:
+      Name: !Join ["-", [!Ref "AWS::StackName","subnet-b"]]
