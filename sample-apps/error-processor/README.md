@@ -45,7 +45,7 @@ Run `deploy.sh` to deploy the application.
     Successfully packaged artifacts and wrote output template to file out.yaml.
     Waiting for changeset to be created..
     Waiting for stack create/update to complete
-    Successfully created/updated stack - lambda-error-processor
+    Successfully created/updated stack - error-processor
 
 This script uses AWS CloudFormation to deploy the Lambda functions, an IAM role, and a CloudWatch Logs subscription that triggers the processor function. If the AWS CloudFormation stack that contains the resources already exists, the script updates it with any changes to the template or function code.
 
@@ -79,7 +79,7 @@ Finally, view the logs and traces that the function stores in Amazon S3.
 
 *To view the output*
 1. Open the [applications page](https://console.aws.amazon.com/lambda/home#/applications) in the Lambda console.
-2. Choose **lambda-error-processor**.
+2. Choose **error-processor**.
 
   ![Application](/sample-apps/error-processor/images/errorprocessor-application.png)
 
