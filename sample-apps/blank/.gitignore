@@ -1,0 +1,6 @@
+node_modules
+package-lock.json
+out.yaml
+out
+bucket-name.txt
+deploy.sh
