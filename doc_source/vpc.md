@@ -62,7 +62,7 @@ When a Lambda function is configured to run within a VPC, it incurs an additiona
 AWS Lambda uses the VPC information you provide to set up [ENIs](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ElasticNetworkInterfaces.html) that allow your Lambda function to access VPC resources\. Each ENI is assigned a private IP address from the IP address range within the subnets you specify\. Functions that are connected to a VPC do not have public IP addresses or internet access by default\.
 
 **Note**  
-Several services offer [VPC Endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html)\. You can use VPC endpoints to connect to AWS services from within a VPC without internet access\.
+Several services offer [VPC endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html)\. You can use VPC endpoints to connect to AWS services from within a VPC without internet access\.
 
 Internet access from a private subnet requires network address translation \(NAT\)\. You can give your function access to the internet by adding a NAT gateway or NAT instance to your VPC\. An internet gateway does not work as it requires public IP addresses\. For more information, see [NAT Gateways](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html) in the *Amazon VPC User Guide*\.
 
@@ -83,3 +83,11 @@ Your Lambda function automatically scales based on the number of events it proce
   We also recommend that you specify at least one subnet in each Availability Zone in your Lambda function configuration\. By specifying subnets in each of the Availability Zones, your Lambda function can run in another Availability Zone if one goes down or runs out of IP addresses\. 
 
 If your VPC does not have sufficient ENIs or subnet IPs, your Lambda function will not scale as requests increase, and you will see an increase in invocation errors with EC2 error types like `EC2ThrottledException`\. Amazon VPC applies a [limit to ENI creation](https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html)\. You can request an increase to this limit in the [Support Center console](https://console.aws.amazon.com/support/v1#/case/create?issueType=service-limit-increase)\. 
+
+## Sample VPC Configurations<a name="vpc-samples"></a>
+
+Sample AWS CloudFormation templates for VPC configurations that you can use with Lambda functions are available in this guide's GitHub repository\. There are two templates:
++ [vpc\-private\.yaml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/templates/vpc-private.yaml) – A VPC with two private subnets and VPC endpoints for Amazon Simple Storage Service and Amazon DynamoDB\. You can use this template to create a VPC for functions that do not need internet access\. This configuration supports use of Amazon S3 and DynamoDB with the AWS SDK, and access to database resources in the same VPC over a local network connection\.
++ [vpc\-privatepublic\.yaml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/templates/vpc-privatepublic.yaml) – A VPC with two private subnets, VPC endpoints, a public subnet with a NAT gateway, and an internet gateway\. Internet\-bound traffic from functions in the private subnets is routed to the NAT gateway by a route table\.
+
+To use a template to create a VPC, choose **Create stack** in the [AWS CloudFormation console](https://console.aws.amazon.com/cloudformation) and follow the instructions\.

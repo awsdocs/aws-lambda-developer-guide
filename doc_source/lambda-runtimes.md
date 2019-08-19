@@ -19,8 +19,8 @@ A runtime can support a single version of a language, multiple versions of a lan
 
 | Name | Identifier | Node\.js Version | AWS SDK for JavaScript | Operating System | 
 | --- | --- | --- | --- | --- | 
-|  Node\.js 10  |  `nodejs10.x`  |  10\.15  |  2\.437\.0  |  Amazon Linux 2  | 
-|  Node\.js 8\.10  |  `nodejs8.10`  |  8\.10  |  2\.290\.0  |  Amazon Linux  | 
+|  Node\.js 10  |  `nodejs10.x`  |  10\.15  |  2\.488\.0  |  Amazon Linux 2  | 
+|  Node\.js 8\.10  |  `nodejs8.10`  |  8\.10  |  2\.488\.0  |  Amazon Linux  | 
 
 
 **Python Runtimes**  
