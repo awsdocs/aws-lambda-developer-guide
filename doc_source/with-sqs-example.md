@@ -149,7 +149,7 @@ The list returns all of the event source mappings you created, and for each mapp
 
 Now you can test the setup as follows:
 
-1. In the Amazon SQS console, send messsages to the queue\. Amazon SQS writes records of these actions to the queue\.
+1. In the Amazon SQS console, send messages to the queue\. Amazon SQS writes records of these actions to the queue\.
 
 1. AWS Lambda polls the queue and when it detects updates, it invokes your Lambda function by passing in the event data it finds in the queue\.
 
