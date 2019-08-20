@@ -310,6 +310,7 @@ import boto3
 import os
 import sys
 import uuid
+from urllib.parse import unquote_plus
 from PIL import Image
 import PIL.Image
      
@@ -323,7 +324,7 @@ def resize_image(image_path, resized_path):
 def handler(event, context):
     for record in event['Records']:
         bucket = record['s3']['bucket']['name']
-        key = record['s3']['object']['key'] 
+        key = unquote_plus(record['s3']['object']['key'])
         download_path = '/tmp/{}{}'.format(uuid.uuid4(), key)
         upload_path = '/tmp/resized-{}'.format(key)
         
