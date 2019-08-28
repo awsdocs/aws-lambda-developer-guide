@@ -7,6 +7,7 @@ This project creates a function and supporting resources:
 # TODO
 change stack name in `deploy.sh.template`, `invoke.sh`, `cleanup.sh`
 (optional) change function name in `template.yaml`, `invoke.sh`
+(optional) change function folder name in `template.yaml`, `install.sh`
 
 ![Architecture](/sample-apps/blank/images/sample-errorprocessor.png)
 
