@@ -4,6 +4,9 @@ This project creates a function and supporting resources:
 - blank.yaml - An AWS CloudFormation template that creates an application.
 - install.sh, deploy.sh, etc. - Shell scripts that use the AWS CLI to deploy and manage the application.
 
+# TODO
+change stack name in `deploy.sh.template`, `invoke.sh`, `cleanup.sh`
+(optional) change function name in `template.yaml`, `invoke.sh`
 
 ![Architecture](/sample-apps/blank/images/sample-errorprocessor.png)
 

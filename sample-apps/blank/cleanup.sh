@@ -1,5 +1,6 @@
 #!/bin/bash
-OUTPUT_BUCKET=$(aws cloudformation describe-stack-resource --stack-name lambda-blank --logical-resource-id bucket --query 'StackResourceDetail.PhysicalResourceId' --output text)
+set -eo pipefail
+OUTPUT_BUCKET=$(aws cloudformation describe-stack-resource --stack-name blank --logical-resource-id bucket --query 'StackResourceDetail.PhysicalResourceId' --output text)
 while true; do
     read -p "Delete logs, traces, and output bucket ($OUTPUT_BUCKET)?" response
     case $response in
