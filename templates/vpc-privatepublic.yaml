@@ -1,16 +1,16 @@
 AWSTemplateFormatVersion: 2010-09-09
 Resources:
-  PubPrivateVPC:
+  pubPrivateVPC:
     Type: AWS::EC2::VPC
     Properties:
       CidrBlock: 172.31.0.0/16
       Tags:
         - Key: Name
           Value: !Ref AWS::StackName
-  PublicSubnet1:
+  publicSubnet1:
     Type: AWS::EC2::Subnet
     Properties:
-      VpcId: !Ref PubPrivateVPC
+      VpcId: !Ref pubPrivateVPC
       AvailabilityZone:
         Fn::Select:
          - 0
@@ -20,10 +20,10 @@ Resources:
       Tags:
         - Key: Name
           Value: !Join ["-", [!Ref "AWS::StackName","public-subnet"]]
-  PrivateSubnet1:
+  privateSubnet1:
     Type: AWS::EC2::Subnet
     Properties:
-      VpcId: !Ref PubPrivateVPC
+      VpcId: !Ref pubPrivateVPC
       AvailabilityZone:
         Fn::Select:
          - 0
@@ -33,10 +33,10 @@ Resources:
       Tags:
         - Key: Name
           Value: !Join ["-", [!Ref "AWS::StackName","private-subnet-a"]]
-  PrivateSubnet2:
+  privateSubnet2:
     Type: AWS::EC2::Subnet
     Properties:
-      VpcId: !Ref PubPrivateVPC
+      VpcId: !Ref pubPrivateVPC
       AvailabilityZone:
         Fn::Select:
          - 1
@@ -46,83 +46,115 @@ Resources:
       Tags:
         - Key: Name
           Value: !Join ["-", [!Ref "AWS::StackName","private-subnet-b"]]
-  InternetGateway:
+  internetGateway:
     Type: AWS::EC2::InternetGateway
     Properties:
       Tags:
         - Key: Name
           Value: !Join ["-", [!Ref "AWS::StackName","gateway"]]
-  GatewayToInternet:
+  gatewayToInternet:
     Type: AWS::EC2::VPCGatewayAttachment
     Properties:
-      VpcId: !Ref PubPrivateVPC
-      InternetGatewayId: !Ref InternetGateway
-  PublicRouteTable:
+      VpcId: !Ref pubPrivateVPC
+      InternetGatewayId: !Ref internetGateway
+  publicRouteTable:
     Type: AWS::EC2::RouteTable
     Properties:
-      VpcId: !Ref PubPrivateVPC
-  PublicRoute:
+      VpcId: !Ref pubPrivateVPC
+  publicRoute:
     Type: AWS::EC2::Route
-    DependsOn: GatewayToInternet
+    DependsOn: gatewayToInternet
     Properties:
-      RouteTableId: !Ref PublicRouteTable
+      RouteTableId: !Ref publicRouteTable
       DestinationCidrBlock: 0.0.0.0/0
-      GatewayId: !Ref InternetGateway
-  PublicSubnet1RouteTableAssociation:
+      GatewayId: !Ref internetGateway
+  publicSubnet1RouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
-      SubnetId: !Ref PublicSubnet1
-      RouteTableId: !Ref PublicRouteTable
-  NatGateway:
+      SubnetId: !Ref publicSubnet1
+      RouteTableId: !Ref publicRouteTable
+  natGateway:
     Type: AWS::EC2::NatGateway
-    DependsOn: NatPublicIP
+    DependsOn: natPublicIP
     Properties:
-      AllocationId: !GetAtt NatPublicIP.AllocationId
-      SubnetId: !Ref PublicSubnet1
-  NatPublicIP:
+      AllocationId: !GetAtt natPublicIP.AllocationId
+      SubnetId: !Ref publicSubnet1
+  natPublicIP:
     Type: AWS::EC2::EIP
-    DependsOn: PubPrivateVPC
+    DependsOn: pubPrivateVPC
     Properties:
       Domain: vpc
-  PrivateRouteTable:
+  privateRouteTable:
     Type: AWS::EC2::RouteTable
     Properties:
-      VpcId: !Ref PubPrivateVPC
-  PrivateRoute:
+      VpcId: !Ref pubPrivateVPC
+  privateRoute:
     Type: AWS::EC2::Route
     Properties:
-      RouteTableId: !Ref PrivateRouteTable
+      RouteTableId: !Ref privateRouteTable
       DestinationCidrBlock: 0.0.0.0/0
-      NatGatewayId: !Ref NatGateway
-  PrivateSubnet1RouteTableAssociation:
+      NatGatewayId: !Ref natGateway
+  privateSubnet1RouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
-      SubnetId: !Ref PrivateSubnet1
-      RouteTableId: !Ref PrivateRouteTable
-  PrivateSubnet2RouteTableAssociation:
+      SubnetId: !Ref privateSubnet1
+      RouteTableId: !Ref privateRouteTable
+  privateSubnet2RouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
-      SubnetId: !Ref PrivateSubnet2
-      RouteTableId: !Ref PrivateRouteTable
+      SubnetId: !Ref privateSubnet2
+      RouteTableId: !Ref privateRouteTable
+  s3Endpoint:
+    Type: AWS::EC2::VPCEndpoint
+    Properties:
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+        - Effect: Allow
+          Principal: "*"
+          Action:
+            - "s3:*"
+          Resource:
+            - "*"
+      RouteTableIds:
+        - !Ref privateRouteTable
+      ServiceName: !Sub com.amazonaws.${AWS::Region}.s3
+      VpcId: !Ref pubPrivateVPC
+  dynamoDBEndpoint:
+    Type: AWS::EC2::VPCEndpoint
+    Properties:
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+        - Effect: Allow
+          Principal: "*"
+          Action:
+            - "dynamodb:*"
+          Resource:
+            - "*"
+      RouteTableIds:
+        - !Ref privateRouteTable
+      ServiceName: !Sub com.amazonaws.${AWS::Region}.dynamodb
+      VpcId: !Ref pubPrivateVPC
 Outputs:
-  PrivateVPCID:
+  privateVPCID:
     Description: VPC ID
-    Value: !Ref PubPrivateVPC
+    Value: !Ref pubPrivateVPC
     Export:
       Name: !Join ["-", [!Ref "AWS::StackName","vpc"]]
-  PublicSubnet1ID:
+  publicSubnet1ID:
     Description: Public Subnet A ID
-    Value: !Ref PublicSubnet1
+    Value: !Ref publicSubnet1
     Export:
       Name: !Join ["-", [!Ref "AWS::StackName","public-subnet-a"]]
-  PrivateSubnet1ID:
+  privateSubnet1ID:
     Description: Private Subnet A ID
-    Value: !Ref PrivateSubnet1
+    Value: !Ref privateSubnet1
     Export:
       Name: !Join ["-", [!Ref "AWS::StackName","private-subnet-a"]]
-  PrivateSubnet2ID:
+  privateSubnet2ID:
     Description: Private Subnet B ID
-    Value: !Ref PrivateSubnet2
+    Value: !Ref privateSubnet2
     Export:
       Name: !Join ["-", [!Ref "AWS::StackName","private-subnet-b"]]
 
