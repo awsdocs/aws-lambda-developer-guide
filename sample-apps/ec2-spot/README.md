@@ -38,7 +38,7 @@ This script uses AWS CloudFormation to deploy the Lambda functions and an IAM ro
 
 The functions in this application are instrumented with AWS X-Ray. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map. The following service map shows the random error function generating errors for some requests. It also shows the processor function calling X-Ray, CloudWatch Logs, and Amazon S3.
 
-![Service Map](/sample-apps/ec2-spot/images/ec2spot-servicemap.png)
+![Service Map](/sample-apps/ec2-spot/images/sample-ec2spot-servicemap.png)
 
 Choose a node in the main function graph. Then choose **View traces** to see a list of traces. Choose any trace to view a timeline that breaks down the work done by the function.
 
