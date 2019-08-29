@@ -17,21 +17,19 @@ namespace ec2spot
     public class Function
     {
         private static AmazonEC2Client ec2Client;
-        private static string region;
 
         static Function() {
           AWSSDKHandler.RegisterXRayForAllServices();
           ec2Client = new AmazonEC2Client();
-          Console.WriteLine(region);
         }
 
         public async Task<string> FunctionHandler(Dictionary<string, string> input, ILambdaContext context)
         {
-          // More AMI IDs https://aws.amazon.com/amazon-linux-2/release-notes/
+          // More AMI IDs: aws.amazon.com/amazon-linux-2/release-notes/
           // us-east-2  HVM  EBS-Backed  64-bit  Amazon Linux 2
           string ami = "ami-09d9edae5eb90d556";
           string sg = "default";
-          // https://docs.aws.amazon.com/sdkfornet/v3/apidocs/items/EC2/TInstanceType.html
+          // docs.aws.amazon.com/sdkfornet/v3/apidocs/items/EC2/TInstanceType.html
           InstanceType type = InstanceType.T3aNano;
           string price = "0.003";
           int count = 1;
