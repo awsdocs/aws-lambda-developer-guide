@@ -1,4 +1,4 @@
 #!/bin/bash
 set -eo pipefail
-aws cloudformation package --template-file blank.yaml --s3-bucket MY_BUCKET --output-template-file out.yaml
+aws cloudformation package --template-file template.yaml --s3-bucket MY_BUCKET --output-template-file out.yaml
 aws cloudformation deploy --template-file out.yaml --stack-name blank --capabilities CAPABILITY_NAMED_IAM

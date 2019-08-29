@@ -1,7 +1,7 @@
 # Blank function
 This project creates a function and supporting resources:
 - function - A Node.js function.
-- blank.yaml - An AWS CloudFormation template that creates an application.
+- template.yaml - An AWS CloudFormation template that creates an application.
 - install.sh, deploy.sh, etc. - Shell scripts that use the AWS CLI to deploy and manage the application.
 
 # TODO
