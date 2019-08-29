@@ -1,0 +1,33 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: An AWS Lambda application that uses Amazon EC2 spot instances.
+Resources:
+  role:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -
+            Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonEC2FullAccess
+        - arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Path: /service-role/
+  function:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: ec2spot::ec2spot.Function::FunctionHandler
+      Runtime: dotnetcore2.1
+      CodeUri: src/ec2spot/bin/Release/netcoreapp2.1/ec2spot.zip
+      Description: Manage spot instances.
+      MemorySize: 256
+      Timeout: 9
+      Role: !GetAtt role.Arn
+      Tracing: Active
