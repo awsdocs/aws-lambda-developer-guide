@@ -1,6 +1,6 @@
 # EC2 Spot Instance function
 This project creates a function and supporting resources:
-- function - A C# .NET Core function.
+- src/ec2-spot - A C# .NET Core function.
 - template.yaml - An AWS CloudFormation template that creates an application.
 - create-bucket.sh, deploy.sh, etc. - Shell scripts that use the AWS CLI to deploy and manage the application.
 
@@ -29,14 +29,14 @@ Run `deploy.sh` to deploy the application.
 
     ec2-spot$ ./deploy.sh
     Uploading to e678bc216e6a0d510d661ca9ae2fd941  2737254 / 2737254.0  (100.00%)
-    Successfully packaged artifacts and wrote output template to file out.yaml.
+    Successfully packaged artifacts and wrote output template to file out.yml.
     Waiting for changeset to be created..
     Waiting for stack create/update to complete
     Successfully created/updated stack - ec2-spot
 
 This script uses AWS CloudFormation to deploy the Lambda functions and an IAM role. If the AWS CloudFormation stack that contains the resources already exists, the script updates it with any changes to the template or function code.
 
-The functions in this application are instrumented with AWS X-Ray. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map. The following service map shows the random error function generating errors for some requests. It also shows the processor function calling X-Ray, CloudWatch Logs, and Amazon S3.
+The functions in this application are instrumented with AWS X-Ray. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map. The following service map shows the function managing spot instances in Amazon EC2.
 
 ![Service Map](/sample-apps/ec2-spot/images/sample-ec2spot-servicemap.png)
 

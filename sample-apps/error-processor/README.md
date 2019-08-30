@@ -7,7 +7,6 @@ This project contains the following resources:
 - error-processor.yaml - An AWS CloudFormation template that creates an application with the processor and random-error functions.
 - install.sh, deploy.sh, etc. - Shell scripts that use the AWS CLI to deploy and manage the application.
 
-
 ![Architecture](/sample-apps/error-processor/images/sample-errorprocessor.png)
 
 Use the following instructions to deploy the sample application. For more information on the application's architecture and implementation, see [Error Processor Sample Application for AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/sample-errorprocessor.html) in the developer guide.
@@ -42,7 +41,7 @@ Run `deploy.sh` to deploy the application.
 
     error-processor$ ./deploy.sh
     Uploading to e678bc216e6a0d510d661ca9ae2fd941  2737254 / 2737254.0  (100.00%)
-    Successfully packaged artifacts and wrote output template to file out.yaml.
+    Successfully packaged artifacts and wrote output template to file out.yml.
     Waiting for changeset to be created..
     Waiting for stack create/update to complete
     Successfully created/updated stack - error-processor
