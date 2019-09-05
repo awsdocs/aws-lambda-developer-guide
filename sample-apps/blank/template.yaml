@@ -4,24 +4,6 @@ Description: An AWS Lambda application that uses AWS X-Ray and Amazon S3.
 Resources:
   bucket:
     Type: AWS::S3::Bucket
-  role:
-    Type: AWS::IAM::Role
-    Properties:
-      AssumeRolePolicyDocument:
-        Version: "2012-10-17"
-        Statement:
-          -
-            Effect: Allow
-            Principal:
-              Service:
-                - lambda.amazonaws.com
-            Action:
-              - sts:AssumeRole
-      ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess
-        - arn:aws:iam::aws:policy/AmazonS3FullAccess
-        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
-      Path: /service-role/
   function:
     Type: AWS::Serverless::Function
     Properties:
@@ -31,7 +13,18 @@ Resources:
       Description: Write a file to S3.
       MemorySize: 128
       Timeout: 10
-      Role: !GetAtt role.Arn
+      # Function's execution role
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - AmazonS3FullAccess
+        - AWSXrayWriteOnlyAccess
+        - AWSLambdaVPCAccessExecutionRole
+      VpcConfig:
+        SecurityGroupIds:
+          - Fn::ImportValue: lambda-vpc-private-vpc-sg
+        SubnetIds:
+          - Fn::ImportValue: lambda-vpc-private-subnet-a
+          - Fn::ImportValue: lambda-vpc-private-subnet-b
       Environment:
         Variables:
           bucket: !Ref bucket

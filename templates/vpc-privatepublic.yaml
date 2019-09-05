@@ -137,7 +137,7 @@ Resources:
       ServiceName: !Sub com.amazonaws.${AWS::Region}.dynamodb
       VpcId: !Ref pubPrivateVPC
 Outputs:
-  privateVPCID:
+  pubPrivateVPCID:
     Description: VPC ID
     Value: !Ref pubPrivateVPC
     Export:
@@ -157,5 +157,10 @@ Outputs:
     Value: !Ref privateSubnet2
     Export:
       Name: !Join ["-", [!Ref "AWS::StackName","private-subnet-b"]]
+  privateVPCSecurityGroup:
+    Description: Default security for Lambda VPC
+    Value: !GetAtt pubPrivateVPC.DefaultSecurityGroup
+    Export:
+      Name: !Join ["-", [!Ref "AWS::StackName","vpc-sg"]]
 
 
