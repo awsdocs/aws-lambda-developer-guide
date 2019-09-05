@@ -14,7 +14,7 @@ In the syntax, note the following:
 + Optionally, the handler can return a value\. What happens to the returned value depends on the invocation type you use when invoking the Lambda function:
   + If you use the `RequestResponse` invocation type \(synchronous execution\), AWS Lambda returns the result of the Python function call to the client invoking the Lambda function \(in the HTTP response to the invocation request, serialized into JSON\)\. For example, AWS Lambda console uses the `RequestResponse` invocation type, so when you invoke the function using the console, the console will display the returned value\.
   + If the handler returns objects that can't be serialized by `json.dumps`, the runtime returns an error\.
-  + If the handler returns `None`, as Python functions with a `return` statement implicitly do, the runtime returns `null`\.
+  + If the handler returns `None`, as Python functions without a `return` statement implicitly do, the runtime returns `null`\.
   + If you use the `Event` invocation type \(asynchronous execution\), the value is discarded\.
 
 For example, consider the following Python example code\. 
