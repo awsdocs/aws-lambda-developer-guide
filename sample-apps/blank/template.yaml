@@ -19,12 +19,6 @@ Resources:
         - AmazonS3FullAccess
         - AWSXrayWriteOnlyAccess
         - AWSLambdaVPCAccessExecutionRole
-      VpcConfig:
-        SecurityGroupIds:
-          - Fn::ImportValue: lambda-vpc-private-vpc-sg
-        SubnetIds:
-          - Fn::ImportValue: lambda-vpc-private-subnet-a
-          - Fn::ImportValue: lambda-vpc-private-subnet-b
       Environment:
         Variables:
           bucket: !Ref bucket
