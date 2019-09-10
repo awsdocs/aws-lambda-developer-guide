@@ -1,4 +1,4 @@
-# Tutorial: Configuring a Lambda Function to Access Amazon RDS in an Amazon VPC<a name="vpc-rds"></a>
+# Tutorial: Configuring a Lambda Function to Access Amazon RDS in an Amazon VPC<a name="services-rds-tutorial"></a>
 
 In this tutorial, you do the following:
 + Launch an Amazon RDS MySQL database engine instance in your default Amazon VPC\. In the MySQL instance, you create a database \(ExampleDB\) with a sample table \(Employee\) in it\. For more information about Amazon RDS, see [Amazon RDS](https://aws.amazon.com/rds)\.

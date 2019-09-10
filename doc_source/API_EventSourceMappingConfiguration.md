@@ -32,13 +32,19 @@ The result of the last AWS Lambda invocation of your Lambda function\.
 Type: String  
 Required: No
 
+ **MaximumBatchingWindowInSeconds**   <a name="SSS-Type-EventSourceMappingConfiguration-MaximumBatchingWindowInSeconds"></a>
+The maximum amount of time to gather records before invoking the function, in seconds\.  
+Type: Integer  
+Valid Range: Minimum value of 0\. Maximum value of 300\.  
+Required: No
+
  **State**   <a name="SSS-Type-EventSourceMappingConfiguration-State"></a>
 The state of the event source mapping\. It can be one of the following: `Creating`, `Enabling`, `Enabled`, `Disabling`, `Disabled`, `Updating`, or `Deleting`\.  
 Type: String  
 Required: No
 
  **StateTransitionReason**   <a name="SSS-Type-EventSourceMappingConfiguration-StateTransitionReason"></a>
-The cause of the last state change, either `User initiated` or `Lambda initiated`\.  
+Indicates whether the last change to the event source mapping was made by a user, or by the Lambda service\.  
 Type: String  
 Required: No
 

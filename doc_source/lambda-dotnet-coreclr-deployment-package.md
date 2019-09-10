@@ -34,7 +34,7 @@ dotnet new lambda.EmptyFunction --help
 ```
 
 The `lambda.EmptyFunction` template supports the following options\.
-+ `--name` \(required\) – The name of the function\.
++ `--name` – The name of the function\.
 + `--profile` – The name of a profile in your [AWS SDK for \.NET credentials file](https://docs.aws.amazon.com/sdk-for-net/latest/developer-guide/net-dg-config-creds.html)\.
 + `--region` – The AWS Region to create the function in\.
 
@@ -162,7 +162,7 @@ For more information about the Amazon\.Lambda\.Tools \.NET Core Global see its [
 With the Amazon\.Lambda\.Tools installed you can deploy your function with the following command:
 
 ```
-dotnet lambda deploy-function MyFunction –-function-role role
+dotnet lambda deploy-function MyFunction --function-role role
 ```
 
 After deployment, you can re\-test it in a production environment with the following command and pass in a different value to your Lambda function handler:

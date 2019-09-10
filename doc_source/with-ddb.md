@@ -73,6 +73,8 @@ Lambda reads records from the stream and invokes your function [synchronously](i
 
 Lambda polls shards in your DynamoDB Streams stream for records at a base rate of 4 times per second\. When records are available, Lambda invokes your function and waits for the result\. If processing succeeds, Lambda resumes polling until it receives more records\.
 
+By default, Lambda invokes your function as soon as records are available in the stream\. If the batch it reads from the stream only has one record in it, Lambda only sends one record to the function\. To avoid invoking the function with a small number of records, you can tell the event source to buffer records for up to 5 minutes by configuring a *batch window*\. Before invoking the function, Lambda continues to read records from the stream until it has gathered a full batch, or until the batch window expires\.
+
 If your function returns an error, Lambda retries the batch until processing succeeds or the data expires\. Until the issue is resolved, no data in the shard is processed\. Handle any record processing errors in your code to avoid stalled shards and potential data loss\.
 
 ## Execution Role Permissions<a name="events-dynamodb-permissions"></a>
@@ -108,6 +110,7 @@ Lambda supports the following options for DynamoDB event sources\.
 **Event Source Options**
 + **DynamoDB table** – The DynamoDB table to read records from\.
 + **Batch size** – The number of records to read from a shard in each batch, up to 1,000\. Lambda passes all of the records in the batch to the function in a single call, as long as the total size of the events doesn't exceed the [payload limit](limits.md) for synchronous invocation \(6 MB\)\.
++ **Batch window** – Specify the maximum amount of time to gather records before invoking the function, in seconds\.
 + **Starting position** – Process only new records, or all existing records\.
   + **Latest** – Process new records added to the stream\.
   + **Trim horizon** – Process all records in the stream\.
@@ -126,7 +129,7 @@ To manage event source mappings with the AWS CLI or AWS SDK, use the following A
 + [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md)
 + [DeleteEventSourceMapping](API_DeleteEventSourceMapping.md)
 
-The following example uses the AWS Command Line Interface to map a function named `my-function` to an DynamoDB Streams stream specified by Amazon Resource Name \(ARN\), with a batch size of 500\.
+The following example uses the AWS Command Line Interface to map a function named `my-function` to an DynamoDB Streams stream specified by Amazon Resource Name \(ARN\), with a batch size of 500
 
 ```
 $ aws lambda create-event-source-mapping --function-name my-function --batch-size 500 --starting-position LATEST \
@@ -134,6 +137,7 @@ $ aws lambda create-event-source-mapping --function-name my-function --batch-siz
 {
     "UUID": "14e0db71-5d35-4eb5-b481-8945cf9d10c2",
     "BatchSize": 500,
+    "MaximumBatchingWindowInSeconds": 0,
     "EventSourceArn": "arn:aws:dynamodb:us-east-2:123456789012:table/my-table/stream/2019-06-10T19:26:16.525",
     "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
     "LastModified": 1560209851.963,

@@ -56,6 +56,7 @@ Content-type: application/json
          "[FunctionArn](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-FunctionArn)": "string",
          "[LastModified](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-LastModified)": number,
          "[LastProcessingResult](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-LastProcessingResult)": "string",
+         "[MaximumBatchingWindowInSeconds](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-MaximumBatchingWindowInSeconds)": number,
          "[State](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-State)": "string",
          "[StateTransitionReason](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-StateTransitionReason)": "string",
          "[UUID](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-UUID)": "string"

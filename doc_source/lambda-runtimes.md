@@ -19,7 +19,7 @@ A runtime can support a single version of a language, multiple versions of a lan
 
 | Name | Identifier | Node\.js Version | AWS SDK for JavaScript | Operating System | 
 | --- | --- | --- | --- | --- | 
-|  Node\.js 10  |  `nodejs10.x`  |  10\.15  |  2\.488\.0  |  Amazon Linux 2  | 
+|  Node\.js 10  |  `nodejs10.x`  |  10\.16\.3  |  2\.488\.0  |  Amazon Linux 2  | 
 |  Node\.js 8\.10  |  `nodejs8.10`  |  8\.10  |  2\.488\.0  |  Amazon Linux  | 
 
 
@@ -27,8 +27,8 @@ A runtime can support a single version of a language, multiple versions of a lan
 
 | Name | Identifier | AWS SDK for Python | Operating System | 
 | --- | --- | --- | --- | 
-|  Python 3\.6  |  `python3.6`  |  boto3\-1\.7\.74 botocore\-1\.10\.74  |  Amazon Linux  | 
 |  Python 3\.7  |  `python3.7`  |  boto3\-1\.9\.42 botocore\-1\.12\.42  |  Amazon Linux  | 
+|  Python 3\.6  |  `python3.6`  |  boto3\-1\.7\.74 botocore\-1\.10\.74  |  Amazon Linux  | 
 |  Python 2\.7  |  `python2.7`  |  N/A  |  Amazon Linux  | 
 
 

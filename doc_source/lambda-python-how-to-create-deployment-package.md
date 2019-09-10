@@ -38,15 +38,16 @@ To create or update a function with the Lambda API, create an archive that conta
 
    ```
    ~/my-function$ zip function.zip function.py
+     adding: function.py (deflated 17%)
    ```
 
 1. Use the `update-function-code` command to upload the package\.
 
    ```
-   ~/my-function$ aws lambda update-function-code --function-name python37 --zip-file fileb://function.zip
+   ~/my-function$ aws lambda update-function-code --function-name my-function --zip-file fileb://function.zip
    {
-       "FunctionName": "python37",
-       "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:python37",
+       "FunctionName": "my-function",
+       "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:my-function",
        "Runtime": "python3.7",
        "Role": "arn:aws:iam::123456789012:role/lambda-role",
        "Handler": "function.handler",
@@ -111,10 +112,10 @@ In order for `--target` to work on [Debian\-based systems](https://github.com/py
 1. Update the function code\.
 
    ```
-   ~/my-function$ aws lambda update-function-code --function-name python37 --zip-file fileb://function.zip
+   ~/my-function$ aws lambda update-function-code --function-name my-function --zip-file fileb://function.zip
    {
-       "FunctionName": "python37",
-       "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:python37",
+       "FunctionName": "my-function",
+       "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:my-function",
        "Runtime": "python3.7",
        "Role": "arn:aws:iam::123456789012:role/lambda-role",
        "Handler": "function.handler",
@@ -209,10 +210,10 @@ For Python 3\.3 and newer, you can use the built\-in [venv module](https://docs.
 1. Update the function code\.
 
    ```
-   ~/my-function$ aws lambda update-function-code --function-name python37 --zip-file fileb://function.zip
+   ~/my-function$ aws lambda update-function-code --function-name my-function --zip-file fileb://function.zip
    {
-       "FunctionName": "python37",
-       "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:python37",
+       "FunctionName": "my-function",
+       "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:my-function",
        "Runtime": "python3.7",
        "Role": "arn:aws:iam::123456789012:role/lambda-role",
        "Handler": "function.handler",

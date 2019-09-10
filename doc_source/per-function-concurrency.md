@@ -19,7 +19,6 @@ You can reserve up to the **Unreserved account concurrency** value shown, less 1
 Reserving concurrency has the following effects\.
 + **Other functions cannot prevent your function from scaling** – All of your account's functions in the same region without reserved concurrency share the pool of unreserved concurrency\. Without reserved concurrency, other functions can use up all of the available concurrency, preventing your function from scaling up when needed\.
 + **Your function can't scale out of control** – Reserved concurrency also limits your function from using concurrency from the unreserved pool, capping it's maximum concurrency\. Reserve concurrency to prevent your function from using all the available concurrency in the region, or from overloading downstream resources\.
-+ **Conserve networking resources** – If your function connects to a VPC, you must make sure your subnets have adequate address capacity to support the ENI scaling requirements of your function\. For more information, see [Configuring a Lambda Function to Access Resources in an Amazon VPC](vpc.md)\.
 
 Concurrency limits can only be set at the function level, not for individual versions\. All invocations to all versions and aliases of a given function will accrue towards the function limit\.
 

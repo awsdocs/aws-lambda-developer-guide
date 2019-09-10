@@ -1,4 +1,4 @@
-# Tutorial: Configuring a Lambda Function to Access Amazon ElastiCache in an Amazon VPC<a name="vpc-ec"></a>
+# Tutorial: Configuring a Lambda Function to Access Amazon ElastiCache in an Amazon VPC<a name="services-elasticache-tutorial"></a>
 
 In this tutorial, you do the following:
 + Create an Amazon ElastiCache cluster in your default Amazon Virtual Private Cloud\. For more information about Amazon ElastiCache, see [Amazon ElastiCache](https://aws.amazon.com/elasticache/)\.

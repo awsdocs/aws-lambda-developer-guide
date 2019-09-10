@@ -16,7 +16,7 @@ To manage event source mappings with the AWS CLI or AWS SDK, use the following A
 + [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md)
 + [DeleteEventSourceMapping](API_DeleteEventSourceMapping.md)
 
-The following example uses the AWS Command Line Interface to map a function named `my-function` to an DynamoDB Streams stream specified by Amazon Resource Name \(ARN\), with a batch size of 500\.
+The following example uses the AWS Command Line Interface to map a function named `my-function` to an DynamoDB Streams stream specified by Amazon Resource Name \(ARN\), with a batch size of 500
 
 ```
 $ aws lambda create-event-source-mapping --function-name my-function --batch-size 500 --starting-position LATEST \
@@ -24,6 +24,7 @@ $ aws lambda create-event-source-mapping --function-name my-function --batch-siz
 {
     "UUID": "14e0db71-5d35-4eb5-b481-8945cf9d10c2",
     "BatchSize": 500,
+    "MaximumBatchingWindowInSeconds": 0,
     "EventSourceArn": "arn:aws:dynamodb:us-east-2:123456789012:table/my-table/stream/2019-06-10T19:26:16.525",
     "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
     "LastModified": 1560209851.963,

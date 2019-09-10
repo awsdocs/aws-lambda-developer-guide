@@ -1,10 +1,8 @@
 # Using AWS Lambda with Amazon SNS<a name="with-sns"></a>
 
-You can write Lambda functions to process Amazon Simple Notification Service notifications\. When a message is published to an Amazon SNS topic, the service can invoke your Lambda function by passing the message payload as a parameter\. Your Lambda function code can then process the event, for example publish the message to other Amazon SNS topics, or send the message to other AWS services\.
+You can use a Lambda function to process Amazon Simple Notification Service notifications\. Amazon SNS supports Lambda functions as a target for messages sent to a topic\. You can subscribe your function to topics in the same account or in other AWS accounts\.
 
-When a user calls the SNS Publish API on a topic that your Lambda function is subscribed to, Amazon SNS will call Lambda to invoke your function asynchronously\. Lambda will then return a delivery status\. If there was an error calling Lambda, Amazon SNS will retry invoking the Lambda function up to three times\. After three tries, if Amazon SNS still could not successfully invoke the Lambda function, then Amazon SNS will send a delivery status failure message to CloudWatch\.
-
-In order to perform cross account Amazon SNS deliveries to Lambda, you need to authorize your Lambda function to be invoked from Amazon SNS\. In turn, Amazon SNS needs to allow the Lambda account to subscribe to the Amazon SNS topic\. For example, if the Amazon SNS topic is in account A and the Lambda function is in account B, both accounts must grant permissions to the other to access their respective resources\. Since not all the options for setting up cross\-account permissions are available from the AWS console, you use the AWS CLI to set up the entire process\.
+Amazon SNS invokes your [asynchronously](invocation-async.md) with an event that contains a message and metadata\.
 
 **Example Amazon SNS Message Event**  
 
@@ -42,7 +40,11 @@ In order to perform cross account Amazon SNS deliveries to Lambda, you need to a
 }
 ```
 
-You configure the event source mapping in Amazon SNS via topic subscription configuration\. For more information, see [Invoking Lambda functions using Amazon SNS notifications](https://docs.aws.amazon.com/sns/latest/dg/sns-lambda.html) in the *Amazon Simple Notification Service Developer Guide*\. 
+For asynchronous invocation, Lambda queues the message and handles retries\. If Amazon SNS is unable to reach Lambda or the message is rejected, Amazon SNS retries at increasing intervals over several hours\. For details, see [Reliability](https://aws.amazon.com/sns/faqs/#Reliability) in the Amazon SNS FAQ\.
+
+In order to perform cross account Amazon SNS deliveries to Lambda, you need to authorize your Lambda function to be invoked from Amazon SNS\. In turn, Amazon SNS needs to allow the Lambda account to subscribe to the Amazon SNS topic\. For example, if the Amazon SNS topic is in account A and the Lambda function is in account B, both accounts must grant permissions to the other to access their respective resources\. Since not all the options for setting up cross\-account permissions are available from the AWS console, you use the AWS CLI to set up the entire process\.
+
+For more information, see [Invoking Lambda functions using Amazon SNS notifications](https://docs.aws.amazon.com/sns/latest/dg/sns-lambda.html) in the *Amazon Simple Notification Service Developer Guide*\. 
 
 **Topics**
 + [Tutorial: Using AWS Lambda with Amazon Simple Notification Service](with-sns-example.md)

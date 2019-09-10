@@ -1,4 +1,4 @@
-# Sample Amazon Simple Storage Service Function Code<a name="with-s3-example-deployment-pkg"></a>
+# Sample Amazon S3 Function Code<a name="with-s3-example-deployment-pkg"></a>
 
 Sample code is available for the following languages\.
 
@@ -24,14 +24,14 @@ var MAX_WIDTH  = 100;
 var MAX_HEIGHT = 100;
 
 var s3 = new AWS.S3();
- 
+
 exports.handler = function(event, context, callback) {
     // Read options from the event.
     console.log("Reading options from event:\n", util.inspect(event, {depth: 5}));
     var srcBucket = event.Records[0].s3.bucket.name;
     // Object key may have spaces or unicode non-ASCII characters.
     var srcKey    =
-    decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, " "));  
+    decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, " "));
     var dstBucket = srcBucket + "resized";
     var dstKey    = "resized-" + srcKey;
 
@@ -156,7 +156,7 @@ The following is example Java code that reads incoming Amazon S3 events and crea
 
 The `S3Event` type that the handler uses as the input type is one of the predefined classes in the `aws-lambda-java-events`  library that provides methods for you to easily read information from the incoming Amazon S3 event\. The handler returns a string as output\.
 
-**Example handler\.java**  
+**Example Handler\.java**  
 
 ```
 package example;
@@ -185,7 +185,7 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 
-public class handler implements
+public class Handler implements
         RequestHandler<S3Event, String> {
     private static final float MAX_WIDTH = 100;
     private static final float MAX_HEIGHT = 100;
@@ -313,21 +313,20 @@ import uuid
 from urllib.parse import unquote_plus
 from PIL import Image
 import PIL.Image
-     
+
 s3_client = boto3.client('s3')
-     
+
 def resize_image(image_path, resized_path):
     with Image.open(image_path) as image:
         image.thumbnail(tuple(x / 2 for x in image.size))
         image.save(resized_path)
-     
+
 def handler(event, context):
     for record in event['Records']:
         bucket = record['s3']['bucket']['name']
         key = unquote_plus(record['s3']['object']['key'])
         download_path = '/tmp/{}{}'.format(uuid.uuid4(), key)
         upload_path = '/tmp/resized-{}'.format(key)
-        
         s3_client.download_file(bucket, key, download_path)
         resize_image(download_path, upload_path)
         s3_client.upload_file(upload_path, '{}resized'.format(bucket), key)

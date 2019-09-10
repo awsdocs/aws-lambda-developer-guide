@@ -11,7 +11,8 @@ Content-type: application/json
 {
    "[BatchSize](#SSS-UpdateEventSourceMapping-request-BatchSize)": number,
    "[Enabled](#SSS-UpdateEventSourceMapping-request-Enabled)": boolean,
-   "[FunctionName](#SSS-UpdateEventSourceMapping-request-FunctionName)": "string"
+   "[FunctionName](#SSS-UpdateEventSourceMapping-request-FunctionName)": "string",
+   "[MaximumBatchingWindowInSeconds](#SSS-UpdateEventSourceMapping-request-MaximumBatchingWindowInSeconds)": number
 }
 ```
 
@@ -54,6 +55,12 @@ Length Constraints: Minimum length of 1\. Maximum length of 140\.
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
 Required: No
 
+ ** [MaximumBatchingWindowInSeconds](#API_UpdateEventSourceMapping_RequestSyntax) **   <a name="SSS-UpdateEventSourceMapping-request-MaximumBatchingWindowInSeconds"></a>
+The maximum amount of time to gather records before invoking the function, in seconds\.  
+Type: Integer  
+Valid Range: Minimum value of 0\. Maximum value of 300\.  
+Required: No
+
 ## Response Syntax<a name="API_UpdateEventSourceMapping_ResponseSyntax"></a>
 
 ```
@@ -66,6 +73,7 @@ Content-type: application/json
    "[FunctionArn](#SSS-UpdateEventSourceMapping-response-FunctionArn)": "string",
    "[LastModified](#SSS-UpdateEventSourceMapping-response-LastModified)": number,
    "[LastProcessingResult](#SSS-UpdateEventSourceMapping-response-LastProcessingResult)": "string",
+   "[MaximumBatchingWindowInSeconds](#SSS-UpdateEventSourceMapping-response-MaximumBatchingWindowInSeconds)": number,
    "[State](#SSS-UpdateEventSourceMapping-response-State)": "string",
    "[StateTransitionReason](#SSS-UpdateEventSourceMapping-response-StateTransitionReason)": "string",
    "[UUID](#SSS-UpdateEventSourceMapping-response-UUID)": "string"
@@ -101,12 +109,17 @@ Type: Timestamp
 The result of the last AWS Lambda invocation of your Lambda function\.  
 Type: String
 
+ ** [MaximumBatchingWindowInSeconds](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-MaximumBatchingWindowInSeconds"></a>
+The maximum amount of time to gather records before invoking the function, in seconds\.  
+Type: Integer  
+Valid Range: Minimum value of 0\. Maximum value of 300\.
+
  ** [State](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-State"></a>
 The state of the event source mapping\. It can be one of the following: `Creating`, `Enabling`, `Enabled`, `Disabling`, `Disabled`, `Updating`, or `Deleting`\.  
 Type: String
 
  ** [StateTransitionReason](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-StateTransitionReason"></a>
-The cause of the last state change, either `User initiated` or `Lambda initiated`\.  
+Indicates whether the last change to the event source mapping was made by a user, or by the Lambda service\.  
 Type: String
 
  ** [UUID](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-UUID"></a>

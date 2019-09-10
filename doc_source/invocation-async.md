@@ -19,7 +19,7 @@ If the function does not have enough concurrency available to process all events
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/invocation-types-throttle.png)
 
-Even if your function does not return an error, it is possible for it to receive the same event from Lambda multiple times, as the queue itself is eventually consistent\. If the function can't keep up with incoming events, events may also be deleted from the queue without being sent to the function\. Ensure that your function code gracefully handles duplicate events, and that you have enough concurrency available to handle all invocations\.
+Even if your function does not return an error, it is possible for it to receive the same event from Lambda multiple times, as the queue itself is eventually consistent\. If the function can't keep up with incoming events, events may also be deleted from the queue without being sent to the function\. Ensure that your function code gracefully handles duplicate events, and that you have enough concurrency available to handle all invocations\. Configure a dead\-letter queue to retain deleted events\.
 
 ## AWS Lambda Function Dead Letter Queues<a name="dlq"></a>
 
@@ -36,6 +36,8 @@ If you don't have a queue or topic, create one\. Choose the target type that mat
 To send events to a queue or topic, your function needs additional permissions\. Add a policy with the required permissions to your function's [execution role](lambda-intro-execution-role.md)\.
 + **Amazon SQS** – [sqs:SendMessage](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html) 
 + **Amazon SNS** – [sns:Publish](https://docs.aws.amazon.com/sns/latest/api/API_Publish.html) 
+
+If the target queue or topic is encrypted with a customer managed key, the execution role must also be a user in the key's [resource\-based policy](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)\.
 
 After creating the target and updating your function's execution role, add the dead\-letter queue to your function\. You can configure multiple functions to send events to the same target\.
 

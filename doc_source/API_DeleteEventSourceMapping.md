@@ -2,6 +2,8 @@
 
 Deletes an [event source mapping](https://docs.aws.amazon.com/lambda/latest/dg/intro-invocation-modes.html)\. You can get the identifier of a mapping from the output of [ListEventSourceMappings](API_ListEventSourceMappings.md)\.
 
+When you delete an event source mapping, it enters a `Deleting` state and might not be completely deleted for several seconds\.
+
 ## Request Syntax<a name="API_DeleteEventSourceMapping_RequestSyntax"></a>
 
 ```
@@ -31,6 +33,7 @@ Content-type: application/json
    "[FunctionArn](#SSS-DeleteEventSourceMapping-response-FunctionArn)": "string",
    "[LastModified](#SSS-DeleteEventSourceMapping-response-LastModified)": number,
    "[LastProcessingResult](#SSS-DeleteEventSourceMapping-response-LastProcessingResult)": "string",
+   "[MaximumBatchingWindowInSeconds](#SSS-DeleteEventSourceMapping-response-MaximumBatchingWindowInSeconds)": number,
    "[State](#SSS-DeleteEventSourceMapping-response-State)": "string",
    "[StateTransitionReason](#SSS-DeleteEventSourceMapping-response-StateTransitionReason)": "string",
    "[UUID](#SSS-DeleteEventSourceMapping-response-UUID)": "string"
@@ -66,12 +69,17 @@ Type: Timestamp
 The result of the last AWS Lambda invocation of your Lambda function\.  
 Type: String
 
+ ** [MaximumBatchingWindowInSeconds](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-MaximumBatchingWindowInSeconds"></a>
+The maximum amount of time to gather records before invoking the function, in seconds\.  
+Type: Integer  
+Valid Range: Minimum value of 0\. Maximum value of 300\.
+
  ** [State](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-State"></a>
 The state of the event source mapping\. It can be one of the following: `Creating`, `Enabling`, `Enabled`, `Disabling`, `Disabled`, `Updating`, or `Deleting`\.  
 Type: String
 
  ** [StateTransitionReason](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-StateTransitionReason"></a>
-The cause of the last state change, either `User initiated` or `Lambda initiated`\.  
+Indicates whether the last change to the event source mapping was made by a user, or by the Lambda service\.  
 Type: String
 
  ** [UUID](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-UUID"></a>

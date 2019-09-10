@@ -5,7 +5,7 @@ You can use AWS Identity and Access Management \(IAM\) to manage access to the L
 A Lambda function also has a policy, called an [execution role](lambda-intro-execution-role.md), that grants it permission to access AWS services and resources\. At a minimum, your function needs access to Amazon CloudWatch Logs for log streaming\. If you [use AWS X\-Ray to trace your function](lambda-x-ray.md), or your function accesses services with the AWS SDK, you grant it permission to call them in the execution role\. Lambda also uses the execution role to get permission to read from event sources when you use an [event source mapping](invocation-eventsourcemapping.md) to trigger your function\.
 
 **Note**  
-If your function needs network access to a resource like a relational database that isn't accessible through AWS APIs or the internet, [configure it to connect to your VPC](vpc.md)\.
+If your function needs network access to a resource like a relational database that isn't accessible through AWS APIs or the internet, [configure it to connect to your VPC](configuration-vpc.md)\.
 
 Use [resource\-based policies](access-control-resource-based.md) to give other accounts and AWS services permission to use your Lambda resources\. Lambda resources include functions, versions, aliases, and layer versions\. Each of these resources has a permissions policy that applies when the resource is accessed, in addition to any policies that apply to the user\. When an AWS service like Amazon S3 calls your Lambda function, the resource\-based policy gives it access\.
 

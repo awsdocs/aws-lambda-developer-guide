@@ -9,8 +9,10 @@ def handler_name(event, context):
 ```
 
 In the syntax, note the following:
-+ `event` – AWS Lambda uses this parameter to pass in event data to the handler\. This parameter is usually of the Python `dict` type\. It can also be `list`, `str`, `int`, `float`, or `NoneType` type\. 
-+ `context` – AWS Lambda uses this parameter to provide runtime information to your handler\. This parameter is of the `LambdaContext` type\.
++ `event` – AWS Lambda uses this parameter to pass in event data to the handler\. This parameter is usually of the Python `dict` type\. It can also be `list`, `str`, `int`, `float`, or `NoneType` type\.
+
+  When you invoke your function, you determine the content and structure of the event\. When an AWS service invokes your function, the event structure varies by service\. For details, see [Using AWS Lambda with Other Services](lambda-services.md)\.
++ `context` – AWS Lambda uses this parameter to provide runtime information to your handler\. For details, see [AWS Lambda Context Object in Python](python-context-object.md)\.
 + Optionally, the handler can return a value\. What happens to the returned value depends on the invocation type you use when invoking the Lambda function:
   + If you use the `RequestResponse` invocation type \(synchronous execution\), AWS Lambda returns the result of the Python function call to the client invoking the Lambda function \(in the HTTP response to the invocation request, serialized into JSON\)\. For example, AWS Lambda console uses the `RequestResponse` invocation type, so when you invoke the function using the console, the console will display the returned value\.
   + If the handler returns objects that can't be serialized by `json.dumps`, the runtime returns an error\.

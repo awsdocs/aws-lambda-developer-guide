@@ -7,11 +7,9 @@ The following are recommended best practices for using AWS Lambda:
 + [Function Configuration](#function-configuration)
 + [Alarming and Metrics](#alarming-metrics)
 + [Stream Event Invokes](#stream-events)
-+ [Async Invokes](#async-invoke)
-+ [Lambda VPC](#lambda-vpc)
 
 ## Function Code<a name="function-code"></a>
-+ **Separate the Lambda handler \(entry point\) from your core logic\.** This allows you to make a more unit\-testable function\. In Node\.js this may look like: 
++ **Separate the Lambda handler from your core logic\.** This allows you to make a more unit\-testable function\. In Node\.js this may look like: 
 
   ```
   exports.myHandler = function(event, context, callback) {
@@ -55,20 +53,8 @@ The following are recommended best practices for using AWS Lambda:
 + **Leverage your logging library and [AWS Lambda Metrics and Dimensions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/lam-metricscollected.html)** to catch app errors \(e\.g\. ERR, ERROR, WARNING, etc\.\) 
 
 ## Stream Event Invokes<a name="stream-events"></a>
-+ **Test with different batch and record sizes **so that the polling frequency of each event source is tuned to how quickly your function is able to complete its task\. [BatchSize ](https://docs.aws.amazon.com/lambda/latest/dg/API_CreateEventSourceMapping.html#SSS-CreateEventSourceMapping-request-BatchSize)controls the maximum number of records that can be sent to your function with each invoke\. A larger batch size can often more efficiently absorb the invoke overhead across a larger set of records, increasing your throughput\.
-**Note**  
-When there are not enough records to process, instead of waiting, the stream processing function will be invoked with a smaller number of records\.
++ **Test with different batch and record sizes **so that the polling frequency of each event source is tuned to how quickly your function is able to complete its task\. [BatchSize](https://docs.aws.amazon.com/lambda/latest/dg/API_CreateEventSourceMapping.html#SSS-CreateEventSourceMapping-request-BatchSize) controls the maximum number of records that can be sent to your function with each invoke\. A larger batch size can often more efficiently absorb the invoke overhead across a larger set of records, increasing your throughput\.
+
+  By default, Lambda invokes your function as soon as records are available in the stream\. If the batch it reads from the stream only has one record in it, Lambda only sends one record to the function\. To avoid invoking the function with a small number of records, you can tell the event source to buffer records for up to 5 minutes by configuring a *batch window*\. Before invoking the function, Lambda continues to read records from the stream until it has gathered a full batch, or until the batch window expires\.
 + **Increase Kinesis stream processing throughput by adding shards\.** A Kinesis stream is composed of one or more shards\. Lambda will poll each shard with at most one concurrent invocation\. For example, if your stream has 100 active shards, there will be at most 100 Lambda function invocations running concurrently\. Increasing the number of shards will directly increase the number of maximum concurrent Lambda function invocations and can increase your Kinesis stream processing throughput\. If you are increasing the number of shards in a Kinesis stream, make sure you have picked a good partition key \(see [Partition Keys](http://docs.aws.amazon.com/streams/latest/dev/key-concepts.html#partition-key)\) for your data, so that related records end up on the same shards and your data is well distributed\. 
 + **Use [Amazon CloudWatch](https://docs.aws.amazon.com/streams/latest/dev/monitoring-with-cloudwatch.html)** on IteratorAge to determine if your Kinesis stream is being processed\. For example, configure a CloudWatch alarm with a maximum setting to 30000 \(30 seconds\)\.
-
-## Async Invokes<a name="async-invoke"></a>
-+ **Create and use [AWS Lambda Function Dead Letter Queues](invocation-async.md#dlq) **to address and replay async function errors\. 
-
-## Lambda VPC<a name="lambda-vpc"></a>
-+ The following diagram guides you through a decision tree as to whether you should use a VPC \(Virtual Private Cloud\):   
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/VPC-flowchart4.png)
-+ **Don't put your Lambda function in a VPC unless you have to\.** There is no benefit outside of using this to access resources you cannot expose publicly, like a private [Amazon Relational Database](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/) instance\. Services like Amazon Elasticsearch Service can be secured over IAM with access policies, so exposing the endpoint publicly is safe and wouldn't require you to run your function in the VPC to secure it\. 
-+ **Lambda creates elastic network interfaces [\(ENIs\)](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ElasticNetworkInterfaces.html)** in your VPC to access your internal resources\. Before requesting a concurrency increase, ensure you have enough ENI capacity \(the formula for this can be found here: [Configuring a Lambda Function to Access Resources in an Amazon VPC](vpc.md)\) and IP address space\. If you do not have enough ENI capacity, you will need to request an increase\. If you do not have enough IP address space, you may need to create a larger subnet\.
-+ **Create dedicated private subnets in your VPC: **
-  + This will make it easier to apply a custom route table for NAT Gateway traffic without changing your other subnets\. Lambda functions can only run in private subnets\. For more information, see [Configuring a Lambda Function to Access Resources in an Amazon VPC](vpc.md)
-  + This also allows you to dedicate an address space to Lambda without sharing it with other resources\. 

@@ -12,7 +12,7 @@ DELETE /2017-03-31/tags/ARN?tagKeys=TagKeys HTTP/1.1
 
 The request requires the following URI parameters\.
 
- ** [Resource](#API_UntagResource_RequestSyntax) **   <a name="SSS-UntagResource-request-Resource"></a>
+ ** [ARN](#API_UntagResource_RequestSyntax) **   <a name="SSS-UntagResource-request-Resource"></a>
 The function's Amazon Resource Name \(ARN\)\.  
 Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 

@@ -47,6 +47,8 @@ Lambda reads records from the data stream and invokes your function [synchronous
 
 If you have multiple applications that are reading records from the same stream, you can use Kinesis stream consumers instead of standard iterators\. Consumers have dedicated read throughput so they don't have to compete with other consumers of the same data\. With consumers, Kinesis pushes records to Lambda over an HTTP/2 connection, which can also reduce latency between adding a record and function invocation\.
 
+By default, Lambda invokes your function as soon as records are available in the stream\. If the batch it reads from the stream only has one record in it, Lambda only sends one record to the function\. To avoid invoking the function with a small number of records, you can tell the event source to buffer records for up to 5 minutes by configuring a *batch window*\. Before invoking the function, Lambda continues to read records from the stream until it has gathered a full batch, or until the batch window expires\.
+
 If your function returns an error, Lambda retries the batch until processing succeeds or the data expires\. Until the issue is resolved, no data in the shard is processed\. To avoid stalled shards and potential data loss, make sure to handle and record processing errors in your code\.
 
 ## Configuring Your Data Stream and Function<a name="services-kinesis-configure"></a>
@@ -113,6 +115,7 @@ Lambda supports the following options for Kinesis event sources\.
 + **Kinesis stream** – The Kinesis stream to read records from\.
 + **Consumer** \(optional\) – Use a stream consumer to read from the stream over a dedicated connection\.
 + **Batch size** – The number of records to read from a shard in each batch, up to 10,000\. Lambda passes all of the records in the batch to the function in a single call, as long as the total size of the events doesn't exceed the [payload limit](limits.md) for synchronous invocation \(6 MB\)\.
++ **Batch window** – Specify the maximum amount of time to gather records before invoking the function, in seconds\.
 + **Starting position** – Process only new records, all existing records, or records created after a certain date\.
   + **Latest** – Process new records that are added to the stream\.
   + **Trim horizon** – Process all records in the stream\.
@@ -134,6 +137,7 @@ $ aws lambda create-event-source-mapping --function-name my-function \
 {
     "UUID": "2b733gdc-8ac3-cdf5-af3a-1827b3b11284",
     "BatchSize": 500,
+    "MaximumBatchingWindowInSeconds": 0,
     "EventSourceArn": "arn:aws:kinesis:us-east-2:123456789012:stream/lambda-stream",
     "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
     "LastModified": 1541139209.351,

@@ -34,4 +34,4 @@ For instructions on configuring an Amazon RDS database to send notifications, se
 For details on using Amazon SNS as trigger, see [Using AWS Lambda with Amazon SNS](with-sns.md)\.
 
 **Topics**
-+ [Tutorial: Configuring a Lambda Function to Access Amazon RDS in an Amazon VPC](vpc-rds.md)
++ [Tutorial: Configuring a Lambda Function to Access Amazon RDS in an Amazon VPC](services-rds-tutorial.md)

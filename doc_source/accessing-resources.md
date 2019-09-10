@@ -39,4 +39,4 @@ AWS Lambda runs your function code securely within a VPC by default\. However, t
 **Important**  
 AWS Lambda does not support connecting to resources within Dedicated Tenancy VPCs\. For more information, see [Dedicated VPCs](https://docs.aws.amazon.com/vpc/latest/userguide/dedicated-instance.html)\. 
 
-To learn how to configure a Lambda function to access resources within a VPC, see [Configuring a Lambda Function to Access Resources in an Amazon VPC](vpc.md)
+To learn how to configure a Lambda function to access resources within a VPC, see [Configuring a Lambda Function to Access Resources in a VPC](configuration-vpc.md)

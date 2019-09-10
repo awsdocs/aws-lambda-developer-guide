@@ -24,7 +24,7 @@ A Lambda function consists of code and any associated dependencies\. In addition
 
   Lambda allocates CPU power linearly in proportion to the amount of memory configured\. At 1,792 MB, a function has the equivalent of 1 full vCPU \(one vCPU\-second of credits per second\)\.
 + **Timeout** – The amount of time that Lambda allows a function to run before stopping it\. The default is 3 seconds\. The maximum allowed value is 900 seconds\.
-+ **Virtual private cloud \(VPC\)** – If your function needs network access to resources that are not available over the internet, [configure it to connect to a VPC](vpc.md)\.
++ **Virtual private cloud \(VPC\)** – If your function needs network access to resources that are not available over the internet, [configure it to connect to a VPC](configuration-vpc.md)\.
 + **Dead letter queue \(DLQ\)** – If your function is invoked asynchronously, [choose a queue or topic](invocation-async.md#dlq) to receive failed invocations\.
 + **Enable active tracing** – Sample incoming requests and [trace sampled requests with AWS X\-Ray](lambda-x-ray.md)\.
 + **Concurrency** – [Reserve concurrency for a function](per-function-concurrency.md) to set the maximum number of simultaneous executions for a function, and reserves capacity for that concurrency level\.

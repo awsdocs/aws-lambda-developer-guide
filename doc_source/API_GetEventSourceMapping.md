@@ -31,6 +31,7 @@ Content-type: application/json
    "[FunctionArn](#SSS-GetEventSourceMapping-response-FunctionArn)": "string",
    "[LastModified](#SSS-GetEventSourceMapping-response-LastModified)": number,
    "[LastProcessingResult](#SSS-GetEventSourceMapping-response-LastProcessingResult)": "string",
+   "[MaximumBatchingWindowInSeconds](#SSS-GetEventSourceMapping-response-MaximumBatchingWindowInSeconds)": number,
    "[State](#SSS-GetEventSourceMapping-response-State)": "string",
    "[StateTransitionReason](#SSS-GetEventSourceMapping-response-StateTransitionReason)": "string",
    "[UUID](#SSS-GetEventSourceMapping-response-UUID)": "string"
@@ -66,12 +67,17 @@ Type: Timestamp
 The result of the last AWS Lambda invocation of your Lambda function\.  
 Type: String
 
+ ** [MaximumBatchingWindowInSeconds](#API_GetEventSourceMapping_ResponseSyntax) **   <a name="SSS-GetEventSourceMapping-response-MaximumBatchingWindowInSeconds"></a>
+The maximum amount of time to gather records before invoking the function, in seconds\.  
+Type: Integer  
+Valid Range: Minimum value of 0\. Maximum value of 300\.
+
  ** [State](#API_GetEventSourceMapping_ResponseSyntax) **   <a name="SSS-GetEventSourceMapping-response-State"></a>
 The state of the event source mapping\. It can be one of the following: `Creating`, `Enabling`, `Enabled`, `Disabling`, `Disabled`, `Updating`, or `Deleting`\.  
 Type: String
 
  ** [StateTransitionReason](#API_GetEventSourceMapping_ResponseSyntax) **   <a name="SSS-GetEventSourceMapping-response-StateTransitionReason"></a>
-The cause of the last state change, either `User initiated` or `Lambda initiated`\.  
+Indicates whether the last change to the event source mapping was made by a user, or by the Lambda service\.  
 Type: String
 
  ** [UUID](#API_GetEventSourceMapping_ResponseSyntax) **   <a name="SSS-GetEventSourceMapping-response-UUID"></a>

@@ -68,7 +68,7 @@ Follow the steps to create buckets and upload an object\.
 The following example code receives an Amazon S3 event input and processes the message that it contains\. It resizes an image in the source bucket and saves the output to the target bucket\.
 
 **Note**  
-For sample code in other languages, see [Sample Amazon Simple Storage Service Function Code](with-s3-example-deployment-pkg.md)\.
+For sample code in other languages, see [Sample Amazon S3 Function Code](with-s3-example-deployment-pkg.md)\.
 
 **Example index\.js**  
 
@@ -294,19 +294,19 @@ In this step, you add the remaining configuration so that Amazon S3 can publish 
 
 1. Run the following Lambda CLI `add-permission` command to grant Amazon S3 service principal \(`s3.amazonaws.com`\) permissions to perform the `lambda:InvokeFunction` action\. Note that permission is granted to Amazon S3 to invoke the function only if the following conditions are met:
    + An object\-created event is detected on a specific bucket\.
-   + The bucket is owned by a specific AWS account\. If a bucket owner deletes a bucket, some other AWS account can create a bucket with the same name\. This condition ensures that only a specific AWS account can invoke your Lambda function\.
+   + The bucket is owned by your account\. If you delete a bucket, it is possible for another account to create a bucket with the same ARN\.
 
    ```
    $ aws lambda add-permission --function-name CreateThumbnail --principal s3.amazonaws.com \
-   --statement-id some-unique-id --action "lambda:InvokeFunction" \
+   --statement-id s3invoke --action "lambda:InvokeFunction" \
    --source-arn arn:aws:s3:::sourcebucket \
-   --source-account bucket-owner-account-id
+   --source-account account-id
    ```
 
 1. Verify the function's access policy by running the AWS CLI `get-policy` command\.
 
    ```
-   $ aws lambda get-policy --function-name function-name
+   $ aws lambda get-policy --function-name CreateThumbnail
    ```
 
 Add notification configuration on the source bucket to request Amazon S3 to publish object\-created events to Lambda\.

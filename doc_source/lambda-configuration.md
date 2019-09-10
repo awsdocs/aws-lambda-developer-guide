@@ -8,7 +8,7 @@ To keep secrets out of your function code, store them in the function's configur
 
 As you add libraries and other dependencies to your function, creating and uploading a deployment package can slow down development\. Use [layers](configuration-layers.md) to manage your function's dependencies independently and keep your deployment package small\. You can also use layers to share your own libraries with other customers and use publicly available layers with your functions\.
 
-To use your Lambda function with AWS resources in an Amazon VPC, configure it with security groups and subnets to [create a VPC connection](vpc.md)\. Lambda uses [elastic network interfaces](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ElasticNetworkInterfaces.html) \(ENIs\) to create the connection, so you need to ensure that your account has enough ENI capacity to handle the number of connections made as your function scales up under load\.
+To use your Lambda function with AWS resources in an Amazon VPC, configure it with security groups and subnets to [create a VPC connection](configuration-vpc.md)\. Connecting your function to a VPC lets you access resources in a private subnet such as relational databases and caches\.
 
 **Topics**
 + [AWS Lambda Function Configuration](resource-model.md)
@@ -16,5 +16,5 @@ To use your Lambda function with AWS resources in an Amazon VPC, configure it wi
 + [AWS Lambda Environment Variables](env_variables.md)
 + [AWS Lambda Function Versioning and Aliases](versioning-aliases.md)
 + [AWS Lambda Layers](configuration-layers.md)
-+ [Configuring a Lambda Function to Access Resources in an Amazon VPC](vpc.md)
++ [Configuring a Lambda Function to Access Resources in a VPC](configuration-vpc.md)
 + [Tagging Lambda Functions](tagging.md)

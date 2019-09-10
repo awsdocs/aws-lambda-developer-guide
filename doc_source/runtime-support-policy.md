@@ -1,6 +1,6 @@
 # Runtime Support Policy<a name="runtime-support-policy"></a>
 
-AWS Lambda runtimes are built around a combination of operating system, programming language, and software libraries that are subject to maintenance and security updates\. When a component of a runtime is no longer supported for security updates, Lambda deprecates the runtime\.
+[AWS Lambda runtimes](lambda-runtimes.md) are built around a combination of operating system, programming language, and software libraries that are subject to maintenance and security updates\. When a component of a runtime is no longer supported for security updates, Lambda deprecates the runtime\.
 
 Deprecation occurs in two phases\. During the first phase, you can no longer create functions that use the deprecated runtime\. For at least 30 days, you can continue to update existing functions that use the deprecated runtime\. After this period, both function creation and updates are disabled permanently\. However, the function continues to be available to process invocation events\.
 

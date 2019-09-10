@@ -18,6 +18,7 @@ Content-type: application/json
    "[Enabled](#SSS-CreateEventSourceMapping-request-Enabled)": boolean,
    "[EventSourceArn](#SSS-CreateEventSourceMapping-request-EventSourceArn)": "string",
    "[FunctionName](#SSS-CreateEventSourceMapping-request-FunctionName)": "string",
+   "[MaximumBatchingWindowInSeconds](#SSS-CreateEventSourceMapping-request-MaximumBatchingWindowInSeconds)": number,
    "[StartingPosition](#SSS-CreateEventSourceMapping-request-StartingPosition)": "string",
    "[StartingPositionTimestamp](#SSS-CreateEventSourceMapping-request-StartingPositionTimestamp)": number
 }
@@ -68,6 +69,12 @@ Length Constraints: Minimum length of 1\. Maximum length of 140\.
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
 Required: Yes
 
+ ** [MaximumBatchingWindowInSeconds](#API_CreateEventSourceMapping_RequestSyntax) **   <a name="SSS-CreateEventSourceMapping-request-MaximumBatchingWindowInSeconds"></a>
+The maximum amount of time to gather records before invoking the function, in seconds\.  
+Type: Integer  
+Valid Range: Minimum value of 0\. Maximum value of 300\.  
+Required: No
+
  ** [StartingPosition](#API_CreateEventSourceMapping_RequestSyntax) **   <a name="SSS-CreateEventSourceMapping-request-StartingPosition"></a>
 The position in a stream from which to start reading\. Required for Amazon Kinesis and Amazon DynamoDB Streams sources\. `AT_TIMESTAMP` is only supported for Amazon Kinesis streams\.  
 Type: String  
@@ -91,6 +98,7 @@ Content-type: application/json
    "[FunctionArn](#SSS-CreateEventSourceMapping-response-FunctionArn)": "string",
    "[LastModified](#SSS-CreateEventSourceMapping-response-LastModified)": number,
    "[LastProcessingResult](#SSS-CreateEventSourceMapping-response-LastProcessingResult)": "string",
+   "[MaximumBatchingWindowInSeconds](#SSS-CreateEventSourceMapping-response-MaximumBatchingWindowInSeconds)": number,
    "[State](#SSS-CreateEventSourceMapping-response-State)": "string",
    "[StateTransitionReason](#SSS-CreateEventSourceMapping-response-StateTransitionReason)": "string",
    "[UUID](#SSS-CreateEventSourceMapping-response-UUID)": "string"
@@ -126,12 +134,17 @@ Type: Timestamp
 The result of the last AWS Lambda invocation of your Lambda function\.  
 Type: String
 
+ ** [MaximumBatchingWindowInSeconds](#API_CreateEventSourceMapping_ResponseSyntax) **   <a name="SSS-CreateEventSourceMapping-response-MaximumBatchingWindowInSeconds"></a>
+The maximum amount of time to gather records before invoking the function, in seconds\.  
+Type: Integer  
+Valid Range: Minimum value of 0\. Maximum value of 300\.
+
  ** [State](#API_CreateEventSourceMapping_ResponseSyntax) **   <a name="SSS-CreateEventSourceMapping-response-State"></a>
 The state of the event source mapping\. It can be one of the following: `Creating`, `Enabling`, `Enabled`, `Disabling`, `Disabled`, `Updating`, or `Deleting`\.  
 Type: String
 
  ** [StateTransitionReason](#API_CreateEventSourceMapping_ResponseSyntax) **   <a name="SSS-CreateEventSourceMapping-response-StateTransitionReason"></a>
-The cause of the last state change, either `User initiated` or `Lambda initiated`\.  
+Indicates whether the last change to the event source mapping was made by a user, or by the Lambda service\.  
 Type: String
 
  ** [UUID](#API_CreateEventSourceMapping_ResponseSyntax) **   <a name="SSS-CreateEventSourceMapping-response-UUID"></a>

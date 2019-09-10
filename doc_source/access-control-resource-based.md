@@ -56,6 +56,8 @@ $ aws lambda add-permission --function-name my-function:prod --statement-id xacc
 {"Sid":"xaccount","Effect":"Allow","Principal":{"AWS":"arn:aws:iam::210987654321:root"},"Action":"lambda:InvokeFunction","Resource":"arn:aws:lambda:us-east-2:123456789012:function:my-function"}
 ```
 
+The resource\-based policy grants permission for the other account to access the function, but does not allow users in that account to exceed their permissions\. Users in the other account must have the correspoding [user permissions](access-control-identity-based.md) to use the Lambda API\.
+
 To limit access to a user, group, or role in another account, specify the full ARN of the identity as the principal\. For example, `arn:aws:iam::123456789012:user/developer`\.
 
 The [alias](aliases-intro.md) limits which version the other account can invoke\. It requires the other account to include the alias in the function ARN\.

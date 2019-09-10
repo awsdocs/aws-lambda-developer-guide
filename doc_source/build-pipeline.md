@@ -119,7 +119,7 @@ exports.handler = (event, context, callback) => {
 };
 ```
 
-**Example template\.yaml**  
+**Example template\.yml**  
 The [SAM template](serverless_app.md) that defines the application\.  
 
 ```
@@ -154,12 +154,12 @@ phases:
     commands:
       - npm install time
       - export BUCKET=lambda-deployment-artifacts-123456789012
-      - aws cloudformation package --template-file template.yaml --s3-bucket $BUCKET --output-template-file outputtemplate.yaml
+      - aws cloudformation package --template-file template.yml --s3-bucket $BUCKET --output-template-file outputtemplate.yml
 artifacts:
   type: zip
   files:
-    - template.yaml
-    - outputtemplate.yaml
+    - template.yml
+    - outputtemplate.yml
 ```
 
 Commit and push the files to CodeCommit\.
@@ -210,7 +210,7 @@ Create a pipeline that deploys your application\. The pipeline monitors your rep
    + **Action mode** – **Create or replace a change set**
    + **Stack name** – **lambda\-pipeline\-stack**
    + **Change set name** – **lambda\-pipeline\-changeset**
-   + **Template** – **BuildArtifact::outputtemplate\.yaml**
+   + **Template** – **BuildArtifact::outputtemplate\.yml**
    + **Capabilities** – **CAPABILITY\_IAM**
    + **Role name** – **cfn\-lambda\-pipeline**
 

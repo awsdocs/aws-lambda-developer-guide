@@ -18,7 +18,7 @@ Resources:
 
 The service token is the Amazon Resource Name \(ARN\) of the function that AWS CloudFormation invokes when you create, update, or delete the stack\. You can also include additional properties like `FunctionName`, which AWS CloudFormation passes to your function as is\.
 
-AWS CloudFormation invokes your Lambda function asynchronously with an event that includes a callback URL\.
+AWS CloudFormation invokes your Lambda function [asynchronously](invocation-async.md) with an event that includes a callback URL\.
 
 **Example – AWS CloudFormation Message Event**  
 
