@@ -2,7 +2,7 @@
 
 Lambda User Guide and API operations and how it integrates with other AWS Service
 
-Start  with documentaion [index](/doc_source/index.md)
+Start  with documentation [index](/doc_source/index.md)
 
 ## License Summary
 
