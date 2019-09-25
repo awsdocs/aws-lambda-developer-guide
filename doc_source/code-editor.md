@@ -6,11 +6,13 @@ The code editor includes the *menu bar*, *windows*, and the *editor pane*\.
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/code-editor/code-editor.png)
 
-You use the menu bar to run common commands\. For more information, see [Using the Menu Bar](#code-editor-menu-bar)\.
+For a list of what the commands do, see the [Menu Commands Reference](https://docs.aws.amazon.com/cloud9/latest/user-guide/menu-commands.html) in the *AWS Cloud9 User Guide*\. Note that some of the commands listed in that reference are not available in the code editor\.
 
-You use windows to work with files, folders, and other commands\. For more information, see [Working with Files and Folders](#code-editor-files) and [Working with Commands](#code-editor-commands-overview)\.
-
-You use the editor pane to write code\. For more information, see [Working with Code](#code-editor-code)\.
+**Topics**
++ [Working with Files and Folders](#code-editor-files)
++ [Working with Code](#code-editor-code)
++ [Working in Fullscreen Mode](#code-editor-fullscreen)
++ [Working with Preferences](#code-editor-prefs)
 
 ## Working with Files and Folders<a name="code-editor-files"></a>
 
@@ -49,8 +51,6 @@ You can use the **Environment** window in the code editor to create, open, and m
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/code-editor/code-editor-env-collapse.png)
 
 **To show or hide hidden files**, choose the gear icon in the **Environment** window, and then choose **Show Hidden Files**\. 
-
-You can also create, open, and manage files by using the **Commands** window\. For more information, see [Working with Commands](#code-editor-commands-overview)\.
 
 ## Working with Code<a name="code-editor-code"></a>
 
@@ -99,24 +99,6 @@ Use the status bar to move quickly to a line in the active file and to change ho
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/code-editor/code-editor-status-bar-settings.png)
 
-## Using the Menu Bar<a name="code-editor-menu-bar"></a>
-
-You can use the menu bar to run common commands\.
-
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/code-editor/code-editor-menu-bar.png)
-
-**To hide the menu bar**, choose the up arrow in the menu bar\.
-
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/code-editor/code-editor-menu-bar-hide.png)
-
-**To show the menu bar if it is hidden**, choose the down arrow in the menu bar\.
-
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/code-editor/code-editor-menu-bar-show.png)
-
-For a list of what the commands do, see the [Menu Commands Reference](https://docs.aws.amazon.com/cloud9/latest/user-guide/menu-commands.html) in the *AWS Cloud9 User Guide*\. Note that some of the commands listed in that reference are not available in the code editor\.
-
-You can also run commands by using the **Commands** window\. For more information, see [Working with Commands](#code-editor-commands-overview)\.
-
 ## Working in Fullscreen Mode<a name="code-editor-fullscreen"></a>
 
 You can expand the code editor to get more room to work with your code\.
@@ -142,17 +124,3 @@ For a list of what the settings do, see the following references in the *AWS Clo
 + [User Setting Changes You Can Make](https://docs.aws.amazon.com/cloud9/latest/user-guide/settings-user.html#settings-user-change)
 
 Note that some of the settings listed in those references are not available in the code editor\.
-
-## Working with Commands<a name="code-editor-commands-overview"></a>
-
-You can use the **Commands** window to run various commands such as those found on the menu bar, in the **Environment** window, in the editor pane\. 
-
-**To show or hide the Commands window**, choose the **Commands** button\. If the **Commands** button is not visible, choose **Window, Commands** on the menu bar\.
-
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/code-editor/code-editor-commands.png)
-
-To run a command, choose it in the **Commands** window\. To find a command, type some or all of the command's name in the search box\. 
-
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/code-editor/code-editor-commands-search.png)
-
-For a list of what the commands do, see the [Commands Reference](https://docs.aws.amazon.com/cloud9/latest/user-guide/commands.html) in the *AWS Cloud9 User Guide*\. Note that some of the commands listed in that reference are not available in the code editor\.

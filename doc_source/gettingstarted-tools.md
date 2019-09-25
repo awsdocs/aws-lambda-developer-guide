@@ -1,28 +1,38 @@
 # Tools for Working With AWS Lambda<a name="gettingstarted-tools"></a>
 
+In addition to the Lambda console, you can use the following tools to manage and invoke Lambda resources\.
+
+**Topics**
++ [AWS Command Line Interface](#gettingstarted-tools-awscli)
++ [AWS Serverless Application Model](#gettingstarted-tools-awssam)
++ [SAM CLI](#gettingstarted-tools-samcli)
++ [Code Authoring Tools](#lambda-app-author)
+
+## AWS Command Line Interface<a name="gettingstarted-tools-awscli"></a>
+
 Install the AWS Command Line Interface to manage and use Lambda functions from the command line\. Tutorials in this guide use the AWS CLI, which has commands for all Lambda API actions\. Some functionality is not available in the Lambda console and can only be accessed with the AWS CLI or the AWS SDK\.
 
-**To set up the AWS CLI**
+To set up the AWS CLI, see the following topics in the *AWS Command Line Interface User Guide*\.
++ [Getting Set Up with the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-set-up.html)
++ [Configuring the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html)
 
-1. Download and configure the AWS CLI\. For instructions, see the following topics in the *AWS Command Line Interface User Guide*\. 
-   + [Getting Set Up with the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-set-up.html)
-   + [Configuring the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html)
+To verify that the AWS CLI is configured correctly, run the `list-functions` command to see a list of your Lambda functions in the current region\.
 
-1. Verify the setup by entering the following commands at the command prompt\. 
-   + Try the help command to verify that the AWS CLI is installed on your computer:
+```
+$ aws lambda list-functions
+```
 
-     ```
-     $ aws help
-     ```
-   + Try a Lambda command to verify the user can reach AWS Lambda\. This command lists Lambda functions in the account, if any\. The AWS CLI uses the `adminuser` credentials to authenticate the request\.
+## AWS Serverless Application Model<a name="gettingstarted-tools-awssam"></a>
 
-     ```
-     $ aws lambda list-functions
-     ```
+AWS SAM is an extension for the AWS CloudFormation template language that lets you define serverless applications at a higher level\. It abstracts away common tasks such as function role creation, which makes it easier to write templates\. AWS SAM is supported directly by AWS CloudFormation, and includes additional functionality through the AWS CLI and AWS SAM CLI\.
+
+For more information about AWS SAM templates, see [ AWS SAM Template Basics](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-template-basics.html) in the *AWS Serverless Application Model Developer Guide*\.
+
+## SAM CLI<a name="gettingstarted-tools-samcli"></a>
 
 The AWS SAM CLI is a separate command line tool that you can use to manage and test AWS SAM applications\. In addition to commands for uploading artifacts and launching AWS CloudFormation stacks that are also available in the AWS CLI, the SAM CLI provides additional commands for validating templates and running applications locally in a Docker container\.
 
-For more details about installing the AWS SAM CLI, see [ Installing the AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html) in the *AWS Serverless Application Model Developer Guide*\.
+To set up the AWS SAM CLI, see [Installing the AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html) in the *AWS Serverless Application Model Developer Guide*\.
 
 ## Code Authoring Tools<a name="lambda-app-author"></a>
 
@@ -44,5 +54,3 @@ The following table lists languages, and the available tools and options that yo
 | Ruby |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-tools.html)  | 
 | Go |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-tools.html)  | 
 | PowerShell |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-tools.html) | 
-
-In addition, regardless of the language you choose, there is a [programming model](programming-model-v2.md) for writing Lambda function code\. For example, how you write the handler method of your Lambda function \(that is, the method that AWS Lambda first calls when it begins executing the code\), how you pass events to the handler, what statements you can use in your code to generate logs in CloudWatch Logs, how to interact with AWS Lambda runtime and obtain information such as the time remaining before timeout, and how to handle exceptions\.

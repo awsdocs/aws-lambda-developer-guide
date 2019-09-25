@@ -5,6 +5,8 @@ In this tutorial, you do the following:
 + Create a Lambda function to access the ExampleDB database, create a table \(Employee\), add a few records, and retrieve the records from the table\.
 + Invoke the Lambda function and verify the query results\. This is how you verify that your Lambda function was able to access the RDS MySQL instance in the VPC\.
 
+For details on using Lambda with Amazon VPC, see [Configuring a Lambda Function to Access Resources in a VPC](configuration-vpc.md)\.
+
 ## Prerequisites<a name="vpc-rds-prereqs"></a>
 
 This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started with AWS Lambda](getting-started.md) to create your first Lambda function\.

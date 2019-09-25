@@ -20,7 +20,7 @@ The **Designer** lets you configure triggers and view permissions\.
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/console-designer.png)
 
-Choose **Amazon CloudWatch Logs** to view the log\-related permissions that the execution role grants the function\. When you add a trigger or configure features that require additional permissions, Lambda modifies to the function's execution role or resource\-based policy to grant the minimum required access\. To view these policies, choose the key icon\.
+Choose **Amazon CloudWatch Logs** to view the log\-related permissions that the execution role grants the function\. When you add a trigger or configure features that require additional permissions, Lambda modifies the function's execution role or resource\-based policy to grant the minimum required access\. To view these policies, choose the key icon\.
 
 Choose **my\-function** in the designer to return to the function's code and configuration\. For scripting languages, Lambda includes sample code that returns a success response\. You can edit your function code with the embedded [AWS Cloud9](https://docs.aws.amazon.com/cloud9/latest/user-guide/) editor as long as your source code doesn't exceed the 3 MB limit\.
 

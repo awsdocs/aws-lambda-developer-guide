@@ -7,8 +7,6 @@ If you use the Lambda [console editor](code-editor.md) to author your function, 
 **Note**  
 To keep your deployment package size low, package your function's dependencies in layers\. Layers let you manage your dependencies independently, can be used by multiple functions, and can be shared with other accounts\. For details, see [AWS Lambda Layers](configuration-layers.md)\.
 
- Files in your deployment package must have an appropriate file mode to run on Lambda\. For more information, see [Permissions Policies on Lambda Deployment Packages](deployment-package-v2.md#lambda-zip-package-permission-policies)\.
-
 **Topics**
 + [Updating a Function with No Dependencies](#nodejs-package-codeonly)
 + [Updating a Function with Additional Dependencies](#nodejs-package-dependencies)

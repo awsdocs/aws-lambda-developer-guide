@@ -40,7 +40,7 @@ The following example shows a test event from an [Application Load Balancer](ser
 ```
 
 **Note**  
-The Lambda runtime converts the event document into an object and passes it to your [function handler](programming-model-v2.md)\. For compiled languages, Lambda provides definitions for event types in a library\. See the following topics for more information\.  
+The Lambda runtime converts the event document into an object and passes it to your [function handler](gettingstarted-concepts.md)\. For compiled languages, Lambda provides definitions for event types in a library\. See the following topics for more information\.  
 [Building Lambda Functions with Java](java-programming-model.md)
 [Building Lambda Functions with Go](go-programming-model.md)
 [Building Lambda Functions with C\#](dotnet-programming-model.md)

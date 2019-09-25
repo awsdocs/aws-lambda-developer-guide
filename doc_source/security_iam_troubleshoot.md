@@ -19,7 +19,7 @@ The following example error occurs when the `mateojackson` IAM user tries to use
 User: arn:aws:iam::123456789012:user/mateojackson is not authorized to perform: lambda:GetFunction on resource: my-function
 ```
 
-In this case, Mateo asks his administrator to update his policies to allow him to access the `my-funciton` resource using the `lambda:GetFunction` action\.
+In this case, Mateo asks his administrator to update his policies to allow him to access the `my-function` resource using the `lambda:GetFunction` action\.
 
 ## I Am Not Authorized to Perform iam:PassRole<a name="security_iam_troubleshoot-passrole"></a>
 

@@ -9,9 +9,10 @@ To output logs from your function code, you can use methods on the [console obje
 ```
 exports.handler = async function(event, context) {
   console.log("ENVIRONMENT VARIABLES\n" + JSON.stringify(process.env, null, 2))
-  console.log("EVENT\n" + JSON.stringify(event, null, 2))
+  console.info("EVENT\n" + JSON.stringify(event, null, 2))
+  console.warn("Event not processed.")
   return context.logStreamName
-};
+}
 ```
 
 **Example Log Format**  
@@ -33,6 +34,7 @@ START RequestId: c793869b-ee49-115b-a5b6-4fd21e8dedac Version: $LATEST
 {
   "key": "value"
 }
+2019-06-07T19:11:20.564Z	c793869b-ee49-115b-a5b6-4fd21e8dedac	WARN	Event not processed.
 END RequestId: c793869b-ee49-115b-a5b6-4fd21e8dedac
 REPORT RequestId: c793869b-ee49-115b-a5b6-4fd21e8dedac	Duration: 170.19 ms	Billed Duration: 200 ms 	Memory Size: 128 MB	Max Memory Used: 73 MB
 ```

@@ -5,6 +5,8 @@ In this tutorial, you do the following:
 + Create a Lambda function to access the ElastiCache cluster\. When you create the Lambda function, you provide subnet IDs in your Amazon VPC and a VPC security group to allow the Lambda function to access resources in your VPC\. For illustration in this tutorial, the Lambda function generates a UUID, writes it to the cache, and retrieves it from the cache\.
 + Invoke the Lambda function and verify that it accessed the ElastiCache cluster in your VPC\.
 
+For details on using Lambda with Amazon VPC, see [Configuring a Lambda Function to Access Resources in a VPC](configuration-vpc.md)\.
+
 ## Prerequisites<a name="vpc-ec-prereqs"></a>
 
 This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started with AWS Lambda](getting-started.md) to create your first Lambda function\.

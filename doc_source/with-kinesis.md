@@ -153,4 +153,4 @@ To use a consumer, specify the consumer's ARN instead of the stream's ARN\.
 
 Lambda emits the `IteratorAge` metric when your function finishes processing a batch of records\. The metric indicates how old the last record in the batch was when processing finished\. If your function is processing new events, you can use the iterator age to estimate the latency between when a record is added, and when the function processes it\.
 
-An increasing trend in iterator age can indicate issues with your function\. For more information, see [Monitoring and Troubleshooting Lambda Applications](troubleshooting.md)\.
+An increasing trend in iterator age can indicate issues with your function\. For more information, see [AWS Lambda Metrics](monitoring-functions-metrics.md)\.

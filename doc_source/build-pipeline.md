@@ -11,6 +11,8 @@ In this tutorial, you create the following resources\.
 
 The pipeline maps a single branch in a repository to a single AWS CloudFormation stack\. You can create additional pipelines to add environments for other branches in the same repository\. You can also add stages to your pipeline for testing, staging, and manual approvals\. For more information about AWS CodePipeline, see [What is AWS CodePipeline](https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html)\.
 
+For an alternate method of creating a pipeline with AWS Serverless Application Model and AWS CloudFormation, watch [Automate Your Serverless Application Deployments](https://www.youtube.com/watch?v=0o3urdBeoII) on the Amazon Web Services YouTube channel\.
+
 **Topics**
 + [Prerequisites](#with-pipeline-prepare)
 + [Create an AWS CloudFormation Role](#with-pipeline-create-cfn-role)
@@ -120,7 +122,7 @@ exports.handler = (event, context, callback) => {
 ```
 
 **Example template\.yml**  
-The [SAM template](serverless_app.md) that defines the application\.  
+The [SAM template](gettingstarted-tools.md) that defines the application\.  
 
 ```
 AWSTemplateFormatVersion: '2010-09-09'

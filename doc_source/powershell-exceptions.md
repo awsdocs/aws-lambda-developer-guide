@@ -48,11 +48,3 @@ The error is serialized like this:
   "errorType": "AccountNotFound"
 }
 ```
-
-## Function Error Handling<a name="powershell-custom-errors"></a>
-
-You can use a custom errorType in your Lambda function and handle function errors directly \(Retry or Catch\) within an AWS Step Functions State Machine\. For more information, see [Handling Error Conditions Using a State Machine](https://docs.aws.amazon.com/step-functions/latest/dg/tutorial-handling-error-conditions.html)\. 
-
-Custom error handling makes it easier to create [serverless](https://aws.amazon.com/serverless) applications\. This feature integrates with all the languages that are supported by the Lambda [Programming Model](programming-model-v2.md)\. This allows you to design your application in the programming languages of your choice, mixing and matching as you go\.
-
-To learn more about creating your own serverless applications using AWS Step Functions and AWS Lambda, see [AWS Step Functions](https://aws.amazon.com/step-functions/)\.

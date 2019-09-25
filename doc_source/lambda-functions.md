@@ -1,4 +1,4 @@
-# Configuring AWS Lambda Functions<a name="lambda-configuration"></a>
+# Managing AWS Lambda Functions<a name="lambda-functions"></a>
 
 You can use the AWS Lambda API or console to configure settings on your Lambda functions\. [Basic function settings](resource-model.md) include the description, role, and runtime that you specify when you create a function in the Lambda console\. You can configure more settings after you create a function, or use the API to set things like the handler name, memory allocation, and security groups during creation\.
 
@@ -18,3 +18,4 @@ To use your Lambda function with AWS resources in an Amazon VPC, configure it wi
 + [AWS Lambda Layers](configuration-layers.md)
 + [Configuring a Lambda Function to Access Resources in a VPC](configuration-vpc.md)
 + [Tagging Lambda Functions](tagging.md)
++ [Accessing AWS Resources from a Lambda Function](accessing-resources.md)

@@ -1,6 +1,6 @@
 # Using AWS Lambda with Amazon S3<a name="with-s3"></a>
 
-You can use Lambda to process [notifications](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) from Amazon Simple Storage Service\. Amazon S3 can send an event to a Lambda function when an object is created or deleted\. You configure notification settings on abucket, and grant Amazon S3 permission to invoke a function on the function's resource\-based permissions policy\.
+You can use Lambda to process [notifications](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) from Amazon Simple Storage Service\. Amazon S3 can send an event to a Lambda function when an object is created or deleted\. You configure notification settings on a bucket, and grant Amazon S3 permission to invoke a function on the function's resource\-based permissions policy\.
 
 **Important**  
 If your Lambda function uses the same bucket that triggers it, it could cause the function to execute in a loop\. For example, if the bucket triggers a function each time an object is uploaded, and the function uploads an object to the bucket, then the function indirectly triggers itself\. To avoid this, use two buckets, or configure the trigger to only apply to a prefix used for incoming objects\.
