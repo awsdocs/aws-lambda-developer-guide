@@ -11,7 +11,7 @@ A Lambda function consists of code and any associated dependencies\. In addition
 1. Configure any of the available options and then choose **Save**\.
 
 **Function Settings**
-+ **Code** – The code and dependencies of your function\. For scripting languages, you can edit your function code in the embedded [editor](code-editor.md)\. To add libraries, or for languages that the editor doesn't support, upload a [deployment package](gettingstarted-concepts.md#gettingstarted-concepts-package)\.
++ **Code** – The code and dependencies of your function\. For scripting languages, you can edit your function code in the embedded [editor](code-editor.md)\. To add libraries, or for languages that the editor doesn't support, upload a [deployment package](gettingstarted-features.md#gettingstarted-features-package)\.
 + **Runtime** – The [Lambda runtime](lambda-runtimes.md) that executes your function\.
 + **Handler** – The method that the runtime executes when your function is invoked, such as `index.handler`\. The first value is the name of the file or module, and the second is the name of the method\.
 + **Environment variables** – Key\-value pairs that Lambda sets in the execution environment\. [ Use environment variables](env_variables.md) to extend your function's configuration outside of code\.

@@ -13,5 +13,6 @@ You can author functions in the Lambda console—or with an IDE toolkit, command
 + [Creating Functions Using the AWS Lambda Console Editor](code-editor.md)
 + [Using AWS Lambda with the AWS Command Line Interface](gettingstarted-awscli.md)
 + [AWS Lambda Concepts](gettingstarted-concepts.md)
++ [AWS Lambda Features](gettingstarted-features.md)
 + [Tools for Working With AWS Lambda](gettingstarted-tools.md)
 + [AWS Lambda Limits](limits.md)
