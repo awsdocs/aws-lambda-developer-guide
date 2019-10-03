@@ -1,6 +1,24 @@
 # Using AWS X\-Ray<a name="lambda-x-ray"></a>
 
-A typical Lambda\-based application consists of one or more functions triggered by events such as object uploads to Amazon S3, Amazon SNS notifications, and API actions\. Once triggered, those functions usually call downstream resources such as DynamoDB tables or Amazon S3 buckets, or make other API calls\. AWS Lambda leverages Amazon CloudWatch to automatically emit metrics and logs for all invocations of your function\. However, this mechanism might not be convenient for tracing the event source that invoked your Lambda function, or for tracing downstream calls that your function made\. For a complete overview of how tracing works, see [AWS X\-Ray](https://docs.aws.amazon.com/xray/latest/devguide/)\. 
+You can use AWS X\-Ray to visualize the components of your application, identify performance bottlenecks, and troubleshoot requests that resulted in an error\. Your Lambda functions send trace data to X\-Ray, and X\-Ray processes the data to generate a service map and searchable trace summaries\.
+
+If you've enabled X\-Ray tracing in a service that invokes your function, Lambda sends traces to X\-Ray automatically\. The upstream service, such as Amazon API Gateway, or an application hosted on Amazon EC2 that is instrumented with the X\-Ray SDK, samples incoming requests and adds a tracing header that tells Lambda to send traces or not\. For a full list of services that support active instrumentation, see [Supported AWS Services](https://docs.aws.amazon.com/xray/latest/devguide/xray-usage.html#xray-usage-codechanges) in the AWS X\-Ray Developer Guide\.
+
+To trace requests that don't have a tracing header, enable active tracing in your function's configuration\.
+
+**To enable active tracing**
+
+1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+
+1. Choose a function\.
+
+1. Under **AWS X\-Ray**, choose **Active tracing**\.
+
+1. Choose **Save**\.
+
+Your function needs permission to upload trace data to X\-Ray\. When you enable active tracing in the Lambda console, Lambda adds the required permissions to your function's [execution role](lambda-intro-execution-role.md)\. Otherwise, add the [AWSXrayWriteOnlyAccess](https://console.aws.amazon.com/iam/home#/policies/arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess) policy to the execution role\.
+
+X\-Ray applies a sampling algorithm to ensure that tracing is efficient, while still providing a representative sample of the requests that your application serves\. The default sampling rule is 1 request per second and 5 percent of additional requests\.
 
 ## Using Environment Variables to Communicate with AWS X\-Ray<a name="lambda-x-ray-env-variables"></a>
 

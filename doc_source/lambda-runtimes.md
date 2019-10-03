@@ -27,8 +27,8 @@ A runtime can support a single version of a language, multiple versions of a lan
 
 | Name | Identifier | AWS SDK for Python | Operating System | 
 | --- | --- | --- | --- | 
-|  Python 3\.7  |  `python3.7`  |  boto3\-1\.9\.42 botocore\-1\.12\.42  |  Amazon Linux  | 
-|  Python 3\.6  |  `python3.6`  |  boto3\-1\.7\.74 botocore\-1\.10\.74  |  Amazon Linux  | 
+|  Python 3\.7  |  `python3.7`  |  boto3\-1\.9\.221 botocore\-1\.12\.221  |  Amazon Linux  | 
+|  Python 3\.6  |  `python3.6`  |  boto3\-1\.9\.221 botocore\-1\.12\.221  |  Amazon Linux  | 
 |  Python 2\.7  |  `python2.7`  |  N/A  |  Amazon Linux  | 
 
 

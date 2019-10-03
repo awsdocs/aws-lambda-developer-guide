@@ -39,7 +39,7 @@ Unlike other API actions in Lambda, the name of the action in IAM \(`lambda:Invo
 
 For more information, see [AWS Lambda Permissions](lambda-permissions.md)\.
 
-**Issue:** *Funtion execution takes too long\.*
+**Issue:** *Function execution takes too long\.*
 
 If your code takes much longer to run in Lambda than on your local machine, it may be constrained by the memory or processing power available to the function\. [Configure the function with additional memory](resource-model.md) to increase both memory and CPU\.
 

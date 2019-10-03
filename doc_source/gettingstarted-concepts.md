@@ -29,7 +29,7 @@ For details on events from AWS services, see [Using AWS Lambda with Other Servic
 
 ## Concurrency<a name="gettingstarted-concepts-concurrency"></a>
 
-Concurrency is the number of requests that your function is serving at any given time\. When your function is invoked, Lambda provisions an instance if it to process the event\. When the function code finishes running, it can handle another request\. If the function is invoked again while a request is still being processed, another instance is provisioned, increasing the function's concurrency\.
+Concurrency is the number of requests that your function is serving at any given time\. When your function is invoked, Lambda provisions an instance of it to process the event\. When the function code finishes running, it can handle another request\. If the function is invoked again while a request is still being processed, another instance is provisioned, increasing the function's concurrency\.
 
 Concurrency is subject to limits at the region level\. You can also configure individual functions to limit their concurrency, or to ensure that they can reach a specific level of concurrency\. For more information, see [Reserving Concurrency for a Lambda Function](per-function-concurrency.md)\.
 
