@@ -62,7 +62,7 @@ Other services invoke your function directly\. You grant the other service permi
 + [Amazon API Gateway](with-on-demand-https.md)
 + [Amazon CloudFront \(Lambda@Edge\)](lambda-edge.md)
 + [Amazon Kinesis Data Firehose](services-kinesisfirehose.md)
-+ [Amazon Step Functions](https://github.com/awsdocs/aws-step-functions-developer-guide/blob/master/doc_source/connect-lambda.md)
++ [AWS Step Functions](https://github.com/awsdocs/aws-step-functions-developer-guide/blob/master/doc_source/connect-lambda.md)
 
 For asynchronous invocation, Lambda queues the event before passing it to your function\. The other service gets a success response as soon as the event is queued and isn't aware of what happens afterwards\. If an error occurs, Lambda handles [retries](retries-on-errors.md), and can send failed events to a [dead\-letter queue](invocation-async.md#dlq) that you configure\.
 
