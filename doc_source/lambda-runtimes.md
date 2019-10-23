@@ -29,7 +29,7 @@ A runtime can support a single version of a language, multiple versions of a lan
 | --- | --- | --- | --- | 
 |  Python 3\.7  |  `python3.7`  |  boto3\-1\.9\.221 botocore\-1\.12\.221  |  Amazon Linux  | 
 |  Python 3\.6  |  `python3.6`  |  boto3\-1\.9\.221 botocore\-1\.12\.221  |  Amazon Linux  | 
-|  Python 2\.7  |  `python2.7`  |  N/A  |  Amazon Linux  | 
+|  Python 2\.7  |  `python2.7`  |  boto3\-1\.9\.221 botocore\-1\.12\.221  |  Amazon Linux  | 
 
 
 **Ruby Runtimes**  
@@ -58,7 +58,6 @@ A runtime can support a single version of a language, multiple versions of a lan
 | Name | Identifier | Languages | Operating System | 
 | --- | --- | --- | --- | 
 |  \.NET Core 2\.1  |  `dotnetcore2.1`  |  C\# PowerShell Core 6\.0  |  Amazon Linux  | 
-|  \.NET Core 1\.0  |  `dotnetcore1.0`  |  C\#  |  Amazon Linux  | 
 
 To use other languages in Lambda, you can implement a [custom runtime](runtimes-custom.md)\. The Lambda execution environment provides a [runtime interface](runtimes-api.md) for getting invocation events and sending responses\. You can deploy a custom runtime alongside your function code, or in a [layer](configuration-layers.md)\.
 

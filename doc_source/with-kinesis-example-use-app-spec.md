@@ -21,10 +21,10 @@ Resources:
         Stream:
           Type: Kinesis
           Properties:
-            Stream: !GetAtt KinesisStream.Arn
+            Stream: !GetAtt stream.Arn
             BatchSize: 100
             StartingPosition: LATEST
-  KinesisStream:
+  stream:
     Type: AWS::Kinesis::Stream
     Properties:
       ShardCount: 1
@@ -34,7 +34,7 @@ Outputs:
     Value: !Ref LambdaFunction
   StreamARN:
     Description: "Stream ARN"
-    Value: !GetAtt KinesisStream.Arn
+    Value: !GetAtt stream.Arn
 ```
 
 The template creates a Lambda function, a Kinesis stream, and an event source mapping\. The event source mapping reads from the stream and invokes the function\.
@@ -48,7 +48,7 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: A function that processes data from a Kinesis stream.
 Resources:
-  kinesisprocessrecordpython:
+  function:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
@@ -59,28 +59,28 @@ Resources:
         Stream:
           Type: Kinesis
           Properties:
-            Stream: !GetAtt StreamConsumer.ConsumerARN
+            Stream: !GetAtt streamConsumer.ConsumerARN
             StartingPosition: LATEST
             BatchSize: 100
-  KinesisStream:
+  stream:
     Type: "AWS::Kinesis::Stream"
     Properties:
       ShardCount: 1
-  StreamConsumer:
+  streamConsumer:
     Type: "AWS::Kinesis::StreamConsumer"
     Properties:
-      StreamARN: !GetAtt KinesisStream.Arn
+      StreamARN: !GetAtt stream.Arn
       ConsumerName: "TestConsumer"
 Outputs:
   FunctionName:
     Description: "Function name"
-    Value: !Ref LambdaFunction
+    Value: !Ref function
   StreamARN:
     Description: "Stream ARN"
-    Value: !GetAtt KinesisStream.Arn
+    Value: !GetAtt stream.Arn
   ConsumerARN:
     Description: "Stream consumer ARN"
-    Value: !GetAtt StreamConsumer.ConsumerARN
+    Value: !GetAtt streamConsumer.ConsumerARN
 ```
 
 For information on how to package and deploy your serverless application using the package and deploy commands, see [Deploying Serverless Applications](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-deploying.html) in the *AWS Serverless Application Model Developer Guide*\.

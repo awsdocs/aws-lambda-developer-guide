@@ -36,10 +36,21 @@ START RequestId: c793869b-ee49-115b-a5b6-4fd21e8dedac Version: $LATEST
 }
 2019-06-07T19:11:20.564Z	c793869b-ee49-115b-a5b6-4fd21e8dedac	WARN	Event not processed.
 END RequestId: c793869b-ee49-115b-a5b6-4fd21e8dedac
-REPORT RequestId: c793869b-ee49-115b-a5b6-4fd21e8dedac	Duration: 170.19 ms	Billed Duration: 200 ms 	Memory Size: 128 MB	Max Memory Used: 73 MB
+REPORT RequestId: c793869b-ee49-115b-a5b6-4fd21e8dedac	Duration: 128.83 ms	Billed Duration: 200 ms	Memory Size: 128 MB	Max Memory Used: 74 MB	Init Duration: 166.62 ms	XRAY TraceId: 1-5d9d007f-0a8c7fd02xmpl480aed55ef0	SegmentId: 3d752xmpl1bbe37e	Sampled: true
 ```
 
-The Node\.js runtime logs the `START`, `END`, and `REPORT` lines for each invocation\. It adds a timestamp, request ID, and log level to each entry logged by the function\.
+The Node\.js runtime logs the `START`, `END`, and `REPORT` lines for each invocation\. It adds a timestamp, request ID, and log level to each entry logged by the function\. The report line provides the following details\.
+
+**Report Log**
++ **RequestId** – The unique request ID for the invocation\.
++ **Duration** – The amount of time that your function's handler method spent processing the event\.
++ **Billed Duration** – The amount of time billed for the invocation\.
++ **Memory Size** – The amount of memory allocated to the function\.
++ **Max Memory Used** – The amount of memory used by the function\.
++ **Init Duration** – For the first request served, the amount of time it took the runtime to load the function and run code outside of the handler method\.
++ **XRAY TraceId** – For traced requests, the [AWS X\-Ray trace ID](lambda-x-ray.md)\.
++ **SegmentId** – For traced requests, the X\-Ray segment ID\.
++ **Sampled** – For traced requests, the sampling result\.
 
 You can view logs in the Lambda console, in the CloudWatch Logs console, or from the command line\.
 

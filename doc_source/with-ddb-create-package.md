@@ -11,7 +11,7 @@ Sample code is available for the following languages\.
 
 ## Node\.js<a name="with-ddb-example-deployment-pkg-nodejs"></a>
 
-The following example processes messages from DynamoDB, and logs their contents\. 
+The following example processes messages from DynamoDB, and logs their contents\.
 
 **Example ProcessDynamoDBStream\.js**  
 
@@ -33,7 +33,7 @@ Zip up the sample code to create a deployment package\. For instructions, see [A
 
 ## Java 8<a name="with-ddb-example-deployment-pkg-java"></a>
 
-The following example processes messages from DynamoDB, and logs their contents\. `handleRequest` is the handler that AWS Lambda invokes and provides event data\. The handler uses the predefined `DynamodbEvent` class, which is defined in the `aws-lambda-java-events` library\. 
+The following example processes messages from DynamoDB, and logs their contents\. `handleRequest` is the handler that AWS Lambda invokes and provides event data\. The handler uses the predefined `DynamodbEvent` class, which is defined in the `aws-lambda-java-events` library\.
 
 **Example DDBEventProcessor\.java**  
 
@@ -61,7 +61,7 @@ public class DDBEventProcessor implements
 }
 ```
 
-If the handler returns normally without exceptions, Lambda considers the input batch of records as processed successfully and begins reading new records in the stream\. If the handler throws an exception, Lambda considers the input batch of records as not processed and invokes the function with the same batch of records again\. 
+If the handler returns normally without exceptions, Lambda considers the input batch of records as processed successfully and begins reading new records in the stream\. If the handler throws an exception, Lambda considers the input batch of records as not processed and invokes the function with the same batch of records again\.
 
 **Dependencies**
 + `aws-lambda-java-core`
@@ -71,7 +71,7 @@ Build the code with the Lambda library dependencies to create a deployment packa
 
 ## C\#<a name="with-ddb-example-deployment-pkg-dotnet"></a>
 
-The following example processes messages from DynamoDB, and logs their contents\. `ProcessDynamoEvent` is the handler that AWS Lambda invokes and provides event data\. The handler uses the predefined `DynamoDbEvent` class, which is defined in the `Amazon.Lambda.DynamoDBEvents` library\. 
+The following example processes messages from DynamoDB, and logs their contents\. `ProcessDynamoEvent` is the handler that AWS Lambda invokes and provides event data\. The handler uses the predefined `DynamoDbEvent` class, which is defined in the `Amazon.Lambda.DynamoDBEvents` library\.
 
 **Example ProcessingDynamoDBStreams\.cs**  
 
@@ -141,7 +141,7 @@ Zip up the sample code to create a deployment package\. For instructions, see [A
 
 ## Go<a name="with-ddb-example-deployment-pkg-go"></a>
 
-The following example processes messages from DynamoDB, and logs their contents\. 
+The following example processes messages from DynamoDB, and logs their contents\.
 
 **Example**  
 

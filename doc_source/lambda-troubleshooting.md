@@ -30,9 +30,13 @@ When you upload a file directly with the AWS CLI, AWS SDK, or otherwise, the bin
 
 ## Invocation<a name="troubleshooting-invocation"></a>
 
+**Issue:** *Function is invoked continuously in a loop\.*
+
+This typically occurs when your function manages resources in the same AWS service that triggers it\. For example, it is possible to create a function that stores an object in an Amazon S3 bucket that is configured with a [notification that invokes the function again](with-s3.md)\. To stop the function from running, choose **Throttle** on the [function configuration page](resource-model.md)\. Then identify the code path or configuration error that caused the recursive invocation\.
+
 **Error:** *User: arn:aws:iam::123456789012:user/developer is not authorized to perform: lambda:InvokeFunction on resource: my\-function*
 
-Your IAM user, or the role that you assume, needs permission to invoke a function\. This requirement also applies to Lambda functions and other compute resources that invoke functions\. Add the **AWSLambdaRole** managed policy, or a custom policy that allows the `lambda:InvokeFunction` action on the target function, to your IAM user\. 
+Your IAM user, or the role that you assume, needs permission to invoke a function\. This requirement also applies to Lambda functions and other compute resources that invoke functions\. Add the **AWSLambdaRole** managed policy, or a custom policy that allows the `lambda:InvokeFunction` action on the target function, to your IAM user\.
 
 **Note**  
 Unlike other API actions in Lambda, the name of the action in IAM \(`lambda:InvokeFunction`\) does not match the name of the API action \(`Invoke`\) for invoking a function\.

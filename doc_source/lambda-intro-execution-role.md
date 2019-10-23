@@ -13,6 +13,8 @@ An AWS Lambda function's execution role grants it permission to access AWS servi
    + **Permissions** – **AWSLambdaBasicExecutionRole**, **AWSXrayWriteOnlyAccess**
    + **Role name** – **lambda\-role**
 
+   For detailed instructions, see [Creating a Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html#roles-creatingrole-service-console) in the IAM User Guide\.
+
 You can add or remove permissions from a function's execution role at any time, or configure your function to use a different role\. Add permissions for any services that your function calls with the AWS SDK, and for services that Lambda uses to enable optional features\.
 
 The following managed policies provide permissions that are required to use Lambda features:

@@ -38,7 +38,11 @@ The code in this tutorial manages spot requests that launch Amazon EC2 instances
 + `ec2:CancelSpotRequest`
 + `ec2:TerminateInstances`
 
-To run the sample application in AWS, you need permission to use Lambda, Amazon S3 and AWS CloudFormation\. See [Permissions](https://docs.aws.amazon.com/lambda/latest/dg/lambda-permissions.xml) in the Lambda developer guide for more information\.
+To run the sample application in AWS, you need [permission to use Lambda](lambda-permissions.md) and the following services\.
++ [AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html) \([pricing](https://aws.amazon.com/cloudformation/pricing/)\)
++ [Amazon Elastic Compute Cloud](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-policies-for-amazon-ec2.html) \([pricing](https://aws.amazon.com/ec2/pricing/)\)
+
+Standard charges apply for each service\.
 
 ## Review the Code<a name="services-ec2-tutorial-code"></a>
 

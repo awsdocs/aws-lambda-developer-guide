@@ -23,7 +23,7 @@ For more information, see [AWS Lambda Runtimes](lambda-runtimes.md)\.
 
 ## Event<a name="gettingstarted-concepts-event"></a>
 
-An event is a JSON formatted document that contains data for a function to process\. The Lambda runtime converts the function to an object and passes it to your function code\. When you invoke a function, you determine the structure and contents of the event\. When an AWS service invokes your function, the service defines the event\.
+An event is a JSON formatted document that contains data for a function to process\. The Lambda runtime converts the event to an object and passes it to your function code\. When you invoke a function, you determine the structure and contents of the event\. When an AWS service invokes your function, the service defines the event\.
 
 For details on events from AWS services, see [Using AWS Lambda with Other Services](lambda-services.md)\.
 

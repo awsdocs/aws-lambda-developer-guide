@@ -72,7 +72,24 @@ $ aws lambda invoke --function-name arn:aws:lambda:us-west-2:123456789012:functi
 
 You can then update the alias to point to new versions as needed\. When you update the alias, the other account doesn't need to change its code to use the new version, and it only has permission to invoke the version that you choose\.
 
-You can grant cross\-account access for any API action that [operates on an existing function](lambda-api-permissions-ref.md#permissions-resources-function)\. For example, you could grant access to `lambda:ListAliases` to let an account get a list of aliases, or `lambda:GetFunction` to let them download your function code\. Add each permission separately, or use `lambda:*` to grant access to all actions for the specified function\.
+You can grant cross\-account access for most API actions that [operate on an existing function](lambda-api-permissions-ref.md#permissions-resources-function)\. For example, you could grant access to `lambda:ListAliases` to let an account get a list of aliases, or `lambda:GetFunction` to let them download your function code\. Add each permission separately, or use `lambda:*` to grant access to all actions for the specified function\.
+
+**Cross Account APIs**
++ [Invoke](API_Invoke.md)
++ [GetFunction](API_GetFunction.md)
++ [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)
++ [GetFunctionConfiguration](API_GetFunctionConfiguration.md)
++ [DeleteFunction](API_DeleteFunction.md)
++ [PublishVersion](API_PublishVersion.md)
++ [ListVersionsByFunction](API_ListVersionsByFunction.md)
++ [CreateAlias](API_CreateAlias.md)
++ [GetAlias](API_GetAlias.md)
++ [ListAliases](API_ListAliases.md)
++ [UpdateAlias](API_UpdateAlias.md)
++ [DeleteAlias](API_DeleteAlias.md)
++ [GetPolicy](API_GetPolicy.md)
++ [PutFunctionConcurrency](API_PutFunctionConcurrency.md)
++ [PutFunctionConcurrency](API_DeleteFunctionConcurrency.md)
 
 To grant other accounts permission for multiple functions, or for actions that don't operate on a function, use [roles](access-control-identity-based.md)\.
 

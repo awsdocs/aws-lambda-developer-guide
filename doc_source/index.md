@@ -96,6 +96,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Tutorial: Configuring a Lambda Function to Access Amazon ElastiCache in an Amazon VPC](services-elasticache-tutorial.md)
    + [Using AWS Lambda with Amazon EC2](services-ec2.md)
       + [Tutorial: Using AWS SDK for .NET to Manage Amazon EC2 Spot Instances](services-ec2-tutorial.md)
+   + [Using AWS Lambda with AWS IoT Events](services-iotevents.md)
    + [Using AWS Lambda with Amazon Kinesis](with-kinesis.md)
       + [Tutorial: Using AWS Lambda with Amazon Kinesis](with-kinesis-example.md)
       + [Sample Function Code](with-kinesis-create-package.md)

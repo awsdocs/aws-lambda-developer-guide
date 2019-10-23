@@ -1,5 +1,10 @@
 # Sample Function Code<a name="with-kinesis-create-package"></a>
 
+To process events from Amazon Kinesis, iterate through the records included in the event object and decode the Base64\-encoded data included in each\.
+
+**Note**  
+The code on this page does not support [aggregated records](https://docs.aws.amazon.com/kinesis/latest/dev/kinesis-kpl-concepts.html#kinesis-kpl-concepts-aggretation)\. You can disable aggregation in the Kinesis Producer Library [configuration](https://docs.aws.amazon.com/kinesis/latest/dev/kinesis-kpl-config.html), or use the [Kinesis Record Aggregation library](https://github.com/awslabs/kinesis-aggregation) to deaggregate records\.
+
 Sample code is available for the following languages\.
 
 **Topics**

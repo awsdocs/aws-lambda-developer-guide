@@ -2,7 +2,7 @@
 
 You can use a Lambda function to process Amazon Simple Notification Service notifications\. Amazon SNS supports Lambda functions as a target for messages sent to a topic\. You can subscribe your function to topics in the same account or in other AWS accounts\.
 
-Amazon SNS invokes your [asynchronously](invocation-async.md) with an event that contains a message and metadata\.
+Amazon SNS invokes your function [asynchronously](invocation-async.md) with an event that contains a message and metadata\.
 
 **Example Amazon SNS Message Event**  
 

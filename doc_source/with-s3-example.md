@@ -311,6 +311,9 @@ In this step, you add the remaining configuration so that Amazon S3 can publish 
 
 Add notification configuration on the source bucket to request Amazon S3 to publish object\-created events to Lambda\.
 
+**Important**  
+This procedure configures the bucket to invoke your function every time an object is created in it\. Ensure that you configure this option only on the source bucket and do not create objects in the source bucket from the function that is triggered\. Otherwise, your function could cause itself to be [invoked continuously in a loop](with-s3.md#services-s3-runaway)\.
+
 **To configure notifications**
 
 1. Open the [Amazon S3 console](https://console.aws.amazon.com/s3)\.

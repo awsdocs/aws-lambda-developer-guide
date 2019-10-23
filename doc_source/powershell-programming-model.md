@@ -8,7 +8,6 @@ The following sections explain how [common programming patterns and core concept
 | Name | Identifier | Languages | Operating System | 
 | --- | --- | --- | --- | 
 |  \.NET Core 2\.1  |  `dotnetcore2.1`  |  C\# PowerShell Core 6\.0  |  Amazon Linux  | 
-|  \.NET Core 1\.0  |  `dotnetcore1.0`  |  C\#  |  Amazon Linux  | 
 
 Note that Lambda functions in PowerShell require PowerShell Core 6\.0\. Windows PowerShell isn't supported\.
 
