@@ -77,8 +77,8 @@ You can grant cross\-account access for most API actions that [operate on an exi
 **Cross Account APIs**
 + [Invoke](API_Invoke.md)
 + [GetFunction](API_GetFunction.md)
-+ [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)
 + [GetFunctionConfiguration](API_GetFunctionConfiguration.md)
++ [UpdateFunctionCode](API_UpdateFunctionCode.md)
 + [DeleteFunction](API_DeleteFunction.md)
 + [PublishVersion](API_PublishVersion.md)
 + [ListVersionsByFunction](API_ListVersionsByFunction.md)
@@ -89,7 +89,10 @@ You can grant cross\-account access for most API actions that [operate on an exi
 + [DeleteAlias](API_DeleteAlias.md)
 + [GetPolicy](API_GetPolicy.md)
 + [PutFunctionConcurrency](API_PutFunctionConcurrency.md)
-+ [PutFunctionConcurrency](API_DeleteFunctionConcurrency.md)
++ [DeleteFunctionConcurrency](API_DeleteFunctionConcurrency.md)
++ [ListTags](API_ListTags.md)
++ [TagResource](API_TagResource.md)
++ [UntagResource](API_UntagResource.md)
 
 To grant other accounts permission for multiple functions, or for actions that don't operate on a function, use [roles](access-control-identity-based.md)\.
 
