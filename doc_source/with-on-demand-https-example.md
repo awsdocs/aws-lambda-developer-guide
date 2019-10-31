@@ -365,7 +365,7 @@ $ aws apigateway create-deployment --rest-api-id $API --stage-name prod
 
 Now that you have an API created using Amazon API Gateway and you've deployed it, you can test\. First, you need to add permissions so that Amazon API Gateway can invoke your Lambda function when you send HTTP request to the `POST` method\.
 
-To do this, you need to add a permissions to the permissions policy associated with your Lambda function\. Run the following `add-permission` AWS Lambda command to grant the Amazon API Gateway service principal \(`apigateway.amazonaws.com`\) permissions to invoke your Lambda function \(`LambdaFunctionOverHttps`\)\. 
+To do this, you need to add a permission to the permissions policy associated with your Lambda function\. Run the following `add-permission` AWS Lambda command to grant the Amazon API Gateway service principal \(`apigateway.amazonaws.com`\) permissions to invoke your Lambda function \(`LambdaFunctionOverHttps`\)\. 
 
 ```
 $ aws lambda add-permission --function-name LambdaFunctionOverHttps \
