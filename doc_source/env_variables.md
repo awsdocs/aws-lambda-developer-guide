@@ -44,7 +44,7 @@ Function versioning provides a way to manage your Lambda function code by enabli
 
 As application and configuration requirements evolve, you can create new versions of your Lambda function and update the environment variables to meet those requirements prior to the newest version being published\. The current version of your function is $LATEST\. 
 
-In addition, you can create aliases, which are pointers to a particular version of your function\. The advantage of aliases is that if you need to roll back to a previous function version, you point the alias to that version, which contains the environment variables required for that version\. For more information, see [AWS Lambda Function Versioning and Aliases](versioning-aliases.md)\.
+In addition, you can create aliases, which are pointers to a particular version of your function\. The advantage of aliases is that if you need to roll back to a previous function version, you point the alias to that version, which contains the environment variables required for that version\. For more information, see [AWS Lambda Function Versions](configuration-versions.md)\.
 
 ## Environment Variable Encryption<a name="env_encrypt"></a>
 

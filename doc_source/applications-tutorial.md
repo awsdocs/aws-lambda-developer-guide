@@ -2,9 +2,6 @@
 
 You can use the Lambda console to create an application with an integrated continuous delivery pipeline\. With continuous delivery, every change that you push to your source control repository triggers a pipeline that builds and deploys your application automatically\. The Lambda console provides templates to build common application types with sample code and templates that create supporting resources\.
 
-**Note**  
-This feature is in beta\.
-
 In this tutorial, you create the following resources\.
 + **Application** – A Node\.js Lambda function, build specification, and AWS Serverless Application Model \(AWS SAM\) template\.
 + **Pipeline** – An AWS CodePipeline pipeline that connects the other resources to enable continuous delivery\.
@@ -186,7 +183,7 @@ In order for the function to use the DynamoDB permission that you added to its e
 
 1. Follow the instructions shown to update the boundary to allow access to the new table\.
 
-For more information about permissions boundaries, see [Permissions Boundaries](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html) in the IAM user guide\.
+For more information about permissions boundaries, see [Using AWS Lambda Application Permissions Boundaries](permissions-boundary.md)\.
 
 ## Update the Function Code<a name="applications-tutorial-code"></a>
 

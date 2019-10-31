@@ -5,7 +5,7 @@ When Lambda runs your function, it passes a context object to the [handler](java
 **Context Methods**
 + `getRemainingTimeInMillis()` – Returns the number of milliseconds left before the execution times out\.
 + `getFunctionName()` – Returns the name of the Lambda function\.
-+ `getFunctionVersion()` – Returns the [version](versioning-aliases.md) of the function\.
++ `getFunctionVersion()` – Returns the [version](configuration-versions.md) of the function\.
 + `getInvokedFunctionArn()` – Returns the Amazon Resource Name \(ARN\) that's used to invoke the function\. Indicates if the invoker specified a version number or alias\.
 + `getMemoryLimitInMB()` – Returns the amount of memory that's allocated for the function\.
 + `getAwsRequestId()` – Returns the identifier of the invocation request\.

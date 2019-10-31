@@ -34,6 +34,8 @@ On Linux and macOS, use your preferred shell and package manager\. On Windows 10
 
 Install NPM to manage the function's dependencies\.
 
+The tutorial uses AWS CLI commands to create and invoke the Lambda function\. Install the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) and [configure it with your AWS credentials](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) 
+
 ## Create the Execution Role<a name="with-s3-create-execution-role"></a>
 
 Create the [execution role](lambda-intro-execution-role.md) that gives your function permission to access AWS resources\.

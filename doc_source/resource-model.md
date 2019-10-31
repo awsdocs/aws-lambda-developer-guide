@@ -31,7 +31,7 @@ A Lambda function consists of code and any associated dependencies\. In addition
 
   Reserved concurrency applies to the entire function, including all versions and aliases\.
 
-Function settings can only be changed on the unpublished version of a function\. When you publish a version, code and most settings are locked to ensure a consistent experience for users of that version\. Use [aliases](versioning-aliases.md) to propagate configuration changes in a controlled manner\.
+Function settings can only be changed on the unpublished version of a function\. When you publish a version, code and most settings are locked to ensure a consistent experience for users of that version\. Use [aliases](configuration-aliases.md) to propagate configuration changes in a controlled manner\.
 
 To configure functions with the Lambda API, use the following actions\.
 + [UpdateFunctionCode](API_UpdateFunctionCode.md) – Update the function's code\.

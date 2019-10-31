@@ -6,7 +6,7 @@ The Lambda context library provides the following global variables, methods, and
 
 **Global Variables**
 + `FunctionName` – The name of the Lambda function\.
-+ `FunctionVersion` – The [version](versioning-aliases.md) of the function\.
++ `FunctionVersion` – The [version](configuration-versions.md) of the function\.
 + `MemoryLimitInMB` – The amount of memory that's allocated for the function\.
 + `LogGroupName` – The log group for the function\.
 + `LogStreamName` – The log stream for the function instance\.

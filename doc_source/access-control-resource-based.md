@@ -60,7 +60,7 @@ The resource\-based policy grants permission for the other account to access the
 
 To limit access to a user, group, or role in another account, specify the full ARN of the identity as the principal\. For example, `arn:aws:iam::123456789012:user/developer`\.
 
-The [alias](aliases-intro.md) limits which version the other account can invoke\. It requires the other account to include the alias in the function ARN\.
+The [alias](configuration-aliases.md) limits which version the other account can invoke\. It requires the other account to include the alias in the function ARN\.
 
 ```
 $ aws lambda invoke --function-name arn:aws:lambda:us-west-2:123456789012:function:my-function:prod out

@@ -12,7 +12,7 @@ $ aws lambda invoke --function-name my-function --payload '{ "key": "value" }' r
 
 The `payload` is a string that contains an event in JSON format\. `response.json` is the name of the file where the AWS CLI writes the response from the function\. If the function returns an object or error, the response is the object or error in JSON format\. If the function exits without error, the response is `null`\.
 
-The output from the command, which is displayed in the terminal, includes information from headers in the response from Lambda\. This includes the version that processed the event \(useful when you use [aliases](versioning-aliases.md)\), and the status code returned by Lambda\. If Lambda was able to run the function, the status code is 200, even if the function returned an error\.
+The output from the command, which is displayed in the terminal, includes information from headers in the response from Lambda\. This includes the version that processed the event \(useful when you use [aliases](configuration-aliases.md)\), and the status code returned by Lambda\. If Lambda was able to run the function, the status code is 200, even if the function returned an error\.
 
 **Note**  
 For functions with a long timeout, your client might be disconnected during synchronous invocation while it waits for a response\. Configure your HTTP client, SDK, firewall, proxy, or operating system to allow for long connections with timeout or keep\-alive settings\.

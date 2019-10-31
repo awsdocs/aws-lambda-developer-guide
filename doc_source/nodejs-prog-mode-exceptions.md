@@ -59,4 +59,4 @@ REPORT RequestId: 8bbbfb91-a3ff-4502-b1b7-cb8f6658de64  Duration: 76.85 ms      
 
 For more information about logs, see [AWS Lambda Function Logging in Node\.js](nodejs-prog-model-logging.md)\.
 
-Depending on the event source, AWS Lambda might retry the failed Lambda function\. For example, if Kinesis is the event source, AWS Lambda retres the failed invocation until the Lambda function succeeds or the records in the stream expire\. For more information on retries, see [Error Handling and Automatic Retries in AWS Lambda](retries-on-errors.md)\.
+Depending on the event source, AWS Lambda might retry the failed Lambda function\. For example, if Kinesis is the event source, AWS Lambda retries the failed invocation until the Lambda function succeeds or the records in the stream expire\. For more information on retries, see [Error Handling and Automatic Retries in AWS Lambda](retries-on-errors.md)\.

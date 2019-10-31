@@ -7,7 +7,7 @@ When Lambda runs your function, it passes a context object to the [handler](pyth
 
 **Context Properties**
 + `function_name` – The name of the Lambda function\.
-+ `function_version` – The [version](versioning-aliases.md) of the function\.
++ `function_version` – The [version](configuration-versions.md) of the function\.
 + `invoked_function_arn` – The Amazon Resource Name \(ARN\) that's used to invoke the function\. Indicates if the invoker specified a version number or alias\.
 + `memory_limit_in_mb` – The amount of memory that's allocated for the function\.
 + `aws_request_id` – The identifier of the invocation request\.

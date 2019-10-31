@@ -6,6 +6,8 @@ AWS Lambda provides a management console and API for managing and invoking funct
 + [Programming Model](#gettingstarted-features-programmingmodel)
 + [Scaling](#gettingstarted-features-scaling)
 + [Deployment Package](#gettingstarted-features-package)
++ [Function Blueprints](#gettingstarted-features-blueprints)
++ [Application Templates](#gettingstarted-features-templates)
 + [Layers](#gettingstarted-features-layers)
 
 ## Programming Model<a name="gettingstarted-features-programmingmodel"></a>
@@ -34,7 +36,7 @@ For a hands\-on introduction to the programming model in your preferred programm
 
 Lambda manages the infrastructure that runs your code, scaling automatically in response to incoming requests\. When your function is invoked more quickly than a single instance of your function can process events, Lambda scales up by running additional instances\. When traffic subsides, inactive instances are frozen or terminated\. You only pay for the time that your function code is actually processing events\.
 
-For more information, see [AWS Lambda Function Scaling](scaling.md)
+For more information, see [AWS Lambda Function Scaling](scaling.md)\.
 
 ## Deployment Package<a name="gettingstarted-features-package"></a>
 
@@ -48,6 +50,20 @@ For language specific instructions, see the following topics\.
 +  [AWS Lambda Deployment Package in Go](lambda-go-how-to-create-deployment-package.md) 
 +  [AWS Lambda Deployment Package in C\#](lambda-dotnet-how-to-create-deployment-package.md) 
 +  [AWS Lambda Deployment Package in PowerShell](lambda-powershell-how-to-create-deployment-package.md) 
+
+## Function Blueprints<a name="gettingstarted-features-blueprints"></a>
+
+When you create a function in the Lambda console, you can choose to start from scratch, use a blueprint, or deploy an application from the [AWS Serverless Application Repository](https://docs.aws.amazon.com/serverlessrepo/latest/devguide/what-is-serverlessrepo.html)\. A blueprint provides sample code that shows how to use Lambda with an AWS service or popular 3rd party application\. Blueprints include sample code and function configuration presets for Node\.js and Python runtimes\.
+
+Blueprints are provided for use under the [Creative Commons Zero](https://spdx.org/licenses/CC0-1.0.html) license\. They are only available in the Lambda console\.
+
+## Application Templates<a name="gettingstarted-features-templates"></a>
+
+You can use the Lambda console to create an application with a continous delivery pipeline\. Application templates in the Lambda console include code for one or more functions, an application template that defines functions and supporting AWS resources, and an infrastructure template that defines an AWS CodePipeline pipeline with build and deploy stages that run every time you push changes to the included Git repository\.
+
+Application templates are provided for use under the [MIT No Attribution](https://spdx.org/licenses/MIT-0.html) license\. They are only available in the Lambda console\.
+
+For more information, see [Creating an Application with Continuous Delivery in the Lambda Console](applications-tutorial.md)\.
 
 ## Layers<a name="gettingstarted-features-layers"></a>
 
