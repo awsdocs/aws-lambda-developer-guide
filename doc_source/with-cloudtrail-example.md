@@ -114,8 +114,8 @@ The following Lambda function processes CloudTrail logs, and sends a notificatio
    var zlib = require('zlib');
    var async = require('async');
    
-   var EVENT_SOURCE_TO_TRACK = /sns.amazonaws.com/;  
-   var EVENT_NAME_TO_TRACK   = /CreateTopic/; 
+   var EVENT_SOURCE_TO_TRACK = /sns.amazonaws.com/;
+   var EVENT_NAME_TO_TRACK   = /CreateTopic/;
    var DEFAULT_SNS_REGION  = 'us-east-2';
    var SNS_TOPIC_ARN       = 'arn:aws:sns:us-west-2:123456789012:my-topic';
    
@@ -128,7 +128,7 @@ The following Lambda function processes CloudTrail logs, and sends a notificatio
    exports.handler = function(event, context, callback) {
        var srcBucket = event.Records[0].s3.bucket.name;
        var srcKey = event.Records[0].s3.object.key;
-      
+   
        async.waterfall([
            function fetchLogFromS3(next){
                console.log('Fetching compressed log from S3...');
@@ -159,7 +159,7 @@ The following Lambda function processes CloudTrail logs, and sends a notificatio
                        return record.eventSource.match(EVENT_SOURCE_TO_TRACK)
                            && record.eventName.match(EVENT_NAME_TO_TRACK);
                    });
-                   
+   
                console.log('Publishing ' + matchingRecords.length + ' notification(s) in parallel...');
                async.each(
                    matchingRecords,
@@ -167,7 +167,7 @@ The following Lambda function processes CloudTrail logs, and sends a notificatio
                        console.log('Publishing notification: ', record);
                        sns.publish({
                            Message:
-                               'Alert... SNS topic created: \n TopicARN=' + record.responseElements.topicArn + '\n\n' + 
+                               'Alert... SNS topic created: \n TopicARN=' + record.responseElements.topicArn + '\n\n' +
                                JSON.stringify(record),
                            TopicArn: SNS_TOPIC_ARN
                        }, publishComplete);
@@ -202,7 +202,7 @@ The following Lambda function processes CloudTrail logs, and sends a notificatio
 
    ```
    $ aws lambda create-function --function-name CloudTrailEventProcessing \
-   --zip-file fileb://function.zip --handler index.handler --runtime nodejs8.10 --timeout 10 --memory-size 1024 \
+   --zip-file fileb://function.zip --handler index.handler --runtime nodejs12.x --timeout 10 --memory-size 1024 \
    --role arn:aws:iam::123456789012:role/lambda-cloudtrail-role
    ```
 

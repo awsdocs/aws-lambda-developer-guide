@@ -22,7 +22,7 @@ In most cases, the end\-of\-life date of a language version or operating system 
 + **Node\.js** – [github\.com](https://github.com/nodejs/Release#release-schedule)
 + **Python** – [devguide\.python\.org](https://devguide.python.org/#status-of-python-branches)
 + **Ruby** – [www\.ruby\-lang\.org](https://www.ruby-lang.org/en/downloads/branches/)
-+ **Java** – [www\.oracle\.com](https://www.oracle.com/technetwork/java/java-se-support-roadmap.html)
++ **Java** – [www\.oracle\.com](https://www.oracle.com/technetwork/java/java-se-support-roadmap.html) and [aws\.amazon\.com/corretto](https://aws.amazon.com/corretto/faqs/) 
 + **Go** – [golang\.org](https://golang.org/s/release)
 + **\.NET Core** – [dotnet\.microsoft\.com](https://dotnet.microsoft.com/platform/support/policy/dotnet-core)
 

@@ -4,7 +4,7 @@ Sample code is available for the following languages\.
 
 **Topics**
 + [Node\.js 8](#with-s3-example-deployment-pkg-nodejs)
-+ [Java 8](#with-s3-example-deployment-pkg-java)
++ [Java 11](#with-s3-example-deployment-pkg-java)
 + [Python 3](#with-s3-example-deployment-pkg-python)
 
 ## Node\.js 8<a name="with-s3-example-deployment-pkg-nodejs"></a>
@@ -150,7 +150,7 @@ The deployment package is a \.zip file containing your Lambda function code and 
 
 1. Zip the index\.js file and the node\_modules folder as `CreateThumbnail.zip`\.
 
-## Java 8<a name="with-s3-example-deployment-pkg-java"></a>
+## Java 11<a name="with-s3-example-deployment-pkg-java"></a>
 
 The following is example Java code that reads incoming Amazon S3 events and creates a thumbnail\. Note that it implements the `RequestHandler` interface provided in the `aws-lambda-java-core` library\. Therefore, at the time you create a Lambda function you specify the class as the handler \(that is, `example.handler`\)\. For more information about using interfaces to provide a handler, see [Leveraging Predefined Interfaces for Creating Handler \(Java\)](java-handler-using-predefined-interfaces.md)\.
 
@@ -350,7 +350,7 @@ def handler(event, context):
 
 1. Add the contents of `lib` and `lib64` site\-packages to your \.zip file\.
 
-   `$ cd $VIRTUAL_ENV/lib/python3.7/site-packages`
+   `$ cd $VIRTUAL_ENV/lib/python3.8/site-packages`
 
    `$ zip -r ~/CreateThumbnail.zip . `
 

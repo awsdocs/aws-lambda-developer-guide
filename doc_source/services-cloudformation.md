@@ -64,7 +64,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       InlineCode: |
         var aws = require('aws-sdk');
         var response = require('cfn-response');

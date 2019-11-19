@@ -86,16 +86,16 @@ var util = require('util');
 var MAX_WIDTH  = 100;
 var MAX_HEIGHT = 100;
 
-// get reference to S3 client 
+// get reference to S3 client
 var s3 = new AWS.S3();
- 
+
 exports.handler = function(event, context, callback) {
     // Read options from the event.
     console.log("Reading options from event:\n", util.inspect(event, {depth: 5}));
     var srcBucket = event.Records[0].s3.bucket.name;
     // Object key may have spaces or unicode non-ASCII characters.
     var srcKey    =
-    decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, " "));  
+    decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, " "));
     var dstBucket = srcBucket + "resized";
     var dstKey    = "resized-" + srcKey;
 
@@ -215,7 +215,7 @@ The deployment package is a \.zip file containing your Lambda function code and 
 
   ```
   $ aws lambda create-function --function-name CreateThumbnail \
-  --zip-file fileb://function.zip --handler index.handler --runtime nodejs8.10 \
+  --zip-file fileb://function.zip --handler index.handler --runtime nodejs12.x \
   --timeout 10 --memory-size 1024 \
   --role arn:aws:iam::123456789012:role/lambda-s3-role
   ```
@@ -236,34 +236,34 @@ In this step, you invoke the Lambda function manually using sample Amazon S3 eve
 
    ```
    {
-     "Records":[  
-       {  
+     "Records":[
+       {
          "eventVersion":"2.0",
          "eventSource":"aws:s3",
          "awsRegion":"us-west-2",
          "eventTime":"1970-01-01T00:00:00.000Z",
          "eventName":"ObjectCreated:Put",
-         "userIdentity":{  
+         "userIdentity":{
            "principalId":"AIDAJDPLRKLG7UEXAMPLE"
          },
-         "requestParameters":{  
+         "requestParameters":{
            "sourceIPAddress":"127.0.0.1"
          },
-         "responseElements":{  
+         "responseElements":{
            "x-amz-request-id":"C3D13FE58DE4C810",
            "x-amz-id-2":"FMyUVURIY8/IgAtTv8xRjskZQpcIZ9KG4V5Wp6S7S/JRWeUWerMUE5JgHvANOjpD"
          },
-         "s3":{  
+         "s3":{
            "s3SchemaVersion":"1.0",
            "configurationId":"testConfigRule",
-           "bucket":{  
+           "bucket":{
              "name":"sourcebucket",
-             "ownerIdentity":{  
+             "ownerIdentity":{
                "principalId":"A3NL1KOZZKExample"
              },
              "arn":"arn:aws:s3:::sourcebucket"
            },
-           "object":{  
+           "object":{
              "key":"HappyFace.jpg",
              "size":1024,
              "eTag":"d41d8cd98f00b204e9800998ecf8427e",

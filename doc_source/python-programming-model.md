@@ -9,6 +9,7 @@ Lambda supports the following Python runtimes\.
 
 | Name | Identifier | AWS SDK for Python | Operating System | 
 | --- | --- | --- | --- | 
+|  Python 3\.8  |  `python3.8`  |  boto3\-1\.10\.2 botocore\-1\.13\.2  |  Amazon Linux 2  | 
 |  Python 3\.7  |  `python3.7`  |  boto3\-1\.9\.221 botocore\-1\.12\.221  |  Amazon Linux  | 
 |  Python 3\.6  |  `python3.6`  |  boto3\-1\.9\.221 botocore\-1\.12\.221  |  Amazon Linux  | 
 |  Python 2\.7  |  `python2.7`  |  boto3\-1\.9\.221 botocore\-1\.12\.221  |  Amazon Linux  | 
@@ -38,7 +39,7 @@ You can add permissions to the role later, or swap it out for a different role t
 
 1. Configure the following settings:
    + **Name** – **my\-function**\.
-   + **Runtime** – **Python 3\.7**\.
+   + **Runtime** – **Python 3\.8**\.
    + **Role** – **Choose an existing role**\.
    + **Existing role** – **lambda\-role**\.
 

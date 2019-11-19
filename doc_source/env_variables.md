@@ -18,14 +18,14 @@ Note the **Encryption configuration** section\. You will learn more about using 
 
 You can also use the AWS CLI to create Lambda functions that contain environment variables\. For more details, see the [CreateFunction](API_CreateFunction.md) and [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md) APIs\. Environment variables are also supported when creating and updating functions using AWS CloudFormation\. Environment variables can also be used to configure settings specific to the language runtime or a library included in your function\. For example, you can modify `PATH` to specify a directory where executables are stored\. You can also set runtime\-specific environment variables, such as `PYTHONPATH` for Python or `NODE_PATH` for Node\.js\. 
 
-The following example creates a new Lambda function that sets the `LD_LIBRARY_PATH` environment variable, which is used to specify a directory where shared libraries are dynamically loaded at runtime\. In this example, the Lambda function code uses the shared library in the `/usr/bin/test/lib64` directory\. Note that the `Runtime` parameter uses `nodejs6.10` but you can also specify `nodejs8.10`\. 
+The following example creates a new Lambda function that sets the `LD_LIBRARY_PATH` environment variable, which is used to specify a directory where shared libraries are dynamically loaded at runtime\. In this example, the Lambda function code uses the shared library in the `/usr/bin/test/lib64` directory\. 
 
 ```
 $ aws lambda create-function --function-name myTestFunction \
     --zip-file fileb://package.zip \
     --role role-arn \
     --environment Variables="{LD_LIBRARY_PATH=/usr/bin/test/lib64}" \
-    --handler index.handler --runtime nodejs6.10
+    --handler index.handler --runtime nodejs12.x
 ```
 
 ## Rules for Naming Environment Variables<a name="env_limits"></a>
@@ -70,6 +70,6 @@ As mentioned in the previous section, when you deploy your Lambda function, all 
 If your function configuration exceeds 4KB, or you use environment variable keys reserved by AWS Lambda, then your update or create operation will fail with a configuration error\. During execution time, it's possible that the encryption/decryption of environment variables can fail\. If AWS Lambda is unable to decrypt the environment variables due to an AWS KMS service exception, AWS KMS will return an exception message explaining what the error conditions are and what, if any, remedies you can apply to address the issue\. These will be logged to your function log stream in Amazon CloudWatch logs\. For example, if the KMS key you are using to access the environment variables is disabled, you will see the following error: 
 
 ```
-Lambda was unable to configure access to your environment variables because the KMS key used is disabled. 
+Lambda was unable to configure access to your environment variables because the KMS key used is disabled.
             Please check your KMS key settings.
 ```

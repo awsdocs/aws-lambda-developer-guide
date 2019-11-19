@@ -35,7 +35,7 @@ When you create a new Lambda function, you can include tags with the `--tags` op
 
 ```
 $ aws lambda create-function --function-name my-function
---handler index.js --runtime nodejs8.10 \
+--handler index.js --runtime nodejs12.x \
 --role role-arn \
 --tags "DEPARTMENT=Department A"
 ```

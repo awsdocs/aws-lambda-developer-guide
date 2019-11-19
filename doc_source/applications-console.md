@@ -4,9 +4,7 @@ The AWS Lambda console helps you monitor and manage your [Lambda applications](d
 
 **To view a Lambda application**
 
-1. Open the [Lambda console](https://console.aws.amazon.com/lambda)\.
-
-1. Choose **Applications**\.
+1. Open the Lambda console [Applications page](https://console.aws.amazon.com/lambda/home#/applications)\.
 
 1. Choose an application\.  
 ![\[A monitoring widget.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/applications-page.png)
@@ -21,9 +19,7 @@ The **Monitoring** tab shows an Amazon CloudWatch dashboard with aggregate metri
 
 **To monitor a Lambda application**
 
-1. Open the [Lambda console](https://console.aws.amazon.com/lambda)\.
-
-1. Choose **Applications**\.
+1. Open the Lambda console [Applications page](https://console.aws.amazon.com/lambda/home#/applications)\.
 
 1. Choose **Monitoring**\.
 
@@ -81,9 +77,7 @@ You can get the definition for any of the widgets in the default monitoring dash
 
 **To view a widget definition**
 
-1. Open the [Lambda console](https://console.aws.amazon.com/lambda)\.
-
-1. Choose **Applications**\.
+1. Open the Lambda console [Applications page](https://console.aws.amazon.com/lambda/home#/applications)\.
 
 1. Choose an application that has the standard dashboard\.
 

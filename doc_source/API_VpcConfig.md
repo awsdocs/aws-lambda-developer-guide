@@ -1,6 +1,6 @@
 # VpcConfig<a name="API_VpcConfig"></a>
 
-The VPC security groups and subnets that are attached to a Lambda function\.
+The VPC security groups and subnets that are attached to a Lambda function\. For more information, see [VPC Settings](https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html)\.
 
 ## Contents<a name="API_VpcConfig_Contents"></a>
 

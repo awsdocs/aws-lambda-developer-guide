@@ -19,6 +19,7 @@ A runtime can support a single version of a language, multiple versions of a lan
 
 | Name | Identifier | Node\.js Version | AWS SDK for JavaScript | Operating System | 
 | --- | --- | --- | --- | --- | 
+|  Node\.js 12  |  `nodejs12.x`  |  12\.13\.0  |  2\.536\.0  |  Amazon Linux 2  | 
 |  Node\.js 10  |  `nodejs10.x`  |  10\.16\.3  |  2\.488\.0  |  Amazon Linux 2  | 
 |  Node\.js 8\.10  |  `nodejs8.10`  |  8\.10  |  2\.488\.0  |  Amazon Linux  | 
 
@@ -27,6 +28,7 @@ A runtime can support a single version of a language, multiple versions of a lan
 
 | Name | Identifier | AWS SDK for Python | Operating System | 
 | --- | --- | --- | --- | 
+|  Python 3\.8  |  `python3.8`  |  boto3\-1\.10\.2 botocore\-1\.13\.2  |  Amazon Linux 2  | 
 |  Python 3\.7  |  `python3.7`  |  boto3\-1\.9\.221 botocore\-1\.12\.221  |  Amazon Linux  | 
 |  Python 3\.6  |  `python3.6`  |  boto3\-1\.9\.221 botocore\-1\.12\.221  |  Amazon Linux  | 
 |  Python 2\.7  |  `python2.7`  |  boto3\-1\.9\.221 botocore\-1\.12\.221  |  Amazon Linux  | 
@@ -43,6 +45,7 @@ A runtime can support a single version of a language, multiple versions of a lan
 
 | Name | Identifier | JDK | Operating System | 
 | --- | --- | --- | --- | 
+|  Java 11  |  `java11`  |  amazon\-corretto\-11  |  Amazon Linux 2  | 
 |  Java 8  |  `java8`  |  java\-1\.8\.0\-openjdk  |  Amazon Linux  | 
 
 

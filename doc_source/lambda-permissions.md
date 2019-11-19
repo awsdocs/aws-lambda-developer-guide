@@ -20,4 +20,4 @@ For more information about IAM, see [What Is IAM?](https://docs.aws.amazon.com/I
 + [Using Resource\-based Policies for AWS Lambda](access-control-resource-based.md)
 + [Identity\-based IAM Policies for AWS Lambda](access-control-identity-based.md)
 + [Resources and Conditions for Lambda Actions](lambda-api-permissions-ref.md)
-+ [Using AWS Lambda Application Permissions Boundaries](permissions-boundary.md)
++ [Using Permissions Boundaries for AWS Lambda Applications](permissions-boundary.md)

@@ -7,6 +7,7 @@ The following sections explain how [common programming patterns and core concept
 
 | Name | Identifier | JDK | Operating System | 
 | --- | --- | --- | --- | 
+|  Java 11  |  `java11`  |  amazon\-corretto\-11  |  Amazon Linux 2  | 
 |  Java 8  |  `java8`  |  java\-1\.8\.0\-openjdk  |  Amazon Linux  | 
 
 **Topics**

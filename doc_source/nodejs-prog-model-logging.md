@@ -24,7 +24,7 @@ START RequestId: c793869b-ee49-115b-a5b6-4fd21e8dedac Version: $LATEST
   "AWS_LAMBDA_FUNCTION_VERSION": "$LATEST",
   "AWS_LAMBDA_LOG_GROUP_NAME": "/aws/lambda/my-function",
   "AWS_LAMBDA_LOG_STREAM_NAME": "2019/06/07/[$LATEST]e6f4a0c4241adcd70c262d34c0bbc85c",
-  "AWS_EXECUTION_ENV": "AWS_Lambda_nodejs10.x",
+  "AWS_EXECUTION_ENV": "AWS_Lambda_nodejs12.x",
   "AWS_LAMBDA_FUNCTION_NAME": "my-function",
   "PATH": "/var/lang/bin:/usr/local/bin:/usr/bin/:/bin:/opt/bin",
   "NODE_PATH": "/opt/nodejs/node10/node_modules:/opt/nodejs/node_modules:/var/runtime/node_modules",

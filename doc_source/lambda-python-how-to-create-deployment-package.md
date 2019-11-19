@@ -48,7 +48,7 @@ To create or update a function with the Lambda API, create an archive that conta
    {
        "FunctionName": "my-function",
        "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:my-function",
-       "Runtime": "python3.7",
+       "Runtime": "python3.8",
        "Role": "arn:aws:iam::123456789012:role/lambda-role",
        "Handler": "function.handler",
        "CodeSize": 815,
@@ -116,7 +116,7 @@ In order for `--target` to work on [Debian\-based systems](https://github.com/py
    {
        "FunctionName": "my-function",
        "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:my-function",
-       "Runtime": "python3.7",
+       "Runtime": "python3.8",
        "Role": "arn:aws:iam::123456789012:role/lambda-role",
        "Handler": "function.handler",
        "CodeSize": 2269409,
@@ -149,7 +149,7 @@ In some cases, you may need to use a [virtual environment](https://virtualenv.py
    ```
    ~/my-function$ virtualenv v-env
    Using base prefix '~/.local/python-3.7.0'
-   New python executable in v-env/bin/python3.7
+   New python executable in v-env/bin/python3.8
    Also creating executable in v-env/bin/python
    Installing setuptools, pip, wheel...
    done.
@@ -187,8 +187,8 @@ For Python 3\.3 and newer, you can use the built\-in [venv module](https://docs.
 1. Create a ZIP archive with the contents of the library\.
 
    ```
-   ~/my-function$ cd v-env/lib/python3.7/site-packages  
-   ~/my-function/v-env/lib/python3.7/site-packages$ zip -r9 ${OLDPWD}/function.zip .
+   ~/my-function$ cd v-env/lib/python3.8/site-packages
+   ~/my-function/v-env/lib/python3.8/site-packages$ zip -r9 ${OLDPWD}/function.zip .
      adding: easy_install.py (deflated 17%)
      adding: PIL/ (stored 0%)
      adding: PIL/.libs/ (stored 0%)
@@ -202,7 +202,7 @@ For Python 3\.3 and newer, you can use the built\-in [venv module](https://docs.
 1. Add your function code to the archive\.
 
    ```
-   ~/my-function/v-env/lib/python3.7/site-packages$ cd $OLDPWD
+   ~/my-function/v-env/lib/python3.8/site-packages$ cd $OLDPWD
    ~/my-function$ zip -g function.zip function.py
      adding: function.py (deflated 56%)
    ```
@@ -214,7 +214,7 @@ For Python 3\.3 and newer, you can use the built\-in [venv module](https://docs.
    {
        "FunctionName": "my-function",
        "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:my-function",
-       "Runtime": "python3.7",
+       "Runtime": "python3.8",
        "Role": "arn:aws:iam::123456789012:role/lambda-role",
        "Handler": "function.handler",
        "CodeSize": 5912988,

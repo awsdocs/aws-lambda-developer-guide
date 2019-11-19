@@ -9,7 +9,7 @@ Sample code is available for the following languages\.
 
 **Topics**
 + [Node\.js 8](#with-kinesis-example-deployment-pkg-nodejs)
-+ [Java 8](#with-kinesis-example-deployment-pkg-java)
++ [Java 11](#with-kinesis-example-deployment-pkg-java)
 + [C\#](#with-kinesis-example-deployment-pkg-dotnet)
 + [Python 3](#with-kinesis-example-deployment-pkg-python)
 + [Go](#with-kinesis-example-deployment-pkg-go)
@@ -35,7 +35,7 @@ exports.handler = function(event, context) {
 
 Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Node\.js](nodejs-create-deployment-pkg.md)\.
 
-## Java 8<a name="with-kinesis-example-deployment-pkg-java"></a>
+## Java 11<a name="with-kinesis-example-deployment-pkg-java"></a>
 
 The following is example Java code that receives Kinesis event record data as input and processes it\. For illustration, the code writes some of the incoming event data to CloudWatch Logs\. 
 
@@ -84,10 +84,10 @@ The following is example C\# code that receives Kinesis event record data as inp
 using System;
 using System.IO;
 using System.Text;
- 
+
 using Amazon.Lambda.Core;
 using Amazon.Lambda.KinesisEvents;
- 
+
 namespace KinesisStreams
 {
     public class KinesisSample
@@ -96,12 +96,12 @@ namespace KinesisStreams
         public void HandleKinesisRecord(KinesisEvent kinesisEvent)
         {
             Console.WriteLine($"Beginning to process {kinesisEvent.Records.Count} records...");
- 
+
             foreach (var record in kinesisEvent.Records)
             {
                 Console.WriteLine($"Event ID: {record.EventId}");
                 Console.WriteLine($"Event Name: {record.EventName}");
- 
+
                 string recordData = GetRecordContents(record.Kinesis);
                 Console.WriteLine($"Record Data:");
                 Console.WriteLine(recordData);
@@ -158,7 +158,7 @@ func handler(ctx context.Context, kinesisEvent events.KinesisEvent) {
         dataBytes := kinesisRecord.Data
         dataText := string(dataBytes)
 
-        fmt.Printf("%s Data = %s \n", record.EventName, dataText) 
+        fmt.Printf("%s Data = %s \n", record.EventName, dataText)
     }
 }
 ```

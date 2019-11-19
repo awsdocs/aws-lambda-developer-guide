@@ -31,7 +31,7 @@ To publish a version of a function, use the [PublishVersion](API_PublishVersion.
 The following example publishes a new version of a function\. The response returns configuration information about the new version, including the version number and the function ARN with the version suffix\.
 
 ```
-$ aws lambda publish-version --function-name my-function 
+$ aws lambda publish-version --function-name my-function
 {
   "CodeSha256": "OjRFuuHKizEE8tHFIMsI+iHR6BPAfJ5S0rW31Mh6jKg=",
   "FunctionName": "my-function",
@@ -43,7 +43,7 @@ $ aws lambda publish-version --function-name my-function
   "Timeout": 3,
   "LastModified": "2015-10-03T00:48:00.435+0000",
   "Handler": "my-function.handler",
-  "Runtime": "nodejs10.x",
+  "Runtime": "nodejs12.x",
   "Description": ""
 }
 ```

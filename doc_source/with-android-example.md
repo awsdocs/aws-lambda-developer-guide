@@ -71,7 +71,7 @@ exports.handler = function(event, context, callback) {
 
    ```
    $ aws lambda create-function --function-name AndroidBackendLambdaFunction \
-   --zip-file fileb://function.zip --handler index.handler --runtime nodejs8.10 \
+   --zip-file fileb://function.zip --handler index.handler --runtime nodejs12.x \
    --role arn:aws:iam::123456789012:role/lambda-android-role
    ```
 
@@ -123,25 +123,25 @@ For more information about IAM roles, see [IAM Roles](https://docs.aws.amazon.co
      The resulting policy will be as follows:
 
      ```
-     {  
+     {
         "Version":"2012-10-17",
-        "Statement":[  
-           {  
+        "Statement":[
+           {
               "Effect":"Allow",
-              "Action":[  
+              "Action":[
                  "mobileanalytics:PutEvents",
                  "cognito-sync:*"
               ],
-              "Resource":[  
+              "Resource":[
                  "*"
               ]
            },
-           {  
+           {
               "Effect":"Allow",
-              "Action":[  
+              "Action":[
                  "lambda:invokefunction"
               ],
-              "Resource":[  
+              "Resource":[
                  "arn:aws:lambda:us-east-1:account-id:function:AndroidBackendLambdaFunction"
               ]
            }
@@ -253,7 +253,7 @@ The following instructions have been verified using Android studio\.
    public interface MyInterface {
    
        /**
-        * Invoke the Lambda function "AndroidBackendLambdaFunction". 
+        * Invoke the Lambda function "AndroidBackendLambdaFunction".
         * The function name is the method name.
         */
        @LambdaFunction

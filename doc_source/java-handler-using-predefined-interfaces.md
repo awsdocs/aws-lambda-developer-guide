@@ -19,7 +19,7 @@ aws lambda create-function \
         path \
 --role arn:aws:iam::account-id:role/lambda_basic_execution  \
 --handler example.Hello \
---runtime java8 \
+--runtime java11 \
 --timeout 15 \
 --memory-size 512
 ```
@@ -42,10 +42,10 @@ The `Hello` class with sample implementation of the `handleRequest()` method is 
 package example;
 
 import com.amazonaws.services.lambda.runtime.RequestHandler;
-import com.amazonaws.services.lambda.runtime.Context; 
+import com.amazonaws.services.lambda.runtime.Context;
 
 public class Hello implements RequestHandler<Request, Response> {
-    
+
     public Response handleRequest(Request request, Context context) {
         String greetingString = String.format("Hello %s %s.", request.firstName, request.lastName);
         return new Response(greetingString);
@@ -177,7 +177,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
-import com.amazonaws.services.lambda.runtime.Context; 
+import com.amazonaws.services.lambda.runtime.Context;
 
 public class Hello implements RequestStreamHandler {
     public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context)

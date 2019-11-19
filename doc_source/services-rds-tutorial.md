@@ -100,7 +100,7 @@ def handler(event, context):
     item_count = 0
 
     with conn.cursor() as cur:
-        cur.execute("create table Employee ( EmpID  int NOT NULL, Name varchar(255) NOT NULL, PRIMARY KEY (EmpID))")  
+        cur.execute("create table Employee ( EmpID  int NOT NULL, Name varchar(255) NOT NULL, PRIMARY KEY (EmpID))")
         cur.execute('insert into Employee (EmpID, Name) values(1, "Joe")')
         cur.execute('insert into Employee (EmpID, Name) values(2, "Bob")')
         cur.execute('insert into Employee (EmpID, Name) values(3, "Mary")')
@@ -138,7 +138,7 @@ Install dependencies with Pip and create a deployment package\. For instructions
 Create the Lambda function with the `create-function` command\. You can find the subnet IDs and security group ID for your default VPC in the [Amazon VPC console](https://console.aws.amazon.com/vpc)\.
 
 ```
-$ aws lambda create-function --function-name  CreateTableAddRecordsAndRead --runtime python3.7 \
+$ aws lambda create-function --function-name  CreateTableAddRecordsAndRead --runtime python3.8 \
 --zip-file fileb://app.zip --handler app.handler \
 --role arn:aws:iam::123456789012:role/lambda-vpc-role \
 --vpc-config SubnetIds=subnet-0532bb6758ce7c71f,subnet-d6b7fda068036e11f,SecurityGroupIds=sg-0897d5f549934c2fb

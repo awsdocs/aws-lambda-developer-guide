@@ -78,7 +78,7 @@ exports.handler = function(event, context) {
 
    ```
    $ aws lambda create-function --function-name ProcessKinesisRecords \
-   --zip-file fileb://function.zip --handler index.handler --runtime nodejs8.10 \
+   --zip-file fileb://function.zip --handler index.handler --runtime nodejs12.x \
    --role arn:aws:iam::123456789012:role/lambda-kinesis-role
    ```
 

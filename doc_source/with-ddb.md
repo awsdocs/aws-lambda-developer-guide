@@ -122,14 +122,14 @@ To manage the event source configuration later, choose the trigger in the design
 
 ## Event Source Mapping APIs<a name="services-dynamodb-api"></a>
 
-To manage event source mappings with the AWS CLI or AWS SDK, use the following APIs\.
+To manage event source mappings with the AWS CLI or AWS SDK, use the following API actions\.
 + [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
 + [ListEventSourceMappings](API_ListEventSourceMappings.md)
 + [GetEventSourceMapping](API_GetEventSourceMapping.md)
 + [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md)
 + [DeleteEventSourceMapping](API_DeleteEventSourceMapping.md)
 
-The following example uses the AWS Command Line Interface to map a function named `my-function` to an DynamoDB Streams stream specified by Amazon Resource Name \(ARN\), with a batch size of 500
+The following example uses the AWS CLI to map a function named `my-function` to a DynamoDB stream specified by Amazon Resource Name \(ARN\), with a batch size of 500\.
 
 ```
 $ aws lambda create-event-source-mapping --function-name my-function --batch-size 500 --starting-position LATEST \

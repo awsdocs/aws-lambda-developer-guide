@@ -112,7 +112,7 @@ A Lambda function that returns the current time\.
 ```
 var time = require('time');
 exports.handler = (event, context, callback) => {
-    var currentTime = new time.Date(); 
+    var currentTime = new time.Date();
     currentTime.setTimezone("America/Los_Angeles");
     callback(null, {
         statusCode: '200',
@@ -133,7 +133,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      Runtime: nodejs10.x
+      Runtime: nodejs12.x
       CodeUri: ./
       Events:
         MyTimeApi:
@@ -270,7 +270,7 @@ The application includes an API Gateway API with a public endpoint that returns 
 
 **To test the application**
 
-1. Choose **Applications**\.
+1. Open the Lambda console [Applications page](https://console.aws.amazon.com/lambda/home#/applications)\.
 
 1. Choose **lambda\-pipeline\-stack**\.
 

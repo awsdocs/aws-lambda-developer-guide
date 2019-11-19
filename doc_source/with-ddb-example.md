@@ -53,7 +53,7 @@ exports.handler = function(event, context, callback) {
         console.log(record.eventName);
         console.log('DynamoDB Record: %j', record.dynamodb);
     });
-    callback(null, "message"); 
+    callback(null, "message");
 };
 ```
 
@@ -71,7 +71,7 @@ exports.handler = function(event, context, callback) {
 
    ```
    $ aws lambda create-function --function-name ProcessDynamoDBRecords \
-   --zip-file fileb://function.zip --handler index.handler --runtime nodejs8.10 \
+   --zip-file fileb://function.zip --handler index.handler --runtime nodejs12.x \
    --role arn:aws:iam::123456789012:role/lambda-dynamodb-role
    ```
 

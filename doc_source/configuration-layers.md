@@ -32,7 +32,7 @@ arn:aws:lambda:us-east-2:210987654321:layer:their-layer:2
 {
     "FunctionName": "test-layers",
     "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
-    "Runtime": "nodejs8.10",
+    "Runtime": "nodejs12.x",
     "Role": "arn:aws:iam::123456789012:role/service-role/lambda-role",
     "Handler": "index.handler",
     "CodeSize": 402,
@@ -90,7 +90,8 @@ $ aws lambda publish-layer-version --layer-name my-layer --description "My layer
     "LicenseInfo": "MIT",
     "CompatibleRuntimes": [
         "python3.6",
-        "python3.7"
+        "python3.7",
+        "python3.8"
     ]
 }
 ```
@@ -100,7 +101,7 @@ Each time you call `publish-layer-version`, you create a new version\. Functions
  To find layers that are compatible with your function's runtime, use the `list-layers` command\.
 
 ```
-$ aws lambda list-layers --compatible-runtime python3.7
+$ aws lambda list-layers --compatible-runtime python3.8
 {
     "Layers": [
         {
@@ -113,7 +114,8 @@ $ aws lambda list-layers --compatible-runtime python3.7
                 "CreatedDate": "2018-11-15T00:37:46.592+0000",
                 "CompatibleRuntimes": [
                     "python3.6",
-                    "python3.7"
+                    "python3.7",
+                    "python3.8",
                 ]
             }
         }
@@ -138,7 +140,8 @@ $ aws lambda get-layer-version --layer-name my-layer --version-number 2
     "Version": 2,
     "CompatibleRuntimes": [
         "python3.6",
-        "python3.7"
+        "python3.7",
+        "python3.8"
     ]
 }
 ```
@@ -163,7 +166,7 @@ To include libraries in a layer, place them in one of the folders supported by y
   xray-sdk.zip
   └ nodejs/node_modules/aws-xray-sdk
   ```
-+ **Python** – `python`, `python/lib/python3.7/site-packages` \(site directories\)  
++ **Python** – `python`, `python/lib/python3.8/site-packages` \(site directories\)  
 **Example Pillow**  
 
   ```

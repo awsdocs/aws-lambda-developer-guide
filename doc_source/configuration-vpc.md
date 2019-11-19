@@ -34,7 +34,7 @@ To connect your function to a VPC during creation, use the `vpc-config` option w
 
 ```
 $ aws lambda create-function --function-name my-function \
---runtime nodejs10.x --handler index.js --zip-file fileb://function.zip \
+--runtime nodejs12.x --handler index.js --zip-file fileb://function.zip \
 --role arn:aws:iam::123456789012:role/lambda-role \
 --vpc-config SubnetIds=subnet-071f712345678e7c8,subnet-07fd123456788a036,SecurityGroupIds=sg-085912345678492fb
 ```

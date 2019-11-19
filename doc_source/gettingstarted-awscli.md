@@ -64,12 +64,12 @@ exports.handler = async function(event, context) {
 
    ```
    $ aws lambda create-function --function-name my-function \
-   --zip-file fileb://function.zip --handler index.handler --runtime nodejs10.x \
+   --zip-file fileb://function.zip --handler index.handler --runtime nodejs12.x \
    --role arn:aws:iam::123456789012:role/lambda-cli-role
    {
        "FunctionName": "cli",
        "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
-       "Runtime": "nodejs10.x",
+       "Runtime": "nodejs12.x",
        "Role": "arn:aws:iam::123456789012:role/lambda-cli-role",
        "Handler": "index.handler",
        "CodeSize": 322,
@@ -174,7 +174,7 @@ $ aws lambda list-functions --max-items 10
         {
             "FunctionName": "cli",
             "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
-            "Runtime": "nodejs10.x",
+            "Runtime": "nodejs12.x",
             "Role": "arn:aws:iam::123456789012:role/lambda-cli-role",
             "Handler": "index.handler",
             "CodeSize": 322,
@@ -192,7 +192,7 @@ $ aws lambda list-functions --max-items 10
         {
             "FunctionName": "random-error",
             "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:random-error",
-            "Runtime": "nodejs8.10",
+            "Runtime": "nodejs12.x",
             "Role": "arn:aws:iam::123456789012:role/lambda-role",
             "Handler": "index.handler",
             "CodeSize": 1572488,
@@ -234,7 +234,7 @@ $ aws lambda get-function --function-name my-function
     "Configuration": {
         "FunctionName": "cli",
         "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
-        "Runtime": "nodejs10.x",
+        "Runtime": "nodejs12.x",
         "Role": "arn:aws:iam::123456789012:role/lambda-cli-role",
         "Handler": "index.handler",
         "CodeSize": 322,

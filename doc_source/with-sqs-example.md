@@ -67,7 +67,7 @@ exports.handler = async function(event, context) {
 
    ```
    $ aws lambda create-function --function-name ProcessSQSRecord \
-   --zip-file fileb://function.zip --handler index.handler --runtime nodejs8.10 \
+   --zip-file fileb://function.zip --handler index.handler --runtime nodejs12.x \
    --role arn:aws:iam::123456789012:role/lambda-sqs-role
    ```
 

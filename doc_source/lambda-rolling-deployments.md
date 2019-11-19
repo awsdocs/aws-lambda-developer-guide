@@ -31,7 +31,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: myDateTimeFunction.handler
-      Runtime: nodejs10.x
+      Runtime: nodejs12.x
 # Creates an alias named "live" for the function, and automatically publishes when you update the function.
       AutoPublishAlias: live
       DeploymentPreference:

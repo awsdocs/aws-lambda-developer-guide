@@ -4,7 +4,7 @@ Sample code is available for the following languages\.
 
 **Topics**
 + [Node\.js](#with-ddb-example-deployment-pkg-nodejs)
-+ [Java 8](#with-ddb-example-deployment-pkg-java)
++ [Java 11](#with-ddb-example-deployment-pkg-java)
 + [C\#](#with-ddb-example-deployment-pkg-dotnet)
 + [Python 3](#with-ddb-example-deployment-pkg-python)
 + [Go](#with-ddb-example-deployment-pkg-go)
@@ -25,13 +25,13 @@ exports.lambda_handler = function(event, context, callback) {
         console.log(record.eventName);
         console.log('DynamoDB Record: %j', record.dynamodb);
     });
-    callback(null, "message"); 
+    callback(null, "message");
 };
 ```
 
 Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Node\.js](nodejs-create-deployment-pkg.md)\.
 
-## Java 8<a name="with-ddb-example-deployment-pkg-java"></a>
+## Java 11<a name="with-ddb-example-deployment-pkg-java"></a>
 
 The following example processes messages from DynamoDB, and logs their contents\. `handleRequest` is the handler that AWS Lambda invokes and provides event data\. The handler uses the predefined `DynamodbEvent` class, which is defined in the `aws-lambda-java-events` library\.
 
@@ -48,13 +48,13 @@ import com.amazonaws.services.lambda.runtime.events.DynamodbEvent.DynamodbStream
 
 public class DDBEventProcessor implements
         RequestHandler<DynamodbEvent, String> {
-    
-    public String handleRequest(DynamodbEvent ddbEvent, Context context) {       
+
+    public String handleRequest(DynamodbEvent ddbEvent, Context context) {
         for (DynamodbStreamRecord record : ddbEvent.getRecords()){
            System.out.println(record.getEventID());
            System.out.println(record.getEventName());
            System.out.println(record.getDynamodb().toString());
-           
+
         }
         return "Successfully processed " + ddbEvent.getRecords().size() + " records.";
     }
@@ -81,32 +81,32 @@ using System.IO;
 using System.Text;
 using Amazon.Lambda.Core;
 using Amazon.Lambda.DynamoDBEvents;
- 
+
 using Amazon.Lambda.Serialization.Json;
- 
+
 namespace DynamoDBStreams
 {
     public class DdbSample
     {
         private static readonly JsonSerializer _jsonSerializer = new JsonSerializer();
- 
+
         public void ProcessDynamoEvent(DynamoDBEvent dynamoEvent)
         {
             Console.WriteLine($"Beginning to process {dynamoEvent.Records.Count} records...");
- 
+
             foreach (var record in dynamoEvent.Records)
             {
                 Console.WriteLine($"Event ID: {record.EventID}");
                 Console.WriteLine($"Event Name: {record.EventName}");
- 
+
                 string streamRecordJson = SerializeObject(record.Dynamodb);
                 Console.WriteLine($"DynamoDB Record:");
                 Console.WriteLine(streamRecordJson);
             }
- 
+
             Console.WriteLine("Stream processing complete.");
         }
- 
+
         private string SerializeObject(object streamRecord)
         {
             using (var ms = new MemoryStream())
@@ -133,7 +133,7 @@ from __future__ import print_function
 def lambda_handler(event, context):
     for record in event['Records']:
         print(record['eventID'])
-        print(record['eventName'])       
+        print(record['eventName'])
     print('Successfully processed %s records.' % str(len(event['Records'])))
 ```
 

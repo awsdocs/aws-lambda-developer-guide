@@ -28,7 +28,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Using Resource-based Policies for AWS Lambda](access-control-resource-based.md)
    + [Identity-based IAM Policies for AWS Lambda](access-control-identity-based.md)
    + [Resources and Conditions for Lambda Actions](lambda-api-permissions-ref.md)
-   + [Using AWS Lambda Application Permissions Boundaries](permissions-boundary.md)
+   + [Using Permissions Boundaries for AWS Lambda Applications](permissions-boundary.md)
 + [Managing AWS Lambda Functions](lambda-functions.md)
    + [AWS Lambda Function Configuration](resource-model.md)
    + [Reserving Concurrency for a Lambda Function](per-function-concurrency.md)

@@ -109,7 +109,7 @@ Create the Lambda function with the `create-function` command\.
 
 ```
 $ aws lambda create-function --function-name AccessMemCache --timeout 30 --memory-size 1024 \
---zip-file fileb://function.zip --handler app.handler --runtime python3.7 \
+--zip-file fileb://function.zip --handler app.handler --runtime python3.8 \
 --role arn:aws:iam::123456789012:role/lambda-vpc-role \
 --vpc-config SubnetIds=subnet-0532bb6758ce7c71f,subnet-d6b7fda068036e11f,SecurityGroupIds=sg-0897d5f549934c2fb
 ```

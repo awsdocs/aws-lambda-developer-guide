@@ -4,7 +4,7 @@ Sample code is available for the following languages\.
 
 **Topics**
 + [Node\.js 8](#with-sns-example-deployment-pkg-nodejs)
-+ [Java 8](#with-sns-example-deployment-pkg-java)
++ [Java 11](#with-sns-example-deployment-pkg-java)
 + [Go](#with-sns-example-deployment-pkg-go)
 + [Python 3](#with-sns-example-deployment-pkg-python)
 
@@ -16,19 +16,19 @@ The following example processes messages from Amazon SNS, and logs their content
 
 ```
 console.log('Loading function');
- 
+
 exports.handler = function(event, context, callback) {
 // console.log('Received event:', JSON.stringify(event, null, 4));
- 
+
     var message = event.Records[0].Sns.Message;
-    console.log('Message received from SNS:', message); 
+    console.log('Message received from SNS:', message);
     callback(null, "Success");
 };
 ```
 
 Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Node\.js](nodejs-create-deployment-pkg.md)\.
 
-## Java 8<a name="with-sns-example-deployment-pkg-java"></a>
+## Java 11<a name="with-sns-example-deployment-pkg-java"></a>
 
 The following example processes messages from Amazon SNS, and logs their contents\.
 
@@ -36,14 +36,14 @@ The following example processes messages from Amazon SNS, and logs their content
 
 ```
 package example;
- 
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
- 
+
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.events.SNSEvent;
- 
+
 public class LogEvent implements RequestHandler<SNSEvent, Object> {
     public Object handleRequest(SNSEvent request, Context context){
     String timeStamp = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss").format(Calendar.getInstance().getTime());

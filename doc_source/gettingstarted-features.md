@@ -1,6 +1,6 @@
 # AWS Lambda Features<a name="gettingstarted-features"></a>
 
-AWS Lambda provides a management console and API for managing and invoking functions\. It provides runtimes that support a standard set of features so that you can easily switch between languages and frameworks depending on your needs\. In addition to functions, you can also create versions, aliases, layers and custom runtimes\.
+AWS Lambda provides a management console and API for managing and invoking functions\. It provides runtimes that support a standard set of features so that you can easily switch between languages and frameworks, depending on your needs\. In addition to functions, you can also create versions, aliases, layers, and custom runtimes\.
 
 **Topics**
 + [Programming Model](#gettingstarted-features-programmingmodel)
@@ -19,9 +19,9 @@ The runtime captures **logging** output from your function and sends it to Amazo
 **Note**  
 Logging is subject to [CloudWatch Logs limits](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/cloudwatch_limits_cwl.html)\. Log data can be lost due to throttling or, in some cases, when the [execution context](running-lambda-code.md) is terminated\.
 
-If your function exits without error, the runtime sends it another event\. The function's class stays in memory, so clients and variables declared outside of the handler method can be reused\. Your function also has access to local storage in the `/tmp` directory\.
+If your function exits without error, the runtime sends it another event\. The function's class stays in memory, so clients and variables that are declared outside of the handler method can be reused\. Your function also has access to local storage in the `/tmp` directory\.
 
-Lambda scales your function by running additional instances of it as demand increases, and terminating instances as demand decreases\. Unless noted otherwise, incoming requests may be processed out of order or concurrently\. Store your application's state in other services, and don't rely on instances of your function being long lived\. Use local storage and class\-level objects to increase performance, but keep the size of your deployment package and the amount of data that you transfer onto the execution environment to a minimum\.
+Lambda scales your function by running additional instances of it as demand increases, and by terminating instances as demand decreases\. Unless noted otherwise, incoming requests might be processed out of order or concurrently\. Store your application's state in other services, and don't rely on instances of your function being long lived\. Use local storage and class\-level objects to increase performance, but keep the size of your deployment package and the amount of data that you transfer onto the execution environment to a minimum\.
 
 For a hands\-on introduction to the programming model in your preferred programming language, see the following chapters\.
 + [Building Lambda Functions with Node\.js](programming-model.md)
@@ -34,7 +34,7 @@ For a hands\-on introduction to the programming model in your preferred programm
 
 ## Scaling<a name="gettingstarted-features-scaling"></a>
 
-Lambda manages the infrastructure that runs your code, scaling automatically in response to incoming requests\. When your function is invoked more quickly than a single instance of your function can process events, Lambda scales up by running additional instances\. When traffic subsides, inactive instances are frozen or terminated\. You only pay for the time that your function code is actually processing events\.
+Lambda manages the infrastructure that runs your code, and scales automatically in response to incoming requests\. When your function is invoked more quickly than a single instance of your function can process events, Lambda scales up by running additional instances\. When traffic subsides, inactive instances are frozen or terminated\. You only pay for the time that your function code is actually processing events\.
 
 For more information, see [AWS Lambda Function Scaling](scaling.md)\.
 
@@ -42,7 +42,7 @@ For more information, see [AWS Lambda Function Scaling](scaling.md)\.
 
 Your function's code consists of scripts or compiled programs and their dependencies\. When you author functions in the Lambda console or a toolkit, the client creates a ZIP archive of your code called a deployment package\. The client then sends the package to the Lambda service\. When you manage functions with the Lambda API, command line tools, or SDKs, you create the deployment package\. You also need to create a deployment package manually for compiled languages and to add dependencies to your function\.
 
-For language specific instructions, see the following topics\.
+For language\-specific instructions, see the following topics\.
 +  [AWS Lambda Deployment Package in Node\.js](nodejs-create-deployment-pkg.md) 
 +  [AWS Lambda Deployment Package in Python](lambda-python-how-to-create-deployment-package.md) 
 +  [AWS Lambda Deployment Package in Ruby](ruby-package.md) 
@@ -53,13 +53,13 @@ For language specific instructions, see the following topics\.
 
 ## Function Blueprints<a name="gettingstarted-features-blueprints"></a>
 
-When you create a function in the Lambda console, you can choose to start from scratch, use a blueprint, or deploy an application from the [AWS Serverless Application Repository](https://docs.aws.amazon.com/serverlessrepo/latest/devguide/what-is-serverlessrepo.html)\. A blueprint provides sample code that shows how to use Lambda with an AWS service or popular 3rd party application\. Blueprints include sample code and function configuration presets for Node\.js and Python runtimes\.
+When you create a function in the Lambda console, you can choose to start from scratch, use a blueprint, or deploy an application from the [AWS Serverless Application Repository](https://docs.aws.amazon.com/serverlessrepo/latest/devguide/what-is-serverlessrepo.html)\. A blueprint provides sample code that shows how to use Lambda with an AWS service or a popular third\-party application\. Blueprints include sample code and function configuration presets for Node\.js and Python runtimes\.
 
 Blueprints are provided for use under the [Creative Commons Zero](https://spdx.org/licenses/CC0-1.0.html) license\. They are only available in the Lambda console\.
 
 ## Application Templates<a name="gettingstarted-features-templates"></a>
 
-You can use the Lambda console to create an application with a continous delivery pipeline\. Application templates in the Lambda console include code for one or more functions, an application template that defines functions and supporting AWS resources, and an infrastructure template that defines an AWS CodePipeline pipeline with build and deploy stages that run every time you push changes to the included Git repository\.
+You can use the Lambda console to create an application with a continuous delivery pipeline\. Application templates in the Lambda console include code for one or more functions, an application template that defines functions and supporting AWS resources, and an infrastructure template that defines an AWS CodePipeline pipeline\. The pipeline has build and deploy stages that run every time you push changes to the included Git repository\.
 
 Application templates are provided for use under the [MIT No Attribution](https://spdx.org/licenses/MIT-0.html) license\. They are only available in the Lambda console\.
 

@@ -48,7 +48,7 @@ $ aws lambda  create-function --function-name ReturnBucketName \
 --zip-file fileb://file-path/Test_Environment_Variables.zip \
 --role role-arn \
 --environment Variables={S3_BUCKET=Test} \
---handler index.handler --runtime nodejs8.10
+--handler index.handler --runtime nodejs12.x
 ```
 
 Next, run the following Lambda CLI `invoke` command to invoke the function\.

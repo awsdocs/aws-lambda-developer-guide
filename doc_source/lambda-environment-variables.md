@@ -21,7 +21,7 @@ The following is a list of environment variables that are part of the AWS Lambda
 |  `LAMBDA_RUNTIME_DIR`  |  Yes  | The path to runtime libraries\. | 
 |  `PATH`  |  No  |  `/usr/local/bin:/usr/bin/:/bin:/opt/bin`  | 
 |  `LD_LIBRARY_PATH`  |  No  |  `/lib64:/usr/lib64:$LAMBDA_RUNTIME_DIR:$LAMBDA_RUNTIME_DIR/lib:$LAMBDA_TASK_ROOT:$LAMBDA_TASK_ROOT/lib:/opt/lib`  | 
-|  `NODE_PATH`  |  No  |  \(Node\.js\) `/opt/nodejs/node8/node_modules/:/opt/nodejs/node_modules:$LAMBDA_RUNTIME_DIR/node_modules`  | 
-|  `PYTHONPATH`  |  No  |  \(Python 2\.7, 3\.6\) `$LAMBDA_RUNTIME_DIR`\.  | 
+|  `NODE_PATH`  |  No  |  \(Node\.js\) `/opt/nodejs/node12/node_modules/:/opt/nodejs/node_modules:$LAMBDA_RUNTIME_DIR/node_modules`  | 
+|  `PYTHONPATH`  |  No  |  \(Python 2\.7, 3\.6, 3\.8\) `$LAMBDA_RUNTIME_DIR`\.  | 
 |  `GEM_PATH`  |  No  |  \(Ruby\) `$LAMBDA_TASK_ROOT/vendor/bundle/ruby/2.5.0:/opt/ruby/gems/2.5.0`\.  | 
 |  `AWS_LAMBDA_RUNTIME_API`  |  Yes  |  \(custom runtime\) The host and port of the [runtime API](runtimes-api.md)\.  | 

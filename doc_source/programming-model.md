@@ -9,6 +9,7 @@ Lambda supports the following Node\.js runtimes\.
 
 | Name | Identifier | Node\.js Version | AWS SDK for JavaScript | Operating System | 
 | --- | --- | --- | --- | --- | 
+|  Node\.js 12  |  `nodejs12.x`  |  12\.13\.0  |  2\.536\.0  |  Amazon Linux 2  | 
 |  Node\.js 10  |  `nodejs10.x`  |  10\.16\.3  |  2\.488\.0  |  Amazon Linux 2  | 
 |  Node\.js 8\.10  |  `nodejs8.10`  |  8\.10  |  2\.488\.0  |  Amazon Linux  | 
 
@@ -37,7 +38,7 @@ You can add permissions to the role later, or swap it out for a different role t
 
 1. Configure the following settings:
    + **Name** – **my\-function**\.
-   + **Runtime** – **Node\.js 10\.x**\.
+   + **Runtime** – **Node\.js 12\.x**\.
    + **Role** – **Choose an existing role**\.
    + **Existing role** – **lambda\-role**\.
 

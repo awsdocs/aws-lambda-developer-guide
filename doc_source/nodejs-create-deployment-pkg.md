@@ -30,7 +30,7 @@ To create or update a function by using the Lambda API, create an archive that c
    {
        "FunctionName": "my-function",
        "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:my-function",
-       "Runtime": "nodejs10.x",
+       "Runtime": "nodejs12.x",
        "Role": "arn:aws:iam::123456789012:role/lambda-role",
        "Handler": "index.handler",
        "CodeSize": 300,
@@ -86,7 +86,7 @@ If your function depends on libraries other than the SDK for JavaScript, install
    {
        "FunctionName": "my-function",
        "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:my-function",
-       "Runtime": "nodejs10.x",
+       "Runtime": "nodejs12.x",
        "Role": "arn:aws:iam::123456789012:role/lambda-role",
        "Handler": "index.handler",
        "CodeSize": 300,

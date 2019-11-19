@@ -50,9 +50,7 @@ Create an application in the Lambda console\.
 
 **To create an application**
 
-1. Open the [Lambda console](https://console.aws.amazon.com/lambda)\.
-
-1. Choose **Applications**\.
+1. Open the Lambda console [Applications page](https://console.aws.amazon.com/lambda/home#/applications)\.
 
 1. Choose **Create application**\.
 
@@ -61,12 +59,12 @@ Create an application in the Lambda console\.
 1. Configure application settings\.
    + **Application name** – **my\-app**\.
    + **Application description** – **my application**\.
-   + **Runtime** – **Node\.js 10\.x**\.
+   + **Runtime** – **Node\.js 12\.x**\.
    + **Repository provider** – **CodeCommit**\.
    + **Repository provider** – **my\-app\-repo**\.
    + **Permissions** – **Create roles and permissions boundary**\.
 
-1. Choose **Deploy**\.
+1. Choose **Create**\.
 
 Lambda creates the pipeline and related resources and commits the sample application code to the Git repository\. As resources are created, they appear on the overview page\.
 
@@ -76,9 +74,7 @@ Invoke the function to verify that it works\.
 
 **To invoke the application's function**
 
-1. Open the [Lambda console](https://console.aws.amazon.com/lambda)\.
-
-1. Choose **Applications**\.
+1. Open the Lambda console [Applications page](https://console.aws.amazon.com/lambda/home#/applications)\.
 
 1. Choose **my\-app**\.
 
@@ -102,15 +98,13 @@ When you create your application, the Lambda console creates a Git repository th
 
 **To clone the project repository**
 
-1. Open the [Lambda console](https://console.aws.amazon.com/lambda)\.
-
-1. Choose **Applications**\.
+1. Open the Lambda console [Applications page](https://console.aws.amazon.com/lambda/home#/applications)\.
 
 1. Choose **my\-app**\.
 
 1. Choose **Code**\.
 
-1. Copy the HTTP or SSH repository URI, depending on the authentication mode that you configured during [setup](#applications-tutorial-prepare)\.
+1. Under **Repository details**, copy the HTTP or SSH repository URI, depending on the authentication mode that you configured during [setup](#applications-tutorial-prepare)\.
 
 1. Clone the repository\.
 
@@ -143,7 +137,7 @@ The repository contains the template for the application, a build specification,
        Type: AWS::Serverless::Function
        Properties:
          Handler: src/handlers/hello-from-lambda.helloFromLambdaHandler
-         Runtime: nodejs10.x
+         Runtime: nodejs12.x
          MemorySize: 128
          Timeout: 100
          Description: This is a hello from Lambda example.
@@ -173,9 +167,7 @@ In order for the function to use the DynamoDB permission that you added to its e
 
 **To update the application's permissions boundary**
 
-1. Open the [Lambda console](https://console.aws.amazon.com/lambda)\.
-
-1. Choose **Applications**\.
+1. Open the Lambda console [Applications page](https://console.aws.amazon.com/lambda/home#/applications)\.
 
 1. Choose your application\.
 
@@ -183,7 +175,7 @@ In order for the function to use the DynamoDB permission that you added to its e
 
 1. Follow the instructions shown to update the boundary to allow access to the new table\.
 
-For more information about permissions boundaries, see [Using AWS Lambda Application Permissions Boundaries](permissions-boundary.md)\.
+For more information about permissions boundaries, see [Using Permissions Boundaries for AWS Lambda Applications](permissions-boundary.md)\.
 
 ## Update the Function Code<a name="applications-tutorial-code"></a>
 
@@ -191,16 +183,14 @@ Next, update the function code to use the table\. The following code uses the ta
 
 **To update the function code**
 
-1. Open `src/handlers/hello-from-lambda.js` in a text editor\.
-
-1. Change the code to the following\.  
-**Example hello\-from\-lambda\.js**  
+1. Add a new handler named `index.js` to the `src/handlers` folder with the following content\.  
+**Example src/handlers/index\.js**  
 
    ```
    const dynamodb = require('aws-sdk/clients/dynamodb');
    const docClient = new dynamodb.DocumentClient();
    
-   exports.helloFromLambdaHandler = async (event, context) => {
+   exports.handler = async (event, context) => {
        const message = 'Hello from Lambda!';
        const tableName = process.env.DDB_TABLE;
        const logStreamName = context.logStreamName;
@@ -224,10 +214,22 @@ Next, update the function code to use the table\. The following code uses the ta
    }
    ```
 
+1. Open the application template and change the handler value to `src/handlers/index.handler`\.  
+**Example template\.yml**  
+
+   ```
+   ...
+     helloFromLambdaFunction:
+       Type: AWS::Serverless::Function
+       Properties:
+         Handler: src/handlers/index.handler
+         Runtime: nodejs10.x
+   ```
+
 1. Commit and push the change\.
 
    ```
-   ~/my-app-repo$ git commit -am "Use DynamoDB table"
+   ~/my-app-repo$ git add . && git commit -m "Use DynamoDB table"
    ~/my-app-repo$ git push
    ```
 
@@ -268,9 +270,7 @@ For build and deployment errors, you can identify the cause of an error in the L
 
 **To troubleshoot application errors**
 
-1. Open the [Lambda console](https://console.aws.amazon.com/lambda)\.
-
-1. Choose **Applications**\.
+1. Open the Lambda console [Applications page](https://console.aws.amazon.com/lambda/home#/applications)\.
 
 1. Choose an application\.
 

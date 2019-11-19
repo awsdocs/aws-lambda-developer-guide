@@ -14,7 +14,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       Timeout: 10
       Tracing: Active
       Events:
@@ -52,7 +52,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       Timeout: 10
       Tracing: Active
       Events:

@@ -57,12 +57,12 @@ For sample code in other languages, see [Sample Function Code](with-sns-create-p
 
 ```
 console.log('Loading function');
- 
+
 exports.handler = function(event, context, callback) {
 // console.log('Received event:', JSON.stringify(event, null, 4));
- 
+
     var message = event.Records[0].Sns.Message;
-    console.log('Message received from SNS:', message); 
+    console.log('Message received from SNS:', message);
     callback(null, "Success");
 };
 ```
@@ -81,8 +81,8 @@ exports.handler = function(event, context, callback) {
 
    ```
    $ aws lambda create-function --function-name SNS-X-Account \
-   --zip-file fileb://function.zip --handler index.handler --runtime nodejs8.10 \
-   --role arn:aws:iam::01234567891B:role/service-role/lambda-sns-execution-role  \ 
+   --zip-file fileb://function.zip --handler index.handler --runtime nodejs12.x \
+   --role arn:aws:iam::01234567891B:role/service-role/lambda-sns-execution-role  \
    --timeout 60 --profile accountB
    ```
 
