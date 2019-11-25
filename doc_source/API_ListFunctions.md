@@ -62,6 +62,9 @@ Content-type: application/json
          "[Handler](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-Handler)": "string",
          "[KMSKeyArn](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-KMSKeyArn)": "string",
          "[LastModified](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-LastModified)": "string",
+         "[LastUpdateStatus](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-LastUpdateStatus)": "string",
+         "[LastUpdateStatusReason](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-LastUpdateStatusReason)": "string",
+         "[LastUpdateStatusReasonCode](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-LastUpdateStatusReasonCode)": "string",
          "[Layers](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-Layers)": [ 
             { 
                "[Arn](API_Layer.md#SSS-Type-Layer-Arn)": "string",
@@ -73,6 +76,9 @@ Content-type: application/json
          "[RevisionId](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-RevisionId)": "string",
          "[Role](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-Role)": "string",
          "[Runtime](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-Runtime)": "string",
+         "[State](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-State)": "string",
+         "[StateReason](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-StateReason)": "string",
+         "[StateReasonCode](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-StateReasonCode)": "string",
          "[Timeout](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-Timeout)": number,
          "[TracingConfig](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-TracingConfig)": { 
             "[Mode](API_TracingConfigResponse.md#SSS-Type-TracingConfigResponse-Mode)": "string"
@@ -106,7 +112,7 @@ Type: String
 ## Errors<a name="API_ListFunctions_Errors"></a>
 
  **InvalidParameterValueException**   
-One of the parameters in the request is invalid\. For example, if you provided an IAM role for AWS Lambda to assume in the `CreateFunction` or the `UpdateFunctionConfiguration` API, that AWS Lambda is unable to assume you will get this exception\.  
+One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
  **ServiceException**   
@@ -114,7 +120,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-Request throughput limit exceeded\.  
+The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 
 ## See Also<a name="API_ListFunctions_SeeAlso"></a>

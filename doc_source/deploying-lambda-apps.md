@@ -12,5 +12,6 @@ The [AWS CLI](gettingstarted-tools.md#gettingstarted-tools-awscli) and [SAM CLI]
 + [Managing Applications in the AWS Lambda Console](applications-console.md)
 + [Creating an Application with Continuous Delivery in the Lambda Console](applications-tutorial.md)
 + [Error Processor Sample Application for AWS Lambda](sample-errorprocessor.md)
++ [Rolling Deployments for Lambda Functions](lambda-rolling-deployments.md)
 + [Common Lambda Application Types and Use Cases](applications-usecases.md)
 + [Best Practices for Working with AWS Lambda Functions](best-practices.md)

@@ -81,6 +81,9 @@ Content-type: application/json
    "[Handler](#SSS-PublishVersion-response-Handler)": "string",
    "[KMSKeyArn](#SSS-PublishVersion-response-KMSKeyArn)": "string",
    "[LastModified](#SSS-PublishVersion-response-LastModified)": "string",
+   "[LastUpdateStatus](#SSS-PublishVersion-response-LastUpdateStatus)": "string",
+   "[LastUpdateStatusReason](#SSS-PublishVersion-response-LastUpdateStatusReason)": "string",
+   "[LastUpdateStatusReasonCode](#SSS-PublishVersion-response-LastUpdateStatusReasonCode)": "string",
    "[Layers](#SSS-PublishVersion-response-Layers)": [ 
       { 
          "[Arn](API_Layer.md#SSS-Type-Layer-Arn)": "string",
@@ -92,6 +95,9 @@ Content-type: application/json
    "[RevisionId](#SSS-PublishVersion-response-RevisionId)": "string",
    "[Role](#SSS-PublishVersion-response-Role)": "string",
    "[Runtime](#SSS-PublishVersion-response-Runtime)": "string",
+   "[State](#SSS-PublishVersion-response-State)": "string",
+   "[StateReason](#SSS-PublishVersion-response-StateReason)": "string",
+   "[StateReasonCode](#SSS-PublishVersion-response-StateReasonCode)": "string",
    "[Timeout](#SSS-PublishVersion-response-Timeout)": number,
    "[TracingConfig](#SSS-PublishVersion-response-TracingConfig)": { 
       "[Mode](API_TracingConfigResponse.md#SSS-Type-TracingConfigResponse-Mode)": "string"
@@ -150,13 +156,27 @@ Length Constraints: Maximum length of 128\.
 Pattern: `[^\s]+` 
 
  ** [KMSKeyArn](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-KMSKeyArn"></a>
-The KMS key that's used to encrypt the function's environment variables\. This key is only returned if you've configured a customer\-managed CMK\.  
+The KMS key that's used to encrypt the function's environment variables\. This key is only returned if you've configured a customer managed CMK\.  
 Type: String  
 Pattern: `(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()` 
 
  ** [LastModified](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-LastModified"></a>
 The date and time that the function was last updated, in [ISO\-8601 format](https://www.w3.org/TR/NOTE-datetime) \(YYYY\-MM\-DDThh:mm:ss\.sTZD\)\.  
 Type: String
+
+ ** [LastUpdateStatus](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-LastUpdateStatus"></a>
+The status of the last update that was performed on the function\.  
+Type: String  
+Valid Values:` Successful | Failed | InProgress` 
+
+ ** [LastUpdateStatusReason](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-LastUpdateStatusReason"></a>
+The reason for the last update that was performed on the function\.  
+Type: String
+
+ ** [LastUpdateStatusReasonCode](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-LastUpdateStatusReasonCode"></a>
+The reason code for the last update that was performed on the function\.  
+Type: String  
+Valid Values:` EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError` 
 
  ** [Layers](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-Layers"></a>
 The function's [ layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\.  
@@ -186,6 +206,20 @@ The runtime environment for the Lambda function\.
 Type: String  
 Valid Values:` nodejs8.10 | nodejs10.x | nodejs12.x | java8 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore1.0 | dotnetcore2.1 | go1.x | ruby2.5 | provided` 
 
+ ** [State](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-State"></a>
+The current state of the function\. When the state is `Inactive`, you can reactivate the function by invoking it\.  
+Type: String  
+Valid Values:` Pending | Active | Inactive | Failed` 
+
+ ** [StateReason](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-StateReason"></a>
+The reason for the function's current state\.  
+Type: String
+
+ ** [StateReasonCode](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-StateReasonCode"></a>
+The reason code for the function's current state\. When the code is `Creating`, you can't invoke or modify the function\.  
+Type: String  
+Valid Values:` Idle | Creating | Restoring | EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses` 
+
  ** [Timeout](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-Timeout"></a>
 The amount of time that Lambda allows a function to run before stopping it\.  
 Type: Integer  
@@ -212,15 +246,19 @@ You have exceeded your maximum total code size per account\. [Learn more](https:
 HTTP Status Code: 400
 
  **InvalidParameterValueException**   
-One of the parameters in the request is invalid\. For example, if you provided an IAM role for AWS Lambda to assume in the `CreateFunction` or the `UpdateFunctionConfiguration` API, that AWS Lambda is unable to assume you will get this exception\.  
+One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
  **PreconditionFailedException**   
 The RevisionId provided does not match the latest RevisionId for the Lambda function or alias\. Call the `GetFunction` or the `GetAlias` API to retrieve the latest RevisionId for your resource\.  
 HTTP Status Code: 412
 
+ **ResourceConflictException**   
+The resource already exists, or another operation is in progress\.  
+HTTP Status Code: 409
+
  **ResourceNotFoundException**   
-The resource \(for example, a Lambda function or access policy statement\) specified in the request does not exist\.  
+The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
  **ServiceException**   
@@ -228,7 +266,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-Request throughput limit exceeded\.  
+The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 
 ## See Also<a name="API_PublishVersion_SeeAlso"></a>

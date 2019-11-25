@@ -69,7 +69,7 @@ Type: String
 ## Errors<a name="API_ListLayers_Errors"></a>
 
  **InvalidParameterValueException**   
-One of the parameters in the request is invalid\. For example, if you provided an IAM role for AWS Lambda to assume in the `CreateFunction` or the `UpdateFunctionConfiguration` API, that AWS Lambda is unable to assume you will get this exception\.  
+One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
  **ServiceException**   
@@ -77,7 +77,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-Request throughput limit exceeded\.  
+The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 
 ## See Also<a name="API_ListLayers_SeeAlso"></a>

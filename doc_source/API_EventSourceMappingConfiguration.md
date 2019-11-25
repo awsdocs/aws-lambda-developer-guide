@@ -10,6 +10,16 @@ Type: Integer
 Valid Range: Minimum value of 1\. Maximum value of 10000\.  
 Required: No
 
+ **BisectBatchOnFunctionError**   <a name="SSS-Type-EventSourceMappingConfiguration-BisectBatchOnFunctionError"></a>
+\(Streams\) If the function returns an error, split the batch in two and retry\.  
+Type: Boolean  
+Required: No
+
+ **DestinationConfig**   <a name="SSS-Type-EventSourceMappingConfiguration-DestinationConfig"></a>
+\(Streams\) An Amazon SQS queue or Amazon SNS topic destination for discarded records\.  
+Type: [DestinationConfig](API_DestinationConfig.md) object  
+Required: No
+
  **EventSourceArn**   <a name="SSS-Type-EventSourceMappingConfiguration-EventSourceArn"></a>
 The Amazon Resource Name \(ARN\) of the event source\.  
 Type: String  
@@ -36,6 +46,24 @@ Required: No
 The maximum amount of time to gather records before invoking the function, in seconds\.  
 Type: Integer  
 Valid Range: Minimum value of 0\. Maximum value of 300\.  
+Required: No
+
+ **MaximumRecordAgeInSeconds**   <a name="SSS-Type-EventSourceMappingConfiguration-MaximumRecordAgeInSeconds"></a>
+\(Streams\) The maximum age of a record that Lambda sends to a function for processing\.  
+Type: Integer  
+Valid Range: Minimum value of 60\. Maximum value of 604800\.  
+Required: No
+
+ **MaximumRetryAttempts**   <a name="SSS-Type-EventSourceMappingConfiguration-MaximumRetryAttempts"></a>
+\(Streams\) The maximum number of times to retry when the function returns an error\.  
+Type: Integer  
+Valid Range: Minimum value of 0\. Maximum value of 10000\.  
+Required: No
+
+ **ParallelizationFactor**   <a name="SSS-Type-EventSourceMappingConfiguration-ParallelizationFactor"></a>
+\(Streams\) The number of batches to process from each shard concurrently\.  
+Type: Integer  
+Valid Range: Minimum value of 1\. Maximum value of 10\.  
 Required: No
 
  **State**   <a name="SSS-Type-EventSourceMappingConfiguration-State"></a>

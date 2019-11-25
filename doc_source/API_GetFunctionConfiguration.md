@@ -61,6 +61,9 @@ Content-type: application/json
    "[Handler](#SSS-GetFunctionConfiguration-response-Handler)": "string",
    "[KMSKeyArn](#SSS-GetFunctionConfiguration-response-KMSKeyArn)": "string",
    "[LastModified](#SSS-GetFunctionConfiguration-response-LastModified)": "string",
+   "[LastUpdateStatus](#SSS-GetFunctionConfiguration-response-LastUpdateStatus)": "string",
+   "[LastUpdateStatusReason](#SSS-GetFunctionConfiguration-response-LastUpdateStatusReason)": "string",
+   "[LastUpdateStatusReasonCode](#SSS-GetFunctionConfiguration-response-LastUpdateStatusReasonCode)": "string",
    "[Layers](#SSS-GetFunctionConfiguration-response-Layers)": [ 
       { 
          "[Arn](API_Layer.md#SSS-Type-Layer-Arn)": "string",
@@ -72,6 +75,9 @@ Content-type: application/json
    "[RevisionId](#SSS-GetFunctionConfiguration-response-RevisionId)": "string",
    "[Role](#SSS-GetFunctionConfiguration-response-Role)": "string",
    "[Runtime](#SSS-GetFunctionConfiguration-response-Runtime)": "string",
+   "[State](#SSS-GetFunctionConfiguration-response-State)": "string",
+   "[StateReason](#SSS-GetFunctionConfiguration-response-StateReason)": "string",
+   "[StateReasonCode](#SSS-GetFunctionConfiguration-response-StateReasonCode)": "string",
    "[Timeout](#SSS-GetFunctionConfiguration-response-Timeout)": number,
    "[TracingConfig](#SSS-GetFunctionConfiguration-response-TracingConfig)": { 
       "[Mode](API_TracingConfigResponse.md#SSS-Type-TracingConfigResponse-Mode)": "string"
@@ -130,13 +136,27 @@ Length Constraints: Maximum length of 128\.
 Pattern: `[^\s]+` 
 
  ** [KMSKeyArn](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-KMSKeyArn"></a>
-The KMS key that's used to encrypt the function's environment variables\. This key is only returned if you've configured a customer\-managed CMK\.  
+The KMS key that's used to encrypt the function's environment variables\. This key is only returned if you've configured a customer managed CMK\.  
 Type: String  
 Pattern: `(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()` 
 
  ** [LastModified](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-LastModified"></a>
 The date and time that the function was last updated, in [ISO\-8601 format](https://www.w3.org/TR/NOTE-datetime) \(YYYY\-MM\-DDThh:mm:ss\.sTZD\)\.  
 Type: String
+
+ ** [LastUpdateStatus](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-LastUpdateStatus"></a>
+The status of the last update that was performed on the function\.  
+Type: String  
+Valid Values:` Successful | Failed | InProgress` 
+
+ ** [LastUpdateStatusReason](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-LastUpdateStatusReason"></a>
+The reason for the last update that was performed on the function\.  
+Type: String
+
+ ** [LastUpdateStatusReasonCode](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-LastUpdateStatusReasonCode"></a>
+The reason code for the last update that was performed on the function\.  
+Type: String  
+Valid Values:` EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError` 
 
  ** [Layers](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-Layers"></a>
 The function's [ layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\.  
@@ -166,6 +186,20 @@ The runtime environment for the Lambda function\.
 Type: String  
 Valid Values:` nodejs8.10 | nodejs10.x | nodejs12.x | java8 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore1.0 | dotnetcore2.1 | go1.x | ruby2.5 | provided` 
 
+ ** [State](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-State"></a>
+The current state of the function\. When the state is `Inactive`, you can reactivate the function by invoking it\.  
+Type: String  
+Valid Values:` Pending | Active | Inactive | Failed` 
+
+ ** [StateReason](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-StateReason"></a>
+The reason for the function's current state\.  
+Type: String
+
+ ** [StateReasonCode](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-StateReasonCode"></a>
+The reason code for the function's current state\. When the code is `Creating`, you can't invoke or modify the function\.  
+Type: String  
+Valid Values:` Idle | Creating | Restoring | EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses` 
+
  ** [Timeout](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-Timeout"></a>
 The amount of time that Lambda allows a function to run before stopping it\.  
 Type: Integer  
@@ -188,11 +222,11 @@ Type: [VpcConfigResponse](API_VpcConfigResponse.md) object
 ## Errors<a name="API_GetFunctionConfiguration_Errors"></a>
 
  **InvalidParameterValueException**   
-One of the parameters in the request is invalid\. For example, if you provided an IAM role for AWS Lambda to assume in the `CreateFunction` or the `UpdateFunctionConfiguration` API, that AWS Lambda is unable to assume you will get this exception\.  
+One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
  **ResourceNotFoundException**   
-The resource \(for example, a Lambda function or access policy statement\) specified in the request does not exist\.  
+The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
  **ServiceException**   
@@ -200,7 +234,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-Request throughput limit exceeded\.  
+The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 
 ## See Also<a name="API_GetFunctionConfiguration_SeeAlso"></a>

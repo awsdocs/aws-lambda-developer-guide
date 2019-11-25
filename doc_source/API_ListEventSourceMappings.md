@@ -52,11 +52,23 @@ Content-type: application/json
    "[EventSourceMappings](#SSS-ListEventSourceMappings-response-EventSourceMappings)": [ 
       { 
          "[BatchSize](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-BatchSize)": number,
+         "[BisectBatchOnFunctionError](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-BisectBatchOnFunctionError)": boolean,
+         "[DestinationConfig](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-DestinationConfig)": { 
+            "[OnFailure](API_DestinationConfig.md#SSS-Type-DestinationConfig-OnFailure)": { 
+               "[Destination](API_OnFailure.md#SSS-Type-OnFailure-Destination)": "string"
+            },
+            "[OnSuccess](API_DestinationConfig.md#SSS-Type-DestinationConfig-OnSuccess)": { 
+               "[Destination](API_OnSuccess.md#SSS-Type-OnSuccess-Destination)": "string"
+            }
+         },
          "[EventSourceArn](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-EventSourceArn)": "string",
          "[FunctionArn](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-FunctionArn)": "string",
          "[LastModified](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-LastModified)": number,
          "[LastProcessingResult](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-LastProcessingResult)": "string",
          "[MaximumBatchingWindowInSeconds](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-MaximumBatchingWindowInSeconds)": number,
+         "[MaximumRecordAgeInSeconds](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-MaximumRecordAgeInSeconds)": number,
+         "[MaximumRetryAttempts](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-MaximumRetryAttempts)": number,
+         "[ParallelizationFactor](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-ParallelizationFactor)": number,
          "[State](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-State)": "string",
          "[StateTransitionReason](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-StateTransitionReason)": "string",
          "[UUID](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-UUID)": "string"
@@ -83,11 +95,11 @@ Type: String
 ## Errors<a name="API_ListEventSourceMappings_Errors"></a>
 
  **InvalidParameterValueException**   
-One of the parameters in the request is invalid\. For example, if you provided an IAM role for AWS Lambda to assume in the `CreateFunction` or the `UpdateFunctionConfiguration` API, that AWS Lambda is unable to assume you will get this exception\.  
+One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
  **ResourceNotFoundException**   
-The resource \(for example, a Lambda function or access policy statement\) specified in the request does not exist\.  
+The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
  **ServiceException**   
@@ -95,7 +107,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-Request throughput limit exceeded\.  
+The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 
 ## See Also<a name="API_ListEventSourceMappings_SeeAlso"></a>

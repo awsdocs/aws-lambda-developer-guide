@@ -11,13 +11,12 @@ As you add libraries and other dependencies to your function, creating and uploa
 To use your Lambda function with AWS resources in an Amazon VPC, configure it with security groups and subnets to [create a VPC connection](configuration-vpc.md)\. Connecting your function to a VPC lets you access resources in a private subnet such as relational databases and caches\.
 
 **Topics**
-+ [AWS Lambda Function Configuration](resource-model.md)
-+ [Reserving Concurrency for a Lambda Function](per-function-concurrency.md)
++ [Configuring AWS Lambda Functions](resource-model.md)
 + [AWS Lambda Environment Variables](env_variables.md)
++ [Reserving Concurrency for a Lambda Function](per-function-concurrency.md)
 + [AWS Lambda Function Versions](configuration-versions.md)
 + [AWS Lambda Function Aliases](configuration-aliases.md)
-+ [Rolling Deployments for Lambda Functions](lambda-rolling-deployments.md)
 + [AWS Lambda Layers](configuration-layers.md)
 + [Configuring a Lambda Function to Access Resources in a VPC](configuration-vpc.md)
++ [Monitoring the State of a Function with the Lambda API](functions-states.md)
 + [Tagging Lambda Functions](tagging.md)
-+ [Accessing AWS Resources from a Lambda Function](accessing-resources.md)

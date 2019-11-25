@@ -2,7 +2,11 @@
 
 You can configure a function to connect to private subnets in a virtual private cloud \(VPC\) in your account\. Use Amazon Virtual Private Cloud \(Amazon VPC\) to create a private network for resources such as databases, cache instances, or internal services\. Connect your function to the VPC to access private resources during execution\.
 
-Lambda creates an [elastic network interface](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ElasticNetworkInterfaces.html) for each combination of security group and subnet in your function's VPC configuration in a process that can take a minute or so\.  Multiple functions connected to the same subnets share network interfaces, so connecting additional functions to a subnet that already has a Lambda\-managed network interface is much quicker\. Lambda might create additional network interfaces if you have many functions or very busy functions\.
+When you connect a function to a VPC, Lambda creates an [elastic network interface](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ElasticNetworkInterfaces.html) for each combination of security group and subnet in your function's VPC configuration\. This process that can take about a minute\. During this time, you cannot perform additional operations that target the function, such as [creating versions](configuration-versions.md) or updating the function's code\. For new functions, you can't invoke the function until its state transitions from `Pending` to `Active`\. For existing functions, you can still invoke the old version while the update is in progress\. For more information about function states, see [Monitoring the State of a Function with the Lambda API](functions-states.md)\.
+
+Multiple functions connected to the same subnets share network interfaces, so connecting additional functions to a subnet that already has a Lambda\-managed network interface is much quicker\. However, Lambda might create additional network interfaces if you have many functions or very busy functions\.
+
+If your functions are not active for a long period of time, Lambda reclaims its network interfaces, and the function becomes `Idle`\. Invoke an idle function to reactivate it\. The first invocation fails and the function enters a pending state again until the network interface is available\.
 
 Lambda functions cannot connect directly to a VPC with [dedicated instance tenancy](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html)\. To connect to resources in a dedicated VPC, [peer it to a second VPC with default tenancy](https://aws.amazon.com/premiumsupport/knowledge-center/lambda-dedicated-vpc/)\.
 
@@ -10,9 +14,15 @@ Lambda functions cannot connect directly to a VPC with [dedicated instance tenan
 + [Tutorial: Configuring a Lambda Function to Access Amazon RDS in an Amazon VPC](services-rds-tutorial.md)
 + [Tutorial: Configuring a Lambda Function to Access Amazon ElastiCache in an Amazon VPC](services-elasticache-tutorial.md)
 
+**Topics**
++ [Execution Role and User Permissions](#vpc-permissions)
++ [Configuring Amazon VPC Access with the Lambda API](#vpc-configuring)
++ [Internet and Service Access for VPC\-Connected Functions](#vpc-internet)
++ [Sample VPC Configurations](#vpc-samples)
+
 ## Execution Role and User Permissions<a name="vpc-permissions"></a>
 
-To connect to a VPC, your function's execution role must have the following permissions\.
+Lambda uses your function's permissions to create and manage network interfaces\. To connect to a VPC, your function's execution role must have the following permissions\.
 
 **Execution Role Permissions**
 + **ec2:CreateNetworkInterface**
@@ -21,7 +31,7 @@ To connect to a VPC, your function's execution role must have the following perm
 
 These permissions are included in the **AWSLambdaVPCAccessExecutionRole** managed policy\.
 
-To configure a function to connect to a VPC, you need the following permissions\.
+When you configure VPC connectivity, Lambda uses your permissions to verify network resources\. To configure a function to connect to a VPC, your IAM user need the following permissions\.
 
 **User Permissions**
 + **ec2:DescribeSecurityGroups**
@@ -30,7 +40,11 @@ To configure a function to connect to a VPC, you need the following permissions\
 
 ## Configuring Amazon VPC Access with the Lambda API<a name="vpc-configuring"></a>
 
-To connect your function to a VPC during creation, use the `vpc-config` option with a list of private subnet IDs and security groups\.
+You can connect a function to a VPC with the following APIs\.
++ [CreateFunction](API_CreateFunction.md)
++ [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)
+
+To connect your function to a VPC during creation with the AWS CLI, use the `vpc-config` option with a list of private subnet IDs and security groups\. The following example creates a function with a connection to a VPC with two subnets and one security group\.
 
 ```
 $ aws lambda create-function --function-name my-function \
@@ -39,7 +53,7 @@ $ aws lambda create-function --function-name my-function \
 --vpc-config SubnetIds=subnet-071f712345678e7c8,subnet-07fd123456788a036,SecurityGroupIds=sg-085912345678492fb
 ```
 
-For an existing function, use the same option with the `update-function-configuration` command\.
+To connect an existing function, use the `vpc-config` option with the `update-function-configuration` command\.
 
 ```
 $ aws lambda update-function-configuration --function-name my-function \
@@ -53,13 +67,9 @@ $ aws lambda update-function-configuration --function-name my-function \
 --vpc-config SubnetIds=[],SecurityGroupIds=[]
 ```
 
-These commands use the following APIs\.
-+ [CreateFunction](API_CreateFunction.md)
-+ [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)
-
 ## Internet and Service Access for VPC\-Connected Functions<a name="vpc-internet"></a>
 
-By default, Lambda runs your functions in a secure VPC with access to AWS services and the internet\. When you connect a function to a VPC in your account, it does not have access to the internet unless the VPC provides access\.
+By default, Lambda runs your functions in a secure VPC with access to AWS services and the internet\. When you connect a function to a VPC in your account, it does not have access to the internet unless your VPC provides access\.
 
 **Note**  
 Several services offer [VPC endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html)\. You can use VPC endpoints to connect to AWS services from within a VPC without internet access\.

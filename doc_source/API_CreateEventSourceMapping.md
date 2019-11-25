@@ -3,9 +3,15 @@
 Creates a mapping between an event source and an AWS Lambda function\. Lambda reads items from the event source and triggers the function\.
 
 For details about each event source type, see the following topics\.
++  [Using AWS Lambda with Amazon DynamoDB](https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html) 
 +  [Using AWS Lambda with Amazon Kinesis](https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html) 
 +  [Using AWS Lambda with Amazon SQS](https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html) 
-+  [Using AWS Lambda with Amazon DynamoDB](https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html) 
+
+The following error handling options are only available for stream sources \(DynamoDB and Kinesis\):
++  `BisectBatchOnFunctionError` \- If the function returns an error, split the batch in two and retry\.
++  `DestinationConfig` \- Send discarded records to an Amazon SQS queue or Amazon SNS topic\.
++  `MaximumRecordAgeInSeconds` \- Discard records older than the specified age\.
++  `MaximumRetryAttempts` \- Discard records after the specified number of retries\.
 
 ## Request Syntax<a name="API_CreateEventSourceMapping_RequestSyntax"></a>
 
@@ -15,10 +21,22 @@ Content-type: application/json
 
 {
    "[BatchSize](#SSS-CreateEventSourceMapping-request-BatchSize)": number,
+   "[BisectBatchOnFunctionError](#SSS-CreateEventSourceMapping-request-BisectBatchOnFunctionError)": boolean,
+   "[DestinationConfig](#SSS-CreateEventSourceMapping-request-DestinationConfig)": { 
+      "[OnFailure](API_DestinationConfig.md#SSS-Type-DestinationConfig-OnFailure)": { 
+         "[Destination](API_OnFailure.md#SSS-Type-OnFailure-Destination)": "string"
+      },
+      "[OnSuccess](API_DestinationConfig.md#SSS-Type-DestinationConfig-OnSuccess)": { 
+         "[Destination](API_OnSuccess.md#SSS-Type-OnSuccess-Destination)": "string"
+      }
+   },
    "[Enabled](#SSS-CreateEventSourceMapping-request-Enabled)": boolean,
    "[EventSourceArn](#SSS-CreateEventSourceMapping-request-EventSourceArn)": "string",
    "[FunctionName](#SSS-CreateEventSourceMapping-request-FunctionName)": "string",
    "[MaximumBatchingWindowInSeconds](#SSS-CreateEventSourceMapping-request-MaximumBatchingWindowInSeconds)": number,
+   "[MaximumRecordAgeInSeconds](#SSS-CreateEventSourceMapping-request-MaximumRecordAgeInSeconds)": number,
+   "[MaximumRetryAttempts](#SSS-CreateEventSourceMapping-request-MaximumRetryAttempts)": number,
+   "[ParallelizationFactor](#SSS-CreateEventSourceMapping-request-ParallelizationFactor)": number,
    "[StartingPosition](#SSS-CreateEventSourceMapping-request-StartingPosition)": "string",
    "[StartingPositionTimestamp](#SSS-CreateEventSourceMapping-request-StartingPositionTimestamp)": number
 }
@@ -39,6 +57,16 @@ The maximum number of items to retrieve in a single batch\.
 +  **Amazon Simple Queue Service** \- Default 10\. Max 10\.
 Type: Integer  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.  
+Required: No
+
+ ** [BisectBatchOnFunctionError](#API_CreateEventSourceMapping_RequestSyntax) **   <a name="SSS-CreateEventSourceMapping-request-BisectBatchOnFunctionError"></a>
+\(Streams\) If the function returns an error, split the batch in two and retry\.  
+Type: Boolean  
+Required: No
+
+ ** [DestinationConfig](#API_CreateEventSourceMapping_RequestSyntax) **   <a name="SSS-CreateEventSourceMapping-request-DestinationConfig"></a>
+\(Streams\) An Amazon SQS queue or Amazon SNS topic destination for discarded records\.  
+Type: [DestinationConfig](API_DestinationConfig.md) object  
 Required: No
 
  ** [Enabled](#API_CreateEventSourceMapping_RequestSyntax) **   <a name="SSS-CreateEventSourceMapping-request-Enabled"></a>
@@ -75,6 +103,24 @@ Type: Integer
 Valid Range: Minimum value of 0\. Maximum value of 300\.  
 Required: No
 
+ ** [MaximumRecordAgeInSeconds](#API_CreateEventSourceMapping_RequestSyntax) **   <a name="SSS-CreateEventSourceMapping-request-MaximumRecordAgeInSeconds"></a>
+\(Streams\) The maximum age of a record that Lambda sends to a function for processing\.  
+Type: Integer  
+Valid Range: Minimum value of 60\. Maximum value of 604800\.  
+Required: No
+
+ ** [MaximumRetryAttempts](#API_CreateEventSourceMapping_RequestSyntax) **   <a name="SSS-CreateEventSourceMapping-request-MaximumRetryAttempts"></a>
+\(Streams\) The maximum number of times to retry when the function returns an error\.  
+Type: Integer  
+Valid Range: Minimum value of 0\. Maximum value of 10000\.  
+Required: No
+
+ ** [ParallelizationFactor](#API_CreateEventSourceMapping_RequestSyntax) **   <a name="SSS-CreateEventSourceMapping-request-ParallelizationFactor"></a>
+\(Streams\) The number of batches to process from each shard concurrently\.  
+Type: Integer  
+Valid Range: Minimum value of 1\. Maximum value of 10\.  
+Required: No
+
  ** [StartingPosition](#API_CreateEventSourceMapping_RequestSyntax) **   <a name="SSS-CreateEventSourceMapping-request-StartingPosition"></a>
 The position in a stream from which to start reading\. Required for Amazon Kinesis and Amazon DynamoDB Streams sources\. `AT_TIMESTAMP` is only supported for Amazon Kinesis streams\.  
 Type: String  
@@ -94,11 +140,23 @@ Content-type: application/json
 
 {
    "[BatchSize](#SSS-CreateEventSourceMapping-response-BatchSize)": number,
+   "[BisectBatchOnFunctionError](#SSS-CreateEventSourceMapping-response-BisectBatchOnFunctionError)": boolean,
+   "[DestinationConfig](#SSS-CreateEventSourceMapping-response-DestinationConfig)": { 
+      "[OnFailure](API_DestinationConfig.md#SSS-Type-DestinationConfig-OnFailure)": { 
+         "[Destination](API_OnFailure.md#SSS-Type-OnFailure-Destination)": "string"
+      },
+      "[OnSuccess](API_DestinationConfig.md#SSS-Type-DestinationConfig-OnSuccess)": { 
+         "[Destination](API_OnSuccess.md#SSS-Type-OnSuccess-Destination)": "string"
+      }
+   },
    "[EventSourceArn](#SSS-CreateEventSourceMapping-response-EventSourceArn)": "string",
    "[FunctionArn](#SSS-CreateEventSourceMapping-response-FunctionArn)": "string",
    "[LastModified](#SSS-CreateEventSourceMapping-response-LastModified)": number,
    "[LastProcessingResult](#SSS-CreateEventSourceMapping-response-LastProcessingResult)": "string",
    "[MaximumBatchingWindowInSeconds](#SSS-CreateEventSourceMapping-response-MaximumBatchingWindowInSeconds)": number,
+   "[MaximumRecordAgeInSeconds](#SSS-CreateEventSourceMapping-response-MaximumRecordAgeInSeconds)": number,
+   "[MaximumRetryAttempts](#SSS-CreateEventSourceMapping-response-MaximumRetryAttempts)": number,
+   "[ParallelizationFactor](#SSS-CreateEventSourceMapping-response-ParallelizationFactor)": number,
    "[State](#SSS-CreateEventSourceMapping-response-State)": "string",
    "[StateTransitionReason](#SSS-CreateEventSourceMapping-response-StateTransitionReason)": "string",
    "[UUID](#SSS-CreateEventSourceMapping-response-UUID)": "string"
@@ -115,6 +173,14 @@ The following data is returned in JSON format by the service\.
 The maximum number of items to retrieve in a single batch\.  
 Type: Integer  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.
+
+ ** [BisectBatchOnFunctionError](#API_CreateEventSourceMapping_ResponseSyntax) **   <a name="SSS-CreateEventSourceMapping-response-BisectBatchOnFunctionError"></a>
+\(Streams\) If the function returns an error, split the batch in two and retry\.  
+Type: Boolean
+
+ ** [DestinationConfig](#API_CreateEventSourceMapping_ResponseSyntax) **   <a name="SSS-CreateEventSourceMapping-response-DestinationConfig"></a>
+\(Streams\) An Amazon SQS queue or Amazon SNS topic destination for discarded records\.  
+Type: [DestinationConfig](API_DestinationConfig.md) object
 
  ** [EventSourceArn](#API_CreateEventSourceMapping_ResponseSyntax) **   <a name="SSS-CreateEventSourceMapping-response-EventSourceArn"></a>
 The Amazon Resource Name \(ARN\) of the event source\.  
@@ -139,6 +205,21 @@ The maximum amount of time to gather records before invoking the function, in se
 Type: Integer  
 Valid Range: Minimum value of 0\. Maximum value of 300\.
 
+ ** [MaximumRecordAgeInSeconds](#API_CreateEventSourceMapping_ResponseSyntax) **   <a name="SSS-CreateEventSourceMapping-response-MaximumRecordAgeInSeconds"></a>
+\(Streams\) The maximum age of a record that Lambda sends to a function for processing\.  
+Type: Integer  
+Valid Range: Minimum value of 60\. Maximum value of 604800\.
+
+ ** [MaximumRetryAttempts](#API_CreateEventSourceMapping_ResponseSyntax) **   <a name="SSS-CreateEventSourceMapping-response-MaximumRetryAttempts"></a>
+\(Streams\) The maximum number of times to retry when the function returns an error\.  
+Type: Integer  
+Valid Range: Minimum value of 0\. Maximum value of 10000\.
+
+ ** [ParallelizationFactor](#API_CreateEventSourceMapping_ResponseSyntax) **   <a name="SSS-CreateEventSourceMapping-response-ParallelizationFactor"></a>
+\(Streams\) The number of batches to process from each shard concurrently\.  
+Type: Integer  
+Valid Range: Minimum value of 1\. Maximum value of 10\.
+
  ** [State](#API_CreateEventSourceMapping_ResponseSyntax) **   <a name="SSS-CreateEventSourceMapping-response-State"></a>
 The state of the event source mapping\. It can be one of the following: `Creating`, `Enabling`, `Enabled`, `Disabling`, `Disabled`, `Updating`, or `Deleting`\.  
 Type: String
@@ -154,15 +235,15 @@ Type: String
 ## Errors<a name="API_CreateEventSourceMapping_Errors"></a>
 
  **InvalidParameterValueException**   
-One of the parameters in the request is invalid\. For example, if you provided an IAM role for AWS Lambda to assume in the `CreateFunction` or the `UpdateFunctionConfiguration` API, that AWS Lambda is unable to assume you will get this exception\.  
+One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
  **ResourceConflictException**   
-The resource already exists\.  
+The resource already exists, or another operation is in progress\.  
 HTTP Status Code: 409
 
  **ResourceNotFoundException**   
-The resource \(for example, a Lambda function or access policy statement\) specified in the request does not exist\.  
+The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
  **ServiceException**   
@@ -170,7 +251,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-Request throughput limit exceeded\.  
+The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 
 ## See Also<a name="API_CreateEventSourceMapping_SeeAlso"></a>

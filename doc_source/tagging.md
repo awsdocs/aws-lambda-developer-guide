@@ -36,7 +36,7 @@ When you create a new Lambda function, you can include tags with the `--tags` op
 ```
 $ aws lambda create-function --function-name my-function
 --handler index.js --runtime nodejs12.x \
---role role-arn \
+--role arn:aws:iam::123456789012:role/lambda-role \
 --tags "DEPARTMENT=Department A"
 ```
 
@@ -81,12 +81,12 @@ You are limited to a maximum of 50 tags per Lambda function\. If you delete the 
 ### Filtering Lambda Functions Using the CLI<a name="tag-filtering-cli"></a>
 
 If you want to view the tags that are applied to a specific Lambda function, you can use either of the following Lambda API commands:
-+ [ListTags](API_ListTags.md): You supply your Lambda function ARN \(Amazon Resource Name\) to view a list of the tags associated with this function:
++ [ListTags](API_ListTags.md) – You supply your Lambda function ARN \(Amazon Resource Name\) to view a list of the tags associated with this function:
 
   ```
   $ aws lambda list-tags --resource function arn
   ```
-+ [GetFunction](API_GetFunction.md): You supply your Lambda function name to a view a list of the tags associated with this function:
++ [GetFunction](API_GetFunction.md) – You supply your Lambda function name to a view a list of the tags associated with this function:
 
   ```
   $ aws lambda get-function --function-name my-function

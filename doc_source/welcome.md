@@ -6,7 +6,7 @@ You can use AWS Lambda to run your code in response to events, such as changes t
 
 You can also build [serverless](https://aws.amazon.com/serverless) applications composed of functions that are triggered by events and automatically deploy them using CodePipeline and AWS CodeBuild\. For more information, see [AWS Lambda Applications](deploying-lambda-apps.md)\.
 
-For more information about the AWS Lambda execution environment, see [AWS Lambda Runtimes](lambda-runtimes.md)\. For information about how AWS Lambda determines compute resources required to execute your code, see [AWS Lambda Function Configuration](resource-model.md)\.
+For more information about the AWS Lambda execution environment, see [AWS Lambda Runtimes](lambda-runtimes.md)\. For information about how AWS Lambda determines compute resources required to execute your code, see [Configuring AWS Lambda Functions](resource-model.md)\.
 
 ## When Should I Use AWS Lambda?<a name="when-to-use-cloud-functions"></a>
 

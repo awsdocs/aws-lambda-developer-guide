@@ -29,11 +29,23 @@ Content-type: application/json
 
 {
    "[BatchSize](#SSS-DeleteEventSourceMapping-response-BatchSize)": number,
+   "[BisectBatchOnFunctionError](#SSS-DeleteEventSourceMapping-response-BisectBatchOnFunctionError)": boolean,
+   "[DestinationConfig](#SSS-DeleteEventSourceMapping-response-DestinationConfig)": { 
+      "[OnFailure](API_DestinationConfig.md#SSS-Type-DestinationConfig-OnFailure)": { 
+         "[Destination](API_OnFailure.md#SSS-Type-OnFailure-Destination)": "string"
+      },
+      "[OnSuccess](API_DestinationConfig.md#SSS-Type-DestinationConfig-OnSuccess)": { 
+         "[Destination](API_OnSuccess.md#SSS-Type-OnSuccess-Destination)": "string"
+      }
+   },
    "[EventSourceArn](#SSS-DeleteEventSourceMapping-response-EventSourceArn)": "string",
    "[FunctionArn](#SSS-DeleteEventSourceMapping-response-FunctionArn)": "string",
    "[LastModified](#SSS-DeleteEventSourceMapping-response-LastModified)": number,
    "[LastProcessingResult](#SSS-DeleteEventSourceMapping-response-LastProcessingResult)": "string",
    "[MaximumBatchingWindowInSeconds](#SSS-DeleteEventSourceMapping-response-MaximumBatchingWindowInSeconds)": number,
+   "[MaximumRecordAgeInSeconds](#SSS-DeleteEventSourceMapping-response-MaximumRecordAgeInSeconds)": number,
+   "[MaximumRetryAttempts](#SSS-DeleteEventSourceMapping-response-MaximumRetryAttempts)": number,
+   "[ParallelizationFactor](#SSS-DeleteEventSourceMapping-response-ParallelizationFactor)": number,
    "[State](#SSS-DeleteEventSourceMapping-response-State)": "string",
    "[StateTransitionReason](#SSS-DeleteEventSourceMapping-response-StateTransitionReason)": "string",
    "[UUID](#SSS-DeleteEventSourceMapping-response-UUID)": "string"
@@ -50,6 +62,14 @@ The following data is returned in JSON format by the service\.
 The maximum number of items to retrieve in a single batch\.  
 Type: Integer  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.
+
+ ** [BisectBatchOnFunctionError](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-BisectBatchOnFunctionError"></a>
+\(Streams\) If the function returns an error, split the batch in two and retry\.  
+Type: Boolean
+
+ ** [DestinationConfig](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-DestinationConfig"></a>
+\(Streams\) An Amazon SQS queue or Amazon SNS topic destination for discarded records\.  
+Type: [DestinationConfig](API_DestinationConfig.md) object
 
  ** [EventSourceArn](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-EventSourceArn"></a>
 The Amazon Resource Name \(ARN\) of the event source\.  
@@ -74,6 +94,21 @@ The maximum amount of time to gather records before invoking the function, in se
 Type: Integer  
 Valid Range: Minimum value of 0\. Maximum value of 300\.
 
+ ** [MaximumRecordAgeInSeconds](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-MaximumRecordAgeInSeconds"></a>
+\(Streams\) The maximum age of a record that Lambda sends to a function for processing\.  
+Type: Integer  
+Valid Range: Minimum value of 60\. Maximum value of 604800\.
+
+ ** [MaximumRetryAttempts](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-MaximumRetryAttempts"></a>
+\(Streams\) The maximum number of times to retry when the function returns an error\.  
+Type: Integer  
+Valid Range: Minimum value of 0\. Maximum value of 10000\.
+
+ ** [ParallelizationFactor](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-ParallelizationFactor"></a>
+\(Streams\) The number of batches to process from each shard concurrently\.  
+Type: Integer  
+Valid Range: Minimum value of 1\. Maximum value of 10\.
+
  ** [State](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-State"></a>
 The state of the event source mapping\. It can be one of the following: `Creating`, `Enabling`, `Enabled`, `Disabling`, `Disabled`, `Updating`, or `Deleting`\.  
 Type: String
@@ -89,7 +124,7 @@ Type: String
 ## Errors<a name="API_DeleteEventSourceMapping_Errors"></a>
 
  **InvalidParameterValueException**   
-One of the parameters in the request is invalid\. For example, if you provided an IAM role for AWS Lambda to assume in the `CreateFunction` or the `UpdateFunctionConfiguration` API, that AWS Lambda is unable to assume you will get this exception\.  
+One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
  **ResourceInUseException**   
@@ -97,7 +132,7 @@ The operation conflicts with the resource's availability\. For example, you atte
 HTTP Status Code: 400
 
  **ResourceNotFoundException**   
-The resource \(for example, a Lambda function or access policy statement\) specified in the request does not exist\.  
+The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
  **ServiceException**   
@@ -105,7 +140,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-Request throughput limit exceeded\.  
+The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 
 ## See Also<a name="API_DeleteEventSourceMapping_SeeAlso"></a>

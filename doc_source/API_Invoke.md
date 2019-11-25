@@ -119,11 +119,11 @@ AWS Lambda received an unexpected EC2 client exception while setting up for the 
 HTTP Status Code: 502
 
  **ENILimitReachedException**   
-AWS Lambda was not able to create an Elastic Network Interface \(ENI\) in the VPC, specified as part of Lambda function configuration, because the limit for network interfaces has been reached\.  
+AWS Lambda was not able to create an elastic network interface in the VPC, specified as part of Lambda function configuration, because the limit for network interfaces has been reached\.  
 HTTP Status Code: 502
 
  **InvalidParameterValueException**   
-One of the parameters in the request is invalid\. For example, if you provided an IAM role for AWS Lambda to assume in the `CreateFunction` or the `UpdateFunctionConfiguration` API, that AWS Lambda is unable to assume you will get this exception\.  
+One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
  **InvalidRequestContentException**   
@@ -166,9 +166,17 @@ HTTP Status Code: 502
 The request payload exceeded the `Invoke` request body JSON input limit\. For more information, see [Limits](https://docs.aws.amazon.com/lambda/latest/dg/limits.html)\.   
 HTTP Status Code: 413
 
+ **ResourceConflictException**   
+The resource already exists, or another operation is in progress\.  
+HTTP Status Code: 409
+
  **ResourceNotFoundException**   
-The resource \(for example, a Lambda function or access policy statement\) specified in the request does not exist\.  
+The resource specified in the request does not exist\.  
 HTTP Status Code: 404
+
+ **ResourceNotReadyException**   
+The function is inactive and its VPC connection is no longer available\. Wait for the VPC connection to reestablish and try again\.  
+HTTP Status Code: 502
 
  **ServiceException**   
 The AWS Lambda service encountered an internal error\.  
@@ -179,7 +187,7 @@ AWS Lambda was not able to set up VPC access for the Lambda function because one
 HTTP Status Code: 502
 
  **TooManyRequestsException**   
-Request throughput limit exceeded\.  
+The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 
  **UnsupportedMediaTypeException**   

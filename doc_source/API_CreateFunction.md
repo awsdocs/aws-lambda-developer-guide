@@ -2,6 +2,8 @@
 
 Creates a Lambda function\. To create a function, you need a [deployment package](https://docs.aws.amazon.com/lambda/latest/dg/deployment-package-v2.html) and an [execution role](https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role)\. The deployment package contains your function code\. The execution role grants the function permission to use AWS services, such as Amazon CloudWatch Logs for log streaming and AWS X\-Ray for request tracing\.
 
+When you create a function, Lambda provisions an instance of the function and its supporting resources\. If your function connects to a VPC, this process can take a minute or so\. During this time, you can't invoke or modify the function\. The `State`, `StateReason`, and `StateReasonCode` fields in the response from [GetFunctionConfiguration](API_GetFunctionConfiguration.md) indicate when the function is ready to invoke\. For more information, see [Function States](https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html)\.
+
 A function has an unpublished version, and can have published versions and aliases\. The unpublished version changes when you update your function's code and configuration\. A published version is a snapshot of your function code and configuration that can't be changed\. An alias is a named resource that maps to a version, and can be changed to map to a different version\. Use the `Publish` parameter to create version `1` of your function from its initial configuration\.
 
 The other parameters let you configure version\-specific and function\-level settings\. You can modify version\-specific settings later with [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)\. Function\-level settings apply to both the unpublished and published versions of the function, and include tags \([TagResource](API_TagResource.md)\) and per\-function concurrency limits \([PutFunctionConcurrency](API_PutFunctionConcurrency.md)\)\.
@@ -187,6 +189,9 @@ Content-type: application/json
    "[Handler](#SSS-CreateFunction-response-Handler)": "string",
    "[KMSKeyArn](#SSS-CreateFunction-response-KMSKeyArn)": "string",
    "[LastModified](#SSS-CreateFunction-response-LastModified)": "string",
+   "[LastUpdateStatus](#SSS-CreateFunction-response-LastUpdateStatus)": "string",
+   "[LastUpdateStatusReason](#SSS-CreateFunction-response-LastUpdateStatusReason)": "string",
+   "[LastUpdateStatusReasonCode](#SSS-CreateFunction-response-LastUpdateStatusReasonCode)": "string",
    "[Layers](#SSS-CreateFunction-response-Layers)": [ 
       { 
          "[Arn](API_Layer.md#SSS-Type-Layer-Arn)": "string",
@@ -198,6 +203,9 @@ Content-type: application/json
    "[RevisionId](#SSS-CreateFunction-response-RevisionId)": "string",
    "[Role](#SSS-CreateFunction-response-Role)": "string",
    "[Runtime](#SSS-CreateFunction-response-Runtime)": "string",
+   "[State](#SSS-CreateFunction-response-State)": "string",
+   "[StateReason](#SSS-CreateFunction-response-StateReason)": "string",
+   "[StateReasonCode](#SSS-CreateFunction-response-StateReasonCode)": "string",
    "[Timeout](#SSS-CreateFunction-response-Timeout)": number,
    "[TracingConfig](#SSS-CreateFunction-response-TracingConfig)": { 
       "[Mode](API_TracingConfigResponse.md#SSS-Type-TracingConfigResponse-Mode)": "string"
@@ -256,13 +264,27 @@ Length Constraints: Maximum length of 128\.
 Pattern: `[^\s]+` 
 
  ** [KMSKeyArn](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-KMSKeyArn"></a>
-The KMS key that's used to encrypt the function's environment variables\. This key is only returned if you've configured a customer\-managed CMK\.  
+The KMS key that's used to encrypt the function's environment variables\. This key is only returned if you've configured a customer managed CMK\.  
 Type: String  
 Pattern: `(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()` 
 
  ** [LastModified](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-LastModified"></a>
 The date and time that the function was last updated, in [ISO\-8601 format](https://www.w3.org/TR/NOTE-datetime) \(YYYY\-MM\-DDThh:mm:ss\.sTZD\)\.  
 Type: String
+
+ ** [LastUpdateStatus](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-LastUpdateStatus"></a>
+The status of the last update that was performed on the function\.  
+Type: String  
+Valid Values:` Successful | Failed | InProgress` 
+
+ ** [LastUpdateStatusReason](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-LastUpdateStatusReason"></a>
+The reason for the last update that was performed on the function\.  
+Type: String
+
+ ** [LastUpdateStatusReasonCode](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-LastUpdateStatusReasonCode"></a>
+The reason code for the last update that was performed on the function\.  
+Type: String  
+Valid Values:` EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError` 
 
  ** [Layers](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-Layers"></a>
 The function's [ layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\.  
@@ -292,6 +314,20 @@ The runtime environment for the Lambda function\.
 Type: String  
 Valid Values:` nodejs8.10 | nodejs10.x | nodejs12.x | java8 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore1.0 | dotnetcore2.1 | go1.x | ruby2.5 | provided` 
 
+ ** [State](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-State"></a>
+The current state of the function\. When the state is `Inactive`, you can reactivate the function by invoking it\.  
+Type: String  
+Valid Values:` Pending | Active | Inactive | Failed` 
+
+ ** [StateReason](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-StateReason"></a>
+The reason for the function's current state\.  
+Type: String
+
+ ** [StateReasonCode](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-StateReasonCode"></a>
+The reason code for the function's current state\. When the code is `Creating`, you can't invoke or modify the function\.  
+Type: String  
+Valid Values:` Idle | Creating | Restoring | EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses` 
+
  ** [Timeout](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-Timeout"></a>
 The amount of time that Lambda allows a function to run before stopping it\.  
 Type: Integer  
@@ -318,15 +354,15 @@ You have exceeded your maximum total code size per account\. [Learn more](https:
 HTTP Status Code: 400
 
  **InvalidParameterValueException**   
-One of the parameters in the request is invalid\. For example, if you provided an IAM role for AWS Lambda to assume in the `CreateFunction` or the `UpdateFunctionConfiguration` API, that AWS Lambda is unable to assume you will get this exception\.  
+One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
  **ResourceConflictException**   
-The resource already exists\.  
+The resource already exists, or another operation is in progress\.  
 HTTP Status Code: 409
 
  **ResourceNotFoundException**   
-The resource \(for example, a Lambda function or access policy statement\) specified in the request does not exist\.  
+The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
  **ServiceException**   
@@ -334,7 +370,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-Request throughput limit exceeded\.  
+The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 
 ## See Also<a name="API_CreateFunction_SeeAlso"></a>

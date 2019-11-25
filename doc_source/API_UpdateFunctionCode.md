@@ -106,6 +106,9 @@ Content-type: application/json
    "[Handler](#SSS-UpdateFunctionCode-response-Handler)": "string",
    "[KMSKeyArn](#SSS-UpdateFunctionCode-response-KMSKeyArn)": "string",
    "[LastModified](#SSS-UpdateFunctionCode-response-LastModified)": "string",
+   "[LastUpdateStatus](#SSS-UpdateFunctionCode-response-LastUpdateStatus)": "string",
+   "[LastUpdateStatusReason](#SSS-UpdateFunctionCode-response-LastUpdateStatusReason)": "string",
+   "[LastUpdateStatusReasonCode](#SSS-UpdateFunctionCode-response-LastUpdateStatusReasonCode)": "string",
    "[Layers](#SSS-UpdateFunctionCode-response-Layers)": [ 
       { 
          "[Arn](API_Layer.md#SSS-Type-Layer-Arn)": "string",
@@ -117,6 +120,9 @@ Content-type: application/json
    "[RevisionId](#SSS-UpdateFunctionCode-response-RevisionId)": "string",
    "[Role](#SSS-UpdateFunctionCode-response-Role)": "string",
    "[Runtime](#SSS-UpdateFunctionCode-response-Runtime)": "string",
+   "[State](#SSS-UpdateFunctionCode-response-State)": "string",
+   "[StateReason](#SSS-UpdateFunctionCode-response-StateReason)": "string",
+   "[StateReasonCode](#SSS-UpdateFunctionCode-response-StateReasonCode)": "string",
    "[Timeout](#SSS-UpdateFunctionCode-response-Timeout)": number,
    "[TracingConfig](#SSS-UpdateFunctionCode-response-TracingConfig)": { 
       "[Mode](API_TracingConfigResponse.md#SSS-Type-TracingConfigResponse-Mode)": "string"
@@ -175,13 +181,27 @@ Length Constraints: Maximum length of 128\.
 Pattern: `[^\s]+` 
 
  ** [KMSKeyArn](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-KMSKeyArn"></a>
-The KMS key that's used to encrypt the function's environment variables\. This key is only returned if you've configured a customer\-managed CMK\.  
+The KMS key that's used to encrypt the function's environment variables\. This key is only returned if you've configured a customer managed CMK\.  
 Type: String  
 Pattern: `(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()` 
 
  ** [LastModified](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-LastModified"></a>
 The date and time that the function was last updated, in [ISO\-8601 format](https://www.w3.org/TR/NOTE-datetime) \(YYYY\-MM\-DDThh:mm:ss\.sTZD\)\.  
 Type: String
+
+ ** [LastUpdateStatus](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-LastUpdateStatus"></a>
+The status of the last update that was performed on the function\.  
+Type: String  
+Valid Values:` Successful | Failed | InProgress` 
+
+ ** [LastUpdateStatusReason](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-LastUpdateStatusReason"></a>
+The reason for the last update that was performed on the function\.  
+Type: String
+
+ ** [LastUpdateStatusReasonCode](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-LastUpdateStatusReasonCode"></a>
+The reason code for the last update that was performed on the function\.  
+Type: String  
+Valid Values:` EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError` 
 
  ** [Layers](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-Layers"></a>
 The function's [ layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\.  
@@ -211,6 +231,20 @@ The runtime environment for the Lambda function\.
 Type: String  
 Valid Values:` nodejs8.10 | nodejs10.x | nodejs12.x | java8 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore1.0 | dotnetcore2.1 | go1.x | ruby2.5 | provided` 
 
+ ** [State](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-State"></a>
+The current state of the function\. When the state is `Inactive`, you can reactivate the function by invoking it\.  
+Type: String  
+Valid Values:` Pending | Active | Inactive | Failed` 
+
+ ** [StateReason](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-StateReason"></a>
+The reason for the function's current state\.  
+Type: String
+
+ ** [StateReasonCode](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-StateReasonCode"></a>
+The reason code for the function's current state\. When the code is `Creating`, you can't invoke or modify the function\.  
+Type: String  
+Valid Values:` Idle | Creating | Restoring | EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses` 
+
  ** [Timeout](#API_UpdateFunctionCode_ResponseSyntax) **   <a name="SSS-UpdateFunctionCode-response-Timeout"></a>
 The amount of time that Lambda allows a function to run before stopping it\.  
 Type: Integer  
@@ -237,15 +271,19 @@ You have exceeded your maximum total code size per account\. [Learn more](https:
 HTTP Status Code: 400
 
  **InvalidParameterValueException**   
-One of the parameters in the request is invalid\. For example, if you provided an IAM role for AWS Lambda to assume in the `CreateFunction` or the `UpdateFunctionConfiguration` API, that AWS Lambda is unable to assume you will get this exception\.  
+One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
  **PreconditionFailedException**   
 The RevisionId provided does not match the latest RevisionId for the Lambda function or alias\. Call the `GetFunction` or the `GetAlias` API to retrieve the latest RevisionId for your resource\.  
 HTTP Status Code: 412
 
+ **ResourceConflictException**   
+The resource already exists, or another operation is in progress\.  
+HTTP Status Code: 409
+
  **ResourceNotFoundException**   
-The resource \(for example, a Lambda function or access policy statement\) specified in the request does not exist\.  
+The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
  **ServiceException**   
@@ -253,7 +291,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-Request throughput limit exceeded\.  
+The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 
 ## See Also<a name="API_UpdateFunctionCode_SeeAlso"></a>

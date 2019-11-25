@@ -60,8 +60,12 @@ HTTP Status Code: 400
 The runtime or runtime version specified is not supported\.  
 HTTP Status Code: 502
 
+ **ResourceConflictException**   
+The resource already exists, or another operation is in progress\.  
+HTTP Status Code: 409
+
  **ResourceNotFoundException**   
-The resource \(for example, a Lambda function or access policy statement\) specified in the request does not exist\.  
+The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
  **ServiceException**   

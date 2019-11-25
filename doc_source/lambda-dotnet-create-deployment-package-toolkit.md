@@ -41,7 +41,7 @@ You can build \.NET\-based Lambda applications using the Lambda plugin to the [A
 1. In the **Advanced Function Details** window, configure the following options:
    + **Role Name** \(required\) – The [IAM role](lambda-intro-execution-role.md) that AWS Lambda assumes when it executes your function\.
    + **Environment** – Key\-value pairs that Lambda sets in the execution environment\. [ Use environment variables](env_variables.md) to extend your function's configuration outside of code\.
-   + **Memory** – The amount of memory available to the function during execution\. Choose an amount [between 128 MB and 3,008 MB](limits.md) in 64 MB increments\.
+   + **Memory** – The amount of memory available to the function during execution\. Choose an amount [between 128 MB and 3,008 MB](limits.md) in 64\-MB increments\.
    + **Timeout** – The amount of time that Lambda allows a function to run before stopping it\. The default is 3 seconds\. The maximum allowed value is 900 seconds\.
    + **VPC** – If your function needs network access to resources that are not available over the internet, [configure it to connect to a VPC](configuration-vpc.md)\.
    + **DLQ** – If your function is invoked asynchronously, [choose a queue or topic](invocation-async.md#dlq) to receive failed invocations\.

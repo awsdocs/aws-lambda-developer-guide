@@ -51,7 +51,7 @@ Pattern: `[^\s]+`
 Required: No
 
  **KMSKeyArn**   <a name="SSS-Type-FunctionConfiguration-KMSKeyArn"></a>
-The KMS key that's used to encrypt the function's environment variables\. This key is only returned if you've configured a customer\-managed CMK\.  
+The KMS key that's used to encrypt the function's environment variables\. This key is only returned if you've configured a customer managed CMK\.  
 Type: String  
 Pattern: `(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()`   
 Required: No
@@ -59,6 +59,23 @@ Required: No
  **LastModified**   <a name="SSS-Type-FunctionConfiguration-LastModified"></a>
 The date and time that the function was last updated, in [ISO\-8601 format](https://www.w3.org/TR/NOTE-datetime) \(YYYY\-MM\-DDThh:mm:ss\.sTZD\)\.  
 Type: String  
+Required: No
+
+ **LastUpdateStatus**   <a name="SSS-Type-FunctionConfiguration-LastUpdateStatus"></a>
+The status of the last update that was performed on the function\.  
+Type: String  
+Valid Values:` Successful | Failed | InProgress`   
+Required: No
+
+ **LastUpdateStatusReason**   <a name="SSS-Type-FunctionConfiguration-LastUpdateStatusReason"></a>
+The reason for the last update that was performed on the function\.  
+Type: String  
+Required: No
+
+ **LastUpdateStatusReasonCode**   <a name="SSS-Type-FunctionConfiguration-LastUpdateStatusReasonCode"></a>
+The reason code for the last update that was performed on the function\.  
+Type: String  
+Valid Values:` EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError`   
 Required: No
 
  **Layers**   <a name="SSS-Type-FunctionConfiguration-Layers"></a>
@@ -93,6 +110,23 @@ Required: No
 The runtime environment for the Lambda function\.  
 Type: String  
 Valid Values:` nodejs8.10 | nodejs10.x | nodejs12.x | java8 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore1.0 | dotnetcore2.1 | go1.x | ruby2.5 | provided`   
+Required: No
+
+ **State**   <a name="SSS-Type-FunctionConfiguration-State"></a>
+The current state of the function\. When the state is `Inactive`, you can reactivate the function by invoking it\.  
+Type: String  
+Valid Values:` Pending | Active | Inactive | Failed`   
+Required: No
+
+ **StateReason**   <a name="SSS-Type-FunctionConfiguration-StateReason"></a>
+The reason for the function's current state\.  
+Type: String  
+Required: No
+
+ **StateReasonCode**   <a name="SSS-Type-FunctionConfiguration-StateReasonCode"></a>
+The reason code for the function's current state\. When the code is `Creating`, you can't invoke or modify the function\.  
+Type: String  
+Valid Values:` Idle | Creating | Restoring | EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses`   
 Required: No
 
  **Timeout**   <a name="SSS-Type-FunctionConfiguration-Timeout"></a>

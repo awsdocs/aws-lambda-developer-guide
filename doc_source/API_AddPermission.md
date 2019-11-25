@@ -4,7 +4,7 @@ Grants an AWS service or another account permission to use a function\. You can 
 
 To grant permission to another account, specify the account ID as the `Principal`\. For AWS services, the principal is a domain\-style identifier defined by the service, like `s3.amazonaws.com` or `sns.amazonaws.com`\. For AWS services, you can also specify the ARN or owning account of the associated resource as the `SourceArn` or `SourceAccount`\. If you grant permission to a service principal without specifying the source, other accounts could potentially configure resources in their account to invoke your Lambda function\.
 
-This action adds a statement to a resource\-based permission policy for the function\. For more information about function policies, see [Lambda Function Policies](https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html)\. 
+This action adds a statement to a resource\-based permissions policy for the function\. For more information about function policies, see [Lambda Function Policies](https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html)\. 
 
 ## Request Syntax<a name="API_AddPermission_RequestSyntax"></a>
 
@@ -114,7 +114,7 @@ Type: String
 ## Errors<a name="API_AddPermission_Errors"></a>
 
  **InvalidParameterValueException**   
-One of the parameters in the request is invalid\. For example, if you provided an IAM role for AWS Lambda to assume in the `CreateFunction` or the `UpdateFunctionConfiguration` API, that AWS Lambda is unable to assume you will get this exception\.  
+One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
  **PolicyLengthExceededException**   
@@ -126,11 +126,11 @@ The RevisionId provided does not match the latest RevisionId for the Lambda func
 HTTP Status Code: 412
 
  **ResourceConflictException**   
-The resource already exists\.  
+The resource already exists, or another operation is in progress\.  
 HTTP Status Code: 409
 
  **ResourceNotFoundException**   
-The resource \(for example, a Lambda function or access policy statement\) specified in the request does not exist\.  
+The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
  **ServiceException**   
@@ -138,7 +138,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **TooManyRequestsException**   
-Request throughput limit exceeded\.  
+The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 
 ## See Also<a name="API_AddPermission_SeeAlso"></a>

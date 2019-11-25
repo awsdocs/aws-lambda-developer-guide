@@ -16,11 +16,9 @@ Lambda creates a Node\.js function and an execution role that grants the functio
 
 ## Use the Designer<a name="get-started-designer"></a>
 
-The **Designer** lets you configure triggers and view permissions\.
+The **Designer** shows an overview of your function and its upstream and downstream resources\. You can use it to configure triggers, layers, and destinations\.
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/console-designer.png)
-
-Choose **Amazon CloudWatch Logs** to view the log\-related permissions that the execution role grants the function\. When you add a trigger or configure features that require additional permissions, Lambda modifies the function's execution role or resource\-based policy to grant the minimum required access\. To view these policies, choose the key icon\.
+![\[A Lambda function with an Amazon S3 trigger and Amazon EventBridge destination.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/console-designer.png)
 
 Choose **my\-function** in the designer to return to the function's code and configuration\. For scripting languages, Lambda includes sample code that returns a success response\. You can edit your function code with the embedded [AWS Cloud9](https://docs.aws.amazon.com/cloud9/latest/user-guide/) editor as long as your source code doesn't exceed the 3 MB limit\.
 

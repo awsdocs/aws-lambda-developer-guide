@@ -130,7 +130,7 @@ Configure your function timeout to allow enough time to process an entire batch 
 
 ## Event Source Mapping APIs<a name="services-dynamodb-api"></a>
 
-To manage event source mappings with the AWS CLI or AWS SDK, use the following API actions\.
+To manage event source mappings with the AWS CLI or AWS SDK, use the following API actions:
 + [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
 + [ListEventSourceMappings](API_ListEventSourceMappings.md)
 + [GetEventSourceMapping](API_GetEventSourceMapping.md)
