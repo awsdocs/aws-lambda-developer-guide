@@ -120,11 +120,11 @@ The invocation record contains details about the event, the response, and the re
 ## Asynchronous Invocation Configuration API<a name="invocation-async-api"></a>
 
 To manage asynchronous invocation settings with the AWS CLI or AWS SDK, use the following API operations\.
-+ [PutFunctionEventInvokeConfig](https://docs.aws.amazon.com/lambda/latest/dg/PutFunctionEventInvokeConfig.html)
-+ [GetFunctionEventInvokeConfig](https://docs.aws.amazon.com/lambda/latest/dg/GetFunctionEventInvokeConfig.html)
-+ [UpdateFunctionEventInvokeConfig](https://docs.aws.amazon.com/lambda/latest/dg/UpdateFunctionEventInvokeConfig.html)
-+ [ListFunctionEventInvokeConfigs](https://docs.aws.amazon.com/lambda/latest/dg/ListFunctionEventInvokeConfigs.html)
-+ [DeleteFunctionEventInvokeConfig](https://docs.aws.amazon.com/lambda/latest/dg/DeleteFunctionEventInvokeConfig.html)
++ [PutFunctionEventInvokeConfig](https://docs.aws.amazon.com/lambda/latest/dg/API_PutFunctionEventInvokeConfig.html)
++ [GetFunctionEventInvokeConfig](https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunctionEventInvokeConfig.html)
++ [UpdateFunctionEventInvokeConfig](https://docs.aws.amazon.com/lambda/latest/dg/API_UpdateFunctionEventInvokeConfig.html)
++ [ListFunctionEventInvokeConfigs](https://docs.aws.amazon.com/lambda/latest/dg/API_ListFunctionEventInvokeConfigs.html)
++ [DeleteFunctionEventInvokeConfig](https://docs.aws.amazon.com/lambda/latest/dg/API_DeleteFunctionEventInvokeConfig.html)
 
 To configure asynchronous invocation with the AWS CLI, use the `put-function-event-invoke-config` command\. The following example configures a function with a maximum event age of 1 hour and no retries\.
 
@@ -143,7 +143,7 @@ $ aws lambda put-function-event-invoke-config --function-name error \
 }
 ```
 
-The `put-function-event-invoke-config` command overwrites any existing configuration on the function, version, or alias\. To configure an option without resetting others, use `update-function-event-invoke-config`\. The following example configures Lambda to send a record to an SQS queue named `destination` when an event can'ta be processed\.
+The `put-function-event-invoke-config` command overwrites any existing configuration on the function, version, or alias\. To configure an option without resetting others, use `update-function-event-invoke-config`\. The following example configures Lambda to send a record to an SQS queue named `destination` when an event can't be processed\.
 
 ```
 $ aws lambda update-function-event-invoke-config --function-name error \

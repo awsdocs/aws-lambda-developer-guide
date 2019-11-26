@@ -54,7 +54,7 @@ To configure functions with the Lambda API, use the following actions:
 + [PutFunctionConcurrency](API_PutFunctionConcurrency.md) – Configure a function's reserved concurrency\.
 + [PublishVersion](API_PublishVersion.md) – Create an immutable version with the current code and configuration\.
 + [CreateAlias](API_CreateAlias.md) – Create aliases for function versions\.
-+ [PutFunctionEventInvokeConfig](invocation-async.md#invocation-async-api) – Configure error handling for asynchronous invocation\.
++ [PutFunctionEventInvokeConfig](https://docs.aws.amazon.com/lambda/latest/dg/API_PutFunctionEventInvokeConfig.html) – Configure error handling for asynchronous invocation\.
 
 For example, to update a function's memory setting with the AWS CLI, use the `update-function-configuration` command\.
 

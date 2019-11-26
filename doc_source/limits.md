@@ -7,6 +7,7 @@ AWS Lambda limits the amount of compute and storage resources that you can use t
 | --- | --- | 
 | Concurrent executions | 1,000 | 
 | Function and layer storage | 75 GB | 
+| [Elastic network interfaces per VPC](configuration-vpc.md) | 250 | 
 
 For details on concurrency and how Lambda scales your function concurrency in response to traffic, see [AWS Lambda Function Scaling](scaling.md)\.
 
@@ -24,7 +25,6 @@ The following limits apply to function configuration, deployments, and execution
 | Invocation frequency \(requests per second\) |  10 x concurrent executions limit \([synchronous](invocation-sync.md) – all sources\) 10 x concurrent executions limit \([asynchronous](invocation-async.md) – non\-AWS sources\) Unlimited \(asynchronous – [AWS service sources](lambda-services.md)\)  | 
 | [Invocation payload](lambda-invocation.md) \(request and response\) |  6 MB \(synchronous\) 256 KB \(asynchronous\)  | 
 | [Deployment package](gettingstarted-features.md#gettingstarted-features-package) size |  50 MB \(zipped, for direct upload\) 250 MB \(unzipped, including layers\) 3 MB \(console editor\)  | 
-| [Elastic network interfaces per VPC](configuration-vpc.md) | 160 | 
 | Test events \(console editor\) | 10 | 
 | `/tmp` directory storage | 512 MB | 
 | File descriptors | 1,024 | 
