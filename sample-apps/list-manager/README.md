@@ -73,7 +73,7 @@ Run the `create-dbpasswordsecret.sh` script to create a database password and st
 
     list-manager$ ./create-dbpasswordsecret.sh
 
-Run the `deploy-vcp.sh` script to create the VPC and RDS database instance. This process takes about 15 minutes.
+Run the `deploy-vpc.sh` script to create the VPC and RDS database instance. This process takes about 15 minutes.
 
     list-manager$ ./deploy-vpc.sh
 
@@ -108,7 +108,7 @@ If that succeeds, send records to the Kinesis stream. The processor function's e
 
     list-manager$ ./put-records.sh
 
-The functions in this application are instrumented with AWS X-Ray. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map. The following service map shows the random error function generating errors for some requests. It also shows the processor function calling X-Ray, CloudWatch Logs, and Amazon S3.
+The functions in this application are instrumented with AWS X-Ray. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map. The following service map shows the function writing to the two DynamoDB tables and the MySQL database.
 
 ![Service Map](/sample-apps/list-manager/images/listmanager-servicemap.png)
 
