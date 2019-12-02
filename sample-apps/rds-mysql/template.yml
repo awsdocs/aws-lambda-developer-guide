@@ -1,0 +1,56 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: An AWS Lambda application that uses Amazon Kinesis and Amazon RDS.
+Transform: AWS::Serverless-2016-10-31
+Parameters:
+  vpcStackName:
+    Default: rds-mysql-vpc
+    Description: VPC and database stack name
+    Type: String
+Globals:
+  Function:
+    Runtime: nodejs10.x
+    Tracing: Active
+    Handler: index.handler
+    Environment:
+        Variables:
+          databaseHost:
+            Fn::ImportValue:
+              !Sub "${vpcStackName}-db-host"
+          databaseName:
+            Fn::ImportValue:
+              !Sub "${vpcStackName}-db-name"
+          databaseUser:
+            Fn::ImportValue:
+              !Sub "${vpcStackName}-db-user"
+          databasePassword: '{{resolve:secretsmanager:rds-mysql-admin:SecretString:password}}'
+    VpcConfig:
+      SecurityGroupIds:
+        - Fn::ImportValue:
+              !Sub "${vpcStackName}-vpc-sg"
+      SubnetIds:
+        - Fn::ImportValue:
+              !Sub "${vpcStackName}-subnet-a"
+        - Fn::ImportValue:
+              !Sub "${vpcStackName}-subnet-b"
+    Layers:
+      - !Ref libs
+Resources:
+  libs:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: rds-mysql-lib
+      Description: Dependencies for the rds-mysql sample app.
+      ContentUri: lib/.
+      CompatibleRuntimes:
+        - nodejs10.x
+  dbadmin:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: dbadmin/.
+      Description: Run SQL queries.
+      MemorySize: 128
+      Timeout: 15
+      # Function's execution role
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - AWSLambdaVPCAccessExecutionRole
