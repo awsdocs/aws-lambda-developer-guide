@@ -8,15 +8,15 @@ To keep secrets out of your function code, store them in the function's configur
 
 As you add libraries and other dependencies to your function, creating and uploading a deployment package can slow down development\. Use [layers](configuration-layers.md) to manage your function's dependencies independently and keep your deployment package small\. You can also use layers to share your own libraries with other customers and use publicly available layers with your functions\.
 
-To use your Lambda function with AWS resources in an Amazon VPC, configure it with security groups and subnets to [create a VPC connection](configuration-vpc.md)\. Connecting your function to a VPC lets you access resources in a private subnet such as relational databases and caches\.
+To use your Lambda function with AWS resources in an Amazon VPC, configure it with security groups and subnets to [create a VPC connection](configuration-vpc.md)\. Connecting your function to a VPC lets you access resources in a private subnet such as relational databases and caches\. You can also [create a database proxy](configuration-database.md) for MySQL and Aurora DB instances\. A database proxy enables a function to reach high concurrency levels without exhausting database connections\.
 
 **Topics**
 + [Configuring AWS Lambda Functions](resource-model.md)
 + [AWS Lambda Environment Variables](env_variables.md)
-+ [Reserving Concurrency for a Lambda Function](per-function-concurrency.md)
++ [Managing Concurrency for a Lambda Function](configuration-concurrency.md)
 + [AWS Lambda Function Versions](configuration-versions.md)
 + [AWS Lambda Function Aliases](configuration-aliases.md)
 + [AWS Lambda Layers](configuration-layers.md)
 + [Configuring a Lambda Function to Access Resources in a VPC](configuration-vpc.md)
-+ [Monitoring the State of a Function with the Lambda API](functions-states.md)
++ [Configuring Database Access for a Lambda Function](configuration-database.md)
 + [Tagging Lambda Functions](tagging.md)

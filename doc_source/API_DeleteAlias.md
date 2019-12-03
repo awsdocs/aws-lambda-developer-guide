@@ -48,6 +48,10 @@ If the action is successful, the service sends back an HTTP 204 response with an
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
+ **ResourceConflictException**   
+The resource already exists, or another operation is in progress\.  
+HTTP Status Code: 409
+
  **ServiceException**   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500

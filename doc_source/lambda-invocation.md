@@ -14,6 +14,7 @@ Depending on who invokes your function and how it's invoked, scaling behavior an
 + [Synchronous Invocation](invocation-sync.md)
 + [Asynchronous Invocation](invocation-async.md)
 + [AWS Lambda Event Source Mapping](invocation-eventsourcemapping.md)
++ [Monitoring the State of a Function with the Lambda API](functions-states.md)
 + [AWS Lambda Function Scaling](scaling.md)
 + [Error Handling and Automatic Retries in AWS Lambda](retries-on-errors.md)
 + [Invoking Lambda Functions with the AWS Mobile SDK for Android](with-on-demand-custom-android.md)

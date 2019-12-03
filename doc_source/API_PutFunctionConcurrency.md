@@ -4,7 +4,7 @@ Sets the maximum number of simultaneous executions for a function, and reserves 
 
 Concurrency settings apply to the function as a whole, including all published versions and the unpublished version\. Reserving concurrency both ensures that your function has capacity to process the specified number of events simultaneously, and prevents it from scaling beyond that level\. Use [GetFunction](API_GetFunction.md) to see the current setting for a function\.
 
-Use [GetAccountSettings](API_GetAccountSettings.md) to see your regional concurrency limit\. You can reserve concurrency for as many functions as you like, as long as you leave at least 100 simultaneous executions unreserved for functions that aren't configured with a per\-function limit\. For more information, see [Managing Concurrency](https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html)\.
+Use [GetAccountSettings](API_GetAccountSettings.md) to see your Regional concurrency limit\. You can reserve concurrency for as many functions as you like, as long as you leave at least 100 simultaneous executions unreserved for functions that aren't configured with a per\-function limit\. For more information, see [Managing Concurrency](https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html)\.
 
 ## Request Syntax<a name="API_PutFunctionConcurrency_RequestSyntax"></a>
 

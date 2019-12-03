@@ -23,6 +23,7 @@ The following data types are supported:
 +  [LayerVersionsListItem](API_LayerVersionsListItem.md) 
 +  [OnFailure](API_OnFailure.md) 
 +  [OnSuccess](API_OnSuccess.md) 
++  [ProvisionedConcurrencyConfigListItem](API_ProvisionedConcurrencyConfigListItem.md) 
 +  [TracingConfig](API_TracingConfig.md) 
 +  [TracingConfigResponse](API_TracingConfigResponse.md) 
 +  [VpcConfig](API_VpcConfig.md) 

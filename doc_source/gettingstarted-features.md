@@ -5,6 +5,7 @@ AWS Lambda provides a management console and API for managing and invoking funct
 **Topics**
 + [Programming Model](#gettingstarted-features-programmingmodel)
 + [Scaling](#gettingstarted-features-scaling)
++ [Concurrency Controls](#gettingstarted-features-concurrency)
 + [Deployment Package](#gettingstarted-features-package)
 + [Function Blueprints](#gettingstarted-features-blueprints)
 + [Application Templates](#gettingstarted-features-templates)
@@ -37,6 +38,12 @@ For a hands\-on introduction to the programming model in your preferred programm
 Lambda manages the infrastructure that runs your code, and scales automatically in response to incoming requests\. When your function is invoked more quickly than a single instance of your function can process events, Lambda scales up by running additional instances\. When traffic subsides, inactive instances are frozen or terminated\. You only pay for the time that your function code is actually processing events\.
 
 For more information, see [AWS Lambda Function Scaling](scaling.md)\.
+
+## Concurrency Controls<a name="gettingstarted-features-concurrency"></a>
+
+Use concurrency settings to ensure that your production applications are highly available and highly responsive\. To prevent a function from using too much concurrency, and to reserve a portion of your account's available concurrency for a function, use *reserved concurrency*\. To enable functions to scale without fluctuations in latency, use *provisioned concurrency*\.
+
+For more information, see [Managing Concurrency for a Lambda Function](configuration-concurrency.md)\.
 
 ## Deployment Package<a name="gettingstarted-features-package"></a>
 

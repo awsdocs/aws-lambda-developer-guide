@@ -89,7 +89,7 @@ $ aws kinesis register-stream-consumer --consumer-name con1 \
 
 To increase the speed at which your function processes records, add shards to your data stream\. Lambda processes records in each shard in order\. It stops processing additional records in a shard if your function returns an error\. With more shards, there are more batches being processed at once, which lowers the impact of errors on concurrency\.
 
-If your function can't scale up to handle the total number of concurrent batches, [request a limit increase](limits.md) or [reserve concurrency](per-function-concurrency.md) for your function\.
+If your function can't scale up to handle the total number of concurrent batches, [request a limit increase](limits.md) or [reserve concurrency](configuration-concurrency.md) for your function\.
 
 ## Execution Role Permissions<a name="events-kinesis-permissions"></a>
 

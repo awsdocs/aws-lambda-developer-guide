@@ -11,7 +11,7 @@ As more events come in, Lambda routes them to available instances and creates ne
 
 After the initial burst, your function's concurrency can scale by an additional 500 instances each minute\. This continues until there are enough instances to serve all requests, or a concurrency limit is reached\. When the number of requests decreases, Lambda stops unused instances to free up scaling capacity for other functions\.
 
-The regional concurrency limit starts at 1,000\. You can increase the limit by submitting a request in the [Support Center console](https://console.aws.amazon.com/support/v1#/case/create?issueType=service-limit-increase)\. To limit scaling and allocate capacity on a per\-function basis, you can configure functions with [reserved concurrency](per-function-concurrency.md)\.
+The regional concurrency limit starts at 1,000\. You can increase the limit by submitting a request in the [Support Center console](https://console.aws.amazon.com/support/v1#/case/create?issueType=service-limit-increase)\. To limit scaling and allocate capacity on a per\-function basis, you can configure functions with [reserved concurrency](configuration-concurrency.md)\.
 
 When requests come in faster than your function can scale, or when your function is at maximum concurrency, additional requests fail with a throttling error \(429 status code\)\. When you invoke your function directly, you should treat this as a retryable error\.
 
