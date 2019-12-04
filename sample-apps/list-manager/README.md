@@ -19,7 +19,7 @@ The project source includes function code and supporting resources:
 
 The processor supports the following types of list:
 
-##Ranking
+## Ranking
 
 List of names with a rank or weight. For example:
 
@@ -28,7 +28,7 @@ List of names with a rank or weight. For example:
 
 Rankings are combined into an aggregate list. When user updates their ranking, the change (added, removed, and moved entries) is applied to the aggregate list as well.
 
-##Stats
+## Stats
 
 A list of fields to increment. For example:
 
