@@ -15,16 +15,16 @@ var putObject = function(data, filename, context){
     Body: JSON.stringify(data, null, 2),
     Bucket: bucket,
     Key: filename
-  };
+  }
   // Send request and log result
   s3.putObject(s3params, function(err, data) {
      if (err) console.log(err, err.stack)
      else     console.log(data)
-  });
+  })
 }
 
 exports.handler = function(event, context) {
     console.log("Event: " + JSON.stringify(event, null, 2))
     // Wait one second and store event in S3
     setTimeout(function(){putObject(event, "test", context)}, 1000)
-};
+}
