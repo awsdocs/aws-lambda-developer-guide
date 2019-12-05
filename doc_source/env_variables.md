@@ -54,10 +54,10 @@ The first time you create or update Lambda functions that use environment variab
 
 If you use your own key, you will be billed per [AWS Key Management Service Pricing](https://aws.amazon.com/kms/pricing/) guidelines\. You will not be billed if you use the default service key provided by AWS Lambda\.
 
-If you’re using the default KMS service key for Lambda, then no additional IAM permissions are required in your function execution role – your role will just work automatically without changes\. If you’re supplying your own \(custom\) KMS key, then you’ll need to add `kms:Decrypt` to your execution role\. In addition, the user that will be creating and updating the Lambda function must have permissions to use the KMS key\. For more information on KMS keys, see the [Using Key Policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)\.
+If you’re using the default KMS service key for Lambda, then no additional IAM permissions are required in your function execution role – your role will just work automatically without changes\. If you’re supplying your own \(custom\) KMS key, the user that will be creating and updating the Lambda function must have permissions to use the KMS key (`kms:Decrypt` `kms:CreateGrant`)\. For more information on KMS keys, see the [Using Key Policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)\.
 
 **Note**  
-AWS Lambda authorizes your function to use the default KMS key through a user grant, which it adds when you assign the role to the function\. If you delete the role and create a new role with the same name, you need to refresh the role's grant\. Refresh the grant by re\-assigning the role to the function\. 
+AWS Lambda authorizes your function to use the KMS key through a user grant, which it adds when you assign the role to the function\. If you delete the role and create a new role with the same name, you need to refresh the role's grant\. Refresh the grant by re\-assigning the role to the function\. 
 
 ### Storing Sensitive Information<a name="env-storing-sensitive-data"></a>
 
