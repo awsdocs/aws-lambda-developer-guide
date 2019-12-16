@@ -69,7 +69,7 @@ $ aws lambda update-function-configuration --function-name my-function \
 
 ## Internet and Service Access for VPC\-Connected Functions<a name="vpc-internet"></a>
 
-By default, Lambda runs your functions in a secure VPC with access to AWS services and the internet\. When you connect a function to a VPC in your account, it does not have access to the internet unless your VPC provides access\.
+By default, Lambda runs your functions in a secure VPC with access to AWS services and the internet\. This VPC is owned by AWS and is different from the default VPC in your AWS account\. When you connect a function to a VPC in your account, it does not have access to the internet unless your VPC provides access\.
 
 **Note**  
 Several services offer [VPC endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html)\. You can use VPC endpoints to connect to AWS services from within a VPC without internet access\.
