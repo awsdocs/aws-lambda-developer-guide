@@ -60,7 +60,7 @@ exports.handler = async function(event, context) {
    $ zip function.zip index.js
    ```
 
-1. Create a Lambda function with the `create-function` command\.
+1. Create a Lambda function with the `create-function` command\. Replace the highlighted text in the role ARN with your account ID\.
 
    ```
    $ aws lambda create-function --function-name my-function \

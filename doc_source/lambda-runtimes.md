@@ -17,11 +17,11 @@ A runtime can support a single version of a language, multiple versions of a lan
 
 **Node\.js Runtimes**  
 
-| Name | Identifier | Node\.js Version | AWS SDK for JavaScript | Operating System | 
-| --- | --- | --- | --- | --- | 
-|  Node\.js 12  |  `nodejs12.x`  |  12\.13\.0  |  2\.536\.0  |  Amazon Linux 2  | 
-|  Node\.js 10  |  `nodejs10.x`  |  10\.17\.0  |  2\.488\.0  |  Amazon Linux 2  | 
-|  Node\.js 8\.10  |  `nodejs8.10`  |  8\.10  |  2\.488\.0  |  Amazon Linux  | 
+| Name | Identifier | AWS SDK for JavaScript | Operating System | 
+| --- | --- | --- | --- | 
+|  Node\.js 12  |  `nodejs12.x`  |  2\.536\.0  |  Amazon Linux 2  | 
+|  Node\.js 10  |  `nodejs10.x`  |  2\.488\.0  |  Amazon Linux 2  | 
+|  Node\.js 8\.10  |  `nodejs8.10`  |  2\.488\.0  |  Amazon Linux  | 
 
 
 **Python Runtimes**  

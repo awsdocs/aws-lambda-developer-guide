@@ -76,5 +76,6 @@ For asynchronous invocation, Lambda queues the event before passing it to your f
 + [AWS CodeCommit](services-codecommit.md)
 + [AWS Config](services-config.md)
 + [AWS IoT Events](services-iotevents.md)
++ [AWS CodePipeline](services-codepipeline.md)
 
 See the topics in this chapter for more details about each service, and example events that you can use to test your function\.

@@ -28,7 +28,7 @@ You can use the Lambda console to create an Amazon Relational Database Service \
 
 Proxy creation takes a few minutes\. When the proxy is available, configure your function to connect to the proxy endpoint instead of the database endpoint\.
 
-For more information, see [Managing Connections with the Amazon RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-database-proxy.html) in the Amazon Aurora User Guide\.
+For more information, see [Managing Connections with the Amazon RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-proxy.html) in the Amazon Aurora User Guide\.
 
 ## Sample Application<a name="configuration-database-sample"></a>
 

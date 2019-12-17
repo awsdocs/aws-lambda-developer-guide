@@ -9,7 +9,7 @@ In this tutorial, you create the following resources\.
 + **AWS CloudFormation stack** – The deployment stage uses a template to create a stack in AWS CloudFormation\. The template is a YAML\-formatted document that defines the resources of the Lambda application\. The application includes a Lambda function and an Amazon API Gateway API that invokes it\.
 + **Roles** – The pipeline, build, and deployment each have a service role that allows them to manage AWS resources\. The console creates the pipeline and build roles when you create those resources\. You create the role that allows AWS CloudFormation to manage the application stack\.
 
-The pipeline maps a single branch in a repository to a single AWS CloudFormation stack\. You can create additional pipelines to add environments for other branches in the same repository\. You can also add stages to your pipeline for testing, staging, and manual approvals\. For more information about AWS CodePipeline, see [What is AWS CodePipeline](https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html)\.
+The pipeline maps a single branch in a repository to a single AWS CloudFormation stack\. You can create additional pipelines to add environments for other branches in the same repository\. You can also add stages to your pipeline for testing, staging, and manual approvals\. For more information about AWS CodePipeline, see [What Is AWS CodePipeline](https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html)\.
 
 For an alternate method of creating a pipeline with AWS Serverless Application Model and AWS CloudFormation, watch [Automate Your Serverless Application Deployments](https://www.youtube.com/watch?v=0o3urdBeoII) on the Amazon Web Services YouTube channel\.
 
@@ -79,6 +79,7 @@ Create a role that gives AWS CloudFormation permission to access AWS resources\.
                    "iam:DeleteRolePolicy",
                    "iam:DetachRolePolicy",
                    "iam:PassRole",
+                   "s3:GetObject",
                    "s3:GetObjectVersion",
                    "s3:GetBucketVersioning"
                ],
@@ -122,7 +123,7 @@ exports.handler = (event, context, callback) => {
 ```
 
 **Example template\.yml**  
-The [SAM template](gettingstarted-tools.md) that defines the application\.  
+The [AWS SAM template](gettingstarted-tools.md) that defines the application\.  
 
 ```
 AWSTemplateFormatVersion: '2010-09-09'
@@ -218,7 +219,7 @@ Create a pipeline that deploys your application\. The pipeline monitors your rep
 
 1. Choose **Create pipeline**\.
 
-The pipeline fails the first time it runs because it needs additional permissions\. In the next section, you add permissions to the role that's generated for your build stage\.\.
+The pipeline fails the first time it runs because it needs additional permissions\. In the next section, you add permissions to the role that's generated for your build stage\.
 
 ## Update the Build Stage Role<a name="update-policy"></a>
 

@@ -144,7 +144,7 @@ The example preceding uses the following log4j2\.xml file to load properties
   <Appenders>
     <Lambda name="Lambda">
       <PatternLayout>
-          <pattern>%d{yyyy-MM-dd HH:mm:ss} %X{AWSRequestId} %-5p %c{1}:%L - %m%n</pattern>
+          <pattern>%d{yyyy-MM-dd HH:mm:ss} %X{AWSRequestId} %-5p %c{1} - %m%n</pattern>
       </PatternLayout>
     </Lambda>
   </Appenders>

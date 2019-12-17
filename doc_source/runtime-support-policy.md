@@ -4,6 +4,8 @@
 
 Deprecation occurs in two phases\. During the first phase, you can no longer create functions that use the deprecated runtime\. For at least 30 days, you can continue to update existing functions that use the deprecated runtime\. After this period, both function creation and updates are disabled permanently\. However, the function continues to be available to process invocation events\.
 
+The following runtimes have been scheduled to be deprecated\.
+
 
 **Deprecation Schedule**  
 

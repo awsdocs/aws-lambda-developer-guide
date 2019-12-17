@@ -133,14 +133,14 @@ To create a mapping between the specified Amazon SQS queue and the Lambda functi
 
 ```
 $ aws lambda create-event-source-mapping --function-name ProcessSQSRecord  --batch-size 10 \
---event-source SQS-queue-arn
+--event-source-arn arn:aws:sqs:us-east-2:123456789012:my-queue
 ```
 
 You can get the list of event source mappings by running the following command\.
 
 ```
 $ aws lambda list-event-source-mappings --function-name ProcessSQSRecord \
---event-source SQS-queue-arn
+--event-source-arn arn:aws:sqs:us-east-2:123456789012:my-queue
 ```
 
 The list returns all of the event source mappings you created, and for each mapping it shows the `LastProcessingResult`, among other things\. This field is used to provide an informative message if there are any problems\. Values such as `No records processed` \(indicates that AWS Lambda has not started polling or that there are no records in the queue\) and `OK` \(indicates AWS Lambda successfully read records from the queue and invoked your Lambda function\) indicate that there no issues\. If there are issues, you receive an error message\.

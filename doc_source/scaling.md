@@ -5,8 +5,8 @@ The first time you invoke your function, AWS Lambda creates an instance of the f
 As more events come in, Lambda routes them to available instances and creates new instances as needed\. Your function's *concurrency* is the number of instances serving requests at a given time\. For an initial burst of traffic, your function's concurrency can reach an initial level of between 500 and 3000, which varies per Region\.
 
 **Initial Concurrency Burst Limits**
-+ **3000** – US West \(Oregon\), US East \(N\. Virginia\), EU \(Ireland\)\.
-+ **1000** – Asia Pacific \(Tokyo\), EU \(Frankfurt\)\.
++ **3000** – US West \(Oregon\), US East \(N\. Virginia\), Europe \(Ireland\)\.
++ **1000** – Asia Pacific \(Tokyo\), Europe \(Frankfurt\)\.
 + **500** – Other Regions\.
 
 After the initial burst, your function's concurrency can scale by an additional 500 instances each minute\. This continues until there are enough instances to serve all requests, or a concurrency limit is reached\. When the number of requests decreases, Lambda stops unused instances to free up scaling capacity for other functions\.
