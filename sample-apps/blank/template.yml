@@ -16,10 +16,10 @@ Resources:
       # Function's execution role
       Policies:
         - AWSLambdaBasicExecutionRole
-        - AmazonS3FullAccess
+        - AWSLambdaReadOnlyAccess
         - AWSXrayWriteOnlyAccess
         - AWSLambdaVPCAccessExecutionRole
       Environment:
         Variables:
-          bucket: !Ref bucket
+          topic: !Ref topic
       Tracing: Active
