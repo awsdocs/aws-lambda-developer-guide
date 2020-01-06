@@ -1,13 +1,13 @@
 # Blank function
 This project creates a function and supporting resources:
 - function - A Node.js function.
-- template.yaml - An AWS CloudFormation template that creates an application.
+- template.yml - An AWS CloudFormation template that creates an application.
 - install.sh, deploy.sh, etc. - Shell scripts that use the AWS CLI to deploy and manage the application.
 
 # TODO
 change stack name in `deploy.sh.template`, `invoke.sh`, `cleanup.sh`
-(optional) change function name in `template.yaml`, `invoke.sh`
-(optional) change function folder name in `template.yaml`, `install.sh`
+(optional) change function name in `template.yml`, `invoke.sh`
+(optional) change function folder name in `template.yml`, `install.sh`
 
 ![Architecture](/sample-apps/blank/images/sample-blank.png)
 

@@ -30,7 +30,7 @@ Resources:
       Description: Blank application function
       Environment:
         Variables:
-          bucket: !Ref bucket
+          topic: !Ref topic
       Handler: index.handler
       MemorySize: 128
       Role: !GetAtt executionRole.Arn
@@ -45,6 +45,7 @@ Resources:
         - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
         - arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess
         - arn:aws:iam::aws:policy/AWSLambdaFullAccess
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole
       AssumeRolePolicyDocument: |
         {
           "Version": "2012-10-17",

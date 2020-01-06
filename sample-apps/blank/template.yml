@@ -1,16 +1,16 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
-Description: An AWS Lambda application that uses AWS X-Ray and Amazon S3.
+Description: An AWS Lambda application that calls the Lambda API.
 Resources:
-  bucket:
-    Type: AWS::S3::Bucket
+  topic:
+    Type: AWS::SNS::Topic
   function:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      Runtime: nodejs10.x
+      Runtime: nodejs12.x
       CodeUri: function/.
-      Description: Write a file to S3.
+      Description: Call the AWS Lambda API
       MemorySize: 128
       Timeout: 10
       # Function's execution role
