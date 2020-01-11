@@ -279,7 +279,7 @@ In this step, you invoke the Lambda function manually using sample Amazon S3 eve
 
    ```
    $ aws lambda invoke --function-name CreateThumbnail --invocation-type Event \
-   --payload file://inputfile.txt outputfile.txt
+   --payload file://inputFile.txt outputfile.txt
    ```
 
 1. Verify that the thumbnail was created in the target bucket\.
