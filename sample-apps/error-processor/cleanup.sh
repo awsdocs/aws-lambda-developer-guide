@@ -20,4 +20,4 @@ if [ -f bucket-name.txt ]; then
         esac
     done
 fi
-rm -f deploy.sh out.yml
+rm -f deploy.sh out.yml out.json

@@ -1,6 +1,11 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
 Description: An AWS Lambda application that uses Amazon CloudWatch Logs, AWS X-Ray, and AWS CloudFormation custom resources.
+Globals:
+  Function:
+    Runtime: nodejs12.x
+    Handler: index.handler
+    Tracing: Active
 Resources:
   bucket:
     Type: AWS::S3::Bucket
@@ -27,32 +32,23 @@ Resources:
   processor:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: index.handler
-      Runtime: nodejs8.10
       CodeUri: processor/.
       Description: Retrieve logs and trace for errors.
-      MemorySize: 128
       Timeout: 40
       Role: !GetAtt role.Arn
       Environment:
         Variables:
           bucket: !Ref bucket
-      Tracing: Active
   randomerror:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: index.handler
-      Runtime: nodejs8.10
       CodeUri: random-error/.
       Description: Generate errors.
       Timeout: 8
       Role: !GetAtt role.Arn
-      Tracing: Active
   primer:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: index.handler
-      Runtime: nodejs8.10
       InlineCode: |
         var aws = require("aws-sdk");
         var response = require('cfn-response');
@@ -77,10 +73,8 @@ Resources:
             });
         };
       Description: Invoke a function to create a log stream.
-      MemorySize: 128
-      Timeout: 8
       Role: !GetAtt role.Arn
-      Tracing: Active
+      Timeout: 8
   primerinvoke:
     Type: AWS::CloudFormation::CustomResource
     Version: "1.0"
