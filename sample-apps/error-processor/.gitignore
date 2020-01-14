@@ -3,4 +3,4 @@ package-lock.json
 out.yml
 out.json
 bucket-name.txt
-deploy.sh
+2-deploy.sh

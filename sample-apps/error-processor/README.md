@@ -5,7 +5,7 @@ This project contains the following resources:
 - processor - A Node.js function that retrieves logs and traces, and stores them in Amazon S3.
 - random-error - A Node.js function that generates errors at random.
 - template.yml - An AWS CloudFormation template that creates an application with the processor and random-error functions.
-- install.sh, deploy.sh, etc. - Shell scripts that use the AWS CLI to deploy and manage the application.
+- 1-createbucket.sh, 2-deploy.sh, etc. - Shell scripts that use the AWS CLI to deploy and manage the application.
 
 ![Architecture](/sample-apps/error-processor/images/sample-errorprocessor.png)
 
@@ -22,24 +22,18 @@ Download or clone this repository.
     $ git clone git@github.com:awsdocs/aws-lambda-developer-guide.git
     $ cd aws-lambda-developer-guide/sample-apps/error-processor
 
-Run `create-bucket.sh` to create a new bucket for deployment artifacts. Or, if you already have a bucket, replace `MY_BUCKET` in `deploy.sh` with the name of an existing bucket.
+Run `1-create-bucket.sh` to create a new bucket for deployment artifacts. Or, if you already have a bucket, rename `2-deploy.sh.template` to `2-deploy.sh` and replace `MY_BUCKET` in it with the name of an existing bucket.
 
-    error-processor$ ./create-bucket.sh
+    error-processor$ ./1-create-bucket.sh
     make_bucket: lambda-artifacts-a5e491dbb5b22e0d
 
-Run `install.sh` to install the dependencies for each function, including the X-Ray SDK.
-
-    error-processor$ ./install.sh
-    added 16 packages from 18 contributors and audited 18 packages in 0.926s
-    found 0 vulnerabilities
-
-    added 17 packages from 19 contributors and audited 19 packages in 0.916s
-    found 0 vulnerabilities
-
 # Deploy
-Run `deploy.sh` to deploy the application.
+Run `2-deploy.sh` to install dependencies and deploy the application.
 
-    error-processor$ ./deploy.sh
+    error-processor$ ./2-deploy.sh
+    added 16 packages from 18 contributors and audited 18 packages in 1.979s
+    found 0 vulnerabilities
+    added 17 packages from 19 contributors and audited 19 packages in 1.782s
     Uploading to e678bc216e6a0d510d661ca9ae2fd941  2737254 / 2737254.0  (100.00%)
     Successfully packaged artifacts and wrote output template to file out.yml.
     Waiting for changeset to be created..
@@ -51,7 +45,7 @@ This script uses AWS CloudFormation to deploy the Lambda functions, an IAM role,
 # Test
 To generate logs and errors, invoke the random error function.
 
-    error-processor$ ./invoke.sh
+    error-processor$ ./3-invoke.sh
     {
         "StatusCode": 200,
         "ExecutedVersion": "$LATEST"
@@ -90,4 +84,4 @@ Finally, view the logs and traces that the function stores in Amazon S3.
 # Cleanup
 To delete the application, run the cleanup script.
 
-    error-processor$ ./cleanup.sh
+    error-processor$ ./4-cleanup.sh

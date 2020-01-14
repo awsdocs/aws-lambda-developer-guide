@@ -19,4 +19,5 @@ if [ -f bucket-name.txt ]; then
         esac
     done
 fi
-rm -f deploy.sh out.yml out.json
+rm -f 2-deploy.sh out.yml out.json
+rm -rf processor/node_modules random-error/node_modules processor/package-lock.json random-error/package-lock.json
