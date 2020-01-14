@@ -10,7 +10,6 @@ while true; do
 done
 if [ -f bucket-name.txt ]; then
     ARTIFACT_BUCKET=$(cat bucket-name.txt)
-    sed -i "s/$ARTIFACT_BUCKET/MY_BUCKET/" deploy.sh
     while true; do
         read -p "Delete deployment artifacts and bucket ($ARTIFACT_BUCKET)?" response
         case $response in

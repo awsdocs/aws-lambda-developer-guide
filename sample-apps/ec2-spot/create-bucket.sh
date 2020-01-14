@@ -4,4 +4,4 @@ BUCKET_NAME=lambda-artifacts-$BUCKET_ID
 echo $BUCKET_NAME > bucket-name.txt
 aws s3 mb s3://$BUCKET_NAME
 cp deploy.sh.template deploy.sh
-sed -i.template "s/MY_BUCKET/$BUCKET_NAME/" deploy.sh
+sed -i'' -e "s/MY_BUCKET/$BUCKET_NAME/" deploy.sh
