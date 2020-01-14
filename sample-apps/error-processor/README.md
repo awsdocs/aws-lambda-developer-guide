@@ -4,7 +4,7 @@ This sample application triggers a Lambda function when CloudWatch Logs detects 
 This project contains the following resources:
 - processor - A Node.js function that retrieves logs and traces, and stores them in Amazon S3.
 - random-error - A Node.js function that generates errors at random.
-- error-processor.yaml - An AWS CloudFormation template that creates an application with the processor and random-error functions.
+- template.yml - An AWS CloudFormation template that creates an application with the processor and random-error functions.
 - install.sh, deploy.sh, etc. - Shell scripts that use the AWS CLI to deploy and manage the application.
 
 ![Architecture](/sample-apps/error-processor/images/sample-errorprocessor.png)
