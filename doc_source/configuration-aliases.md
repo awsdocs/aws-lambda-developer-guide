@@ -26,7 +26,7 @@ $ aws lambda create-alias --function-name my-function --function-version version
 To change an alias to point a new version of the function, use the `update-alias` command\.
 
 ```
-$ aws lambda update-alias --function-name my-function --function-version version number 
+$ aws lambda update-alias --function-name my-function --function-version version number --name alias name
 ```
 
  The AWS CLI commands in the preceding steps correspond to the following AWS Lambda APIs: 
