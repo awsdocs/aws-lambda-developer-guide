@@ -14,7 +14,7 @@ The project source includes function code and supporting resources:
 - events - JSON documents that can be used to test the application's functions.
 - template.yml - An AWS CloudFormation template that creates the application.
 - template-vpcrds.yml - A template that creates the VPC and Amazon RDS database instance.
-- create-bucket.sh, deploy-vpc.sh, etc. - Shell scripts that use the AWS CLI to deploy and manage the application.
+- 1-create-bucket.sh, 2-create-dbpasswordsecret.sh, etc. - Shell scripts that use the AWS CLI to deploy and manage the application.
 - bin - Additional scripts. 
 
 The processor supports the following types of list:
@@ -66,26 +66,26 @@ Download or clone this repository.
 
 Run `create-bucket.sh` to create a new bucket for deployment artifacts. Or, if you already have a bucket, replace `MY_BUCKET` in `deploy.sh` with the name of an existing bucket.
 
-    list-manager$ ./create-bucket.sh
+    list-manager$ ./1-create-bucket.sh
     make_bucket: lambda-artifacts-a5e491dbb5b22e0d
 
 Run the `create-dbpasswordsecret.sh` script to create a database password and store it in AWS Secrets Manager.
 
-    list-manager$ ./create-dbpasswordsecret.sh
+    list-manager$ ./2-create-dbpasswordsecret.sh
 
 Run the `deploy-vpc.sh` script to create the VPC and RDS database instance. This process takes about 15 minutes.
 
-    list-manager$ ./deploy-vpc.sh
+    list-manager$ ./3-deploy-vpc.sh
 
 Run the `create-dbtable.sh` script to create a table in the database.
 
-    list-manager$ ./create-dbtable.sh
+    list-manager$ ./4-create-dbtable.sh
 
 # Deploy
 
 Run `deploy.sh` to deploy the application.
 
-    list-manager$ ./deploy.sh
+    list-manager$ ./5-deploy.sh
     Uploading to e678bc216e6a0d510d661ca9ae2fd941  2678 / 2678.0  (100.00%)
     Successfully packaged artifacts and wrote output template to file out.yml.
     Waiting for changeset to be created..
@@ -98,7 +98,7 @@ This script uses AWS CloudFormation to deploy the Lambda functions and an IAM ro
 
 To invoke the function with a test event, use the invoke script.
 
-    list-manager$ ./invoke.sh
+    list-manager$ ./6-invoke.sh
     {
         "StatusCode": 200,
         "ExecutedVersion": "$LATEST"
@@ -106,7 +106,7 @@ To invoke the function with a test event, use the invoke script.
 
 If that succeeds, send records to the Kinesis stream. The processor function's event source mapping pulls records from the stream and invokes the function.
 
-    list-manager$ ./put-records.sh
+    list-manager$ ./7-put-records.sh
 
 The functions in this application are instrumented with AWS X-Ray. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map. The following service map shows the function writing to the two DynamoDB tables and the MySQL database.
 
@@ -216,4 +216,4 @@ Aggregate table:
 
 To delete the application, run the cleanup script.
 
-    list-manager$ ./cleanup.sh
+    list-manager$ ./8-cleanup.sh

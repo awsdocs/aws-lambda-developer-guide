@@ -1,8 +1,8 @@
 node_modules
 package-lock.json
-out
+out.json
 *out.yml
-deploy.sh
+5-deploy.sh
 npm-debug.log
 bucket-name.txt
 deploy.sh

@@ -8,7 +8,7 @@ Parameters:
     Type: String
 Globals:
   Function:
-    Runtime: nodejs10.x
+    Runtime: nodejs12.x
     Tracing: Active
     Handler: index.handler
     AutoPublishAlias: live
