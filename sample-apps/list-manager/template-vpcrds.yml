@@ -34,7 +34,7 @@ Resources:
       Engine: MySQL
       EngineVersion: 8.0.15
       MasterUsername: !Ref 'databaseUser'
-      MasterUserPassword: '{{resolve:secretsmanager:list-manager:SecretString:db-password}}'
+      MasterUserPassword: '{{resolve:secretsmanager:list-manager:SecretString:password}}'
       DeletionProtection: true
       MultiAZ: true
       DBSubnetGroupName: !Ref databaseSubnetGroup

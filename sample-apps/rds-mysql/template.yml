@@ -1,14 +1,18 @@
 AWSTemplateFormatVersion: 2010-09-09
-Description: An AWS Lambda application that uses Amazon Kinesis and Amazon RDS.
+Description: An AWS Lambda application that connects to a MySQL database in the VPC to run SQL queries.
 Transform: AWS::Serverless-2016-10-31
 Parameters:
   vpcStackName:
     Default: rds-mysql-vpc
     Description: VPC and database stack name
     Type: String
+  secretName:
+    Default: rds-mysql-admin
+    Description: Database password secret name
+    Type: String
 Globals:
   Function:
-    Runtime: nodejs10.x
+    Runtime: nodejs12.x
     Tracing: Active
     Handler: index.handler
     Environment:
@@ -22,7 +26,7 @@ Globals:
           databaseUser:
             Fn::ImportValue:
               !Sub "${vpcStackName}-db-user"
-          databasePassword: '{{resolve:secretsmanager:rds-mysql-admin:SecretString:password}}'
+          databasePassword: !Sub '{{resolve:secretsmanager:${secretName}:SecretString:password}}'
     VpcConfig:
       SecurityGroupIds:
         - Fn::ImportValue:
@@ -43,6 +47,7 @@ Resources:
       ContentUri: lib/.
       CompatibleRuntimes:
         - nodejs10.x
+        - nodejs12.x
   dbadmin:
     Type: AWS::Serverless::Function
     Properties:

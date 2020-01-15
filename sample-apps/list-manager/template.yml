@@ -25,7 +25,7 @@ Globals:
           databaseUser:
             Fn::ImportValue:
               !Sub "${vpcStackName}-db-user"
-          databasePassword: '{{resolve:secretsmanager:list-manager:SecretString:db-password}}'
+          databasePassword: '{{resolve:secretsmanager:list-manager:SecretString:password}}'
     VpcConfig:
       SecurityGroupIds:
         - Fn::ImportValue:
@@ -62,7 +62,7 @@ Resources:
       Description: Dependencies for the list manager sample app.
       ContentUri: lib/.
       CompatibleRuntimes:
-        - nodejs10.x
+        - nodejs12.x
   dbadmin:
     Type: AWS::Serverless::Function
     Properties:

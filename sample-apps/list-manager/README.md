@@ -39,7 +39,7 @@ A list of fields to increment. For example:
 
 To deploy the sample application, you need the following tools:
 
-- [Node.js 8 with NPM](https://nodejs.org/en/download/releases/).
+- [Node.js 10 with NPM](https://nodejs.org/en/download/releases/).
 - The Bash shell. For Linux and macOS, this is included by default. In Windows 10, you can install the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows-integrated version of Ubuntu and Bash.
 - [The AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html).
 
@@ -64,7 +64,7 @@ Download or clone this repository.
     $ git clone git@github.com:awsdocs/aws-lambda-developer-guide.git
     $ cd aws-lambda-developer-guide/sample-apps/list-manager
 
-Run `create-bucket.sh` to create a new bucket for deployment artifacts. Or, if you already have a bucket, replace `MY_BUCKET` in `deploy.sh` with the name of an existing bucket.
+Run `1-create-bucket.sh` to create a new bucket for deployment artifacts. Or, if you already have a bucket, rename `4-deploy.sh.template` to `4-deploy.sh` and replace `MY_BUCKET` in it with the name of an existing bucket.
 
     list-manager$ ./1-create-bucket.sh
     make_bucket: lambda-artifacts-a5e491dbb5b22e0d
@@ -77,15 +77,11 @@ Run the `deploy-vpc.sh` script to create the VPC and RDS database instance. This
 
     list-manager$ ./3-deploy-vpc.sh
 
-Run the `create-dbtable.sh` script to create a table in the database.
-
-    list-manager$ ./4-create-dbtable.sh
-
 # Deploy
 
-Run `deploy.sh` to deploy the application.
+Run `4-deploy.sh` to deploy the application.
 
-    list-manager$ ./5-deploy.sh
+    list-manager$ ./4-deploy.sh
     Uploading to e678bc216e6a0d510d661ca9ae2fd941  2678 / 2678.0  (100.00%)
     Successfully packaged artifacts and wrote output template to file out.yml.
     Waiting for changeset to be created..
@@ -93,6 +89,10 @@ Run `deploy.sh` to deploy the application.
     Successfully created/updated stack - list-manager
 
 This script uses AWS CloudFormation to deploy the Lambda functions and an IAM role. If the AWS CloudFormation stack that contains the resources already exists, the script updates it with any changes to the template or function code.
+
+Run the `create-dbtable.sh` script to create a table in the database.
+
+    list-manager$ ./5-create-dbtable.sh
 
 # Test
 

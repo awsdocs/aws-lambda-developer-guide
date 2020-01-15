@@ -21,14 +21,14 @@ The project source includes function code and supporting resources:
 - events - JSON documents that can be used to test the application's functions.
 - template.yml - An AWS CloudFormation template that creates the application.
 - template-vpcrds.yml - A template that creates the VPC and Amazon RDS database instance.
-- create-bucket.sh, deploy-vpc.sh, etc. - Shell scripts that use the AWS CLI to deploy and manage the application.
+- 1-create-bucket.sh, 3-deploy-vpc.sh, etc. - Shell scripts that use the AWS CLI to deploy and manage the application.
 - bin - Additional scripts. 
 
 # Requirements
 
 To deploy the sample application, you need the following tools:
 
-- [Node.js 8 with NPM](https://nodejs.org/en/download/releases/).
+- [Node.js 10 with NPM](https://nodejs.org/en/download/releases/).
 - The Bash shell. For Linux and macOS, this is included by default. In Windows 10, you can install the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows-integrated version of Ubuntu and Bash.
 - [The AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html).
 
@@ -50,28 +50,24 @@ Download or clone this repository.
     $ git clone git@github.com:awsdocs/aws-lambda-developer-guide.git
     $ cd aws-lambda-developer-guide/sample-apps/rds-mysql
 
-Run `create-bucket.sh` to create a new bucket for deployment artifacts. Or, if you already have a bucket, replace `MY_BUCKET` in `deploy.sh` with the name of an existing bucket.
+Run `create-bucket.sh` to create a new bucket for deployment artifacts. Or, if you already have a bucket, rename `4-deploy.sh.template` to `4-deploy.sh` and replace `MY_BUCKET` in it with the name of an existing bucket.
 
-    rds-mysql$ ./create-bucket.sh
+    rds-mysql$ ./1-create-bucket.sh
     make_bucket: lambda-artifacts-a5e491dbb5b22e0d
 
-Run the `create-dbpasswordsecret.sh` script to create a database password and store it in AWS Secrets Manager.
+Run the `2-create-dbpasswordsecret.sh` script to create a database password and store it in AWS Secrets Manager.
 
-    rds-mysql$ ./create-dbpasswordsecret.sh
+    rds-mysql$ ./2-create-dbpasswordsecret.sh
 
-Run the `deploy-vpc.sh` script to create the VPC and RDS database instance. This process takes about 15 minutes.
+Run the `3-deploy-vpc.sh` script to create the VPC and RDS database instance. This process takes about 15 minutes.
 
-    rds-mysql$ ./deploy-vpc.sh
-
-Run the `create-dbtable.sh` script to create a table in the database.
-
-    rds-mysql$ ./create-dbtable.sh
+    rds-mysql$ ./3-deploy-vpc.sh
 
 # Deploy
 
-Run `deploy.sh` to deploy the application.
+Run `4-deploy.sh` to deploy the application.
 
-    rds-mysql$ ./deploy.sh
+    rds-mysql$ ./4-deploy.sh
     Uploading to e678bc216e6a0d510d661ca9ae2fd941  2678 / 2678.0  (100.00%)
     Successfully packaged artifacts and wrote output template to file out.yml.
     Waiting for changeset to be created..
@@ -80,11 +76,15 @@ Run `deploy.sh` to deploy the application.
 
 This script uses AWS CloudFormation to deploy the Lambda functions and an IAM role. If the AWS CloudFormation stack that contains the resources already exists, the script updates it with any changes to the template or function code.
 
+Run `5-create-dbtable.sh` to create a table in the database.
+
+    rds-mysql$ ./5-create-dbtable.sh
+
 # Test
 
 To invoke the function with a test event, use the invoke script.
 
-    rds-mysql$ ./invoke.sh
+    rds-mysql$ ./6-invoke.sh
     {
         "StatusCode": 200,
         "ExecutedVersion": "$LATEST"
@@ -110,4 +110,4 @@ Finally, view the application in the Lambda console.
 
 To delete the application, run the cleanup script.
 
-    rds-mysql$ ./cleanup.sh
+    rds-mysql$ ./8-cleanup.sh
