@@ -1,7 +1,12 @@
 #!/bin/bash
 set -eo pipefail
-aws cloudformation delete-stack --stack-name rds-mysql
-echo "Deleted rds-mysql stack."
+STACK=rds-mysql
+if [[ $# -eq 1 ]] ; then
+    STACK=$1
+    echo "Deleting stack $STACK"
+fi
+aws cloudformation delete-stack --stack-name $STACK
+echo "Deleted $STACK stack."
 if [ -f bucket-name.txt ]; then
     ARTIFACT_BUCKET=$(cat bucket-name.txt)
     while true; do
