@@ -74,7 +74,7 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 
 public class ContextLogger {
-    public static void myHandler(InputStream inputStream, OutputStream outputStream, Context context) {
+    public static String myHandler(InputStream inputStream, OutputStream outputStream, Context context) {
         LambdaLogger logger = context.getLogger();
         int letter;
         try {
