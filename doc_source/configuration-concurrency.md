@@ -45,6 +45,8 @@ Setting per\-function concurrency can impact the concurrency pool that is availa
 
 To manage provisioned concurrency settings for a version or alias, use the Lambda console\.
 
+**Note:** Provisioned Concurrency is not supported with [Lambda@Edge](https://docs.aws.amazon.com/lambda/latest/dg/lambda-edge.html)
+
 **To reserve concurrency for an alias**
 
 1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
