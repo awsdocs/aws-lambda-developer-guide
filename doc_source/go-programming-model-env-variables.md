@@ -1,6 +1,6 @@
 # Using Environment Variables<a name="go-programming-model-env-variables"></a>
 
-To access [AWS Lambda Environment Variables](env_variables.md) in Go, use the [Getenv](https://golang.org/pkg/os/#Getenv) function\.
+To access [environment variables](configuration-envvars.md) in Go, use the [Getenv](https://golang.org/pkg/os/#Getenv) function\.
 
 The following explains how to do this\. Note that the function imports the [fmt](https://golang.org/pkg/fmt/) package to format the printed results and the [os](https://golang.org/pkg/os/) package, a platform\-independent system interface that allows you to access environment variables\.
 
@@ -19,4 +19,4 @@ func main() {
 }
 ```
 
-Lambda configures the following environment variables by default: [Environment Variables Available to Lambda Functions](lambda-environment-variables.md)\.
+For a list of environment variables that are set by the Lambda runtime, see [Runtime Environment Variables](configuration-envvars.md#configuration-envvars-runtime)\.

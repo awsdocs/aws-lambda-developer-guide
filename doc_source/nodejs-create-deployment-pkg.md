@@ -33,17 +33,13 @@ To create or update a function by using the Lambda API, create an archive that c
        "Runtime": "nodejs12.x",
        "Role": "arn:aws:iam::123456789012:role/lambda-role",
        "Handler": "index.handler",
-       "CodeSize": 300,
-       "Description": "",
-       "Timeout": 3,
-       "MemorySize": 128,
-       "LastModified": "2018-11-23T21:00:10.248+0000",
        "CodeSha256": "Qf0hMc1I2di6YFMi9aXm3JtGTmcDbjniEuiYonYptAk=",
        "Version": "$LATEST",
        "TracingConfig": {
            "Mode": "Active"
        },
-       "RevisionId": "983ed1e3-ca8e-434b-8dc1-7d72ebadd83d"
+       "RevisionId": "983ed1e3-ca8e-434b-8dc1-7d72ebadd83d",
+       ...
    }
    ```
 
@@ -85,21 +81,17 @@ If your function depends on libraries other than the SDK for JavaScript, install
    ~/my-function$ aws lambda update-function-code --function-name my-function --zip-file fileb://function.zip
    {
        "FunctionName": "my-function",
-       "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:my-function",
+       "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
        "Runtime": "nodejs12.x",
        "Role": "arn:aws:iam::123456789012:role/lambda-role",
        "Handler": "index.handler",
-       "CodeSize": 300,
-       "Description": "My function",
-       "Timeout": 3,
-       "MemorySize": 128,
-       "LastModified": "2018-11-23T21:00:10.248+0000",
        "CodeSha256": "Qf0hMc1I2di6YFMi9aXm3JtGTmcDbjniEuiYonYptAk=",
        "Version": "$LATEST",
        "TracingConfig": {
            "Mode": "Active"
        },
-       "RevisionId": "983ed1e3-ca8e-434b-8dc1-7d72ebadd83d"
+       "RevisionId": "983ed1e3-ca8e-434b-8dc1-7d72ebadd83d",
+       ...
    }
    ```
 

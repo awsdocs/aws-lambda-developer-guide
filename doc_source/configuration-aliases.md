@@ -20,13 +20,13 @@ To view the aliases that are currently defined for a function, choose **Qualifie
 To create an alias, use the `create-alias` command\.
 
 ```
-$ aws lambda create-alias --function-name my-function --function-version version number --name alias name --description " "
+$ aws lambda create-alias   --function-name my-function --name alias-name --function-version version-number  --description " "
 ```
 
-To change an alias to point a new version of the function, use the `update-alias` command\.
+To change an alias to point a new version of the function, use the `update-alias` command\. 
 
 ```
-$ aws lambda update-alias --function-name my-function --function-version version number --name alias name
+$ aws lambda update-alias  --function-name my-function --name alias-name --function-version version-number 
 ```
 
  The AWS CLI commands in the preceding steps correspond to the following AWS Lambda APIs: 

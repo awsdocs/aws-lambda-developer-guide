@@ -101,15 +101,15 @@ This example requires that `my-function` returns a log stream ID\.
 
 ```
 aws lambda invoke --function-name my-function --payload '{"key": "value"}' out
-sed -i 's/"//g' out
+sed -i'' -e 's/"//g' out
 sleep 15
-aws logs get-log-events --log-group-name /aws/lambda/my-function --log-stream-name=file://out --limit 5
+aws logs get-log-events --log-group-name /aws/lambda/my-function --log-stream-name $(cat out) --limit 5
 ```
 
 The script uses `sed` to remove quotes from the output file, and sleeps for 15 seconds to allow time for the logs to be available\. The output includes the response from Lambda and the output from the `get-log-events` command\.
 
 ```
-$ ./get-log.sh
+$ ./get-logs.sh
 {
     "StatusCode": 200,
     "ExecutedVersion": "$LATEST"

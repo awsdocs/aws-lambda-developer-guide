@@ -4,6 +4,9 @@
 
 Deprecation occurs in two phases\. During the first phase, you can no longer create functions that use the deprecated runtime\. For at least 30 days, you can continue to update existing functions that use the deprecated runtime\. After this period, both function creation and updates are disabled permanently\. However, the function continues to be available to process invocation events\.
 
+**Note**  
+Python 2\.7 reached end\-of\-life on January 1st, 2020\. However, the Python 2\.7 runtime is still supported and is not scheduled to be deprecated at this time\. For details, see [Continued support for Python 2\.7 on AWS Lambda](https://aws.amazon.com/blogs/compute/continued-support-for-python-2-7-on-aws-lambda/)\.
+
 The following runtimes have been scheduled to be deprecated\.
 
 

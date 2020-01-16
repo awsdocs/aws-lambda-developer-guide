@@ -2,7 +2,7 @@
 
 You can use the AWS Lambda API or console to configure settings on your Lambda functions\. [Basic function settings](resource-model.md) include the description, role, and runtime that you specify when you create a function in the Lambda console\. You can configure more settings after you create a function, or use the API to set things like the handler name, memory allocation, and security groups during creation\.
 
-To keep secrets out of your function code, store them in the function's configuration and read them from the execution environment during initialization\. [Environment variables](env_variables.md) are always encrypted at rest, and can be encrypted in transit as well\. Use environment variables to make your function code portable by removing connection strings, passwords, and endpoints for external resources\.
+To keep secrets out of your function code, store them in the function's configuration and read them from the execution environment during initialization\. [Environment variables](configuration-envvars.md) are always encrypted at rest, and can be encrypted client\-side as well\. Use environment variables to make your function code portable by removing connection strings, passwords, and endpoints for external resources\.
 
 [Versions and aliases](configuration-versions.md) are secondary resources that you can create to manage function deployment and invocation\. Publish [versions](configuration-versions.md) of your function to store its code and configuration as a separate resource that cannot be changed, and create an [alias](configuration-aliases.md) that points to a specific version\. Then you can configure your clients to invoke a function alias, and update the alias when you want to point the client to a new version, instead of updating the client\.
 
@@ -12,7 +12,7 @@ To use your Lambda function with AWS resources in an Amazon VPC, configure it wi
 
 **Topics**
 + [Configuring AWS Lambda Functions](resource-model.md)
-+ [AWS Lambda Environment Variables](env_variables.md)
++ [AWS Lambda Environment Variables](configuration-envvars.md)
 + [Managing Concurrency for a Lambda Function](configuration-concurrency.md)
 + [AWS Lambda Function Versions](configuration-versions.md)
 + [AWS Lambda Function Aliases](configuration-aliases.md)

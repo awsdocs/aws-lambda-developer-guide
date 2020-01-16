@@ -62,7 +62,7 @@ Type: String
 Required: No
 
  **LastUpdateStatus**   <a name="SSS-Type-FunctionConfiguration-LastUpdateStatus"></a>
-The status of the last update that was performed on the function\.  
+The status of the last update that was performed on the function\. This is first set to `Successful` after function creation completes\.  
 Type: String  
 Valid Values:` Successful | Failed | InProgress`   
 Required: No

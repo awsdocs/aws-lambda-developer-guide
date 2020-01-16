@@ -59,7 +59,7 @@ Create an application in the Lambda console\.
 1. Configure application settings\.
    + **Application name** – **my\-app**\.
    + **Application description** – **my application**\.
-   + **Runtime** – **Node\.js 12\.x**\.
+   + **Runtime** – **Node\.js 10\.x**\.
    + **Repository provider** – **CodeCommit**\.
    + **Repository provider** – **my\-app\-repo**\.
    + **Permissions** – **Create roles and permissions boundary**\.
@@ -137,7 +137,7 @@ The repository contains the template for the application, a build specification,
        Type: AWS::Serverless::Function
        Properties:
          Handler: src/handlers/hello-from-lambda.helloFromLambdaHandler
-         Runtime: nodejs12.x
+         Runtime: nodejs10.x
          MemorySize: 128
          Timeout: 100
          Description: This is a hello from Lambda example.

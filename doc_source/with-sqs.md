@@ -75,9 +75,15 @@ For FIFO queues, records contain additional attributes that are related to dedup
 }
 ```
 
-Lambda uses [long polling](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-long-polling.html) to poll a queue until it becomes active\. When messages are available, Lambda reads up to 5 batches and sends them to your function\. If messages are still available, Lambda increases the number of processes that are reading batches by up to 60 more instances per minute\. The maximum number of batches that can be processed simultaneously by an event source mapping is 1000\.
-
 When Lambda reads a batch, the messages stay in the queue but become hidden for the length of the queue's [visibility timeout](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html)\. If your function successfully processes the batch, Lambda deletes the messages from the queue\. If your function is [throttled](scaling.md), returns an error, or doesn't respond, the message becomes visible again\. All messages in a failed batch return to the queue, so your function code must be able to process the same message multiple times without side effects\.
+
+## Scaling and Processing<a name="events-sqs-scaling"></a>
+
+For standard queues, Lambda uses [long polling](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-long-polling.html) to poll a queue until it becomes active\. When messages are available, Lambda reads up to 5 batches and sends them to your function\. If messages are still available, Lambda increases the number of processes that are reading batches by up to 60 more instances per minute\. The maximum number of batches that can be processed simultaneously by an event source mapping is 1000\.
+
+For FIFO queues, Lambda sends messages to your function in the order that it receives them\. When you send a message to a FIFO queue, you specify a [message group ID](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagegroupid-property.html)\. Amazon SQS ensures that messages in the same group are delivered to Lambda in order\. Lambda sorts the messages into groups and sends only one batch at a time for a group\. If the function returns an error, all retries are attempted on the affected messages before Lambda receives additional messages from the same group\.
+
+Your function can scale in concurrency to the number of active message groups\. For more information, see [SQS FIFO as an event source](https://aws.amazon.com/blogs/compute/new-for-aws-lambda-sqs-fifo-as-an-event-source/) on the AWS Compute Blog\.
 
 ## Configuring a Queue for Use with Lambda<a name="events-sqs-queueconfig"></a>
 
@@ -85,10 +91,12 @@ When Lambda reads a batch, the messages stay in the queue but become hidden for 
 
 To allow your function time to process each batch of records, set the source queue's visibility timeout to at least 6 times the [timeout](resource-model.md) that you configure on your function\. The extra time allows for Lambda to retry if your function execution is throttled while your function is processing a previous batch\.
 
-If a message fails to be processed multiple times, Amazon SQS can send it to a [dead\-letter queue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html)\. When your function returns an error, Lambda leaves it in the queue\. After the visibility timeout occurs, Lambda receives the message again\. To send messages to a second queue after a number of receives, configure a dead\-letter queue on your source queue\. Set the `maxReceiveCount` on the queue's redrive policy to at least **5** to avoid sending messages to the dead\-letter queue due to throttling, or errors caused by a different message pulled in the same batch\.
+If a message fails to be processed multiple times, Amazon SQS can send it to a [dead\-letter queue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html)\. When your function returns an error, Lambda leaves it in the queue\. After the visibility timeout occurs, Lambda receives the message again\. To send messages to a second queue after a number of receives, configure a dead\-letter queue on your source queue\.
 
 **Note**  
 Make sure that you configure the dead\-letter queue on the source queue, not on the Lambda function\. The dead\-letter queue that you configure on a function is used for the function's [asynchronous invocation queue](invocation-async.md), not for event source queues\.
+
+If your function returns an error, or can't be invoked because it's at maximum concurrency, processing might succeed with additional attempts\. To give messages a better chance to be processed before sending them to the dead\-letter queue, set the `maxReceiveCount` on the source queue's redrive policy to at least **5**\.
 
 ## Execution Role Permissions<a name="events-sqs-permissions"></a>
 

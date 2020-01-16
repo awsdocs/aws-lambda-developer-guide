@@ -19,7 +19,7 @@ The runtime passes three arguments to the handler method\. The first argument is
 
 The second argument is the [context object](nodejs-prog-model-context.md), which contains information about the invocation, function, and execution environment\. In the preceding example, the function gets the name of the [log stream](nodejs-prog-model-logging.md) from the context object and returns it to the invoker\.
 
-The third argument, `callback`, is a function that you can call in [non\-async functions](#nodejs-handler-sync) to send a response\. The callback function takes two arguments: an `Error` and a response\. The response object must be compatible with `JSON.stringify`\.
+The third argument, `callback`, is a function that you can call in [non\-async functions](#nodejs-handler-sync) to send a response\. The callback function takes two arguments: an `Error` and a response\. When you call it, Lambda waits for the event loop to be empty and then returns the response or error to the invoker\. The response object must be compatible with `JSON.stringify`\.
 
 For async functions, you return a response, error, or promise to the runtime instead of using `callback`\.
 

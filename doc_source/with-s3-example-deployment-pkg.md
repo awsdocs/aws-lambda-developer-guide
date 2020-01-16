@@ -303,7 +303,7 @@ Build the code with the Lambda library dependencies to create a deployment packa
 
 The following example code receives an Amazon S3 event input and processes the message that it contains\. It resizes an image in the source bucket and saves the output to the target bucket\.
 
-**Example CreateThumbnail\.py**  
+**Example lambda\_function\.py**  
 
 ```
 import boto3
@@ -321,41 +321,50 @@ def resize_image(image_path, resized_path):
         image.thumbnail(tuple(x / 2 for x in image.size))
         image.save(resized_path)
 
-def handler(event, context):
+def lambda_handler(event, context):
     for record in event['Records']:
         bucket = record['s3']['bucket']['name']
         key = unquote_plus(record['s3']['object']['key'])
-        download_path = '/tmp/{}{}'.format(uuid.uuid4(), key)
-        upload_path = '/tmp/resized-{}'.format(key)
+        tmpkey = key.replace('/', '')
+        download_path = '/tmp/{}{}'.format(uuid.uuid4(), tmpkey)
+        upload_path = '/tmp/resized-{}'.format(tmpkey)
         s3_client.download_file(bucket, key, download_path)
         resize_image(download_path, upload_path)
         s3_client.upload_file(upload_path, '{}resized'.format(bucket), key)
 ```
 
+**Note**  
+The image library used by this code must be installed in a Linux environment in order to create a working deployment package\.
+
 **To create a deployment package**
 
-1. Copy the sample code into a file named `CreateThumbnail.py`\.
+1. Copy the sample code into a file named `lambda_function.py`\.
 
 1. Create a virtual environment\.
 
-   `$ virtualenv ~/shrink_venv`
-
-   `$ source ~/shrink_venv/bin/activate `
+   ```
+   s3-python$ virtualenv v-env
+   s3-python$ source v-env/bin/activate
+   ```
 
 1. Install libraries in the virtual environment
 
-   `$ pip install Pillow`
+   ```
+   (v-env) s3-python$ pip install Pillow boto3
+   ```
 
-   `$ pip install boto3`
+1. Create a deployment package with the contents of the installed libraries\.
 
-1. Add the contents of `lib` and `lib64` site\-packages to your \.zip file\.
+   ```
+   (v-env) s3-python$ cd $VIRTUAL_ENV/lib/python3.8/site-packages
+   (v-env) python-s3/v-env/lib/python3.8/site-packages$ zip -r9 ${OLDPWD}/function.zip .
+   ```
 
-   `$ cd $VIRTUAL_ENV/lib/python3.8/site-packages`
+1. Add the handler code to the deployment package and deactivate the virtual environment\.
 
-   `$ zip -r ~/CreateThumbnail.zip . `
-
-1. Add your python code to the \.zip file
-
-   `$ cd ~`
-
-   `$ zip -g CreateThumbnail.zip CreateThumbnail.py `
+   ```
+   (v-env) python-s3/v-env/lib/python3.8/site-packages$  cd ${OLDPWD}
+   (v-env) python-s3$ zip -g function.zip lambda_function.py
+     adding: lambda_function.py (deflated 55%)
+   (v-env) python-s3$ deactivate
+   ```

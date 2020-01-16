@@ -15,6 +15,7 @@ In the syntax, note the following:
 + *returnType* – If you plan to invoke the Lambda function synchronously \(using the `RequestResponse` invocation type\), you can return the output of your function using any of the supported data types\. For example, if you use a Lambda function as a mobile application backend, you are invoking it synchronously\. Your output data type will be serialized into JSON\. 
 
   If you plan to invoke the Lambda function asynchronously \(using the `Event` invocation type\), the `returnType` should be `void`\. For example, if you use AWS Lambda with event sources such as Amazon S3 or Amazon SNS, these event sources invoke the Lambda function using the `Event` invocation type\.
++ `ILambdaContext context` – The second argument in the handler signature is optional\. It provides access to the [context object](dotnet-context-object.md) which has information about the function and request\.
 
 ## Handling Streams<a name="dotnet-programming-model-handling-streams"></a>
 

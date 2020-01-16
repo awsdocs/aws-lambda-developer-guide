@@ -11,7 +11,6 @@ Lambda supports the following Node\.js runtimes\.
 | --- | --- | --- | --- | 
 |  Node\.js 12  |  `nodejs12.x`  |  2\.536\.0  |  Amazon Linux 2  | 
 |  Node\.js 10  |  `nodejs10.x`  |  2\.488\.0  |  Amazon Linux 2  | 
-|  Node\.js 8\.10  |  `nodejs8.10`  |  2\.488\.0  |  Amazon Linux  | 
 
 Lambda functions use an [execution role](lambda-intro-execution-role.md) to get permission to write logs to Amazon CloudWatch Logs, and to access other services and resources\. If you don't already have an execution role for function development, create one\.
 

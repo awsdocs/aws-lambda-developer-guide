@@ -54,11 +54,12 @@ The function is responsible for returning a response to the callback URL that in
 
 AWS CloudFormation provides a library called `cfn-response` that handles sending the response\. If you define your function within a template, you can require the library by name\. AWS CloudFormation then adds the library to the deployment package that it creates for the function\.
 
-The following example function invokes a second function\. If the call succeeds, the function sends a success response to AWS CloudFormation, and the stack update continues\.
+The following example function invokes a second function\. If the call succeeds, the function sends a success response to AWS CloudFormation, and the stack update continues\. The template uses the [AWS::Serverless::Function](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html) resource type provided by AWS Serverless Application Model\.
 
-**Example – Custom Resource Function**  
+**Example [error\-processor/template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/error-processor/template.yml) – Custom Resource Function**  
 
 ```
+Transform: 'AWS::Serverless-2016-10-31'
 Resources:
   primer:
     Type: AWS::Serverless::Function

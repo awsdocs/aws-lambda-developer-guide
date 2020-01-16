@@ -4,25 +4,26 @@ AWS Lambda provides a management console and API for managing and invoking funct
 
 **Topics**
 + [Programming Model](#gettingstarted-features-programmingmodel)
++ [Deployment Package](#gettingstarted-features-package)
++ [Layers](#gettingstarted-features-layers)
 + [Scaling](#gettingstarted-features-scaling)
 + [Concurrency Controls](#gettingstarted-features-concurrency)
-+ [Deployment Package](#gettingstarted-features-package)
++ [Asynchronous Invocation](#gettingstarted-features-async)
++ [Event Source Mappings](#gettingstarted-features-eventsourcemapping)
++ [Destinations](#gettingstarted-features-destinations)
 + [Function Blueprints](#gettingstarted-features-blueprints)
 + [Application Templates](#gettingstarted-features-templates)
-+ [Layers](#gettingstarted-features-layers)
 
 ## Programming Model<a name="gettingstarted-features-programmingmodel"></a>
 
 Authoring specifics vary between runtimes, but all runtimes share a common programming model that defines the interface between your code and the runtime code\. You tell the runtime which method to run by defining a **handler** in the function configuration, and the runtime runs that method\. The runtime passes in objects to the handler that contain the invocation **event** and the **context**, such as the function name and request ID\.
 
+If your function exits without error, the runtime sends it another event\. The function's class stays in memory, so clients and variables that are declared outside of the handler method in **initialization code** can be reused\. Your function also has access to local storage in the `/tmp` directory\. Instances of your function that are serving requests remain active for a few hours before being recycled\.
+
 The runtime captures **logging** output from your function and sends it to Amazon CloudWatch Logs\. You can use the standard logging functionality of your programming language\. If your function throws an **error**, the runtime returns that error to the client\.
 
 **Note**  
-Logging is subject to [CloudWatch Logs limits](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/cloudwatch_limits_cwl.html)\. Log data can be lost due to throttling or, in some cases, when the [execution context](running-lambda-code.md) is terminated\.
-
-If your function exits without error, the runtime sends it another event\. The function's class stays in memory, so clients and variables that are declared outside of the handler method can be reused\. Your function also has access to local storage in the `/tmp` directory\.
-
-Lambda scales your function by running additional instances of it as demand increases, and by terminating instances as demand decreases\. Unless noted otherwise, incoming requests might be processed out of order or concurrently\. Store your application's state in other services, and don't rely on instances of your function being long lived\. Use local storage and class\-level objects to increase performance, but keep the size of your deployment package and the amount of data that you transfer onto the execution environment to a minimum\.
+Logging is subject to [CloudWatch Logs limits](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/cloudwatch_limits_cwl.html)\. Log data can be lost due to throttling or, in some cases, when an instance of your function is stopped\.
 
 For a hands\-on introduction to the programming model in your preferred programming language, see the following chapters\.
 + [Building Lambda Functions with Node\.js](programming-model.md)
@@ -33,17 +34,7 @@ For a hands\-on introduction to the programming model in your preferred programm
 + [Building Lambda Functions with C\#](dotnet-programming-model.md)
 + [Building Lambda Functions with PowerShell](powershell-programming-model.md)
 
-## Scaling<a name="gettingstarted-features-scaling"></a>
-
-Lambda manages the infrastructure that runs your code, and scales automatically in response to incoming requests\. When your function is invoked more quickly than a single instance of your function can process events, Lambda scales up by running additional instances\. When traffic subsides, inactive instances are frozen or terminated\. You only pay for the time that your function code is actually processing events\.
-
-For more information, see [AWS Lambda Function Scaling](scaling.md)\.
-
-## Concurrency Controls<a name="gettingstarted-features-concurrency"></a>
-
-Use concurrency settings to ensure that your production applications are highly available and highly responsive\. To prevent a function from using too much concurrency, and to reserve a portion of your account's available concurrency for a function, use *reserved concurrency*\. To enable functions to scale without fluctuations in latency, use *provisioned concurrency*\.
-
-For more information, see [Managing Concurrency for a Lambda Function](configuration-concurrency.md)\.
+Lambda scales your function by running additional instances of it as demand increases, and by stopping instances as demand decreases\. Unless noted otherwise, incoming requests might be processed out of order or concurrently\. Store your application's state in other services, and don't rely on instances of your function being long lived\. Use local storage and class\-level objects to increase performance, but keep the size of your deployment package and the amount of data that you transfer onto the execution environment to a minimum\.
 
 ## Deployment Package<a name="gettingstarted-features-package"></a>
 
@@ -58,6 +49,62 @@ For language\-specific instructions, see the following topics\.
 +  [AWS Lambda Deployment Package in C\#](lambda-dotnet-how-to-create-deployment-package.md) 
 +  [AWS Lambda Deployment Package in PowerShell](lambda-powershell-how-to-create-deployment-package.md) 
 
+## Layers<a name="gettingstarted-features-layers"></a>
+
+Lambda layers are a distribution mechanism for libraries, custom runtimes, and other function dependencies\. Layers let you manage your in\-development function code independently from the unchanging code and resources that it uses\. You can configure your function to use layers that you create, layers provided by AWS, or layers from other AWS customers\.
+
+For more information, see [AWS Lambda Layers](configuration-layers.md)\.
+
+## Scaling<a name="gettingstarted-features-scaling"></a>
+
+Lambda manages the infrastructure that runs your code, and scales automatically in response to incoming requests\. When your function is invoked more quickly than a single instance of your function can process events, Lambda scales up by running additional instances\. When traffic subsides, inactive instances are frozen or stopped\. You only pay for the time that your function is initializing or processing events\.
+
+![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/features-scaling.png)
+
+For more information, see [AWS Lambda Function Scaling](scaling.md)\.
+
+## Concurrency Controls<a name="gettingstarted-features-concurrency"></a>
+
+Use concurrency settings to ensure that your production applications are highly available and highly responsive\. To prevent a function from using too much concurrency, and to reserve a portion of your account's available concurrency for a function, use *reserved concurrency*\. Reserved concurrency splits the pool of available concurrency into subsets\. A function with reserved concurrency only uses concurrency from its dedicated pool\.
+
+![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/features-concurrency-reserved.png)
+
+To enable functions to scale without fluctuations in latency, use *provisioned concurrency*\. For functions that take a long time to initialize, or require extremely low latency for all invocations, provisioned concurrency enables you to pre\-initialize instances of your function and keep them running at all times\. Lambda integrates with Application Auto Scaling to support autoscaling for provisioned concurrency based on utilization\.
+
+![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/features-scaling-provisioned-auto.png)
+
+For more information, see [Managing Concurrency for a Lambda Function](configuration-concurrency.md)\.
+
+## Asynchronous Invocation<a name="gettingstarted-features-async"></a>
+
+When you invoke a function, you can choose to invoke it synchronously or asynchronously\. With [synchronous invocation](invocation-sync.md), you wait for the function to process the event and return a response\. With asynchronous invocation, Lambda queues the event for processing and returns a response immediately\.
+
+![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/features-async.png)
+
+For asynchronous invocations, Lambda handles retries if the function returns an error or is throttled\. To customize this behavior, you can configure error handling settings on a function, version, or alias\. You can also configure Lambda to send events that failed processing to a dead\-letter queue, or to send a record of any invocation to a [destination](#gettingstarted-features-destinations)\.
+
+For more information, see [Asynchronous Invocation](invocation-async.md)\.
+
+## Event Source Mappings<a name="gettingstarted-features-eventsourcemapping"></a>
+
+To process items from a stream or queue, you can create an [event source mapping](invocation-eventsourcemapping.md)\. An event source mapping is a resource in Lambda that reads items from an Amazon SQS queue, an Amazon Kinesis stream, or an Amazon DynamoDB stream, and sends them to your function in batches\. Each event that your function processes can contain hundreds or thousands of items\.
+
+![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/features-eventsourcemapping.png)
+
+Event source mappings maintain a local queue of unprocessed items, and handle retries if the function returns an error or is throttled\. You can configure an event source mapping to customize batching behavior and error handling, or to send a record of items that fail processing to a [destination](#gettingstarted-features-destinations)\.
+
+For more information, see [AWS Lambda Event Source Mapping](invocation-eventsourcemapping.md)\.
+
+## Destinations<a name="gettingstarted-features-destinations"></a>
+
+A destination is an AWS resource that receives invocation records for a function\. For [asynchronous invocation](#gettingstarted-features-async), you can configure Lambda to send invocation records to a queue, topic, function, or event bus\. You can configure separate destinations for successful invocations and events that failed processing\. The invocation record contains details about the event, the function's response, and the reason that the record was sent\.
+
+![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/features-destinations.png)
+
+For [event source mappings](#gettingstarted-features-eventsourcemapping) that read from streams, you can configure Lambda to send a record of batches that failed processing to a queue or topic\. A failure record for an event source mapping contains metadata about the batch, and it points to the items in the stream\.
+
+For more information, see [Configuring Destinations for Asynchronous Invocation](invocation-async.md#invocation-async-destinations) and the error handling sections of [Using AWS Lambda with Amazon DynamoDB](with-ddb.md) and [Using AWS Lambda with Amazon Kinesis](with-kinesis.md)\.
+
 ## Function Blueprints<a name="gettingstarted-features-blueprints"></a>
 
 When you create a function in the Lambda console, you can choose to start from scratch, use a blueprint, or deploy an application from the [AWS Serverless Application Repository](https://docs.aws.amazon.com/serverlessrepo/latest/devguide/what-is-serverlessrepo.html)\. A blueprint provides sample code that shows how to use Lambda with an AWS service or a popular third\-party application\. Blueprints include sample code and function configuration presets for Node\.js and Python runtimes\.
@@ -71,9 +118,3 @@ You can use the Lambda console to create an application with a continuous delive
 Application templates are provided for use under the [MIT No Attribution](https://spdx.org/licenses/MIT-0.html) license\. They are only available in the Lambda console\.
 
 For more information, see [Creating an Application with Continuous Delivery in the Lambda Console](applications-tutorial.md)\.
-
-## Layers<a name="gettingstarted-features-layers"></a>
-
-Lambda layers are a distribution mechanism for libraries, custom runtimes, and other function dependencies\. Layers let you manage your in\-development function code independently from the unchanging code and resources that it uses\. You can configure your function to use layers that you create, layers provided by AWS, or layers from other AWS customers\.
-
-For more information, see [AWS Lambda Layers](configuration-layers.md)\.

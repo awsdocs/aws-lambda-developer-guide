@@ -1,6 +1,6 @@
 # TracingConfig<a name="API_TracingConfig"></a>
 
-The function's AWS X\-Ray tracing configuration\.
+The function's AWS X\-Ray tracing configuration\. To sample and record incoming requests, set `Mode` to `Active`\.
 
 ## Contents<a name="API_TracingConfig_Contents"></a>
 

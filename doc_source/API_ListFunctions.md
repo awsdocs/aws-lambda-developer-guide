@@ -22,7 +22,7 @@ Valid Values:` ALL`
 Specify the pagination token that's returned by a previous request to retrieve the next page of results\.
 
  ** [MasterRegion](#API_ListFunctions_RequestSyntax) **   <a name="SSS-ListFunctions-request-MasterRegion"></a>
-For Lambda@Edge functions, the AWS Region of the master function\. For example, `us-east-2` or `ALL`\. If specified, you must set `FunctionVersion` to `ALL`\.  
+For Lambda@Edge functions, the AWS Region of the master function\. For example, `us-east-1` filters the list of functions to only include Lambda@Edge functions replicated from a master function in US East \(N\. Virginia\)\. If specified, you must set `FunctionVersion` to `ALL`\.  
 Pattern: `ALL|[a-z]{2}(-gov)?-[a-z]+-\d{1}` 
 
  ** [MaxItems](#API_ListFunctions_RequestSyntax) **   <a name="SSS-ListFunctions-request-MaxItems"></a>

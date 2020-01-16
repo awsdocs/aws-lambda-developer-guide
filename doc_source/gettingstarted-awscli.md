@@ -67,22 +67,18 @@ exports.handler = async function(event, context) {
    --zip-file fileb://function.zip --handler index.handler --runtime nodejs12.x \
    --role arn:aws:iam::123456789012:role/lambda-cli-role
    {
-       "FunctionName": "cli",
+       "FunctionName": "my-function",
        "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
        "Runtime": "nodejs12.x",
        "Role": "arn:aws:iam::123456789012:role/lambda-cli-role",
        "Handler": "index.handler",
-       "CodeSize": 322,
-       "Description": "",
-       "Timeout": 3,
-       "MemorySize": 128,
-       "LastModified": "2019-06-13T23:56:27.308+0000",
        "CodeSha256": "FpFMvUhayLkOoVBpNuNiIVML/tuGv2iJQ7t0yWVTU8c=",
        "Version": "$LATEST",
        "TracingConfig": {
            "Mode": "PassThrough"
        },
-       "RevisionId": "88ebe1e1-bfdf-4dc3-84de-3017268fa1ff"
+       "RevisionId": "88ebe1e1-bfdf-4dc3-84de-3017268fa1ff",
+       ...
    }
    ```
 
@@ -117,15 +113,15 @@ This example requires that `my-function` returns a log stream ID\.
 
 ```
 aws lambda invoke --function-name my-function --payload '{"key": "value"}' out
-sed -i 's/"//g' out
+sed -i'' -e 's/"//g' out
 sleep 15
-aws logs get-log-events --log-group-name /aws/lambda/my-function --log-stream-name=file://out --limit 5
+aws logs get-log-events --log-group-name /aws/lambda/my-function --log-stream-name $(cat out) --limit 5
 ```
 
 The script uses `sed` to remove quotes from the output file, and sleeps for 15 seconds to allow time for the logs to be available\. The output includes the response from Lambda and the output from the `get-log-events` command\.
 
 ```
-$ ./get-log.sh
+$ ./get-logs.sh
 {
     "StatusCode": 200,
     "ExecutedVersion": "$LATEST"
@@ -177,17 +173,7 @@ $ aws lambda list-functions --max-items 10
             "Runtime": "nodejs12.x",
             "Role": "arn:aws:iam::123456789012:role/lambda-cli-role",
             "Handler": "index.handler",
-            "CodeSize": 322,
-            "Description": "",
-            "Timeout": 3,
-            "MemorySize": 128,
-            "LastModified": "2019-06-13T23:56:27.308+0000",
-            "CodeSha256": "FpFMvUhayLkOoVBpNuNiIVML/tuGv2iJQ7t0yWVTU8c=",
-            "Version": "$LATEST",
-            "TracingConfig": {
-                "Mode": "PassThrough"
-            },
-            "RevisionId": "88ebe1e1-bfdf-4dc3-84de-3017268fa1ff"
+            ...
         },
         {
             "FunctionName": "random-error",
@@ -195,22 +181,7 @@ $ aws lambda list-functions --max-items 10
             "Runtime": "nodejs12.x",
             "Role": "arn:aws:iam::123456789012:role/lambda-role",
             "Handler": "index.handler",
-            "CodeSize": 1572488,
-            "Description": "",
-            "Timeout": 3,
-            "MemorySize": 128,
-            "LastModified": "2019-03-20T21:17:52.564+0000",
-            "CodeSha256": "TSGmGwJEsBSaTZcViXJ/Xz3ntZUmSF7AURodpt2zAeo=",
-            "Version": "$LATEST",
-            "VpcConfig": {
-                "SubnetIds": [],
-                "SecurityGroupIds": [],
-                "VpcId": ""
-            },
-            "TracingConfig": {
-                "Mode": "Active"
-            },
-            "RevisionId": "2e4e549a-6259-4f8a-aacc-3e6614962812"
+            ...
         },
         ...
       ],
@@ -232,22 +203,17 @@ The Lambda CLI `get-function` command returns Lambda function metadata and a pre
 $ aws lambda get-function --function-name my-function
 {
     "Configuration": {
-        "FunctionName": "cli",
+        "FunctionName": "my-function",
         "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
         "Runtime": "nodejs12.x",
         "Role": "arn:aws:iam::123456789012:role/lambda-cli-role",
-        "Handler": "index.handler",
-        "CodeSize": 322,
-        "Description": "",
-        "Timeout": 3,
-        "MemorySize": 128,
-        "LastModified": "2019-06-13T23:56:27.308+0000",
         "CodeSha256": "FpFMvUhayLkOoVBpNuNiIVML/tuGv2iJQ7t0yWVTU8c=",
         "Version": "$LATEST",
         "TracingConfig": {
             "Mode": "PassThrough"
         },
-        "RevisionId": "88ebe1e1-bfdf-4dc3-84de-3017268fa1ff"
+        "RevisionId": "88ebe1e1-bfdf-4dc3-84de-3017268fa1ff",
+        ...
     },
     "Code": {
         "RepositoryType": "S3",

@@ -15,21 +15,13 @@ $ aws lambda get-function-configuration --function-name my-function
     "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
     "Runtime": "nodejs12.x",
     "Role": "arn:aws:iam::123456789012:role/lambda-role",
-    "Handler": "index.handler",
-    "CodeSize": 322,
-    "Description": "testing function creation",
-    "Timeout": 3,
-    "MemorySize": 128,
-    "LastModified": "2019-07-17T23:10:15.832+0000",
-    "CodeSha256": "4YtlMWptAWjGEfjWz9xrGaRnoew9tLR8QVb/occIQYg=",
-    "Version": "$LATEST",
     "TracingConfig": {
         "Mode": "Active"
     },
-    "RevisionId": "80aac04a-157b-4530-8f0e-cf1a9094dfdf",
     "State": "Pending",
     "StateReason": "The function is being created.",
-    "StateReasonCode": "Creating"
+    "StateReasonCode": "Creating",
+    ...
 }
 ```
 
@@ -48,15 +40,6 @@ When you update a function's configuration, the update can trigger an asynchrono
     "FunctionName": "my-function",
     "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
     "Runtime": "nodejs12.x",
-    "Role": "arn:aws:iam::123456789012:role/lambda-role",
-    "Handler": "index.handler",
-    "CodeSize": 322,
-    "Description": "testing function creation",
-    "Timeout": 3,
-    "MemorySize": 128,
-    "LastModified": "2019-07-17T23:10:15.832+0000",
-    "CodeSha256": "4YtlMWptAWjGEfjWz9xrGaRnoew9tLR8QVb/occIQYg=",
-    "Version": "$LATEST",
     "VpcConfig": {
         "SubnetIds": [
             "subnet-071f712345678e7c8",
@@ -68,12 +51,9 @@ When you update a function's configuration, the update can trigger an asynchrono
         ],
         "VpcId": "vpc-08e1234569e011e83"
     },
-    "TracingConfig": {
-        "Mode": "Active"
-    },
-    "RevisionId": "80aac04a-157b-4530-8f0e-cfdfdf1a9094",
     "State": "Active",
-    "LastUpdateStatus": "InProgress"
+    "LastUpdateStatus": "InProgress",
+    ...
 }
 ```
 
@@ -84,6 +64,6 @@ The following operations fail while an asynchronous update is in progress:
 
 Other operations, including invocation, work while updates are in progress\.
 
-For example, when you connect your function to a virtual private cloud \(VPC\), Lambda provisions an elastic network interface for each subnet\. This process can leave your function in a pending state for a minute or so\. Lambda also reclaims network interfaces that are not in use, placing your function in an `Idle` state\. When the function is idle, an invocation causes it to enter the `Pending` state while network access is restored\.
+For example, when you connect your function to a virtual private cloud \(VPC\), Lambda provisions an elastic network interface for each subnet\. This process can leave your function in a pending state for a minute or so\. Lambda also reclaims network interfaces that are not in use, placing your function in an `Inactive` state\. When the function is inactive, an invocation causes it to enter the `Pending` state while network access is restored\.
 
 For more information on how states work with VPC connectivity, see [Configuring a Lambda Function to Access Resources in a VPC](configuration-vpc.md)\.

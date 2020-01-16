@@ -18,7 +18,7 @@ The following limits apply to function configuration, deployments, and execution
 | --- | --- | 
 | Function [memory allocation](resource-model.md) | 128 MB to 3,008 MB, in 64 MB increments\. | 
 | Function [timeout](resource-model.md) | 900 seconds \(15 minutes\) | 
-| Function [environment variables](env_variables.md) | 4 KB | 
+| Function [environment variables](configuration-envvars.md) | 4 KB | 
 | Function [resource\-based policy](access-control-resource-based.md) | 20 KB | 
 | Function [layers](configuration-layers.md) | 5 layers | 
 | Function [burst concurrency](scaling.md) | 500 \- 3000 \([varies per region](scaling.md)\) | 

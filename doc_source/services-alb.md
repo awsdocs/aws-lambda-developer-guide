@@ -37,9 +37,9 @@ Elastic Load Balancing invokes your Lambda function synchronously with an event 
 }
 ```
 
-Your function processes the event and returns a response to the load balancer in JSON\. Elastic Load Balancing converts the response to HTTP and returns it to the user\.
+Your function processes the event and returns a response document to the load balancer in JSON\. Elastic Load Balancing converts the document to an HTTP success or error response and returns it to the user\.
 
-**Example Response Format**  
+**Example Response Document format**  
 
 ```
 {

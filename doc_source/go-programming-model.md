@@ -19,6 +19,6 @@ The following sections explain how [common programming patterns and core concept
 + [Using Environment Variables](go-programming-model-env-variables.md)
 
 Additionally, note that AWS Lambda provides the following:
-+ **github\.com/aws/aws\-lambda\-go/lambda**: The implementation of the Lambda programming model for Go\. This package is used by AWS Lambda to invoke your [AWS Lambda Function Handler in Go](go-programming-model-handler-types.md)\.
-+ **github\.com/aws/aws\-lambda\-go/lambdacontext**: Helpers for accessing execution context information from the [AWS Lambda Context Object in Go](go-programming-model-context.md)\.
++ **github\.com/aws/aws\-lambda\-go/lambda**: The implementation of the Lambda programming model for Go\. This package is used by AWS Lambda to invoke your [handler](go-programming-model-handler-types.md)\.
++ **github\.com/aws/aws\-lambda\-go/lambdacontext**: Helpers for accessing execution context information from the [context object](go-programming-model-context.md)\.
 + **github\.com/aws/aws\-lambda\-go/events**: This library provides type definitions for common event source integrations\.

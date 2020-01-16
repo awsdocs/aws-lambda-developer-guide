@@ -10,6 +10,10 @@ $ aws lambda invoke --function-name my-function --payload '{ "key": "value" }' r
 }
 ```
 
+The following diagram shows clients invoking a Lambda function synchronously\. Lambda sends the events directly to the function and sends the function's response back to the invoker\.
+
+![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/invocation-sync.png)
+
 The `payload` is a string that contains an event in JSON format\. The name of the file where the AWS CLI writes the response from the function is `response.json`\. If the function returns an object or error, the response is the object or error in JSON format\. If the function exits without error, the response is `null`\.
 
 The output from the command, which is displayed in the terminal, includes information from headers in the response from Lambda\. This includes the version that processed the event \(useful when you use [aliases](configuration-aliases.md)\), and the status code returned by Lambda\. If Lambda was able to run the function, the status code is 200, even if the function returned an error\.

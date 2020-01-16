@@ -18,7 +18,7 @@ When Lambda runs your function, it passes context information by making a `$Lamb
 The following PowerShell code snippet shows a simple handler function that prints some of the context information\. 
 
 ```
-#Requires -Modules @{ModuleName='AWSPowerShell.NetCore';ModuleVersion='3.3.343.0'}
+#Requires -Modules @{ModuleName='AWSPowerShell.NetCore';ModuleVersion='3.3.618.0'}
 Write-Host 'Function name:' $LambdaContext.FunctionName
 Write-Host 'Remaining milliseconds:' $LambdaContext.RemainingTime.TotalMilliseconds
 Write-Host 'Log group name:' $LambdaContext.LogGroupName

@@ -75,6 +75,7 @@ For asynchronous invocation, Lambda queues the event before passing it to your f
 + [Amazon CloudWatch Events](with-scheduled-events.md)
 + [AWS CodeCommit](services-codecommit.md)
 + [AWS Config](services-config.md)
++ [AWS IoT](services-iot.md)
 + [AWS IoT Events](services-iotevents.md)
 + [AWS CodePipeline](services-codepipeline.md)
 

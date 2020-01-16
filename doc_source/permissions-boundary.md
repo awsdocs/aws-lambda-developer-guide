@@ -10,7 +10,7 @@ Globals:
     PermissionsBoundary: !Sub 'arn:${AWS::Partition}:iam::${AWS::AccountId}:policy/${AppId}-${AWS::Region}-PermissionsBoundary'
 ```
 
-The boundary limits the permissions of the functions' roles\. You can add permissions to a function's execution role in the template, but that permission is only effective if it's also allowed by the permissions boundary\. T the role that AWS CloudFormation assumes to deploy the application enforces the use of the permissions boundary\. That role only has permission to create and pass roles that have the application's permissions boundary attached\.
+The boundary limits the permissions of the functions' roles\. You can add permissions to a function's execution role in the template, but that permission is only effective if it's also allowed by the permissions boundary\. The role that AWS CloudFormation assumes to deploy the application enforces the use of the permissions boundary\. That role only has permission to create and pass roles that have the application's permissions boundary attached\.
 
 By default, an application's permissions boundary enables functions to perform actions on the resources in the application\. For example, if the application includes an Amazon DynamoDB table, the boundary allows access to any API action that can be restricted to operate on specific tables with resource\-level permissions\. You can only use actions that don't support resource\-level permissions if they're specifically permitted in the boundary\. These include Amazon CloudWatch Logs and AWS X\-Ray API actions for logging and tracing\.
 

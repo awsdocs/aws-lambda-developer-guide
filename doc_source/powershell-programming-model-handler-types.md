@@ -9,7 +9,7 @@ When the PowerShell script is invoked, the following variables are predefined:
 For example, consider the following PowerShell example code\.
 
 ```
-#Requires -Modules @{ModuleName='AWSPowerShell.NetCore';ModuleVersion='3.3.343.0'}
+#Requires -Modules @{ModuleName='AWSPowerShell.NetCore';ModuleVersion='3.3.618.0'}
 Write-Host 'Function Name:' $LambdaContext.FunctionName
 ```
 

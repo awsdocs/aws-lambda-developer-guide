@@ -134,7 +134,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      Runtime: nodejs12.x
+      Runtime: nodejs10.x
       CodeUri: ./
       Events:
         MyTimeApi:

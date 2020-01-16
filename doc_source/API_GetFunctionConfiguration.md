@@ -145,7 +145,7 @@ The date and time that the function was last updated, in [ISO\-8601 format](http
 Type: String
 
  ** [LastUpdateStatus](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-LastUpdateStatus"></a>
-The status of the last update that was performed on the function\.  
+The status of the last update that was performed on the function\. This is first set to `Successful` after function creation completes\.  
 Type: String  
 Valid Values:` Successful | Failed | InProgress` 
 

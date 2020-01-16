@@ -37,8 +37,8 @@ To create or update a function with the Lambda API, create an archive that conta
 1. Create a ZIP archive\.
 
    ```
-   ~/my-function$ zip function.zip function.py
-     adding: function.py (deflated 17%)
+   ~/my-function$ zip function.zip lambda_function.py
+     adding: lambda_function.py (deflated 17%)
    ```
 
 1. Use the `update-function-code` command to upload the package\.
@@ -50,29 +50,20 @@ To create or update a function with the Lambda API, create an archive that conta
        "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:my-function",
        "Runtime": "python3.8",
        "Role": "arn:aws:iam::123456789012:role/lambda-role",
-       "Handler": "function.handler",
+       "Handler": "lambda_function.lambda_handler",
        "CodeSize": 815,
-       "Description": "",
-       "Timeout": 3,
-       "MemorySize": 128,
-       "LastModified": "2018-11-20T20:41:16.647+0000",
        "CodeSha256": "GcZ05oeHoJi61VpQj7vCLPs8DwCXmX5sE/fE2IHsizc=",
        "Version": "$LATEST",
-       "VpcConfig": {
-           "SubnetIds": [],
-           "SecurityGroupIds": [],
-           "VpcId": ""
-       },
-       "TracingConfig": {
-           "Mode": "Active"
-       },
-       "RevisionId": "d1e983e3-ca8e-434b-8dc1-7add83d72ebd"
+       "RevisionId": "d1e983e3-ca8e-434b-8dc1-7add83d72ebd",
+       ...
    }
    ```
 
 ## Updating a Function with Additional Dependencies<a name="python-package-dependencies"></a>
 
 If your function depends on libraries other than the SDK for Python \(Boto 3\), install them to a local directory with [pip](https://pypi.org/project/pip/), and include them in your deployment package\.
+
+The following example shows how to create a deployment package that includes a common graphics library named Pillow\.
 
 **To update a Python function with dependencies**
 
@@ -105,8 +96,8 @@ In order for `--target` to work on [Debian\-based systems](https://github.com/py
 
    ```
    ~/my-function/package$ cd $OLDPWD
-   ~/my-function$ zip -g function.zip function.py
-     adding: function.py (deflated 56%)
+   ~/my-function$ zip -g function.zip lambda_function.py
+     adding: lambda_function.py (deflated 56%)
    ```
 
 1. Update the function code\.
@@ -118,23 +109,12 @@ In order for `--target` to work on [Debian\-based systems](https://github.com/py
        "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:my-function",
        "Runtime": "python3.8",
        "Role": "arn:aws:iam::123456789012:role/lambda-role",
-       "Handler": "function.handler",
+       "Handler": "lambda_function.lambda_handler",
        "CodeSize": 2269409,
-       "Description": "",
-       "Timeout": 3,
-       "MemorySize": 128,
-       "LastModified": "2018-11-20T20:51:35.871+0000",
        "CodeSha256": "GcZ05oeHoJi61VpQj7vCLPs8DwCXmX5sE/fE2IHsizc=",
        "Version": "$LATEST",
-       "VpcConfig": {
-           "SubnetIds": [],
-           "SecurityGroupIds": [],
-           "VpcId": ""
-       },
-       "TracingConfig": {
-           "Mode": "Active"
-       },
-       "RevisionId": "a9c05ffd-8ad6-4d22-b6cd-d34a00c1702c"
+       "RevisionId": "a9c05ffd-8ad6-4d22-b6cd-d34a00c1702c",
+       ...
    }
    ```
 
@@ -203,8 +183,8 @@ For Python 3\.3 and newer, you can use the built\-in [venv module](https://docs.
 
    ```
    ~/my-function/v-env/lib/python3.8/site-packages$ cd $OLDPWD
-   ~/my-function$ zip -g function.zip function.py
-     adding: function.py (deflated 56%)
+   ~/my-function$ zip -g function.zip lambda_function.py
+     adding: lambda_function.py (deflated 56%)
    ```
 
 1. Update the function code\.
@@ -216,22 +196,11 @@ For Python 3\.3 and newer, you can use the built\-in [venv module](https://docs.
        "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:my-function",
        "Runtime": "python3.8",
        "Role": "arn:aws:iam::123456789012:role/lambda-role",
-       "Handler": "function.handler",
+       "Handler": "lambda_function.lambda_handler",
        "CodeSize": 5912988,
-       "Description": "",
-       "Timeout": 3,
-       "MemorySize": 128,
-       "LastModified": "2018-11-20T21:08:26.326+0000",
        "CodeSha256": "A2P0NUWq1J+LtSbkuP8tm9uNYqs1TAa3M76ptmZCw5g=",
        "Version": "$LATEST",
-       "VpcConfig": {
-           "SubnetIds": [],
-           "SecurityGroupIds": [],
-           "VpcId": ""
-       },
-       "TracingConfig": {
-           "Mode": "Active"
-       },
-       "RevisionId": "5afdc7dc-2fcb-4ca8-8f24-947939ca707f"
+       "RevisionId": "5afdc7dc-2fcb-4ca8-8f24-947939ca707f",
+       ...
    }
    ```

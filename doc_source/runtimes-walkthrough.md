@@ -112,17 +112,13 @@ runtime-tutorial$ aws lambda create-function --function-name bash-runtime \
     "Runtime": "provided",
     "Role": "arn:aws:iam::123456789012:role/lambda-role",
     "Handler": "function.handler",
-    "CodeSize": 831,
-    "Description": "",
-    "Timeout": 3,
-    "MemorySize": 128,
-    "LastModified": "2018-11-28T06:57:31.095+0000",
     "CodeSha256": "mv/xRv84LPCxdpcbKvmwuuFzwo7sLwUO1VxcUv3wKlM=",
     "Version": "$LATEST",
     "TracingConfig": {
         "Mode": "PassThrough"
     },
-    "RevisionId": "2e1d51b0-6144-4763-8e5c-7d5672a01713"
+    "RevisionId": "2e1d51b0-6144-4763-8e5c-7d5672a01713",
+    ...
 }
 ```
 

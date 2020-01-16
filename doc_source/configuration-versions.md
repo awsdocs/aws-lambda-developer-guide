@@ -33,18 +33,13 @@ The following example publishes a new version of a function\. The response retur
 ```
 $ aws lambda publish-version --function-name my-function
 {
-  "CodeSha256": "OjRFuuHKizEE8tHFIMsI+iHR6BPAfJ5S0rW31Mh6jKg=",
   "FunctionName": "my-function",
-  "CodeSize": 287,
-  "MemorySize": 128,
-  "FunctionArn": "arn:aws:lambda:us-west-2:account-id:function:my-function:1",
+  "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function:1",
   "Version": "1",
-  "Role": "arn:aws:iam::account-id:role/lambda_basic_execution",
-  "Timeout": 3,
-  "LastModified": "2015-10-03T00:48:00.435+0000",
-  "Handler": "my-function.handler",
+  "Role": "arn:aws:iam::123456789012:role/lambda-role",
+  "Handler": "function.handler",
   "Runtime": "nodejs12.x",
-  "Description": ""
+  ...
 }
 ```
 

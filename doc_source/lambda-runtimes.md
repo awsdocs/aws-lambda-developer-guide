@@ -1,14 +1,14 @@
 # AWS Lambda Runtimes<a name="lambda-runtimes"></a>
 
-AWS Lambda supports multiple languages through the use of runtimes\. You choose a runtime when you create a function, and you can change runtimes by updating your function's configuration\. The underlying execution environment provides additional libraries and [environment variables](lambda-environment-variables.md) that you can access from your function code\.
+AWS Lambda supports multiple languages through the use of runtimes\. You choose a runtime when you create a function, and you can change runtimes by updating your function's configuration\. The underlying execution environment provides additional libraries and [environment variables](configuration-envvars.md) that you can access from your function code\.
 
 **Amazon Linux**
 + AMI – [amzn\-ami\-hvm\-2018\.03\.0\.20181129\-x86\_64\-gp2](https://console.aws.amazon.com/ec2/v2/home#Images:visibility=public-images;search=amzn-ami-hvm-2018.03.0.20181129-x86_64-gp2)
-+ Linux kernel – 4\.14\.123\-95\.109\.amzn2\.x86\_64 or 4\.14\.123\-86\.109\.amzn1\.x86\_64
++ Linux kernel – 4\.14\.154\-99\.181\.amzn1\.x86\_64
 
 **Amazon Linux 2**
 + AMI – [amzn2\-ami\-hvm\-2\.0\.20190313\-x86\_64\-gp2](https://console.aws.amazon.com/ec2/v2/home#Images:visibility=public-images;search=amzn2-ami-hvm-2.0.20190313-x86_64-gp2)
-+ Linux kernel – 4\.14\.123\-95\.109\.amzn2\.x86\_64
++ Linux kernel – 4\.14\.138\-99\.102\.amzn2\.x86\_64
 
 When your function is invoked, Lambda attempts to re\-use the execution environment from a previous invocation if one is available\. This saves time preparing the execution environment, and allows you to save resources like database connections and temporary files in the [execution context](running-lambda-code.md) to avoid creating them every time your function runs\.
 
@@ -21,7 +21,6 @@ A runtime can support a single version of a language, multiple versions of a lan
 | --- | --- | --- | --- | 
 |  Node\.js 12  |  `nodejs12.x`  |  2\.536\.0  |  Amazon Linux 2  | 
 |  Node\.js 10  |  `nodejs10.x`  |  2\.488\.0  |  Amazon Linux 2  | 
-|  Node\.js 8\.10  |  `nodejs8.10`  |  2\.488\.0  |  Amazon Linux  | 
 
 
 **Python Runtimes**  
@@ -65,7 +64,6 @@ A runtime can support a single version of a language, multiple versions of a lan
 To use other languages in Lambda, you can implement a [custom runtime](runtimes-custom.md)\. The Lambda execution environment provides a [runtime interface](runtimes-api.md) for getting invocation events and sending responses\. You can deploy a custom runtime alongside your function code, or in a [layer](configuration-layers.md)\.
 
 **Topics**
-+ [Environment Variables Available to Lambda Functions](lambda-environment-variables.md)
 + [AWS Lambda Execution Context](running-lambda-code.md)
 + [Runtime Support Policy](runtime-support-policy.md)
 + [Custom AWS Lambda Runtimes](runtimes-custom.md)

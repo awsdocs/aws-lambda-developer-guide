@@ -34,18 +34,6 @@ arn:aws:lambda:us-east-2:210987654321:layer:their-layer:2
     "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
     "Runtime": "nodejs12.x",
     "Role": "arn:aws:iam::123456789012:role/service-role/lambda-role",
-    "Handler": "index.handler",
-    "CodeSize": 402,
-    "Description": "",
-    "Timeout": 5,
-    "MemorySize": 128,
-    "LastModified": "2018-11-14T22:47:04.542+0000",
-    "CodeSha256": "kDHAEY62Ni3OovMwVO8tNvgbRoRa6IOOKqShm7bSWF4=",
-    "Version": "$LATEST",
-    "TracingConfig": {
-        "Mode": "Active"
-    },
-    "RevisionId": "81cc64f5-5772-449a-b63e-12330476bcc4",
     "Layers": [
         {
             "Arn": "arn:aws:lambda:us-east-2:123456789012:layer:my-layer:3",
@@ -55,7 +43,9 @@ arn:aws:lambda:us-east-2:210987654321:layer:their-layer:2
             "Arn": "arn:aws:lambda:us-east-2:210987654321:layer:their-layer:2",
             "CodeSize": 169
         }
-    ]
+    ],
+    "RevisionId": "81cc64f5-5772-449a-b63e-12330476bcc4",
+    ...
 }
 ```
 
@@ -204,7 +194,7 @@ To include libraries in a layer, place them in one of the folders supported by y
   └ bin/jq
   ```
 
-For more information about path settings in the Lambda execution environment, see [Environment Variables Available to Lambda Functions](lambda-environment-variables.md)\.
+For more information about path settings in the Lambda execution environment, see [Runtime Environment Variables](configuration-envvars.md#configuration-envvars-runtime)\.
 
 ## Layer Permissions<a name="configuration-layers-permissions"></a>
 

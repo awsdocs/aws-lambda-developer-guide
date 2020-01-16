@@ -1,7 +1,7 @@
 # AWS Lambda Developer Guide
 
 -----
-*****Copyright &copy; 2019 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; 2020 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -31,9 +31,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Using Permissions Boundaries for AWS Lambda Applications](permissions-boundary.md)
 + [Managing AWS Lambda Functions](lambda-functions.md)
    + [Configuring AWS Lambda Functions](resource-model.md)
-   + [AWS Lambda Environment Variables](env_variables.md)
-      + [Using Environment Variables in a Lambda Function](tutorial-env_cli.md)
-      + [Encrypting Environment Variables Client-Side in a Lambda Function](tutorial-env_console.md)
+   + [AWS Lambda Environment Variables](configuration-envvars.md)
    + [Managing Concurrency for a Lambda Function](configuration-concurrency.md)
    + [AWS Lambda Function Versions](configuration-versions.md)
    + [AWS Lambda Function Aliases](configuration-aliases.md)
@@ -52,7 +50,6 @@ Amazon's trademarks and trade dress may not be used in
       + [Tutorial: Using AWS Lambda with the Mobile SDK for Android](with-android-example.md)
       + [Sample Function Code](with-android-create-package.md)
 + [AWS Lambda Runtimes](lambda-runtimes.md)
-   + [Environment Variables Available to Lambda Functions](lambda-environment-variables.md)
    + [AWS Lambda Execution Context](running-lambda-code.md)
    + [Runtime Support Policy](runtime-support-policy.md)
    + [Custom AWS Lambda Runtimes](runtimes-custom.md)
@@ -95,6 +92,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Tutorial: Configuring a Lambda Function to Access Amazon ElastiCache in an Amazon VPC](services-elasticache-tutorial.md)
    + [Using AWS Lambda with Amazon EC2](services-ec2.md)
       + [Tutorial: Using AWS SDK for .NET to Manage Amazon EC2 Spot Instances](services-ec2-tutorial.md)
+   + [Using AWS Lambda with AWS IoT](services-iot.md)
    + [Using AWS Lambda with AWS IoT Events](services-iotevents.md)
    + [Using AWS Lambda with Amazon Kinesis](with-kinesis.md)
       + [Tutorial: Using AWS Lambda with Amazon Kinesis](with-kinesis-example.md)
@@ -104,7 +102,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Using AWS Lambda with Amazon Lex](services-lex.md)
    + [Using AWS Lambda with Amazon RDS](services-rds.md)
       + [Tutorial: Configuring a Lambda Function to Access Amazon RDS in an Amazon VPC](services-rds-tutorial.md)
-   + [Using AWS Lambda with Amazon S3](with-s3.md)
+   + [Using AWS Lambda with Amazon S3 Events](with-s3.md)
       + [Tutorial: Using AWS Lambda with Amazon S3](with-s3-example.md)
       + [Sample Amazon S3 Function Code](with-s3-example-deployment-pkg.md)
       + [AWS SAM Template for an Amazon S3 Application](with-s3-example-use-app-spec.md)
@@ -194,7 +192,10 @@ Amazon's trademarks and trade dress may not be used in
    + [Resilience in AWS Lambda](security-resilience.md)
    + [Infrastructure Security in AWS Lambda](security-infrastructure.md)
    + [Configuration and Vulnerability Analysis in AWS Lambda](security-configuration.md)
-+ [Troubleshooting AWS Lambda](lambda-troubleshooting.md)
++ [Troubleshooting Issues in AWS Lambda](lambda-troubleshooting.md)
+   + [Troubleshoot Deployment Issues in AWS Lambda](troubleshooting-deployment.md)
+   + [Troubleshoot Invocation Issues in AWS Lambda](troubleshooting-invocation.md)
+   + [Troubleshoot Networking Issues in AWS Lambda](troubleshooting-networking.md)
 + [AWS Lambda Releases](lambda-releases.md)
 + [API Reference](API_Reference.md)
    + [Actions](API_Operations.md)

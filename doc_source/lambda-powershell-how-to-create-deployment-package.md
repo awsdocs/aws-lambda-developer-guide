@@ -48,7 +48,7 @@ To create a new PowerShell script, upload it, and test it, follow this procedure
    # To include PowerShell modules with your Lambda function, like the AWSPowerShell.NetCore module, add a "#Requires" statement 
    # indicating the module and version.
                    
-   #Requires -Modules @{ModuleName='AWSPowerShell.NetCore';ModuleVersion='3.3.343.0'}
+   #Requires -Modules @{ModuleName='AWSPowerShell.NetCore';ModuleVersion='3.3.618.0'}
    
    # Uncomment to send the input to CloudWatch Logs
    # Write-Host (ConvertTo-Json -InputObject $LambdaInput -Compress -Depth 5)

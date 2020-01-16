@@ -7,6 +7,7 @@ The following error handling options are only available for stream sources \(Dyn
 +  `DestinationConfig` \- Send discarded records to an Amazon SQS queue or Amazon SNS topic\.
 +  `MaximumRecordAgeInSeconds` \- Discard records older than the specified age\.
 +  `MaximumRetryAttempts` \- Discard records after the specified number of retries\.
++  `ParallelizationFactor` \- Process multiple batches from each shard concurrently\.
 
 ## Request Syntax<a name="API_UpdateEventSourceMapping_RequestSyntax"></a>
 

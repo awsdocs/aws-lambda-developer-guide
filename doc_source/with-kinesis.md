@@ -47,6 +47,9 @@ Lambda reads records from the data stream and invokes your function [synchronous
 
 If you have multiple applications that are reading records from the same stream, you can use Kinesis stream consumers instead of standard iterators\. Consumers have dedicated read throughput so they don't have to compete with other consumers of the same data\. With consumers, Kinesis pushes records to Lambda over an HTTP/2 connection, which can also reduce latency between adding a record and function invocation\.
 
+**Note**  
+Batch window, error handling, and concurrency settings are not available for HTTP/2 stream consumers\.
+
 By default, Lambda invokes your function as soon as records are available in the stream\. If the batch it reads from the stream only has one record in it, Lambda only sends one record to the function\. To avoid invoking the function with a small number of records, you can tell the event source to buffer records for up to 5 minutes by configuring a *batch window*\. Before invoking the function, Lambda continues to read records from the stream until it has gathered a full batch, or until the batch window expires\.
 
 If your function returns an error, Lambda retries the batch until processing succeeds or the data expires\. To avoid stalled shards, you can configure the event source mapping to retry with a smaller batch size, limit the number of retries, or discard records that are too old\. To retain discarded events, you can configure the event source mapping to send details about failed batches to an SQS queue or SNS topic\.
@@ -68,7 +71,7 @@ You can also increase concurrency by processing multiple batches from each shard
 
 Your Lambda function is a consumer application for your data stream\. It processes one batch of records at a time from each shard\. You can map a Lambda function to a data stream \(standard iterator\), or to a consumer of a stream \([enhanced fan\-out](https://docs.aws.amazon.com/kinesis/latest/dev/introduction-to-enhanced-consumers.html)\)\.
 
-For standard iterators, Lambda polls each shard in your Kinesis stream for records at a base rate of once per second\. When more records are available, Lambda keeps processing batches until it receives a batch that's smaller than the configured maximum batch size\. The function shares read throughput with other consumers of the shard\.
+For standard iterators, Lambda polls each shard in your Kinesis stream for records at a base rate of once per second\. When more records are available, Lambda keeps processing batches until the function catches up with the stream\. The event source mapping shares read throughput with other consumers of the shard\.
 
 To minimize latency and maximize read throughput, create a data stream consumer\. Stream consumers get a dedicated connection to each shard that doesn't impact other applications reading from the stream\. The dedicated throughput can help if you have many applications reading the same data, or if you're reprocessing a stream with large records\.
 
@@ -131,7 +134,7 @@ Lambda supports the following options for Kinesis event sources\.
 **Event Source Options**
 + **Kinesis stream** – The Kinesis stream to read records from\.
 + **Consumer** \(optional\) – Use a stream consumer to read from the stream over a dedicated connection\.
-+ **Batch size** – The number of records to read from a shard in each batch, up to 10,000\. Lambda passes all of the records in the batch to the function in a single call, as long as the total size of the events doesn't exceed the [payload limit](limits.md) for synchronous invocation \(6 MB\)\.
++ **Batch size** – The number of records to send to the function in each batch, up to 10,000\. Lambda passes all of the records in the batch to the function in a single call, as long as the total size of the events doesn't exceed the [payload limit](limits.md) for synchronous invocation \(6 MB\)\.
 + **Batch window** – Specify the maximum amount of time to gather records before invoking the function, in seconds\.
 + **Starting position** – Process only new records, all existing records, or records created after a certain date\.
   + **Latest** – Process new records that are added to the stream\.
@@ -250,7 +253,9 @@ If the error handling measures fail, Lambda discards the records and continues p
 
 To retain a record of discarded batches, configure an on\-failure destination\. Lambda sends a document to the destination queue or topic with details about the batch\.
 
-**Example Failure Record**  
+The following example shows an invocation record for a Kinesis stream\.
+
+**Example Invocation Record**  
 
 ```
 {

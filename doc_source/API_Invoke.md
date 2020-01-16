@@ -92,9 +92,7 @@ Length Constraints: Minimum length of 1\. Maximum length of 1024\.
 Pattern: `(\$LATEST|[0-9]+)` 
 
  ** [FunctionError](#API_Invoke_ResponseSyntax) **   <a name="SSS-Invoke-response-FunctionError"></a>
-If present, indicates that an error occurred during function execution\. Details about the error are included in the response payload\.  
-+  `Handled` \- The runtime caught an error thrown by the function and formatted it into a JSON document\.
-+  `Unhandled` \- The runtime didn't handle the error\. For example, the function ran out of memory or timed out\.
+If present, indicates that an error occurred during function execution\. Details about the error are included in the response payload\.
 
  ** [LogResult](#API_Invoke_ResponseSyntax) **   <a name="SSS-Invoke-response-LogResult"></a>
 The last 4 KB of the execution log, which is base64 encoded\.

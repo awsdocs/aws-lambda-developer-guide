@@ -31,7 +31,7 @@ Additionally, you can use the following features to customize how environment va
 + **Key configuration** – On a per\-function basis, you can configure Lambda to use an encryption key that you create and manage in AWS Key Management Service\. These are referred to as *customer managed* customer master keys \(CMKs\) or customer managed keys\. If you don't configure a customer managed key, Lambda uses an AWS managed CMK named `aws/lambda`, which Lambda creates in your account\.
 + **Encryption helpers** – The Lambda console lets you encrypt environment variable values client side, before sending them to Lambda\. This enhances security further by preventing secrets from being displayed unencrypted in the Lambda console, or in function configuration that's returned by the Lambda API\. The console also provides sample code that you can adapt to decrypt the values in your function handler\.
 
-For more information, see [AWS Lambda Environment Variables](env_variables.md)\.
+For more information, see [AWS Lambda Environment Variables](configuration-envvars.md)\.
 
 Lambda always encrypts files that you upload to Lambda, including [deployment packages](gettingstarted-features.md#gettingstarted-features-package) and [layer archives](configuration-layers.md)\.
 
