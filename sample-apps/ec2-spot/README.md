@@ -2,7 +2,7 @@
 This project creates a function and supporting resources:
 - src/ec2-spot - A C# .NET Core function.
 - template.yaml - An AWS CloudFormation template that creates an application.
-- create-bucket.sh, deploy.sh, etc. - Shell scripts that use the AWS CLI to deploy and manage the application.
+- 1-create-bucket.sh, 2-deploy.sh, etc. - Shell scripts that use the AWS CLI to deploy and manage the application.
 
 ![Architecture](/sample-apps/ec2-spot/images/sample-ec2spot.png)
 
@@ -19,15 +19,15 @@ Download or clone this repository.
     $ git clone git@github.com:awsdocs/aws-lambda-developer-guide.git
     $ cd aws-lambda-developer-guide/sample-apps/ec2-spot
 
-Run `create-bucket.sh` to create a new bucket for deployment artifacts. Or, if you already have a bucket, replace `MY_BUCKET` in `deploy.sh` with the name of an existing bucket.
+Run `1-create-bucket.sh` to create a new bucket for deployment artifacts. Or, if you already have a bucket, rename `2-deploy.sh.template` to `2-deploy.sh` and replace `MY_BUCKET` in it with the name of an existing bucket.
 
-    ec2-spot$ ./create-bucket.sh
+    ec2-spot$ ./1-create-bucket.sh
     make_bucket: lambda-artifacts-a5e491dbb5b22e0d
 
 # Deploy
-Run `deploy.sh` to deploy the application.
+Run `2-deploy.sh` to deploy the application.
 
-    ec2-spot$ ./deploy.sh
+    ec2-spot$ ./2-deploy.sh
     Uploading to e678bc216e6a0d510d661ca9ae2fd941  2737254 / 2737254.0  (100.00%)
     Successfully packaged artifacts and wrote output template to file out.yml.
     Waiting for changeset to be created..
@@ -35,6 +35,14 @@ Run `deploy.sh` to deploy the application.
     Successfully created/updated stack - ec2-spot
 
 This script uses AWS CloudFormation to deploy the Lambda functions and an IAM role. If the AWS CloudFormation stack that contains the resources already exists, the script updates it with any changes to the template or function code.
+
+Run `3-invoke.sh` to invoke the function.
+
+    ec2-spot$ ./3-invoke.sh
+    {
+        "StatusCode": 200,
+        "ExecutedVersion": "$LATEST"
+    }
 
 The functions in this application are instrumented with AWS X-Ray. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map. The following service map shows the function managing spot instances in Amazon EC2.
 
@@ -55,4 +63,4 @@ Finally, view the application in the Lambda console.
 # Cleanup
 To delete the application, run the cleanup script.
 
-    ec2-spot$ ./cleanup.sh
+    ec2-spot$ ./4-cleanup.sh

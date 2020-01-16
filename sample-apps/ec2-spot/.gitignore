@@ -1,8 +1,8 @@
 node_modules
 package-lock.json
 out.yml
-out
+out.json
 bucket-name.txt
-deploy.sh
+2-deploy.sh
 bin
 obj
