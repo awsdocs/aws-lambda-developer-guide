@@ -182,7 +182,7 @@ $ aws lambda list-event-source-mappings --function-name ProcessKinesisRecords \
 --event-source arn:aws:kinesis:us-west-2:123456789012:stream/lambda-stream
 ```
 
-In the response, you can verify the status value is `enabled`\. Event source mappings can be disabled to pause polling temporarily losing any records\.
+In the response, you can verify the status value is `enabled`\. Event source mappings can be disabled to pause polling temporarily without losing any records\.
 
 ## Test the Setup<a name="with-kinesis-example-configure-event-source-test-end-to-end"></a>
 
