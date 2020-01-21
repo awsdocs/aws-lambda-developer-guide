@@ -10,6 +10,9 @@ AWS Lambda supports multiple languages through the use of runtimes\. You choose 
 + AMI – [amzn2\-ami\-hvm\-2\.0\.20190313\-x86\_64\-gp2](https://console.aws.amazon.com/ec2/v2/home#Images:visibility=public-images;search=amzn2-ami-hvm-2.0.20190313-x86_64-gp2)
 + Linux kernel – 4\.14\.138\-99\.102\.amzn2\.x86\_64
 
+If you are providing a custom runtime and would like to use Amazon Linux 2 rather than Amazon Linux add `
+arn:aws:lambda:::awslayer:AmazonLinux2` to your function's layers.  By default all custom runtimes will use Amazon Linux.
+
 When your function is invoked, Lambda attempts to re\-use the execution environment from a previous invocation if one is available\. This saves time preparing the execution environment, and allows you to save resources like database connections and temporary files in the [execution context](running-lambda-code.md) to avoid creating them every time your function runs\.
 
 A runtime can support a single version of a language, multiple versions of a language, or multiple languages\. Runtimes specific to a language or framework version are [deprecated](runtime-support-policy.md) when the version reaches end of life\.
