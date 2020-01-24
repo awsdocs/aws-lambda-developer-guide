@@ -42,7 +42,7 @@ In cmd\.exe, run the following:
 ```
 set GOOS=linux
 go build -o main main.go
-%USERPROFILE%\Go\bin\build-lambda-zip.exe -o main.zip main
+%USERPROFILE%\Go\bin\build-lambda-zip.exe --output main.zip main
 ```
 
 In Powershell, run the following:
@@ -50,5 +50,5 @@ In Powershell, run the following:
 ```
 $env:GOOS = "linux"
 go build -o main main.go
-~\Go\Bin\build-lambda-zip.exe -o main.zip main
+~\Go\Bin\build-lambda-zip.exe --output main.zip main
 ```
