@@ -69,11 +69,11 @@ To create a new bucket for deployment artifacts, run `1-create-bucket.sh`. Or, i
     list-manager$ ./1-create-bucket.sh
     make_bucket: lambda-artifacts-a5e491dbb5b22e0d
 
-To create a database password and store it in AWS Secrets Manager, run the `create-dbpasswordsecret.sh` script.
+To create a database password and store it in AWS Secrets Manager, run the `2-create-dbpasswordsecret.sh` script.
 
     list-manager$ ./2-create-dbpasswordsecret.sh
 
-To create the VPC and RDS database instance, run the `deploy-vpc.sh` script. This process takes about 15 minutes.
+To create the VPC and RDS database instance, run the `3-deploy-vpc.sh` script. This process takes about 15 minutes.
 
     list-manager$ ./3-deploy-vpc.sh
 
