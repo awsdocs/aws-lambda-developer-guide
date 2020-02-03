@@ -1,0 +1,3 @@
+{
+  "query": "ALTER TABLE test ADD type varchar(255)"
+}
