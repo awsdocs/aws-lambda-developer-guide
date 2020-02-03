@@ -4,7 +4,7 @@ This sample application processes records from an Amazon Kinesis stream to creat
 
 ![Architecture](/sample-apps/list-manager/images/sample-listmanager.png)
 
-The processor function doesn't read directly from the Kinesis stream. Instead, an AWS Lambda event source mapping reads records from the Kinesis stream and sends them to the processor function in batches. The processor function stores all incoming events in a MySQL database, and persists the current state of each list to a DynamoDB table. 
+The processor function doesn't read directly from the Kinesis stream. Instead, an AWS Lambda event source mapping reads records from the Kinesis stream and sends them to the processor function in batches. The processor function stores all incoming events in a MySQL database, and maintains the current state of each list in a DynamoDB table. 
 
 The project source includes function code and supporting resources:
 

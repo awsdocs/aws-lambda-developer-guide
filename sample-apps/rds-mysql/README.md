@@ -17,7 +17,7 @@ The function executes the query and logs the output.
 The project source includes function code and supporting resources:
 
 - dbadmin - A Node.js function that runs SQL commands for administrator use.
-- lib - A Lambda layer with the NPM modules used by the application's functions.
+- lib - A Lambda layer with the npm modules used by the application's functions.
 - events - JSON documents that can be used to test the application's functions.
 - template.yml - An AWS CloudFormation template that creates the application.
 - template-vpcrds.yml - A template that creates the VPC and Amazon RDS database instance.
@@ -28,7 +28,7 @@ The project source includes function code and supporting resources:
 
 To deploy the sample application, you need the following tools:
 
-- [Node.js 10 with NPM](https://nodejs.org/en/download/releases/).
+- [Node.js 10 with npm](https://nodejs.org/en/download/releases/).
 - The Bash shell. For Linux and macOS, this is included by default. In Windows 10, you can install the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows-integrated version of Ubuntu and Bash.
 - [The AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html).
 
