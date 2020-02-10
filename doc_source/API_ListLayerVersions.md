@@ -14,7 +14,7 @@ The request requires the following URI parameters\.
 
  ** [CompatibleRuntime](#API_ListLayerVersions_RequestSyntax) **   <a name="SSS-ListLayerVersions-request-CompatibleRuntime"></a>
 A runtime identifier\. For example, `go1.x`\.  
-Valid Values:` nodejs8.10 | nodejs10.x | nodejs12.x | java8 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore1.0 | dotnetcore2.1 | go1.x | ruby2.5 | provided` 
+Valid Values:` nodejs10.x | nodejs12.x | java8 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore2.1 | go1.x | ruby2.5 | provided` 
 
  ** [LayerName](#API_ListLayerVersions_RequestSyntax) **   <a name="SSS-ListLayerVersions-request-LayerName"></a>
 The name or Amazon Resource Name \(ARN\) of the layer\.  

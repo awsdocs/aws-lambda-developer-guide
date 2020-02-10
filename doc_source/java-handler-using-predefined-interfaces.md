@@ -1,27 +1,16 @@
-# Leveraging Predefined Interfaces for Creating Handler \(Java\)<a name="java-handler-using-predefined-interfaces"></a>
+# Using Provided Interfaces for Java Function Handlers in AWS Lambda<a name="java-handler-using-predefined-interfaces"></a>
 
-You can use one of the predefined interfaces provided by the AWS Lambda Java core library \(`aws-lambda-java-core`\) to create your Lambda function handler, as an alternative to writing your own handler method with an arbitrary name and parameters\. For more information about handlers, see \(see [AWS Lambda Function Handler in Java](java-programming-model-handler-types.md)\)\.
+You can use one of the predefined interfaces provided by the AWS Lambda Java core library \(`aws-lambda-java-core`\) to create your Lambda function handler\. Using the provided interfaces simplifies handler definition and enables you to validate your handler method signature at compile time\.
 
-You can implement one of the predefined interfaces, `RequestStreamHandler` or `RequestHandler` and provide implementation for the `handleRequest` method that the interfaces provide\. You implement one of these interfaces depending on whether you want to use standard Java types or custom POJO types for your handler input/output \(where AWS Lambda automatically serializes and deserializes the input and output to Match your data type\), or customize the serialization using the `Stream` type\.
-
-**Note**  
-These interfaces are available in the `aws-lambda-java-core` library\. 
-
-When you implement standard interfaces, they help you validate your method signature at compile time\. 
+The library defines 2 interfaces, `RequestStreamHandler` and `RequestHandler`\. You implement one of these interfaces depending on whether you want to use standard Java types or custom POJO types for your handler input/output \(where AWS Lambda automatically serializes and deserializes the input and output to Match your data type\), or customize the serialization using the `Stream` type\.
 
 If you implement one of the interfaces, you specify *package*\.*class* in your Java code as the handler when you create the Lambda function\. For example, the following is the modified `create-function` CLI command from the getting started\. Note that the `--handler` parameter specifies "example\.Hello" value:
 
 ```
-aws lambda create-function \
---region region \
---function-name getting-started-lambda-function-in-java \
---zip-file fileb://deployment-package (zip or jar)
-        path \
---role arn:aws:iam::account-id:role/lambda_basic_execution  \
---handler example.Hello \
---runtime java11 \
---timeout 15 \
---memory-size 512
+aws lambda create-function --function-name my-function \
+--zip-file fileb://function.zip \
+--role arn:aws:iam::123456789012:role/lambdarole  \
+--handler example.Hello --runtime java11
 ```
 
 The following sections provide examples of implementing these interfaces\. 

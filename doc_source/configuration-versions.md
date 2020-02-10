@@ -8,7 +8,7 @@ The system creates a new version of your Lambda function each time that you publ
 + All of the function settings, including the environment variables\.
 + A unique Amazon Resource Name \(ARN\) to identify this version of the function\.
 
-You can change the function code and settings only on the unpublished version of a function\. When you publish a version, the code and most of the settings are locked to ensure a consistent experience for users of that version\. For more information about configuring function settings, see [Configuring AWS Lambda Functions](resource-model.md)\.
+You can change the function code and settings only on the unpublished version of a function\. When you publish a version, the code and most of the settings are locked to ensure a consistent experience for users of that version\. For more information about configuring function settings, see [Configuring Functions in the AWS Lambda Console](configuration-console.md)\.
 
 **To create a new version of a function**
 

@@ -75,7 +75,7 @@ Required: No
  **LastUpdateStatusReasonCode**   <a name="SSS-Type-FunctionConfiguration-LastUpdateStatusReasonCode"></a>
 The reason code for the last update that was performed on the function\.  
 Type: String  
-Valid Values:` EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError`   
+Valid Values:` EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses | InvalidSubnet | InvalidSecurityGroup`   
 Required: No
 
  **Layers**   <a name="SSS-Type-FunctionConfiguration-Layers"></a>
@@ -109,7 +109,7 @@ Required: No
  **Runtime**   <a name="SSS-Type-FunctionConfiguration-Runtime"></a>
 The runtime environment for the Lambda function\.  
 Type: String  
-Valid Values:` nodejs8.10 | nodejs10.x | nodejs12.x | java8 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore1.0 | dotnetcore2.1 | go1.x | ruby2.5 | provided`   
+Valid Values:` nodejs10.x | nodejs12.x | java8 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore2.1 | go1.x | ruby2.5 | provided`   
 Required: No
 
  **State**   <a name="SSS-Type-FunctionConfiguration-State"></a>
@@ -126,7 +126,7 @@ Required: No
  **StateReasonCode**   <a name="SSS-Type-FunctionConfiguration-StateReasonCode"></a>
 The reason code for the function's current state\. When the code is `Creating`, you can't invoke or modify the function\.  
 Type: String  
-Valid Values:` Idle | Creating | Restoring | EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses`   
+Valid Values:` Idle | Creating | Restoring | EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses | InvalidSubnet | InvalidSecurityGroup`   
 Required: No
 
  **Timeout**   <a name="SSS-Type-FunctionConfiguration-Timeout"></a>

@@ -1,6 +1,6 @@
 # GetFunctionConcurrency<a name="API_GetFunctionConcurrency"></a>
 
-Returns details about the concurrency configuration for a function\. To set a concurrency limit for a function, use [PutFunctionConcurrency](API_PutFunctionConcurrency.md)\.
+Returns details about the reserved concurrency configuration for a function\. To set a concurrency limit for a function, use [PutFunctionConcurrency](API_PutFunctionConcurrency.md)\.
 
 ## Request Syntax<a name="API_GetFunctionConcurrency_RequestSyntax"></a>
 

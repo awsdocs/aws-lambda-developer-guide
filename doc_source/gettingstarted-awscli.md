@@ -21,18 +21,63 @@ On Linux and macOS, use your preferred shell and package manager\. On Windows 10
 
 ## Create the Execution Role<a name="with-userapp-walkthrough-custom-events-create-iam-role"></a>
 
-Create the [execution role](lambda-intro-execution-role.md) that gives your function permission to access AWS resources\.
+Create the [execution role](lambda-intro-execution-role.md) that gives your function permission to access AWS resources\. To create an execution role with the AWS CLI, use the `create-role` command\.
 
-**To create an execution role**
+```
+$ aws iam create-role --role-name lambda-ex --assume-role-policy-document file://trust-policy.json
+{
+    "Role": {
+        "Path": "/",
+        "RoleName": "lambda-ex",
+        "RoleId": "AROAQFOXMPL6TZ6ITKWND",
+        "Arn": "arn:aws:iam::123456789012:role/lambda-ex",
+        "CreateDate": "2020-01-17T23:19:12Z",
+        "AssumeRolePolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Effect": "Allow",
+                    "Principal": {
+                        "Service": "lambda.amazonaws.com"
+                    },
+                    "Action": "sts:AssumeRole"
+                }
+            ]
+        }
+    }
+}
+```
 
-1. Open the [roles page](https://console.aws.amazon.com/iam/home#/roles) in the IAM console\.
+The `trust-policy.json` file is a JSON file in the current directory that defines the [trust policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html) for the role\. This trust policy allows Lambda to use the role's permissions by giving the service principal `lambda.amazonaws.com` permission to call the AWS Security Token Service `AssumeRole` action\.
 
-1. Choose **Create role**\.
+**Example trust\-policy\.json**  
 
-1. Create a role with the following properties\.
-   + **Trusted entity** – **AWS Lambda**\.
-   + **Permissions** – **AWSLambdaBasicExecutionRole**\.
-   + **Role name** – **lambda\-cli\-role**\.
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "lambda.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+```
+
+You can also specify the trust policy inline\. Requirements for escaping quotes in the JSON string vary depending on your shell\.
+
+```
+$ aws iam create-role --role-name lambda-ex --assume-role-policy-document '{"Version": "2012-10-17","Statement": [{ "Effect": "Allow", "Principal": {"Service": "lambda.amazonaws.com"}, "Action": "sts:AssumeRole"}]}'
+```
+
+To add permissions to the role, use the `attach-policy-to-role` command\. Start by adding the `AWSLambdaBasicExecutionRole` managed policy\.
+
+```
+$ aws iam attach-role-policy --role-name lambda-ex --policy-arn arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+```
 
 The **AWSLambdaBasicExecutionRole** policy has the permissions that the function needs to write logs to CloudWatch Logs\.
 
@@ -65,12 +110,12 @@ exports.handler = async function(event, context) {
    ```
    $ aws lambda create-function --function-name my-function \
    --zip-file fileb://function.zip --handler index.handler --runtime nodejs12.x \
-   --role arn:aws:iam::123456789012:role/lambda-cli-role
+   --role arn:aws:iam::123456789012:role/lambda-ex
    {
        "FunctionName": "my-function",
        "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
        "Runtime": "nodejs12.x",
-       "Role": "arn:aws:iam::123456789012:role/lambda-cli-role",
+       "Role": "arn:aws:iam::123456789012:role/lambda-ex",
        "Handler": "index.handler",
        "CodeSha256": "FpFMvUhayLkOoVBpNuNiIVML/tuGv2iJQ7t0yWVTU8c=",
        "Version": "$LATEST",
@@ -171,7 +216,7 @@ $ aws lambda list-functions --max-items 10
             "FunctionName": "cli",
             "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
             "Runtime": "nodejs12.x",
-            "Role": "arn:aws:iam::123456789012:role/lambda-cli-role",
+            "Role": "arn:aws:iam::123456789012:role/lambda-ex",
             "Handler": "index.handler",
             ...
         },
@@ -206,7 +251,7 @@ $ aws lambda get-function --function-name my-function
         "FunctionName": "my-function",
         "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
         "Runtime": "nodejs12.x",
-        "Role": "arn:aws:iam::123456789012:role/lambda-cli-role",
+        "Role": "arn:aws:iam::123456789012:role/lambda-ex",
         "CodeSha256": "FpFMvUhayLkOoVBpNuNiIVML/tuGv2iJQ7t0yWVTU8c=",
         "Version": "$LATEST",
         "TracingConfig": {

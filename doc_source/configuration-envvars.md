@@ -1,8 +1,8 @@
-# AWS Lambda Environment Variables<a name="configuration-envvars"></a>
+# Using AWS Lambda Environment Variables<a name="configuration-envvars"></a>
 
 You can use environment variables to store secrets securely and adjust your function's behavior without updating code\. An environment variable is a pair of strings stored in a function's version\-specific configuration\. The Lambda runtime makes environment variables available to your code and sets additional environment variables that contain information about the function and invocation request\.
 
-You set environment variables on the unpublished version of your function by specifying a key and value\. When you publish a version, the environment variables are locked for that version along with other [version\-specific configuration](resource-model.md)\.
+You set environment variables on the unpublished version of your function by specifying a key and value\. When you publish a version, the environment variables are locked for that version along with other [version\-specific configuration](configuration-console.md)\.
 
 **To set environment variables in the Lambda console**
 
@@ -12,15 +12,15 @@ You set environment variables on the unpublished version of your function by spe
 
 1. Under **Environment variables**, enter key\-value pairs\.
 
-**Environment Variable Requirements**
-   + Keys and values start with a letter\.
-   + Keys and values only contain letters, numbers, and the underscore character \(`_`\)\.
-   + Keys are not [reserved by Lambda](#configuration-envvars-runtime)\.
-   + The total size of all environment variables does not exceed 4 KB\.
+**Requirements**
+   + Keys start with a letter\.
+   + Keys only contain letters, numbers, and the underscore character \(`_`\)\.
+   + Keys aren't [reserved by Lambda](#configuration-envvars-runtime)\.
+   + The total size of all environment variables doesn't exceed 4 KB\.
 
 1. Choose **Save**\.
 
-Use environment variables to pass environment\-specific settings to your code\. For example, you can have two functions with the same code but different configuration\. One function connects to a test database and the other to a production database\. In this situation, you use environment variables to tell the function the hostname and other connection details for the database\. You might also set an environment variable to configure your test environment to use more verbose logging or more detailed tracing\.
+Use environment variables to pass environment\-specific settings to your code\. For example, you can have two functions with the same code but different configuration\. One function connects to a test database, and the other connects to a production database\. In this situation, you use environment variables to tell the function the hostname and other connection details for the database\. You might also set an environment variable to configure your test environment to use more verbose logging or more detailed tracing\.
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/console-env.png)
 
@@ -78,7 +78,7 @@ $region = $env:AWS_REGION
 
 ------
 
-Lambda stores environment variables securely by encrypting them at rest\. You can [configure Lambda to use a different encryption key](#configuration-envvars-encryption), encrypt environment variable values client\-side, or set environment variables in a AWS CloudFormation with AWS Secrets Manager\.
+Lambda stores environment variables securely by encrypting them at rest\. You can [configure Lambda to use a different encryption key](#configuration-envvars-encryption), encrypt environment variable values on the client side, or set environment variables in an AWS CloudFormation template with AWS Secrets Manager\.
 
 **Topics**
 + [Runtime Environment Variables](#configuration-envvars-runtime)
@@ -92,19 +92,19 @@ Lambda [runtimes](lambda-runtimes.md) set several environment variables during i
 
 **Reserved Environment Variables**
 + `_HANDLER` – The handler location configured on the function\.
-+ `AWS_REGION` – The AWS region where the Lambda function is executed\.
-+ `AWS_EXECUTION_ENV` – The [runtime identifier](lambda-runtimes.md), prefixed by `AWS_Lambda_`\. For example, `AWS_Lambda_java8`\.
++ `AWS_REGION` – The AWS Region where the Lambda function is executed\.
++ `AWS_EXECUTION_ENV` – The [runtime identifier](lambda-runtimes.md), prefixed by `AWS_Lambda_`—for example, `AWS_Lambda_java8`\.
 + `AWS_LAMBDA_FUNCTION_NAME` – The name of the function\.
 + `AWS_LAMBDA_FUNCTION_MEMORY_SIZE` – The amount of memory available to the function in MB\.
 + `AWS_LAMBDA_FUNCTION_VERSION` – The version of the function being executed\.
 + `AWS_LAMBDA_LOG_GROUP_NAME`, `AWS_LAMBDA_LOG_STREAM_NAME` – The name of the Amazon CloudWatch Logs group and stream for the function\.
-+ `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_SESSION_TOKEN` – Access keys obtained from the function's [execution role](lambda-intro-execution-role.md)\.
++ `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_SESSION_TOKEN` – The access keys obtained from the function's [execution role](lambda-intro-execution-role.md)\.
 + `AWS_LAMBDA_RUNTIME_API` – \([Custom runtime](runtimes-custom.md)\) The host and port of the [runtime API](runtimes-api.md)\.
 + `LAMBDA_TASK_ROOT` – The path to your Lambda function code\.
 + `LAMBDA_RUNTIME_DIR` – The path to runtime libraries\.
-+ `TZ` – The environment's timezone \(`UTC`\)\. The execution environment uses NTP to synchronize the system clock\.
++ `TZ` – The environment's time zone \(`UTC`\)\. The execution environment uses NTP to synchronize the system clock\.
 
-The following additional environment variables are not reserved and can be extended in your function configuration\.
+The following additional environment variables aren't reserved and can be extended in your function configuration\.
 
 **Unreserved Environment Variables**
 + `LANG` – The locale of the runtime \(`en_US.UTF-8`\)\.
@@ -114,13 +114,13 @@ The following additional environment variables are not reserved and can be exten
 + `PYTHONPATH` – \([Python 2\.7, 3\.6, 3\.8](python-programming-model.md)\) The Python library path \(`$LAMBDA_RUNTIME_DIR`\)\.
 + `GEM_PATH` – \([Ruby](lambda-ruby.md)\) The Ruby library path \(`$LAMBDA_TASK_ROOT/vendor/bundle/ruby/2.5.0:/opt/ruby/gems/2.5.0`\)\.
 
-The sample values shown reflect the latest runtimes\. The values of or presence of specific variables can vary on older runtimes\.
+The sample values shown reflect the latest runtimes\. The presence of specific variables or their values can vary on earlier runtimes\.
 
 ## Securing Environment Variables<a name="configuration-envvars-encryption"></a>
 
-Lambda encrypts environment variables with a key that it creates in your account \(an AWS managed customer master key\)\. Use of this key is free\. You can also choose to provide your own key for Lambda to use instead of the default key\.
+Lambda encrypts environment variables with a key that it creates in your account \(an AWS managed customer master key \(CMK\)\)\. Use of this key is free\. You can also choose to provide your own key for Lambda to use instead of the default key\.
 
-When you provide the key, only users in your account with access to the key can view or manage environment variables on the function\. Your organization may also have internal or external requirements to manage keys used for encryption and control when they are rotated\.
+When you provide the key, only users in your account with access to the key can view or manage environment variables on the function\. Your organization might also have internal or external requirements to manage keys that are used for encryption and to control when they're rotated\.
 
 **To use a customer managed CMK**
 
@@ -136,19 +136,19 @@ When you provide the key, only users in your account with access to the key can 
 
 1. Choose **Save**\.
 
-Customer managed customer master keys incur standard [AWS KMS charges](https://aws.amazon.com/kms/pricing/)\.
+Customer managed CMKs incur standard [AWS KMS charges](https://aws.amazon.com/kms/pricing/)\.
 
-No AWS KMS permissions are required on your user or the function's execution role to use the default encryption key\. To use a customer managed CMK, you need permission to use the key\. Lambda uses your permissions to create a grant on the key that allows Lambda to use it for encryption\.
+No AWS KMS permissions are required for your user or the function's execution role to use the default encryption key\. To use a customer managed CMK, you need permission to use the key\. Lambda uses your permissions to create a grant on the key\. This allows Lambda to use it for encryption\.
 + `kms:ListAliases` – To view keys in the Lambda console\.
-+ `kms:CreateGrant` – To configure a customer managed CMK on a function\.
-+ `kms:Encrypt` – To configure a customer managed CMK on a function\.
++ `kms:CreateGrant`, `kms:Encrypt` – To configure a customer managed CMK on a function\.
++  – To configure a customer managed CMK on a function\.
 + `kms:Decrypt` – To view and manage environment variables that are encrypted with a customer managed CMK\.
 
-You can get these permissions from your user account or from a key's resource\-based permission policy\. `ListAliases` is provided by the [managed policies for Lambda](access-control-identity-based.md)\. Key policies grant the remaining permissions to users in the **Key users** group\.
+You can get these permissions from your user account or from a key's resource\-based permissions policy\. `ListAliases` is provided by the [managed policies for Lambda](access-control-identity-based.md)\. Key policies grant the remaining permissions to users in the **Key users** group\.
 
 Users without `Decrypt` permissions can still manage functions, but they can't view environment variables or manage them in the Lambda console\. To prevent a user from viewing environment variables, add a statement to the user's permissions that denies access to the default key, a customer managed key, or all keys\.
 
-**Example IAM Policy – Deny Access By Key ARN**  
+**Example IAM Policy – Deny Access by Key ARN**  
 
 ```
 {
@@ -170,9 +170,9 @@ Users without `Decrypt` permissions can still manage functions, but they can't v
 
 For details on managing key permissions, see [Using Key Policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)\.
 
-You can also encrypt environment variable values client\-side before sending them to Lambda, and decrypt them in your function code\. This obscures secret values in the Lambda console and API output, even for users who have permission to use the key\. In your code, you retrieve the encrypted value from the environment and decrypt it by using the AWS KMS API\.
+You can also encrypt environment variable values on the client side before sending them to Lambda, and decrypt them in your function code\. This obscures secret values in the Lambda console and API output, even for users who have permission to use the key\. In your code, you retrieve the encrypted value from the environment and decrypt it by using the AWS KMS API\.
 
-**To encrypt environment variables client\-side**
+**To encrypt environment variables on the client side**
 
 1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
 
@@ -188,7 +188,7 @@ You can also encrypt environment variable values client\-side before sending the
 
 To view sample code for your function's language, choose **Code** next to an environment variable\. The sample code shows how to retrieve an environment variable in a function and decrypt its value\.
 
-Another option is to store passwords in AWS Secrets Manager secrets\. You can reference the secret in your AWS CloudFormation templates to set passwords on databases or set the value of an environment variables on the Lambda function\. See the next section for an example\.
+Another option is to store passwords in AWS Secrets Manager secrets\. You can reference the secret in your AWS CloudFormation templates to set passwords on databases\. You can also set the value of an environment variable on the Lambda function\. For an example, see the next section\.
 
 ## Configuring Environment Variables with the Lambda API<a name="configuration-envvars-api"></a>
 

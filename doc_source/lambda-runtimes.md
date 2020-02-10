@@ -19,18 +19,18 @@ A runtime can support a single version of a language, multiple versions of a lan
 
 | Name | Identifier | AWS SDK for JavaScript | Operating System | 
 | --- | --- | --- | --- | 
-|  Node\.js 12  |  `nodejs12.x`  |  2\.536\.0  |  Amazon Linux 2  | 
-|  Node\.js 10  |  `nodejs10.x`  |  2\.488\.0  |  Amazon Linux 2  | 
+|  Node\.js 12  |  `nodejs12.x`  |  2\.585\.0  |  Amazon Linux 2  | 
+|  Node\.js 10  |  `nodejs10.x`  |  2\.585\.0  |  Amazon Linux 2  | 
 
 
 **Python Runtimes**  
 
 | Name | Identifier | AWS SDK for Python | Operating System | 
 | --- | --- | --- | --- | 
-|  Python 3\.8  |  `python3.8`  |  boto3\-1\.10\.2 botocore\-1\.13\.2  |  Amazon Linux 2  | 
-|  Python 3\.7  |  `python3.7`  |  boto3\-1\.9\.221 botocore\-1\.12\.221  |  Amazon Linux  | 
-|  Python 3\.6  |  `python3.6`  |  boto3\-1\.9\.221 botocore\-1\.12\.221  |  Amazon Linux  | 
-|  Python 2\.7  |  `python2.7`  |  boto3\-1\.9\.221 botocore\-1\.12\.221  |  Amazon Linux  | 
+|  Python 3\.8  |  `python3.8`  |  boto3\-1\.10\.34 botocore\-1\.13\.34  |  Amazon Linux 2  | 
+|  Python 3\.7  |  `python3.7`  |  boto3\-1\.10\.34 botocore\-1\.13\.34  |  Amazon Linux  | 
+|  Python 3\.6  |  `python3.6`  |  boto3\-1\.10\.34 botocore\-1\.13\.34  |  Amazon Linux  | 
+|  Python 2\.7  |  `python2.7`  |  boto3\-1\.10\.34 botocore\-1\.13\.34  |  Amazon Linux  | 
 
 
 **Ruby Runtimes**  

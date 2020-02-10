@@ -1,6 +1,6 @@
 # AWS Lambda Context Object in Java<a name="java-context-object"></a>
 
-When Lambda runs your function, it passes a context object to the [handler](java-programming-model-handler-types.md)\. This object provides methods and properties that provide information about the invocation, function, and execution environment\.
+When Lambda runs your function, it passes a context object to the [handler](java-handler.md)\. This object provides methods and properties that provide information about the invocation, function, and execution environment\.
 
 **Context Methods**
 + `getRemainingTimeInMillis()` – Returns the number of milliseconds left before the execution times out\.

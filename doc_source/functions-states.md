@@ -64,6 +64,10 @@ The following operations fail while an asynchronous update is in progress:
 
 Other operations, including invocation, work while updates are in progress\.
 
-For example, when you connect your function to a virtual private cloud \(VPC\), Lambda provisions an elastic network interface for each subnet\. This process can leave your function in a pending state for a minute or so\. Lambda also reclaims network interfaces that are not in use, placing your function in an `Inactive` state\. When the function is inactive, an invocation causes it to enter the `Pending` state while network access is restored\.
+For example, when you connect your function to a virtual private cloud \(VPC\), Lambda provisions an elastic network interface for each subnet\. This process can leave your function in a pending state for a minute or so\. Lambda also reclaims network interfaces that are not in use, placing your function in an `Inactive` state\. When the function is inactive, an invocation causes it to enter the `Pending` state while network access is restored\. The invocation that triggers restoration, and further invocations while the operation is pending, fail with `ResourceNotReadyException`\.
+
+If Lambda encounters an error when restoring a function's network interface, the function goes back to the `Inactive` state\. The next invocation can trigger another attempt\. For some configuration errors, Lambda waits at least 5 minutes before attempting to create another network interface\. These errors have the following `LastUpdateStatusReasonCode` values:
++ `InsufficientRolePermission` – Role doesn't exist or is missing permissions\.
++ `SubnetOutOfIPAddresses` – All IP addresses in a subnet are in use\.
 
 For more information on how states work with VPC connectivity, see [Configuring a Lambda Function to Access Resources in a VPC](configuration-vpc.md)\.

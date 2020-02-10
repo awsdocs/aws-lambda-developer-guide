@@ -45,7 +45,7 @@ To create or update a function by using the Lambda API, create an archive that c
 
 ## Updating a Function with Additional Dependencies<a name="nodejs-package-dependencies"></a>
 
-If your function depends on libraries other than the SDK for JavaScript, install them to a local directory with [NPM](https://www.npmjs.com/), and include them in your deployment package\. You can also include the SDK for JavaScript if you need a newer version than the one [included on the runtime](programming-model.md), or to ensure that the version doesn't change in the future\.
+If your function depends on libraries other than the SDK for JavaScript, install them to a local directory with [npm](https://www.npmjs.com/), and include them in your deployment package\. You can also include the SDK for JavaScript if you need a newer version than the one [included on the runtime](programming-model.md), or to ensure that the version doesn't change in the future\.
 
 **To update a Node\.js function with dependencies**
 

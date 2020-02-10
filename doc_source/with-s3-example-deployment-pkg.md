@@ -3,26 +3,24 @@
 Sample code is available for the following languages\.
 
 **Topics**
-+ [Node\.js 8](#with-s3-example-deployment-pkg-nodejs)
++ [Node\.js 12\.x](#with-s3-example-deployment-pkg-nodejs)
 + [Java 11](#with-s3-example-deployment-pkg-java)
 + [Python 3](#with-s3-example-deployment-pkg-python)
 
-## Node\.js 8<a name="with-s3-example-deployment-pkg-nodejs"></a>
+## Node\.js 12\.x<a name="with-s3-example-deployment-pkg-nodejs"></a>
 
 The following example code receives an Amazon S3 event input and processes the message that it contains\. It resizes an image in the source bucket and saves the output to the target bucket\.
 
 **Example index\.js**  
 
 ```
+// dependencies
 var async = require('async');
 var AWS = require('aws-sdk');
-var gm = require('gm')
-            .subClass({ imageMagick: true }); // Enable ImageMagick integration.
 var util = require('util');
+var sharp = require('sharp');
 
-var MAX_WIDTH  = 100;
-var MAX_HEIGHT = 100;
-
+// get reference to S3 client
 var s3 = new AWS.S3();
 
 exports.handler = function(event, context, callback) {
@@ -30,9 +28,8 @@ exports.handler = function(event, context, callback) {
     console.log("Reading options from event:\n", util.inspect(event, {depth: 5}));
     var srcBucket = event.Records[0].s3.bucket.name;
     // Object key may have spaces or unicode non-ASCII characters.
-    var srcKey    =
-    decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, " "));
-    var dstBucket = srcBucket + "resized";
+    var srcKey    = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, " "));
+    var dstBucket = srcBucket + "-resized";
     var dstKey    = "resized-" + srcKey;
 
     // Sanity check: validate that source and destination are different buckets.
@@ -64,25 +61,20 @@ exports.handler = function(event, context, callback) {
                 next);
             },
         function transform(response, next) {
-            gm(response.Body).size(function(err, size) {
-                // Infer the scaling factor to avoid stretching the image unnaturally.
-                var scalingFactor = Math.min(
-                    MAX_WIDTH / size.width,
-                    MAX_HEIGHT / size.height
-                );
-                var width  = scalingFactor * size.width;
-                var height = scalingFactor * size.height;
+            // set thumbnail width. Resize will set height automatically 
+            // to maintain aspect ratio.
+            var width  = 200;
 
-                // Transform the image buffer in memory.
-                this.resize(width, height)
-                    .toBuffer(imageType, function(err, buffer) {
+            // Transform the image buffer in memory.
+            sharp(response.Body)
+               .resize(width)
+                   .toBuffer(imageType, function(err, buffer) {
                         if (err) {
                             next(err);
                         } else {
                             next(null, response.ContentType, buffer);
                         }
                     });
-            });
         },
         function upload(contentType, data, next) {
             // Stream the transformed image to a different S3 bucket.
@@ -120,31 +112,35 @@ The deployment package is a \.zip file containing your Lambda function code and 
 
 1. Create a folder \(`examplefolder`\), and then create a subfolder \(`node_modules`\)\. 
 
-1. Install the Node\.js platform\. For more information, see the [Node\.js](https://nodejs.org/) website\.
-
 1. Install dependencies\. The code examples use the following libraries:
    + AWS SDK for JavaScript in Node\.js
-   + gm, GraphicsMagick for node\.js
+   + Sharp for node\.js
    + Async utility module
 
-   The AWS Lambda runtime already has the AWS SDK for JavaScript in Node\.js, so you only need to install the other libraries\. Open a command prompt, navigate to the `examplefolder`, and install the libraries using the `npm` command, which is part of Node\.js\.
+   The AWS Lambda runtime already has the AWS SDK for JavaScript in Node\.js, so you only need to install the other libraries\. Open a command prompt, navigate to the `examplefolder`, and install the libraries using the `npm` command, which is part of Node\.js\. For Linux, use the following command\.
 
    ```
-   $ npm install async gm
+   $ npm install async sharp
+   ```
+
+   For macOS, use the following command\.
+
+   ```
+   $ npm install --arch=x64 --platform=linux --target=12.13.0 async sharp
    ```
 
 1. Save the sample code to a file named index\.js\.
 
 1. Review the preceding code and note the following:
    + The function knows the source bucket name and the key name of the object from the event data it receives as parameters\. If the object is a \.jpg, the code creates a thumbnail and saves it to the target bucket\. 
-   + The code assumes that the destination bucket exists and its name is a concatenation of the source bucket name followed by the string `resized`\. For example, if the source bucket identified in the event data is `examplebucket`, the code assumes you have an `examplebucketresized` destination bucket\.
+   + The code assumes that the destination bucket exists and its name is a concatenation of the source bucket name followed by the string `-resized`\. For example, if the source bucket identified in the event data is `examplebucket`, the code assumes you have an `examplebucket-resized` destination bucket\.
    + For the thumbnail it creates, the code derives its key name as the concatenation of the string `resized-` followed by the source object key name\. For example, if the source object key is `sample.jpg`, the code creates a thumbnail object that has the key `resized-sample.jpg`\.
 
 1. Save the file as `index.js` in `examplefolder`\. After you complete this step, you will have the following folder structure:
 
    ```
    index.js
-   /node_modules/gm
+   /node_modules/sharp
    /node_modules/async
    ```
 
@@ -152,7 +148,7 @@ The deployment package is a \.zip file containing your Lambda function code and 
 
 ## Java 11<a name="with-s3-example-deployment-pkg-java"></a>
 
-The following is example Java code that reads incoming Amazon S3 events and creates a thumbnail\. Note that it implements the `RequestHandler` interface provided in the `aws-lambda-java-core` library\. Therefore, at the time you create a Lambda function you specify the class as the handler \(that is, `example.handler`\)\. For more information about using interfaces to provide a handler, see [Leveraging Predefined Interfaces for Creating Handler \(Java\)](java-handler-using-predefined-interfaces.md)\.
+The following is example Java code that reads incoming Amazon S3 events and creates a thumbnail\. Note that it implements the `RequestHandler` interface provided in the `aws-lambda-java-core` library\. Therefore, at the time you create a Lambda function you specify the class as the handler \(that is, `example.handler`\)\. For more information about using interfaces to provide a handler, see [Using Provided Interfaces for Java Function Handlers in AWS Lambda](java-handler-using-predefined-interfaces.md)\.
 
 The `S3Event` type that the handler uses as the input type is one of the predefined classes in the `aws-lambda-java-events`  library that provides methods for you to easily read information from the incoming Amazon S3 event\. The handler returns a string as output\.
 

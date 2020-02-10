@@ -69,6 +69,10 @@ When an invocation event exceeds the maximum age or fails all retry attempts, La
 
 To send records of asynchronous invocations to another service, add a destination to your function\. You can configure separate destinations for events that fail processing and events that are successfully processed\. Like error handling settings, you can configure destinations on a function, a version, or an alias\.
 
+The following example shows a function processing asynchronous invocations\. When the function returns a success response or exits without throwing an error, Lambda sends a record of the invocation to an EventBridge event bus\. When an event fails all processing attempts, Lambda sends an invocation record to an Amazon SQS queue\.
+
+![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/features-destinations.png)
+
 To send events to a destination, your function needs additional permissions\. Add a policy with the required permissions to your function's [execution role](lambda-intro-execution-role.md)\.
 + **Amazon SQS** – [sqs:SendMessage](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html) 
 + **Amazon SNS** – [sns:Publish](https://docs.aws.amazon.com/sns/latest/api/API_Publish.html) 

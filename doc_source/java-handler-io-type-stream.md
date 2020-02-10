@@ -1,19 +1,10 @@
-# Example: Using Stream for Handler Input/Output \(Java\)<a name="java-handler-io-type-stream"></a>
+# Using Stream Input and Output Types for Java Functions in AWS Lambda<a name="java-handler-io-type-stream"></a>
 
-If you do not want to use POJOs or if Lambda's serialization approach does not meet your needs, you can use the byte stream implementation\. In this case, you can use the `InputStream` and `OutputStream` as the input and output types for the handler\. An example handler function is shown:
+If you do not want to use POJOs or if Lambda's serialization approach does not meet your needs, you can use the byte stream implementation\. In this case, you can use the `InputStream` and `OutputStream` as the input and output types for the handler\.
 
-```
-public void handler(InputStream inputStream, OutputStream outputStream, Context context) throws IOException{
-   ...
-}
-```
+The following is a Lambda function example that implements the handler that uses `InputStream` and `OutputStream` types for the input and output parameters\.
 
-Note that in this case the handler function uses parameters for both the request and response streams\. 
-
-The following is a Lambda function example that implements the handler that uses `InputStream` and `OutputStream` types for the `input` and `output` parameters\. 
-
-**Note**  
-The input payload must be valid JSON but the output stream does not carry such a restriction\. Any bytes are supported\.
+**Example Hello\.java**  
 
 ```
 package example;
@@ -34,15 +25,8 @@ public class Hello implements RequestStreamHandler{
 }
 ```
 
-You can do the following to test the code:
-+ Using the preceding code, create a deployment package\.
-+ Upload the deployment package to AWS Lambda and create your Lambda function\. You can do this using the console or AWS CLI\.
-+ You can manually invoke the code by providing sample input\. For example:
+**Dependencies**
++ `aws-lambda-java-core`
++ **Handler** – `example.Hello::handler`
 
-  ```
-  test
-  ```
-
-Follow instructions provided in the Getting Started\. For more information, see [Create a Lambda Function Authored in Java](get-started-step4-optional.md)\. Note the following differences:
-+ When you create a deployment package, don't forget the `aws-lambda-java-core` library dependency\.
-+ When you create the Lambda function, specify `example.Hello::handler` \(*package*\.*class*::*method*\) as the handler value\.
+The event received processed by the function must be valid JSON but the output stream type is not restricted\. Any bytes are supported\.

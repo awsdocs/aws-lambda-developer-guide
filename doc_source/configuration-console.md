@@ -1,18 +1,10 @@
-# Configuring AWS Lambda Functions<a name="resource-model"></a>
+# Configuring Functions in the AWS Lambda Console<a name="configuration-console"></a>
 
-A Lambda function consists of code and any associated dependencies\. In addition, a Lambda function also has configuration information associated with it\. Initially, you specify the configuration information when you create a Lambda function\.
+You can use the Lambda console to configure function settings, add triggers and destinations, and update and test your code\.
 
-**To configure function settings**
+To manage a function, open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions) and choose a function\. The function designer is at the top of the configuration page\.
 
-1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
-
-1. Choose a function\.
-
-1. Configure any of the available options, and then choose **Save**\.
-
-The function designer is at the top of the configuration page\.
-
-![\[The designer example screenshot shows a Lambda function with an Amazon S3 trigger and Amazon EventBridge destination.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/console-designer.png)
+![\[The function designer in the AWS Lambda console.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/console-designer.png)
 
 The designer shows an overview of your function and its upstream and downstream resources\. You can use it to configure triggers, layers, and destinations\.
 + **Triggers** – Triggers are services and resources that you have configured to invoke your function\. Choose **Add trigger** to create a Lambda [event source mapping](invocation-eventsourcemapping.md) or to configure a trigger in another service that the Lambda console integrates with\. For details about these services and others, see [Using AWS Lambda with Other Services](lambda-services.md)\.

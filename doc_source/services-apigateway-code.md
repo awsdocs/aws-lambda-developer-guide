@@ -1,13 +1,13 @@
-# Sample Function Code<a name="with-on-demand-https-create-package"></a>
+# Sample Function Code<a name="services-apigateway-code"></a>
 
 Sample code is available for the following languages\.
 
 **Topics**
-+ [Node\.js](#with-apigateway-example-deployment-pkg-nodejs)
-+ [Python 3](#with-apigateway-example-deployment-pkg-python)
-+ [Go](#with-apigateway-example-deployment-pkg-go)
++ [Node\.js](#services-apigateway-code-nodejs)
++ [Python 3](#services-apigateway-code-python)
++ [Go](#services-apigateway-code-go)
 
-## Node\.js<a name="with-apigateway-example-deployment-pkg-nodejs"></a>
+## Node\.js<a name="services-apigateway-code-nodejs"></a>
 
 The following example processes messages from API Gateway, and manages DynamoDB documents based on the request method\.
 
@@ -65,7 +65,7 @@ exports.handler = function(event, context, callback) {
 
 Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Node\.js](nodejs-create-deployment-pkg.md)\.
 
-## Python 3<a name="with-apigateway-example-deployment-pkg-python"></a>
+## Python 3<a name="services-apigateway-code-python"></a>
 
 The following example processes messages from API Gateway, and manages DynamoDB documents based on the request method\.
 
@@ -112,7 +112,7 @@ def handler(event, context):
 
 Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Python](lambda-python-how-to-create-deployment-package.md)\.
 
-## Go<a name="with-apigateway-example-deployment-pkg-go"></a>
+## Go<a name="services-apigateway-code-go"></a>
 
 The following example processes messages from API Gateway, and logs information about the request\.
 

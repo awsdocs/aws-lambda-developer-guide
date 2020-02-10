@@ -1,4 +1,4 @@
-# Create a Simple Microservice using Lambda and API Gateway<a name="with-on-demand-https-example-configure-event-source_1"></a>
+# Create a Simple Microservice using Lambda and API Gateway<a name="services-apigateway-blueprint"></a>
 
 In this tutorial you will use the Lambda console to create a Lambda function, and an Amazon API Gateway endpoint to trigger that function\. You will be able to call the endpoint with any method \(`GET`, `POST`, `PATCH`, etc\.\) to trigger your Lambda function\. When the endpoint is called, the entire request will be passed through to your Lambda function\. Your function action will depend on the method you call your endpoint with: 
 + DELETE: delete an item from a DynamoDB table
@@ -6,7 +6,7 @@ In this tutorial you will use the Lambda console to create a Lambda function, an
 + POST: Create an item
 + PUT: Update an item
 
-## Create an API Using Amazon API Gateway<a name="with-on-demand-https-example-configure-event-source_2"></a>
+## Create an API Using Amazon API Gateway<a name="services-apigateway-blueprint-create"></a>
 
 Follow the steps in this section to create a new Lambda function and an API Gateway endpoint to trigger it:
 
@@ -34,7 +34,7 @@ When you complete the wizard and create your function, Lambda creates a proxy re
 
 A proxy resource has an `AWS_PROXY` integration type and a catch\-all method `ANY`\. The `AWS_PROXY` integration type applies a default mapping template to pass through the entire request to the Lambda function and transforms the output from the Lambda function to HTTP responses\. The `ANY` method defines the same integration setup for all the supported methods, including `GET`, `POST`, `PATCH`, `DELETE `and others\. 
 
-## Test Sending an HTTPS Request<a name="with-on-demand-https-example-configure-event-source-test-end-to-end_1"></a>
+## Test Sending an HTTPS Request<a name="services-apigateway-blueprint-test"></a>
 
 In this step, you will use the console to test the Lambda function\. In addition, you can run a `curl` command to test the end\-to\-end experience\. That is, send an HTTPS request to your API method and have Amazon API Gateway invoke your Lambda function\. In order to complete the steps, make sure you have created a DynamoDB table and named it "MyTable"\. For more information, see [Create a DynamoDB Table with a Stream Enabled](with-ddb-example.md#with-ddb-create-buckets)
 

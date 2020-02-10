@@ -16,8 +16,8 @@ The following limits apply to function configuration, deployments, and execution
 
 | Resource | Limit | 
 | --- | --- | 
-| Function [memory allocation](resource-model.md) | 128 MB to 3,008 MB, in 64 MB increments\. | 
-| Function [timeout](resource-model.md) | 900 seconds \(15 minutes\) | 
+| Function [memory allocation](configuration-console.md) | 128 MB to 3,008 MB, in 64 MB increments\. | 
+| Function [timeout](configuration-console.md) | 900 seconds \(15 minutes\) | 
 | Function [environment variables](configuration-envvars.md) | 4 KB | 
 | Function [resource\-based policy](access-control-resource-based.md) | 20 KB | 
 | Function [layers](configuration-layers.md) | 5 layers | 

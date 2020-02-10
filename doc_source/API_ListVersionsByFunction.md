@@ -1,6 +1,6 @@
 # ListVersionsByFunction<a name="API_ListVersionsByFunction"></a>
 
-Returns a list of [versions](https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html), with the version\-specific configuration of each\. 
+Returns a list of [versions](https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html), with the version\-specific configuration of each\. Lambda returns up to 50 versions per call\.
 
 ## Request Syntax<a name="API_ListVersionsByFunction_RequestSyntax"></a>
 
@@ -27,7 +27,7 @@ Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}
 Specify the pagination token that's returned by a previous request to retrieve the next page of results\.
 
  ** [MaxItems](#API_ListVersionsByFunction_RequestSyntax) **   <a name="SSS-ListVersionsByFunction-request-MaxItems"></a>
-Limit the number of versions that are returned\.  
+The maximum number of versions to return\.  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.
 
 ## Request Body<a name="API_ListVersionsByFunction_RequestBody"></a>

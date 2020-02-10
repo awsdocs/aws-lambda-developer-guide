@@ -52,7 +52,7 @@ To remove tags, use the `untag-resource` command\.
 
 ```
 $ aws lambda untag-resource --resource function arn \
---tagkeys DEPARTMENT
+--tag-keys DEPARTMENT
 ```
 
 ## Filtering on Tagged Lambda Functions<a name="tag-filtering"></a>

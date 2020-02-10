@@ -19,7 +19,7 @@ The following runtimes have been scheduled to be deprecated\.
 |  Node\.js 6\.10  |  `nodejs6.10`  |  April 30, 2019  |  April 30, 2019  |  August 12, 2019  | 
 |  \.NET Core 2\.0  |  `dotnetcore2.0`  |  April 30, 2019  |  April 30, 2019  |  May 30, 2019  | 
 |  \.NET Core 1\.0  |  `dotnetcore1.0`  |  June 27, 2019  |  June 27, 2019  |  July 31, 2019  | 
-|  Node\.js 8\.10  |  `nodejs8.10`  |  December 31, 2019  |  January 6, 2020  |  February 3, 2020  | 
+|  Node\.js 8\.10  |  `nodejs8.10`  |  December 31, 2019  |  January 6, 2020  |  February 24, 2020  | 
 
 In most cases, the end\-of\-life date of a language version or operating system is known well in advance\. If you have functions running on a runtime that will be deprecated in the next 60 days, Lambda notifies you by email that you should prepare by migrating your function to a supported runtime\. In some cases, such as security issues that require a backwards\-incompatible update, or software that doesn't support a long\-term support \(LTS\) schedule, advance notice might not be possible\.
 

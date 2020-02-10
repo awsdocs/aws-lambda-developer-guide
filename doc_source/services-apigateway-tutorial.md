@@ -1,4 +1,4 @@
-# Tutorial: Using AWS Lambda with Amazon API Gateway<a name="with-on-demand-https-example"></a>
+# Tutorial: Using AWS Lambda with Amazon API Gateway<a name="services-apigateway-tutorial"></a>
 
 In this example you create a simple API using Amazon API Gateway\. An Amazon API Gateway is a collection of resources and methods\. For this tutorial, you create one resource \(`DynamoDBManager`\) and define one method \(`POST`\) on it\. The method is backed by a Lambda function \(`LambdaFunctionOverHttps`\)\. That is, when you call the API through an HTTPS endpoint, Amazon API Gateway invokes the Lambda function\.
 
@@ -55,7 +55,7 @@ API Gateway offers advanced capabilities, such as:
 **Catch\-all resources** – Map all sub\-paths of a resource to a Lambda function without any additional configuration using the new path parameter \(`{proxy+})`\.
 To learn more about these API Gateway features, see [Configure Proxy Integration for a Proxy Resource](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-set-up-simple-proxy.html)\.
 
-## Prerequisites<a name="with-on-demand-https-prepare"></a>
+## Prerequisites<a name="services-apigateway-tutorial-prereqs"></a>
 
 This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started with AWS Lambda](getting-started.md) to create your first Lambda function\.
 
@@ -70,7 +70,7 @@ For long commands, an escape character \(`\`\) is used to split a command over m
 
 On Linux and macOS, use your preferred shell and package manager\. On Windows 10, you can [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows\-integrated version of Ubuntu and Bash\.
 
-## Create the Execution Role<a name="with-on-demand-https-create-execution-role"></a>
+## Create the Execution Role<a name="services-apigateway-tutorial-role"></a>
 
 Create the [execution role](lambda-intro-execution-role.md) that gives your function permission to access AWS resources\.
 
@@ -118,12 +118,12 @@ Create the [execution role](lambda-intro-execution-role.md) that gives your func
 
 The custom policy has the permissions that the function needs to write data to DynamoDB and upload logs\. Note the Amazon Resource Name \(ARN\) of the role for later use\. 
 
-## Create the Function<a name="with-on-demand-https-example-create-function"></a>
+## Create the Function<a name="services-apigateway-tutorial-function"></a>
 
 The following example code receives a API Gateway event input and processes the messages that it contains\. For illustration, the code writes some of the incoming event data to CloudWatch Logs\.
 
 **Note**  
-For sample code in other languages, see [Sample Function Code](with-on-demand-https-create-package.md)\.
+For sample code in other languages, see [Sample Function Code](services-apigateway-code.md)\.
 
 **Example index\.js**  
 
@@ -195,9 +195,7 @@ exports.handler = function(event, context, callback) {
    --role arn:aws:iam::123456789012:role/service-role/lambda-apigateway-role
    ```
 
-## <a name="with-on-demand-https-example-upload-deployment-pkg_1"></a>
-
-### Test the Lambda Function<a name="walkthrough-on-demand-https-events-adminuser-create-test-function-upload-zip-test-manual-invoke"></a>
+## Test the Lambda Function<a name="services-apigateway-tutorial-test"></a>
 
 Invoke the function manually using the sample event data\. We recommend that you invoke the function using the console because the console UI provides a user\-friendly interface for reviewing the execution results, including the execution summary, logs written by your code, and the results returned by the function \(because the console always performs synchronous execution—invokes the Lambda function using the `RequestResponse` invocation type\)\.
 
@@ -222,7 +220,7 @@ Invoke the function manually using the sample event data\. We recommend that you
    --payload fileb://input.txt outputfile.txt
    ```
 
-## Create an API Using Amazon API Gateway<a name="with-on-demand-https-example-configure-event-source"></a>
+## Create an API Using Amazon API Gateway<a name="services-apigateway-tutorial-api"></a>
 
 In this step, you associate your Lambda function with a method in the API that you created using Amazon API Gateway and test the end\-to\-end experience\. That is, when an HTTP request is sent to an API method, Amazon API Gateway invokes your Lambda function\.
 
@@ -274,7 +272,7 @@ $ aws apigateway create-resource --rest-api-id $API  --path-part DynamoDBManager
 {
     "path": "/DynamoDBManager",
     "pathPart": "DynamoDBManager",
-    "id": "resource-id",
+    "id": "iuig5w",
     "parentId": "e8kitthgdb"
 }
 ```
@@ -361,7 +359,7 @@ $ aws apigateway create-deployment --rest-api-id $API --stage-name prod
 }
 ```
 
-## Grant Invoke Permission to the API<a name="with-on-demand-https-add-permission"></a>
+## Grant Invoke Permission to the API<a name="services-apigateway-tutorial-permission"></a>
 
 Now that you have an API created using Amazon API Gateway and you've deployed it, you can test\. First, you need to add permissions so that Amazon API Gateway can invoke your Lambda function when you send HTTP request to the `POST` method\.
 
@@ -396,7 +394,7 @@ $ aws lambda add-permission --function-name LambdaFunctionOverHttps \
 
 You grant this permission so that your deployed API has permissions to invoke the Lambda function\. Note that the `--source-arn` specifies a `prod` which is the stage name we used when deploying the API\.
 
-## Create a Amazon DynamoDB Table<a name="with-on-demand-https-example-table"></a>
+## Create a Amazon DynamoDB Table<a name="services-apigateway-tutorial-table"></a>
 
 Create the DynamoDB table that the Lambda function uses\.
 
@@ -412,7 +410,7 @@ Create the DynamoDB table that the Lambda function uses\.
 
 1. Choose **Create**\.
 
-## Trigger the Function with an HTTP Request<a name="with-on-demand-https-example-configure-event-source-test-end-to-end"></a>
+## Trigger the Function with an HTTP Request<a name="services-apigateway-tutorial-request"></a>
 
 In this step, you are ready to send an HTTP request to the `POST` method endpoint\. You can use either Curl or a method \(`test-invoke-method`\) provided by Amazon API Gateway\.
 

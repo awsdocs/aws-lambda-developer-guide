@@ -1,6 +1,6 @@
 # ListFunctions<a name="API_ListFunctions"></a>
 
-Returns a list of Lambda functions, with the version\-specific configuration of each\.
+Returns a list of Lambda functions, with the version\-specific configuration of each\. Lambda returns up to 50 functions per call\.
 
 Set `FunctionVersion` to `ALL` to include all published versions of each function in addition to the unpublished version\. To get more information about a function or version, use [GetFunction](API_GetFunction.md)\.
 
@@ -26,7 +26,7 @@ For Lambda@Edge functions, the AWS Region of the master function\. For example, 
 Pattern: `ALL|[a-z]{2}(-gov)?-[a-z]+-\d{1}` 
 
  ** [MaxItems](#API_ListFunctions_RequestSyntax) **   <a name="SSS-ListFunctions-request-MaxItems"></a>
-Specify a value between 1 and 50 to limit the number of functions in the response\.  
+The maximum number of functions to return\.  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.
 
 ## Request Body<a name="API_ListFunctions_RequestBody"></a>

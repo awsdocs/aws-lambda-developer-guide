@@ -1,4 +1,4 @@
-# Using AWS Lambda with Amazon API Gateway<a name="with-on-demand-https"></a>
+# Using AWS Lambda with Amazon API Gateway<a name="services-apigateway"></a>
 
 You can invoke AWS Lambda functions over HTTPS\. You can do this by defining a custom REST API and endpoint using [Amazon API Gateway](https://aws.amazon.com/api-gateway/), and then mapping individual methods, such as `GET` and `PUT`, to specific Lambda functions\. Alternatively, you could add a special method named ANY to map all supported methods \(`GET`, `POST`, `PATCH`, `DELETE`\) to your Lambda function\. When you send an HTTPS request to the API endpoint, the Amazon API Gateway service invokes the corresponding Lambda function\.
 

@@ -162,7 +162,7 @@ Note that there are some restrictions on the handler signature\.
 
 ## Using Async in C\# Functions with AWS Lambda<a name="dot-net-async"></a>
 
-If you know your Lambda function will require a long\-running process, such as uploading large files to Amazon S3 or reading a large stream of records from DynamoDB, you can take advantage of the async/await pattern\. When you use this signature, Lambda executes the function synchronously and waits for the function to return a response or for execution to [time out](resource-model.md)\.
+If you know your Lambda function will require a long\-running process, such as uploading large files to Amazon S3 or reading a large stream of records from DynamoDB, you can take advantage of the async/await pattern\. When you use this signature, Lambda executes the function synchronously and waits for the function to return a response or for execution to [time out](configuration-console.md)\.
 
 ```
 public async Task<Response> ProcessS3ImageResizeAsync(SimpleS3Event input)

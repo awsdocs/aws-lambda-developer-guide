@@ -59,7 +59,7 @@ Other services invoke your function directly\. You grant the other service permi
 + [Amazon Cognito](services-cognito.md)
 + [Amazon Lex](services-lex.md)
 + [Amazon Alexa](services-alexa.md)
-+ [Amazon API Gateway](with-on-demand-https.md)
++ [Amazon API Gateway](services-apigateway.md)
 + [Amazon CloudFront \(Lambda@Edge\)](lambda-edge.md)
 + [Amazon Kinesis Data Firehose](services-kinesisfirehose.md)
 + [AWS Step Functions](https://docs.aws.amazon.com/step-functions/latest/dg/connect-lambda.html)

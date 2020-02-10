@@ -32,7 +32,7 @@ For long commands, an escape character \(`\`\) is used to split a command over m
 
 On Linux and macOS, use your preferred shell and package manager\. On Windows 10, you can [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows\-integrated version of Ubuntu and Bash\.
 
-Install NPM to manage the function's dependencies\.
+Install npm to manage the function's dependencies\.
 
 The tutorial uses AWS CLI commands to create and invoke the Lambda function\. Install the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) and [configure it with your AWS credentials](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) 
 
@@ -78,13 +78,8 @@ For sample code in other languages, see [Sample Amazon S3 Function Code](with-s3
 // dependencies
 var async = require('async');
 var AWS = require('aws-sdk');
-var gm = require('gm')
-            .subClass({ imageMagick: true }); // Enable ImageMagick integration.
 var util = require('util');
-
-// constants
-var MAX_WIDTH  = 100;
-var MAX_HEIGHT = 100;
+var sharp = require('sharp');
 
 // get reference to S3 client
 var s3 = new AWS.S3();
@@ -94,9 +89,8 @@ exports.handler = function(event, context, callback) {
     console.log("Reading options from event:\n", util.inspect(event, {depth: 5}));
     var srcBucket = event.Records[0].s3.bucket.name;
     // Object key may have spaces or unicode non-ASCII characters.
-    var srcKey    =
-    decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, " "));
-    var dstBucket = srcBucket + "resized";
+    var srcKey    = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, " "));
+    var dstBucket = srcBucket + "-resized";
     var dstKey    = "resized-" + srcKey;
 
     // Sanity check: validate that source and destination are different buckets.
@@ -128,25 +122,20 @@ exports.handler = function(event, context, callback) {
                 next);
             },
         function transform(response, next) {
-            gm(response.Body).size(function(err, size) {
-                // Infer the scaling factor to avoid stretching the image unnaturally.
-                var scalingFactor = Math.min(
-                    MAX_WIDTH / size.width,
-                    MAX_HEIGHT / size.height
-                );
-                var width  = scalingFactor * size.width;
-                var height = scalingFactor * size.height;
+            // set thumbnail width. Resize will set height automatically 
+            // to maintain aspect ratio.
+            var width  = 200;
 
-                // Transform the image buffer in memory.
-                this.resize(width, height)
-                    .toBuffer(imageType, function(err, buffer) {
+            // Transform the image buffer in memory.
+            sharp(response.Body)
+               .resize(width)
+                   .toBuffer(imageType, function(err, buffer) {
                         if (err) {
                             next(err);
                         } else {
                             next(null, response.ContentType, buffer);
                         }
                     });
-            });
         },
         function upload(contentType, data, next) {
             // Stream the transformed image to a different S3 bucket.
@@ -180,7 +169,7 @@ exports.handler = function(event, context, callback) {
 
 Review the preceding code and note the following:
 + The function knows the source bucket name and the key name of the object from the event data it receives as parameters\. If the object is a \.jpg, the code creates a thumbnail and saves it to the target bucket\. 
-+ The code assumes that the destination bucket exists and its name is a concatenation of the source bucket name followed by the string `resized`\. For example, if the source bucket identified in the event data is `examplebucket`, the code assumes you have an `examplebucketresized` destination bucket\.
++ The code assumes that the destination bucket exists and its name is a concatenation of the source bucket name followed by the string `-resized`\. For example, if the source bucket identified in the event data is `examplebucket`, the code assumes you have an `examplebucket-resized` destination bucket\.
 + For the thumbnail it creates, the code derives its key name as the concatenation of the string `resized-` followed by the source object key name\. For example, if the source object key is `sample.jpg`, the code creates a thumbnail object that has the key `resized-sample.jpg`\.
 
 The deployment package is a \.zip file containing your Lambda function code and dependencies\. 
@@ -189,10 +178,16 @@ The deployment package is a \.zip file containing your Lambda function code and 
 
 1. Save the function code as `index.js` in a folder named `lambda-s3`\.
 
-1. Install the GraphicsMagick and Async libraries with NPM\.
+1. Install the Sharp and Async libraries with npm\. For Linux, use the following command\.
 
    ```
-   lambda-s3$ npm install async gm
+   lambda-s3$ npm install async sharp
+   ```
+
+   For macOS, use the following command\.
+
+   ```
+   lambda-s3$ npm install --arch=x64 --platform=linux --target=12.13.0 async sharp
    ```
 
    After you complete this step, you will have the following folder structure:
@@ -200,8 +195,9 @@ The deployment package is a \.zip file containing your Lambda function code and 
    ```
    lambda-s3
    |- index.js
-   |- /node_modules/gm
-   └ /node_modules/async
+   |- /node_modules/async
+   |- /node_modules/sharp
+   └ /node_modules/...
    ```
 
 1. Create a deployment package with the function code and dependencies\.
@@ -215,7 +211,7 @@ The deployment package is a \.zip file containing your Lambda function code and 
 
   ```
   $ aws lambda create-function --function-name CreateThumbnail \
-  --zip-file fileb://function.zip --handler index.handler --runtime nodejs8.10 \
+  --zip-file fileb://function.zip --handler index.handler --runtime nodejs12.x \
   --timeout 10 --memory-size 1024 \
   --role arn:aws:iam::123456789012:role/lambda-s3-role
   ```

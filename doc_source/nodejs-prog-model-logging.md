@@ -54,6 +54,11 @@ The Node\.js runtime logs the `START`, `END`, and `REPORT` lines for each invoca
 
 You can view logs in the Lambda console, in the CloudWatch Logs console, or from the command line\.
 
+**Topics**
++ [Viewing Logs in the AWS Management Console](#nodejs-logging-console)
++ [Using the AWS CLI](#nodejs-logging-cli)
++ [Deleting Logs](#nodejs-logging-delete)
+
 ## Viewing Logs in the AWS Management Console<a name="nodejs-logging-console"></a>
 
 The Lambda console shows log output when you test a function on the function configuration page\. To view logs for all invocations, use the CloudWatch Logs console\.

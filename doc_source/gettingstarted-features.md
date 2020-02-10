@@ -18,9 +18,15 @@ AWS Lambda provides a management console and API for managing and invoking funct
 
 Authoring specifics vary between runtimes, but all runtimes share a common programming model that defines the interface between your code and the runtime code\. You tell the runtime which method to run by defining a **handler** in the function configuration, and the runtime runs that method\. The runtime passes in objects to the handler that contain the invocation **event** and the **context**, such as the function name and request ID\.
 
-If your function exits without error, the runtime sends it another event\. The function's class stays in memory, so clients and variables that are declared outside of the handler method in **initialization code** can be reused\. Your function also has access to local storage in the `/tmp` directory\. Instances of your function that are serving requests remain active for a few hours before being recycled\.
+When the handler finishes processing the first event, the runtime sends it another\. The function's class stays in memory, so clients and variables that are declared outside of the handler method in **initialization code** can be reused\. To save processing time on subsequent events, create reusable resources like AWS SDK clients during initialization\. Once initialized, each instance of your function can process thousands of requests\.
 
-The runtime captures **logging** output from your function and sends it to Amazon CloudWatch Logs\. You can use the standard logging functionality of your programming language\. If your function throws an **error**, the runtime returns that error to the client\.
+Initialization is billed as part of the duration for the first invocation processed by an instance of your function\. When [X\-Ray tracing](lambda-x-ray.md) is enabled, the runtime records separate subsegments for initialization and execution\.
+
+![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/features-initialization-trace.png)
+
+Your function also has access to local storage in the `/tmp` directory\. Instances of your function that are serving requests remain active for a few hours before being recycled\.
+
+The runtime captures **logging** output from your function and sends it to Amazon CloudWatch Logs\. In addition to logging your function's output, the runtime also logs entries when execution starts and ends\. This includes a report log with the request ID, billed duration, initialization duration, and other details\. If your function throws an **error**, the runtime returns that error to the invoker\.
 
 **Note**  
 Logging is subject to [CloudWatch Logs limits](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/cloudwatch_limits_cwl.html)\. Log data can be lost due to throttling or, in some cases, when an instance of your function is stopped\.
