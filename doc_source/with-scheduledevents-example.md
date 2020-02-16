@@ -19,7 +19,7 @@ This tutorial assumes that you have some knowledge of basic Lambda operations an
 
 1. Choose **Blueprints**\.
 
-1. Enter **canary** in the search bar\. Choose the **lambda\-canary** blueprint and then choose **Configure**\.
+1. Enter **canary** in the search bar\. Choose the **lambda\-canary** blueprint, and then choose **Configure**\.
 
 1. Configure the following settings\.
    + **Name** – **lambda\-canary**\.
@@ -32,8 +32,8 @@ This tutorial assumes that you have some knowledge of basic Lambda operations an
    + **Schedule expression** – **rate\(1 minute\)**\.
    + **Enabled** – True \(checked\)\.
    + **Environment variables**
-     + **site** – **https://docs\.aws\.amazon\.com/lambda/latest/dg/welcome\.html**
-     + **expected** – **What Is AWS Lambda?**
+     + **site** – **https://docs\.aws\.amazon\.com/lambda/latest/dg/welcome\.html**\.
+     + **expected** – **What Is AWS Lambda?**\.
 
 1. Choose **Create function**\.
 
@@ -59,7 +59,7 @@ The output from the function execution is shown at the top of the page\.
 
 ## Create an Amazon SNS Topic and Subscribe to It<a name="tutorial-scheduled-events-subscribe-sns"></a>
 
-Create an Amazon Simple Notification Service topic to receive notifications when the canary function returns an error\.
+Create an Amazon Simple Notification Service \(Amazon SNS\) topic to receive notifications when the canary function returns an error\.
 
 **To create a topic**
 
@@ -99,15 +99,15 @@ Configure an alarm in Amazon CloudWatch that monitors the Lambda function and se
      Search for **lambda canary errors** to find the metric\.
    + Statistic – **Sum**\.
 
-     Choose the statistic from the drop down above the preview graph\.
+     Choose the statistic from the drop\-down menu above the preview graph\.
    + **Name** – **lambda\-canary\-alarm**\.
    + **Description** – **Lambda canary alarm**\.
    + Threshold – **Whenever Errors is >=****1**\.
-   + **Send notification to** – **lambda\-canary\-notifications**
+   + **Send notification to** – **lambda\-canary\-notifications**\.
 
 ## Test the Alarm<a name="tutorial-scheduled-events-test-function-again"></a>
 
-Update the function configuration to cause the function to return an error, triggering the alarm\.
+Update the function configuration to cause the function to return an error, which triggers the alarm\.
 
 **To trigger an alarm**
 
@@ -115,8 +115,10 @@ Update the function configuration to cause the function to return an error, trig
 
 1. Choose **lambda\-canary**\.
 
-1. Under **Environment variables**, set **expected** to **404**\.
+1. Under **Environment variables**, choose **Edit**\.
 
-1. Choose **Save**
+1. Set **expected** to **404**\.
 
-Wait a minute, and then check your email for a message from Amazon SNS
+1. Choose **Save**\.
+
+Wait a minute, and then check your email for a message from Amazon SNS\.

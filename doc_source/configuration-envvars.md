@@ -1,6 +1,6 @@
 # Using AWS Lambda Environment Variables<a name="configuration-envvars"></a>
 
-You can use environment variables to store secrets securely and adjust your function's behavior without updating code\. An environment variable is a pair of strings stored in a function's version\-specific configuration\. The Lambda runtime makes environment variables available to your code and sets additional environment variables that contain information about the function and invocation request\.
+You can use environment variables to store secrets securely and adjust your function's behavior without updating code\. An environment variable is a pair of strings that are stored in a function's version\-specific configuration\. The Lambda runtime makes environment variables available to your code and sets additional environment variables that contain information about the function and invocation request\.
 
 You set environment variables on the unpublished version of your function by specifying a key and value\. When you publish a version, the environment variables are locked for that version along with other [version\-specific configuration](configuration-console.md)\.
 
@@ -10,10 +10,14 @@ You set environment variables on the unpublished version of your function by spe
 
 1. Choose a function\.
 
-1. Under **Environment variables**, enter key\-value pairs\.
+1. Under **Environment variables**, choose **Edit**\.
+
+1. Choose **Add environment variable**\.
+
+1. Enter a key and value\.
 
 **Requirements**
-   + Keys start with a letter\.
+   + Keys start with a letter and are at least two characters\.
    + Keys only contain letters, numbers, and the underscore character \(`_`\)\.
    + Keys aren't [reserved by Lambda](#configuration-envvars-runtime)\.
    + The total size of all environment variables doesn't exceed 4 KB\.
@@ -128,7 +132,9 @@ When you provide the key, only users in your account with access to the key can 
 
 1. Choose a function\.
 
-1. Under **Environment variables**, expand **Encryption configuration**\.
+1. Under **Environment variables**, choose **Edit**\.
+
+1. Expand **Encryption configuration**\.
 
 1. Choose **Use a customer master key**\.
 
@@ -141,7 +147,6 @@ Customer managed CMKs incur standard [AWS KMS charges](https://aws.amazon.com/km
 No AWS KMS permissions are required for your user or the function's execution role to use the default encryption key\. To use a customer managed CMK, you need permission to use the key\. Lambda uses your permissions to create a grant on the key\. This allows Lambda to use it for encryption\.
 + `kms:ListAliases` – To view keys in the Lambda console\.
 + `kms:CreateGrant`, `kms:Encrypt` – To configure a customer managed CMK on a function\.
-+  – To configure a customer managed CMK on a function\.
 + `kms:Decrypt` – To view and manage environment variables that are encrypted with a customer managed CMK\.
 
 You can get these permissions from your user account or from a key's resource\-based permissions policy\. `ListAliases` is provided by the [managed policies for Lambda](access-control-identity-based.md)\. Key policies grant the remaining permissions to users in the **Key users** group\.
@@ -178,7 +183,9 @@ You can also encrypt environment variable values on the client side before sendi
 
 1. Choose a function\.
 
-1. Under **Environment variables**, expand **Encryption configuration**\.
+1. Under **Environment variables**, choose **Edit**\.
+
+1. Expand **Encryption configuration**\.
 
 1. Choose **Enable helpers for encryption in transit**\.
 

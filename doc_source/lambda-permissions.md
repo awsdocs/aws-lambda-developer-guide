@@ -17,7 +17,7 @@ For more information about IAM, see [What Is IAM?](https://docs.aws.amazon.com/I
 
 **Topics**
 + [AWS Lambda Execution Role](lambda-intro-execution-role.md)
-+ [Using Resource\-based Policies for AWS Lambda](access-control-resource-based.md)
++ [Using Resource\-Based Policies for AWS Lambda](access-control-resource-based.md)
 + [Identity\-based IAM Policies for AWS Lambda](access-control-identity-based.md)
 + [Resources and Conditions for Lambda Actions](lambda-api-permissions-ref.md)
 + [Using Permissions Boundaries for AWS Lambda Applications](permissions-boundary.md)

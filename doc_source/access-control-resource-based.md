@@ -1,8 +1,19 @@
-# Using Resource\-based Policies for AWS Lambda<a name="access-control-resource-based"></a>
+# Using Resource\-Based Policies for AWS Lambda<a name="access-control-resource-based"></a>
 
 AWS Lambda supports resource\-based permissions policies for Lambda functions and layers\. Resource\-based policies let you grant usage permission to other accounts on a per\-resource basis\. You also use a resource\-based policy to allow an AWS service to invoke your function\.
 
 For Lambda functions, you can [grant an account permission](#permissions-resource-xaccountinvoke) to invoke or manage a function\. You can add multiple statements to grant access to multiple accounts, or let any account invoke your function\. For functions that another AWS service invokes in response to activity in your account, you use the policy to [grant invoke permission to the service](#permissions-resource-serviceinvoke)\.
+
+**To view a function's resource\-based policy**
+
+1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+
+1. Choose a function\.
+
+1. Choose **Permissions**\.
+
+1. The resource\-based policy shows the permissions that are applied when another account or AWS service attempts to access the function\. The following example shows a statement that allows Amazon S3 to invoke a function named `my-function` for a bucket named `my-bucket` in account `123456789012`\.  
+![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/permissions-resourcebased.png)
 
 For Lambda layers, you use a resource\-based policy on a version of the layer to let other accounts use it\. In addition to policies that grant permission to a single account or all accounts, for layers, you can also grant permission to all accounts in an organization\.
 
@@ -15,7 +26,7 @@ Resource\-based policies apply to a single function, version, alias, or layer ve
 + [Granting Function Access to AWS Services](#permissions-resource-serviceinvoke)
 + [Granting Function Access to Other Accounts](#permissions-resource-xaccountinvoke)
 + [Granting Layer Access to Other Accounts](#permissions-resource-xaccountlayer)
-+ [Cleaning up Resource\-based Policies](#permissions-resource-cleanup)
++ [Cleaning Up Resource\-Based Policies](#permissions-resource-cleanup)
 
 ## Granting Function Access to AWS Services<a name="permissions-resource-serviceinvoke"></a>
 
@@ -56,7 +67,7 @@ $ aws lambda add-permission --function-name my-function:prod --statement-id xacc
 {"Sid":"xaccount","Effect":"Allow","Principal":{"AWS":"arn:aws:iam::210987654321:root"},"Action":"lambda:InvokeFunction","Resource":"arn:aws:lambda:us-east-2:123456789012:function:my-function"}
 ```
 
-The resource\-based policy grants permission for the other account to access the function, but does not allow users in that account to exceed their permissions\. Users in the other account must have the correspoding [user permissions](access-control-identity-based.md) to use the Lambda API\.
+The resource\-based policy grants permission for the other account to access the function, but doesn't allow users in that account to exceed their permissions\. Users in the other account must have the corresponding [user permissions](access-control-identity-based.md) to use the Lambda API\.
 
 To limit access to a user, group, or role in another account, specify the full ARN of the identity as the principal\. For example, `arn:aws:iam::123456789012:user/developer`\.
 
@@ -74,7 +85,7 @@ You can then update the alias to point to new versions as needed\. When you upda
 
 You can grant cross\-account access for most API actions that [operate on an existing function](lambda-api-permissions-ref.md#permissions-resources-function)\. For example, you could grant access to `lambda:ListAliases` to let an account get a list of aliases, or `lambda:GetFunction` to let them download your function code\. Add each permission separately, or use `lambda:*` to grant access to all actions for the specified function\.
 
-**Cross Account APIs**
+**Cross\-Account APIs**
 + [Invoke](API_Invoke.md)
 + [GetFunction](API_GetFunction.md)
 + [GetFunctionConfiguration](API_GetFunctionConfiguration.md)
@@ -119,7 +130,7 @@ b0cd9796-d4eb-4564-939f-de7fe0b42236    {"Sid":"engineering-org","Effect":"Allow
 
 To grant permission to all AWS accounts, use `*` for the principal, and omit the organization ID\. For multiple accounts or organizations, add multiple statements\.
 
-## Cleaning up Resource\-based Policies<a name="permissions-resource-cleanup"></a>
+## Cleaning Up Resource\-Based Policies<a name="permissions-resource-cleanup"></a>
 
 To view a function's resource\-based policy, use the `get-policy` command\.
 
@@ -140,7 +151,7 @@ To remove permissions from your function, use `remove-permission`\.
 $ aws lambda remove-permission --function-name example --statement-id sns
 ```
 
-Use the `get-layer-version-policy` command to view the permissions on a layer, and `remove-layer-version-permission` to remove statements from the policy\.
+Use the `get-layer-version-policy` command to view the permissions on a layer\. Use `remove-layer-version-permission` to remove statements from the policy\.
 
 ```
 $ aws lambda get-layer-version-policy --layer-name my-layer --version-number 3 --output text

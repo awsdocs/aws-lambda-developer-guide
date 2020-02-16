@@ -107,7 +107,7 @@ Lambda needs the following permissions to manage resources that are related to y
 
 The `AWSLambdaKinesisExecutionRole` managed policy includes these permissions\. For more information, see [AWS Lambda Execution Role](lambda-intro-execution-role.md)\.
 
-To send records of failed batches to a queue or topic, your function needs additional permissions\.
+To send records of failed batches to a queue or topic, your function needs additional permissions\. Each destination service requires a different permission, as follows:
 + **Amazon SQS** – [sqs:SendMessage](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html)
 + **Amazon SNS** – [sns:Publish](https://docs.aws.amazon.com/sns/latest/api/API_Publish.html)
 
@@ -251,7 +251,25 @@ If the function receives the records but returns an error, Lambda retries until 
 
 If the error handling measures fail, Lambda discards the records and continues processing batches from the stream\. With the default settings, this means that a bad record can block processing on the affected shard for up to one week\. To avoid this, configure your function's event source mapping with a reasonable number of retries and a maximum record age that fits your use case\.
 
-To retain a record of discarded batches, configure an on\-failure destination\. Lambda sends a document to the destination queue or topic with details about the batch\.
+To retain a record of discarded batches, configure a failed\-event destination\. Lambda sends a document to the destination queue or topic with details about the batch\.
+
+**To configure a destination for failed\-event records**
+
+1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+
+1. Choose a function\.
+
+1. Under **Designer**, choose **Add destination**\.
+
+1. For **Source**, choose **Stream invocation**\.
+
+1. For **Stream**, choose a stream that is mapped to the function\.
+
+1. For **Destination type**, choose the type of resource that receives the invocation record\.
+
+1. For **Destination**, choose a resource\.
+
+1. Choose **Save**\.
 
 The following example shows an invocation record for a Kinesis stream\.
 

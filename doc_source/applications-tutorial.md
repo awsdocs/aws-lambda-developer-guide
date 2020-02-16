@@ -1,6 +1,6 @@
 # Creating an Application with Continuous Delivery in the Lambda Console<a name="applications-tutorial"></a>
 
-You can use the Lambda console to create an application with an integrated continuous delivery pipeline\. With continuous delivery, every change that you push to your source control repository triggers a pipeline that builds and deploys your application automatically\. The Lambda console provides templates to build common application types with sample code and templates that create supporting resources\.
+You can use the Lambda console to create an application with an integrated continuous delivery pipeline\. With continuous delivery, every change that you push to your source control repository triggers a pipeline that builds and deploys your application automatically\. The Lambda console provides starter projects for common application types with Node\.js sample code and templates that create supporting resources\.
 
 In this tutorial, you create the following resources\.
 + **Application** – A Node\.js Lambda function, build specification, and AWS Serverless Application Model \(AWS SAM\) template\.

@@ -1,6 +1,6 @@
 # Asynchronous Invocation<a name="invocation-async"></a>
 
-Several AWS services, such as Amazon Simple Storage Service and Amazon Simple Notification Service, invoke functions asynchronously to process events\. When you invoke a function asynchronously, you don't wait for a response from the function code\. You hand off the event to Lambda and Lambda handles the rest\. You can configure how Lambda handles errors, and send invocation records to a downstream resource to chain together components of your application\.
+Several AWS services, such as Amazon Simple Storage Service \(Amazon S3\) and Amazon Simple Notification Service \(Amazon SNS\), invoke functions asynchronously to process events\. When you invoke a function asynchronously, you don't wait for a response from the function code\. You hand off the event to Lambda and Lambda handles the rest\. You can configure how Lambda handles errors, and can send invocation records to a downstream resource to chain together components of your application\.
 
 The following diagram shows clients invoking a Lambda function asynchronously\. Lambda queues the events before sending them to the function\.
 
@@ -37,13 +37,13 @@ You can also configure Lambda to send an invocation record to another service\. 
 + **AWS Lambda** – A Lambda function\.
 + **Amazon EventBridge** – An EventBridge event bus\.
 
-The invocation record contains details about the request and response in JSON format\. You can configure separate destinations for events that are processesed successfully, and events that fail all processing attempts\. Alternatively, you can configure an SQS queue or SNS topic as a [dead\-letter queue](#dlq) for discarded events\. For dead\-letter queues, Lambda only sends the content of the event, without details about the response\.
+The invocation record contains details about the request and response in JSON format\. You can configure separate destinations for events that are processed successfully, and events that fail all processing attempts\. Alternatively, you can configure an SQS queue or SNS topic as a [dead\-letter queue](#dlq) for discarded events\. For dead\-letter queues, Lambda only sends the content of the event, without details about the response\.
 
 **Topics**
 + [Configuring Error Handling for Asynchronous Invocation](#invocation-async-errors)
 + [Configuring Destinations for Asynchronous Invocation](#invocation-async-destinations)
 + [Asynchronous Invocation Configuration API](#invocation-async-api)
-+ [AWS Lambda Function Dead Letter Queues](#dlq)
++ [AWS Lambda Function Dead\-Letter Queues](#dlq)
 
 ## Configuring Error Handling for Asynchronous Invocation<a name="invocation-async-errors"></a>
 
@@ -63,17 +63,17 @@ Use the Lambda console to configure error handling settings on a function, a ver
 
 1. Choose **Save**\.
 
-When an invocation event exceeds the maximum age or fails all retry attempts, Lambda discards it\. To retain a copy of discarded events, configure an on\-failure destination\.
+When an invocation event exceeds the maximum age or fails all retry attempts, Lambda discards it\. To retain a copy of discarded events, configure a failed\-event destination\.
 
 ## Configuring Destinations for Asynchronous Invocation<a name="invocation-async-destinations"></a>
 
 To send records of asynchronous invocations to another service, add a destination to your function\. You can configure separate destinations for events that fail processing and events that are successfully processed\. Like error handling settings, you can configure destinations on a function, a version, or an alias\.
 
-The following example shows a function processing asynchronous invocations\. When the function returns a success response or exits without throwing an error, Lambda sends a record of the invocation to an EventBridge event bus\. When an event fails all processing attempts, Lambda sends an invocation record to an Amazon SQS queue\.
+The following example shows a function that is processing asynchronous invocations\. When the function returns a success response or exits without throwing an error, Lambda sends a record of the invocation to an EventBridge event bus\. When an event fails all processing attempts, Lambda sends an invocation record to an Amazon SQS queue\.
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/features-destinations.png)
 
-To send events to a destination, your function needs additional permissions\. Add a policy with the required permissions to your function's [execution role](lambda-intro-execution-role.md)\.
+To send events to a destination, your function needs additional permissions\. Add a policy with the required permissions to your function's [execution role](lambda-intro-execution-role.md)\. Each destination service requires a different permission, as follows:
 + **Amazon SQS** – [sqs:SendMessage](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html) 
 + **Amazon SNS** – [sns:Publish](https://docs.aws.amazon.com/sns/latest/api/API_Publish.html) 
 + **Lambda** – [lambda:InvokeFunction](https://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html)
@@ -91,15 +91,17 @@ Add destinations to your function in the Lambda console's function designer\.
 
 1. For **Source**, choose **Asynchronous invocation**\.
 
-1. For **Condition** choose from the following options\.
+1. For **Condition**, choose from the following options:
    + **On failure** – Send a record when the event fails all processing attempts or exceeds the maximum age\.
    + **On success** – Send a record when the function successfully processes an asynchronous invocation\.
 
-1. For **Destination**, enter the ARN of an SQS queue, SNS topic, Lambda function, or EventBridge event bus\.
+1. For **Destination type**, choose the type of resource that receives the invocation record\.
+
+1. For **Destination**, choose a resource\.
 
 1. Choose **Save**\.
 
-When an invocation matches the condition, Lambda sends a JSON document with details about the invocation to the destination\. The following example shows an invocation record for an event that failed 3 processing attempts due to a function error\.
+When an invocation matches the condition, Lambda sends a JSON document with details about the invocation to the destination\. The following example shows an invocation record for an event that failed three processing attempts due to a function error\.
 
 **Example Invocation Record**  
 
@@ -178,7 +180,7 @@ $ aws lambda update-function-event-invoke-config --function-name error \
 }
 ```
 
-## AWS Lambda Function Dead Letter Queues<a name="dlq"></a>
+## AWS Lambda Function Dead\-Letter Queues<a name="dlq"></a>
 
 As an alternative to an [on\-failure destination](#invocation-async-destinations), you can configure your function with a dead\-letter queue to save discarded events for further processing\. A dead\-letter queue acts the same as an on\-failure destination in that it is used when an event fails all processing attempts or expires without being processed\. However, a dead\-letter queue is part of a function's version\-specific configuration, so it is locked in when you publish a version\. On\-failure destinations also support additional targets and include details about the function's response in the invocation record\.
 

@@ -18,7 +18,7 @@ Your function needs permission to call CloudWatch Logs and X\-Ray\. Update its [
 + **AWSLambdaBasicExecutionRole**
 + **AWSXrayWriteOnlyAccess**
 
-When you add permissions to your function, make an update to it's code or configuration as well\. This forces running instances of your function, which have out of date credentials, to stop and be replaced\.
+When you add permissions to your function, make an update to its code or configuration as well\. This forces running instances of your function, which have out\-of\-date credentials, to stop and be replaced\.
 
 **Issue: \(Node\.js\)** *Function returns before code finishes executing*
 

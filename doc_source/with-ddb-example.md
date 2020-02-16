@@ -233,7 +233,7 @@ You can get the list of event source mappings by running the following command\.
 $ aws lambda list-event-source-mappings
 ```
 
-The list returns all of the event source mappings you created, and for each mapping it shows the `LastProcessingResult`, among other things\. This field is used to provide an informative message if there are any problems\. Values such as `No records processed` \(indicates that AWS Lambda has not started polling or that there are no records in the stream\) and `OK` \(indicates AWS Lambda successfully read records from the stream and invoked your Lambda function\) indicate that there no issues\. If there are issues, you receive an error message\.
+The list returns all of the event source mappings you created, and for each mapping it shows the `LastProcessingResult`, among other things\. This field is used to provide an informative message if there are any problems\. Values such as `No records processed` \(indicates that AWS Lambda has not started polling or that there are no records in the stream\) and `OK` \(indicates AWS Lambda successfully read records from the stream and invoked your Lambda function\) indicate that there are no issues\. If there are issues, you receive an error message\.
 
 If you have a lot of event source mappings, use the function name parameter to narrow down the results\.
 
@@ -245,7 +245,7 @@ $ aws lambda list-event-source-mappings --function-name ProcessDynamoDBRecords
 
 Test the end\-to\-end experience\. As you perform table updates, DynamoDB writes event records to the stream\. As AWS Lambda polls the stream, it detects new records in the stream and executes your Lambda function on your behalf by passing events to the function\. 
 
-1. In the DynamoDB console, add, update, delete items to the table\. DynamoDB writes records of these actions to the stream\.
+1. In the DynamoDB console, add, update, and delete items to the table\. DynamoDB writes records of these actions to the stream\.
 
 1. AWS Lambda polls the stream and when it detects updates to the stream, it invokes your Lambda function by passing in the event data it finds in the stream\.
 
