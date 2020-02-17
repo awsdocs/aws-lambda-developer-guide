@@ -9,16 +9,17 @@ The following is a Lambda function example that implements the handler that uses
 ```
 package example;
 
-import java.io.InputStream;
-import java.io.OutputStream;
-import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
 import com.amazonaws.services.lambda.runtime.Context; 
+import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
 
-public class Hello implements RequestStreamHandler{
-    public void handler(InputStream inputStream, OutputStream outputStream, Context context) throws IOException {
+import java.io.InputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+
+public class Hello implements RequestStreamHandler {
+    public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context) throws IOException {
         int letter;
-        while((letter = inputStream.read()) != -1)
-        {
+        while ((letter = inputStream.read()) != -1) {
             outputStream.write(Character.toUpperCase(letter));
         }
     }
@@ -27,6 +28,7 @@ public class Hello implements RequestStreamHandler{
 
 **Dependencies**
 + `aws-lambda-java-core`
-+ **Handler** – `example.Hello::handler`
+
+**Handler** - `example.Hello::handleRequest`
 
 The event received processed by the function must be valid JSON but the output stream type is not restricted\. Any bytes are supported\.
