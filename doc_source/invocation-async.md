@@ -230,6 +230,6 @@ Lambda sends the event to the dead\-letter queue as\-is, with additional informa
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/invocation-dlq-attributes.png)
 
-If Lambda can't send a message to the dead\-letter queue, it deletes the event and emits the [DeadLetterErrors](monitoring-functions-metrics.md) metric\. This can happen because of lack of permissions, or if the total size of the message exceeds the limit for the target queue or topic\. For example, if an Amazon SNS notification with a body close to 256 KB triggers a function that results in an error, the additional event data added by Amazon SNS, combined with the attributes added by Lambda, can cause the message to exceed the maximum size allowed in the dead\-letter queue\. 
+If Lambda can't send a message to the dead\-letter queue, it deletes the event and emits the [DeadLetterErrors](monitoring-metrics.md) metric\. This can happen because of lack of permissions, or if the total size of the message exceeds the limit for the target queue or topic\. For example, if an Amazon SNS notification with a body close to 256 KB triggers a function that results in an error, the additional event data added by Amazon SNS, combined with the attributes added by Lambda, can cause the message to exceed the maximum size allowed in the dead\-letter queue\. 
 
 If you're using Amazon SQS as an event source, configure a dead\-letter queue on the Amazon SQS queue itself and not on the Lambda function\. For more information, see [Using AWS Lambda with Amazon SQS](with-sqs.md)\.

@@ -51,7 +51,7 @@ The following are recommended best practices for using AWS Lambda:
   + In the case of **UpdateFunctionConfiguration**, it could result in duplicate invocations of the function\.
 
 ## Alarming and Metrics<a name="alarming-metrics"></a>
-+ **Use [AWS Lambda Metrics](monitoring-functions-metrics.md) and [ CloudWatch Alarms](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html)** instead of creating or updating a metric from within your Lambda function code\. It's a much more efficient way to track the health of your Lambda functions, allowing you to catch issues early in the development process\. For instance, you can configure an alarm based on the expected duration of your Lambda function execution time in order to address any bottlenecks or latencies attributable to your function code\.
++ **Use [Working with AWS Lambda Function Metrics](monitoring-metrics.md) and [ CloudWatch Alarms](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html)** instead of creating or updating a metric from within your Lambda function code\. It's a much more efficient way to track the health of your Lambda functions, allowing you to catch issues early in the development process\. For instance, you can configure an alarm based on the expected duration of your Lambda function execution time in order to address any bottlenecks or latencies attributable to your function code\.
 + **Leverage your logging library and [AWS Lambda Metrics and Dimensions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/lam-metricscollected.html)** to catch app errors \(e\.g\. ERR, ERROR, WARNING, etc\.\) 
 
 ## Stream Event Invokes<a name="stream-events"></a>

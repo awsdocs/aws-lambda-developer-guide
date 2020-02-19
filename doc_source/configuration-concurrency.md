@@ -106,7 +106,7 @@ Lambda emits the following metrics for provisioned concurrency:
 + `ProvisionedConcurrencySpilloverInvocations`
 + `ProvisionedConcurrencyUtilization`
 
-For details, see [AWS Lambda Metrics](monitoring-functions-metrics.md)\.
+For details, see [Working with AWS Lambda Function Metrics](monitoring-metrics.md)\.
 
 ## Configuring Concurrency with the Lambda API<a name="configuration-concurrency-api"></a>
 

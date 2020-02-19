@@ -175,7 +175,7 @@ Amazon's trademarks and trade dress may not be used in
    + [AWS Lambda Function Errors in PowerShell](powershell-exceptions.md)
 + [Monitoring and Troubleshooting Lambda Applications](lambda-monitoring.md)
    + [Monitoring Functions in the AWS Lambda Console](monitoring-functions-access-metrics.md)
-   + [AWS Lambda Metrics](monitoring-functions-metrics.md)
+   + [Working with AWS Lambda Function Metrics](monitoring-metrics.md)
    + [Accessing Amazon CloudWatch Logs for AWS Lambda](monitoring-functions-logs.md)
    + [Using AWS X-Ray](lambda-x-ray.md)
       + [Tracing Lambda-Based Applications with AWS X-Ray](using-x-ray.md)

@@ -19,9 +19,10 @@ The console provides the following graphs\.
 + **Error count and success rate \(%\)** – The number of errors and the percentage of executions that completed without error\.
 + **Throttles** – The number of times that execution failed due to concurrency limits\.
 + **IteratorAge** – For stream event sources, the age of the last item in the batch when Lambda received it and invoked the function\.
-+ **DeadLetterErrors** – The number of events that Lambda attempted to write to a dead\-letter queue, but failed\.
++ **Async delivery failures** – The number of errors that occurred when Lambda attempted to write to a destination or dead\-letter queue\.
++ **Concurrent executions** – The number of function instances that are processing events.
 
-To see the definition of a graph in CloudWatch, choose **View in metrics** from the menu in the top right of the graph\. For more information about the metrics that Lambda records, see [AWS Lambda Metrics](monitoring-functions-metrics.md)\.
+To see the definition of a graph in CloudWatch, choose **View in metrics** from the menu in the top right of the graph\. For more information about the metrics that Lambda records, see [Working with AWS Lambda Function Metrics](monitoring-metrics.md)\.
 
 The console also shows reports from CloudWatch Logs Insights that are compiled from information in your function's logs\. You can add these reports to a custom dashboard in the CloudWatch Logs console\. Use the queries as a starting point for your own reports\.
 

@@ -4,7 +4,7 @@ AWS Lambda automatically monitors Lambda functions on your behalf and reports me
 
 You can view request rates and error rates for each of your Lambda functions by using the AWS Lambda console, the CloudWatch console, and other AWS resources\. The following topics describe Lambda CloudWatch metrics and how to access them\.
 + [Monitoring Functions in the AWS Lambda Console](monitoring-functions-access-metrics.md)
-+ [AWS Lambda Metrics](monitoring-functions-metrics.md)
++ [Working with AWS Lambda Function Metrics](monitoring-metrics.md)
 
 You can insert logging statements into your code to help you validate that your code is working as expected\. Lambda automatically integrates with Amazon CloudWatch Logs\. It pushes all logs from your code to a CloudWatch Logs group that is associated with a Lambda function \(/aws/lambda/*<function name>*\)\. To learn more about log groups and accessing them through the CloudWatch console, see [Working with Log Groups and Log Streams](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html) in the *Amazon CloudWatch Logs User Guide*\. For information about how to access CloudWatch log entries, see [Accessing Amazon CloudWatch Logs for AWS Lambda](monitoring-functions-logs.md)\.
 

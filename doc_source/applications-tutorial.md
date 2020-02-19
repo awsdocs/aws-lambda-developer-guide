@@ -59,7 +59,7 @@ Create an application in the Lambda console\.
 1. Configure application settings\.
    + **Application name** – **my\-app**\.
    + **Application description** – **my application**\.
-   + **Runtime** – **Node\.js 10\.x**\. Only Node.js runtime is supported
+   + **Runtime** – **Node\.js 10\.x**\.
    + **Repository provider** – **CodeCommit**\.
    + **Repository provider** – **my\-app\-repo**\.
    + **Permissions** – **Create roles and permissions boundary**\.

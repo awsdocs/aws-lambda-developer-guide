@@ -120,5 +120,5 @@ When you configure traffic weights between two function versions, there are two 
 
   `19:44:37 START RequestId: request id Version: $version ` 
 
-  For alias invocations, Lambda uses the `Executed Version` dimension to filter the metric data by the executed version\. For more information, see [AWS Lambda CloudWatch Dimensions](monitoring-functions-metrics.md#lambda-cloudwatch-dimensions)\.
+  For alias invocations, Lambda uses the `Executed Version` dimension to filter the metric data by the executed version\. For more information, see [Working with AWS Lambda Function Metrics](monitoring-metrics.md)\.
 + **Response payload \(synchronous invocations\)** – Responses to synchronous function invocations include an `x-amz-executed-version` header to indicate which function version has been invoked\.

@@ -64,4 +64,4 @@ You can monitor concurrency levels in your account by using the following metric
 + `ProvisionedConcurrencySpilloverInvocations`
 + `ProvisionedConcurrencyUtilization`
 
-For more information, see [AWS Lambda Metrics](monitoring-functions-metrics.md)\.
+For more information, see [Working with AWS Lambda Function Metrics](monitoring-metrics.md)\.
