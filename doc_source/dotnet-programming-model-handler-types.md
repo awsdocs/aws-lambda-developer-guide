@@ -34,6 +34,7 @@ namespace Example
     {
        //function logic
     }
+  }
 }
 ```
 
@@ -113,6 +114,7 @@ namespace Example
     {
        //function logic
     }
+  }
 }
 ```
 
