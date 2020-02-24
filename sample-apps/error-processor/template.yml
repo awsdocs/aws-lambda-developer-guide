@@ -50,27 +50,27 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       InlineCode: |
-        var aws = require("aws-sdk")
+        var aws = require('aws-sdk')
         var response = require('cfn-response')
-        exports.handler = function(event, context) {
-            console.log("REQUEST RECEIVED:\n" + JSON.stringify(event))
-            // For Delete requests, immediately send a SUCCESS response.
-            if (event.RequestType == "Delete") {
-                response.send(event, context, "SUCCESS")
-                return
-            }
-            var responseStatus = "FAILED"
-            var responseData = {}
-            var functionName = event.ResourceProperties.FunctionName
-            var lambda = new aws.Lambda()
-            lambda.invoke({ FunctionName: functionName }, function(err, invokeResult) {
-                if (err) {
-                    responseData = {Error: "Invoke call failed"}
-                    console.log(responseData.Error + ":\n", err)
-                }
-                else responseStatus = "SUCCESS"
-                response.send(event, context, responseStatus, responseData)
-            })
+        exports.handler = async function(event, context) {
+          console.log("REQUEST RECEIVED:\n" + JSON.stringify(event))
+          // For Delete requests, immediately send a SUCCESS response.
+          if (event.RequestType == "Delete") {
+            return await response.send(event, context, "SUCCESS")
+          }
+          var responseStatus = "FAILED"
+          var responseData = {}
+          var functionName = event.ResourceProperties.FunctionName
+          var lambda = new aws.Lambda()
+          try {
+            let invokeResponse = await lambda.invoke({ FunctionName: functionName }).promise()
+          } catch(err) {
+            responseData = {Error: "Invoke call failed"}
+            console.log(responseData.Error + ":\n", err)
+            return await response.send(event, context, responseStatus, responseData)
+          }
+          responseStatus = "SUCCESS"
+          return await response.send(event, context, responseStatus, responseData)
         }
       Description: Invoke a function to create a log stream.
       Role: !GetAtt role.Arn
