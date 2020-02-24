@@ -1,6 +1,6 @@
 # Using AWS Lambda with Other Services<a name="lambda-services"></a>
 
-AWS Lambda integrates with other AWS services to invoke functions\. You can configure triggers to invoke a function in response to resource lifecycle events, respond to incoming HTTP requests, consume events from a queue, or [run on a schedule](with-scheduled-events.md)\.
+AWS Lambda integrates with other AWS services to invoke functions\. You can configure triggers to invoke a function in response to resource lifecycle events, respond to incoming HTTP requests, consume events from a queue, or [run on a schedule](services-cloudwatchevents.md)\.
 
 Each service that integrates with Lambda sends data to your function in JSON as an event\. The structure of the event document is different for each event type, and contains data about the resource or request that triggered the function\. Lambda runtimes convert the event into an object and pass it to your function\.
 
@@ -41,9 +41,10 @@ The following example shows a test event from an [Application Load Balancer](ser
 
 **Note**  
 The Lambda runtime converts the event document into an object and passes it to your [function handler](gettingstarted-concepts.md)\. For compiled languages, Lambda provides definitions for event types in a library\. See the following topics for more information\.  
-[Building Lambda Functions with Java](java-programming-model.md)
-[Building Lambda Functions with Go](go-programming-model.md)
-[Building Lambda Functions with C\#](dotnet-programming-model.md)
+[Building Lambda Functions with Java](lambda-java.md)
+[Building Lambda Functions with Go](lambda-golang.md)
+[Building Lambda Functions with C\#](lambda-csharp.md)
+[Building Lambda Functions with PowerShell](lambda-powershell.md)
 
 For services that generate a queue or data stream, you create an [event source mapping](invocation-eventsourcemapping.md) in Lambda and grant Lambda permission to access the other service in the [execution role](lambda-intro-execution-role.md)\. Lambda reads data from the other service, creates an event, and invokes your function\.
 
@@ -52,7 +53,7 @@ For services that generate a queue or data stream, you create an [event source m
 + [Amazon DynamoDB](with-ddb.md)
 + [Amazon Simple Queue Service](with-sqs.md)
 
-Other services invoke your function directly\. You grant the other service permission in the function's [resource\-based policy](access-control-resource-based.md), and configure the other service to generate events and invoke your function\. Depending on the service, the invocation can be synchronous or asynchronous\. For synchronous invocation, the other service waits for the response from your function and might [retry on errors](retries-on-errors.md)\.
+Other services invoke your function directly\. You grant the other service permission in the function's [resource\-based policy](access-control-resource-based.md), and configure the other service to generate events and invoke your function\. Depending on the service, the invocation can be synchronous or asynchronous\. For synchronous invocation, the other service waits for the response from your function and might [retry on errors](invocation-retries.md)\.
 
 **Services That Invoke Lambda Functions Synchronously**
 + [Elastic Load Balancing \(Application Load Balancer\)](services-alb.md)
@@ -65,7 +66,7 @@ Other services invoke your function directly\. You grant the other service permi
 + [AWS Step Functions](https://docs.aws.amazon.com/step-functions/latest/dg/connect-lambda.html)
 + [Amazon Simple Storage Service Batch](services-s3-batch.md)
 
-For asynchronous invocation, Lambda queues the event before passing it to your function\. The other service gets a success response as soon as the event is queued and isn't aware of what happens afterwards\. If an error occurs, Lambda handles [retries](retries-on-errors.md), and can send failed events to a [dead\-letter queue](invocation-async.md#dlq) that you configure\.
+For asynchronous invocation, Lambda queues the event before passing it to your function\. The other service gets a success response as soon as the event is queued and isn't aware of what happens afterwards\. If an error occurs, Lambda handles [retries](invocation-retries.md), and can send failed events to a [dead\-letter queue](invocation-async.md#dlq) that you configure\.
 
 **Services That Invoke Lambda Functions Asynchronously**
 + [Amazon Simple Storage Service](with-s3.md)
@@ -73,7 +74,7 @@ For asynchronous invocation, Lambda queues the event before passing it to your f
 + [Amazon Simple Email Service](services-ses.md)
 + [AWS CloudFormation](services-cloudformation.md)
 + [Amazon CloudWatch Logs](services-cloudwatchlogs.md)
-+ [Amazon CloudWatch Events](with-scheduled-events.md)
++ [Amazon CloudWatch Events](services-cloudwatchevents.md)
 + [AWS CodeCommit](services-codecommit.md)
 + [AWS Config](services-config.md)
 + [AWS IoT](services-iot.md)

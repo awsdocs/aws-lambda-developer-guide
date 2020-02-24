@@ -10,7 +10,7 @@ AWS Lambda supports multiple languages through the use of runtimes\. You choose 
 + Image – Custom
 + Linux kernel – 4\.14\.138\-99\.102\.amzn2\.x86\_64
 
-When your function is invoked, Lambda attempts to re\-use the execution environment from a previous invocation if one is available\. This saves time preparing the execution environment, and allows you to save resources like database connections and temporary files in the [execution context](running-lambda-code.md) to avoid creating them every time your function runs\.
+When your function is invoked, Lambda attempts to re\-use the execution environment from a previous invocation if one is available\. This saves time preparing the execution environment, and allows you to save resources like database connections and temporary files in the [execution context](runtimes-context.md) to avoid creating them every time your function runs\.
 
 A runtime can support a single version of a language, multiple versions of a language, or multiple languages\. Runtimes specific to a language or framework version are [deprecated](runtime-support-policy.md) when the version reaches end of life\.
 
@@ -37,6 +37,7 @@ A runtime can support a single version of a language, multiple versions of a lan
 
 | Name | Identifier | AWS SDK for Ruby | Operating System | 
 | --- | --- | --- | --- | 
+|  Ruby 2\.7  |  `ruby2.7`  |  3\.0\.1  |  Amazon Linux 2  | 
 |  Ruby 2\.5  |  `ruby2.5`  |  3\.0\.1  |  Amazon Linux  | 
 
 
@@ -64,7 +65,7 @@ A runtime can support a single version of a language, multiple versions of a lan
 To use other languages in Lambda, you can implement a [custom runtime](runtimes-custom.md)\. The Lambda execution environment provides a [runtime interface](runtimes-api.md) for getting invocation events and sending responses\. You can deploy a custom runtime alongside your function code, or in a [layer](configuration-layers.md)\.
 
 **Topics**
-+ [AWS Lambda Execution Context](running-lambda-code.md)
++ [AWS Lambda Execution Context](runtimes-context.md)
 + [Runtime Support Policy](runtime-support-policy.md)
 + [Custom AWS Lambda Runtimes](runtimes-custom.md)
 + [AWS Lambda Runtime Interface](runtimes-api.md)

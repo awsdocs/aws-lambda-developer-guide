@@ -92,7 +92,7 @@ $ aws kinesis register-stream-consumer --consumer-name con1 \
 
 To increase the speed at which your function processes records, add shards to your data stream\. Lambda processes records in each shard in order\. It stops processing additional records in a shard if your function returns an error\. With more shards, there are more batches being processed at once, which lowers the impact of errors on concurrency\.
 
-If your function can't scale up to handle the total number of concurrent batches, [request a limit increase](limits.md) or [reserve concurrency](configuration-concurrency.md) for your function\.
+If your function can't scale up to handle the total number of concurrent batches, [request a limit increase](gettingstarted-limits.md) or [reserve concurrency](configuration-concurrency.md) for your function\.
 
 ## Execution Role Permissions<a name="events-kinesis-permissions"></a>
 
@@ -134,7 +134,7 @@ Lambda supports the following options for Kinesis event sources\.
 **Event Source Options**
 + **Kinesis stream** – The Kinesis stream to read records from\.
 + **Consumer** \(optional\) – Use a stream consumer to read from the stream over a dedicated connection\.
-+ **Batch size** – The number of records to send to the function in each batch, up to 10,000\. Lambda passes all of the records in the batch to the function in a single call, as long as the total size of the events doesn't exceed the [payload limit](limits.md) for synchronous invocation \(6 MB\)\.
++ **Batch size** – The number of records to send to the function in each batch, up to 10,000\. Lambda passes all of the records in the batch to the function in a single call, as long as the total size of the events doesn't exceed the [payload limit](gettingstarted-limits.md) for synchronous invocation \(6 MB\)\.
 + **Batch window** – Specify the maximum amount of time to gather records before invoking the function, in seconds\.
 + **Starting position** – Process only new records, all existing records, or records created after a certain date\.
   + **Latest** – Process new records that are added to the stream\.

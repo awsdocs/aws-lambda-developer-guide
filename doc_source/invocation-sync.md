@@ -55,4 +55,4 @@ The `base64` utility is available on Linux, macOS, and [Ubuntu on Windows](https
 
 For more information about the `Invoke` API, including a full list of parameters, headers, and errors, see [Invoke](API_Invoke.md)\.
 
-When you invoke a function directly, you can check the response for errors and retry\. The AWS CLI and AWS SDK also automatically retry on client timeouts, throttling, and service errors\. For more information, see [Error Handling and Automatic Retries in AWS Lambda](retries-on-errors.md)\.
+When you invoke a function directly, you can check the response for errors and retry\. The AWS CLI and AWS SDK also automatically retry on client timeouts, throttling, and service errors\. For more information, see [Error Handling and Automatic Retries in AWS Lambda](invocation-retries.md)\.

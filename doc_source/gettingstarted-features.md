@@ -32,13 +32,13 @@ The runtime captures **logging** output from your function and sends it to Amazo
 Logging is subject to [CloudWatch Logs limits](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/cloudwatch_limits_cwl.html)\. Log data can be lost due to throttling or, in some cases, when an instance of your function is stopped\.
 
 For a hands\-on introduction to the programming model in your preferred programming language, see the following chapters\.
-+ [Building Lambda Functions with Node\.js](programming-model.md)
-+ [Building Lambda Functions with Python](python-programming-model.md)
++ [Building Lambda Functions with Node\.js](lambda-nodejs.md)
++ [Building Lambda Functions with Python](lambda-python.md)
 + [Building Lambda Functions with Ruby](lambda-ruby.md)
-+ [Building Lambda Functions with Java](java-programming-model.md)
-+ [Building Lambda Functions with Go](go-programming-model.md)
-+ [Building Lambda Functions with C\#](dotnet-programming-model.md)
-+ [Building Lambda Functions with PowerShell](powershell-programming-model.md)
++ [Building Lambda Functions with Java](lambda-java.md)
++ [Building Lambda Functions with Go](lambda-golang.md)
++ [Building Lambda Functions with C\#](lambda-csharp.md)
++ [Building Lambda Functions with PowerShell](lambda-powershell.md)
 
 Lambda scales your function by running additional instances of it as demand increases, and by stopping instances as demand decreases\. Unless noted otherwise, incoming requests might be processed out of order or concurrently\. Store your application's state in other services, and don't rely on instances of your function being long lived\. Use local storage and class\-level objects to increase performance, but keep the size of your deployment package and the amount of data that you transfer onto the execution environment to a minimum\.
 
@@ -47,13 +47,13 @@ Lambda scales your function by running additional instances of it as demand incr
 Your function's code consists of scripts or compiled programs and their dependencies\. When you author functions in the Lambda console or a toolkit, the client creates a ZIP archive of your code called a deployment package\. The client then sends the package to the Lambda service\. When you manage functions with the Lambda API, command line tools, or SDKs, you create the deployment package\. You also need to create a deployment package manually for compiled languages and to add dependencies to your function\.
 
 For language\-specific instructions, see the following topics\.
-+  [AWS Lambda Deployment Package in Node\.js](nodejs-create-deployment-pkg.md) 
-+  [AWS Lambda Deployment Package in Python](lambda-python-how-to-create-deployment-package.md) 
++  [AWS Lambda Deployment Package in Node\.js](nodejs-package.md) 
++  [AWS Lambda Deployment Package in Python](python-package.md) 
 +  [AWS Lambda Deployment Package in Ruby](ruby-package.md) 
-+  [AWS Lambda Deployment Package in Java](lambda-java-how-to-create-deployment-package.md) 
-+  [AWS Lambda Deployment Package in Go](lambda-go-how-to-create-deployment-package.md) 
-+  [AWS Lambda Deployment Package in C\#](lambda-dotnet-how-to-create-deployment-package.md) 
-+  [AWS Lambda Deployment Package in PowerShell](lambda-powershell-how-to-create-deployment-package.md) 
++  [AWS Lambda Deployment Package in Java](java-package.md) 
++  [AWS Lambda Deployment Package in Go](golang-package.md) 
++  [AWS Lambda Deployment Package in C\#](csharp-package.md) 
++  [AWS Lambda Deployment Package in PowerShell](powershell-package.md) 
 
 ## Layers<a name="gettingstarted-features-layers"></a>
 
@@ -67,7 +67,7 @@ Lambda manages the infrastructure that runs your code, and scales automatically 
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/features-scaling.png)
 
-For more information, see [AWS Lambda Function Scaling](scaling.md)\.
+For more information, see [AWS Lambda Function Scaling](invocation-scaling.md)\.
 
 ## Concurrency Controls<a name="gettingstarted-features-concurrency"></a>
 

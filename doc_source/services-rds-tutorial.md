@@ -131,7 +131,7 @@ db_name = "ExampleDB"
 **Dependencies**
 + `pymysql` – The Lambda function code uses this library to access your MySQL instance \(see [PyMySQL](https://pypi.python.org/pypi/PyMySQL)\) \.
 
-Install dependencies with Pip and create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Python](lambda-python-how-to-create-deployment-package.md)\.
+Install dependencies with Pip and create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Python](python-package.md)\.
 
 ## Create the Lambda Function<a name="vpc-rds-upload-deployment-pkg"></a>
 

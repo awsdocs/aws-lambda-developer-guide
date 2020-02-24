@@ -15,4 +15,4 @@ You can author functions in the Lambda console—or with an IDE toolkit, command
 + [AWS Lambda Concepts](gettingstarted-concepts.md)
 + [AWS Lambda Features](gettingstarted-features.md)
 + [Tools for Working With AWS Lambda](gettingstarted-tools.md)
-+ [AWS Lambda Limits](limits.md)
++ [AWS Lambda Limits](gettingstarted-limits.md)

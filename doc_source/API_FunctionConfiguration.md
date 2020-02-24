@@ -109,7 +109,7 @@ Required: No
  **Runtime**   <a name="SSS-Type-FunctionConfiguration-Runtime"></a>
 The runtime environment for the Lambda function\.  
 Type: String  
-Valid Values:` nodejs10.x | nodejs12.x | java8 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore2.1 | go1.x | ruby2.5 | provided`   
+Valid Values:` nodejs10.x | nodejs12.x | java8 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore2.1 | go1.x | ruby2.5 | ruby2.7 | provided`   
 Required: No
 
  **State**   <a name="SSS-Type-FunctionConfiguration-State"></a>

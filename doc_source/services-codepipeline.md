@@ -73,7 +73,7 @@ exports.handler = async (event) => {
 }
 ```
 
-For asynchronous invocation, Lambda queues the message and [retries](retries-on-errors.md) if your function returns an error\. Configure your function with a [destination](invocation-async.md#invocation-async-destinations) to retain events that your function could not process\.
+For asynchronous invocation, Lambda queues the message and [retries](invocation-retries.md) if your function returns an error\. Configure your function with a [destination](invocation-async.md#invocation-async-destinations) to retain events that your function could not process\.
 
 For details on configuring a pipeline to invoke a Lambda function, see [Invoke an AWS Lambda Function in a Pipeline](https://docs.aws.amazon.com/codepipeline/latest/userguide/actions-invoke-lambda-function.html) in the AWS CodePipeline User Guide\.
 

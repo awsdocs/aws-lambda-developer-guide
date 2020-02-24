@@ -70,10 +70,10 @@ If your function depends on libraries other than the AWS SDK for Ruby, install t
      adding: vendor/ (stored 0%)
      adding: vendor/bundle/ (stored 0%)
      adding: vendor/bundle/ruby/ (stored 0%)
-     adding: vendor/bundle/ruby/2.5.0/ (stored 0%)
-     adding: vendor/bundle/ruby/2.5.0/build_info/ (stored 0%)
-     adding: vendor/bundle/ruby/2.5.0/cache/ (stored 0%)
-     adding: vendor/bundle/ruby/2.5.0/cache/aws-eventstream-1.0.1.gem (deflated 36%)
+     adding: vendor/bundle/ruby/2.7.0/ (stored 0%)
+     adding: vendor/bundle/ruby/2.7.0/build_info/ (stored 0%)
+     adding: vendor/bundle/ruby/2.7.0/cache/ (stored 0%)
+     adding: vendor/bundle/ruby/2.7.0/cache/aws-eventstream-1.0.1.gem (deflated 36%)
    ...
    ```
 

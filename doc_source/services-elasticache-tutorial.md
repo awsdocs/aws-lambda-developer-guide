@@ -101,7 +101,7 @@ def handler(event, context):
 +  [pymemcache](https://pypi.python.org/pypi/pymemcache) – The Lambda function code uses this library to create a `HashClient` object to set and get items from memcache\. 
 + [elasticache\-auto\-discovery](https://pypi.python.org/pypi/elasticache-auto-discovery) – The Lambda function uses this library to get the nodes in your Amazon ElastiCache cluster\.
 
-Install dependencies with Pip and create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Python](lambda-python-how-to-create-deployment-package.md)\.
+Install dependencies with Pip and create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Python](python-package.md)\.
 
 ## Create the Lambda Function<a name="vpc-ec-upload-deployment-pkg"></a>
 

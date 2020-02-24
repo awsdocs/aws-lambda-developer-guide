@@ -2,7 +2,7 @@
 
 Grants an AWS service or another account permission to use a function\. You can apply the policy at the function level, or specify a qualifier to restrict access to a single version or alias\. If you use a qualifier, the invoker must use the full Amazon Resource Name \(ARN\) of that version or alias to invoke the function\.
 
-To grant permission to another account, specify the account ID as the `Principal`\. For AWS services, the principal is a domain\-style identifier defined by the service, like `s3.amazonaws.com` or `sns.amazonaws.com`\. For AWS services, you can also specify the ARN or owning account of the associated resource as the `SourceArn` or `SourceAccount`\. If you grant permission to a service principal without specifying the source, other accounts could potentially configure resources in their account to invoke your Lambda function\.
+To grant permission to another account, specify the account ID as the `Principal`\. For AWS services, the principal is a domain\-style identifier defined by the service, like `s3.amazonaws.com` or `sns.amazonaws.com`\. For AWS services, you can also specify the ARN of the associated resource as the `SourceArn`\. If you grant permission to a service principal without specifying the source, other accounts could potentially configure resources in their account to invoke your Lambda function\.
 
 This action adds a statement to a resource\-based permissions policy for the function\. For more information about function policies, see [Lambda Function Policies](https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html)\. 
 
@@ -72,7 +72,7 @@ Type: String
 Required: No
 
  ** [SourceAccount](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-SourceAccount"></a>
-For AWS services, the ID of the account that owns the resource\. Use this instead of `SourceArn` to grant permission to resources that are owned by another account \(for example, all of an account's Amazon S3 buckets\)\. Or use it together with `SourceArn` to ensure that the resource is owned by the specified account\. For example, an Amazon S3 bucket could be deleted by its owner and recreated by another account\.  
+For Amazon S3, the ID of the account that owns the resource\. Use this together with `SourceArn` to ensure that the resource is owned by the specified account\. It is possible for an Amazon S3 bucket to be deleted by its owner and recreated by another account\.  
 Type: String  
 Pattern: `\d{12}`   
 Required: No

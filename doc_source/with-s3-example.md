@@ -59,7 +59,7 @@ Follow the steps to create buckets and upload an object\.
 
 1. Open the [Amazon S3 console](https://console.aws.amazon.com/s3)\.
 
-1. Create two buckets\. The target bucket name must be *source* followed by **-resized**, where *source* is the name of the bucket you want to use for the source\. For example, `mybucket` and `mybucket-resized`\.
+1. Create two buckets\. The target bucket name must be *source* followed by **\-resized**, where *source* is the name of the bucket you want to use for the source\. For example, `mybucket` and `mybucket-resized`\.
 
 1. In the source bucket, upload a \.jpg object, `HappyFace.jpg`\. 
 

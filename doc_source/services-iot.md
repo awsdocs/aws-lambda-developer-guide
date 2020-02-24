@@ -18,7 +18,7 @@ The following example shows a moisture reading from a greenhouse sensor\. The **
 }
 ```
 
-For asynchronous invocation, Lambda queues the message and [retries](retries-on-errors.md) if your function returns an error\. Configure your function with a [destination](invocation-async.md#invocation-async-destinations) to retain events that your function could not process\.
+For asynchronous invocation, Lambda queues the message and [retries](invocation-retries.md) if your function returns an error\. Configure your function with a [destination](invocation-async.md#invocation-async-destinations) to retain events that your function could not process\.
 
 You need to grant permission for the AWS IoT service to invoke your Lambda function\. Use the `add-permission` command to add a permission statement to your function's resource\-based policy\.
 

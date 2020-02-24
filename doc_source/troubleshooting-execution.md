@@ -26,21 +26,21 @@ Many libraries, including the AWS SDK, operate asynchronously\. When you make a 
 
 To wait for the promise to resolve into a response, use the `await` keyword\. This blocks your handler code from executing until the promise is resolved into an object that contains the response\. If you don't need to use the data from the response in your code, you can return the promise directly to the runtime\.
 
-Some libraries don't return promises but can be wrapped in code that does\. For more information, see [AWS Lambda Function Handler in Node\.js](nodejs-prog-model-handler.md)\.
+Some libraries don't return promises but can be wrapped in code that does\. For more information, see [AWS Lambda Function Handler in Node\.js](nodejs-handler.md)\.
 
 **Issue:** *The AWS SDK included on the runtime is not the latest version*
 
 **Issue:** *The AWS SDK included on the runtime updates automatically*
 
 Runtimes for scripting languages include the AWS SDK and are periodically updated to the latest version\. The current version for each runtime is listed on [runtimes page](lambda-runtimes.md)\. To use a newer version of the AWS SDK, or to lock your functions to a specific version, you can bundle the library with your function code, or [create a Lambda layer](configuration-layers.md)\. For details on creating a deployment package with dependencies, see the following topics:
-+  [AWS Lambda Deployment Package in Node\.js](nodejs-create-deployment-pkg.md) 
-+  [AWS Lambda Deployment Package in Python](lambda-python-how-to-create-deployment-package.md) 
++  [AWS Lambda Deployment Package in Node\.js](nodejs-package.md) 
++  [AWS Lambda Deployment Package in Python](python-package.md) 
 +  [AWS Lambda Deployment Package in Ruby](ruby-package.md) 
-+  [AWS Lambda Deployment Package in Java](lambda-java-how-to-create-deployment-package.md) 
-+  [AWS Lambda Deployment Package in Go](lambda-go-how-to-create-deployment-package.md) 
-+  [AWS Lambda Deployment Package in C\#](lambda-dotnet-how-to-create-deployment-package.md) 
-+  [AWS Lambda Deployment Package in PowerShell](lambda-powershell-how-to-create-deployment-package.md) 
++  [AWS Lambda Deployment Package in Java](java-package.md) 
++  [AWS Lambda Deployment Package in Go](golang-package.md) 
++  [AWS Lambda Deployment Package in C\#](csharp-package.md) 
++  [AWS Lambda Deployment Package in PowerShell](powershell-package.md) 
 
 **Issue:** \(Python\) *Some libraries don't load correctly from the deployment package*
 
-Libraries with extension modules written in C or C\+\+ must be compiled in an environment with the same processor architecture as Lambda \(Amazon Linux\)\. For more information, see [AWS Lambda Deployment Package in Python](lambda-python-how-to-create-deployment-package.md)\.
+Libraries with extension modules written in C or C\+\+ must be compiled in an environment with the same processor architecture as Lambda \(Amazon Linux\)\. For more information, see [AWS Lambda Deployment Package in Python](python-package.md)\.

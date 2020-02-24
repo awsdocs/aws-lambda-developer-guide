@@ -59,7 +59,7 @@ In the [execution role](lambda-intro-execution-role.md) for the function, set a 
 
 If your function uses the AWS SDK to manage Amazon S3 resources, you need to add Amazon S3 permissions in the execution role\. 
 
-When the job executes, Amazon S3 starts multiple function instances to process the Amazon S3 objects in parallel, up to the [concurrency limit](scaling.md) of the function\. Amazon S3 limits the initial ramp\-up of instances to avoid excess cost for smaller jobs\. 
+When the job executes, Amazon S3 starts multiple function instances to process the Amazon S3 objects in parallel, up to the [concurrency limit](invocation-scaling.md) of the function\. Amazon S3 limits the initial ramp\-up of instances to avoid excess cost for smaller jobs\. 
 
 If the Lambda function returns a `TemporaryFailure` response code, Amazon S3 retries the operation\. 
 

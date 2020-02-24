@@ -4,7 +4,7 @@ At the time you create a Lambda function you specify a handler that AWS Lambda c
 
 Lambda supports two approaches for creating a handler: 
 + Loading the handler method directly without having to implement an interface\. This section describes this approach\.
-+  Implementing standard interfaces provided as part of `aws-lambda-java-core` library \(interface approach\)\. For more information, see [Using Provided Interfaces for Java Function Handlers in AWS Lambda](java-handler-using-predefined-interfaces.md)\. 
++  Implementing standard interfaces provided as part of `aws-lambda-java-core` library \(interface approach\)\. For more information, see [Using Provided Interfaces for Java Function Handlers in AWS Lambda](java-handler-interfaces.md)\. 
 
 The general syntax for the handler is as follows:
 
@@ -27,7 +27,7 @@ In the syntax, note the following:
 
     For example `S3Event` is one of the POJOs predefined in the library that provides methods for you to easily read information from the incoming Amazon S3 event\.
   + You can also write your own POJO class\. AWS Lambda will automatically serialize and deserialize input and output JSON based on the POJO type\. 
-+ You can omit the `Context` object from the handler method signature if it isn't needed\. For more information, see [AWS Lambda Context Object in Java](java-context-object.md)\.
++ You can omit the `Context` object from the handler method signature if it isn't needed\. For more information, see [AWS Lambda Context Object in Java](java-context.md)\.
 
 For example, consider the following Java example code\. 
 
@@ -73,6 +73,6 @@ public class Hello {
 AWS Lambda supports the String, Integer, Boolean, Map, and List types\.
 
 **Topics**
-+ [Using POJO Input and Output Types for Java Functions in AWS Lambda](java-handler-io-type-pojo.md)
-+ [Using Stream Input and Output Types for Java Functions in AWS Lambda](java-handler-io-type-stream.md)
-+ [Using Provided Interfaces for Java Function Handlers in AWS Lambda](java-handler-using-predefined-interfaces.md)
++ [Using POJO Input and Output Types for Java Functions in AWS Lambda](java-handler-pojo.md)
++ [Using Stream Input and Output Types for Java Functions in AWS Lambda](java-handler-stream.md)
++ [Using Provided Interfaces for Java Function Handlers in AWS Lambda](java-handler-interfaces.md)

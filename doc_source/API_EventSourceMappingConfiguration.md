@@ -43,7 +43,7 @@ Type: String
 Required: No
 
  **MaximumBatchingWindowInSeconds**   <a name="SSS-Type-EventSourceMappingConfiguration-MaximumBatchingWindowInSeconds"></a>
-The maximum amount of time to gather records before invoking the function, in seconds\.  
+\(Streams\) The maximum amount of time to gather records before invoking the function, in seconds\.  
 Type: Integer  
 Valid Range: Minimum value of 0\. Maximum value of 300\.  
 Required: No

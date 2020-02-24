@@ -125,7 +125,7 @@ Lambda supports the following options for DynamoDB event sources\.
 
 **Event Source Options**
 + **DynamoDB table** – The DynamoDB table to read records from\.
-+ **Batch size** – The number of records to send to the function in each batch, up to 1,000\. Lambda passes all of the records in the batch to the function in a single call, as long as the total size of the events doesn't exceed the [payload limit](limits.md) for synchronous invocation \(6 MB\)\.
++ **Batch size** – The number of records to send to the function in each batch, up to 1,000\. Lambda passes all of the records in the batch to the function in a single call, as long as the total size of the events doesn't exceed the [payload limit](gettingstarted-limits.md) for synchronous invocation \(6 MB\)\.
 + **Batch window** – Specify the maximum amount of time to gather records before invoking the function, in seconds\.
 + **Starting position** – Process only new records, or all existing records\.
   + **Latest** – Process new records that are added to the stream\.

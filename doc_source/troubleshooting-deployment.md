@@ -55,13 +55,13 @@ The name of the file or class in your function's handler configuration doesn't m
 The name of the handler method in your function's handler configuration doesn't match your code\. Each runtime defines a naming convention for handlers, such as *filename*\.*methodname*\. The handler is the method in your function's code that the runtime executes when your function is invoked\.
 
 For some languages, Lambda provides a library with an interface that expects a handler method to have a specific name\. For details about handler naming for each language, see the following topics\.
-+ [Building Lambda Functions with Node\.js](programming-model.md)
-+ [Building Lambda Functions with Python](python-programming-model.md)
++ [Building Lambda Functions with Node\.js](lambda-nodejs.md)
++ [Building Lambda Functions with Python](lambda-python.md)
 + [Building Lambda Functions with Ruby](lambda-ruby.md)
-+ [Building Lambda Functions with Java](java-programming-model.md)
-+ [Building Lambda Functions with Go](go-programming-model.md)
-+ [Building Lambda Functions with C\#](dotnet-programming-model.md)
-+ [Building Lambda Functions with PowerShell](powershell-programming-model.md)
++ [Building Lambda Functions with Java](lambda-java.md)
++ [Building Lambda Functions with Go](lambda-golang.md)
++ [Building Lambda Functions with C\#](lambda-csharp.md)
++ [Building Lambda Functions with PowerShell](lambda-powershell.md)
 
 **Error:** *InvalidParameterValueException: Lambda was unable to configure your environment variables because the environment variables you have provided exceeded the 4KB limit\. String measured: \{"A1":"uSFeY5cyPiPn7AtnX5BsM\.\.\.*
 

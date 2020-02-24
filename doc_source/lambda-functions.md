@@ -19,4 +19,4 @@ To use your Lambda function with AWS resources in an Amazon VPC, configure it wi
 + [AWS Lambda Layers](configuration-layers.md)
 + [Configuring a Lambda Function to Access Resources in a VPC](configuration-vpc.md)
 + [Configuring Database Access for a Lambda Function](configuration-database.md)
-+ [Tagging Lambda Functions](tagging.md)
++ [Tagging Lambda Functions](configuration-tags.md)

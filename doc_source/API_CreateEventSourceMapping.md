@@ -99,7 +99,7 @@ Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}
 Required: Yes
 
  ** [MaximumBatchingWindowInSeconds](#API_CreateEventSourceMapping_RequestSyntax) **   <a name="SSS-CreateEventSourceMapping-request-MaximumBatchingWindowInSeconds"></a>
-The maximum amount of time to gather records before invoking the function, in seconds\.  
+\(Streams\) The maximum amount of time to gather records before invoking the function, in seconds\.  
 Type: Integer  
 Valid Range: Minimum value of 0\. Maximum value of 300\.  
 Required: No
@@ -202,7 +202,7 @@ The result of the last AWS Lambda invocation of your Lambda function\.
 Type: String
 
  ** [MaximumBatchingWindowInSeconds](#API_CreateEventSourceMapping_ResponseSyntax) **   <a name="SSS-CreateEventSourceMapping-response-MaximumBatchingWindowInSeconds"></a>
-The maximum amount of time to gather records before invoking the function, in seconds\.  
+\(Streams\) The maximum amount of time to gather records before invoking the function, in seconds\.  
 Type: Integer  
 Valid Range: Minimum value of 0\. Maximum value of 300\.
 

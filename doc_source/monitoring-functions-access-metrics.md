@@ -20,7 +20,7 @@ The console provides the following graphs\.
 + **Throttles** – The number of times that execution failed due to concurrency limits\.
 + **IteratorAge** – For stream event sources, the age of the last item in the batch when Lambda received it and invoked the function\.
 + **Async delivery failures** – The number of errors that occurred when Lambda attempted to write to a destination or dead\-letter queue\.
-+ **Concurrent executions** – The number of function instances that are processing events.
++ **Concurrent executions** – The number of function instances that are processing events\.
 
 To see the definition of a graph in CloudWatch, choose **View in metrics** from the menu in the top right of the graph\. For more information about the metrics that Lambda records, see [Working with AWS Lambda Function Metrics](monitoring-metrics.md)\.
 

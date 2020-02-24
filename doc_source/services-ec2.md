@@ -25,7 +25,7 @@ CloudWatch Events invokes your Lambda function asynchronously with the event doc
 }
 ```
 
-For details on configuring events in CloudWatch Events, see [Using AWS Lambda with Amazon CloudWatch Events](with-scheduled-events.md)\. For an example function that processes Amazon EBS snapshot notifications, see [Amazon CloudWatch Events for Amazon EBS](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-cloud-watch-events.html) in the Amazon EC2 User Guide for Linux Instances\.
+For details on configuring events in CloudWatch Events, see [Using AWS Lambda with Amazon CloudWatch Events](services-cloudwatchevents.md)\. For an example function that processes Amazon EBS snapshot notifications, see [Amazon CloudWatch Events for Amazon EBS](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-cloud-watch-events.html) in the Amazon EC2 User Guide for Linux Instances\.
 
 You can also use the AWS SDK to manage instances and other resources with the Amazon EC2 API\. For a tutorial with a sample application in C\#, see [Tutorial: Using AWS SDK for \.NET to Manage Amazon EC2 Spot Instances](services-ec2-tutorial.md)\.
 

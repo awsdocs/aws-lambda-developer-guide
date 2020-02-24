@@ -29,7 +29,7 @@ exports.lambda_handler = function(event, context, callback) {
 };
 ```
 
-Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Node\.js](nodejs-create-deployment-pkg.md)\.
+Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Node\.js](nodejs-package.md)\.
 
 ## Java 11<a name="with-ddb-example-deployment-pkg-java"></a>
 
@@ -67,7 +67,7 @@ If the handler returns normally without exceptions, Lambda considers the input b
 + `aws-lambda-java-core`
 + `aws-lambda-java-events`
 
-Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Java](lambda-java-how-to-create-deployment-package.md)\.
+Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Java](java-package.md)\.
 
 ## C\#<a name="with-ddb-example-deployment-pkg-dotnet"></a>
 
@@ -119,7 +119,7 @@ namespace DynamoDBStreams
 }
 ```
 
-Replace the `Program.cs` in a \.NET Core project with the above sample\. For instructions, see [\.NET Core CLI](lambda-dotnet-coreclr-deployment-package.md)\.
+Replace the `Program.cs` in a \.NET Core project with the above sample\. For instructions, see [AWS Lambda Deployment Package in C\#](csharp-package.md)\.
 
 ## Python 3<a name="with-ddb-example-deployment-pkg-python"></a>
 
@@ -137,7 +137,7 @@ def lambda_handler(event, context):
     print('Successfully processed %s records.' % str(len(event['Records'])))
 ```
 
-Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Python](lambda-python-how-to-create-deployment-package.md)\.
+Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Python](python-package.md)\.
 
 ## Go<a name="with-ddb-example-deployment-pkg-go"></a>
 
@@ -167,4 +167,4 @@ func handleRequest(ctx context.Context, e events.DynamoDBEvent) {
 }
 ```
 
-Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Python](lambda-python-how-to-create-deployment-package.md)\.
+Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Python](python-package.md)\.

@@ -8,13 +8,13 @@ To process items from a stream or queue, you can create an [event source mapping
 
 Other AWS services and resources invoke your function directly\. For example, you can configure CloudWatch Events to invoke your function on a timer, or you can configure Amazon S3 to invoke your function when an object is created\. Each service varies in the method it uses to invoke your function, the structure of the event, and how you configure it\. For more information, see [Using AWS Lambda with Other Services](lambda-services.md)\.
 
-Depending on who invokes your function and how it's invoked, scaling behavior and the types of errors that occur can vary\. When you invoke a function synchronously, you receive errors in the response and can retry\. When you invoke asynchronously, use an event source mapping, or configure another service to invoke your function, the retry requirements and the way that your function scales to handle large numbers of events can vary\. For details, see [AWS Lambda Function Scaling](scaling.md) and [Error Handling and Automatic Retries in AWS Lambda](retries-on-errors.md)\.
+Depending on who invokes your function and how it's invoked, scaling behavior and the types of errors that occur can vary\. When you invoke a function synchronously, you receive errors in the response and can retry\. When you invoke asynchronously, use an event source mapping, or configure another service to invoke your function, the retry requirements and the way that your function scales to handle large numbers of events can vary\. For details, see [AWS Lambda Function Scaling](invocation-scaling.md) and [Error Handling and Automatic Retries in AWS Lambda](invocation-retries.md)\.
 
 **Topics**
 + [Synchronous Invocation](invocation-sync.md)
 + [Asynchronous Invocation](invocation-async.md)
 + [AWS Lambda Event Source Mapping](invocation-eventsourcemapping.md)
 + [Monitoring the State of a Function with the Lambda API](functions-states.md)
-+ [AWS Lambda Function Scaling](scaling.md)
-+ [Error Handling and Automatic Retries in AWS Lambda](retries-on-errors.md)
++ [AWS Lambda Function Scaling](invocation-scaling.md)
++ [Error Handling and Automatic Retries in AWS Lambda](invocation-retries.md)
 + [Invoking Lambda Functions with the AWS Mobile SDK for Android](with-on-demand-custom-android.md)

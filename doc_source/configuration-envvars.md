@@ -114,8 +114,8 @@ The following additional environment variables aren't reserved and can be extend
 + `LANG` – The locale of the runtime \(`en_US.UTF-8`\)\.
 + `PATH` – The execution path \(`/usr/local/bin:/usr/bin/:/bin:/opt/bin`\)\.
 + `LD_LIBRARY_PATH` – The system library path \(`/lib64:/usr/lib64:$LAMBDA_RUNTIME_DIR:$LAMBDA_RUNTIME_DIR/lib:$LAMBDA_TASK_ROOT:$LAMBDA_TASK_ROOT/lib:/opt/lib`\)\.
-+ `NODE_PATH` – \([Node\.js](programming-model.md)\) The Node\.js library path \(`/opt/nodejs/node12/node_modules/:/opt/nodejs/node_modules:$LAMBDA_RUNTIME_DIR/node_modules`\)\.
-+ `PYTHONPATH` – \([Python 2\.7, 3\.6, 3\.8](python-programming-model.md)\) The Python library path \(`$LAMBDA_RUNTIME_DIR`\)\.
++ `NODE_PATH` – \([Node\.js](lambda-nodejs.md)\) The Node\.js library path \(`/opt/nodejs/node12/node_modules/:/opt/nodejs/node_modules:$LAMBDA_RUNTIME_DIR/node_modules`\)\.
++ `PYTHONPATH` – \([Python 2\.7, 3\.6, 3\.8](lambda-python.md)\) The Python library path \(`$LAMBDA_RUNTIME_DIR`\)\.
 + `GEM_PATH` – \([Ruby](lambda-ruby.md)\) The Ruby library path \(`$LAMBDA_TASK_ROOT/vendor/bundle/ruby/2.5.0:/opt/ruby/gems/2.5.0`\)\.
 
 The sample values shown reflect the latest runtimes\. The presence of specific variables or their values can vary on earlier runtimes\.

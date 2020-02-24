@@ -63,7 +63,7 @@ The Lambda console shows log output when you test a function on the function con
 
 1. Choose the first stream in the list\.
 
-Each log stream corresponds to an [instance of your function](running-lambda-code.md)\. New streams appear when you update your function and when additional instances are created to handle multiple concurrent invocations\. To find logs for specific invocations, you can instrument your function with X\-Ray, and record details about the request and log stream in the trace\. For a sample application that correlates logs and traces with X\-Ray, see [Error Processor Sample Application for AWS Lambda](sample-errorprocessor.md)\.
+Each log stream corresponds to an [instance of your function](runtimes-context.md)\. New streams appear when you update your function and when additional instances are created to handle multiple concurrent invocations\. To find logs for specific invocations, you can instrument your function with X\-Ray, and record details about the request and log stream in the trace\. For a sample application that correlates logs and traces with X\-Ray, see [Error Processor Sample Application for AWS Lambda](sample-errorprocessor.md)\.
 
 ## Using the AWS CLI<a name="java-logging-cli"></a>
 
@@ -194,7 +194,7 @@ public class ContextLogger {
 **Dependencies**
 + `aws-lambda-java-core`
 
-Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Java](lambda-java-how-to-create-deployment-package.md)\.
+Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Java](java-package.md)\.
 
 ## Custom Appender for Log4j 2<a name="java-logging-log4j2"></a>
 
@@ -251,4 +251,4 @@ The example preceding uses the following log4j2\.xml file to load properties
 + `log4j-core`
 + `log4j-api`
 
-Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Java](lambda-java-how-to-create-deployment-package.md)\.
+Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Java](java-package.md)\.
