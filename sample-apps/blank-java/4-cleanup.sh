@@ -1,6 +1,6 @@
 #!/bin/bash
 set -eo pipefail
-aws cloudformation delete-stack --stack-name blank
+aws cloudformation delete-stack --stack-name blank-java
 echo "Deleted function stack"
 if [ -f bucket-name.txt ]; then
     ARTIFACT_BUCKET=$(cat bucket-name.txt)
@@ -14,4 +14,4 @@ if [ -f bucket-name.txt ]; then
     done
 fi
 rm -f 2-deploy.sh out.yml out.json
-rm -rf function/node_modules function/package-lock.json
+rm -rf build .gradle
