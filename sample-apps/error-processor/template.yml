@@ -25,7 +25,7 @@ Resources:
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AWSXrayFullAccess
         - arn:aws:iam::aws:policy/AmazonS3FullAccess
-        - arn:aws:iam::aws:policy/CloudWatchLogsReadOnlyAccess
+        - arn:aws:iam::aws:policy/CloudWatchLogsFullAccess
         - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
         - arn:aws:iam::aws:policy/service-role/AWSLambdaRole
       Path: /service-role/
@@ -60,12 +60,28 @@ Resources:
           }
           var responseStatus = "FAILED"
           var responseData = {}
-          var functionName = event.ResourceProperties.FunctionName
+          var functionName1 = event.ResourceProperties.FunctionName1
+          var functionName2 = event.ResourceProperties.FunctionName2
+          var functionName3 = event.ResourceProperties.FunctionName3
+          var logGroup1 = "/aws/lambda/" + functionName1
+          var logGroup2 = "/aws/lambda/" + functionName2
+          var logGroup3 = "/aws/lambda/" + functionName3
           var lambda = new aws.Lambda()
+          var logs = new aws.CloudWatchLogs()
           try {
-            let invokeResponse = await lambda.invoke({ FunctionName: functionName }).promise()
-          } catch(err) {
-            responseData = {Error: "Invoke call failed"}
+            // Invoke other functions and wait for log groups to populate
+            await Promise.all([
+              lambda.invoke({ FunctionName: functionName2 }).promise(),
+              lambda.invoke({ FunctionName: functionName3 }).promise(),
+              new Promise(resolve => setTimeout(resolve, 10000))
+            ])
+            // Set log retention on all log groups
+            await Promise.all([
+              logs.putRetentionPolicy({logGroupName: logGroup1, retentionInDays: 3 }).promise(),
+              logs.putRetentionPolicy({logGroupName: logGroup2, retentionInDays: 3 }).promise(),
+              logs.putRetentionPolicy({logGroupName: logGroup3, retentionInDays: 3 }).promise()
+            ])} catch(err) {
+            responseData = {Error: "SDK call failed"}
             console.log(responseData.Error + ":\n", err)
             return await response.send(event, context, responseStatus, responseData)
           }
@@ -74,13 +90,15 @@ Resources:
         }
       Description: Invoke a function to create a log stream.
       Role: !GetAtt role.Arn
-      Timeout: 8
+      Timeout: 30
   primerinvoke:
     Type: AWS::CloudFormation::CustomResource
     Version: "1.0"
     Properties:
       ServiceToken: !GetAtt primer.Arn
-      FunctionName: !Ref randomerror
+      FunctionName1: !Ref primer
+      FunctionName2: !Ref randomerror
+      FunctionName3: !Ref processor
   subscription:
     Type: AWS::Logs::SubscriptionFilter
     DependsOn: cloudwatchlogspermission
