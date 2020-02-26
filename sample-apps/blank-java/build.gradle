@@ -7,9 +7,12 @@ repositories {
 }
 
 dependencies {
+    implementation platform('software.amazon.awssdk:bom:2.5.29')
     implementation 'com.amazonaws:aws-lambda-java-core:1.2.0'
     implementation 'com.amazonaws:aws-lambda-java-events:2.2.7'
     implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'software.amazon.awssdk:lambda'
+    testCompile group: 'junit', name: 'junit', version: '4.11'
 }
 
 task buildZip(type: Zip) {

@@ -11,7 +11,7 @@ Resources:
       Handler: example.Handler::handleRequest
       Runtime: java8
       Description: Java function
-      MemorySize: 128
+      MemorySize: 512
       Timeout: 10
       # Function's execution role
       Policies:
