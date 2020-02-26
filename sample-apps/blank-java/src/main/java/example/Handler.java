@@ -6,13 +6,11 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.SQSEvent;
 import com.amazonaws.services.lambda.runtime.events.SQSEvent.SQSMessage;
 
-
 import software.amazon.awssdk.services.lambda.model.GetAccountSettingsRequest;
 import software.amazon.awssdk.services.lambda.model.GetAccountSettingsResponse;
 import software.amazon.awssdk.services.lambda.model.ServiceException;
 import software.amazon.awssdk.services.lambda.LambdaAsyncClient;
 import software.amazon.awssdk.services.lambda.model.AccountUsage;
-
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -24,6 +22,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class Handler implements RequestHandler<SQSEvent, String>{
   Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
   LambdaAsyncClient lambdaClient = LambdaAsyncClient.create();
 
   // example.Handler::handleRequest
