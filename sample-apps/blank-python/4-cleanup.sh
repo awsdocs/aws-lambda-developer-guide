@@ -14,4 +14,4 @@ if [ -f bucket-name.txt ]; then
     done
 fi
 rm -f 2-deploy.sh out.yml out.json
-rm -rf function/node_modules function/package-lock.json
+rm -rf function/package

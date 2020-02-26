@@ -1,11 +1,11 @@
-import json
 import os
-region = os.environ['AWS_REGION']
+import logging
+import jsonpickle
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 def lambda_handler(event, context):
-    print('Region: ' + region)
-    print('All environment variables: ')
-    print(os.environ)
-    return {
-        'status': 'success!'
-    }
+    logger.info('## ENVIRONMENT VARIABLES\r' + jsonpickle.encode(dict(**os.environ)))
+    logger.info('## EVENT\r' + jsonpickle.encode(event))
+    logger.info('## CONTEXT\r' + jsonpickle.encode(context))
+    return context.log_group_name
