@@ -2,8 +2,6 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
 Description: An AWS Lambda application that calls the Lambda API.
 Resources:
-  topic:
-    Type: AWS::SNS::Topic
   function:
     Type: AWS::Serverless::Function
     Properties:
@@ -19,7 +17,4 @@ Resources:
         - AWSLambdaReadOnlyAccess
         - AWSXrayWriteOnlyAccess
         - AWSLambdaVPCAccessExecutionRole
-      Environment:
-        Variables:
-          topic: !Ref topic
       Tracing: Active
