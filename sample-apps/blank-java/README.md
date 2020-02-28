@@ -1,4 +1,4 @@
-# Blank function
+# Blank function (Java)
 This project creates a function and supporting resources:
 - src - A Java function.
 - template.yml - An AWS CloudFormation template that creates an application.
@@ -7,7 +7,7 @@ This project creates a function and supporting resources:
 
 ![Architecture](/sample-apps/blank/images/sample-blank.png)
 
-Use the following instructions to deploy the sample application. For more information on the application's architecture and implementation, see [Blank Application for AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/sample-blank.html) in the developer guide.
+Use the following instructions to deploy the sample application.
 
 # Requirements
 - [Java 8 runtime environment (SE JRE)](https://www.oracle.com/java/technologies/javase-downloads.html)
@@ -40,7 +40,7 @@ This script uses AWS CloudFormation to deploy the Lambda functions and an IAM ro
 # Test
 Run `3-invoke.sh` to invoke the function.
 
-    blank$ ./3-invoke.sh
+    blank-java$ ./3-invoke.sh
     {
         "StatusCode": 200,
         "ExecutedVersion": "$LATEST"
@@ -48,11 +48,11 @@ Run `3-invoke.sh` to invoke the function.
 
 The functions in this application are instrumented with AWS X-Ray. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map.
 
-![Service Map](/sample-apps/blank/images/blank-servicemap.png)
+![Service Map](/sample-apps/blank-java/images/blank-java-servicemap.png)
 
 Choose a node in the main function graph. Then choose **View traces** to see a list of traces. Choose any trace to view a timeline that breaks down the work done by the function.
 
-![Trace](/sample-apps/blank/images/blank-trace.png)
+![Trace](/sample-apps/blank-java/images/blank-java-trace.png)
 
 Finally, view the application in the Lambda console.
 
@@ -60,7 +60,7 @@ Finally, view the application in the Lambda console.
 1. Open the [applications page](https://console.aws.amazon.com/lambda/home#/applications) in the Lambda console.
 2. Choose **blank-java**.
 
-  ![Application](/sample-apps/blank/images/blank-application.png)
+  ![Application](/sample-apps/blank-java/images/blank-java-application.png)
 
 # Cleanup
 To delete the application, run `4-cleanup.sh`.

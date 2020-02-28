@@ -1,4 +1,4 @@
-# Blank function
+# Blank function (Python)
 This project creates a function and supporting resources:
 - function - A Python function.
 - template.yml - An AWS CloudFormation template that creates an application.
