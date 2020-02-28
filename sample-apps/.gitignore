@@ -5,3 +5,7 @@ out.yml
 out.json
 bucket-name.txt
 2-deploy.sh
+target
+build
+.gradle
+*.zip

@@ -1,6 +1,6 @@
 #!/bin/bash
 set -eo pipefail
-aws cloudformation delete-stack --stack-name blank-java
+aws cloudformation delete-stack --stack-name java-maven
 echo "Deleted function stack"
 if [ -f bucket-name.txt ]; then
     ARTIFACT_BUCKET=$(cat bucket-name.txt)
