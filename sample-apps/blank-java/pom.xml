@@ -52,18 +52,18 @@
       <artifactId>lambda</artifactId>
       <version>2.10.72</version>
     </dependency>
-   <dependency>
+    <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
       <version>5.6.0</version>
       <scope>test</scope>
-   </dependency>
-   <dependency>
+    </dependency>
+    <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
       <version>5.6.0</version>
       <scope>test</scope>
-   </dependency>
+    </dependency>
   </dependencies>
 
   <build>
@@ -85,8 +85,21 @@
             <goals>
               <goal>shade</goal>
             </goals>
+            <configuration>
+              <transformers>
+                <transformer implementation="com.github.edwgiz.maven_shade_plugin.log4j2_cache_transformer.PluginsCacheFileTransformer">
+                </transformer>
+              </transformers>
+            </configuration>
           </execution>
         </executions>
+        <dependencies>
+          <dependency>
+            <groupId>com.github.edwgiz</groupId>
+            <artifactId>maven-shade-plugin.log4j2-cachefile-transformer</artifactId>
+            <version>2.13.0</version>
+          </dependency>
+      </dependencies>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
