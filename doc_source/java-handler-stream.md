@@ -19,7 +19,7 @@ import java.io.OutputStream;
 public class Hello implements RequestStreamHandler {
     public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context) throws IOException {
         int letter;
-        while((letter = inputStream.read()) != -1) {
+        while ((letter = inputStream.read()) != -1) {
             outputStream.write(Character.toUpperCase(letter));
         }
     }
@@ -29,6 +29,6 @@ public class Hello implements RequestStreamHandler {
 **Dependencies**
 + `aws-lambda-java-core`
 
-**Handler** – `example.Hello::handler`
+**Handler** – `example.Hello`
 
-The event received processed by the function must be valid JSON but the output stream type is not restricted\. Any bytes are supported\.
+When you create the Lambda function, specify `example.Hello` \(*package*\.*class*\) as the handler value\.
