@@ -32,3 +32,5 @@ public class Hello implements RequestStreamHandler {
 **Handler** – `example.Hello`
 
 When you create the Lambda function, specify `example.Hello` \(*package*\.*class*\) as the handler value\.
+
+The format of the data in the input stream that's received and processed by the function must be valid JSON but the format of the data in the output stream is not restricted\. Any bytes are supported\.
