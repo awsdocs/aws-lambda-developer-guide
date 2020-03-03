@@ -99,7 +99,7 @@
             <artifactId>maven-shade-plugin.log4j2-cachefile-transformer</artifactId>
             <version>2.13.0</version>
           </dependency>
-      </dependencies>
+        </dependencies>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
