@@ -23,11 +23,11 @@ import java.util.Map;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
+// Handler value: example.Handler
 public class Handler implements RequestHandler<SQSEvent, String>{
   private static final Logger logger = LoggerFactory.getLogger(Handler.class);
   Gson gson = new GsonBuilder().setPrettyPrinting().create();
   LambdaAsyncClient lambdaClient = LambdaAsyncClient.create();
-  // example.Handler::handleRequest
   @Override
   public String handleRequest(SQSEvent event, Context context)
   {

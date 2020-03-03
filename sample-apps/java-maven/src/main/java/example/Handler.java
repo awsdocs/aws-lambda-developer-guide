@@ -9,9 +9,9 @@ import com.amazonaws.services.lambda.runtime.events.SQSEvent.SQSMessage;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+// Handler value: example.Handler
 public class Handler implements RequestHandler<SQSEvent, String>{
   Gson gson = new GsonBuilder().setPrettyPrinting().create();
-  // example.Handler::handleRequest
   @Override
   public String handleRequest(SQSEvent event, Context context)
   {
