@@ -5,8 +5,8 @@ Resources:
   function:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: target/java-maven-1.0-SNAPSHOT.jar
-      Handler: example.Handler::handleRequest
+      CodeUri: build/distributions/java-basic.zip
+      Handler: example.Handler
       Runtime: java8
       Description: Java function
       MemorySize: 512

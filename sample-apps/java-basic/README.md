@@ -1,4 +1,4 @@
-# java-maven function
+# java-basic function
 This project creates a function and supporting resources:
 - src - A Java function.
 - template.yml - An AWS CloudFormation template that creates an application.
@@ -6,7 +6,7 @@ This project creates a function and supporting resources:
 - build.gradle - A Gradle build file.
 - 1-create-bucket.sh, 2-deploy.sh, etc. - Shell scripts that use the AWS CLI to deploy and manage the application.
 
-![Architecture](/sample-apps/java-maven/images/sample-java-maven.png)
+![Architecture](/sample-apps/java-basic/images/sample-java-basic.png)
 
 Use the following instructions to deploy the sample application.
 
@@ -20,28 +20,28 @@ Use the following instructions to deploy the sample application.
 Download or clone this repository.
 
     $ git clone git@github.com:awsdocs/aws-lambda-developer-guide.git
-    $ cd aws-lambda-developer-guide/sample-apps/java-maven
+    $ cd aws-lambda-developer-guide/sample-apps/java-basic
 
 Run `1-create-bucket.sh` to create a new bucket for deployment artifacts. Or, if you already have a bucket, rename `2-deploy.sh.template` to `2-deploy.sh` and replace `MY_BUCKET` in it with the name of an existing bucket.
 
-    java-maven$ ./1-create-bucket.sh
+    java-basic$ ./1-create-bucket.sh
     make_bucket: lambda-artifacts-a5e491dbb5b22e0d
 
 # Deploy
 Run `2-deploy.sh` to deploy the application.
 
-    java-maven$ ./2-deploy.sh
+    java-basic$ ./2-deploy.sh
     BUILD SUCCESSFUL in 1s
     Successfully packaged artifacts and wrote output template to file out.yml.
     Waiting for changeset to be created..
-    Successfully created/updated stack - java-maven
+    Successfully created/updated stack - java-basic
 
 This script uses AWS CloudFormation to deploy the Lambda functions and an IAM role. If the AWS CloudFormation stack that contains the resources already exists, the script updates it with any changes to the template or function code.
 
 # Test
 Run `3-invoke.sh` to invoke the function.
 
-    java-maven$ ./3-invoke.sh
+    java-basic$ ./3-invoke.sh
     {
         "StatusCode": 200,
         "ExecutedVersion": "$LATEST"
@@ -49,21 +49,21 @@ Run `3-invoke.sh` to invoke the function.
 
 The functions in this application are instrumented with AWS X-Ray. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map.
 
-![Service Map](/sample-apps/java-maven/images/java-maven-servicemap.png)
+![Service Map](/sample-apps/java-basic/images/java-basic-servicemap.png)
 
 Choose a node in the main function graph. Then choose **View traces** to see a list of traces. Choose any trace to view a timeline that breaks down the work done by the function.
 
-![Trace](/sample-apps/java-maven/images/java-maven-trace.png)
+![Trace](/sample-apps/java-basic/images/java-basic-trace.png)
 
 Finally, view the application in the Lambda console.
 
 *To view the output*
 1. Open the [applications page](https://console.aws.amazon.com/lambda/home#/applications) in the Lambda console.
-2. Choose **java-maven**.
+2. Choose **java-basic**.
 
-  ![Application](/sample-apps/java-maven/images/java-maven-application.png)
+  ![Application](/sample-apps/java-basic/images/java-basic-application.png)
 
 # Cleanup
 To delete the application, run `4-cleanup.sh`.
 
-    java-maven$ ./4-cleanup.sh
+    java-basic$ ./4-cleanup.sh
