@@ -4,5 +4,7 @@ FUNCTION=$(aws cloudformation describe-stack-resource --stack-name list-manager 
 
 while true; do
   aws lambda invoke --function-name $FUNCTION --payload file://events/kinesis.json out.json
+  cat out.json
+  echo ""
   sleep 2
 done

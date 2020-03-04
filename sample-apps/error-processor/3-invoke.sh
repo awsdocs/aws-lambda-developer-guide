@@ -3,5 +3,7 @@ ERROR_FUNCTION=$(aws cloudformation describe-stack-resource --stack-name error-p
 
 while true; do
   aws lambda invoke --function-name $ERROR_FUNCTION --payload '{}' out.json
+  cat out.json
+  echo ""
   sleep 2
 done

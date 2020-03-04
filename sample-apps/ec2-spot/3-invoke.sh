@@ -4,5 +4,7 @@ FUNCTION=$(aws cloudformation describe-stack-resource --stack-name ec2-spot --lo
 
 while true; do
   aws lambda invoke --function-name $FUNCTION --payload '{"key": "value"}' out.json
+  cat out.json
+  echo ""
   sleep 2
 done

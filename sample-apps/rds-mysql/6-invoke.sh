@@ -4,5 +4,7 @@ FUNCTION=$(aws cloudformation describe-stack-resource --stack-name rds-mysql --l
 
 while true; do
   aws lambda invoke --function-name $FUNCTION --payload file://events/db-read-table.json out.json
+  cat out.json
+  echo ""
   sleep 2
 done
