@@ -1,6 +1,6 @@
 {
-  "TemperatureK": 281,
-  "WindKmh": -3,
-  "HumidityPct": 0.55,
-  "PressureHPa": 1020
+  "temperatureK": 281,
+  "windKmh": -3,
+  "humidityPct": 0.55,
+  "pressureHPa": 1020
 }
