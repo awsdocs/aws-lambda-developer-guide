@@ -16,7 +16,7 @@ public class Handler implements RequestHandler<Map<String,String>, String>{
   public String handleRequest(Map<String,String> event, Context context)
   {
     LambdaLogger logger = context.getLogger();
-    String response = new String("SUCCESS");
+    String response = new String("200 OK");
     // log execution details
     logger.log("ENVIRONMENT VARIABLES: " + gson.toJson(System.getenv()));
     logger.log("CONTEXT: " + gson.toJson(context));
