@@ -8,7 +8,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 
-
 import java.util.HashMap;
 import java.io.InputStream;
 import java.io.IOException;
@@ -21,7 +20,7 @@ import java.io.BufferedWriter;
 import java.nio.charset.Charset;
 import java.lang.IllegalStateException;
 
-// Handler value: example.Handler
+// Handler value: example.HandlerStream
 public class HandlerStream implements RequestStreamHandler {
   Gson gson = new GsonBuilder().setPrettyPrinting().create();
   @Override
