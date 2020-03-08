@@ -4,7 +4,7 @@ package
 out.yml
 out.json
 bucket-name.txt
-2-deploy.sh
+*-deploy.sh
 target
 build
 .gradle
