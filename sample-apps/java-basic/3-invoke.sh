@@ -1,9 +1,33 @@
 #!/bin/bash
 set -eo pipefail
 FUNCTION=$(aws cloudformation describe-stack-resource --stack-name java-basic --logical-resource-id function --query 'StackResourceDetail.PhysicalResourceId' --output text)
+if [ $1 ]
+then
+  case $1 in
+    string)
+      PAYLOAD='"MY STRING"'
+      ;;
 
+    int | integer)
+      PAYLOAD=12345
+      ;;
+
+    list)
+      PAYLOAD='[24,25,26]'
+      ;;
+
+    *)
+      echo -n "Unknown event type"
+      ;;
+  esac
+fi
 while true; do
-  aws lambda invoke --function-name $FUNCTION --payload file://event.json out.json
+  if [ $PAYLOAD ]
+  then
+    aws lambda invoke --function-name $FUNCTION --payload $PAYLOAD out.json
+  else
+    aws lambda invoke --function-name $FUNCTION --payload file://event.json out.json
+  fi
   cat out.json
   echo ""
   sleep 2
