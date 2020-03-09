@@ -1,10 +1,13 @@
 node_modules
+npm-debug.log
 package-lock.json
 package
-out.yml
+*out.yml
 out.json
 bucket-name.txt
 target
 build
 .gradle
 *.zip
+bin
+obj

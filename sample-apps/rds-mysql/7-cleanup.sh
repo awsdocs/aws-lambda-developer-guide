@@ -18,3 +18,5 @@ if [ -f bucket-name.txt ]; then
         esac
     done
 fi
+
+rm out.yml out.json

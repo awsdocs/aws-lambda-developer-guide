@@ -14,6 +14,5 @@ if [ -f bucket-name.txt ]; then
         esac
     done
 fi
-
-rm out.yml out.json 4-deploy.sh
+rm out.yml out.json
 rm -rf lib/nodejs/node_modules

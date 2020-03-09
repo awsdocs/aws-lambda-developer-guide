@@ -1,7 +1,0 @@
-node_modules
-package-lock.json
-out.json
-*out.yml
-4-deploy.sh
-npm-debug.log
-bucket-name.txt
