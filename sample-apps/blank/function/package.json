@@ -2,11 +2,8 @@
   "name": "blank",
   "version": "1.0.0",
   "private": true,
-  "dependencies": {
-    "aws-xray-sdk-core": "1.1.2"
-  },
   "devDependencies": {
-    "aws-sdk": "2.488.0"
+    "aws-sdk": "2.585.0"
   },
   "scripts": {
     "start": "node app.js"
