@@ -22,5 +22,5 @@ while true; do
         * ) echo "Response must start with y or n.";;
     esac
 done
-rm -f 3-deploy.sh out.yml out.json event.json
+rm -f out.yml out.json event.json
 rm -rf build .gradle target

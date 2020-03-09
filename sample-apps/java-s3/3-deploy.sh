@@ -13,5 +13,5 @@ then
 else
   gradle build -i
 fi
-aws cloudformation package --template-file $TEMPLATE --s3-bucket MY_BUCKET --output-template-file out.yml
+aws cloudformation package --template-file $TEMPLATE --s3-bucket $ARTIFACT_BUCKET --output-template-file out.yml
 aws cloudformation deploy --template-file out.yml --stack-name java-s3 --capabilities CAPABILITY_NAMED_IAM
