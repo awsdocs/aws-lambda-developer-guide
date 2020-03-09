@@ -5,7 +5,7 @@ if [ $1 ]
 then
   case $1 in
     string)
-      PAYLOAD='"MY STRING"'
+      PAYLOAD='"MYSTRING"'
       ;;
 
     int | integer)
