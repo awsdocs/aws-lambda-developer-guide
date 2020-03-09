@@ -7,6 +7,7 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.slf4j:slf4j-api:1.7.30'
     implementation 'com.amazonaws:aws-java-sdk-s3:1.11.578'
     implementation 'com.amazonaws:aws-lambda-java-core:1.2.0'
     implementation 'com.amazonaws:aws-lambda-java-events:2.2.7'
