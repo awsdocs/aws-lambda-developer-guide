@@ -18,7 +18,7 @@ Resources:
       Timeout: 10
       Tracing: Active
       Events:
-        Stream:
+        Properties:
           Type: Kinesis
           Properties:
             Stream: !GetAtt stream.Arn
@@ -56,7 +56,7 @@ Resources:
       Timeout: 10
       Tracing: Active
       Events:
-        Stream:
+        Properties:
           Type: Kinesis
           Properties:
             Stream: !GetAtt streamConsumer.ConsumerARN
