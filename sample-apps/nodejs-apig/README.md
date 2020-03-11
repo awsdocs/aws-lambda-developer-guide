@@ -1,4 +1,4 @@
-# nodejs-apig function
+# API Gateway proxy integration with Node.js
 This project creates a function and supporting resources:
 - function - A Node.js function.
 - template.yml - An AWS CloudFormation template that creates an application.
