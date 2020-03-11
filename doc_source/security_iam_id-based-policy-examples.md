@@ -21,7 +21,7 @@ Identity\-based policies are very powerful\. They determine whether someone can 
 
 To access the AWS Lambda console, you must have a minimum set of permissions\. These permissions must allow you to list and view details about the Lambda resources in your AWS account\. If you create an identity\-based policy that is more restrictive than the minimum required permissions, the console won't function as intended for entities \(IAM users or roles\) with that policy\.
 
-In addition to Lambda APIs, the Lambda console uses other services to display trigger configuration and let you add new triggers\. For details on configuring other services with Lambda, see [Using AWS Lambda with Other Services](lambda-services.md)\.
+For an example policy that grants minimal access for function development, see [Function Development](access-control-identity-based.md#permissions-user-function)\. In addition to Lambda APIs, the Lambda console uses other services to display trigger configuration and let you add new triggers\. If your users use Lambda with other services, they need access to those services as well\. For details on configuring other services with Lambda, see [Using AWS Lambda with Other Services](lambda-services.md)\.
 
 ## Allow Users to View Their Own Permissions<a name="security_iam_id-based-policy-examples-view-own-permissions"></a>
 

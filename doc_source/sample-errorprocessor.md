@@ -83,7 +83,7 @@ The application is implemented in two Node\.js modules—an AWS CloudFormation t
 + Resource\-based policy – A permission statement on the processor function that allows CloudWatch Logs to invoke it\.
 + Amazon S3 bucket – A storage location for output from the processor function\.
 
-View the template [error\-processor\.yaml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/error-processor/error-processor.yaml) on GitHub\.
+View the template [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/error-processor/template.yml) on GitHub\.
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-errorprocessor-stack.png)
 

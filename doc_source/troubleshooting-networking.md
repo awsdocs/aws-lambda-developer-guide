@@ -1,6 +1,6 @@
 # Troubleshoot Networking Issues in AWS Lambda<a name="troubleshooting-networking"></a>
 
-By default, Lambda runs your functions in an internal virtual private cloud \(VPC\) with connectivity to AWS services and the internet\. To access local network resources, you can [configure your functin to connect to a VPC in your account](configuration-vpc.md)\. When you use this feature, you manage the function's internet access and network connectivity with VPC resources\.
+By default, Lambda runs your functions in an internal virtual private cloud \(VPC\) with connectivity to AWS services and the internet\. To access local network resources, you can [configure your function to connect to a VPC in your account](configuration-vpc.md)\. When you use this feature, you manage the function's internet access and network connectivity with VPC resources\.
 
 Network connectivity errors can result from issues in routing configuration, security group rules, role permissions, network address translation, or the availability of resources such as IP addresses or network interfaces\. They may result in a specific error or, if a request can't reach its destination, a timeout\.
 

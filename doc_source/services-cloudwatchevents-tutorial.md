@@ -63,7 +63,7 @@ Create an Amazon Simple Notification Service \(Amazon SNS\) topic to receive not
 
 **To create a topic**
 
-1. Open the [Amazon SNS console](https://console.aws.amazon.com/sns)\.
+1. Open the [Amazon SNS console](https://console.aws.amazon.com/sns/home)\.
 
 1. Choose **Create topic**\.
 

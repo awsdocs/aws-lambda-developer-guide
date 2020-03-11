@@ -11,9 +11,9 @@ There is no additional charge for using Lambda logs; however, standard CloudWatc
 
 **To view logs using the Lambda console**
 
-1. Open the [Lambda console](https://console.aws.amazon.com/lambda)\.
-
 1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+
+1. Choose a function\.
 
 1. Choose **Monitoring**\.  
 ![\[Events\]](http://docs.aws.amazon.com/lambda/latest/dg/images/metrics-functions-list.png)![\[Events\]](http://docs.aws.amazon.com/lambda/latest/dg/)![\[Events\]](http://docs.aws.amazon.com/lambda/latest/dg/)

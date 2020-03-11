@@ -245,7 +245,7 @@ Run the code in Lambda as a starting point for creating a serverless application
    Successfully created/updated stack - ec2-spot
    ```
 
-1. Open the [Applications page](https://us-east-2.console.aws.amazon.comlambda/home?region=us-east-2#/applications/ec2-spot) of the Lambda console\.  
+1. Open the [Applications page](https://us-east-2.console.aws.amazon.com/lambda/home?region=us-east-2#/applications/ec2-spot) of the Lambda console\.  
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-ec2spot-application.png)
 
 1. Under **Resources**, choose **function**\.

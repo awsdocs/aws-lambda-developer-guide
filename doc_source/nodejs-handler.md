@@ -19,17 +19,17 @@ The runtime passes three arguments to the handler method\. The first argument is
 
 The second argument is the [context object](nodejs-context.md), which contains information about the invocation, function, and execution environment\. In the preceding example, the function gets the name of the [log stream](nodejs-logging.md) from the context object and returns it to the invoker\.
 
-The third argument, `callback`, is a function that you can call in [non\-async functions](#nodejs-handler-sync) to send a response\. The callback function takes two arguments: an `Error` and a response\. When you call it, Lambda waits for the event loop to be empty and then returns the response or error to the invoker\. The response object must be compatible with `JSON.stringify`\.
+The third argument, `callback`, is a function that you can call in [non\-async handlers](#nodejs-handler-sync) to send a response\. The callback function takes two arguments: an `Error` and a response\. When you call it, Lambda waits for the event loop to be empty and then returns the response or error to the invoker\. The response object must be compatible with `JSON.stringify`\.
 
-For async functions, you return a response, error, or promise to the runtime instead of using `callback`\.
+For async handlers, you return a response, error, or promise to the runtime instead of using `callback`\.
 
-## Async Functions<a name="nodejs-handler-async"></a>
+## Async Handlers<a name="nodejs-handler-async"></a>
 
-For async functions, you can use `return` and `throw` to send a response or error, respectively\. Functions must use the `async` keyword to use these methods to return a response or error\.
+For async handlers, you can use `return` and `throw` to send a response or error, respectively\. Functions must use the `async` keyword to use these methods to return a response or error\.
 
 If your code performs an asynchronous task, return a promise to make sure that it finishes running\. When you resolve or reject the promise, Lambda sends the response or error to the invoker\.
 
-**Example index\.js File – HTTP Request with Async Function and Promises**  
+**Example index\.js File – HTTP Request with Async Handler and Promises**  
 
 ```
 const https = require('https')
@@ -49,7 +49,7 @@ exports.handler = async function(event) {
 
 For libraries that return a promise, you can return that promise directly to the runtime\.
 
-**Example index\.js File – AWS SDK with Async Function and Promises**  
+**Example index\.js File – AWS SDK with Async Handler and Promises**  
 
 ```
 const AWS = require('aws-sdk')
@@ -60,7 +60,7 @@ exports.handler = async function(event) {
 }
 ```
 
-## Non\-Async Functions<a name="nodejs-handler-sync"></a>
+## Non\-Async Handlers<a name="nodejs-handler-sync"></a>
 
 The following example function checks a URL and returns the status code to the invoker\.
 
@@ -79,7 +79,7 @@ exports.handler =  function(event, context, callback) {
 }
 ```
 
-For non\-async functions, function execution continues until the [event loop](https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/) is empty or the function times out\. The response isn't sent to the invoker until all event loop tasks are finished\. If the function times out, an error is returned instead\. You can configure the runtime to send the response immediately by setting [context\.callbackWaitsForEmptyEventLoop](nodejs-context.md) to false\.
+For non\-async handlers, function execution continues until the [event loop](https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/) is empty or the function times out\. The response isn't sent to the invoker until all event loop tasks are finished\. If the function times out, an error is returned instead\. You can configure the runtime to send the response immediately by setting [context\.callbackWaitsForEmptyEventLoop](nodejs-context.md) to false\.
 
 In the following example, the response from Amazon S3 is returned to the invoker as soon as it's available\. The timeout running on the event loop is frozen, and it continues running the next time the function is invoked\.
 
