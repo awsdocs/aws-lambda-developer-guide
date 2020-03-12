@@ -24,13 +24,6 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 
-/**
-import software.amazon.awssdk.services.lambda.model.GetAccountSettingsRequest;
-import software.amazon.awssdk.services.lambda.model.GetAccountSettingsResponse;
-import software.amazon.awssdk.services.lambda.model.ServiceException;
-import software.amazon.awssdk.services.lambda.LambdaAsyncClient;
-import software.amazon.awssdk.services.lambda.model.AccountUsage;
-**/
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -40,7 +33,6 @@ import org.slf4j.LoggerFactory;
 // Handler value: example.Handler
 public class Handler implements RequestHandler<S3Event, String> {
   Gson gson = new GsonBuilder().setPrettyPrinting().create();
-  //LambdaAsyncClient lambdaClient = LambdaAsyncClient.create();
   private static final Logger logger = LoggerFactory.getLogger(Handler.class);
   private static final float MAX_WIDTH = 100;
   private static final float MAX_HEIGHT = 100;
