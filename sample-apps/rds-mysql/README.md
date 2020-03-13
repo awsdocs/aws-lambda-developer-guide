@@ -1,4 +1,4 @@
-# RDS MySQL
+# Managing a MySQL for RDS Database in a Private VPC
 
 This sample application runs SQL queries on a MySQL database. It uses a private VPC to connect to an Amazon Relational Database Service (Amazon RDS) database. The application also uses AWS Secrets Manager and AWS X-Ray.
 
