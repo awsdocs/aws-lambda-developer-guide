@@ -20,7 +20,7 @@ The **Designer** shows an overview of your function and its upstream and downstr
 
 ![\[A Lambda function with an Amazon S3 trigger and Amazon EventBridge destination.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/console-designer.png)
 
-Choose **my\-function** in the designer to return to the function's code and configuration\. For scripting languages, Lambda includes sample code that returns a success response\. You can edit your function code with the embedded [AWS Cloud9](https://docs.aws.amazon.com/cloud9/latest/user-guide/) editor as long as your source code doesn't exceed the 3 MB limit\.
+Choose **my\-function** in the designer to return to the function's code and configuration\. For interpreted languages, Lambda includes sample code that returns a success response\. You can edit your function code with the embedded [AWS Cloud9](https://docs.aws.amazon.com/cloud9/latest/user-guide/) editor as long as your source code doesn't exceed the 3 MB limit\.
 
 ## Invoke the Lambda Function<a name="get-started-invoke-manually"></a>
 
