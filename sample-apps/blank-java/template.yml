@@ -18,3 +18,13 @@ Resources:
         - AWSXrayWriteOnlyAccess
         - AWSLambdaVPCAccessExecutionRole
       Tracing: Active
+      Layers:
+        - !Ref libs
+  libs:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: blank-java-lib
+      Description: Dependencies for the Java S3 sample app.
+      ContentUri: build/blank-java-lib.zip
+      CompatibleRuntimes:
+        - java8

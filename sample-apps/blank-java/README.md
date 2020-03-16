@@ -28,9 +28,9 @@ Run `1-create-bucket.sh` to create a new bucket for deployment artifacts. Or, if
     make_bucket: lambda-artifacts-a5e491dbb5b22e0d
 
 # Deploy
-Run `2-deploy.sh` to deploy the application.
+Run `3-deploy.sh` to deploy the application.
 
-    blank-java$ ./2-deploy.sh
+    blank-java$ ./3-deploy.sh
     BUILD SUCCESSFUL in 1s
     Successfully packaged artifacts and wrote output template to file out.yml.
     Waiting for changeset to be created..
@@ -40,7 +40,7 @@ This script uses AWS CloudFormation to deploy the Lambda functions and an IAM ro
 
 You can also build the application with Maven. To use maven, add `mvn` to the command.
 
-    java-basic$ ./2-deploy.sh mvn
+    java-basic$ ./3-deploy.sh mvn
     [INFO] Scanning for projects...
     [INFO] -----------------------< com.example:blank-java >-----------------------
     [INFO] Building blank-java-function 1.0-SNAPSHOT
@@ -48,9 +48,9 @@ You can also build the application with Maven. To use maven, add `mvn` to the co
     ...
 
 # Test
-Run `3-invoke.sh` to invoke the function.
+Run `4-invoke.sh` to invoke the function.
 
-    blank-java$ ./3-invoke.sh
+    blank-java$ ./4-invoke.sh
     {
         "StatusCode": 200,
         "ExecutedVersion": "$LATEST"
@@ -73,6 +73,6 @@ Finally, view the application in the Lambda console.
   ![Application](/sample-apps/blank-java/images/blank-java-application.png)
 
 # Cleanup
-To delete the application, run `4-cleanup.sh`.
+To delete the application, run `5-cleanup.sh`.
 
-    blank$ ./4-cleanup.sh
+    blank$ ./5-cleanup.sh
