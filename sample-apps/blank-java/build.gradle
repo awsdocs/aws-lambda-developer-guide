@@ -30,6 +30,8 @@ task buildZip(type: Zip) {
     into('lib') {
         from configurations.runtimeClasspath
     }
+    dirMode = 0755
+    fileMode = 0755
 }
 
 java {
