@@ -1,9 +1,10 @@
-# java-basic function
-This project creates a function and supporting resources:
-- src - A Java function.
+# Basic Function with Minimal Dependencies (Java)
+This project includes function code and supporting resources:
+- src/main - A Java function.
+- src/test - A unit test and helper classes.
 - template.yml - An AWS CloudFormation template that creates an application.
-- pom.xml - A Maven build file.
 - build.gradle - A Gradle build file.
+- pom.xml - A Maven build file.
 - 1-create-bucket.sh, 2-deploy.sh, etc. - Shell scripts that use the AWS CLI to deploy and manage the application.
 
 ![Architecture](/sample-apps/java-basic/images/sample-java-basic.png)
@@ -25,10 +26,10 @@ Download or clone this repository.
 Run `1-create-bucket.sh` to create a new bucket for deployment artifacts. Or, if you already have a bucket, create a file named `bucket-name.txt` that contains the name of your bucket.
 
     java-basic$ ./1-create-bucket.sh
-    make_bucket: lambda-artifacts-a5e491dbb5b22e0d
+    make_bucket: lambda-artifacts-a5e4xmplb5b22e0d
 
 # Deploy
-Run `2-deploy.sh` to deploy the application.
+Run `2-deploy.sh` to build the application with Gradle and deploy it.
 
     java-basic$ ./2-deploy.sh
     BUILD SUCCESSFUL in 1s
@@ -38,6 +39,15 @@ Run `2-deploy.sh` to deploy the application.
 
 This script uses AWS CloudFormation to deploy the Lambda functions and an IAM role. If the AWS CloudFormation stack that contains the resources already exists, the script updates it with any changes to the template or function code.
 
+You can also build the application with Maven. To use maven, add `mvn` to the command.
+
+    java-basic$ ./2-deploy.sh mvn
+    [INFO] Scanning for projects...
+    [INFO] -----------------------< com.example:java-basic >-----------------------
+    [INFO] Building java-basic-function 1.0-SNAPSHOT
+    [INFO] --------------------------------[ jar ]---------------------------------
+    ...
+
 # Test
 Run `3-invoke.sh` to invoke the function.
 
@@ -46,6 +56,7 @@ Run `3-invoke.sh` to invoke the function.
         "StatusCode": 200,
         "ExecutedVersion": "$LATEST"
     }
+    "200 OK"
 
 The functions in this application are instrumented with AWS X-Ray. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map.
 
@@ -62,6 +73,32 @@ Finally, view the application in the Lambda console.
 2. Choose **java-basic**.
 
   ![Application](/sample-apps/java-basic/images/java-basic-application.png)
+
+# Configure Handler Class
+
+By default, the function uses a handler class named `Handler` that takes a map as input and returns a string. The project also includes handlers that use other input and output types. These are defined in the following files under src/main/java/example:
+
+- `Handler.java` – Takes a `Map<String,String>` as input.
+- `HandlerInteger.java` – Takes an `Integer` as input.
+- `HandlerList.java` – Takes a `List<Integer>` as input.
+- `HandlerStream.java` – Takes an `InputStream` and `OutputStream` as input.
+- `HandlerString.java` – Takes a `String` as input.
+- `HandlerWeatherData.java` – Takes a custom type as input.
+
+To use a different handler, change the value of the Handler setting in the application template (`template.yml` or `template-mvn.yaml`). For example, to use the list handler:
+
+    Properties:
+      CodeUri: build/distributions/java-basic.zip
+      Handler: example.HandlerList
+
+Deploy the change, and then use the invoke script to test the new configuration. For handlers, that don't take a JSON object as input, pass the type (`string`, `int` or `list`) as an argument to the invoke script.
+
+    ./3-invoke.sh list
+    {
+        "StatusCode": 200,
+        "ExecutedVersion": "$LATEST"
+    }
+    9979
 
 # Cleanup
 To delete the application, run `4-cleanup.sh`.
