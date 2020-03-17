@@ -37,10 +37,10 @@ public class Handler implements RequestHandler<SQSEvent, String>{
     CompletableFuture<GetAccountSettingsResponse> accountSettings = 
         lambdaClient.getAccountSettings(GetAccountSettingsRequest.builder().build());
     // log execution details
-    logger.info("ENVIRONMENT VARIABLES: " + gson.toJson(System.getenv()));
-    logger.info("CONTEXT: " + gson.toJson(context));
+    logger.info("ENVIRONMENT VARIABLES: {}", gson.toJson(System.getenv()));
+    logger.info("CONTEXT: {}", gson.toJson(context));
     // process event
-    logger.info("EVENT: " + gson.toJson(event));
+    logger.info("EVENT: {}", gson.toJson(event));
     for(SQSMessage msg : event.getRecords()){
       logger.info(msg.getBody());
     }
@@ -48,7 +48,7 @@ public class Handler implements RequestHandler<SQSEvent, String>{
     try {
       GetAccountSettingsResponse settings = accountSettings.get();
       response = gson.toJson(settings.accountUsage());
-      logger.info("Account usage:" + response);
+      logger.info("Account usage: {}", response);
     } catch(Exception e) {
       e.getStackTrace();
     }
