@@ -18,23 +18,23 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.ArrayList;
-
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
- 
+
 class InvokeTest {
   private static final Logger logger = LoggerFactory.getLogger(InvokeTest.class);
-  Gson gson = new GsonBuilder().setPrettyPrinting().create();
+  Gson gson = new GsonBuilder()
+          .registerTypeAdapter(SQSEvent.class, new SQSEventDeserializer())
+          .setPrettyPrinting()
+          .create();
   @Test
   void invokeTest() {
-
     String path = "src/test/resources/event.json";
-    String eventString = loadJsonFile( path );
-    logger.info("EVENT STRING: " + eventString);
-    SQSEvent event = new Gson().fromJson(eventString, SQSEvent.class);
+    String eventString = loadJsonFile(path);
+    SQSEvent event = gson.fromJson(eventString, SQSEvent.class);
     Context context = new TestContext();
     String requestId = context.getAwsRequestId();
     Handler handler = new Handler();
@@ -42,14 +42,14 @@ class InvokeTest {
     assertTrue(result.contains("totalCodeSize"));
   }
 
-  private static String loadJsonFile(String path) 
+  private static String loadJsonFile(String path)
   {
       StringBuilder stringBuilder = new StringBuilder();
-      try (Stream<String> stream = Files.lines( Paths.get(path), StandardCharsets.UTF_8)) 
+      try (Stream<String> stream = Files.lines( Paths.get(path), StandardCharsets.UTF_8))
       {
           stream.forEach(s -> stringBuilder.append(s));
       }
-      catch (IOException e) 
+      catch (IOException e)
       {
           e.printStackTrace();
       }
