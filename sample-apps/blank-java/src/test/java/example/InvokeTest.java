@@ -24,14 +24,29 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
+import com.amazonaws.xray.AWSXRay;
+import com.amazonaws.xray.AWSXRayRecorderBuilder;
+import com.amazonaws.xray.javax.servlet.AWSXRayServletFilter;
+import com.amazonaws.xray.plugins.EC2Plugin;
+import com.amazonaws.xray.plugins.ElasticBeanstalkPlugin;
+import com.amazonaws.xray.strategy.sampling.NoSamplingStrategy;
+
 class InvokeTest {
   private static final Logger logger = LoggerFactory.getLogger(InvokeTest.class);
   Gson gson = new GsonBuilder()
           .registerTypeAdapter(SQSEvent.class, new SQSEventDeserializer())
           .setPrettyPrinting()
           .create();
+
+  public InvokeTest() {
+    AWSXRayRecorderBuilder builder = AWSXRayRecorderBuilder.standard();
+    builder.withSamplingStrategy(new NoSamplingStrategy());
+    AWSXRay.setGlobalRecorder(builder.build());
+  }
+
   @Test
   void invokeTest() {
+    AWSXRay.beginSegment("blank-java-test");
     String path = "src/test/resources/event.json";
     String eventString = loadJsonFile(path);
     SQSEvent event = gson.fromJson(eventString, SQSEvent.class);
@@ -40,6 +55,7 @@ class InvokeTest {
     Handler handler = new Handler();
     String result = handler.handleRequest(event, context);
     assertTrue(result.contains("totalCodeSize"));
+    AWSXRay.endSegment();
   }
 
   private static String loadJsonFile(String path)
