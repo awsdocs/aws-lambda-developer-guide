@@ -1,6 +1,6 @@
 #!/bin/bash
-cd processor
 ARTIFACT_BUCKET=$(cat bucket-name.txt)
+cd processor
 npm install --production
 cd ../random-error
 npm install --production
