@@ -26,9 +26,6 @@ import java.util.stream.Stream;
 
 import com.amazonaws.xray.AWSXRay;
 import com.amazonaws.xray.AWSXRayRecorderBuilder;
-import com.amazonaws.xray.javax.servlet.AWSXRayServletFilter;
-import com.amazonaws.xray.plugins.EC2Plugin;
-import com.amazonaws.xray.plugins.ElasticBeanstalkPlugin;
 import com.amazonaws.xray.strategy.sampling.NoSamplingStrategy;
 
 class InvokeTest {
