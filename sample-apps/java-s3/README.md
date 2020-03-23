@@ -1,6 +1,6 @@
 # S3 image resizer (Java)
 
-![Architecture](/sample-apps/blank/images/sample-blank.png)
+![Architecture](/sample-apps/java-s3/images/sample-java-s3.png)
 
 The project source includes function code and supporting resources:
 
@@ -64,15 +64,7 @@ Choose a node in the main function graph. Then choose **View traces** to see a l
 
 ![Trace](/sample-apps/java-s3/images/java-s3-trace.png)
 
-Finally, view the application in the Lambda console.
-
-*To view the output*
-1. Open the [applications page](https://console.aws.amazon.com/lambda/home#/applications) in the Lambda console.
-2. Choose **java-s3**.
-
-  ![Application](/sample-apps/java-s3/images/java-s3-application.png)
-
 # Cleanup
 To delete the application, run `6-cleanup.sh`.
 
-    blank$ ./6cleanup.sh
+    blank$ ./6-cleanup.sh

@@ -29,11 +29,22 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.IOException;
 
+import com.amazonaws.xray.AWSXRay;
+import com.amazonaws.xray.AWSXRayRecorderBuilder;
+import com.amazonaws.xray.strategy.sampling.NoSamplingStrategy;
+
 class InvokeTest {
   private static final Logger logger = LoggerFactory.getLogger(InvokeTest.class);
 
+  public InvokeTest() {
+    AWSXRayRecorderBuilder builder = AWSXRayRecorderBuilder.standard();
+    builder.withSamplingStrategy(new NoSamplingStrategy());
+    AWSXRay.setGlobalRecorder(builder.build());
+  }
+
   @Test
   void invokeTest() throws IOException {
+    AWSXRay.beginSegment("java-s3-test");
     String bucket = new String(Files.readAllLines(Paths.get("bucket-name.txt")).get(0));
     S3EventNotificationRecord record = new S3EventNotificationRecord("us-east-2",
        "ObjectCreated:Put",
@@ -63,6 +74,7 @@ class InvokeTest {
     Handler handler = new Handler();
     String result = handler.handleRequest(event, context);
     assertTrue(result.contains("Ok"));
+    AWSXRay.endSegment();
   }
 
 }
