@@ -16,13 +16,15 @@ The function executes the query and logs the output.
 
 The project source includes function code and supporting resources:
 
-- dbadmin - A Node.js function that runs SQL commands for administrator use.
-- lib - A Lambda layer with the npm modules used by the application's functions.
-- events - JSON documents that can be used to test the application's functions.
-- template.yml - An AWS CloudFormation template that creates the application.
-- template-vpcrds.yml - A template that creates the VPC and Amazon RDS database instance.
-- 1-create-bucket.sh, 3-deploy-vpc.sh, etc. - Shell scripts that use the AWS CLI to deploy and manage the application.
+- `dbadmin` - A Node.js function that runs SQL commands for administrator use.
+- `lib` - A Lambda layer with the npm modules used by the application's functions.
+- `events` - JSON documents that can be used to test the application's functions.
+- `template.yml` - An AWS CloudFormation template that creates the application.
+- `template-vpcrds.yml` - A template that creates the VPC and Amazon RDS database instance.
+- `1-create-bucket.sh`, `3-deploy-vpc.sh`, etc. - Shell scripts that use the AWS CLI to deploy and manage the application.
 - bin - Additional scripts. 
+
+Use the following instructions to deploy the sample application.
 
 # Requirements
 
@@ -50,22 +52,22 @@ Download or clone this repository.
     $ git clone git@github.com:awsdocs/aws-lambda-developer-guide.git
     $ cd aws-lambda-developer-guide/sample-apps/rds-mysql
 
-Run `create-bucket.sh` to create a new bucket for deployment artifacts. Or, if you already have a bucket, create a file named `bucket-name.txt` that contains the name of your bucket.
+To create a new bucket for deployment artifacts, run `1-create-bucket.sh`. Or, if you already have a bucket, create a file named `bucket-name.txt` that contains the name of your bucket.
 
     rds-mysql$ ./1-create-bucket.sh
     make_bucket: lambda-artifacts-a5e491dbb5b22e0d
 
-Run the `2-create-dbpasswordsecret.sh` script to create a database password and store it in AWS Secrets Manager.
+To create a database password and store it in AWS Secrets Manager, run `2-create-dbpasswordsecret.sh` script.
 
     rds-mysql$ ./2-create-dbpasswordsecret.sh
 
-Run the `3-deploy-vpc.sh` script to create the VPC and RDS database instance. This process takes about 15 minutes.
+To create the VPC and RDS database instance, run the `3-deploy-vpc.sh` script. This process takes about 15 minutes.
 
     rds-mysql$ ./3-deploy-vpc.sh
 
 # Deploy
 
-Run `4-deploy.sh` to deploy the application.
+To deploy the application, run `4-deploy.sh`.
 
     rds-mysql$ ./4-deploy.sh
     Uploading to e678bc216e6a0d510d661ca9ae2fd941  2678 / 2678.0  (100.00%)
@@ -76,7 +78,7 @@ Run `4-deploy.sh` to deploy the application.
 
 This script uses AWS CloudFormation to deploy the Lambda functions and an IAM role. If the AWS CloudFormation stack that contains the resources already exists, the script updates it with any changes to the template or function code.
 
-Run `5-create-dbtable.sh` to create a table in the database.
+To create a table in the database, run `5-create-dbtable.sh`.
 
     rds-mysql$ ./5-create-dbtable.sh
 
@@ -90,7 +92,7 @@ To invoke the function with a test event, use the invoke script.
         "ExecutedVersion": "$LATEST"
     }
 
-The functions in this application are instrumented with AWS X-Ray. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map. The following service map shows the function calling the database to run a query.
+The application uses AWS X-Ray to trace requests. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map. The following service map shows the function calling the database to run a query.
 
 ![Service Map](/sample-apps/rds-mysql/images/rdsmysql-servicemap.png)
 

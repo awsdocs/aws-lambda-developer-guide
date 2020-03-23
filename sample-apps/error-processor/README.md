@@ -1,13 +1,15 @@
 # Error Processing with CloudWatch Logs and X-Ray
+
 This sample application triggers a Lambda function when CloudWatch Logs detects the word ERROR in a log stream. The function downloads the full log stream and the X-Ray trace for the request that caused the error. It stores both in an Amazon S3 bucket.
 
-This project contains the following resources:
-- processor - A Node.js function that retrieves logs and traces, and stores them in Amazon S3.
-- random-error - A Node.js function that generates errors at random.
-- template.yml - An AWS CloudFormation template that creates an application with the processor and random-error functions.
-- 1-createbucket.sh, 2-deploy.sh, etc. - Shell scripts that use the AWS CLI to deploy and manage the application.
-
 ![Architecture](/sample-apps/error-processor/images/sample-errorprocessor.png)
+
+The project source includes function code and supporting resources:
+
+- `processor` - A Node.js function that retrieves logs and traces, and stores them in Amazon S3.
+- `random-error` - A Node.js function that generates errors at random.
+- `template.yml` - An AWS CloudFormation template that creates an application with the processor and random-error functions.
+- `1-createbucket.sh`, `2-deploy.sh`, etc. - Shell scripts that use the AWS CLI to deploy and manage the application.
 
 Use the following instructions to deploy the sample application. For more information on the application's architecture and implementation, see [Error Processor Sample Application for AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/sample-errorprocessor.html) in the developer guide.
 
@@ -22,13 +24,13 @@ Download or clone this repository.
     $ git clone git@github.com:awsdocs/aws-lambda-developer-guide.git
     $ cd aws-lambda-developer-guide/sample-apps/error-processor
 
-Run `1-create-bucket.sh` to create a new bucket for deployment artifacts. Or, if you already have a bucket, create a file named `bucket-name.txt` that contains the name of your bucket.
+To create a new bucket for deployment artifacts, run `1-create-bucket.sh`. Or, if you already have a bucket, create a file named `bucket-name.txt` that contains the name of your bucket.
 
     error-processor$ ./1-create-bucket.sh
     make_bucket: lambda-artifacts-a5e491dbb5b22e0d
 
 # Deploy
-Run `2-deploy.sh` to install dependencies and deploy the application.
+To deploy the application, run `2-deploy.sh`.
 
     error-processor$ ./2-deploy.sh
     added 16 packages from 18 contributors and audited 18 packages in 1.979s
@@ -60,7 +62,7 @@ To generate logs and errors, invoke the random error function.
         "ExecutedVersion": "$LATEST"
     }
 
-The functions in this application are instrumented with AWS X-Ray. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map. The following service map shows the random error function generating errors for some requests. It also shows the processor function calling X-Ray, CloudWatch Logs, and Amazon S3.
+The application uses AWS X-Ray to trace requests. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map. The following service map shows the random error function generating errors for some requests. It also shows the processor function calling X-Ray, CloudWatch Logs, and Amazon S3.
 
 ![Service Map](/sample-apps/error-processor/images/errorprocessor-servicemap.png)
 

@@ -1,13 +1,14 @@
 # Basic Function with Minimal Dependencies (Java)
-This project includes function code and supporting resources:
-- src/main - A Java function.
-- src/test - A unit test and helper classes.
-- template.yml - An AWS CloudFormation template that creates an application.
-- build.gradle - A Gradle build file.
-- pom.xml - A Maven build file.
-- 1-create-bucket.sh, 2-deploy.sh, etc. - Shell scripts that use the AWS CLI to deploy and manage the application.
 
 ![Architecture](/sample-apps/java-basic/images/sample-java-basic.png)
+
+The project source includes function code and supporting resources:
+- `src/main` - A Java function.
+- `src/test` - A unit test and helper classes.
+- `template.yml` - An AWS CloudFormation template that creates an application.
+- `build.gradle` - A Gradle build file.
+- `pom.xml` - A Maven build file.
+- `1-create-bucket.sh`, `2-deploy.sh`, etc. - Shell scripts that use the AWS CLI to deploy and manage the application.
 
 Use the following instructions to deploy the sample application.
 
@@ -23,13 +24,13 @@ Download or clone this repository.
     $ git clone git@github.com:awsdocs/aws-lambda-developer-guide.git
     $ cd aws-lambda-developer-guide/sample-apps/java-basic
 
-Run `1-create-bucket.sh` to create a new bucket for deployment artifacts. Or, if you already have a bucket, create a file named `bucket-name.txt` that contains the name of your bucket.
+To create a new bucket for deployment artifacts, run `1-create-bucket.sh`. Or, if you already have a bucket, create a file named `bucket-name.txt` that contains the name of your bucket.
 
     java-basic$ ./1-create-bucket.sh
     make_bucket: lambda-artifacts-a5e4xmplb5b22e0d
 
 # Deploy
-Run `2-deploy.sh` to build the application with Gradle and deploy it.
+To deploy the application, run `2-deploy.sh`.
 
     java-basic$ ./2-deploy.sh
     BUILD SUCCESSFUL in 1s
@@ -49,7 +50,7 @@ You can also build the application with Maven. To use maven, add `mvn` to the co
     ...
 
 # Test
-Run `3-invoke.sh` to invoke the function.
+To invoke the function, run `3-invoke.sh`.
 
     java-basic$ ./3-invoke.sh
     {
@@ -58,7 +59,7 @@ Run `3-invoke.sh` to invoke the function.
     }
     "200 OK"
 
-The functions in this application are instrumented with AWS X-Ray. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map.
+The application uses AWS X-Ray to trace requests. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map.
 
 ![Service Map](/sample-apps/java-basic/images/java-basic-servicemap.png)
 

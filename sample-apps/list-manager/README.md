@@ -8,14 +8,14 @@ The processor function doesn't read directly from the Kinesis stream. Instead, a
 
 The project source includes function code and supporting resources:
 
-- Processor - A Node.js function that processes records from a Kinesis stream.
-- dbadmin - A Node.js function that runs SQL commands for administrator use.
-- lib - A Lambda layer with the npm modules used by the application's functions.
-- Events - JSON documents that can be used to test the application's functions.
-- template.yml - An AWS CloudFormation template that creates the application.
-- template-vpcrds.yml - A template that creates the VPC and Amazon RDS database instance.
-- 1-create-bucket.sh, 2-create-dbpasswordsecret.sh, and other scripts - Shell scripts that use the AWS CLI to deploy and manage the application.
-- bin - Additional scripts. 
+- `processor` - A Node.js function that processes records from a Kinesis stream.
+- `dbadmin` - A Node.js function that runs SQL commands for administrator use.
+- `lib` - A Lambda layer with the npm modules used by the application's functions.
+- `events` - JSON documents that can be used to test the application's functions.
+- `template.yml` - An AWS CloudFormation template that creates the application.
+- `template-vpcrds.yml` - A template that creates the VPC and Amazon RDS database instance.
+- `1-create-bucket.sh`, `2-create-dbpasswordsecret.sh`, and other scripts - Shell scripts that use the AWS CLI to deploy and manage the application.
+- `bin` - Additional scripts. 
 
 The processor supports the following types of lists:
 
@@ -96,7 +96,7 @@ To create a table in the database, run the `5-create-dbtable.sh` script.
 
 # Test
 
-To invoke the function with a test event, use the invoke script.
+To invoke the function with a test event, run `6-invoke.sh`.
 
     list-manager$ ./6-invoke.sh
     {
@@ -108,7 +108,7 @@ If that succeeds, send records to the Kinesis stream. The processor function's e
 
     list-manager$ ./7-put-records.sh
 
-The functions in this application are instrumented with AWS X-Ray. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map. The following service map shows the function writing to the two DynamoDB tables and the MySQL database.
+The application uses AWS X-Ray to trace requests. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map. The following service map shows the function writing to the two DynamoDB tables and the MySQL database.
 
 ![Service Map](/sample-apps/list-manager/images/listmanager-servicemap.png)
 
