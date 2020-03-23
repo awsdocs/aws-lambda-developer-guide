@@ -1,12 +1,12 @@
 # API Gateway proxy integration with Node.js
-This project creates a function and supporting resources:
-- function - A Node.js function.
-- template.yml - An AWS CloudFormation template that creates an application.
-- 1-create-bucket.sh, 2-deploy.sh, etc. - Shell scripts that use the AWS CLI to deploy and manage the application.
+This project includes function code and supporting resources:
+- `function` - A Node.js function.
+- `template.yml` - An AWS CloudFormation template that creates an application.
+- `1-create-bucket.sh`, `2-deploy.sh`, etc. - Shell scripts that use the AWS CLI to deploy and manage the application.
 
 The sample application is a Lambda function that processes events from an API Gateway REST API. The API provides a public endpoint that you can access with a web browser or other HTTP client. When you send a request to the endpoint, the API serializes the request and sends it to the function. The function calls the Lambda API to get utilization data and returns it to the API in the required format.
 
-:warning: The application creates a public API endpoint that is accessible over the internet. When you are done testing, run the cleanup script to delete it.
+:warning: The application creates a public API endpoint that is accessible over the internet. When you're done testing, run the cleanup script to delete it.
 
 ![Architecture](/sample-apps/nodejs-apig/images/sample-nodejs-apig.png)
 
@@ -23,13 +23,13 @@ Download or clone this repository.
     $ git clone git@github.com:awsdocs/aws-lambda-developer-guide.git
     $ cd aws-lambda-developer-guide/sample-apps/nodejs-apig
 
-Run `1-create-bucket.sh` to create a new bucket for deployment artifacts. Or, if you already have a bucket, create a file named `bucket-name.txt` that contains the name of your bucket.
+To create a new bucket for deployment artifacts, run `1-create-bucket.sh`. Or, if you already have a bucket, create a file named `bucket-name.txt` that contains the name of your bucket.
 
     nodejs-apig$ ./1-create-bucket.sh
     make_bucket: lambda-artifacts-a5e491dbb5b22e0d
 
 # Deploy
-Run `2-deploy.sh` to deploy the application.
+To deploy the application, run `2-deploy.sh`.
 
     nodejs-apig$ ./2-deploy.sh
     added 16 packages from 18 contributors and audited 18 packages in 0.926s
@@ -43,7 +43,7 @@ Run `2-deploy.sh` to deploy the application.
 This script uses AWS CloudFormation to deploy the Lambda functions and an IAM role. If the AWS CloudFormation stack that contains the resources already exists, the script updates it with any changes to the template or function code.
 
 # Test
-Run `3-invoke.sh` to invoke the function directly with a test event (`event.json`).
+To invoke the function directly with a test event (`event.json`), run `3-invoke.sh`.
 
     nodejs-apig$ ./3-invoke.sh
     {
@@ -72,7 +72,7 @@ To invoke the function with the REST API, run the `4-get.sh` script. This script
       "FunctionCount": 39
     }
 
-The functions in this application are instrumented with AWS X-Ray. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map. The following service map shows the function invoked in two ways.
+The application uses AWS X-Ray to trace requests. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map. The following service map shows the function invoked in two ways.
 
 ![Service Map](/sample-apps/nodejs-apig/images/nodejs-apig-servicemap.png)
 
