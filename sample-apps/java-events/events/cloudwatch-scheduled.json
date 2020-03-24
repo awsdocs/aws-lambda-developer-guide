@@ -1,0 +1,12 @@
+{
+    "account": "123456789012",
+    "region": "us-east-2",
+    "detail": {},
+    "detailType": "Scheduled Event",
+    "source": "aws.events",
+    "id": "e1fdf1be-xmpl-1cbb-8102-667adfc78d5f",
+    "time": "2020-02-02T12:34:56Z",
+    "resources": [
+        "arn:aws:events:us-east-2:123456789012:rule/my-rule"
+    ]
+}
