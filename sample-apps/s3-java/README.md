@@ -1,6 +1,6 @@
 # S3 image resizer (Java)
 
-![Architecture](/sample-apps/java-s3/images/sample-java-s3.png)
+![Architecture](/sample-apps/s3-java/images/sample-s3-java.png)
 
 The project source includes function code and supporting resources:
 
@@ -23,25 +23,25 @@ Use the following instructions to deploy the sample application.
 Download or clone this repository.
 
     $ git clone git@github.com:awsdocs/aws-lambda-developer-guide.git
-    $ cd aws-lambda-developer-guide/sample-apps/java-s3
+    $ cd aws-lambda-developer-guide/sample-apps/s3-java
 
 To create a new bucket for deployment artifacts, run `1-create-bucket.sh`. Or, if you already have a bucket, create a file named `bucket-name.txt` that contains the name of your bucket.
 
-    java-s3$ ./1-create-bucket.sh
+    s3-java$ ./1-create-bucket.sh
     make_bucket: lambda-artifacts-a5e491dbb5b22e0d
 
 To build a Lambda layer that contains the function's runtime dependencies, run `2-build-layer.sh`. Packaging dependencies in a layer reduces the size of the deployment package that you upload when you modify your code.
 
-    java-s3$ ./2-build-layer.sh
+    s3-java$ ./2-build-layer.sh
 
 # Deploy
 To deploy the application, run `3-deploy.sh`.
 
-    java-s3$ ./3-deploy.sh
+    s3-java$ ./3-deploy.sh
     BUILD SUCCESSFUL in 1s
     Successfully packaged artifacts and wrote output template to file out.yml.
     Waiting for changeset to be created..
-    Successfully created/updated stack - java-s3
+    Successfully created/updated stack - s3-java
 
 This script uses AWS CloudFormation to deploy the Lambda functions and an IAM role. If the AWS CloudFormation stack that contains the resources already exists, the script updates it with any changes to the template or function code.
 
@@ -49,19 +49,19 @@ You can also build the application with Maven. To use maven, add `mvn` to the co
 
     java-basic$ ./3-deploy.sh mvn
     [INFO] Scanning for projects...
-    [INFO] -----------------------< com.example:java-s3 >-----------------------
-    [INFO] Building java-s3-function 1.0-SNAPSHOT
+    [INFO] -----------------------< com.example:s3-java >-----------------------
+    [INFO] Building s3-java-function 1.0-SNAPSHOT
     [INFO] --------------------------------[ jar ]---------------------------------
     ...
 
 # Test
 To upload an image file to the application bucket and trigger the function, run `4-upload.sh`.
 
-    java-s3$ ./4-upload.sh
+    s3-java$ ./4-upload.sh
 
 To invoke the function directly, run `5-invoke.sh`.
 
-    java-s3$ ./5-invoke.sh
+    s3-java$ ./5-invoke.sh
     {
         "StatusCode": 200,
         "ExecutedVersion": "$LATEST"
@@ -69,11 +69,11 @@ To invoke the function directly, run `5-invoke.sh`.
 
 The application uses AWS X-Ray to trace requests. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map.
 
-![Service Map](/sample-apps/java-s3/images/java-s3-servicemap.png)
+![Service Map](/sample-apps/s3-java/images/s3-java-servicemap.png)
 
 Choose a node in the main function graph. Then choose **View traces** to see a list of traces. Choose any trace to view a timeline that breaks down the work done by the function.
 
-![Trace](/sample-apps/java-s3/images/java-s3-trace.png)
+![Trace](/sample-apps/s3-java/images/s3-java-trace.png)
 
 # Cleanup
 To delete the application, run `6-cleanup.sh`.

@@ -44,7 +44,7 @@ class InvokeTest {
 
   @Test
   void invokeTest() throws IOException {
-    AWSXRay.beginSegment("java-s3-test");
+    AWSXRay.beginSegment("s3-java-test");
     String bucket = new String(Files.readAllLines(Paths.get("bucket-name.txt")).get(0));
     S3EventNotificationRecord record = new S3EventNotificationRecord("us-east-2",
        "ObjectCreated:Put",
@@ -57,7 +57,7 @@ class InvokeTest {
         new S3BucketEntity(bucket,
           new UserIdentityEntity("A3XMPLFAF2AI3E"),
           "arn:aws:s3:::" + bucket),
-        new S3ObjectEntity("inbound/sample-java-s3.png",
+        new S3ObjectEntity("inbound/sample-s3-java.png",
           new Long(21476),
           "d132690b6c65b6d1629721dcfb49b883",
           "",

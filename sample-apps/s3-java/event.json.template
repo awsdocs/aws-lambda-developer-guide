@@ -23,7 +23,7 @@
                     "arn": "arn:aws:s3:::BUCKET_NAME"
                 },
                 "object": {
-                    "key": "inbound/sample-java-s3.png",
+                    "key": "inbound/sample-s3-java.png",
                     "size": 21476,
                     "eTag": "d132690b6c65b6d1629721dcfb49b883",
                     "versionId": "",

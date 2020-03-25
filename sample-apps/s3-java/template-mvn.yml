@@ -8,8 +8,8 @@ Resources:
   function:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: build/distributions/java-s3.zip
-      Handler: example.Handler
+      CodeUri: target/s3-java-1.0-SNAPSHOT.jar
+      Handler: example.Handler::handleRequest
       Runtime: java8
       Description: Java function
       MemorySize: 512
@@ -22,8 +22,6 @@ Resources:
         - AWSLambdaVPCAccessExecutionRole
         - AmazonS3FullAccess
       Tracing: Active
-      Layers:
-        - !Ref libs
       Events:
         s3Notification:
           Type: S3
@@ -35,11 +33,3 @@ Resources:
                 Rules:
                 - Name: prefix
                   Value: inbound/
-  libs:
-    Type: AWS::Serverless::LayerVersion
-    Properties:
-      LayerName: java-s3-lib
-      Description: Dependencies for the Java S3 sample app.
-      ContentUri: build/java-s3-lib.zip
-      CompatibleRuntimes:
-        - java8
