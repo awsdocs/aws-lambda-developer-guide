@@ -1,0 +1,30 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: An AWS Lambda application that calls the Lambda API.
+Resources:
+  function:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: build/distributions/java-events-v1sdk.zip
+      Handler: example.Handler
+      Runtime: java8
+      Description: Java function
+      MemorySize: 512
+      Timeout: 15
+      # Function's execution role
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - AWSLambdaReadOnlyAccess
+        - AWSXrayWriteOnlyAccess
+        - AWSLambdaVPCAccessExecutionRole
+      Tracing: Active
+      Layers:
+        - !Ref libs
+  libs:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: java-events-v1sdk-lib
+      Description: Dependencies for the Java S3 sample app.
+      ContentUri: build/java-events-v1sdk-lib.zip
+      CompatibleRuntimes:
+        - java8
