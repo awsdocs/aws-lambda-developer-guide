@@ -64,7 +64,6 @@ class InvokeTest {
           "005E64A65DF093B26D"),
         "1.0"),
        new UserIdentityEntity("AWS:AIDAINPONIXMPLT3IKHL2"));
-       //new GlacierEventDataEntity());
     ArrayList<S3EventNotificationRecord> records = new ArrayList<S3EventNotificationRecord>();
     records.add(record);
     S3Event event = new S3Event(records);

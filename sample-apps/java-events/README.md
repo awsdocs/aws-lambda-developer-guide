@@ -71,7 +71,7 @@ Choose a node in the main function graph. Then choose **View traces** to see a l
 
 # Configure Handler Class
 
-By default, the function uses a handler class named `Handler` that takes a map as input and returns a string. The project also includes handlers that use other input and output types. These are defined in the following files under src/main/java/example:
+By default, the function uses a handler class named `Handler` that takes an API Gateway proxy event as input and returns a string. The project also includes handlers that use other input and output types. The handlers are defined in the following files under src/main/java/example:
 
 - `Handler.java` - Takes `APIGatewayV2ProxyRequestEvent` as input and returns `APIGatewayV2ProxyResponseEvent`.
 - `HandlerApiGateway.java` - Takes `APIGatewayProxyRequestEvent` as input and returns `APIGatewayProxyResponseEvent`.
@@ -90,7 +90,7 @@ To use a different handler, change the value of the Handler setting in the appli
       CodeUri: build/distributions/java-events.zip
       Handler: example.HandlerApiGateway
 
-Deploy the change, and then use the invoke script to test the new configuration. For handlers, that don't take a JSON object as input, pass the type as an argument to the invoke script.
+Deploy the change, and then use the invoke script to test the new configuration. Pass the handler type key as an argument to the invoke script.
 
     ./3-invoke.sh lex
     {

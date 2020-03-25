@@ -8,14 +8,14 @@ repositories {
 
 dependencies {
     implementation platform('com.amazonaws:aws-xray-recorder-sdk-bom:2.4.0')
-    implementation 'org.slf4j:slf4j-api:1.7.30'
-    implementation 'com.amazonaws:aws-java-sdk-s3:1.11.578'
     implementation 'com.amazonaws:aws-lambda-java-core:1.2.0'
     implementation 'com.amazonaws:aws-lambda-java-events:2.2.7'
+    implementation 'com.amazonaws:aws-java-sdk-s3:1.11.578'
     implementation 'com.amazonaws:aws-xray-recorder-sdk-core'
     implementation 'com.amazonaws:aws-xray-recorder-sdk-aws-sdk'
     implementation 'com.amazonaws:aws-xray-recorder-sdk-aws-sdk-instrumentor'
     implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'org.slf4j:slf4j-api:1.7.30'
     implementation 'org.apache.logging.log4j:log4j-api:2.13.0'
     implementation 'org.apache.logging.log4j:log4j-core:2.13.0'
     runtimeOnly 'org.apache.logging.log4j:log4j-slf4j18-impl:2.13.0'
@@ -28,7 +28,7 @@ test {
     useJUnitPlatform()
 }
 
-task packageFat(type: Zip) {
+task packageBig(type: Zip) {
     from compileJava
     from processResources
     into('lib') {
@@ -42,7 +42,7 @@ task packageLibs(type: Zip) {
     }
 }
 
-task packageSkinny(type: Zip) {
+task packageSmall(type: Zip) {
     from compileJava
     from processResources
 }
@@ -52,4 +52,4 @@ java {
     targetCompatibility = JavaVersion.VERSION_1_8
 }
 
-build.dependsOn packageSkinny
+build.dependsOn packageSmall
