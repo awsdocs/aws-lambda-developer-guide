@@ -26,8 +26,16 @@ import java.util.concurrent.CompletableFuture;
 // Handler value: example.Handler
 public class Handler implements RequestHandler<SQSEvent, String>{
   private static final Logger logger = LoggerFactory.getLogger(Handler.class);
-  Gson gson = new GsonBuilder().setPrettyPrinting().create();
-  LambdaAsyncClient lambdaClient = LambdaAsyncClient.create();
+  private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+  private static final LambdaAsyncClient lambdaClient = LambdaAsyncClient.create();
+  public Handler(){
+    CompletableFuture<GetAccountSettingsResponse> accountSettings = lambdaClient.getAccountSettings(GetAccountSettingsRequest.builder().build());
+    try {
+      GetAccountSettingsResponse settings = accountSettings.get();
+    } catch(Exception e) {
+      e.getStackTrace();
+    }
+  }
   @Override
   public String handleRequest(SQSEvent event, Context context)
   {
@@ -39,8 +47,8 @@ public class Handler implements RequestHandler<SQSEvent, String>{
     // log execution details
     logger.info("ENVIRONMENT VARIABLES: {}", gson.toJson(System.getenv()));
     logger.info("CONTEXT: {}", gson.toJson(context));
-    // process event
     logger.info("EVENT: {}", gson.toJson(event));
+    // process event
     for(SQSMessage msg : event.getRecords()){
       logger.info(msg.getBody());
     }
