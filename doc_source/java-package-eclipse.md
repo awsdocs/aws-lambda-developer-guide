@@ -1,4 +1,4 @@
-# Creating a \.jar Deployment Package Using Eclipse<a name="java-package-eclipse"></a>
+# Creating a Deployment Package Using Eclipse<a name="java-package-eclipse"></a>
 
 This section shows how to package your Java code into a deployment package using Eclipse IDE and Maven plugin for Eclipse\. 
 
@@ -81,7 +81,7 @@ The resulting \.jar, `lambda-java-example-0.0.1-SNAPSHOT.jar`, is not the final 
    1. In the **Add Plugin** window, type the following values:
       + **Group Id:** org\.apache\.maven\.plugins
       + **Artifact Id:** maven\-shade\-plugin
-      + **Version:** 3\.2\.1
+      + **Version:** 3\.2\.2
 
    1. Now build again\.
 

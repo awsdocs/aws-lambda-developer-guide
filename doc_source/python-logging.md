@@ -97,6 +97,7 @@ To get full log events from the command line, you can include the log stream nam
 This example requires that `my-function` returns a log stream ID\.  
 
 ```
+#!/bin/bash
 aws lambda invoke --function-name my-function --payload '{"key": "value"}' out
 sed -i'' -e 's/"//g' out
 sleep 15

@@ -16,7 +16,7 @@ If your code takes much longer to run in Lambda than on your local machine, it m
 
 Your function needs permission to call CloudWatch Logs and X\-Ray\. Update its [execution role](lambda-intro-execution-role.md) to grant it permission\. Add the following managed policies to enable logs and tracing\.
 + **AWSLambdaBasicExecutionRole**
-+ **AWSXrayWriteOnlyAccess**
++ **AWSXRayDaemonWriteAccess**
 
 When you add permissions to your function, make an update to its code or configuration as well\. This forces running instances of your function, which have out\-of\-date credentials, to stop and be replaced\.
 

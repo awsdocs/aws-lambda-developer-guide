@@ -148,7 +148,7 @@ The deployment package is a \.zip file containing your Lambda function code and 
 
 ## Java 11<a name="with-s3-example-deployment-pkg-java"></a>
 
-The following is example Java code that reads incoming Amazon S3 events and creates a thumbnail\. Note that it implements the `RequestHandler` interface provided in the `aws-lambda-java-core` library\. Therefore, at the time you create a Lambda function you specify the class as the handler \(that is, `example.handler`\)\. For more information about using interfaces to provide a handler, see [Using Provided Interfaces for Java Function Handlers in AWS Lambda](java-handler-interfaces.md)\.
+The following is example Java code that reads incoming Amazon S3 events and creates a thumbnail\. Note that it implements the `RequestHandler` interface provided in the `aws-lambda-java-core` library\. Therefore, at the time you create a Lambda function you specify the class as the handler \(that is, `example.handler`\)\. For more information about using interfaces to provide a handler, see [Handler Interfaces](java-handler.md#java-handler-interfaces)\.
 
 The `S3Event` type that the handler uses as the input type is one of the predefined classes in the `aws-lambda-java-events`  library that provides methods for you to easily read information from the incoming Amazon S3 event\. The handler returns a string as output\.
 

@@ -6,6 +6,8 @@ If you've enabled X\-Ray tracing in a service that invokes your function, Lambda
 
 To trace requests that don't have a tracing header, enable active tracing in your function's configuration\.
 
+You can enable tracing in your function's configuration\.
+
 **To enable active tracing**
 
 1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
@@ -16,7 +18,7 @@ To trace requests that don't have a tracing header, enable active tracing in you
 
 1. Choose **Save**\.
 
-Your function needs permission to upload trace data to X\-Ray\. When you enable active tracing in the Lambda console, Lambda adds the required permissions to your function's [execution role](lambda-intro-execution-role.md)\. Otherwise, add the [AWSXrayWriteOnlyAccess](https://console.aws.amazon.com/iam/home#/policies/arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess) policy to the execution role\.
+Your function needs permission to upload trace data to X\-Ray\. When you enable active tracing in the Lambda console, Lambda adds the required permissions to your function's [execution role](lambda-intro-execution-role.md)\. Otherwise, add the [AWSXRayDaemonWriteAccess](https://console.aws.amazon.com/iam/home#/policies/arn:aws:iam::aws:policy/AWSXRayDaemonWriteAccess) policy to the execution role\.
 
 X\-Ray applies a sampling algorithm to ensure that tracing is efficient, while still providing a representative sample of the requests that your application serves\. The default sampling rule is 1 request per second and 5 percent of additional requests\.
 

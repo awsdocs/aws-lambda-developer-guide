@@ -33,7 +33,7 @@ By default, Lambda creates an execution role with minimal permissions when you [
 
 1. Choose **Next: Permissions**\.
 
-1. Under **Attach permissions policies**, choose the **AWSLambdaBasicExecutionRole** and **AWSXrayWriteOnlyAccess** managed policies\.
+1. Under **Attach permissions policies**, choose the **AWSLambdaBasicExecutionRole** and **AWSXRayDaemonWriteAccess** managed policies\.
 
 1. Choose **Next: Tags**\.
 
@@ -113,7 +113,7 @@ The following managed policies provide permissions that are required to use Lamb
 + **AWSLambdaDynamoDBExecutionRole** – Permission to read records from an Amazon DynamoDB stream\.
 + **AWSLambdaSQSQueueExecutionRole** – Permission to read a message from an Amazon Simple Queue Service \(Amazon SQS\) queue\.
 + **AWSLambdaVPCAccessExecutionRole** – Permission to manage elastic network interfaces to connect your function to a VPC\.
-+ **AWSXrayWriteOnlyAccess** – Permission to upload trace data to X\-Ray\.
++ **AWSXRayDaemonWriteAccess** – Permission to upload trace data to X\-Ray\.
 
 For some features, the Lambda console attempts to add missing permissions to your execution role in a customer managed policy\. These policies can become numerous\. Add the relevant managed policies to your execution role before enabling features to avoid creating extra policies\.
 

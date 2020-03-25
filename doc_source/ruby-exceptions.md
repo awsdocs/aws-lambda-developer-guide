@@ -28,7 +28,7 @@ This code results in a type error\. Lambda catches the error and generates a JSO
 When you invoke the function from the command line, the AWS CLI splits the response into two documents\. To indicate that a function error occurred, the response displayed in the terminal includes a `FunctionError` field\. The response or error returned by the function is written to the output file\.
 
 ```
-$ aws lambda invoke --function-name my-function out
+$ aws lambda invoke --function-name my-function out.json
 {
     "StatusCode": 200,
     "FunctionError": "Unhandled",
@@ -39,7 +39,7 @@ $ aws lambda invoke --function-name my-function out
 View the output file to see the error document\.
 
 ```
-$ cat out
+$ cat out.json
 {"errorMessage":"no implicit conversion of String into Integer","errorType":"Function<TypeError>","stackTrace":["/var/task/function.rb:3:in `first'","/var/task/function.rb:3:in `handler'"]}
 ```
 
@@ -49,7 +49,7 @@ The 200 \(success\) status code in the response from Lambda indicates that there
 Lambda also records up to 256 KB of the error object in the function's logs\. To view logs when you invoke the function from the command line, use the `--log-type` option and decode the base64 string in the response\.
 
 ```
-$ aws lambda invoke --function-name my-function out --log-type Tail \
+$ aws lambda invoke --function-name my-function out.json --log-type Tail \
 --query 'LogResult' --output text |  base64 -d
 START RequestId: 5ce6a15a-f156-11e8-b8aa-25371a5ca2a3 Version: $LATEST
 Processing event...

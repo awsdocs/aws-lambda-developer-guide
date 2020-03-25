@@ -214,7 +214,7 @@ Create a pipeline that deploys your application\. The pipeline monitors your rep
    + **Stack name** – **lambda\-pipeline\-stack**
    + **Change set name** – **lambda\-pipeline\-changeset**
    + **Template** – **BuildArtifact::outputtemplate\.yml**
-   + **Capabilities** – **CAPABILITY\_IAM**
+   + **Capabilities** – **CAPABILITY\_IAM**, **CAPABILITY\_AUTO\_EXPAND**
    + **Role name** – **cfn\-lambda\-pipeline**
 
 1. Choose **Create pipeline**\.

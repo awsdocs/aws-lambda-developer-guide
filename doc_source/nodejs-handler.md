@@ -4,7 +4,7 @@ The handler is the method in your Lambda function that processes events\. When y
 
 The following example function logs the contents of the event object and returns the location of the logs\.
 
-**Example index\.js File**  
+**Example index\.js**  
 
 ```
 exports.handler =  async function(event, context) {

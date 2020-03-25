@@ -28,7 +28,7 @@ This code results in a reference error\. Lambda catches the error and generates 
 When you invoke the function from the command line, the AWS CLI splits the response into two documents\. To indicate that a function error occurred, the response displayed in the terminal includes a `FunctionError` field\. The response or error returned by the function is written to the output file\.
 
 ```
-$ aws lambda invoke --function-name my-function out
+$ aws lambda invoke --function-name my-function out.json
 {
     "StatusCode": 200,
     "FunctionError": "Unhandled",
@@ -39,7 +39,7 @@ $ aws lambda invoke --function-name my-function out
 View the output file to see the error document\.
 
 ```
-$ cat out
+$ cat out.json
 {"errorType":"ReferenceError","errorMessage":"x is not defined","trace":["ReferenceError: x is not defined"," at Runtime.exports.handler (/var/task/index.js:2:3)"," at Runtime.handleOnce (/var/runtime/Runtime.js:63:25)"," at process._tickCallback (internal/process/next_tick.js:68:7)"]}
 ```
 
@@ -49,7 +49,7 @@ The 200 \(success\) status code in the response from Lambda indicates that there
 Lambda also records up to 256 KB of the error object in the function's logs\. To view logs when you invoke the function from the command line, use the `--log-type` option and decode the base64 string in the response\.
 
 ```
-$ aws lambda invoke --function-name my-function out --log-type Tail \
+$ aws lambda invoke --function-name my-function out.json --log-type Tail \
 --query 'LogResult' --output text |  base64 -d
 START RequestId: 8bbbfb91-a3ff-4502-b1b7-cb8f6658de64 Version: $LATEST
 2019-06-05T22:11:27.082Z        8bbbfb91-a3ff-4502-b1b7-cb8f6658de64    ERROR   Invoke Error    {"errorType":"ReferenceError","errorMessage":"x is not defined","stack":["ReferenceError: x is not defined","    at Runtime.exports.handler (/var/task/index.js:2:3)","    at Runtime.handleOnce (/var/runtime/Runtime.js:63:25)","    at process._tickCallback (internal/process/next_tick.js:68:7)"]}

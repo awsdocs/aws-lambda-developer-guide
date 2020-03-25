@@ -2,6 +2,22 @@
 
 You can configure a function to connect to private subnets in a virtual private cloud \(VPC\) in your account\. Use Amazon Virtual Private Cloud \(Amazon VPC\) to create a private network for resources such as databases, cache instances, or internal services\. Connect your function to the VPC to access private resources during execution\.
 
+**To connect a function to a VPC**
+
+1. Open the [Lambda console](https://console.aws.amazon.com/lambda)\.
+
+1. Choose a function\.
+
+1. Under **VPC**, choose **Edit**\.
+
+1. Choose **Custom VPC**\.
+
+1. Choose a VPC, subnets, and security groups\.
+**Note**  
+Connect your function to private subnets to access private resources\. If your function needs internet access, use [NAT](#vpc-internet)\. Connecting a function to a public subnet does not give it internet access or a public IP address\.
+
+1. Choose **Save**\.
+
 When you connect a function to a VPC, Lambda creates an [elastic network interface](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ElasticNetworkInterfaces.html) for each combination of security group and subnet in your function's VPC configuration\. This process can take about a minute\. During this time, you cannot perform additional operations that target the function, such as [creating versions](configuration-versions.md) or updating the function's code\. For new functions, you can't invoke the function until its state transitions from `Pending` to `Active`\. For existing functions, you can still invoke the old version while the update is in progress\. For more information about function states, see [Monitoring the State of a Function with the Lambda API](functions-states.md)\.
 
 Multiple functions connected to the same subnets share network interfaces, so connecting additional functions to a subnet that already has a Lambda\-managed network interface is much quicker\. However, Lambda might create additional network interfaces if you have many functions or very busy functions\.

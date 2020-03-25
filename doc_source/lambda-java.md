@@ -1,6 +1,8 @@
 # Building Lambda Functions with Java<a name="lambda-java"></a>
 
-The following sections explain how common programming patterns and core concepts apply when authoring Lambda function code in Java\.
+You can run Java code in AWS Lambda\. Lambda provides [runtimes](lambda-runtimes.md) for Java that execute your code to process events\. Your code runs in an Amazon Linux environment that includes AWS credentials from an AWS Identity and Access Management \(IAM\) role that you manage\.
+
+Lambda supports the following Java runtimes\.
 
 
 **Java Runtimes**  
@@ -10,12 +12,54 @@ The following sections explain how common programming patterns and core concepts
 |  Java 11  |  `java11`  |  amazon\-corretto\-11  |  Amazon Linux 2  | 
 |  Java 8  |  `java8`  |  java\-1\.8\.0\-openjdk  |  Amazon Linux  | 
 
-AWS Lambda provides the following libraries for Java functions:
-+ **aws\-lambda\-java\-core** – This library provides the Context object, `RequestStreamHandler`, and the `RequestHandler` interfaces\. The `Context` object \([AWS Lambda Context Object in Java](java-context.md)\) provides runtime information about your Lambda function\. The predefined interfaces provide one way of defining your Lambda function handler\. For more information, see [Using Provided Interfaces for Java Function Handlers in AWS Lambda](java-handler-interfaces.md)\.
-+ **aws\-lambda\-java\-events** – This library provides predefined types that you can use when writing Lambda functions to process events published by Amazon S3, Kinesis, Amazon SNS, and Amazon Cognito\. These classes help you process the event without having to write your own custom serialization logic\.
-+ **Custom Appender for Log4j2\.8** – You can use the custom Log4j \(see [Apache Log4j 2](http://logging.apache.org/log4j/2.x)\) appender provided by AWS Lambda for logging from your lambda functions\. Every call to Log4j methods, such as log\.info\(\) or log\.error\(\), will result in a CloudWatch Logs event\. The custom appender is called LambdaAppender and must be used in the log4j2\.xml file\. You must include the aws\-lambda\-java\-log4j2 artifact \(artifactId:aws\-lambda\-java\-log4j2\) in the deployment package \(\.jar file\)\.For more information, see [AWS Lambda Function Logging in Java](java-logging.md)\.
+Lambda functions use an [execution role](lambda-intro-execution-role.md) to get permission to write logs to Amazon CloudWatch Logs, and to access other services and resources\. If you don't already have an execution role for function development, create one\.
 
- These libraries are available through the [Maven Central Repository](https://search.maven.org/search?q=g:com.amazonaws) and can also be found on [GitHub](https://github.com/aws/aws-lambda-java-libs)\.
+**To create an execution role**
+
+1. Open the [roles page](https://console.aws.amazon.com/iam/home#/roles) in the IAM console\.
+
+1. Choose **Create role**\.
+
+1. Create a role with the following properties\.
+   + **Trusted entity** – **Lambda**\.
+   + **Permissions** – **AWSLambdaBasicExecutionRole**\.
+   + **Role name** – **lambda\-role**\.
+
+   The **AWSLambdaBasicExecutionRole** policy has the permissions that the function needs to write logs to CloudWatch Logs\.
+
+You can add permissions to the role later, or swap it out for a different role that's specific to a single function\.
+
+**To create a Java function**
+
+1. Open the [Lambda console](https://console.aws.amazon.com/lambda)\.
+
+1. Choose **Create function**\.
+
+1. Configure the following settings:
+   + **Name** – **my\-function**\.
+   + **Runtime** – **Java 11**\.
+   + **Role** – **Choose an existing role**\.
+   + **Existing role** – **lambda\-role**\.
+
+1. Choose **Create function**\.
+
+1. To configure a test event, choose **Test**\.
+
+1. For **Event name**, enter **test**\.
+
+1. Choose **Create**\.
+
+1. To execute the function, choose **Test**\.
+
+The console creates a Lambda function with a handler class named `Hello`\. Since Java is a compiled language, you can't view or edit the source code in the Lambda console, but you can modify its configuration, invoke it, and configure triggers\.
+
+The `Hello` class has a function named `handleRequest` that takes an event object and a context object\. This is the [handler function](java-handler.md) that Lambda calls when the function is invoked\. The Java function runtime gets invocation events from Lambda and passes them to the handler\. In the function configuration, the handler value is `example.Hello::handleRequest`\.
+
+To update the function's code, you create a deployment package, which is a ZIP archive that contains your function code\. As your function development progresses, you will want to store your function code in source control, add libraries, and automate deployments\. Start by [creating a deployment package](java-package.md) and updating your code at the command line\.
+
+The function runtime passes a context object to the handler, in addition to the invocation event\. The [context object](java-context.md) contains additional information about the invocation, the function, and the execution environment\. More information is available from environment variables\.
+
+Your Lambda function comes with a CloudWatch Logs log group\. The function runtime sends details about each invocation to CloudWatch Logs\. It relays any [logs that your function outputs](java-logging.md) during invocation\. If your function [returns an error](java-exceptions.md), Lambda formats the error and returns it to the invoker\.
 
 **Topics**
 + [AWS Lambda Deployment Package in Java](java-package.md)
@@ -24,3 +68,4 @@ AWS Lambda provides the following libraries for Java functions:
 + [AWS Lambda Function Logging in Java](java-logging.md)
 + [AWS Lambda Function Errors in Java](java-exceptions.md)
 + [Instrumenting Java Code in AWS Lambda](java-tracing.md)
++ [Creating a Deployment Package Using Eclipse](java-package-eclipse.md)

@@ -2,31 +2,62 @@
 
 Your Lambda function comes with a CloudWatch Logs log group, with a log stream for each instance of your function\. The runtime sends details about each invocation to the log stream, and relays logs and other output from your function's code\.
 
-To output logs from your function code, you can use methods on [java\.lang\.System](https://docs.oracle.com/javase/8/docs/api/java/lang/System.html), or any logging module that writes to `stdout` or `stderr`\. The following example uses `System.out.println`\.
+To output logs from your function code, you can use methods on [java\.lang\.System](https://docs.oracle.com/javase/8/docs/api/java/lang/System.html), or any logging module that writes to `stdout` or `stderr`\. The [aws\-lambda\-java\-core](java-package.md) library provides a logger class named `LambdaLogger` that you can access from the context object\. The logger class supports multiline logs\.
 
-**Example Hello\.java**  
+The following example uses the `LambdaLogger` logger provided by the context object\.
+
+**Example Handler\.java**  
 
 ```
-package example;
-
-import com.amazonaws.services.lambda.runtime.Context; 
-import com.amazonaws.services.lambda.runtime.LambdaLogger;
-
-public class Hello {
-    public String myHandler(String name, Context context) {
-        System.out.println("Event received.");
-        return String.format("Hello %s.", name);
-    }
+// Handler value: example.Handler
+public class Handler implements RequestHandler<Object, String>{
+  Gson gson = new GsonBuilder().setPrettyPrinting().create();
+  @Override
+  public String handleRequest(Object event, Context context)
+  {
+    LambdaLogger logger = context.getLogger();
+    String response = new String("SUCCESS");
+    // log execution details
+    logger.log("ENVIRONMENT VARIABLES: " + gson.toJson(System.getenv()));
+    logger.log("CONTEXT: " + gson.toJson(context));
+    // process event
+    logger.log("EVENT: " + gson.toJson(event));
+    return response;
+  }
 }
 ```
 
 **Example Log Format**  
 
 ```
-START RequestId: 9877995f-64e6-44db-af3c-cdc3a2567aa9 Version: $LATEST
-END RequestId: 9877995f-64e6-44db-af3c-cdc3a2567aa9
-REPORT RequestId: 9877995f-64e6-44db-af3c-cdc3a2567aa9  Duration: 157.36 ms Billed Duration: 200 ms Memory Size: 512 MB Max Memory Used: 85 MB  Init Duration: 343.03 ms    
-XRAY TraceId: 1-5e34a403-4cd0569f6177433622a571da   SegmentId: 379352d424813c63 Sampled: true
+START RequestId: 6bc28136-xmpl-4365-b021-0ce6b2e64ab0 Version: $LATEST
+ENVIRONMENT VARIABLES: 
+{
+    "_HANDLER": "example.Handler",
+    "AWS_EXECUTION_ENV": "AWS_Lambda_java8",
+    "AWS_LAMBDA_FUNCTION_MEMORY_SIZE": "512",
+    ...
+}
+CONTEXT: 
+{
+    "memoryLimit": 512,
+    "awsRequestId": "6bc28136-xmpl-4365-b021-0ce6b2e64ab0",
+    "functionName": "java-console",
+    ...
+}
+EVENT:
+{
+  "records": [
+    {
+      "messageId": "19dd0b57-xmpl-4ac1-bd88-01bbb068cb78",
+      "receiptHandle": "MessageReceiptHandle",
+      "body": "Hello from SQS!",
+       ...
+    }
+  ]
+}
+END RequestId: 6bc28136-xmpl-4365-b021-0ce6b2e64ab0
+REPORT RequestId: 6bc28136-xmpl-4365-b021-0ce6b2e64ab0	Duration: 198.50 ms	Billed Duration: 200 ms	Memory Size: 512 MB	Max Memory Used: 90 MB	Init Duration: 524.75 ms
 ```
 
 The Java runtime logs the `START`, `END`, and `REPORT` lines for each invocation\. The report line provides the following details\.
@@ -48,8 +79,8 @@ You can view logs in the Lambda console, in the CloudWatch Logs console, or from
 + [Viewing Logs in the AWS Management Console](#java-logging-console)
 + [Using the AWS CLI](#java-logging-cli)
 + [Deleting Logs](#java-logging-delete)
-+ [LambdaLogger](#java-logging-lambdalogger)
-+ [Custom Appender for Log4j 2](#java-logging-log4j2)
++ [Advanced Logging with Log4j 2 and SLF4J](#java-logging-log4j2)
++ [Sample Logging Code](#java-logging-samples)
 
 ## Viewing Logs in the AWS Management Console<a name="java-logging-console"></a>
 
@@ -97,6 +128,7 @@ To get full log events from the command line, you can include the log stream nam
 This example requires that `my-function` returns a log stream ID\.  
 
 ```
+#!/bin/bash
 aws lambda invoke --function-name my-function --payload '{"key": "value"}' out
 sed -i'' -e 's/"//g' out
 sleep 15
@@ -148,89 +180,16 @@ $ ./get-logs.sh
 
 Log groups aren't deleted automatically when you delete a function\. To avoid storing logs indefinitely, delete the log group, or [configure a retention period](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#SettingLogRetention) after which logs are deleted automatically\.
 
-## LambdaLogger<a name="java-logging-lambdalogger"></a>
+## Advanced Logging with Log4j 2 and SLF4J<a name="java-logging-log4j2"></a>
 
-Lambda provides a logger object that you can retrieve from the context object\. `LambdaLogger` supports multi\-line logs\. If you log a string that includes line breaks with `System.out.println`, each line break results in a separate entry in CloudWatch Logs\. If you use `LambdaLogger`, you get one entry with multiple lines\.
+To customize log output, support logging during unit tests, and log AWS SDK calls, use Apache Log4j 2 with SLF4J\. Log4j is a logging library for Java programs that enables you to configure log levels and use appender libraries\. SLF4J is a facade library that lets you change which library you use without changing your function code\.
 
-The following example function logs context information\.
+To add the request ID to your function's logs, use the appender in the [aws\-lambda\-java\-log4j2](java-package.md) library\. The following example shows a Log4j 2 configuration file that adds a timestamp and request ID to all logs\.
 
-**Example ContextLogger\.java**  
-
-```
-package example;
-import java.io.InputStream;
-import java.io.OutputStream;
-import com.amazonaws.services.lambda.runtime.Context;
-import com.amazonaws.services.lambda.runtime.LambdaLogger;
-
-public class ContextLogger {
-    public static String myHandler(InputStream inputStream, OutputStream outputStream, Context context) {
-        LambdaLogger logger = context.getLogger();
-        int letter;
-        try {
-            while((letter = inputStream.read()) != -1)
-            {
-                outputStream.write(Character.toUpperCase(letter));
-            }
-            Thread.sleep(3000); // Intentional delay for testing the getRemainingTimeInMillis() result.
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        
-        logger.log("Log data from LambdaLogger \n with multiple lines");
-        // Print info from the context object
-        logger.log("Function name: " + context.getFunctionName());
-        logger.log("Max mem allocated: " + context.getMemoryLimitInMB());
-        logger.log("Time remaining in milliseconds: " + context.getRemainingTimeInMillis());
-
-        // Return the log stream name so you can look up the log later.
-        return String.format("Hello %s. log stream = %s", name, context.getLogStreamName());
-    }
-}
-```
-
-**Dependencies**
-+ `aws-lambda-java-core`
-
-Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Java](java-package.md)\.
-
-## Custom Appender for Log4j 2<a name="java-logging-log4j2"></a>
-
- AWS Lambda recommends Log4j 2 to provide a custom appender\. You can use the custom [Apache log4j](https://logging.apache.org/log4j/2.x/) appender provided by Lambda for logging from your functions\. The custom appender is called `LambdaAppender` and must be used in the `log4j2.xml` file\. You must include the `aws-lambda-java-log4j2` artifact \(`artifactId:aws-lambda-java-log4j2`\) in the deployment package\.
-
-**Example Hello\.java**  
+**Example [src/main/resources/log4j2\.xml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-java/src/main/resources/log4j2.xml) – Appender configuration**  
 
 ```
-package example;
-
-import com.amazonaws.services.lambda.runtime.Context;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-public class Hello {
-    // Initialize the Log4j logger.
-    static final Logger logger = LogManager.getLogger(Hello.class);
-
-    public String myHandler(String name, Context context) {
-        logger.error("log data from log4j err.");
-
-        // Return will include the log stream name so you can look
-        // up the log later.
-        return String.format("Hello %s. log stream = %s", name, context.getLogStreamName());
-    }
-}
-```
-
-The example preceding uses the following log4j2\.xml file to load properties
-
-**Example log4j2\.xml**  
-
-```
-<?xml version="1.0" encoding="UTF-8"?>
-<Configuration packages="com.amazonaws.services.lambda.runtime.log4j2">
+<Configuration status="WARN">
   <Appenders>
     <Lambda name="Lambda">
       <PatternLayout>
@@ -239,16 +198,101 @@ The example preceding uses the following log4j2\.xml file to load properties
     </Lambda>
   </Appenders>
   <Loggers>
-    <Root level="info">
-      <AppenderRef ref="Lambda" />
+    <Root level="INFO">
+      <AppenderRef ref="Lambda"/>
     </Root>
+    <Logger name="software.amazon.awssdk" level="WARN" />
+    <Logger name="software.amazon.awssdk.request" level="DEBUG" />
   </Loggers>
 </Configuration>
 ```
 
-**Dependencies**
-+ `aws-lambda-java-log4j2`
-+ `log4j-core`
-+ `log4j-api`
+With this configuration, each line is prepended with the date, time, request ID, log level and class name\.
 
-Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Java](java-package.md)\.
+**Example Log Format with Appender**  
+
+```
+START RequestId: 6bc28136-xmpl-4365-b021-0ce6b2e64ab0 Version: $LATEST
+2020-03-18 08:52:43 6bc28136-xmpl-4365-b021-0ce6b2e64ab0 INFO  Handler - ENVIRONMENT VARIABLES:
+{
+    "_HANDLER": "example.Handler",
+    "AWS_EXECUTION_ENV": "AWS_Lambda_java8",
+    "AWS_LAMBDA_FUNCTION_MEMORY_SIZE": "512",
+    ...
+}
+2020-03-18 08:52:43 6bc28136-xmpl-4365-b021-0ce6b2e64ab0 INFO  Handler - CONTEXT:
+{
+    "memoryLimit": 512,
+    "awsRequestId": "6bc28136-xmpl-4365-b021-0ce6b2e64ab0",
+    "functionName": "java-console",
+    ...
+}
+```
+
+SLF4J is a facade library for logging in Java code\. In your function code, you use the SLF4J logger factory to retrieve a logger with methods for log levels like `info()` and `warn()`\. In your build configuration, you include the logging library and SLF4J adapter in the classpath\. By changing the libraries in the build configuration, you can change the logger type without changing your function code\. SLF4J is required to capture logs from the SDK for Java\.
+
+In the following example, the handler class uses SLF4J to retrieve a logger\.
+
+**Example [src/main/java/example/Handler\.java](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-java/src/main/java/example/Handler.java) – Logging with SLF4J**  
+
+```
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+// Handler value: example.Handler
+public class Handler implements RequestHandler<SQSEvent, String>{
+  private static final Logger logger = LoggerFactory.getLogger(Handler.class);
+  Gson gson = new GsonBuilder().setPrettyPrinting().create();
+  LambdaAsyncClient lambdaClient = LambdaAsyncClient.create();
+  @Override
+  public String handleRequest(SQSEvent event, Context context)
+  {
+    String response = new String();
+    // call Lambda API
+    logger.info("Getting account settings");
+    CompletableFuture<GetAccountSettingsResponse> accountSettings = 
+        lambdaClient.getAccountSettings(GetAccountSettingsRequest.builder().build());
+    // log execution details
+    logger.info("ENVIRONMENT VARIABLES: {}", gson.toJson(System.getenv()));
+...
+```
+
+The build configuration takes runtime dependencies on the Lambda appender and SLF4J adapter, and implementation dependencies on Log4J 2\.
+
+**Example [build\.gradle](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-java/build.gradle) – Logging dependencies**  
+
+```
+dependencies {
+    implementation platform('software.amazon.awssdk:bom:2.10.73')
+    implementation platform('com.amazonaws:aws-xray-recorder-sdk-bom:2.4.0')
+    implementation 'software.amazon.awssdk:lambda'
+    implementation 'com.amazonaws:aws-xray-recorder-sdk-core'
+    implementation 'com.amazonaws:aws-xray-recorder-sdk-aws-sdk-core'
+    implementation 'com.amazonaws:aws-xray-recorder-sdk-aws-sdk-v2'
+    implementation 'com.amazonaws:aws-xray-recorder-sdk-aws-sdk-v2-instrumentor'
+    implementation 'com.amazonaws:aws-lambda-java-core:1.2.0'
+    implementation 'com.amazonaws:aws-lambda-java-events:2.2.7'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'org.apache.logging.log4j:log4j-api:2.13.0'
+    implementation 'org.apache.logging.log4j:log4j-core:2.13.0'
+    runtimeOnly 'org.apache.logging.log4j:log4j-slf4j18-impl:2.13.0'
+    runtimeOnly 'com.amazonaws:aws-lambda-java-log4j2:1.1.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.0'
+}
+```
+
+When you run your code locally for tests, the context object with the Lambda logger is not available, and there's no request ID for the Lambda appender to use\. For example test configurations, see the sample applications in the next section\. 
+
+## Sample Logging Code<a name="java-logging-samples"></a>
+
+The GitHub repository for this guide includes sample applications that demonstrate the use of various logging configurations\. Each sample application includes scripts for easy deployment and cleanup, an AWS SAM template, and supporting resources\.
+
+**Java Sample Applications**
++ [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-basic) – A minimal Java function with unit tests and variable logging configuration\. Includes both Gradle and Maven builds\.
++ [blank\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-java) – A Java function with the events library, advanced logging configuration, and the AWS SDK for Java 2\.x that calls the Lambda API to retrieve account settings\.
++ [s3\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/s3-java) – A Java function that processes notification events from Amazon S3 and uses the Java Class Library \(JCL\) to create thumbnails from uploaded image files\.
+
+The `java-basic` sample application shows a minimal logging configuration that supports logging tests\. The handler code uses the `LambdaLogger` logger provided by the context object\. For tests, the application uses a custom `TestLogger` class that implements the `LambdaLogger` interface with a Log4j 2 logger\. It uses SLF4J as a facade for compatibility with the AWS SDK\. Logging libararies are excluded from build output to keep the deployment package small\.
+
+The `blank-java` sample application builds on the basic configuration with AWS SDK logging and the Lambda Log4j 2 appender\. It uses Log4j 2 in Lambda with custom appender that adds the invocation request ID to each line\.

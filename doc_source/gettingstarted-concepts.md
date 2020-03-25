@@ -13,7 +13,7 @@ With AWS Lambda, you run functions to process events\. You can send events to yo
 
 A function is a resource that you can invoke to run your code in AWS Lambda\. A function has code that processes events, and a runtime that passes requests and responses between Lambda and the function code\. You provide the code, and you can use the provided runtimes or create your own\.
 
-For more information, see [AWS Lambda Runtimes](lambda-runtimes.md)\.
+For more information, see [Managing AWS Lambda Functions](lambda-functions.md)\.
 
 ## Runtime<a name="gettingstarted-concepts-runtimes"></a>
 
@@ -23,7 +23,34 @@ For more information, see [AWS Lambda Runtimes](lambda-runtimes.md)\.
 
 ## Event<a name="gettingstarted-concepts-event"></a>
 
-An event is a JSON formatted document that contains data for a function to process\. The Lambda runtime converts the event to an object and passes it to your function code\. When you invoke a function, you determine the structure and contents of the event\. When an AWS service invokes your function, the service defines the event\.
+An event is a JSON formatted document that contains data for a function to process\. The Lambda runtime converts the event to an object and passes it to your function code\. When you invoke a function, you determine the structure and contents of the event\.
+
+**Example Custom Event – Weather Data**  
+
+```
+{
+  "TemperatureK": 281,
+  "WindKmh": -3,
+  "HumidityPct": 0.55,
+  "PressureHPa": 1020
+}
+```
+
+When an AWS service invokes your function, the service defines the shape of the event\.
+
+**Example Service Event – Amazon SNS Notification**  
+
+```
+{
+  "Records": [
+    {
+      "Sns": {
+        "Timestamp": "2019-01-02T12:45:07.000Z",
+        "Signature": "tcc6faL2yUC6dgZdmrwh1Y4cGa/ebXEkAi6RibDsvpi+tE/1+82j...65r==",
+        "MessageId": "95df01b4-ee98-5cb9-9903-4c221d41eb5e",
+        "Message": "Hello from SNS!",
+        ...
+```
 
 For details on events from AWS services, see [Using AWS Lambda with Other Services](lambda-services.md)\.
 

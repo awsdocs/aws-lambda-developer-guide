@@ -1,74 +1,297 @@
 # Using AWS Lambda with Amazon API Gateway<a name="services-apigateway"></a>
 
-You can invoke AWS Lambda functions over HTTPS\. You can do this by defining a custom REST API and endpoint using [Amazon API Gateway](https://aws.amazon.com/api-gateway/), and then mapping individual methods, such as `GET` and `PUT`, to specific Lambda functions\. Alternatively, you could add a special method named ANY to map all supported methods \(`GET`, `POST`, `PATCH`, `DELETE`\) to your Lambda function\. When you send an HTTPS request to the API endpoint, the Amazon API Gateway service invokes the corresponding Lambda function\.
+You can create a web API with an HTTP endpoint for your Lambda function by using Amazon API Gateway\. API Gateway provides tools for creating and documenting web APIs that route HTTP requests to Lambda functions\. You can secure access to your API with authentication and authorization controls\. Your APIs can serve traffic over the internet or can be accessible only within your VPC\.
 
-Amazon API Gateway invokes your function [synchronously](invocation-sync.md) with an event that contains details about the HTTP request that it received\.
+**To add a public endpoint to your Lambda function**
 
-**Example Amazon API Gateway Message Event**  
+1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+
+1. Choose a function\.
+
+1. Under **Designer**, choose **Add trigger**\.
+
+1. Choose **API Gateway**\.
+
+1. For **API**, choose **Create an API**\.
+
+1. For **Security**, choose **Open**\.
+
+1. Choose **Add**\.
+
+With the **API Gateway** trigger selected in the designer, choose the endpoint to invoke the function with API Gateway\.
+
+![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/console-apig-endpoint.png)
+
+API Gateway APIs are comprised of stages, resources, methods, and integrations\. The stage and resource determine the path of the endpoint:
+
+**API Path Format**
++ `/prod/` – The `prod` stage and root resource\.
++ `/prod/user` – The `prod` stage and `user` resource\.
++ `/dev/{proxy+}` – Any route in the `dev` stage\.
++ `/` – \(HTTP APIs\) The default stage and root resource\.
+
+A Lambda integration maps a path and HTTP method combination to a Lambda function\. You can configure API Gateway to pass the body of the HTTP request as\-is \(custom integration\), or to encapsulate the request body in a document that includes all of the request information including headers, resource, path, and method\.
+
+Amazon API Gateway invokes your function [synchronously](invocation-sync.md) with an event that contains a JSON representation of the HTTP request\. For a custom integration, the event is the body of the request\. For a proxy integration, the event has a defined structure\. The following example shows a proxy event from an API Gateway REST API\.
+
+**Example [event\.json](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/nodejs-apig/event.json) API Gateway Proxy Event \(REST API\)**  
 
 ```
 {
-  "path": "/test/hello",
-  "headers": {
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-    "Accept-Encoding": "gzip, deflate, lzma, sdch, br",
-    "Accept-Language": "en-US,en;q=0.8",
-    "CloudFront-Forwarded-Proto": "https",
-    "CloudFront-Is-Desktop-Viewer": "true",
-    "CloudFront-Is-Mobile-Viewer": "false",
-    "CloudFront-Is-SmartTV-Viewer": "false",
-    "CloudFront-Is-Tablet-Viewer": "false",
-    "CloudFront-Viewer-Country": "US",
-    "Host": "wt6mne2s9k.execute-api.us-west-2.amazonaws.com",
-    "Upgrade-Insecure-Requests": "1",
-    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.82 Safari/537.36 OPR/39.0.2256.48",
-    "Via": "1.1 fb7cca60f0ecd82ce07790c9c5eef16c.cloudfront.net (CloudFront)",
-    "X-Amz-Cf-Id": "nBsWBOrSHMgnaROZJK1wGCZ9PcRcSpq_oSXZNQwQ10OTZL4cimZo3g==",
-    "X-Forwarded-For": "192.168.100.1, 192.168.1.1",
-    "X-Forwarded-Port": "443",
-    "X-Forwarded-Proto": "https"
-  },
-  "pathParameters": {
-    "proxy": "hello"
-  },
-  "requestContext": {
-    "accountId": "123456789012",
-    "resourceId": "us4z18",
-    "stage": "test",
-    "requestId": "41b45ea3-70b5-11e6-b7bd-69b5aaebc7d9",
-    "identity": {
-      "cognitoIdentityPoolId": "",
-      "accountId": "",
-      "cognitoIdentityId": "",
-      "caller": "",
-      "apiKey": "",
-      "sourceIp": "192.168.100.1",
-      "cognitoAuthenticationType": "",
-      "cognitoAuthenticationProvider": "",
-      "userArn": "",
-      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.82 Safari/537.36 OPR/39.0.2256.48",
-      "user": ""
-    },
-    "resourcePath": "/{proxy+}",
+    "resource": "/",
+    "path": "/",
     "httpMethod": "GET",
-    "apiId": "wt6mne2s9k"
-  },
-  "resource": "/{proxy+}",
-  "httpMethod": "GET",
-  "queryStringParameters": {
-    "name": "me"
-  },
-  "stageVariables": {
-    "stageVarName": "stageVarValue"
-  }
+    "requestContext": {
+        "resourcePath": "/",
+        "httpMethod": "GET",
+        "path": "/Prod/",
+        ...
+    },
+    "headers": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+        "accept-encoding": "gzip, deflate, br",
+        "Host": "70ixmpl4fl.execute-api.us-east-2.amazonaws.com",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36",
+        "X-Amzn-Trace-Id": "Root=1-5e66d96f-7491f09xmpl79d18acf3d050",
+        ...
+    },
+    "multiValueHeaders": {
+        "accept": [
+            "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"
+        ],
+        "accept-encoding": [
+            "gzip, deflate, br"
+        ],
+        ...
+    },
+    "queryStringParameters": null,
+    "multiValueQueryStringParameters": null,
+    "pathParameters": null,
+    "stageVariables": null,
+    "body": null,
+    "isBase64Encoded": false
 }
 ```
 
-Amazon API Gateway also adds a layer between your application users and your app logic that enables the following: 
-+ Ability to throttle individual users or requests\. 
-+ Protect against Distributed Denial of Service attacks\.
-+ Provide a caching layer to cache response from your Lambda function\. 
+This example shows an event for a GET request to the root path of the Prod stage of a REST API\. Event shape and contents vary by [API type](#services-apigateway-apitypes) and configuration\.
 
-Note that there are two types of permissions policies that you work with when you set up the end\-to\-end experience:
-+ **Permissions for your Lambda function** – Regardless of what invokes a Lambda function, AWS Lambda executes the function by assuming the IAM role \(execution role\) that you specify at the time you create the Lambda function\. Using the permissions policy associated with this role, you grant your Lambda function the permissions that it needs\. For example, if your Lambda function needs to read an object, you grant permissions for the relevant Amazon S3 actions in the permissions policy\. For more information, see [AWS Lambda Execution Role](lambda-intro-execution-role.md)\.
-+ **Permission for Amazon API Gateway to invoke your Lambda function** – Amazon API Gateway cannot invoke your Lambda function without your permission\. You grant this permission via the permission policy associated with the Lambda function\.
+API Gateway waits for a response from your function and relays the result to the caller\. For a custom integration, you define an integration response and a method response to convert the output from the function to an HTTP response\. For a proxy integration, the function must respond with a representation of the response in a specific format\.
+
+The following example shows a response object from a Node\.js function\. The response object represents a successful HTTP response that contains a JSON document\.
+
+**Example [index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/nodejs-apig/function/index.js) – Proxy Integration Response Object \(Node\.js\)**  
+
+```
+var response = {
+    "statusCode": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "isBase64Encoded": false,
+    "multiValueHeaders": { 
+      "X-Custom-Header": ["My value", "My other value"],
+    },
+    "body": "{\n  \"TotalCodeSize\": 104330022,\n  \"FunctionCount\": 26\n}"
+  }
+```
+
+The Lambda runtime serializes the response object into JSON and sends it to the API\. The API parses the response and uses it to create an HTTP response, which it then sends to the client that made the original request\.
+
+**Example HTTP Response**  
+
+```
+< HTTP/1.1 200 OK
+< Content-Type: application/json
+< Content-Length: 55
+< Connection: keep-alive
+< x-amzn-RequestId: 32998fea-xmpl-4268-8c72-16138d629356
+< X-Custom-Header: My value
+< X-Custom-Header: My other value
+< X-Amzn-Trace-Id: Root=1-5e6aa925-ccecxmplbae116148e52f036
+<
+{
+  "TotalCodeSize": 104330022,
+  "FunctionCount": 26
+}
+```
+
+Resources in your API define one or more methods, such as GET or POST\. Methods have an integration that routes requests to a Lambda function or another integration type\. You can define each resource and method individually, or use special resource and method types to match all requests that fit a pattern\. A *proxy resource* catches all paths beneath a resource\. The `ANY` method catches all HTTP methods\.
+
+**Topics**
++ [Permissions](#apigateway-permissions)
++ [Handling Errors with an API Gateway API](#services-apigateway-errors)
++ [Choosing an API Type](#services-apigateway-apitypes)
++ [Sample Applications](#services-apigateway-samples)
++ [Tutorial: Using AWS Lambda with Amazon API Gateway](services-apigateway-tutorial.md)
++ [Sample Function Code](services-apigateway-code.md)
++ [Create a Simple Microservice using Lambda and API Gateway](services-apigateway-blueprint.md)
++ [AWS SAM Template for an API Gateway Application](services-apigateway-template.md)
+
+## Permissions<a name="apigateway-permissions"></a>
+
+Amazon API Gateway gets permission to invoke your function from the function's [resource\-based policy](access-control-resource-based.md)\. You can grant invoke permission to an entire API, or grant limited access to a stage, resource, or method\.
+
+When you add an API to your function by using the Lambda console, using the API Gateway console, or in an AWS SAM template, the function's resource\-based policy is updated automatically\. The following example shows a function policy with a statement that was added by an AWS SAM template\.
+
+**Example Function Policy**  
+
+```
+{
+  "Version": "2012-10-17",
+  "Id": "default",
+  "Statement": [
+    {
+      "Sid": "nodejs-apig-functiongetEndpointPermissionProd-BWDBXMPLXE2F",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "apigateway.amazonaws.com"
+      },
+      "Action": "lambda:InvokeFunction",
+      "Resource": "arn:aws:lambda:us-east-2:123456789012:function:nodejs-apig-function-1G3MXMPLXVXYI",
+      "Condition": {
+        "ArnLike": {
+          "AWS:SourceArn": "arn:aws:execute-api:us-east-2:123456789012:ktyvxmpls1/*/GET/"
+        }
+      }
+    }
+  ]
+}
+```
+
+[Confirm the function policy](access-control-resource-based.md) in the **Permissions** tab of the Lambda console\.
+
+You can manage function policy permissions manually with the following API operations:
++ [AddPermission](API_AddPermission.md)
++ [RemovePermission](API_RemovePermission.md)
++ [GetPolicy](API_GetPolicy.md)
+
+To grant invocation permission to an existing API, use the `add-permission` command\.
+
+```
+$ aws lambda add-permission --function-name my-function \
+--statement-id apigateway-get --action lambda:InvokeFunction \
+--principal apigateway.amazonaws.com \
+--source-arn "arn:aws:execute-api:us-east-2:123456789012:mnh1xmpli7/default/GET/"
+{
+    "Statement": "{\"Sid\":\"apigateway-test-2\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"apigateway.amazonaws.com\"},\"Action\":\"lambda:InvokeFunction\",\"Resource\":\"arn:aws:lambda:us-east-2:123456789012:function:my-function\",\"Condition\":{\"ArnLike\":{\"AWS:SourceArn\":\"arn:aws:execute-api:us-east-2:123456789012:mnh1xmpli7/default/GET\"}}}"
+}
+```
+
+**Note**  
+If your function and API are in different regions, the region identifier in the source ARN must match the region of the function, not the region of the API\. When API Gateway invokes a function, it uses a resource ARN that is based on the ARN of the API, but modified to match the function's region\.
+
+The source ARN in this example grants permission to an integration on the GET method of the root resource in the default stage of an API, with ID `mnh1xmpli7`\. You can use an asterisk in the source ARN to grant permissions to multiple stages, methods, or resources\.
+
+**Resource Patterns**
++ `mnh1xmpli7/*/GET/*` – GET method on all resources in all stages\.
++ `mnh1xmpli7/prod/ANY/user` – ANY method on the `user` resource in the `prod` stage\.
++ `mnh1xmpli7/*/*/*` – Any method on all resources in all stages\.
+
+For details on viewing the policy and removing statements, see [Cleaning Up Resource\-Based Policies](access-control-resource-based.md#permissions-resource-cleanup)\.
+
+## Handling Errors with an API Gateway API<a name="services-apigateway-errors"></a>
+
+API Gateway treats all invocation and function errors as internal errors\. If the Lambda API rejects the invocation request, API Gateway returns a 500 error code\. If the function runs but returns an error, or returns a response in the wrong format, API Gateway returns a 502\. In both cases, the body of the response from API Gateway is `{"message": "Internal server error"}`\.
+
+The following example shows an X\-Ray trace map for a request that resulted in a function error and a 502 from API Gateway\. The client receives the generic error message\.
+
+![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/tracemap-apig-502.png)
+
+To customize the error response, you must catch errors in your code and format a response in the required format\.
+
+**Example [index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/nodejs-apig/function/index.js) – Error formatting**  
+
+```
+var formatError = function(error){
+  var response = {
+    "statusCode": error.statusCode,
+    "headers": {
+      "Content-Type": "text/plain",
+      "x-amzn-ErrorType": error.code
+    },
+    "isBase64Encoded": false,
+    "body": error.code + ": " + error.message
+  }
+  return response
+}
+```
+
+API Gateway converts this response into an HTTP error with a custom status code and body\. In the trace map, the function node is green because it handled the error\.
+
+![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/tracemap-apig-404.png)
+
+## Choosing an API Type<a name="services-apigateway-apitypes"></a>
+
+API Gateway supports three types of APIs that invoke Lambda functions:
++ **HTTP API** – A lightweight, low\-latency RESTful API\.
++ **REST API** – A customizable, feature\-rich RESTful API\.
++ **WebSocket API** – A web API that maintains persistent connections with clients for full\-duplex communication\.
+
+HTTP APIs and REST APIs are both RESTful APIs that process HTTP requests and return responses\. HTTP APIs are newer and are built with the API Gateway version 2 API\. The following features are new for HTTP APIs:
+
+**HTTP API Features**
++ **Automatic deployments** – When you modify routes or integrations, changes deploy automatically to stages that have automatic deployment enabled\.
++ **Default stage** – You can create a default stage \(`$default`\) to serve requests at the root path of your API's URL\. For named stages, you must include the stage name at the beginning of the path\.
++ **CORS configuration** – You can configure your API to add CORS headers to outgoing responses, instead of adding them manually in your function code\.
+
+REST APIs are the classic RESTful APIs that API Gateway has supported since launch\. REST APIs currently have more customization, integration, and management features\.
+
+**REST API Features**
++ **Integration types** – REST APIs support custom Lambda integrations\. With a custom integration, you can send just the body of the request to the function, or apply a transform template to the request body before sending it to the function\.
++ **Access control** – REST APIs support more options for authentication and authorization\.
++ **Monitoring and tracing** – REST APIs support AWS X\-Ray tracing and additional logging options\.
+
+For a detailed comparison, see [Choosing Between HTTP APIs and REST APIs](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-vs-rest.html) in the *API Gateway Developer Guide*\.
+
+WebSocket APIs also use the API Gateway version 2 API and support a similar feature set\. Use a WebSocket API for applications that benefit from a persistent connection between the client and API\. WebSocket APIs provide full\-duplex communication, which means that both the client and the API can send messages continuously without waiting for a response\.
+
+WebSocket APIs and HTTP APIs support a simplified event format \(version 2\.0\)\. The following example shows an event from an HTTP API\.
+
+**Example [event\-v2\.json](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/nodejs-apig/event-v2.json) API Gateway Proxy Event \(HTTP API\)**  
+
+```
+{
+    "version": "2.0",
+    "routeKey": "ANY /nodejs-apig-function-1G3XMPLZXVXYI",
+    "rawPath": "/default/nodejs-apig-function-1G3XMPLZXVXYI",
+    "rawQueryString": "",
+    "cookies": [
+        "s_fid=7AABXMPL1AFD9BBF-0643XMPL09956DE2",
+        "regStatus=pre-register"
+    ],
+    "headers": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+        "accept-encoding": "gzip, deflate, br",
+        ...
+    },
+    "requestContext": {
+        "accountId": "123456789012",
+        "apiId": "r3pmxmplak",
+        "domainName": "r3pmxmplak.execute-api.us-east-2.amazonaws.com",
+        "domainPrefix": "r3pmxmplak",
+        "http": {
+            "method": "GET",
+            "path": "/default/nodejs-apig-function-1G3XMPLZXVXYI",
+            "protocol": "HTTP/1.1",
+            "sourceIp": "205.255.255.176",
+            "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36"
+        },
+        "requestId": "JKJaXmPLvHcESHA=",
+        "routeId": null,
+        "routeKey": "ANY /nodejs-apig-function-1G3XMPLZXVXYI",
+        "stage": "default",
+        "time": "10/Mar/2020:05:16:23 +0000",
+        "timeEpoch": 1583817383220
+    },
+    "isBase64Encoded": true
+}
+```
+
+For more information, see [AWS Lambda Integrations](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html) in the API Gateway Developer Guide\.
+
+## Sample Applications<a name="services-apigateway-samples"></a>
+
+The GitHub repository for this guide provides the following sample application for API Gateway\.
++ [API Gateway with Node\.js](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/nodejs-apig) – A function with an AWS SAM template that creates a REST API that has AWS X\-Ray tracing enabled\. It includes scripts for deploying, invoking the function, testing the API, and cleanup\.
+
+Lambda also provides [blueprints](gettingstarted-features.md#gettingstarted-features-blueprints) and [templates](gettingstarted-features.md#gettingstarted-features-templates) that you can use to create an API Gateway application in the Lambda console\.

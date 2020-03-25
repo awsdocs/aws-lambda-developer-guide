@@ -64,6 +64,13 @@ A runtime can support a single version of a language, multiple versions of a lan
 
 To use other languages in Lambda, you can implement a [custom runtime](runtimes-custom.md)\. The Lambda execution environment provides a [runtime interface](runtimes-api.md) for getting invocation events and sending responses\. You can deploy a custom runtime alongside your function code, or in a [layer](configuration-layers.md)\.
 
+
+**Custom Runtime**  
+
+| Name | Identifier | Operating System | 
+| --- | --- | --- | 
+|  Custom Runtime  |  `provided`  |  Amazon Linux  | 
+
 **Topics**
 + [AWS Lambda Execution Context](runtimes-context.md)
 + [Runtime Support Policy](runtime-support-policy.md)
