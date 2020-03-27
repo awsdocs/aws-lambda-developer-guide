@@ -2,7 +2,6 @@ package main
 
 import (
   "os"
-  "fmt"
   "log"
   "context"
   "encoding/json"
@@ -50,7 +49,7 @@ func handleRequest(ctx context.Context, event events.SQSEvent) (string, error) {
   if err != nil {
     return "ERROR", err
   }
-  return fmt.Sprint(usage), nil
+  return usage, nil
 }
 
 func main() {

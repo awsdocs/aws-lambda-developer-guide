@@ -1,11 +1,6 @@
 #!/bin/bash
 set -eo pipefail
 ARTIFACT_BUCKET=$(cat bucket-name.txt)
-go get github.com/aws/aws-lambda-go/lambda
-go get github.com/aws/aws-lambda-go/lambdacontext
-go get github.com/aws/aws-sdk-go/aws
-go get github.com/aws/aws-sdk-go/aws/session
-go get github.com/aws/aws-sdk-go/service/lambda
 cd function
 GOOS=linux go build main.go
 cd ../
