@@ -61,11 +61,9 @@ Choose a node in the main function graph. Then choose **View traces** to see a l
 
 Finally, view the application in the Lambda console.
 
-*To view the output*
+*To view the application*
 1. Open the [applications page](https://console.aws.amazon.com/lambda/home#/applications) in the Lambda console.
 2. Choose **blank-powershell**.
-
-  ![Application](/sample-apps/blank-powershell/images/blank-powershell-application.png)
 
 # Cleanup
 To delete the application, run `4-cleanup.sh`.
