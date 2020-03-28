@@ -50,6 +50,12 @@ To invoke the function, run `3-invoke.sh`.
         "StatusCode": 200,
         "ExecutedVersion": "$LATEST"
     }
+    {
+      "AccountUsage": {
+        "FunctionCount": 44,
+        "TotalCodeSize": 391675850
+      }
+    }
 
 The application uses AWS X-Ray to trace requests. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map. The following service map shows the function calling Amazon S3.
 
