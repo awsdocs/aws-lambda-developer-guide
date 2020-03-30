@@ -25,4 +25,4 @@ Resources:
       Description: Dependencies for the blank-python sample app.
       ContentUri: package/.
       CompatibleRuntimes:
-        - java8
+        - python3.8

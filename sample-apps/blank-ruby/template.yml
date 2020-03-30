@@ -16,3 +16,17 @@ Resources:
         - AWSLambdaReadOnlyAccess
         - AWSXrayWriteOnlyAccess
       Tracing: Active
+      Environment:
+          Variables:
+            GEM_PATH: /opt/ruby/2.7.0
+      Layers:
+        - !Ref libs
+  libs:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: blank-ruby-lib
+      Description: Dependencies for the blank-ruby sample app.
+      ContentUri: lib/.
+      CompatibleRuntimes:
+        - ruby2.7
+
