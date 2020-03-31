@@ -6,12 +6,12 @@ The project source includes function code and supporting resources:
 
 - `function` - A Python function.
 - `template.yml` - An AWS CloudFormation template that creates an application.
-- `1-create-bucket.sh`, `2-deploy.sh`, etc. - Shell scripts that use the AWS CLI to deploy and manage the application.
+- `1-create-bucket.sh`, `2-build-layer.sh`, etc. - Shell scripts that use the AWS CLI to deploy and manage the application.
 
 Use the following instructions to deploy the sample application.
 
 # Requirements
-- [Python 3.6 or newer](https://www.python.org/downloads/)
+- [Python 3.7](https://www.python.org/downloads/)
 - The Bash shell. For Linux and macOS, this is included by default. In Windows 10, you can install the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows-integrated version of Ubuntu and Bash.
 - [The AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html).
 
