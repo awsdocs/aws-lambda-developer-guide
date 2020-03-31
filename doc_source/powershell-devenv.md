@@ -11,3 +11,5 @@ To set up your development environment for writing PowerShell scripts, do the fo
    ```
    Install-Module AWSLambdaPSCore -Scope CurrentUser
    ```
+
+1. **(Optional) Install AWS Tools for PowerShell**\. You can install either the modularized [AWS.Tools](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-welcome.html#pwsh_structure_pstools) or single-module [AWSPowerShell.NetCore](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-welcome.html#pwsh_structure_pscore) version in PowerShell Core 6\.0 to use the Lambda API within your PowerShell environment\. You can find installation instructions in [Installing the AWS Tools for PowerShell](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-getting-set-up.html)\.
