@@ -28,7 +28,7 @@ To create a new bucket for deployment artifacts, run `1-create-bucket.sh`. Or, i
 
 To build a Lambda layer that contains the function's runtime dependencies, run `2-build-layer.sh`. Packaging dependencies in a layer reduces the size of the deployment package that you upload when you modify your code.
 
-    blank-java$ ./2-build-layer.sh
+    blank-python$ ./2-build-layer.sh
 
 # Deploy
 To deploy the application, run `3-deploy.sh`.
