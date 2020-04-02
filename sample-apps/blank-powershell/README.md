@@ -11,9 +11,9 @@ The project source includes function code and supporting resources:
 Use the following instructions to deploy the sample application.
 
 # Requirements
-- [PowerShell Core 6.0 or newer](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell#powershell-core)
-- [.NET Core 2.1](https://www.microsoft.com/net/download)
-- [AWSLambdaPSCore module](https://www.powershellgallery.com/packages/AWSLambdaPSCore/1.2.0.0)
+- [PowerShell 7.0](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell#powershell-core)
+- [.NET Core 3.1](https://www.microsoft.com/net/download)
+- [AWSLambdaPSCore module 2.0](https://www.powershellgallery.com/packages/AWSLambdaPSCore/2.0.0.0)
 - The Bash shell. For Linux and macOS, this is included by default. In Windows 10, you can install the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows-integrated version of Ubuntu and Bash.
 - [The AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html).
 
