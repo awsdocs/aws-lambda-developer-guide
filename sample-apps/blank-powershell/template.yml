@@ -6,7 +6,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: Handler::Handler.Bootstrap::ExecuteFunction
-      Runtime: dotnetcore2.1
+      Runtime: dotnetcore3.1
       CodeUri: function/function.zip
       Description: Call the AWS Lambda API
       Timeout: 30
