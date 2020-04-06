@@ -29,10 +29,14 @@ To create a new bucket for deployment artifacts, run `1-create-bucket.sh`. Or, i
     error-processor$ ./1-create-bucket.sh
     make_bucket: lambda-artifacts-a5e491dbb5b22e0d
 
-# Deploy
-To deploy the application, run `2-deploy.sh`.
+To build a Lambda layer that contains the function's runtime dependencies, run `2-build-layer.sh`. Packaging dependencies in a layer reduces the size of the deployment package that you upload when you modify your code.
 
-    error-processor$ ./2-deploy.sh
+    blank-ruby$ ./2-build-layer.sh
+
+# Deploy
+To deploy the application, run `3-deploy.sh`.
+
+    error-processor$ ./3-deploy.sh
     added 16 packages from 18 contributors and audited 18 packages in 1.979s
     found 0 vulnerabilities
     added 17 packages from 19 contributors and audited 19 packages in 1.782s
@@ -47,7 +51,7 @@ This script uses AWS CloudFormation to deploy the Lambda functions, an IAM role,
 # Test
 To generate logs and errors, invoke the random error function.  
 
-    error-processor$ ./3-invoke.sh
+    error-processor$ ./4-invoke.sh
     {
         "StatusCode": 200,
         "FunctionError": "Unhandled",
@@ -115,4 +119,4 @@ Lambda records traces for the first request each second and 5% of additional req
 # Cleanup
 To delete the application, run the cleanup script.
 
-    error-processor$ ./4-cleanup.sh
+    error-processor$ ./5-cleanup.sh
