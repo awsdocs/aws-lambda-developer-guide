@@ -72,9 +72,34 @@ To create a new PowerShell script, upload it, and test it, follow this procedure
    ```
 
    Note that the `-Name` parameter specifies the Lambda function name, which appears in the Lambda console\. You can use this function to invoke your script manually\.
-
-1. Invoke your function with the AWS CLI `invoke` command\.
+   
+1. Invoke your function using the [AWS Tools for PowerShell](https://docs.aws.amazon.com/powershell/latest/userguide) `Invoke-LMFunction` cmdlet\.
 
    ```
-   > aws lambda invoke --function-name MyFirstPSScript out
+   # Invoke function
+   $response = Invoke-LMFunction -FunctionName MyFirstPSScript
+   
+   # Read response payload
+   $reader = New-Object -TypeName 'System.IO.StreamReader' -ArgumentList $response.Payload
+   $reader.ReadToEnd()
+   ```
+
+1. Alternatively, invoke your function with the AWS CLI `invoke` command\.
+
+   ```
+   > aws lambda invoke --function-name MyFirstPSScript response.json
+   ```
+   
+   The response data payload returned from the function is stored as `response.json`\. View the file using an appropriate tool for the operating system you are running the AWS CLI on\.
+   
+   **Linux or macOS**
+
+   ```
+   $ cat response.json
+   ```
+
+   **Windows command prompt**
+
+   ```
+   C:\> type response.json
    ```
