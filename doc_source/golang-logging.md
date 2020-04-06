@@ -2,51 +2,50 @@
 
 Your Lambda function comes with a CloudWatch Logs log group, with a log stream for each instance of your function\. The runtime sends details about each invocation to the log stream, and relays logs and other output from your function's code\.
 
-To output logs from your function code, you can use methods on [the fmt package](https://golang.org/pkg/fmt/), or any logging library that writes to `stdout` or `stderr`\. The following example uses `fmt.Print`\.
+To output logs from your function code, you can use methods on [the fmt package](https://golang.org/pkg/fmt/), or any logging library that writes to `stdout` or `stderr`\. The following example uses [the log package](https://golang.org/pkg/log/)\.
+
+**Example [main\.go](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-go/function/main.go) – logging**  
 
 ```
-package main
- 
-import ( 
-        "fmt"        
-        "github.com/aws/aws-lambda-go/lambda"
-)
- 
-func HandleRequest() {
-        fmt.Print("Hello from Lambda")
-}
- 
-func main() {
-        lambda.Start(HandleRequest)
-}
-```
-
-For more detailed logs, use [the log package](https://golang.org/pkg/log/)\.
-
-```
-package main
- 
-import (
-        "log"       
-        "github.com/aws/aws-lambda-go/lambda"
-)
- 
-func HandleRequest() {
-        log.Print("Event received.")
-}
- 
-func main() {
-        lambda.Start(HandleRequest)
-}
+func handleRequest(ctx context.Context, event events.SQSEvent) (string, error) {
+  // event
+  eventJson, _ := json.MarshalIndent(event, "", "  ")
+  log.Printf("EVENT: %s", eventJson)
+  // environment variables
+  log.Printf("REGION: %s", os.Getenv("AWS_REGION"))
+  log.Println("ALL ENV VARS:")
+  for _, element := range os.Environ() {
+    log.Println(element)
+  }
 ```
 
 **Example Log Format**  
 
 ```
-START RequestId: 6b9702a6-xmpl-487a-a10d-b066d7e8a5e1 Version: $LATEST
-END RequestId: 6b9702a6-xmpl-487a-a10d-b066d7e8a5e1
-REPORT RequestId: 6b9702a6-xmpl-487a-a10d-b066d7e8a5e1  Duration: 1.07 ms   Billed Duration: 100 ms Memory Size: 512 MB Max Memory Used: 41 MB  Init Duration: 204.69 ms    
-XRAY TraceId: 1-5e34a425-4b30xmple305c998ac423ea5   SegmentId: 6362xmpl0ff64446 Sampled: true
+START RequestId: dbda340c-xmpl-4031-8810-11bb609b4c71 Version: $LATEST
+2020/03/27 03:40:05 EVENT: {
+  "Records": [
+    {
+      "messageId": "19dd0b57-b21e-4ac1-bd88-01bbb068cb78",
+      "receiptHandle": "MessageReceiptHandle",
+      "body": "Hello from SQS!",
+      "md5OfBody": "7b27xmplb47ff90a553787216d55d91d",
+      "md5OfMessageAttributes": "",
+      "attributes": {
+        "ApproximateFirstReceiveTimestamp": "1523232000001",
+        "ApproximateReceiveCount": "1",
+        "SenderId": "123456789012",
+        "SentTimestamp": "1523232000000"
+      },
+      ...
+2020/03/27 03:40:05 AWS_LAMBDA_LOG_STREAM_NAME=2020/03/27/[$LATEST]569cxmplc3c34c7489e6a97ad08b4419
+2020/03/27 03:40:05 AWS_LAMBDA_FUNCTION_NAME=blank-go-function-9DV3XMPL6XBC
+2020/03/27 03:40:05 AWS_LAMBDA_FUNCTION_MEMORY_SIZE=128
+2020/03/27 03:40:05 AWS_LAMBDA_FUNCTION_VERSION=$LATEST
+2020/03/27 03:40:05 AWS_EXECUTION_ENV=AWS_Lambda_go1.x
+END RequestId: dbda340c-xmpl-4031-8810-11bb609b4c71
+REPORT RequestId: dbda340c-xmpl-4031-8810-11bb609b4c71	Duration: 38.66 ms	Billed Duration: 100 ms	Memory Size: 128 MB	Max Memory Used: 54 MB	Init Duration: 203.69 ms	
+XRAY TraceId: 1-5e7d7595-212fxmpl9ee07c4884191322	SegmentId: 42ffxmpl0645f474	Sampled: true
 ```
 
 The Go runtime logs the `START`, `END`, and `REPORT` lines for each invocation\. The report line provides the following details\.

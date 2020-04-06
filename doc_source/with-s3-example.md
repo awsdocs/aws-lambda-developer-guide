@@ -76,99 +76,86 @@ For sample code in other languages, see [Sample Amazon S3 Function Code](with-s3
 
 ```
 // dependencies
-var async = require('async');
-var AWS = require('aws-sdk');
-var util = require('util');
-var sharp = require('sharp');
+const AWS = require('aws-sdk');
+const util = require('util');
+const sharp = require('sharp');
 
 // get reference to S3 client
-var s3 = new AWS.S3();
+const s3 = new AWS.S3();
 
-exports.handler = function(event, context, callback) {
-    // Read options from the event.
+exports.handler = async (event, context, callback) => {
+
+    // Read options from the event parameter.
     console.log("Reading options from event:\n", util.inspect(event, {depth: 5}));
-    var srcBucket = event.Records[0].s3.bucket.name;
+    const srcBucket = event.Records[0].s3.bucket.name;
     // Object key may have spaces or unicode non-ASCII characters.
-    var srcKey    = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, " "));
-    var dstBucket = srcBucket + "-resized";
-    var dstKey    = "resized-" + srcKey;
+    const srcKey    = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, " "));
+    const dstBucket = srcBucket + "-resized";
+    const dstKey    = "resized-" + srcKey;
 
-    // Sanity check: validate that source and destination are different buckets.
-    if (srcBucket == dstBucket) {
-        callback("Source and destination buckets are the same.");
-        return;
-    }
-
-    // Infer the image type.
-    var typeMatch = srcKey.match(/\.([^.]*)$/);
+    // Infer the image type from the file suffix.
+    const typeMatch = srcKey.match(/\.([^.]*)$/);
     if (!typeMatch) {
-        callback("Could not determine the image type.");
+        console.log("Could not determine the image type.");
         return;
     }
-    var imageType = typeMatch[1].toLowerCase();
+
+    // Check that the image type is supported  
+    const imageType = typeMatch[1].toLowerCase();
     if (imageType != "jpg" && imageType != "png") {
-        callback(`Unsupported image type: ${imageType}`);
+        console.log(`Unsupported image type: ${imageType}`);
         return;
     }
 
-    // Download the image from S3, transform, and upload to a different S3 bucket.
-    async.waterfall([
-        function download(next) {
-            // Download the image from S3 into a buffer.
-            s3.getObject({
-                    Bucket: srcBucket,
-                    Key: srcKey
-                },
-                next);
-            },
-        function transform(response, next) {
-            // set thumbnail width. Resize will set height automatically 
-            // to maintain aspect ratio.
-            var width  = 200;
+    // Download the image from the S3 source bucket. 
 
-            // Transform the image buffer in memory.
-            sharp(response.Body)
-               .resize(width)
-                   .toBuffer(imageType, function(err, buffer) {
-                        if (err) {
-                            next(err);
-                        } else {
-                            next(null, response.ContentType, buffer);
-                        }
-                    });
-        },
-        function upload(contentType, data, next) {
-            // Stream the transformed image to a different S3 bucket.
-            s3.putObject({
-                    Bucket: dstBucket,
-                    Key: dstKey,
-                    Body: data,
-                    ContentType: contentType
-                },
-                next);
-            }
-        ], function (err) {
-            if (err) {
-                console.error(
-                    'Unable to resize ' + srcBucket + '/' + srcKey +
-                    ' and upload to ' + dstBucket + '/' + dstKey +
-                    ' due to an error: ' + err
-                );
-            } else {
-                console.log(
-                    'Successfully resized ' + srcBucket + '/' + srcKey +
-                    ' and uploaded to ' + dstBucket + '/' + dstKey
-                );
-            }
+    try {
+        const params = {
+            Bucket: srcBucket,
+            Key: srcKey
+        };
+        var origimage = await s3.getObject(params).promise();
 
-            callback(null, "message");
-        }
-    );
+    } catch (error) {
+        console.log(error);
+        return;
+    }  
+
+    // set thumbnail width. Resize will set the height automatically to maintain aspect ratio.
+    const width  = 200;
+
+    // Use the Sharp module to resize the image and save in a buffer.
+    try { 
+        var buffer = await sharp(origimage.Body).resize(width).toBuffer();
+            
+    } catch (error) {
+        console.log(error);
+        return;
+    } 
+
+    // Upload the thumbnail image to the destination bucket
+    try {
+        const destparams = {
+            Bucket: dstBucket,
+            Key: dstKey,
+            Body: buffer,
+            ContentType: "image"
+        };
+
+        const putResult = await s3.putObject(destparams).promise(); 
+        
+    } catch (error) {
+        console.log(error);
+        return;
+    } 
+        
+    console.log('Successfully resized ' + srcBucket + '/' + srcKey +
+        ' and uploaded to ' + dstBucket + '/' + dstKey); 
 };
 ```
 
 Review the preceding code and note the following:
-+ The function knows the source bucket name and the key name of the object from the event data it receives as parameters\. If the object is a \.jpg, the code creates a thumbnail and saves it to the target bucket\. 
++ The function knows the source bucket name and the key name of the object from the event data it receives as parameters\. If the object is a \.jpg or a \.png, the code creates a thumbnail and saves it to the target bucket\. 
 + The code assumes that the destination bucket exists and its name is a concatenation of the source bucket name followed by the string `-resized`\. For example, if the source bucket identified in the event data is `examplebucket`, the code assumes you have an `examplebucket-resized` destination bucket\.
 + For the thumbnail it creates, the code derives its key name as the concatenation of the string `resized-` followed by the source object key name\. For example, if the source object key is `sample.jpg`, the code creates a thumbnail object that has the key `resized-sample.jpg`\.
 
@@ -178,16 +165,16 @@ The deployment package is a \.zip file containing your Lambda function code and 
 
 1. Save the function code as `index.js` in a folder named `lambda-s3`\.
 
-1. Install the Sharp and Async libraries with npm\. For Linux, use the following command\.
+1. Install the Sharp library with npm\. For Linux, use the following command\.
 
    ```
-   lambda-s3$ npm install async sharp
+   lambda-s3$ npm install sharp
    ```
 
    For macOS, use the following command\.
 
    ```
-   lambda-s3$ npm install --arch=x64 --platform=linux --target=12.13.0 async sharp
+   lambda-s3$ npm install --arch=x64 --platform=linux --target=12.13.0  sharp
    ```
 
    After you complete this step, you will have the following folder structure:
@@ -195,7 +182,6 @@ The deployment package is a \.zip file containing your Lambda function code and 
    ```
    lambda-s3
    |- index.js
-   |- /node_modules/async
    |- /node_modules/sharp
    └ /node_modules/...
    ```
@@ -216,7 +202,7 @@ The deployment package is a \.zip file containing your Lambda function code and 
   --role arn:aws:iam::123456789012:role/lambda-s3-role
   ```
 
-The preceding command specifies a 10\-second timeout value as the function configuration\. Depending on the size of objects you upload, you might need to increase the timeout value using the following AWS CLI command\.
+For the role parameter, replace the number sequence with your AWS account ID\. The preceding example command specifies a 10\-second timeout value as the function configuration\. Depending on the size of objects you upload, you might need to increase the timeout value using the following AWS CLI command\.
 
 ```
 $ aws lambda update-function-configuration --function-name CreateThumbnail --timeout 30

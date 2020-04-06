@@ -60,8 +60,8 @@ Create an application in the Lambda console\.
    + **Application name** – **my\-app**\.
    + **Application description** – **my application**\.
    + **Runtime** – **Node\.js 10\.x**\.
-   + **Repository provider** – **CodeCommit**\.
-   + **Repository provider** – **my\-app\-repo**\.
+   + **Source control service** – **CodeCommit**\.
+   + **Repository name** – **my\-app\-repo**\.
    + **Permissions** – **Create roles and permissions boundary**\.
 
 1. Choose **Create**\.

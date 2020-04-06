@@ -2,28 +2,53 @@
 
 Your Lambda function comes with a CloudWatch Logs log group, with a log stream for each instance of your function\. The runtime sends details about each invocation to the log stream, and relays logs and other output from your function's code\.
 
-To output logs from your function code, you can use cmdlets on [Microsoft\.PowerShell\.Utility ](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility), or any logging module that writes to `stdout` or `stderr`\. The following example uses `Write-Host` to log environment variables\.
+To output logs from your function code, you can use cmdlets on [Microsoft\.PowerShell\.Utility ](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility), or any logging module that writes to `stdout` or `stderr`\. The following example uses `Write-Host`\.
 
-**Example function\.ps1**  
+**Example [function/Handler\.ps1](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-powershell/function/Handler.ps1) – logging**  
 
 ```
-#Requires -Modules @{ModuleName='AWSPowerShell.NetCore';ModuleVersion='3.3.365.0'}
-$var = (Get-ChildItem env:*).GetEnumerator() | Sort-Object Name
-$out = "`n"
-Foreach ($v in $var) {$out = $out + "{0} : {1}`n" -f $v.Name, $v.Value}
-Write-Host ( $out )
+#Requires -Modules @{ModuleName='AWSPowerShell.NetCore';ModuleVersion='3.3.618.0'}
+Write-Host `## Environment variables
+Write-Host AWS_LAMBDA_FUNCTION_VERSION=$Env:AWS_LAMBDA_FUNCTION_VERSION
+Write-Host AWS_LAMBDA_LOG_GROUP_NAME=$Env:AWS_LAMBDA_LOG_GROUP_NAME
+Write-Host AWS_LAMBDA_LOG_STREAM_NAME=$Env:AWS_LAMBDA_LOG_STREAM_NAME
+Write-Host AWS_EXECUTION_ENV=$Env:AWS_EXECUTION_ENV
+Write-Host AWS_LAMBDA_FUNCTION_NAME=$Env:AWS_LAMBDA_FUNCTION_NAME
+Write-Host PATH=$Env:PATH
+Write-Host `## Event
+Write-Host (ConvertTo-Json -InputObject $LambdaInput -Compress -Depth 3)
 ```
 
 **Example Log Format**  
 
 ```
-START RequestId: d50fc4d4-xmpl-4b55-8225-af0c43bb27d2 Version: $LATEST
+START RequestId: 56639408-xmpl-435f-9041-ac47ae25ceed Version: $LATEST
 Importing module ./Modules/AWSPowerShell.NetCore/3.3.618.0/AWSPowerShell.NetCore.psd1
-[Information] - Region: us-east-2
-[Information] - Function name: my-function
-END RequestId: d50fc4d4-xmpl-4b55-8225-af0c43bb27d2
-REPORT RequestId: d50fc4d4-xmpl-4b55-8225-af0c43bb27d2  Duration: 601.73 ms Billed Duration: 700 ms Memory Size: 512 MB Max Memory Used: 365 MB Init Duration: 5994.31 ms   
-XRAY TraceId: 1-5e34a46a-591fxmpl7a412745094b2b7a   SegmentId: 4988xmpl190a003a Sampled: true
+[Information] - ## Environment variables
+[Information] - AWS_LAMBDA_FUNCTION_VERSION=$LATEST
+[Information] - AWS_LAMBDA_LOG_GROUP_NAME=/aws/lambda/blank-powershell-function-18CIXMPLHFAJJ
+[Information] - AWS_LAMBDA_LOG_STREAM_NAME=2020/04/01/[$LATEST]53c5xmpl52d64ed3a744724d9c201089
+[Information] - AWS_EXECUTION_ENV=AWS_Lambda_dotnetcore2.1_powershell_1.0.0
+[Information] - AWS_LAMBDA_FUNCTION_NAME=blank-powershell-function-18CIXMPLHFAJJ
+[Information] - PATH=/var/lang/bin:/usr/local/bin:/usr/bin/:/bin:/opt/bin
+[Information] - ## Event
+[Information] - 
+{
+    "Records": [
+        {
+            "messageId": "19dd0b57-b21e-4ac1-bd88-01bbb068cb78",
+            "receiptHandle": "MessageReceiptHandle",
+            "body": "Hello from SQS!",
+            "attributes": {
+                "ApproximateReceiveCount": "1",
+                "SentTimestamp": "1523232000000",
+                "SenderId": "123456789012",
+                "ApproximateFirstReceiveTimestamp": "1523232000001"
+            },
+            ...
+END RequestId: 56639408-xmpl-435f-9041-ac47ae25ceed
+REPORT RequestId: 56639408-xmpl-435f-9041-ac47ae25ceed	Duration: 3906.38 ms	Billed Duration: 4000 ms	Memory Size: 512 MB	Max Memory Used: 367 MB	Init Duration: 5960.19 ms	
+XRAY TraceId: 1-5e843da6-733cxmple7d0c3c020510040	SegmentId: 3913xmpl20999446	Sampled: true
 ```
 
 The \.NET runtime logs the `START`, `END`, and `REPORT` lines for each invocation\. The report line provides the following details\.

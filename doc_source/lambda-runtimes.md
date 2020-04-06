@@ -60,6 +60,7 @@ A runtime can support a single version of a language, multiple versions of a lan
 
 | Name | Identifier | Languages | Operating System | 
 | --- | --- | --- | --- | 
+|  \.NET Core 3\.1  |  `dotnetcore3.1`  |  C\# PowerShell Core 6\.0  |  Amazon Linux 2  | 
 |  \.NET Core 2\.1  |  `dotnetcore2.1`  |  C\# PowerShell Core 6\.0  |  Amazon Linux  | 
 
 To use other languages in Lambda, you can implement a [custom runtime](runtimes-custom.md)\. The Lambda execution environment provides a [runtime interface](runtimes-api.md) for getting invocation events and sending responses\. You can deploy a custom runtime alongside your function code, or in a [layer](configuration-layers.md)\.

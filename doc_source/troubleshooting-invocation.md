@@ -21,6 +21,15 @@ When you connect a function to a VPC at the time of creation, the function enter
 
 For more information, see [Monitoring the State of a Function with the Lambda API](functions-states.md)\.
 
+**Error:** *A function is stuck in the `Pending` state for several minutes\.*
+
+If a function becomes stuck in the `Pending` state for more than six minutes, call one of the following API operations to unblock it\.
++ [UpdateFunctionCode](API_UpdateFunctionCode.md)
++ [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)
++ [PublishVersion](API_PublishVersion.md)
+
+Lambda cancels the pending operation and puts the function into the `Failed` state\. You can then delete the function and recreate it, or attempt another update\.
+
 **Issue:** *One function is using all of the available concurrency, causing other functions to be throttled\.*
 
 To divide the available concurrency in a Region into pools, use [reserved concurrency](configuration-concurrency.md)\. Reserved concurrency ensures that a function can always scale to its assigned concurrency, and also that it won't scale beyond its assigned concurrency\.

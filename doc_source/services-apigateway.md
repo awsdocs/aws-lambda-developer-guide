@@ -277,7 +277,6 @@ WebSocket APIs and HTTP APIs support a simplified event format \(version 2\.0\)\
             "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36"
         },
         "requestId": "JKJaXmPLvHcESHA=",
-        "routeId": null,
         "routeKey": "ANY /nodejs-apig-function-1G3XMPLZXVXYI",
         "stage": "default",
         "time": "10/Mar/2020:05:16:23 +0000",

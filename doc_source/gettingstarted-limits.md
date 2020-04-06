@@ -22,7 +22,8 @@ The following limits apply to function configuration, deployments, and execution
 | Function [resource\-based policy](access-control-resource-based.md) | 20 KB | 
 | Function [layers](configuration-layers.md) | 5 layers | 
 | Function [burst concurrency](invocation-scaling.md) | 500 \- 3000 \([varies per region](invocation-scaling.md)\) | 
-| Invocation frequency \(requests per second\) |  10 x concurrent executions limit \([synchronous](invocation-sync.md) – all sources\) 10 x concurrent executions limit \([asynchronous](invocation-async.md) – non\-AWS sources\) Unlimited \(asynchronous – [AWS service sources](lambda-services.md)\)  | 
+| Invocation frequency per Region \(requests per second\) |  10 x concurrent executions limit \([synchronous](invocation-sync.md) – all sources\) 10 x concurrent executions limit \([asynchronous](invocation-async.md) – non\-AWS sources\) Unlimited \(asynchronous – [AWS service sources](lambda-services.md)\)  | 
+| Invocation frequency per function version or alias \(requests per second\) |  10 x allocated [provisioned concurrency](configuration-concurrency.md) This limit only applies to functions that use provisioned concurrency\.  | 
 | [Invocation payload](lambda-invocation.md) \(request and response\) |  6 MB \(synchronous\) 256 KB \(asynchronous\)  | 
 | [Deployment package](gettingstarted-features.md#gettingstarted-features-package) size |  50 MB \(zipped, for direct upload\) 250 MB \(unzipped, including layers\) 3 MB \(console editor\)  | 
 | Test events \(console editor\) | 10 | 

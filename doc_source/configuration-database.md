@@ -1,6 +1,6 @@
 # Configuring Database Access for a Lambda Function<a name="configuration-database"></a>
 
-You can use the Lambda console to create an Amazon Relational Database Service \(Amazon RDS\) database proxy for your function\. A database proxy manages a pool of database connections and relays queries from a function\. This enables a function to reach high [concurrency](gettingstarted-concepts.md#gettingstarted-concepts-concurrency) levels without exhausting database connections\.
+You can use the Lambda console to create an Amazon RDS Proxy database proxy for your function\. A database proxy manages a pool of database connections and relays queries from a function\. This enables a function to reach high [concurrency](gettingstarted-concepts.md#gettingstarted-concepts-concurrency) levels without exhausting database connections\.
 
 **To create a database proxy**
 
@@ -28,7 +28,7 @@ You can use the Lambda console to create an Amazon Relational Database Service \
 
 Proxy creation takes a few minutes\. When the proxy is available, configure your function to connect to the proxy endpoint instead of the database endpoint\.
 
-For more information, see [Managing Connections with the Amazon RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-proxy.html) in the Amazon Aurora User Guide\.
+Standard [Amazon RDS Proxy pricing](https://aws.amazon.com/rds/proxy/pricing/) applies\. For more information, see [Managing Connections with the Amazon RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-proxy.html) in the Amazon Aurora User Guide\.
 
 ## Sample Application<a name="configuration-database-sample"></a>
 

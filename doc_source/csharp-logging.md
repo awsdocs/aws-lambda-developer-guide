@@ -2,54 +2,65 @@
 
 Your Lambda function comes with a CloudWatch Logs log group, with a log stream for each instance of your function\. The runtime sends details about each invocation to the log stream, and relays logs and other output from your function's code\.
 
-To output logs from your function code, you can use methods on [the Console class](https://docs.microsoft.com/en-us/dotnet/api/system.console), or any logging library that writes to `stdout` or `stderr`\. The following example logs the request ID for an invocation\.
+To output logs from your function code, you can use methods on [the Console class](https://docs.microsoft.com/en-us/dotnet/api/system.console), or any logging library that writes to `stdout` or `stderr`\. The following example uses the `LambdaLogger` class from the [Amazon\.Lambda\.Core](lambda-csharp.md) library\.
+
+**Example [src/blank\-csharp/Function\.cs](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-csharp/src/blank-csharp/Function.cs) – logging**  
 
 ```
-public class ProductService
-{
-   public async Task<Product> DescribeProduct(DescribeProductRequest request)
+public async Task<AccountUsage> FunctionHandler(SQSEvent invocationEvent, ILambdaContext context)
     {
-       Console.WriteLine("DescribeProduct invoked with Id " + request.Id);
-       return await catalogService.DescribeProduct(request.Id);
+      GetAccountSettingsResponse accountSettings;
+      try
+      {
+        accountSettings = await callLambda();
+      }
+      catch (AmazonLambdaException ex)
+      {
+        throw ex;
+      }
+      AccountUsage accountUsage = accountSettings.AccountUsage;
+      LambdaLogger.Log("ENVIRONMENT VARIABLES: " + JsonConvert.SerializeObject(System.Environment.GetEnvironmentVariables()));
+      LambdaLogger.Log("CONTEXT: " + JsonConvert.SerializeObject(context));
+      LambdaLogger.Log("EVENT: " + JsonConvert.SerializeObject(invocationEvent));
+      return accountUsage;
     }
-}
-```
-
-Lambda also provides a logger class in the `Amazon.Lambda.Core ` library\. Use the `Log` method on the `Amazon.Lambda.Core.LambdaLogger` class to write logs\.
-
-```
-using Amazon.Lambda.Core;
-                            
-public class ProductService
-{
-   public async Task<Product> DescribeProduct(DescribeProductRequest request)
-   {
-       LambdaLogger.Log("DescribeProduct invoked with Id " + request.Id);
-       return await catalogService.DescribeProduct(request.Id);
-   }
-}
-```
-
-An instance of this class is also available on [the context object](csharp-context.md)\.
-
-```
-public class ProductService
-{
-   public async Task<Product> DescribeProduct(DescribeProductRequest request, ILambdaContext context)
-   {
-       context.Logger.Log("DescribeProduct invoked with Id " + request.Id);
-       return await catalogService.DescribeProduct(request.Id);
-   }
-}
 ```
 
 **Example Log Format**  
 
 ```
-START RequestId: 29d229ff-xmpl-49d8-8d86-b1f89b06bdc9 Version: $LATEST
-END RequestId: 29d229ff-xmpl-49d8-8d86-b1f89b06bdc9
-REPORT RequestId: 29d229ff-xmpl-49d8-8d86-b1f89b06bdc9  Duration: 576.36 ms Billed Duration: 600 ms Memory Size: 512 MB Max Memory Used: 69 MB  Init Duration: 205.64 ms    
-XRAY TraceId: 1-5e34a44f-a125xmpl3603a4cdf526103e   SegmentId: 5f41xmpl4b1664d9 Sampled: true
+START RequestId: d1cf0ccb-xmpl-46e6-950d-04c96c9b1c5d Version: $LATEST
+ENVIRONMENT VARIABLES: 
+{
+    "AWS_EXECUTION_ENV": "AWS_Lambda_dotnetcore2.1",
+    "AWS_LAMBDA_FUNCTION_MEMORY_SIZE": "256",
+    "AWS_LAMBDA_LOG_GROUP_NAME": "/aws/lambda/blank-csharp-function-WU56XMPLV2XA",
+    "AWS_LAMBDA_FUNCTION_VERSION": "$LATEST",
+    "AWS_LAMBDA_LOG_STREAM_NAME": "2020/03/27/[$LATEST]5296xmpl084f411d9fb73b258393f30c",
+    "AWS_LAMBDA_FUNCTION_NAME": "blank-csharp-function-WU56XMPLV2XA",
+    ...
+EVENT: 
+{
+    "Records": [
+        {
+            "MessageId": "19dd0b57-b21e-4ac1-bd88-01bbb068cb78",
+            "ReceiptHandle": "MessageReceiptHandle",
+            "Body": "Hello from SQS!",
+            "Md5OfBody": "7b270e59b47ff90a553787216d55d91d",
+            "Md5OfMessageAttributes": null,
+            "EventSourceArn": "arn:aws:sqs:us-west-2:123456789012:MyQueue",
+            "EventSource": "aws:sqs",
+            "AwsRegion": "us-west-2",
+            "Attributes": {
+                "ApproximateReceiveCount": "1",
+                "SentTimestamp": "1523232000000",
+                "SenderId": "123456789012",
+                "ApproximateFirstReceiveTimestamp": "1523232000001"
+            },
+            ...
+END RequestId: d1cf0ccb-xmpl-46e6-950d-04c96c9b1c5d
+REPORT RequestId: d1cf0ccb-xmpl-46e6-950d-04c96c9b1c5d	Duration: 4157.16 ms	Billed Duration: 4200 ms	Memory Size: 256 MB	Max Memory Used: 99 MB	Init Duration: 841.60 ms	
+XRAY TraceId: 1-5e7e8131-7ff0xmpl32bfb31045d0a3bb	SegmentId: 0152xmpl6016310f	Sampled: true
 ```
 
 The \.NET runtime logs the `START`, `END`, and `REPORT` lines for each invocation\. The report line provides the following details\.
