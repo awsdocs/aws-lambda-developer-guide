@@ -1,9 +1,12 @@
 {
-  "name": "random-error",
+  "name": "error-processor",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
     "aws-xray-sdk-core": "1.1.2",
     "chance": "1.0.16"
+  },
+  "scripts": {
+    "start": "node app.js"
   }
 }

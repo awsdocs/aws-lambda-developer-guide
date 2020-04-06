@@ -6,6 +6,8 @@ Globals:
     Runtime: nodejs12.x
     Handler: index.handler
     Tracing: Active
+    Layers:
+      - !Ref libs
 Resources:
   bucket:
     Type: AWS::S3::Bucket
@@ -39,12 +41,20 @@ Resources:
       Environment:
         Variables:
           bucket: !Ref bucket
+  libs:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: error-processor-lib
+      Description: Dependencies for the error-processor sample app.
+      ContentUri: lib/.
+      CompatibleRuntimes:
+        - nodejs12.x
   randomerror:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: random-error/.
       Description: Generate errors.
-      Timeout: 8
+      Timeout: 600
       Role: !GetAtt role.Arn
   primer:
     Type: AWS::Serverless::Function

@@ -90,7 +90,12 @@ exports.handler = function(event, context) {
         } else {
             console.log("Decoded event: " + decodedEvent)
             decodedEvent = JSON.parse(decodedEvent.toString('ascii'))
-            context.requestid = decodedEvent.logEvents[0].message.match(/\w{8}-\w{4}-\w{4}-\w{4}-\w{12}/)[0]
+            try {
+              context.requestid = decodedEvent.logEvents[0].message.match(/\w{8}-\w{4}-\w{4}-\w{4}-\w{12}/)[0]
+            } catch (TypeError){
+              console.log("Request ID not found. Error is outside of traced request loop.")
+              return
+            }
             console.log(context.requestid)
             // download log stream
             setTimeout(function(){getLogStream(context, decodedEvent.logGroup, decodedEvent.logStream)}, 10000)

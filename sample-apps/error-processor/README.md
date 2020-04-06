@@ -45,30 +45,49 @@ To deploy the application, run `2-deploy.sh`.
 This script uses AWS CloudFormation to deploy the Lambda functions, an IAM role, and a CloudWatch Logs subscription that triggers the processor function. If the AWS CloudFormation stack that contains the resources already exists, the script updates it with any changes to the template or function code.
 
 # Test
-To generate logs and errors, invoke the random error function.
+To generate logs and errors, invoke the random error function.  
 
     error-processor$ ./3-invoke.sh
     {
         "StatusCode": 200,
+        "FunctionError": "Unhandled",
         "ExecutedVersion": "$LATEST"
     }
-    {
-        "StatusCode": 200,
-        "FunctionError": "Handled",
-        "ExecutedVersion": "$LATEST"
-    }
+    {"errorType":"function.DoublesRolledError","errorMessage":"Doubles rolled: 10 & 10","trace":["function.DoublesRolledError: Doubles rolled: 10 & 10","    at Runtime.myFunction [as handler] (/var/task/index.js:36:17)","    at Runtime.handleOnce (/var/runtime/Runtime.js:66:25)"]}
     {
         "StatusCode": 200,
         "ExecutedVersion": "$LATEST"
+    }
+    {"errorType":"function.DoublesRolledError","errorMessage":"Doubles rolled: 2 & 2","trace":["function.DoublesRolledError: Doubles rolled: 2 & 2","    at Runtime.myFunction [as handler] (/var/task/index.js:36:17)","    at Runtime.handleOnce (/var/runtime/Runtime.js:66:25)"],"depth":8}
+    {
+        "StatusCode": 200,
+        "ExecutedVersion": "$LATEST"
+    }
+    {"errorType":"function.MaxDepthError","errorMessage":"Maximum depth reached: 9","trace":["function.MaxDepthError: Maximum depth reached: 9","    at Runtime.myFunction [as handler] (/var/task/index.js:30:17)","    at Runtime.handleOnce (/var/runtime/Runtime.js:66:25)"],"depth":9}
+
+This function generates errors for a configurable percentage of invocations. When an error does not occur, it invokes itself recursively until one does. The event (`event.json`) provides a base error rate and maximum recursion depth.
+
+    {
+      "max-depth": 9,
+      "current-depth": 0,
+      "error-rate": 0.07
     }
 
 The application uses AWS X-Ray to trace requests. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map. The following service map shows the random error function generating errors for some requests. It also shows the processor function calling X-Ray, CloudWatch Logs, and Amazon S3.
 
 ![Service Map](/sample-apps/error-processor/images/errorprocessor-servicemap.png)
 
-Choose a node in the main function graph. Then choose **View traces** to see a list of traces. Choose any trace to view a timeline that breaks down the work done by the function.
+Choose a node in the main function graph. Then choose **View traces** to see a list of traces. Choose any trace to view a timeline that breaks down the work done by the function.  The following example shows a trace for the processor function, which is invoked by CloudWatch Logs for each error.
 
-![Trace](/sample-apps/error-processor/images/errorprocessor-trace.png)
+![Trace - Processor](/sample-apps/error-processor/images/errorprocessor-trace.png)
+
+Traces for the random error function include all recursive calls. The following example shows a request that resulted in 3 invocations. The third invocation resulted in an error that was relayed back through the other two (successful) invocations to the requester.
+
+![Trace - Random Error](/sample-apps/error-processor/images/errorprocessor-trace-randomerror.png)
+
+Click on the error icon next to the function segment for the final invocation to see details about the exception.
+
+![Trace - Exception](/sample-apps/error-processor/images/errorprocessor-exception.png)
 
 Finally, view the logs and traces that the function stores in Amazon S3.
 
@@ -82,6 +101,16 @@ Finally, view the logs and traces that the function stores in Amazon S3.
 4. Choose **errors**.
 5. Choose a request ID.
 6. For each file, check the box next to the filename and then choose **Download**.
+
+# Configure the random error function
+
+With the default configuration, the function runs up to 9 times before returning an error. When invoked continuously with the AWS CLI, it maintains a concurrency of 9, with approximately 100 invocations per minute, including when the function invokes itself. The effective error rate is close to 14%.
+
+To generate a larger, more varied set of data, lower the error rate and increase the maximum depth. The following example shows a service map for the application running with an error rate of 0.5% and a maximum depth of 500.
+
+![Service Map](/sample-apps/error-processor/images/errorprocessor-servicemap-traffic.png)
+
+Lambda records traces for the first request each second and 5% of additional requests. 
 
 # Cleanup
 To delete the application, run the cleanup script.
