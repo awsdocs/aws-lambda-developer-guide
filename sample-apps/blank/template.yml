@@ -16,3 +16,13 @@ Resources:
         - AWSLambdaReadOnlyAccess
         - AWSXrayWriteOnlyAccess
       Tracing: Active
+      Layers:
+        - !Ref libs
+  libs:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: blank-lib
+      Description: Dependencies for the blank sample app.
+      ContentUri: lib/.
+      CompatibleRuntimes:
+        - nodejs12.x

@@ -5,6 +5,9 @@
   "devDependencies": {
     "aws-sdk": "2.585.0"
   },
+  "dependencies": {
+    "aws-xray-sdk-core": "1.1.2"
+  },
   "scripts": {
     "start": "node app.js"
   }
