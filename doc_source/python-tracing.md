@@ -60,6 +60,7 @@ boto3
 requests
 sqlite3
 mysql
+pymysql
 You can use `patch_all()` to patch all of them at once\. 
 
 Following is what a trace emitted by the code preceding looks like \(synchronous invocation\): 
