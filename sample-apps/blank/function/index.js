@@ -1,19 +1,26 @@
-const AWS = require('aws-sdk')
-// Read environment variable
-let region = process.env.AWS_REGION
-if (process.env.region)
-  region = process.env.region
+const AWSXRay = require('aws-xray-sdk-core')
+const AWS = AWSXRay.captureAWS(require('aws-sdk'))
+
 // Create client outside of handler to reuse
-const lambda = new AWS.Lambda({region: region})
+const lambda = new AWS.Lambda()
 
 // Handler
-exports.handler = function(event, context) {
-  console.log('Region: ' + region)
-  console.log('Event: ' + JSON.stringify(event, null, 2))
+exports.handler = async function(event, context) {
+  event.Records.forEach(record => {
+    console.log(record.body)
+  })
+  console.log('## ENVIRONMENT VARIABLES: ' + serialize(process.env))
+  console.log('## CONTEXT: ' + serialize(context))
+  console.log('## EVENT: ' + serialize(event))
+  
   return getAccountSettings()
 }
 
 // Use SDK client
 var getAccountSettings = function(){
   return lambda.getAccountSettings().promise()
+}
+
+var serialize = function(object) {
+  return JSON.stringify(object, null, 2)
 }

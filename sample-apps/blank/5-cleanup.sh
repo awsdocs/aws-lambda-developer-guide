@@ -14,4 +14,4 @@ if [ -f bucket-name.txt ]; then
     done
 fi
 rm -f out.yml out.json
-rm -rf function/node_modules function/package-lock.json
+rm -rf lib package-lock.json

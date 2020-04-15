@@ -1,8 +1,8 @@
-var AWSXRay = require('aws-xray-sdk-core')
-var aws = AWSXRay.captureAWS(require('aws-sdk'))
+const AWSXRay = require('aws-xray-sdk-core')
+const aws = AWSXRay.captureAWS(require('aws-sdk'))
 
-var Chance = require('chance')
-var lambda = new aws.Lambda()
+const Chance = require('chance')
+const lambda = new aws.Lambda()
 
 var myFunction = async function(event, context) {
   var chance = new Chance()
