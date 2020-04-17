@@ -96,7 +96,7 @@ For more information on logging, see [AWS Lambda Function Logging in Java](java-
 
 ## Context in Sample Applications<a name="java-context-samples"></a>
 
-The GitHub repository for this guide includes sample applications that demonstrate the use of the context object\. Each sample application includes scripts for easy deployment and cleanup, an AWS SAM template, and supporting resources\.
+The GitHub repository for this guide includes sample applications that demonstrate the use of the context object\. Each sample application includes scripts for easy deployment and cleanup, an AWS Serverless Application Model \(AWS SAM\) template, and supporting resources\.
 
 **Java Sample Applications**
 + [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-basic) – A minimal Java function with unit tests and variable logging configuration\. Includes both Gradle and Maven builds\.
@@ -105,4 +105,4 @@ The GitHub repository for this guide includes sample applications that demonstra
 + [blank\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-java) – A Java function with the events library, advanced logging configuration, and the AWS SDK for Java 2\.x that calls the Lambda API to retrieve account settings\.
 + [s3\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/s3-java) – A Java function that processes notification events from Amazon S3 and uses the Java Class Library \(JCL\) to create thumbnails from uploaded image files\.
 
-All of the sample applications have a test context class for unit tests\. The `java-basic` application shows the use the context object to get a logger\. It uses SLF4J and Log4J 2 to provide a logger that works for local unit tests\.
+All of the sample applications have a test context class for unit tests\. The `java-basic` application shows you how to use the context object to get a logger\. It uses SLF4J and Log4J 2 to provide a logger that works for local unit tests\.

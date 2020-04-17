@@ -21,10 +21,10 @@ These packages are available at [Nuget Packages](https://www.nuget.org/packages/
 
 **\.NET Runtimes**  
 
-| Name | Identifier | Languages | Operating System | 
-| --- | --- | --- | --- | 
-|  \.NET Core 3\.1  |  `dotnetcore3.1`  |  C\# PowerShell Core 6\.0  |  Amazon Linux 2  | 
-|  \.NET Core 2\.1  |  `dotnetcore2.1`  |  C\# PowerShell Core 6\.0  |  Amazon Linux  | 
+| Name | Identifier | Operating System | 
+| --- | --- | --- | 
+|  \.NET Core 3\.1  |  `dotnetcore3.1`  |  Amazon Linux 2  | 
+|  \.NET Core 2\.1  |  `dotnetcore2.1`  |  Amazon Linux  | 
 
 **Topics**
 + [AWS Lambda Deployment Package in C\#](csharp-package.md)

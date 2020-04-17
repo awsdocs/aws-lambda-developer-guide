@@ -60,7 +60,7 @@ END RequestId: 6bc28136-xmpl-4365-b021-0ce6b2e64ab0
 REPORT RequestId: 6bc28136-xmpl-4365-b021-0ce6b2e64ab0	Duration: 198.50 ms	Billed Duration: 200 ms	Memory Size: 512 MB	Max Memory Used: 90 MB	Init Duration: 524.75 ms
 ```
 
-The Java runtime logs the `START`, `END`, and `REPORT` lines for each invocation\. The report line provides the following details\.
+The Java runtime logs the `START`, `END`, and `REPORT` lines for each invocation\. The report line provides the following details:
 
 **Report Log**
 + **RequestId** – The unique request ID for the invocation\.
@@ -207,7 +207,7 @@ To add the request ID to your function's logs, use the appender in the [aws\-lam
 </Configuration>
 ```
 
-With this configuration, each line is prepended with the date, time, request ID, log level and class name\.
+With this configuration, each line is prepended with the date, time, request ID, log level, and class name\.
 
 **Example Log Format with Appender**  
 
@@ -295,6 +295,6 @@ The GitHub repository for this guide includes sample applications that demonstra
 + [blank\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-java) – A Java function with the events library, advanced logging configuration, and the AWS SDK for Java 2\.x that calls the Lambda API to retrieve account settings\.
 + [s3\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/s3-java) – A Java function that processes notification events from Amazon S3 and uses the Java Class Library \(JCL\) to create thumbnails from uploaded image files\.
 
-The `java-basic` sample application shows a minimal logging configuration that supports logging tests\. The handler code uses the `LambdaLogger` logger provided by the context object\. For tests, the application uses a custom `TestLogger` class that implements the `LambdaLogger` interface with a Log4j 2 logger\. It uses SLF4J as a facade for compatibility with the AWS SDK\. Logging libararies are excluded from build output to keep the deployment package small\.
+The `java-basic` sample application shows a minimal logging configuration that supports logging tests\. The handler code uses the `LambdaLogger` logger provided by the context object\. For tests, the application uses a custom `TestLogger` class that implements the `LambdaLogger` interface with a Log4j 2 logger\. It uses SLF4J as a facade for compatibility with the AWS SDK\. Logging libraries are excluded from build output to keep the deployment package small\.
 
 The `blank-java` sample application builds on the basic configuration with AWS SDK logging and the Lambda Log4j 2 appender\. It uses Log4j 2 in Lambda with custom appender that adds the invocation request ID to each line\.

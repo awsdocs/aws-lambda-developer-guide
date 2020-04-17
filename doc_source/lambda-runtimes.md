@@ -27,10 +27,10 @@ A runtime can support a single version of a language, multiple versions of a lan
 
 | Name | Identifier | AWS SDK for Python | Operating System | 
 | --- | --- | --- | --- | 
-|  Python 3\.8  |  `python3.8`  |  boto3\-1\.10\.34 botocore\-1\.13\.34  |  Amazon Linux 2  | 
-|  Python 3\.7  |  `python3.7`  |  boto3\-1\.10\.34 botocore\-1\.13\.34  |  Amazon Linux  | 
-|  Python 3\.6  |  `python3.6`  |  boto3\-1\.10\.34 botocore\-1\.13\.34  |  Amazon Linux  | 
-|  Python 2\.7  |  `python2.7`  |  boto3\-1\.10\.34 botocore\-1\.13\.34  |  Amazon Linux  | 
+|  Python 3\.8  |  `python3.8`  |  boto3\-1\.12\.22 botocore\-1\.15\.22  |  Amazon Linux 2  | 
+|  Python 3\.7  |  `python3.7`  |  boto3\-1\.12\.22 botocore\-1\.15\.22  |  Amazon Linux  | 
+|  Python 3\.6  |  `python3.6`  |  boto3\-1\.12\.22 botocore\-1\.15\.22  |  Amazon Linux  | 
+|  Python 2\.7  |  `python2.7`  |  boto3\-1\.12\.22 botocore\-1\.15\.22  |  Amazon Linux  | 
 
 
 **Ruby Runtimes**  
@@ -58,10 +58,10 @@ A runtime can support a single version of a language, multiple versions of a lan
 
 **\.NET Runtimes**  
 
-| Name | Identifier | Languages | Operating System | 
-| --- | --- | --- | --- | 
-|  \.NET Core 3\.1  |  `dotnetcore3.1`  |  C\# PowerShell Core 6\.0  |  Amazon Linux 2  | 
-|  \.NET Core 2\.1  |  `dotnetcore2.1`  |  C\# PowerShell Core 6\.0  |  Amazon Linux  | 
+| Name | Identifier | Operating System | 
+| --- | --- | --- | 
+|  \.NET Core 3\.1  |  `dotnetcore3.1`  |  Amazon Linux 2  | 
+|  \.NET Core 2\.1  |  `dotnetcore2.1`  |  Amazon Linux  | 
 
 To use other languages in Lambda, you can implement a [custom runtime](runtimes-custom.md)\. The Lambda execution environment provides a [runtime interface](runtimes-api.md) for getting invocation events and sending responses\. You can deploy a custom runtime alongside your function code, or in a [layer](configuration-layers.md)\.
 

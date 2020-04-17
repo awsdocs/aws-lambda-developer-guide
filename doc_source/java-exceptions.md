@@ -1,6 +1,6 @@
 # AWS Lambda Function Errors in Java<a name="java-exceptions"></a>
 
-When your function raises an error, Lambda returns details about the error to the invoker\. The body of the respone that Lambda returns contains a JSON document with the error name, error type, and an array of stack frames\. The client or service that invoked the function can handle the error or pass it along to an end user\. You can use custom exceptions to return helpful information to users for client errors\.
+When your function raises an error, Lambda returns details about the error to the invoker\. The body of the response that Lambda returns contains a JSON document with the error name, error type, and an array of stack frames\. The client or service that invoked the function can handle the error or pass it along to an end user\. You can use custom exceptions to return helpful information to users for client errors\.
 
 **Example [src/main/java/example/HandlerDivide\.java](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/java-basic/src/main/java/example/HandlerDivide.java) – Runtime Exception**  
 
@@ -45,7 +45,7 @@ When the function throws `InputLengthException`, the Java runtime serializes it 
 
 In this example, [InputLengthException](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/java-basic/src/main/java/example/InputLengthException.java) is a `RuntimeException`\. The `RequestHandler` [interface](java-handler.md#java-handler-interfaces) does not allow checked exceptions\. The `RequestStreamHandler` interface supports throwing `IOException` errors\.
 
-The return statement in the above example can also throw a runtime exception:
+The return statement in the previous example can also throw a runtime exception\.
 
 ```
     return numerator/denominator;
@@ -130,16 +130,16 @@ For more information about logs, see [AWS Lambda Function Logging in Java](java-
 
 ## Understanding Error Types and Sources<a name="java-exceptions-types"></a>
 
-When you invoke a function, multiple subsystems handle the request, event, output, and response\. Errors can come from your the Lambda service \(invocation errors\), or from an instance of your function\. Function errors include exceptions returned by your handler code and exceptions returned by the Lambda runtime\.
+When you invoke a function, multiple subsystems handle the request, event, output, and response\. Errors can come from the Lambda service \(invocation errors\), or from an instance of your function\. Function errors include exceptions returned by your handler code and exceptions returned by the Lambda runtime\.
 
 The Lambda service receives the invocation request and validates it\. It checks permissions, verifies that the event document is a valid JSON document, and checks parameter values\. If the Lambda service encounters an error, it returns an exception type, message, and HTTP status code that indicate the cause of the error\.
 
 **Note**  
 For a full list of errors that the `Invoke` API operation can return, see [Invoke Errors](API_Invoke.md#API_Invoke_Errors) in the Lambda API reference\.
 
-A `4xx` series error from the Lambda service indicates an error that the invoker can fix by modifying the request, requesting permission, or trying again\. A `5xx` series error indicates an issue with the Lambda service, or an issue with the function's configuration or resources\. These issues can't be addressed by the invoker, but may be fixable by the function's owner\.
+A `4xx` series error from the Lambda service indicates an error that the invoker can fix by modifying the request, requesting permission, or trying again\. A `5xx` series error indicates an issue with the Lambda service, or an issue with the function's configuration or resources\. These issues can't be addressed by the invoker, but the function's owner might be able to fix them\.
 
-If a request passes validation, Lambda sends it to an instance of the function\. The runtime converts the event document into an object and passes it to your handler code\. Errors can occur during this process if, for example, the name of your handler method doesn't match the function's configuration, or if the invocation times out before your handler code returns a response\. Lambda runtime errors are formatted like errors that your code returns, but are returned by the runtime\.
+If a request passes validation, Lambda sends it to an instance of the function\. The runtime converts the event document into an object and passes it to your handler code\. Errors can occur during this process if, for example, the name of your handler method doesn't match the function's configuration, or if the invocation times out before your handler code returns a response\. Lambda runtime errors are formatted like errors that your code returns, but they are returned by the runtime\.
 
 In the following example, the runtime fails to deserialize the event into an object\. The input is a valid JSON type, but it doesn't match the type expected by the handler method\.
 
@@ -203,7 +203,7 @@ $ aws lambda invoke --function-name my-function --payload '[1000]' out.json
 
 When an AWS service invokes your function, the service chooses the invocation type and retry behavior\. AWS services can invoke your function on a schedule, in response to a lifecycle event on a resource, or to serve a request from a user\. Some services invoke functions asynchronously and let Lambda handle errors, while others retry or pass errors back to the user\.
 
-For example, API Gateway treats all invocation and function errors as internal errors\. If the Lambda API rejects the invocation request, API Gateway returns a 500 error code\. If the function runs but returns an error, or returns a response in the wrong format, API Gateway returns a 502\. To customize the error response, you must catch errors in your code and format a response in the required format\.
+For example, API Gateway treats all invocation and function errors as internal errors\. If the Lambda API rejects the invocation request, API Gateway returns a 500 error code\. If the function runs but returns an error, or returns a response in the wrong format, API Gateway returns a 502 error code\. To customize the error response, you must catch errors in your code and format a response in the required format\.
 
 To determine the source of an error and its cause, use AWS X\-Ray\. With X\-Ray, you can find out which component encountered an error and see details about exceptions\. The following example shows a function error that resulted in a 502 response from API Gateway\.
 
@@ -215,7 +215,7 @@ For details on how other services handler errors, see the topics in the [Using A
 
 ## Error Handling in Sample Applications<a name="java-exceptions-samples"></a>
 
-The GitHub repository for this guide includes sample applications that demonstrate the use of the errors\. Each sample application includes scripts for easy deployment and cleanup, an AWS SAM template, and supporting resources\.
+The GitHub repository for this guide includes sample applications that demonstrate the use of the errors\. Each sample application includes scripts for easy deployment and cleanup, an AWS Serverless Application Model \(AWS SAM\) template, and supporting resources\.
 
 **Java Sample Applications**
 + [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-basic) – A minimal Java function with unit tests and variable logging configuration\. Includes both Gradle and Maven builds\.

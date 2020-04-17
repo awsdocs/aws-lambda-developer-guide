@@ -47,7 +47,7 @@ You can also instrument HTTP clients, record SQL queries, and create custom subs
 
 ## Enabling Active Tracing with the Lambda API<a name="java-tracing-api"></a>
 
-To manage tracing configuration with the AWS CLI or AWS SDK, use the following API operations\.
+To manage tracing configuration with the AWS CLI or AWS SDK, use the following API operations:
 + [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)
 + [GetFunctionConfiguration](API_GetFunctionConfiguration.md)
 + [CreateFunction](API_CreateFunction.md)
@@ -77,7 +77,7 @@ Resources:
       ...
 ```
 
-For an AWS SAM `AWS::Serverless::Function` resource, use the `Tracing` property\.
+For an AWS Serverless Application Model \(AWS SAM\) `AWS::Serverless::Function` resource, use the `Tracing` property\.
 
 **Example [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-java/template.yml) – Tracing Configuration**  
 
@@ -117,7 +117,7 @@ Resources:
 
 With this configuration, you only update library JARs if you change your build dependencies\. When you update your function code, you only need to upload your function's compiled classes, so upload times can be much faster\.
 
-Creating a layer for dependencies requires build configuration changes to generate the layer archive prior to deployment\. See the [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-basic) sample application for a working example\. 
+Creating a layer for dependencies requires build configuration changes to generate the layer archive prior to deployment\. For a working example, see the [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-basic) sample application\. 
 
 ## Tracing in Sample Applications<a name="java-tracing-samples"></a>
 
