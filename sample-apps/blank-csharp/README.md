@@ -11,7 +11,8 @@ The project source includes function code and supporting resources:
 Use the following instructions to deploy the sample application. For more information on the application's architecture and implementation, see [Managing Spot Instance Requests](https://docs.aws.amazon.com/lambda/latest/dg/services-ec2-tutorial.html) in the developer guide.
 
 # Requirements
-- [.NET Core SDK 2.1](https://nodejs.org/en/download/releases/)
+- [.NET Core SDK 3.1](https://nodejs.org/en/download/releases/)
+- [AWS extensions for .NET CLI](https://github.com/aws/aws-extensions-for-dotnet-cli)
 - The Bash shell. For Linux and macOS, this is included by default. In Windows 10, you can install the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows-integrated version of Ubuntu and Bash.
 - [The AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html).
 
@@ -30,7 +31,7 @@ To create a new bucket for deployment artifacts, run `1-create-bucket.sh`. Or, i
 To deploy the application, run `2-deploy.sh`.
 
     blank-csharp$ ./2-deploy.sh
-    Amazon Lambda Tools for .NET Core applications (3.3.1)
+    Amazon Lambda Tools for .NET Core applications (4.0.0)
     Executing publish command
     Uploading to e678bc216e6a0d510d661ca9ae2fd941  1009985 / 1009985.0  (100.00%)
     Successfully packaged artifacts and wrote output template to file out.yml.
