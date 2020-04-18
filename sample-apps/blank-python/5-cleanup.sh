@@ -13,5 +13,5 @@ if [ -f bucket-name.txt ]; then
         esac
     done
 fi
-rm -f out.yml out.json
-rm -rf package
+rm -f out.yml out.json function/*.pyc
+rm -rf package function/__pycache__
