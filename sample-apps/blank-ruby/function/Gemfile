@@ -1,4 +1,6 @@
 # Gemfile
 source 'https://rubygems.org'
 
-gem 'aws-xray-sdk'
+gem 'aws-xray-sdk', '0.11.4'
+gem 'aws-sdk-lambda', '1.39.0'
+gem 'test-unit', '3.3.5'
