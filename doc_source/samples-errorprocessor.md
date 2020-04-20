@@ -1,4 +1,4 @@
-# Error Processor Sample Application for AWS Lambda<a name="sample-errorprocessor"></a>
+# Error Processor Sample Application for AWS Lambda<a name="samples-errorprocessor"></a>
 
 The Error Processor sample application demonstrates the use of AWS Lambda to handle events from an [Amazon CloudWatch Logs subscription](services-cloudwatchlogs.md)\. CloudWatch Logs lets you invoke a Lambda function when a log entry matches a pattern\. The subscription in this application monitors the log group of a function for entries that contain the word `ERROR`\. It invokes a processor Lambda function in response\. The processor function retrieves the full log stream and trace data for the request that caused the error, and stores them for later use\.
 
@@ -22,7 +22,8 @@ The sample application uses the following AWS services\.
 + Amazon CloudWatch Logs – Collects logs, and invokes a function when a log entry matches a filter pattern\.
 + AWS X\-Ray – Collects trace data, indexes traces for search, and generates a service map\.
 + Amazon Simple Storage Service \(Amazon S3\) – Stores deployment artifacts and application output\.
-+ AWS CloudFormation – Creates application resources and deploys function code\.
+
+Standard charges apply for each service\.
 
 A Lambda function in the application generates errors randomly\. When CloudWatch Logs detects the word `ERROR` in the function's logs, it sends an event to the processor function for processing\.
 
@@ -75,7 +76,7 @@ The processor function gets the request ID from the CloudWatch Logs event, and u
 
 ## AWS CloudFormation Template and Additional Resources<a name="sample-errorprocessor-template"></a>
 
-The application is implemented in two Node\.js modules—an AWS CloudFormation template and supporting shell scripts\. The template creates the processor function, the random error function, and the following supporting resources\.
+The application is implemented in two Node\.js modules and deployed with an AWS CloudFormation template and supporting shell scripts\. The template creates the processor function, the random error function, and the following supporting resources\.
 + Execution role – An IAM role that grants the functions permission to access other AWS services\.
 + Primer function – An additional function that invokes the random error function to create a log group\.
 + Custom resource – An AWS CloudFormation custom resource that invokes the primer function during deployment to ensure that the log group exists\.

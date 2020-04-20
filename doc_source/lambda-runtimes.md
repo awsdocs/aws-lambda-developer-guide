@@ -4,11 +4,11 @@ AWS Lambda supports multiple languages through the use of runtimes\. You choose 
 
 **Amazon Linux**
 + Image – [amzn\-ami\-hvm\-2018\.03\.0\.20181129\-x86\_64\-gp2](https://console.aws.amazon.com/ec2/v2/home#Images:visibility=public-images;search=amzn-ami-hvm-2018.03.0.20181129-x86_64-gp2)
-+ Linux kernel – 4\.14\.154\-99\.181\.amzn1\.x86\_64
++ Linux kernel – 4\.14\.171\-105\.231\.amzn1\.x86\_64
 
 **Amazon Linux 2**
 + Image – Custom
-+ Linux kernel – 4\.14\.138\-99\.102\.amzn2\.x86\_64
++ Linux kernel – 4\.14\.165\-102\.205\.amzn2\.x86\_64
 
 When your function is invoked, Lambda attempts to re\-use the execution environment from a previous invocation if one is available\. This saves time preparing the execution environment, and allows you to save resources like database connections and temporary files in the [execution context](runtimes-context.md) to avoid creating them every time your function runs\.
 

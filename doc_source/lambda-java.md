@@ -62,6 +62,7 @@ The function runtime passes a context object to the handler, in addition to the 
 Your Lambda function comes with a CloudWatch Logs log group\. The function runtime sends details about each invocation to CloudWatch Logs\. It relays any [logs that your function outputs](java-logging.md) during invocation\. If your function [returns an error](java-exceptions.md), Lambda formats the error and returns it to the invoker\.
 
 **Topics**
++ [Java Sample Applications for AWS Lambda](java-samples.md)
 + [AWS Lambda Deployment Package in Java](java-package.md)
 + [AWS Lambda Function Handler in Java](java-handler.md)
 + [AWS Lambda Context Object in Java](java-context.md)

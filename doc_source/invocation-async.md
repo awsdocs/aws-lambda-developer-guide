@@ -224,7 +224,7 @@ $ aws lambda update-function-configuration --function-name my-function \
 Lambda sends the event to the dead\-letter queue as\-is, with additional information in attributes\. You can use this information to identify the error that the function returned, or to correlate the event with logs or an AWS X\-Ray trace\.
 
 **Dead\-Letter Queue Message Attributes**
-+ **RequestID** \(String\) – The ID of the invocation request\. Request IDs appear in function logs\. You can also use the X\-Ray SDK to record the request ID on an attribute in the trace\. You can then search for traces by request ID in the X\-Ray console\. For an example, see the [error processor sample](sample-errorprocessor.md)\.
++ **RequestID** \(String\) – The ID of the invocation request\. Request IDs appear in function logs\. You can also use the X\-Ray SDK to record the request ID on an attribute in the trace\. You can then search for traces by request ID in the X\-Ray console\. For an example, see the [error processor sample](samples-errorprocessor.md)\.
 + **ErrorCode** \(Number\) – The HTTP status code\.
 + **ErrorMessage** \(String\) – The first 1 KB of the error message\.
 

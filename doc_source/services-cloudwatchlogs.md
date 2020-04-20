@@ -37,4 +37,4 @@ When decoded and decompressed, the log data is a JSON document with the followin
 }
 ```
 
-For a sample application that uses CloudWatch Logs as a trigger, see [Error Processor Sample Application for AWS Lambda](sample-errorprocessor.md)\.
+For a sample application that uses CloudWatch Logs as a trigger, see [Error Processor Sample Application for AWS Lambda](samples-errorprocessor.md)\.

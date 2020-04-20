@@ -40,4 +40,4 @@ When you invoke a function indirectly, you need to be aware of the retry behavio
 
 To help you deal with errors in Lambda applications, Lambda integrates with services like Amazon CloudWatch and AWS X\-Ray\. You can use a combination of logs, metrics, alarms, and tracing to quickly detect and identify issues in your function code, API, or other resources that support your application\. For more information, see [Monitoring and Troubleshooting Lambda Applications](lambda-monitoring.md)\.
 
-For a sample application that uses a CloudWatch Logs subscription, X\-Ray tracing, and a Lambda function to detect and process errors, see [Error Processor Sample Application for AWS Lambda](sample-errorprocessor.md)\.
+For a sample application that uses a CloudWatch Logs subscription, X\-Ray tracing, and a Lambda function to detect and process errors, see [Error Processor Sample Application for AWS Lambda](samples-errorprocessor.md)\.
