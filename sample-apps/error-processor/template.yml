@@ -11,6 +11,7 @@ Globals:
 Resources:
   bucket:
     Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
   role:
     Type: AWS::IAM::Role
     Properties:

@@ -1,13 +1,15 @@
 #!/bin/bash
-OUTPUT_BUCKET=$(aws cloudformation describe-stack-resource --stack-name error-processor --logical-resource-id bucket --query 'StackResourceDetail.PhysicalResourceId' --output text)
-while true; do
-    read -p "Delete logs, traces, and output bucket ($OUTPUT_BUCKET)?" response
-    case $response in
-        [Yy]* ) aws s3 rb --force s3://$OUTPUT_BUCKET; aws cloudformation delete-stack --stack-name error-processor; break;;
-        [Nn]* ) aws cloudformation delete-stack --stack-name error-processor --retain-resources bucket; exit;;
-        * ) echo "Response must start with y or n.";;
-    esac
-done
+set -eo pipefail
+STACK=error-processor
+if [[ $# -eq 1 ]] ; then
+    STACK=$1
+    echo "Deleting stack $STACK"
+fi
+APP_BUCKET=$(aws cloudformation describe-stack-resource --stack-name $STACK --logical-resource-id bucket --query 'StackResourceDetail.PhysicalResourceId' --output text)
+FUNCTION=$(aws cloudformation describe-stack-resource --stack-name $STACK --logical-resource-id function --query 'StackResourceDetail.PhysicalResourceId' --output text)
+aws cloudformation delete-stack --stack-name $STACK
+echo "Deleted $STACK stack."
+
 if [ -f bucket-name.txt ]; then
     ARTIFACT_BUCKET=$(cat bucket-name.txt)
     while true; do
@@ -19,5 +21,24 @@ if [ -f bucket-name.txt ]; then
         esac
     done
 fi
+
+while true; do
+    read -p "Delete function logs? (log group /aws/lambda/$FUNCTION)" response
+    case $response in
+        [Yy]* ) aws logs delete-log-group --log-group-name /aws/lambda/$FUNCTION; break;;
+        [Nn]* ) break;;
+        * ) echo "Response must start with y or n.";;
+    esac
+done
+
+while true; do
+    read -p "Delete application bucket ($APP_BUCKET)?" response
+    case $response in
+        [Yy]* ) aws s3 rb --force s3://$APP_BUCKET; break;;
+        [Nn]* ) break;;
+        * ) echo "Response must start with y or n.";;
+    esac
+done
+
 rm -f out.yml out.json
 rm -rf processor/node_modules random-error/node_modules processor/package-lock.json random-error/package-lock.json

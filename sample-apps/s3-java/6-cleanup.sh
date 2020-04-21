@@ -1,8 +1,15 @@
 #!/bin/bash
 set -eo pipefail
-APP_BUCKET=$(aws cloudformation describe-stack-resource --stack-name s3-java --logical-resource-id bucket --query 'StackResourceDetail.PhysicalResourceId' --output text)
-aws cloudformation delete-stack --stack-name s3-java
-echo "Deleted function stack"
+STACK=s3-java
+if [[ $# -eq 1 ]] ; then
+    STACK=$1
+    echo "Deleting stack $STACK"
+fi
+APP_BUCKET=$(aws cloudformation describe-stack-resource --stack-name $STACK --logical-resource-id bucket --query 'StackResourceDetail.PhysicalResourceId' --output text)
+FUNCTION=$(aws cloudformation describe-stack-resource --stack-name $STACK --logical-resource-id function --query 'StackResourceDetail.PhysicalResourceId' --output text)
+aws cloudformation delete-stack --stack-name $STACK
+echo "Deleted $STACK stack."
+
 if [ -f bucket-name.txt ]; then
     ARTIFACT_BUCKET=$(cat bucket-name.txt)
     while true; do
@@ -14,6 +21,16 @@ if [ -f bucket-name.txt ]; then
         esac
     done
 fi
+
+while true; do
+    read -p "Delete function logs? (log group /aws/lambda/$FUNCTION)" response
+    case $response in
+        [Yy]* ) aws logs delete-log-group --log-group-name /aws/lambda/$FUNCTION; break;;
+        [Nn]* ) break;;
+        * ) echo "Response must start with y or n.";;
+    esac
+done
+
 while true; do
     read -p "Delete application bucket ($APP_BUCKET)?" response
     case $response in
@@ -22,5 +39,6 @@ while true; do
         * ) echo "Response must start with y or n.";;
     esac
 done
+
 rm -f out.yml out.json event.json
 rm -rf build .gradle target
