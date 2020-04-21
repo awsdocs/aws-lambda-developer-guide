@@ -24,7 +24,7 @@ You need to grant permission for the AWS IoT service to invoke your Lambda funct
 
 ```
 $ aws lambda add-permission --function-name my-function \
---statement-id iot-events --action "lambda:InvokeFunction" principal iotevents.amazonaws.com
+--statement-id iot-events --action "lambda:InvokeFunction" --principal iotevents.amazonaws.com
 {
     "Statement": "{\"Sid\":\"iot-events\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"iot.amazonaws.com\"},\"Action\":\"lambda:InvokeFunction\",\"Resource\":\"arn:aws:lambda:us-west-2:123456789012:function:my-function\"}"
 }
