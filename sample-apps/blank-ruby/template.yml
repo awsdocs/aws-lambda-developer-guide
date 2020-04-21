@@ -18,7 +18,7 @@ Resources:
       Tracing: Active
       Environment:
           Variables:
-            GEM_PATH: /opt
+            GEM_PATH: /opt/ruby/2.5.0
       Layers:
         - !Ref libs
   libs:
