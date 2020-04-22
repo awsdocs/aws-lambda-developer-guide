@@ -36,10 +36,14 @@ To create a new bucket for deployment artifacts, run `1-create-bucket.sh`. Or, i
     blank$ ./1-create-bucket.sh
     make_bucket: lambda-artifacts-a5e491dbb5b22e0d
 
-# Deploy
-To deploy the application, run `2-deploy.sh`.
+To build a Lambda layer that contains the function's runtime dependencies, run `2-build-layer.sh`. Packaging dependencies in a layer reduces the size of the deployment package that you upload when you modify your code.
 
-    blank$ ./2-deploy.sh
+    blank$ ./2-build-layer.sh
+
+# Deploy
+To deploy the application, run `3-deploy.sh`.
+
+    blank$ ./3-deploy.sh
     added 16 packages from 18 contributors and audited 18 packages in 0.926s
     added 17 packages from 19 contributors and audited 19 packages in 0.916s
     Uploading to e678bc216e6a0d510d661ca9ae2fd941  2737254 / 2737254.0  (100.00%)
@@ -51,13 +55,14 @@ To deploy the application, run `2-deploy.sh`.
 This script uses AWS CloudFormation to deploy the Lambda functions and an IAM role. If the AWS CloudFormation stack that contains the resources already exists, the script updates it with any changes to the template or function code.
 
 # Test
-To invoke the function, run `3-invoke.sh`.
+To invoke the function, run `4-invoke.sh`.
 
-    blank$ ./3-invoke.sh
+    blank$ ./4-invoke.sh
     {
         "StatusCode": 200,
         "ExecutedVersion": "$LATEST"
     }
+    {"AccountLimit":{"TotalCodeSize":80530636800,"CodeSizeUnzipped":262144000,"CodeSizeZipped":52428800,"ConcurrentExecutions":1000,"UnreservedConcurrentExecutions":933},"AccountUsage":{"TotalCodeSize":303678359,"FunctionCount":75}}
 
 The application uses AWS X-Ray to trace requests. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map. The following service map shows the function calling Amazon S3.
 
@@ -76,6 +81,14 @@ Finally, view the application in the Lambda console.
   ![Application](/sample-apps/blank/images/blank-application.png)
 
 # Cleanup
-To delete the application, run `4-cleanup.sh`.
+To delete the application, run `5-cleanup.sh`.
 
-    blank$ ./4-cleanup.sh
+    blank$ ./5-cleanup.sh
+    Deleted blank stack.
+    Delete deployment artifacts and bucket (lambda-artifacts-4475xmpl08ba7f8d)?y
+    delete: s3://lambda-artifacts-4475xmpl08ba7f8d/6f2edcce52085e31a4a5ba823dba2c9d
+    delete: s3://lambda-artifacts-4475xmpl08ba7f8d/3d3aee62473d249d039d2d7a37512db3
+    remove_bucket: lambda-artifacts-4475xmpl08ba7f8d
+    Delete function logs? (log group /aws/lambda/blank-function-1RQTXMPLR0YSO)y
+
+The cleanup script delete's the application stack, which includes the function and execution role, and local build artifacts. You can choose to delete the bucket and function logs as well.
