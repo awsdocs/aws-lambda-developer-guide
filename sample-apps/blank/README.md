@@ -1,20 +1,24 @@
 # Blank function
+This sample application is a Lambda function that calls the Lambda API. It shows the use of logging, environment variables, AWS X-Ray tracing, layers, unit tests and the AWS SDK. You can use it to learn about Lambda features or use it as a starting point for your own projects.
 
 ![Architecture](/sample-apps/blank/images/sample-blank.png)
 
-This project creates a function and supporting resources:
+The project source includes function code and supporting resources:
+
 - `function` - A Node.js function.
 - `template.yml` - An AWS CloudFormation template that creates an application.
 - `1-create-bucket.sh`, `2-deploy.sh`, etc. - Shell scripts that use the AWS CLI to deploy and manage the application.
 
-Use the following instructions to deploy the sample application.
+Variants of this sample application are available for the following languages:
 
-# TODO
-When you adapt this project for your own application, complete the following tasks.
+- Python – [blank-python](https://github.com/awsdocs/aws-lambda-developer-guide/edit/master/sample-apps/blank-python).
+- Ruby – [blank-ruby](https://github.com/awsdocs/aws-lambda-developer-guide/edit/master/sample-apps/blank-ruby).
+- Java – [blank-java](https://github.com/awsdocs/aws-lambda-developer-guide/edit/master/sample-apps/blank-java).
+- Go – [blank-go](https://github.com/awsdocs/aws-lambda-developer-guide/edit/master/sample-apps/blank-go).
+- C# – [blank-csharp](https://github.com/awsdocs/aws-lambda-developer-guide/edit/master/sample-apps/blank-csharp).
+- PowerShell – [blank-powershell](https://github.com/awsdocs/aws-lambda-developer-guide/edit/master/sample-apps/blank-powershell).
 
-- Change stack name in `2-deploy.sh`, `3-invoke.sh`, `4-cleanup.sh`
-- (optional) Change function name in `template.yml`, `3-invoke.sh`
-- (optional) Change function folder name in `template.yml`, `2-deploy.sh.template`
+Use the following instructions to deploy the sample application. For an in-depth look at its architecture and features, see [Blank Function Sample Application for AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/samples-blank.html) in the developer guide.
 
 # Requirements
 - [Node.js 10 with npm](https://nodejs.org/en/download/releases/)
