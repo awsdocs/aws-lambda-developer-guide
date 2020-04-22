@@ -33,6 +33,22 @@ Resources:
       Timeout: 10
       TracingConfig:
         Mode: Active
+  scheduledEvent:
+    Type: AWS::Events::Rule
+    Properties:
+      Description: Scheduled event
+      ScheduleExpression: rate(2 minutes)
+      State: ENABLED
+      Targets:
+        - Arn: !GetAtt function.Arn
+          Id: Function
+  invokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref function
+      Action: lambda:InvokeFunction
+      Principal: events.amazonaws.com
+      SourceArn: !GetAtt scheduledEvent.Arn
   executionRole:
     Type: AWS::IAM::Role
     Properties:
