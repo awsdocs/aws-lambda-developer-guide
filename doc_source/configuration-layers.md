@@ -171,7 +171,7 @@ To include libraries in a layer, place them in one of the folders supported by y
   jackson.zip
   └ java/lib/jackson-core-2.2.3.jar
   ```
-+ **Ruby** – `ruby/gems/2.5.0` \(`GEM_PATH`\), `ruby/lib` \(`RUBY_LIB`\)  
++ **Ruby** – `ruby/gems/2.5.0` \(`GEM_PATH`\), `ruby/lib` \(`RUBYLIB`\)  
 **Example JSON**  
 
   ```
