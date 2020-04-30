@@ -1,4 +1,4 @@
-# Common Lambda Application Types and Use Cases<a name="applications-usecases"></a>
+# Common Lambda application types and use cases<a name="applications-usecases"></a>
 
 When building applications on AWS Lambda the core components are Lambda functions and triggers\. A trigger is the AWS service or application that invokes a function, and a Lambda function is the code and runtime that process events\. To illustrate, consider the following scenarios:
 + **File processing** – Suppose you have a photo sharing application\. People use your application to upload photos, and the application stores these user photos in an Amazon S3 bucket\. Then, your application creates a thumbnail version of each user's photos and displays them on the user's profile page\. In this scenario, you may choose to create a Lambda function that creates a thumbnail automatically\. Amazon S3 is one of the supported AWS event sources that can publish *object\-created events* and invoke your Lambda function\. Your Lambda function code can read the photo object from the S3 bucket, create a thumbnail version, and then save it in another S3 bucket\. 
@@ -6,11 +6,11 @@ When building applications on AWS Lambda the core components are Lambda function
 + **Websites** – Suppose you are creating a website and you want to host the backend logic on Lambda\. You can invoke your Lambda function over HTTP using Amazon API Gateway as the HTTP endpoint\. Now, your web client can invoke the API, and then API Gateway can route the request to Lambda\.
 + **Mobile applications** – Suppose you have a custom mobile application that produces events\. You can create a Lambda function to process events published by your custom application\. For example, in this scenario you can configure a Lambda function to process the clicks within your custom mobile application\. 
 
-AWS Lambda supports many AWS services as event sources\. For more information, see [Using AWS Lambda with Other Services](lambda-services.md)\. When you configure these event sources to trigger a Lambda function, the Lambda function is invoked automatically when events occur\. You define *event source mapping*, which is how you identify what events to track and which Lambda function to invoke\. 
+AWS Lambda supports many AWS services as event sources\. For more information, see [Using AWS Lambda with other services](lambda-services.md)\. When you configure these event sources to trigger a Lambda function, the Lambda function is invoked automatically when events occur\. You define *event source mapping*, which is how you identify what events to track and which Lambda function to invoke\. 
 
 The following are introductory examples of event sources and how the end\-to\-end experience works\.
 
-## Example 1: Amazon S3 Pushes Events and Invokes a Lambda Function<a name="example-lambda-pushes-events-invokes-function"></a>
+## Example 1: Amazon S3 pushes events and invokes a Lambda function<a name="example-lambda-pushes-events-invokes-function"></a>
 
 Amazon S3 can publish events of different types, such as PUT, POST, COPY, and DELETE object events on a bucket\. Using the bucket notification feature, you can configure an event source mapping that directs Amazon S3 to invoke a Lambda function when a specific type of event occurs, as shown in the following illustration\. 
 
@@ -28,7 +28,7 @@ The diagram illustrates the following sequence:
 
 You configure Amazon S3 to invoke your function as a bucket notification action\. To grant Amazon S3 permission to invoke the function, update the function's [resource\-based policy](access-control-resource-based.md)\.
 
-## Example 2: AWS Lambda Pulls Events from a Kinesis Stream and Invokes a Lambda Function<a name="example-lambda-pulls-kinesis-streams-events-invokes-function"></a>
+## Example 2: AWS Lambda pulls events from a Kinesis stream and invokes a Lambda function<a name="example-lambda-pulls-kinesis-streams-events-invokes-function"></a>
 
 For poll\-based event sources, AWS Lambda polls the source and then invokes the Lambda function when records are detected on that source\.
 + [CreateEventSourceMapping](API_CreateEventSourceMapping.md)

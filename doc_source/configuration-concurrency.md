@@ -1,4 +1,4 @@
-# Managing Concurrency for a Lambda Function<a name="configuration-concurrency"></a>
+# Managing concurrency for a Lambda function<a name="configuration-concurrency"></a>
 
 Concurrency is the number of requests that your function is serving at any given time\. When your function is invoked, Lambda allocates an instance of it to process the event\. When the function code finishes running, it can handle another request\. If the function is invoked again while a request is still being processed, another instance is allocated, which increases the function's concurrency\.
 
@@ -13,11 +13,11 @@ Lambda also integrates with [Application Auto Scaling](https://docs.aws.amazon.c
 Provisioned concurrency counts towards a function's reserved concurrency and Regional limits\. If the amount of provisioned concurrency on a function's versions and aliases adds up to the function's reserved concurrency, all invocations run on provisioned concurrency\. This configuration also has the effect of throttling the unpublished version of the function \(`$LATEST`\), which prevents it from executing\.
 
 **Topics**
-+ [Configuring Reserved Concurrency](#configuration-concurrency-reserved)
-+ [Configuring Provisioned Concurrency](#configuration-concurrency-provisioned)
-+ [Configuring Concurrency with the Lambda API](#configuration-concurrency-api)
++ [Configuring reserved concurrency](#configuration-concurrency-reserved)
++ [Configuring provisioned concurrency](#configuration-concurrency-provisioned)
++ [Configuring concurrency with the Lambda API](#configuration-concurrency-api)
 
-## Configuring Reserved Concurrency<a name="configuration-concurrency-reserved"></a>
+## Configuring reserved concurrency<a name="configuration-concurrency-reserved"></a>
 
 To manage reserved concurrency settings for a function, use the Lambda console\.
 
@@ -51,7 +51,7 @@ Reserving concurrency has the following effects\.
 
 Setting per\-function concurrency can impact the concurrency pool that is available to other functions\. To avoid issues, limit the number of users who can use the `PutFunctionConcurrency` and `DeleteFunctionConcurrency` API operations\.
 
-## Configuring Provisioned Concurrency<a name="configuration-concurrency-provisioned"></a>
+## Configuring provisioned concurrency<a name="configuration-concurrency-provisioned"></a>
 
 To manage provisioned concurrency settings for a version or alias, use the Lambda console\.
 
@@ -100,15 +100,15 @@ When you change the version that an alias points to, provisioned concurrency is 
 
 Lambda emits the following metrics for provisioned concurrency:
 
-**Provisioned Concurrency Metrics**
+**Provisioned concurrency metrics**
 + `ProvisionedConcurrentExecutions`
 + `ProvisionedConcurrencyInvocations`
 + `ProvisionedConcurrencySpilloverInvocations`
 + `ProvisionedConcurrencyUtilization`
 
-For details, see [Working with AWS Lambda Function Metrics](monitoring-metrics.md)\.
+For details, see [Working with AWS Lambda function metrics](monitoring-metrics.md)\.
 
-## Configuring Concurrency with the Lambda API<a name="configuration-concurrency-api"></a>
+## Configuring concurrency with the Lambda API<a name="configuration-concurrency-api"></a>
 
 To manage concurrency settings and autoscaling with the AWS CLI or AWS SDK, use the following API operations\.
 + [PutFunctionConcurrency](API_PutFunctionConcurrency.md)

@@ -2,7 +2,7 @@
 
 You can use AWS Lambda functions to evaluate whether your AWS resource configurations comply with your custom Config rules\. As resources are created, deleted, or changed, AWS Config records these changes and sends the information to your Lambda functions\. Your Lambda functions then evaluate the changes and report results to AWS Config\. You can then use AWS Config to assess overall resource compliance: you can learn which resources are noncompliant and which configuration attributes are the cause of noncompliance\. 
 
-**Example AWS Config Message Event**  
+**Example AWS Config message event**  
 
 ```
 { 
@@ -19,4 +19,4 @@ You can use AWS Lambda functions to evaluate whether your AWS resource configura
 }
 ```
 
-For more information, see [Evaluating Resources With AWS Config Rules](https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html)\.
+For more information, see [Evaluating resources with AWS Config rules](https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html)\.

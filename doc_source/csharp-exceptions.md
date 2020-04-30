@@ -1,4 +1,4 @@
-# AWS Lambda Function Errors in C\#<a name="csharp-exceptions"></a>
+# AWS Lambda function errors in C\#<a name="csharp-exceptions"></a>
 
 When an exception occurs in your Lambda function, Lambda will report the exception information back to you\. Exceptions can occur in two different places: 
 + Initialization \(Lambda loading your code, validating the handler string, and creating an instance of your class if it is non\-static\)\.
@@ -6,7 +6,7 @@ When an exception occurs in your Lambda function, Lambda will report the excepti
 
 The serialized exception information is returned as the payload as a modeled JSON object and outputted to CloudWatch logs\.
 
-In the initialization phase, exceptions can be thrown for invalid handler strings, a rule\-breaking type or method \(see [Lambda Function Handler Restrictions ](csharp-handler.md#csharp-handler-restrictions)\), or any other validation method \(such as forgetting the serializer attribute and having a POCO as your input or output type\)\. These exceptions are of type `LambdaException`\. For example: 
+In the initialization phase, exceptions can be thrown for invalid handler strings, a rule\-breaking type or method \(see [Lambda function handler restrictions ](csharp-handler.md#csharp-handler-restrictions)\), or any other validation method \(such as forgetting the serializer attribute and having a POCO as your input or output type\)\. These exceptions are of type `LambdaException`\. For example: 
 
 ```
 {
@@ -116,4 +116,4 @@ The method in which error information is conveyed depends on the invocation type
   For example, if you invoke a Lambda function using the Lambda console, the `RequestResponse` is always the invocation type and the console displays the error information returned by AWS Lambda in the **Execution result** section of the console\.
 + `Event` invocation type \(that is, asynchronous execution\): In this case AWS Lambda does not return anything\. Instead, it logs the error information in CloudWatch Logs and CloudWatch metrics\.
 
-Depending on the event source, AWS Lambda may retry the failed Lambda function\. For more information, see [Error Handling and Automatic Retries in AWS Lambda](invocation-retries.md)\. 
+Depending on the event source, AWS Lambda may retry the failed Lambda function\. For more information, see [Error handling and automatic retries in AWS Lambda](invocation-retries.md)\. 

@@ -1,4 +1,4 @@
-# Tutorial: Using AWS SDK for \.NET to Manage Amazon EC2 Spot Instances<a name="services-ec2-tutorial"></a>
+# Tutorial: Using AWS SDK for \.NET to manage Amazon EC2 Spot Instances<a name="services-ec2-tutorial"></a>
 
 You can use the AWS SDK for \.NET to manage Amazon EC2 spot instances with C\# code\. The SDK enables you to use the Amazon EC2 API to create spot instance requests, determine when the request is fulfilled, delete requests, and identify the instances created\.
 
@@ -26,7 +26,7 @@ This tutorial uses code from the developer guide's GitHub repository\. The repos
 To use the sample code you need the following tools:
 + **AWS CLI** – To deploy the sample application to AWS, install the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)\. The AWS CLI also provides credentials to the sample code when you run it locally\.
 + **\.NET Core CLI** – To run and test the code locally, install the [\.NET Core SDK 2\.1](https://dotnet.microsoft.com/download/dotnet-core/2.1)\.
-+ **Lambda \.NET Core Global Tool** – To build the deployment package for Lambda, install the [\.NET Core Global Tool](https://dotnet.microsoft.com/download/dotnet-core/2.1) with the \.NET Core CLI\.
++ **Lambda \.NET Core Global Tool** – To build the deployment package for Lambda, install the [\.NET Core global tool](https://dotnet.microsoft.com/download/dotnet-core/2.1) with the \.NET Core CLI\.
 
   ```
   $ dotnet tool install -g [Amazon\.Lambda\.Tools](https://www.nuget.org/packages/Amazon.Lambda.Tools)
@@ -44,7 +44,7 @@ To run the sample application in AWS, you need [permission to use Lambda](lambda
 
 Standard charges apply for each service\.
 
-## Review the Code<a name="services-ec2-tutorial-code"></a>
+## Review the code<a name="services-ec2-tutorial-code"></a>
 
 Locate the sample project in the guide repository under [sample\-apps/ec2\-spot](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/ec2-spot)\. This directory contains Lambda function code, tests, project files, scripts, and a AWS CloudFormation template\.
 
@@ -169,7 +169,7 @@ public async Task TerminateSpotInstance(string instanceId)
 }
 ```
 
-## Run the Code Locally<a name="services-ec2-tutorial-run"></a>
+## Run the code locally<a name="services-ec2-tutorial-run"></a>
 
 Run the code on your local machine to create a spot instance request\. After the request is fulfilled, the code deletes the request and terminates the instance\.
 
@@ -205,7 +205,7 @@ Run the code on your local machine to create a spot instance request\. After the
 
 The unit test invokes the FunctionHandler method to create a spot instance request, monitor it, and clean up\. It is implemented in the [xUnit\.net](https://xunit.net/) testing framework\.
 
-## Deploy the Application<a name="services-ec2-tutorial-deploy"></a>
+## Deploy the application<a name="services-ec2-tutorial-deploy"></a>
 
 Run the code in Lambda as a starting point for creating a serverless application\.
 
@@ -264,7 +264,7 @@ Choose a node in the service map and then choose **View traces** to see a list o
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-ec2spot-timeline.png)
 
-## Clean Up<a name="services-ec2-tutorial-cleanup"></a>
+## Clean up<a name="services-ec2-tutorial-cleanup"></a>
 
 The code provided in this tutorial is designed to create and delete spot instance requests, and to terminate the instances that they launch\. However, if an error occurs, the requests and instances might not be cleaned up automatically\. View the spot requests and instances in the Amazon EC2 console\.
 

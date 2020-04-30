@@ -1,4 +1,4 @@
-# AWS Lambda Function Handler in Go<a name="golang-handler"></a>
+# AWS Lambda function handler in Go<a name="golang-handler"></a>
 
 A Lambda function written in [Go](https://golang.org/) is authored as a Go executable\. In your Lambda function code, you need to include the [github\.com/aws/aws\-lambda\-go/lambda](https://github.com/aws/aws-lambda-go/tree/master/lambda) package, which implements the Lambda programming model for Go\. In addition, you need to implement handler function code and a `main()` function\. 
 
@@ -27,19 +27,19 @@ func main() {
 Note the following:
 + **package main**: In Go, the package containing `func main()` must always be named `main`\.
 + **import**: Use this to include the libraries your Lambda function requires\. In this instance, it includes:
-  + **context: **[AWS Lambda Context Object in Go](golang-context.md)\.
+  + **context: **[AWS Lambda context object in Go](golang-context.md)\.
   + **fmt:** The Go [Formatting](https://golang.org/pkg/fmt/) object used to format the return value of your function\.
   + **github\.com/aws/aws\-lambda\-go/lambda:** As mentioned previously, implements the Lambda programming model for Go\.
 + **func HandleRequest\(ctx context\.Context, name MyEvent\) \(string, error\)**: This is your Lambda handler signature and includes the code which will be executed\. In addition, the parameters included denote the following: 
-  + **ctx context\.Context**: Provides runtime information for your Lambda function invocation\. `ctx` is the variable you declare to leverage the information available via [AWS Lambda Context Object in Go](golang-context.md)\.
+  + **ctx context\.Context**: Provides runtime information for your Lambda function invocation\. `ctx` is the variable you declare to leverage the information available via [AWS Lambda context object in Go](golang-context.md)\.
   + **name MyEvent**: An input type with a variable name of `name` whose value will be returned in the `return` statement\.
-  + **string, error**: Returns two values: string for success and standard [error](https://golang.org/pkg/builtin/#error) information\. For more information on custom error handling, see [AWS Lambda Function Errors in Go](golang-exceptions.md)\.
+  + **string, error**: Returns two values: string for success and standard [error](https://golang.org/pkg/builtin/#error) information\. For more information on custom error handling, see [AWS Lambda function errors in Go](golang-exceptions.md)\.
   + **return fmt\.Sprintf\("Hello %s\!", name\), nil**: Simply returns a formatted "Hello" greeting with the name you supplied in the input event\. `nil` indicates there were no errors and the function executed successfully\.
 + **func main\(\)**: The entry point that executes your Lambda function code\. This is required\.
 
   By adding `lambda.Start(HandleRequest)` between `func main(){}` code brackets, your Lambda function will be executed\. Per Go language standards, the opening bracket, `{` must be placed directly at end the of the `main` function signature\.
 
-## Lambda Function Handler Using Structured Types<a name="golang-handler-structs"></a>
+## Lambda function handler using structured types<a name="golang-handler-structs"></a>
 
 In the example above, the input type was a simple string\. But you can also pass in structured events to your function handler:
 
@@ -90,12 +90,12 @@ And the response would look like this:
 
 To be exported, field names in the event struct must be capitalized\. For more information on handling events from AWS event sources, see [aws\-lambda\-go/events](https://github.com/aws/aws-lambda-go/tree/master/events)\.
 
-### Valid Handler Signatures<a name="golang-handler-signatures"></a>
+### Valid handler signatures<a name="golang-handler-signatures"></a>
 
 You have several options when building a Lambda function handler in Go, but you must adhere to the following rules:
 + The handler must be a function\.
 + The handler may take between 0 and 2 arguments\. If there are two arguments, the first argument must implement `context.Context`\.
-+ The handler may return between 0 and 2 arguments\. If there is a single return value, it must implement `error`\. If there are two return values, the second value must implement `error`\. For more information on implementing error\-handling information, see [AWS Lambda Function Errors in Go](golang-exceptions.md)\.
++ The handler may return between 0 and 2 arguments\. If there is a single return value, it must implement `error`\. If there are two return values, the second value must implement `error`\. For more information on implementing error\-handling information, see [AWS Lambda function errors in Go](golang-exceptions.md)\.
 
 The following lists valid handler signatures\. `TIn` and `TOut` represent types compatible with the *encoding/json* standard library\. For more information, see [func Unmarshal](https://golang.org/pkg/encoding/json/#Unmarshal) to learn how these types are deserialized\.
 + 
@@ -139,7 +139,7 @@ The following lists valid handler signatures\. `TIn` and `TOut` represent types 
   func (context.Context, TIn) (TOut, error)
   ```
 
-## Using Global State<a name="golang-handler-state"></a>
+## Using global state<a name="golang-handler-state"></a>
 
 You can declare and modify global variables that are independent of your Lambda function's handler code\. In addition, your handler may declare an `init` function that is executed when your handler is loaded\. This behaves the same in AWS Lambda as it does in standard Go programs\. A single instance of your Lambda function will never handle multiple events simultaneously\.
 

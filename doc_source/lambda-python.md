@@ -1,13 +1,13 @@
-# Building Lambda Functions with Python<a name="lambda-python"></a>
+# Building Lambda functions with Python<a name="lambda-python"></a>
 
 You can run Python code in AWS Lambda\. Lambda provides [runtimes](lambda-runtimes.md) for Python that execute your code to process events\. Your code runs in an environment that includes the SDK for Python \(Boto 3\), with credentials from an AWS Identity and Access Management \(IAM\) role that you manage\.
 
 Lambda supports the following Python runtimes\.
 
 
-**Python Runtimes**  
+**Python runtimes**  
 
-| Name | Identifier | AWS SDK for Python | Operating System | 
+| Name | Identifier | AWS SDK for Python | Operating system | 
 | --- | --- | --- | --- | 
 |  Python 3\.8  |  `python3.8`  |  boto3\-1\.12\.22 botocore\-1\.15\.22  |  Amazon Linux 2  | 
 |  Python 3\.7  |  `python3.7`  |  boto3\-1\.12\.22 botocore\-1\.15\.22  |  Amazon Linux  | 
@@ -62,14 +62,18 @@ The `lambda_function` file exports a function named `lambda_handler` that takes 
 
 Each time you save your function code, the Lambda console creates a deployment package, which is a ZIP archive that contains your function code\. As your function development progresses, you will want to store your function code in source control, add libraries, and automate deployments\. Start by [creating a deployment package](python-package.md) and updating your code at the command line\.
 
+**Note**  
+To get started with application development in your local environment, deploy one of the sample applications available in this guide's GitHub repository\.  
+[blank\-python](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-python) – A Python function that shows the use of logging, environment variables, AWS X\-Ray tracing, layers, unit tests and the AWS SDK\.
+
 The function runtime passes a context object to the handler, in addition to the invocation event\. The [context object](python-context.md) contains additional information about the invocation, the function, and the execution environment\. More information is available from environment variables\.
 
 Your Lambda function comes with a CloudWatch Logs log group\. The function runtime sends details about each invocation to CloudWatch Logs\. It relays any [logs that your function outputs](python-logging.md) during invocation\. If your function [returns an error](python-exceptions.md), Lambda formats the error and returns it to the invoker\.
 
 **Topics**
-+ [AWS Lambda Function Handler in Python](python-handler.md)
-+ [AWS Lambda Deployment Package in Python](python-package.md)
-+ [AWS Lambda Context Object in Python](python-context.md)
-+ [AWS Lambda Function Logging in Python](python-logging.md)
-+ [AWS Lambda Function Errors in Python](python-exceptions.md)
-+ [Instrumenting Python Code in AWS Lambda](python-tracing.md)
++ [AWS Lambda function handler in Python](python-handler.md)
++ [AWS Lambda deployment package in Python](python-package.md)
++ [AWS Lambda context object in Python](python-context.md)
++ [AWS Lambda function logging in Python](python-logging.md)
++ [AWS Lambda function errors in Python](python-exceptions.md)
++ [Instrumenting Python code in AWS Lambda](python-tracing.md)

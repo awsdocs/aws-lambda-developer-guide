@@ -1,8 +1,8 @@
-# Java Sample Applications for AWS Lambda<a name="java-samples"></a>
+# Java sample applications for AWS Lambda<a name="java-samples"></a>
 
 The GitHub repository for this guide provides sample applications that demonstrate the use of Java in AWS Lambda\. Each sample application includes scripts for easy deployment and cleanup, an AWS CloudFormation template, and supporting resources\.
 
-**Sample Lambda Applications in Java**
+**Sample Lambda applications in Java**
 + [blank\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-java) – A Java function that shows the use of Lambda's Java libraries, logging, environment variables, layers, AWS X\-Ray tracing, unit tests, and the AWS SDK\.
 + [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-basic) – A minimal Java function with unit tests and variable logging configuration\.
 + [java\-events](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-events) – A minimal Java function that uses the [aws\-lambda\-java\-events](java-package.md) library with event types that don't require the AWS SDK as a dependency, such as Amazon API Gateway\.

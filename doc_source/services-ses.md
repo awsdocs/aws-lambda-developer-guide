@@ -2,7 +2,7 @@
 
 When you use Amazon SES to receive messages, you can configure Amazon SES to call your Lambda function when messages arrive\. The service can then invoke your Lambda function by passing in the incoming email event, which in reality is an Amazon SES message in an Amazon SNS event, as a parameter\.
 
-**Example Amazon SES Message Event**  
+**Example Amazon SES message event**  
 
 ```
 {
@@ -104,4 +104,4 @@ When you use Amazon SES to receive messages, you can configure Amazon SES to cal
 }
 ```
 
-For more information, see [Lambda Action](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-lambda.html) in the *Amazon SES Developer Guide*\.
+For more information, see [Lambda action](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-lambda.html) in the *Amazon SES Developer Guide*\.

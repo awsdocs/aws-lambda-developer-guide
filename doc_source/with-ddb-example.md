@@ -1,10 +1,10 @@
-# Tutorial: Using AWS Lambda with Amazon DynamoDB Streams<a name="with-ddb-example"></a>
+# Tutorial: Using AWS Lambda with Amazon DynamoDB streams<a name="with-ddb-example"></a>
 
  In this tutorial, you create a Lambda function to consume events from an Amazon DynamoDB stream\.
 
 ## Prerequisites<a name="with-ddb-prepare"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started with AWS Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with AWS Lambda](getting-started.md) to create your first Lambda function\.
 
 To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
@@ -17,7 +17,7 @@ For long commands, an escape character \(`\`\) is used to split a command over m
 
 On Linux and macOS, use your preferred shell and package manager\. On Windows 10, you can [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows\-integrated version of Ubuntu and Bash\.
 
-## Create the Execution Role<a name="with-ddb-create-execution-role"></a>
+## Create the execution role<a name="with-ddb-create-execution-role"></a>
 
 Create the [execution role](lambda-intro-execution-role.md) that gives your function permission to access AWS resources\.
 
@@ -34,12 +34,12 @@ Create the [execution role](lambda-intro-execution-role.md) that gives your func
 
 The **AWSLambdaDynamoDBExecutionRole** has the permissions that the function needs to read items from DynamoDB and write logs to CloudWatch Logs\.
 
-## Create the Function<a name="with-ddb-example-create-function"></a>
+## Create the function<a name="with-ddb-example-create-function"></a>
 
 The following example code receives a DynamoDB event input and processes the messages that it contains\. For illustration, the code writes some of the incoming event data to CloudWatch Logs\.
 
 **Note**  
-For sample code in other languages, see [Sample Function Code](with-ddb-create-package.md)\.
+For sample code in other languages, see [Sample function code](with-ddb-create-package.md)\.
 
 **Example index\.js**  
 
@@ -75,7 +75,7 @@ exports.handler = function(event, context, callback) {
    --role arn:aws:iam::123456789012:role/lambda-dynamodb-role
    ```
 
-## Test the Lambda Function<a name="with-dbb-invoke-manually"></a>
+## Test the Lambda function<a name="with-dbb-invoke-manually"></a>
 
 In this step, you invoke your Lambda function manually using the `invoke` AWS Lambda CLI command and the following sample DynamoDB event\.
 
@@ -184,7 +184,7 @@ The function returns the string `message` in the response body\.
 
 Verify the output in the `outputfile.txt` file\.
 
-## Create a DynamoDB Table with a Stream Enabled<a name="with-ddb-create-buckets"></a>
+## Create a DynamoDB table with a stream enabled<a name="with-ddb-create-buckets"></a>
 
 Create an Amazon DynamoDB table with a stream enabled\.
 
@@ -212,9 +212,9 @@ Create an Amazon DynamoDB table with a stream enabled\.
 
 1. Choose **Enable**\.
 
-Write down the stream ARN\. You need this in the next step when you associate the stream with your Lambda function\. For more information on enabling streams, see [Capturing Table Activity with DynamoDB Streams](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html)\.
+Write down the stream ARN\. You need this in the next step when you associate the stream with your Lambda function\. For more information on enabling streams, see [Capturing table activity with DynamoDB Streams](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html)\.
 
-## Add an Event Source in AWS Lambda<a name="with-ddb-attach-notification-configuration"></a>
+## Add an event source in AWS Lambda<a name="with-ddb-attach-notification-configuration"></a>
 
 Create an event source mapping in AWS Lambda\. This event source mapping associates the DynamoDB stream with your Lambda function\. After you create this event source mapping, AWS Lambda starts polling the stream\.
 
@@ -241,7 +241,7 @@ If you have a lot of event source mappings, use the function name parameter to n
 $ aws lambda list-event-source-mappings --function-name ProcessDynamoDBRecords
 ```
 
-## Test the Setup<a name="with-ddb-final-integration-test-no-iam"></a>
+## Test the setup<a name="with-ddb-final-integration-test-no-iam"></a>
 
 Test the end\-to\-end experience\. As you perform table updates, DynamoDB writes event records to the stream\. As AWS Lambda polls the stream, it detects new records in the stream and executes your Lambda function on your behalf by passing events to the function\. 
 

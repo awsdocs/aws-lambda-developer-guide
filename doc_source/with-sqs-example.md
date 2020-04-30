@@ -4,7 +4,7 @@ In this tutorial, you create a Lambda function to consume messages from an [Amaz
 
 ## Prerequisites<a name="with-sqs-prepare"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started with AWS Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with AWS Lambda](getting-started.md) to create your first Lambda function\.
 
 To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
@@ -17,7 +17,7 @@ For long commands, an escape character \(`\`\) is used to split a command over m
 
 On Linux and macOS, use your preferred shell and package manager\. On Windows 10, you can [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows\-integrated version of Ubuntu and Bash\.
 
-## Create the Execution Role<a name="with-sqs-create-execution-role"></a>
+## Create the execution role<a name="with-sqs-create-execution-role"></a>
 
 Create the [execution role](lambda-intro-execution-role.md) that gives your function permission to access AWS resources\.
 
@@ -34,12 +34,12 @@ Create the [execution role](lambda-intro-execution-role.md) that gives your func
 
 The **AWSLambdaSQSQueueExecutionRole** policy has the permissions that the function needs to read items from Amazon SQS and write logs to CloudWatch Logs\.
 
-## Create the Function<a name="with-sqs-create-function"></a>
+## Create the function<a name="with-sqs-create-function"></a>
 
 The following example code receives an Amazon SQS event input and processes the messages that it contains\. For illustration, the code writes some of the incoming event data to CloudWatch Logs\.
 
 **Note**  
-For sample code in other languages, see [Sample Amazon SQS Function Code](with-sqs-create-package.md)\.
+For sample code in other languages, see [Sample Amazon SQS function code](with-sqs-create-package.md)\.
 
 **Example index\.js**  
 
@@ -71,7 +71,7 @@ exports.handler = async function(event, context) {
    --role arn:aws:iam::123456789012:role/lambda-sqs-role
    ```
 
-## Test the Function<a name="with-sqs-create-test-function"></a>
+## Test the function<a name="with-sqs-create-test-function"></a>
 
 Invoke your Lambda function manually using the `invoke` AWS Lambda CLI command and a sample Amazon Simple Queue Service event\.
 
@@ -111,7 +111,7 @@ If the handler returns normally without exceptions, Lambda considers the message
 
 1. Verify the output in the `outputfile.txt` file\.
 
-## Create an Amazon SQS Queue<a name="with-sqs-configure-sqs"></a>
+## Create an Amazon SQS queue<a name="with-sqs-configure-sqs"></a>
 
 Create an Amazon SQS queue that the Lambda function can use as an event source\.
 
@@ -127,7 +127,7 @@ Create an event source mapping in AWS Lambda\. This event source mapping associa
 
 Test the end\-to\-end experience\. As you perform queue updates, Amazon Simple Queue Service writes messages to the queue\. AWS Lambda polls the queue, detects new records and executes your Lambda function on your behalf by passing events, in this case Amazon SQS messages, to the function\. 
 
-## Configure the Event Source<a name="with-sqs-attach-notification-configuration"></a>
+## Configure the event source<a name="with-sqs-attach-notification-configuration"></a>
 
 To create a mapping between the specified Amazon SQS queue and the Lambda function, run the following AWS CLI `create-event-source-mapping` command\. After the command executes, write down or otherwise record the UUID\. You'll need this UUID to refer to the event source mapping in any other commands, for example, if you choose to delete the event source mapping\.
 
@@ -145,7 +145,7 @@ $ aws lambda list-event-source-mappings --function-name ProcessSQSRecord \
 
 The list returns all of the event source mappings you created, and for each mapping it shows the `LastProcessingResult`, among other things\. This field is used to provide an informative message if there are any problems\. Values such as `No records processed` \(indicates that AWS Lambda has not started polling or that there are no records in the queue\) and `OK` \(indicates AWS Lambda successfully read records from the queue and invoked your Lambda function\) indicate that there no issues\. If there are issues, you receive an error message\.
 
-## Test the Setup<a name="with-sqs-final-integration-test-no-iam"></a>
+## Test the setup<a name="with-sqs-final-integration-test-no-iam"></a>
 
 Now you can test the setup as follows:
 

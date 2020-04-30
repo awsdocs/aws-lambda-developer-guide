@@ -1,4 +1,4 @@
-# Instrumenting Java Code in AWS Lambda<a name="java-tracing"></a>
+# Instrumenting Java code in AWS Lambda<a name="java-tracing"></a>
 
 Lambda integrates with AWS X\-Ray to enable you to trace, debug, and optimize Lambda applications\. You can use X\-Ray to trace a request as it traverses resources in your application, from the frontend API to storage and database on the backend\. By simply adding the X\-Ray SDK library to your build configuration, you can record errors and latency for any call that your function makes to an AWS service\.
 
@@ -45,7 +45,7 @@ dependencies {
 
 You can also instrument HTTP clients, record SQL queries, and create custom subsegments with annotations and metadata\. For more information, see [AWS X\-Ray SDK for Java ](https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-java.html) in the AWS X\-Ray Developer Guide\.
 
-## Enabling Active Tracing with the Lambda API<a name="java-tracing-api"></a>
+## Enabling active tracing with the Lambda API<a name="java-tracing-api"></a>
 
 To manage tracing configuration with the AWS CLI or AWS SDK, use the following API operations:
 + [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)
@@ -61,11 +61,11 @@ $ aws lambda update-function-configuration --function-name my-function \
 
 Tracing mode is part of the version\-specific configuration that is locked when you publish a version of your function\. You can't change the tracing mode on a published version\.
 
-## Enabling Active Tracing with AWS CloudFormation<a name="java-tracing-cloudformation"></a>
+## Enabling active tracing with AWS CloudFormation<a name="java-tracing-cloudformation"></a>
 
 To enable active tracing on an `AWS::Lambda::Function` resource in an AWS CloudFormation template, use the `TracingConfig` property\.
 
-**Example [template\-std\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank/template-std.yml) – Tracing Configuration**  
+**Example [Template\-std\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank/template-std.yml) – Tracing configuration**  
 
 ```
 Resources:
@@ -79,7 +79,7 @@ Resources:
 
 For an AWS Serverless Application Model \(AWS SAM\) `AWS::Serverless::Function` resource, use the `Tracing` property\.
 
-**Example [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-java/template.yml) – Tracing Configuration**  
+**Example [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-java/template.yml) – Tracing configuration**  
 
 ```
 Resources:
@@ -93,7 +93,7 @@ Resources:
 
 If you use the X\-Ray SDK to instrument AWS SDK clients your function code, your deployment package can become quite large\. To avoid uploading runtime dependencies every time you update your functions code, package them in a [Lambda layer](configuration-layers.md)\. The following example shows an `AWS::Serverless::LayerVersion` resource that stores the SDK for Java and X\-Ray SDK for Java\.
 
-**Example [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-java/template.yml) – Dependencies Layer**  
+**Example [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-java/template.yml) – Dependencies layer**  
 
 ```
 Resources:
@@ -119,11 +119,11 @@ With this configuration, you only update library JARs if you change your build d
 
 Creating a layer for dependencies requires build configuration changes to generate the layer archive prior to deployment\. For a working example, see the [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-basic) sample application\. 
 
-## Tracing in Sample Applications<a name="java-tracing-samples"></a>
+## Tracing in sample applications<a name="java-tracing-samples"></a>
 
 The GitHub repository for this guide includes sample applications that demonstrate the use of tracing\. Each sample application includes scripts for easy deployment and cleanup, an AWS SAM template, and supporting resources\.
 
-**Sample Lambda Applications in Java**
+**Sample Lambda applications in Java**
 + [blank\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-java) – A Java function that shows the use of Lambda's Java libraries, logging, environment variables, layers, AWS X\-Ray tracing, unit tests, and the AWS SDK\.
 + [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-basic) – A minimal Java function with unit tests and variable logging configuration\.
 + [java\-events](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-events) – A minimal Java function that uses the [aws\-lambda\-java\-events](java-package.md) library with event types that don't require the AWS SDK as a dependency, such as Amazon API Gateway\.

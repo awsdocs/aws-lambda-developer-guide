@@ -1,4 +1,4 @@
-# Sample Function Code<a name="with-kinesis-create-package"></a>
+# Sample function code<a name="with-kinesis-create-package"></a>
 
 To process events from Amazon Kinesis, iterate through the records included in the event object and decode the Base64\-encoded data included in each\.
 
@@ -33,7 +33,7 @@ exports.handler = function(event, context) {
 };
 ```
 
-Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Node\.js](nodejs-package.md)\.
+Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda deployment package in Node\.js](nodejs-package.md)\.
 
 ## Java 11<a name="with-kinesis-example-deployment-pkg-java"></a>
 
@@ -70,7 +70,7 @@ If the handler returns normally without exceptions, Lambda considers the input b
 + `aws-lambda-java-events`
 + `aws-java-sdk`
 
-Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Java](java-package.md)\.
+Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [AWS Lambda deployment package in Java](java-package.md)\.
 
 ## C\#<a name="with-kinesis-example-deployment-pkg-dotnet"></a>
 
@@ -138,7 +138,7 @@ def lambda_handler(event, context):
        print("Decoded payload: " + str(payload))
 ```
 
-Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Python](python-package.md)\.
+Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda deployment package in Python](python-package.md)\.
 
 ## Go<a name="with-kinesis-example-deployment-pkg-go"></a>
 
@@ -163,4 +163,4 @@ func handler(ctx context.Context, kinesisEvent events.KinesisEvent) {
 }
 ```
 
-Build the executable with `go build` and create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Go](golang-package.md)\.
+Build the executable with `go build` and create a deployment package\. For instructions, see [AWS Lambda deployment package in Go](golang-package.md)\.

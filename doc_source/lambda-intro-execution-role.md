@@ -1,4 +1,4 @@
-# AWS Lambda Execution Role<a name="lambda-intro-execution-role"></a>
+# AWS Lambda execution role<a name="lambda-intro-execution-role"></a>
 
 An AWS Lambda function's execution role grants it permission to access AWS services and resources\. You provide this role when you create a function, and Lambda assumes the role when your function is invoked\. You can create an execution role for development that has permission to send logs to Amazon CloudWatch and upload trace data to AWS X\-Ray\.
 
@@ -19,7 +19,7 @@ You can add or remove permissions from a function's execution role at any time, 
 
 When you add permissions to your function, make an update to its code or configuration as well\. This forces running instances of your function, which have out\-of\-date credentials, to stop and be replaced\.
 
-## Creating an Execution Role in the IAM Console<a name="permissions-executionrole-console"></a>
+## Creating an execution role in the IAM console<a name="permissions-executionrole-console"></a>
 
 By default, Lambda creates an execution role with minimal permissions when you [create a function](getting-started-create-function.md) in the Lambda console\. You can also create an execution role in the IAM console\.
 
@@ -43,9 +43,9 @@ By default, Lambda creates an execution role with minimal permissions when you [
 
 1. Choose **Create role**\.
 
-For detailed instructions, see [Creating a Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html#roles-creatingrole-service-console) in the IAM User Guide\.
+For detailed instructions, see [Creating a role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html#roles-creatingrole-service-console) in the IAM User Guide\.
 
-## Managing Roles with the IAM API<a name="permissions-executionrole-api"></a>
+## Managing roles with the IAM API<a name="permissions-executionrole-api"></a>
 
 An execution role is an IAM role that Lambda has permission to assume when you invoke a function\. To create an execution role with the AWS CLI, use the `create-role` command\.
 
@@ -105,7 +105,7 @@ To add permissions to the role, use the `attach-policy-to-role` command\. Start 
 $ aws iam attach-role-policy --role-name lambda-ex --policy-arn arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
 ```
 
-## Managed Policies for Lambda Features<a name="permissions-executionrole-features"></a>
+## Managed policies for Lambda features<a name="permissions-executionrole-features"></a>
 
 The following managed policies provide permissions that are required to use Lambda features:
 + **AWSLambdaBasicExecutionRole** – Permission to upload logs to CloudWatch\.
@@ -119,7 +119,7 @@ For some features, the Lambda console attempts to add missing permissions to you
 
 When you use an [event source mapping](invocation-eventsourcemapping.md) to invoke your function, Lambda uses the execution role to read event data\. For example, an event source mapping for Amazon Kinesis reads events from a data stream and sends them to your function in batches\. You can use event source mappings with the following services:
 
-**Services That Lambda Reads Events From**
+**Services that Lambda reads events from**
 + [Amazon Kinesis](with-kinesis.md)
 + [Amazon DynamoDB](with-ddb.md)
 + [Amazon Simple Queue Service](with-sqs.md)

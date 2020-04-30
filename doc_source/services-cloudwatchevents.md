@@ -1,12 +1,39 @@
 # Using AWS Lambda with Amazon CloudWatch Events<a name="services-cloudwatchevents"></a>
 
-[Amazon CloudWatch Events](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatchEvents.html) help you to respond to state changes in your AWS resources\. When your resources change state, they automatically send events into an event stream\. You can create rules that match selected events in the stream and route them to your AWS Lambda function to take action\. For example, you can automatically invoke an AWS Lambda function to log the state of an [EC2 instance](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/LogEC2InstanceState.html) or [AutoScaling Group](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/LogASGroupState.html)\. 
+[Amazon CloudWatch events](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatchEvents.html) help you to respond to state changes in your AWS resources\. When your resources change state, they automatically send events into an event stream\. You can create rules that match selected events in the stream and route them to your AWS Lambda function to take action\. For example, you can automatically invoke an AWS Lambda function to log the state of an [EC2 instance](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/LogEC2InstanceState.html) or [AutoScaling group](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/LogASGroupState.html)\.
 
-You maintain event source mapping in Amazon CloudWatch Events by using a rule target definition\. For more information, see the [PutTargets](https://docs.aws.amazon.com/AmazonCloudWatchEvents/latest/APIReference/API_PutTargets.html) operation in the *Amazon CloudWatch Events API Reference*\.
+CloudWatch Events invokes your function asynchronously with an event document that wraps the event from its source\. The following example shows an event that originated from a database snapshot in Amazon Relational Database Service\.
 
-You can also create a Lambda function and direct AWS Lambda to execute it on a regular schedule\. You can specify a fixed rate \(for example, execute a Lambda function every hour or 15 minutes\), or you can specify a Cron expression\. For more information on expressions schedules, see [Schedule Expressions Using Rate or Cron](services-cloudwatchevents-expressions.md)\.
+**Example CloudWatch Events event**  
 
-**Example CloudWatch Events Message Event**  
+```
+{
+    "version": "0",
+    "id": "fe8d3c65-xmpl-c5c3-2c87-81584709a377",
+    "detail-type": "RDS DB Instance Event",
+    "source": "aws.rds",
+    "account": "123456789012",
+    "time": "2020-04-28T07:20:20Z",
+    "region": "us-east-2",
+    "resources": [
+        "arn:aws:rds:us-east-2:123456789012:db:rdz6xmpliljlb1"
+    ],
+    "detail": {
+        "EventCategories": [
+            "backup"
+        ],
+        "SourceType": "DB_INSTANCE",
+        "SourceArn": "arn:aws:rds:us-east-2:123456789012:db:rdz6xmpliljlb1",
+        "Date": "2020-04-28T07:20:20.112Z",
+        "Message": "Finished DB Instance backup",
+        "SourceIdentifier": "rdz6xmpliljlb1"
+    }
+}
+```
+
+You can also create a Lambda function and direct AWS Lambda to execute it on a regular schedule\. You can specify a fixed rate \(for example, execute a Lambda function every hour or 15 minutes\), or you can specify a Cron expression\.
+
+**Example CloudWatch Events message event**  
 
 ```
 {
@@ -23,16 +50,25 @@ You can also create a Lambda function and direct AWS Lambda to execute it on a r
 }
 ```
 
-This functionality is available when you create a Lambda function using the AWS Lambda console or the AWS CLI\. To configure it using the AWS CLI, see [Run an AWS Lambda Function on a Schedule Using the AWS CLI](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/RunLambdaSchedule.html)\. The console provides **CloudWatch Events** as an event source\. At the time of creating a Lambda function, you choose this event source and specify a time interval\. 
+**To configure CloudWatch Events to invoke your function**
 
- If you have made any manual changes to the permissions on your function, you may need to reapply the scheduled event access to your function\. You can do that by using the following CLI command\. 
+1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
 
-```
-$ aws lambda add-permission --function-name my-function\
-    --action 'lambda:InvokeFunction' --principal events.amazonaws.com --statement-id events-access \
-    --source-arn arn:aws:events:*:123456789012:rule/*
-```
+1. Choose a function
+
+1. Under **Designer**, choose **Add trigger**\.
+
+1. Set the trigger type to **CloudWatch Events/EventBridge**\.
+
+1. For **Rule**, choose **Create a new rule**\.
+
+1. Configure the remaining options and choose **Add**\.
+
+For more information on expressions schedules, see [Schedule expressions using rate or cron](services-cloudwatchevents-expressions.md)\.
 
 Each AWS account can have up to 100 unique event sources of the **CloudWatch Events\- Schedule** source type\. Each of these can be the event source for up to five Lambda functions\. That is, you can have up to 500 Lambda functions that can be executing on a schedule in your AWS account\.
 
-The console also provides a blueprint \(**lambda\-canary**\) that uses the **CloudWatch Events \- Schedule** source type\. Using this blueprint, you can create a sample Lambda function and test this feature\. The example code that the blueprint provides checks for the presence of a specific webpage and specific text string on the webpage\. If either the webpage or the text string is not found, the Lambda function throws an error\. 
+**Topics**
++ [Tutorial: Using AWS Lambda with scheduled events](services-cloudwatchevents-tutorial.md)
++ [AWS SAM template for a CloudWatch Events application](with-scheduledevents-example-use-app-spec.md)
++ [Schedule expressions using rate or cron](services-cloudwatchevents-expressions.md)

@@ -1,4 +1,4 @@
-# AWS Lambda Runtime Interface<a name="runtimes-api"></a>
+# AWS Lambda runtime interface<a name="runtimes-api"></a>
 
 AWS Lambda provides an HTTP API for [custom runtimes](runtimes-custom.md) to receive invocation events from Lambda and send response data back within the Lambda [execution environment](lambda-runtimes.md)\.
 
@@ -13,12 +13,12 @@ curl "http://${AWS_LAMBDA_RUNTIME_API}/2018-06-01/runtime/invocation/next"
 ```
 
 **Topics**
-+ [Next Invocation](#runtimes-api-next)
-+ [Invocation Response](#runtimes-api-response)
-+ [Invocation Error](#runtimes-api-invokeerror)
-+ [Initialization Error](#runtimes-api-initerror)
++ [Next invocation](#runtimes-api-next)
++ [Invocation response](#runtimes-api-response)
++ [Invocation error](#runtimes-api-invokeerror)
++ [Initialization error](#runtimes-api-initerror)
 
-## Next Invocation<a name="runtimes-api-next"></a>
+## Next invocation<a name="runtimes-api-next"></a>
 
 **Path** – `/runtime/invocation/next`
 
@@ -26,7 +26,7 @@ curl "http://${AWS_LAMBDA_RUNTIME_API}/2018-06-01/runtime/invocation/next"
 
 Retrieves an invocation event\. The response body contains the payload from the invocation, which is a JSON document that contains event data from the function trigger\. The response headers contain additional data about the invocation\.
 
-**Response Headers**
+**Response headers**
 + `Lambda-Runtime-Aws-Request-Id` – The request ID, which identifies the request that triggered the function invocation\.
 
   For example, `8476a536-e9f4-11e8-9739-2dfe598c3fcd`\.
@@ -48,7 +48,7 @@ The request ID tracks the invocation within Lambda\. Use it to specify the invoc
 
 The tracing header contains the trace ID, parent ID, and sampling decision\. If the request is sampled, the request was sampled by Lambda or an upstream service\. The runtime should set the `_X_AMZN_TRACE_ID` with the value of the header\. The X\-Ray SDK reads this to get the IDs and determine whether to trace the request\.
 
-## Invocation Response<a name="runtimes-api-response"></a>
+## Invocation response<a name="runtimes-api-response"></a>
 
 **Path** – `/runtime/invocation/AwsRequestId/response`
 
@@ -56,14 +56,14 @@ The tracing header contains the trace ID, parent ID, and sampling decision\. If 
 
 Sends an invocation response to Lambda\. After the runtime invokes the function handler, it posts the response from the function to the invocation response path\. For synchronous invocations, Lambda then sends the response back to the client\.
 
-**Example Success Request**  
+**Example Success request**  
 
 ```
 REQUEST_ID=156cb537-e2d4-11e8-9b34-d36013741fb9
 curl -X POST  "http://${AWS_LAMBDA_RUNTIME_API}/2018-06-01/runtime/invocation/$REQUEST_ID/response"  -d "SUCCESS"
 ```
 
-## Invocation Error<a name="runtimes-api-invokeerror"></a>
+## Invocation error<a name="runtimes-api-invokeerror"></a>
 
 **Path** – `/runtime/invocation/AwsRequestId/error`
 
@@ -71,7 +71,7 @@ curl -X POST  "http://${AWS_LAMBDA_RUNTIME_API}/2018-06-01/runtime/invocation/$R
 
 If the function returns an error, the runtime formats the error into a JSON document, and posts it to the invocation error path\.
 
-**Example Request Body**  
+**Example Request body**  
 
 ```
 {
@@ -80,7 +80,7 @@ If the function returns an error, the runtime formats the error into a JSON docu
 }
 ```
 
-**Example Error Request**  
+**Example Error request**  
 
 ```
 REQUEST_ID=156cb537-e2d4-11e8-9b34-d36013741fb9
@@ -88,7 +88,7 @@ ERROR="{\"errorMessage\" : \"Error parsing event data.\", \"errorType\" : \"Inva
 curl -X POST "http://${AWS_LAMBDA_RUNTIME_API}/2018-06-01/runtime/invocation/$REQUEST_ID/error" -d "$ERROR" --header "Lambda-Runtime-Function-Error-Type: Unhandled"
 ```
 
-## Initialization Error<a name="runtimes-api-initerror"></a>
+## Initialization error<a name="runtimes-api-initerror"></a>
 
 **Path** – `/runtime/init/error`
 
@@ -96,7 +96,7 @@ curl -X POST "http://${AWS_LAMBDA_RUNTIME_API}/2018-06-01/runtime/invocation/$RE
 
 If the runtime encounters an error during initialization, it posts an error message to the initialization error path\.
 
-**Example Initialization Error Request**  
+**Example Initialization error request**  
 
 ```
 ERROR="{\"errorMessage\" : \"Failed to load function.\", \"errorType\" : \"InvalidFunctionException\"}"

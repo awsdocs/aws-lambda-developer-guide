@@ -1,4 +1,4 @@
-# Invoking Lambda Functions with the AWS Mobile SDK for Android<a name="with-on-demand-custom-android"></a>
+# Invoking Lambda functions with the AWS Mobile SDK for Android<a name="with-on-demand-custom-android"></a>
 
 You can call a Lambda function from a mobile application\. Put business logic in functions to separate its development lifecycle from that of front\-end clients, making mobile applications less complex to develop and maintain\. With the Mobile SDK for Android, you [use Amazon Cognito to authenticate users and authorize requests](with-android-example.md)\.
 
@@ -8,4 +8,4 @@ To create a fully\-featured web API for your mobile and web applications, use Am
 
 **Topics**
 + [Tutorial: Using AWS Lambda with the Mobile SDK for Android](with-android-example.md)
-+ [Sample Function Code](with-android-create-package.md)
++ [Sample function code](with-android-create-package.md)

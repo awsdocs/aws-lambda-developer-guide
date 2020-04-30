@@ -1,15 +1,15 @@
-# Tutorial: Configuring a Lambda Function to Access Amazon RDS in an Amazon VPC<a name="services-rds-tutorial"></a>
+# Tutorial: Configuring a Lambda function to access Amazon RDS in an Amazon VPC<a name="services-rds-tutorial"></a>
 
 In this tutorial, you do the following:
 + Launch an Amazon RDS MySQL database engine instance in your default Amazon VPC\. In the MySQL instance, you create a database \(ExampleDB\) with a sample table \(Employee\) in it\. For more information about Amazon RDS, see [Amazon RDS](https://aws.amazon.com/rds)\.
 + Create a Lambda function to access the ExampleDB database, create a table \(Employee\), add a few records, and retrieve the records from the table\.
 + Invoke the Lambda function and verify the query results\. This is how you verify that your Lambda function was able to access the RDS MySQL instance in the VPC\.
 
-For details on using Lambda with Amazon VPC, see [Configuring a Lambda Function to Access Resources in a VPC](configuration-vpc.md)\.
+For details on using Lambda with Amazon VPC, see [Configuring a Lambda function to access resources in a VPC](configuration-vpc.md)\.
 
 ## Prerequisites<a name="vpc-rds-prereqs"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started with AWS Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with AWS Lambda](getting-started.md) to create your first Lambda function\.
 
 To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
@@ -22,7 +22,7 @@ For long commands, an escape character \(`\`\) is used to split a command over m
 
 On Linux and macOS, use your preferred shell and package manager\. On Windows 10, you can [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows\-integrated version of Ubuntu and Bash\.
 
-## Create the Execution Role<a name="vpc-rds-create-iam-role"></a>
+## Create the execution role<a name="vpc-rds-create-iam-role"></a>
 
 Create the [execution role](lambda-intro-execution-role.md) that gives your function permission to access AWS resources\.
 
@@ -39,7 +39,7 @@ Create the [execution role](lambda-intro-execution-role.md) that gives your func
 
 The **AWSLambdaVPCAccessExecutionRole** has the permissions that the function needs to manage network connections to a VPC\.
 
-## Create an Amazon RDS Database Instance<a name="vpc-rds-create-rds-mysql"></a>
+## Create an Amazon RDS database instance<a name="vpc-rds-create-rds-mysql"></a>
 
 In this tutorial, the example Lambda function creates a table \(Employee\), inserts a few records, and then retrieves the records\. The table that the Lambda function creates has the following schema:
 
@@ -52,7 +52,7 @@ Where `EmpID` is the primary key\. Now, you need to add a few records to this ta
 First, you launch an RDS MySQL instance in your default VPC with ExampleDB database\. If you already have an RDS MySQL instance running in your default VPC, skip this step\.
 
 You can launch an RDS MySQL instance using one of the following methods:
-+ Follow the instructions at [Creating a MySQL DB Instance and Connecting to a Database on a MySQL DB Instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.MySQL.html) in the *Amazon RDS User Guide*\.
++ Follow the instructions at [Creating a MySQL DB instance and connecting to a database on a MySQL DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.MySQL.html) in the *Amazon RDS User Guide*\.
 + Use the following AWS CLI command:
 
   ```
@@ -64,7 +64,7 @@ You can launch an RDS MySQL instance using one of the following methods:
 
 Write down the database name, user name, and password\. You also need the host address \(endpoint\) of the DB instance, which you can get from the RDS console\. You might need to wait until the instance status is available and the Endpoint value appears in the console\.
 
-## Create a Deployment Package<a name="vpc-rds-deployment-pkg"></a>
+## Create a deployment package<a name="vpc-rds-deployment-pkg"></a>
 
 The following example Python code runs a SELECT query against the Employee table in the MySQL RDS instance that you created in the VPC\. The code creates a table in the ExampleDB database, adds sample records, and retrieves those records\. 
 
@@ -131,9 +131,9 @@ db_name = "ExampleDB"
 **Dependencies**
 + `pymysql` – The Lambda function code uses this library to access your MySQL instance \(see [PyMySQL](https://pypi.python.org/pypi/PyMySQL)\) \.
 
-Install dependencies with Pip and create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Python](python-package.md)\.
+Install dependencies with Pip and create a deployment package\. For instructions, see [AWS Lambda deployment package in Python](python-package.md)\.
 
-## Create the Lambda Function<a name="vpc-rds-upload-deployment-pkg"></a>
+## Create the Lambda function<a name="vpc-rds-upload-deployment-pkg"></a>
 
 Create the Lambda function with the `create-function` command\. You can find the subnet IDs and security group ID for your default VPC in the [Amazon VPC console](https://console.aws.amazon.com/vpc)\.
 
@@ -144,7 +144,7 @@ $ aws lambda create-function --function-name  CreateTableAddRecordsAndRead --run
 --vpc-config SubnetIds=subnet-0532bb6758ce7c71f,subnet-d6b7fda068036e11f,SecurityGroupIds=sg-0897d5f549934c2fb
 ```
 
-## Test the Lambda Function<a name="vpc-rds-invoke-lambda-function"></a>
+## Test the Lambda function<a name="vpc-rds-invoke-lambda-function"></a>
 
 In this step, you invoke the Lambda function manually using the `invoke` command\. When the Lambda function executes, it runs the SELECT query against the Employee table in the RDS MySQL instance and prints the results, which also go to the CloudWatch Logs\.
 
@@ -159,4 +159,4 @@ In this step, you invoke the Lambda function manually using the `invoke` command
    + Review the results in the AWS Lambda console\.
    + Verify the results in CloudWatch Logs\.
 
-Now that you have created a Lambda function that accesses a database in your VPC, you can have the function invoked in response to events\. For information about configuring event sources and examples, see [Using AWS Lambda with Other Services](lambda-services.md)\.
+Now that you have created a Lambda function that accesses a database in your VPC, you can have the function invoked in response to events\. For information about configuring event sources and examples, see [Using AWS Lambda with other services](lambda-services.md)\.

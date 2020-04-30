@@ -1,4 +1,4 @@
-# AWS Lambda Function Aliases<a name="configuration-aliases"></a>
+# AWS Lambda function aliases<a name="configuration-aliases"></a>
 
 You can create one or more aliases for your AWS Lambda function\. A Lambda alias is like a pointer to a specific Lambda function version\. Users can access the function version using the alias ARN\. 
 
@@ -15,7 +15,7 @@ You can create one or more aliases for your AWS Lambda function\. A Lambda alias
 
 To view the aliases that are currently defined for a function, choose **Qualifiers**, and choose the **Aliases** tab\.
 
-## Managing Aliases with the Lambda API<a name="versioning-aliases-api"></a>
+## Managing aliases with the Lambda API<a name="versioning-aliases-api"></a>
 
 To create an alias, use the `create-alias` command\.
 
@@ -33,7 +33,7 @@ $ aws lambda update-alias  --function-name my-function --name alias-name --funct
 + [CreateAlias](API_CreateAlias.md)
 + [UpdateAlias](API_UpdateAlias.md)
 
-## Using Aliases<a name="using-aliases"></a>
+## Using aliases<a name="using-aliases"></a>
 
 Each alias has a unique ARN\. An alias can only point to a function version, not to another alias\. You can update an alias to point to a new version of the function\.
 
@@ -41,7 +41,7 @@ Event sources such as Amazon S3 invoke your Lambda function\. These event source
 
 In a resource policy, you can grant permissions for event sources to use your Lambda function\. If you specify an alias ARN in the policy, you don't need to update the policy when the function version changes\. 
 
-## Resource Policies<a name="versioning-permissions-alias"></a>
+## Resource policies<a name="versioning-permissions-alias"></a>
 
 When you use a [resource\-based policy](access-control-resource-based.md) to give a service, resource, or account access to your function, the scope of that permission depends on whether you applied it to an alias, to a version, or to the function\. If you use an alias name \(such as `helloworld:PROD`\), the permission is valid only for invoking the `helloworld` function using the alias ARN\. You get a permission error if you use a version ARN or the function ARN\. This includes the version ARN that the alias points to\.
 
@@ -55,7 +55,7 @@ $ aws lambda add-permission --function-name helloworld \
 
 In this case, Amazon S3 is now able to invoke the PROD alias\. Lambda can then execute the `helloworld` Lambda function version that the PROD alias references\. For this to work correctly, you must use the PROD alias ARN in the S3 bucket's notification configuration\.
 
-## Alias Routing Configuration<a name="configuring-alias-routing"></a>
+## Alias routing configuration<a name="configuring-alias-routing"></a>
 
 Use routing configuration on an alias to send a portion of traffic to a second function version\. For example, you can reduce the risk of deploying a new version by configuring the alias to send most of the traffic to the existing version, and only a small percentage of traffic to the new version\. 
 
@@ -70,7 +70,7 @@ You can point an alias to a maximum of two Lambda function versions\. The versio
 
 1. Choose a function\.
 
-1. Verify that the function has at least two published versions\. To do this, choose **Qualifiers** and then choose **Versions** to display the list of versions\. If you need to create additional versions, follow the instructions in [AWS Lambda Function Versions](configuration-versions.md)\.
+1. Verify that the function has at least two published versions\. To do this, choose **Qualifiers** and then choose **Versions** to display the list of versions\. If you need to create additional versions, follow the instructions in [AWS Lambda function versions](configuration-versions.md)\.
 
 1. On the **Actions** menu, choose **Create alias**\.
 
@@ -84,7 +84,7 @@ You can point an alias to a maximum of two Lambda function versions\. The versio
 
 1. Choose **Create**\.
 
-### Configuring Alias Routing<a name="configuring-routing"></a>
+### Configuring alias routing<a name="configuring-routing"></a>
 
 Use the `create-alias` and `update-alias` commands to configure the traffic weights between two function versions\. When you create or update the alias, you specify the traffic weight in the `routing-config` parameter\. 
 
@@ -113,12 +113,12 @@ $ aws lambda update-alias --name  routing-alias  --function-name  my-function  \
 + [CreateAlias](API_CreateAlias.md)
 + [UpdateAlias](API_UpdateAlias.md)
 
-### Determining Which Version Has Been Invoked<a name="determining-routing-version"></a>
+### Determining which version has been invoked<a name="determining-routing-version"></a>
 
 When you configure traffic weights between two function versions, there are two ways to determine the Lambda function version that has been invoked:
 + **CloudWatch Logs** – Lambda automatically emits a `START` log entry that contains the invoked version ID to CloudWatch Logs for every function invocation\. The following is an example:
 
   `19:44:37 START RequestId: request id Version: $version ` 
 
-  For alias invocations, Lambda uses the `Executed Version` dimension to filter the metric data by the executed version\. For more information, see [Working with AWS Lambda Function Metrics](monitoring-metrics.md)\.
+  For alias invocations, Lambda uses the `Executed Version` dimension to filter the metric data by the executed version\. For more information, see [Working with AWS Lambda function metrics](monitoring-metrics.md)\.
 + **Response payload \(synchronous invocations\)** – Responses to synchronous function invocations include an `x-amz-executed-version` header to indicate which function version has been invoked\.

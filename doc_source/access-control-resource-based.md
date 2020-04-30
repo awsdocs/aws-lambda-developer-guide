@@ -1,4 +1,4 @@
-# Using Resource\-Based Policies for AWS Lambda<a name="access-control-resource-based"></a>
+# Using resource\-based policies for AWS Lambda<a name="access-control-resource-based"></a>
 
 AWS Lambda supports resource\-based permissions policies for Lambda functions and layers\. Resource\-based policies let you grant usage permission to other accounts on a per\-resource basis\. You also use a resource\-based policy to allow an AWS service to invoke your function\.
 
@@ -23,12 +23,12 @@ You can only update resource\-based policies for Lambda resources within the sco
 Resource\-based policies apply to a single function, version, alias, or layer version\. They grant permission to one or more services and accounts\. For trusted accounts that you want to have access to multiple resources, or to use API actions that resource\-based policies don't support, you can use [cross\-account roles](access-control-identity-based.md)\.
 
 **Topics**
-+ [Granting Function Access to AWS Services](#permissions-resource-serviceinvoke)
-+ [Granting Function Access to Other Accounts](#permissions-resource-xaccountinvoke)
-+ [Granting Layer Access to Other Accounts](#permissions-resource-xaccountlayer)
-+ [Cleaning Up Resource\-Based Policies](#permissions-resource-cleanup)
++ [Granting function access to AWS services](#permissions-resource-serviceinvoke)
++ [Granting function access to other accounts](#permissions-resource-xaccountinvoke)
++ [Granting layer access to other accounts](#permissions-resource-xaccountlayer)
++ [Cleaning up resource\-based policies](#permissions-resource-cleanup)
 
-## Granting Function Access to AWS Services<a name="permissions-resource-serviceinvoke"></a>
+## Granting function access to AWS services<a name="permissions-resource-serviceinvoke"></a>
 
 When you [use an AWS service to invoke your function](lambda-services.md), you grant permission in a statement on a resource\-based policy\. You can apply the statement to the function, or limit it to a single version or alias\.
 
@@ -57,7 +57,7 @@ $ aws lambda add-permission --function-name my-function --action lambda:InvokeFu
 --principal s3.amazonaws.com --source-arn arn:aws:s3:::my-bucket-123456 --source-account 123456789012
 ```
 
-## Granting Function Access to Other Accounts<a name="permissions-resource-xaccountinvoke"></a>
+## Granting function access to other accounts<a name="permissions-resource-xaccountinvoke"></a>
 
 To grant permissions to another AWS account, specify the account ID as the `principal`\. The following example grants account `210987654321` permission to invoke `my-function` with the `prod` alias\.
 
@@ -85,7 +85,7 @@ You can then update the alias to point to new versions as needed\. When you upda
 
 You can grant cross\-account access for most API actions that [operate on an existing function](lambda-api-permissions-ref.md#permissions-resources-function)\. For example, you could grant access to `lambda:ListAliases` to let an account get a list of aliases, or `lambda:GetFunction` to let them download your function code\. Add each permission separately, or use `lambda:*` to grant access to all actions for the specified function\.
 
-**Cross\-Account APIs**
+**Cross\-account APIs**
 + [Invoke](API_Invoke.md)
 + [GetFunction](API_GetFunction.md)
 + [GetFunctionConfiguration](API_GetFunctionConfiguration.md)
@@ -107,7 +107,7 @@ You can grant cross\-account access for most API actions that [operate on an exi
 
 To grant other accounts permission for multiple functions, or for actions that don't operate on a function, use [roles](access-control-identity-based.md)\.
 
-## Granting Layer Access to Other Accounts<a name="permissions-resource-xaccountlayer"></a>
+## Granting layer access to other accounts<a name="permissions-resource-xaccountlayer"></a>
 
 To grant layer\-usage permission to another account, add a statement to the layer version's permissions policy with the `add-layer-version-permission` command\. In each statement, you can grant permission to a single account, all accounts, or an organization\.
 
@@ -130,7 +130,7 @@ b0cd9796-d4eb-4564-939f-de7fe0b42236    {"Sid":"engineering-org","Effect":"Allow
 
 To grant permission to all AWS accounts, use `*` for the principal, and omit the organization ID\. For multiple accounts or organizations, add multiple statements\.
 
-## Cleaning Up Resource\-Based Policies<a name="permissions-resource-cleanup"></a>
+## Cleaning up resource\-based policies<a name="permissions-resource-cleanup"></a>
 
 To view a function's resource\-based policy, use the `get-policy` command\.
 

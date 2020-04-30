@@ -1,4 +1,4 @@
-# AWS Lambda Function Handler in Ruby<a name="ruby-handler"></a>
+# AWS Lambda function handler in Ruby<a name="ruby-handler"></a>
 
 Your Lambda function's handler is the method that Lambda calls when your function is invoked\. In the following example, the file `function.rb` defines a handler method named `handler`\. The handler function takes two objects as input and returns a JSON document\.
 
@@ -34,4 +34,4 @@ The two objects that the handler accepts are the invocation event and context\. 
 
 The function handler is executed every time your Lambda function is invoked\. Static code outside of the handler is executed once per instance of the function\. If your handler uses resources like SDK clients and database connections, you can create them outside of the handler method to reuse them for multiple invocations\.
 
-Each instance of your function can process multiple invocation events, but it only processes one event at a time\. The number of instances processing an event at any given time is your function's *concurrency*\. For more information about the Lambda execution context, see [AWS Lambda Execution Context](runtimes-context.md)\.
+Each instance of your function can process multiple invocation events, but it only processes one event at a time\. The number of instances processing an event at any given time is your function's *concurrency*\. For more information about the Lambda execution context, see [AWS Lambda execution context](runtimes-context.md)\.

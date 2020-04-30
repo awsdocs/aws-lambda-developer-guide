@@ -1,4 +1,4 @@
-# Building a Continuous Delivery Pipeline for a Lambda Application with AWS CodePipeline<a name="build-pipeline"></a>
+# Building a continuous delivery pipeline for a Lambda application with AWS CodePipeline<a name="build-pipeline"></a>
 
 You can use AWS CodePipeline to create a continuous delivery pipeline for your Lambda application\. CodePipeline combines source control, build, and deployment resources to create a pipeline that runs whenever you make a change to your application's source code\.
 
@@ -9,22 +9,22 @@ In this tutorial, you create the following resources\.
 + **AWS CloudFormation stack** – The deployment stage uses a template to create a stack in AWS CloudFormation\. The template is a YAML\-formatted document that defines the resources of the Lambda application\. The application includes a Lambda function and an Amazon API Gateway API that invokes it\.
 + **Roles** – The pipeline, build, and deployment each have a service role that allows them to manage AWS resources\. The console creates the pipeline and build roles when you create those resources\. You create the role that allows AWS CloudFormation to manage the application stack\.
 
-The pipeline maps a single branch in a repository to a single AWS CloudFormation stack\. You can create additional pipelines to add environments for other branches in the same repository\. You can also add stages to your pipeline for testing, staging, and manual approvals\. For more information about AWS CodePipeline, see [What Is AWS CodePipeline](https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html)\.
+The pipeline maps a single branch in a repository to a single AWS CloudFormation stack\. You can create additional pipelines to add environments for other branches in the same repository\. You can also add stages to your pipeline for testing, staging, and manual approvals\. For more information about AWS CodePipeline, see [What is AWS CodePipeline](https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html)\.
 
-For an alternate method of creating a pipeline with AWS Serverless Application Model and AWS CloudFormation, watch [Automate Your Serverless Application Deployments](https://www.youtube.com/watch?v=0o3urdBeoII) on the Amazon Web Services YouTube channel\.
+For an alternate method of creating a pipeline with AWS Serverless Application Model and AWS CloudFormation, watch [Automate your serverless application deployments](https://www.youtube.com/watch?v=0o3urdBeoII) on the Amazon Web Services YouTube channel\.
 
 **Topics**
 + [Prerequisites](#with-pipeline-prepare)
-+ [Create an AWS CloudFormation Role](#with-pipeline-create-cfn-role)
-+ [Set Up a Repository](#setup-repository)
-+ [Create a Pipeline](#create-pipeline1)
-+ [Update the Build Stage Role](#update-policy)
-+ [Complete the Deployment Stage](#create-pipeline2)
-+ [Test The Application](#applications-pipeline-test)
++ [Create an AWS CloudFormation role](#with-pipeline-create-cfn-role)
++ [Set up a repository](#setup-repository)
++ [Create a pipeline](#create-pipeline1)
++ [Update the build stage role](#update-policy)
++ [Complete the deployment stage](#create-pipeline2)
++ [Test the application](#applications-pipeline-test)
 
 ## Prerequisites<a name="with-pipeline-prepare"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started with AWS Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with AWS Lambda](getting-started.md) to create your first Lambda function\.
 
 To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
@@ -43,7 +43,7 @@ During the build phase, the build script uploads artifacts to Amazon Simple Stor
 $ aws s3 mb s3://lambda-deployment-artifacts-123456789012
 ```
 
-## Create an AWS CloudFormation Role<a name="with-pipeline-create-cfn-role"></a>
+## Create an AWS CloudFormation role<a name="with-pipeline-create-cfn-role"></a>
 
 Create a role that gives AWS CloudFormation permission to access AWS resources\.
 
@@ -91,13 +91,13 @@ Create a role that gives AWS CloudFormation permission to access AWS resources\.
    }
    ```
 
-## Set Up a Repository<a name="setup-repository"></a>
+## Set up a repository<a name="setup-repository"></a>
 
-Create an AWS CodeCommit repository to store your project files\. For more information, see [Setting Up](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up.html) in the CodeCommit User Guide\.
+Create an AWS CodeCommit repository to store your project files\. For more information, see [Setting up](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up.html) in the CodeCommit User Guide\.
 
 **To create a repository**
 
-1. Open the [Developer Tools console](https://console.aws.amazon.com/codesuite/home)\.
+1. Open the [Developer tools console](https://console.aws.amazon.com/codesuite/home)\.
 
 1. Under **Source**, choose **Repositories**\.
 
@@ -173,13 +173,13 @@ Commit and push the files to CodeCommit\.
 ~/lambda-pipeline-repo$ git push
 ```
 
-## Create a Pipeline<a name="create-pipeline1"></a>
+## Create a pipeline<a name="create-pipeline1"></a>
 
 Create a pipeline that deploys your application\. The pipeline monitors your repository for changes, runs an AWS CodeBuild build to create a deployment package, and deploys the application with AWS CloudFormation\. During the pipeline creation process, you also create the AWS CodeBuild build project\.
 
 **To create a pipeline**
 
-1. Open the [Developer Tools console](https://console.aws.amazon.com/codesuite/home)\.
+1. Open the [Developer tools console](https://console.aws.amazon.com/codesuite/home)\.
 
 1. Under **Pipeline**, choose **Pipelines**\.
 
@@ -221,7 +221,7 @@ Create a pipeline that deploys your application\. The pipeline monitors your rep
 
 The pipeline fails the first time it runs because it needs additional permissions\. In the next section, you add permissions to the role that's generated for your build stage\.
 
-## Update the Build Stage Role<a name="update-policy"></a>
+## Update the build stage role<a name="update-policy"></a>
 
 During the build stage, AWS CodeBuild needs permission to upload the build output to your Amazon S3 bucket\.
 
@@ -235,13 +235,13 @@ During the build stage, AWS CodeBuild needs permission to upload the build outpu
 
 1. Attach **AmazonS3FullAccess**\.
 
-## Complete the Deployment Stage<a name="create-pipeline2"></a>
+## Complete the deployment stage<a name="create-pipeline2"></a>
 
 The deployment stage has an action that creates a change set for the AWS CloudFormation stack that manages your Lambda application\. A change set specifies the changes that are made to the stack, such as adding new resources and updating existing resources\. Change sets let you preview the changes that are made before making them, and add approval stages\. Add a second action that executes the change set to complete the deployment\.
 
 **To update the deployment stage**
 
-1. Open your pipeline in the [Developer Tools console](https://console.aws.amazon.com/codesuite/home)\.
+1. Open your pipeline in the [Developer tools console](https://console.aws.amazon.com/codesuite/home)\.
 
 1. Choose **Edit**\.
 
@@ -265,7 +265,7 @@ The deployment stage has an action that creates a change set for the AWS CloudFo
 
 Your pipeline is ready\. Push changes to the master branch to trigger a deployment\.
 
-## Test The Application<a name="applications-pipeline-test"></a>
+## Test the application<a name="applications-pipeline-test"></a>
 
 The application includes an API Gateway API with a public endpoint that returns the current time\. Use the Lambda console to view the application and access the API\.
 

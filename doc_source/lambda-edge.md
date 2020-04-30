@@ -9,11 +9,11 @@ Lambda@Edge lets you run Node\.js and Python Lambda functions to customize conte
 ![\[Conceptual graphic that shows how the CloudFront events that can trigger a Lambda function.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/cloudfront-events-that-trigger-lambda-functions.png)
 
 **Note**  
-Lambda@Edge supports a limited set of runtimes and features\. For details, see [Requirements and Restrictions on Lambda Functions](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-requirements-limits.html) in the Amazon CloudFront developer guide\.
+Lambda@Edge supports a limited set of runtimes and features\. For details, see [Requirements and restrictions on Lambda functions](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-requirements-limits.html) in the Amazon CloudFront developer guide\.
 
 You can also generate responses to viewers without ever sending the request to the origin\.
 
-**Example CloudFront Message Event**  
+**Example CloudFront message event**  
 
 ```
 {
@@ -53,6 +53,6 @@ With Lambda@Edge, you can build a variety of solutions, for example:
 + Send different objects to your users based on the `User-Agent` header, which contains information about the device that submitted the request\. For example, you can send images in different resolutions to users based on their devices\.
 + Inspect headers or authorized tokens, inserting a corresponding header and allowing access control before forwarding a request to the origin\.
 + Add, delete, and modify headers, and rewrite the URL path to direct users to different objects in the cache\.
-+ Generate new HTTP responses to do things like redirect unauthenticated users to login pages, or create and deliver static webpages right from the edge\. For more information, see [Using Lambda Functions to Generate HTTP Responses to Viewer and Origin Requests](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/http-response-generation.html) in the *Amazon CloudFront Developer Guide*\.
++ Generate new HTTP responses to do things like redirect unauthenticated users to login pages, or create and deliver static webpages right from the edge\. For more information, see [Using Lambda functions to generate HTTP responses to viewer and origin requests](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/http-response-generation.html) in the *Amazon CloudFront Developer Guide*\.
 
 For more information about using Lambda@Edge, see [Using CloudFront with Lambda@Edge](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-at-the-edge.html)\. 

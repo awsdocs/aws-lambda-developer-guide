@@ -1,25 +1,25 @@
-# AWS Lambda Layers<a name="configuration-layers"></a>
+# AWS Lambda layers<a name="configuration-layers"></a>
 
 You can configure your Lambda function to pull in additional code and content in the form of layers\. A layer is a ZIP archive that contains libraries, a [custom runtime](runtimes-custom.md), or other dependencies\. With layers, you can use libraries in your function without needing to include them in your deployment package\.
 
 Layers let you keep your deployment package small, which makes development easier\. You can avoid errors that can occur when you install and package dependencies with your function code\. For Node\.js, Python, and Ruby functions, you can [develop your function code in the Lambda console](code-editor.md) as long as you keep your deployment package under 3 MB\.
 
 **Note**  
-A function can use up to 5 layers at a time\. The total unzipped size of the function and all layers can't exceed the unzipped deployment package size limit of 250 MB\. For more information, see [AWS Lambda Limits](gettingstarted-limits.md)\.
+A function can use up to 5 layers at a time\. The total unzipped size of the function and all layers can't exceed the unzipped deployment package size limit of 250 MB\. For more information, see [AWS Lambda limits](gettingstarted-limits.md)\.
 
 You can create layers, or use layers published by AWS and other AWS customers\. Layers support [resource\-based policies](#configuration-layers-permissions) for granting layer usage permissions to specific AWS accounts, [AWS Organizations](https://docs.aws.amazon.com/organizations/latest/userguide/), or all accounts\.
 
 Layers are extracted to the `/opt` directory in the function execution environment\. Each runtime looks for libraries in a different location under `/opt`, depending on the language\. [Structure your layer](#configuration-layers-path) so that function code can access libraries without additional configuration\.
 
-You can also use AWS Serverless Application Model \(AWS SAM\) to manage layers and your function's layer configuration\. For instructions, see [Declaring Serverless Resources](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-template.html) in the *AWS Serverless Application Model Developer Guide*\.
+You can also use AWS Serverless Application Model \(AWS SAM\) to manage layers and your function's layer configuration\. For instructions, see [Declaring serverless resources](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-template.html) in the *AWS Serverless Application Model Developer Guide*\.
 
 **Topics**
-+ [Configuring a Function to Use Layers](#configuration-layers-using)
-+ [Managing Layers](#configuration-layers-manage)
-+ [Including Library Dependencies in a Layer](#configuration-layers-path)
-+ [Layer Permissions](#configuration-layers-permissions)
++ [Configuring a function to use layers](#configuration-layers-using)
++ [Managing layers](#configuration-layers-manage)
++ [Including library dependencies in a layer](#configuration-layers-path)
++ [Layer permissions](#configuration-layers-permissions)
 
-## Configuring a Function to Use Layers<a name="configuration-layers-using"></a>
+## Configuring a function to use layers<a name="configuration-layers-using"></a>
 
 You can specify up to 5 layers in your function's configuration, during or after function creation\. You choose a specific version of a layer to use\. If you want to use a different version later, update your function's configuration\.
 
@@ -59,7 +59,7 @@ Your function can access the content of the layer during execution in the `/opt`
 
 The creator of a layer can delete the version of the layer that you're using\. When this happens, your function continues to run as though the layer version still existed\. However, when you update the layer configuration, you must remove the reference to the deleted version\.
 
-## Managing Layers<a name="configuration-layers-manage"></a>
+## Managing layers<a name="configuration-layers-manage"></a>
 
 To create a layer, use the `publish-layer-version` command with a name, description, ZIP archive, and a list of [runtimes](lambda-runtimes.md) that are compatible with the layer\. The list of runtimes is optional, but it makes the layer easier to discover\.
 
@@ -144,7 +144,7 @@ $ aws lambda delete-layer-version --layer-name my-layer --version-number 1
 
 When you delete a layer version, you can no longer configure functions to use it\. However, any function that already uses the version continues to have access to it\. Version numbers are never re\-used for a layer name\.
 
-## Including Library Dependencies in a Layer<a name="configuration-layers-path"></a>
+## Including library dependencies in a layer<a name="configuration-layers-path"></a>
 
 You can move runtime dependencies out of your function code by placing them in a layer\. Lambda runtimes include paths in the `/opt` directory to ensure that your function code has access to libraries that are included in layers\.
 
@@ -194,9 +194,9 @@ To include libraries in a layer, place them in one of the folders supported by y
   └ bin/jq
   ```
 
-For more information about path settings in the Lambda execution environment, see [Runtime Environment Variables](configuration-envvars.md#configuration-envvars-runtime)\.
+For more information about path settings in the Lambda execution environment, see [Runtime environment variables](configuration-envvars.md#configuration-envvars-runtime)\.
 
-## Layer Permissions<a name="configuration-layers-permissions"></a>
+## Layer permissions<a name="configuration-layers-permissions"></a>
 
 Layer usage permissions are managed on the resource\. To configure a function with a layer, you need permission to call `GetLayerVersion` on the layer version\. For functions in your account, you can get this permission from your [user policy](access-control-identity-based.md) or from the function's [resource\-based policy](access-control-resource-based.md)\. To use a layer in another account, you need permission on your user policy, and the owner of the other account must grant your account permission with a resource\-based policy\.
 
@@ -210,4 +210,4 @@ e210ffdc-e901-43b0-824b-5fcd0dd26d16    {"Sid":"xaccount","Effect":"Allow","Prin
 
 Permissions only apply to a single version of a layer\. Repeat the procedure each time you create a new layer version\.
 
-For more examples, see [Granting Layer Access to Other Accounts](access-control-resource-based.md#permissions-resource-xaccountlayer)\.
+For more examples, see [Granting layer access to other accounts](access-control-resource-based.md#permissions-resource-xaccountlayer)\.

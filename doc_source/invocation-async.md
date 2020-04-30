@@ -1,4 +1,4 @@
-# Asynchronous Invocation<a name="invocation-async"></a>
+# Asynchronous invocation<a name="invocation-async"></a>
 
 Several AWS services, such as Amazon Simple Storage Service \(Amazon S3\) and Amazon Simple Notification Service \(Amazon SNS\), invoke functions asynchronously to process events\. When you invoke a function asynchronously, you don't wait for a response from the function code\. You hand off the event to Lambda and Lambda handles the rest\. You can configure how Lambda handles errors, and can send invocation records to a downstream resource to chain together components of your application\.
 
@@ -32,7 +32,7 @@ Even if your function doesn't return an error, it's possible for it to receive t
 When the queue is backed up, new events might age out before Lambda has a chance to send them to your function\. When an event expires or fails all processing attempts, Lambda discards it\. You can [configure error handling](#invocation-async-errors) for a function to reduce the number of retries that Lambda performs, or to discard unprocessed events more quickly\.
 
 You can also configure Lambda to send an invocation record to another service\. Lambda supports the following [destinations](#invocation-async-destinations) for asynchronous invocation\.
-+ **Amazon SQS** – An SQS queue\.
++ **Amazon SQS** – A standard SQS queue\.
 + **Amazon SNS** – An SNS topic\.
 + **AWS Lambda** – A Lambda function\.
 + **Amazon EventBridge** – An EventBridge event bus\.
@@ -40,12 +40,12 @@ You can also configure Lambda to send an invocation record to another service\. 
 The invocation record contains details about the request and response in JSON format\. You can configure separate destinations for events that are processed successfully, and events that fail all processing attempts\. Alternatively, you can configure an SQS queue or SNS topic as a [dead\-letter queue](#dlq) for discarded events\. For dead\-letter queues, Lambda only sends the content of the event, without details about the response\.
 
 **Topics**
-+ [Configuring Error Handling for Asynchronous Invocation](#invocation-async-errors)
-+ [Configuring Destinations for Asynchronous Invocation](#invocation-async-destinations)
-+ [Asynchronous Invocation Configuration API](#invocation-async-api)
-+ [AWS Lambda Function Dead\-Letter Queues](#dlq)
++ [Configuring error handling for asynchronous invocation](#invocation-async-errors)
++ [Configuring destinations for asynchronous invocation](#invocation-async-destinations)
++ [Asynchronous invocation configuration API](#invocation-async-api)
++ [AWS Lambda function dead\-letter queues](#dlq)
 
-## Configuring Error Handling for Asynchronous Invocation<a name="invocation-async-errors"></a>
+## Configuring error handling for asynchronous invocation<a name="invocation-async-errors"></a>
 
 Use the Lambda console to configure error handling settings on a function, a version, or an alias\.
 
@@ -65,7 +65,7 @@ Use the Lambda console to configure error handling settings on a function, a ver
 
 When an invocation event exceeds the maximum age or fails all retry attempts, Lambda discards it\. To retain a copy of discarded events, configure a failed\-event destination\.
 
-## Configuring Destinations for Asynchronous Invocation<a name="invocation-async-destinations"></a>
+## Configuring destinations for asynchronous invocation<a name="invocation-async-destinations"></a>
 
 To send records of asynchronous invocations to another service, add a destination to your function\. You can configure separate destinations for events that fail processing and events that are successfully processed\. Like error handling settings, you can configure destinations on a function, a version, or an alias\.
 
@@ -103,7 +103,7 @@ Add destinations to your function in the Lambda console's function designer\.
 
 When an invocation matches the condition, Lambda sends a JSON document with details about the invocation to the destination\. The following example shows an invocation record for an event that failed three processing attempts due to a function error\.
 
-**Example Invocation Record**  
+**Example Invocation record**  
 
 ```
 {
@@ -135,7 +135,7 @@ When an invocation matches the condition, Lambda sends a JSON document with deta
 
 The invocation record contains details about the event, the response, and the reason that the record was sent\.
 
-## Asynchronous Invocation Configuration API<a name="invocation-async-api"></a>
+## Asynchronous invocation configuration API<a name="invocation-async-api"></a>
 
 To manage asynchronous invocation settings with the AWS CLI or AWS SDK, use the following API operations\.
 + [PutFunctionEventInvokeConfig](https://docs.aws.amazon.com/lambda/latest/dg/API_PutFunctionEventInvokeConfig.html)
@@ -180,7 +180,7 @@ $ aws lambda update-function-event-invoke-config --function-name error \
 }
 ```
 
-## AWS Lambda Function Dead\-Letter Queues<a name="dlq"></a>
+## AWS Lambda function dead\-letter queues<a name="dlq"></a>
 
 As an alternative to an [on\-failure destination](#invocation-async-destinations), you can configure your function with a dead\-letter queue to save discarded events for further processing\. A dead\-letter queue acts the same as an on\-failure destination in that it is used when an event fails all processing attempts or expires without being processed\. However, a dead\-letter queue is part of a function's version\-specific configuration, so it is locked in when you publish a version\. On\-failure destinations also support additional targets and include details about the function's response in the invocation record\.
 
@@ -223,7 +223,7 @@ $ aws lambda update-function-configuration --function-name my-function \
 
 Lambda sends the event to the dead\-letter queue as\-is, with additional information in attributes\. You can use this information to identify the error that the function returned, or to correlate the event with logs or an AWS X\-Ray trace\.
 
-**Dead\-Letter Queue Message Attributes**
+**Dead\-letter queue message attributes**
 + **RequestID** \(String\) – The ID of the invocation request\. Request IDs appear in function logs\. You can also use the X\-Ray SDK to record the request ID on an attribute in the trace\. You can then search for traces by request ID in the X\-Ray console\. For an example, see the [error processor sample](samples-errorprocessor.md)\.
 + **ErrorCode** \(Number\) – The HTTP status code\.
 + **ErrorMessage** \(String\) – The first 1 KB of the error message\.

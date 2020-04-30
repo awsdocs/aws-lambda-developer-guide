@@ -1,4 +1,4 @@
-# Sample Function Code<a name="with-ddb-create-package"></a>
+# Sample function code<a name="with-ddb-create-package"></a>
 
 Sample code is available for the following languages\.
 
@@ -29,7 +29,7 @@ exports.lambda_handler = function(event, context, callback) {
 };
 ```
 
-Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Node\.js](nodejs-package.md)\.
+Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda deployment package in Node\.js](nodejs-package.md)\.
 
 ## Java 11<a name="with-ddb-example-deployment-pkg-java"></a>
 
@@ -67,7 +67,7 @@ If the handler returns normally without exceptions, Lambda considers the input b
 + `aws-lambda-java-core`
 + `aws-lambda-java-events`
 
-Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Java](java-package.md)\.
+Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [AWS Lambda deployment package in Java](java-package.md)\.
 
 ## C\#<a name="with-ddb-example-deployment-pkg-dotnet"></a>
 
@@ -137,7 +137,7 @@ def lambda_handler(event, context):
     print('Successfully processed %s records.' % str(len(event['Records'])))
 ```
 
-Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Python](python-package.md)\.
+Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda deployment package in Python](python-package.md)\.
 
 ## Go<a name="with-ddb-example-deployment-pkg-go"></a>
 
@@ -167,4 +167,4 @@ func handleRequest(ctx context.Context, e events.DynamoDBEvent) {
 }
 ```
 
-Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Python](python-package.md)\.
+Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda deployment package in Python](python-package.md)\.

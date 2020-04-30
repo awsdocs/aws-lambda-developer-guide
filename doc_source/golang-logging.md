@@ -1,10 +1,10 @@
-# AWS Lambda Function Logging in Go<a name="golang-logging"></a>
+# AWS Lambda function logging in Go<a name="golang-logging"></a>
 
 Your Lambda function comes with a CloudWatch Logs log group, with a log stream for each instance of your function\. The runtime sends details about each invocation to the log stream, and relays logs and other output from your function's code\.
 
 To output logs from your function code, you can use methods on [the fmt package](https://golang.org/pkg/fmt/), or any logging library that writes to `stdout` or `stderr`\. The following example uses [the log package](https://golang.org/pkg/log/)\.
 
-**Example [main\.go](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-go/function/main.go) – logging**  
+**Example [main\.go](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-go/function/main.go) – Logging**  
 
 ```
 func handleRequest(ctx context.Context, event events.SQSEvent) (string, error) {
@@ -19,7 +19,7 @@ func handleRequest(ctx context.Context, event events.SQSEvent) (string, error) {
   }
 ```
 
-**Example Log Format**  
+**Example Log format**  
 
 ```
 START RequestId: dbda340c-xmpl-4031-8810-11bb609b4c71 Version: $LATEST
@@ -64,11 +64,11 @@ The Go runtime logs the `START`, `END`, and `REPORT` lines for each invocation\.
 You can view logs in the Lambda console, in the CloudWatch Logs console, or from the command line\.
 
 **Topics**
-+ [Viewing Logs in the AWS Management Console](#golang-logging-console)
++ [Viewing logs in the AWS Management Console](#golang-logging-console)
 + [Using the AWS CLI](#golang-logging-cli)
-+ [Deleting Logs](#golang-logging-delete)
++ [Deleting logs](#golang-logging-delete)
 
-## Viewing Logs in the AWS Management Console<a name="golang-logging-console"></a>
+## Viewing logs in the AWS Management Console<a name="golang-logging-console"></a>
 
 The Lambda console shows log output when you test a function on the function configuration page\. To view logs for all invocations, use the CloudWatch Logs console\.
 
@@ -80,7 +80,7 @@ The Lambda console shows log output when you test a function on the function con
 
 1. Choose the first stream in the list\.
 
-Each log stream corresponds to an [instance of your function](runtimes-context.md)\. New streams appear when you update your function and when additional instances are created to handle multiple concurrent invocations\. To find logs for specific invocations, you can instrument your function with X\-Ray, and record details about the request and log stream in the trace\. For a sample application that correlates logs and traces with X\-Ray, see [Error Processor Sample Application for AWS Lambda](samples-errorprocessor.md)\.
+Each log stream corresponds to an [instance of your function](runtimes-context.md)\. New streams appear when you update your function and when additional instances are created to handle multiple concurrent invocations\. To find logs for specific invocations, you can instrument your function with X\-Ray, and record details about the request and log stream in the trace\. For a sample application that correlates logs and traces with X\-Ray, see [Error processor sample application for AWS Lambda](samples-errorprocessor.md)\.
 
 ## Using the AWS CLI<a name="golang-logging-cli"></a>
 
@@ -162,6 +162,6 @@ $ ./get-logs.sh
 }
 ```
 
-## Deleting Logs<a name="golang-logging-delete"></a>
+## Deleting logs<a name="golang-logging-delete"></a>
 
 Log groups aren't deleted automatically when you delete a function\. To avoid storing logs indefinitely, delete the log group, or [configure a retention period](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#SettingLogRetention) after which logs are deleted automatically\.

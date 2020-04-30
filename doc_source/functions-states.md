@@ -1,4 +1,4 @@
-# Monitoring the State of a Function with the Lambda API<a name="functions-states"></a>
+# Monitoring the state of a function with the Lambda API<a name="functions-states"></a>
 
 When you create or update a function, Lambda provisions the compute and networking resources that enable it to run\. In most cases, this process is very fast, and your function is ready to be invoked or modified right away\.
 
@@ -33,7 +33,7 @@ The `StateReason` and `StateReasonCode` contain additional information about the
 
 When you update a function's configuration, the update can trigger an asynchronous operation to provision resources\. While this is in progress, you can invoke the function, but other operations on the function fail\. Invocations that occur while the update is in progress run against the previous configuration\. The function's state is `Active`, but its `LastUpdateStatus` is `InProgress`\.
 
-**Example Function Configuration – Connecting to a VPC**  
+**Example Function configuration – Connecting to a VPC**  
 
 ```
 {
@@ -70,4 +70,4 @@ If Lambda encounters an error when restoring a function's network interface, the
 + `InsufficientRolePermission` – Role doesn't exist or is missing permissions\.
 + `SubnetOutOfIPAddresses` – All IP addresses in a subnet are in use\.
 
-For more information on how states work with VPC connectivity, see [Configuring a Lambda Function to Access Resources in a VPC](configuration-vpc.md)\.
+For more information on how states work with VPC connectivity, see [Configuring a Lambda function to access resources in a VPC](configuration-vpc.md)\.

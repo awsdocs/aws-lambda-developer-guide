@@ -1,8 +1,8 @@
-# AWS Lambda Function Errors in Python<a name="python-exceptions"></a>
+# AWS Lambda function errors in Python<a name="python-exceptions"></a>
 
 When your code raises an error, Lambda generates a JSON representation of the error\. This error document appears in the invocation log and, for synchronous invocations, in the output\.
 
-**Example lambda\_function\.py File – Exception**  
+**Example lambda\_function\.py file – Exception**  
 
 ```
 def lambda_handler(event, context):
@@ -53,4 +53,4 @@ END RequestId: fc4f8810-88ff-4800-974c-12cec018a4b9
 REPORT RequestId: fc4f8810-88ff-4800-974c-12cec018a4b9	Duration: 12.33 ms	Billed Duration: 100 ms	Memory Size: 128 MB	Max Memory Used: 56 MB
 ```
 
-For more information about logs, see [AWS Lambda Function Logging in Python](python-logging.md)\.
+For more information about logs, see [AWS Lambda function logging in Python](python-logging.md)\.

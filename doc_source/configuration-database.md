@@ -1,4 +1,4 @@
-# Configuring Database Access for a Lambda Function<a name="configuration-database"></a>
+# Configuring database access for a Lambda function<a name="configuration-database"></a>
 
 You can use the Lambda console to create an Amazon RDS Proxy database proxy for your function\. A database proxy manages a pool of database connections and relays queries from a function\. This enables a function to reach high [concurrency](gettingstarted-concepts.md#gettingstarted-concepts-concurrency) levels without exhausting database connections\.
 
@@ -28,9 +28,9 @@ You can use the Lambda console to create an Amazon RDS Proxy database proxy for 
 
 Proxy creation takes a few minutes\. When the proxy is available, configure your function to connect to the proxy endpoint instead of the database endpoint\.
 
-Standard [Amazon RDS Proxy pricing](https://aws.amazon.com/rds/proxy/pricing/) applies\. For more information, see [Managing Connections with the Amazon RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-proxy.html) in the Amazon Aurora User Guide\.
+Standard [Amazon RDS Proxy pricing](https://aws.amazon.com/rds/proxy/pricing/) applies\. For more information, see [Managing connections with the Amazon RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-proxy.html) in the Amazon Aurora User Guide\.
 
-## Sample Application<a name="configuration-database-sample"></a>
+## Sample application<a name="configuration-database-sample"></a>
 
 Sample applications that demonstrate the use of Lambda with an Amazon RDS database are available in this guide's GitHub repository\. There are two applications:
 + [RDS MySQL](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/rds-mysql) – The AWS CloudFormation template `template-vpcrds.yml` creates a MySQL 5\.7 database in a private VPC\. In the sample application, a Lambda function proxies queries to the database\. The function and database templates both use Secrets Manager to access database credentials\.

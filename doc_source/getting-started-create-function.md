@@ -1,4 +1,4 @@
-# Create a Lambda Function with the Console<a name="getting-started-create-function"></a>
+# Create a Lambda function with the console<a name="getting-started-create-function"></a>
 
 In this Getting Started exercise you create a Lambda function using the AWS Lambda console\. Next, you manually invoke the Lambda function using sample event data\. AWS Lambda executes the Lambda function and returns results\. You then verify execution results, including the logs that your Lambda function created and various CloudWatch metrics\. 
 
@@ -14,7 +14,7 @@ In this Getting Started exercise you create a Lambda function using the AWS Lamb
 
 Lambda creates a Node\.js function and an execution role that grants the function permission to upload logs\. Lambda assumes the execution role when you invoke your function, and uses it to create credentials for the AWS SDK and to read data from event sources\.
 
-## Use the Designer<a name="get-started-designer"></a>
+## Use the designer<a name="get-started-designer"></a>
 
 The **Designer** shows an overview of your function and its upstream and downstream resources\. You can use it to configure triggers, layers, and destinations\.
 
@@ -22,7 +22,7 @@ The **Designer** shows an overview of your function and its upstream and downstr
 
 Choose **my\-function** in the designer to return to the function's code and configuration\. For scripting languages, Lambda includes sample code that returns a success response\. You can edit your function code with the embedded [AWS Cloud9](https://docs.aws.amazon.com/cloud9/latest/user-guide/) editor as long as your source code doesn't exceed the 3 MB limit\.
 
-## Invoke the Lambda Function<a name="get-started-invoke-manually"></a>
+## Invoke the Lambda function<a name="get-started-invoke-manually"></a>
 
 Invoke your Lambda function using the sample event data provided in the console\.
 
@@ -58,4 +58,40 @@ Invoke your Lambda function using the sample event data provided in the console\
 1. Choose **Monitoring**\. This page shows graphs for the metrics that Lambda sends to CloudWatch\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/metrics-functions-list.png)
 
-   For more information on these graphs, see [Monitoring Functions in the AWS Lambda Console](monitoring-functions-access-metrics.md)\.
+   For more information on these graphs, see [Monitoring functions in the AWS Lambda console](monitoring-functions-access-metrics.md)\.
+
+## Clean up<a name="gettingstarted-cleanup"></a>
+
+If you are done working with the example function, delete it\. You can also delete the execution role that the console created, and the log group that stores the function's logs\.
+
+**To delete a Lambda function**
+
+1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+
+1. Choose a function\.
+
+1. Choose **Actions**, and then choose **Delete function**\.
+
+1. Choose **Delete**\.
+
+**To delete the log group**
+
+1. Open the [Log groups page](https://console.aws.amazon.com/cloudwatch/home#logs:) of the Amazon CloudWatch console\.
+
+1. Choose the function's log group \(`/aws/lambda/my-function`\)\.
+
+1. Choose **Actions**, and then choose **Delete log group**\.
+
+1. Choose **Yes, Delete**\.
+
+**To delete the execution role**
+
+1. Open the [Roles page](https://console.aws.amazon.com/iam/home?#/roles) of the AWS Identity and Access Management console\.
+
+1. Choose the function's role \(`my-function-role-31exxmpl`
+
+1. Choose **Delete role**\.
+
+1. Choose **Yes, delete**\.
+
+You can automate the creation and cleanup of functions, roles, and log groups with AWS CloudFormation and the AWS CLI\. For fully functional sample applications, see [Lambda sample applications](lambda-samples.md)\.

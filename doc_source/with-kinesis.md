@@ -4,7 +4,7 @@ You can use an AWS Lambda function to process records in an [Amazon Kinesis data
 
 Lambda reads records from the data stream and invokes your function [synchronously](invocation-sync.md) with an event that contains stream records\. Lambda reads records in batches and invokes your function to process records from the batch\.
 
-**Example Kinesis Record Event**  
+**Example Kinesis record event**  
 
 ```
 {
@@ -57,17 +57,17 @@ If your function returns an error, Lambda retries the batch until processing suc
 You can also increase concurrency by processing multiple batches from each shard in parallel\. Lambda can process up to 10 batches in each shard simultaneously\. If you increase the number of concurrent batches per shard, Lambda still ensures in\-order processing at the partition\-key level\.
 
 **Topics**
-+ [Configuring Your Data Stream and Function](#services-kinesis-configure)
-+ [Execution Role Permissions](#events-kinesis-permissions)
-+ [Configuring a Stream as an Event Source](#services-kinesis-eventsourcemapping)
-+ [Event Source Mapping API](#services-kinesis-api)
-+ [Error Handling](#services-kinesis-errors)
-+ [Amazon CloudWatch Metrics](#events-kinesis-metrics)
++ [Configuring your data stream and function](#services-kinesis-configure)
++ [Execution role permissions](#events-kinesis-permissions)
++ [Configuring a stream as an event source](#services-kinesis-eventsourcemapping)
++ [Event source mapping API](#services-kinesis-api)
++ [Error handling](#services-kinesis-errors)
++ [Amazon CloudWatch metrics](#events-kinesis-metrics)
 + [Tutorial: Using AWS Lambda with Amazon Kinesis](with-kinesis-example.md)
-+ [Sample Function Code](with-kinesis-create-package.md)
-+ [AWS SAM Template for a Kinesis Application](with-kinesis-example-use-app-spec.md)
++ [Sample function code](with-kinesis-create-package.md)
++ [AWS SAM template for a Kinesis application](with-kinesis-example-use-app-spec.md)
 
-## Configuring Your Data Stream and Function<a name="services-kinesis-configure"></a>
+## Configuring your data stream and function<a name="services-kinesis-configure"></a>
 
 Your Lambda function is a consumer application for your data stream\. It processes one batch of records at a time from each shard\. You can map a Lambda function to a data stream \(standard iterator\), or to a consumer of a stream \([enhanced fan\-out](https://docs.aws.amazon.com/kinesis/latest/dev/introduction-to-enhanced-consumers.html)\)\.
 
@@ -94,7 +94,7 @@ To increase the speed at which your function processes records, add shards to yo
 
 If your function can't scale up to handle the total number of concurrent batches, [request a limit increase](gettingstarted-limits.md) or [reserve concurrency](configuration-concurrency.md) for your function\.
 
-## Execution Role Permissions<a name="events-kinesis-permissions"></a>
+## Execution role permissions<a name="events-kinesis-permissions"></a>
 
 Lambda needs the following permissions to manage resources that are related to your Kinesis data stream\. Add them to your function's [execution role](lambda-intro-execution-role.md)\.
 + [kinesis:DescribeStream](https://docs.aws.amazon.com/kinesis/latest/APIReference/API_DescribeStream.html)
@@ -105,13 +105,13 @@ Lambda needs the following permissions to manage resources that are related to y
 + [kinesis:ListStreams](https://docs.aws.amazon.com/kinesis/latest/APIReference/API_ListStreams.html)
 + [kinesis:SubscribeToShard](https://docs.aws.amazon.com/kinesis/latest/APIReference/API_SubscribeToShard.html)
 
-The `AWSLambdaKinesisExecutionRole` managed policy includes these permissions\. For more information, see [AWS Lambda Execution Role](lambda-intro-execution-role.md)\.
+The `AWSLambdaKinesisExecutionRole` managed policy includes these permissions\. For more information, see [AWS Lambda execution role](lambda-intro-execution-role.md)\.
 
 To send records of failed batches to a queue or topic, your function needs additional permissions\. Each destination service requires a different permission, as follows:
 + **Amazon SQS** – [sqs:SendMessage](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html)
 + **Amazon SNS** – [sns:Publish](https://docs.aws.amazon.com/sns/latest/api/API_Publish.html)
 
-## Configuring a Stream as an Event Source<a name="services-kinesis-eventsourcemapping"></a>
+## Configuring a stream as an event source<a name="services-kinesis-eventsourcemapping"></a>
 
 Create an event source mapping to tell Lambda to send records from your data stream to a Lambda function\. You can create multiple event source mappings to process the same data with multiple Lambda functions, or to process items from multiple data streams with a single function\.
 
@@ -131,7 +131,7 @@ To configure your function to read from Kinesis in the Lambda console, create a 
 
 Lambda supports the following options for Kinesis event sources\.
 
-**Event Source Options**
+**Event source options**
 + **Kinesis stream** – The Kinesis stream to read records from\.
 + **Consumer** \(optional\) – Use a stream consumer to read from the stream over a dedicated connection\.
 + **Batch size** – The number of records to send to the function in each batch, up to 10,000\. Lambda passes all of the records in the batch to the function in a single call, as long as the total size of the events doesn't exceed the [payload limit](gettingstarted-limits.md) for synchronous invocation \(6 MB\)\.
@@ -151,7 +151,7 @@ Lambda supports the following options for Kinesis event sources\.
 
 To manage the event source configuration later, choose the trigger in the designer\.
 
-## Event Source Mapping API<a name="services-kinesis-api"></a>
+## Event source mapping API<a name="services-kinesis-api"></a>
 
 To manage event source mappings with the AWS CLI or AWS SDK, use the following API actions:
 + [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
@@ -243,7 +243,7 @@ $ aws lambda update-event-source-mapping --uuid 2b733gdc-8ac3-cdf5-af3a-1827b3b1
 --parallelization-factor 5
 ```
 
-## Error Handling<a name="services-kinesis-errors"></a>
+## Error handling<a name="services-kinesis-errors"></a>
 
 The event source mapping that reads records from your Kinesis stream invokes your function synchronously and retries on errors\. If the function is throttled or the Lambda service returns an error without invoking the function, Lambda retries until the records expire or exceed the maximum age that you configure on the event source mapping\.
 
@@ -304,8 +304,8 @@ The following example shows an invocation record for a Kinesis stream\.
 
 You can use this information to retrieve the affected records from the stream for troubleshooting\. The actual records aren't included, so you must process this record and retrieve them from the stream before they expire and are lost\.
 
-## Amazon CloudWatch Metrics<a name="events-kinesis-metrics"></a>
+## Amazon CloudWatch metrics<a name="events-kinesis-metrics"></a>
 
 Lambda emits the `IteratorAge` metric when your function finishes processing a batch of records\. The metric indicates how old the last record in the batch was when processing finished\. If your function is processing new events, you can use the iterator age to estimate the latency between when a record is added and when the function processes it\.
 
-An increasing trend in iterator age can indicate issues with your function\. For more information, see [Working with AWS Lambda Function Metrics](monitoring-metrics.md)\.
+An increasing trend in iterator age can indicate issues with your function\. For more information, see [Working with AWS Lambda function metrics](monitoring-metrics.md)\.

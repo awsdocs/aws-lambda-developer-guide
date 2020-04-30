@@ -1,4 +1,4 @@
-# Monitoring Functions in the AWS Lambda Console<a name="monitoring-functions-access-metrics"></a>
+# Monitoring functions in the AWS Lambda console<a name="monitoring-functions-access-metrics"></a>
 
 AWS Lambda monitors functions on your behalf and sends metrics to Amazon CloudWatch\. The metrics include total requests, duration, and error rates\. The Lambda console creates graphs for these metrics and shows them on the **Monitoring** page for each function\.
 
@@ -13,7 +13,7 @@ AWS Lambda monitors functions on your behalf and sends metrics to Amazon CloudWa
 
 The console provides the following graphs\.
 
-**Lambda Monitoring Graphs**
+**Lambda monitoring graphs**
 + **Invocations** – The number of times that the function was invoked in each 5\-minute period\.
 + **Duration** – The average, minimum, and maximum execution times\.
 + **Error count and success rate \(%\)** – The number of errors and the percentage of executions that completed without error\.
@@ -22,7 +22,7 @@ The console provides the following graphs\.
 + **Async delivery failures** – The number of errors that occurred when Lambda attempted to write to a destination or dead\-letter queue\.
 + **Concurrent executions** – The number of function instances that are processing events\.
 
-To see the definition of a graph in CloudWatch, choose **View in metrics** from the menu in the top right of the graph\. For more information about the metrics that Lambda records, see [Working with AWS Lambda Function Metrics](monitoring-metrics.md)\.
+To see the definition of a graph in CloudWatch, choose **View in metrics** from the menu in the top right of the graph\. For more information about the metrics that Lambda records, see [Working with AWS Lambda function metrics](monitoring-metrics.md)\.
 
 The console also shows reports from CloudWatch Logs Insights that are compiled from information in your function's logs\. You can add these reports to a custom dashboard in the CloudWatch Logs console\. Use the queries as a starting point for your own reports\.
 

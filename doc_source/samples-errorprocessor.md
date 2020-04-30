@@ -1,4 +1,4 @@
-# Error Processor Sample Application for AWS Lambda<a name="samples-errorprocessor"></a>
+# Error processor sample application for AWS Lambda<a name="samples-errorprocessor"></a>
 
 The Error Processor sample application demonstrates the use of AWS Lambda to handle events from an [Amazon CloudWatch Logs subscription](services-cloudwatchlogs.md)\. CloudWatch Logs lets you invoke a Lambda function when a log entry matches a pattern\. The subscription in this application monitors the log group of a function for entries that contain the word `ERROR`\. It invokes a processor Lambda function in response\. The processor function retrieves the full log stream and trace data for the request that caused the error, and stores them for later use\.
 
@@ -11,11 +11,11 @@ Function code is available in the following files:
 You can deploy the sample in a few minutes with the AWS CLI and AWS CloudFormation\. Follow the instructions in the [README](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/error-processor) to download, configure, and deploy it in your account\.
 
 **Topics**
-+ [Architecture and Event Structure](#sample-errorprocessor-architecture)
++ [Architecture and event structure](#sample-errorprocessor-architecture)
 + [Instrumentation with AWS X\-Ray](#sample-errorprocessor-instrumentation)
-+ [AWS CloudFormation Template and Additional Resources](#sample-errorprocessor-template)
++ [AWS CloudFormation template and additional resources](#sample-errorprocessor-template)
 
-## Architecture and Event Structure<a name="sample-errorprocessor-architecture"></a>
+## Architecture and event structure<a name="sample-errorprocessor-architecture"></a>
 
 The sample application uses the following AWS services\.
 + AWS Lambda – Runs function code, sends logs to CloudWatch Logs, and sends trace data to X\-Ray\.
@@ -27,7 +27,7 @@ Standard charges apply for each service\.
 
 A Lambda function in the application generates errors randomly\. When CloudWatch Logs detects the word `ERROR` in the function's logs, it sends an event to the processor function for processing\.
 
-**Example – CloudWatch Logs Message Event**  
+**Example – CloudWatch Logs message event**  
 
 ```
 {
@@ -39,7 +39,7 @@ A Lambda function in the application generates errors randomly\. When CloudWatch
 
 When it's decoded, the data contains details about the log event\. The function uses these details to identify the log stream, and parses the log message to get the ID of the request that caused the error\.
 
-**Example – Decoded CloudWatch Logs Event Data**  
+**Example – Decoded CloudWatch Logs event data**  
 
 ```
 {
@@ -74,7 +74,7 @@ The two Node\.js functions are configured for active tracing in the template, an
 
 The processor function gets the request ID from the CloudWatch Logs event, and uses the AWS SDK for JavaScript to search X\-Ray for that request\. It uses AWS SDK clients, which are instrumented with the X\-Ray SDK, to download the trace and log stream\. Then it stores them in the output bucket\. The X\-Ray SDK records these calls, and they appear as subsegments in the trace\.
 
-## AWS CloudFormation Template and Additional Resources<a name="sample-errorprocessor-template"></a>
+## AWS CloudFormation template and additional resources<a name="sample-errorprocessor-template"></a>
 
 The application is implemented in two Node\.js modules and deployed with an AWS CloudFormation template and supporting shell scripts\. The template creates the processor function, the random error function, and the following supporting resources\.
 + Execution role – An IAM role that grants the functions permission to access other AWS services\.

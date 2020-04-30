@@ -1,4 +1,4 @@
-# Managing AWS Lambda Functions<a name="lambda-functions"></a>
+# Managing AWS Lambda functions<a name="lambda-functions"></a>
 
 You can use the AWS Lambda API or console to configure settings on your Lambda functions\. [Basic function settings](configuration-console.md) include the description, role, and runtime that you specify when you create a function in the Lambda console\. You can configure more settings after you create a function, or use the API to set things like the handler name, memory allocation, and security groups during creation\.
 
@@ -11,12 +11,12 @@ As you add libraries and other dependencies to your function, creating and uploa
 To use your Lambda function with AWS resources in an Amazon VPC, configure it with security groups and subnets to [create a VPC connection](configuration-vpc.md)\. Connecting your function to a VPC lets you access resources in a private subnet such as relational databases and caches\. You can also [create a database proxy](configuration-database.md) for MySQL and Aurora DB instances\. A database proxy enables a function to reach high concurrency levels without exhausting database connections\.
 
 **Topics**
-+ [Configuring Functions in the AWS Lambda Console](configuration-console.md)
-+ [Using AWS Lambda Environment Variables](configuration-envvars.md)
-+ [Managing Concurrency for a Lambda Function](configuration-concurrency.md)
-+ [AWS Lambda Function Versions](configuration-versions.md)
-+ [AWS Lambda Function Aliases](configuration-aliases.md)
-+ [AWS Lambda Layers](configuration-layers.md)
-+ [Configuring a Lambda Function to Access Resources in a VPC](configuration-vpc.md)
-+ [Configuring Database Access for a Lambda Function](configuration-database.md)
++ [Configuring functions in the AWS Lambda console](configuration-console.md)
++ [Using AWS Lambda environment variables](configuration-envvars.md)
++ [Managing concurrency for a Lambda function](configuration-concurrency.md)
++ [AWS Lambda function versions](configuration-versions.md)
++ [AWS Lambda function aliases](configuration-aliases.md)
++ [AWS Lambda layers](configuration-layers.md)
++ [Configuring a Lambda function to access resources in a VPC](configuration-vpc.md)
++ [Configuring database access for a Lambda function](configuration-database.md)
 + [Tagging Lambda Functions](configuration-tags.md)

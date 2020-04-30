@@ -1,4 +1,4 @@
-# Creating an Application with Continuous Delivery in the Lambda Console<a name="applications-tutorial"></a>
+# Creating an application with continuous delivery in the Lambda console<a name="applications-tutorial"></a>
 
 You can use the Lambda console to create an application with an integrated continuous delivery pipeline\. With continuous delivery, every change that you push to your source control repository triggers a pipeline that builds and deploys your application automatically\. The Lambda console provides starter projects for common application types with Node\.js sample code and templates that create supporting resources\.
 
@@ -14,22 +14,22 @@ In this tutorial, you create the following resources\.
 
 Your application and pipeline resources are defined in AWS CloudFormation templates that you can customize and extend\. Your application repository includes a template that you can modify to add Amazon DynamoDB tables, an Amazon API Gateway API, and other application resources\. The continuous delivery pipeline is defined in a separate template outside of source control and has its own stack\.
 
-The pipeline maps a single branch in a repository to a single application stack\. You can create additional pipelines to add environments for other branches in the same repository\. You can also add stages to your pipeline for testing, staging, and manual approvals\. For more information about AWS CodePipeline, see [What Is AWS CodePipeline](https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html)\.
+The pipeline maps a single branch in a repository to a single application stack\. You can create additional pipelines to add environments for other branches in the same repository\. You can also add stages to your pipeline for testing, staging, and manual approvals\. For more information about AWS CodePipeline, see [What is AWS CodePipeline](https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html)\.
 
 **Topics**
 + [Prerequisites](#applications-tutorial-prepare)
-+ [Create an Application](#applications-tutorial-wizard)
-+ [Invoke the Function](#applications-tutorial-invoke)
-+ [Add an AWS Resource](#applications-tutorial-update)
-+ [Update the Permissions Boundary](#applications-tutorial-permissions)
-+ [Update the Function Code](#applications-tutorial-code)
-+ [Next Steps](#applications-tutorial-nextsteps)
++ [Create an application](#applications-tutorial-wizard)
++ [Invoke the function](#applications-tutorial-invoke)
++ [Add an AWS resource](#applications-tutorial-update)
++ [Update the permissions boundary](#applications-tutorial-permissions)
++ [Update the function code](#applications-tutorial-code)
++ [Next steps](#applications-tutorial-nextsteps)
 + [Troubleshooting](#applications-tutorial-troubleshooting)
-+ [Clean Up](#applications-tutorial-cleanup)
++ [Clean up](#applications-tutorial-cleanup)
 
 ## Prerequisites<a name="applications-tutorial-prepare"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started with AWS Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with AWS Lambda](getting-started.md) to create your first Lambda function\.
 
 To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
@@ -42,9 +42,9 @@ For long commands, an escape character \(`\`\) is used to split a command over m
 
 On Linux and macOS, use your preferred shell and package manager\. On Windows 10, you can [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows\-integrated version of Ubuntu and Bash\.
 
-This tutorial uses CodeCommit for source control\. To set up your local machine to access and update application code, see [Setting Up](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up.html) in the *AWS CodeCommit User Guide*\.
+This tutorial uses CodeCommit for source control\. To set up your local machine to access and update application code, see [Setting up](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up.html) in the *AWS CodeCommit User Guide*\.
 
-## Create an Application<a name="applications-tutorial-wizard"></a>
+## Create an application<a name="applications-tutorial-wizard"></a>
 
 Create an application in the Lambda console\.
 
@@ -68,7 +68,7 @@ Create an application in the Lambda console\.
 
 Lambda creates the pipeline and related resources and commits the sample application code to the Git repository\. As resources are created, they appear on the overview page\.
 
-## Invoke the Function<a name="applications-tutorial-invoke"></a>
+## Invoke the function<a name="applications-tutorial-invoke"></a>
 
 Invoke the function to verify that it works\.
 
@@ -92,7 +92,7 @@ Invoke the function to verify that it works\.
 
 The Lambda console executes your function and displays the result\. Expand the **Details** section under the result to see the output and execution details\.
 
-## Add an AWS Resource<a name="applications-tutorial-update"></a>
+## Add an AWS resource<a name="applications-tutorial-update"></a>
 
 When you create your application, the Lambda console creates a Git repository that contains the sample application\. To get a copy of the application code on your local machine, clone the project repository\.
 
@@ -119,7 +119,7 @@ The repository contains the template for the application, a build specification,
 1. Open `template.yml` in a text editor\.
 
 1. Add a table resource, an environment variable that passes the table name to the function, and a permissions policy that allows the function to manage it\.  
-**Example template\.yml \- Resources**  
+**Example template\.yml \- resources**  
 
    ```
    ...
@@ -159,7 +159,7 @@ The repository contains the template for the application, a build specification,
 
 When you push a change, it triggers the application's pipeline\. Use the **Deployments** tab of the application screen to track the change as it flows through the pipeline\. When the deployment is complete, proceed to the next step\.
 
-## Update the Permissions Boundary<a name="applications-tutorial-permissions"></a>
+## Update the permissions boundary<a name="applications-tutorial-permissions"></a>
 
 The sample application applies a *permissions boundary* to its function's execution role\. The permissions boundary limits the permissions that you can add to the function's role\. Without the boundary, users with write access to the project repository could modify the project template to give the function permission to access resources and services outside of the scope of the sample application\.
 
@@ -175,9 +175,9 @@ In order for the function to use the DynamoDB permission that you added to its e
 
 1. Follow the instructions shown to update the boundary to allow access to the new table\.
 
-For more information about permissions boundaries, see [Using Permissions Boundaries for AWS Lambda Applications](permissions-boundary.md)\.
+For more information about permissions boundaries, see [Using permissions boundaries for AWS Lambda applications](permissions-boundary.md)\.
 
-## Update the Function Code<a name="applications-tutorial-code"></a>
+## Update the function code<a name="applications-tutorial-code"></a>
 
 Next, update the function code to use the table\. The following code uses the table to track the number of invocations processed by each instance of the function\. It uses the log stream ID as a unique identifier\. New instances are created when you update a function, and to handle multiple concurrent invocations\.
 
@@ -245,13 +245,13 @@ After the code change is deployed, invoke the function a few times to update the
 
 1. Choose **Start search**\.
 
-## Next Steps<a name="applications-tutorial-nextsteps"></a>
+## Next steps<a name="applications-tutorial-nextsteps"></a>
 
 The AWS CloudFormation template that defines your application resources uses the AWS Serverless Application Model transform to simplify the syntax for resource definitions, and automate uploading the deployment package and other artifacts\. AWS SAM also provides a command line interface \(the AWS SAM CLI\), which has the same packaging and deployment functionality as the AWS CLI, with additional features specific to Lambda applications\. Use the AWS SAM CLI to test your application locally in a Docker container that emulates the Lambda execution environment\.
 + [Installing the AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html)
-+ [Testing and Debugging Serverless Applications](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-test-and-debug.html)
++ [Testing and debugging serverless applications](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-test-and-debug.html)
 
-AWS Cloud9 provides an online development environment that includes Node\.js, the AWS SAM CLI, and Docker\. With AWS Cloud9, you can start developing quickly and access your development environment from any computer\. For instructions, see [Getting Started](https://docs.aws.amazon.com/cloud9/latest/user-guide/get-started.html) in the *AWS Cloud9 User Guide*\.
+AWS Cloud9 provides an online development environment that includes Node\.js, the AWS SAM CLI, and Docker\. With AWS Cloud9, you can start developing quickly and access your development environment from any computer\. For instructions, see [Getting started](https://docs.aws.amazon.com/cloud9/latest/user-guide/get-started.html) in the *AWS Cloud9 User Guide*\.
 
 For local development, AWS toolkits for integrated development environments \(IDEs\) let you test and debug functions before pushing them to your repository\.
 + [AWS Toolkit for JetBrains](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/) – Plugin for PyCharm \(Python\) and IntelliJ \(Java\) IDEs\.
@@ -300,7 +300,7 @@ For example, to [connect a function to a virtual private cloud](configuration-vp
 
 After you address permissions errors, choose **Release change** in the pipeline overview to rerun the build and deployment\.
 
-## Clean Up<a name="applications-tutorial-cleanup"></a>
+## Clean up<a name="applications-tutorial-cleanup"></a>
 
 You can continue to modify and use the sample to develop your own application\. If you are done using the sample, delete the application to avoid paying for the pipeline, repository, and storage\.
 

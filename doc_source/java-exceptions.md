@@ -1,8 +1,8 @@
-# AWS Lambda Function Errors in Java<a name="java-exceptions"></a>
+# AWS Lambda function errors in Java<a name="java-exceptions"></a>
 
 When your function raises an error, Lambda returns details about the error to the invoker\. The body of the response that Lambda returns contains a JSON document with the error name, error type, and an array of stack frames\. The client or service that invoked the function can handle the error or pass it along to an end user\. You can use custom exceptions to return helpful information to users for client errors\.
 
-**Example [src/main/java/example/HandlerDivide\.java](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/java-basic/src/main/java/example/HandlerDivide.java) – Runtime Exception**  
+**Example [src/main/java/example/HandlerDivide\.java](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/java-basic/src/main/java/example/HandlerDivide.java) – Runtime exception**  
 
 ```
 import java.util.List;
@@ -30,7 +30,7 @@ public class HandlerDivide implements RequestHandler<List<Integer>, Integer>{
 
 When the function throws `InputLengthException`, the Java runtime serializes it into the following document\.
 
-**Example Error Document \(Whitespace Added\)**  
+**Example Error document \(whitespace added\)**  
 
 ```
 {
@@ -58,13 +58,13 @@ This code can return an arithmetic error\.
 ```
 
 **Topics**
-+ [Viewing Error Output](#java-exceptions-view)
-+ [Understanding Error Types and Sources](#java-exceptions-types)
-+ [Error Handling in Clients](#java-exceptions-clients)
-+ [Error Handling in Other AWS Services](#java-exceptions-services)
-+ [Error Handling in Sample Applications](#java-exceptions-samples)
++ [Viewing error output](#java-exceptions-view)
++ [Understanding error types and sources](#java-exceptions-types)
++ [Error handling in clients](#java-exceptions-clients)
++ [Error handling in other AWS services](#java-exceptions-services)
++ [Error handling in sample applications](#java-exceptions-samples)
 
-## Viewing Error Output<a name="java-exceptions-view"></a>
+## Viewing error output<a name="java-exceptions-view"></a>
 
 You can invoke your function with a test payload and view error output in the Lambda console, from the command line, or with the AWS SDK\. Error output is also captured in the function's execution logs and, when [tracing](java-tracing.md) is enabled, in AWS X\-Ray\.
 
@@ -126,9 +126,9 @@ REPORT RequestId: 081f7522-xmpl-48e2-8f67-96686904bb4f  Duration: 4.20 ms       
 XRAY TraceId: 1-5e73162b-1919xmpl2592f4549e1c39be       SegmentId: 3dadxmpl48126cb8     Sampled: true
 ```
 
-For more information about logs, see [AWS Lambda Function Logging in Java](java-logging.md)\.
+For more information about logs, see [AWS Lambda function logging in Java](java-logging.md)\.
 
-## Understanding Error Types and Sources<a name="java-exceptions-types"></a>
+## Understanding error types and sources<a name="java-exceptions-types"></a>
 
 When you invoke a function, multiple subsystems handle the request, event, output, and response\. Errors can come from the Lambda service \(invocation errors\), or from an instance of your function\. Function errors include exceptions returned by your handler code and exceptions returned by the Lambda runtime\.
 
@@ -143,7 +143,7 @@ If a request passes validation, Lambda sends it to an instance of the function\.
 
 In the following example, the runtime fails to deserialize the event into an object\. The input is a valid JSON type, but it doesn't match the type expected by the handler method\.
 
-**Example Lambda Runtime Error**  
+**Example Lambda runtime error**  
 
 ```
 {
@@ -169,9 +169,9 @@ In the following example, the runtime fails to deserialize the event into an obj
 
 For Lambda runtime errors and other function errors, the Lambda service does not return an error code\. A `2xx` series status code indicates that the Lambda service accepted the request\. Instead of an error code, Lambda indicates the error by including the `X-Amz-Function-Error` header in the response\.
 
-For asynchronous invocation, events are queued before Lambda sends them to your function\. For valid requests, Lambda returns a success response immediately and adds the event to the queue\. Lambda then reads events from the queue and invokes the function\. If an error occurs, Lambda retries with behavior that varies depending on the type of error\. For more information, see [Asynchronous Invocation](invocation-async.md)\.
+For asynchronous invocation, events are queued before Lambda sends them to your function\. For valid requests, Lambda returns a success response immediately and adds the event to the queue\. Lambda then reads events from the queue and invokes the function\. If an error occurs, Lambda retries with behavior that varies depending on the type of error\. For more information, see [Asynchronous invocation](invocation-async.md)\.
 
-## Error Handling in Clients<a name="java-exceptions-clients"></a>
+## Error handling in clients<a name="java-exceptions-clients"></a>
 
 Clients that invoke Lambda functions can choose to handle errors or pass them on to the end user\. The correct error handling behavior depends on the type of application, the audience, and the source of the error\. For example, if an invocation fails with an error code `429` \(too many requests\), the AWS CLI retries up to 4 times before showing an error to the user\.
 
@@ -199,7 +199,7 @@ $ aws lambda invoke --function-name my-function --payload '[1000]' out.json
 {"errorMessage":"Input must be an array that contains 2 numbers.","errorType":"example.InputLengthException","stackTrace":["example.HandlerDivide.handleRequest(HandlerDivide.java:22)","example.HandlerDivide.handleRequest(HandlerDivide.java:13)"]}
 ```
 
-## Error Handling in Other AWS Services<a name="java-exceptions-services"></a>
+## Error handling in other AWS services<a name="java-exceptions-services"></a>
 
 When an AWS service invokes your function, the service chooses the invocation type and retry behavior\. AWS services can invoke your function on a schedule, in response to a lifecycle event on a resource, or to serve a request from a user\. Some services invoke functions asynchronously and let Lambda handle errors, while others retry or pass errors back to the user\.
 
@@ -211,13 +211,13 @@ To determine the source of an error and its cause, use AWS X\-Ray\. With X\-Ray,
 
 Get started with X\-Ray by [enabling active tracing](java-tracing.md) on your functions\.
 
-For details on how other services handler errors, see the topics in the [Using AWS Lambda with Other Services](lambda-services.md) chapter\.
+For details on how other services handler errors, see the topics in the [Using AWS Lambda with other services](lambda-services.md) chapter\.
 
-## Error Handling in Sample Applications<a name="java-exceptions-samples"></a>
+## Error handling in sample applications<a name="java-exceptions-samples"></a>
 
 The GitHub repository for this guide includes sample applications that demonstrate the use of the errors\. Each sample application includes scripts for easy deployment and cleanup, an AWS Serverless Application Model \(AWS SAM\) template, and supporting resources\.
 
-**Sample Lambda Applications in Java**
+**Sample Lambda applications in Java**
 + [blank\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-java) – A Java function that shows the use of Lambda's Java libraries, logging, environment variables, layers, AWS X\-Ray tracing, unit tests, and the AWS SDK\.
 + [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-basic) – A minimal Java function with unit tests and variable logging configuration\.
 + [java\-events](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-events) – A minimal Java function that uses the [aws\-lambda\-java\-events](java-package.md) library with event types that don't require the AWS SDK as a dependency, such as Amazon API Gateway\.

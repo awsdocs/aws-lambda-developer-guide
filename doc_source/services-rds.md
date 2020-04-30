@@ -2,7 +2,7 @@
 
 You can use AWS Lambda to process event notifications from an Amazon Relational Database Service \(Amazon RDS\) database\. Amazon RDS sends notifications to an Amazon Simple Notification Service \(Amazon SNS\) topic, which you can configure to invoke a Lambda function\. Amazon SNS wraps the message from Amazon RDS in its own event document and sends it to your function\.
 
-**Example Amazon RDS Message in an Amazon SNS Event**  
+**Example Amazon RDS message in an Amazon SNS event**  
 
 ```
 {
@@ -29,9 +29,9 @@ You can use AWS Lambda to process event notifications from an Amazon Relational 
 }
 ```
 
-For instructions on configuring an Amazon RDS database to send notifications, see [Using Amazon RDS Event Notification](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html) in the Amazon Relational Database Service User Guide\.
+For instructions on configuring an Amazon RDS database to send notifications, see [Using Amazon RDS event notification](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html) in the Amazon Relational Database Service User Guide\.
 
 For details on using Amazon SNS as trigger, see [Using AWS Lambda with Amazon SNS](with-sns.md)\.
 
 **Topics**
-+ [Tutorial: Configuring a Lambda Function to Access Amazon RDS in an Amazon VPC](services-rds-tutorial.md)
++ [Tutorial: Configuring a Lambda function to access Amazon RDS in an Amazon VPC](services-rds-tutorial.md)

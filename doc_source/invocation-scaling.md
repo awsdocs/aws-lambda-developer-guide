@@ -1,10 +1,10 @@
-# AWS Lambda Function Scaling<a name="invocation-scaling"></a>
+# AWS Lambda function scaling<a name="invocation-scaling"></a>
 
 The first time you invoke your function, AWS Lambda creates an instance of the function and runs its handler method to process the event\. When the function returns a response, it stays active and waits to process additional events\. If you invoke the function again while the first event is being processed, Lambda initializes another instance, and the function processes the two events concurrently\. As more events come in, Lambda routes them to available instances and creates new instances as needed\. When the number of requests decreases, Lambda stops unused instances to free up scaling capacity for other functions\.
 
  Your functions' *concurrency* is the number of instances that serve requests at a given time\. For an initial burst of traffic, your functions' cumulative concurrency in a Region can reach an initial level of between 500 and 3000, which varies per Region\.
 
-**Burst Concurrency Limits**
+**Burst concurrency limits**
 + **3000** – US West \(Oregon\), US East \(N\. Virginia\), Europe \(Ireland\)
 + **1000** – Asia Pacific \(Tokyo\), Europe \(Frankfurt\)
 + **500** – Other Regions
@@ -49,14 +49,14 @@ In the following example, a function scales between a minimum and maximum amount
 + ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/features-scaling-provisioned.standard.png) Standard concurrency
 
 When you invoke your function asynchronously, by using an event source mapping or another AWS service, scaling behavior varies\. For example, event source mappings that read from a stream are limited by the number of shards in the stream\. Scaling capacity that is unused by an event source is available for use by other clients and event sources\. For more information, see the following topics\.
-+ [Asynchronous Invocation](invocation-async.md)
-+ [AWS Lambda Event Source Mapping](invocation-eventsourcemapping.md)
-+ [Error Handling and Automatic Retries in AWS Lambda](invocation-retries.md)
-+ [Using AWS Lambda with Other Services](lambda-services.md)
++ [Asynchronous invocation](invocation-async.md)
++ [AWS Lambda event source mappings](invocation-eventsourcemapping.md)
++ [Error handling and automatic retries in AWS Lambda](invocation-retries.md)
++ [Using AWS Lambda with other services](lambda-services.md)
 
 You can monitor concurrency levels in your account by using the following metrics:
 
-**Concurrency Metrics**
+**Concurrency metrics**
 + `ConcurrentExecutions`
 + `UnreservedConcurrentExecutions`
 + `ProvisionedConcurrentExecutions`
@@ -64,4 +64,4 @@ You can monitor concurrency levels in your account by using the following metric
 + `ProvisionedConcurrencySpilloverInvocations`
 + `ProvisionedConcurrencyUtilization`
 
-For more information, see [Working with AWS Lambda Function Metrics](monitoring-metrics.md)\.
+For more information, see [Working with AWS Lambda function metrics](monitoring-metrics.md)\.

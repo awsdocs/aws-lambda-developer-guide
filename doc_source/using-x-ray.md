@@ -1,13 +1,13 @@
-# Tracing Lambda\-Based Applications with AWS X\-Ray<a name="using-x-ray"></a>
+# Tracing Lambda\-based applications with AWS X\-Ray<a name="using-x-ray"></a>
 
 AWS X\-Ray is an AWS service that allows you to detect, analyze, and optimize performance issues with your AWS Lambda applications\. X\-Ray collects metadata from the Lambda service and any upstream or downstream services that make up your application\. X\-Ray uses this metadata to generate a detailed service graph that illustrates performance bottlenecks, latency spikes, and other issues that impact the performance of your Lambda application\. 
 
-After using the [Lambda on the AWS X\-Ray Service Map ](#lambda-service-map)to identify a problematic resource or component, you can zoom in and view a visual representation of the request\. This visual representation covers the time from when an event source triggers a Lambda function until the function execution has completed\. X\-Ray provides you with a breakdown of your function's operations, such as information regarding downstream calls your Lambda function made to other services\. In addition, X\-Ray integration with Lambda provides you with visibility into the AWS Lambda service overhead\. It does so by displaying specifics such as your request's dwell time and number of invocations\. 
+After using the [Lambda on the AWS X\-Ray service map ](#lambda-service-map)to identify a problematic resource or component, you can zoom in and view a visual representation of the request\. This visual representation covers the time from when an event source triggers a Lambda function until the function execution has completed\. X\-Ray provides you with a breakdown of your function's operations, such as information regarding downstream calls your Lambda function made to other services\. In addition, X\-Ray integration with Lambda provides you with visibility into the AWS Lambda service overhead\. It does so by displaying specifics such as your request's dwell time and number of invocations\. 
 
 **Note**  
-Only services that currently integrate with X\-Ray show as standalone traces, outside of your Lambda trace\. For a list of services that currently support X\-Ray, see [Integrating AWS X\-Ray with Other AWS Services](https://docs.aws.amazon.com/xray/latest/devguide/xray-services.html)\.
+Only services that currently integrate with X\-Ray show as standalone traces, outside of your Lambda trace\. For a list of services that currently support X\-Ray, see [Integrating AWS X\-Ray with other AWS services](https://docs.aws.amazon.com/xray/latest/devguide/xray-services.html)\.
 
-## Lambda on the AWS X\-Ray Service Map<a name="lambda-service-map"></a>
+## Lambda on the AWS X\-Ray service map<a name="lambda-service-map"></a>
 
 X\-Ray displays three types of nodes on the service map for requests served by Lambda:
 + **Lambda service \(AWS::Lambda\)** – This type of node represents the time the request spent in the Lambda service\. Timing starts when Lambda first receives the request and ends when the request leaves the Lambda service\.
@@ -18,9 +18,9 @@ In the diagram following, the nodes represent \(from left to right\): The Lambda
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/Tracing-S3.png)
 
-For more information, see [Viewing the Service Map](https://docs.aws.amazon.com/xray/latest/devguide/xray-console.html)\.
+For more information, see [Viewing the service map](https://docs.aws.amazon.com/xray/latest/devguide/xray-console.html)\.
 
-## Lambda as an AWS X\-Ray Trace<a name="lambda-request"></a>
+## Lambda as an AWS X\-Ray trace<a name="lambda-request"></a>
 
 From the service map, you can zoom in to see a trace view of your Lambda function\. The trace will display in\-depth information regarding your function invocations, represented as segments and subsegments:
 + **Lambda service segment** – This segment represents different information depending on the event source used to invoke the function:

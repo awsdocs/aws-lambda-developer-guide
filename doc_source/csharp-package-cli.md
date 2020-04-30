@@ -59,7 +59,7 @@ Under the `src/myfunction` directory, examine the following files:
     "function-timeout" : 30,
     "function-handler" : "MyFunction::MyFunction.Function::FunctionHandler"
   ```
-+ **Function\.cs**: Your Lambda handler function code\. It's a C\# template that includes the default `Amazon.Lambda.Core` library and a default `LambdaSerializer` attribute\. For more information on serialization requirements and options, see [Serializing Lambda Functions](csharp-handler.md#csharp-handler-serializer)\. It also includes a sample function that you can edit to apply your Lambda function code\.
++ **Function\.cs**: Your Lambda handler function code\. It's a C\# template that includes the default `Amazon.Lambda.Core` library and a default `LambdaSerializer` attribute\. For more information on serialization requirements and options, see [Serializing Lambda functions](csharp-handler.md#csharp-handler-serializer)\. It also includes a sample function that you can edit to apply your Lambda function code\.
 
   ```
   using System;

@@ -10,7 +10,7 @@ The API returns an HTTP 424 status code \(Dependency Failed Exception\) if the L
 
 The Amazon Lex bot invokes your Lambda function [synchronously](invocation-sync.md)\. The event parameter contains information about the bot and the value of each slot in the dialog\. The `invocationSource` parameter indicates whether the Lambda function should validate the inputs \(DialogCodeHook\) or fulfill the intent \(FulfillmentCodeHook\)\.
 
-**Example Amazon Lex Message Event**  
+**Example Amazon Lex message event**  
 
 ```
 {
@@ -41,7 +41,7 @@ The Amazon Lex bot invokes your Lambda function [synchronously](invocation-sync.
 
 Amazon Lex expects a response from a Lambda function in the following format\. The `dialogAction` field is required\. The `sessionAttributes` and the `recentIntentSummaryView` fields are optional\. 
 
-**Example Amazon Lex Message Event**  
+**Example Amazon Lex message event**  
 
 ```
 {
@@ -93,9 +93,9 @@ Amazon Lex expects a response from a Lambda function in the following format\. T
 }
 ```
 
-Note that the additional fields required for `dialogAction` vary based on the value of the `type` field\. For more information about the event and response fields, see [Lambda Event and Response Format](https://docs.aws.amazon.com/lex/latest/dg/lambda-input-response-format.html) in the *Amazon Lex Developer Guide*\. For an example tutorial that shows how to use Lambda with Amazon Lex, see [Exercise 1: Create Amazon Lex Bot Using a Blueprint](https://docs.aws.amazon.com/lex/latest/dg/gs-bp.html) in the *Amazon Lex Developer Guide*\.
+Note that the additional fields required for `dialogAction` vary based on the value of the `type` field\. For more information about the event and response fields, see [Lambda event and response format](https://docs.aws.amazon.com/lex/latest/dg/lambda-input-response-format.html) in the *Amazon Lex Developer Guide*\. For an example tutorial that shows how to use Lambda with Amazon Lex, see [Exercise 1: Create Amazon Lex bot using a blueprint](https://docs.aws.amazon.com/lex/latest/dg/gs-bp.html) in the *Amazon Lex Developer Guide*\.
 
-## Roles and Permissions<a name="services-cloudfront-permissions"></a>
+## Roles and permissions<a name="services-cloudfront-permissions"></a>
 
 You need to configure a service\-linked role as your function's [execution role](lambda-intro-execution-role.md)\. Amazon Lex defines the service\-linked role with predefined permissions\. When you create an Amazon Lex bot using the console, the service\-linked role is created automatically\. To create a service\-linked role with the AWS CLI, use the `create-service-linked-role` command\. 
 

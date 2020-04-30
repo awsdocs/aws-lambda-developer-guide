@@ -1,4 +1,4 @@
-# Troubleshoot Deployment Issues in AWS Lambda<a name="troubleshooting-deployment"></a>
+# Troubleshoot deployment issues in AWS Lambda<a name="troubleshooting-deployment"></a>
 
 When you update your function, Lambda deploys the change by launching new instances of the function with the updated code or settings\. Deployment errors prevent the new version from being used and can arise from issues with your deployment package, code, permissions, or tools\.
 
@@ -55,13 +55,13 @@ The name of the file or class in your function's handler configuration doesn't m
 The name of the handler method in your function's handler configuration doesn't match your code\. Each runtime defines a naming convention for handlers, such as *filename*\.*methodname*\. The handler is the method in your function's code that the runtime executes when your function is invoked\.
 
 For some languages, Lambda provides a library with an interface that expects a handler method to have a specific name\. For details about handler naming for each language, see the following topics\.
-+ [Building Lambda Functions with Node\.js](lambda-nodejs.md)
-+ [Building Lambda Functions with Python](lambda-python.md)
-+ [Building Lambda Functions with Ruby](lambda-ruby.md)
-+ [Building Lambda Functions with Java](lambda-java.md)
-+ [Building Lambda Functions with Go](lambda-golang.md)
-+ [Building Lambda Functions with C\#](lambda-csharp.md)
-+ [Building Lambda Functions with PowerShell](lambda-powershell.md)
++ [Building Lambda functions with Node\.js](lambda-nodejs.md)
++ [Building Lambda functions with Python](lambda-python.md)
++ [Building Lambda functions with Ruby](lambda-ruby.md)
++ [Building Lambda functions with Java](lambda-java.md)
++ [Building Lambda functions with Go](lambda-golang.md)
++ [Building Lambda functions with C\#](lambda-csharp.md)
++ [Building Lambda functions with PowerShell](lambda-powershell.md)
 
 **Error:** *InvalidParameterValueException: Lambda was unable to configure your environment variables because the environment variables you have provided exceeded the 4KB limit\. String measured: \{"A1":"uSFeY5cyPiPn7AtnX5BsM\.\.\.*
 
@@ -89,4 +89,4 @@ In this example, the object is 39 characters and takes up 39 bytes when it's sto
 
 **Error:** *InvalidParameterValueException: Lambda was unable to configure your environment variables because the environment variables you have provided contains reserved keys that are currently not supported for modification\.*
 
-Lambda reserves some environment variable keys for internal use\. For example, `AWS_REGION` is used by the runtime to determine the current Region and cannot be overridden\. Other variables, like `PATH`, are used by the runtime but can be extended in your function configuration\. For a full list, see [Runtime Environment Variables](configuration-envvars.md#configuration-envvars-runtime)\.
+Lambda reserves some environment variable keys for internal use\. For example, `AWS_REGION` is used by the runtime to determine the current Region and cannot be overridden\. Other variables, like `PATH`, are used by the runtime but can be extended in your function configuration\. For a full list, see [Runtime environment variables](configuration-envvars.md#configuration-envvars-runtime)\.

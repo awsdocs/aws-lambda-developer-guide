@@ -4,7 +4,7 @@ You can use an AWS Lambda function to process records in an [Amazon DynamoDB str
 
 Lambda reads records from the stream and invokes your function [synchronously](invocation-sync.md) with an event that contains stream records\. Lambda reads records in batches and invokes your function to process records from the batch\.
 
-**Example DynamoDB Streams Record Event**  
+**Example DynamoDB Streams record event**  
 
 ```
 {
@@ -80,16 +80,16 @@ If your function returns an error, Lambda retries the batch until processing suc
 You can also increase concurrency by processing multiple batches from each shard in parallel\. Lambda can process up to 10 batches in each shard simultaneously\. If you increase the number of concurrent batches per shard, Lambda still ensures in\-order processing at the partition\-key level\.
 
 **Topics**
-+ [Execution Role Permissions](#events-dynamodb-permissions)
-+ [Configuring a Stream as an Event Source](#services-dynamodb-eventsourcemapping)
-+ [Event Source Mapping APIs](#services-dynamodb-api)
-+ [Error Handling](#services-dynamodb-errors)
-+ [Amazon CloudWatch Metrics](#events-dynamodb-metrics)
-+ [Tutorial: Using AWS Lambda with Amazon DynamoDB Streams](with-ddb-example.md)
-+ [Sample Function Code](with-ddb-create-package.md)
-+ [AWS SAM Template for a DynamoDB Application](kinesis-tutorial-spec.md)
++ [Execution role permissions](#events-dynamodb-permissions)
++ [Configuring a stream as an event source](#services-dynamodb-eventsourcemapping)
++ [Event source mapping APIs](#services-dynamodb-api)
++ [Error handling](#services-dynamodb-errors)
++ [Amazon CloudWatch metrics](#events-dynamodb-metrics)
++ [Tutorial: Using AWS Lambda with Amazon DynamoDB streams](with-ddb-example.md)
++ [Sample function code](with-ddb-create-package.md)
++ [AWS SAM template for a DynamoDB application](kinesis-tutorial-spec.md)
 
-## Execution Role Permissions<a name="events-dynamodb-permissions"></a>
+## Execution role permissions<a name="events-dynamodb-permissions"></a>
 
 Lambda needs the following permissions to manage resources related to your DynamoDB stream\. Add them to your function's execution role\.
 + [dynamodb:DescribeStream](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_streams_DescribeStream.html)
@@ -97,13 +97,13 @@ Lambda needs the following permissions to manage resources related to your Dynam
 + [dynamodb:GetShardIterator](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_streams_GetShardIterator.html)
 + [dynamodb:ListStreams](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_streams_ListStreams.html)
 
-The `AWSLambdaDynamoDBExecutionRole` managed policy includes these permissions\. For more information, see [AWS Lambda Execution Role](lambda-intro-execution-role.md)\.
+The `AWSLambdaDynamoDBExecutionRole` managed policy includes these permissions\. For more information, see [AWS Lambda execution role](lambda-intro-execution-role.md)\.
 
 To send records of failed batches to a queue or topic, your function needs additional permissions\. Each destination service requires a different permission, as follows:
 + **Amazon SQS** – [sqs:SendMessage](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html)
 + **Amazon SNS** – [sns:Publish](https://docs.aws.amazon.com/sns/latest/api/API_Publish.html)
 
-## Configuring a Stream as an Event Source<a name="services-dynamodb-eventsourcemapping"></a>
+## Configuring a stream as an event source<a name="services-dynamodb-eventsourcemapping"></a>
 
 Create an event source mapping to tell Lambda to send records from your stream to a Lambda function\. You can create multiple event source mappings to process the same data with multiple Lambda functions, or to process items from multiple streams with a single function\.
 
@@ -123,7 +123,7 @@ To configure your function to read from DynamoDB Streams in the Lambda console, 
 
 Lambda supports the following options for DynamoDB event sources\.
 
-**Event Source Options**
+**Event source options**
 + **DynamoDB table** – The DynamoDB table to read records from\.
 + **Batch size** – The number of records to send to the function in each batch, up to 1,000\. Lambda passes all of the records in the batch to the function in a single call, as long as the total size of the events doesn't exceed the [payload limit](gettingstarted-limits.md) for synchronous invocation \(6 MB\)\.
 + **Batch window** – Specify the maximum amount of time to gather records before invoking the function, in seconds\.
@@ -141,7 +141,7 @@ Lambda supports the following options for DynamoDB event sources\.
 
 To manage the event source configuration later, choose the trigger in the designer\.
 
-## Event Source Mapping APIs<a name="services-dynamodb-api"></a>
+## Event source mapping APIs<a name="services-dynamodb-api"></a>
 
 To manage event source mappings with the AWS CLI or AWS SDK, use the following API actions:
 + [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
@@ -230,7 +230,7 @@ $ aws lambda update-event-source-mapping --uuid 2b733gdc-8ac3-cdf5-af3a-1827b3b1
 --parallelization-factor 5
 ```
 
-## Error Handling<a name="services-dynamodb-errors"></a>
+## Error handling<a name="services-dynamodb-errors"></a>
 
 The event source mapping that reads records from your DynamoDB stream invokes your function synchronously and retries on errors\. If the function is throttled or the Lambda service returns an error without invoking the function, Lambda retries until the records expire or exceed the maximum age that you configure on the event source mapping\.
 
@@ -291,8 +291,8 @@ The following example shows an invocation record for a DynamoDB stream\.
 
 You can use this information to retrieve the affected records from the stream for troubleshooting\. The actual records aren't included, so you must process this record and retrieve them from the stream before they expire and are lost\.
 
-## Amazon CloudWatch Metrics<a name="events-dynamodb-metrics"></a>
+## Amazon CloudWatch metrics<a name="events-dynamodb-metrics"></a>
 
 Lambda emits the `IteratorAge` metric when your function finishes processing a batch of records\. The metric indicates how old the last record in the batch was when processing finished\. If your function is processing new events, you can use the iterator age to estimate the latency between when a record is added and when the function processes it\.
 
-An increasing trend in iterator age can indicate issues with your function\. For more information, see [Working with AWS Lambda Function Metrics](monitoring-metrics.md)\.
+An increasing trend in iterator age can indicate issues with your function\. For more information, see [Working with AWS Lambda function metrics](monitoring-metrics.md)\.

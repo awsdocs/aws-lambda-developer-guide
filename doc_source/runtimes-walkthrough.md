@@ -1,10 +1,10 @@
-# Tutorial – Publishing a Custom Runtime<a name="runtimes-walkthrough"></a>
+# Tutorial – Publishing a custom runtime<a name="runtimes-walkthrough"></a>
 
 In this tutorial, you create a Lambda function with a custom runtime\. You start by including the runtime in the function's deployment package\. Then you migrate it to a layer that you manage independently from the function\. Finally, you share the runtime layer with the world by updating its resource\-based permissions policy\.
 
 ## Prerequisites<a name="runtimes-walkthrough-prereqs"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started with AWS Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with AWS Lambda](getting-started.md) to create your first Lambda function\.
 
 To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
@@ -32,7 +32,7 @@ You need an IAM role to create a Lambda function\. The role needs permission to 
 
    The **AWSLambdaBasicExecutionRole** policy has the permissions that the function needs to write logs to CloudWatch Logs\.
 
-## Create a Function<a name="runtimes-walkthrough-function"></a>
+## Create a function<a name="runtimes-walkthrough-function"></a>
 
 Create a Lambda function with a custom runtime\. This example includes two files, a runtime `bootstrap` file, and a function handler\. Both are implemented in Bash\.
 
@@ -69,7 +69,7 @@ done
 After loading the script, the runtime processes events in a loop\. It uses the runtime API to retrieve an invocation event from Lambda, passes the event to the handler, and posts the response back to Lambda\. To get the request ID, the runtime saves the headers from the API response to a temporary file, and reads the `Lambda-Runtime-Aws-Request-Id` header from the file\.
 
 **Note**  
-Runtimes have additional responsibilities, including error handling, and providing context information to the handler\. For details, see [Building a Custom Runtime](runtimes-custom.md#runtimes-custom-build)\.
+Runtimes have additional responsibilities, including error handling, and providing context information to the handler\. For details, see [Building a custom runtime](runtimes-custom.md#runtimes-custom-build)\.
 
 The script defines a handler function that takes event data, logs it to `stderr`, and returns it\.
 
@@ -136,7 +136,7 @@ runtime-tutorial$ cat response.txt
 Echoing request: '{"text":"Hello"}'
 ```
 
-## Create a Layer<a name="runtimes-walkthrough-layer"></a>
+## Create a layer<a name="runtimes-walkthrough-layer"></a>
 
 To separate the runtime code from the function code, create a layer that only contains the runtime\. Layers let you develop your function's dependencies independently, and can reduce storage usage when you use the same layer with multiple functions\.
 
@@ -168,7 +168,7 @@ runtime-tutorial$ aws lambda publish-layer-version --layer-name bash-runtime --z
 
 This creates the first version of the layer\.
 
-## Update the Function<a name="runtimes-walkthrough-update"></a>
+## Update the function<a name="runtimes-walkthrough-update"></a>
 
 To use the runtime layer with the function, configure the function to use the layer, and remove the runtime code from the function\.
 
@@ -222,7 +222,7 @@ runtime-tutorial$ cat response.txt
 Echoing request: '{"text":"Hello"}'
 ```
 
-## Update the Runtime<a name="runtimes-walkthrough-runtime"></a>
+## Update the runtime<a name="runtimes-walkthrough-runtime"></a>
 
 To log information about the execution environment, update the runtime script to output environment variables\.
 
@@ -256,7 +256,7 @@ runtime-tutorial$ aws lambda update-function-configuration --function-name bash-
 --layers arn:aws:lambda:us-west-2:123456789012:layer:bash-runtime:2
 ```
 
-## Share the Layer<a name="runtimes-walkthrough-share"></a>
+## Share the layer<a name="runtimes-walkthrough-share"></a>
 
 Add a permission statement to your runtime layer to share it with other accounts\.
 
@@ -271,7 +271,7 @@ runtime-tutorial$ aws lambda add-layer-version-permission --layer-name bash-runt
 
 You can add multiple statements that each grant permission to a single account, accounts in an organization, or all accounts\.
 
-## Clean Up<a name="runtimes-walkthrough-cleanup"></a>
+## Clean up<a name="runtimes-walkthrough-cleanup"></a>
 
 Delete each version of the layer\.
 

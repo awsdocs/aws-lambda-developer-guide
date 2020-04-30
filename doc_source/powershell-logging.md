@@ -1,10 +1,10 @@
-# AWS Lambda Function Logging in PowerShell<a name="powershell-logging"></a>
+# AWS Lambda function logging in PowerShell<a name="powershell-logging"></a>
 
 Your Lambda function comes with a CloudWatch Logs log group, with a log stream for each instance of your function\. The runtime sends details about each invocation to the log stream, and relays logs and other output from your function's code\.
 
 To output logs from your function code, you can use cmdlets on [Microsoft\.PowerShell\.Utility ](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility), or any logging module that writes to `stdout` or `stderr`\. The following example uses `Write-Host`\.
 
-**Example [function/Handler\.ps1](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-powershell/function/Handler.ps1) – logging**  
+**Example [function/Handler\.ps1](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-powershell/function/Handler.ps1) – Logging**  
 
 ```
 #Requires -Modules @{ModuleName='AWSPowerShell.NetCore';ModuleVersion='3.3.618.0'}
@@ -19,7 +19,7 @@ Write-Host `## Event
 Write-Host (ConvertTo-Json -InputObject $LambdaInput -Compress -Depth 3)
 ```
 
-**Example Log Format**  
+**Example Log format**  
 
 ```
 START RequestId: 56639408-xmpl-435f-9041-ac47ae25ceed Version: $LATEST
@@ -67,11 +67,11 @@ The \.NET runtime logs the `START`, `END`, and `REPORT` lines for each invocatio
 You can view logs in the Lambda console, in the CloudWatch Logs console, or from the command line\.
 
 **Topics**
-+ [Viewing Logs in the AWS Management Console](#powershell-logging-console)
++ [Viewing logs in the AWS Management Console](#powershell-logging-console)
 + [Using the AWS CLI](#powershell-logging-cli)
-+ [Deleting Logs](#powershell-logging-delete)
++ [Deleting logs](#powershell-logging-delete)
 
-## Viewing Logs in the AWS Management Console<a name="powershell-logging-console"></a>
+## Viewing logs in the AWS Management Console<a name="powershell-logging-console"></a>
 
 The Lambda console shows log output when you test a function on the function configuration page\. To view logs for all invocations, use the CloudWatch Logs console\.
 
@@ -83,7 +83,7 @@ The Lambda console shows log output when you test a function on the function con
 
 1. Choose the first stream in the list\.
 
-Each log stream corresponds to an [instance of your function](runtimes-context.md)\. New streams appear when you update your function and when additional instances are created to handle multiple concurrent invocations\. To find logs for specific invocations, you can instrument your function with X\-Ray, and record details about the request and log stream in the trace\. For a sample application that correlates logs and traces with X\-Ray, see [Error Processor Sample Application for AWS Lambda](samples-errorprocessor.md)\.
+Each log stream corresponds to an [instance of your function](runtimes-context.md)\. New streams appear when you update your function and when additional instances are created to handle multiple concurrent invocations\. To find logs for specific invocations, you can instrument your function with X\-Ray, and record details about the request and log stream in the trace\. For a sample application that correlates logs and traces with X\-Ray, see [Error processor sample application for AWS Lambda](samples-errorprocessor.md)\.
 
 ## Using the AWS CLI<a name="powershell-logging-cli"></a>
 
@@ -165,6 +165,6 @@ $ ./get-logs.sh
 }
 ```
 
-## Deleting Logs<a name="powershell-logging-delete"></a>
+## Deleting logs<a name="powershell-logging-delete"></a>
 
 Log groups aren't deleted automatically when you delete a function\. To avoid storing logs indefinitely, delete the log group, or [configure a retention period](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#SettingLogRetention) after which logs are deleted automatically\.

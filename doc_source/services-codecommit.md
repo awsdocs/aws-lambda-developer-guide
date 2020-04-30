@@ -2,7 +2,7 @@
 
 You can create a trigger for an AWS CodeCommit repository so that events in the repository will invoke a Lambda function\. For example, you can invoke a Lambda function when a branch or tag is created or when a push is made to an existing branch\.
 
-**Example AWS CodeCommit Message Event**  
+**Example AWS CodeCommit message event**  
 
 ```
 {
@@ -33,4 +33,4 @@ You can create a trigger for an AWS CodeCommit repository so that events in the 
 }
 ```
 
-For more information, see [Manage Triggers for an AWS CodeCommit Repository](https://docs.aws.amazon.com/codecommit/latest/userguide/how-to-notify.html)\.
+For more information, see [Manage triggers for an AWS CodeCommit repository](https://docs.aws.amazon.com/codecommit/latest/userguide/how-to-notify.html)\.

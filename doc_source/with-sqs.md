@@ -4,7 +4,7 @@ You can use an AWS Lambda function to process messages in an Amazon Simple Queue
 
 Lambda polls the queue and invokes your function [synchronously](invocation-sync.md) with an event that contains queue messages\. Lambda reads messages in batches and invokes your function once for each batch\. When your function successfully processes a batch, Lambda deletes its messages from the queue\. The following example shows an event for a batch of two messages\.
 
-**Example Amazon SQS Message Event \(Standard Queue\)**  
+**Example Amazon SQS message event \(standard queue\)**  
 
 ```
 {
@@ -47,7 +47,7 @@ Lambda polls the queue and invokes your function [synchronously](invocation-sync
 
 For FIFO queues, records contain additional attributes that are related to deduplication and sequencing\.
 
-**Example Amazon SQS Message Event \(FIFO Queue\)**  
+**Example Amazon SQS message event \(FIFO queue\)**  
 
 ```
 {
@@ -77,7 +77,7 @@ For FIFO queues, records contain additional attributes that are related to dedup
 
 When Lambda reads a batch, the messages stay in the queue but become hidden for the length of the queue's [visibility timeout](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html)\. If your function successfully processes the batch, Lambda deletes the messages from the queue\. If your function is [throttled](invocation-scaling.md), returns an error, or doesn't respond, the message becomes visible again\. All messages in a failed batch return to the queue, so your function code must be able to process the same message multiple times without side effects\.
 
-## Scaling and Processing<a name="events-sqs-scaling"></a>
+## Scaling and processing<a name="events-sqs-scaling"></a>
 
 For standard queues, Lambda uses [long polling](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-long-polling.html) to poll a queue until it becomes active\. When messages are available, Lambda reads up to 5 batches and sends them to your function\. If messages are still available, Lambda increases the number of processes that are reading batches by up to 60 more instances per minute\. The maximum number of batches that can be processed simultaneously by an event source mapping is 1000\.
 
@@ -85,7 +85,7 @@ For FIFO queues, Lambda sends messages to your function in the order that it rec
 
 Your function can scale in concurrency to the number of active message groups\. For more information, see [SQS FIFO as an event source](https://aws.amazon.com/blogs/compute/new-for-aws-lambda-sqs-fifo-as-an-event-source/) on the AWS Compute Blog\.
 
-## Configuring a Queue for Use with Lambda<a name="events-sqs-queueconfig"></a>
+## Configuring a queue for use with Lambda<a name="events-sqs-queueconfig"></a>
 
 [Create an SQS queue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/) to serve as an event source for your Lambda function\. Then configure the queue to allow time for your Lambda function to process each batch of events—and for Lambda to retry in response to throttling errors as it scales up\.
 
@@ -98,16 +98,16 @@ Make sure that you configure the dead\-letter queue on the source queue, not on 
 
 If your function returns an error, or can't be invoked because it's at maximum concurrency, processing might succeed with additional attempts\. To give messages a better chance to be processed before sending them to the dead\-letter queue, set the `maxReceiveCount` on the source queue's redrive policy to at least **5**\.
 
-## Execution Role Permissions<a name="events-sqs-permissions"></a>
+## Execution role permissions<a name="events-sqs-permissions"></a>
 
 Lambda needs the following permissions to manage messages in your Amazon SQS queue\. Add them to your function's execution role\.
 + [sqs:ReceiveMessage](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_ReceiveMessage.html)
 + [sqs:DeleteMessage](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_DeleteMessage.html)
 + [sqs:GetQueueAttributes](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_GetQueueAttributes.html)
 
-For more information, see [AWS Lambda Execution Role](lambda-intro-execution-role.md)\.
+For more information, see [AWS Lambda execution role](lambda-intro-execution-role.md)\.
 
-## Configuring a Queue as an Event Source<a name="events-sqs-eventsource"></a>
+## Configuring a queue as an event source<a name="events-sqs-eventsource"></a>
 
 Create an event source mapping to tell Lambda to send items from your queue to a Lambda function\. You can create multiple event source mappings to process items from multiple queues with a single function\. When Lambda invokes the target function, the event can contain multiple items, up to a configurable maximum *batch size*\.
 
@@ -127,7 +127,7 @@ To configure your function to read from Amazon SQS in the Lambda console, create
 
 Lambda supports the following options for Amazon SQS event sources\.
 
-**Event Source Options**
+**Event source options**
 + **SQS queue** – The Amazon SQS queue to read records from\.
 + **Batch size** – The number of items to read from the queue in each batch, up to 10\. The event might contain fewer items if the batch that Lambda read from the queue had fewer items\.
 + **Enabled** – Disable the event source to stop processing items\.
@@ -136,7 +136,7 @@ To manage the event source configuration later, choose the trigger in the design
 
 Configure your function timeout to allow enough time to process an entire batch of items\. If items take a long time to process, choose a smaller batch size\. A large batch size can improve efficiency for workloads that are very fast or have a lot of overhead\. However, if your function returns an error, all items in the batch return to the queue\. If you configure [reserved concurrency](configuration-concurrency.md) on your function, set a minimum of 5 concurrent executions to reduce the chance of throttling errors when Lambda invokes your function\.
 
-## Event Source Mapping APIs<a name="services-dynamodb-api"></a>
+## Event source mapping APIs<a name="services-dynamodb-api"></a>
 
 To manage event source mappings with the AWS CLI or AWS SDK, use the following API actions:
 + [CreateEventSourceMapping](API_CreateEventSourceMapping.md)

@@ -1,10 +1,10 @@
-# AWS Lambda Deployment Package in PowerShell<a name="powershell-package"></a>
+# AWS Lambda deployment package in PowerShell<a name="powershell-package"></a>
 
 A PowerShell Lambda deployment package is a ZIP file that contains your PowerShell script, PowerShell modules that are required for your PowerShell script, and the assemblies needed to host PowerShell Core\.
 
 The AWSLambdaPSCore module has the following new cmdlets to help author and publish PowerShell Lambda functions\.
 
-**AWSLambdaPSCore Cmdlets**
+**AWSLambdaPSCore cmdlets**
 + **Get\-AWSPowerShellLambdaTemplate** – Returns a list of getting started templates\.
 + **New\-AWSPowerShellLambda** – Creates an initial PowerShell script based on a template\.
 + **Publish\-AWSPowerShellLambda** – Publishes a given PowerShell script to Lambda\.

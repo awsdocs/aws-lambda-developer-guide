@@ -4,7 +4,7 @@ AWS CodePipeline is a service that enables you to create continuous delivery pip
 
 CodePipeline invokes your function asynchronously with an event that contains details about the job\. The following example shows an event from a pipeline that invoked a function named `my-function`\.
 
-**Example CodePipeline Event**  
+**Example CodePipeline event**  
 
 ```
 {
@@ -75,11 +75,11 @@ exports.handler = async (event) => {
 
 For asynchronous invocation, Lambda queues the message and [retries](invocation-retries.md) if your function returns an error\. Configure your function with a [destination](invocation-async.md#invocation-async-destinations) to retain events that your function could not process\.
 
-For details on configuring a pipeline to invoke a Lambda function, see [Invoke an AWS Lambda Function in a Pipeline](https://docs.aws.amazon.com/codepipeline/latest/userguide/actions-invoke-lambda-function.html) in the AWS CodePipeline User Guide\.
+For details on configuring a pipeline to invoke a Lambda function, see [Invoke an AWS Lambda function in a pipeline](https://docs.aws.amazon.com/codepipeline/latest/userguide/actions-invoke-lambda-function.html) in the AWS CodePipeline User Guide\.
 
 **Topics**
 + [Permissions](#services-codepipeline-permissions)
-+ [Building a Continuous Delivery Pipeline for a Lambda Application with AWS CodePipeline](build-pipeline.md)
++ [Building a continuous delivery pipeline for a Lambda application with AWS CodePipeline](build-pipeline.md)
 
 ## Permissions<a name="services-codepipeline-permissions"></a>
 

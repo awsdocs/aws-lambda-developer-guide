@@ -4,7 +4,7 @@ In an AWS CloudFormation template, you can specify a Lambda function as the targ
 
 The following example invokes a function that's defined elsewhere in the template\.
 
-**Example – Custom Resource Definition**  
+**Example – Custom resource definition**  
 
 ```
 Resources:
@@ -20,7 +20,7 @@ The service token is the Amazon Resource Name \(ARN\) of the function that AWS C
 
 AWS CloudFormation invokes your Lambda function [asynchronously](invocation-async.md) with an event that includes a callback URL\.
 
-**Example – AWS CloudFormation Message Event**  
+**Example – AWS CloudFormation message event**  
 
 ```
 {
@@ -38,9 +38,9 @@ AWS CloudFormation invokes your Lambda function [asynchronously](invocation-asyn
 }
 ```
 
-The function is responsible for returning a response to the callback URL that indicates success or failure\. For the full response syntax, see [Custom Resource Response Objects](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/crpg-ref-responses.html)\.
+The function is responsible for returning a response to the callback URL that indicates success or failure\. For the full response syntax, see [Custom resource response objects](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/crpg-ref-responses.html)\.
 
-**Example – AWS CloudFormation Custom Resource Response**  
+**Example – AWS CloudFormation custom resource response**  
 
 ```
 {
@@ -56,7 +56,7 @@ AWS CloudFormation provides a library called `cfn-response` that handles sending
 
 The following example function invokes a second function\. If the call succeeds, the function sends a success response to AWS CloudFormation, and the stack update continues\. The template uses the [AWS::Serverless::Function](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html) resource type provided by AWS Serverless Application Model\.
 
-**Example [error\-processor/template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/error-processor/template.yml) – Custom Resource Function**  
+**Example [Error\-processor/template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/error-processor/template.yml) – Custom resource function**  
 
 ```
 Transform: 'AWS::Serverless-2016-10-31'
@@ -95,8 +95,8 @@ Resources:
       Tracing: Active
 ```
 
-If the function that the custom resource invokes isn't defined in a template, you can get the source code for `cfn-response` from [cfn\-response Module](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-lambda-function-code-cfnresponsemodule.html) in the AWS CloudFormation User Guide\.
+If the function that the custom resource invokes isn't defined in a template, you can get the source code for `cfn-response` from [cfn\-response module](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-lambda-function-code-cfnresponsemodule.html) in the AWS CloudFormation User Guide\.
 
-For a sample application that uses a custom resource to ensure that a function's log group is created before another resource that depends on it, see [Error Processor Sample Application for AWS Lambda](samples-errorprocessor.md)\.
+For a sample application that uses a custom resource to ensure that a function's log group is created before another resource that depends on it, see [Error processor sample application for AWS Lambda](samples-errorprocessor.md)\.
 
-For more information about custom resources, see [Custom Resources](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-custom-resources.html) in the *AWS CloudFormation User Guide*\.
+For more information about custom resources, see [Custom resources](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-custom-resources.html) in the *AWS CloudFormation User Guide*\.

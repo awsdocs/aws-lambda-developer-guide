@@ -1,4 +1,4 @@
-# AWS Lambda Runtimes<a name="lambda-runtimes"></a>
+# AWS Lambda runtimes<a name="lambda-runtimes"></a>
 
 AWS Lambda supports multiple languages through the use of runtimes\. You choose a runtime when you create a function, and you can change runtimes by updating your function's configuration\. The underlying execution environment provides additional libraries and [environment variables](configuration-envvars.md) that you can access from your function code\.
 
@@ -15,17 +15,17 @@ When your function is invoked, Lambda attempts to re\-use the execution environm
 A runtime can support a single version of a language, multiple versions of a language, or multiple languages\. Runtimes specific to a language or framework version are [deprecated](runtime-support-policy.md) when the version reaches end of life\.
 
 
-**Node\.js Runtimes**  
+**Node\.js runtimes**  
 
-| Name | Identifier | AWS SDK for JavaScript | Operating System | 
+| Name | Identifier | AWS SDK for JavaScript | Operating system | 
 | --- | --- | --- | --- | 
 |  Node\.js 12  |  `nodejs12.x`  |  2\.631\.0  |  Amazon Linux 2  | 
 |  Node\.js 10  |  `nodejs10.x`  |  2\.631\.0  |  Amazon Linux 2  | 
 
 
-**Python Runtimes**  
+**Python runtimes**  
 
-| Name | Identifier | AWS SDK for Python | Operating System | 
+| Name | Identifier | AWS SDK for Python | Operating system | 
 | --- | --- | --- | --- | 
 |  Python 3\.8  |  `python3.8`  |  boto3\-1\.12\.22 botocore\-1\.15\.22  |  Amazon Linux 2  | 
 |  Python 3\.7  |  `python3.7`  |  boto3\-1\.12\.22 botocore\-1\.15\.22  |  Amazon Linux  | 
@@ -33,32 +33,32 @@ A runtime can support a single version of a language, multiple versions of a lan
 |  Python 2\.7  |  `python2.7`  |  boto3\-1\.12\.22 botocore\-1\.15\.22  |  Amazon Linux  | 
 
 
-**Ruby Runtimes**  
+**Ruby runtimes**  
 
-| Name | Identifier | AWS SDK for Ruby | Operating System | 
+| Name | Identifier | AWS SDK for Ruby | Operating system | 
 | --- | --- | --- | --- | 
 |  Ruby 2\.7  |  `ruby2.7`  |  3\.0\.1  |  Amazon Linux 2  | 
 |  Ruby 2\.5  |  `ruby2.5`  |  3\.0\.1  |  Amazon Linux  | 
 
 
-**Java Runtimes**  
+**Java runtimes**  
 
-| Name | Identifier | JDK | Operating System | 
+| Name | Identifier | JDK | Operating system | 
 | --- | --- | --- | --- | 
 |  Java 11  |  `java11`  |  amazon\-corretto\-11  |  Amazon Linux 2  | 
 |  Java 8  |  `java8`  |  java\-1\.8\.0\-openjdk  |  Amazon Linux  | 
 
 
-**Go Runtimes**  
+**Go runtimes**  
 
-| Name | Identifier | Operating System | 
+| Name | Identifier | Operating system | 
 | --- | --- | --- | 
 |  Go 1\.x  |  `go1.x`  |  Amazon Linux  | 
 
 
-**\.NET Runtimes**  
+**\.NET runtimes**  
 
-| Name | Identifier | Operating System | 
+| Name | Identifier | Operating system | 
 | --- | --- | --- | 
 |  \.NET Core 3\.1  |  `dotnetcore3.1`  |  Amazon Linux 2  | 
 |  \.NET Core 2\.1  |  `dotnetcore2.1`  |  Amazon Linux  | 
@@ -66,15 +66,15 @@ A runtime can support a single version of a language, multiple versions of a lan
 To use other languages in Lambda, you can implement a [custom runtime](runtimes-custom.md)\. The Lambda execution environment provides a [runtime interface](runtimes-api.md) for getting invocation events and sending responses\. You can deploy a custom runtime alongside your function code, or in a [layer](configuration-layers.md)\.
 
 
-**Custom Runtime**  
+**Custom runtime**  
 
-| Name | Identifier | Operating System | 
+| Name | Identifier | Operating system | 
 | --- | --- | --- | 
 |  Custom Runtime  |  `provided`  |  Amazon Linux  | 
 
 **Topics**
-+ [AWS Lambda Execution Context](runtimes-context.md)
-+ [Runtime Support Policy](runtime-support-policy.md)
-+ [Custom AWS Lambda Runtimes](runtimes-custom.md)
-+ [AWS Lambda Runtime Interface](runtimes-api.md)
-+ [Tutorial – Publishing a Custom Runtime](runtimes-walkthrough.md)
++ [AWS Lambda execution context](runtimes-context.md)
++ [Runtime support policy](runtime-support-policy.md)
++ [Custom AWS Lambda runtimes](runtimes-custom.md)
++ [AWS Lambda runtime interface](runtimes-api.md)
++ [Tutorial – Publishing a custom runtime](runtimes-walkthrough.md)

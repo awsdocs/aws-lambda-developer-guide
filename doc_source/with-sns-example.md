@@ -4,7 +4,7 @@ You can use a Lambda function in one AWS account to subscribe to an Amazon SNS t
 
 ## Prerequisites<a name="with-sns-prepare"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started with AWS Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with AWS Lambda](getting-started.md) to create your first Lambda function\.
 
 To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
@@ -19,7 +19,7 @@ On Linux and macOS, use your preferred shell and package manager\. On Windows 10
 
 In the tutorial, you use two accounts\. The AWS CLI commands illustrate this by using two [named profiles](https://docs.aws.amazon.com/cli/latest/userguide/cli-multiple-profiles.html), each configured for use with a different account\. If you use profiles with different names, or the default profile and one named profile, modify the commands as needed\.
 
-## Create an Amazon SNS Topic<a name="with-sns-create-topic"></a>
+## Create an Amazon SNS topic<a name="with-sns-create-topic"></a>
 
 From account A, create the source Amazon SNS topic\.
 
@@ -29,7 +29,7 @@ $ aws sns create-topic --name lambda-x-account --profile accountA
 
 Note the topic ARN that is returned by the command\. You will need it when you add permissions to the Lambda function to subscribe to the topic\.
 
-## Create the Execution Role<a name="with-sns-example-create-iam-role"></a>
+## Create the execution role<a name="with-sns-example-create-iam-role"></a>
 
 From account B, create the [execution role](lambda-intro-execution-role.md) that gives your function permission to access AWS resources\.
 
@@ -46,12 +46,12 @@ From account B, create the [execution role](lambda-intro-execution-role.md) that
 
 The **AWSLambdaBasicExecutionRole** policy has the permissions that the function needs to write logs to CloudWatch Logs\.
 
-## Create a Lambda Function<a name="with-sns-example-create-test-function"></a>
+## Create a Lambda function<a name="with-sns-example-create-test-function"></a>
 
 From account B, create the function that processes events from Amazon SNS\. The following example code receives an Amazon SNS event input and processes the messages that it contains\. For illustration, the code writes some of the incoming event data to CloudWatch Logs\.
 
 **Note**  
-For sample code in other languages, see [Sample Function Code](with-sns-create-package.md)\.
+For sample code in other languages, see [Sample function code](with-sns-create-package.md)\.
 
 **Example index\.js**  
 
@@ -88,7 +88,7 @@ exports.handler = function(event, context, callback) {
 
 Note the function ARN that is returned by the command\. You will need it when you add permissions to allow Amazon SNS to invoke your function\.
 
-## Set Up Cross\-Account Permissions<a name="with-sns-create-x-account-permissions"></a>
+## Set up cross\-account permissions<a name="with-sns-create-x-account-permissions"></a>
 
 From account A, grant permission to account B to subscribe to the topic:
 
@@ -112,7 +112,7 @@ $ aws lambda add-permission --function-name SNS-X-Account \
 
 Do not use the `--source-account` parameter to add a source account to the Lambda policy when adding the policy\. Source account is not supported for Amazon SNS event sources and will result in access being denied\.
 
-## Create a Subscription<a name="with-sns-create-supscription"></a>
+## Create a subscription<a name="with-sns-create-supscription"></a>
 
 From account B, subscribe the Lambda function to the topic\. When a message is sent to the `lambda-x-account` topic in account A, Amazon SNS invokes the `SNS-X-Account` function in account B\.
 
@@ -128,7 +128,7 @@ $ aws sns subscribe --protocol lambda \
 
 The output contains the ARN of the topic subscription\.
 
-## Test Subscription<a name="with-sns-create-test"></a>
+## Test subscription<a name="with-sns-create-test"></a>
 
 From account A, test the subscription\. Type `Hello World` into a text file and save it as `message.txt`\. Then run the following command: 
 

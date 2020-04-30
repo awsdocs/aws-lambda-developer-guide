@@ -1,4 +1,4 @@
-# Using AWS Lambda with Other Services<a name="lambda-services"></a>
+# Using AWS Lambda with other services<a name="lambda-services"></a>
 
 AWS Lambda integrates with other AWS services to invoke functions\. You can configure triggers to invoke a function in response to resource lifecycle events, respond to incoming HTTP requests, consume events from a queue, or [run on a schedule](services-cloudwatchevents.md)\.
 
@@ -41,21 +41,21 @@ The following example shows a test event from an [Application Load Balancer](ser
 
 **Note**  
 The Lambda runtime converts the event document into an object and passes it to your [function handler](gettingstarted-concepts.md)\. For compiled languages, Lambda provides definitions for event types in a library\. See the following topics for more information\.  
-[Building Lambda Functions with Java](lambda-java.md)
-[Building Lambda Functions with Go](lambda-golang.md)
-[Building Lambda Functions with C\#](lambda-csharp.md)
-[Building Lambda Functions with PowerShell](lambda-powershell.md)
+[Building Lambda functions with Java](lambda-java.md)
+[Building Lambda functions with Go](lambda-golang.md)
+[Building Lambda functions with C\#](lambda-csharp.md)
+[Building Lambda functions with PowerShell](lambda-powershell.md)
 
 For services that generate a queue or data stream, you create an [event source mapping](invocation-eventsourcemapping.md) in Lambda and grant Lambda permission to access the other service in the [execution role](lambda-intro-execution-role.md)\. Lambda reads data from the other service, creates an event, and invokes your function\.
 
-**Services That Lambda Reads Events From**
+**Services that Lambda reads events from**
 + [Amazon Kinesis](with-kinesis.md)
 + [Amazon DynamoDB](with-ddb.md)
 + [Amazon Simple Queue Service](with-sqs.md)
 
 Other services invoke your function directly\. You grant the other service permission in the function's [resource\-based policy](access-control-resource-based.md), and configure the other service to generate events and invoke your function\. Depending on the service, the invocation can be synchronous or asynchronous\. For synchronous invocation, the other service waits for the response from your function and might [retry on errors](invocation-retries.md)\.
 
-**Services That Invoke Lambda Functions Synchronously**
+**Services that invoke Lambda functions synchronously**
 + [Elastic Load Balancing \(Application Load Balancer\)](services-alb.md)
 + [Amazon Cognito](services-cognito.md)
 + [Amazon Lex](services-lex.md)
@@ -68,7 +68,7 @@ Other services invoke your function directly\. You grant the other service permi
 
 For asynchronous invocation, Lambda queues the event before passing it to your function\. The other service gets a success response as soon as the event is queued and isn't aware of what happens afterwards\. If an error occurs, Lambda handles [retries](invocation-retries.md), and can send failed events to a [dead\-letter queue](invocation-async.md#dlq) that you configure\.
 
-**Services That Invoke Lambda Functions Asynchronously**
+**Services that invoke Lambda functions asynchronously**
 + [Amazon Simple Storage Service](with-s3.md)
 + [Amazon Simple Notification Service](with-sns.md)
 + [Amazon Simple Email Service](services-ses.md)

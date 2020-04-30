@@ -1,4 +1,4 @@
-# Schedule Expressions Using Rate or Cron<a name="services-cloudwatchevents-expressions"></a>
+# Schedule expressions using rate or cron<a name="services-cloudwatchevents-expressions"></a>
 
 AWS Lambda supports standard rate and cron expressions for frequencies of up to once per minute\. CloudWatch Events rate expressions have the following format\.
 
@@ -9,7 +9,7 @@ rate(Value Unit)
 Where *Value* is a positive integer and *Unit* can be minute\(s\), hour\(s\), or day\(s\)\. For a singular value the unit must be singular \(for example, `rate(1 day)`\), otherwise plural \(for example, `rate(5 days)`\)\.
 
 
-**Rate Expression Examples**  
+**Rate expression examples**  
 
 | Frequency | Expression | 
 | --- | --- | 
@@ -24,7 +24,7 @@ cron(Minutes Hours Day-of-month Month Day-of-week Year)
 ```
 
 
-**Cron Expression Examples**  
+**Cron expression examples**  
 
 | Frequency | Expression | 
 | --- | --- | 
@@ -39,4 +39,4 @@ Note the following:
 + If you are using the Lambda console, do not include the `cron` prefix to your expression\.
 + One of the day\-of\-month or day\-of\-week values must be a question mark \(`?`\)\.
 
-For more information, see [Schedule Expressions for Rules](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html) in the *CloudWatch Events User Guide*\.
+For more information, see [Schedule expressions for rules](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html) in the *CloudWatch Events User Guide*\.

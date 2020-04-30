@@ -1,4 +1,4 @@
-# Runtime Support Policy<a name="runtime-support-policy"></a>
+# Runtime support policy<a name="runtime-support-policy"></a>
 
 [AWS Lambda runtimes](lambda-runtimes.md) are built around a combination of operating system, programming language, and software libraries that are subject to maintenance and security updates\. When a component of a runtime is no longer supported for security updates, Lambda deprecates the runtime\.
 
@@ -9,7 +9,7 @@ Python 2\.7 reached end\-of\-life on January 1st, 2020\. However, the Python 2\.
 
 In most cases, the end\-of\-life date of a language version or operating system is known well in advance\. If you have functions running on a runtime that will be deprecated in the next 60 days, Lambda notifies you by email that you should prepare by migrating your function to a supported runtime\. In some cases, such as security issues that require a backwards\-incompatible update, or software that doesn't support a long\-term support \(LTS\) schedule, advance notice might not be possible\.
 
-**Language and Framework Support Policies**
+**Language and framework support policies**
 + **Node\.js** – [github\.com](https://github.com/nodejs/Release#release-schedule)
 + **Python** – [devguide\.python\.org](https://devguide.python.org/#status-of-python-branches)
 + **Ruby** – [www\.ruby\-lang\.org](https://www.ruby-lang.org/en/downloads/branches/)

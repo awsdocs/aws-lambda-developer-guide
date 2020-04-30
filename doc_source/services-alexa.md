@@ -6,7 +6,7 @@ The Alexa Skills Kit is available on GitHub\.
 + [Alexa Skills Kit SDK for Node\.js ](https://github.com/alexa/alexa-skills-kit-sdk-for-nodejs)
 + [Alexa Skills Kit SDK for Java](https://github.com/alexa/alexa-skills-kit-sdk-for-java)
 
-**Example Alexa Smart Home Event**  
+**Example Alexa smart home event**  
 
 ```
 {
@@ -29,4 +29,4 @@ The Alexa Skills Kit is available on GitHub\.
 }
 ```
 
-For more information, see [Getting Started with Alexa Skills Kit](https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit/getting-started-guide)\.
+For more information, see [Getting started with Alexa Skills Kit](https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit/getting-started-guide)\.

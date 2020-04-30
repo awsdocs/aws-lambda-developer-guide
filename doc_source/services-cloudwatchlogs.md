@@ -4,7 +4,7 @@ You can use a Lambda function to monitor and analyze logs from an Amazon CloudWa
 
 CloudWatch Logs invokes your function asynchronously with an event that contains log data\. The value of the data field is a Base64 encoded ZIP archive\.
 
-**Example Amazon CloudWatch Logs Message Event**  
+**Example Amazon CloudWatch Logs message event**  
 
 ```
 {
@@ -16,7 +16,7 @@ CloudWatch Logs invokes your function asynchronously with an event that contains
 
 When decoded and decompressed, the log data is a JSON document with the following structure\.
 
-**Example Amazon CloudWatch Logs Message Data \(decoded\)**  
+**Example Amazon CloudWatch Logs message data \(decoded\)**  
 
 ```
 {
@@ -37,4 +37,4 @@ When decoded and decompressed, the log data is a JSON document with the followin
 }
 ```
 
-For a sample application that uses CloudWatch Logs as a trigger, see [Error Processor Sample Application for AWS Lambda](samples-errorprocessor.md)\.
+For a sample application that uses CloudWatch Logs as a trigger, see [Error processor sample application for AWS Lambda](samples-errorprocessor.md)\.

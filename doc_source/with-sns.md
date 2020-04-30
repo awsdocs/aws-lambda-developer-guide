@@ -4,7 +4,7 @@ You can use a Lambda function to process Amazon Simple Notification Service noti
 
 Amazon SNS invokes your function [asynchronously](invocation-async.md) with an event that contains a message and metadata\.
 
-**Example Amazon SNS Message Event**  
+**Example Amazon SNS message event**  
 
 ```
 {
@@ -48,4 +48,4 @@ For more information, see [Invoking Lambda functions using Amazon SNS notificati
 
 **Topics**
 + [Tutorial: Using AWS Lambda with Amazon Simple Notification Service](with-sns-example.md)
-+ [Sample Function Code](with-sns-create-package.md)
++ [Sample function code](with-sns-create-package.md)

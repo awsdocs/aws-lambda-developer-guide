@@ -1,8 +1,8 @@
-# Instrumenting Go Code in AWS Lambda<a name="golang-tracing"></a>
+# Instrumenting Go code in AWS Lambda<a name="golang-tracing"></a>
 
-You can use the [X\-Ray SDK for Go](https://github.com/aws/aws-xray-sdk-go) with your Lambda function\. If your handler includes [AWS Lambda Context Object in Go](golang-context.md) as its first argument, that object can be passed to the X\-Ray SDK\. Lambda passes values through this context that the SDK can use to attach subsegments to the Lambda invoke service segment\. Subsegments created with the SDK will appear as a part of your Lambda traces\. 
+You can use the [X\-Ray SDK for Go](https://github.com/aws/aws-xray-sdk-go) with your Lambda function\. If your handler includes [AWS Lambda context object in Go](golang-context.md) as its first argument, that object can be passed to the X\-Ray SDK\. Lambda passes values through this context that the SDK can use to attach subsegments to the Lambda invoke service segment\. Subsegments created with the SDK will appear as a part of your Lambda traces\. 
 
-## Installing the X\-Ray SDK for Go<a name="go-tracing-installing-sdk"></a>
+## Installing the X\-Ray SDK<a name="go-tracing-installing-sdk"></a>
 
 Use the following command to install the X\-Ray SDK for Go\. \(The SDK's non\-testing dependencies will be included\)\.
 
@@ -22,7 +22,7 @@ You can also use [Glide](https://github.com/Masterminds/glide/blob/master/README
 glide install
 ```
 
-## Configuring the X\-Ray SDK for Go<a name="go-tracing-configuring-sdk"></a>
+## Configuring the X\-Ray<a name="go-tracing-configuring-sdk"></a>
 
 The following code sample illustrates how to configure the X\-Ray SDK for Go in your Lambda function:
 
@@ -39,7 +39,7 @@ func myHandlerFunction(ctx context.Context, sample string) {
 }
 ```
 
-## Create a subsegment<a name="go-tracing-create-segment"></a>
+## Creating a subsegment<a name="go-tracing-create-segment"></a>
 
 The following code illustrates how to start a subsegment:
 
@@ -51,8 +51,6 @@ The following code illustrates how to start a subsegment:
   // ...
   subSeg.Close(nil)
 ```
-
-## Capture<a name="go-tracing-capture"></a>
 
 The following code illustrates how to trace and capture a critical code path:
 
@@ -71,7 +69,7 @@ func criticalSection(ctx context.Context) {
 }
 ```
 
-## Tracing HTTP Requests<a name="go-tracing-use-client-method"></a>
+## Tracing HTTP requests<a name="go-tracing-use-client-method"></a>
 
 You can also use the `xray.Client()` method if you want to trace an HTTP client, as shown below:
 

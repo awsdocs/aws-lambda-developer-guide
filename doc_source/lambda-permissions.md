@@ -1,4 +1,4 @@
-# AWS Lambda Permissions<a name="lambda-permissions"></a>
+# AWS Lambda permissions<a name="lambda-permissions"></a>
 
 You can use AWS Identity and Access Management \(IAM\) to manage access to the Lambda API and resources like functions and layers\. For users and applications in your account that use Lambda, you manage permissions in a permissions policy that you can apply to IAM users, groups, or roles\. To grant permissions to other accounts or AWS services that use your Lambda resources, you use a policy that applies to the resource itself\.
 
@@ -13,11 +13,11 @@ To manage permissions for users and applications in your accounts, [use the mana
 
 You can restrict user permissions by the resource an action affects and, in some cases, by additional conditions\. For example, you can specify a pattern for the Amazon Resource Name \(ARN\) of a function that requires a user to include their user name in the name of functions that they create\. Additionally, you can add a condition that requires that the user configure functions to use a specific layer to, for example, pull in logging software\. For the resources and conditions that are supported by each action, see [Resources and Conditions](lambda-api-permissions-ref.md)\.
 
-For more information about IAM, see [What Is IAM?](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) in the *IAM User Guide*\.
+For more information about IAM, see [What is IAM?](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) in the *IAM User Guide*\.
 
 **Topics**
-+ [AWS Lambda Execution Role](lambda-intro-execution-role.md)
-+ [Using Resource\-Based Policies for AWS Lambda](access-control-resource-based.md)
-+ [Identity\-based IAM Policies for AWS Lambda](access-control-identity-based.md)
-+ [Resources and Conditions for Lambda Actions](lambda-api-permissions-ref.md)
-+ [Using Permissions Boundaries for AWS Lambda Applications](permissions-boundary.md)
++ [AWS Lambda execution role](lambda-intro-execution-role.md)
++ [Using resource\-based policies for AWS Lambda](access-control-resource-based.md)
++ [Identity\-based IAM policies for AWS Lambda](access-control-identity-based.md)
++ [Resources and conditions for Lambda actions](lambda-api-permissions-ref.md)
++ [Using permissions boundaries for AWS Lambda applications](permissions-boundary.md)

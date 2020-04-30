@@ -1,13 +1,13 @@
-# Building Lambda Functions with Ruby<a name="lambda-ruby"></a>
+# Building Lambda functions with Ruby<a name="lambda-ruby"></a>
 
 You can run Ruby code in AWS Lambda\. Lambda provides [runtimes](lambda-runtimes.md) for Ruby that execute your code to process events\. Your code runs in an environment that includes the AWS SDK for Ruby, with credentials from an AWS Identity and Access Management \(IAM\) role that you manage\.
 
 Lambda supports the following Ruby runtimes\.
 
 
-**Ruby Runtimes**  
+**Ruby runtimes**  
 
-| Name | Identifier | AWS SDK for Ruby | Operating System | 
+| Name | Identifier | AWS SDK for Ruby | Operating system | 
 | --- | --- | --- | --- | 
 |  Ruby 2\.7  |  `ruby2.7`  |  3\.0\.1  |  Amazon Linux 2  | 
 |  Ruby 2\.5  |  `ruby2.5`  |  3\.0\.1  |  Amazon Linux  | 
@@ -60,13 +60,17 @@ The `lambda_function.rb` file exports a function named `lambda_handler` that tak
 
 Each time you save your function code, the Lambda console creates a deployment package, which is a ZIP archive that contains your function code\. As your function development progresses, you will want to store your function code in source control, add libraries, and automate deployments\. Start by [creating a deployment package](ruby-package.md) and updating your code at the command line\.
 
+**Note**  
+To get started with application development in your local environment, deploy one of the sample applications available in this guide's GitHub repository\.  
+[blank\-ruby](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-ruby) – A Ruby function that shows the use of logging, environment variables, AWS X\-Ray tracing, layers, unit tests and the AWS SDK\.
+
 The function runtime passes a context object to the handler, in addition to the invocation event\. The [context object](ruby-context.md) contains additional information about the invocation, the function, and the execution environment\. More information is available from environment variables\.
 
 Your Lambda function comes with a CloudWatch Logs log group\. The function runtime sends details about each invocation to CloudWatch Logs\. It relays any [logs that your function outputs](ruby-logging.md) during invocation\. If your function [returns an error](ruby-exceptions.md), Lambda formats the error and returns it to the invoker\.
 
 **Topics**
-+ [AWS Lambda Function Handler in Ruby](ruby-handler.md)
-+ [AWS Lambda Deployment Package in Ruby](ruby-package.md)
-+ [AWS Lambda Context Object in Ruby](ruby-context.md)
-+ [AWS Lambda Function Logging in Ruby](ruby-logging.md)
-+ [AWS Lambda Function Errors in Ruby](ruby-exceptions.md)
++ [AWS Lambda function handler in Ruby](ruby-handler.md)
++ [AWS Lambda deployment package in Ruby](ruby-package.md)
++ [AWS Lambda context object in Ruby](ruby-context.md)
++ [AWS Lambda function logging in Ruby](ruby-logging.md)
++ [AWS Lambda function errors in Ruby](ruby-exceptions.md)

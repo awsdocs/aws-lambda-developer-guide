@@ -2,7 +2,7 @@
 
 Amazon Kinesis Data Firehose captures, transforms, and loads streaming data into downstream services such as Kinesis Data Analytics or Amazon S3\. You can write Lambda functions to request additional, customized processing of the data before it is sent downstream\.
 
-**Example Amazon Kinesis Data Firehose Message Event**  
+**Example Amazon Kinesis Data Firehose message event**  
 
 ```
 {
@@ -38,4 +38,4 @@ Amazon Kinesis Data Firehose captures, transforms, and loads streaming data into
 }
 ```
 
-For more information, see [Amazon Kinesis Data Firehose Data Transformation ](https://docs.aws.amazon.com/firehose/latest/dev/data-transformation.html) in the Kinesis Data Firehose Developer Guide\.
+For more information, see [Amazon Kinesis Data Firehose data transformation ](https://docs.aws.amazon.com/firehose/latest/dev/data-transformation.html) in the Kinesis Data Firehose Developer Guide\.

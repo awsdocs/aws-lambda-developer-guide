@@ -1,13 +1,13 @@
-# Creating a Deployment Package Using Eclipse<a name="java-package-eclipse"></a>
+# Creating a deployment package using Eclipse<a name="java-package-eclipse"></a>
 
 This section shows how to package your Java code into a deployment package using Eclipse IDE and Maven plugin for Eclipse\. 
 
 **Note**  
-The AWS SDK Eclipse Toolkit provides an Eclipse plugin for you to both create a deployment package and also upload it to create a Lambda function\. If you can use Eclipse IDE as your development environment, this plugin enables you to author Java code, create and upload a deployment package, and create your Lambda function\. For more information, see the [AWS Toolkit for Eclipse Getting Started Guide](https://docs.aws.amazon.com/AWSToolkitEclipse/latest/GettingStartedGuide/)\. For an example of using the toolkit for authoring Lambda functions, see [Using AWS Lambda with the AWS Toolkit for Eclipse](https://docs.aws.amazon.com/AWSToolkitEclipse/latest/GettingStartedGuide/lambda.html)\. 
+The AWS SDK Eclipse Toolkit provides an Eclipse plugin for you to both create a deployment package and also upload it to create a Lambda function\. If you can use Eclipse IDE as your development environment, this plugin enables you to author Java code, create and upload a deployment package, and create your Lambda function\. For more information, see the [AWS Toolkit for Eclipse Getting Started Guide](https://docs.aws.amazon.com/AWSToolkitEclipse/latest/GettingStartedGuide/)\. For an example of using the toolkit for authoring Lambda functions, see [Using AWS Lambda with the AWS toolkit for Eclipse](https://docs.aws.amazon.com/AWSToolkitEclipse/latest/GettingStartedGuide/lambda.html)\. 
 
 **Topics**
 + [Prerequisites](#java-package-eclipse-prereqs)
-+ [Create and Build a Project](#java-package-eclipse-create)
++ [Create and build a project](#java-package-eclipse-create)
 
 ## Prerequisites<a name="java-package-eclipse-prereqs"></a>
 
@@ -19,7 +19,7 @@ Install the **Maven** Plugin for Eclipse\.
 
 1. Follow the steps to complete the setup\.
 
-## Create and Build a Project<a name="java-package-eclipse-create"></a>
+## Create and build a project<a name="java-package-eclipse-create"></a>
 
 In this step, you start Eclipse and create a Maven project\. You will add the necessary dependencies, and build the project\. The build will produce a \.jar, which is your deployment package\. 
 
@@ -70,7 +70,7 @@ If you are following other tutorial topics in this guide, the specific tutorials
 
    Open the context \(right\-click\) menu for the project in **Package Explorer**, choose **Run As**, and then choose **Maven Build \.\.\.**\. In the **Edit Configuration** window, type **package** in the **Goals** box\.
 **Note**  
-The resulting \.jar, `lambda-java-example-0.0.1-SNAPSHOT.jar`, is not the final standalone \.jar that you can use as your deployment package\. In the next step, you add the Apache `maven-shade-plugin` to create the standalone \.jar\. For more information, go to [Apache Maven Shade Plugin](https://maven.apache.org/plugins/maven-shade-plugin/)\.
+The resulting \.jar, `lambda-java-example-0.0.1-SNAPSHOT.jar`, is not the final standalone \.jar that you can use as your deployment package\. In the next step, you add the Apache `maven-shade-plugin` to create the standalone \.jar\. For more information, go to [Apache Maven Shade plugin](https://maven.apache.org/plugins/maven-shade-plugin/)\.
 
 1. Add the `maven-shade-plugin` plugin and rebuild\. 
 

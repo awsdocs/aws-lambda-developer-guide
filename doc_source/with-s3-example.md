@@ -6,20 +6,20 @@ Upon completing this tutorial, you will have the following Amazon S3, Lambda, an
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/s3-admin-iser-walkthrough-10.png)
 
-**Lambda Resources**
+**Lambda resources**
 + A Lambda function\.
 + An access policy associated with your Lambda function that grants Amazon S3 permission to invoke the Lambda function\.
 
-**IAM Resources**
+**IAM resources**
 + An execution role that grants permissions that your Lambda function needs through the permissions policy associated with this role\.
 
-**Amazon S3 Resources**
+**Amazon S3 resources**
 + A source bucket with a notification configuration that invokes the Lambda function\.
 + A target bucket where the function saves resized images\.
 
 ## Prerequisites<a name="with-s3-prepare"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started with AWS Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with AWS Lambda](getting-started.md) to create your first Lambda function\.
 
 To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
@@ -36,7 +36,7 @@ Install npm to manage the function's dependencies\.
 
 The tutorial uses AWS CLI commands to create and invoke the Lambda function\. Install the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) and [configure it with your AWS credentials](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) 
 
-## Create the Execution Role<a name="with-s3-create-execution-role"></a>
+## Create the execution role<a name="with-s3-create-execution-role"></a>
 
 Create the [execution role](lambda-intro-execution-role.md) that gives your function permission to access AWS resources\.
 
@@ -53,7 +53,7 @@ Create the [execution role](lambda-intro-execution-role.md) that gives your func
 
 The **AWSLambdaExecute** policy has the permissions that the function needs to manage objects in Amazon S3 and write logs to CloudWatch Logs\.
 
-## Create Buckets and Upload a Sample Object<a name="with-s3-example-prepare-create-buckets"></a>
+## Create buckets and upload a sample object<a name="with-s3-example-prepare-create-buckets"></a>
 
 Follow the steps to create buckets and upload an object\.
 
@@ -65,12 +65,12 @@ Follow the steps to create buckets and upload an object\.
 
    When you invoke the Lambda function manually before you connect to Amazon S3, you pass sample event data to the function that specifies the source bucket and `HappyFace.jpg` as the newly created object so you need to create this sample object first\.
 
-## Create the Function<a name="with-s3-example-create-function"></a>
+## Create the function<a name="with-s3-example-create-function"></a>
 
 The following example code receives an Amazon S3 event input and processes the message that it contains\. It resizes an image in the source bucket and saves the output to the target bucket\.
 
 **Note**  
-For sample code in other languages, see [Sample Amazon S3 Function Code](with-s3-example-deployment-pkg.md)\.
+For sample code in other languages, see [Sample Amazon S3 function code](with-s3-example-deployment-pkg.md)\.
 
 **Example index\.js**  
 
@@ -208,7 +208,7 @@ For the role parameter, replace the number sequence with your AWS account ID\. T
 $ aws lambda update-function-configuration --function-name CreateThumbnail --timeout 30
 ```
 
-## Test the Lambda Function<a name="walkthrough-s3-events-adminuser-create-test-function-upload-zip-test-manual-invoke"></a>
+## Test the Lambda function<a name="walkthrough-s3-events-adminuser-create-test-function-upload-zip-test-manual-invoke"></a>
 
 In this step, you invoke the Lambda function manually using sample Amazon S3 event data\.
 
@@ -266,7 +266,7 @@ In this step, you invoke the Lambda function manually using sample Amazon S3 eve
 
 1. Verify that the thumbnail was created in the target bucket\.
 
-## Configure Amazon S3 to Publish Events<a name="with-s3-example-configure-event-source"></a>
+## Configure Amazon S3 to publish events<a name="with-s3-example-configure-event-source"></a>
 
 In this step, you add the remaining configuration so that Amazon S3 can publish object\-created events to AWS Lambda and invoke your Lambda function\. You do the following in this step:
 + Add permissions to the Lambda function access policy to allow Amazon S3 to invoke the function\.
@@ -312,9 +312,9 @@ This procedure configures the bucket to invoke your function every time an objec
    + **Send to** – **Lambda function**\.
    + **Lambda** – **CreateThumbnail**\.
 
-For more information on event configuration, see [Enabling Event Notifications](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-event-notifications.html) in the *Amazon Simple Storage Service Console User Guide*\.
+For more information on event configuration, see [Enabling event notifications](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-event-notifications.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
-## Test the Setup<a name="with-s3-example-configure-event-source-test-end-to-end"></a>
+## Test the setup<a name="with-s3-example-configure-event-source-test-end-to-end"></a>
 
 Now you can test the setup as follows:
 

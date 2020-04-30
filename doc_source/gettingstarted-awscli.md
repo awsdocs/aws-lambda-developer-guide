@@ -6,7 +6,7 @@ In this tutorial, you manage and invoke Lambda functions with the AWS CLI\.
 
 ## Prerequisites<a name="with-userapp-walkthrough-custom-events-deploy"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started with AWS Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with AWS Lambda](getting-started.md) to create your first Lambda function\.
 
 To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
@@ -21,7 +21,7 @@ On Linux and macOS, use your preferred shell and package manager\. On Windows 10
 
 This tutorial uses the AWS Command Line Interface \(AWS CLI\) to call service API operations\. To install the AWS CLI, see [Installing the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) in the AWS Command Line Interface User Guide\.
 
-## Create the Execution Role<a name="with-userapp-walkthrough-custom-events-create-iam-role"></a>
+## Create the execution role<a name="with-userapp-walkthrough-custom-events-create-iam-role"></a>
 
 Create the [execution role](lambda-intro-execution-role.md) that gives your function permission to access AWS resources\. To create an execution role with the AWS CLI, use the `create-role` command\.
 
@@ -83,7 +83,7 @@ $ aws iam attach-role-policy --role-name lambda-ex --policy-arn arn:aws:iam::aws
 
 The **AWSLambdaBasicExecutionRole** policy has the permissions that the function needs to write logs to CloudWatch Logs\.
 
-## Create the Function<a name="with-userapp-walkthrough-custom-events-upload"></a>
+## Create the function<a name="with-userapp-walkthrough-custom-events-upload"></a>
 
 The following example logs the values of environment variables and the event object\.
 
@@ -207,7 +207,7 @@ $ ./get-logs.sh
 }
 ```
 
-## List the Lambda Functions in Your Account<a name="with-userapp-walkthrough-custom-events-list-functions"></a>
+## List the Lambda functions in your account<a name="with-userapp-walkthrough-custom-events-list-functions"></a>
 
 Execute the following AWS CLI `list-functions` command to retrieve a list of functions that you have created\. 
 
@@ -243,7 +243,7 @@ In response, Lambda returns a list of up to 10 functions\. If there are more fun
 $ aws lambda list-functions --max-items 10 --starting-token eyJNYXJrZXIiOiBudWxsLCAiYm90b190cnVuY2F0ZV9hbW91bnQiOiAxMH0=
 ```
 
-## Retrieve a Lambda Function<a name="with-userapp-walkthrough-custom-events-get-configuration"></a>
+## Retrieve a Lambda function<a name="with-userapp-walkthrough-custom-events-get-configuration"></a>
 
 The Lambda CLI `get-function` command returns Lambda function metadata and a presigned URL that you can use to download the function's deployment package\.
 
@@ -272,7 +272,7 @@ $ aws lambda get-function --function-name my-function
 
 For more information, see [GetFunction](API_GetFunction.md)\.
 
-## Clean Up<a name="with-userapp-walkthrough-custom-events-delete-function"></a>
+## Clean up<a name="with-userapp-walkthrough-custom-events-delete-function"></a>
 
 Execute the following `delete-function` command to delete the `my-function` function\.
 
@@ -280,4 +280,4 @@ Execute the following `delete-function` command to delete the `my-function` func
 $ aws lambda delete-function --function-name my-function
 ```
 
-Delete the IAM role you created in the IAM console\. For information about deleting a role, see [Deleting Roles or Instance Profiles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_manage_delete.html) in the *IAM User Guide*\. 
+Delete the IAM role you created in the IAM console\. For information about deleting a role, see [Deleting roles or instance profiles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_manage_delete.html) in the *IAM User Guide*\. 

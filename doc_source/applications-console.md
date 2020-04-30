@@ -1,4 +1,4 @@
-# Managing Applications in the AWS Lambda Console<a name="applications-console"></a>
+# Managing applications in the AWS Lambda console<a name="applications-console"></a>
 
 The AWS Lambda console helps you monitor and manage your [Lambda applications](deploying-lambda-apps.md)\. The **Applications** menu lists AWS CloudFormation stacks with Lambda functions\. The menu includes stacks that you launch in AWS CloudFormation by using the AWS CloudFormation console, the AWS Serverless Application Repository, the AWS CLI, or the AWS SAM CLI\.
 
@@ -13,7 +13,7 @@ The overview shows the following information about your application\.
 + **AWS CloudFormation template** or **SAM template** – The template that defines your application\.
 + **Resources** – The AWS resources that are defined in your application's template\. To manage your application's Lambda functions, choose a function name from the list\.
 
-## Monitoring Applications<a name="applications-console-monitoring"></a>
+## Monitoring applications<a name="applications-console-monitoring"></a>
 
 The **Monitoring** tab shows an Amazon CloudWatch dashboard with aggregate metrics for the resources in your application\.
 
@@ -25,11 +25,11 @@ The **Monitoring** tab shows an Amazon CloudWatch dashboard with aggregate metri
 
 By default, the Lambda console shows a basic dashboard\. You can customize this page by defining custom dashboards in your application template\. When your template includes one or more dashboards, the page shows your dashboards instead of the default dashboard\. You can switch between dashboards with the drop\-down menu on the top right of the page\.
 
-## Custom Monitoring Dashboards<a name="applications-console-dashboards"></a>
+## Custom monitoring dashboards<a name="applications-console-dashboards"></a>
 
 Customize your application monitoring page by adding one or more Amazon CloudWatch dashboards to your application template with the [AWS::CloudWatch::Dashboard](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-dashboard.html) resource type\. The following example creates a dashboard with a single widget that graphs the number of invocations of a function named `my-function`\.
 
-**Example Function Dashboard Template**  
+**Example Function dashboard template**  
 
 ```
 Resources:
@@ -88,4 +88,4 @@ You can get the definition for any of the widgets in the default monitoring dash
 
 1. Choose **Source**\.
 
-For more information about authoring CloudWatch dashboards and widgets, see [Dashboard Body Structure and Syntax](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Dashboard-Body-Structure.html) in the *Amazon CloudWatch API Reference*\.
+For more information about authoring CloudWatch dashboards and widgets, see [Dashboard body structure and syntax](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Dashboard-Body-Structure.html) in the *Amazon CloudWatch API Reference*\.

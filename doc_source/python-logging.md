@@ -1,4 +1,4 @@
-# AWS Lambda Function Logging in Python<a name="python-logging"></a>
+# AWS Lambda function logging in Python<a name="python-logging"></a>
 
 Your Lambda function comes with a CloudWatch Logs log group, with a log stream for each instance of your function\. The runtime sends details about each invocation to the log stream, and relays logs and other output from your function's code\.
 
@@ -17,7 +17,7 @@ def lambda_handler(event, context):
     print(event)
 ```
 
-**Example Log Format**  
+**Example Log format**  
 
 ```
 START RequestId: 8f507cfc-xmpl-4697-b07a-ac58fc914c95 Version: $LATEST
@@ -46,12 +46,12 @@ The Python runtime logs the `START`, `END`, and `REPORT` lines for each invocati
 You can view logs in the Lambda console, in the CloudWatch Logs console, or from the command line\.
 
 **Topics**
-+ [Viewing Logs in the AWS Management Console](#python-logging-console)
++ [Viewing logs in the AWS Management Console](#python-logging-console)
 + [Using the AWS CLI](#python-logging-cli)
-+ [Deleting Logs](#python-logging-delete)
-+ [Logging Library](#python-logging-lib)
++ [Deleting logs](#python-logging-delete)
++ [Logging library](#python-logging-lib)
 
-## Viewing Logs in the AWS Management Console<a name="python-logging-console"></a>
+## Viewing logs in the AWS Management Console<a name="python-logging-console"></a>
 
 The Lambda console shows log output when you test a function on the function configuration page\. To view logs for all invocations, use the CloudWatch Logs console\.
 
@@ -63,7 +63,7 @@ The Lambda console shows log output when you test a function on the function con
 
 1. Choose the first stream in the list\.
 
-Each log stream corresponds to an [instance of your function](runtimes-context.md)\. New streams appear when you update your function and when additional instances are created to handle multiple concurrent invocations\. To find logs for specific invocations, you can instrument your function with X\-Ray, and record details about the request and log stream in the trace\. For a sample application that correlates logs and traces with X\-Ray, see [Error Processor Sample Application for AWS Lambda](samples-errorprocessor.md)\.
+Each log stream corresponds to an [instance of your function](runtimes-context.md)\. New streams appear when you update your function and when additional instances are created to handle multiple concurrent invocations\. To find logs for specific invocations, you can instrument your function with X\-Ray, and record details about the request and log stream in the trace\. For a sample application that correlates logs and traces with X\-Ray, see [Error processor sample application for AWS Lambda](samples-errorprocessor.md)\.
 
 ## Using the AWS CLI<a name="python-logging-cli"></a>
 
@@ -145,11 +145,11 @@ $ ./get-logs.sh
 }
 ```
 
-## Deleting Logs<a name="python-logging-delete"></a>
+## Deleting logs<a name="python-logging-delete"></a>
 
 Log groups aren't deleted automatically when you delete a function\. To avoid storing logs indefinitely, delete the log group, or [configure a retention period](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#SettingLogRetention) after which logs are deleted automatically\.
 
-## Logging Library<a name="python-logging-lib"></a>
+## Logging library<a name="python-logging-lib"></a>
 
 For more detailed logs, use the [logging library](https://docs.python.org/3/library/logging.html)\. 
 

@@ -1,4 +1,4 @@
-# Identity\-based IAM Policies for AWS Lambda<a name="access-control-identity-based"></a>
+# Identity\-based IAM policies for AWS Lambda<a name="access-control-identity-based"></a>
 
 You can use identity\-based policies in AWS Identity and Access Management \(IAM\) to grant users in your account access to Lambda\. Identity\-based policies can apply to users directly, or to groups and roles that are associated with a user\. You can also grant users in another account permission to assume a role in your account and access your Lambda resources\.
 
@@ -10,15 +10,15 @@ Lambda provides managed policies that grant access to Lambda API actions and, in
 Managed policies grant permission to API actions without restricting the functions or layers that a user can modify\. For finer\-grained control, you can create your own policies that limit the scope of a user's permissions\.
 
 **Topics**
-+ [Function Development](#permissions-user-function)
-+ [Layer Development and Use](#permissions-user-layer)
-+ [Cross\-Account Roles](#permissions-user-xaccount)
++ [Function development](#permissions-user-function)
++ [Layer development and use](#permissions-user-layer)
++ [Cross\-account roles](#permissions-user-xaccount)
 
-## Function Development<a name="permissions-user-function"></a>
+## Function development<a name="permissions-user-function"></a>
 
 The following shows an example of a permissions policy with limited scope\. It allows a user to create and manage Lambda functions named with a designated prefix \(`intern-`\), and configured with a designated execution role\.
 
-**Example Function Development Policy**  
+**Example Function development policy**  
 
 ```
 {
@@ -164,11 +164,11 @@ This policy allows a user to get started with Lambda, without putting other user
 
 When you configure triggers for your function, you need access to use the AWS service that invokes your function\. For example, to configure an Amazon S3 trigger, you need permission to Amazon S3 actions to manage bucket notifications\. Many of these permissions are included in the **AWSLambdaFullAccess** managed policy\. Example policies are available in this guide's [GitHub repository](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/iam-policies)\.
 
-## Layer Development and Use<a name="permissions-user-layer"></a>
+## Layer development and use<a name="permissions-user-layer"></a>
 
 The following policy grants a user permission to create layers and use them with functions\. The resource patterns allow the user to work in any AWS Region and with any layer version, as long as the name of the layer starts with `test-`\.
 
-**Example Layer Development Policy**  
+**Example Layer development policy**  
 
 ```
 {
@@ -223,10 +223,10 @@ You can also enforce layer use during function creation and configuration with t
 
 To ensure that the condition applies, verify that no other statements grant the user permission to these actions\.
 
-## Cross\-Account Roles<a name="permissions-user-xaccount"></a>
+## Cross\-account roles<a name="permissions-user-xaccount"></a>
 
 You can apply any of the preceding policies and statements to a role, which you can then share with another account to give it access to your Lambda resources\. Unlike an IAM user, a role doesn't have credentials for authentication\. Instead, it has a *trust policy* that specifies who can assume the role and use its permissions\.
 
 You can use cross\-account roles to give accounts that you trust access to Lambda actions and resources\. If you just want to grant permission to invoke a function or use a layer, use [resource\-based policies](access-control-resource-based.md) instead\.
 
-For more information, see [IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *IAM User Guide*\.
+For more information, see [IAM roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *IAM User Guide*\.

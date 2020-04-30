@@ -6,9 +6,9 @@ You can create AWS IoT rules for your devices to interact with AWS services\. Th
 
 When an incoming IoT message triggers the rule, AWS IoT invokes your Lambda function [asynchronously](invocation-async.md) and passes data from the IoT message to the function\. 
 
-The following example shows a moisture reading from a greenhouse sensor\. The **row** and **pos** values identify the location of the sensor\. This example event is based on the greenhouse type in the [AWS IoT Rules Tutorials](https://docs.aws.amazon.com/iot/latest/developerguide/iot-rules-tutorial.html)\. 
+The following example shows a moisture reading from a greenhouse sensor\. The **row** and **pos** values identify the location of the sensor\. This example event is based on the greenhouse type in the [AWS IoT Rules tutorials](https://docs.aws.amazon.com/iot/latest/developerguide/iot-rules-tutorial.html)\. 
 
-**Example Example AWS IoT Message Event**  
+**Example Example AWS IoT message event**  
 
 ```
 {
@@ -30,4 +30,4 @@ $ aws lambda add-permission --function-name my-function \
 }
 ```
 
-For more information about how to use Lambda with AWS IoT, see [Creating an AWS Lambda Rule](https://docs.aws.amazon.com/iot/latest/developerguide/iot-lambda-rule.html)\. 
+For more information about how to use Lambda with AWS IoT, see [Creating an AWS Lambda rule](https://docs.aws.amazon.com/iot/latest/developerguide/iot-lambda-rule.html)\. 

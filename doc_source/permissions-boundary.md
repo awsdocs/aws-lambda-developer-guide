@@ -1,4 +1,4 @@
-# Using Permissions Boundaries for AWS Lambda Applications<a name="permissions-boundary"></a>
+# Using permissions boundaries for AWS Lambda applications<a name="permissions-boundary"></a>
 
 When you [create an application](applications-tutorial.md) in the AWS Lambda console, Lambda applies a *permissions boundary* to the application's IAM roles\. The permissions boundary limits the scope of the [execution role](lambda-intro-execution-role.md) that the application's template creates for each of its functions, and any roles that you add to the template\. The permissions boundary prevents users with write access to the application's Git repository from escalating the application's permissions beyond the scope of its own resources\.
 
@@ -14,7 +14,7 @@ The boundary limits the permissions of the functions' roles\. You can add permis
 
 By default, an application's permissions boundary enables functions to perform actions on the resources in the application\. For example, if the application includes an Amazon DynamoDB table, the boundary allows access to any API action that can be restricted to operate on specific tables with resource\-level permissions\. You can only use actions that don't support resource\-level permissions if they're specifically permitted in the boundary\. These include Amazon CloudWatch Logs and AWS X\-Ray API actions for logging and tracing\.
 
-**Example Permissions Boundary**  
+**Example Permissions boundary**  
 
 ```
 {
@@ -55,6 +55,6 @@ To access other resources or API actions, you or an administrator must expand th
 + **Execution role** – Extend a function's execution role when it needs to use additional actions\. In the application template, add policies to the execution role\. The intersection of permissions in the boundary and execution role is granted to the function\.
 + **Deployment role** – Extend the application's deployment role when it needs additional permissions to create or configure resources\. In IAM, add policies to the application's deployment role\. The deployment role needs the same user permissions that you need to deploy or update an application in AWS CloudFormation\.
 
-For a tutorial that walks through adding resources to an application and extending its permissions, see [Creating an Application with Continuous Delivery in the Lambda Console](applications-tutorial.md)\.
+For a tutorial that walks through adding resources to an application and extending its permissions, see [Creating an application with continuous delivery in the Lambda console](applications-tutorial.md)\.
 
-For more information, see [Permissions Boundaries for IAM Entities](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html) in the IAM User Guide\.
+For more information, see [Permissions boundaries for IAM entities](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html) in the IAM User Guide\.

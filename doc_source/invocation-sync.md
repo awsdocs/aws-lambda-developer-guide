@@ -1,4 +1,4 @@
-# Synchronous Invocation<a name="invocation-sync"></a>
+# Synchronous invocation<a name="invocation-sync"></a>
 
 When you invoke a function synchronously, Lambda runs the function and waits for a response\. When the function execution ends, Lambda returns the response from the function's code with additional data, such as the version of the function that was executed\. To invoke a function synchronously with the AWS CLI, use the `invoke` command\.
 
@@ -55,4 +55,4 @@ The `base64` utility is available on Linux, macOS, and [Ubuntu on Windows](https
 
 For more information about the `Invoke` API, including a full list of parameters, headers, and errors, see [Invoke](API_Invoke.md)\.
 
-When you invoke a function directly, you can check the response for errors and retry\. The AWS CLI and AWS SDK also automatically retry on client timeouts, throttling, and service errors\. For more information, see [Error Handling and Automatic Retries in AWS Lambda](invocation-retries.md)\.
+When you invoke a function directly, you can check the response for errors and retry\. The AWS CLI and AWS SDK also automatically retry on client timeouts, throttling, and service errors\. For more information, see [Error handling and automatic retries in AWS Lambda](invocation-retries.md)\.

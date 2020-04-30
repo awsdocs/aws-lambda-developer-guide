@@ -1,10 +1,10 @@
-# AWS Lambda Function Logging in C\#<a name="csharp-logging"></a>
+# AWS Lambda function logging in C\#<a name="csharp-logging"></a>
 
 Your Lambda function comes with a CloudWatch Logs log group, with a log stream for each instance of your function\. The runtime sends details about each invocation to the log stream, and relays logs and other output from your function's code\.
 
 To output logs from your function code, you can use methods on [the Console class](https://docs.microsoft.com/en-us/dotnet/api/system.console), or any logging library that writes to `stdout` or `stderr`\. The following example uses the `LambdaLogger` class from the [Amazon\.Lambda\.Core](lambda-csharp.md) library\.
 
-**Example [src/blank\-csharp/Function\.cs](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-csharp/src/blank-csharp/Function.cs) – logging**  
+**Example [src/blank\-csharp/Function\.cs](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-csharp/src/blank-csharp/Function.cs) – Logging**  
 
 ```
 public async Task<AccountUsage> FunctionHandler(SQSEvent invocationEvent, ILambdaContext context)
@@ -26,7 +26,7 @@ public async Task<AccountUsage> FunctionHandler(SQSEvent invocationEvent, ILambd
     }
 ```
 
-**Example Log Format**  
+**Example Log format**  
 
 ```
 START RequestId: d1cf0ccb-xmpl-46e6-950d-04c96c9b1c5d Version: $LATEST
@@ -79,11 +79,11 @@ The \.NET runtime logs the `START`, `END`, and `REPORT` lines for each invocatio
 You can view logs in the Lambda console, in the CloudWatch Logs console, or from the command line\.
 
 **Topics**
-+ [Viewing Logs in the AWS Management Console](#csharp-logging-console)
++ [Viewing logs in the AWS Management Console](#csharp-logging-console)
 + [Using the AWS CLI](#csharp-logging-cli)
-+ [Deleting Logs](#csharp-logging-delete)
++ [Deleting logs](#csharp-logging-delete)
 
-## Viewing Logs in the AWS Management Console<a name="csharp-logging-console"></a>
+## Viewing logs in the AWS Management Console<a name="csharp-logging-console"></a>
 
 The Lambda console shows log output when you test a function on the function configuration page\. To view logs for all invocations, use the CloudWatch Logs console\.
 
@@ -95,7 +95,7 @@ The Lambda console shows log output when you test a function on the function con
 
 1. Choose the first stream in the list\.
 
-Each log stream corresponds to an [instance of your function](runtimes-context.md)\. New streams appear when you update your function and when additional instances are created to handle multiple concurrent invocations\. To find logs for specific invocations, you can instrument your function with X\-Ray, and record details about the request and log stream in the trace\. For a sample application that correlates logs and traces with X\-Ray, see [Error Processor Sample Application for AWS Lambda](samples-errorprocessor.md)\.
+Each log stream corresponds to an [instance of your function](runtimes-context.md)\. New streams appear when you update your function and when additional instances are created to handle multiple concurrent invocations\. To find logs for specific invocations, you can instrument your function with X\-Ray, and record details about the request and log stream in the trace\. For a sample application that correlates logs and traces with X\-Ray, see [Error processor sample application for AWS Lambda](samples-errorprocessor.md)\.
 
 ## Using the AWS CLI<a name="csharp-logging-cli"></a>
 
@@ -177,6 +177,6 @@ $ ./get-logs.sh
 }
 ```
 
-## Deleting Logs<a name="csharp-logging-delete"></a>
+## Deleting logs<a name="csharp-logging-delete"></a>
 
 Log groups aren't deleted automatically when you delete a function\. To avoid storing logs indefinitely, delete the log group, or [configure a retention period](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#SettingLogRetention) after which logs are deleted automatically\.

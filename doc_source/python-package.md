@@ -1,21 +1,21 @@
-# AWS Lambda Deployment Package in Python<a name="python-package"></a>
+# AWS Lambda deployment package in Python<a name="python-package"></a>
 
 A deployment package is a ZIP archive that contains your function code and dependencies\. You need to create a deployment package if you use the Lambda API to manage functions, or if you need to include libraries and dependencies other than the AWS SDK\. You can upload the package directly to Lambda, or you can use an Amazon S3 bucket, and then upload it to Lambda\. If the deployment package is larger than 50 MB, you must use Amazon S3\.
 
 If you use the Lambda [console editor](code-editor.md) to author your function, the console manages the deployment package\. You can use this method as long as you don't need to add any libraries\. You can also use it to update a function that already has libraries in the deployment package, as long as the total size doesn't exceed 3 MB\.
 
 **Note**  
-You can use the AWS SAM CLI `build` command to create a deployment package for your Python function code and dependencies\. The AWS SAM CLI also provides an option to build your deployment package inside a Docker image that is compatible with the Lambda execution environment\. See [Building Applications with Dependencies](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-build.html) in the AWS SAM Developer Guide for instructions\.
+You can use the AWS SAM CLI `build` command to create a deployment package for your Python function code and dependencies\. The AWS SAM CLI also provides an option to build your deployment package inside a Docker image that is compatible with the Lambda execution environment\. See [Building applications with dependencies](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-build.html) in the AWS SAM Developer Guide for instructions\.
 
 **Topics**
 + [Prerequisites](#python-package-prereqs)
-+ [Updating a Function with No Dependencies](#python-package-codeonly)
-+ [Updating a Function with Additional Dependencies](#python-package-dependencies)
-+ [With a Virtual Environment](#python-package-venv)
++ [Updating a function with no dependencies](#python-package-codeonly)
++ [Updating a function with additional dependencies](#python-package-dependencies)
++ [With a virtual environment](#python-package-venv)
 
 ## Prerequisites<a name="python-package-prereqs"></a>
 
-These instructions assume that you already have a function\. If you haven't created a function yet, see [Building Lambda Functions with Python](lambda-python.md)\.
+These instructions assume that you already have a function\. If you haven't created a function yet, see [Building Lambda functions with Python](lambda-python.md)\.
 
 To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
@@ -28,7 +28,7 @@ For long commands, an escape character \(`\`\) is used to split a command over m
 
 On Linux and macOS, use your preferred shell and package manager\. On Windows 10, you can [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows\-integrated version of Ubuntu and Bash\.
 
-## Updating a Function with No Dependencies<a name="python-package-codeonly"></a>
+## Updating a function with no dependencies<a name="python-package-codeonly"></a>
 
 To create or update a function with the Lambda API, create an archive that contains your function code and upload it with the AWS CLI\.
 
@@ -59,7 +59,7 @@ To create or update a function with the Lambda API, create an archive that conta
    }
    ```
 
-## Updating a Function with Additional Dependencies<a name="python-package-dependencies"></a>
+## Updating a function with additional dependencies<a name="python-package-dependencies"></a>
 
 If your function depends on libraries other than the SDK for Python \(Boto 3\), install them to a local directory with [pip](https://pypi.org/project/pip/), and include them in your deployment package\.
 
@@ -121,7 +121,7 @@ In order for `--target` to work on [Debian\-based systems](https://github.com/py
    }
    ```
 
-## With a Virtual Environment<a name="python-package-venv"></a>
+## With a virtual environment<a name="python-package-venv"></a>
 
 In some cases, you may need to use a [virtual environment](https://virtualenv.pypa.io/en/latest/) to install dependencies for your function\. This can occur if your function or its dependencies have dependencies on native libraries, or if you used Homebrew to install Python\.
 

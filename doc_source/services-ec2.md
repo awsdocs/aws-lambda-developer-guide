@@ -4,7 +4,7 @@ You can use AWS Lambda to process lifecycle events from Amazon Elastic Compute C
 
 CloudWatch Events invokes your Lambda function asynchronously with the event document from Amazon EC2\.
 
-**Example Instance Lifecycle Event**  
+**Example Instance lifecycle event**  
 
 ```
 {
@@ -27,13 +27,13 @@ CloudWatch Events invokes your Lambda function asynchronously with the event doc
 
 For details on configuring events in CloudWatch Events, see [Using AWS Lambda with Amazon CloudWatch Events](services-cloudwatchevents.md)\. For an example function that processes Amazon EBS snapshot notifications, see [Amazon CloudWatch Events for Amazon EBS](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-cloud-watch-events.html) in the Amazon EC2 User Guide for Linux Instances\.
 
-You can also use the AWS SDK to manage instances and other resources with the Amazon EC2 API\. For a tutorial with a sample application in C\#, see [Tutorial: Using AWS SDK for \.NET to Manage Amazon EC2 Spot Instances](services-ec2-tutorial.md)\.
+You can also use the AWS SDK to manage instances and other resources with the Amazon EC2 API\. For a tutorial with a sample application in C\#, see [Tutorial: Using AWS SDK for \.NET to manage Amazon EC2 Spot Instances](services-ec2-tutorial.md)\.
 
 ## Permissions<a name="services-ec2-permissions"></a>
 
 To process lifecycle events from Amazon EC2, CloudWatch Events needs permission to invoke your function\. This permission comes from the function's [resource\-based policy](access-control-resource-based.md)\. If you use the CloudWatch Events console to configure an event trigger, the console updates the resource\-based policy on your behalf\. Otherwise, add a statement like the following:
 
-**Example Resource\-based Policy Statement for Amazon EC2 Lifecycle Notifications**  
+**Example Resource\-based policy statement for Amazon EC2 lifecycle notifications**  
 
 ```
 {

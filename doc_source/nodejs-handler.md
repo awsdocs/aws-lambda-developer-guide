@@ -1,4 +1,4 @@
-# AWS Lambda Function Handler in Node\.js<a name="nodejs-handler"></a>
+# AWS Lambda function handler in Node\.js<a name="nodejs-handler"></a>
 
 The handler is the method in your Lambda function that processes events\. When you invoke a function, the [runtime](lambda-runtimes.md) runs the handler method\. When the handler exits or returns a response, it becomes available to handle another event\.
 
@@ -23,13 +23,13 @@ The third argument, `callback`, is a function that you can call in [non\-async h
 
 For async handlers, you return a response, error, or promise to the runtime instead of using `callback`\.
 
-## Async Handlers<a name="nodejs-handler-async"></a>
+## Async handlers<a name="nodejs-handler-async"></a>
 
 For async handlers, you can use `return` and `throw` to send a response or error, respectively\. Functions must use the `async` keyword to use these methods to return a response or error\.
 
 If your code performs an asynchronous task, return a promise to make sure that it finishes running\. When you resolve or reject the promise, Lambda sends the response or error to the invoker\.
 
-**Example index\.js File – HTTP Request with Async Handler and Promises**  
+**Example index\.js file – HTTP request with async handler and promises**  
 
 ```
 const https = require('https')
@@ -49,7 +49,7 @@ exports.handler = async function(event) {
 
 For libraries that return a promise, you can return that promise directly to the runtime\.
 
-**Example index\.js File – AWS SDK with Async Handler and Promises**  
+**Example index\.js file – AWS SDK with async handler and promises**  
 
 ```
 const AWS = require('aws-sdk')
@@ -60,11 +60,11 @@ exports.handler = async function(event) {
 }
 ```
 
-## Non\-Async Handlers<a name="nodejs-handler-sync"></a>
+## Non\-async handlers<a name="nodejs-handler-sync"></a>
 
 The following example function checks a URL and returns the status code to the invoker\.
 
-**Example index\.js File – HTTP Request with Callback**  
+**Example index\.js file – HTTP request with callback**  
 
 ```
 const https = require('https')
@@ -83,7 +83,7 @@ For non\-async handlers, function execution continues until the [event loop](htt
 
 In the following example, the response from Amazon S3 is returned to the invoker as soon as it's available\. The timeout running on the event loop is frozen, and it continues running the next time the function is invoked\.
 
-**Example index\.js File – callbackWaitsForEmptyEventLoop**  
+**Example index\.js file – callbackWaitsForEmptyEventLoop**  
 
 ```
 const AWS = require('aws-sdk')

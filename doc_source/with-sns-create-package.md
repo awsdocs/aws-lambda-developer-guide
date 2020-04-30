@@ -1,4 +1,4 @@
-# Sample Function Code<a name="with-sns-create-package"></a>
+# Sample function code<a name="with-sns-create-package"></a>
 
 Sample code is available for the following languages\.
 
@@ -26,7 +26,7 @@ exports.handler = function(event, context, callback) {
 };
 ```
 
-Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Node\.js](nodejs-package.md)\.
+Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda deployment package in Node\.js](nodejs-package.md)\.
 
 ## Java 11<a name="with-sns-example-deployment-pkg-java"></a>
 
@@ -61,7 +61,7 @@ public class LogEvent implements RequestHandler<SNSEvent, Object> {
 + `aws-lambda-java-core`
 + `aws-lambda-java-events`
 
-Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Java](java-package.md)\.
+Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [AWS Lambda deployment package in Java](java-package.md)\.
 
 ## Go<a name="with-sns-example-deployment-pkg-go"></a>
 
@@ -91,7 +91,7 @@ func main() {
 }
 ```
 
-Build the executable with `go build` and create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Go](golang-package.md)\.
+Build the executable with `go build` and create a deployment package\. For instructions, see [AWS Lambda deployment package in Go](golang-package.md)\.
 
 ## Python 3<a name="with-sns-example-deployment-pkg-python"></a>
 
@@ -111,4 +111,4 @@ def lambda_handler(event, context):
     return message
 ```
 
-Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Python](python-package.md)\.
+Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda deployment package in Python](python-package.md)\.

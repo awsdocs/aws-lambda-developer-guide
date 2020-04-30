@@ -1,15 +1,15 @@
-# AWS Lambda Limits<a name="gettingstarted-limits"></a>
+# AWS Lambda limits<a name="gettingstarted-limits"></a>
 
 AWS Lambda limits the amount of compute and storage resources that you can use to run and store functions\. The following limits apply per\-region and can be increased\. To request an increase, use the [Support Center console](https://console.aws.amazon.com/support/v1#/case/create?issueType=service-limit-increase)\.
 
 
-| Resource | Default Limit | 
+| Resource | Default limit | 
 | --- | --- | 
 | Concurrent executions | 1,000 | 
 | Function and layer storage | 75 GB | 
 | [Elastic network interfaces per VPC](configuration-vpc.md) | 250 | 
 
-For details on concurrency and how Lambda scales your function concurrency in response to traffic, see [AWS Lambda Function Scaling](invocation-scaling.md)\.
+For details on concurrency and how Lambda scales your function concurrency in response to traffic, see [AWS Lambda function scaling](invocation-scaling.md)\.
 
 The following limits apply to function configuration, deployments, and execution\. They cannot be changed\.
 
@@ -31,4 +31,4 @@ The following limits apply to function configuration, deployments, and execution
 | File descriptors | 1,024 | 
 | Execution processes/threads | 1,024 | 
 
-Limits for other services, such as AWS Identity and Access Management, Amazon CloudFront \(Lambda@Edge\), and Amazon Virtual Private Cloud, can impact your Lambda functions\. For more information, see [AWS Service Limits](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html) and [Using AWS Lambda with Other Services](lambda-services.md)\.
+Limits for other services, such as AWS Identity and Access Management, Amazon CloudFront \(Lambda@Edge\), and Amazon Virtual Private Cloud, can impact your Lambda functions\. For more information, see [AWS service limits](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html) and [Using AWS Lambda with other services](lambda-services.md)\.

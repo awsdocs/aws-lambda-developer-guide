@@ -1,4 +1,4 @@
-# Tutorial: Triggering a Lambda Function with AWS CloudTrail Events<a name="with-cloudtrail-example"></a>
+# Tutorial: Triggering a Lambda function with AWS CloudTrail events<a name="with-cloudtrail-example"></a>
 
 You can configure Amazon S3 to publish events to AWS Lambda when AWS CloudTrail stores API call logs\. Your Lambda function can read the log object and process the access records logged by CloudTrail\.
 
@@ -10,14 +10,14 @@ Use the following instructions to create a Lambda function that notifies you whe
 
 ## Requirements<a name="with-cloudtrail-tutorial-requirements"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started with AWS Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with AWS Lambda](getting-started.md) to create your first Lambda function\.
 
 Before you begin, make sure that you have the following tools:
 + [Node\.js 8 with `npm`](https://nodejs.org/en/download/releases/)\.
 + The Bash shell\. For Linux and macOS, this is included by default\. In Windows 10, you can install the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows\-integrated version of Ubuntu and Bash\.
 + [The AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)\.
 
-## Step 1: Creating a Trail in CloudTrail<a name="with-cloudtrail-example-prepare-create-buckets"></a>
+## Step 1: Creating a trail in CloudTrail<a name="with-cloudtrail-example-prepare-create-buckets"></a>
 
 When you create a trail, CloudTrail records the API calls in log files and stores them in Amazon S3\. A CloudTrail log is an unordered array of events in JSON format\. For each call to a supported API action, CloudTrail records information about the request and the entity that made it\. Log events include the action name, parameters, response values, and details about the requester\.
 
@@ -35,7 +35,7 @@ When you create a trail, CloudTrail records the API calls in log files and store
 
 1. Save the bucket Amazon Resource Name \(ARN\) to add it to the IAM execution role, which you create later\.
 
-## Step 2: Creating an Amazon SNS Topic<a name="with-cloudtrail-create-sns-topic"></a>
+## Step 2: Creating an Amazon SNS topic<a name="with-cloudtrail-create-sns-topic"></a>
 
  Create an Amazon SNS topic to send out a notification when new object events have occurred\. 
 
@@ -51,7 +51,7 @@ When you create a trail, CloudTrail records the API calls in log files and store
 
 1. Record the topic ARN\. You will need it when you create the IAM execution role and Lambda function\.
 
-## Step 3: Creating an IAM Execution Role<a name="with-cloudtrail-create-execution-role"></a>
+## Step 3: Creating an IAM execution role<a name="with-cloudtrail-create-execution-role"></a>
 
 An [execution role](lambda-intro-execution-role.md) gives your function permission to access AWS resources\. Create an execution role that grants the function permission to access CloudWatch Logs, Amazon S3, and Amazon SNS\.
 
@@ -97,7 +97,7 @@ An [execution role](lambda-intro-execution-role.md) gives your function permissi
 
 1. Record the role ARN\. You will need it when you create the Lambda function\.
 
-## Step 4: Creating the Lambda Function<a name="with-cloudtrail-example-create-function"></a>
+## Step 4: Creating the Lambda function<a name="with-cloudtrail-example-create-function"></a>
 
 The following Lambda function processes CloudTrail logs, and sends a notification through Amazon SNS when a new Amazon SNS topic is created\.
 
@@ -206,7 +206,7 @@ The following Lambda function processes CloudTrail logs, and sends a notificatio
    --role arn:aws:iam::123456789012:role/lambda-cloudtrail-role
    ```
 
-## Step 5: Adding Permissions to the Lambda Function Policy<a name="with-cloudtrail-example-configure-event-source-add-permission"></a>
+## Step 5: Adding permissions to the Lambda function policy<a name="with-cloudtrail-example-configure-event-source-add-permission"></a>
 
 The Lambda function's resource policy needs permissions to allow Amazon S3 to invoke the function\.
 
@@ -231,7 +231,7 @@ The Lambda function's resource policy needs permissions to allow Amazon S3 to in
    $ aws lambda get-policy --function-name function-name
    ```
 
-## Step 6: Configuring Notifications on an Amazon S3 Bucket<a name="with-cloudtrail-example-configure-event-source-add-notif-config"></a>
+## Step 6: Configuring notifications on an Amazon S3 bucket<a name="with-cloudtrail-example-configure-event-source-add-notif-config"></a>
 
 To request that Amazon S3 publishes object\-created events to Lambda, add a notification configuration to the S3 bucket\. In the configuration, you specify the following:
 + Event type – Any event types that create objects\.

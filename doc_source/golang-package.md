@@ -1,4 +1,4 @@
-# AWS Lambda Deployment Package in Go<a name="golang-package"></a>
+# AWS Lambda deployment package in Go<a name="golang-package"></a>
 
 To create a Lambda function you first create a Lambda function deployment package, a \.zip file consisting of your code \(a Go executable\) and any dependencies\.
 
@@ -22,7 +22,7 @@ Create a deployment package by packaging the executable in a ZIP file, and use t
   --role arn:aws:iam::123456789012:role/execution_role
 ```
 
-## Creating a Deployment Package on Windows<a name="golang-package-windows"></a>
+## Creating a deployment package on Windows<a name="golang-package-windows"></a>
 
 To create a \.zip that will work on AWS Lambda using Windows, we recommend installing the **build\-lambda\-zip** tool\.
 

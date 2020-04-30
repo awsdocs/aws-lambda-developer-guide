@@ -24,7 +24,7 @@ With the **API Gateway** trigger selected in the designer, choose the endpoint t
 
 API Gateway APIs are comprised of stages, resources, methods, and integrations\. The stage and resource determine the path of the endpoint:
 
-**API Path Format**
+**API path format**
 + `/prod/` – The `prod` stage and root resource\.
 + `/prod/user` – The `prod` stage and `user` resource\.
 + `/dev/{proxy+}` – Any route in the `dev` stage\.
@@ -34,7 +34,7 @@ A Lambda integration maps a path and HTTP method combination to a Lambda functio
 
 Amazon API Gateway invokes your function [synchronously](invocation-sync.md) with an event that contains a JSON representation of the HTTP request\. For a custom integration, the event is the body of the request\. For a proxy integration, the event has a defined structure\. The following example shows a proxy event from an API Gateway REST API\.
 
-**Example [event\.json](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/nodejs-apig/event.json) API Gateway Proxy Event \(REST API\)**  
+**Example [event\.json](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/nodejs-apig/event.json) API Gateway proxy event \(REST API\)**  
 
 ```
 {
@@ -79,7 +79,7 @@ API Gateway waits for a response from your function and relays the result to the
 
 The following example shows a response object from a Node\.js function\. The response object represents a successful HTTP response that contains a JSON document\.
 
-**Example [index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/nodejs-apig/function/index.js) – Proxy Integration Response Object \(Node\.js\)**  
+**Example [index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/nodejs-apig/function/index.js) – Proxy integration response object \(Node\.js\)**  
 
 ```
 var response = {
@@ -97,7 +97,7 @@ var response = {
 
 The Lambda runtime serializes the response object into JSON and sends it to the API\. The API parses the response and uses it to create an HTTP response, which it then sends to the client that made the original request\.
 
-**Example HTTP Response**  
+**Example HTTP response**  
 
 ```
 < HTTP/1.1 200 OK
@@ -119,13 +119,13 @@ Resources in your API define one or more methods, such as GET or POST\. Methods 
 
 **Topics**
 + [Permissions](#apigateway-permissions)
-+ [Handling Errors with an API Gateway API](#services-apigateway-errors)
-+ [Choosing an API Type](#services-apigateway-apitypes)
-+ [Sample Applications](#services-apigateway-samples)
++ [Handling errors with an API Gateway API](#services-apigateway-errors)
++ [Choosing an API type](#services-apigateway-apitypes)
++ [Sample applications](#services-apigateway-samples)
 + [Tutorial: Using AWS Lambda with Amazon API Gateway](services-apigateway-tutorial.md)
-+ [Sample Function Code](services-apigateway-code.md)
-+ [Create a Simple Microservice using Lambda and API Gateway](services-apigateway-blueprint.md)
-+ [AWS SAM Template for an API Gateway Application](services-apigateway-template.md)
++ [Sample function code](services-apigateway-code.md)
++ [Create a simple microservice using Lambda and API Gateway](services-apigateway-blueprint.md)
++ [AWS SAM template for an API Gateway application](services-apigateway-template.md)
 
 ## Permissions<a name="apigateway-permissions"></a>
 
@@ -133,7 +133,7 @@ Amazon API Gateway gets permission to invoke your function from the function's [
 
 When you add an API to your function by using the Lambda console, using the API Gateway console, or in an AWS SAM template, the function's resource\-based policy is updated automatically\. The following example shows a function policy with a statement that was added by an AWS SAM template\.
 
-**Example Function Policy**  
+**Example Function policy**  
 
 ```
 {
@@ -182,14 +182,14 @@ If your function and API are in different regions, the region identifier in the 
 
 The source ARN in this example grants permission to an integration on the GET method of the root resource in the default stage of an API, with ID `mnh1xmpli7`\. You can use an asterisk in the source ARN to grant permissions to multiple stages, methods, or resources\.
 
-**Resource Patterns**
+**Resource patterns**
 + `mnh1xmpli7/*/GET/*` – GET method on all resources in all stages\.
 + `mnh1xmpli7/prod/ANY/user` – ANY method on the `user` resource in the `prod` stage\.
 + `mnh1xmpli7/*/*/*` – Any method on all resources in all stages\.
 
-For details on viewing the policy and removing statements, see [Cleaning Up Resource\-Based Policies](access-control-resource-based.md#permissions-resource-cleanup)\.
+For details on viewing the policy and removing statements, see [Cleaning up resource\-based policies](access-control-resource-based.md#permissions-resource-cleanup)\.
 
-## Handling Errors with an API Gateway API<a name="services-apigateway-errors"></a>
+## Handling errors with an API Gateway API<a name="services-apigateway-errors"></a>
 
 API Gateway treats all invocation and function errors as internal errors\. If the Lambda API rejects the invocation request, API Gateway returns a 500 error code\. If the function runs but returns an error, or returns a response in the wrong format, API Gateway returns a 502\. In both cases, the body of the response from API Gateway is `{"message": "Internal server error"}`\.
 
@@ -220,7 +220,7 @@ API Gateway converts this response into an HTTP error with a custom status code 
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/tracemap-apig-404.png)
 
-## Choosing an API Type<a name="services-apigateway-apitypes"></a>
+## Choosing an API type<a name="services-apigateway-apitypes"></a>
 
 API Gateway supports three types of APIs that invoke Lambda functions:
 + **HTTP API** – A lightweight, low\-latency RESTful API\.
@@ -229,25 +229,25 @@ API Gateway supports three types of APIs that invoke Lambda functions:
 
 HTTP APIs and REST APIs are both RESTful APIs that process HTTP requests and return responses\. HTTP APIs are newer and are built with the API Gateway version 2 API\. The following features are new for HTTP APIs:
 
-**HTTP API Features**
+**HTTP API features**
 + **Automatic deployments** – When you modify routes or integrations, changes deploy automatically to stages that have automatic deployment enabled\.
 + **Default stage** – You can create a default stage \(`$default`\) to serve requests at the root path of your API's URL\. For named stages, you must include the stage name at the beginning of the path\.
 + **CORS configuration** – You can configure your API to add CORS headers to outgoing responses, instead of adding them manually in your function code\.
 
 REST APIs are the classic RESTful APIs that API Gateway has supported since launch\. REST APIs currently have more customization, integration, and management features\.
 
-**REST API Features**
+**REST API features**
 + **Integration types** – REST APIs support custom Lambda integrations\. With a custom integration, you can send just the body of the request to the function, or apply a transform template to the request body before sending it to the function\.
 + **Access control** – REST APIs support more options for authentication and authorization\.
 + **Monitoring and tracing** – REST APIs support AWS X\-Ray tracing and additional logging options\.
 
-For a detailed comparison, see [Choosing Between HTTP APIs and REST APIs](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-vs-rest.html) in the *API Gateway Developer Guide*\.
+For a detailed comparison, see [Choosing between HTTP APIs and REST APIs](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-vs-rest.html) in the *API Gateway Developer Guide*\.
 
 WebSocket APIs also use the API Gateway version 2 API and support a similar feature set\. Use a WebSocket API for applications that benefit from a persistent connection between the client and API\. WebSocket APIs provide full\-duplex communication, which means that both the client and the API can send messages continuously without waiting for a response\.
 
-WebSocket APIs and HTTP APIs support a simplified event format \(version 2\.0\)\. The following example shows an event from an HTTP API\.
+HTTP APIs support a simplified event format \(version 2\.0\)\. The following example shows an event from an HTTP API\.
 
-**Example [event\-v2\.json](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/nodejs-apig/event-v2.json) API Gateway Proxy Event \(HTTP API\)**  
+**Example [event\-v2\.json](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/nodejs-apig/event-v2.json) – API Gateway proxy event \(HTTP API\)**  
 
 ```
 {
@@ -286,9 +286,9 @@ WebSocket APIs and HTTP APIs support a simplified event format \(version 2\.0\)\
 }
 ```
 
-For more information, see [AWS Lambda Integrations](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html) in the API Gateway Developer Guide\.
+For more information, see [AWS Lambda integrations](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html) in the API Gateway Developer Guide\.
 
-## Sample Applications<a name="services-apigateway-samples"></a>
+## Sample applications<a name="services-apigateway-samples"></a>
 
 The GitHub repository for this guide provides the following sample application for API Gateway\.
 + [API Gateway with Node\.js](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/nodejs-apig) – A function with an AWS SAM template that creates a REST API that has AWS X\-Ray tracing enabled\. It includes scripts for deploying, invoking the function, testing the API, and cleanup\.

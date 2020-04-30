@@ -1,11 +1,11 @@
-# AWS Lambda Context Object in Node\.js<a name="nodejs-context"></a>
+# AWS Lambda context object in Node\.js<a name="nodejs-context"></a>
 
 When Lambda runs your function, it passes a context object to the [handler](nodejs-handler.md)\. This object provides methods and properties that provide information about the invocation, function, and execution environment\.
 
-**Context Methods**
+**Context methods**
 + `getRemainingTimeInMillis()` – Returns the number of milliseconds left before the execution times out\.
 
-**Context Properties**
+**Context properties**
 + `functionName` – The name of the Lambda function\.
 + `functionVersion` – The [version](configuration-versions.md) of the function\.
 + `invokedFunctionArn` – The Amazon Resource Name \(ARN\) that's used to invoke the function\. Indicates if the invoker specified a version number or alias\.
@@ -32,7 +32,7 @@ When Lambda runs your function, it passes a context object to the [handler](node
 
 The following example function logs context information and returns the location of the logs\.
 
-**Example index\.js File**  
+**Example index\.js file**  
 
 ```
 exports.handler = async function(event, context) {

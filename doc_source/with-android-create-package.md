@@ -1,4 +1,4 @@
-# Sample Function Code<a name="with-android-create-package"></a>
+# Sample function code<a name="with-android-create-package"></a>
 
 Sample code is available for the following languages\.
 
@@ -22,7 +22,7 @@ exports.handler = function(event, context, callback) {
 }
 ```
 
-Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Node\.js](nodejs-package.md)\.
+Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda deployment package in Node\.js](nodejs-package.md)\.
 
 ## Java<a name="with-on-demand-custom-android-example-deployment-pkg-java"></a>
 
@@ -100,4 +100,4 @@ public class HelloPojo {
 **Dependencies**
 + `aws-lambda-java-core`
 
-Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [AWS Lambda Deployment Package in Java](java-package.md)\.
+Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [AWS Lambda deployment package in Java](java-package.md)\.

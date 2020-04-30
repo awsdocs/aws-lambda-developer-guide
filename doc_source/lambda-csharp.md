@@ -1,9 +1,9 @@
-# Building Lambda Functions with C\#<a name="lambda-csharp"></a>
+# Building Lambda functions with C\#<a name="lambda-csharp"></a>
 
 The following sections explain how common programming patterns and core concepts apply when authoring Lambda function code in C\#\.
 
 AWS Lambda provides the following libraries for C\# functions:
-+ **Amazon\.Lambda\.Core** – This library provides a static Lambda logger, serialization interfaces and a context object\. The `Context` object \([AWS Lambda Context Object in C\#](csharp-context.md)\) provides runtime information about your Lambda function\.
++ **Amazon\.Lambda\.Core** – This library provides a static Lambda logger, serialization interfaces and a context object\. The `Context` object \([AWS Lambda context object in C\#](csharp-context.md)\) provides runtime information about your Lambda function\.
 + **Amazon\.Lambda\.Serialization\.Json ** – This is an implementation of the serialization interface in **Amazon\.Lambda\.Core**\. 
 + **Amazon\.Lambda\.Logging\.AspNetCore ** – This provides a library for logging from ASP\.NET\. 
 + Event objects \(POCOs\) for several AWS services, including: 
@@ -16,19 +16,24 @@ AWS Lambda provides the following libraries for C\# functions:
   + **Amazon\.Lambda\.SQSEvents **
   + **Amazon\.Lambda\.SNSEvents **
 
-These packages are available at [Nuget Packages](https://www.nuget.org/packages/)\.
+These packages are available at [Nuget packages](https://www.nuget.org/packages/)\.
 
 
-**\.NET Runtimes**  
+**\.NET runtimes**  
 
-| Name | Identifier | Operating System | 
+| Name | Identifier | Operating system | 
 | --- | --- | --- | 
 |  \.NET Core 3\.1  |  `dotnetcore3.1`  |  Amazon Linux 2  | 
 |  \.NET Core 2\.1  |  `dotnetcore2.1`  |  Amazon Linux  | 
 
+**Note**  
+To get started with application development in your local environment, deploy one of the sample applications available in this guide's GitHub repository\.  
+[blank\-csharp](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-csharp) – A C\# function that shows the use of Lambda's \.NET libraries, logging, environment variables, AWS X\-Ray tracing, unit tests, and the AWS SDK\.
+[ec2\-spot](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/ec2-spot) – A function that manages spot instance requests in Amazon EC2\.
+
 **Topics**
 + [AWS Lambda Deployment Package in C\#](csharp-package.md)
-+ [AWS Lambda Function Handler in C\#](csharp-handler.md)
-+ [AWS Lambda Context Object in C\#](csharp-context.md)
-+ [AWS Lambda Function Logging in C\#](csharp-logging.md)
-+ [AWS Lambda Function Errors in C\#](csharp-exceptions.md)
++ [AWS Lambda function handler in C\#](csharp-handler.md)
++ [AWS Lambda context object in C\#](csharp-context.md)
++ [AWS Lambda function logging in C\#](csharp-logging.md)
++ [AWS Lambda function errors in C\#](csharp-exceptions.md)

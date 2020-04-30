@@ -1,4 +1,4 @@
-# Troubleshoot Invocation Issues in AWS Lambda<a name="troubleshooting-invocation"></a>
+# Troubleshoot invocation issues in AWS Lambda<a name="troubleshooting-invocation"></a>
 
 When you invoke a Lambda function, Lambda validates the request and checks for scaling capacity before sending the event to your function or, for asynchronous invocation, to the event queue\. Invocation errors can be caused by issues with request parameters, event structure, function settings, user permissions, resource permissions, or limits\.
 
@@ -13,13 +13,13 @@ Your IAM user, or the role that you assume, needs permission to invoke a functio
 **Note**  
 Unlike other API actions in Lambda, the name of the action in IAM \(`lambda:InvokeFunction`\) doesn't match the name of the API action \(`Invoke`\) for invoking a function\.
 
-For more information, see [AWS Lambda Permissions](lambda-permissions.md)\.
+For more information, see [AWS Lambda permissions](lambda-permissions.md)\.
 
 **Error:** *ResourceConflictException: The operation cannot be performed at this time\. The function is currently in the following state: Pending*
 
 When you connect a function to a VPC at the time of creation, the function enters a `Pending` state while Lambda creates elastic network interfaces\. During this time, you can't invoke or modify your function\. If you connect your function to a VPC after creation, you can invoke it while the update is pending, but you can't modify its code or configuration\.
 
-For more information, see [Monitoring the State of a Function with the Lambda API](functions-states.md)\.
+For more information, see [Monitoring the state of a function with the Lambda API](functions-states.md)\.
 
 **Error:** *A function is stuck in the `Pending` state for several minutes\.*
 

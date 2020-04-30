@@ -1,8 +1,8 @@
-# AWS Lambda Context Object in C\#<a name="csharp-context"></a>
+# AWS Lambda context object in C\#<a name="csharp-context"></a>
 
 When Lambda runs your function, it passes a context object to the [handler](csharp-handler.md)\. This object provides properties with information about the invocation, function, and execution environment\.
 
-**Context Properties**
+**Context properties**
 + `FunctionName` – The name of the Lambda function\.
 + `FunctionVersion` – The [version](configuration-versions.md) of the function\.
 + `InvokedFunctionArn` – The Amazon Resource Name \(ARN\) that's used to invoke the function\. Indicates if the invoker specified a version number or alias\.

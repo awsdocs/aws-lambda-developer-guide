@@ -1,8 +1,8 @@
-# AWS Lambda Event Source Mapping<a name="invocation-eventsourcemapping"></a>
+# AWS Lambda event source mappings<a name="invocation-eventsourcemapping"></a>
 
 An event source mapping is an AWS Lambda resource that reads from an event source and invokes a Lambda function\. You can use event source mappings to process items from a stream or queue in services that don't invoke Lambda functions directly\. Lambda provides event source mappings for the following services\.
 
-**Services That Lambda Reads Events From**
+**Services that Lambda reads events from**
 + [Amazon Kinesis](with-kinesis.md)
 + [Amazon DynamoDB](with-ddb.md)
 + [Amazon Simple Queue Service](with-sqs.md)
@@ -90,4 +90,4 @@ The following example shows an invocation record for a Kinesis stream\.
 
 Lambda also supports in\-order processing for [FIFO \(first\-in, first\-out\) queues](with-sqs.md), scaling up to the number of active message groups\. For standard queues, items aren't necessarily processed in order\. Lambda scales up to process a standard queue as quickly as possible\. When an error occurs, batches are returned to the queue as individual items and might be processed in a different grouping than the original batch\. Occasionally, the event source mapping might receive the same item from the queue twice, even if no function error occurred\. Lambda deletes items from the queue after they're processed successfully\. You can configure the source queue to send items to a dead\-letter queue if they can't be processed\.
 
-For information about services that invoke Lambda functions directly, see [Using AWS Lambda with Other Services](lambda-services.md)\.
+For information about services that invoke Lambda functions directly, see [Using AWS Lambda with other services](lambda-services.md)\.

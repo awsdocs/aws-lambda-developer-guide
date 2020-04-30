@@ -1,6 +1,6 @@
-# Blank Function Sample Application for AWS Lambda<a name="samples-blank"></a>
+# Blank function sample application for AWS Lambda<a name="samples-blank"></a>
 
-The blank function sample application demonstrates common operations in Lambda\. Explore this application to learn about building Lambda functions in your programming language, or use it as a starting point for your own projects\.
+The blank function sample application demonstrates common operations in Lambda with a function that calls the Lambda API\. It shows the use of logging, environment variables, AWS X\-Ray tracing, layers, unit tests and the AWS SDK\. Explore this application to learn about building Lambda functions in your programming language, or use it as a starting point for your own projects\.
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-blank.png)
 
@@ -15,20 +15,22 @@ Variants of this sample application are available for the following languages:
 + C\# – [blank\-csharp](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-csharp)\.
 + PowerShell – [blank\-powershell](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-python)\.
 
+The examples in this topic highlight code from the Node\.js version, but the details are generally applicable to all variants\.
+
 You can deploy the sample in a few minutes with the AWS CLI and AWS CloudFormation\. Follow the instructions in the [README](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank) to download, configure, and deploy it in your account\.
 
 **Topics**
-+ [Architecture and Event Structure](#samples-blank-architecture)
-+ [Deployment Automation with AWS CloudFormation and the AWS CLI](#samples-blank-automation)
++ [Architecture and event structure](#samples-blank-architecture)
++ [Deployment automation with AWS CloudFormation and the AWS CLI](#samples-blank-automation)
 + [Instrumentation with the AWS X\-Ray](#samples-blank-instrumentation)
-+ [Dependency Management with Layers](#samples-blank-dependencies)
++ [Dependency management with layers](#samples-blank-dependencies)
 
-## Architecture and Event Structure<a name="samples-blank-architecture"></a>
+## Architecture and event structure<a name="samples-blank-architecture"></a>
 
 The sample application uses the following AWS services:
 + AWS Lambda – Runs function code, sends logs to CloudWatch Logs, and sends trace data to X\-Ray\. The function also calls the Lambda API to get details about the account's limits and usage in the current Region\.
-+ AWS X\-Ray – Collects trace data, indexes traces for search, and generates a service map\.
-+ AWS CloudFormation – Creates application resources and deploys function code\.
++ [AWS X\-Ray](https://aws.amazon.com/xray) – Collects trace data, indexes traces for search, and generates a service map\.
++ [AWS CloudFormation](https://aws.amazon.com/cloudformation) – Creates application resources and deploys function code\.
 
 Standard charges apply for each service\.
 
@@ -61,7 +63,7 @@ var serialize = function(object) {
 
 The handler method is `async`, so it must return a promise back to the runtime\. The runtime waits for the promise to be resolved and returns the response to the invoker\. If the function code or AWS SDK client return an error, the runtime formats the error into a JSON document and returns that\.
 
-## Deployment Automation with AWS CloudFormation and the AWS CLI<a name="samples-blank-automation"></a>
+## Deployment automation with AWS CloudFormation and the AWS CLI<a name="samples-blank-automation"></a>
 
 The sample application's resources are defined in an AWS CloudFormation template and deployed with the AWS CLI\. The project includes simple shell scripts that automate the process of setting up, deploying, invoking, and tearing down the application\.
 
@@ -102,7 +104,7 @@ Resources:
 
 When you deploy the application, AWS CloudFormation applies the AWS SAM transform to the template to generate an AWS CloudFormation template with standard types such as `AWS::Lambda::Function` and `AWS::IAM::Role`\.
 
-**Example Processed Template**  
+**Example Processed template**  
 
 ```
 {
@@ -155,11 +157,11 @@ The first time you run this script, it creates a AWS CloudFormation stack named 
 
 ## Instrumentation with the AWS X\-Ray<a name="samples-blank-instrumentation"></a>
 
-The sample function is configured for tracing with [AWS X\-Ray](https://console.aws.amazon.com/xray/home)\. With the tracing mode set to active, Lambda records timing information for a subset of invocations and sends it to X\-Ray\. X\-Ray processes the data to generate a *service map* that shows two nodes:
+The sample function is configured for tracing with [AWS X\-Ray](https://console.aws.amazon.com/xray/home)\. With the tracing mode set to active, Lambda records timing information for a subset of invocations and sends it to X\-Ray\. X\-Ray processes the data to generate a *service map* that shows a client node and two service nodes:
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/blank-servicemap-basic.png)
 
-The first node \(`AWS::Lambda`\) represents the Lambda service, which validates the invocation request and sends it to the function\. The second node, `AWS::Lambda::Function`, represents the function itself\.
+The first service node \(`AWS::Lambda`\) represents the Lambda service, which validates the invocation request and sends it to the function\. The second node, `AWS::Lambda::Function`, represents the function itself\.
 
 To record additional detail, the sample function uses the X\-Ray SDK\. With minimal changes to the function code, the X\-Ray SDK records details about calls made with the AWS SDK to AWS services\.
 
@@ -181,11 +183,11 @@ The trace shows timing details for the invocation, with subsegments for function
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/blank-trace.png)
 
-The Lambda runtime includes the AWS SDK for JavaScript in Node\.js in the execution environment\. You can include the X\-Ray SDK and other libraries in your function's deployment package, or deploy them separately in a Lambda layer\.
+You can include the X\-Ray SDK and other libraries in your function's deployment package, or deploy them separately in a Lambda layer\. For Node\.js, Ruby, and Python, the Lambda runtime includes the AWS SDK in the execution environment\.
 
-## Dependency Management with Layers<a name="samples-blank-dependencies"></a>
+## Dependency management with layers<a name="samples-blank-dependencies"></a>
 
-You can install Node\.js libraries locally and include them in the deployment package that you upload to Lambda, but this has its drawbacks\. Larger file sizes cause increased deployment times and can prevent you from testing changes to your function code in the Lambda console\. To keep the deployment package small and avoid uploading dependencies that haven't changed, the sample app creates a [Lambda layer](configuration-layers.md) and associates it with the function\.
+You can install libraries locally and include them in the deployment package that you upload to Lambda, but this has its drawbacks\. Larger file sizes cause increased deployment times and can prevent you from testing changes to your function code in the Lambda console\. To keep the deployment package small and avoid uploading dependencies that haven't changed, the sample app creates a [Lambda layer](configuration-layers.md) and associates it with the function\.
 
 **Example [blank/template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank/template.yml) – Dependency layer**  
 

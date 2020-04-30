@@ -1,4 +1,4 @@
-# Tutorial: Using AWS Lambda with Scheduled Events<a name="services-cloudwatchevents-tutorial"></a>
+# Tutorial: Using AWS Lambda with scheduled events<a name="services-cloudwatchevents-tutorial"></a>
 
 In this tutorial, you do the following:
 + Create a Lambda function using the **lambda\-canary** blueprint\. You configure the Lambda function to run every minute\. Note that if the function returns an error, AWS Lambda logs error metrics to CloudWatch\. 
@@ -9,9 +9,9 @@ In this tutorial, you do the following:
 
 ## Prerequisites<a name="services-cloudwatchevents-tutorial-prereqs"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started with AWS Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with AWS Lambda](getting-started.md) to create your first Lambda function\.
 
-## Create a Lambda Function<a name="services-cloudwatchevents-tutorial-create"></a>
+## Create a Lambda function<a name="services-cloudwatchevents-tutorial-create"></a>
 
 1. Sign in to the AWS Management Console and open the AWS Lambda console at [https://console\.aws\.amazon\.com/lambda/](https://console.aws.amazon.com/lambda/)\.
 
@@ -37,9 +37,9 @@ This tutorial assumes that you have some knowledge of basic Lambda operations an
 
 1. Choose **Create function**\.
 
-CloudWatch Events emits an event every minute, based on the schedule expression\. The event triggers the Lambda function, which verifies that the expected string appears in the specified page\. For more information on expressions schedules, see [Schedule Expressions Using Rate or Cron](services-cloudwatchevents-expressions.md)\.
+CloudWatch Events emits an event every minute, based on the schedule expression\. The event triggers the Lambda function, which verifies that the expected string appears in the specified page\. For more information on expressions schedules, see [Schedule expressions using rate or cron](services-cloudwatchevents-expressions.md)\.
 
-## Test the Lambda Function<a name="services-cloudwatchevents-tutorial-test"></a>
+## Test the Lambda function<a name="services-cloudwatchevents-tutorial-test"></a>
 
 Test the function with a sample event provided by the Lambda console\.
 
@@ -57,7 +57,7 @@ Test the function with a sample event provided by the Lambda console\.
 
 The output from the function execution is shown at the top of the page\.
 
-## Create an Amazon SNS Topic and Subscribe to It<a name="services-cloudwatchevents-tutorial-subscribe"></a>
+## Create an Amazon SNS topic and subscribe to it<a name="services-cloudwatchevents-tutorial-subscribe"></a>
 
 Create an Amazon Simple Notification Service \(Amazon SNS\) topic to receive notifications when the canary function returns an error\.
 
@@ -79,7 +79,7 @@ Create an Amazon Simple Notification Service \(Amazon SNS\) topic to receive not
 
 Amazon SNS sends an email from `Canary <no-reply@sns.amazonaws.com>`, reflecting the friendly name of the topic\. Use the link in the email to confirm your address\.
 
-## Configure an Alarm<a name="services-cloudwatchevents-tutorial-alarm"></a>
+## Configure an alarm<a name="services-cloudwatchevents-tutorial-alarm"></a>
 
 Configure an alarm in Amazon CloudWatch that monitors the Lambda function and sends a notification when it fails\.
 
@@ -105,7 +105,7 @@ Configure an alarm in Amazon CloudWatch that monitors the Lambda function and se
    + Threshold – **Whenever Errors is >=****1**\.
    + **Send notification to** – **lambda\-canary\-notifications**\.
 
-## Test the Alarm<a name="services-cloudwatchevents-tutorial-testalarm"></a>
+## Test the alarm<a name="services-cloudwatchevents-tutorial-testalarm"></a>
 
 Update the function configuration to cause the function to return an error, which triggers the alarm\.
 

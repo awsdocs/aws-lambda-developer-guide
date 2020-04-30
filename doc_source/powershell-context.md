@@ -1,8 +1,8 @@
-# AWS Lambda Context Object in PowerShell<a name="powershell-context"></a>
+# AWS Lambda context object in PowerShell<a name="powershell-context"></a>
 
 When Lambda runs your function, it passes context information by making a `$LambdaContext` variable available to the [handler](powershell-handler.md)\. This variable provides methods and properties with information about the invocation, function, and execution environment\.
 
-**Context Properties**
+**Context properties**
 + `FunctionName` – The name of the Lambda function\.
 + `FunctionVersion` – The [version](configuration-versions.md) of the function\.
 + `InvokedFunctionArn` – The Amazon Resource Name \(ARN\) that's used to invoke the function\. Indicates if the invoker specified a version number or alias\.

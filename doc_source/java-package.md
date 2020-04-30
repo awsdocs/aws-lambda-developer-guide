@@ -1,4 +1,4 @@
-# AWS Lambda Deployment Package in Java<a name="java-package"></a>
+# AWS Lambda deployment package in Java<a name="java-package"></a>
 
 A deployment package is a ZIP archive that contains your compiled function code and dependencies\. You can upload the package directly to Lambda, or you can use an Amazon S3 bucket, and then upload it to Lambda\. If the deployment package is larger than 50 MB, you must use Amazon S3\.
 
@@ -7,7 +7,7 @@ AWS Lambda provides the following libraries for Java functions:
 + [com\.amazonaws:aws\-lambda\-java\-events](https://github.com/aws/aws-lambda-java-libs/tree/master/aws-lambda-java-events) – Input types for events from services that invoke Lambda functions\.
 + [com\.amazonaws:aws\-lambda\-java\-log4j2](https://github.com/aws/aws-lambda-java-libs/tree/master/aws-lambda-java-log4j2) – An appender library for Log4j 2 that you can use to add the request ID for the current invocation to your [function logs](java-logging.md)\.
 
-These libraries are available through [Maven Central Repository](https://search.maven.org/search?q=g:com.amazonaws)\. Add them to your build definition as follows\.
+These libraries are available through [Maven central repository](https://search.maven.org/search?q=g:com.amazonaws)\. Add them to your build definition as follows\.
 
 ------
 #### [ Gradle ]
@@ -48,7 +48,7 @@ dependencies {
 To create a deployment package, compile your function code and dependencies into a single ZIP or Java Archive \(JAR\) file\. For Gradle, [use the Zip build type](#java-package-gradle)\. For Maven, [use the Maven Shade plugin](#java-package-maven)\.
 
 **Note**  
-To keep your deployment package size small, package your function's dependencies in layers\. Layers let you manage your dependencies independently, can be used by multiple functions, and can be shared with other accounts\. For details, see [AWS Lambda Layers](configuration-layers.md)\.
+To keep your deployment package size small, package your function's dependencies in layers\. Layers let you manage your dependencies independently, can be used by multiple functions, and can be shared with other accounts\. For details, see [AWS Lambda layers](configuration-layers.md)\.
 
 You can upload your deployment package by using the Lambda console, the Lambda API, or AWS SAM\.
 
@@ -65,16 +65,16 @@ You can upload your deployment package by using the Lambda console, the Lambda A
 1. Choose **Save**\.
 
 **Topics**
-+ [Building a Deployment Package with Gradle](#java-package-gradle)
-+ [Building a Deployment Package with Maven](#java-package-maven)
-+ [Uploading a Deployment Package with the Lambda API](#java-package-cli)
-+ [Uploading a Deployment Package with AWS SAM](#java-package-cloudformation)
++ [Building a deployment package with Gradle](#java-package-gradle)
++ [Building a deployment package with Maven](#java-package-maven)
++ [Uploading a deployment package with the Lambda API](#java-package-cli)
++ [Uploading a deployment package with AWS SAM](#java-package-cloudformation)
 
-## Building a Deployment Package with Gradle<a name="java-package-gradle"></a>
+## Building a deployment package with Gradle<a name="java-package-gradle"></a>
 
 Use the `Zip` build type to create a deployment package with your function's code and dependencies\.
 
-**Example build\.gradle – build task**  
+**Example build\.gradle – Build task**  
 
 ```
 task buildZip(type: Zip) {
@@ -88,7 +88,7 @@ task buildZip(type: Zip) {
 
 This build configuration produces a deployment package in the `build/distributions` folder\. The `compileJava` task compiles your function's classes\. The `processResources` tasks copies libraries from the build's classpath into a folder named `lib`\.
 
-**Example build\.gradle – dependencies**  
+**Example build\.gradle – Dependencies**  
 
 ```
 dependencies {
@@ -116,11 +116,11 @@ unzip path/to/my/function.zip -d expanded
 find ./expanded/lib -name '*.jar' | xargs -n1 zipinfo -1 | grep '.*.class' | sort | uniq -c | sort
 ```
 
-## Building a Deployment Package with Maven<a name="java-package-maven"></a>
+## Building a deployment package with Maven<a name="java-package-maven"></a>
 
 To build a deployment package with Maven, use the [Maven Shade plugin](https://maven.apache.org/plugins/maven-shade-plugin/)\. The plugin creates a JAR file that contains the compiled function code and all of its dependencies\.
 
-**Example pom\.xml – plugin configuration**  
+**Example pom\.xml – Plugin configuration**  
 
 ```
       <plugin>
@@ -171,7 +171,7 @@ This command generates a JAR file in the `target` folder\.
 
 If you use the appender library \(`aws-lambda-java-log4j2`\), you must also configure a transformer for the Maven Shade plugin\. The transformer library combines versions of a cache file that appear in both the appender library and in Log4j\.
 
-**Example pom\.xml – plugin configuration with Log4j 2 appender**  
+**Example pom\.xml – Plugin configuration with Log4j 2 appender**  
 
 ```
       <plugin>
@@ -205,7 +205,7 @@ If you use the appender library \(`aws-lambda-java-log4j2`\), you must also conf
       </plugin>
 ```
 
-## Uploading a Deployment Package with the Lambda API<a name="java-package-cli"></a>
+## Uploading a deployment package with the Lambda API<a name="java-package-cli"></a>
 
 To update a function's code with the AWS CLI or AWS SDK, use the [UpdateFunctionCode](API_UpdateFunctionCode.md) API operation\. For the AWS CLI, use the `update-function-code` command\. The following command uploads a deployment package named `my-function.zip` in the current directory\.
 
@@ -252,7 +252,7 @@ If your deployment package is larger than 50 MB, you can't upload it directly\. 
 
 You can use this method to upload function packages up to 250 MB \(decompressed\)\.
 
-## Uploading a Deployment Package with AWS SAM<a name="java-package-cloudformation"></a>
+## Uploading a deployment package with AWS SAM<a name="java-package-cloudformation"></a>
 
 You can use the AWS Serverless Application Model to automate deployments of your function code, configuration, and dependencies\. AWS SAM is an extension of AWS CloudFormation that provides a simplified syntax for defining serverless applications\. The following example template defines a function with a deployment package in the `build/distributions` directory that Gradle uses\.
 
@@ -296,7 +296,7 @@ aws cloudformation deploy --template-file out.yml --stack-name java-basic --capa
 
 For a complete working example, see the following sample applications\.
 
-**Sample Lambda Applications in Java**
+**Sample Lambda applications in Java**
 + [blank\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-java) – A Java function that shows the use of Lambda's Java libraries, logging, environment variables, layers, AWS X\-Ray tracing, unit tests, and the AWS SDK\.
 + [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-basic) – A minimal Java function with unit tests and variable logging configuration\.
 + [java\-events](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-events) – A minimal Java function that uses the [aws\-lambda\-java\-events](#java-package) library with event types that don't require the AWS SDK as a dependency, such as Amazon API Gateway\.

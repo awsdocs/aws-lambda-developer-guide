@@ -1,4 +1,4 @@
-# Using AWS Lambda Environment Variables<a name="configuration-envvars"></a>
+# Using AWS Lambda environment variables<a name="configuration-envvars"></a>
 
 You can use environment variables to store secrets securely and adjust your function's behavior without updating code\. An environment variable is a pair of strings that are stored in a function's version\-specific configuration\. The Lambda runtime makes environment variables available to your code and sets additional environment variables that contain information about the function and invocation request\.
 
@@ -85,16 +85,16 @@ $region = $env:AWS_REGION
 Lambda stores environment variables securely by encrypting them at rest\. You can [configure Lambda to use a different encryption key](#configuration-envvars-encryption), encrypt environment variable values on the client side, or set environment variables in an AWS CloudFormation template with AWS Secrets Manager\.
 
 **Topics**
-+ [Runtime Environment Variables](#configuration-envvars-runtime)
-+ [Securing Environment Variables](#configuration-envvars-encryption)
-+ [Configuring Environment Variables with the Lambda API](#configuration-envvars-api)
-+ [Sample Code and Templates](#configuration-envvars-samples)
++ [Runtime environment variables](#configuration-envvars-runtime)
++ [Securing environment variables](#configuration-envvars-encryption)
++ [Configuring environment variables with the Lambda API](#configuration-envvars-api)
++ [Sample code and templates](#configuration-envvars-samples)
 
-## Runtime Environment Variables<a name="configuration-envvars-runtime"></a>
+## Runtime environment variables<a name="configuration-envvars-runtime"></a>
 
 Lambda [runtimes](lambda-runtimes.md) set several environment variables during initialization\. Most of the environment variables provide information about the function or runtime\. The keys for these environment variables are *reserved* and cannot be set in your function configuration\.
 
-**Reserved Environment Variables**
+**Reserved environment variables**
 + `_HANDLER` – The handler location configured on the function\.
 + `AWS_REGION` – The AWS Region where the Lambda function is executed\.
 + `AWS_EXECUTION_ENV` – The [runtime identifier](lambda-runtimes.md), prefixed by `AWS_Lambda_`—for example, `AWS_Lambda_java8`\.
@@ -110,7 +110,7 @@ Lambda [runtimes](lambda-runtimes.md) set several environment variables during i
 
 The following additional environment variables aren't reserved and can be extended in your function configuration\.
 
-**Unreserved Environment Variables**
+**Unreserved environment variables**
 + `LANG` – The locale of the runtime \(`en_US.UTF-8`\)\.
 + `PATH` – The execution path \(`/usr/local/bin:/usr/bin/:/bin:/opt/bin`\)\.
 + `LD_LIBRARY_PATH` – The system library path \(`/lib64:/usr/lib64:$LAMBDA_RUNTIME_DIR:$LAMBDA_RUNTIME_DIR/lib:$LAMBDA_TASK_ROOT:$LAMBDA_TASK_ROOT/lib:/opt/lib`\)\.
@@ -120,7 +120,7 @@ The following additional environment variables aren't reserved and can be extend
 
 The sample values shown reflect the latest runtimes\. The presence of specific variables or their values can vary on earlier runtimes\.
 
-## Securing Environment Variables<a name="configuration-envvars-encryption"></a>
+## Securing environment variables<a name="configuration-envvars-encryption"></a>
 
 Lambda encrypts environment variables with a key that it creates in your account \(an AWS managed customer master key \(CMK\)\)\. Use of this key is free\. You can also choose to provide your own key for Lambda to use instead of the default key\.
 
@@ -153,7 +153,7 @@ You can get these permissions from your user account or from a key's resource\-b
 
 Users without `Decrypt` permissions can still manage functions, but they can't view environment variables or manage them in the Lambda console\. To prevent a user from viewing environment variables, add a statement to the user's permissions that denies access to the default key, a customer managed key, or all keys\.
 
-**Example IAM Policy – Deny Access by Key ARN**  
+**Example IAM policy – Deny access by key ARN**  
 
 ```
 {
@@ -173,7 +173,7 @@ Users without `Decrypt` permissions can still manage functions, but they can't v
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/env-accessdenied.png)
 
-For details on managing key permissions, see [Using Key Policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)\.
+For details on managing key permissions, see [Using key policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)\.
 
 You can also encrypt environment variable values on the client side before sending them to Lambda, and decrypt them in your function code\. This obscures secret values in the Lambda console and API output, even for users who have permission to use the key\. In your code, you retrieve the encrypted value from the environment and decrypt it by using the AWS KMS API\.
 
@@ -197,7 +197,7 @@ To view sample code for your function's language, choose **Code** next to an env
 
 Another option is to store passwords in AWS Secrets Manager secrets\. You can reference the secret in your AWS CloudFormation templates to set passwords on databases\. You can also set the value of an environment variable on the Lambda function\. For an example, see the next section\.
 
-## Configuring Environment Variables with the Lambda API<a name="configuration-envvars-api"></a>
+## Configuring environment variables with the Lambda API<a name="configuration-envvars-api"></a>
 
 To manage environment variables with the AWS CLI or AWS SDK, use the following API operations\.
 + [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)
@@ -242,10 +242,10 @@ $ aws lambda update-function-configuration --function-name my-function \
    --kms-key-arn arn:aws:kms:us-east-2:123456789012:key/055efbb4-xmpl-4336-ba9c-538c7d31f599
 ```
 
-## Sample Code and Templates<a name="configuration-envvars-samples"></a>
+## Sample code and templates<a name="configuration-envvars-samples"></a>
 
 Sample applications in this guide's GitHub repository demonstrate the use of environment variables in function code and AWS CloudFormation templates\.
 
-**Sample Applications**
+**Sample applications**
 + [Blank](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank) – Create a function and an Amazon SNS topic in the same template\. Pass the name of the topic to the function in an environment variable\. Read environment variables in code \(multiple languages\)\.
 + [RDS MySQL](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/rds-mysql) – Create a VPC and an Amazon RDS DB instance in one template, with a password stored in Secrets Manager\. In the application template, import database details from the VPC stack, read the password from Secrets Manager, and pass all connection configuration to the function in environment variables\.

@@ -1,4 +1,4 @@
-# AWS Lambda Function Errors in Go<a name="golang-exceptions"></a>
+# AWS Lambda function errors in Go<a name="golang-exceptions"></a>
 
 You can create custom error handling to raise an exception directly from your Lambda function and handle it directly\. 
 

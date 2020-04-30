@@ -1,11 +1,11 @@
-# AWS Lambda Context Object in Python<a name="python-context"></a>
+# AWS Lambda context object in Python<a name="python-context"></a>
 
 When Lambda runs your function, it passes a context object to the [handler](python-handler.md)\. This object provides methods and properties that provide information about the invocation, function, and execution environment\.
 
-**Context Methods**
+**Context methods**
 + `get_remaining_time_in_millis` – Returns the number of milliseconds left before the execution times out\.
 
-**Context Properties**
+**Context properties**
 + `function_name` – The name of the Lambda function\.
 + `function_version` – The [version](configuration-versions.md) of the function\.
 + `invoked_function_arn` – The Amazon Resource Name \(ARN\) that's used to invoke the function\. Indicates if the invoker specified a version number or alias\.
@@ -41,4 +41,4 @@ def get_my_log_stream(event, context):      
     print("Time remaining (MS):", context.get_remaining_time_in_millis())
 ```
 
-In addition to the options listed above, you can also use the AWS X\-Ray SDK for [Instrumenting Python Code in AWS Lambda](python-tracing.md) to identify critical code paths, trace their performance and capture the data for analysis\. 
+In addition to the options listed above, you can also use the AWS X\-Ray SDK for [Instrumenting Python code in AWS Lambda](python-tracing.md) to identify critical code paths, trace their performance and capture the data for analysis\. 

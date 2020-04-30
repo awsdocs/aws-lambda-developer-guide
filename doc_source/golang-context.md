@@ -1,26 +1,26 @@
-# AWS Lambda Context Object in Go<a name="golang-context"></a>
+# AWS Lambda context object in Go<a name="golang-context"></a>
 
 When Lambda runs your function, it passes a context object to the [handler](golang-handler.md)\. This object provides methods and properties with information about the invocation, function, and execution environment\.
 
 The Lambda context library provides the following global variables, methods, and properties\.
 
-**Global Variables**
+**Global variables**
 + `FunctionName` – The name of the Lambda function\.
 + `FunctionVersion` – The [version](configuration-versions.md) of the function\.
 + `MemoryLimitInMB` – The amount of memory that's allocated for the function\.
 + `LogGroupName` – The log group for the function\.
 + `LogStreamName` – The log stream for the function instance\.
 
-**Context Methods**
+**Context methods**
 + `Deadline` – Returns the date that the execution times out, in Unix time milliseconds\.
 
-**Context Properties**
+**Context properties**
 + `InvokedFunctionArn` – The Amazon Resource Name \(ARN\) that's used to invoke the function\. Indicates if the invoker specified a version number or alias\.
 + `AwsRequestID` – The identifier of the invocation request\.
 + `Identity` – \(mobile apps\) Information about the Amazon Cognito identity that authorized the request\.
 + `ClientContext` – \(mobile apps\) Client context that's provided to Lambda by the client application\.
 
-## Accessing Invoke Context Information<a name="golang-context-access"></a>
+## Accessing invoke context information<a name="golang-context-access"></a>
 
 Lambda functions have access to metadata about their environment and the invocation request\. This can be accessed at [Package context](https://golang.org/pkg/context/)\. Should your handler include `context.Context` as a parameter, Lambda will insert information about your function into the context's `Value` property\. Note that you need to import the `lambdacontext` library to access the contents of the `context.Context` object\.
 

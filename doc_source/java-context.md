@@ -1,8 +1,8 @@
-# AWS Lambda Context Object in Java<a name="java-context"></a>
+# AWS Lambda context object in Java<a name="java-context"></a>
 
 When Lambda runs your function, it passes a context object to the [handler](java-handler.md)\. This object provides methods and properties that provide information about the invocation, function, and execution environment\.
 
-**Context Methods**
+**Context methods**
 + `getRemainingTimeInMillis()` – Returns the number of milliseconds left before the execution times out\.
 + `getFunctionName()` – Returns the name of the Lambda function\.
 + `getFunctionVersion()` – Returns the [version](configuration-versions.md) of the function\.
@@ -47,7 +47,7 @@ public class Handler implements RequestHandler<Map<String,String>, String>{
 
 The function serializes the context object into JSON and records it in its log stream\.
 
-**Example Log Output**  
+**Example Log output**  
 
 ```
 START RequestId: 6bc28136-xmpl-4365-b021-0ce6b2e64ab0 Version: $LATEST
@@ -92,13 +92,13 @@ public class TestContext implements Context{
 }
 ```
 
-For more information on logging, see [AWS Lambda Function Logging in Java](java-logging.md)\.
+For more information on logging, see [AWS Lambda function logging in Java](java-logging.md)\.
 
-## Context in Sample Applications<a name="java-context-samples"></a>
+## Context in sample applications<a name="java-context-samples"></a>
 
 The GitHub repository for this guide includes sample applications that demonstrate the use of the context object\. Each sample application includes scripts for easy deployment and cleanup, an AWS Serverless Application Model \(AWS SAM\) template, and supporting resources\.
 
-**Sample Lambda Applications in Java**
+**Sample Lambda applications in Java**
 + [blank\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-java) – A Java function that shows the use of Lambda's Java libraries, logging, environment variables, layers, AWS X\-Ray tracing, unit tests, and the AWS SDK\.
 + [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-basic) – A minimal Java function with unit tests and variable logging configuration\.
 + [java\-events](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-events) – A minimal Java function that uses the [aws\-lambda\-java\-events](java-package.md) library with event types that don't require the AWS SDK as a dependency, such as Amazon API Gateway\.

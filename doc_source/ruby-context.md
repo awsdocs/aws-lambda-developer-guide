@@ -1,11 +1,11 @@
-# AWS Lambda Context Object in Ruby<a name="ruby-context"></a>
+# AWS Lambda context object in Ruby<a name="ruby-context"></a>
 
 When Lambda runs your function, it passes a context object to the [handler](ruby-handler.md)\. This object provides methods and properties that provide information about the invocation, function, and execution environment\.
 
-**Context Methods**
+**Context methods**
 + `get_remaining_time_in_millis` – Returns the number of milliseconds left before the execution times out\.
 
-**Context Properties**
+**Context properties**
 + `function_name` – The name of the Lambda function\.
 + `function_version` – The [version](configuration-versions.md) of the function\.
 + `invoked_function_arn` – The Amazon Resource Name \(ARN\) that's used to invoke the function\. Indicates if the invoker specified a version number or alias\.

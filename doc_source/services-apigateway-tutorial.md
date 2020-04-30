@@ -53,11 +53,11 @@ API Gateway offers advanced capabilities, such as:
 **Pass through the entire request** – A Lambda function can receive the entire HTTP request \(instead of just the request body\) and set the HTTP response \(instead of just the response body\) using the `AWS_PROXY` integration type\.
 **Catch\-all methods** – Map all methods of an API resource to a single Lambda function with a single mapping, using the `ANY` catch\-all method\.
 **Catch\-all resources** – Map all sub\-paths of a resource to a Lambda function without any additional configuration using the new path parameter \(`{proxy+})`\.
-To learn more about these API Gateway features, see [Configure Proxy Integration for a Proxy Resource](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-set-up-simple-proxy.html)\.
+To learn more about these API Gateway features, see [Configure proxy integration for a proxy resource](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-set-up-simple-proxy.html)\.
 
 ## Prerequisites<a name="services-apigateway-tutorial-prereqs"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started with AWS Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with AWS Lambda](getting-started.md) to create your first Lambda function\.
 
 To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
@@ -70,7 +70,7 @@ For long commands, an escape character \(`\`\) is used to split a command over m
 
 On Linux and macOS, use your preferred shell and package manager\. On Windows 10, you can [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows\-integrated version of Ubuntu and Bash\.
 
-## Create the Execution Role<a name="services-apigateway-tutorial-role"></a>
+## Create the execution role<a name="services-apigateway-tutorial-role"></a>
 
 Create the [execution role](lambda-intro-execution-role.md) that gives your function permission to access AWS resources\.
 
@@ -118,12 +118,12 @@ Create the [execution role](lambda-intro-execution-role.md) that gives your func
 
 The custom policy has the permissions that the function needs to write data to DynamoDB and upload logs\. Note the Amazon Resource Name \(ARN\) of the role for later use\. 
 
-## Create the Function<a name="services-apigateway-tutorial-function"></a>
+## Create the function<a name="services-apigateway-tutorial-function"></a>
 
 The following example code receives a API Gateway event input and processes the messages that it contains\. For illustration, the code writes some of the incoming event data to CloudWatch Logs\.
 
 **Note**  
-For sample code in other languages, see [Sample Function Code](services-apigateway-code.md)\.
+For sample code in other languages, see [Sample function code](services-apigateway-code.md)\.
 
 **Example index\.js**  
 
@@ -195,7 +195,7 @@ exports.handler = function(event, context, callback) {
    --role arn:aws:iam::123456789012:role/service-role/lambda-apigateway-role
    ```
 
-## Test the Lambda Function<a name="services-apigateway-tutorial-test"></a>
+## Test the Lambda function<a name="services-apigateway-tutorial-test"></a>
 
 Invoke the function manually using the sample event data\. We recommend that you invoke the function using the console because the console UI provides a user\-friendly interface for reviewing the execution results, including the execution summary, logs written by your code, and the results returned by the function \(because the console always performs synchronous execution—invokes the Lambda function using the `RequestResponse` invocation type\)\.
 
@@ -220,7 +220,7 @@ Invoke the function manually using the sample event data\. We recommend that you
    --payload fileb://input.txt outputfile.txt
    ```
 
-## Create an API Using Amazon API Gateway<a name="services-apigateway-tutorial-api"></a>
+## Create an API using Amazon API Gateway<a name="services-apigateway-tutorial-api"></a>
 
 In this step, you associate your Lambda function with a method in the API that you created using Amazon API Gateway and test the end\-to\-end experience\. That is, when an HTTP request is sent to an API method, Amazon API Gateway invokes your Lambda function\.
 
@@ -262,7 +262,7 @@ $ aws apigateway get-resources --rest-api-id $API
 
 At this time you only have the root resource, but you add more resources in the next step\.
 
-### Create a Resource in the API<a name="with-on-demand-https-create-resource"></a>
+### Create a resource in the API<a name="with-on-demand-https-create-resource"></a>
 
 Run the following `create-resource` command to create a resource \(`DynamoDBManager`\) in the API that you created in the preceding section\.
 
@@ -279,7 +279,7 @@ $ aws apigateway create-resource --rest-api-id $API  --path-part DynamoDBManager
 
 Note the ID in the response\. This is the ID of the `DynamoDBManager` resource that you created\. 
 
-### Create POST Method on the Resource<a name="with-on-demand-https-create-method"></a>
+### Create POST method on the resource<a name="with-on-demand-https-create-method"></a>
 
 Run the following `put-method` command to create a `POST` method on the `DynamoDBManager` resource in your API\.
 
@@ -296,7 +296,7 @@ $ aws apigateway put-method --rest-api-id $API --resource-id $RESOURCE \
 
 We specify `NONE` for the `--authorization-type` parameter, which means that unauthenticated requests for this method are supported\. This is fine for testing but in production you should use either the key\-based or role\-base authentication\.
 
-### Set the Lambda Function as the Destination for the POST Method<a name="with-on-demand-https-integrate-method-with-function"></a>
+### Set the Lambda function as the destination for the POST method<a name="with-on-demand-https-integrate-method-with-function"></a>
 
 Run the following command to set the Lambda function as the integration point for the `POST` method\. This is the method Amazon API Gateway invokes when you make an HTTP request for the `POST` method endpoint\. This command and others use ARNs that include your account ID and region\. Save these to variables \(you can find your account ID in the role ARN that you used to create the function\)\.
 
@@ -359,7 +359,7 @@ $ aws apigateway create-deployment --rest-api-id $API --stage-name prod
 }
 ```
 
-## Grant Invoke Permission to the API<a name="services-apigateway-tutorial-permission"></a>
+## Grant invoke permission to the API<a name="services-apigateway-tutorial-permission"></a>
 
 Now that you have an API created using Amazon API Gateway and you've deployed it, you can test\. First, you need to add permissions so that Amazon API Gateway can invoke your Lambda function when you send HTTP request to the `POST` method\.
 
@@ -394,7 +394,7 @@ $ aws lambda add-permission --function-name LambdaFunctionOverHttps \
 
 You grant this permission so that your deployed API has permissions to invoke the Lambda function\. Note that the `--source-arn` specifies a `prod` which is the stage name we used when deploying the API\.
 
-## Create a Amazon DynamoDB Table<a name="services-apigateway-tutorial-table"></a>
+## Create a Amazon DynamoDB table<a name="services-apigateway-tutorial-table"></a>
 
 Create the DynamoDB table that the Lambda function uses\.
 
@@ -410,7 +410,7 @@ Create the DynamoDB table that the Lambda function uses\.
 
 1. Choose **Create**\.
 
-## Trigger the Function with an HTTP Request<a name="services-apigateway-tutorial-request"></a>
+## Trigger the function with an HTTP request<a name="services-apigateway-tutorial-request"></a>
 
 In this step, you are ready to send an HTTP request to the `POST` method endpoint\. You can use either Curl or a method \(`test-invoke-method`\) provided by Amazon API Gateway\.
 

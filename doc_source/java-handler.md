@@ -1,4 +1,4 @@
-# AWS Lambda Function Handler in Java<a name="java-handler"></a>
+# AWS Lambda function handler in Java<a name="java-handler"></a>
 
 Your Lambda function's handler is the method in your function code that processes events\. When your function is invoked, Lambda runs the handler method\. When the handler exits or returns a response, it becomes available to handle another event\.
 
@@ -34,7 +34,7 @@ public class Handler implements RequestHandler<Map<String,String>, String>{
 
 The [Lambda runtime](lambda-runtimes.md) receives an event as a JSON\-formatted string and converts it into an object\. It passes the event object to your function handler along with a context object that provides details about the invocation and the function\. You tell the runtime which method to invoke by setting the handler parameter on your function's configuration\.
 
-**Handler Formats**
+**Handler formats**
 + `package.Class::method` – Full format\. For example: `example.Handler::handleRequest`\.
 + `package.Class` – Abbreviated format for functions that implement a [handler interface](#java-handler-interfaces)\. For example: `example.Handler`\.
 
@@ -42,7 +42,7 @@ You can add [initialization code](gettingstarted-features.md#gettingstarted-feat
 
 In the following example, the logger, serializer, and AWS SDK client are created when the function serves its first event\. Subsequent events served by the same function instance are much faster because those resources already exist\.
 
-**Example [Handler\.java](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-java/src/main/java/example/Handler.java) – Initialization Code**  
+**Example [Handler\.java](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-java/src/main/java/example/Handler.java) – Initialization code**  
 
 ```
 // Handler value: example.Handler
@@ -67,15 +67,15 @@ public class Handler implements RequestHandler<SQSEvent, String>{
 The GitHub repo for this guide provides easy\-to\-deploy sample applications that demonstrate a variety of handler types\. For details, see the [end of this topic](#java-handler-samples)\.
 
 **Topics**
-+ [Choosing Input and Output Types](#java-handler-types)
-+ [Handler Interfaces](#java-handler-interfaces)
-+ [Sample Handler Code](#java-handler-samples)
++ [Choosing input and output types](#java-handler-types)
++ [Handler interfaces](#java-handler-interfaces)
++ [Sample handler code](#java-handler-samples)
 
-## Choosing Input and Output Types<a name="java-handler-types"></a>
+## Choosing input and output types<a name="java-handler-types"></a>
 
 You specify the type of object that the event maps to in the handler method's signature\. In the preceding example, the Java runtime deserializes the event into a type that implements the `Map<String,String>` interface\. String\-to\-string maps work for flat events like the following:
 
-**Example [Event\.json](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/java-basic/event.json) – Weather Data**  
+**Example [Event\.json](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/java-basic/event.json) – Weather data**  
 
 ```
 {
@@ -90,7 +90,7 @@ However, the value of each field must be a string or number\. If the event inclu
 
 Choose an input type that works with the event data that your function processes\. You can use a basic type, a generic type, or a well\-defined type\.
 
-**Input Types**
+**Input types**
 + `Integer`, `Long`, `Double`, etc\. – The event is a number with no additional formatting—for example, `3.5`\. The runtime converts the value into an object of the specified type\.
 + `String` – The event is a JSON string, including quotes—for example, `"My string."`\. The runtime converts the value \(without quotes\) into a `String` object\.
 + `Type`, `Map<String,Type>` etc\. – The event is a JSON object\. The runtime deserializes it into an object of the specified type or interface\.
@@ -102,7 +102,7 @@ If you define your own input type, it should be a deserializable, mutable plain 
 
 The output type can be an object or `void`\. The runtime serializes return values into text\. If the output is an object with fields, the runtime serializes it into a JSON document\. If it's a type that wraps a primitive value, the runtime returns a text representation of that value\.
 
-## Handler Interfaces<a name="java-handler-interfaces"></a>
+## Handler interfaces<a name="java-handler-interfaces"></a>
 
 The [aws\-lambda\-java\-core](https://github.com/aws/aws-lambda-java-libs/tree/master/aws-lambda-java-core) library defines two interfaces for handler methods\. Use the provided interfaces to simplify handler configuration and validate the handler method signature at compile time\.
 
@@ -112,7 +112,7 @@ The [aws\-lambda\-java\-core](https://github.com/aws/aws-lambda-java-libs/tree/m
 
 The `RequestHandler` interface is a generic type that takes two parameters: the input type and the output type\. Both types must be objects\. When you use this interface, the Java runtime deserializes the event into an object with the input type, and serializes the output into text\. Use this interface when the built\-in serialization works with your input and output types\.
 
-**Example [Handler\.java](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/java-basic/src/main/java/example/Handler.java) – Handler Interface**  
+**Example [Handler\.java](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/java-basic/src/main/java/example/Handler.java) – Handler interface**  
 
 ```
 // Handler value: example.Handler
@@ -165,11 +165,11 @@ public class HandlerStream implements RequestStreamHandler {
 }
 ```
 
-## Sample Handler Code<a name="java-handler-samples"></a>
+## Sample handler code<a name="java-handler-samples"></a>
 
 The GitHub repository for this guide includes sample applications that demonstrate the use of various handler types and interfaces\. Each sample application includes scripts for easy deployment and cleanup, an AWS SAM template, and supporting resources\.
 
-**Sample Lambda Applications in Java**
+**Sample Lambda applications in Java**
 + [blank\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-java) – A Java function that shows the use of Lambda's Java libraries, logging, environment variables, layers, AWS X\-Ray tracing, unit tests, and the AWS SDK\.
 + [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-basic) – A minimal Java function with unit tests and variable logging configuration\.
 + [java\-events](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-events) – A minimal Java function that uses the [aws\-lambda\-java\-events](java-package.md) library with event types that don't require the AWS SDK as a dependency, such as Amazon API Gateway\.

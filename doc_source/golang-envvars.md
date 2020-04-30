@@ -1,4 +1,4 @@
-# Using Environment Variables<a name="golang-envvars"></a>
+# Using environment variables<a name="golang-envvars"></a>
 
 To access [environment variables](configuration-envvars.md) in Go, use the [Getenv](https://golang.org/pkg/os/#Getenv) function\.
 
@@ -19,4 +19,4 @@ func main() {
 }
 ```
 
-For a list of environment variables that are set by the Lambda runtime, see [Runtime Environment Variables](configuration-envvars.md#configuration-envvars-runtime)\.
+For a list of environment variables that are set by the Lambda runtime, see [Runtime environment variables](configuration-envvars.md#configuration-envvars-runtime)\.

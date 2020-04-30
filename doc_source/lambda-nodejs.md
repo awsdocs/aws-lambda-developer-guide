@@ -1,13 +1,13 @@
-# Building Lambda Functions with Node\.js<a name="lambda-nodejs"></a>
+# Building Lambda functions with Node\.js<a name="lambda-nodejs"></a>
 
 You can run JavaScript code with Node\.js in AWS Lambda\. Lambda provides [runtimes](lambda-runtimes.md) for Node\.js that execute your code to process events\. Your code runs in an environment that includes the AWS SDK for JavaScript, with credentials from an AWS Identity and Access Management \(IAM\) role that you manage\.
 
 Lambda supports the following Node\.js runtimes\.
 
 
-**Node\.js Runtimes**  
+**Node\.js runtimes**  
 
-| Name | Identifier | AWS SDK for JavaScript | Operating System | 
+| Name | Identifier | AWS SDK for JavaScript | Operating system | 
 | --- | --- | --- | --- | 
 |  Node\.js 12  |  `nodejs12.x`  |  2\.631\.0  |  Amazon Linux 2  | 
 |  Node\.js 10  |  `nodejs10.x`  |  2\.631\.0  |  Amazon Linux 2  | 
@@ -60,14 +60,22 @@ The `index.js` file exports a function named `handler` that takes an event objec
 
 Each time you save your function code, the Lambda console creates a deployment package, which is a ZIP archive that contains your function code\. As your function development progresses, you will want to store your function code in source control, add libraries, and automate deployments\. Start by [creating a deployment package](nodejs-package.md) and updating your code at the command line\.
 
+**Note**  
+To get started with application development in your local environment, deploy one of the sample applications available in this guide's GitHub repository\.  
+[blank](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank) – A Node\.js function that shows the use of logging, environment variables, AWS X\-Ray tracing, layers, unit tests and the AWS SDK\.
+[nodejs\-apig](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/nodejs-apig) – A function with a public API endpoint that processes an event from API Gateway and returns an HTTP response\.
+[rds\-mysql](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/rds-mysql) – A function that relays queries to a MySQL for RDS Database\. This sample includes a private VPC and database instance configured with a password in AWS Secrets Manager\.
+[list\-manager](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/list-manager) – A function processes events from an Amazon Kinesis data stream and update aggregate lists in Amazon DynamoDB\. The function stores a record of each event in a MySQL for RDS Database in a private VPC\. This sample includes a private VPC with a VPC endpoint for DynamoDB and a database instance\.
+[error\-processor](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/error-processor) – A Node\.js function generates errors for a specified percentage of requests\. A CloudWatch Logs subscription invokes a second function when an error is recorded\. The processor function uses the AWS SDK to gather details about the request and stores them in an Amazon S3 bucket\.
+
 The function runtime passes a context object to the handler, in addition to the invocation event\. The [context object](nodejs-context.md) contains additional information about the invocation, the function, and the execution environment\. More information is available from environment variables\.
 
 Your Lambda function comes with a CloudWatch Logs log group\. The function runtime sends details about each invocation to CloudWatch Logs\. It relays any [logs that your function outputs](nodejs-logging.md) during invocation\. If your function [returns an error](nodejs-exceptions.md), Lambda formats the error and returns it to the invoker\.
 
 **Topics**
-+ [AWS Lambda Function Handler in Node\.js](nodejs-handler.md)
-+ [AWS Lambda Deployment Package in Node\.js](nodejs-package.md)
-+ [AWS Lambda Context Object in Node\.js](nodejs-context.md)
-+ [AWS Lambda Function Logging in Node\.js](nodejs-logging.md)
-+ [AWS Lambda Function Errors in Node\.js](nodejs-exceptions.md)
-+ [Instrumenting Node\.js Code in AWS Lambda](nodejs-tracing.md)
++ [AWS Lambda function handler in Node\.js](nodejs-handler.md)
++ [AWS Lambda deployment package in Node\.js](nodejs-package.md)
++ [AWS Lambda context object in Node\.js](nodejs-context.md)
++ [AWS Lambda function logging in Node\.js](nodejs-logging.md)
++ [AWS Lambda function errors in Node\.js](nodejs-exceptions.md)
++ [Instrumenting Node\.js code in AWS Lambda](nodejs-tracing.md)

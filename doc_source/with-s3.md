@@ -1,4 +1,4 @@
-# Using AWS Lambda with Amazon S3 Events<a name="with-s3"></a>
+# Using AWS Lambda with Amazon S3 events<a name="with-s3"></a>
 
 You can use Lambda to process [event notifications](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) from Amazon Simple Storage Service\. Amazon S3 can send an event to a Lambda function when an object is created or deleted\. You configure notification settings on a bucket, and grant Amazon S3 permission to invoke a function on the function's resource\-based permissions policy\.
 
@@ -7,7 +7,7 @@ If your Lambda function uses the same bucket that triggers it, it could cause th
 
 Amazon S3 invokes your function [asynchronously](invocation-async.md) with an event that contains details about the object\. The following example shows an event that Amazon S3 sent when a deployment package was uploaded to Amazon S3\.
 
-**Example Amazon S3 Notification Event**  
+**Example Amazon S3 notification event**  
 
 ```
 {
@@ -56,5 +56,5 @@ If your function uses the AWS SDK to manage Amazon S3 resources, it also needs A
 
 **Topics**
 + [Tutorial: Using AWS Lambda with Amazon S3](with-s3-example.md)
-+ [Sample Amazon S3 Function Code](with-s3-example-deployment-pkg.md)
-+ [AWS SAM Template for an Amazon S3 Application](with-s3-example-use-app-spec.md)
++ [Sample Amazon S3 function code](with-s3-example-deployment-pkg.md)
++ [AWS SAM template for an Amazon S3 application](with-s3-example-use-app-spec.md)

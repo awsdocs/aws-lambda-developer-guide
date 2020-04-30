@@ -1,8 +1,8 @@
-# AWS Lambda Function Errors in Node\.js<a name="nodejs-exceptions"></a>
+# AWS Lambda function errors in Node\.js<a name="nodejs-exceptions"></a>
 
 When your code raises an error, Lambda generates a JSON representation of the error\. This error document appears in the invocation log and, for synchronous invocations, in the output\.
 
-**Example index\.js File – Reference Error**  
+**Example index\.js file – Reference error**  
 
 ```
 exports.handler = async function() {
@@ -57,6 +57,6 @@ END RequestId: 8bbbfb91-a3ff-4502-b1b7-cb8f6658de64
 REPORT RequestId: 8bbbfb91-a3ff-4502-b1b7-cb8f6658de64  Duration: 76.85 ms      Billed Duration: 100 ms         Memory Size: 128 MB     Max Memory Used: 74 MB
 ```
 
-For more information about logs, see [AWS Lambda Function Logging in Node\.js](nodejs-logging.md)\.
+For more information about logs, see [AWS Lambda function logging in Node\.js](nodejs-logging.md)\.
 
-Depending on the event source, AWS Lambda might retry the failed Lambda function\. For example, if Kinesis is the event source, AWS Lambda retries the failed invocation until the Lambda function succeeds or the records in the stream expire\. For more information on retries, see [Error Handling and Automatic Retries in AWS Lambda](invocation-retries.md)\.
+Depending on the event source, AWS Lambda might retry the failed Lambda function\. For example, if Kinesis is the event source, AWS Lambda retries the failed invocation until the Lambda function succeeds or the records in the stream expire\. For more information on retries, see [Error handling and automatic retries in AWS Lambda](invocation-retries.md)\.

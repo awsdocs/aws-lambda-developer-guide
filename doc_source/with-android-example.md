@@ -8,7 +8,7 @@ The mobile application retrieves AWS credentials from an Amazon Cognito identity
 
 ## Prerequisites<a name="with-android-prepare"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting Started with AWS Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with AWS Lambda](getting-started.md) to create your first Lambda function\.
 
 To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
@@ -21,7 +21,7 @@ For long commands, an escape character \(`\`\) is used to split a command over m
 
 On Linux and macOS, use your preferred shell and package manager\. On Windows 10, you can [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows\-integrated version of Ubuntu and Bash\.
 
-## Create the Execution Role<a name="with-android-create-execution-role"></a>
+## Create the execution role<a name="with-android-create-execution-role"></a>
 
 Create the [execution role](lambda-intro-execution-role.md) that gives your function permission to access AWS resources\.
 
@@ -38,12 +38,12 @@ Create the [execution role](lambda-intro-execution-role.md) that gives your func
 
 The **AWSLambdaBasicExecutionRole** policy has the permissions that the function needs to write logs to CloudWatch Logs\.
 
-## Create the Function<a name="with-android-example-create-function"></a>
+## Create the function<a name="with-android-example-create-function"></a>
 
 The following example uses data to generate a string response\.
 
 **Note**  
-For sample code in other languages, see [Sample Function Code](with-android-create-package.md)\.
+For sample code in other languages, see [Sample function code](with-android-create-package.md)\.
 
 **Example index\.js**  
 
@@ -75,7 +75,7 @@ exports.handler = function(event, context, callback) {
    --role arn:aws:iam::123456789012:role/lambda-android-role
    ```
 
-## Test the Lambda Function<a name="walkthrough-on-demand-custom-android-events-adminuser-create-test-function-upload-zip-test-manual-invoke"></a>
+## Test the Lambda function<a name="walkthrough-on-demand-custom-android-events-adminuser-create-test-function-upload-zip-test-manual-invoke"></a>
 
 Invoke the function manually using the sample event data\.
 
@@ -94,11 +94,11 @@ Invoke the function manually using the sample event data\.
    --payload file://file-path/input.txt outputfile.txt
    ```
 
-## Create an Amazon Cognito Identity Pool<a name="with-on-demand-custom-android-create-cognito-pool"></a>
+## Create an Amazon Cognito identity pool<a name="with-on-demand-custom-android-create-cognito-pool"></a>
 
 In this section, you create an Amazon Cognito identity pool\. The identity pool has two IAM roles\. You update the IAM role for unauthenticated users and grant permissions to execute the `AndroidBackendLambdaFunction` Lambda function\. 
 
-For more information about IAM roles, see [IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *IAM User Guide*\. For more information about Amazon Cognito services, see the [Amazon Cognito](https://aws.amazon.com/cognito/) product detail page\. 
+For more information about IAM roles, see [IAM roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *IAM User Guide*\. For more information about Amazon Cognito services, see the [Amazon Cognito](https://aws.amazon.com/cognito/) product detail page\. 
 
 **To create an identity pool**
 
@@ -153,7 +153,7 @@ For more information about IAM roles, see [IAM Roles](https://docs.aws.amazon.co
 
 1. Note the identity pool ID\. You specify this ID in your mobile application you create in the next section\. The app uses this ID when it sends request to Amazon Cognito to request for temporary security credentials\.
 
-## Create an Android Application<a name="with-ondemand-android-mobile-create-app"></a>
+## Create an Android application<a name="with-ondemand-android-mobile-create-app"></a>
 
 Create a simple Android mobile application that generates events and invokes Lambda functions by passing the event data as parameters\. 
 

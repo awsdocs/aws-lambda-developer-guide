@@ -4,7 +4,7 @@ You can use a Lambda function to process requests from an Application Load Balan
 
 Elastic Load Balancing invokes your Lambda function synchronously with an event that contains the request body and metadata\.
 
-**Example Application Load Balancer Request Event**  
+**Example Application Load Balancer request event**  
 
 ```
 {
@@ -39,7 +39,7 @@ Elastic Load Balancing invokes your Lambda function synchronously with an event 
 
 Your function processes the event and returns a response document to the load balancer in JSON\. Elastic Load Balancing converts the document to an HTTP success or error response and returns it to the user\.
 
-**Example Response Document format**  
+**Example Response document format**  
 
 ```
 {
@@ -66,4 +66,4 @@ $ aws lambda add-permission --function-name alb-function \
 }
 ```
 
-For instructions on configuring the Application Load Balancer listener and target group, see [Lambda Functions as a Target](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/lambda-functions.html) in the *User Guide for Application Load Balancers*\.
+For instructions on configuring the Application Load Balancer listener and target group, see [Lambda functions as a target](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/lambda-functions.html) in the *User Guide for Application Load Balancers*\.
