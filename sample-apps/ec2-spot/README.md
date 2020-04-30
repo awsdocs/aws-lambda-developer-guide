@@ -1,4 +1,4 @@
-# EC2 Spot Instance function
+# EC2 spot instance function
 
 ![Architecture](/sample-apps/ec2-spot/images/sample-ec2spot.png)
 

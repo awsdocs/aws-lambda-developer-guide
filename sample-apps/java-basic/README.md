@@ -1,4 +1,4 @@
-# Basic Function with Minimal Dependencies (Java)
+# Basic function with minimal dependencies (Java)
 
 ![Architecture](/sample-apps/java-basic/images/sample-java-basic.png)
 

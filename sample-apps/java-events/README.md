@@ -1,4 +1,4 @@
-# Basic Function with Event Library Types (Java)
+# Basic function with event library types (Java)
 
 This sample application shows the use of the `aws-lambda-java-events` library with various event types. To keep the deployment size minimal, it includes only types that can be used without adding the AWS SDK as a dependency. A separate handler class is defined for each input type.
 

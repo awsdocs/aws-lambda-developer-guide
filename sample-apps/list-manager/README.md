@@ -1,4 +1,4 @@
-# Processing a Kinesis Stream with Database Resources in a VPC
+# Processing a Kinesis stream with database resources in a VPC
 
 This sample application processes records from an Amazon Kinesis stream to create and update lists. It uses a private VPC to connect to an Amazon Relational Database Service (Amazon RDS) database. It uses a VPC endpoint to connect to Amazon DynamoDB. The application also uses AWS Secrets Manager, AWS X-Ray, and AWS CodeDeploy.
 

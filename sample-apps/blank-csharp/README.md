@@ -1,4 +1,4 @@
-# EC2 Spot Instance function
+# Blank function (C#)
 
 ![Architecture](/sample-apps/blank-csharp/images/sample-blank-csharp.png)
 

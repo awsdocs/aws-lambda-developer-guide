@@ -1,8 +1,8 @@
 ## AWS Lambda Developer Guide
 
-Lambda User Guide and API operations and how it integrates with other AWS Service
+This repository contains the Markdown version of the AWS Lambda Developer Guide and sample applications that you can deploy to learn about Lambda concepts and features.
 
-Start  with documentation [index](/doc_source/index.md)
+Table of contents: [index.md](/doc_source/index.md)
 
 ## License Summary
 

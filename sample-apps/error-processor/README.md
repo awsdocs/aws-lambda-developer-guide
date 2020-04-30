@@ -1,4 +1,4 @@
-# Error Processing with CloudWatch Logs and X-Ray
+# Error processing with CloudWatch Logs and X-Ray
 
 This sample application triggers a Lambda function when CloudWatch Logs detects the word ERROR in a log stream. The function downloads the full log stream and the X-Ray trace for the request that caused the error. It stores both in an Amazon S3 bucket.
 
