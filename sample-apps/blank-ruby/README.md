@@ -26,14 +26,16 @@ To create a new bucket for deployment artifacts, run `1-create-bucket.sh`. Or, i
     blank-ruby$ ./1-create-bucket.sh
     make_bucket: lambda-artifacts-a5e491dbb5b22e0d
 
-To build a Lambda layer that contains the function's runtime dependencies, run `2-build-layer.sh`. Packaging dependencies in a layer reduces the size of the deployment package that you upload when you modify your code.
+To build a Lambda layer that contains the function's runtime dependencies, run `2-build-layer.sh`. The script installs Bundler and uses it to install the application's libraries in a folder named `lib`.
 
     blank-ruby$ ./2-build-layer.sh
 
-# Deploy
-To deploy the application, run `2-deploy.sh`.
+The `lib` folder is used to create a Lambda layer during deployment. Packaging dependencies in a layer reduces the size of the deployment package that you upload when you modify your code.
 
-    blank-ruby$ ./2-deploy.sh
+# Deploy
+To deploy the application, run `3-deploy.sh`.
+
+    blank-ruby$ ./3-deploy.sh
     Uploading to e678bc216e6a0d510d661ca9ae2fd941  2737254 / 2737254.0  (100.00%)
     Successfully packaged artifacts and wrote output template to file out.yml.
     Waiting for changeset to be created..
@@ -43,13 +45,15 @@ To deploy the application, run `2-deploy.sh`.
 This script uses AWS CloudFormation to deploy the Lambda functions and an IAM role. If the AWS CloudFormation stack that contains the resources already exists, the script updates it with any changes to the template or function code.
 
 # Test
-To invoke the function, run `3-invoke.sh`.
+To invoke the function, run `4-invoke.sh`.
 
-    blank-ruby$ ./3-invoke.sh
+    blank-ruby$ ./4-invoke.sh
     {
         "StatusCode": 200,
         "ExecutedVersion": "$LATEST"
     }
+
+Let the script invoke the function a few times and then press `CRTL+C` to exit.
 
 The application uses AWS X-Ray to trace requests. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map. The following service map shows the function calling Amazon S3.
 
@@ -60,6 +64,6 @@ Choose a node in the main function graph. Then choose **View traces** to see a l
 ![Trace](/sample-apps/blank-ruby/images/blank-ruby-trace.png)
 
 # Cleanup
-To delete the application, run `4-cleanup.sh`.
+To delete the application, run `5-cleanup.sh`.
 
-    blank-ruby$ ./4-cleanup.sh
+    blank-ruby$ ./5-cleanup.sh
