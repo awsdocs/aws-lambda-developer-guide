@@ -16,6 +16,10 @@ then
       PAYLOAD='[24,25,26]'
       ;;
 
+    divide)
+      PAYLOAD='[235241,17]'
+      ;;
+
     *)
       echo -n "Unknown event type"
       ;;
