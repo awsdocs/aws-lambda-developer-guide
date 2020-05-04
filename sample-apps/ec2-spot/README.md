@@ -46,6 +46,8 @@ To invoke the function, run `3-invoke.sh`.
         "ExecutedVersion": "$LATEST"
     }
 
+Let the script invoke the function a few times and then press `CRTL+C` to exit.
+
 The application uses AWS X-Ray to trace requests. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map. The following service map shows the function managing spot instances in Amazon EC2.
 
 ![Service Map](/sample-apps/ec2-spot/images/sample-ec2spot-servicemap.png)

@@ -57,6 +57,8 @@ To invoke the function, run `3-invoke.sh`.
       }
     }
 
+Let the script invoke the function a few times and then press `CRTL+C` to exit.
+
 The application uses AWS X-Ray to trace requests. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map. The following service map shows the function calling Amazon S3.
 
 ![Service Map](/sample-apps/blank-powershell/images/blank-powershell-servicemap.png)

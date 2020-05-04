@@ -92,6 +92,8 @@ To invoke the function with a test event, use the invoke script.
         "ExecutedVersion": "$LATEST"
     }
 
+Let the script invoke the function a few times and then press `CRTL+C` to exit.
+
 The application uses AWS X-Ray to trace requests. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map. The following service map shows the function calling the database to run a query.
 
 ![Service Map](/sample-apps/rds-mysql/images/rdsmysql-servicemap.png)

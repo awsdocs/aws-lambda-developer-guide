@@ -59,6 +59,8 @@ To invoke the function, run `3-invoke.sh`.
     }
     "200 OK"
 
+Let the script invoke the function a few times and then press `CRTL+C` to exit.
+
 The application uses AWS X-Ray to trace requests. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map.
 
 ![Service Map](/sample-apps/java-basic/images/java-basic-servicemap.png)

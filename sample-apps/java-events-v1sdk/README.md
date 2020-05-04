@@ -65,7 +65,9 @@ Run `4-invoke.sh` to invoke the function.
     }
     "200 OK"
 
-The functions in this application are instrumented with AWS X-Ray. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map.
+Let the script invoke the function a few times and then press `CRTL+C` to exit.
+
+The application uses AWS X-Ray to trace requests. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map.
 
 ![Service Map](/sample-apps/java-events-v1sdk/images/java-events-v1sdk-servicemap.png)
 

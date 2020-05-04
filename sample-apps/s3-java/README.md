@@ -67,6 +67,8 @@ To invoke the function directly, run `5-invoke.sh`.
         "ExecutedVersion": "$LATEST"
     }
 
+Let the script invoke the function a few times and then press `CRTL+C` to exit.
+
 The application uses AWS X-Ray to trace requests. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map.
 
 ![Service Map](/sample-apps/s3-java/images/s3-java-servicemap.png)

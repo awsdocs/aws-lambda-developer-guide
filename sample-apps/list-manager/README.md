@@ -104,6 +104,8 @@ To invoke the function with a test event, run `6-invoke.sh`.
         "ExecutedVersion": "$LATEST"
     }
 
+Let the script invoke the function a few times and then press `CRTL+C` to exit.
+
 If that succeeds, send records to the Kinesis stream. The processor function's event source mapping pulls records from the stream and invokes the function.
 
     list-manager$ ./7-put-records.sh

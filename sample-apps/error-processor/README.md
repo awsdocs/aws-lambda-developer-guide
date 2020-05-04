@@ -69,6 +69,8 @@ To generate logs and errors, invoke the random error function.
     }
     {"errorType":"function.MaxDepthError","errorMessage":"Maximum depth reached: 9","trace":["function.MaxDepthError: Maximum depth reached: 9","    at Runtime.myFunction [as handler] (/var/task/index.js:30:17)","    at Runtime.handleOnce (/var/runtime/Runtime.js:66:25)"],"depth":9}
 
+Let the script invoke the function a few times and then press `CRTL+C` to exit.
+
 This function generates errors for a configurable percentage of invocations. When an error does not occur, it invokes itself recursively until one does. The event (`event.json`) provides a base error rate and maximum recursion depth.
 
     {

@@ -64,6 +64,8 @@ To invoke the function, run `4-invoke.sh`.
     }
     {"AccountLimit":{"TotalCodeSize":80530636800,"CodeSizeUnzipped":262144000,"CodeSizeZipped":52428800,"ConcurrentExecutions":1000,"UnreservedConcurrentExecutions":933},"AccountUsage":{"TotalCodeSize":303678359,"FunctionCount":75}}
 
+Let the script invoke the function a few times and then press `CRTL+C` to exit.
+
 The application uses AWS X-Ray to trace requests. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map. The following service map shows the function calling Amazon S3.
 
 ![Service Map](/sample-apps/blank/images/blank-servicemap.png)
