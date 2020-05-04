@@ -17,6 +17,7 @@ public class HandlerInteger implements RequestHandler<Integer, Integer>{
     // process event
     logger.log("EVENT: " + gson.toJson(event));
     logger.log("EVENT TYPE: " + event.getClass().toString());
+    // return amount of time remaining before timeout
     return context.getRemainingTimeInMillis();
   }
 }

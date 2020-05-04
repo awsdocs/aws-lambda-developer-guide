@@ -12,7 +12,7 @@ echo "Deleted $STACK stack."
 if [ -f bucket-name.txt ]; then
     ARTIFACT_BUCKET=$(cat bucket-name.txt)
     while true; do
-        read -p "Delete deployment artifacts and bucket ($ARTIFACT_BUCKET)?" response
+        read -p "Delete deployment artifacts and bucket ($ARTIFACT_BUCKET)? (y/n)" response
         case $response in
             [Yy]* ) aws s3 rb --force s3://$ARTIFACT_BUCKET; rm bucket-name.txt; rm out.yml out.json 4-deploy.sh; rm -rf lib/nodejs/node_modules; break;;
             [Nn]* ) break;;
@@ -22,7 +22,7 @@ if [ -f bucket-name.txt ]; then
 fi
 
 while true; do
-    read -p "Delete function logs? (log group /aws/lambda/$FUNCTION)" response
+    read -p "Delete function log group (/aws/lambda/$FUNCTION)? (y/n)" response
     case $response in
         [Yy]* ) aws logs delete-log-group --log-group-name /aws/lambda/$FUNCTION; break;;
         [Nn]* ) break;;

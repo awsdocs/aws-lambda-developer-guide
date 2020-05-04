@@ -21,7 +21,7 @@ Use the following instructions to deploy the sample application. For more inform
 # Setup
 Download or clone this repository.
 
-    $ git clone git@github.com:awsdocs/aws-lambda-developer-guide.git
+    $ git clone https://github.com/awsdocs/aws-lambda-developer-guide.git
     $ cd aws-lambda-developer-guide/sample-apps/error-processor
 
 To create a new bucket for deployment artifacts, run `1-create-bucket.sh`. Or, if you already have a bucket, create a file named `bucket-name.txt` that contains the name of your bucket.

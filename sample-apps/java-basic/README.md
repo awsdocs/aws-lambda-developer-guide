@@ -14,14 +14,14 @@ Use the following instructions to deploy the sample application.
 
 # Requirements
 - [Java 8 runtime environment (SE JRE)](https://www.oracle.com/java/technologies/javase-downloads.html)
-- [Maven 3](https://maven.apache.org/docs/history.html)
+- [Gradle 5](https://gradle.org/releases/) or [Maven 3](https://maven.apache.org/docs/history.html)
 - The Bash shell. For Linux and macOS, this is included by default. In Windows 10, you can install the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows-integrated version of Ubuntu and Bash.
 - [The AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html).
 
 # Setup
 Download or clone this repository.
 
-    $ git clone git@github.com:awsdocs/aws-lambda-developer-guide.git
+    $ git clone https://github.com/awsdocs/aws-lambda-developer-guide.git
     $ cd aws-lambda-developer-guide/sample-apps/java-basic
 
 To create a new bucket for deployment artifacts, run `1-create-bucket.sh`. Or, if you already have a bucket, create a file named `bucket-name.txt` that contains the name of your bucket.
