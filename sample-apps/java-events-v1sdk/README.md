@@ -91,7 +91,7 @@ To use a different handler, change the value of the Handler setting in the appli
 
 Deploy the change, and then use the invoke script to test the new configuration. Pass the handler type key as an argument to the invoke script.
 
-    ./3-invoke.sh kin
+    ./4-invoke.sh kin
     {
         "StatusCode": 200,
         "ExecutedVersion": "$LATEST"
