@@ -21,7 +21,7 @@ Resources:
   libs:
     Type: AWS::Serverless::LayerVersion
     Properties:
-      LayerName: blank-lib
+      LayerName: blank-nodejs-lib
       Description: Dependencies for the blank sample app.
       ContentUri: lib/.
       CompatibleRuntimes:
