@@ -11,12 +11,12 @@ The project source includes function code and supporting resources:
 
 Variants of this sample application are available for the following languages:
 
-- Python – [blank-python](https://github.com/awsdocs/aws-lambda-developer-guide/edit/master/sample-apps/blank-python).
-- Ruby – [blank-ruby](https://github.com/awsdocs/aws-lambda-developer-guide/edit/master/sample-apps/blank-ruby).
-- Java – [blank-java](https://github.com/awsdocs/aws-lambda-developer-guide/edit/master/sample-apps/blank-java).
-- Go – [blank-go](https://github.com/awsdocs/aws-lambda-developer-guide/edit/master/sample-apps/blank-go).
-- C# – [blank-csharp](https://github.com/awsdocs/aws-lambda-developer-guide/edit/master/sample-apps/blank-csharp).
-- PowerShell – [blank-powershell](https://github.com/awsdocs/aws-lambda-developer-guide/edit/master/sample-apps/blank-powershell).
+- Python – [blank-python](/sample-apps/blank-python).
+- Ruby – [blank-ruby](/sample-apps/blank-ruby).
+- Java – [blank-java](/sample-apps/blank-java).
+- Go – [blank-go](/sample-apps/blank-go).
+- C# – [blank-csharp](/sample-apps/blank-csharp).
+- PowerShell – [blank-powershell](/sample-apps/blank-powershell).
 
 Use the following instructions to deploy the sample application. For an in-depth look at its architecture and features, see [Blank Function Sample Application for AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/samples-blank-nodejs.html) in the developer guide.
 
