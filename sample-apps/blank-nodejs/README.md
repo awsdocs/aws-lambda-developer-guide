@@ -1,7 +1,7 @@
-# Blank function
+# Blank function (Node.js)
 This sample application is a Lambda function that calls the Lambda API. It shows the use of logging, environment variables, AWS X-Ray tracing, layers, unit tests and the AWS SDK. You can use it to learn about Lambda features or use it as a starting point for your own projects.
 
-![Architecture](/sample-apps/blank/images/sample-blank.png)
+![Architecture](/sample-apps/blank-nodejs/images/sample-blank-nodejs.png)
 
 The project source includes function code and supporting resources:
 
@@ -18,7 +18,7 @@ Variants of this sample application are available for the following languages:
 - C# – [blank-csharp](https://github.com/awsdocs/aws-lambda-developer-guide/edit/master/sample-apps/blank-csharp).
 - PowerShell – [blank-powershell](https://github.com/awsdocs/aws-lambda-developer-guide/edit/master/sample-apps/blank-powershell).
 
-Use the following instructions to deploy the sample application. For an in-depth look at its architecture and features, see [Blank Function Sample Application for AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/samples-blank.html) in the developer guide.
+Use the following instructions to deploy the sample application. For an in-depth look at its architecture and features, see [Blank Function Sample Application for AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/samples-blank-nodejs.html) in the developer guide.
 
 # Requirements
 - [Node.js 10 with npm](https://nodejs.org/en/download/releases/)
@@ -29,35 +29,35 @@ Use the following instructions to deploy the sample application. For an in-depth
 Download or clone this repository.
 
     $ git clone https://github.com/awsdocs/aws-lambda-developer-guide.git
-    $ cd aws-lambda-developer-guide/sample-apps/blank
+    $ cd aws-lambda-developer-guide/sample-apps/blank-nodejs
 
 To create a new bucket for deployment artifacts, run `1-create-bucket.sh`. Or, if you already have a bucket, create a file named `bucket-name.txt` that contains the name of your bucket.
 
-    blank$ ./1-create-bucket.sh
+    blank-nodejs$ ./1-create-bucket.sh
     make_bucket: lambda-artifacts-a5e491dbb5b22e0d
 
 To build a Lambda layer that contains the function's runtime dependencies, run `2-build-layer.sh`. Packaging dependencies in a layer reduces the size of the deployment package that you upload when you modify your code.
 
-    blank$ ./2-build-layer.sh
+    blank-nodejs$ ./2-build-layer.sh
 
 # Deploy
 To deploy the application, run `3-deploy.sh`.
 
-    blank$ ./3-deploy.sh
+    blank-nodejs$ ./3-deploy.sh
     added 16 packages from 18 contributors and audited 18 packages in 0.926s
     added 17 packages from 19 contributors and audited 19 packages in 0.916s
     Uploading to e678bc216e6a0d510d661ca9ae2fd941  2737254 / 2737254.0  (100.00%)
     Successfully packaged artifacts and wrote output template to file out.yml.
     Waiting for changeset to be created..
     Waiting for stack create/update to complete
-    Successfully created/updated stack - blank
+    Successfully created/updated stack - blank-nodejs
 
 This script uses AWS CloudFormation to deploy the Lambda functions and an IAM role. If the AWS CloudFormation stack that contains the resources already exists, the script updates it with any changes to the template or function code.
 
 # Test
 To invoke the function, run `4-invoke.sh`.
 
-    blank$ ./4-invoke.sh
+    blank-nodejs$ ./4-invoke.sh
     {
         "StatusCode": 200,
         "ExecutedVersion": "$LATEST"
@@ -68,29 +68,29 @@ Let the script invoke the function a few times and then press `CRTL+C` to exit.
 
 The application uses AWS X-Ray to trace requests. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map. The following service map shows the function calling Amazon S3.
 
-![Service Map](/sample-apps/blank/images/blank-servicemap.png)
+![Service Map](/sample-apps/blank-nodejs/images/blank-nodejs-servicemap.png)
 
 Choose a node in the main function graph. Then choose **View traces** to see a list of traces. Choose any trace to view a timeline that breaks down the work done by the function.
 
-![Trace](/sample-apps/blank/images/blank-trace.png)
+![Trace](/sample-apps/blank-nodejs/images/blank-nodejs-trace.png)
 
 Finally, view the application in the Lambda console.
 
 *To view the application*
 1. Open the [applications page](https://console.aws.amazon.com/lambda/home#/applications) in the Lambda console.
-2. Choose **blank**.
+2. Choose **blank-nodejs**.
 
-  ![Application](/sample-apps/blank/images/blank-application.png)
+  ![Application](/sample-apps/blank-nodejs/images/blank-nodejs-application.png)
 
 # Cleanup
 To delete the application, run `5-cleanup.sh`.
 
-    blank$ ./5-cleanup.sh
-    Deleted blank stack.
+    blank-nodejs$ ./5-cleanup.sh
+    Deleted blank-nodejs stack.
     Delete deployment artifacts and bucket (lambda-artifacts-4475xmpl08ba7f8d)?y
     delete: s3://lambda-artifacts-4475xmpl08ba7f8d/6f2edcce52085e31a4a5ba823dba2c9d
     delete: s3://lambda-artifacts-4475xmpl08ba7f8d/3d3aee62473d249d039d2d7a37512db3
     remove_bucket: lambda-artifacts-4475xmpl08ba7f8d
-    Delete function logs? (log group /aws/lambda/blank-function-1RQTXMPLR0YSO)y
+    Delete function logs? (log group /aws/lambda/blank-nodejs-function-1RQTXMPLR0YSO)y
 
 The cleanup script delete's the application stack, which includes the function and execution role, and local build artifacts. You can choose to delete the bucket and function logs as well.

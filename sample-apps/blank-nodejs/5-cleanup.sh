@@ -1,6 +1,6 @@
 #!/bin/bash
 set -eo pipefail
-STACK=blank
+STACK=blank-nodejs
 if [[ $# -eq 1 ]] ; then
     STACK=$1
     echo "Deleting stack $STACK"
