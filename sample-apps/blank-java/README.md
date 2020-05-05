@@ -1,6 +1,6 @@
 # Blank function (Java)
 
-![Architecture](/sample-apps/blank/images/sample-blank.png)
+![Architecture](/sample-apps/blank-java/images/sample-blank-java.png)
 
 The project source includes function code and supporting resources:
 

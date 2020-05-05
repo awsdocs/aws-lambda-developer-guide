@@ -1,6 +1,6 @@
 # Blank function (Go)
 
-![Architecture](/sample-apps/blank/images/sample-blank.png)
+![Architecture](/sample-apps/blank-go/images/sample-blank-go.png)
 
 The project source includes function code and supporting resources:
 
