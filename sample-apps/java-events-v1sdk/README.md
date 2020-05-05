@@ -77,7 +77,7 @@ Choose a node in the main function graph. Then choose **View traces** to see a l
 
 # Configure Handler Class
 
-By default, the function uses a handler class named `Handler` that takes an Amazon S3 notification event as input and returns a string. The project also includes handlers that use other input and output types. The handlers are defined in the following files under src/main/java/example:
+By default, the function uses a handler class named `Handler` that takes an Amazon S3 notification event as input and returns a string. The project also includes handlers that use other input and output types. The handlers are defined in the following files under `src/main/java/example`:
 
 - `Handler.java` - Takes `S3Event` as input.
 - `HandlerDynamoDB.java` - Takes `DynamoDBEvent` as input.

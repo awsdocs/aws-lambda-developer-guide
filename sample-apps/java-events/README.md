@@ -52,7 +52,7 @@ You can also build the application with Maven. To use maven, add `mvn` to the co
     ...
 
 # Test
-Run `3-invoke.sh` to invoke the function.
+Run `3-invoke.sh` to invoke the function. The default handler (`Handler.java`) processes an event from an Amazon API Gateway HTTP API and returns a JSON representation of an HTTP response.
 
     java-events$ ./3-invoke.sh
     {
@@ -73,7 +73,7 @@ Choose a node in the main function graph. Then choose **View traces** to see a l
 
 # Configure Handler Class
 
-By default, the function uses a handler class named `Handler` that takes an API Gateway proxy event as input and returns a string. The project also includes handlers that use other input and output types. The handlers are defined in the following files under src/main/java/example:
+By default, the function uses a handler class named `Handler` that takes an API Gateway proxy event as input and returns a string. The project also includes handlers that use other input and output types. The handlers are defined in the following files under `src/main/java/example`:
 
 - `Handler.java` - Takes `APIGatewayV2ProxyRequestEvent` as input and returns `APIGatewayV2ProxyResponseEvent`.
 - `HandlerApiGateway.java` - Takes `APIGatewayProxyRequestEvent` as input and returns `APIGatewayProxyResponseEvent`.
@@ -86,11 +86,11 @@ By default, the function uses a handler class named `Handler` that takes an API 
 - `HandlerLex.java` - Takes `LexEvent` as input.
 - `HandlerSNS.java` - Takes `SNSEvent` as input.
 
-To use a different handler, change the value of the Handler setting in the application template (`template.yml` or `template-mvn.yaml`). For example, to use the API Gateway v1 handler:
+To use a different handler, change the value of the Handler setting in the application template (`template.yml` or `template-mvn.yaml`). For example, to use the Amazon Lex handler:
 
     Properties:
       CodeUri: build/distributions/java-events.zip
-      Handler: example.HandlerApiGateway
+      Handler: example.HandlerLex
 
 Deploy the change, and then use the invoke script to test the new configuration. Pass the handler type key as an argument to the invoke script.
 
