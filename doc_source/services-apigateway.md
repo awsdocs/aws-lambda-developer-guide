@@ -291,6 +291,6 @@ For more information, see [AWS Lambda integrations](https://docs.aws.amazon.com/
 ## Sample applications<a name="services-apigateway-samples"></a>
 
 The GitHub repository for this guide provides the following sample application for API Gateway\.
-+ [API Gateway with Node\.js](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/nodejs-apig) – A function with an AWS SAM template that creates a REST API that has AWS X\-Ray tracing enabled\. It includes scripts for deploying, invoking the function, testing the API, and cleanup\.
++ [API Gateway with Node\.js](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/nodejs-apig) – A function with an AWS SAM template that creates a REST API that has AWS X\-Ray tracing enabled\. It includes scripts for deploying, invoking the function, testing the API, and cleanup\.
 
 Lambda also provides [blueprints](gettingstarted-features.md#gettingstarted-features-blueprints) and [templates](gettingstarted-features.md#gettingstarted-features-templates) that you can use to create an API Gateway application in the Lambda console\.

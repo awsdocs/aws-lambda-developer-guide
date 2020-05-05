@@ -68,7 +68,9 @@ The following shows an example of a permissions policy with limited scope\. It a
                 "iam:ListRolePolicies",
                 "iam:ListAttachedRolePolicies",
                 "iam:GetRole",
-                "iam:PassRole"
+                "iam:GetRolePolicy",
+                "iam:PassRole",
+                "iam:SimulatePrincipalPolicy"
             ],
             "Resource": "arn:aws:iam::*:role/intern-lambda-execution-role"
         },
@@ -138,7 +140,9 @@ The permissions in the policy are organized into statements based on the [resour
                   "iam:ListRolePolicies",
                   "iam:ListAttachedRolePolicies",
                   "iam:GetRole",
-                  "iam:PassRole"
+                  "iam:GetRolePolicy",
+                  "iam:PassRole",
+                  "iam:SimulatePrincipalPolicy"
               ],
               "Resource": "arn:aws:iam::*:role/intern-lambda-execution-role"
   ```

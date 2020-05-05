@@ -273,4 +273,4 @@ Amazon's trademarks and trade dress may not be used in
       + [TracingConfigResponse](API_TracingConfigResponse.md)
       + [VpcConfig](API_VpcConfig.md)
       + [VpcConfigResponse](API_VpcConfigResponse.md)
-+ [AWS Glossary](glossary.md)
++ [AWS glossary](glossary.md)

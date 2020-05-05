@@ -65,7 +65,7 @@ Tracing mode is part of the version\-specific configuration that is locked when 
 
 To enable active tracing on an `AWS::Lambda::Function` resource in an AWS CloudFormation template, use the `TracingConfig` property\.
 
-**Example [Template\-std\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank/template-std.yml) – Tracing configuration**  
+**Example [function\-inline\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/templates/function-inline.yml) – Tracing configuration**  
 
 ```
 Resources:

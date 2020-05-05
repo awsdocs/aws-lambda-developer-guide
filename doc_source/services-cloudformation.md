@@ -56,7 +56,7 @@ AWS CloudFormation provides a library called `cfn-response` that handles sending
 
 The following example function invokes a second function\. If the call succeeds, the function sends a success response to AWS CloudFormation, and the stack update continues\. The template uses the [AWS::Serverless::Function](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html) resource type provided by AWS Serverless Application Model\.
 
-**Example [Error\-processor/template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/error-processor/template.yml) – Custom resource function**  
+**Example [error\-processor/template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/error-processor/template.yml) – Custom resource function**  
 
 ```
 Transform: 'AWS::Serverless-2016-10-31'
