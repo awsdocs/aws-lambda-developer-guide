@@ -15,7 +15,7 @@ Use the following instructions to deploy the sample application.
 - [.NET Core 3.1](https://www.microsoft.com/net/download)
 - [AWSLambdaPSCore module 2.0](https://www.powershellgallery.com/packages/AWSLambdaPSCore/2.0.0.0)
 - The Bash shell. For Linux and macOS, this is included by default. In Windows 10, you can install the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows-integrated version of Ubuntu and Bash.
-- [The AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html).
+- [The AWS CLI v1](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html).
 
 # Setup
 Download or clone this repository.
@@ -23,7 +23,7 @@ Download or clone this repository.
     $ git clone https://github.com/awsdocs/aws-lambda-developer-guide.git
     $ cd aws-lambda-developer-guide/sample-apps/blank-powershell
 
-To create a new bucket for deployment artifacts, run `1-create-bucket.sh`. Or, if you already have a bucket, create a file named `bucket-name.txt` that contains the name of your bucket.
+To create a new bucket for deployment artifacts, run `1-create-bucket.sh`.
 
     blank-powershell$ ./1-create-bucket.sh
     make_bucket: lambda-artifacts-a5e491dbb5b22e0d

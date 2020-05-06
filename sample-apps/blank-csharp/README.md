@@ -14,7 +14,7 @@ Use the following instructions to deploy the sample application. For more inform
 - [.NET Core SDK 3.1](https://nodejs.org/en/download/releases/)
 - [AWS extensions for .NET CLI](https://github.com/aws/aws-extensions-for-dotnet-cli)
 - The Bash shell. For Linux and macOS, this is included by default. In Windows 10, you can install the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows-integrated version of Ubuntu and Bash.
-- [The AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html).
+- [The AWS CLI v1](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html).
 
 # Setup
 Download or clone this repository.
@@ -22,7 +22,7 @@ Download or clone this repository.
     $ git clone https://github.com/awsdocs/aws-lambda-developer-guide.git
     $ cd aws-lambda-developer-guide/sample-apps/blank-csharp
 
-To create a new bucket for deployment artifacts, run `1-create-bucket.sh`. Or, if you already have a bucket, create a file named `bucket-name.txt` that contains the name of your bucket.
+To create a new bucket for deployment artifacts, run `1-create-bucket.sh`.
 
     blank-csharp$ ./1-create-bucket.sh
     make_bucket: lambda-artifacts-a5e491dbb5b22e0d
