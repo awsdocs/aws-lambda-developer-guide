@@ -33,7 +33,7 @@ This tutorial assumes that you have some knowledge of basic Lambda operations an
    + **Enabled** – True \(checked\)\.
    + **Environment variables**
      + **site** – **https://docs\.aws\.amazon\.com/lambda/latest/dg/welcome\.html**\.
-     + **expected** – **What Is AWS Lambda?**\.
+     + **expected** – **What is AWS Lambda?**\.
 
 1. Choose **Create function**\.
 
