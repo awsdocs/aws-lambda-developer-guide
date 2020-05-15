@@ -48,7 +48,7 @@ Resources:
       CompatibleRuntimes:
         - nodejs10.x
         - nodejs12.x
-  dbadmin:
+  function:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: dbadmin/.
@@ -56,6 +56,32 @@ Resources:
       MemorySize: 128
       Timeout: 15
       # Function's execution role
+      Role: !GetAtt role.Arn
+  role:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -
+            Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaRole
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole
       Policies:
-        - AWSLambdaBasicExecutionRole
-        - AWSLambdaVPCAccessExecutionRole
+        - PolicyName: rds-iamauth
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action: 'rds-db:connect'
+                Resource: '*'
+      Path: /service-role/
+

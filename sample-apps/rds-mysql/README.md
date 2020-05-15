@@ -110,6 +110,12 @@ Finally, view the application in the Lambda console.
 
   ![Application](/sample-apps/rds-mysql/images/rdsmysql-application.png)
 
+# Use IAM authorization with a database proxy
+
+This application includes a second handler that uses the function's credentials to authenticate ([index-iam.js](/sample-apps/rds-mysql/dbadmin/index-iam.js)). You can use this method to connect to an RDS Proxy without configuring the function with a database password.
+
+For more information, see [Configuring database access](https://docs.aws.amazon.com/lambda/latest/dg/configuration-database.html) in the AWS Lambda Developer Guide.
+
 # Cleanup
 
 To delete the application, run the cleanup script.

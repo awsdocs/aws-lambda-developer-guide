@@ -1,6 +1,6 @@
 var AWSXRay = require('aws-xray-sdk-core')
 var captureMySQL = require('aws-xray-sdk-mysql')
-var mysql = captureMySQL(require('mysql'))
+var mysql = captureMySQL(require('mysql2'))
 const username = process.env.databaseUser
 const password = process.env.databasePassword
 const host = process.env.databaseHost
