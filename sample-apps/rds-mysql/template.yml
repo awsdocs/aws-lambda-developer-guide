@@ -10,34 +10,6 @@ Parameters:
     Default: rds-mysql-admin
     Description: Database password secret name
     Type: String
-Globals:
-  Function:
-    Runtime: nodejs12.x
-    Tracing: Active
-    Handler: index.handler
-    Environment:
-        Variables:
-          databaseHost:
-            Fn::ImportValue:
-              !Sub "${vpcStackName}-db-host"
-          databaseName:
-            Fn::ImportValue:
-              !Sub "${vpcStackName}-db-name"
-          databaseUser:
-            Fn::ImportValue:
-              !Sub "${vpcStackName}-db-user"
-          databasePassword: !Sub '{{resolve:secretsmanager:${secretName}:SecretString:password}}'
-    VpcConfig:
-      SecurityGroupIds:
-        - Fn::ImportValue:
-              !Sub "${vpcStackName}-vpc-sg"
-      SubnetIds:
-        - Fn::ImportValue:
-              !Sub "${vpcStackName}-subnet-a"
-        - Fn::ImportValue:
-              !Sub "${vpcStackName}-subnet-b"
-    Layers:
-      - !Ref libs
 Resources:
   libs:
     Type: AWS::Serverless::LayerVersion
@@ -55,8 +27,34 @@ Resources:
       Description: Run SQL queries.
       MemorySize: 128
       Timeout: 15
+      Runtime: nodejs12.x
+      Tracing: Active
+      Handler: index.handler
+      Environment:
+          Variables:
+            databaseHost:
+              Fn::ImportValue:
+                !Sub "${vpcStackName}-db-host"
+            databaseName:
+              Fn::ImportValue:
+                !Sub "${vpcStackName}-db-name"
+            databaseUser:
+              Fn::ImportValue:
+                !Sub "${vpcStackName}-db-user"
+            databasePassword: !Sub '{{resolve:secretsmanager:${secretName}:SecretString:password}}'
+      VpcConfig:
+        SecurityGroupIds:
+          - Fn::ImportValue:
+                !Sub "${vpcStackName}-vpc-sg"
+        SubnetIds:
+          - Fn::ImportValue:
+                !Sub "${vpcStackName}-subnet-a"
+          - Fn::ImportValue:
+                !Sub "${vpcStackName}-subnet-b"
       # Function's execution role
       Role: !GetAtt role.Arn
+      Layers:
+        - !Ref libs
   role:
     Type: AWS::IAM::Role
     Properties:
