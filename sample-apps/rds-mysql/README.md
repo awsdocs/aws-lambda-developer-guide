@@ -114,6 +114,16 @@ Finally, view the application in the Lambda console.
 
 This application includes a second handler that uses the function's credentials to authenticate ([index-iam.js](/sample-apps/rds-mysql/dbadmin/index-iam.js)). You can use this method to connect to an RDS Proxy without configuring the function with a database password.
 
+To use handler with IAM authentication, change the `databaseHost` environment variable in `template.yml` to the hostname of an RDS Proxy, and change the handler setting to `index-iam.handler`.
+
+    Tracing: Active
+      Handler: index-iam.handler
+      Environment:
+        Variables:
+          databaseHost: rds-mysql-proxy.proxy-cxarxmpluqha.us-east-2.rds.amazonaws.com
+            #Fn::ImportValue:
+            #  !Sub "${vpcStackName}-db-host"
+
 For more information, see [Configuring database access](https://docs.aws.amazon.com/lambda/latest/dg/configuration-database.html) in the AWS Lambda Developer Guide.
 
 # Cleanup
