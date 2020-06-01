@@ -50,7 +50,7 @@ In this step, you start Eclipse and create a Maven project\. You will add the ne
 
       **Artifact Id:** aws\-lambda\-java\-core
 
-      **Version:** 1\.2\.0
+      **Version:** 1\.2\.1
 **Note**  
 If you are following other tutorial topics in this guide, the specific tutorials might require you to add more dependencies\. Make sure to add those dependencies as required\.
 

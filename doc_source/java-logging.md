@@ -27,7 +27,7 @@ public class Handler implements RequestHandler<Object, String>{
 }
 ```
 
-**Example Log format**  
+**Example log format**  
 
 ```
 START RequestId: 6bc28136-xmpl-4365-b021-0ce6b2e64ab0 Version: $LATEST
@@ -69,7 +69,7 @@ The Java runtime logs the `START`, `END`, and `REPORT` lines for each invocation
 + **Memory Size** – The amount of memory allocated to the function\.
 + **Max Memory Used** – The amount of memory used by the function\.
 + **Init Duration** – For the first request served, the amount of time it took the runtime to load the function and run code outside of the handler method\.
-+ **XRAY TraceId** – For traced requests, the [AWS X\-Ray trace ID](lambda-x-ray.md)\.
++ **XRAY TraceId** – For traced requests, the [AWS X\-Ray trace ID](services-xray.md)\.
 + **SegmentId** – For traced requests, the X\-Ray segment ID\.
 + **Sampled** – For traced requests, the sampling result\.
 
@@ -209,7 +209,7 @@ To add the request ID to your function's logs, use the appender in the [aws\-lam
 
 With this configuration, each line is prepended with the date, time, request ID, log level, and class name\.
 
-**Example Log format with appender**  
+**Example log format with appender**  
 
 ```
 START RequestId: 6bc28136-xmpl-4365-b021-0ce6b2e64ab0 Version: $LATEST
@@ -270,13 +270,13 @@ dependencies {
     implementation 'com.amazonaws:aws-xray-recorder-sdk-aws-sdk-core'
     implementation 'com.amazonaws:aws-xray-recorder-sdk-aws-sdk-v2'
     implementation 'com.amazonaws:aws-xray-recorder-sdk-aws-sdk-v2-instrumentor'
-    implementation 'com.amazonaws:aws-lambda-java-core:1.2.0'
-    implementation 'com.amazonaws:aws-lambda-java-events:2.2.7'
+    implementation 'com.amazonaws:aws-lambda-java-core:1.2.1'
+    implementation 'com.amazonaws:aws-lambda-java-events:2.2.9'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'org.apache.logging.log4j:log4j-api:2.13.0'
     implementation 'org.apache.logging.log4j:log4j-core:2.13.0'
     runtimeOnly 'org.apache.logging.log4j:log4j-slf4j18-impl:2.13.0'
-    runtimeOnly 'com.amazonaws:aws-lambda-java-log4j2:1.1.0'
+    runtimeOnly 'com.amazonaws:aws-lambda-java-log4j2:1.2.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.0'
 }

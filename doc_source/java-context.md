@@ -47,7 +47,7 @@ public class Handler implements RequestHandler<Map<String,String>, String>{
 
 The function serializes the context object into JSON and records it in its log stream\.
 
-**Example Log output**  
+**Example log output**  
 
 ```
 START RequestId: 6bc28136-xmpl-4365-b021-0ce6b2e64ab0 Version: $LATEST

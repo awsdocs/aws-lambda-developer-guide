@@ -78,7 +78,7 @@ The application template uses an AWS Serverless Application Model \(AWS SAM\) re
 
 The template defines the resources in the application *stack*\. This includes the function, its execution role, and a Lambda layer that provides the function's library dependencies\. The stack does not include the bucket that the AWS CLI uses during deployment or the CloudWatch Logs log group\.
 
-**Example [blank\-nodejs/template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-nodejs/template.yml) – Serverless resource**  
+**Example [blank\-nodejs/template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-nodejs/template.yml) – Serverless resources**  
 
 ```
 AWSTemplateFormatVersion: '2010-09-09'
@@ -113,7 +113,7 @@ Resources:
 
 When you deploy the application, AWS CloudFormation applies the AWS SAM transform to the template to generate an AWS CloudFormation template with standard types such as `AWS::Lambda::Function` and `AWS::IAM::Role`\.
 
-**Example Processed template**  
+**Example processed template**  
 
 ```
 {
@@ -164,7 +164,7 @@ aws cloudformation deploy --template-file out.yml --stack-name blank-nodejs --ca
 
 The first time you run this script, it creates a AWS CloudFormation stack named `blank-nodejs`\. If you make changes to the function code or template, you can run it again to update the stack\.
 
-The cleanup script \([blank\-nodejs/4\-cleanup\.sh](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-nodejs/4-cleanup.sh)\) deletes the stack and optionally deletes the deployment bucket and function logs\.
+The cleanup script \([blank\-nodejs/5\-cleanup\.sh](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-nodejs/5-cleanup.sh)\) deletes the stack and optionally deletes the deployment bucket and function logs\.
 
 ## Instrumentation with the AWS X\-Ray<a name="samples-blank-instrumentation"></a>
 

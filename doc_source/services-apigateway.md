@@ -133,7 +133,7 @@ Amazon API Gateway gets permission to invoke your function from the function's [
 
 When you add an API to your function by using the Lambda console, using the API Gateway console, or in an AWS SAM template, the function's resource\-based policy is updated automatically\. The following example shows a function policy with a statement that was added by an AWS SAM template\.
 
-**Example Function policy**  
+**Example function policy**  
 
 ```
 {

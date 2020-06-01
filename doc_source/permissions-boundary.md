@@ -14,7 +14,7 @@ The boundary limits the permissions of the functions' roles\. You can add permis
 
 By default, an application's permissions boundary enables functions to perform actions on the resources in the application\. For example, if the application includes an Amazon DynamoDB table, the boundary allows access to any API action that can be restricted to operate on specific tables with resource\-level permissions\. You can only use actions that don't support resource\-level permissions if they're specifically permitted in the boundary\. These include Amazon CloudWatch Logs and AWS X\-Ray API actions for logging and tracing\.
 
-**Example Permissions boundary**  
+**Example permissions boundary**  
 
 ```
 {

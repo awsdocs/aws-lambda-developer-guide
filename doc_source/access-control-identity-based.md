@@ -172,7 +172,7 @@ When you configure triggers for your function, you need access to use the AWS se
 
 The following policy grants a user permission to create layers and use them with functions\. The resource patterns allow the user to work in any AWS Region and with any layer version, as long as the name of the layer starts with `test-`\.
 
-**Example Layer development policy**  
+**Example layer development policy**  
 
 ```
 {

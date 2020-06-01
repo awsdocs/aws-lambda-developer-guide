@@ -30,7 +30,7 @@ public class HandlerDivide implements RequestHandler<List<Integer>, Integer>{
 
 When the function throws `InputLengthException`, the Java runtime serializes it into the following document\.
 
-**Example Error document \(whitespace added\)**  
+**Example error document \(whitespace added\)**  
 
 ```
 {

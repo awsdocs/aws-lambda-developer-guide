@@ -149,6 +149,9 @@ Lambda supports the following options for Kinesis event sources\.
 + **Concurrent batches per shard** – Process multiple batches from the same shard concurrently\.
 + **Enabled** – Disable the event source to stop processing records\. Lambda keeps track of the last record processed and resumes processing from that point when it's reenabled\.
 
+**Note**  
+Kinesis charges for each shard and, for enhanced fan\-out, data read from the stream\. For pricing details, see [Amazon Kinesis pricing](https://aws.amazon.com/kinesis/data-streams/pricing)\.
+
 To manage the event source configuration later, choose the trigger in the designer\.
 
 ## Event source mapping API<a name="services-kinesis-api"></a>
@@ -273,7 +276,7 @@ To retain a record of discarded batches, configure a failed\-event destination\.
 
 The following example shows an invocation record for a Kinesis stream\.
 
-**Example Invocation Record**  
+**Example invocation Record**  
 
 ```
 {

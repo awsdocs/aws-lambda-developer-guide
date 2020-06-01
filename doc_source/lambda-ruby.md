@@ -74,3 +74,4 @@ Your Lambda function comes with a CloudWatch Logs log group\. The function runti
 + [AWS Lambda context object in Ruby](ruby-context.md)
 + [AWS Lambda function logging in Ruby](ruby-logging.md)
 + [AWS Lambda function errors in Ruby](ruby-exceptions.md)
++ [Instrumenting Ruby code in AWS Lambda](ruby-tracing.md)

@@ -132,6 +132,9 @@ Lambda supports the following options for Amazon SQS event sources\.
 + **Batch size** – The number of items to read from the queue in each batch, up to 10\. The event might contain fewer items if the batch that Lambda read from the queue had fewer items\.
 + **Enabled** – Disable the event source to stop processing items\.
 
+**Note**  
+Amazon SQS has a perpetual free tier for requests\. Beyond the free tier, Amazon SQS charges per million requests\. While your event source mapping is active, Lambda makes requests to the queue to get items\. For pricing details, see [Amazon Simple Queue Service pricing](https://aws.amazon.com/sqs/pricing)\.
+
 To manage the event source configuration later, choose the trigger in the designer\.
 
 Configure your function timeout to allow enough time to process an entire batch of items\. If items take a long time to process, choose a smaller batch size\. A large batch size can improve efficiency for workloads that are very fast or have a lot of overhead\. However, if your function returns an error, all items in the batch return to the queue\. If you configure [reserved concurrency](configuration-concurrency.md) on your function, set a minimum of 5 concurrent executions to reduce the chance of throttling errors when Lambda invokes your function\.

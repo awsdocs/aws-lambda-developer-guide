@@ -5,7 +5,7 @@ The [traffic\-shifting](https://docs.aws.amazon.com/lambda/latest/dg/lambda-traf
 ## Contents<a name="API_AliasRoutingConfiguration_Contents"></a>
 
  **AdditionalVersionWeights**   <a name="SSS-Type-AliasRoutingConfiguration-AdditionalVersionWeights"></a>
-The name of the second alias, and the percentage of traffic that's routed to it\.  
+The second version, and the percentage of traffic that's routed to it\.  
 Type: String to double map  
 Key Length Constraints: Minimum length of 1\. Maximum length of 1024\.  
 Key Pattern: `[0-9]+`   

@@ -8,7 +8,7 @@ When the batch job starts, Amazon S3 invokes the Lambda function [synchronously]
 
 The following example shows the event that Amazon S3 sends to the Lambda function for an object that is named **customerImage1\.jpg** in the **awsexamplebucket** bucket\.
 
-**Example Example Amazon S3 batch request event**  
+**Example Amazon S3 batch request event**  
 
 ```
 {

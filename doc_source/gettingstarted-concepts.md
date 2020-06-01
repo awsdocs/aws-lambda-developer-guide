@@ -4,6 +4,7 @@ With AWS Lambda, you run functions to process events\. You can send events to yo
 
 **Topics**
 + [Function](#gettingstarted-concepts-function)
++ [Qualifier](#gettingstarted-concepts-qualifier)
 + [Runtime](#gettingstarted-concepts-runtimes)
 + [Event](#gettingstarted-concepts-event)
 + [Concurrency](#gettingstarted-concepts-concurrency)
@@ -15,6 +16,12 @@ A function is a resource that you can invoke to run your code in AWS Lambda\. A 
 
 For more information, see [Managing AWS Lambda functions](lambda-functions.md)\.
 
+## Qualifier<a name="gettingstarted-concepts-qualifier"></a>
+
+When you invoke or view a function, you can include a qualfier to specify a version or alias\. A version is an immutable snapshot of a function's code and configuration that has a numerical qualifier\. For example, `my-function:1`\. An alias is a pointer to a version that can be updated to map to a different version, or split traffic between two versions\. For example, `my-function:BLUE`\. You can use versions and aliases together to provide a stable interface for clients to invoke your function\.
+
+For more information, see [AWS Lambda function versions](configuration-versions.md)\.
+
 ## Runtime<a name="gettingstarted-concepts-runtimes"></a>
 
 Lambda runtimes allow functions in different languages to run in the same base execution environment\. You configure your function to use a runtime that matches your programming language\. The runtime sits in between the Lambda service and your function code, relaying invocation events, context information, and responses between the two\. You can use runtimes provided by Lambda, or build your own\.
@@ -25,7 +32,7 @@ For more information, see [AWS Lambda runtimes](lambda-runtimes.md)\.
 
 An event is a JSON formatted document that contains data for a function to process\. The Lambda runtime converts the event to an object and passes it to your function code\. When you invoke a function, you determine the structure and contents of the event\.
 
-**Example Custom event – Weather data**  
+**Example custom event – Weather data**  
 
 ```
 {
@@ -38,7 +45,7 @@ An event is a JSON formatted document that contains data for a function to proce
 
 When an AWS service invokes your function, the service defines the shape of the event\.
 
-**Example Service event – Amazon SNS notification**  
+**Example service event – Amazon SNS notification**  
 
 ```
 {

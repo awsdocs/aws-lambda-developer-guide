@@ -12,7 +12,7 @@ The status code in the API response doesn't reflect function errors\. Error code
 
 For functions with a long timeout, your client might be disconnected during synchronous invocation while it waits for a response\. Configure your HTTP client, SDK, firewall, proxy, or operating system to allow for long connections with timeout or keep\-alive settings\.
 
-This operation requires permission for the `lambda:InvokeFunction` action\.
+This operation requires permission for the [lambda:InvokeFunction](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awslambda.html) action\.
 
 ## Request Syntax<a name="API_Invoke_RequestSyntax"></a>
 

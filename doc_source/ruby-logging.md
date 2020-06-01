@@ -79,7 +79,7 @@ The `base64` utility is available on Linux, macOS, and [Ubuntu on Windows](https
 
 Log groups aren't deleted automatically when you delete a function\. To avoid storing logs indefinitely, delete the log group, or [configure a retention period](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#SettingLogRetention) after which logs are deleted automatically\.
 
-**Example Log format**  
+**Example log format**  
 
 ```
 START RequestId: 50aba555-99c8-4b21-8358-644ee996a05f Version: $LATEST
@@ -110,7 +110,7 @@ The Ruby runtime logs the `START`, `END`, and `REPORT` lines for each invocation
 + **Memory Size** – The amount of memory allocated to the function\.
 + **Max Memory Used** – The amount of memory used by the function\.
 + **Init Duration** – For the first request served, the amount of time it took the runtime to load the function and run code outside of the handler method\.
-+ **XRAY TraceId** – For traced requests, the [AWS X\-Ray trace ID](lambda-x-ray.md)\.
++ **XRAY TraceId** – For traced requests, the [AWS X\-Ray trace ID](services-xray.md)\.
 + **SegmentId** – For traced requests, the X\-Ray segment ID\.
 + **Sampled** – For traced requests, the sampling result\.
 

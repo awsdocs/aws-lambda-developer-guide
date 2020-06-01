@@ -4,8 +4,6 @@ AWS Lambda monitors functions on your behalf and sends metrics to Amazon CloudWa
 
 **To access the monitoring console**
 
-1. Open the [Lambda console](https://console.aws.amazon.com/lambda)\.
-
 1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
 
 1. Choose **Monitoring**\.  

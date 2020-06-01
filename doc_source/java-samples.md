@@ -13,7 +13,7 @@ Use the `blank-java` sample app to learn the basics, or as a starting point for 
 
 [https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-java)
 
-The other sample applications show other build configurations, handler interfaces, and use cases for services that integrate with Lambda\. The `java-basic` sample shows a function with minimal dependencies, for cases where you don't need additional libraries like the AWS SDK and can represent your function's input and output with standard Java types\. To try a different handler type, you can simply change the handler setting on the function\.
+The other sample applications show other build configurations, handler interfaces, and use cases for services that integrate with Lambda\. The `java-basic` sample shows a function with minimal dependencies\. You can use this sample for cases where you don't need additional libraries like the AWS SDK, and can represent your function's input and output with standard Java types\. To try a different handler type, you can simply change the handler setting on the function\.
 
 **Example [java\-basic/src/main/java/example/HandlerStream\.java](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/java-basic/src/main/java/example/HandlerStream.java) – Stream handler**  
 

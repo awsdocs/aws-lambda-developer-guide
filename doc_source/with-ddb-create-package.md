@@ -167,4 +167,4 @@ func handleRequest(ctx context.Context, e events.DynamoDBEvent) {
 }
 ```
 
-Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda deployment package in Python](python-package.md)\.
+Build the executable with `go build` and create a deployment package\. For instructions, see [AWS Lambda deployment package in Go](golang-package.md)\.

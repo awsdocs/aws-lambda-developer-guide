@@ -59,7 +59,7 @@ The invocation record contains details about the failed event batch in JSON form
 
 The following example shows an invocation record for a Kinesis stream\.
 
-**Example Invocation Record**  
+**Example invocation Record**  
 
 ```
 {

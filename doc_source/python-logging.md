@@ -17,7 +17,7 @@ def lambda_handler(event, context):
     print(event)
 ```
 
-**Example Log format**  
+**Example log format**  
 
 ```
 START RequestId: 8f507cfc-xmpl-4697-b07a-ac58fc914c95 Version: $LATEST
@@ -39,7 +39,7 @@ The Python runtime logs the `START`, `END`, and `REPORT` lines for each invocati
 + **Memory Size** – The amount of memory allocated to the function\.
 + **Max Memory Used** – The amount of memory used by the function\.
 + **Init Duration** – For the first request served, the amount of time it took the runtime to load the function and run code outside of the handler method\.
-+ **XRAY TraceId** – For traced requests, the [AWS X\-Ray trace ID](lambda-x-ray.md)\.
++ **XRAY TraceId** – For traced requests, the [AWS X\-Ray trace ID](services-xray.md)\.
 + **SegmentId** – For traced requests, the X\-Ray segment ID\.
 + **Sampled** – For traced requests, the sampling result\.
 

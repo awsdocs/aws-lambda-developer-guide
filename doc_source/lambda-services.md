@@ -6,7 +6,7 @@ Each service that integrates with Lambda sends data to your function in JSON as 
 
 The following example shows a test event from an [Application Load Balancer](services-alb.md) that represents a GET request to `/lambda?query=1234ABCD`\.
 
-**Example Event from an Application Load Balancer**  
+**Example event from an Application Load Balancer**  
 
 ```
 {

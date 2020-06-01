@@ -27,7 +27,7 @@ For more information about CloudWatch, see the [https://docs.aws.amazon.com/Amaz
 
 ## Using invocation metrics<a name="monitoring-metrics-invocation"></a>
 
-Invocation metrics are binary indicators of the outcome of an invocation\. For example, if the function returns an error, Lambda sends the `Errors` metric with a value of 1\. To get a count of the number of function errors that occurred each minute, view the sum of the `Errors` metric with a period of one minute\.
+Invocation metrics are binary indicators of the outcome of an invocation\. For example, if the function returns an error, Lambda sends the `Errors` metric with a value of 1\. To get a count of the number of function errors that occurred each minute, view the `Sum` of the `Errors` metric with a period of one minute\.
 
 You should view the following metrics with the `Sum` statistic\.
 
@@ -42,7 +42,7 @@ You should view the following metrics with the `Sum` statistic\.
 
 ## Using performance metrics<a name="monitoring-metrics-performance"></a>
 
-Performance metrics provide performance details about a single invocation\. For example, the `Duration` metric indicates the amount of time in milliseconds that your function spends processing an event\. To get a sense of how fast your function processes events, view these metrics with the `Average` or `Maximum` statistic\.
+Performance metrics provide performance details about a single invocation\. For example, the `Duration` metric indicates the amount of time in milliseconds that your function spends processing an event\. To get a sense of how fast your function processes events, view these metrics with the `Average` or `Max` statistic\.
 
 **Performance metrics**
 + `Duration` – The amount of time that your function code spends processing an event\. For the first event processed by an instance of your function, this includes [initialization time](gettingstarted-features.md#gettingstarted-features-programmingmodel)\. The billed duration for an invocation is the value of `Duration` rounded up to the nearest 100 milliseconds\.

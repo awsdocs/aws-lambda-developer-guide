@@ -20,7 +20,7 @@ Authoring specifics vary between runtimes, but all runtimes share a common progr
 
 When the handler finishes processing the first event, the runtime sends it another\. The function's class stays in memory, so clients and variables that are declared outside of the handler method in **initialization code** can be reused\. To save processing time on subsequent events, create reusable resources like AWS SDK clients during initialization\. Once initialized, each instance of your function can process thousands of requests\.
 
-Initialization is billed as part of the duration for the first invocation processed by an instance of your function\. When [X\-Ray tracing](lambda-x-ray.md) is enabled, the runtime records separate subsegments for initialization and execution\.
+Initialization is billed as part of the duration for the first invocation processed by an instance of your function\. When [X\-Ray tracing](services-xray.md) is enabled, the runtime records separate subsegments for initialization and execution\.
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/features-initialization-trace.png)
 

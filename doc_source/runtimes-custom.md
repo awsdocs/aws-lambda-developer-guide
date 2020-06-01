@@ -50,9 +50,9 @@ Your runtime code is responsible for completing some initialization tasks\. Then
 + **Initialize the function** – Load the handler file and run any global or static code that it contains\. Functions should create static resources like SDK clients and database connections once, and reuse them for multiple invocations\.
 + **Handle errors** – If an error occurs, call the [initialization error](runtimes-api.md#runtimes-api-initerror) API and exit immediately\.
 
-Initialization counts towards billed execution time and timeout\. When an execution triggers the initialization of a new instance of your function, you can see the initialization time in the logs and [AWS X\-Ray trace](lambda-x-ray.md)\.
+Initialization counts towards billed execution time and timeout\. When an execution triggers the initialization of a new instance of your function, you can see the initialization time in the logs and [AWS X\-Ray trace](services-xray.md)\.
 
-**Example Log**  
+**Example log**  
 
 ```
 REPORT RequestId: f8ac1208... Init Duration: 48.26 ms   Duration: 237.17 ms   Billed Duration: 300 ms   Memory Size: 128 MB   Max Memory Used: 26 MB

@@ -29,7 +29,7 @@ By default, the Lambda console shows a basic dashboard\. You can customize this 
 
 Customize your application monitoring page by adding one or more Amazon CloudWatch dashboards to your application template with the [AWS::CloudWatch::Dashboard](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-dashboard.html) resource type\. The following example creates a dashboard with a single widget that graphs the number of invocations of a function named `my-function`\.
 
-**Example Function dashboard template**  
+**Example function dashboard template**  
 
 ```
 Resources:

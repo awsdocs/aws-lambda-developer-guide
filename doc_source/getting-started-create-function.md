@@ -88,7 +88,7 @@ If you are done working with the example function, delete it\. You can also dele
 
 1. Open the [Roles page](https://console.aws.amazon.com/iam/home?#/roles) of the AWS Identity and Access Management console\.
 
-1. Choose the function's role \(`my-function-role-31exxmpl`
+1. Choose the function's role \(`my-function-role-31exxmpl`\)
 
 1. Choose **Delete role**\.
 

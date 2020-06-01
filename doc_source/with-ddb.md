@@ -139,6 +139,9 @@ Lambda supports the following options for DynamoDB event sources\.
 + **Concurrent batches per shard** – Process multiple batches from the same shard concurrently\.
 + **Enabled** – Disable the event source to stop processing records\. Lambda keeps track of the last record processed and resumes processing from that point when the mapping is reenabled\.
 
+**Note**  
+DynamoDB charges for read requests that Lambda makes to get records from the stream\. For pricing details, see [Amazon DynamoDB pricing](https://aws.amazon.com/dynamodb/pricing)\.
+
 To manage the event source configuration later, choose the trigger in the designer\.
 
 ## Event source mapping APIs<a name="services-dynamodb-api"></a>

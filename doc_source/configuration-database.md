@@ -12,9 +12,9 @@ You can use the Lambda console to create an Amazon RDS Proxy database proxy for 
 
 1. Configure the following options\.
    + **Proxy identifier** – The name of the proxy\.
-   + **RDS DB instance** – A MySQL 5\.6 or MySQL 5\.7 DB instance or cluster\.
+   + **RDS DB instance** – A [supported MySQL or PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html#rds-proxy.limitations) DB instance or cluster\.
    + **Secret** – A Secrets Manager secret with the database user name and password\.  
-**Example Secret**  
+**Example secret**  
 
      ```
      {
@@ -23,12 +23,54 @@ You can use the Lambda console to create an Amazon RDS Proxy database proxy for 
      }
      ```
    + **IAM role** – An IAM role with permission to use the secret, and a trust policy that allows Amazon RDS to assume the role\.
+   + **Authentication** – The authentication and authorization method for connecting to the proxy from your function code\.
 
 1. Choose **Add**\.
+
+**Pricing**  
+Amazon RDS charges a hourly price for proxies that that is determined by the instance size of your database\. For details, see [RDS Proxy pricing](https://aws.amazon.com/rds/proxy/pricing/)\.
 
 Proxy creation takes a few minutes\. When the proxy is available, configure your function to connect to the proxy endpoint instead of the database endpoint\.
 
 Standard [Amazon RDS Proxy pricing](https://aws.amazon.com/rds/proxy/pricing/) applies\. For more information, see [Managing connections with the Amazon RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-proxy.html) in the Amazon Aurora User Guide\.
+
+**Topics**
++ [Using the function's permissions for authentication](#configuration-database-auth)
++ [Sample application](#configuration-database-sample)
+
+## Using the function's permissions for authentication<a name="configuration-database-auth"></a>
+
+By default, you can connect to a proxy with the same username and password that it uses to connect to the database\. The only difference in your function code is the endpoint that the database client connects to\. The drawback of this method is that you must expose the password to your function code, either by configuring it in a secure environment variable or by retrieving it from Secrets Manager\.
+
+You can create a database proxy that uses the function's IAM credentials for authentication and authorization instead of a password\. To use the function's permissions to connect to the proxy, set **Authentication** to **Execution role**\.
+
+The Lambda console adds the required permission \(`rds-db:connect`\) to the execution role\. You can then use the AWS SDK to generate a token that allows it to connect to the proxy\. The following example shows how to configure a database connection with the `mysql2` library in Node\.js\.
+
+**Example [dbadmin/index\-iam\.js](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/rds-mysql/dbadmin/index-iam.js) – AWS SDK signer**  
+
+```
+const signer = new AWS.RDS.Signer({
+  region: region,
+  hostname: host,
+  port: sqlport,
+  username: username
+})
+
+exports.handler = async (event) => {
+  let connectionConfig = {
+    host     : host,
+    user     : username,
+    database : database,
+    ssl: 'Amazon RDS',
+    authPlugins: { mysql_clear_password: () => () => signer.getAuthToken() }
+  }
+  var connection = mysql.createConnection(connectionConfig)
+  var query = event.query
+  var result
+  connection.connect()
+```
+
+For more information, see [IAM database authentication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html) in the Amazon RDS User Guide\.
 
 ## Sample application<a name="configuration-database-sample"></a>
 

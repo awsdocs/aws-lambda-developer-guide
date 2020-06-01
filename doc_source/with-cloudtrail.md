@@ -77,8 +77,9 @@ In this scenario, CloudTrail writes access logs to your S3 bucket\. As for AWS L
 }
 ```
 
-For detailed information about how to configure Amazon S3 as the event source, see [Using AWS Lambda with Amazon S3 events](with-s3.md)\.
+For detailed information about how to configure Amazon S3 as the event source, see [Using AWS Lambda with Amazon S3](with-s3.md)\.
 
 **Topics**
++ [Logging AWS Lambda API calls with AWS CloudTrail](logging-using-cloudtrail.md)
 + [Tutorial: Triggering a Lambda function with AWS CloudTrail events](with-cloudtrail-example.md)
 + [Sample function code](with-cloudtrail-create-package.md)

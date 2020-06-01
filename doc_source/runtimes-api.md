@@ -56,7 +56,7 @@ The tracing header contains the trace ID, parent ID, and sampling decision\. If 
 
 Sends an invocation response to Lambda\. After the runtime invokes the function handler, it posts the response from the function to the invocation response path\. For synchronous invocations, Lambda then sends the response back to the client\.
 
-**Example Success request**  
+**Example success request**  
 
 ```
 REQUEST_ID=156cb537-e2d4-11e8-9b34-d36013741fb9
@@ -71,7 +71,7 @@ curl -X POST  "http://${AWS_LAMBDA_RUNTIME_API}/2018-06-01/runtime/invocation/$R
 
 If the function returns an error, the runtime formats the error into a JSON document, and posts it to the invocation error path\.
 
-**Example Request body**  
+**Example request body**  
 
 ```
 {
@@ -80,7 +80,7 @@ If the function returns an error, the runtime formats the error into a JSON docu
 }
 ```
 
-**Example Error request**  
+**Example error request**  
 
 ```
 REQUEST_ID=156cb537-e2d4-11e8-9b34-d36013741fb9
@@ -96,7 +96,7 @@ curl -X POST "http://${AWS_LAMBDA_RUNTIME_API}/2018-06-01/runtime/invocation/$RE
 
 If the runtime encounters an error during initialization, it posts an error message to the initialization error path\.
 
-**Example Initialization error request**  
+**Example initialization error request**  
 
 ```
 ERROR="{\"errorMessage\" : \"Failed to load function.\", \"errorType\" : \"InvalidFunctionException\"}"

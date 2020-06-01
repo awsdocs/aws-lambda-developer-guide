@@ -1,19 +1,27 @@
 # Monitoring and troubleshooting Lambda applications<a name="lambda-monitoring"></a>
 
-AWS Lambda automatically monitors Lambda functions on your behalf and reports metrics through Amazon CloudWatch\. To help you monitor your code as it executes, Lambda automatically tracks the number of requests, the execution duration per request, and the number of requests that result in an error\. It also publishes the associated CloudWatch metrics\. You can leverage these metrics to set CloudWatch custom alarms\. For more information about CloudWatch, see the *[Amazon CloudWatch User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/)*\.
+AWS Lambda automatically monitors Lambda functions on your behalf and reports metrics through Amazon CloudWatch\. To help you monitor your code as it executes, Lambda automatically tracks the number of requests, the execution duration per request, and the number of requests that result in an error\. It also publishes the associated CloudWatch metrics\. You can leverage these metrics to set CloudWatch custom alarms\.
 
-You can view request rates and error rates for each of your Lambda functions by using the AWS Lambda console, the CloudWatch console, and other AWS resources\. The following topics describe Lambda CloudWatch metrics and how to access them\.
+The Lambda console provides a built\-in [monitoring dashboard](monitoring-functions-access-metrics.md) for each of your functions and applications\.
+
+**To monitor a function**
+
+1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+
+1. Choose a function\.
+
+1. Choose **Monitoring**\.
+
+**Pricing**  
+CloudWatch has a perpetual free tier\. Beyond the free tier threshold, CloudWatch charges for metrics, dashboards, alarms, logs, and insights\. For details, see [CloudWatch pricing](https://aws.amazon.com/cloudwatch/pricing/)\.
+
+Each time your function is invoked, Lambda records [metrics](monitoring-metrics.md) for the request, the function's response, and the overall state of the function\. You can use metrics to set alarms the are triggered when function performance degrades, or when you are close to hitting concurrency limits in the current Region\.
+
+To debug and validate that your code is working as expected, you can output logs with the standard logging functionality for your programming language\. The Lambda runtime uploads your function's log output to CloudWatch Logs\. You can [view logs](monitoring-cloudwatchlogs.md) in the CloudWatch Logs console, in the Lambda console, or from the command line\.
+
+In addition to monitoring logs and metrics in CloudWatch, you can use AWS X\-Ray to trace and debug requests served by your application\. For details, see [Using AWS Lambda with AWS X\-Ray](services-xray.md)\.
+
+**Topics**
 + [Monitoring functions in the AWS Lambda console](monitoring-functions-access-metrics.md)
 + [Working with AWS Lambda function metrics](monitoring-metrics.md)
-
-You can insert logging statements into your code to help you validate that your code is working as expected\. Lambda automatically integrates with Amazon CloudWatch Logs\. It pushes all logs from your code to a CloudWatch Logs group that is associated with a Lambda function \(/aws/lambda/*<function name>*\)\. To learn more about log groups and accessing them through the CloudWatch console, see [Working with log groups and log streams](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html) in the *Amazon CloudWatch Logs User Guide*\. For information about how to access CloudWatch log entries, see [Accessing Amazon CloudWatch logs for AWS Lambda](monitoring-cloudwatchlogs.md)\.
-
-**Note**  
-If your Lambda function code is executing, but you don't see any log data being generated after several minutes, this could mean that your execution role for the Lambda function didn't grant permissions to write log data to CloudWatch Logs\. For information about how to make sure that you have set up the execution role correctly to grant these permissions, see [AWS Lambda execution role](lambda-intro-execution-role.md)\.
-
-Each of the monitoring services provides a free tier\. If your application exceeds the free tier limits, pricing is based on usage\. For more information, see [ CloudWatch pricing](https://aws.amazon.com/cloudwatch/pricing/) and [X\-Ray pricing](https://aws.amazon.com/xray/pricing/)\. Also note that standard storage rates apply for CloudWatch logs that are stored by the Lambda service\. 
-
-The monitoring services follow these usage models:
-+  AWS Lambda reports metrics and logs to CloudWatch every time your Lambda function executes\. 
-+ CloudWatch Logs Insights runs when you view the Monitoring page of your Lambda function\.
-+ X\-Ray starts to record traces when you enable X\-Ray for a function, or when an upstream service enables X\-Ray\. 
++ [Accessing Amazon CloudWatch logs for AWS Lambda](monitoring-cloudwatchlogs.md)

@@ -4,7 +4,7 @@ You can use AWS Lambda to process lifecycle events from Amazon Elastic Compute C
 
 CloudWatch Events invokes your Lambda function asynchronously with the event document from Amazon EC2\.
 
-**Example Instance lifecycle event**  
+**Example instance lifecycle event**  
 
 ```
 {
@@ -33,7 +33,7 @@ You can also use the AWS SDK to manage instances and other resources with the Am
 
 To process lifecycle events from Amazon EC2, CloudWatch Events needs permission to invoke your function\. This permission comes from the function's [resource\-based policy](access-control-resource-based.md)\. If you use the CloudWatch Events console to configure an event trigger, the console updates the resource\-based policy on your behalf\. Otherwise, add a statement like the following:
 
-**Example Resource\-based policy statement for Amazon EC2 lifecycle notifications**  
+**Example resource\-based policy statement for Amazon EC2 lifecycle notifications**  
 
 ```
 {

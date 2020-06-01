@@ -117,6 +117,9 @@ The following additional environment variables aren't reserved and can be extend
 + `NODE_PATH` – \([Node\.js](lambda-nodejs.md)\) The Node\.js library path \(`/opt/nodejs/node12/node_modules/:/opt/nodejs/node_modules:$LAMBDA_RUNTIME_DIR/node_modules`\)\.
 + `PYTHONPATH` – \([Python 2\.7, 3\.6, 3\.8](lambda-python.md)\) The Python library path \(`$LAMBDA_RUNTIME_DIR`\)\.
 + `GEM_PATH` – \([Ruby](lambda-ruby.md)\) The Ruby library path \(`$LAMBDA_TASK_ROOT/vendor/bundle/ruby/2.5.0:/opt/ruby/gems/2.5.0`\)\.
++ `_X_AMZN_TRACE_ID` – The [X\-Ray tracing header](services-xray.md)\.
++ `AWS_XRAY_CONTEXT_MISSING` – For X\-Ray tracing, Lambda sets this to `LOG_ERROR` to avoid throwing runtime errors from the X\-Ray SDK\.
++ `AWS_XRAY_DAEMON_ADDRESS` – For X\-Ray tracing, the IP address and port of the X\-Ray daemon\.
 
 The sample values shown reflect the latest runtimes\. The presence of specific variables or their values can vary on earlier runtimes\.
 
@@ -193,6 +196,9 @@ You can also encrypt environment variable values on the client side before sendi
 
 1. Choose **Save**\.
 
+**Note**  
+When you use the console encryption helpers, your function needs permission to call the `kms:Decrypt` API operation in its [execution role](lambda-intro-execution-role.md)\.
+
 To view sample code for your function's language, choose **Code** next to an environment variable\. The sample code shows how to retrieve an environment variable in a function and decrypt its value\.
 
 Another option is to store passwords in AWS Secrets Manager secrets\. You can reference the secret in your AWS CloudFormation templates to set passwords on databases\. You can also set the value of an environment variable on the Lambda function\. For an example, see the next section\.
@@ -247,5 +253,5 @@ $ aws lambda update-function-configuration --function-name my-function \
 Sample applications in this guide's GitHub repository demonstrate the use of environment variables in function code and AWS CloudFormation templates\.
 
 **Sample applications**
-+ [Blank](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank) – Create a function and an Amazon SNS topic in the same template\. Pass the name of the topic to the function in an environment variable\. Read environment variables in code \(multiple languages\)\.
++ [Blank function](samples-blank.md) – Create a function and an Amazon SNS topic in the same template\. Pass the name of the topic to the function in an environment variable\. Read environment variables in code \(multiple languages\)\.
 + [RDS MySQL](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/rds-mysql) – Create a VPC and an Amazon RDS DB instance in one template, with a password stored in Secrets Manager\. In the application template, import database details from the VPC stack, read the password from Secrets Manager, and pass all connection configuration to the function in environment variables\.

@@ -8,7 +8,7 @@ When an incoming IoT message triggers the rule, AWS IoT invokes your Lambda func
 
 The following example shows a moisture reading from a greenhouse sensor\. The **row** and **pos** values identify the location of the sensor\. This example event is based on the greenhouse type in the [AWS IoT Rules tutorials](https://docs.aws.amazon.com/iot/latest/developerguide/iot-rules-tutorial.html)\. 
 
-**Example Example AWS IoT message event**  
+**Example AWS IoT message event**  
 
 ```
 {

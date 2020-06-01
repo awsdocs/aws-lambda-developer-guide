@@ -103,7 +103,7 @@ Add destinations to your function in the Lambda console's function designer\.
 
 When an invocation matches the condition, Lambda sends a JSON document with details about the invocation to the destination\. The following example shows an invocation record for an event that failed three processing attempts due to a function error\.
 
-**Example Invocation record**  
+**Example invocation record**  
 
 ```
 {

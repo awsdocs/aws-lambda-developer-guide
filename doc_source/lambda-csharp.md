@@ -37,3 +37,4 @@ To get started with application development in your local environment, deploy on
 + [AWS Lambda context object in C\#](csharp-context.md)
 + [AWS Lambda function logging in C\#](csharp-logging.md)
 + [AWS Lambda function errors in C\#](csharp-exceptions.md)
++ [Instrumenting C\# code in AWS Lambda](csharp-tracing.md)

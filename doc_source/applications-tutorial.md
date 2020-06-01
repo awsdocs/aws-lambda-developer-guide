@@ -46,7 +46,7 @@ This tutorial uses CodeCommit for source control\. To set up your local machine 
 
 ## Create an application<a name="applications-tutorial-wizard"></a>
 
-Create an application in the Lambda console\.
+Create an application in the Lambda console\. In Lambda, an application is an AWS CloudFormation stack with a Lambda function and any number of supporting resources\. In this tutorial, you create an application that has a function and its execution role\.
 
 **To create an application**
 
@@ -68,9 +68,13 @@ Create an application in the Lambda console\.
 
 Lambda creates the pipeline and related resources and commits the sample application code to the Git repository\. As resources are created, they appear on the overview page\.
 
+![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/application-create-resources.png)
+
+The **Infrastructure** stack contains the repository, build project, and other resources that combine to form a continuous delivery pipeline\. When this stack finishes deploying, it in turn deploys the application stack that contains the function and execution role\. These are the application resources that appear under **Resources**\.
+
 ## Invoke the function<a name="applications-tutorial-invoke"></a>
 
-Invoke the function to verify that it works\.
+When the deployment process completes, invoke the function from the Lambda console\.
 
 **To invoke the application's function**
 
@@ -83,7 +87,7 @@ Invoke the function to verify that it works\.
 1. Choose **Test**\.
 
 1. Configure a test event\.
-   + **Event name** – **test**
+   + **Event name** – **event**
    + **Body** – **\{\}**
 
 1. Choose **Create**\.
@@ -92,9 +96,11 @@ Invoke the function to verify that it works\.
 
 The Lambda console executes your function and displays the result\. Expand the **Details** section under the result to see the output and execution details\.
 
+![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/application-create-result.png)
+
 ## Add an AWS resource<a name="applications-tutorial-update"></a>
 
-When you create your application, the Lambda console creates a Git repository that contains the sample application\. To get a copy of the application code on your local machine, clone the project repository\.
+In the previous step, Lambda console created a Git repository that contains function code, a template, and a build specification\. You can add resources to your application by modifying the template and pushing changes to the repository\. To get a copy of the application on your local machine, clone the repository\.
 
 **To clone the project repository**
 
@@ -106,13 +112,13 @@ When you create your application, the Lambda console creates a Git repository th
 
 1. Under **Repository details**, copy the HTTP or SSH repository URI, depending on the authentication mode that you configured during [setup](#applications-tutorial-prepare)\.
 
-1. Clone the repository\.
+1. To clone the repository, use the `git clone` command\.
 
    ```
    ~$ git clone ssh://git-codecommit.us-east-2.amazonaws.com/v1/repos/my-app-repo
    ```
 
-The repository contains the template for the application, a build specification, and code\. Add a DynamoDB table to the application template\.
+To add a DynamoDB table to the application, define an `AWS::Serverless::SimpleTable` resource in the template\.
 
 **To add a DynamoDB table**
 
@@ -136,11 +142,12 @@ The repository contains the template for the application, a build specification,
      helloFromLambdaFunction:
        Type: AWS::Serverless::Function
        Properties:
+         CodeUri: ./
          Handler: src/handlers/hello-from-lambda.helloFromLambdaHandler
          Runtime: nodejs10.x
          MemorySize: 128
-         Timeout: 100
-         Description: This is a hello from Lambda example.
+         Timeout: 60
+         Description: A Lambda function that returns a static string.
          Environment:
            Variables:
              DDB_TABLE: !Ref ddbTable
@@ -158,6 +165,8 @@ The repository contains the template for the application, a build specification,
    ```
 
 When you push a change, it triggers the application's pipeline\. Use the **Deployments** tab of the application screen to track the change as it flows through the pipeline\. When the deployment is complete, proceed to the next step\.
+
+![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/application-create-deployment.png)
 
 ## Update the permissions boundary<a name="applications-tutorial-permissions"></a>
 
@@ -179,7 +188,7 @@ For more information about permissions boundaries, see [Using permissions bounda
 
 ## Update the function code<a name="applications-tutorial-code"></a>
 
-Next, update the function code to use the table\. The following code uses the table to track the number of invocations processed by each instance of the function\. It uses the log stream ID as a unique identifier\. New instances are created when you update a function, and to handle multiple concurrent invocations\.
+Next, update the function code to use the table\. The following code uses the DynamoDB table to track the number of invocations processed by each instance of the function\. It uses the log stream ID as a unique identifier for the function instance\.
 
 **To update the function code**
 
@@ -222,6 +231,7 @@ Next, update the function code to use the table\. The following code uses the ta
      helloFromLambdaFunction:
        Type: AWS::Serverless::Function
        Properties:
+         CodeUri: ./
          Handler: src/handlers/index.handler
          Runtime: nodejs10.x
    ```
@@ -244,6 +254,10 @@ After the code change is deployed, invoke the function a few times to update the
 1. Choose **Items**\.
 
 1. Choose **Start search**\.
+
+![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/application-create-ddbtable.png)
+
+Lambda creates additional instances of your function to handle multiple concurrent invocations\. Each log stream in the CloudWatch Logs log group corresponds to a function instance\. A new function instance is also created when you change your function's code or configuration\. For more information on scaling, see [AWS Lambda function scaling](invocation-scaling.md)\.
 
 ## Next steps<a name="applications-tutorial-nextsteps"></a>
 
@@ -315,3 +329,15 @@ You can continue to modify and use the sample to develop your own application\. 
 1. Delete the artifact bucket – **aws\-*us\-east\-2*\-*123456789012*\-my\-app\-pipe**\.
 
 1. Return to the AWS CloudFormation console and delete the infrastructure stack – **serverlessrepo\-my\-app\-toolchain**\.
+
+Function logs are not associated with the application or infrastructure stack in AWS CloudFormation\. Delete the log group separately in the CloudWatch Logs console\.
+
+**To delete the log group**
+
+1. Open the [Log groups page](https://console.aws.amazon.com/cloudwatch/home#logs:) of the Amazon CloudWatch console\.
+
+1. Choose the function's log group \(`/aws/lambda/my-app-helloFromLambdaFunction-YV1VXMPLK7QK`\)\.
+
+1. Choose **Actions**, and then choose **Delete log group**\.
+
+1. Choose **Yes, Delete**\.

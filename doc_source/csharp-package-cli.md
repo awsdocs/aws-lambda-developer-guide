@@ -35,7 +35,7 @@ dotnet new lambda.EmptyFunction --help
 
 The `lambda.EmptyFunction` template supports the following options\.
 + `--name` – The name of the function\.
-+ `--profile` – The name of a profile in your [AWS SDK for \.NET credentials file](https://docs.aws.amazon.com/sdk-for-net/latest/developer-guide/net-dg-config-creds.html)\.
++ `--profile` – The name of a profile in your [AWS SDK for \.NET credentials file](https://docs.aws.amazon.com/sdk-for-net/v3/developer-guide/net-dg-config-creds.html)\.
 + `--region` – The AWS Region to create the function in\.
 
 These options are saved to a file named `aws-lambda-tools-defaults.json`\.

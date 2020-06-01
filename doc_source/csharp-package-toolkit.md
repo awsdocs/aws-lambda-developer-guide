@@ -13,7 +13,7 @@ You can build \.NET\-based Lambda applications using the Lambda plugin to the [A
    1. To create a Lambda application from scratch, choose **Empty Function** and then choose **Finish**\. 
 
 1. Examine the `aws-lambda-tools-defaults.json` file, which is created as part of your project\. You can set the options in this file, which is read by the Lambda tooling by default\. The project templates created in Visual Studio set many of these fields with default values\. Note the following fields:
-   + **profile** – The name of a profile in your [AWS SDK for \.NET credentials file](https://docs.aws.amazon.com/sdk-for-net/latest/developer-guide/net-dg-config-creds.html)\.
+   + **profile** – The name of a profile in your [AWS SDK for \.NET credentials file](https://docs.aws.amazon.com/sdk-for-net/v3/developer-guide/net-dg-config-creds.html)\.
    + **function\-handler** – This is where the `function handler` is specified, which is why you don't have to set it in the wizard\. However, whenever you rename the *Assembly*, *Namespace*, *Class* or *Function* in your function code, you will need to update the corresponding fields in the `aws-lambda-tools-defaults.json file`\.
 
      ```
@@ -43,7 +43,7 @@ You can build \.NET\-based Lambda applications using the Lambda plugin to the [A
    + **Timeout** – The amount of time that Lambda allows a function to run before stopping it\. The default is 3 seconds\. The maximum allowed value is 900 seconds\.
    + **VPC** – If your function needs network access to resources that are not available over the internet, [configure it to connect to a VPC](configuration-vpc.md)\.
    + **DLQ** – If your function is invoked asynchronously, [choose a queue or topic](invocation-async.md#dlq) to receive failed invocations\.
-   + **Enable active tracing** – Sample incoming requests and [trace sampled requests with AWS X\-Ray](lambda-x-ray.md)\.
+   + **Enable active tracing** – Sample incoming requests and [trace sampled requests with AWS X\-Ray](services-xray.md)\.
 
 1. Choose **Next** and then choose **Upload** to deploy your application\.
 

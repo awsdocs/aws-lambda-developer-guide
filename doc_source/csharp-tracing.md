@@ -1,4 +1,4 @@
-# Instrumenting Go code in AWS Lambda<a name="golang-tracing"></a>
+# Instrumenting C\# code in AWS Lambda<a name="csharp-tracing"></a>
 
 Lambda integrates with AWS X\-Ray to enable you to trace, debug, and optimize Lambda applications\. You can use X\-Ray to trace a request as it traverses resources in your application, from the frontend API to storage and database on the backend\. By simply adding the X\-Ray SDK library to your build configuration, you can record errors and latency for any call that your function makes to an AWS service\.
 
@@ -29,16 +29,40 @@ When active tracing is enabled, Lambda records a trace for a subset of invocatio
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/xray-servicemap-function.png)
 
-You can instrument your handler code to record metadata and trace downstream calls\. To record detail about calls that your handler makes to other resources and services, use the X\-Ray SDK for Go\. Download the SDK from its [GitHub repository](https://github.com/aws/aws-xray-sdk-go) with `go get`:
+You can instrument your function code to record metadata and trace downstream calls\. To record detail about calls that your function makes to other resources and services, use the X\-Ray SDK for \.NET\. To get the SDK, add the `AWSXRayRecorder` packages to your project file\.
+
+**Example [src/blank\-csharp/blank\-csharp\.csproj](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-csharp/src/blank-csharp/blank-csharp.csproj)**  
 
 ```
-$ go get github.com/aws/aws-xray-sdk-go
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <AWSProjectType>Lambda</AWSProjectType>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Amazon.Lambda.Core" Version="1.1.0" />
+    <PackageReference Include="Amazon.Lambda.SQSEvents" Version="1.1.0" />
+    <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="1.7.0" />
+    <PackageReference Include="AWSSDK.Core" Version="3.3.104.38" />
+    <PackageReference Include="AWSSDK.Lambda" Version="3.3.108.11" />
+    <PackageReference Include="AWSXRayRecorder.Core" Version="2.6.2" />
+    <PackageReference Include="AWSXRayRecorder.Handlers.AwsSdk" Version="2.7.2" />
+  </ItemGroup>
+</Project>
 ```
 
-To instrument AWS SDK clients, pass the client to the `xray.AWS()` method\.
+To instrument AWS SDK clients, call the `RegisterXRayForAllServices` method in your initilization code\.
+
+**Example [src/blank\-csharp/Function\.cs](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-csharp/src/blank-csharp/Function.cs) – Initialize X\-Ray**  
 
 ```
-    xray.AWS(s3.Client)
+    static async void initialize() {
+      AWSSDKHandler.RegisterXRayForAllServices();
+      lambdaClient = new AmazonLambdaClient();
+      await callLambda();
+    }
 ```
 
 The following example shows a trace with 2 segments\. Both are named **my\-function**, but one is type `AWS::Lambda` and the other is `AWS::Lambda::Function`\. The function segment is expanded to show its subsegments\.
@@ -50,13 +74,13 @@ The first segment represents the invocation request processed by the Lambda serv
 + **Invocation** – Represents the work done by your handler code\. By instrumenting your code, you can extend this subsegment with additional subsegments\.
 + **Overhead** – Represents the work done by the Lambda runtime to prepare to handle the next event\.
 
-You can also instrument HTTP clients, record SQL queries, and create custom subsegments with annotations and metadata\. For more information, see [The X\-Ray SDK for Go](https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-go.html) in the AWS X\-Ray Developer Guide\.
+You can also instrument HTTP clients, record SQL queries, and create custom subsegments with annotations and metadata\. For more information, see [The X\-Ray SDK for \.NET](https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-dotnet.html) in the AWS X\-Ray Developer Guide\.
 
 **Topics**
-+ [Enabling active tracing with the Lambda API](#golang-tracing-api)
-+ [Enabling active tracing with AWS CloudFormation](#golang-tracing-cloudformation)
++ [Enabling active tracing with the Lambda API](#csharp-tracing-api)
++ [Enabling active tracing with AWS CloudFormation](#csharp-tracing-cloudformation)
 
-## Enabling active tracing with the Lambda API<a name="golang-tracing-api"></a>
+## Enabling active tracing with the Lambda API<a name="csharp-tracing-api"></a>
 
 To manage tracing configuration with the AWS CLI or AWS SDK, use the following API operations:
 + [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)
@@ -72,7 +96,7 @@ $ aws lambda update-function-configuration --function-name my-function \
 
 Tracing mode is part of the version\-specific configuration that is locked when you publish a version of your function\. You can't change the tracing mode on a published version\.
 
-## Enabling active tracing with AWS CloudFormation<a name="golang-tracing-cloudformation"></a>
+## Enabling active tracing with AWS CloudFormation<a name="csharp-tracing-cloudformation"></a>
 
 To enable active tracing on an `AWS::Lambda::Function` resource in an AWS CloudFormation template, use the `TracingConfig` property\.
 

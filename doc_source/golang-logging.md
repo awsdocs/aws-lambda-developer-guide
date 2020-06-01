@@ -19,7 +19,7 @@ func handleRequest(ctx context.Context, event events.SQSEvent) (string, error) {
   }
 ```
 
-**Example Log format**  
+**Example log format**  
 
 ```
 START RequestId: dbda340c-xmpl-4031-8810-11bb609b4c71 Version: $LATEST
@@ -57,7 +57,7 @@ The Go runtime logs the `START`, `END`, and `REPORT` lines for each invocation\.
 + **Memory Size** – The amount of memory allocated to the function\.
 + **Max Memory Used** – The amount of memory used by the function\.
 + **Init Duration** – For the first request served, the amount of time it took the runtime to load the function and run code outside of the handler method\.
-+ **XRAY TraceId** – For traced requests, the [AWS X\-Ray trace ID](lambda-x-ray.md)\.
++ **XRAY TraceId** – For traced requests, the [AWS X\-Ray trace ID](services-xray.md)\.
 + **SegmentId** – For traced requests, the X\-Ray segment ID\.
 + **Sampled** – For traced requests, the sampling result\.
 

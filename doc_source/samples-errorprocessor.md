@@ -27,7 +27,7 @@ Standard charges apply for each service\.
 
 A Lambda function in the application generates errors randomly\. When CloudWatch Logs detects the word `ERROR` in the function's logs, it sends an event to the processor function for processing\.
 
-**Example – CloudWatch Logs message event**  
+**Example CloudWatch Logs message event**  
 
 ```
 {
@@ -39,7 +39,7 @@ A Lambda function in the application generates errors randomly\. When CloudWatch
 
 When it's decoded, the data contains details about the log event\. The function uses these details to identify the log stream, and parses the log message to get the ID of the request that caused the error\.
 
-**Example – Decoded CloudWatch Logs event data**  
+**Example decoded CloudWatch Logs event data**  
 
 ```
 {
@@ -64,7 +64,7 @@ The processor function uses information from the CloudWatch Logs event to downlo
 
 ## Instrumentation with AWS X\-Ray<a name="sample-errorprocessor-instrumentation"></a>
 
-The application uses [AWS X\-Ray](lambda-x-ray.md) to trace function invocations and the calls that functions make to AWS services\. X\-Ray uses the trace data that it receives from functions to create a service map that helps you identify errors\. The following service map shows the random error function generating errors for some requests\. It also shows the processor function calling X\-Ray, CloudWatch Logs, and Amazon S3\.
+The application uses [AWS X\-Ray](services-xray.md) to trace function invocations and the calls that functions make to AWS services\. X\-Ray uses the trace data that it receives from functions to create a service map that helps you identify errors\. The following service map shows the random error function generating errors for some requests\. It also shows the processor function calling X\-Ray, CloudWatch Logs, and Amazon S3\.
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-errorprocessor-servicemap.png)
 

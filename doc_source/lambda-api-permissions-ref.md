@@ -16,7 +16,7 @@ To restrict permissions by resource, specify the resource by ARN\.
 
 For example, the following policy allows a user in account `123456789012` to invoke a function named `my-function` in the US West \(Oregon\) Region\.
 
-**Example Invoke a function policy**  
+**Example invoke function policy**  
 
 ```
 {
@@ -40,7 +40,7 @@ Conditions are an optional policy element that applies additional logic to deter
 
 For example, the `lambda:Principal` condition lets you restrict the service or account that a user can grant invocation access to on a function's resource\-based policy\. The following policy lets a user grant permission to SNS topics to invoke a function named `test`\.
 
-**Example Manage function policy permissions**  
+**Example manage function policy permissions**  
 
 ```
 {

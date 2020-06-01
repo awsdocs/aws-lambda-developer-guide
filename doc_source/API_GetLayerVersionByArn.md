@@ -53,7 +53,7 @@ The following data is returned in JSON format by the service\.
 The layer's compatible runtimes\.  
 Type: Array of strings  
 Array Members: Maximum number of 5 items\.  
-Valid Values:` nodejs10.x | nodejs12.x | java8 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore2.1 | go1.x | ruby2.5 | ruby2.7 | provided` 
+Valid Values:` nodejs10.x | nodejs12.x | java8 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore2.1 | dotnetcore3.1 | go1.x | ruby2.5 | ruby2.7 | provided` 
 
  ** [Content](#API_GetLayerVersionByArn_ResponseSyntax) **   <a name="SSS-GetLayerVersionByArn-response-Content"></a>
 Details about the layer version\.  

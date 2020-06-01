@@ -14,9 +14,9 @@ These libraries are available through [Maven central repository](https://search.
 
 ```
 dependencies {
-    implementation 'com.amazonaws:aws-lambda-java-core:1.2.0'
-    implementation 'com.amazonaws:aws-lambda-java-events:2.2.7'
-    runtimeOnly 'com.amazonaws:aws-lambda-java-log4j2:1.1.0'
+    implementation 'com.amazonaws:aws-lambda-java-core:1.2.1'
+    implementation 'com.amazonaws:aws-lambda-java-events:2.2.9'
+    runtimeOnly 'com.amazonaws:aws-lambda-java-log4j2:1.2.0'
 }
 ```
 
@@ -28,17 +28,17 @@ dependencies {
     <dependency>
       <groupId>com.amazonaws</groupId>
       <artifactId>aws-lambda-java-core</artifactId>
-      <version>1.2.0</version>
+      <version>1.2.1</version>
     </dependency>
     <dependency>
       <groupId>com.amazonaws</groupId>
       <artifactId>aws-lambda-java-events</artifactId>
-      <version>2.2.7</version>
+      <version>2.2.9</version>
     </dependency>
     <dependency>
       <groupId>com.amazonaws</groupId>
       <artifactId>aws-lambda-java-log4j2</artifactId>
-      <version>1.1.0</version>
+      <version>1.2.0</version>
     </dependency>
   </dependencies>
 ```
@@ -94,13 +94,13 @@ This build configuration produces a deployment package in the `build/distributio
 dependencies {
     implementation platform('software.amazon.awssdk:bom:2.10.73')
     implementation 'software.amazon.awssdk:lambda'
-    implementation 'com.amazonaws:aws-lambda-java-core:1.2.0'
-    implementation 'com.amazonaws:aws-lambda-java-events:2.2.7'
+    implementation 'com.amazonaws:aws-lambda-java-core:1.2.1'
+    implementation 'com.amazonaws:aws-lambda-java-events:2.2.9'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'org.apache.logging.log4j:log4j-api:2.13.0'
     implementation 'org.apache.logging.log4j:log4j-core:2.13.0'
     runtimeOnly 'org.apache.logging.log4j:log4j-slf4j18-impl:2.13.0'
-    runtimeOnly 'com.amazonaws:aws-lambda-java-log4j2:1.1.0'
+    runtimeOnly 'com.amazonaws:aws-lambda-java-log4j2:1.2.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.0'
 }
@@ -153,8 +153,8 @@ To build the deployment package, use the `mvn package` command\.
 [INFO] Building jar: target/java-maven-1.0-SNAPSHOT.jar
 [INFO]
 [INFO] --- maven-shade-plugin:3.2.2:shade (default) @ java-maven ---
-[INFO] Including com.amazonaws:aws-lambda-java-core:jar:1.2.0 in the shaded jar.
-[INFO] Including com.amazonaws:aws-lambda-java-events:jar:2.2.7 in the shaded jar.
+[INFO] Including com.amazonaws:aws-lambda-java-core:jar:1.2.1 in the shaded jar.
+[INFO] Including com.amazonaws:aws-lambda-java-events:jar:2.2.9 in the shaded jar.
 [INFO] Including joda-time:joda-time:jar:2.6 in the shaded jar.
 [INFO] Including com.google.code.gson:gson:jar:2.8.6 in the shaded jar.
 [INFO] Replacing original artifact with shaded artifact.

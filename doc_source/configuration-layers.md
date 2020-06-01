@@ -18,6 +18,8 @@ You can also use AWS Serverless Application Model \(AWS SAM\) to manage layers a
 + [Managing layers](#configuration-layers-manage)
 + [Including library dependencies in a layer](#configuration-layers-path)
 + [Layer permissions](#configuration-layers-permissions)
++ [AWS CloudFormation and AWS SAM](#configuration-layers-cloudformation)
++ [Sample applications](#configuration-layers-samples)
 
 ## Configuring a function to use layers<a name="configuration-layers-using"></a>
 
@@ -148,7 +150,7 @@ When you delete a layer version, you can no longer configure functions to use it
 
 You can move runtime dependencies out of your function code by placing them in a layer\. Lambda runtimes include paths in the `/opt` directory to ensure that your function code has access to libraries that are included in layers\.
 
-To include libraries in a layer, place them in one of the folders supported by your runtime\.
+To include libraries in a layer, place them in one of the folders supported by your runtime, or modify that path variable for your language\.
 + **Node\.js** – `nodejs/node_modules`, `nodejs/node8/node_modules` \(`NODE_PATH`\)  
 **Example AWS X\-Ray SDK for Node\.js**  
 
@@ -164,13 +166,6 @@ To include libraries in a layer, place them in one of the folders supported by y
   │ python/PIL
   └ python/Pillow-5.3.0.dist-info
   ```
-+ **Java** – `java/lib` \(classpath\)  
-**Example Jackson**  
-
-  ```
-  jackson.zip
-  └ java/lib/jackson-core-2.2.3.jar
-  ```
 + **Ruby** – `ruby/gems/2.5.0` \(`GEM_PATH`\), `ruby/lib` \(`RUBYLIB`\)  
 **Example JSON**  
 
@@ -185,6 +180,13 @@ To include libraries in a layer, place them in one of the folders supported by y
                  | └ json-2.1.0
                  └ specifications
                    └ json-2.1.0.gemspec
+  ```
++ **Java** – `java/lib` \(classpath\)  
+**Example Jackson**  
+
+  ```
+  jackson.zip
+  └ java/lib/jackson-core-2.2.3.jar
   ```
 + **All** – `bin` \(`PATH`\), `lib` \(`LD_LIBRARY_PATH`\)  
 **Example JQ**  
@@ -211,3 +213,52 @@ e210ffdc-e901-43b0-824b-5fcd0dd26d16    {"Sid":"xaccount","Effect":"Allow","Prin
 Permissions only apply to a single version of a layer\. Repeat the procedure each time you create a new layer version\.
 
 For more examples, see [Granting layer access to other accounts](access-control-resource-based.md#permissions-resource-xaccountlayer)\.
+
+## AWS CloudFormation and AWS SAM<a name="configuration-layers-cloudformation"></a>
+
+Use the AWS Serverless Application Model \(AWS SAM\) in your AWS CloudFormation templates to automate the creation and mapping of layers in your application\. The `AWS::Serverless::LayerVersion` resource type creates a layer version that you can reference from your function configuration\.
+
+**Example [blank\-nodejs/template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-nodejs/template.yml) – Serverless resources**  
+
+```
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: An AWS Lambda application that calls the Lambda API.
+Resources:
+  function:
+    Type: [AWS::Serverless::Function](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html)
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs12.x
+      CodeUri: function/.
+      Description: Call the AWS Lambda API
+      Timeout: 10
+      # Function's execution role
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - AWSLambdaReadOnlyAccess
+        - AWSXrayWriteOnlyAccess
+      Tracing: Active
+      Layers:
+        - !Ref libs
+  libs:
+    Type: [AWS::Serverless::LayerVersion](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-layerversion.html)
+    Properties:
+      LayerName: blank-nodejs-lib
+      Description: Dependencies for the blank sample app.
+      ContentUri: lib/.
+      CompatibleRuntimes:
+        - nodejs12.x
+```
+
+When you update your dependencies and deploy, AWS SAM creates a new version of the layer and updates the mapping\. If you deploy changes to your code without modifying your dependencies, AWS SAM skips the layer update, saving upload time\.
+
+## Sample applications<a name="configuration-layers-samples"></a>
+
+The GitHub repository for this guide provides [sample applications](lambda-samples.md) that demonstrate the use of layers for dependency management\.
++ **Node\.js** – [blank\-nodejs](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-nodejs)
++ **Python** – [blank\-python](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-python)
++ **Ruby** – [blank\-ruby](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-ruby)
++ **Java** – [blank\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-java)
+
+For more information about the blank sample app, see [Blank function sample application for AWS Lambda](samples-blank.md)\.

@@ -62,7 +62,7 @@ Pattern: `(?!^[0-9]+$)([a-zA-Z0-9-_]+)`
 Required: Yes
 
  ** [RoutingConfig](#API_CreateAlias_RequestSyntax) **   <a name="SSS-CreateAlias-request-RoutingConfig"></a>
-The [routing configuration](https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html) of the alias\.  
+The [routing configuration](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html#configuring-alias-routing) of the alias\.  
 Type: [AliasRoutingConfiguration](API_AliasRoutingConfiguration.md) object  
 Required: No
 
