@@ -35,6 +35,8 @@ A list of fields to increment. For example:
   - Expenses - Amounts spent on gasoline, meals out, and so on.
   - Character state - Stats such as health, experience points, and steps walked.
 
+Use the following instructions to deploy the sample application. For more information on the application's architecture and implementation, see [List manager sample application for AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/samples-listmanager.html) in the developer guide.
+
 # Requirements
 
 To deploy the sample application, you need the following tools:
