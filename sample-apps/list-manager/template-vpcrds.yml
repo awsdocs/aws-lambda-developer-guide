@@ -87,22 +87,6 @@ Resources:
     Properties:
       SubnetId: !Ref privateSubnetB
       RouteTableId: !Ref privateRouteTable
-  s3Endpoint:
-    Type: AWS::EC2::VPCEndpoint
-    Properties:
-      PolicyDocument:
-        Version: 2012-10-17
-        Statement:
-        - Effect: Allow
-          Principal: "*"
-          Action:
-            - "s3:*"
-          Resource:
-            - "*"
-      RouteTableIds:
-        - !Ref privateRouteTable
-      ServiceName: !Sub com.amazonaws.${AWS::Region}.s3
-      VpcId: !Ref privateVPC
   dynamoDBEndpoint:
     Type: AWS::EC2::VPCEndpoint
     Properties:
