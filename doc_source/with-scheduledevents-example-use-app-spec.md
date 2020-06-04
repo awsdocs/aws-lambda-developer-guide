@@ -14,7 +14,7 @@ Parameters:
     Type: String
 Resources:
   CheckWebsitePeriodically:
-    Type: AWS::Serverless::Function
+    Type: [AWS::Serverless::Function](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html)
     Properties:
       Handler: LambdaFunctionOverHttps.handler
       Runtime: runtime

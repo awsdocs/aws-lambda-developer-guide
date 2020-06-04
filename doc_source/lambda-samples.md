@@ -60,3 +60,4 @@ To deploy a sample application, follow the instructions in its README file\. To 
 **Topics**
 + [Blank function sample application for AWS Lambda](samples-blank.md)
 + [Error processor sample application for AWS Lambda](samples-errorprocessor.md)
++ [List manager sample application for AWS Lambda](samples-listmanager.md)

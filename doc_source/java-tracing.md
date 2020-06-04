@@ -88,7 +88,7 @@ To enable active tracing on an `AWS::Lambda::Function` resource in an AWS CloudF
 ```
 Resources:
   function:
-    Type: AWS::Lambda::Function
+    Type: [AWS::Lambda::Function](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html)
     Properties:
       TracingConfig: 
         Mode: Active
@@ -102,7 +102,7 @@ For an AWS Serverless Application Model \(AWS SAM\) `AWS::Serverless::Function` 
 ```
 Resources:
   function:
-    Type: AWS::Serverless::Function
+    Type: [AWS::Serverless::Function](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html)
     Properties:
       Tracing: Active
       ...
@@ -119,7 +119,7 @@ The following example shows an `AWS::Serverless::LayerVersion` resource that sto
 ```
 Resources:
   function:
-    Type: AWS::Serverless::Function
+    Type: [AWS::Serverless::Function](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html)
     Properties:
       CodeUri: build/distributions/blank-java.zip
       Tracing: Active
@@ -127,7 +127,7 @@ Resources:
         - !Ref libs
       ...
   libs:
-    Type: AWS::Serverless::LayerVersion
+    Type: [AWS::Serverless::LayerVersion](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-layerversion.html)
     Properties:
       LayerName: blank-java-lib
       Description: Dependencies for the blank-java sample app.

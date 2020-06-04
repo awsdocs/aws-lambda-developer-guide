@@ -1,14 +1,14 @@
-# Best Practices for Working with AWS Lambda Functions<a name="best-practices"></a>
+# Best practices for working with AWS Lambda functions<a name="best-practices"></a>
 
 The following are recommended best practices for using AWS Lambda:
 
 **Topics**
-+ [Function Code](#function-code)
-+ [Function Configuration](#function-configuration)
-+ [Alarming and Metrics](#alarming-metrics)
-+ [Stream Event Invokes](#stream-events)
++ [Function code](#function-code)
++ [Function configuration](#function-configuration)
++ [Metrics and alarms](#alarming-metrics)
++ [Working with streams](#stream-events)
 
-## Function Code<a name="function-code"></a>
+## Function code<a name="function-code"></a>
 + **Separate the Lambda handler from your core logic\.** This allows you to make a more unit\-testable function\. In Node\.js this may look like: 
 
   ```
@@ -34,7 +34,7 @@ The following are recommended best practices for using AWS Lambda:
 + **Minimize the complexity of your dependencies\.** Prefer simpler frameworks that load quickly on [execution context](runtimes-context.md) startup\. For example, prefer simpler Java dependency injection \(IoC\) frameworks like [Dagger](https://google.github.io/dagger/) or [Guice](https://github.com/google/guice), over more complex ones like [Spring Framework](https://github.com/spring-projects/spring-framework)\. 
 + **Avoid using recursive code** in your Lambda function, wherein the function automatically calls itself until some arbitrary criteria is met\. This could lead to unintended volume of function invocations and escalated costs\. If you do accidentally do so, set the function concurrent execution limit to `0` immediately to throttle all invocations to the function, while you update the code\.
 
-## Function Configuration<a name="function-configuration"></a>
+## Function configuration<a name="function-configuration"></a>
 + **Performance testing your Lambda function** is a crucial part in ensuring you pick the optimum memory size configuration\. Any increase in memory size triggers an equivalent increase in CPU available to your function\. The memory usage for your function is determined per\-invoke and can be viewed in [AWS CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatchLogs.html)\. On each invoke a `REPORT:` entry will be made, as shown below: 
 
   ```
@@ -50,11 +50,11 @@ The following are recommended best practices for using AWS Lambda:
   + In the case of **CreateFunction**, AWS Lambda will fail the function creation process\.
   + In the case of **UpdateFunctionConfiguration**, it could result in duplicate invocations of the function\.
 
-## Alarming and Metrics<a name="alarming-metrics"></a>
+## Metrics and alarms<a name="alarming-metrics"></a>
 + **Use [Working with AWS Lambda function metrics](monitoring-metrics.md) and [ CloudWatch Alarms](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html)** instead of creating or updating a metric from within your Lambda function code\. It's a much more efficient way to track the health of your Lambda functions, allowing you to catch issues early in the development process\. For instance, you can configure an alarm based on the expected duration of your Lambda function execution time in order to address any bottlenecks or latencies attributable to your function code\.
 + **Leverage your logging library and [AWS Lambda Metrics and Dimensions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/lam-metricscollected.html)** to catch app errors \(e\.g\. ERR, ERROR, WARNING, etc\.\) 
 
-## Stream Event Invokes<a name="stream-events"></a>
+## Working with streams<a name="stream-events"></a>
 + **Test with different batch and record sizes **so that the polling frequency of each event source is tuned to how quickly your function is able to complete its task\. [BatchSize](API_CreateEventSourceMapping.md#SSS-CreateEventSourceMapping-request-BatchSize) controls the maximum number of records that can be sent to your function with each invoke\. A larger batch size can often more efficiently absorb the invoke overhead across a larger set of records, increasing your throughput\.
 
   By default, Lambda invokes your function as soon as records are available in the stream\. If the batch it reads from the stream only has one record in it, Lambda only sends one record to the function\. To avoid invoking the function with a small number of records, you can tell the event source to buffer records for up to 5 minutes by configuring a *batch window*\. Before invoking the function, Lambda continues to read records from the stream until it has gathered a full batch, or until the batch window expires\.

@@ -140,7 +140,7 @@ To add a DynamoDB table to the application, define an `AWS::Serverless::SimpleTa
            ReadCapacityUnits: 1
            WriteCapacityUnits: 1
      helloFromLambdaFunction:
-       Type: AWS::Serverless::Function
+       Type: [AWS::Serverless::Function](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html)
        Properties:
          CodeUri: ./
          Handler: src/handlers/hello-from-lambda.helloFromLambdaHandler
@@ -229,7 +229,7 @@ Next, update the function code to use the table\. The following code uses the Dy
    ```
    ...
      helloFromLambdaFunction:
-       Type: AWS::Serverless::Function
+       Type: [AWS::Serverless::Function](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html)
        Properties:
          CodeUri: ./
          Handler: src/handlers/index.handler

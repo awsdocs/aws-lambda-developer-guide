@@ -205,7 +205,7 @@ You can install libraries locally and include them in the deployment package tha
 ```
 Resources:
   function:
-    Type: AWS::Serverless::Function
+    Type: [AWS::Serverless::Function](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html)
     Properties:
       Handler: index.handler
       Runtime: nodejs12.x
@@ -221,7 +221,7 @@ Resources:
       Layers:
         - !Ref libs
   libs:
-    Type: AWS::Serverless::LayerVersion
+    Type: [AWS::Serverless::LayerVersion](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-layerversion.html)
     Properties:
       LayerName: blank-nodejs-lib
       Description: Dependencies for the blank sample app.

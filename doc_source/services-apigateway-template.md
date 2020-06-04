@@ -9,7 +9,7 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Resources:
   LambdaFunctionOverHttps:
-    Type: AWS::Serverless::Function
+    Type: [AWS::Serverless::Function](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html)
     Properties:
       Handler: index.handler
       Runtime: nodejs12.x

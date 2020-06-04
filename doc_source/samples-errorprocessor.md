@@ -8,7 +8,7 @@ Function code is available in the following files:
 + Random error – [random\-error/index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/error-processor/random-error/index.js)
 + Processor – [processor/index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/error-processor/processor/index.js)
 
-You can deploy the sample in a few minutes with the AWS CLI and AWS CloudFormation\. Follow the instructions in the [README](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/error-processor) to download, configure, and deploy it in your account\.
+You can deploy the sample in a few minutes with the AWS CLI and AWS CloudFormation\. To download, configure, and deploy it in your account, follow the instructions in the [README](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/error-processor)\.
 
 **Topics**
 + [Architecture and event structure](#sample-errorprocessor-architecture)
@@ -76,7 +76,7 @@ The processor function gets the request ID from the CloudWatch Logs event, and u
 
 ## AWS CloudFormation template and additional resources<a name="sample-errorprocessor-template"></a>
 
-The application is implemented in two Node\.js modules and deployed with an AWS CloudFormation template and supporting shell scripts\. The template creates the processor function, the random error function, and the following supporting resources\.
+The application is implemented in two Node\.js modules and deployed with an AWS CloudFormation template and shell scripts\. The template creates the processor function, the random error function, and the following supporting resources\.
 + Execution role – An IAM role that grants the functions permission to access other AWS services\.
 + Primer function – An additional function that invokes the random error function to create a log group\.
 + Custom resource – An AWS CloudFormation custom resource that invokes the primer function during deployment to ensure that the log group exists\.
@@ -84,7 +84,7 @@ The application is implemented in two Node\.js modules and deployed with an AWS 
 + Resource\-based policy – A permission statement on the processor function that allows CloudWatch Logs to invoke it\.
 + Amazon S3 bucket – A storage location for output from the processor function\.
 
-View the template [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/error-processor/template.yml) on GitHub\.
+View the [application template](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/error-processor/template.yml) on GitHub\.
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-errorprocessor-stack.png)
 

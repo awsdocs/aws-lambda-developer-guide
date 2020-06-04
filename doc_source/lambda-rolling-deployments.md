@@ -28,7 +28,7 @@ Description: A sample SAM template for deploying Lambda functions.
 Resources:
 # Details about the myDateTimeFunction Lambda function
   myDateTimeFunction:
-    Type: AWS::Serverless::Function
+    Type: [AWS::Serverless::Function](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html)
     Properties:
       Handler: myDateTimeFunction.handler
       Runtime: nodejs12.x

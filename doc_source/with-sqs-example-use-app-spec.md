@@ -12,7 +12,7 @@ Transform: AWS::Serverless-2016-10-31
 Description: Example of processing messages on an SQS queue with Lambda
 Resources:
   MySQSQueueFunction:
-    Type: AWS::Serverless::Function
+    Type: [AWS::Serverless::Function](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html)
     Properties:
       Handler: index.handler
       Runtime: nodejs12.x

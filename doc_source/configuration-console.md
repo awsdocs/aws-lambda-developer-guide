@@ -55,4 +55,4 @@ For example, to update a function's memory setting with the AWS CLI, use the `up
 $ aws lambda update-function-configuration --function-name my-function --memory-size 256
 ```
 
-For function configuration best practices, see [Function Configuration](best-practices.md#function-configuration)\.
+For function configuration best practices, see [Function configuration](best-practices.md#function-configuration)\.
