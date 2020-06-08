@@ -10,7 +10,7 @@ GET /2015-03-31/functions/FunctionName/aliases?FunctionVersion=FunctionVersion&M
 
 ## URI Request Parameters<a name="API_ListAliases_RequestParameters"></a>
 
-The request requires the following URI parameters\.
+The request uses the following URI parameters\.
 
  ** [FunctionName](#API_ListAliases_RequestSyntax) **   <a name="SSS-ListAliases-request-FunctionName"></a>
 The name of the Lambda function\.  
@@ -21,7 +21,8 @@ The name of the Lambda function\.
 +  **Partial ARN** \- `123456789012:function:MyFunction`\.
 The length constraint applies only to the full ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
-Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
+Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
+Required: Yes
 
  ** [FunctionVersion](#API_ListAliases_RequestSyntax) **   <a name="SSS-ListAliases-request-FunctionVersion"></a>
 Specify a function version to only list aliases that invoke that version\.  

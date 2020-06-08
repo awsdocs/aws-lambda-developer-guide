@@ -10,15 +10,17 @@ GET /2018-10-31/layers/LayerName/versions/VersionNumber HTTP/1.1
 
 ## URI Request Parameters<a name="API_GetLayerVersion_RequestParameters"></a>
 
-The request requires the following URI parameters\.
+The request uses the following URI parameters\.
 
  ** [LayerName](#API_GetLayerVersion_RequestSyntax) **   <a name="SSS-GetLayerVersion-request-LayerName"></a>
 The name or Amazon Resource Name \(ARN\) of the layer\.  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
-Pattern: `(arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+)|[a-zA-Z0-9-_]+` 
+Pattern: `(arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+)|[a-zA-Z0-9-_]+`   
+Required: Yes
 
  ** [VersionNumber](#API_GetLayerVersion_RequestSyntax) **   <a name="SSS-GetLayerVersion-request-VersionNumber"></a>
-The version number\.
+The version number\.  
+Required: Yes
 
 ## Request Body<a name="API_GetLayerVersion_RequestBody"></a>
 

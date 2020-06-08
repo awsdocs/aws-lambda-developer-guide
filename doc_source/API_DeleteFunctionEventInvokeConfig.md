@@ -12,7 +12,7 @@ DELETE /2019-09-25/functions/FunctionName/event-invoke-config?Qualifier=Qualifie
 
 ## URI Request Parameters<a name="API_DeleteFunctionEventInvokeConfig_RequestParameters"></a>
 
-The request requires the following URI parameters\.
+The request uses the following URI parameters\.
 
  ** [FunctionName](#API_DeleteFunctionEventInvokeConfig_RequestSyntax) **   <a name="SSS-DeleteFunctionEventInvokeConfig-request-FunctionName"></a>
 The name of the Lambda function, version, or alias\.  
@@ -23,7 +23,8 @@ The name of the Lambda function, version, or alias\.
 +  **Partial ARN** \- `123456789012:function:my-function`\.
 You can append a version number or alias to any of the formats\. The length constraint applies only to the full ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
-Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
+Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
+Required: Yes
 
  ** [Qualifier](#API_DeleteFunctionEventInvokeConfig_RequestSyntax) **   <a name="SSS-DeleteFunctionEventInvokeConfig-request-Qualifier"></a>
 A version number or alias name\.  

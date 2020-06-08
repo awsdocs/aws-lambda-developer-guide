@@ -12,7 +12,7 @@ DELETE /2015-03-31/functions/FunctionName?Qualifier=Qualifier HTTP/1.1
 
 ## URI Request Parameters<a name="API_DeleteFunction_RequestParameters"></a>
 
-The request requires the following URI parameters\.
+The request uses the following URI parameters\.
 
  ** [FunctionName](#API_DeleteFunction_RequestSyntax) **   <a name="SSS-DeleteFunction-request-FunctionName"></a>
 The name of the Lambda function or version\.  
@@ -23,7 +23,8 @@ The name of the Lambda function or version\.
 +  **Partial ARN** \- `123456789012:function:my-function`\.
 You can append a version number or alias to any of the formats\. The length constraint applies only to the full ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
-Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
+Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
+Required: Yes
 
  ** [Qualifier](#API_DeleteFunction_RequestSyntax) **   <a name="SSS-DeleteFunction-request-Qualifier"></a>
 Specify a version to delete\. You can't delete a version that's referenced by an alias\.  

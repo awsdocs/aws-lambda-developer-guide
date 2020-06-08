@@ -12,10 +12,11 @@ DELETE /2015-03-31/event-source-mappings/UUID HTTP/1.1
 
 ## URI Request Parameters<a name="API_DeleteEventSourceMapping_RequestParameters"></a>
 
-The request requires the following URI parameters\.
+The request uses the following URI parameters\.
 
  ** [UUID](#API_DeleteEventSourceMapping_RequestSyntax) **   <a name="SSS-DeleteEventSourceMapping-request-UUID"></a>
-The identifier of the event source mapping\.
+The identifier of the event source mapping\.  
+Required: Yes
 
 ## Request Body<a name="API_DeleteEventSourceMapping_RequestBody"></a>
 

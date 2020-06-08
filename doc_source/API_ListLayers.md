@@ -10,7 +10,7 @@ GET /2018-10-31/layers?CompatibleRuntime=CompatibleRuntime&Marker=Marker&MaxItem
 
 ## URI Request Parameters<a name="API_ListLayers_RequestParameters"></a>
 
-The request requires the following URI parameters\.
+The request uses the following URI parameters\.
 
  ** [CompatibleRuntime](#API_ListLayers_RequestSyntax) **   <a name="SSS-ListLayers-request-CompatibleRuntime"></a>
 A runtime identifier\. For example, `go1.x`\.  

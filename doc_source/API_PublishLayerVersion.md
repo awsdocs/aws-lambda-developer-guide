@@ -25,12 +25,13 @@ Content-type: application/json
 
 ## URI Request Parameters<a name="API_PublishLayerVersion_RequestParameters"></a>
 
-The request requires the following URI parameters\.
+The request uses the following URI parameters\.
 
  ** [LayerName](#API_PublishLayerVersion_RequestSyntax) **   <a name="SSS-PublishLayerVersion-request-LayerName"></a>
 The name or Amazon Resource Name \(ARN\) of the layer\.  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
-Pattern: `(arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+)|[a-zA-Z0-9-_]+` 
+Pattern: `(arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+)|[a-zA-Z0-9-_]+`   
+Required: Yes
 
 ## Request Body<a name="API_PublishLayerVersion_RequestBody"></a>
 

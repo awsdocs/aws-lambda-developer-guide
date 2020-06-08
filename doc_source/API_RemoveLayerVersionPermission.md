@@ -10,12 +10,13 @@ DELETE /2018-10-31/layers/LayerName/versions/VersionNumber/policy/StatementId?Re
 
 ## URI Request Parameters<a name="API_RemoveLayerVersionPermission_RequestParameters"></a>
 
-The request requires the following URI parameters\.
+The request uses the following URI parameters\.
 
  ** [LayerName](#API_RemoveLayerVersionPermission_RequestSyntax) **   <a name="SSS-RemoveLayerVersionPermission-request-LayerName"></a>
 The name or Amazon Resource Name \(ARN\) of the layer\.  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
-Pattern: `(arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+)|[a-zA-Z0-9-_]+` 
+Pattern: `(arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+)|[a-zA-Z0-9-_]+`   
+Required: Yes
 
  ** [RevisionId](#API_RemoveLayerVersionPermission_RequestSyntax) **   <a name="SSS-RemoveLayerVersionPermission-request-RevisionId"></a>
 Only update the policy if the revision ID matches the ID specified\. Use this option to avoid modifying a policy that has changed since you last read it\.
@@ -23,10 +24,12 @@ Only update the policy if the revision ID matches the ID specified\. Use this op
  ** [StatementId](#API_RemoveLayerVersionPermission_RequestSyntax) **   <a name="SSS-RemoveLayerVersionPermission-request-StatementId"></a>
 The identifier that was specified when the statement was added\.  
 Length Constraints: Minimum length of 1\. Maximum length of 100\.  
-Pattern: `([a-zA-Z0-9-_]+)` 
+Pattern: `([a-zA-Z0-9-_]+)`   
+Required: Yes
 
  ** [VersionNumber](#API_RemoveLayerVersionPermission_RequestSyntax) **   <a name="SSS-RemoveLayerVersionPermission-request-VersionNumber"></a>
-The version number\.
+The version number\.  
+Required: Yes
 
 ## Request Body<a name="API_RemoveLayerVersionPermission_RequestBody"></a>
 

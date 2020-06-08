@@ -37,10 +37,11 @@ Content-type: application/json
 
 ## URI Request Parameters<a name="API_UpdateEventSourceMapping_RequestParameters"></a>
 
-The request requires the following URI parameters\.
+The request uses the following URI parameters\.
 
  ** [UUID](#API_UpdateEventSourceMapping_RequestSyntax) **   <a name="SSS-UpdateEventSourceMapping-request-UUID"></a>
-The identifier of the event source mapping\.
+The identifier of the event source mapping\.  
+Required: Yes
 
 ## Request Body<a name="API_UpdateEventSourceMapping_RequestBody"></a>
 

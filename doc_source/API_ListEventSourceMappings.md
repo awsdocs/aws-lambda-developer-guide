@@ -10,7 +10,7 @@ GET /2015-03-31/event-source-mappings/?EventSourceArn=EventSourceArn&FunctionNam
 
 ## URI Request Parameters<a name="API_ListEventSourceMappings_RequestParameters"></a>
 
-The request requires the following URI parameters\.
+The request uses the following URI parameters\.
 
  ** [EventSourceArn](#API_ListEventSourceMappings_RequestSyntax) **   <a name="SSS-ListEventSourceMappings-request-EventSourceArn"></a>
 The Amazon Resource Name \(ARN\) of the event source\.  

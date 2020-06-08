@@ -17,7 +17,7 @@ InvokeArgs
 
 ## URI Request Parameters<a name="API_InvokeAsync_RequestParameters"></a>
 
-The request requires the following URI parameters\.
+The request uses the following URI parameters\.
 
  ** [FunctionName](#API_InvokeAsync_RequestSyntax) **   <a name="SSS-InvokeAsync-request-FunctionName"></a>
 The name of the Lambda function\.  
@@ -28,14 +28,16 @@ The name of the Lambda function\.
 +  **Partial ARN** \- `123456789012:function:my-function`\.
 The length constraint applies only to the full ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
 Length Constraints: Minimum length of 1\. Maximum length of 170\.  
-Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_\.]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
+Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_\.]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
+Required: Yes
 
 ## Request Body<a name="API_InvokeAsync_RequestBody"></a>
 
 The request accepts the following binary data\.
 
  ** [InvokeArgs](#API_InvokeAsync_RequestSyntax) **   <a name="SSS-InvokeAsync-request-InvokeArgs"></a>
-The JSON that you want to provide to your Lambda function as input\.
+The JSON that you want to provide to your Lambda function as input\.  
+Required: Yes
 
 ## Response Syntax<a name="API_InvokeAsync_ResponseSyntax"></a>
 

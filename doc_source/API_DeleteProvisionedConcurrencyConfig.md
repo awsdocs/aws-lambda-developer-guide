@@ -10,7 +10,7 @@ DELETE /2019-09-30/functions/FunctionName/provisioned-concurrency?Qualifier=Qual
 
 ## URI Request Parameters<a name="API_DeleteProvisionedConcurrencyConfig_RequestParameters"></a>
 
-The request requires the following URI parameters\.
+The request uses the following URI parameters\.
 
  ** [FunctionName](#API_DeleteProvisionedConcurrencyConfig_RequestSyntax) **   <a name="SSS-DeleteProvisionedConcurrencyConfig-request-FunctionName"></a>
 The name of the Lambda function\.  
@@ -21,12 +21,14 @@ The name of the Lambda function\.
 +  **Partial ARN** \- `123456789012:function:my-function`\.
 The length constraint applies only to the full ARN\. If you specify only the function name, it is limited to 64 characters in length\.  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
-Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
+Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
+Required: Yes
 
  ** [Qualifier](#API_DeleteProvisionedConcurrencyConfig_RequestSyntax) **   <a name="SSS-DeleteProvisionedConcurrencyConfig-request-Qualifier"></a>
 The version number or alias name\.  
 Length Constraints: Minimum length of 1\. Maximum length of 128\.  
-Pattern: `(|[a-zA-Z0-9$_-]+)` 
+Pattern: `(|[a-zA-Z0-9$_-]+)`   
+Required: Yes
 
 ## Request Body<a name="API_DeleteProvisionedConcurrencyConfig_RequestBody"></a>
 

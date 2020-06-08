@@ -10,7 +10,7 @@ GET /2018-10-31/layers/LayerName/versions?CompatibleRuntime=CompatibleRuntime&Ma
 
 ## URI Request Parameters<a name="API_ListLayerVersions_RequestParameters"></a>
 
-The request requires the following URI parameters\.
+The request uses the following URI parameters\.
 
  ** [CompatibleRuntime](#API_ListLayerVersions_RequestSyntax) **   <a name="SSS-ListLayerVersions-request-CompatibleRuntime"></a>
 A runtime identifier\. For example, `go1.x`\.  
@@ -19,7 +19,8 @@ Valid Values:` nodejs10.x | nodejs12.x | java8 | java11 | python2.7 | python3.6 
  ** [LayerName](#API_ListLayerVersions_RequestSyntax) **   <a name="SSS-ListLayerVersions-request-LayerName"></a>
 The name or Amazon Resource Name \(ARN\) of the layer\.  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
-Pattern: `(arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+)|[a-zA-Z0-9-_]+` 
+Pattern: `(arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+)|[a-zA-Z0-9-_]+`   
+Required: Yes
 
  ** [Marker](#API_ListLayerVersions_RequestSyntax) **   <a name="SSS-ListLayerVersions-request-Marker"></a>
 A pagination token returned by a previous call\.

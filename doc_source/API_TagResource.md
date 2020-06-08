@@ -17,11 +17,12 @@ Content-type: application/json
 
 ## URI Request Parameters<a name="API_TagResource_RequestParameters"></a>
 
-The request requires the following URI parameters\.
+The request uses the following URI parameters\.
 
  ** [ARN](#API_TagResource_RequestSyntax) **   <a name="SSS-TagResource-request-Resource"></a>
 The function's Amazon Resource Name \(ARN\)\.  
-Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
+Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
+Required: Yes
 
 ## Request Body<a name="API_TagResource_RequestBody"></a>
 

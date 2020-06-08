@@ -10,12 +10,13 @@ GET /2018-10-31/layers?find=LayerVersion&Arn=Arn HTTP/1.1
 
 ## URI Request Parameters<a name="API_GetLayerVersionByArn_RequestParameters"></a>
 
-The request requires the following URI parameters\.
+The request uses the following URI parameters\.
 
  ** [Arn](#API_GetLayerVersionByArn_RequestSyntax) **   <a name="SSS-GetLayerVersionByArn-request-Arn"></a>
 The ARN of the layer version\.  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
-Pattern: `arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+:[0-9]+` 
+Pattern: `arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+:[0-9]+`   
+Required: Yes
 
 ## Request Body<a name="API_GetLayerVersionByArn_RequestBody"></a>
 

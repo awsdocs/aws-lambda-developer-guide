@@ -10,10 +10,11 @@ GET /2015-03-31/event-source-mappings/UUID HTTP/1.1
 
 ## URI Request Parameters<a name="API_GetEventSourceMapping_RequestParameters"></a>
 
-The request requires the following URI parameters\.
+The request uses the following URI parameters\.
 
  ** [UUID](#API_GetEventSourceMapping_RequestSyntax) **   <a name="SSS-GetEventSourceMapping-request-UUID"></a>
-The identifier of the event source mapping\.
+The identifier of the event source mapping\.  
+Required: Yes
 
 ## Request Body<a name="API_GetEventSourceMapping_RequestBody"></a>
 

@@ -12,7 +12,7 @@ GET /2015-03-31/functions/?FunctionVersion=FunctionVersion&Marker=Marker&MasterR
 
 ## URI Request Parameters<a name="API_ListFunctions_RequestParameters"></a>
 
-The request requires the following URI parameters\.
+The request uses the following URI parameters\.
 
  ** [FunctionVersion](#API_ListFunctions_RequestSyntax) **   <a name="SSS-ListFunctions-request-FunctionVersion"></a>
 Set to `ALL` to include entries for all published versions of each function\.  
