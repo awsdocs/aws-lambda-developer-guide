@@ -1,6 +1,6 @@
 # List manager sample application for AWS Lambda<a name="samples-listmanager"></a>
 
-The list manager sample application demonstrates the use of AWS Lambda to process records in an Amazon Kinesis data stream\. A Lambda event source mapping reads records from the stream in batches and invokes a Lambda function\. The function function uses information from the records to update documents in Amazon DynamoDB and stores the records it processes in Amazon Relational Database Service \(Amazon RDS\)\.
+The list manager sample application demonstrates the use of AWS Lambda to process records in an Amazon Kinesis data stream\. A Lambda event source mapping reads records from the stream in batches and invokes a Lambda function\. The function uses information from the records to update documents in Amazon DynamoDB and stores the records it processes in Amazon Relational Database Service \(Amazon RDS\)\.
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-listmanager.png)
 
@@ -30,7 +30,7 @@ The sample application uses the following AWS services:
 **Pricing**  
 Standard charges apply for each service\.
 
-The application processes JSON documents from clients that contain information necessary to update a list\. It supports two types of list: tally and ranking\. A tally contains values that are added to the current value for key if it exists\. Each entry processed for a user increases the value of a key in the specified table\.
+The application processes JSON documents from clients that contain information necessary to update a list\. It supports two types of list: tally and ranking\. A *tally* contains values that are added to the current value for key if it exists\. Each entry processed for a user increases the value of a key in the specified table\.
 
 The following example shows a document that increases the `xp` \(experience points\) value for a user's `stats` list\.
 

@@ -115,6 +115,7 @@ Amazon's trademarks and trade dress may not be used in
       + [Tutorial: Using AWS Lambda with Amazon Simple Queue Service](with-sqs-example.md)
       + [Sample Amazon SQS function code](with-sqs-create-package.md)
       + [AWS SAM template for an Amazon SQS application](with-sqs-example-use-app-spec.md)
+   + [Orchestrate Lambda functions with AWS Step Functions](services-stepfunctions.md)
    + [Using AWS Lambda with AWS X-Ray](services-xray.md)
 + [Lambda sample applications](lambda-samples.md)
    + [Blank function sample application for AWS Lambda](samples-blank.md)
