@@ -23,7 +23,6 @@ var myFunction = async function(event, context) {
     subsegment.addAnnotation('roll2', roll2)
     subsegment.addAnnotation('request_id', context.awsRequestId)
   })
-
   
   event["current-depth"] += 1
   if (event["max-depth"] == event["current-depth"]) {
@@ -47,6 +46,13 @@ var myFunction = async function(event, context) {
   else {
     response.depth +=1
   }
+  if ( response.errorType == "function.MaxDepthError" ){
+    var error = new Error(response.errorMessage)
+    error.name = "function.MaxDepthError"
+    console.log("ERROR")
+    throw error
+  }
+  
   return response
 }
 
