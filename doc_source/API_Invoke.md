@@ -117,6 +117,22 @@ HTTP Status Code: 502
 AWS Lambda received an unexpected EC2 client exception while setting up for the Lambda function\.  
 HTTP Status Code: 502
 
+ **EFSIOException**   
+An error occured when reading from or writing to a connected file system\.  
+HTTP Status Code: 410
+
+ **EFSMountConnectivityException**   
+The function couldn't make a network connection to the configured file system\.  
+HTTP Status Code: 408
+
+ **EFSMountFailureException**   
+The function couldn't mount the configured file system due to a permission or configuration issue\.  
+HTTP Status Code: 403
+
+ **EFSMountTimeoutException**   
+The function was able to make a network connection to the configured file system, but the mount operation timed out\.  
+HTTP Status Code: 408
+
  **ENILimitReachedException**   
 AWS Lambda was not able to create an elastic network interface in the VPC, specified as part of Lambda function configuration, because the limit for network interfaces has been reached\.  
 HTTP Status Code: 502

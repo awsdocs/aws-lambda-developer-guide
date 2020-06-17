@@ -106,11 +106,19 @@ $ aws lambda add-permission --function-name SNS-X-Account \
 --statement-id sns-x-account --action "lambda:InvokeFunction" \
 --principal sns.amazonaws.com --profile accountB
 {
-    "Statement": "{\"Condition\":{\"ArnLike\":{\"AWS:SourceArn\":\"arn:aws:lambda:us-east-2:12345678901B:function:SNS-X-Account\"}},\"Action\":[\"lambda:InvokeFunction\"],\"Resource\":\"arn:aws:lambda:us-east-2:01234567891A:function:SNS-X-Account\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"sns.amazonaws.com\"},\"Sid\":\"sns-x-account1\"}"
+    "Statement": "{\"Condition\":{\"ArnLike\":{\"AWS:SourceArn\":
+      \"arn:aws:lambda:us-east-2:12345678901B:function:SNS-X-Account\"}},
+      \"Action\":[\"lambda:InvokeFunction\"],
+      \"Resource\":\"arn:aws:lambda:us-east-2:01234567891A:function:SNS-X-Account\",
+      \"Effect\":\"Allow\",\"Principal\":{\"Service\":\"sns.amazonaws.com\"},
+      \"Sid\":\"sns-x-account1\"}"
 }
 ```
 
 Do not use the `--source-account` parameter to add a source account to the Lambda policy when adding the policy\. Source account is not supported for Amazon SNS event sources and will result in access being denied\.
+
+**Note**  
+If the account with the SNS topic is hosted in an opt\-in region, you need to specify the region in the principal\. For an example, see [Invoking Lambda functions using Amazon SNS notifications](https://docs.aws.amazon.com/sns/latest/dg/sns-lambda.html) in the *Amazon Simple Notification Service Developer Guide*\. 
 
 ## Create a subscription<a name="with-sns-create-supscription"></a>
 

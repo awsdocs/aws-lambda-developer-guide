@@ -12,6 +12,7 @@ The following data types are supported:
 +  [EnvironmentError](API_EnvironmentError.md) 
 +  [EnvironmentResponse](API_EnvironmentResponse.md) 
 +  [EventSourceMappingConfiguration](API_EventSourceMappingConfiguration.md) 
++  [FileSystemConfig](API_FileSystemConfig.md) 
 +  [FunctionCode](API_FunctionCode.md) 
 +  [FunctionCodeLocation](API_FunctionCodeLocation.md) 
 +  [FunctionConfiguration](API_FunctionConfiguration.md) 

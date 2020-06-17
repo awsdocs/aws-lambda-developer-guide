@@ -29,9 +29,16 @@ To change an alias to point a new version of the function, use the `update-alias
 $ aws lambda update-alias  --function-name my-function --name alias-name --function-version version-number 
 ```
 
+To delete an alias, use the `delete-alias` command\.
+
+```
+$ aws lambda delete-alias   --function-name my-function --name alias-name 
+```
+
  The AWS CLI commands in the preceding steps correspond to the following AWS Lambda APIs: 
 + [CreateAlias](API_CreateAlias.md)
 + [UpdateAlias](API_UpdateAlias.md)
++ [DeleteAlias](API_DeleteAlias.md)
 
 ## Using aliases<a name="using-aliases"></a>
 

@@ -129,7 +129,7 @@ One of the parameters in the request is invalid\.
 HTTP Status Code: 400
 
  **ResourceInUseException**   
-The operation conflicts with the resource's availability\. For example, you attempted to update an EventSource Mapping in CREATING, or tried to delete a EventSource mapping currently in the UPDATING state\.   
+The operation conflicts with the resource's availability\. For example, you attempted to update an EventSource Mapping in CREATING, or tried to delete a EventSource mapping currently in the UPDATING state\.  
 HTTP Status Code: 400
 
  **ResourceNotFoundException**   

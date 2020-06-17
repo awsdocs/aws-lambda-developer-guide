@@ -34,6 +34,12 @@ Content-type: application/json
          "string" : "string" 
       }
    },
+   "[FileSystemConfigs](#SSS-CreateFunction-request-FileSystemConfigs)": [ 
+      { 
+         "[Arn](API_FileSystemConfig.md#SSS-Type-FileSystemConfig-Arn)": "string",
+         "[LocalMountPath](API_FileSystemConfig.md#SSS-Type-FileSystemConfig-LocalMountPath)": "string"
+      }
+   ],
    "[FunctionName](#SSS-CreateFunction-request-FunctionName)": "string",
    "[Handler](#SSS-CreateFunction-request-Handler)": "string",
    "[KMSKeyArn](#SSS-CreateFunction-request-KMSKeyArn)": "string",
@@ -83,6 +89,12 @@ Required: No
  ** [Environment](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-Environment"></a>
 Environment variables that are accessible from function code during execution\.  
 Type: [Environment](API_Environment.md) object  
+Required: No
+
+ ** [FileSystemConfigs](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-FileSystemConfigs"></a>
+Connection settings for an Amazon EFS file system\.  
+Type: Array of [FileSystemConfig](API_FileSystemConfig.md) objects  
+Array Members: Maximum number of 1 item\.  
 Required: No
 
  ** [FunctionName](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-FunctionName"></a>
@@ -184,6 +196,12 @@ Content-type: application/json
          "string" : "string" 
       }
    },
+   "[FileSystemConfigs](#SSS-CreateFunction-response-FileSystemConfigs)": [ 
+      { 
+         "[Arn](API_FileSystemConfig.md#SSS-Type-FileSystemConfig-Arn)": "string",
+         "[LocalMountPath](API_FileSystemConfig.md#SSS-Type-FileSystemConfig-LocalMountPath)": "string"
+      }
+   ],
    "[FunctionArn](#SSS-CreateFunction-response-FunctionArn)": "string",
    "[FunctionName](#SSS-CreateFunction-response-FunctionName)": "string",
    "[Handler](#SSS-CreateFunction-response-Handler)": "string",
@@ -245,6 +263,11 @@ Length Constraints: Minimum length of 0\. Maximum length of 256\.
  ** [Environment](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-Environment"></a>
 The function's environment variables\.  
 Type: [EnvironmentResponse](API_EnvironmentResponse.md) object
+
+ ** [FileSystemConfigs](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-FileSystemConfigs"></a>
+Connection settings for an Amazon EFS file system\.  
+Type: Array of [FileSystemConfig](API_FileSystemConfig.md) objects  
+Array Members: Maximum number of 1 item\.
 
  ** [FunctionArn](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-FunctionArn"></a>
 The function's Amazon Resource Name \(ARN\)\.  

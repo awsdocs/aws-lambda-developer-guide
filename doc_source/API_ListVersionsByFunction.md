@@ -60,6 +60,12 @@ Content-type: application/json
                "string" : "string" 
             }
          },
+         "[FileSystemConfigs](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-FileSystemConfigs)": [ 
+            { 
+               "[Arn](API_FileSystemConfig.md#SSS-Type-FileSystemConfig-Arn)": "string",
+               "[LocalMountPath](API_FileSystemConfig.md#SSS-Type-FileSystemConfig-LocalMountPath)": "string"
+            }
+         ],
          "[FunctionArn](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-FunctionArn)": "string",
          "[FunctionName](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-FunctionName)": "string",
          "[Handler](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-Handler)": "string",

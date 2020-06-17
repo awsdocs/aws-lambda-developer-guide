@@ -220,7 +220,7 @@ The resource already exists, or another operation is in progress\.
 HTTP Status Code: 409
 
  **ResourceInUseException**   
-The operation conflicts with the resource's availability\. For example, you attempted to update an EventSource Mapping in CREATING, or tried to delete a EventSource mapping currently in the UPDATING state\.   
+The operation conflicts with the resource's availability\. For example, you attempted to update an EventSource Mapping in CREATING, or tried to delete a EventSource mapping currently in the UPDATING state\.  
 HTTP Status Code: 400
 
  **ResourceNotFoundException**   

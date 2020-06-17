@@ -57,6 +57,12 @@ Content-type: application/json
          "string" : "string" 
       }
    },
+   "[FileSystemConfigs](#SSS-GetFunctionConfiguration-response-FileSystemConfigs)": [ 
+      { 
+         "[Arn](API_FileSystemConfig.md#SSS-Type-FileSystemConfig-Arn)": "string",
+         "[LocalMountPath](API_FileSystemConfig.md#SSS-Type-FileSystemConfig-LocalMountPath)": "string"
+      }
+   ],
    "[FunctionArn](#SSS-GetFunctionConfiguration-response-FunctionArn)": "string",
    "[FunctionName](#SSS-GetFunctionConfiguration-response-FunctionName)": "string",
    "[Handler](#SSS-GetFunctionConfiguration-response-Handler)": "string",
@@ -118,6 +124,11 @@ Length Constraints: Minimum length of 0\. Maximum length of 256\.
  ** [Environment](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-Environment"></a>
 The function's environment variables\.  
 Type: [EnvironmentResponse](API_EnvironmentResponse.md) object
+
+ ** [FileSystemConfigs](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-FileSystemConfigs"></a>
+Connection settings for an Amazon EFS file system\.  
+Type: Array of [FileSystemConfig](API_FileSystemConfig.md) objects  
+Array Members: Maximum number of 1 item\.
 
  ** [FunctionArn](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-FunctionArn"></a>
 The function's Amazon Resource Name \(ARN\)\.  

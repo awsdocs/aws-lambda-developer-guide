@@ -21,6 +21,8 @@ For more information about data protection, see the [AWS shared responsibility m
 
 Lambda API endpoints only support secure connections over HTTPS\. When you manage Lambda resources with the AWS Management Console, AWS SDK, or the Lambda API, all communication is encrypted with Transport Layer Security \(TLS\)\.
 
+When you [connect your function to a file system](configuration-filesystem.md), Lambda uses [Encryption in transit](https://docs.aws.amazon.com/efs/latest/ug/encryption.html) for all connections\.
+
 For a full list of API endpoints, see [AWS Regions and endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html) in the AWS General Reference\.
 
 ## Encryption at rest<a name="security-privacy-atrest"></a>

@@ -66,7 +66,7 @@ Other services invoke your function directly\. You grant the other service permi
 + [AWS Step Functions](services-stepfunctions.md)
 + [Amazon Simple Storage Service Batch](services-s3-batch.md)
 
-For asynchronous invocation, Lambda queues the event before passing it to your function\. The other service gets a success response as soon as the event is queued and isn't aware of what happens afterwards\. If an error occurs, Lambda handles [retries](invocation-retries.md), and can send failed events to a [dead\-letter queue](invocation-async.md#dlq) that you configure\.
+For asynchronous invocation, Lambda queues the event before passing it to your function\. The other service gets a success response as soon as the event is queued and isn't aware of what happens afterwards\. If an error occurs, Lambda handles [retries](invocation-retries.md), and can send failed events to a [destination](invocation-async.md#invocation-async-destinations) that you configure\.
 
 **Services that invoke Lambda functions asynchronously**
 + [Amazon Simple Storage Service](with-s3.md)
@@ -80,5 +80,11 @@ For asynchronous invocation, Lambda queues the event before passing it to your f
 + [AWS IoT](services-iot.md)
 + [AWS IoT Events](services-iotevents.md)
 + [AWS CodePipeline](services-codepipeline.md)
+
+Additionally, some services integrate with Lambda in other ways that don't involve invoking functions\.
+
+**Services that integrate with Lambda in other ways**
++ [Amazon Elastic File System](services-efs.md)
++ [AWS X\-Ray](services-xray.md)
 
 See the topics in this chapter for more details about each service, and example events that you can use to test your function\.

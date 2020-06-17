@@ -34,7 +34,7 @@ When your function scales up, the first request served by each instance is impac
 + ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/features-scaling-provisioned.provisioned.png) Provisioned concurrency
 + ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/features-scaling-provisioned.standard.png) Standard concurrency
 
-When provisioned concurrency is allocated, the function scales with the same burst behavior as standard concurrency\. After it's allocated, provisioned concurrency serves incoming requests with very low latency\. When all provisioned concurrency is in use, the function scales up normally to handle any additional requests\.
+When you allocate provisioned concurrency, your function is ready to serve a burst of incoming requests with very low latency\. When all provisioned concurrency is in use, the function scales up normally to handle any additional requests\.
 
 Application Auto Scaling takes this a step further by providing autoscaling for provisioned concurrency\. With Application Auto Scaling, you can create a target tracking scaling policy that adjusts provisioned concurrency levels automatically, based on the utilization metric that Lambda emits\. [Use the Application Auto Scaling API](configuration-concurrency.md#configuration-concurrency-api) to register an alias as a scalable target and create a scaling policy\.
 

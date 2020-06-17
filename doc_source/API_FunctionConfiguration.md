@@ -30,6 +30,12 @@ The function's environment variables\.
 Type: [EnvironmentResponse](API_EnvironmentResponse.md) object  
 Required: No
 
+ **FileSystemConfigs**   <a name="SSS-Type-FunctionConfiguration-FileSystemConfigs"></a>
+Connection settings for an Amazon EFS file system\.  
+Type: Array of [FileSystemConfig](API_FileSystemConfig.md) objects  
+Array Members: Maximum number of 1 item\.  
+Required: No
+
  **FunctionArn**   <a name="SSS-Type-FunctionConfiguration-FunctionArn"></a>
 The function's Amazon Resource Name \(ARN\)\.  
 Type: String  

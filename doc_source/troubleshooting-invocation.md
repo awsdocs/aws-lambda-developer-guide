@@ -45,3 +45,19 @@ This typically occurs when your function manages resources in the same AWS servi
 **Error:** *KMSDisabledException: Lambda was unable to decrypt the environment variables because the KMS key used is disabled\. Please check the function's KMS key settings\.*
 
 This error can occur if your KMS key is disabled, or if the grant that allows Lambda to use the key is revoked\. If the grant is missing, configure the function to use a different key\. Then reassign the custom key to recreate the grant\.
+
+**Error:** *EFSMountFailureException: The function could not mount the EFS file system with access point arn:aws:elasticfilesystem:us\-east\-2:123456789012:access\-point/fsap\-015cxmplb72b405fd\.*
+
+The mount request to the function's [file system](configuration-filesystem.md) was rejected\. Check the function's permissions, and confirm that its file system and access point exist and are ready for use\.
+
+**Error:** *EFSMountConnectivityException: The function couldn't connect to the Amazon EFS file system with access point arn:aws:elasticfilesystem:us\-east\-2:123456789012:access\-point/fsap\-015cxmplb72b405fd\. Check your network configuration and try again\.*
+
+The function couldn't establish a connection to the function's [file system](configuration-filesystem.md) with the NFS protocol \(TCP port 2049\)\. Check the [security group and routing configuration](https://docs.aws.amazon.com/efs/latest/ug/network-access.html) for the VPC's subnets\.
+
+**Error:** *EFSMountTimeoutException: The function could not mount the EFS file system with access point \{arn:aws:elasticfilesystem:us\-east\-2:123456789012:access\-point/fsap\-015cxmplb72b405fd\} due to mount time out*
+
+The function was able to connect to the function's [file system](configuration-filesystem.md), but the mount operation timed out\. Try again after a short time and consider limiting the function's [concurrency](configuration-concurrency.md) to reduce load on the file system\.
+
+**Error:** *EFSIOException: This function instance was stopped because Lambda detected an IO process that was taking too long\.*
+
+A previous invocation timed out and Lambda was unable to terminate the function handler\. This issue can occur when an attached file system runs out of burst credits and the baseline throughput is insufficient\. To increase throughput, you can increase the size of the file system or use provisioned throughput\. For more information, see [Throughput](services-efs.md#services-efs-throughput)\.
