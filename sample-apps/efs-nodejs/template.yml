@@ -1,0 +1,44 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: An AWS Lambda application that connects to an EFS file system in the VPC to share files.
+Transform: AWS::Serverless-2016-10-31
+Parameters:
+  vpcStackName:
+    Default: efs-nodejs-vpc
+    Description: VPC and file system stack name
+    Type: String
+  mountPath:
+    Default: "/mnt/efs0"
+    Description: File system mount path
+    Type: String
+Resources:
+  function:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: function/.
+      Description: Use a file system.
+      FileSystemConfigs:
+        - LocalMountPath: !Ref mountPath
+          Arn: 
+            Fn::ImportValue: !Sub "${vpcStackName}-accesspoint"
+      Environment:
+          Variables:
+            mountPath: !Ref mountPath
+      MemorySize: 128
+      Timeout: 15
+      Runtime: nodejs12.x
+      Tracing: Active
+      Handler: index.handler
+      VpcConfig:
+        SecurityGroupIds:
+          - Fn::ImportValue:
+                !Sub "${vpcStackName}-vpc-sg"
+        SubnetIds:
+          - Fn::ImportValue:
+                !Sub "${vpcStackName}-subnet-a"
+          - Fn::ImportValue:
+                !Sub "${vpcStackName}-subnet-b"
+      # Function's execution role
+      Policies:
+        - AWSLambdaVPCAccessExecutionRole
+        - AmazonElasticFileSystemClientReadWriteAccess
+        - AWSXRayDaemonWriteAccess
