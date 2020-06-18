@@ -30,6 +30,7 @@ For more information about Lambda's integration with Amazon EFS, see [Using Amaz
 + [Execution role and user permissions](#configuration-filesystem-permissions)
 + [Configuring file system access with the Lambda API](#configuration-filesystem-api)
 + [AWS CloudFormation and AWS SAM](#configuration-filesystem-cloudformation)
++ [Sample applications](#configuration-filesystem-samples)
 
 ## Configuring a file system and access point<a name="configuration-filesystem-setup"></a>
 
@@ -133,3 +134,8 @@ You can use AWS CloudFormation and the AWS Serverless Application Model \(AWS SA
 You must add the `DependsOn` to ensure that the mount targets are fully created before the Lambda runs for the first time\.
 
 For the AWS CloudFormation `AWS::Lambda::Function` type, the property name and fields are the same\. For more information, see [Using AWS Lambda with AWS CloudFormation](services-cloudformation.md)\.
+
+## Sample applications<a name="configuration-filesystem-samples"></a>
+
+The GitHub repository for this guide includes a sample application that demonstrates the use of Amazon EFS with a Lambda function\.
++ [efs\-nodejs](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/efs-nodejs) – A function that uses an Amazon EFS file system in a Amazon VPC\. This sample includes a VPC, file system, mount targets, and access point configured for use with Lambda\.

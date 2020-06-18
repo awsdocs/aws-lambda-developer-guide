@@ -229,7 +229,7 @@ During the build stage, AWS CodeBuild needs permission to upload the build outpu
 
 1. Open the [roles page](https://console.aws.amazon.com/iam/home#/roles) in the IAM console\.
 
-1. Choose **code\-build\-lamba\-pipeline\-service\-role**\.
+1. Choose **codebuild\-lamba\-pipeline\-build\-service\-role**\.
 
 1. Choose **Attach policies**\.
 

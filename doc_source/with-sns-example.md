@@ -21,7 +21,7 @@ In the tutorial, you use two accounts\. The AWS CLI commands illustrate this by 
 
 ## Create an Amazon SNS topic<a name="with-sns-create-topic"></a>
 
-From account A, create the source Amazon SNS topic\.
+From account A \(01234567891A\), create the source Amazon SNS topic\.
 
 ```
 $ aws sns create-topic --name lambda-x-account --profile accountA
@@ -31,7 +31,7 @@ Note the topic ARN that is returned by the command\. You will need it when you a
 
 ## Create the execution role<a name="with-sns-example-create-iam-role"></a>
 
-From account B, create the [execution role](lambda-intro-execution-role.md) that gives your function permission to access AWS resources\.
+From account B \(01234567891B\), create the [execution role](lambda-intro-execution-role.md) that gives your function permission to access AWS resources\.
 
 **To create an execution role**
 
@@ -48,7 +48,7 @@ The **AWSLambdaBasicExecutionRole** policy has the permissions that the function
 
 ## Create a Lambda function<a name="with-sns-example-create-test-function"></a>
 
-From account B, create the function that processes events from Amazon SNS\. The following example code receives an Amazon SNS event input and processes the messages that it contains\. For illustration, the code writes some of the incoming event data to CloudWatch Logs\.
+From account B \(01234567891B\), create the function that processes events from Amazon SNS\. The following example code receives an Amazon SNS event input and processes the messages that it contains\. For illustration, the code writes some of the incoming event data to CloudWatch Logs\.
 
 **Note**  
 For sample code in other languages, see [Sample function code](with-sns-create-package.md)\.
@@ -90,7 +90,7 @@ Note the function ARN that is returned by the command\. You will need it when yo
 
 ## Set up cross\-account permissions<a name="with-sns-create-x-account-permissions"></a>
 
-From account A, grant permission to account B to subscribe to the topic:
+From account A \(01234567891A\), grant permission to account B \(01234567891B\) to subscribe to the topic:
 
 ```
 $ aws sns add-permission --label lambda-access --aws-account-id 12345678901B \
@@ -98,7 +98,7 @@ $ aws sns add-permission --label lambda-access --aws-account-id 12345678901B \
 --action-name Subscribe ListSubscriptionsByTopic Receive --profile accountA
 ```
 
-From account B, add the Lambda permission to allow invocation from Amazon SNS\.
+From account B \(01234567891B\), add the Lambda permission to allow invocation from Amazon SNS\.
 
 ```
 $ aws lambda add-permission --function-name SNS-X-Account \
@@ -122,7 +122,7 @@ If the account with the SNS topic is hosted in an opt\-in region, you need to sp
 
 ## Create a subscription<a name="with-sns-create-supscription"></a>
 
-From account B, subscribe the Lambda function to the topic\. When a message is sent to the `lambda-x-account` topic in account A, Amazon SNS invokes the `SNS-X-Account` function in account B\.
+From account B, subscribe the Lambda function to the topic\. When a message is sent to the `lambda-x-account` topic in account A \(01234567891A\), Amazon SNS invokes the `SNS-X-Account` function in account B \(01234567891B\)\.
 
 ```
 $ aws sns subscribe --protocol lambda \
@@ -138,7 +138,7 @@ The output contains the ARN of the topic subscription\.
 
 ## Test subscription<a name="with-sns-create-test"></a>
 
-From account A, test the subscription\. Type `Hello World` into a text file and save it as `message.txt`\. Then run the following command: 
+From account A \(01234567891A\), test the subscription\. Type `Hello World` into a text file and save it as `message.txt`\. Then run the following command: 
 
 ```
 $ aws sns publish --message file://message.txt --subject Test \
