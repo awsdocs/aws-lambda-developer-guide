@@ -48,7 +48,7 @@ Lambda reads records from the data stream and invokes your function [synchronous
 If you have multiple applications that are reading records from the same stream, you can use Kinesis stream consumers instead of standard iterators\. Consumers have dedicated read throughput so they don't have to compete with other consumers of the same data\. With consumers, Kinesis pushes records to Lambda over an HTTP/2 connection, which can also reduce latency between adding a record and function invocation\.
 
 **Note**  
-Batch window, error handling, and concurrency settings are not available for HTTP/2 stream consumers\.
+Error handling and concurrency settings are not available for HTTP/2 stream consumers\.
 
 By default, Lambda invokes your function as soon as records are available in the stream\. If the batch it reads from the stream only has one record in it, Lambda only sends one record to the function\. To avoid invoking the function with a small number of records, you can tell the event source to buffer records for up to 5 minutes by configuring a *batch window*\. Before invoking the function, Lambda continues to read records from the stream until it has gathered a full batch, or until the batch window expires\.
 
