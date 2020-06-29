@@ -71,7 +71,7 @@ Type: [DestinationConfig](API_DestinationConfig.md) object
 Required: No
 
  ** [Enabled](#API_CreateEventSourceMapping_RequestSyntax) **   <a name="SSS-CreateEventSourceMapping-request-Enabled"></a>
-Disables the event source mapping to pause polling and invocation\.  
+If true, the event source mapping is active\. Set to false to pause polling and invocation\.  
 Type: Boolean  
 Required: No
 

@@ -7,7 +7,6 @@ To output logs from your function code, you can use [the `print` method](https:/
 **Example lambda\_function\.py**  
 
 ```
-import json
 import os
 
 def lambda_handler(event, context):
@@ -154,7 +153,6 @@ Log groups aren't deleted automatically when you delete a function\. To avoid st
 For more detailed logs, use the [logging library](https://docs.python.org/3/library/logging.html)\. 
 
 ```
-import json
 import os
 import logging
 logger = logging.getLogger()

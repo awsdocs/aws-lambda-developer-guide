@@ -69,7 +69,7 @@ You can also increase concurrency by processing multiple batches from each shard
 
 ## Configuring your data stream and function<a name="services-kinesis-configure"></a>
 
-Your Lambda function is a consumer application for your data stream\. It processes one batch of records at a time from each shard\. You can map a Lambda function to a data stream \(standard iterator\), or to a consumer of a stream \([enhanced fan\-out](https://docs.aws.amazon.com/kinesis/latest/dev/introduction-to-enhanced-consumers.html)\)\.
+Your Lambda function is a consumer application for your data stream\. It processes one batch of records at a time from each shard\. You can map a Lambda function to a data stream \(standard iterator\), or to a consumer of a stream \([enhanced fan\-out](https://docs.aws.amazon.com/kinesis/latest/dev/enhanced-consumers.html)\)\.
 
 For standard iterators, Lambda polls each shard in your Kinesis stream for records at a base rate of once per second\. When more records are available, Lambda keeps processing batches until the function catches up with the stream\. The event source mapping shares read throughput with other consumers of the shard\.
 
@@ -147,7 +147,7 @@ Lambda supports the following options for Kinesis event sources\.
 + **Maximum age of record** – The maximum age of a record that Lambda sends to your function\.
 + **Split batch on error** – When the function returns an error, split the batch into two before retrying\.
 + **Concurrent batches per shard** – Process multiple batches from the same shard concurrently\.
-+ **Enabled** – Disable the event source to stop processing records\. Lambda keeps track of the last record processed and resumes processing from that point when it's reenabled\.
++ **Enabled** – Set to true to enable the event source mapping\. Set to false to stop processing records\. Lambda keeps track of the last record processed and resumes processing from that point when it's reenabled\.
 
 **Note**  
 Kinesis charges for each shard and, for enhanced fan\-out, data read from the stream\. For pricing details, see [Amazon Kinesis pricing](https://aws.amazon.com/kinesis/data-streams/pricing)\.

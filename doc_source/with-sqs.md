@@ -130,7 +130,7 @@ Lambda supports the following options for Amazon SQS event sources\.
 **Event source options**
 + **SQS queue** – The Amazon SQS queue to read records from\.
 + **Batch size** – The number of items to read from the queue in each batch, up to 10\. The event might contain fewer items if the batch that Lambda read from the queue had fewer items\.
-+ **Enabled** – Disable the event source to stop processing items\.
++ **Enabled** – Set to true to enable the event source mapping\. Set to false to stop processing records\.
 
 **Note**  
 Amazon SQS has a perpetual free tier for requests\. Beyond the free tier, Amazon SQS charges per million requests\. While your event source mapping is active, Lambda makes requests to the queue to get items\. For pricing details, see [Amazon Simple Queue Service pricing](https://aws.amazon.com/sqs/pricing)\.
