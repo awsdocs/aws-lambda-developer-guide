@@ -168,13 +168,13 @@ The deployment package is a \.zip file containing your Lambda function code and 
 1. Install the Sharp library with npm\. For Linux, use the following command\.
 
    ```
-   lambda-s3$ npm install sharp
+   lambda-s3$ npm install --arch=x64 --platform=linux --target=12.13.0  sharp
    ```
 
    For macOS, use the following command\.
 
    ```
-   lambda-s3$ npm install --arch=x64 --platform=linux --target=12.13.0  sharp
+   lambda-s3$ npm install sharp
    ```
 
    After you complete this step, you will have the following folder structure:
