@@ -277,7 +277,7 @@ For local development, AWS toolkits for integrated development environments \(ID
 
 As you develop your application, you will likely encounter the following types of errors\.
 + **Build errors** – Issues that occur during the build phase, including compilation, test, and packaging errors\.
-+ **Deployment errors** – Issues that occur when AWS CloudFormation isn't able to update the application stack\. These include permissions errors, account limits, service issues, or template errors\.
++ **Deployment errors** – Issues that occur when AWS CloudFormation isn't able to update the application stack\. These include permissions errors, account quotas, service issues, or template errors\.
 + **Invocation errors** – Errors that are returned by a function's code or runtime\.
 
 For build and deployment errors, you can identify the cause of an error in the Lambda console\.

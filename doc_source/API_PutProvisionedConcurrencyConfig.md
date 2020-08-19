@@ -9,7 +9,7 @@ PUT /2019-09-30/functions/FunctionName/provisioned-concurrency?Qualifier=Qualifi
 Content-type: application/json
 
 {
-   "[ProvisionedConcurrentExecutions](#SSS-PutProvisionedConcurrencyConfig-request-ProvisionedConcurrentExecutions)": number
+   "ProvisionedConcurrentExecutions": number
 }
 ```
 
@@ -52,12 +52,12 @@ HTTP/1.1 202
 Content-type: application/json
 
 {
-   "[AllocatedProvisionedConcurrentExecutions](#SSS-PutProvisionedConcurrencyConfig-response-AllocatedProvisionedConcurrentExecutions)": number,
-   "[AvailableProvisionedConcurrentExecutions](#SSS-PutProvisionedConcurrencyConfig-response-AvailableProvisionedConcurrentExecutions)": number,
-   "[LastModified](#SSS-PutProvisionedConcurrencyConfig-response-LastModified)": "string",
-   "[RequestedProvisionedConcurrentExecutions](#SSS-PutProvisionedConcurrencyConfig-response-RequestedProvisionedConcurrentExecutions)": number,
-   "[Status](#SSS-PutProvisionedConcurrencyConfig-response-Status)": "string",
-   "[StatusReason](#SSS-PutProvisionedConcurrencyConfig-response-StatusReason)": "string"
+   "AllocatedProvisionedConcurrentExecutions": number,
+   "AvailableProvisionedConcurrentExecutions": number,
+   "LastModified": "string",
+   "RequestedProvisionedConcurrentExecutions": number,
+   "Status": "string",
+   "StatusReason": "string"
 }
 ```
 

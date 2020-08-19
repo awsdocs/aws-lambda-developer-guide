@@ -13,6 +13,7 @@ Managed policies grant permission to API actions without restricting the functio
 + [Function development](#permissions-user-function)
 + [Layer development and use](#permissions-user-layer)
 + [Cross\-account roles](#permissions-user-xaccount)
++ [Condition keys for VPC settings](#permissions-condition-keys)
 
 ## Function development<a name="permissions-user-function"></a>
 
@@ -234,3 +235,9 @@ You can apply any of the preceding policies and statements to a role, which you 
 You can use cross\-account roles to give accounts that you trust access to Lambda actions and resources\. If you just want to grant permission to invoke a function or use a layer, use [resource\-based policies](access-control-resource-based.md) instead\.
 
 For more information, see [IAM roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *IAM User Guide*\.
+
+## Condition keys for VPC settings<a name="permissions-condition-keys"></a>
+
+You can use condition keys for VPC settings to provide additional permission controls for your Lambda functions\. For example, you can enforce that all Lambda functions in your organization are connected to a VPC\. You can also specify the subnets and security groups that the functions are allowed to use, or are denied from using\.
+
+For more information, see [Using IAM condition keys for VPC settings](configuration-vpc.md#vpc-conditions)\.

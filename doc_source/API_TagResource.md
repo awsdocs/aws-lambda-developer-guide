@@ -9,7 +9,7 @@ POST /2017-03-31/tags/ARN HTTP/1.1
 Content-type: application/json
 
 {
-   "[Tags](#SSS-TagResource-request-Tags)": { 
+   "Tags": { 
       "string" : "string" 
    }
 }

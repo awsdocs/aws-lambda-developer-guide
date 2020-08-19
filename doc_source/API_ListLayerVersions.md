@@ -40,17 +40,17 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "[LayerVersions](#SSS-ListLayerVersions-response-LayerVersions)": [ 
+   "LayerVersions": [ 
       { 
-         "[CompatibleRuntimes](API_LayerVersionsListItem.md#SSS-Type-LayerVersionsListItem-CompatibleRuntimes)": [ "string" ],
-         "[CreatedDate](API_LayerVersionsListItem.md#SSS-Type-LayerVersionsListItem-CreatedDate)": "string",
-         "[Description](API_LayerVersionsListItem.md#SSS-Type-LayerVersionsListItem-Description)": "string",
-         "[LayerVersionArn](API_LayerVersionsListItem.md#SSS-Type-LayerVersionsListItem-LayerVersionArn)": "string",
-         "[LicenseInfo](API_LayerVersionsListItem.md#SSS-Type-LayerVersionsListItem-LicenseInfo)": "string",
-         "[Version](API_LayerVersionsListItem.md#SSS-Type-LayerVersionsListItem-Version)": number
+         "CompatibleRuntimes": [ "string" ],
+         "CreatedDate": "string",
+         "Description": "string",
+         "LayerVersionArn": "string",
+         "LicenseInfo": "string",
+         "Version": number
       }
    ],
-   "[NextMarker](#SSS-ListLayerVersions-response-NextMarker)": "string"
+   "NextMarker": "string"
 }
 ```
 

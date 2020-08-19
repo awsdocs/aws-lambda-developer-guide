@@ -10,6 +10,7 @@ Lambda supports the following Java runtimes\.
 | Name | Identifier | JDK | Operating system | 
 | --- | --- | --- | --- | 
 |  Java 11  |  `java11`  |  amazon\-corretto\-11  |  Amazon Linux 2  | 
+|  Java 8  |  `java8.al2`  |  amazon\-corretto\-8  |  Amazon Linux 2  | 
 |  Java 8  |  `java8`  |  java\-1\.8\.0\-openjdk  |  Amazon Linux  | 
 
 Lambda functions use an [execution role](lambda-intro-execution-role.md) to get permission to write logs to Amazon CloudWatch Logs, and to access other services and resources\. If you don't already have an execution role for function development, create one\.

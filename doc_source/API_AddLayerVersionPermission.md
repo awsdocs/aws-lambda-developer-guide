@@ -11,10 +11,10 @@ POST /2018-10-31/layers/LayerName/versions/VersionNumber/policy?RevisionId=Revis
 Content-type: application/json
 
 {
-   "[Action](#SSS-AddLayerVersionPermission-request-Action)": "string",
-   "[OrganizationId](#SSS-AddLayerVersionPermission-request-OrganizationId)": "string",
-   "[Principal](#SSS-AddLayerVersionPermission-request-Principal)": "string",
-   "[StatementId](#SSS-AddLayerVersionPermission-request-StatementId)": "string"
+   "Action": "string",
+   "OrganizationId": "string",
+   "Principal": "string",
+   "StatementId": "string"
 }
 ```
 
@@ -71,8 +71,8 @@ HTTP/1.1 201
 Content-type: application/json
 
 {
-   "[RevisionId](#SSS-AddLayerVersionPermission-response-RevisionId)": "string",
-   "[Statement](#SSS-AddLayerVersionPermission-response-Statement)": "string"
+   "RevisionId": "string",
+   "Statement": "string"
 }
 ```
 

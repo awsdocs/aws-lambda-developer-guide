@@ -17,6 +17,7 @@ The Amazon Resource Name \(ARN\) of the event source\.
 +  **Amazon Kinesis** \- The ARN of the data stream or a stream consumer\.
 +  **Amazon DynamoDB Streams** \- The ARN of the stream\.
 +  **Amazon Simple Queue Service** \- The ARN of the queue\.
++  **Amazon Managed Streaming for Apache Kafka** \- The ARN of the cluster\.
 Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)` 
 
  ** [FunctionName](#API_ListEventSourceMappings_RequestSyntax) **   <a name="SSS-ListEventSourceMappings-request-FunctionName"></a>
@@ -49,32 +50,33 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "[EventSourceMappings](#SSS-ListEventSourceMappings-response-EventSourceMappings)": [ 
+   "EventSourceMappings": [ 
       { 
-         "[BatchSize](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-BatchSize)": number,
-         "[BisectBatchOnFunctionError](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-BisectBatchOnFunctionError)": boolean,
-         "[DestinationConfig](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-DestinationConfig)": { 
-            "[OnFailure](API_DestinationConfig.md#SSS-Type-DestinationConfig-OnFailure)": { 
-               "[Destination](API_OnFailure.md#SSS-Type-OnFailure-Destination)": "string"
+         "BatchSize": number,
+         "BisectBatchOnFunctionError": boolean,
+         "DestinationConfig": { 
+            "OnFailure": { 
+               "Destination": "string"
             },
-            "[OnSuccess](API_DestinationConfig.md#SSS-Type-DestinationConfig-OnSuccess)": { 
-               "[Destination](API_OnSuccess.md#SSS-Type-OnSuccess-Destination)": "string"
+            "OnSuccess": { 
+               "Destination": "string"
             }
          },
-         "[EventSourceArn](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-EventSourceArn)": "string",
-         "[FunctionArn](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-FunctionArn)": "string",
-         "[LastModified](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-LastModified)": number,
-         "[LastProcessingResult](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-LastProcessingResult)": "string",
-         "[MaximumBatchingWindowInSeconds](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-MaximumBatchingWindowInSeconds)": number,
-         "[MaximumRecordAgeInSeconds](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-MaximumRecordAgeInSeconds)": number,
-         "[MaximumRetryAttempts](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-MaximumRetryAttempts)": number,
-         "[ParallelizationFactor](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-ParallelizationFactor)": number,
-         "[State](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-State)": "string",
-         "[StateTransitionReason](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-StateTransitionReason)": "string",
-         "[UUID](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-UUID)": "string"
+         "EventSourceArn": "string",
+         "FunctionArn": "string",
+         "LastModified": number,
+         "LastProcessingResult": "string",
+         "MaximumBatchingWindowInSeconds": number,
+         "MaximumRecordAgeInSeconds": number,
+         "MaximumRetryAttempts": number,
+         "ParallelizationFactor": number,
+         "State": "string",
+         "StateTransitionReason": "string",
+         "Topics": [ "string" ],
+         "UUID": "string"
       }
    ],
-   "[NextMarker](#SSS-ListEventSourceMappings-response-NextMarker)": "string"
+   "NextMarker": "string"
 }
 ```
 

@@ -6,6 +6,9 @@ After you create a deployment package, you may either upload it directly or uplo
 
 Download the Lambda library for Go with `go get`, and compile your executable\.
 
+**Note**  
+Use version 1\.18\.0 or later of aws\-lambda\-go\.
+
 ```
 ~/my-function$ go get github.com/aws/aws-lambda-go/lambda
 ~/my-function$ GOOS=linux go build main.go

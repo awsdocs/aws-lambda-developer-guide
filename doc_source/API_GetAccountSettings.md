@@ -23,16 +23,16 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "[AccountLimit](#SSS-GetAccountSettings-response-AccountLimit)": { 
-      "[CodeSizeUnzipped](API_AccountLimit.md#SSS-Type-AccountLimit-CodeSizeUnzipped)": number,
-      "[CodeSizeZipped](API_AccountLimit.md#SSS-Type-AccountLimit-CodeSizeZipped)": number,
-      "[ConcurrentExecutions](API_AccountLimit.md#SSS-Type-AccountLimit-ConcurrentExecutions)": number,
-      "[TotalCodeSize](API_AccountLimit.md#SSS-Type-AccountLimit-TotalCodeSize)": number,
-      "[UnreservedConcurrentExecutions](API_AccountLimit.md#SSS-Type-AccountLimit-UnreservedConcurrentExecutions)": number
+   "AccountLimit": { 
+      "CodeSizeUnzipped": number,
+      "CodeSizeZipped": number,
+      "ConcurrentExecutions": number,
+      "TotalCodeSize": number,
+      "UnreservedConcurrentExecutions": number
    },
-   "[AccountUsage](#SSS-GetAccountSettings-response-AccountUsage)": { 
-      "[FunctionCount](API_AccountUsage.md#SSS-Type-AccountUsage-FunctionCount)": number,
-      "[TotalCodeSize](API_AccountUsage.md#SSS-Type-AccountUsage-TotalCodeSize)": number
+   "AccountUsage": { 
+      "FunctionCount": number,
+      "TotalCodeSize": number
    }
 }
 ```

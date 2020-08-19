@@ -325,7 +325,7 @@ Set `content-type` of the `POST` method response and integration response to JSO
   ```
   $ aws apigateway put-method-response --rest-api-id $API \
   --resource-id $RESOURCE --http-method POST \
-  --status-code 200 --response-models "{\"application/json"\":""\"Empty"\"}"""
+  --status-code 200 --response-models application/json=Empty
   {
       "statusCode": "200",
       "responseModels": {
@@ -338,7 +338,7 @@ Set `content-type` of the `POST` method response and integration response to JSO
   ```
   $ aws apigateway put-integration-response --rest-api-id $API \
   --resource-id $RESOURCE --http-method POST \
-  --status-code 200 --response-templates "{\"application/json"\":""\"\"}""
+  --status-code 200 --response-templates application/json=""
   {
       "statusCode": "200",
       "responseTemplates": {
@@ -346,6 +346,8 @@ Set `content-type` of the `POST` method response and integration response to JSO
       }
   }
   ```
+**Note**  
+If you encounter an error running this command, you can use escape characters around the response template field for more clarity\. The text `application/json=""` becomes `"{\"application/json"\":""\"\"}""`\.
 
 ### Deploy the API<a name="with-on-demand-https-deploy-api-prod"></a>
 

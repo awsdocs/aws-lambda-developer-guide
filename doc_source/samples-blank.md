@@ -28,7 +28,7 @@ You can deploy the sample in a few minutes with the AWS CLI and AWS CloudFormati
 ## Architecture and handler code<a name="samples-blank-architecture"></a>
 
 The sample application consists of function code, an AWS CloudFormation template, and supporting resources\. When you deploy the sample, you use the following AWS services:
-+ AWS Lambda – Runs function code, sends logs to CloudWatch Logs, and sends trace data to X\-Ray\. The function also calls the Lambda API to get details about the account's limits and usage in the current Region\.
++ AWS Lambda – Runs function code, sends logs to CloudWatch Logs, and sends trace data to X\-Ray\. The function also calls the Lambda API to get details about the account's quotas and usage in the current Region\.
 + [AWS X\-Ray](https://aws.amazon.com/xray) – Collects trace data, indexes traces for search, and generates a service map\.
 + [Amazon CloudWatch](https://aws.amazon.com/cloudwatch) – Stores logs and metrics\.
 + [AWS Identity and Access Management \(IAM\)](https://aws.amazon.com/iam) – Grants permission\.

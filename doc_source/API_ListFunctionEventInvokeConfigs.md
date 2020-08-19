@@ -44,23 +44,23 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "[FunctionEventInvokeConfigs](#SSS-ListFunctionEventInvokeConfigs-response-FunctionEventInvokeConfigs)": [ 
+   "FunctionEventInvokeConfigs": [ 
       { 
-         "[DestinationConfig](API_FunctionEventInvokeConfig.md#SSS-Type-FunctionEventInvokeConfig-DestinationConfig)": { 
-            "[OnFailure](API_DestinationConfig.md#SSS-Type-DestinationConfig-OnFailure)": { 
-               "[Destination](API_OnFailure.md#SSS-Type-OnFailure-Destination)": "string"
+         "DestinationConfig": { 
+            "OnFailure": { 
+               "Destination": "string"
             },
-            "[OnSuccess](API_DestinationConfig.md#SSS-Type-DestinationConfig-OnSuccess)": { 
-               "[Destination](API_OnSuccess.md#SSS-Type-OnSuccess-Destination)": "string"
+            "OnSuccess": { 
+               "Destination": "string"
             }
          },
-         "[FunctionArn](API_FunctionEventInvokeConfig.md#SSS-Type-FunctionEventInvokeConfig-FunctionArn)": "string",
-         "[LastModified](API_FunctionEventInvokeConfig.md#SSS-Type-FunctionEventInvokeConfig-LastModified)": number,
-         "[MaximumEventAgeInSeconds](API_FunctionEventInvokeConfig.md#SSS-Type-FunctionEventInvokeConfig-MaximumEventAgeInSeconds)": number,
-         "[MaximumRetryAttempts](API_FunctionEventInvokeConfig.md#SSS-Type-FunctionEventInvokeConfig-MaximumRetryAttempts)": number
+         "FunctionArn": "string",
+         "LastModified": number,
+         "MaximumEventAgeInSeconds": number,
+         "MaximumRetryAttempts": number
       }
    ],
-   "[NextMarker](#SSS-ListFunctionEventInvokeConfigs-response-NextMarker)": "string"
+   "NextMarker": "string"
 }
 ```
 

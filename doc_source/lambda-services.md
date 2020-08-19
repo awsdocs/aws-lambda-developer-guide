@@ -49,8 +49,9 @@ The Lambda runtime converts the event document into an object and passes it to y
 For services that generate a queue or data stream, you create an [event source mapping](invocation-eventsourcemapping.md) in Lambda and grant Lambda permission to access the other service in the [execution role](lambda-intro-execution-role.md)\. Lambda reads data from the other service, creates an event, and invokes your function\.
 
 **Services that Lambda reads events from**
-+ [Amazon Kinesis](with-kinesis.md)
 + [Amazon DynamoDB](with-ddb.md)
++ [Amazon Kinesis](with-kinesis.md)
++ [Amazon Managed Streaming for Apache Kafka](with-msk.md)
 + [Amazon Simple Queue Service](with-sqs.md)
 
 Other services invoke your function directly\. You grant the other service permission in the function's [resource\-based policy](access-control-resource-based.md), and configure the other service to generate events and invoke your function\. Depending on the service, the invocation can be synchronous or asynchronous\. For synchronous invocation, the other service waits for the response from your function and might [retry on errors](invocation-retries.md)\.

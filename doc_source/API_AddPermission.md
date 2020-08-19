@@ -13,13 +13,13 @@ POST /2015-03-31/functions/FunctionName/policy?Qualifier=Qualifier HTTP/1.1
 Content-type: application/json
 
 {
-   "[Action](#SSS-AddPermission-request-Action)": "string",
-   "[EventSourceToken](#SSS-AddPermission-request-EventSourceToken)": "string",
-   "[Principal](#SSS-AddPermission-request-Principal)": "string",
-   "[RevisionId](#SSS-AddPermission-request-RevisionId)": "string",
-   "[SourceAccount](#SSS-AddPermission-request-SourceAccount)": "string",
-   "[SourceArn](#SSS-AddPermission-request-SourceArn)": "string",
-   "[StatementId](#SSS-AddPermission-request-StatementId)": "string"
+   "Action": "string",
+   "EventSourceToken": "string",
+   "Principal": "string",
+   "RevisionId": "string",
+   "SourceAccount": "string",
+   "SourceArn": "string",
+   "StatementId": "string"
 }
 ```
 
@@ -98,7 +98,7 @@ HTTP/1.1 201
 Content-type: application/json
 
 {
-   "[Statement](#SSS-AddPermission-response-Statement)": "string"
+   "Statement": "string"
 }
 ```
 

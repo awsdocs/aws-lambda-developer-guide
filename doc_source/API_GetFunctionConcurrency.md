@@ -35,7 +35,7 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "[ReservedConcurrentExecutions](#SSS-GetFunctionConcurrency-response-ReservedConcurrentExecutions)": number
+   "ReservedConcurrentExecutions": number
 }
 ```
 

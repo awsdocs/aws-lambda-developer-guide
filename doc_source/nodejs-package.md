@@ -45,9 +45,13 @@ To update a function by using the Lambda API, use the [UpdateFunctionCode](API_U
 
 ## Updating a function with additional dependencies<a name="nodejs-package-dependencies"></a>
 
-If your function depends on libraries other than the SDK for JavaScript, install them to a local directory with [npm](https://www.npmjs.com/), and include them in your deployment package\. You can also include the SDK for JavaScript if you need a newer version than the one [included on the runtime](lambda-nodejs.md), or to ensure that the version doesn't change in the future\.
+If your function depends on libraries other than the SDK for JavaScript, use [npm](https://www.npmjs.com/) to include them in your deployment package\. Ensure that the Node\.js version in your local environment matches the Node\.js version of your function\. If any of the libraries use native code, use an [Amazon Linux environment ](https://aws.amazon.com/blogs/compute/nodejs-packages-in-lambda/) to create the deployment package\.
+
+You can add the SDK for JavaScript to the deployment package if you need a newer version than the one [included on the runtime](lambda-nodejs.md), or to ensure that the version doesn't change in the future\. 
 
 **To update a Node\.js function with dependencies**
+
+1. Open a command line terminal or shell\. Ensure that the Node\.js version in your local environment matches the Node\.js version of your function\.
 
 1. Install libraries in the node\_modules directory with the `npm install` command\.
 

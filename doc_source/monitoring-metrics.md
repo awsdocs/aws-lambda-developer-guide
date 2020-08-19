@@ -55,7 +55,7 @@ Performance metrics provide performance details about a single invocation\. For 
 Lambda reports concurrency metrics as an aggregate count of the number of instances processing events across a function, version, alias, or AWS Region\. To see how close you are to hitting concurrency limits, view these metrics with the `Max` statistic\.
 
 **Concurrency metrics**
-+ `ConcurrentExecutions` – The number of function instances that are processing events\. If this number reaches your [concurrent executions limit](gettingstarted-limits.md) for the Region, or the [reserved concurrency limit](configuration-concurrency.md) that you configured on the function, additional invocation requests are throttled\.
++ `ConcurrentExecutions` – The number of function instances that are processing events\. If this number reaches your [concurrent executions quota](gettingstarted-limits.md) for the Region, or the [reserved concurrency limit](configuration-concurrency.md) that you configured on the function, additional invocation requests are throttled\.
 + `ProvisionedConcurrentExecutions` – The number of function instances that are processing events on [provisioned concurrency](configuration-concurrency.md)\. For each invocation of an alias or version with provisioned concurrency, Lambda emits the current count\.
 + `ProvisionedConcurrencyUtilization` – For a version or alias, the value of `ProvisionedConcurrentExecutions` divided by the total amount of provisioned concurrency allocated\. For example, `.5` indicates that 50 percent of allocated provisioned concurrency is in use\.
 + `UnreservedConcurrentExecutions` – For an AWS Region, the number of events that are being processed by functions that don't have reserved concurrency\.

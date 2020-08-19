@@ -84,7 +84,7 @@ Actions that operate on a function can be restricted to a specific function by f
 | --- | --- | --- | 
 |   [AddPermission](API_AddPermission.md)  [RemovePermission](API_RemovePermission.md)  |  Function Function version Function alias  |  `lambda:Principal`  | 
 |   [Invoke](API_Invoke.md) **Permission:** `lambda:InvokeFunction`  |  Function Function version Function alias  |  None  | 
-|   [CreateFunction](API_CreateFunction.md)  [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)  |  Function  |  `lambda:Layer`  | 
+|   [CreateFunction](API_CreateFunction.md)  [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)  |  Function  |  `lambda:Layer` `lambda:VpcIds` `lambda:SubnetIds` `lambda:SecurityGroupIds`  | 
 |   [CreateAlias](API_CreateAlias.md)  [DeleteAlias](API_DeleteAlias.md)  [DeleteFunction](API_DeleteFunction.md)  [DeleteFunctionConcurrency](API_DeleteFunctionConcurrency.md)  [GetAlias](API_GetAlias.md)  [GetFunction](API_GetFunction.md)  [GetFunctionConfiguration](API_GetFunctionConfiguration.md)  [GetPolicy](API_GetPolicy.md)  [ListAliases](API_ListAliases.md)  [ListVersionsByFunction](API_ListVersionsByFunction.md)  [PublishVersion](API_PublishVersion.md)  [PutFunctionConcurrency](API_PutFunctionConcurrency.md)  [UpdateAlias](API_UpdateAlias.md)  [UpdateFunctionCode](API_UpdateFunctionCode.md)  |  Function  |  None  | 
 |   [GetAccountSettings](API_GetAccountSettings.md)  [ListFunctions](API_ListFunctions.md)  [ListTags](API_ListTags.md)  [TagResource](API_TagResource.md)  [UntagResource](API_UntagResource.md)  |  `*`  |  None  | 
 
@@ -106,6 +106,9 @@ For these actions, the resource is the event source mapping, so Lambda provides 
 ## Layers<a name="permissions-resources-layers"></a>
 
 Layer actions let you restrict the layers that a user can manage or use with a function\. Actions related to layer use and permissions act on a version of a layer, while `PublishLayerVersion` acts on a layer name\. You can use either with wildcards to restrict the layers that a user can work with by name\.
+
+**Note**  
+Note: the [GetLayerVersion](API_GetLayerVersion.md) action also covers [GetLayerVersionByArn](API_GetLayerVersionByArn.md)\. Lambda does not support `GetLayerVersionByArn` as an IAM action\.
 
 
 **Layers**  

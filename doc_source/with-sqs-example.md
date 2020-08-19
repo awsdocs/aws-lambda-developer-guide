@@ -36,7 +36,7 @@ The **AWSLambdaSQSQueueExecutionRole** policy has the permissions that the funct
 
 ## Create the function<a name="with-sqs-create-function"></a>
 
-The following example code receives an Amazon SQS event input and processes the messages that it contains\. For illustration, the code writes some of the incoming event data to CloudWatch Logs\.
+The following example shows how to process each Amazon SQS message in the event input\. See [Using AWS Lambda with Amazon SQS](https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html) for an example of an event with multiple messages\. In the example, the code writes each message to a log in CloudWatch Logs\.
 
 **Note**  
 For sample code in other languages, see [Sample Amazon SQS function code](with-sqs-create-package.md)\.

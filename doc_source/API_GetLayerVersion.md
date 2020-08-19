@@ -33,18 +33,18 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "[CompatibleRuntimes](#SSS-GetLayerVersion-response-CompatibleRuntimes)": [ "string" ],
-   "[Content](#SSS-GetLayerVersion-response-Content)": { 
-      "[CodeSha256](API_LayerVersionContentOutput.md#SSS-Type-LayerVersionContentOutput-CodeSha256)": "string",
-      "[CodeSize](API_LayerVersionContentOutput.md#SSS-Type-LayerVersionContentOutput-CodeSize)": number,
-      "[Location](API_LayerVersionContentOutput.md#SSS-Type-LayerVersionContentOutput-Location)": "string"
+   "CompatibleRuntimes": [ "string" ],
+   "Content": { 
+      "CodeSha256": "string",
+      "CodeSize": number,
+      "Location": "string"
    },
-   "[CreatedDate](#SSS-GetLayerVersion-response-CreatedDate)": "string",
-   "[Description](#SSS-GetLayerVersion-response-Description)": "string",
-   "[LayerArn](#SSS-GetLayerVersion-response-LayerArn)": "string",
-   "[LayerVersionArn](#SSS-GetLayerVersion-response-LayerVersionArn)": "string",
-   "[LicenseInfo](#SSS-GetLayerVersion-response-LicenseInfo)": "string",
-   "[Version](#SSS-GetLayerVersion-response-Version)": number
+   "CreatedDate": "string",
+   "Description": "string",
+   "LayerArn": "string",
+   "LayerVersionArn": "string",
+   "LicenseInfo": "string",
+   "Version": number
 }
 ```
 

@@ -27,27 +27,28 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "[BatchSize](#SSS-GetEventSourceMapping-response-BatchSize)": number,
-   "[BisectBatchOnFunctionError](#SSS-GetEventSourceMapping-response-BisectBatchOnFunctionError)": boolean,
-   "[DestinationConfig](#SSS-GetEventSourceMapping-response-DestinationConfig)": { 
-      "[OnFailure](API_DestinationConfig.md#SSS-Type-DestinationConfig-OnFailure)": { 
-         "[Destination](API_OnFailure.md#SSS-Type-OnFailure-Destination)": "string"
+   "BatchSize": number,
+   "BisectBatchOnFunctionError": boolean,
+   "DestinationConfig": { 
+      "OnFailure": { 
+         "Destination": "string"
       },
-      "[OnSuccess](API_DestinationConfig.md#SSS-Type-DestinationConfig-OnSuccess)": { 
-         "[Destination](API_OnSuccess.md#SSS-Type-OnSuccess-Destination)": "string"
+      "OnSuccess": { 
+         "Destination": "string"
       }
    },
-   "[EventSourceArn](#SSS-GetEventSourceMapping-response-EventSourceArn)": "string",
-   "[FunctionArn](#SSS-GetEventSourceMapping-response-FunctionArn)": "string",
-   "[LastModified](#SSS-GetEventSourceMapping-response-LastModified)": number,
-   "[LastProcessingResult](#SSS-GetEventSourceMapping-response-LastProcessingResult)": "string",
-   "[MaximumBatchingWindowInSeconds](#SSS-GetEventSourceMapping-response-MaximumBatchingWindowInSeconds)": number,
-   "[MaximumRecordAgeInSeconds](#SSS-GetEventSourceMapping-response-MaximumRecordAgeInSeconds)": number,
-   "[MaximumRetryAttempts](#SSS-GetEventSourceMapping-response-MaximumRetryAttempts)": number,
-   "[ParallelizationFactor](#SSS-GetEventSourceMapping-response-ParallelizationFactor)": number,
-   "[State](#SSS-GetEventSourceMapping-response-State)": "string",
-   "[StateTransitionReason](#SSS-GetEventSourceMapping-response-StateTransitionReason)": "string",
-   "[UUID](#SSS-GetEventSourceMapping-response-UUID)": "string"
+   "EventSourceArn": "string",
+   "FunctionArn": "string",
+   "LastModified": number,
+   "LastProcessingResult": "string",
+   "MaximumBatchingWindowInSeconds": number,
+   "MaximumRecordAgeInSeconds": number,
+   "MaximumRetryAttempts": number,
+   "ParallelizationFactor": number,
+   "State": "string",
+   "StateTransitionReason": "string",
+   "Topics": [ "string" ],
+   "UUID": "string"
 }
 ```
 
@@ -94,12 +95,12 @@ Type: Integer
 Valid Range: Minimum value of 0\. Maximum value of 300\.
 
  ** [MaximumRecordAgeInSeconds](#API_GetEventSourceMapping_ResponseSyntax) **   <a name="SSS-GetEventSourceMapping-response-MaximumRecordAgeInSeconds"></a>
-\(Streams\) The maximum age of a record that Lambda sends to a function for processing\.  
+\(Streams\) Discard records older than the specified age\. The default value is infinite \(\-1\)\. When set to infinite \(\-1\), failed records are retried until the record expires\.  
 Type: Integer  
 Valid Range: Minimum value of 60\. Maximum value of 604800\.
 
  ** [MaximumRetryAttempts](#API_GetEventSourceMapping_ResponseSyntax) **   <a name="SSS-GetEventSourceMapping-response-MaximumRetryAttempts"></a>
-\(Streams\) The maximum number of times to retry when the function returns an error\.  
+\(Streams\) Discard records after the specified number of retries\. The default value is infinite \(\-1\)\. When set to infinite \(\-1\), failed records are retried until the record expires\.  
 Type: Integer  
 Valid Range: Minimum value of 0\. Maximum value of 10000\.
 
@@ -115,6 +116,13 @@ Type: String
  ** [StateTransitionReason](#API_GetEventSourceMapping_ResponseSyntax) **   <a name="SSS-GetEventSourceMapping-response-StateTransitionReason"></a>
 Indicates whether the last change to the event source mapping was made by a user, or by the Lambda service\.  
 Type: String
+
+ ** [Topics](#API_GetEventSourceMapping_ResponseSyntax) **   <a name="SSS-GetEventSourceMapping-response-Topics"></a>
+ \(MSK\) The name of the Kafka topic\.   
+Type: Array of strings  
+Array Members: Fixed number of 1 item\.  
+Length Constraints: Minimum length of 1\. Maximum length of 249\.  
+Pattern: `^[^.]([a-zA-Z0-9\-_.]+)` 
 
  ** [UUID](#API_GetEventSourceMapping_ResponseSyntax) **   <a name="SSS-GetEventSourceMapping-response-UUID"></a>
 The identifier of the event source mapping\.  

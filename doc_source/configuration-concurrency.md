@@ -2,7 +2,7 @@
 
 Concurrency is the number of requests that your function is serving at any given time\. When your function is invoked, Lambda allocates an instance of it to process the event\. When the function code finishes running, it can handle another request\. If the function is invoked again while a request is still being processed, another instance is allocated, which increases the function's concurrency\.
 
-Concurrency is subject to a Regional [limit](gettingstarted-limits.md) that is shared by all functions in a Region\. To ensure that a function can always reach a certain level of concurrency, you can configure the function with [reserved concurrency](#configuration-concurrency-reserved)\. When a function has reserved concurrency, no other function can use that concurrency\. Reserved concurrency also limits the maximum concurrency for the function, and applies to the function as a whole, including versions and aliases\.
+Concurrency is subject to a Regional [quota](gettingstarted-limits.md) that is shared by all functions in a Region\. To ensure that a function can always reach a certain level of concurrency, you can configure the function with [reserved concurrency](#configuration-concurrency-reserved)\. When a function has reserved concurrency, no other function can use that concurrency\. Reserved concurrency also limits the maximum concurrency for the function, and applies to the function as a whole, including versions and aliases\.
 
 When Lambda allocates an instance of your function, the [runtime](lambda-runtimes.md) loads your function's code and runs initialization code that you define outside of the handler\. If your code and dependencies are large, or you create SDK clients during initialization, this process can take some time\. As your function [scales up](invocation-scaling.md), this causes the portion of requests that are served by new instances to have higher latency than the rest\.
 
@@ -10,7 +10,7 @@ To enable your function to scale without fluctuations in latency, use [provision
 
 Lambda also integrates with [Application Auto Scaling](https://docs.aws.amazon.com/autoscaling/application/userguide/)\. You can configure Application Auto Scaling to manage provisioned concurrency on a schedule or based on utilization\. Use scheduled scaling to increase provisioned concurrency in anticipation of peak traffic\. To increase provisioned concurrency automatically as needed, use [the Application Auto Scaling API](#configuration-concurrency-api) to register a target and create a scaling policy\.
 
-Provisioned concurrency counts towards a function's reserved concurrency and Regional limits\. If the amount of provisioned concurrency on a function's versions and aliases adds up to the function's reserved concurrency, all invocations run on provisioned concurrency\. This configuration also has the effect of throttling the unpublished version of the function \(`$LATEST`\), which prevents it from executing\.
+Provisioned concurrency counts towards a function's reserved concurrency and Regional quotas\. If the amount of provisioned concurrency on a function's versions and aliases adds up to the function's reserved concurrency, all invocations run on provisioned concurrency\. This configuration also has the effect of throttling the unpublished version of the function \(`$LATEST`\), which prevents it from executing\.
 
 **Topics**
 + [Configuring reserved concurrency](#configuration-concurrency-reserved)
@@ -82,7 +82,7 @@ In the following example, the `my-function-DEV` and `my-function-PROD` functions
 + ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/features-concurrency.unreserved.png) Unreserved concurrency
 + ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/features-concurrency.throttling.png) Throttling
 
-Provisioned concurrency does not come online immediately after you configure it\. Lambda starts allocating provisioned concurrency after a minute or two of preparation\. Similar to how functions [scale under load](invocation-scaling.md), up to 3000 instances of the function can be initialized at once, depending on the Region\. After the initial burst, instances are allocated at a steady rate of 500 per minute until the request is fulfilled\. When you request provisioned concurrency for multiple functions or versions of a function in the same Region, scaling limits apply across all requests\.
+Provisioned concurrency does not come online immediately after you configure it\. Lambda starts allocating provisioned concurrency after a minute or two of preparation\. Similar to how functions [scale under load](invocation-scaling.md), up to 3000 instances of the function can be initialized at once, depending on the Region\. After the initial burst, instances are allocated at a steady rate of 500 per minute until the request is fulfilled\. When you request provisioned concurrency for multiple functions or versions of a function in the same Region, scaling quotas apply across all requests\.
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/features-scaling-provisioned.png)
 
@@ -186,7 +186,7 @@ In the following example, a function scales between a minimum and maximum amount
 + ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/features-scaling-provisioned.provisioned.png) Provisioned concurrency
 + ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/features-scaling-provisioned.standard.png) Standard concurrency
 
-To view your account's concurrency limits in a Region, use `get-account-settings`\.
+To view your account's concurrency quotas in a Region, use `get-account-settings`\.
 
 ```
 $ aws lambda get-account-settings

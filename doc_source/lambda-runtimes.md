@@ -19,18 +19,18 @@ A runtime can support a single version of a language, multiple versions of a lan
 
 | Name | Identifier | AWS SDK for JavaScript | Operating system | 
 | --- | --- | --- | --- | 
-|  Node\.js 12  |  `nodejs12.x`  |  2\.631\.0  |  Amazon Linux 2  | 
-|  Node\.js 10  |  `nodejs10.x`  |  2\.631\.0  |  Amazon Linux 2  | 
+|  Node\.js 12  |  `nodejs12.x`  |  2\.721\.0  |  Amazon Linux 2  | 
+|  Node\.js 10  |  `nodejs10.x`  |  2\.721\.0  |  Amazon Linux 2  | 
 
 
 **Python runtimes**  
 
 | Name | Identifier | AWS SDK for Python | Operating system | 
 | --- | --- | --- | --- | 
-|  Python 3\.8  |  `python3.8`  |  boto3\-1\.12\.49 botocore\-1\.15\.49  |  Amazon Linux 2  | 
-|  Python 3\.7  |  `python3.7`  |  boto3\-1\.12\.49 botocore\-1\.15\.49  |  Amazon Linux  | 
-|  Python 3\.6  |  `python3.6`  |  boto3\-1\.12\.49 botocore\-1\.15\.49  |  Amazon Linux  | 
-|  Python 2\.7  |  `python2.7`  |  boto3\-1\.12\.49 botocore\-1\.15\.49  |  Amazon Linux  | 
+|  Python 3\.8  |  `python3.8`  |  boto3\-1\.14\.5 botocore\-1\.17\.5  |  Amazon Linux 2  | 
+|  Python 3\.7  |  `python3.7`  |  boto3\-1\.14\.5 botocore\-1\.17\.5  |  Amazon Linux  | 
+|  Python 3\.6  |  `python3.6`  |  boto3\-1\.14\.5 botocore\-1\.17\.5  |  Amazon Linux  | 
+|  Python 2\.7  |  `python2.7`  |  boto3\-1\.14\.5 botocore\-1\.17\.5  |  Amazon Linux  | 
 
 
 **Ruby runtimes**  
@@ -46,6 +46,7 @@ A runtime can support a single version of a language, multiple versions of a lan
 | Name | Identifier | JDK | Operating system | 
 | --- | --- | --- | --- | 
 |  Java 11  |  `java11`  |  amazon\-corretto\-11  |  Amazon Linux 2  | 
+|  Java 8  |  `java8.al2`  |  amazon\-corretto\-8  |  Amazon Linux 2  | 
 |  Java 8  |  `java8`  |  java\-1\.8\.0\-openjdk  |  Amazon Linux  | 
 
 
@@ -70,6 +71,7 @@ To use other languages in Lambda, you can implement a [custom runtime](runtimes-
 
 | Name | Identifier | Operating system | 
 | --- | --- | --- | 
+|  Custom Runtime  |  `provided.al2`  |  Amazon Linux 2  | 
 |  Custom Runtime  |  `provided`  |  Amazon Linux  | 
 
 **Topics**

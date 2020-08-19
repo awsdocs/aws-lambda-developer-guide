@@ -11,13 +11,13 @@ PUT /2015-03-31/functions/FunctionName/code HTTP/1.1
 Content-type: application/json
 
 {
-   "[DryRun](#SSS-UpdateFunctionCode-request-DryRun)": boolean,
-   "[Publish](#SSS-UpdateFunctionCode-request-Publish)": boolean,
-   "[RevisionId](#SSS-UpdateFunctionCode-request-RevisionId)": "string",
-   "[S3Bucket](#SSS-UpdateFunctionCode-request-S3Bucket)": "string",
-   "[S3Key](#SSS-UpdateFunctionCode-request-S3Key)": "string",
-   "[S3ObjectVersion](#SSS-UpdateFunctionCode-request-S3ObjectVersion)": "string",
-   "[ZipFile](#SSS-UpdateFunctionCode-request-ZipFile)": blob
+   "DryRun": boolean,
+   "Publish": boolean,
+   "RevisionId": "string",
+   "S3Bucket": "string",
+   "S3Key": "string",
+   "S3ObjectVersion": "string",
+   "ZipFile": blob
 }
 ```
 
@@ -87,58 +87,58 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "[CodeSha256](#SSS-UpdateFunctionCode-response-CodeSha256)": "string",
-   "[CodeSize](#SSS-UpdateFunctionCode-response-CodeSize)": number,
-   "[DeadLetterConfig](#SSS-UpdateFunctionCode-response-DeadLetterConfig)": { 
-      "[TargetArn](API_DeadLetterConfig.md#SSS-Type-DeadLetterConfig-TargetArn)": "string"
+   "CodeSha256": "string",
+   "CodeSize": number,
+   "DeadLetterConfig": { 
+      "TargetArn": "string"
    },
-   "[Description](#SSS-UpdateFunctionCode-response-Description)": "string",
-   "[Environment](#SSS-UpdateFunctionCode-response-Environment)": { 
-      "[Error](API_EnvironmentResponse.md#SSS-Type-EnvironmentResponse-Error)": { 
-         "[ErrorCode](API_EnvironmentError.md#SSS-Type-EnvironmentError-ErrorCode)": "string",
-         "[Message](API_EnvironmentError.md#SSS-Type-EnvironmentError-Message)": "string"
+   "Description": "string",
+   "Environment": { 
+      "Error": { 
+         "ErrorCode": "string",
+         "Message": "string"
       },
-      "[Variables](API_EnvironmentResponse.md#SSS-Type-EnvironmentResponse-Variables)": { 
+      "Variables": { 
          "string" : "string" 
       }
    },
-   "[FileSystemConfigs](#SSS-UpdateFunctionCode-response-FileSystemConfigs)": [ 
+   "FileSystemConfigs": [ 
       { 
-         "[Arn](API_FileSystemConfig.md#SSS-Type-FileSystemConfig-Arn)": "string",
-         "[LocalMountPath](API_FileSystemConfig.md#SSS-Type-FileSystemConfig-LocalMountPath)": "string"
+         "Arn": "string",
+         "LocalMountPath": "string"
       }
    ],
-   "[FunctionArn](#SSS-UpdateFunctionCode-response-FunctionArn)": "string",
-   "[FunctionName](#SSS-UpdateFunctionCode-response-FunctionName)": "string",
-   "[Handler](#SSS-UpdateFunctionCode-response-Handler)": "string",
-   "[KMSKeyArn](#SSS-UpdateFunctionCode-response-KMSKeyArn)": "string",
-   "[LastModified](#SSS-UpdateFunctionCode-response-LastModified)": "string",
-   "[LastUpdateStatus](#SSS-UpdateFunctionCode-response-LastUpdateStatus)": "string",
-   "[LastUpdateStatusReason](#SSS-UpdateFunctionCode-response-LastUpdateStatusReason)": "string",
-   "[LastUpdateStatusReasonCode](#SSS-UpdateFunctionCode-response-LastUpdateStatusReasonCode)": "string",
-   "[Layers](#SSS-UpdateFunctionCode-response-Layers)": [ 
+   "FunctionArn": "string",
+   "FunctionName": "string",
+   "Handler": "string",
+   "KMSKeyArn": "string",
+   "LastModified": "string",
+   "LastUpdateStatus": "string",
+   "LastUpdateStatusReason": "string",
+   "LastUpdateStatusReasonCode": "string",
+   "Layers": [ 
       { 
-         "[Arn](API_Layer.md#SSS-Type-Layer-Arn)": "string",
-         "[CodeSize](API_Layer.md#SSS-Type-Layer-CodeSize)": number
+         "Arn": "string",
+         "CodeSize": number
       }
    ],
-   "[MasterArn](#SSS-UpdateFunctionCode-response-MasterArn)": "string",
-   "[MemorySize](#SSS-UpdateFunctionCode-response-MemorySize)": number,
-   "[RevisionId](#SSS-UpdateFunctionCode-response-RevisionId)": "string",
-   "[Role](#SSS-UpdateFunctionCode-response-Role)": "string",
-   "[Runtime](#SSS-UpdateFunctionCode-response-Runtime)": "string",
-   "[State](#SSS-UpdateFunctionCode-response-State)": "string",
-   "[StateReason](#SSS-UpdateFunctionCode-response-StateReason)": "string",
-   "[StateReasonCode](#SSS-UpdateFunctionCode-response-StateReasonCode)": "string",
-   "[Timeout](#SSS-UpdateFunctionCode-response-Timeout)": number,
-   "[TracingConfig](#SSS-UpdateFunctionCode-response-TracingConfig)": { 
-      "[Mode](API_TracingConfigResponse.md#SSS-Type-TracingConfigResponse-Mode)": "string"
+   "MasterArn": "string",
+   "MemorySize": number,
+   "RevisionId": "string",
+   "Role": "string",
+   "Runtime": "string",
+   "State": "string",
+   "StateReason": "string",
+   "StateReasonCode": "string",
+   "Timeout": number,
+   "TracingConfig": { 
+      "Mode": "string"
    },
-   "[Version](#SSS-UpdateFunctionCode-response-Version)": "string",
-   "[VpcConfig](#SSS-UpdateFunctionCode-response-VpcConfig)": { 
-      "[SecurityGroupIds](API_VpcConfigResponse.md#SSS-Type-VpcConfigResponse-SecurityGroupIds)": [ "string" ],
-      "[SubnetIds](API_VpcConfigResponse.md#SSS-Type-VpcConfigResponse-SubnetIds)": [ "string" ],
-      "[VpcId](API_VpcConfigResponse.md#SSS-Type-VpcConfigResponse-VpcId)": "string"
+   "Version": "string",
+   "VpcConfig": { 
+      "SecurityGroupIds": [ "string" ],
+      "SubnetIds": [ "string" ],
+      "VpcId": "string"
    }
 }
 ```

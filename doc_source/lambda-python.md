@@ -1,6 +1,6 @@
 # Building Lambda functions with Python<a name="lambda-python"></a>
 
-You can run Python code in AWS Lambda\. Lambda provides [runtimes](lambda-runtimes.md) for Python that execute your code to process events\. Your code runs in an environment that includes the SDK for Python \(Boto 3\), with credentials from an AWS Identity and Access Management \(IAM\) role that you manage\.
+You can run Python code in AWS Lambda\. Lambda provides [runtimes](lambda-runtimes.md) for Python that execute your code to process events\. Your code runs in an environment that includes the SDK for Python \(Boto3\), with credentials from an AWS Identity and Access Management \(IAM\) role that you manage\.
 
 Lambda supports the following Python runtimes\.
 
@@ -9,10 +9,10 @@ Lambda supports the following Python runtimes\.
 
 | Name | Identifier | AWS SDK for Python | Operating system | 
 | --- | --- | --- | --- | 
-|  Python 3\.8  |  `python3.8`  |  boto3\-1\.12\.49 botocore\-1\.15\.49  |  Amazon Linux 2  | 
-|  Python 3\.7  |  `python3.7`  |  boto3\-1\.12\.49 botocore\-1\.15\.49  |  Amazon Linux  | 
-|  Python 3\.6  |  `python3.6`  |  boto3\-1\.12\.49 botocore\-1\.15\.49  |  Amazon Linux  | 
-|  Python 2\.7  |  `python2.7`  |  boto3\-1\.12\.49 botocore\-1\.15\.49  |  Amazon Linux  | 
+|  Python 3\.8  |  `python3.8`  |  boto3\-1\.14\.5 botocore\-1\.17\.5  |  Amazon Linux 2  | 
+|  Python 3\.7  |  `python3.7`  |  boto3\-1\.14\.5 botocore\-1\.17\.5  |  Amazon Linux  | 
+|  Python 3\.6  |  `python3.6`  |  boto3\-1\.14\.5 botocore\-1\.17\.5  |  Amazon Linux  | 
+|  Python 2\.7  |  `python2.7`  |  boto3\-1\.14\.5 botocore\-1\.17\.5  |  Amazon Linux  | 
 
 Lambda functions use an [execution role](lambda-intro-execution-role.md) to get permission to write logs to Amazon CloudWatch Logs, and to access other services and resources\. If you don't already have an execution role for function development, create one\.
 

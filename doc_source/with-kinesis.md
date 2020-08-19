@@ -1,6 +1,17 @@
 # Using AWS Lambda with Amazon Kinesis<a name="with-kinesis"></a>
 
-You can use an AWS Lambda function to process records in an [Amazon Kinesis data stream](https://docs.aws.amazon.com/kinesis/latest/dev/amazon-kinesis-streams.html)\. With Kinesis, you can collect data from many sources and process them with multiple consumers\. Lambda supports standard data stream iterators and HTTP/2 stream consumers\.
+You can use an AWS Lambda function to process records in an [Amazon Kinesis data stream](https://docs.aws.amazon.com/kinesis/latest/dev/amazon-kinesis-streams.html)\. 
+
+A Kinesis data stream is a set of [shards](https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html#shard)\. Each shard contains a sequence of data records\. A **consumer** is an application that processes the data from a Kinesis data stream\. You can map a Lambda function to a shared\-throughput consumer \(standard iterator\), or to a dedicated\-throughput consumer with [enhanced fan\-out](https://docs.aws.amazon.com/kinesis/latest/dev/enhanced-consumers.html)\. 
+
+For standard iterators, Lambda polls each shard in your Kinesis stream for records using HTTP protocol\. The event source mapping shares read throughput with other consumers of the shard\. 
+
+To minimize latency and maximize read throughput, you can create a data stream consumer with enhanced fan\-out\. Stream consumers get a dedicated connection to each shard that doesn't impact other applications reading from the stream\. The dedicated throughput can help if you have many applications reading the same data, or if you're reprocessing a stream with large records\. Kinesis pushes records to Lambda over HTTP/2\. 
+
+ For details about Kinesis data streams, see [Reading Data from Amazon Kinesis Data Streams](https://docs.aws.amazon.com/kinesis/latest/dev/building-consumers.html)\. 
+
+**Note**  
+Error handling is not available for HTTP/2 stream consumers\.
 
 Lambda reads records from the data stream and invokes your function [synchronously](invocation-sync.md) with an event that contains stream records\. Lambda reads records in batches and invokes your function to process records from the batch\.
 
@@ -45,12 +56,7 @@ Lambda reads records from the data stream and invokes your function [synchronous
 }
 ```
 
-If you have multiple applications that are reading records from the same stream, you can use Kinesis stream consumers instead of standard iterators\. Consumers have dedicated read throughput so they don't have to compete with other consumers of the same data\. With consumers, Kinesis pushes records to Lambda over an HTTP/2 connection, which can also reduce latency between adding a record and function invocation\.
-
-**Note**  
-Error handling and concurrency settings are not available for HTTP/2 stream consumers\.
-
-By default, Lambda invokes your function as soon as records are available in the stream\. If the batch it reads from the stream only has one record in it, Lambda only sends one record to the function\. To avoid invoking the function with a small number of records, you can tell the event source to buffer records for up to 5 minutes by configuring a *batch window*\. Before invoking the function, Lambda continues to read records from the stream until it has gathered a full batch, or until the batch window expires\.
+By default, Lambda invokes your function as soon as records are available in the stream\. If the batch that Lambda reads from the stream only has one record in it, Lambda sends only one record to the function\. To avoid invoking the function with a small number of records, you can tell the event source to buffer records for up to five minutes by configuring a *batch window*\. Before invoking the function, Lambda continues to read records from the stream until it has gathered a full batch, or until the batch window expires\.
 
 If your function returns an error, Lambda retries the batch until processing succeeds or the data expires\. To avoid stalled shards, you can configure the event source mapping to retry with a smaller batch size, limit the number of retries, or discard records that are too old\. To retain discarded events, you can configure the event source mapping to send details about failed batches to an SQS queue or SNS topic\.
 
@@ -73,9 +79,7 @@ Your Lambda function is a consumer application for your data stream\. It process
 
 For standard iterators, Lambda polls each shard in your Kinesis stream for records at a base rate of once per second\. When more records are available, Lambda keeps processing batches until the function catches up with the stream\. The event source mapping shares read throughput with other consumers of the shard\.
 
-To minimize latency and maximize read throughput, create a data stream consumer\. Stream consumers get a dedicated connection to each shard that doesn't impact other applications reading from the stream\. The dedicated throughput can help if you have many applications reading the same data, or if you're reprocessing a stream with large records\.
-
-Stream consumers use HTTP/2 to reduce latency by pushing records to Lambda over a long\-lived connection and by compressing request headers\. You can create a stream consumer with the Kinesis [RegisterStreamConsumer](https://docs.aws.amazon.com/kinesis/latest/APIReference/API_RegisterStreamConsumer.html) API\.
+To minimize latency and maximize read throughput, create a data stream consumer with enhanced fan\-out\. Enhanced fan\-out consumers get a dedicated connection to each shard that doesn't impact other applications reading from the stream\. Stream consumers use HTTP/2 to reduce latency by pushing records to Lambda over a long\-lived connection and by compressing request headers\. You can create a stream consumer with the Kinesis [RegisterStreamConsumer](https://docs.aws.amazon.com/kinesis/latest/APIReference/API_RegisterStreamConsumer.html) API\.
 
 ```
 $ aws kinesis register-stream-consumer --consumer-name con1 \
@@ -92,7 +96,7 @@ $ aws kinesis register-stream-consumer --consumer-name con1 \
 
 To increase the speed at which your function processes records, add shards to your data stream\. Lambda processes records in each shard in order\. It stops processing additional records in a shard if your function returns an error\. With more shards, there are more batches being processed at once, which lowers the impact of errors on concurrency\.
 
-If your function can't scale up to handle the total number of concurrent batches, [request a limit increase](gettingstarted-limits.md) or [reserve concurrency](configuration-concurrency.md) for your function\.
+If your function can't scale up to handle the total number of concurrent batches, [request a quota increase](gettingstarted-limits.md) or [reserve concurrency](configuration-concurrency.md) for your function\.
 
 ## Execution role permissions<a name="events-kinesis-permissions"></a>
 
@@ -250,7 +254,7 @@ $ aws lambda update-event-source-mapping --uuid 2b733gdc-8ac3-cdf5-af3a-1827b3b1
 
 The event source mapping that reads records from your Kinesis stream invokes your function synchronously and retries on errors\. If the function is throttled or the Lambda service returns an error without invoking the function, Lambda retries until the records expire or exceed the maximum age that you configure on the event source mapping\.
 
-If the function receives the records but returns an error, Lambda retries until the records in the batch expire, exceed the maximum age, or reach the configured retry limit\. For function errors, you can also configure the event source mapping to split a failed batch into two batches\. Retrying with smaller batches isolates bad records and works around timeout issues\. Splitting a batch does not count towards the retry limit\.
+If the function receives the records but returns an error, Lambda retries until the records in the batch expire, exceed the maximum age, or reach the configured retry quota\. For function errors, you can also configure the event source mapping to split a failed batch into two batches\. Retrying with smaller batches isolates bad records and works around timeout issues\. Splitting a batch does not count towards the retry quota\.
 
 If the error handling measures fail, Lambda discards the records and continues processing batches from the stream\. With the default settings, this means that a bad record can block processing on the affected shard for up to one week\. To avoid this, configure your function's event source mapping with a reasonable number of retries and a maximum record age that fits your use case\.
 

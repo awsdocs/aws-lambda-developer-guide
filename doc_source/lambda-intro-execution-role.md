@@ -109,8 +109,9 @@ $ aws iam attach-role-policy --role-name lambda-ex --policy-arn arn:aws:iam::aws
 
 The following managed policies provide permissions that are required to use Lambda features:
 + **AWSLambdaBasicExecutionRole** – Permission to upload logs to CloudWatch\.
-+ **AWSLambdaKinesisExecutionRole** – Permission to read events from an Amazon Kinesis data stream or consumer\.
 + **AWSLambdaDynamoDBExecutionRole** – Permission to read records from an Amazon DynamoDB stream\.
++ **AWSLambdaKinesisExecutionRole** – Permission to read events from an Amazon Kinesis data stream or consumer\.
++ **AWSLambdaMSKExecutionRole** – Permission to read records from an Amazon MSK cluster\.
 + **AWSLambdaSQSQueueExecutionRole** – Permission to read a message from an Amazon Simple Queue Service \(Amazon SQS\) queue\.
 + **AWSLambdaVPCAccessExecutionRole** – Permission to manage elastic network interfaces to connect your function to a VPC\.
 + **AWSXRayDaemonWriteAccess** – Permission to upload trace data to X\-Ray\.
@@ -120,8 +121,9 @@ For some features, the Lambda console attempts to add missing permissions to you
 When you use an [event source mapping](invocation-eventsourcemapping.md) to invoke your function, Lambda uses the execution role to read event data\. For example, an event source mapping for Amazon Kinesis reads events from a data stream and sends them to your function in batches\. You can use event source mappings with the following services:
 
 **Services that Lambda reads events from**
-+ [Amazon Kinesis](with-kinesis.md)
 + [Amazon DynamoDB](with-ddb.md)
++ [Amazon Kinesis](with-kinesis.md)
++ [Amazon Managed Streaming for Apache Kafka](with-msk.md)
 + [Amazon Simple Queue Service](with-sqs.md)
 
 In addition to the managed policies, the Lambda console provides templates for creating a custom policy that has the permissions related to additional use cases\. When you create a function in the Lambda console, you can choose to create a new execution role with permissions from one or more templates\. These templates are also applied automatically when you create a function from a blueprint, or when you configure options that require access to other services\. Example templates are available in this guide's [GitHub repository](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/iam-policies)\.

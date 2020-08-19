@@ -4,9 +4,9 @@ The first time you invoke your function, AWS Lambda creates an instance of the f
 
  Your functions' *concurrency* is the number of instances that serve requests at a given time\. For an initial burst of traffic, your functions' cumulative concurrency in a Region can reach an initial level of between 500 and 3000, which varies per Region\.
 
-**Burst concurrency limits**
+**Burst concurrency quotas**
 + **3000** – US West \(Oregon\), US East \(N\. Virginia\), Europe \(Ireland\)
-+ **1000** – Asia Pacific \(Tokyo\), Europe \(Frankfurt\)
++ **1000** – Asia Pacific \(Tokyo\), Europe \(Frankfurt\), US East \(Ohio\)
 + **500** – Other Regions
 
 After the initial burst, your functions' concurrency can scale by an additional 500 instances each minute\. This continues until there are enough instances to serve all requests, or until a concurrency limit is reached\. When requests come in faster than your function can scale, or when your function is at maximum concurrency, additional requests fail with a throttling error \(429 status code\)\.

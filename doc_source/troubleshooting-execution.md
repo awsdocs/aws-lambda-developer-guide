@@ -1,6 +1,6 @@
 # Troubleshoot execution issues in AWS Lambda<a name="troubleshooting-execution"></a>
 
-When the Lambda runtime executes your function code, the event might be processed on an instance of the function that's been processing events for some time, or it might require a new instance to be initialized\. Errors can occur when during function initialization, when your handler code processes the event, or when your function returns \(or fails to return\) a response\.
+When the Lambda runtime executes your function code, the event might be processed on an instance of the function that's been processing events for some time, or it might require a new instance to be initialized\. Errors can occur during function initialization, when your handler code processes the event, or when your function returns \(or fails to return\) a response\.
 
 Function execution errors can be caused by issues with your code, function configuration, downstream resources, or permissions\. If you invoke your function directly, you see function errors in the response from Lambda\. If you invoke your function asynchronously, with an event source mapping, or through another service, you might find errors in logs, a dead\-letter queue, or an on\-failure destination\. Error handling options and retry behavior vary depending on how you invoke your function and on the type of error\.
 

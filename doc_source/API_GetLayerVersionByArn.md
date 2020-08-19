@@ -29,18 +29,18 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "[CompatibleRuntimes](#SSS-GetLayerVersionByArn-response-CompatibleRuntimes)": [ "string" ],
-   "[Content](#SSS-GetLayerVersionByArn-response-Content)": { 
-      "[CodeSha256](API_LayerVersionContentOutput.md#SSS-Type-LayerVersionContentOutput-CodeSha256)": "string",
-      "[CodeSize](API_LayerVersionContentOutput.md#SSS-Type-LayerVersionContentOutput-CodeSize)": number,
-      "[Location](API_LayerVersionContentOutput.md#SSS-Type-LayerVersionContentOutput-Location)": "string"
+   "CompatibleRuntimes": [ "string" ],
+   "Content": { 
+      "CodeSha256": "string",
+      "CodeSize": number,
+      "Location": "string"
    },
-   "[CreatedDate](#SSS-GetLayerVersionByArn-response-CreatedDate)": "string",
-   "[Description](#SSS-GetLayerVersionByArn-response-Description)": "string",
-   "[LayerArn](#SSS-GetLayerVersionByArn-response-LayerArn)": "string",
-   "[LayerVersionArn](#SSS-GetLayerVersionByArn-response-LayerVersionArn)": "string",
-   "[LicenseInfo](#SSS-GetLayerVersionByArn-response-LicenseInfo)": "string",
-   "[Version](#SSS-GetLayerVersionByArn-response-Version)": number
+   "CreatedDate": "string",
+   "Description": "string",
+   "LayerArn": "string",
+   "LayerVersionArn": "string",
+   "LicenseInfo": "string",
+   "Version": number
 }
 ```
 

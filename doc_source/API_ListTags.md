@@ -28,7 +28,7 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "[Tags](#SSS-ListTags-response-Tags)": { 
+   "Tags": { 
       "string" : "string" 
    }
 }

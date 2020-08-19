@@ -49,13 +49,13 @@ Valid Range: Minimum value of 0\. Maximum value of 300\.
 Required: No
 
  **MaximumRecordAgeInSeconds**   <a name="SSS-Type-EventSourceMappingConfiguration-MaximumRecordAgeInSeconds"></a>
-\(Streams\) The maximum age of a record that Lambda sends to a function for processing\.  
+\(Streams\) Discard records older than the specified age\. The default value is infinite \(\-1\)\. When set to infinite \(\-1\), failed records are retried until the record expires\.  
 Type: Integer  
 Valid Range: Minimum value of 60\. Maximum value of 604800\.  
 Required: No
 
  **MaximumRetryAttempts**   <a name="SSS-Type-EventSourceMappingConfiguration-MaximumRetryAttempts"></a>
-\(Streams\) The maximum number of times to retry when the function returns an error\.  
+\(Streams\) Discard records after the specified number of retries\. The default value is infinite \(\-1\)\. When set to infinite \(\-1\), failed records are retried until the record expires\.  
 Type: Integer  
 Valid Range: Minimum value of 0\. Maximum value of 10000\.  
 Required: No
@@ -74,6 +74,14 @@ Required: No
  **StateTransitionReason**   <a name="SSS-Type-EventSourceMappingConfiguration-StateTransitionReason"></a>
 Indicates whether the last change to the event source mapping was made by a user, or by the Lambda service\.  
 Type: String  
+Required: No
+
+ **Topics**   <a name="SSS-Type-EventSourceMappingConfiguration-Topics"></a>
+ \(MSK\) The name of the Kafka topic\.   
+Type: Array of strings  
+Array Members: Fixed number of 1 item\.  
+Length Constraints: Minimum length of 1\. Maximum length of 249\.  
+Pattern: `^[^.]([a-zA-Z0-9\-_.]+)`   
 Required: No
 
  **UUID**   <a name="SSS-Type-EventSourceMappingConfiguration-UUID"></a>

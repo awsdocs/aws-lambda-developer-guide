@@ -13,7 +13,7 @@ PUT /2017-10-31/functions/FunctionName/concurrency HTTP/1.1
 Content-type: application/json
 
 {
-   "[ReservedConcurrentExecutions](#SSS-PutFunctionConcurrency-request-ReservedConcurrentExecutions)": number
+   "ReservedConcurrentExecutions": number
 }
 ```
 
@@ -50,7 +50,7 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "[ReservedConcurrentExecutions](#SSS-PutFunctionConcurrency-response-ReservedConcurrentExecutions)": number
+   "ReservedConcurrentExecutions": number
 }
 ```
 

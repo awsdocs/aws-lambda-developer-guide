@@ -11,15 +11,15 @@ POST /2018-10-31/layers/LayerName/versions HTTP/1.1
 Content-type: application/json
 
 {
-   "[CompatibleRuntimes](#SSS-PublishLayerVersion-request-CompatibleRuntimes)": [ "string" ],
-   "[Content](#SSS-PublishLayerVersion-request-Content)": { 
-      "[S3Bucket](API_LayerVersionContentInput.md#SSS-Type-LayerVersionContentInput-S3Bucket)": "string",
-      "[S3Key](API_LayerVersionContentInput.md#SSS-Type-LayerVersionContentInput-S3Key)": "string",
-      "[S3ObjectVersion](API_LayerVersionContentInput.md#SSS-Type-LayerVersionContentInput-S3ObjectVersion)": "string",
-      "[ZipFile](API_LayerVersionContentInput.md#SSS-Type-LayerVersionContentInput-ZipFile)": blob
+   "CompatibleRuntimes": [ "string" ],
+   "Content": { 
+      "S3Bucket": "string",
+      "S3Key": "string",
+      "S3ObjectVersion": "string",
+      "ZipFile": blob
    },
-   "[Description](#SSS-PublishLayerVersion-request-Description)": "string",
-   "[LicenseInfo](#SSS-PublishLayerVersion-request-LicenseInfo)": "string"
+   "Description": "string",
+   "LicenseInfo": "string"
 }
 ```
 
@@ -71,18 +71,18 @@ HTTP/1.1 201
 Content-type: application/json
 
 {
-   "[CompatibleRuntimes](#SSS-PublishLayerVersion-response-CompatibleRuntimes)": [ "string" ],
-   "[Content](#SSS-PublishLayerVersion-response-Content)": { 
-      "[CodeSha256](API_LayerVersionContentOutput.md#SSS-Type-LayerVersionContentOutput-CodeSha256)": "string",
-      "[CodeSize](API_LayerVersionContentOutput.md#SSS-Type-LayerVersionContentOutput-CodeSize)": number,
-      "[Location](API_LayerVersionContentOutput.md#SSS-Type-LayerVersionContentOutput-Location)": "string"
+   "CompatibleRuntimes": [ "string" ],
+   "Content": { 
+      "CodeSha256": "string",
+      "CodeSize": number,
+      "Location": "string"
    },
-   "[CreatedDate](#SSS-PublishLayerVersion-response-CreatedDate)": "string",
-   "[Description](#SSS-PublishLayerVersion-response-Description)": "string",
-   "[LayerArn](#SSS-PublishLayerVersion-response-LayerArn)": "string",
-   "[LayerVersionArn](#SSS-PublishLayerVersion-response-LayerVersionArn)": "string",
-   "[LicenseInfo](#SSS-PublishLayerVersion-response-LicenseInfo)": "string",
-   "[Version](#SSS-PublishLayerVersion-response-Version)": number
+   "CreatedDate": "string",
+   "Description": "string",
+   "LayerArn": "string",
+   "LayerVersionArn": "string",
+   "LicenseInfo": "string",
+   "Version": number
 }
 ```
 

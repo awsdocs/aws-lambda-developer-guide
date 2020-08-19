@@ -55,7 +55,7 @@ Invoke your Lambda function using the sample event data provided in the console\
 
 1. Run the Lambda function a few times to gather some metrics that you can view in the next step\.
 
-1. Choose **Monitoring**\. This page shows graphs for the metrics that Lambda sends to CloudWatch\.  
+1. From the tabs near the top of the page, choose **Monitoring**\. This page shows graphs for the metrics that Lambda sends to CloudWatch\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/metrics-functions-list.png)
 
    For more information on these graphs, see [Monitoring functions in the AWS Lambda console](monitoring-functions-access-metrics.md)\.

@@ -42,58 +42,58 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "[CodeSha256](#SSS-GetFunctionConfiguration-response-CodeSha256)": "string",
-   "[CodeSize](#SSS-GetFunctionConfiguration-response-CodeSize)": number,
-   "[DeadLetterConfig](#SSS-GetFunctionConfiguration-response-DeadLetterConfig)": { 
-      "[TargetArn](API_DeadLetterConfig.md#SSS-Type-DeadLetterConfig-TargetArn)": "string"
+   "CodeSha256": "string",
+   "CodeSize": number,
+   "DeadLetterConfig": { 
+      "TargetArn": "string"
    },
-   "[Description](#SSS-GetFunctionConfiguration-response-Description)": "string",
-   "[Environment](#SSS-GetFunctionConfiguration-response-Environment)": { 
-      "[Error](API_EnvironmentResponse.md#SSS-Type-EnvironmentResponse-Error)": { 
-         "[ErrorCode](API_EnvironmentError.md#SSS-Type-EnvironmentError-ErrorCode)": "string",
-         "[Message](API_EnvironmentError.md#SSS-Type-EnvironmentError-Message)": "string"
+   "Description": "string",
+   "Environment": { 
+      "Error": { 
+         "ErrorCode": "string",
+         "Message": "string"
       },
-      "[Variables](API_EnvironmentResponse.md#SSS-Type-EnvironmentResponse-Variables)": { 
+      "Variables": { 
          "string" : "string" 
       }
    },
-   "[FileSystemConfigs](#SSS-GetFunctionConfiguration-response-FileSystemConfigs)": [ 
+   "FileSystemConfigs": [ 
       { 
-         "[Arn](API_FileSystemConfig.md#SSS-Type-FileSystemConfig-Arn)": "string",
-         "[LocalMountPath](API_FileSystemConfig.md#SSS-Type-FileSystemConfig-LocalMountPath)": "string"
+         "Arn": "string",
+         "LocalMountPath": "string"
       }
    ],
-   "[FunctionArn](#SSS-GetFunctionConfiguration-response-FunctionArn)": "string",
-   "[FunctionName](#SSS-GetFunctionConfiguration-response-FunctionName)": "string",
-   "[Handler](#SSS-GetFunctionConfiguration-response-Handler)": "string",
-   "[KMSKeyArn](#SSS-GetFunctionConfiguration-response-KMSKeyArn)": "string",
-   "[LastModified](#SSS-GetFunctionConfiguration-response-LastModified)": "string",
-   "[LastUpdateStatus](#SSS-GetFunctionConfiguration-response-LastUpdateStatus)": "string",
-   "[LastUpdateStatusReason](#SSS-GetFunctionConfiguration-response-LastUpdateStatusReason)": "string",
-   "[LastUpdateStatusReasonCode](#SSS-GetFunctionConfiguration-response-LastUpdateStatusReasonCode)": "string",
-   "[Layers](#SSS-GetFunctionConfiguration-response-Layers)": [ 
+   "FunctionArn": "string",
+   "FunctionName": "string",
+   "Handler": "string",
+   "KMSKeyArn": "string",
+   "LastModified": "string",
+   "LastUpdateStatus": "string",
+   "LastUpdateStatusReason": "string",
+   "LastUpdateStatusReasonCode": "string",
+   "Layers": [ 
       { 
-         "[Arn](API_Layer.md#SSS-Type-Layer-Arn)": "string",
-         "[CodeSize](API_Layer.md#SSS-Type-Layer-CodeSize)": number
+         "Arn": "string",
+         "CodeSize": number
       }
    ],
-   "[MasterArn](#SSS-GetFunctionConfiguration-response-MasterArn)": "string",
-   "[MemorySize](#SSS-GetFunctionConfiguration-response-MemorySize)": number,
-   "[RevisionId](#SSS-GetFunctionConfiguration-response-RevisionId)": "string",
-   "[Role](#SSS-GetFunctionConfiguration-response-Role)": "string",
-   "[Runtime](#SSS-GetFunctionConfiguration-response-Runtime)": "string",
-   "[State](#SSS-GetFunctionConfiguration-response-State)": "string",
-   "[StateReason](#SSS-GetFunctionConfiguration-response-StateReason)": "string",
-   "[StateReasonCode](#SSS-GetFunctionConfiguration-response-StateReasonCode)": "string",
-   "[Timeout](#SSS-GetFunctionConfiguration-response-Timeout)": number,
-   "[TracingConfig](#SSS-GetFunctionConfiguration-response-TracingConfig)": { 
-      "[Mode](API_TracingConfigResponse.md#SSS-Type-TracingConfigResponse-Mode)": "string"
+   "MasterArn": "string",
+   "MemorySize": number,
+   "RevisionId": "string",
+   "Role": "string",
+   "Runtime": "string",
+   "State": "string",
+   "StateReason": "string",
+   "StateReasonCode": "string",
+   "Timeout": number,
+   "TracingConfig": { 
+      "Mode": "string"
    },
-   "[Version](#SSS-GetFunctionConfiguration-response-Version)": "string",
-   "[VpcConfig](#SSS-GetFunctionConfiguration-response-VpcConfig)": { 
-      "[SecurityGroupIds](API_VpcConfigResponse.md#SSS-Type-VpcConfigResponse-SecurityGroupIds)": [ "string" ],
-      "[SubnetIds](API_VpcConfigResponse.md#SSS-Type-VpcConfigResponse-SubnetIds)": [ "string" ],
-      "[VpcId](API_VpcConfigResponse.md#SSS-Type-VpcConfigResponse-VpcId)": "string"
+   "Version": "string",
+   "VpcConfig": { 
+      "SecurityGroupIds": [ "string" ],
+      "SubnetIds": [ "string" ],
+      "VpcId": "string"
    }
 }
 ```

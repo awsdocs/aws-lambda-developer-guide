@@ -163,18 +163,14 @@ The deployment package is a \.zip file containing your Lambda function code and 
 
 **To create a deployment package**
 
+1. Open a command line terminal or shell in a Linux environment\. Ensure that the Node\.js version in your local environment matches the Node\.js version of your function\. 
+
 1. Save the function code as `index.js` in a folder named `lambda-s3`\.
 
-1. Install the Sharp library with npm\. For Linux, use the following command\.
+1. Install the Sharp library with npm\.
 
    ```
    lambda-s3$ npm install sharp
-   ```
-
-   For macOS, use the following command\.
-
-   ```
-   lambda-s3$ npm install --arch=x64 --platform=linux --target=12.13.0  sharp
    ```
 
    After you complete this step, you will have the following folder structure:

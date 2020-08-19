@@ -34,21 +34,21 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "[Layers](#SSS-ListLayers-response-Layers)": [ 
+   "Layers": [ 
       { 
-         "[LatestMatchingVersion](API_LayersListItem.md#SSS-Type-LayersListItem-LatestMatchingVersion)": { 
-            "[CompatibleRuntimes](API_LayerVersionsListItem.md#SSS-Type-LayerVersionsListItem-CompatibleRuntimes)": [ "string" ],
-            "[CreatedDate](API_LayerVersionsListItem.md#SSS-Type-LayerVersionsListItem-CreatedDate)": "string",
-            "[Description](API_LayerVersionsListItem.md#SSS-Type-LayerVersionsListItem-Description)": "string",
-            "[LayerVersionArn](API_LayerVersionsListItem.md#SSS-Type-LayerVersionsListItem-LayerVersionArn)": "string",
-            "[LicenseInfo](API_LayerVersionsListItem.md#SSS-Type-LayerVersionsListItem-LicenseInfo)": "string",
-            "[Version](API_LayerVersionsListItem.md#SSS-Type-LayerVersionsListItem-Version)": number
+         "LatestMatchingVersion": { 
+            "CompatibleRuntimes": [ "string" ],
+            "CreatedDate": "string",
+            "Description": "string",
+            "LayerVersionArn": "string",
+            "LicenseInfo": "string",
+            "Version": number
          },
-         "[LayerArn](API_LayersListItem.md#SSS-Type-LayersListItem-LayerArn)": "string",
-         "[LayerName](API_LayersListItem.md#SSS-Type-LayersListItem-LayerName)": "string"
+         "LayerArn": "string",
+         "LayerName": "string"
       }
    ],
-   "[NextMarker](#SSS-ListLayers-response-NextMarker)": "string"
+   "NextMarker": "string"
 }
 ```
 

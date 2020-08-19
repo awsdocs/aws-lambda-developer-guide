@@ -13,9 +13,9 @@ POST /2015-03-31/functions/FunctionName/versions HTTP/1.1
 Content-type: application/json
 
 {
-   "[CodeSha256](#SSS-PublishVersion-request-CodeSha256)": "string",
-   "[Description](#SSS-PublishVersion-request-Description)": "string",
-   "[RevisionId](#SSS-PublishVersion-request-RevisionId)": "string"
+   "CodeSha256": "string",
+   "Description": "string",
+   "RevisionId": "string"
 }
 ```
 
@@ -62,58 +62,58 @@ HTTP/1.1 201
 Content-type: application/json
 
 {
-   "[CodeSha256](#SSS-PublishVersion-response-CodeSha256)": "string",
-   "[CodeSize](#SSS-PublishVersion-response-CodeSize)": number,
-   "[DeadLetterConfig](#SSS-PublishVersion-response-DeadLetterConfig)": { 
-      "[TargetArn](API_DeadLetterConfig.md#SSS-Type-DeadLetterConfig-TargetArn)": "string"
+   "CodeSha256": "string",
+   "CodeSize": number,
+   "DeadLetterConfig": { 
+      "TargetArn": "string"
    },
-   "[Description](#SSS-PublishVersion-response-Description)": "string",
-   "[Environment](#SSS-PublishVersion-response-Environment)": { 
-      "[Error](API_EnvironmentResponse.md#SSS-Type-EnvironmentResponse-Error)": { 
-         "[ErrorCode](API_EnvironmentError.md#SSS-Type-EnvironmentError-ErrorCode)": "string",
-         "[Message](API_EnvironmentError.md#SSS-Type-EnvironmentError-Message)": "string"
+   "Description": "string",
+   "Environment": { 
+      "Error": { 
+         "ErrorCode": "string",
+         "Message": "string"
       },
-      "[Variables](API_EnvironmentResponse.md#SSS-Type-EnvironmentResponse-Variables)": { 
+      "Variables": { 
          "string" : "string" 
       }
    },
-   "[FileSystemConfigs](#SSS-PublishVersion-response-FileSystemConfigs)": [ 
+   "FileSystemConfigs": [ 
       { 
-         "[Arn](API_FileSystemConfig.md#SSS-Type-FileSystemConfig-Arn)": "string",
-         "[LocalMountPath](API_FileSystemConfig.md#SSS-Type-FileSystemConfig-LocalMountPath)": "string"
+         "Arn": "string",
+         "LocalMountPath": "string"
       }
    ],
-   "[FunctionArn](#SSS-PublishVersion-response-FunctionArn)": "string",
-   "[FunctionName](#SSS-PublishVersion-response-FunctionName)": "string",
-   "[Handler](#SSS-PublishVersion-response-Handler)": "string",
-   "[KMSKeyArn](#SSS-PublishVersion-response-KMSKeyArn)": "string",
-   "[LastModified](#SSS-PublishVersion-response-LastModified)": "string",
-   "[LastUpdateStatus](#SSS-PublishVersion-response-LastUpdateStatus)": "string",
-   "[LastUpdateStatusReason](#SSS-PublishVersion-response-LastUpdateStatusReason)": "string",
-   "[LastUpdateStatusReasonCode](#SSS-PublishVersion-response-LastUpdateStatusReasonCode)": "string",
-   "[Layers](#SSS-PublishVersion-response-Layers)": [ 
+   "FunctionArn": "string",
+   "FunctionName": "string",
+   "Handler": "string",
+   "KMSKeyArn": "string",
+   "LastModified": "string",
+   "LastUpdateStatus": "string",
+   "LastUpdateStatusReason": "string",
+   "LastUpdateStatusReasonCode": "string",
+   "Layers": [ 
       { 
-         "[Arn](API_Layer.md#SSS-Type-Layer-Arn)": "string",
-         "[CodeSize](API_Layer.md#SSS-Type-Layer-CodeSize)": number
+         "Arn": "string",
+         "CodeSize": number
       }
    ],
-   "[MasterArn](#SSS-PublishVersion-response-MasterArn)": "string",
-   "[MemorySize](#SSS-PublishVersion-response-MemorySize)": number,
-   "[RevisionId](#SSS-PublishVersion-response-RevisionId)": "string",
-   "[Role](#SSS-PublishVersion-response-Role)": "string",
-   "[Runtime](#SSS-PublishVersion-response-Runtime)": "string",
-   "[State](#SSS-PublishVersion-response-State)": "string",
-   "[StateReason](#SSS-PublishVersion-response-StateReason)": "string",
-   "[StateReasonCode](#SSS-PublishVersion-response-StateReasonCode)": "string",
-   "[Timeout](#SSS-PublishVersion-response-Timeout)": number,
-   "[TracingConfig](#SSS-PublishVersion-response-TracingConfig)": { 
-      "[Mode](API_TracingConfigResponse.md#SSS-Type-TracingConfigResponse-Mode)": "string"
+   "MasterArn": "string",
+   "MemorySize": number,
+   "RevisionId": "string",
+   "Role": "string",
+   "Runtime": "string",
+   "State": "string",
+   "StateReason": "string",
+   "StateReasonCode": "string",
+   "Timeout": number,
+   "TracingConfig": { 
+      "Mode": "string"
    },
-   "[Version](#SSS-PublishVersion-response-Version)": "string",
-   "[VpcConfig](#SSS-PublishVersion-response-VpcConfig)": { 
-      "[SecurityGroupIds](API_VpcConfigResponse.md#SSS-Type-VpcConfigResponse-SecurityGroupIds)": [ "string" ],
-      "[SubnetIds](API_VpcConfigResponse.md#SSS-Type-VpcConfigResponse-SubnetIds)": [ "string" ],
-      "[VpcId](API_VpcConfigResponse.md#SSS-Type-VpcConfigResponse-VpcId)": "string"
+   "Version": "string",
+   "VpcConfig": { 
+      "SecurityGroupIds": [ "string" ],
+      "SubnetIds": [ "string" ],
+      "VpcId": "string"
    }
 }
 ```

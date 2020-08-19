@@ -41,12 +41,12 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "[AllocatedProvisionedConcurrentExecutions](#SSS-GetProvisionedConcurrencyConfig-response-AllocatedProvisionedConcurrentExecutions)": number,
-   "[AvailableProvisionedConcurrentExecutions](#SSS-GetProvisionedConcurrencyConfig-response-AvailableProvisionedConcurrentExecutions)": number,
-   "[LastModified](#SSS-GetProvisionedConcurrencyConfig-response-LastModified)": "string",
-   "[RequestedProvisionedConcurrentExecutions](#SSS-GetProvisionedConcurrencyConfig-response-RequestedProvisionedConcurrentExecutions)": number,
-   "[Status](#SSS-GetProvisionedConcurrencyConfig-response-Status)": "string",
-   "[StatusReason](#SSS-GetProvisionedConcurrencyConfig-response-StatusReason)": "string"
+   "AllocatedProvisionedConcurrentExecutions": number,
+   "AvailableProvisionedConcurrentExecutions": number,
+   "LastModified": "string",
+   "RequestedProvisionedConcurrentExecutions": number,
+   "Status": "string",
+   "StatusReason": "string"
 }
 ```
 

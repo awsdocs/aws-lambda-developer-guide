@@ -18,7 +18,7 @@ For more information, see [Managing AWS Lambda functions](lambda-functions.md)\.
 
 ## Qualifier<a name="gettingstarted-concepts-qualifier"></a>
 
-When you invoke or view a function, you can include a qualfier to specify a version or alias\. A version is an immutable snapshot of a function's code and configuration that has a numerical qualifier\. For example, `my-function:1`\. An alias is a pointer to a version that can be updated to map to a different version, or split traffic between two versions\. For example, `my-function:BLUE`\. You can use versions and aliases together to provide a stable interface for clients to invoke your function\.
+When you invoke or view a function, you can include a qualifier to specify a version or alias\. A version is an immutable snapshot of a function's code and configuration that has a numerical qualifier\. For example, `my-function:1`\. An alias is a pointer to a version that can be updated to map to a different version, or split traffic between two versions\. For example, `my-function:BLUE`\. You can use versions and aliases together to provide a stable interface for clients to invoke your function\.
 
 For more information, see [AWS Lambda function versions](configuration-versions.md)\.
 
@@ -65,7 +65,7 @@ For details on events from AWS services, see [Using AWS Lambda with other servic
 
 Concurrency is the number of requests that your function is serving at any given time\. When your function is invoked, Lambda provisions an instance of it to process the event\. When the function code finishes running, it can handle another request\. If the function is invoked again while a request is still being processed, another instance is provisioned, increasing the function's concurrency\.
 
-Concurrency is subject to limits at the region level\. You can also configure individual functions to limit their concurrency, or to ensure that they can reach a specific level of concurrency\. For more information, see [Managing concurrency for a Lambda function](configuration-concurrency.md)\.
+Concurrency is subject to quotas at the region level\. You can also configure individual functions to limit their concurrency, or to ensure that they can reach a specific level of concurrency\. For more information, see [Managing concurrency for a Lambda function](configuration-concurrency.md)\.
 
 ## Trigger<a name="gettingstarted-concepts-trigger"></a>
 
