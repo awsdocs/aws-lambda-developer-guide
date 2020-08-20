@@ -113,4 +113,5 @@ Layer actions let you restrict the layers that a user can manage or use with a f
 | Action | Resource | Condition | 
 | --- | --- | --- | 
 |   [AddLayerVersionPermission](API_AddLayerVersionPermission.md)  [RemoveLayerVersionPermission](API_RemoveLayerVersionPermission.md)  [GetLayerVersion](API_GetLayerVersion.md)  [GetLayerVersionPolicy](API_GetLayerVersionPolicy.md)  [DeleteLayerVersion](API_DeleteLayerVersion.md)  |  Layer version  | None | 
-|   [PublishLayerVersion](API_PublishLayerVersion.md)  [ListLayers](API_ListLayers.md)  [ListLayerVersions](API_ListLayerVersions.md)  |  Layer  | None | 
+|   [PublishLayerVersion](API_PublishLayerVersion.md)  [ListLayerVersions](API_ListLayerVersions.md)  |  Layer  | None | 
+|   [ListLayers](API_ListLayers.md)  |   `*`   | None | 
