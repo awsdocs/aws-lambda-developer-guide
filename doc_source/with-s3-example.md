@@ -304,7 +304,7 @@ This procedure configures the bucket to invoke your function every time an objec
 
 1. Under **Events**, configure a notification with the following settings\.
    + **Name** – **lambda\-trigger**\.
-   + **Events** – **ObjectCreate \(All\)**\.
+   + **Events** – **All object create events**\.
    + **Send to** – **Lambda function**\.
    + **Lambda** – **CreateThumbnail**\.
 
