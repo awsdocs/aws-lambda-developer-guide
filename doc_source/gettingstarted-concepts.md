@@ -20,7 +20,7 @@ For more information, see [Managing AWS Lambda functions](lambda-functions.md)\.
 
 When you invoke or view a function, you can include a qualifier to specify a version or alias\. A version is an immutable snapshot of a function's code and configuration that has a numerical qualifier\. For example, `my-function:1`\. An alias is a pointer to a version that can be updated to map to a different version, or split traffic between two versions\. For example, `my-function:BLUE`\. You can use versions and aliases together to provide a stable interface for clients to invoke your function\.
 
-For more information, see [AWS Lambda function versions](configuration-versions.md)\.
+For more information, see [Lambda function versions](configuration-versions.md)\.
 
 ## Runtime<a name="gettingstarted-concepts-runtimes"></a>
 

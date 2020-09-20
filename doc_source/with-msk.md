@@ -109,6 +109,10 @@ To manage event source mappings with the AWS CLI or AWS SDK, use the following A
 
 To create the event source mapping with the AWS Command Line Interface \(AWS CLI\), use the [https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/create-event-source-mapping.html](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/create-event-source-mapping.html) command\. Fetching records from Amazon MSK brokers requires access to an Amazon Virtual Private Cloud \(Amazon VPC\) associated with your MSK cluster\. To meet the Amazon VPC access requirements, you can configure one NAT gateway per public subnet\. For more information, see [Internet and service access for VPC\-connected functions](configuration-vpc.md#vpc-internet)\.
 
+The Amazon VPC security group rules you configure should have the following settings at minimum:
++ Inbound rules – Allow all traffic on all ports for the security group specified as your source\.
++ Outbound rules – Allow all traffic on all ports for all destinations\.
+
 The Amazon VPC configuration is discoverable through the [Amazon MSK API](https://docs.aws.amazon.com/msk/1.0/apireference/resources.html) and doesn't need to be configured in the `create-event-source-mapping` setup\.
 
 The following AWS CLI example maps a Lambda function named `my-kafka-function` to a Kafka topic named `AWSKafkaTopic`, with the starting position set to `latest`:

@@ -34,4 +34,4 @@ The two objects that the handler accepts are the invocation event and context\. 
 
 The function handler is executed every time your Lambda function is invoked\. Static code outside of the handler is executed once per instance of the function\. If your handler uses resources like SDK clients and database connections, you can create them outside of the handler method to reuse them for multiple invocations\.
 
-Each instance of your function can process multiple invocation events, but it only processes one event at a time\. The number of instances processing an event at any given time is your function's *concurrency*\. For more information about the Lambda execution context, see [AWS Lambda execution context](runtimes-context.md)\.
+Each instance of your function can process multiple invocation events, but it only processes one event at a time\. The number of instances processing an event at any given time is your function's *concurrency*\. For more information about the Lambda execution context, see [AWS Lambda execution contextManaging state machines in the Lambda console](runtimes-context.md)\.

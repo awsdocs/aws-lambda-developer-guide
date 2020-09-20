@@ -11,7 +11,7 @@ Valid Range: Minimum value of 1\. Maximum value of 10000\.
 Required: No
 
  **BisectBatchOnFunctionError**   <a name="SSS-Type-EventSourceMappingConfiguration-BisectBatchOnFunctionError"></a>
-\(Streams\) If the function returns an error, split the batch in two and retry\.  
+\(Streams\) If the function returns an error, split the batch in two and retry\. The default value is false\.  
 Type: Boolean  
 Required: No
 
@@ -43,7 +43,7 @@ Type: String
 Required: No
 
  **MaximumBatchingWindowInSeconds**   <a name="SSS-Type-EventSourceMappingConfiguration-MaximumBatchingWindowInSeconds"></a>
-\(Streams\) The maximum amount of time to gather records before invoking the function, in seconds\.  
+\(Streams\) The maximum amount of time to gather records before invoking the function, in seconds\. The default value is zero\.  
 Type: Integer  
 Valid Range: Minimum value of 0\. Maximum value of 300\.  
 Required: No
@@ -61,7 +61,7 @@ Valid Range: Minimum value of 0\. Maximum value of 10000\.
 Required: No
 
  **ParallelizationFactor**   <a name="SSS-Type-EventSourceMappingConfiguration-ParallelizationFactor"></a>
-\(Streams\) The number of batches to process from each shard concurrently\.  
+\(Streams\) The number of batches to process from each shard concurrently\. The default value is 1\.  
 Type: Integer  
 Valid Range: Minimum value of 1\. Maximum value of 10\.  
 Required: No

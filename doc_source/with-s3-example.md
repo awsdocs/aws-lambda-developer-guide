@@ -167,10 +167,16 @@ The deployment package is a \.zip file containing your Lambda function code and 
 
 1. Save the function code as `index.js` in a folder named `lambda-s3`\.
 
-1. Install the Sharp library with npm\.
+1. Install the Sharp library with npm\. For Linux, use the following command\.
 
    ```
    lambda-s3$ npm install sharp
+   ```
+
+   For macOS, use the following command\.
+
+   ```
+   lambda-s3$ npm install --arch=x64 --platform=linux --target=12.13.0  sharp
    ```
 
    After you complete this step, you will have the following folder structure:
@@ -319,3 +325,39 @@ Now you can test the setup as follows:
 1. Verify that the thumbnail was created in the target bucket using the `CreateThumbnail` function\.
 
 1. View logs in the CloudWatch console\. 
+
+## Clean up your resources<a name="cleanup"></a>
+
+You can now delete the resources that you created for this tutorial, unless you want to retain them\. By deleting AWS resources that you are no longer using, you prevent unnecessary charges to your AWS account\.
+
+**To delete the Lambda function**
+
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
+
+1. Select the function that you created\.
+
+1. Choose **Actions**, **Delete**\.
+
+1. Choose **Delete**\.
+
+**To delete the execution role**
+
+1. Open the [Roles page](https://console.aws.amazon.com/iam/home#/roles) of the IAM console\.
+
+1. Select the execution role that you created\.
+
+1. Choose **Delete role**\.
+
+1. Choose **Yes, delete**\.
+
+**To delete the S3 buckets**
+
+1. Open the [Amazon S3 console\.](https://console.aws.amazon.com/s3/home#)
+
+1. Select the source bucket you created\.
+
+1. Choose **Delete**\.
+
+1. Enter the name of the source bucket in the text box\.
+
+1. Choose **Confirm**\.

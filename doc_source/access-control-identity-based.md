@@ -167,7 +167,7 @@ The permissions in the policy are organized into statements based on the [resour
 
 This policy allows a user to get started with Lambda, without putting other users' resources at risk\. It doesn't allow a user to configure a function to be triggered by or call other AWS services, which requires broader IAM permissions\. It also doesn't include permission to services that don't support limited\-scope policies, like CloudWatch and X\-Ray\. Use the read\-only policies for these services to give the user access to metrics and trace data\.
 
-When you configure triggers for your function, you need access to use the AWS service that invokes your function\. For example, to configure an Amazon S3 trigger, you need permission to Amazon S3 actions to manage bucket notifications\. Many of these permissions are included in the **AWSLambdaFullAccess** managed policy\. Example policies are available in this guide's [GitHub repository](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/iam-policies)\.
+When you configure triggers for your function, you need access to use the AWS service that invokes your function\. For example, to configure an Amazon S3 trigger, you need permission to use the Amazon S3 actions that manage bucket notifications\. Many of these permissions are included in the **AWSLambdaFullAccess** managed policy\. Example policies are available in this guide's [GitHub repository](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/iam-policies)\.
 
 ## Layer development and use<a name="permissions-user-layer"></a>
 

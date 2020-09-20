@@ -41,7 +41,7 @@ To create or update a function with the Lambda API, create an archive that conta
      adding: lambda_function.py (deflated 17%)
    ```
 
-1. Use the `update-function-code` command to upload the package\.
+1. Use the [fileb://](https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-file.html#cli-usage-parameters-file-binary) prefix to upload the binary ZIP deployment package to Lambda and update the function code\.
 
    ```
    ~/my-function$ aws lambda update-function-code --function-name my-function --zip-file fileb://function.zip
@@ -103,7 +103,7 @@ In order for `--target` to work on [Debian\-based systems](https://github.com/py
      adding: lambda_function.py (deflated 56%)
    ```
 
-1. Update the function code\.
+1. Use the [fileb://](https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-file.html#cli-usage-parameters-file-binary) prefix to upload the binary ZIP deployment package to Lambda and update the function code\.
 
    ```
    ~/my-function$ aws lambda update-function-code --function-name my-function --zip-file fileb://function.zip
@@ -190,7 +190,7 @@ For Python 3\.3 and newer, you can use the built\-in [venv module](https://docs.
      adding: lambda_function.py (deflated 56%)
    ```
 
-1. Update the function code\.
+1. Use the [fileb://](https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-file.html#cli-usage-parameters-file-binary) prefix to upload the binary ZIP deployment package to Lambda and update the function code\.
 
    ```
    ~/my-function$ aws lambda update-function-code --function-name my-function --zip-file fileb://function.zip

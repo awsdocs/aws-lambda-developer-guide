@@ -48,7 +48,7 @@ The name of the file or class in your function's handler configuration doesn't m
 
 **Error:** *undefined method `handler' for \#<LambdaHandler:0x000055b76ccebf98>*
 
-**Error:** *No public method named handleRequest with appropriate method signature found on class class function\.Handler*
+**Error:** *No public method named handleRequest with appropriate method signature found on class function\.Handler*
 
 **Error:** *Unable to find method 'handleRequest' in type 'Function\.Handler' from assembly 'Function'*
 

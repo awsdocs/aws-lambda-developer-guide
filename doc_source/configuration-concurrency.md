@@ -27,9 +27,9 @@ To manage reserved concurrency settings for a function, use the Lambda console\.
 
 1. Choose a function\.
 
-1. Under **Concurrency**, choose **Reserve concurrency**\.
+1. Under **Concurrency**, choose **Edit**\. 
 
-1. Enter the amount of concurrency to reserve for the function\.
+1. Choose **Reserve concurrency**\. Enter the amount of concurrency to reserve for the function\.
 
 1. Choose **Save**\.
 

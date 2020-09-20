@@ -140,7 +140,7 @@ Lambda supports the following options for DynamoDB event sources\.
 + **Enabled** – Set to true to enable the event source mapping\. Set to false to stop processing records\. Lambda keeps track of the last record processed and resumes processing from that point when the mapping is reenabled\.
 
 **Note**  
-DynamoDB charges for read requests that Lambda makes to get records from the stream\. For pricing details, see [Amazon DynamoDB pricing](https://aws.amazon.com/dynamodb/pricing)\.
+You are not charged for GetRecords API calls invoked by Lambda as part of DynamoDB triggers\.
 
 To manage the event source configuration later, choose the trigger in the designer\.
 
