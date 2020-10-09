@@ -216,8 +216,6 @@ For the role parameter, replace the number sequence with your AWS account ID\. T
 $ aws lambda update-function-configuration --function-name CreateThumbnail --timeout 30
 ```
 
-If using version 2 of the AWS CLI, the command also needs '--cli-binary-format raw-in-base64-out'
-
 ## Test the Lambda function<a name="walkthrough-s3-events-adminuser-create-test-function-upload-zip-test-manual-invoke"></a>
 
 In this step, you invoke the Lambda function manually using sample Amazon S3 event data\.
