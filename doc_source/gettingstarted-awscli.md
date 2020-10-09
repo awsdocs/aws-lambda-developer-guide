@@ -209,7 +209,7 @@ $ ./get-logs.sh
 
 ## List the Lambda functions in your account<a name="with-userapp-walkthrough-custom-events-list-functions"></a>
 
-Execute the following AWS CLI `list-functions` command to retrieve a list of functions that you have created\. 
+Run the following AWS CLI `list-functions` command to retrieve a list of functions that you have created\. 
 
 ```
 $ aws lambda list-functions --max-items 10
@@ -274,7 +274,7 @@ For more information, see [GetFunction](API_GetFunction.md)\.
 
 ## Clean up<a name="with-userapp-walkthrough-custom-events-delete-function"></a>
 
-Execute the following `delete-function` command to delete the `my-function` function\.
+Run the following `delete-function` command to delete the `my-function` function\.
 
 ```
 $ aws lambda delete-function --function-name my-function

@@ -10,7 +10,7 @@ AWS Lambda supports multiple languages through the use of runtimes\. You choose 
 + Image – Custom
 + Linux kernel – 4\.14\.165\-102\.205\.amzn2\.x86\_64
 
-When your function is invoked, Lambda attempts to re\-use the execution environment from a previous invocation if one is available\. This saves time preparing the execution environment, and allows you to save resources like database connections and temporary files in the [execution context](runtimes-context.md) to avoid creating them every time your function runs\.
+When your function is invoked, Lambda attempts to re\-use the execution environment from a previous invocation if one is available\. This saves time preparing the execution environment, and allows you to save resources like database connections and temporary files in the [execution environment](runtimes-context.md) to avoid creating them every time your function runs\.
 
 A runtime can support a single version of a language, multiple versions of a language, or multiple languages\. Runtimes specific to a language or framework version are [deprecated](runtime-support-policy.md) when the version reaches end of life\.
 
@@ -27,10 +27,10 @@ A runtime can support a single version of a language, multiple versions of a lan
 
 | Name | Identifier | AWS SDK for Python | Operating system | 
 | --- | --- | --- | --- | 
-|  Python 3\.8  |  `python3.8`  |  boto3\-1\.14\.17 botocore\-1\.17\.17  |  Amazon Linux 2  | 
-|  Python 3\.7  |  `python3.7`  |  boto3\-1\.14\.17 botocore\-1\.17\.17  |  Amazon Linux  | 
-|  Python 3\.6  |  `python3.6`  |  boto3\-1\.14\.17 botocore\-1\.17\.17  |  Amazon Linux  | 
-|  Python 2\.7  |  `python2.7`  |  boto3\-1\.14\.17 botocore\-1\.17\.17  |  Amazon Linux  | 
+|  Python 3\.8  |  `python3.8`  |  boto3\-1\.14\.40 botocore\-1\.17\.40  |  Amazon Linux 2  | 
+|  Python 3\.7  |  `python3.7`  |  boto3\-1\.14\.40 botocore\-1\.17\.40  |  Amazon Linux  | 
+|  Python 3\.6  |  `python3.6`  |  boto3\-1\.14\.40 botocore\-1\.17\.40  |  Amazon Linux  | 
+|  Python 2\.7  |  `python2.7`  |  boto3\-1\.14\.40 botocore\-1\.17\.40  |  Amazon Linux  | 
 
 
 **Ruby runtimes**  
@@ -75,8 +75,10 @@ To use other languages in Lambda, you can implement a [custom runtime](runtimes-
 |  Custom Runtime  |  `provided`  |  Amazon Linux  | 
 
 **Topics**
-+ [AWS Lambda execution context](runtimes-context.md)
 + [Runtime support policy](runtime-support-policy.md)
++ [AWS Lambda execution environment](runtimes-context.md)
++ [AWS Lambda runtime API](runtimes-api.md)
++ [AWS Lambda Extensions API](runtimes-extensions-api.md)
++ [Modifying the runtime environment](runtimes-modify.md)
 + [Custom AWS Lambda runtimes](runtimes-custom.md)
-+ [AWS Lambda runtime interface](runtimes-api.md)
 + [Tutorial – Publishing a custom runtime](runtimes-walkthrough.md)

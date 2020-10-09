@@ -2,22 +2,6 @@
 
 You can configure a Lambda function to connect to private subnets in a virtual private cloud \(VPC\) in your AWS account\. Use Amazon Virtual Private Cloud \(Amazon VPC\) to create a private network for resources such as databases, cache instances, or internal services\. Connect your function to the VPC to access private resources during execution\.
 
-**To connect a function to a VPC**
-
-1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
-
-1. Choose a function\.
-
-1. Under **VPC**, choose **Edit**\.
-
-1. For **VPC connection**, choose **Custom VPC**\.
-
-1. Choose a VPC, subnets, and security groups\.
-**Note**  
-Connect your function to private subnets to access private resources\. If your function needs internet access, use [network address translation \(NAT\)](#vpc-internet)\. Connecting a function to a public subnet doesn't give it internet access or a public IP address\.
-
-1. Choose **Save**\.
-
 When you connect a function to a VPC, Lambda creates an [elastic network interface](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ElasticNetworkInterfaces.html) for each combination of security group and subnet in your function's VPC configuration\. This process can take about a minute\.
 
 While Lambda creates a network interface, you can't perform additional operations that target the function, such as [creating versions](configuration-versions.md) or updating the function's code\. For new functions, you can't invoke the function until its state changes from `Pending` to `Active`\. For existing functions, you can still invoke an earlier version while the update is in progress\. For more information about function states, see [Monitoring the state of a function with the Lambda API](functions-states.md)\.
@@ -28,15 +12,13 @@ If your functions aren't active for a long period of time, Lambda reclaims its n
 
 Lambda functions can't connect directly to a VPC with [ dedicated instance tenancy](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html)\. To connect to resources in a dedicated VPC, [peer it to a second VPC with default tenancy](https://aws.amazon.com/premiumsupport/knowledge-center/lambda-dedicated-vpc/)\.
 
-**VPC tutorials**
-+ [Tutorial: Configuring a Lambda function to access Amazon RDS in an Amazon VPC](services-rds-tutorial.md)
-+ [Tutorial: Configuring a Lambda function to access Amazon ElastiCache in an Amazon VPC](services-elasticache-tutorial.md)
-
 **Topics**
 + [Execution role and user permissions](#vpc-permissions)
-+ [Configuring VPC access with the Lambda API](#vpc-configuring)
++ [Configuring VPC access with the Lambda console](#vpc-configuring)
++ [Configuring VPC access with the Lambda API](#vpc-configuring-api)
 + [Using IAM condition keys for VPC settings](#vpc-conditions)
 + [Internet and service access for VPC\-connected functions](#vpc-internet)
++ [VPC tutorials](#vpc-tutorials)
 + [Sample VPC configurations](#vpc-samples)
 
 ## Execution role and user permissions<a name="vpc-permissions"></a>
@@ -57,7 +39,43 @@ When you configure VPC connectivity, Lambda uses your permissions to verify netw
 + **ec2:DescribeSubnets**
 + **ec2:DescribeVpcs**
 
-## Configuring VPC access with the Lambda API<a name="vpc-configuring"></a>
+## Configuring VPC access with the Lambda console<a name="vpc-configuring"></a>
+
+If your [IAM permissions](#vpc-conditions) allow you only to create Lambda functions that connect to your VPC, you must configure the VPC when you create the function\. If your IAM permissions allow you to create functions that aren't connected to your VPC, you can add the VPC configuration after you create the function\.
+
+**To configure a VPC when you create a function**
+
+1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+
+1. Choose **Create function**\.
+
+1. Under **Basic information**, for **Function name**, enter a name for your function\.
+
+1. Expand **Advanced settings**\.
+
+1. Under **Network**, choose a **VPC** for your function to access\.
+
+1. Choose subnets and security groups\. When you choose a security group, the console displays the inbound and outbound rules for that security group\.
+**Note**  
+To access private resources, connect your function to private subnets\. If your function needs internet access, use [network address translation \(NAT\)](#vpc-internet)\. Connecting a function to a public subnet doesn't give it internet access or a public IP address\.
+
+1. Choose **Create function**\.
+
+**To configure a VPC for an existing function**
+
+1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+
+1. Choose a function\.
+
+1. Under **VPC**, choose **Edit**\.
+
+1. Choose a VPC, subnets, and security groups\.
+**Note**  
+To access private resources, connect your function to private subnets\. If your function needs internet access, use [network address translation \(NAT\)](#vpc-internet)\. Connecting a function to a public subnet doesn't give it internet access or a public IP address\.
+
+1. Choose **Save**\.
+
+## Configuring VPC access with the Lambda API<a name="vpc-configuring-api"></a>
 
 To connect a Lambda function to a VPC, you can use the following API operations:
 + [CreateFunction](API_CreateFunction.md)
@@ -268,6 +286,12 @@ By default, Lambda runs your functions in a secure VPC with access to AWS servic
 Several AWS services offer [VPC endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html)\. You can use VPC endpoints to connect to AWS services from within a VPC without internet access\.
 
 Internet access from a private subnet requires network address translation \(NAT\)\. To give your function access to the internet, route outbound traffic to a [NAT gateway](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html) in a public subnet\. The NAT gateway has a public IP address and can connect to the internet through the VPC's internet gateway\. For more information, see [How do I give internet access to my Lambda function in a VPC?](https://aws.amazon.com/premiumsupport/knowledge-center/internet-access-lambda-function/)
+
+## VPC tutorials<a name="vpc-tutorials"></a>
+
+In the following tutorials, you connect a Lambda function to resources in your VPC\.
++ [Tutorial: Configuring a Lambda function to access Amazon RDS in an Amazon VPC](services-rds-tutorial.md)
++ [Tutorial: Configuring a Lambda function to access Amazon ElastiCache in an Amazon VPC](services-elasticache-tutorial.md)
 
 ## Sample VPC configurations<a name="vpc-samples"></a>
 

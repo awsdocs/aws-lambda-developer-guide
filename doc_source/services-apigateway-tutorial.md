@@ -213,7 +213,7 @@ Invoke the function manually using the sample event data\. We recommend that you
    }
    ```
 
-1.  Execute the following `invoke` command:
+1. Run the following `invoke` command:
 
    ```
    $ aws lambda  invoke --function-name LambdaFunctionOverHttps \

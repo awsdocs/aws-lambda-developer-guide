@@ -1,6 +1,6 @@
 # Building Lambda functions with Node\.js<a name="lambda-nodejs"></a>
 
-You can run JavaScript code with Node\.js in AWS Lambda\. Lambda provides [runtimes](lambda-runtimes.md) for Node\.js that execute your code to process events\. Your code runs in an environment that includes the AWS SDK for JavaScript, with credentials from an AWS Identity and Access Management \(IAM\) role that you manage\.
+You can run JavaScript code with Node\.js in AWS Lambda\. Lambda provides [runtimes](lambda-runtimes.md) for Node\.js that run your code to process events\. Your code runs in an environment that includes the AWS SDK for JavaScript, with credentials from an AWS Identity and Access Management \(IAM\) role that you manage\.
 
 Lambda supports the following Node\.js runtimes\.
 
@@ -49,7 +49,7 @@ You can add permissions to the role later, or swap it out for a different role t
 
 1. Choose **Create**\.
 
-1. To execute the function, choose **Test**\.
+1. To invoke the function, choose **Test**\.
 
 The console creates a Lambda function with a single source file named `index.js`\. You can edit this file and add more files in the built\-in [code editor](code-editor.md)\. To save your changes, choose **Save**\. Then, to run your code, choose **Test**\.
 

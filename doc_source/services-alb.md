@@ -53,7 +53,7 @@ Your function processes the event and returns a response document to the load ba
 }
 ```
 
-To configure an Application Load Balancer as a function trigger, grant Elastic Load Balancing permission to execute the function, create a target group that routes requests to the function, and add a rule to the load balancer that sends requests to the target group\.
+To configure an Application Load Balancer as a function trigger, grant Elastic Load Balancing permission to run the function, create a target group that routes requests to the function, and add a rule to the load balancer that sends requests to the target group\.
 
 Use the `add-permission` command to add a permission statement to your function's resource\-based policy\.
 

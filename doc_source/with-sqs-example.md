@@ -102,7 +102,7 @@ If the handler returns normally without exceptions, Lambda considers the message
    }
    ```
 
-1. Execute the following `invoke` command\. 
+1. Run the following `invoke` command\. 
 
    ```
    $ aws lambda invoke --function-name ProcessSQSRecord \
@@ -125,11 +125,11 @@ Create an Amazon SQS queue that the Lambda function can use as an event source\.
 
 Create an event source mapping in AWS Lambda\. This event source mapping associates the Amazon SQS queue with your Lambda function\. After you create this event source mapping, AWS Lambda starts polling the queue\.
 
-Test the end\-to\-end experience\. As you perform queue updates, Amazon Simple Queue Service writes messages to the queue\. AWS Lambda polls the queue, detects new records and executes your Lambda function on your behalf by passing events, in this case Amazon SQS messages, to the function\. 
+Test the end\-to\-end experience\. As you perform queue updates, Amazon Simple Queue Service writes messages to the queue\. AWS Lambda polls the queue, detects new records and invokes your Lambda function on your behalf by passing events, in this case Amazon SQS messages, to the function\. 
 
 ## Configure the event source<a name="with-sqs-attach-notification-configuration"></a>
 
-To create a mapping between the specified Amazon SQS queue and the Lambda function, run the following AWS CLI `create-event-source-mapping` command\. After the command executes, write down or otherwise record the UUID\. You'll need this UUID to refer to the event source mapping in any other commands, for example, if you choose to delete the event source mapping\.
+To create a mapping between the specified Amazon SQS queue and the Lambda function, run the following AWS CLI `create-event-source-mapping` command\. After the command runs, write down or otherwise record the UUID\. You'll need this UUID to refer to the event source mapping in any other commands, for example, if you choose to delete the event source mapping\.
 
 ```
 $ aws lambda create-event-source-mapping --function-name ProcessSQSRecord  --batch-size 10 \
@@ -153,4 +153,4 @@ Now you can test the setup as follows:
 
 1. AWS Lambda polls the queue and when it detects updates, it invokes your Lambda function by passing in the event data it finds in the queue\.
 
-1. Your function executes and creates logs in Amazon CloudWatch\. You can verify the logs reported in the Amazon CloudWatch console\.
+1. Your function runs and creates logs in Amazon CloudWatch\. You can verify the logs reported in the Amazon CloudWatch console\.

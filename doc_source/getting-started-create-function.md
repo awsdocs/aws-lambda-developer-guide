@@ -1,6 +1,6 @@
 # Create a Lambda function with the console<a name="getting-started-create-function"></a>
 
-In this Getting Started exercise you create a Lambda function using the AWS Lambda console\. Next, you manually invoke the Lambda function using sample event data\. AWS Lambda executes the Lambda function and returns results\. You then verify execution results, including the logs that your Lambda function created and various CloudWatch metrics\. 
+In this Getting Started exercise you create a Lambda function using the AWS Lambda console\. Next, you manually invoke the Lambda function using sample event data\. AWS Lambda runs the Lambda function and returns results\. You then verify execution results, including the logs that your Lambda function created and various CloudWatch metrics\. 
 
 **To create a Lambda function**
 
@@ -44,7 +44,7 @@ Invoke your Lambda function using the sample event data provided in the console\
 
 1. Choose **Create** and then choose **Test**\. Each user can create up to 10 test events per function\. Those test events are not available to other users\.
 
-1. AWS Lambda executes your function on your behalf\. The `handler` in your Lambda function receives and then processes the sample event\. 
+1. AWS Lambda runs your function on your behalf\. The `handler` in your Lambda function receives and then processes the sample event\. 
 
 1. Upon successful execution, view results in the console\. 
    + The **Execution result** section shows the execution status as **succeeded** and also shows the function execution results, returned by the `return` statement\.

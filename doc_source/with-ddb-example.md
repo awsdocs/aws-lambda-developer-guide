@@ -174,7 +174,7 @@ In this step, you invoke your Lambda function manually using the `invoke` AWS La
 }
 ```
 
-Execute the following `invoke` command\. 
+Run the following `invoke` command\. 
 
 ```
 $ aws lambda invoke --function-name ProcessDynamoDBRecords --payload file://input.txt outputfile.txt
@@ -218,7 +218,7 @@ Write down the stream ARN\. You need this in the next step when you associate th
 
 Create an event source mapping in AWS Lambda\. This event source mapping associates the DynamoDB stream with your Lambda function\. After you create this event source mapping, AWS Lambda starts polling the stream\.
 
-Run the following AWS CLI `create-event-source-mapping` command\. After the command executes, note down the UUID\. You'll need this UUID to refer to the event source mapping in any commands, for example, when deleting the event source mapping\.
+Run the following AWS CLI `create-event-source-mapping` command\. After the command runs, note down the UUID\. You'll need this UUID to refer to the event source mapping in any commands, for example, when deleting the event source mapping\.
 
 ```
 $ aws lambda create-event-source-mapping --function-name ProcessDynamoDBRecords \
@@ -243,13 +243,13 @@ $ aws lambda list-event-source-mappings --function-name ProcessDynamoDBRecords
 
 ## Test the setup<a name="with-ddb-final-integration-test-no-iam"></a>
 
-Test the end\-to\-end experience\. As you perform table updates, DynamoDB writes event records to the stream\. As AWS Lambda polls the stream, it detects new records in the stream and executes your Lambda function on your behalf by passing events to the function\. 
+Test the end\-to\-end experience\. As you perform table updates, DynamoDB writes event records to the stream\. As AWS Lambda polls the stream, it detects new records in the stream and invokes your Lambda function on your behalf by passing events to the function\. 
 
 1. In the DynamoDB console, add, update, and delete items to the table\. DynamoDB writes records of these actions to the stream\.
 
 1. AWS Lambda polls the stream and when it detects updates to the stream, it invokes your Lambda function by passing in the event data it finds in the stream\.
 
-1. Your function executes and creates logs in Amazon CloudWatch\. You can verify the logs reported in the Amazon CloudWatch console\.
+1. Your function runs and creates logs in Amazon CloudWatch\. You can verify the logs reported in the Amazon CloudWatch console\.
 
 ## Clean up your resources<a name="cleanup"></a>
 

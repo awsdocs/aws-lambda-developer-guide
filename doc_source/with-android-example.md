@@ -87,7 +87,7 @@ Invoke the function manually using the sample event data\.
    {   "firstName": "first-name",   "lastName": "last-name" }
    ```
 
-1.  Execute the following `invoke` command:
+1.  Run the following `invoke` command:
 
    ```
    $ aws lambda  invoke --function-name AndroidBackendLambdaFunction \
@@ -96,7 +96,7 @@ Invoke the function manually using the sample event data\.
 
 ## Create an Amazon Cognito identity pool<a name="with-on-demand-custom-android-create-cognito-pool"></a>
 
-In this section, you create an Amazon Cognito identity pool\. The identity pool has two IAM roles\. You update the IAM role for unauthenticated users and grant permissions to execute the `AndroidBackendLambdaFunction` Lambda function\. 
+In this section, you create an Amazon Cognito identity pool\. The identity pool has two IAM roles\. You update the IAM role for unauthenticated users and grant permissions to run the `AndroidBackendLambdaFunction` Lambda function\. 
 
 For more information about IAM roles, see [IAM roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *IAM User Guide*\. For more information about Amazon Cognito services, see the [Amazon Cognito](https://aws.amazon.com/cognito/) product detail page\. 
 

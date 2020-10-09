@@ -1,4 +1,4 @@
-# AWS Lambda runtime interface<a name="runtimes-api"></a>
+# AWS Lambda runtime API<a name="runtimes-api"></a>
 
 AWS Lambda provides an HTTP API for [custom runtimes](runtimes-custom.md) to receive invocation events from Lambda and send response data back within the Lambda [execution environment](lambda-runtimes.md)\.
 

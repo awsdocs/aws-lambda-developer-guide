@@ -58,7 +58,7 @@ do
   # Extract request ID by scraping response headers received above
   REQUEST_ID=$(grep -Fi Lambda-Runtime-Aws-Request-Id "$HEADERS" | tr -d '[:space:]' | cut -d: -f2)
 
-  # Execute the handler function from the script
+  # Run the handler function from the script
   RESPONSE=$($(echo "$_HANDLER" | cut -d. -f2) "$EVENT_DATA")
 
   # Send the response

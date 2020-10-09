@@ -14,7 +14,7 @@ The Lambda console displays a list of your state machines in the current AWS Reg
 Choose a state machine to view a graphical representation of the workflow\. Steps highlighted in blue represent Lambda functions\. Use the graph controls to zoom in, zoom out, and center the graph\.
 
 **Note**  
-When a Lambda function is [dynamically referenced with JsonPath](https://docs.aws.amazon.com/step-functions/latest/dg/connect-parameters.html#connect-parameters-path) in the state machine definition, the function details cannot be shown in the Lambda console\. Instead, the function name is listed as a **Dynamic reference**, and the corresponding steps in the graph are grayed out\.
+When a Lambda function is [dynamically referenced with JsonPath](https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-paths.html) in the state machine definition, the function details cannot be shown in the Lambda console\. Instead, the function name is listed as a **Dynamic reference**, and the corresponding steps in the graph are grayed out\.
 
 **To view state machine details**
 

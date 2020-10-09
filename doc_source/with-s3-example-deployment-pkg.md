@@ -271,7 +271,7 @@ public class Handler implements
 }
 ```
 
-Amazon S3 invokes your Lambda function using the `Event` invocation type, where AWS Lambda executes the code asynchronously\. What you return does not matter\. However, in this case we are implementing an interface that requires us to specify a return type, so in this example the handler uses `String` as the return type\. 
+Amazon S3 invokes your Lambda function using the `Event` invocation type, where AWS Lambda runs the code asynchronously\. What you return does not matter\. However, in this case we are implementing an interface that requires us to specify a return type, so in this example the handler uses `String` as the return type\. 
 
 **Dependencies**
 + `aws-lambda-java-core`

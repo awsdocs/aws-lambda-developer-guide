@@ -31,7 +31,7 @@ CloudWatch Events invokes your function asynchronously with an event document th
 }
 ```
 
-You can also create a Lambda function and direct AWS Lambda to execute it on a regular schedule\. You can specify a fixed rate \(for example, execute a Lambda function every hour or 15 minutes\), or you can specify a Cron expression\.
+You can also create a Lambda function and direct AWS Lambda to invoke it on a regular schedule\. You can specify a fixed rate \(for example, invoke a Lambda function every hour or 15 minutes\), or you can specify a Cron expression\.
 
 **Example CloudWatch Events message event**  
 

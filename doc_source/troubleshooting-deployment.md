@@ -52,7 +52,7 @@ The name of the file or class in your function's handler configuration doesn't m
 
 **Error:** *Unable to find method 'handleRequest' in type 'Function\.Handler' from assembly 'Function'*
 
-The name of the handler method in your function's handler configuration doesn't match your code\. Each runtime defines a naming convention for handlers, such as *filename*\.*methodname*\. The handler is the method in your function's code that the runtime executes when your function is invoked\.
+The name of the handler method in your function's handler configuration doesn't match your code\. Each runtime defines a naming convention for handlers, such as *filename*\.*methodname*\. The handler is the method in your function's code that the runtime runs when your function is invoked\.
 
 For some languages, Lambda provides a library with an interface that expects a handler method to have a specific name\. For details about handler naming for each language, see the following topics\.
 + [Building Lambda functions with Node\.js](lambda-nodejs.md)

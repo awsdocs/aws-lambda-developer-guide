@@ -35,7 +35,7 @@ Note the following:
   + **name MyEvent**: An input type with a variable name of `name` whose value will be returned in the `return` statement\.
   + **string, error**: Returns two values: string for success and standard [error](https://golang.org/pkg/builtin/#error) information\. For more information on custom error handling, see [AWS Lambda function errors in Go](golang-exceptions.md)\.
   + **return fmt\.Sprintf\("Hello %s\!", name\), nil**: Simply returns a formatted "Hello" greeting with the name you supplied in the input event\. `nil` indicates there were no errors and the function executed successfully\.
-+ **func main\(\)**: The entry point that executes your Lambda function code\. This is required\.
++ **func main\(\)**: The entry point that runs your Lambda function code\. This is required\.
 
   By adding `lambda.Start(HandleRequest)` between `func main(){}` code brackets, your Lambda function will be executed\. Per Go language standards, the opening bracket, `{` must be placed directly at end the of the `main` function signature\.
 

@@ -25,7 +25,7 @@ CodePipeline invokes your function asynchronously with an event that contains de
                     "location": {
                         "type": "S3",
                         "s3Location": {
-                            "bucketName": "aws-us-west-2-123456789012-my-pipeline",
+                            "bucketName": "us-west-2-123456789012-my-pipeline",
                             "objectKey": "my-pipeline/test-api-2/TdOSFRV"
                         }
                     }
@@ -38,7 +38,7 @@ CodePipeline invokes your function asynchronously with an event that contains de
                     "location": {
                         "type": "S3",
                         "s3Location": {
-                            "bucketName": "aws-us-west-2-123456789012-my-pipeline",
+                            "bucketName": "us-west-2-123456789012-my-pipeline",
                             "objectKey": "my-pipeline/invokeOutp/D0YHsJn"
                         }
                     }

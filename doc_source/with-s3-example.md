@@ -204,6 +204,12 @@ The deployment package is a \.zip file containing your Lambda function code and 
   --role arn:aws:iam::123456789012:role/lambda-s3-role
   ```
 
+If you are using AWS CLI version 2, add the following command parameters: 
+
+```
+--cli-binary-format raw-in-base64-out
+```
+
 For the role parameter, replace the number sequence with your AWS account ID\. The preceding example command specifies a 10\-second timeout value as the function configuration\. Depending on the size of objects you upload, you might need to increase the timeout value using the following AWS CLI command\.
 
 ```

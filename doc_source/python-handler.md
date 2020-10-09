@@ -1,6 +1,6 @@
 # AWS Lambda function handler in Python<a name="python-handler"></a>
 
-At the time you create a Lambda function, you specify a *handler*, which is a function in your code, that AWS Lambda can invoke when the service executes your code\. Use the following general syntax structure when creating a handler function in Python\. 
+At the time you create a Lambda function, you specify a *handler*, which is a function in your code, that AWS Lambda can invoke when the service runs your code\. Use the following general syntax structure when creating a handler function in Python\. 
 
 ```
 def handler_name(event, context): 

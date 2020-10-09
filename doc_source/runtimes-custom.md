@@ -24,11 +24,11 @@ To use a custom runtime, set your function's runtime to `provided`\. The runtime
 ├── function.sh
 ```
 
-If there's a file named `bootstrap` in your deployment package, Lambda executes that file\. If not, Lambda looks for a runtime in the function's layers\. If the bootstrap file isn't found or isn't executable, your function returns an error upon invocation\.
+If there's a file named `bootstrap` in your deployment package, Lambda runs that file\. If not, Lambda looks for a runtime in the function's layers\. If the bootstrap file isn't found or isn't executable, your function returns an error upon invocation\.
 
 ## Building a custom runtime<a name="runtimes-custom-build"></a>
 
-A custom runtime's entry point is an executable file named `bootstrap`\. The bootstrap file can be the runtime, or it can invoke another file that creates the runtime\. The following example uses a bundled version of Node\.js to execute a JavaScript runtime in a separate file named `runtime.js`\.
+A custom runtime's entry point is an executable file named `bootstrap`\. The bootstrap file can be the runtime, or it can invoke another file that creates the runtime\. The following example uses a bundled version of Node\.js to run a JavaScript runtime in a separate file named `runtime.js`\.
 
 **Example bootstrap**  
 

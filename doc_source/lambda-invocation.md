@@ -19,4 +19,5 @@ Depending on who invokes your function and how it's invoked, scaling behavior an
 + [Monitoring the state of a function with the Lambda API](functions-states.md)
 + [AWS Lambda function scaling](invocation-scaling.md)
 + [Error handling and automatic retries in AWS Lambda](invocation-retries.md)
++ [Using AWS Lambda extensions](using-extensions.md)
 + [Invoking Lambda functions with the AWS Mobile SDK for Android](with-on-demand-custom-android.md)

@@ -70,9 +70,9 @@ For more information on resources and conditions for Lambda and other AWS servic
 
 **Topics**
 + [Function resource names](#function-resources)
-+ [Functions](#permissions-resources-function)
-+ [Event source mappings](#permissions-resources-eventsource)
-+ [Layers](#permissions-resources-layers)
++ [Function actions](#permissions-resources-function)
++ [Event source mapping actions](#permissions-resources-eventsource)
++ [Layer actions](#permissions-resources-layers)
 
 ## Function resource names<a name="function-resources"></a>
 
@@ -181,7 +181,7 @@ The following identity\-based policy statement denies access to the invoke actio
 }
 ```
 
-## Functions<a name="permissions-resources-function"></a>
+## Function actions<a name="permissions-resources-function"></a>
 
 Actions that operate on a function can be restricted to a specific function by function, version, or alias ARN, as described in the following table\. Actions that don't support resource restrictions can only be granted for all resources \(`*`\)\.
 
@@ -196,7 +196,7 @@ Actions that operate on a function can be restricted to a specific function by f
 |   [CreateAlias](API_CreateAlias.md)  [DeleteAlias](API_DeleteAlias.md)  [DeleteFunction](API_DeleteFunction.md)  [DeleteFunctionConcurrency](API_DeleteFunctionConcurrency.md)  [GetAlias](API_GetAlias.md)  [GetFunction](API_GetFunction.md)  [GetFunctionConfiguration](API_GetFunctionConfiguration.md)  [GetPolicy](API_GetPolicy.md)  [ListAliases](API_ListAliases.md)  [ListVersionsByFunction](API_ListVersionsByFunction.md)  [PublishVersion](API_PublishVersion.md)  [PutFunctionConcurrency](API_PutFunctionConcurrency.md)  [UpdateAlias](API_UpdateAlias.md)  [UpdateFunctionCode](API_UpdateFunctionCode.md)  |  Function  |  None  | 
 |   [GetAccountSettings](API_GetAccountSettings.md)  [ListFunctions](API_ListFunctions.md)  [ListTags](API_ListTags.md)  [TagResource](API_TagResource.md)  [UntagResource](API_UntagResource.md)  |  `*`  |  None  | 
 
-## Event source mappings<a name="permissions-resources-eventsource"></a>
+## Event source mapping actions<a name="permissions-resources-eventsource"></a>
 
 For event source mappings, delete and update permissions can be restricted to a specific event source\. The `lambda:FunctionArn` condition lets you restrict which functions a user can configure an event source to invoke\.
 
@@ -211,7 +211,7 @@ For these actions, the resource is the event source mapping, so Lambda provides 
 |   [CreateEventSourceMapping](API_CreateEventSourceMapping.md)  |  `*`  |   `lambda:FunctionArn`   | 
 |   [GetEventSourceMapping](API_GetEventSourceMapping.md)  [ListEventSourceMappings](API_ListEventSourceMappings.md)  |  `*`  |  None  | 
 
-## Layers<a name="permissions-resources-layers"></a>
+## Layer actions<a name="permissions-resources-layers"></a>
 
 Layer actions let you restrict the layers that a user can manage or use with a function\. Actions related to layer use and permissions act on a version of a layer, while `PublishLayerVersion` acts on a layer name\. You can use either with wildcards to restrict the layers that a user can work with by name\.
 

@@ -94,7 +94,7 @@ When the deployment process completes, invoke the function from the Lambda conso
 
 1. Choose **Test**\.
 
-The Lambda console executes your function and displays the result\. Expand the **Details** section under the result to see the output and execution details\.
+The Lambda console runs your function and displays the result\. Expand the **Details** section under the result to see the output and execution details\.
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/application-create-result.png)
 
@@ -326,7 +326,7 @@ You can continue to modify and use the sample to develop your own application\. 
 
 1. Open the [Amazon S3 console](https://console.aws.amazon.com/s3)\.
 
-1. Delete the artifact bucket – **aws\-*us\-east\-2*\-*123456789012*\-my\-app\-pipe**\.
+1. Delete the artifact bucket – ***us\-east\-2*\-*123456789012*\-my\-app\-pipe**\.
 
 1. Return to the AWS CloudFormation console and delete the infrastructure stack – **serverlessrepo\-my\-app\-toolchain**\.
 

@@ -15,13 +15,13 @@ With the function node selected in the designer, you can modify the following se
 
 **Function settings**
 + **Code** – The code and dependencies of your function\. For scripting languages, you can edit your function code in the embedded [editor](code-editor.md)\. To add libraries, or for languages that the editor doesn't support, upload a [deployment package](gettingstarted-features.md#gettingstarted-features-package)\. If your deployment package is larger than 50 MB, choose **Upload a file from Amazon S3**\.
-+ **Runtime** – The [Lambda runtime](lambda-runtimes.md) that executes your function\.
-+ **Handler** – The method that the runtime executes when your function is invoked, such as `index.handler`\. The first value is the name of the file or module\. The second value is the name of the method\.
++ **Runtime** – The [Lambda runtime](lambda-runtimes.md) that runs your function\.
++ **Handler** – The method that the runtime runs when your function is invoked, such as `index.handler`\. The first value is the name of the file or module\. The second value is the name of the method\.
 + **Environment variables** – Key\-value pairs that Lambda sets in the execution environment\. [ Use environment variables](configuration-envvars.md) to extend your function's configuration outside of code\.
 + **Tags** – Key\-value pairs that Lambda attaches to your function resource\. [Use tags](configuration-tags.md) to organize Lambda functions into groups for cost reporting and filtering in the Lambda console\.
 
   Tags apply to the entire function, including all versions and aliases\.
-+ **Execution role** – The [IAM role](lambda-intro-execution-role.md) that AWS Lambda assumes when it executes your function\.
++ **Execution role** – The [IAM role](lambda-intro-execution-role.md) that AWS Lambda assumes when it runs your function\.
 + **Description** – A description of the function\.
 + **Memory**– The amount of memory available to the function during execution\. Choose an amount [between 128 MB and 3,008 MB](gettingstarted-limits.md) in 64\-MB increments\.
 

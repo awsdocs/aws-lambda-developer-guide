@@ -148,7 +148,7 @@ $ aws lambda create-function --function-name  CreateTableAddRecordsAndRead --run
 
 ### Test the Lambda function<a name="vpc-rds-invoke-lambda-function"></a>
 
-In this step, you invoke the Lambda function manually using the `invoke` command\. When the Lambda function executes, it runs the SELECT query against the Employee table in the RDS MySQL instance and prints the results, which also go to the CloudWatch Logs\.
+In this step, you invoke the Lambda function manually using the `invoke` command\. When the Lambda function runs, it runs the SELECT query against the Employee table in the RDS MySQL instance and prints the results, which also go to the CloudWatch Logs\.
 
 1. Invoke the Lambda function with the `invoke` command\. 
 

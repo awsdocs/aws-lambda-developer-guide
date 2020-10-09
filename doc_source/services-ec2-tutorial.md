@@ -237,7 +237,7 @@ Run the code in Lambda as a starting point for creating a serverless application
    Lambda project successfully packaged: ec2spot.zip
    Uploading to ebd38e401cedd7d676d05d22b76f0209  1305107 / 1305107.0  (100.00%)
    Successfully packaged artifacts and wrote output template to file out.yaml.
-   Execute the following command to deploy the packaged template
+   Run the following command to deploy the packaged template
    aws cloudformation deploy --template-file out.yaml --stack-name <YOUR STACK NAME>
    
    Waiting for changeset to be created..

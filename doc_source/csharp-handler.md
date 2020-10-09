@@ -1,6 +1,6 @@
 # AWS Lambda function handler in C\#<a name="csharp-handler"></a>
 
-When you create a Lambda function, you specify a handler that AWS Lambda can invoke when the service executes the function on your behalf\. 
+When you create a Lambda function, you specify a handler that AWS Lambda can invoke when the service runs the function on your behalf\. 
 
 You define a Lambda function handler as an instance or static method in a class\. If you want access to the Lambda context object, it is available by defining a method parameter of type *ILambdaContext*, an interface you can use to access information about the current execution, such as the name of the current function, the memory limit, execution time remaining, and logging\. 
 
@@ -169,7 +169,7 @@ Note that there are some restrictions on the handler signature\.
 
 ## Using async in C\# functions with AWS Lambda<a name="csharp-handler-async"></a>
 
-If you know your Lambda function will require a long\-running process, such as uploading large files to Amazon S3 or reading a large stream of records from DynamoDB, you can take advantage of the async/await pattern\. When you use this signature, Lambda executes the function synchronously and waits for the function to return a response or for execution to [time out](configuration-console.md)\.
+If you know your Lambda function will require a long\-running process, such as uploading large files to Amazon S3 or reading a large stream of records from DynamoDB, you can take advantage of the async/await pattern\. When you use this signature, Lambda invokes the function synchronously and waits for the function to return a response or for execution to [time out](configuration-console.md)\.
 
 ```
 public async Task<Response> ProcessS3ImageResizeAsync(SimpleS3Event input)
@@ -181,7 +181,7 @@ public async Task<Response> ProcessS3ImageResizeAsync(SimpleS3Event input)
 
 If you use this pattern, there are some considerations you must take into account:
 + AWS Lambda does not support `async void` methods\.
-+ If you create an async Lambda function without implementing the `await` operator, \.NET will issue a compiler warning and you will observe unexpected behavior\. For example, some async actions will execute while others won't\. Or some async actions won't complete before the function execution is complete\.
++ If you create an async Lambda function without implementing the `await` operator, \.NET will issue a compiler warning and you will observe unexpected behavior\. For example, some async actions will run while others won't\. Or some async actions won't complete before the function execution is complete\.
 
   ```
   public async Task ProcessS3ImageResizeAsync(SimpleS3Event event) // Compiler warning

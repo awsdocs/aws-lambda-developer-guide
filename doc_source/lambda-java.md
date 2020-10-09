@@ -1,6 +1,6 @@
 # Building Lambda functions with Java<a name="lambda-java"></a>
 
-You can run Java code in AWS Lambda\. Lambda provides [runtimes](lambda-runtimes.md) for Java that execute your code to process events\. Your code runs in an Amazon Linux environment that includes AWS credentials from an AWS Identity and Access Management \(IAM\) role that you manage\.
+You can run Java code in AWS Lambda\. Lambda provides [runtimes](lambda-runtimes.md) for Java that run your code to process events\. Your code runs in an Amazon Linux environment that includes AWS credentials from an AWS Identity and Access Management \(IAM\) role that you manage\.
 
 Lambda supports the following Java runtimes\.
 
@@ -50,7 +50,7 @@ You can add permissions to the role later, or swap it out for a different role t
 
 1. Choose **Create**\.
 
-1. To execute the function, choose **Test**\.
+1. To invoke the function, choose **Test**\.
 
 The console creates a Lambda function with a handler class named `Hello`\. Since Java is a compiled language, you can't view or edit the source code in the Lambda console, but you can modify its configuration, invoke it, and configure triggers\.
 

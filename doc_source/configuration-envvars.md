@@ -27,9 +27,16 @@ You set environment variables on the unpublished version of your function by spe
 
 1. Choose **Save**\.
 
-Use environment variables to pass environment\-specific settings to your code\. For example, you can have two functions with the same code but different configuration\. One function connects to a test database, and the other connects to a production database\. In this situation, you use environment variables to tell the function the hostname and other connection details for the database\. You might also set an environment variable to configure your test environment to use more verbose logging or more detailed tracing\.
+Use environment variables to pass environment\-specific settings to your code\. For example, you can have two functions with the same code but different configuration\. One function connects to a test database, and the other connects to a production database\. In this situation, you use environment variables to tell the function the hostname and other connection details for the database\. 
+
+The following example shows how to define the database host and database name as environment variables\.
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/console-env.png)
+
+If you want your test environment to generate more debug information than the production environment, you could set an environment variable to configure your test environment to use more verbose logging or more detailed tracing\.
+
+**Note**  
+Environment variables are not evaluated prior to the function invocation\. Any value you define is considered a literal string and not expanded\. Perform the variable evaluation in the function code\.
 
 To retrieve environment variables in your function code, use the standard method for your programming language\.
 
@@ -99,6 +106,7 @@ Lambda [runtimes](lambda-runtimes.md) set several environment variables during i
 
 **Reserved environment variables**
 + `_HANDLER` – The handler location configured on the function\.
++ `_X_AMZN_TRACE_ID` – The [X\-Ray tracing header](services-xray.md)\.
 + `AWS_REGION` – The AWS Region where the Lambda function is executed\.
 + `AWS_EXECUTION_ENV` – The [runtime identifier](lambda-runtimes.md), prefixed by `AWS_Lambda_`—for example, `AWS_Lambda_java8`\.
 + `AWS_LAMBDA_FUNCTION_NAME` – The name of the function\.
@@ -120,7 +128,6 @@ The following additional environment variables aren't reserved and can be extend
 + `NODE_PATH` – \([Node\.js](lambda-nodejs.md)\) The Node\.js library path \(`/opt/nodejs/node12/node_modules/:/opt/nodejs/node_modules:$LAMBDA_RUNTIME_DIR/node_modules`\)\.
 + `PYTHONPATH` – \([Python 2\.7, 3\.6, 3\.8](lambda-python.md)\) The Python library path \(`$LAMBDA_RUNTIME_DIR`\)\.
 + `GEM_PATH` – \([Ruby](lambda-ruby.md)\) The Ruby library path \(`$LAMBDA_TASK_ROOT/vendor/bundle/ruby/2.5.0:/opt/ruby/gems/2.5.0`\)\.
-+ `_X_AMZN_TRACE_ID` – The [X\-Ray tracing header](services-xray.md)\.
 + `AWS_XRAY_CONTEXT_MISSING` – For X\-Ray tracing, Lambda sets this to `LOG_ERROR` to avoid throwing runtime errors from the X\-Ray SDK\.
 + `AWS_XRAY_DAEMON_ADDRESS` – For X\-Ray tracing, the IP address and port of the X\-Ray daemon\.
 

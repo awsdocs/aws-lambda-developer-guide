@@ -162,8 +162,7 @@ Resources:
       FileSystemConfigs:
       - 
         Arn: !Sub
-          - "arn:aws:elasticfilesystem:eu-central-1:123456789101:access-point/${ap}"
-          - {ap: !Ref AccessPoint}
+          - "arn:aws:elasticfilesystem:eu-central-1:123456789101:access-point/fsap-015cxmplb72b405fd"
         LocalMountPath: "/mnt/efs0"
     DependsOn: "MountTarget1"
 ```

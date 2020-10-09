@@ -118,7 +118,7 @@ You can find the subnet IDs and the default security group ID of your VPC from t
 
 ## Test the Lambda function<a name="vpc-ec-invoke-lambda-function"></a>
 
-In this step, you invoke the Lambda function manually using the `invoke` command\. When the Lambda function executes, it generates a UUID and writes it to the ElastiCache cluster that you specified in your Lambda code\. The Lambda function then retrieves the item from the cache\.
+In this step, you invoke the Lambda function manually using the `invoke` command\. When the Lambda function runs, it generates a UUID and writes it to the ElastiCache cluster that you specified in your Lambda code\. The Lambda function then retrieves the item from the cache\.
 
 1. Invoke the Lambda function with the `invoke` command\.
 
