@@ -66,7 +66,7 @@ Your Lambda function's [execution role](lambda-intro-execution-role.md) needs th
 + [logs:CreateLogStream](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogStream.html)
 + [logs:PutLogEvents](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html)
 
-The AWS managed policy `AWSLambdaMSKExecutionRole` includes these permissions\. For more information, see [Managed policies for Lambda features](lambda-intro-execution-role.md#permissions-executionrole-features)\.
+The AWS managed policy `AWSLambdaMSKExecutionRole` includes these permissions\. For more information, see [AWS managed policies for Lambda features](lambda-intro-execution-role.md#permissions-executionrole-features)\.
 
 ## Configuring a topic as an event source<a name="services-msk-eventsourcemapping"></a>
 
@@ -76,7 +76,7 @@ To configure your function to read from Amazon MSK, create an **MSK** trigger in
 
 **To create a trigger**
 
-1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function\.
 

@@ -72,7 +72,7 @@ To view error output in the Lambda console, invoke it with a test event\.
 
 **To invoke a function in the Lambda console**
 
-1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function\.
 

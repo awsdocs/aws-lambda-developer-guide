@@ -66,7 +66,7 @@ If you are done working with the example function, delete it\. You can also dele
 
 **To delete a Lambda function**
 
-1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function\.
 

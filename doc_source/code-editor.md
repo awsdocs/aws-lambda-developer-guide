@@ -1,6 +1,6 @@
 # Creating functions using the AWS Lambda console editor<a name="code-editor"></a>
 
-The code editor in the AWS Lambda console enables you to write, test, and view the execution results of your Lambda function code\.
+The Lambda console provides a code editor for languages that do not require compiling, such as Node\.js or Python\. The code editor in the AWS Lambda console enables you to write, test, and view the execution results of your Lambda function code\.
 
 The code editor includes the *menu bar*, *windows*, and the *editor pane*\.
 

@@ -123,7 +123,7 @@ To configure your function to read from Kinesis in the Lambda console, create a 
 
 **To create a trigger**
 
-1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function\.
 
@@ -262,7 +262,7 @@ To retain a record of discarded batches, configure a failed\-event destination\.
 
 **To configure a destination for failed\-event records**
 
-1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function\.
 

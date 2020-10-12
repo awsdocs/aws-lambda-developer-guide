@@ -43,7 +43,7 @@ CloudWatch Events emits an event every minute, based on the schedule expression\
 
 Test the function with a sample event provided by the Lambda console\.
 
-1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose **lambda\-canary**\.
 
@@ -111,7 +111,7 @@ Update the function configuration to cause the function to return an error, whic
 
 **To trigger an alarm**
 
-1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose **lambda\-canary**\.
 

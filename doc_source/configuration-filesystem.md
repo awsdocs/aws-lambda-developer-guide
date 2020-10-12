@@ -9,7 +9,7 @@ If your function is not already connected to a VPC, see [Configuring a Lambda fu
 
 **To configure file system access**
 
-1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function\.
 

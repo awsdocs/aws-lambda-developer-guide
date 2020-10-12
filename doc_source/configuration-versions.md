@@ -12,7 +12,7 @@ You can change the function code and settings only on the unpublished version of
 
 **To create a new version of a function**
 
-1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose the name of the function that you want to publish\.
 

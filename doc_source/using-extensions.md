@@ -60,7 +60,7 @@ You add the extension to your function using the same method as you would for an
 
 **Add an extension to your function \(console\)**
 
-1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function\.
 
@@ -73,3 +73,10 @@ You add the extension to your function using the same method as you would for an
 1. For **Specify an ARN**, enter the Amazon Resource Name \(ARN\) of an extension layer\.
 
 1. Choose **Add**\.
+
+## Next steps<a name="using-extensions-next"></a>
+
+To learn more about extensions, we recommend the following resources:
++ To walk through a simple working example, see the [ Building Extensions for AWS Lambda](https://aws.amazon.com/blogs/compute/building-extensions-for-aws-lambda-in-preview/) blog post\. 
++ For information about extensions that are available from AWS Lambda Partners, see the [ Introducing AWS Lambda Extensions](https://aws.amazon.com/blogs/compute/introducing-aws-lambda-extensions-in-preview/) blog post\. 
++ Example extensions and wrapper scripts are available in the [GitHub repository of example extensions](https://github.com/aws-samples/aws-lambda-extensions/tree/main/custom-runtime-extension-demo)\. 

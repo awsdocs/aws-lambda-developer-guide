@@ -29,6 +29,9 @@ You share your extension as a [Lambda layer](configuration-layers.md) to make it
 
 You can install and manage extensions using the Lambda console, the AWS Command Line Interface \(AWS CLI\), or infrastructure as code \(IaC\) services and tools such as AWS CloudFormation, AWS Serverless Application Model \(AWS SAM\), and Terraform\.
 
+**Note**  
+Example extensions and wrapper scripts are available in the [GitHub repository of example extensions](https://github.com/aws-samples/aws-lambda-extensions/tree/main/custom-runtime-extension-demo)\. 
+
 ## Lambda execution environment lifecycle<a name="runtimes-extensions-api-lifecycle"></a>
 
 The lifecycle of the execution environment includes the following phases:
@@ -111,7 +114,7 @@ When Lambda is about to terminate the runtime, it sends a `Shutdown` event to th
 + 500 ms – a function with a registered internal extension\.
 + 2000 ms – a function with one or more registered external extensions\.
 
-For a function with external extensions, Lambda reserves up to 300 or 500 ms \(for a runtime without/with an internal extension\) for the runtime process to perform a graceful shutdown\. Lambda allocates the remainder of the 2000 ms limit for external extensions to shut down\.
+For a function with external extensions, Lambda reserves up to 300 ms \(500 ms for a runtime with an internal extension\) for the runtime process to perform a graceful shutdown\. Lambda allocates the remainder of the 2000 ms limit for external extensions to shut down\.
 
 If the runtime or an extension does not respond to the `Shutdown` event within the limit, Lambda terminates the process using a `SIGKILL` signal\.
 

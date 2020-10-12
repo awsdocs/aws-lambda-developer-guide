@@ -4,7 +4,7 @@
 
 You can use AWS Lambda to run your code in response to events, such as changes to data in an Amazon S3 bucket or an Amazon DynamoDB table; to run your code in response to HTTP requests using Amazon API Gateway; or invoke your code using API calls made using AWS SDKs\. With these capabilities, you can use Lambda to easily build data processing triggers for AWS services like Amazon S3 and Amazon DynamoDB, process streaming data stored in Kinesis, or create your own back end that operates at AWS scale, performance, and security\.
 
-You can also build serverless applications composed of functions that are triggered by events and automatically deploy them using CodePipeline and AWS CodeBuild\. For more information, see [AWS Lambda applications](deploying-lambda-apps.md)\.
+You can also build serverless applications composed of functions that are triggered by events and automatically deploy them using CodePipeline and CodeBuild\. For more information, see [AWS Lambda applications](deploying-lambda-apps.md)\.
 
 ## When should I use AWS Lambda?<a name="when-to-use-cloud-functions"></a>
 

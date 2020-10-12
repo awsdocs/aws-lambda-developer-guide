@@ -115,7 +115,7 @@ To configure your function to read from Amazon SQS in the Lambda console, create
 
 **To create a trigger**
 
-1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function\.
 

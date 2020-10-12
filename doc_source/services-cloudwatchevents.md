@@ -52,7 +52,7 @@ You can also create a Lambda function and direct AWS Lambda to invoke it on a re
 
 **To configure CloudWatch Events to invoke your function**
 
-1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function
 

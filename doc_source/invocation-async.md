@@ -51,7 +51,7 @@ Use the Lambda console to configure error handling settings on a function, a ver
 
 **To configure error handling**
 
-1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function\.
 
@@ -83,7 +83,7 @@ Add destinations to your function in the Lambda console's function designer\.
 
 **To configure a destination for asynchronous invocation records**
 
-1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function\.
 
@@ -202,7 +202,7 @@ After creating the target and updating your function's execution role, add the d
 
 **To configure a dead\-letter queue**
 
-1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function\.
 

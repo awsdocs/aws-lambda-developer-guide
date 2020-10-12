@@ -64,7 +64,7 @@ To create or update a function with the Lambda API, create an archive that conta
 If your function depends on libraries other than the SDK for Python \(Boto3\), install them to a local directory with [pip](https://pypi.org/project/pip/), and include them in your deployment package\.
 
 **Note**  
-For libraries that use extension modules written in C or C\+\+, build your deployment package in an Amazon Linux environment\. You can use the [SAM CLI build command](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-build.html), which uses Docker, or build your deployment package on Amazon EC2 or AWS CodeBuild\.
+For libraries that use extension modules written in C or C\+\+, build your deployment package in an Amazon Linux environment\. You can use the [SAM CLI build command](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-build.html), which uses Docker, or build your deployment package on Amazon EC2 or CodeBuild\.
 
 The following example shows how to create a deployment package that includes a common graphics library named Pillow\.
 
