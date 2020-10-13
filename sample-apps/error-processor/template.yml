@@ -84,7 +84,7 @@ Resources:
             await Promise.all([
               lambda.invoke({ FunctionName: functionName2 }).promise(),
               lambda.invoke({ FunctionName: functionName3 }).promise(),
-              new Promise(resolve => setTimeout(resolve, 10000))
+              new Promise(resolve => setTimeout(resolve, 15000))
             ])
             // Set log retention on all log groups
             await Promise.all([
