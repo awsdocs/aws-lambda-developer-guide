@@ -14,10 +14,10 @@ import [com\.amazonaws\.services\.lambda\.runtime\.LambdaLogger](https://github.
 ...
 
 // Handler value: example.Handler
-public class Handler implements RequestHandler<Map<String,String>, String>{
+public class Handler implements RequestHandler<Map<String,Object>, String>{
   Gson gson = new GsonBuilder().setPrettyPrinting().create();
   @Override
-  public String handleRequest(Map<String,String> event, Context context)
+  public String handleRequest(Map<String,Object> event, Context context)
   {
     LambdaLogger logger = context.getLogger();
     String response = new String("200 OK");
@@ -116,7 +116,7 @@ The `RequestHandler` interface is a generic type that takes two parameters: the 
 
 ```
 // Handler value: example.Handler
-public class Handler implements RequestHandler<Map<String,String>, String>{
+public class Handler implements RequestHandler<Map<String,Ojbect>, String>{
   @Override
   public String handleRequest(Map<String,String> event, Context context)
 ```
