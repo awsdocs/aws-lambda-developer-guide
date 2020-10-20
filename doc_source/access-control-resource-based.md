@@ -50,7 +50,7 @@ $ aws lambda add-permission --function-name my-function --action lambda:InvokeFu
 --principal sns.amazonaws.com --source-arn arn:aws:sns:us-east-2:123456789012:my-topic
 ```
 
-Some services can invoke functions in other accounts\. If you specify a source ARN that has your account ID in it, that isn't an issue\. For Amazon S3, however, the source is a bucket whose ARN doesn't have an account ID in it\. It's possible that you could delete the bucket and another account could create a bucket with the same name\. Use the `account-id` option to ensure that only resources in your account can invoke the function\.
+Some services can invoke functions in other accounts\. If you specify a source ARN that has your account ID in it, that isn't an issue\. For Amazon S3, however, the source is a bucket whose ARN doesn't have an account ID in it\. It's possible that you could delete the bucket and another account could create a bucket with the same name\. Use the `source-account` option and specify `account-id` to ensure that only resources in your account can invoke the function\.
 
 ```
 $ aws lambda add-permission --function-name my-function --action lambda:InvokeFunction --statement-id s3-account \
@@ -87,7 +87,7 @@ You can grant cross\-account access for most API actions that [operate on an exi
 
 **Cross\-account APIs**
 
-Currently, Lambda doesn’t currently support cross\-account actions for all of its APIs via resource\-based policies\. The following APIs are supported: 
+Currently, Lambda doesn’t currently support cross\-account actions for all of its APIs via resource\-based policies\. The following APIs are supported:
 + [Invoke](API_Invoke.md)
 + [GetFunction](API_GetFunction.md)
 + [GetFunctionConfiguration](API_GetFunctionConfiguration.md)
@@ -126,7 +126,7 @@ To grant permission to all accounts in an organization, use the `organization-id
 ```
 $ aws lambda add-layer-version-permission --layer-name my-layer \
 --statement-id engineering-org --version-number 3 --principal '*' \
---action lambda:GetLayerVersion --organization-id o-t194hfs8cz --output text 
+--action lambda:GetLayerVersion --organization-id o-t194hfs8cz --output text
 b0cd9796-d4eb-4564-939f-de7fe0b42236    {"Sid":"engineering-org","Effect":"Allow","Principal":"*","Action":"lambda:GetLayerVersion","Resource":"arn:aws:lambda:us-east-2:123456789012:layer:my-layer:3","Condition":{"StringEquals":{"aws:PrincipalOrgID":"o-t194hfs8cz"}}}"
 ```
 
