@@ -29,6 +29,19 @@ When active tracing is enabled, Lambda records a trace for a subset of invocatio
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/xray-servicemap-function.png)
 
+**Configuration**
+
+The Lambda runtime sets some environment variables to configure the X-Ray SDK, including `AWS_XRAY_CONTEXT_MISSING`. To set a custom context missing strategy, override the environment variable in your function configuration to have no value, and then you can set the context missing strategy programmatically. For more information, see [Runtime Environment Variables](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-runtime).
+
+**Example initialization code**
+
+```
+const AWSXRay = require('aws-xray-sdk-core');
+
+// Configure the context missing strategy to do nothing
+AWSXRay.setContextMissingStrategy(() => {});
+```
+
 You can instrument your handler code to record metadata and trace downstream calls\. To record detail about calls that your handler makes to other resources and services, use the X\-Ray SDK for Node\.js\. To get the SDK, add the `aws-xray-sdk-core` package to your application's dependencies\.
 
 **Example [blank\-nodejs/package\.json](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-nodejs/package.json)**  
