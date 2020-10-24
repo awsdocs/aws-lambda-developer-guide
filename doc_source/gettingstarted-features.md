@@ -26,7 +26,7 @@ Initialization is billed as part of the duration for the first invocation proces
 
 Your function also has access to local storage in the `/tmp` directory\. Instances of your function that are serving requests remain active for a few hours before being recycled\.
 
-The runtime captures **logging** output from your function and sends it to Amazon CloudWatch Logs\. In addition to logging your function's output, the runtime also logs entries when execution starts and ends\. This includes a report log with the request ID, billed duration, initialization duration, and other details\. If your function throws an **error**, the runtime returns that error to the invoker\.
+The runtime captures **logging** output from your function and sends it to Amazon CloudWatch Logs\. In addition to logging your function's output, the runtime also logs entries when function invocation starts and ends\. This includes a report log with the request ID, billed duration, initialization duration, and other details\. If your function throws an **error**, the runtime returns that error to the invoker\.
 
 **Note**  
 Logging is subject to [CloudWatch Logs limits](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/cloudwatch_limits_cwl.html)\. Log data can be lost due to throttling or, in some cases, when an instance of your function is stopped\.

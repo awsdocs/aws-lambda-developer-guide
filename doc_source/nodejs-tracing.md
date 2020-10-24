@@ -31,9 +31,9 @@ When active tracing is enabled, Lambda records a trace for a subset of invocatio
 
 **Configuration**
 
-The Lambda runtime sets some environment variables to configure the X-Ray SDK, including `AWS_XRAY_CONTEXT_MISSING`. To set a custom context missing strategy, override the environment variable in your function configuration to have no value, and then you can set the context missing strategy programmatically. For more information, see [Runtime Environment Variables](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-runtime).
+ The Lambda runtime sets some environment variables to configure the X\-Ray SDK, including `AWS_XRAY_CONTEXT_MISSING`\. To set a custom context missing strategy, override the environment variable in your function configuration to have no value, and then you can set the context missing strategy programmatically\. For more information, see [Runtime environment variables](configuration-envvars.md#configuration-envvars-runtime)\.
 
-**Example initialization code**
+**Example initialization code**  
 
 ```
 const AWSXRay = require('aws-xray-sdk-core');

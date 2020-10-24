@@ -10,7 +10,8 @@ Lambda Insights is in public preview\. The preview is open to all AWS accounts, 
 + [Pricing](#monitoring-insights-pricing)
 + [Supported runtimes](#monitoring-insights-runtimes)
 + [Region availability](#monitoring-insights-regions)
-+ [Enabling Lambda Insights in the Lambda console](#monitoring-insights-enabling)
++ [Enabling Lambda Insights in the Lambda console](#monitoring-insights-enabling-console)
++ [Enabling Lambda Insights programmatically](#monitoring-insights-enabling-programmatically)
 + [Using the Lambda Insights dashboard](#monitoring-insights-multifunction)
 + [Example workflow to detect function anomalies](#monitoring-insights-anomalies)
 + [Example workflow using queries to troubleshoot a function](#monitoring-insights-queries)
@@ -62,12 +63,9 @@ For this preview release, Lambda Insights is currently available in the followin
 + Europe \(Stockholm\)
 + South America \(São Paulo\)
 
-## Enabling Lambda Insights in the Lambda console<a name="monitoring-insights-enabling"></a>
+## Enabling Lambda Insights in the Lambda console<a name="monitoring-insights-enabling-console"></a>
 
-You can enable Lambda Insights enhanced monitoring on new and existing Lambda functions\. When you turn on Lambda Insights in the Lambda console, Lambda adds the Lambda Insights [extension](https://docs.aws.amazon.com/lambda/latest/dg/using-extensions.html) as a layer to your function, and verifies or attempts to add the required permissions to your function's [execution role](https://docs.aws.amazon.com/lambda/latest/dg/lambda-intro-execution-role.html)\.
-
-**Note**  
-You can also enable Lambda Insights using the AWS Command Line Interface \(AWS CLI\) or the AWS Cloud Development Kit \(AWS CDK\)\. For more information, see [Getting started with Lambda Insights](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Lambda-Insights-Getting-Started.html) in the *Amazon CloudWatch User Guide*\.
+You can enable Lambda Insights enhanced monitoring on new and existing Lambda functions\. When you turn on Lambda Insights in the Lambda console, Lambda adds the Lambda Insights [extension](https://docs.aws.amazon.com/lambda/latest/dg/using-extensions.html) as a layer to your function, and verifies or attempts to attach the [https://console.aws.amazon.com/iam/home#/policies/arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy$jsonEditor](https://console.aws.amazon.com/iam/home#/policies/arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy$jsonEditor) policy to your function’s [execution role](https://docs.aws.amazon.com/lambda/latest/dg/lambda-intro-execution-role.html)\.
 
 **To enable Lambda Insights in the Lambda console**
 
@@ -75,24 +73,30 @@ You can also enable Lambda Insights using the AWS Command Line Interface \(AWS C
 
 1. Choose your function\.
 
-1. Choose the **Version configuration** tab\.
+1. Choose the **Configuration** tab\. 
 
 1. On the **Monitoring tools** pane, choose **Edit**\.
 
-1. Under **Lambda Insights**, turn on **Enhanced monitoring**\.  
+1. Under **Lambda Insights \(preview\)**, turn on **Enhanced monitoring**\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/lambdainsights-enable.png)
 
 1. Choose **Save**\.
 
+## Enabling Lambda Insights programmatically<a name="monitoring-insights-enabling-programmatically"></a>
+
+You can also enable Lambda Insights using the AWS Command Line Interface \(AWS CLI\), AWS Serverless Application Model \(SAM\) CLI, AWS CloudFormation, or the AWS Cloud Development Kit \(AWS CDK\)\. When you enable Lambda Insights programmatically, CloudWatch attaches the [https://console.aws.amazon.com/iam/home#/policies/arn:aws:iam::aws:policy/CloudWatchLambdaInsightsExecutionRolePolicy$jsonEditor](https://console.aws.amazon.com/iam/home#/policies/arn:aws:iam::aws:policy/CloudWatchLambdaInsightsExecutionRolePolicy$jsonEditor) policy to your function’s [execution role](https://docs.aws.amazon.com/lambda/latest/dg/lambda-intro-execution-role.html)\.
+
+For more information, see [Getting started with Lambda Insights](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Lambda-Insights-Getting-Started.html) in the *Amazon CloudWatch User Guide*\.
+
 ## Using the Lambda Insights dashboard<a name="monitoring-insights-multifunction"></a>
 
-The Lambda Insights dashboard has two views: the multi\-function overview and the single\-function view\. The multi\-function overview aggregates the runtime metrics for the Lambda functions in the current AWS account and Region\. The single\-function view shows the available runtime metrics for a single Lambda function\.
+The Lambda Insights dashboard has two views in the CloudWatch console: the multi\-function overview and the single\-function view\. The multi\-function overview aggregates the runtime metrics for the Lambda functions in the current AWS account and Region\. The single\-function view shows the available runtime metrics for a single Lambda function\.
+
+You can use the Lambda Insights dashboard multi\-function overview in the CloudWatch console to identify over\- and under\-utilized Lambda functions\. You can use the Lambda Insights dashboard single\-function view in the CloudWatch console to troubleshoot individual requests\.
 
 **To view the runtime metrics for all functions**
 
-You can use the Lambda Insights dashboard multi\-function overview to identify over\- and under\-utilized Lambda functions\.
-
-1. Open the [multi\-function overview](https://console.aws.amazon.com/cloudwatch/home#lambda-insights:performance) in the CloudWatch console\.
+1. Open the [Multi\-function](https://console.aws.amazon.com/cloudwatch/home#lambda-insights:performance) page in the CloudWatch console\.
 
 1. Choose from the predefined time ranges, or choose a custom time range\.
 
@@ -101,9 +105,7 @@ You can use the Lambda Insights dashboard multi\-function overview to identify o
 
 **To view the runtime metrics of a single function**
 
-You can use the Lambda Insights dashboard single\-function view to troubleshoot individual requests\.
-
-1. Open the [single\-function view](https://console.aws.amazon.com/cloudwatch/home#lambda-insights:functions) in the CloudWatch console\.
+1. Open the [Single\-function](https://console.aws.amazon.com/cloudwatch/home#lambda-insights:functions) page in the CloudWatch console\.
 
 1. Choose from the predefined time ranges, or choose a custom time range\.
 
@@ -118,7 +120,7 @@ You can use the multi\-function overview on the Lambda Insights dashboard to ide
 
 **To enable anomaly detection for a function**
 
-1. Open the [multi\-function overview](https://console.aws.amazon.com/cloudwatch/home#lambda-insights:performance) in the CloudWatch console\.
+1. Open the [Multi\-function](https://console.aws.amazon.com/cloudwatch/home#lambda-insights:performance) page in the CloudWatch console\.
 
 1. Under **Function summary**, choose your function's name\.
 
@@ -139,12 +141,12 @@ You can use the single\-function view on the Lambda Insights dashboard to identi
 
 **To run queries on a function**
 
-1. Open the [multi\-function overview](https://console.aws.amazon.com/cloudwatch/home#lambda-insights:performance) in the CloudWatch console\.
+1. Open the [Multi\-function](https://console.aws.amazon.com/cloudwatch/home#lambda-insights:performance) page in the CloudWatch console\.
 
 1. In the **Duration** pane, choose your function to filter the duration metrics\.  
 ![\[A function chosen in the Duration pane.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/lambdainsights-choose-function.png)
 
-1. Open the [single\-function view](https://console.aws.amazon.com/cloudwatch/home#lambda-insights:functions)\.
+1. Open the [Single\-function](https://console.aws.amazon.com/cloudwatch/home#lambda-insights:functions) page\.
 
 1. Choose the **Filter metrics by function name** dropdown list, and then choose your function\.
 

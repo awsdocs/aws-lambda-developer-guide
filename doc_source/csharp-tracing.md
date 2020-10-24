@@ -53,7 +53,7 @@ You can instrument your function code to record metadata and trace downstream ca
 </Project>
 ```
 
-To instrument AWS SDK clients, call the `RegisterXRayForAllServices` method in your initilization code\.
+To instrument AWS SDK clients, call the `RegisterXRayForAllServices` method in your initialization code\.
 
 **Example [src/blank\-csharp/Function\.cs](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-csharp/src/blank-csharp/Function.cs) – Initialize X\-Ray**  
 

@@ -23,10 +23,10 @@ To create a state machine that uses Lambda, you need the following components:
 ## State machine application patterns<a name="stepfunctions-application-patterns"></a>
 
 You can create complex orchestrations for state machines using application patterns such as:
-+ **Chaining** – Connect functions into a series of steps, with the output of one step providing the input to the next step\.
 + **Catch and retry** – Handle errors using sophisticated catch\-and\-retry functionality\.
-+ **Parallelism** – Run functions in parallel, or use dynamic parallelism to invoke a function for every member of any array\.
 + **Branching** – Design your workflow to choose different branches based on Lambda function output\.
++ **Chaining** – Connect functions into a series of steps, with the output of one step providing the input to the next step\. 
++ **Parallelism** – Run functions in parallel, or use dynamic parallelism to invoke a function for every member of any array\. 
 
 ## Applying patterns to state machines<a name="stepfunctions-patterns-state-machines"></a>
 
@@ -39,7 +39,7 @@ A `Catch` field and a `Retry` field add catch\-and\-retry logic to a state machi
 A `Choice` state adds branching logic to a state machine\. [Choice](https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-choice-state.html) \(`"Type": "Choice"`\) is an array of rules that determine which state the state machine transitions to next\.
 
 **Chaining**  
-A "chaining" pattern describes multiple Lambda functions connected together in a state machine\. You can use chaining to create reusable workflow invocations from a [Task](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-nested-workflows.html) \(`"Type": "Task"`\) state of a state machine\.
+A "Chaining" pattern describes multiple Lambda functions connected together in a state machine\. You can use chaining to create reusable workflow invocations from a [Task](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-nested-workflows.html) \(`"Type": "Task"`\) state of a state machine\.
 
 **Parallelism**  
 A `Parallel` state adds parallelism logic to a state machine\. You can use a [Parallel](https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-parallel-state.html) state \(`"Type": "Parallel"`\) to create parallel branches of invocation in your state machine\.
@@ -51,7 +51,7 @@ In addition to application patterns, Step Functions supports various [service in
 
 ## Example branching application pattern<a name="statemachine-example"></a>
 
-In the following example, the `WhichCoat` state machine shows a branching application pattern with a [Choice](https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-choice-state.html) state \(`"Type": "Choice"`\)\. If the condition of one of the three `Choice` states is met, the Lambda function is invoked as a [Task](https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-task-state.html):
+In the following example, the `WhichCoat` state machine defined in the Amazon States Language \(ASL\) definition shows a branching application pattern with a [Choice](https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-choice-state.html) state \(`"Type": "Choice"`\)\. If the condition of one of the three `Choice` states is met, the Lambda function is invoked as a [Task](https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-task-state.html):
 
 1. The `WearHeavyCoat` state invokes the `wear_heavy_coat` Lambda function and returns a message\.
 
@@ -64,7 +64,7 @@ The `WhichCoat` state machine has the following structure:
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-stepfunctions-wearcoat.png)
 
 **Example Amazon States Language definition**  
-The following Amazon States Language definition uses a `Variable` [context object](https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html) called `Weather`\. If one of the three conditions in `StringEquals` is met, the Lambda function defined in the [`Resource` field's Amazon Resource Name \(ARN\)](https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-task-state.html#amazon-states-language-task-state-specifying-resource-arns) is invoked\.  
+The following Amazon States Language definition of the `WhichCoat` state machine uses a `Variable` [context object](https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html) called `Weather`\. If one of the three conditions in `StringEquals` is met, the Lambda function defined in the [`Resource` field's Amazon Resource Name \(ARN\)](https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-task-state.html#amazon-states-language-task-state-specifying-resource-arns) is invoked\.  
 
 ```
 {

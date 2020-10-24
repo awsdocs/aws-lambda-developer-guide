@@ -1,12 +1,10 @@
 # AWS Lambda Extensions API<a name="runtimes-extensions-api"></a>
 
-You use the Extensions API to create Lambda extensions\. The Extensions API provides a simple way to extend the Lambda [ execution environment](runtimes-context.md)\.
+You use the Extensions API to create Lambda extensions\. Extensions provide a new way for monitoring, security and other tools to integrate with the Lambda [ execution environment](runtimes-context.md)\. For additional information, see [ Introducing AWS Lambda Extensions](https://aws.amazon.com/blogs/compute/introducing-aws-lambda-extensions-in-preview/)\.
 
 The Extensions API builds on the existing [Runtime API](runtimes-api.md), which provides an HTTP API for custom runtimes to receive invocation events from Lambda\. As an extension author, you can use the Extensions API to register for function and execution environment lifecycle events\. In response to these events, you can start new processes or run logic\.
 
-Lambda supports internal and external extensions\. *Internal extensions* allow you to configure the runtime environment and modify the startup of the runtime process\. Internal extensions use language\-specific environment variables and wrapper scripts, and start and shut down within the runtime process\. Internal extensions run as separate threads within the runtime process, which starts and stops them\.**
-
-**
+Lambda supports internal and external extensions\. *Internal extensions* allow you to configure the runtime environment and modify the startup of the runtime process\. Internal extensions use language\-specific environment variables and wrapper scripts, and start and shut down within the runtime process\. Internal extensions run as separate threads within the runtime process, which starts and stops them\.
 
 An *external extension* runs as an independent process in the execution environment and continues to run after the function invoke is fully processed\. An external extension must register for the `Shutdown` event, which triggers the extension to shut down\. Because external extensions run as processes, they can be written in a different language than the function\.
 
@@ -78,7 +76,13 @@ The `Invoke` phase ends after the runtime and all extensions signal that they ar
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/Invoke-Phase.png)
 
-**Event payload**: The event sent to the runtime \(and the Lambda function\) carries the entire request, headers \(such as `RequestId`\), and payload\. The event sent to the extensions carries only the headers\. Extensions that want to access the function event body can use an in\-runtime SDK that communicates with the extension\. Function developers use the in\-runtime SDK to send the payload to the extension when the function is invoked\.
+**Event payload**: 
+
+The event sent to each extension contains metadata that describes the event content\. This lifecycle event includes the type of the event, the time remaining, the `RequestId`, the invoked function ARN, and tracing headers\.
+
+The event sent to the runtime \(and the Lambda function\) carries the entire request, headers \(such as `RequestId`\), and payload\. The event sent to each extension contains metadata that describes the event content\. This lifecycle event includes the type of the event, the time remaining, the `RequestId`, the invoked function ARN, and tracing headers\. 
+
+Extensions that want to access the function event body can use an in\-runtime SDK that communicates with the extension\. Function developers use the in\-runtime SDK to send the payload to the extension when the function is invoked\.
 
 Here is an example payload:
 
@@ -97,7 +101,7 @@ Here is an example payload:
 
 **Duration limit**: The function's [timeout setting](configuration-console.md) limits the duration of the entire `Invoke` phase\. For example, if you set the function timeout as 360 seconds, the function and all extensions need to complete within 360 seconds\. Note that there is no independent post\-invoke phase\. The duration is the sum of all invocation time \(runtime \+ extensions\) and is not calculated until the function and all extensions have finished executing\.
 
-**Performance impact and extension overhead**: Extensions can impact function performance\. As an extension author, you have control over the performance impact of your extension\. For example, if your extension performs compute\-intensive operations, the function's execution duration increases because the extension and the function code share the same CPU resources\. In addition, if your extension performs extensive operations after the function invocation completes, the function execution duration increases because the `Invoke` phase continues until all extensions signal that they are completed\.
+**Performance impact and extension overhead**: Extensions can impact function performance\. As an extension author, you have control over the performance impact of your extension\. For example, if your extension performs compute\-intensive operations, the function's duration increases because the extension and the function code share the same CPU resources\. In addition, if your extension performs extensive operations after the function invocation completes, the function duration increases because the `Invoke` phase continues until all extensions signal that they are completed\.
 
 To help identify the overhead introduced by extensions on the `Invoke` phase, Lambda outputs the `PostRuntimeExecutionDuration` metric\. This metric measures the cumulative time spent between the runtime `Next` API request and the last extension `Next` API request\.
 
@@ -123,7 +127,7 @@ If the runtime or an extension does not respond to the `Shutdown` event within t
 **Event payload**: The `Shutdown` event contains the reason for the shutdown and the time remaining in milliseconds\.
 
  The `shutdownReason` includes the following values:
-+ SPIN\-DOWN – Normal shutdown 
++ SPINDOWN – Normal shutdown 
 + TIMEOUT – Duration limit timed out
 + FAILURE – Error condition, such as an `out-of-memory` event
 
@@ -207,7 +211,7 @@ Internal extensions are started and stopped by the runtime process, so they are 
 
 **Body parameters **
 
-`events` – Array of the events to register for\. Required: no\. Type: array of strings\.
+`events` – Array of the events to register for\. Required: no\. Type: array of strings\. Valid strings: `INVOKE`, `SHUTDOWN`\.
 
 **Response headers**
 + `Lambda-Extension-Identifier` – Generated unique agent identifier \(UUID string\) that is required for all subsequent requests\.
@@ -217,6 +221,16 @@ Internal extensions are started and stopped by the runtime process, so they are 
 + 400 – Bad Request 
 + 403 – Forbidden 
 + 500 – Container error\. Non\-recoverable state\. Extension should exit promptly\. 
+
+**Example response**
+
+```
+ {
+    "functionName": "helloWorld",
+    "functionVersion": "$LATEST",
+    "handler": "lambda_function.lambda_handler"
+}
+```
 
 ### Next<a name="extensions-api-next"></a>
 

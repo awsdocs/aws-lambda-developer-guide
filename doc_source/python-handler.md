@@ -8,6 +8,16 @@ def handler_name(event, context):
     return some_value
 ```
 
+## Naming<a name="Naming"></a>
+
+The Lambda function *handler* name specified at the time you create a Lambda function is derived from the following:
++ the name of the Python file in which the Lambda handler function is located
++ the name of the Python handler function
+
+If your handler function name is `call_amazon`, located in a file named `handler.py`\. The handler name you would specify when you create your Lambda function is `handler.call_amazon`\.
+
+## Syntax<a name="syntax"></a>
+
 In the syntax, note the following:
 + `event` – AWS Lambda uses this parameter to pass in event data to the handler\. This parameter is usually of the Python `dict` type\. It can also be `list`, `str`, `int`, `float`, or `NoneType` type\.
 
@@ -19,15 +29,19 @@ In the syntax, note the following:
   + If the handler returns `None`, as Python functions without a `return` statement implicitly do, the runtime returns `null`\.
   + If you use the `Event` invocation type \(asynchronous execution\), the value is discarded\.
 
+## Example<a name="example"></a>
+
 For example, consider the following Python example code\. 
 
 ```
 def my_handler(event, context):
-    message = 'Hello {} {}!'.format(event['first_name'], 
-                                    event['last_name'])  
-    return { 
-        'message' : message
-    }
+      message = 'Hello {} {}!'.format(event['first_name'], 
+                                      event['last_name'])  
+     return { 
+          'message' : message
+      }
 ```
 
 This example has one function called `my_handler`\. The function returns a message containing data from the event it received as input\. 
+
+For more information, see the following Python code for the [Amazon Simple Queue Service](https://docs.aws.amazon.com/lambda/latest/dg/with-sqs-create-package.html#with-sqs-example-deployment-pkg-python)\.

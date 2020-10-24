@@ -1,6 +1,6 @@
 # Synchronous invocation<a name="invocation-sync"></a>
 
-When you invoke a function synchronously, Lambda runs the function and waits for a response\. When the function execution ends, Lambda returns the response from the function's code with additional data, such as the version of the function that was executed\. To invoke a function synchronously with the AWS CLI, use the `invoke` command\.
+When you invoke a function synchronously, Lambda runs the function and waits for a response\. When the function completes, Lambda returns the response from the function's code with additional data, such as the version of the function that was invoked\. To invoke a function synchronously with the AWS CLI, use the `invoke` command\.
 
 ```
 $ aws lambda invoke --function-name my-function --payload '{ "key": "value" }' response.json

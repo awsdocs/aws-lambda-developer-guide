@@ -55,6 +55,13 @@ import os
 region = os.environ['AWS_REGION']
 ```
 
+**Note**  
+In some cases, you may need to use the following format:  
+
+```
+region = os.environ.get('AWS_REGION')
+```
+
 ------
 #### [ Ruby ]
 

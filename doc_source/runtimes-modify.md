@@ -15,7 +15,7 @@ Using language\-specific environment variables is the preferred way to set start
 
 ### Example: Intercept Lambda invokes with `javaagent`<a name="runtimes-envvars-ex1"></a>
 
-The Java virtual machine \(JVM\) tries to locate the class that was specified with the `javaagent` parameter to the JVM, and execute its `premain` method before the application's entry point\.
+The Java virtual machine \(JVM\) tries to locate the class that was specified with the `javaagent` parameter to the JVM, and invoke its `premain` method before the application's entry point\.
 
 The following example uses [Byte Buddy](https://bytebuddy.net/), a library for creating and modifying Java classes during the runtime of a Java application without the help of a compiler\. Byte Buddy offers an additional API for generating Java agents\. In this example, the `Agent` class intercepts every call of the `handleRequest` method made to the [RequestStreamHandler](https://github.com/aws/aws-lambda-java-libs/blob/master/aws-lambda-java-core/src/main/java/com/amazonaws/services/lambda/runtime/RequestStreamHandler.java) class\. This class is used internally in the runtime to wrap the handler invocations\.
 

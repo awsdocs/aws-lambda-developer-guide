@@ -1,6 +1,6 @@
 # Create a Lambda function with the console<a name="getting-started-create-function"></a>
 
-In this Getting Started exercise you create a Lambda function using the AWS Lambda console\. Next, you manually invoke the Lambda function using sample event data\. AWS Lambda runs the Lambda function and returns results\. You then verify execution results, including the logs that your Lambda function created and various CloudWatch metrics\. 
+In this Getting Started exercise you create a Lambda function using the AWS Lambda console\. Next, you manually invoke the Lambda function using sample event data\. Lambda runs the Lambda function and returns results\. You then verify the results, including the logs that your Lambda function created and various Amazon CloudWatch metrics\. 
 
 **To create a Lambda function**
 
@@ -44,14 +44,12 @@ Invoke your Lambda function using the sample event data provided in the console\
 
 1. Choose **Create** and then choose **Test**\. Each user can create up to 10 test events per function\. Those test events are not available to other users\.
 
-1. AWS Lambda runs your function on your behalf\. The `handler` in your Lambda function receives and then processes the sample event\. 
+1. Lambda runs your function on your behalf\. The `handler` in your Lambda function receives and then processes the sample event\. 
 
-1. Upon successful execution, view results in the console\. 
-   + The **Execution result** section shows the execution status as **succeeded** and also shows the function execution results, returned by the `return` statement\.
+1. Upon successful completion, view results in the console\. 
+   + The **Execution result** section \(below the **Test** button\) shows the execution status as succeeded\. Choose **Details** to view the function execution results\. Note that the **logs** link opens the Log groups page in the CloudWatch console\.
    + The **Summary** section shows the key information reported in the **Log output** section \(the *REPORT* line in the execution log\)\.
-   + The **Log output** section shows the log AWS Lambda generates for each execution\. These are the logs written to CloudWatch by the Lambda function\. The AWS Lambda console shows these logs for your convenience\.
-
-   Note that the **Click here** link shows logs in the CloudWatch console\. The function then adds logs to Amazon CloudWatch in the log group that corresponds to the Lambda function\.
+   + The **Log output** section shows the log Lambda generates for each invocation\. These are the logs written to CloudWatch by the Lambda function\. The Lambda console shows these logs for your convenience\. Choose the **Click here** link to add logs to the CloudWatch log group and open the Log groups page in the CloudWatch console\.
 
 1. Run the Lambda function a few times to gather some metrics that you can view in the next step\.
 

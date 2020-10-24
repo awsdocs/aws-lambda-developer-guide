@@ -10,7 +10,7 @@ The Amazon MSK event source mapping supports the following features:
 + Configurable starting positions and batch sizes\. The configurable starting positions supported are `TRIM_HORIZON` and `LATEST`\. They are not timestamp\-based\.
 
 The following Kafka features are not supported:
-+ Authentication – SSL and SASL authentication are not supported\.
++ Authentication – Mutual TLS and SASL authentication are not supported\.
 + Schema registry – You can host your own schema registry, but the Lambda API doesn't support this functionality\. For more information, see [Schema Management](https://docs.confluent.io/current/schema-registry/index.html) on the Confluent website\.
 
 **Topics**
@@ -107,7 +107,9 @@ To manage event source mappings with the AWS CLI or AWS SDK, use the following A
 + [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md)
 + [DeleteEventSourceMapping](API_DeleteEventSourceMapping.md)
 
-To create the event source mapping with the AWS Command Line Interface \(AWS CLI\), use the [https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/create-event-source-mapping.html](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/create-event-source-mapping.html) command\. Fetching records from Amazon MSK brokers requires access to an Amazon Virtual Private Cloud \(Amazon VPC\) associated with your MSK cluster\. To meet the Amazon VPC access requirements, you can configure one NAT gateway per public subnet\. For more information, see [Internet and service access for VPC\-connected functions](configuration-vpc.md#vpc-internet)\.
+To create the event source mapping with the AWS Command Line Interface \(AWS CLI\), use the [https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/create-event-source-mapping.html](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/create-event-source-mapping.html) command\. Fetching records from Amazon MSK brokers requires access to an Amazon Virtual Private Cloud \(Amazon VPC\) associated with your MSK cluster\. To meet the Amazon VPC access requirements, you can do one of the following:
++ Configure one NAT gateway per public subnet\. For more information, see [Internet and service access for VPC\-connected functions](configuration-vpc.md#vpc-internet)\.
++ Create a connection between your Amazon VPC and Lambda\. For more information, see [Configuring interface VPC endpoints for Lambda](configuration-vpc-endpoints.md)\.
 
 The Amazon VPC security group rules you configure should have the following settings at minimum:
 + Inbound rules – Allow all traffic on all ports for the security group specified as your source\.

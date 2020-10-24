@@ -23,7 +23,7 @@ With the function node selected in the designer, you can modify the following se
   Tags apply to the entire function, including all versions and aliases\.
 + **Execution role** – The [IAM role](lambda-intro-execution-role.md) that AWS Lambda assumes when it runs your function\.
 + **Description** – A description of the function\.
-+ **Memory**– The amount of memory available to the function during execution\. Choose an amount [between 128 MB and 3,008 MB](gettingstarted-limits.md) in 64\-MB increments\.
++ **Memory**– The amount of memory available to the function while it is running\. Choose an amount [between 128 MB and 3,008 MB](gettingstarted-limits.md) in 64\-MB increments\.
 
   Lambda allocates CPU power linearly in proportion to the amount of memory configured\. At 1,792 MB, a function has the equivalent of one full vCPU \(one vCPU\-second of credits per second\)\.
 + **Timeout** – The amount of time that Lambda allows a function to run before stopping it\. The default is 3 seconds\. The maximum allowed value is 900 seconds\.

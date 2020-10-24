@@ -1,6 +1,6 @@
 # Monitoring and troubleshooting Lambda applications<a name="lambda-monitoring"></a>
 
-Lambda automatically monitors Lambda functions on your behalf and reports metrics through Amazon CloudWatch\. To help you monitor your code as it executes, Lambda automatically tracks the number of requests, the execution duration per request, and the number of requests that result in an error\. Lambda also publishes the associated CloudWatch metrics\. You can leverage these metrics to set CloudWatch custom alarms\.
+Lambda automatically monitors Lambda functions on your behalf and reports metrics through Amazon CloudWatch\. To help you monitor your code as it executes, Lambda automatically tracks the number of requests, the invocation duration per request, and the number of requests that result in an error\. Lambda also publishes the associated CloudWatch metrics\. You can leverage these metrics to set CloudWatch custom alarms\.
 
 The Lambda console provides a built\-in [monitoring dashboard](monitoring-functions-access-metrics.md) for each of your functions and applications\.
 

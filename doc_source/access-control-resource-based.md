@@ -13,7 +13,33 @@ For Lambda functions, you can [grant an account permission](#permissions-resourc
 1. Choose **Permissions**\.
 
 1. The resource\-based policy shows the permissions that are applied when another account or AWS service attempts to access the function\. The following example shows a statement that allows Amazon S3 to invoke a function named `my-function` for a bucket named `my-bucket` in account `123456789012`\.  
-![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/permissions-resourcebased.png)
+**Example Resource\-based policy**  
+
+   ```
+   {
+       "Version": "2012-10-17",
+       "Id": "default",
+       "Statement": [
+           {
+               "Sid": "lambda-allow-s3-my-function",
+               "Effect": "Allow",  
+               "Principal": {
+                 "Service": "s3.amazonaws.com"
+               },
+               "Action": "lambda:InvokeFunction",
+               "Resource":  "arn:aws:lambda:us-east-2:123456789012:function:my-function”
+               "Condition": {
+                 "StringEquals": {
+                   "AWS:SourceAccount": "123456789012"
+                 },  
+                 "ArnLike": {
+                   "AWS:SourceArn": "arn:aws:s3:::my-bucket"   
+                 }
+               } 
+           } 
+        ]
+   }
+   ```
 
 For Lambda layers, you can only use a resource\-based policy on a specific layer version, instead of the entire layer\. In addition to policies that grant permission to a single account or multiple accounts, for layers, you can also grant permission to all accounts in an organization\.
 
@@ -50,7 +76,7 @@ $ aws lambda add-permission --function-name my-function --action lambda:InvokeFu
 --principal sns.amazonaws.com --source-arn arn:aws:sns:us-east-2:123456789012:my-topic
 ```
 
-Some services can invoke functions in other accounts\. If you specify a source ARN that has your account ID in it, that isn't an issue\. For Amazon S3, however, the source is a bucket whose ARN doesn't have an account ID in it\. It's possible that you could delete the bucket and another account could create a bucket with the same name\. Use the `source-account` option and specify `account-id` to ensure that only resources in your account can invoke the function\.
+Some services can invoke functions in other accounts\. If you specify a source ARN that has your account ID in it, that isn't an issue\. For Amazon S3, however, the source is a bucket whose ARN doesn't have an account ID in it\. It's possible that you could delete the bucket and another account could create a bucket with the same name\. Use the `source-account` option with your account ID to ensure that only resources in your account can invoke the function\.
 
 ```
 $ aws lambda add-permission --function-name my-function --action lambda:InvokeFunction --statement-id s3-account \

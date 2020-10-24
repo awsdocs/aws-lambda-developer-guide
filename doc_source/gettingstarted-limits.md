@@ -7,7 +7,7 @@ AWS Lambda sets quotas for the amount of compute and storage resources that you 
 | --- | --- | --- | 
 | Concurrent executions | 1,000 | Hundreds of thousands | 
 | Function and layer storage | 75 GB | Terabytes | 
-| [Elastic network interfaces per VPC](configuration-vpc.md) | 250 | Hundreds | 
+| [Elastic network interfaces per VPC](configuration-vpc.md) Note: quota shared with other services, such as EFS\. See [ Amazon VPC quotas](https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html) | 250 | Hundreds | 
 
 For details on concurrency and how Lambda scales your function concurrency in response to traffic, see [AWS Lambda function scaling](invocation-scaling.md)\.
 
@@ -34,7 +34,8 @@ The following quotas are associated with AWS Lambda API requests\.
 
 | Resource | Quota | 
 | --- | --- | 
-| Invocation requests per Region \(requests per second\) |  10 x concurrent executions quota \([synchronous](invocation-sync.md) – all sources\) 10 x concurrent executions quota \([asynchronous](invocation-async.md) – non\-AWS sources\) Unlimited \(asynchronous – [AWS service sources](lambda-services.md)\)  | 
+| Invocation requests per Region \(requests per second\) |  10 x concurrent executions quota \([synchronous](invocation-sync.md) – all sources\) 10 x concurrent executions quota \([asynchronous](invocation-async.md) – non\-AWS sources\)  | 
+| Invocation requests per Region \(requests per second\) for asynchronous [AWS service sources](lambda-services.md) |  Unlimited requests accepted\. Execution rate is based on concurrency available to the function\. See [Asynchronous invocation](invocation-async.md)\.   | 
 | Invocation requests per function version or alias \(requests per second\) |  10 x allocated [provisioned concurrency](configuration-concurrency.md) This quota only applies to functions that use provisioned concurrency\.  | 
 | [GetFunction](API_GetFunction.md) API requests  | 100 requests per second  | 
 | [GetPolicy](API_GetPolicy.md) API requests  | 15 requests per second  | 

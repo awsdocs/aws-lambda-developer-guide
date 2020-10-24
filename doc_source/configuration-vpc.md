@@ -1,6 +1,6 @@
 # Configuring a Lambda function to access resources in a VPC<a name="configuration-vpc"></a>
 
-You can configure a Lambda function to connect to private subnets in a virtual private cloud \(VPC\) in your AWS account\. Use Amazon Virtual Private Cloud \(Amazon VPC\) to create a private network for resources such as databases, cache instances, or internal services\. Connect your function to the VPC to access private resources during execution\.
+You can configure a Lambda function to connect to private subnets in a virtual private cloud \(VPC\) in your AWS account\. Use Amazon Virtual Private Cloud \(Amazon VPC\) to create a private network for resources such as databases, cache instances, or internal services\. Connect your function to the VPC to access private resources while the function is running\.
 
 When you connect a function to a VPC, Lambda creates an [elastic network interface](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ElasticNetworkInterfaces.html) for each combination of security group and subnet in your function's VPC configuration\. This process can take about a minute\.
 
