@@ -24,7 +24,7 @@ The following are recommended best practices for using AWS Lambda:
   	// MyLambdaFunction logic here
   }
   ```
-+ **Take advantage of execution environment reuse to improve the performance of your function\.** Initialize SDK clients and database connections outside of the function handler, and cache static assets locally in the `/tmp` directory\. Subsequent invocations processed by the same instance of your function can reuse these resources\. This saves execution time and cost\.
++ **Take advantage of execution environment reuse to improve the performance of your function\.** Initialize SDK clients and database connections outside of the function handler, and cache static assets locally in the `/tmp` directory\. Subsequent invocations processed by the same instance of your function can reuse these resources\. This saves cost by reducing function run time\.
 
   To avoid potential data leaks across invocations, don’t use the execution environment to store user data, events, or other information with security implications\. If your function relies on a mutable state that can’t be stored in memory within the handler, consider creating a separate function or separate versions of a function for each user\.
 + **Use a keep\-alive directive to maintain persistent connections\.** Lambda purges idle connections over time\. Attempting to reuse an idle connection when invoking a function will result in a connection error\. To maintain your persistent connection, use the keep\-alive directive associated with your runtime\. For an example, see [Reusing Connections with Keep\-Alive in Node\.js](https://docs.amazonaws.cn/en_us/sdk-for-javascript/v2/developer-guide/node-reusing-connections.html)\.

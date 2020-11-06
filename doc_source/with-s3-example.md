@@ -48,49 +48,53 @@ Follow the steps to create buckets and upload an object\.
 
    When you invoke the Lambda function manually before you connect to Amazon S3, you pass sample event data to the function that specifies the source bucket and `HappyFace.jpg` as the newly created object so you need to create this sample object first\.
 
-## Create the IAM Policy<a name="with-s3-and-cloudwatch-logs-permissions"></a>
+## Create the IAM Policy<a name="with-s3-example-create-policy"></a>
 
-Create an IAM policy that defines the permissions for the Lambda. The required permissions are to get the object from the source S3 bucket, put the resized object to the target S3 bucket and permissions around the CloudWatch Logs\.
+Create an IAM policy that defines the permissions for the Lambda function\. The required permissions include:
++ Get the object from the source S3 bucket\.
++ Put the resized object into the target S3 bucket\.
++ Permissions related to the CloudWatch Logs\.
 
 **To create an IAM Policy**
 
-1. Open the [policies page](https://console.aws.amazon.com/iam/home#/policies) in the IAM Console\.
+1. Open the [Policies page](https://console.aws.amazon.com/iam/home#/policies) in the IAM Console\.
 
-1. Choose **Create policy**\.
+1. Choose **Create policy**
 
-1. Under the JSON tab, copy the below JSON. Make sure the source and target bucket names match with the bucket names created in the previous step\.
+1. Under the **JSON** tab, copy the following policy\. Make sure the source and target bucket names match the bucket names that you created previously\.
 
-```
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-                "logs:PutLogEvents",
-                "logs:CreateLogGroup",
-                "logs:CreateLogStream"
-            ],
-            "Resource": "arn:aws:logs:*:*:*"
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "s3:GetObject"
-            ],
-            "Resource": "arn:aws:s3:::mybucket/*"
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "s3:PutObject"
-            ],
-            "Resource": "arn:aws:s3:::mybucket-resized/*"
-        }
-    ]
-}
-```
-1. Click on `Review policy`, specify the policy name as`AWSLambdaS3Policy` and finally create the policy\.
+   ```
+   {
+       "Version": "2012-10-17",
+       "Statement": [
+           {
+               "Effect": "Allow",
+               "Action": [
+                   "logs:PutLogEvents",
+                   "logs:CreateLogGroup",
+                   "logs:CreateLogStream"
+               ],
+               "Resource": "arn:aws:logs:*:*:*"
+           },
+           {
+               "Effect": "Allow",
+               "Action": [
+                   "s3:GetObject"
+               ],
+               "Resource": "arn:aws:s3:::mybucket/*"
+           },
+           {
+               "Effect": "Allow",
+               "Action": [
+                   "s3:PutObject"
+               ],
+               "Resource": "arn:aws:s3:::mybucket-resized/*"
+           }
+       ]
+   }
+   ```
+
+1. Choose **Review policy**, specify the policy name as `AWSLambdaS3Policy`, and create the policy\.
 
 ## Create the execution role<a name="with-s3-create-execution-role"></a>
 
@@ -107,7 +111,7 @@ Create the [execution role](lambda-intro-execution-role.md) that gives your func
    + **Permissions** – **AWSLambdaS3Policy**\.
    + **Role name** – **lambda\-s3\-role**\.
 
-The **AWSLambdaS3Policy** has the permissions that the function needs to manage objects in Amazon S3 and write logs to CloudWatch Logs\.
+The **AWSLambdaS3Policy** policy has the permissions that the function needs to manage objects in Amazon S3 and write logs to CloudWatch Logs\.
 
 ## Create the function<a name="with-s3-example-create-function"></a>
 

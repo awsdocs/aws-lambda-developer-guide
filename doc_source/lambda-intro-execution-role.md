@@ -111,6 +111,7 @@ The following AWS managed policies provide permissions that are required to use 
 + **AWSLambdaBasicExecutionRole** – Permission to upload logs to CloudWatch\.
 + **AWSLambdaDynamoDBExecutionRole** – Permission to read records from an Amazon DynamoDB stream\.
 + **AWSLambdaKinesisExecutionRole** – Permission to read events from an Amazon Kinesis data stream or consumer\.
++ **AWSLambdaMQExecutionRole** – Permission to read records from an Amazon MQ broker\.
 + **AWSLambdaMSKExecutionRole** – Permission to read records from an Amazon Managed Streaming for Apache Kafka \(Amazon MSK\) cluster\.
 + **AWSLambdaSQSQueueExecutionRole** – Permission to read a message from an Amazon Simple Queue Service \(Amazon SQS\) queue\.
 + **AWSLambdaVPCAccessExecutionRole** – Permission to manage elastic network interfaces to connect your function to a virtual private cloud \(VPC\)\.
@@ -124,6 +125,7 @@ When you use an [event source mapping](invocation-eventsourcemapping.md) to invo
 **Services that Lambda reads events from**
 + [Amazon DynamoDB](with-ddb.md)
 + [Amazon Kinesis](with-kinesis.md)
++ [Amazon MQ](with-mq.md)
 + [Amazon Managed Streaming for Apache Kafka](with-msk.md)
 + [Amazon Simple Queue Service](with-sqs.md)
 

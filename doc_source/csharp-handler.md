@@ -2,7 +2,7 @@
 
 When you create a Lambda function, you specify a handler that AWS Lambda can invoke when the service runs the function on your behalf\. 
 
-You define a Lambda function handler as an instance or static method in a class\. If you want access to the Lambda context object, it is available by defining a method parameter of type *ILambdaContext*, an interface you can use to access information about the current execution, such as the name of the current function, the memory limit, execution time remaining, and logging\. 
+You define a Lambda function handler as an instance or static method in a class\. If you want access to the Lambda context object, it is available by defining a method parameter of type *ILambdaContext*, an interface you can use to access information about the current invocation, such as the name of the current function, the memory limit, execution time remaining, and logging\. 
 
 ```
 returnType handler-name(inputType input, ILambdaContext context) {
@@ -181,7 +181,7 @@ public async Task<Response> ProcessS3ImageResizeAsync(SimpleS3Event input)
 
 If you use this pattern, there are some considerations you must take into account:
 + AWS Lambda does not support `async void` methods\.
-+ If you create an async Lambda function without implementing the `await` operator, \.NET will issue a compiler warning and you will observe unexpected behavior\. For example, some async actions will run while others won't\. Or some async actions won't complete before the function execution is complete\.
++ If you create an async Lambda function without implementing the `await` operator, \.NET will issue a compiler warning and you will observe unexpected behavior\. For example, some async actions will run while others won't\. Or some async actions won't complete before the function invocation completes\.
 
   ```
   public async Task ProcessS3ImageResizeAsync(SimpleS3Event event) // Compiler warning

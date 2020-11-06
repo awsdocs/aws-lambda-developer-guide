@@ -28,7 +28,7 @@ For more information, see [Lambda function versions](configuration-versions.md)\
 
 An *execution environment* provides a secure and isolated runtime environment where Lambda invokes your function\. An execution environment manages the runtime and other resources that are required to run your function\. The execution environment provides lifecycle support for the function's runtime and for any [extensions](#gettingstarted-concepts-extensions) associated with your function\.
 
-For more information, see [AWS Lambda execution environmentManaging state machines in the Lambda console](runtimes-context.md)\.
+For more information, see [Execution environment](runtimes-context.md)\.
 
 ## Runtime<a name="gettingstarted-concepts-runtimes"></a>
 

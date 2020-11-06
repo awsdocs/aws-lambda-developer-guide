@@ -100,7 +100,7 @@ To enable or disable the trigger \(or delete it\), choose the **MSK** trigger in
 
 ## Event source mapping API<a name="services-msk-api"></a>
 
-To manage event source mappings with the AWS CLI or AWS SDK, use the following API actions:
+To manage event source mappings with the AWS CLI or AWS SDK, use the following API operations:
 + [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
 + [ListEventSourceMappings](API_ListEventSourceMappings.md)
 + [GetEventSourceMapping](API_GetEventSourceMapping.md)

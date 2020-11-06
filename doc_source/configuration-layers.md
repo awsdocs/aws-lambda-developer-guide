@@ -57,7 +57,7 @@ You must specify the version of each layer to use by providing the full ARN of t
 $ aws lambda update-function-configuration --function-name my-function --layers []
 ```
 
-Your function can access the content of the layer during execution in the `/opt` directory\. Layers are applied in the order that's specified, merging any folders with the same name\. If the same file appears in multiple layers, the version in the last applied layer is used\.
+While your function is running, it can access the content of the layer in the `/opt` directory\. Layers are applied in the order that's specified, merging any folders with the same name\. If the same file appears in multiple layers, the version in the last applied layer is used\.
 
 The creator of a layer can delete the version of the layer that you're using\. When this happens, your function continues to run as though the layer version still existed\. However, when you update the layer configuration, you must remove the reference to the deleted version\.
 

@@ -222,10 +222,18 @@ Internal extensions are started and stopped by the runtime process, so they are 
 + 403 – Forbidden 
 + 500 – Container error\. Non\-recoverable state\. Extension should exit promptly\. 
 
-**Example response**
+**Example request body**  
 
 ```
- {
+{
+    'events': [ 'INVOKE', 'SHUTDOWN']
+}
+```
+
+**Example response body**  
+
+```
+{
     "functionName": "helloWorld",
     "functionVersion": "$LATEST",
     "handler": "lambda_function.lambda_handler"
