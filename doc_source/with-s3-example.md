@@ -394,6 +394,16 @@ You can now delete the resources that you created for this tutorial, unless you 
 
 1. Choose **Delete**\.
 
+**To delete the policy**
+
+1. Open the [Policies page](https://console.aws.amazon.com/iam/home#/policies) of the IAM console\.
+
+1. Select the policy that you created\.
+
+1. Choose **Delete** under the **Policy actions**\.
+
+1. Choose **Delete**\.
+
 **To delete the execution role**
 
 1. Open the [Roles page](https://console.aws.amazon.com/iam/home#/roles) of the IAM console\.
