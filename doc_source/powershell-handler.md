@@ -4,7 +4,7 @@ When a Lambda function is invoked, the Lambda handler invokes the PowerShell scr
 
 When the PowerShell script is invoked, the following variables are predefined:
 +  *$LambdaInput* – A PSObject that contains the input to the handler\. This input can be event data \(published by an event source\) or custom input that you provide, such as a string or any custom data object\. 
-+  *$LambdaContext* – An Amazon\.Lambda\.Core\.ILambdaContext object that you can use to access information about the current execution—such as the name of the current function, the memory limit, execution time remaining, and logging\. 
++  *$LambdaContext* – An Amazon\.Lambda\.Core\.ILambdaContext object that you can use to access information about the current invocation—such as the name of the current function, the memory limit, execution time remaining, and logging\. 
 
 For example, consider the following PowerShell example code\.
 

@@ -47,6 +47,13 @@ Content-type: application/json
    "MaximumRecordAgeInSeconds": number,
    "MaximumRetryAttempts": number,
    "ParallelizationFactor": number,
+   "Queues": [ "string" ],
+   "SourceAccessConfigurations": [ 
+      { 
+         "Type": "string",
+         "URI": "string"
+      }
+   ],
    "State": "string",
    "StateTransitionReason": "string",
    "Topics": [ "string" ],
@@ -99,17 +106,31 @@ Valid Range: Minimum value of 0\. Maximum value of 300\.
  ** [MaximumRecordAgeInSeconds](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-MaximumRecordAgeInSeconds"></a>
 \(Streams\) Discard records older than the specified age\. The default value is infinite \(\-1\)\. When set to infinite \(\-1\), failed records are retried until the record expires\.  
 Type: Integer  
-Valid Range: Minimum value of 60\. Maximum value of 604800\.
+Valid Range: Minimum value of \-1\. Maximum value of 604800\.
 
  ** [MaximumRetryAttempts](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-MaximumRetryAttempts"></a>
 \(Streams\) Discard records after the specified number of retries\. The default value is infinite \(\-1\)\. When set to infinite \(\-1\), failed records are retried until the record expires\.  
 Type: Integer  
-Valid Range: Minimum value of 0\. Maximum value of 10000\.
+Valid Range: Minimum value of \-1\. Maximum value of 10000\.
 
  ** [ParallelizationFactor](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-ParallelizationFactor"></a>
 \(Streams\) The number of batches to process from each shard concurrently\. The default value is 1\.  
 Type: Integer  
 Valid Range: Minimum value of 1\. Maximum value of 10\.
+
+ ** [Queues](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-Queues"></a>
+ \(MQ\) The name of the Amazon MQ broker destination queue to consume\.   
+Type: Array of strings  
+Array Members: Fixed number of 1 item\.  
+Length Constraints: Minimum length of 1\. Maximum length of 1000\.  
+Pattern: `[\s\S]*` 
+
+ ** [SourceAccessConfigurations](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-SourceAccessConfigurations"></a>
+ \(MQ\) The Secrets Manager secret that stores your broker credentials\. To store your secret, use the following format: ` { "username": "your username", "password": "your password" }`   
+To reference the secret, use the following format: `[ { "Type": "BASIC_AUTH", "URI": "secretARN" } ]`   
+The value of `Type` is always `BASIC_AUTH`\. To encrypt the secret, you can use customer or service managed keys\. When using a customer managed KMS key, the Lambda execution role requires `kms:Decrypt` permissions\.  
+Type: Array of [SourceAccessConfiguration](API_SourceAccessConfiguration.md) objects  
+Array Members: Fixed number of 1 item\.
 
  ** [State](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-State"></a>
 The state of the event source mapping\. It can be one of the following: `Creating`, `Enabling`, `Enabled`, `Disabling`, `Disabled`, `Updating`, or `Deleting`\.  
@@ -120,7 +141,7 @@ Indicates whether the last change to the event source mapping was made by a user
 Type: String
 
  ** [Topics](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-Topics"></a>
- \(MSK\) The name of the Kafka topic\.   
+ \(MSK\) The name of the Kafka topic to consume\.   
 Type: Array of strings  
 Array Members: Fixed number of 1 item\.  
 Length Constraints: Minimum length of 1\. Maximum length of 249\.  

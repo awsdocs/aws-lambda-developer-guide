@@ -25,6 +25,7 @@ The following data types are supported:
 +  [OnFailure](API_OnFailure.md) 
 +  [OnSuccess](API_OnSuccess.md) 
 +  [ProvisionedConcurrencyConfigListItem](API_ProvisionedConcurrencyConfigListItem.md) 
++  [SourceAccessConfiguration](API_SourceAccessConfiguration.md) 
 +  [TracingConfig](API_TracingConfig.md) 
 +  [TracingConfigResponse](API_TracingConfigResponse.md) 
 +  [VpcConfig](API_VpcConfig.md) 

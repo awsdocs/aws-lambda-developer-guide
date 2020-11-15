@@ -146,7 +146,7 @@ To manage the event source configuration later, choose the trigger in the design
 
 ## Event source mapping APIs<a name="services-dynamodb-api"></a>
 
-To manage event source mappings with the AWS CLI or AWS SDK, use the following API actions:
+To manage event source mappings with the AWS CLI or AWS SDK, use the following API operations:
 + [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
 + [ListEventSourceMappings](API_ListEventSourceMappings.md)
 + [GetEventSourceMapping](API_GetEventSourceMapping.md)

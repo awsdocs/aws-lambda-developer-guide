@@ -78,9 +78,7 @@ The `Invoke` phase ends after the runtime and all extensions signal that they ar
 
 **Event payload**: 
 
-The event sent to each extension contains metadata that describes the event content\. This lifecycle event includes the type of the event, the time remaining, the `RequestId`, the invoked function ARN, and tracing headers\.
-
-The event sent to the runtime \(and the Lambda function\) carries the entire request, headers \(such as `RequestId`\), and payload\. The event sent to each extension contains metadata that describes the event content\. This lifecycle event includes the type of the event, the time remaining, the `RequestId`, the invoked function ARN, and tracing headers\. 
+The event sent to the runtime \(and the Lambda function\) carries the entire request, headers \(such as `RequestId`\), and payload\. The event sent to each extension contains metadata that describes the event content\. This lifecycle event includes the type of the event, the time that the function times out \(`deadlineMs`\), the `requestId`, the invoked function ARN, and tracing headers\. 
 
 Extensions that want to access the function event body can use an in\-runtime SDK that communicates with the extension\. Function developers use the in\-runtime SDK to send the payload to the extension when the function is invoked\.
 
@@ -135,7 +133,7 @@ If the runtime or an extension does not respond to the `Shutdown` event within t
 { 
   "eventType": "SHUTDOWN", 
   "shutdownReason": "reason for shutdown", 
-  "deadlineMs": "time remaining in milliseconds" 
+  "deadlineMs": "the time and date that the function times out in Unix time milliseconds" 
 }
 ```
 
@@ -222,10 +220,18 @@ Internal extensions are started and stopped by the runtime process, so they are 
 + 403 – Forbidden 
 + 500 – Container error\. Non\-recoverable state\. Extension should exit promptly\. 
 
-**Example response**
+**Example request body**  
 
 ```
- {
+{
+    'events': [ 'INVOKE', 'SHUTDOWN']
+}
+```
+
+**Example response body**  
+
+```
+{
     "functionName": "helloWorld",
     "functionVersion": "$LATEST",
     "handler": "lambda_function.lambda_handler"

@@ -80,5 +80,6 @@ To use other languages in Lambda, you can implement a [custom runtime](runtimes-
 + [AWS Lambda runtime API](runtimes-api.md)
 + [AWS Lambda Extensions API](runtimes-extensions-api.md)
 + [Modifying the runtime environment](runtimes-modify.md)
++ [AWS Lambda Logs API](runtimes-logs-api.md)
 + [Custom AWS Lambda runtimes](runtimes-custom.md)
 + [Tutorial – Publishing a custom runtime](runtimes-walkthrough.md)

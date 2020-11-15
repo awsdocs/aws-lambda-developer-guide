@@ -51,6 +51,7 @@ For services that generate a queue or data stream, you create an [event source m
 **Services that Lambda reads events from**
 + [Amazon DynamoDB](with-ddb.md)
 + [Amazon Kinesis](with-kinesis.md)
++ [Amazon MQ](with-mq.md)
 + [Amazon Managed Streaming for Apache Kafka](with-msk.md)
 + [Amazon Simple Queue Service](with-sqs.md)
 

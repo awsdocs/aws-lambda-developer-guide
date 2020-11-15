@@ -100,7 +100,7 @@ To enable or disable the trigger \(or delete it\), choose the **MSK** trigger in
 
 ## Event source mapping API<a name="services-msk-api"></a>
 
-To manage event source mappings with the AWS CLI or AWS SDK, use the following API actions:
+To manage event source mappings with the AWS CLI or AWS SDK, use the following API operations:
 + [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
 + [ListEventSourceMappings](API_ListEventSourceMappings.md)
 + [GetEventSourceMapping](API_GetEventSourceMapping.md)
@@ -109,7 +109,6 @@ To manage event source mappings with the AWS CLI or AWS SDK, use the following A
 
 To create the event source mapping with the AWS Command Line Interface \(AWS CLI\), use the [https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/create-event-source-mapping.html](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/create-event-source-mapping.html) command\. Fetching records from Amazon MSK brokers requires access to an Amazon Virtual Private Cloud \(Amazon VPC\) associated with your MSK cluster\. To meet the Amazon VPC access requirements, you can do one of the following:
 + Configure one NAT gateway per public subnet\. For more information, see [Internet and service access for VPC\-connected functions](configuration-vpc.md#vpc-internet)\.
-+ Create a connection between your Amazon VPC and Lambda\. For more information, see [Configuring interface VPC endpoints for Lambda](configuration-vpc-endpoints.md)\.
 
 The Amazon VPC security group rules you configure should have the following settings at minimum:
 + Inbound rules – Allow all traffic on all ports for the security group specified as your source\.

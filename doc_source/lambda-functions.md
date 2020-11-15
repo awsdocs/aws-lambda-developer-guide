@@ -12,6 +12,7 @@ To use your Lambda function with AWS resources in an Amazon VPC, configure it wi
 
 **Topics**
 + [Configuring functions in the AWS Lambda console](configuration-console.md)
++ [Configuring functions in the AWS Lambda console \(preview\)](configuration-preview.md)
 + [Using AWS Lambda environment variables](configuration-envvars.md)
 + [Managing concurrency for a Lambda function](configuration-concurrency.md)
 + [Lambda function versions](configuration-versions.md)

@@ -1,6 +1,6 @@
 # Tutorial: Using AWS Lambda with Amazon S3<a name="with-s3-example"></a>
 
-Suppose you want to create a thumbnail for each image file that is uploaded to a bucket\. You can create a Lambda function \(`CreateThumbnail`\) that Amazon S3 can invoke when objects are created\. Then, the Lambda function can read the image object from the source bucket and create a thumbnail image target bucket\.
+Suppose you want to create a thumbnail for each image file that is uploaded to a bucket\. You can create a Lambda function \(`CreateThumbnail`\) that Amazon S3 can invoke when objects are created\. Then, the Lambda function can read the image object from the source bucket and create a thumbnail image to save in the target bucket\.
 
 Upon completing this tutorial, you will have the following Amazon S3, Lambda, and IAM resources in your account: 
 
@@ -36,6 +36,66 @@ Install npm to manage the function's dependencies\.
 
 The tutorial uses AWS CLI commands to create and invoke the Lambda function\. Install the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) and [configure it with your AWS credentials](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) 
 
+## Create buckets and upload a sample object<a name="with-s3-example-prepare-create-buckets"></a>
+
+Follow the steps to create buckets and upload an object\.
+
+1. Open the [Amazon S3 console](https://console.aws.amazon.com/s3)\.
+
+1. Create two buckets\. The target bucket name must be *source* followed by **\-resized**, where *source* is the name of the bucket you want to use for the source\. For example, `mybucket` and `mybucket-resized`\.
+
+1. In the source bucket, upload a \.jpg object, `HappyFace.jpg`\. 
+
+   When you invoke the Lambda function manually before you connect to Amazon S3, you pass sample event data to the function that specifies the source bucket and `HappyFace.jpg` as the newly created object so you need to create this sample object first\.
+
+## Create the IAM Policy<a name="with-s3-example-create-policy"></a>
+
+Create an IAM policy that defines the permissions for the Lambda function\. The required permissions include:
++ Get the object from the source S3 bucket\.
++ Put the resized object into the target S3 bucket\.
++ Permissions related to the CloudWatch Logs\.
+
+**To create an IAM Policy**
+
+1. Open the [Policies page](https://console.aws.amazon.com/iam/home#/policies) in the IAM Console\.
+
+1. Choose **Create policy**
+
+1. Under the **JSON** tab, copy the following policy\. Make sure the source and target bucket names match the bucket names that you created previously\.
+
+   ```
+   {
+       "Version": "2012-10-17",
+       "Statement": [
+           {
+               "Effect": "Allow",
+               "Action": [
+                   "logs:PutLogEvents",
+                   "logs:CreateLogGroup",
+                   "logs:CreateLogStream"
+               ],
+               "Resource": "arn:aws:logs:*:*:*"
+           },
+           {
+               "Effect": "Allow",
+               "Action": [
+                   "s3:GetObject"
+               ],
+               "Resource": "arn:aws:s3:::mybucket/*"
+           },
+           {
+               "Effect": "Allow",
+               "Action": [
+                   "s3:PutObject"
+               ],
+               "Resource": "arn:aws:s3:::mybucket-resized/*"
+           }
+       ]
+   }
+   ```
+
+1. Choose **Review policy**, specify the policy name as `AWSLambdaS3Policy`, and create the policy\.
+
 ## Create the execution role<a name="with-s3-create-execution-role"></a>
 
 Create the [execution role](lambda-intro-execution-role.md) that gives your function permission to access AWS resources\.
@@ -48,22 +108,10 @@ Create the [execution role](lambda-intro-execution-role.md) that gives your func
 
 1. Create a role with the following properties\.
    + **Trusted entity** – **AWS Lambda**\.
-   + **Permissions** – **AWSLambdaExecute**\.
+   + **Permissions** – **AWSLambdaS3Policy**\.
    + **Role name** – **lambda\-s3\-role**\.
 
-The **AWSLambdaExecute** policy has the permissions that the function needs to manage objects in Amazon S3 and write logs to CloudWatch Logs\.
-
-## Create buckets and upload a sample object<a name="with-s3-example-prepare-create-buckets"></a>
-
-Follow the steps to create buckets and upload an object\.
-
-1. Open the [Amazon S3 console](https://console.aws.amazon.com/s3)\.
-
-1. Create two buckets\. The target bucket name must be *source* followed by **\-resized**, where *source* is the name of the bucket you want to use for the source\. For example, `mybucket` and `mybucket-resized`\.
-
-1. In the source bucket, upload a \.jpg object, `HappyFace.jpg`\. 
-
-   When you invoke the Lambda function manually before you connect to Amazon S3, you pass sample event data to the function that specifies the source bucket and `HappyFace.jpg` as the newly created object so you need to create this sample object first\.
+The **AWSLambdaS3Policy** policy has the permissions that the function needs to manage objects in Amazon S3 and write logs to CloudWatch Logs\.
 
 ## Create the function<a name="with-s3-example-create-function"></a>
 
@@ -343,6 +391,16 @@ You can now delete the resources that you created for this tutorial, unless you 
 1. Select the function that you created\.
 
 1. Choose **Actions**, **Delete**\.
+
+1. Choose **Delete**\.
+
+**To delete the policy that you created**
+
+1. Open the [Policies page](https://console.aws.amazon.com/iam/home#/policies) of the IAM console\.
+
+1. Select the policy that you created\.
+
+1. From **Policy actions**, choose **Delete**\.
 
 1. Choose **Delete**\.
 

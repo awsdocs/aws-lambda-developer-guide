@@ -70,6 +70,13 @@ Content-type: application/json
          "MaximumRecordAgeInSeconds": number,
          "MaximumRetryAttempts": number,
          "ParallelizationFactor": number,
+         "Queues": [ "string" ],
+         "SourceAccessConfigurations": [ 
+            { 
+               "Type": "string",
+               "URI": "string"
+            }
+         ],
          "State": "string",
          "StateTransitionReason": "string",
          "Topics": [ "string" ],

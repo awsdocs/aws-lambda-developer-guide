@@ -2,9 +2,9 @@
 
 Lambda invokes your function in an execution environment, which provides a secure and isolated runtime environment\. The execution environment manages the resources required to run your function\. The execution environment also provides lifecycle support for the function's runtime and any [external extensions](using-extensions.md) associated with your function\.
 
-The function's runtime communicates with Lambda using the [Runtime API](runtimes-api.md)\. Extensions communicate with Lambda using the [Extensions API](runtimes-extensions-api.md)\.
+The function's runtime communicates with Lambda using the [Runtime API](runtimes-api.md)\. Extensions communicate with Lambda using the [Extensions API](runtimes-extensions-api.md)\. Extensions can also receive log messages from the function by subscribing to logs using the [Logs API](runtimes-logs-api.md)\.
 
-![\[Architecture diagram of the execution environment.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/Extensions-Concept-Diagram.png)
+![\[Architecture diagram of the execution environment.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/logs-api-concept-diagram.png)
 
 When you create your Lambda function, you specify configuration information, such as the amount of memory available and the maximum execution time allowed for your function\. Lambda uses this information to set up the execution environment\.
 
