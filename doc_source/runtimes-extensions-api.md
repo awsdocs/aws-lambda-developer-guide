@@ -28,7 +28,7 @@ You share your extension as a [Lambda layer](configuration-layers.md) to make it
 You can install and manage extensions using the Lambda console, the AWS Command Line Interface \(AWS CLI\), or infrastructure as code \(IaC\) services and tools such as AWS CloudFormation, AWS Serverless Application Model \(AWS SAM\), and Terraform\.
 
 **Note**  
-Example extensions and wrapper scripts are available in the [GitHub repository of example extensions](https://github.com/aws-samples/aws-lambda-extensions/tree/main/custom-runtime-extension-demo)\.
+Example extensions and wrapper scripts are available in the [GitHub repository of example extensions](https://github.com/aws-samples/aws-lambda-extensions/tree/main/custom-runtime-extension-demo)\. 
 
 ## Lambda execution environment lifecycle<a name="runtimes-extensions-api-lifecycle"></a>
 
@@ -57,7 +57,7 @@ During the `Extension init` phase, each extension needs to register with Lambda 
 
 You can register up to 10 extensions for a function\. This limit is enforced through the `Register` API call\.
 
-After each extension registers with Lambda, Lambda starts the `Runtime init` phase\. The runtime process calls functionInit to start the Function init phase\.
+After each extension registers with Lambda, Lambda starts the `Runtime init` phase\. The runtime process calls functionInit to start the Function init phase\. 
 
 The `Init` phase completes after the runtime and each registered extension indicate completion by sending a `Next` API request\.
 
@@ -72,13 +72,13 @@ When a Lambda function is invoked in response to a `Next` API request, Lambda se
 
 During the invocation, external extensions run in parallel with the function\. They also continue running after the function has completed\. This enables you to capture diagnostic information or send logs, metrics, and traces to a location of your choice\.
 
-The `Invoke` phase ends after the runtime and all extensions signal that they are done by sending a `Next` API request\.
+The `Invoke` phase ends after the runtime and all extensions signal that they are done by sending a `Next` API request\. 
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/Invoke-Phase.png)
 
-**Event payload**:
+**Event payload**: 
 
-The event sent to the runtime \(and the Lambda function\) carries the entire request, headers \(such as `RequestId`\), and payload\. The event sent to each extension contains metadata that describes the event content\. This lifecycle event includes the type of the event, the time that the function times out \(`deadlineMs`\), the `requestId`, the invoked function ARN, and tracing headers\.
+The event sent to the runtime \(and the Lambda function\) carries the entire request, headers \(such as `RequestId`\), and payload\. The event sent to each extension contains metadata that describes the event content\. This lifecycle event includes the type of the event, the time that the function times out \(`deadlineMs`\), the `requestId`, the invoked function ARN, and tracing headers\. 
 
 Extensions that want to access the function event body can use an in\-runtime SDK that communicates with the extension\. Function developers use the in\-runtime SDK to send the payload to the extension when the function is invoked\.
 
@@ -125,15 +125,15 @@ If the runtime or an extension does not respond to the `Shutdown` event within t
 **Event payload**: The `Shutdown` event contains the reason for the shutdown and the time remaining in milliseconds\.
 
  The `shutdownReason` includes the following values:
-+ SPINDOWN – Normal shutdown
++ SPINDOWN – Normal shutdown 
 + TIMEOUT – Duration limit timed out
 + FAILURE – Error condition, such as an `out-of-memory` event
 
 ```
-{
-  "eventType": "SHUTDOWN",
-  "shutdownReason": "reason for shutdown",
-  "deadlineMs": "the time and date that the function times out in Unix time milliseconds"
+{ 
+  "eventType": "SHUTDOWN", 
+  "shutdownReason": "reason for shutdown", 
+  "deadlineMs": "the time and date that the function times out in Unix time milliseconds" 
 }
 ```
 
@@ -195,7 +195,7 @@ http://${AWS_LAMBDA_RUNTIME_API}/2020-01-01/extension/register
 
 ### Register<a name="extensions-registration-api-a"></a>
 
-During `Extension init`, all extensions need to register with Lambda to receive events\. Lambda uses the full file name of the extension to validate that the extension has completed the bootstrap sequence\. Therefore, each `Register` API call must include the `Lambda-Extension-Name` header with the full file name of the extension\.
+During `Extension init`, all extensions need to register with Lambda to receive events\. Lambda uses the full file name of the extension to validate that the extension has completed the bootstrap sequence\. Therefore, each `Register` API call must include the `Lambda-Extension-Name` header with the full file name of the extension\. 
 
 Internal extensions are started and stopped by the runtime process, so they are not permitted to register for the `Shutdown` event\.
 
@@ -216,9 +216,9 @@ Internal extensions are started and stopped by the runtime process, so they are 
 
 **Response codes**
 + 200 – Response body contains the function name, function version, and handler name\.
-+ 400 – Bad Request
-+ 403 – Forbidden
-+ 500 – Container error\. Non\-recoverable state\. Extension should exit promptly\.
++ 400 – Bad Request 
++ 403 – Forbidden 
++ 500 – Container error\. Non\-recoverable state\. Extension should exit promptly\. 
 
 **Example request body**  
 
