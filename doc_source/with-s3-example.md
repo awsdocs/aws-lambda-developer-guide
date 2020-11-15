@@ -2,7 +2,7 @@
 
 Suppose you want to create a thumbnail for each image file that is uploaded to a bucket\. You can create a Lambda function \(`CreateThumbnail`\) that Amazon S3 can invoke when objects are created\. Then, the Lambda function can read the image object from the source bucket and create a thumbnail image to save in the target bucket\.
 
-Upon completing this tutorial, you will have the following Amazon S3, Lambda, and IAM resources in your account: 
+Upon completing this tutorial, you will have the following Amazon S3, Lambda, and IAM resources in your account:
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/s3-admin-iser-walkthrough-10.png)
 
@@ -34,7 +34,7 @@ On Linux and macOS, use your preferred shell and package manager\. On Windows 10
 
 Install npm to manage the function's dependencies\.
 
-The tutorial uses AWS CLI commands to create and invoke the Lambda function\. Install the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) and [configure it with your AWS credentials](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) 
+The tutorial uses AWS CLI commands to create and invoke the Lambda function\. Install the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) and [configure it with your AWS credentials](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)
 
 ## Create buckets and upload a sample object<a name="with-s3-example-prepare-create-buckets"></a>
 
@@ -44,7 +44,7 @@ Follow the steps to create buckets and upload an object\.
 
 1. Create two buckets\. The target bucket name must be *source* followed by **\-resized**, where *source* is the name of the bucket you want to use for the source\. For example, `mybucket` and `mybucket-resized`\.
 
-1. In the source bucket, upload a \.jpg object, `HappyFace.jpg`\. 
+1. In the source bucket, upload a \.jpg object, `HappyFace.jpg`\.
 
    When you invoke the Lambda function manually before you connect to Amazon S3, you pass sample event data to the function that specifies the source bucket and `HappyFace.jpg` as the newly created object so you need to create this sample object first\.
 
@@ -155,7 +155,7 @@ exports.handler = async (event, context, callback) => {
         return;
     }
 
-    // Download the image from the S3 source bucket. 
+    // Download the image from the S3 source bucket.
 
     try {
         const params = {
@@ -173,13 +173,13 @@ exports.handler = async (event, context, callback) => {
     const width  = 200;
 
     // Use the Sharp module to resize the image and save in a buffer.
-    try { 
+    try {
         var buffer = await sharp(origimage.Body).resize(width).toBuffer();
-            
+
     } catch (error) {
         console.log(error);
         return;
-    } 
+    }
 
     // Upload the thumbnail image to the destination bucket
     try {
@@ -190,28 +190,28 @@ exports.handler = async (event, context, callback) => {
             ContentType: "image"
         };
 
-        const putResult = await s3.putObject(destparams).promise(); 
-        
+        const putResult = await s3.putObject(destparams).promise();
+
     } catch (error) {
         console.log(error);
         return;
-    } 
-        
+    }
+
     console.log('Successfully resized ' + srcBucket + '/' + srcKey +
-        ' and uploaded to ' + dstBucket + '/' + dstKey); 
+        ' and uploaded to ' + dstBucket + '/' + dstKey);
 };
 ```
 
 Review the preceding code and note the following:
-+ The function knows the source bucket name and the key name of the object from the event data it receives as parameters\. If the object is a \.jpg or a \.png, the code creates a thumbnail and saves it to the target bucket\. 
++ The function knows the source bucket name and the key name of the object from the event data it receives as parameters\. If the object is a \.jpg or a \.png, the code creates a thumbnail and saves it to the target bucket\.
 + The code assumes that the destination bucket exists and its name is a concatenation of the source bucket name followed by the string `-resized`\. For example, if the source bucket identified in the event data is `examplebucket`, the code assumes you have an `examplebucket-resized` destination bucket\.
 + For the thumbnail it creates, the code derives its key name as the concatenation of the string `resized-` followed by the source object key name\. For example, if the source object key is `sample.jpg`, the code creates a thumbnail object that has the key `resized-sample.jpg`\.
 
-The deployment package is a \.zip file containing your Lambda function code and dependencies\. 
+The deployment package is a \.zip file containing your Lambda function code and dependencies\.
 
 **To create a deployment package**
 
-1. Open a command line terminal or shell in a Linux environment\. Ensure that the Node\.js version in your local environment matches the Node\.js version of your function\. 
+1. Open a command line terminal or shell in a Linux environment\. Ensure that the Node\.js version in your local environment matches the Node\.js version of your function\.
 
 1. Save the function code as `index.js` in a folder named `lambda-s3`\.
 
@@ -252,7 +252,7 @@ The deployment package is a \.zip file containing your Lambda function code and 
   --role arn:aws:iam::123456789012:role/lambda-s3-role
   ```
 
-If you are using AWS CLI version 2, add the following command parameters: 
+If you are using AWS CLI version 2, add the following command parameters:
 
 ```
 --cli-binary-format raw-in-base64-out
@@ -378,7 +378,7 @@ Now you can test the setup as follows:
 
 1. Verify that the thumbnail was created in the target bucket using the `CreateThumbnail` function\.
 
-1. View logs in the CloudWatch console\. 
+1. View logs in the CloudWatch console\.
 
 ## Clean up your resources<a name="cleanup"></a>
 
