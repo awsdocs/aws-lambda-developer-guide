@@ -10,7 +10,7 @@ In addition to the function that processes events, the application includes a se
 + Processor – [processor/index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/list-manager/processor/index.js)
 + Database admin – [dbadmin/index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/list-manager/dbadmin/index.js)
 
-You can deploy the sample in a few minutes with the AWS CLI and AWS CloudFormation\. To download, configure, and deploy it in your account, follow the instructions in the [README](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/list-manager)\.
+You can deploy the sample in a few minutes with the AWS CLI and AWS CloudFormation\. To download, configure, and deploy it in your account, follow the instructions in the [README](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/list-manager)\.
 
 **Topics**
 + [Architecture and event structure](#samples-listmanager-architecture)

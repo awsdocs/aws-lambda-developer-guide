@@ -172,4 +172,4 @@ Resources:
 
 With this configuration, you only update library layer if you change your runtime dependencies\. The function deployment package only contains your code\. When you update your function code, upload time is much faster than if you include dependencies in the deployment package\.
 
-Creating a layer for dependencies requires build changes to generate the layer archive prior to deployment\. For a working example, see the [blank\-nodejs](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-nodejs) sample application\.
+Creating a layer for dependencies requires build changes to generate the layer archive prior to deployment\. For a working example, see the [blank\-nodejs](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-nodejs) sample application\.

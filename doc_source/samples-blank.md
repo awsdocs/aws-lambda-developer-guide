@@ -7,17 +7,17 @@ The blank function sample application is a starter application that demonstrates
 Variants of this sample application are available for the following languages:
 
 **Variants**
-+ Node\.js – [blank\-nodejs](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-nodejs)\.
-+ Python – [blank\-python](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-python)\.
-+ Ruby – [blank\-ruby](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-ruby)\.
-+ Java – [blank\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-java)\.
-+ Go – [blank\-go](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-go)\.
-+ C\# – [blank\-csharp](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-csharp)\.
-+ PowerShell – [blank\-powershell](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-powershell)\.
++ Node\.js – [blank\-nodejs](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-nodejs)\.
++ Python – [blank\-python](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-python)\.
++ Ruby – [blank\-ruby](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-ruby)\.
++ Java – [blank\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-java)\.
++ Go – [blank\-go](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-go)\.
++ C\# – [blank\-csharp](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-csharp)\.
++ PowerShell – [blank\-powershell](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-powershell)\.
 
 The examples in this topic highlight code from the Node\.js version, but the details are generally applicable to all variants\.
 
-You can deploy the sample in a few minutes with the AWS CLI and AWS CloudFormation\. Follow the instructions in the [README](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-nodejs) to download, configure, and deploy it in your account\.
+You can deploy the sample in a few minutes with the AWS CLI and AWS CloudFormation\. Follow the instructions in the [README](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-nodejs) to download, configure, and deploy it in your account\.
 
 **Topics**
 + [Architecture and handler code](#samples-blank-architecture)

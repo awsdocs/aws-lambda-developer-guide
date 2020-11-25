@@ -75,7 +75,7 @@ During buffering configuration, note the following points:
 The following example shows a request to subscribe to the platform and function logs\.
 
 ```
-POST http://${AWS_LAMBDA_RUNTIME_API}/2020-08-15/logs/subscribe HTTP/1.1
+PUT http://${AWS_LAMBDA_RUNTIME_API}/2020-08-15/logs/ HTTP/1.1
 {"types": [
     "platform",
     "function"
@@ -207,7 +207,7 @@ Lambda provides [Python and Go code examples](https://github.com/aws-samples/aws
 You can retrieve the Logs API endpoint from the `AWS_LAMBDA_RUNTIME_API` environment variable\. To send an API request, use the prefix `2020-08-15/` before the API path\. For example:
 
 ```
-http://${AWS_LAMBDA_RUNTIME_API}/2020-08-15/logs/subscribe
+http://${AWS_LAMBDA_RUNTIME_API}/2020-08-15/logs/
 ```
 
 ### Subscribe<a name="runtimes-logs-api-ref-a"></a>
@@ -216,7 +216,7 @@ To subscribe to one or more of the log streams that are available in the Lambda 
 
 The OpenAPI specification for the Logs API subscription request, version **2020\-08\-15**, is available here: [logs\-api\-request\.zip](samples/logs-api-request.zip)
 
-**Path** – `/logs/subscribe`
+**Path** – `/logs`
 
 **Method** – **PUT**
 
@@ -243,7 +243,7 @@ The OpenAPI specifications for the subscription responses, version **2020\-08\-1
 **Example subscription request**  
 
 ```
- POST http://${AWS_LAMBDA_RUNTIME_API}/2020-08-15/logs/subscribe HTTP/1.1
+ PUT http://${AWS_LAMBDA_RUNTIME_API}/2020-08-15/logs/ HTTP/1.1
  {
   "types": [
     "platform",

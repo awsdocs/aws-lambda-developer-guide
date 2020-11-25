@@ -77,7 +77,7 @@ Use the following API operations to connect your Lambda function to a file syste
 + [CreateFunction](API_CreateFunction.md)
 + [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)
 
-To connect a function a file system, use the `update-function-configuration` command\. The following example connects a function named `my-function` to a file system with ARN of an access point\.
+To connect a function to a file system, use the `update-function-configuration` command\. The following example connects a function named `my-function` to a file system with ARN of an access point\.
 
 ```
 $ ARN=arn:aws:elasticfilesystem:us-east-2:123456789012:access-point/fsap-015cxmplb72b405fd
@@ -174,4 +174,4 @@ For the AWS CloudFormation `AWS::Lambda::Function` type, the property name and f
 ## Sample applications<a name="configuration-filesystem-samples"></a>
 
 The GitHub repository for this guide includes a sample application that demonstrates the use of Amazon EFS with a Lambda function\.
-+ [efs\-nodejs](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/efs-nodejs) – A function that uses an Amazon EFS file system in a Amazon VPC\. This sample includes a VPC, file system, mount targets, and access point configured for use with Lambda\.
++ [efs\-nodejs](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/efs-nodejs) – A function that uses an Amazon EFS file system in a Amazon VPC\. This sample includes a VPC, file system, mount targets, and access point configured for use with Lambda\.

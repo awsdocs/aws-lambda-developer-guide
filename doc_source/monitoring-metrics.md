@@ -16,6 +16,7 @@ When your function finishes processing an event, Lambda sends metrics about the 
 
 By default, graphs use the `Sum` statistic for all metrics\. To choose a different statistic and customize the graph, use the options on the **Graphed metrics** tab\.
 
+**Note**  
 The timestamp on a metric reflects when the function was invoked\. Depending on the duration of the execution, this can be several minutes before the metric is emitted\. If, for example, your function has a 10\-minute timeout, look more than 10 minutes in the past for accurate metrics\.
 
 For more information about CloudWatch, see the [https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/)\.
@@ -33,7 +34,7 @@ You should view the following metrics with the `Sum` statistic\.
 
 **Invocation metrics**
 + `Invocations` – The number of times your function code is executed, including successful executions and executions that result in a function error\. Invocations aren't recorded if the invocation request is throttled or otherwise resulted in an [invocation error](API_Invoke.md#API_Invoke_Errors)\. This equals the number of requests billed\.
-+ `Errors` – The number of invocations that result in a function error\. Function errors include exceptions thrown by your code and exceptions thrown by the Lambda runtime\. The runtime returns errors for issues such as timeouts and configuration errors\. To calculate the error rate, divide the value of `Errors` by the value of `Invocations`\.
++ `Errors` – The number of invocations that result in a function error\. Function errors include exceptions thrown by your code and exceptions thrown by the Lambda runtime\. The runtime returns errors for issues such as timeouts and configuration errors\. To calculate the error rate, divide the value of `Errors` by the value of `Invocations`\. Note that the timestamp on an error metric reflects when the function was invoked, not when the error occurred\. 
 + `DeadLetterErrors` – For [asynchronous invocation](invocation-async.md), the number of times Lambda attempts to send an event to a dead\-letter queue but fails\. Dead\-letter errors can occur due to permissions errors, misconfigured resources, or size limits\.
 + `DestinationDeliveryFailures` – For asynchronous invocation, the number of times Lambda attempts to send an event to a [destination](gettingstarted-features.md#gettingstarted-features-destinations) but fails\. Delivery errors can occur due to permissions errors, misconfigured resources, or size limits\.
 + `Throttles` – The number of invocation requests that are throttled\. When all function instances are processing requests and no concurrency is available to scale up, Lambda rejects additional requests with [TooManyRequestsException](API_Invoke.md#API_Invoke_Errors)\. Throttled requests and other invocation errors don't count as `Invocations` or `Errors`\.

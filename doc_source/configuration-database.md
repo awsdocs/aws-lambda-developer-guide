@@ -75,11 +75,11 @@ For more information, see [IAM database authentication](https://docs.aws.amazon.
 ## Sample application<a name="configuration-database-sample"></a>
 
 Sample applications that demonstrate the use of Lambda with an Amazon RDS database are available in this guide's GitHub repository\. There are two applications:
-+ [RDS MySQL](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/rds-mysql) – The AWS CloudFormation template `template-vpcrds.yml` creates a MySQL 5\.7 database in a private VPC\. In the sample application, a Lambda function proxies queries to the database\. The function and database templates both use Secrets Manager to access database credentials\.
++ [RDS MySQL](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/rds-mysql) – The AWS CloudFormation template `template-vpcrds.yml` creates a MySQL 5\.7 database in a private VPC\. In the sample application, a Lambda function proxies queries to the database\. The function and database templates both use Secrets Manager to access database credentials\.
 
-  [ ![\[The dbadmin function relays queries to a database.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-rdsmysql.png)](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/rds-mysql)
-+ [List Manager](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/list-manager) – A processor function reads events from a Kinesis stream\. It uses the data from the events to update DynamoDB tables, and stores a copy of the event in a MySQL database\.
+  [ ![\[The dbadmin function relays queries to a database.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-rdsmysql.png)](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/rds-mysql)
++ [List Manager](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/list-manager) – A processor function reads events from a Kinesis stream\. It uses the data from the events to update DynamoDB tables, and stores a copy of the event in a MySQL database\.
 
-  [ ![\[The processor function processes Kinesis events and stores the events in a MySQL database.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-listmanager.png)](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/list-manager)
+  [ ![\[The processor function processes Kinesis events and stores the events in a MySQL database.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-listmanager.png)](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/list-manager)
 
 To use the sample applications, follow the instructions in the GitHub repository: [RDS MySQL](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/rds-mysql/README.md), [List Manager](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/list-manager/README.md)\.

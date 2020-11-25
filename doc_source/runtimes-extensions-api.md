@@ -103,7 +103,7 @@ Here is an example payload:
 
 To help identify the overhead introduced by extensions on the `Invoke` phase, Lambda outputs the `PostRuntimeExecutionDuration` metric\. This metric measures the cumulative time spent between the runtime `Next` API request and the last extension `Next` API request\.
 
-You can assess the performance impact of an extension by using the `PostRuntimeExecutionDuration` metric to measure the extra time an extension adds to the function execution\. To measure the increase in memory used, use the `MaxMemoryUsed` metric\. For more information about function metrics, see [Working with AWS Lambda function metrics](monitoring-metrics.md)\.
+You can assess the performance impact of an extension by using the `PostRuntimeExtensionsDuration` metric to measure the extra time an extension adds to the function execution\. To measure the increase in memory used, use the `MaxMemoryUsed` metric\. For more information about function metrics, see [Working with AWS Lambda function metrics](monitoring-metrics.md)\.
 
 Function developers can run different versions of their functions side by side to understand the impact of a specific extension\. We recommend that extension authors publish expected resource consumption to make it easier for function developers to choose a suitable extension\.
 

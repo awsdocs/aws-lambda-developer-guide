@@ -62,7 +62,7 @@ Each time you save your function code, the Lambda console creates a deployment p
 
 **Note**  
 To get started with application development in your local environment, deploy one of the sample applications available in this guide's GitHub repository\.  
-[blank\-ruby](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-ruby) – A Ruby function that shows the use of logging, environment variables, AWS X\-Ray tracing, layers, unit tests and the AWS SDK\.
+[blank\-ruby](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-ruby) – A Ruby function that shows the use of logging, environment variables, AWS X\-Ray tracing, layers, unit tests and the AWS SDK\.
 
 The function runtime passes a context object to the handler, in addition to the invocation event\. The [context object](ruby-context.md) contains additional information about the invocation, the function, and the execution environment\. More information is available from environment variables\.
 

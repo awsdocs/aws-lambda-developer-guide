@@ -8,7 +8,7 @@ Function code is available in the following files:
 + Random error – [random\-error/index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/error-processor/random-error/index.js)
 + Processor – [processor/index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/error-processor/processor/index.js)
 
-You can deploy the sample in a few minutes with the AWS CLI and AWS CloudFormation\. To download, configure, and deploy it in your account, follow the instructions in the [README](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/error-processor)\.
+You can deploy the sample in a few minutes with the AWS CLI and AWS CloudFormation\. To download, configure, and deploy it in your account, follow the instructions in the [README](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/error-processor)\.
 
 **Topics**
 + [Architecture and event structure](#sample-errorprocessor-architecture)

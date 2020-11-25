@@ -19,18 +19,18 @@ A runtime can support a single version of a language, multiple versions of a lan
 
 | Name | Identifier | AWS SDK for JavaScript | Operating system | 
 | --- | --- | --- | --- | 
-|  Node\.js 12  |  `nodejs12.x`  |  2\.712\.0  |  Amazon Linux 2  | 
-|  Node\.js 10  |  `nodejs10.x`  |  2\.712\.0  |  Amazon Linux 2  | 
+|  Node\.js 12  |  `nodejs12.x`  |  2\.771\.0  |  Amazon Linux 2  | 
+|  Node\.js 10  |  `nodejs10.x`  |  2\.771\.0  |  Amazon Linux 2  | 
 
 
 **Python runtimes**  
 
 | Name | Identifier | AWS SDK for Python | Operating system | 
 | --- | --- | --- | --- | 
-|  Python 3\.8  |  `python3.8`  |  boto3\-1\.14\.40 botocore\-1\.17\.40  |  Amazon Linux 2  | 
-|  Python 3\.7  |  `python3.7`  |  boto3\-1\.14\.40 botocore\-1\.17\.40  |  Amazon Linux  | 
-|  Python 3\.6  |  `python3.6`  |  boto3\-1\.14\.40 botocore\-1\.17\.40  |  Amazon Linux  | 
-|  Python 2\.7  |  `python2.7`  |  boto3\-1\.14\.40 botocore\-1\.17\.40  |  Amazon Linux  | 
+|  Python 3\.8  |  `python3.8`  |  boto3\-1\.15\.16 botocore\-1\.18\.16  |  Amazon Linux 2  | 
+|  Python 3\.7  |  `python3.7`  |  boto3\-1\.15\.16 botocore\-1\.18\.16  |  Amazon Linux  | 
+|  Python 3\.6  |  `python3.6`  |  boto3\-1\.15\.16 botocore\-1\.18\.16  |  Amazon Linux  | 
+|  Python 2\.7  |  `python2.7`  |  boto3\-1\.15\.16 botocore\-1\.18\.16  |  Amazon Linux  | 
 
 
 **Ruby runtimes**  
@@ -83,3 +83,4 @@ To use other languages in Lambda, you can implement a [custom runtime](runtimes-
 + [AWS Lambda Logs API](runtimes-logs-api.md)
 + [Custom AWS Lambda runtimes](runtimes-custom.md)
 + [Tutorial – Publishing a custom runtime](runtimes-walkthrough.md)
++ [Using AVX2 vectorization in Lambda](runtimes-avx2.md)

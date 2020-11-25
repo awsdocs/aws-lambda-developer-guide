@@ -10,16 +10,4 @@ As you add libraries and other dependencies to your function, creating and uploa
 
 To use your Lambda function with AWS resources in an Amazon VPC, configure it with security groups and subnets to [create a VPC connection](configuration-vpc.md)\. Connecting your function to a VPC lets you access resources in a private subnet such as relational databases and caches\. You can also [create a database proxy](configuration-database.md) for MySQL and Aurora DB instances\. A database proxy enables a function to reach high concurrency levels without exhausting database connections\.
 
-**Topics**
-+ [Configuring functions in the AWS Lambda console](configuration-console.md)
-+ [Configuring functions in the AWS Lambda console \(preview\)](configuration-preview.md)
-+ [Using AWS Lambda environment variables](configuration-envvars.md)
-+ [Managing concurrency for a Lambda function](configuration-concurrency.md)
-+ [Lambda function versions](configuration-versions.md)
-+ [Lambda function aliases](configuration-aliases.md)
-+ [AWS Lambda layers](configuration-layers.md)
-+ [Configuring a Lambda function to access resources in a VPC](configuration-vpc.md)
-+ [Configuring interface VPC endpoints for Lambda](configuration-vpc-endpoints.md)
-+ [Configuring database access for a Lambda function](configuration-database.md)
-+ [Configuring file system access for Lambda functions](configuration-filesystem.md)
-+ [Tagging Lambda Functions](configuration-tags.md)
+To use [code signing](configuration-codesigning.md) with your Lambda function, configure it with a code\-signing configuration\. When a user attempts to deploy a code package, Lambda checks that the code package has a valid signature from a trusted publisher\. The code\-signing configuration includes a set of signing profiles, which define the trusted publishers for this function\.
