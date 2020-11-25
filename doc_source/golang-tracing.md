@@ -41,6 +41,12 @@ To instrument AWS SDK clients, pass the client to the `xray.AWS()` method\.
     xray.AWS(s3.Client)
 ```
 
+Then you can trace your calls by using the `WithContext` version of the method\.
+
+```
+    svc.ListBucketsWithContext(ctx, &s3.ListBucketsInput{})
+```
+
 The following example shows a trace with 2 segments\. Both are named **my\-function**, but one is type `AWS::Lambda` and the other is `AWS::Lambda::Function`\. The function segment is expanded to show its subsegments\.
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/nodejs-xray-timeline.png)
