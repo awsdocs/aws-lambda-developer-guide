@@ -10,7 +10,7 @@ For more information about spot instances usage and best practices, see [Spot In
 
 ## Prerequisites<a name="services-ec2-tutorial-prereqs"></a>
 
-To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
+To complete the following steps, you need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
 ```
 ~/lambda-project$ this is a command

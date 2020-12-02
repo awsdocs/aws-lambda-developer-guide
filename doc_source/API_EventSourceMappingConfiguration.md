@@ -82,6 +82,17 @@ Type: Array of [SourceAccessConfiguration](API_SourceAccessConfiguration.md) obj
 Array Members: Fixed number of 1 item\.  
 Required: No
 
+ **StartingPosition**   <a name="SSS-Type-EventSourceMappingConfiguration-StartingPosition"></a>
+The position in a stream from which to start reading\. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon MSK Streams sources\. `AT_TIMESTAMP` is only supported for Amazon Kinesis streams\.  
+Type: String  
+Valid Values:` TRIM_HORIZON | LATEST | AT_TIMESTAMP`   
+Required: No
+
+ **StartingPositionTimestamp**   <a name="SSS-Type-EventSourceMappingConfiguration-StartingPositionTimestamp"></a>
+With `StartingPosition` set to `AT_TIMESTAMP`, the time from which to start reading, in Unix time seconds\.  
+Type: Timestamp  
+Required: No
+
  **State**   <a name="SSS-Type-EventSourceMappingConfiguration-State"></a>
 The state of the event source mapping\. It can be one of the following: `Creating`, `Enabling`, `Enabled`, `Disabling`, `Disabled`, `Updating`, or `Deleting`\.  
 Type: String  

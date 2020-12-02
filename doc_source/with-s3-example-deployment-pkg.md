@@ -278,7 +278,7 @@ Amazon S3 invokes your Lambda function using the `Event` invocation type, where 
 + `aws-lambda-java-events`
 + `aws-java-sdk`
 
-Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [AWS Lambda deployment package in Java](java-package.md)\.
+Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [Deploy Java Lambda functions with \.zip file archives](java-package.md)\.
 
 ## Python 3<a name="with-s3-example-deployment-pkg-python"></a>
 

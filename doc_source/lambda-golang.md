@@ -16,12 +16,13 @@ AWS Lambda provides the following libraries for Go:
 
 **Note**  
 To get started with application development in your local environment, deploy one of the sample applications available in this guide's GitHub repository\.  
-[blank\-go](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-go) – A Go function that shows the use of Lambda's Go libraries, logging, environment variables, and the AWS SDK\.
+[blank\-go](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-go) – A Go function that shows the use of Lambda's Go libraries, logging, environment variables, and the AWS SDK\.
 
 **Topics**
-+ [AWS Lambda deployment package in Go](golang-package.md)
++ [Deploy Go Lambda functions with \.zip file archives](golang-package.md)
 + [AWS Lambda function handler in Go](golang-handler.md)
 + [AWS Lambda context object in Go](golang-context.md)
++ [Deploy Go Lambda functions with container images](go-image.md)
 + [AWS Lambda function logging in Go](golang-logging.md)
 + [AWS Lambda function errors in Go](golang-exceptions.md)
 + [Instrumenting Go code in AWS Lambda](golang-tracing.md)

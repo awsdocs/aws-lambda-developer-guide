@@ -59,7 +59,7 @@ To get started with application development in your local environment, deploy on
 
 The `Hello` class has a function named `handleRequest` that takes an event object and a context object\. This is the [handler function](java-handler.md) that Lambda calls when the function is invoked\. The Java function runtime gets invocation events from Lambda and passes them to the handler\. In the function configuration, the handler value is `example.Hello::handleRequest`\.
 
-To update the function's code, you create a deployment package, which is a ZIP archive that contains your function code\. As your function development progresses, you will want to store your function code in source control, add libraries, and automate deployments\. Start by [creating a deployment package](java-package.md) and updating your code at the command line\.
+To update the function's code, you create a deployment package, which is a \.zip file archive that contains your function code\. As your function development progresses, you will want to store your function code in source control, add libraries, and automate deployments\. Start by [creating a deployment package](java-package.md) and updating your code at the command line\.
 
 The function runtime passes a context object to the handler, in addition to the invocation event\. The [context object](java-context.md) contains additional information about the invocation, the function, and the execution environment\. More information is available from environment variables\.
 
@@ -67,8 +67,9 @@ Your Lambda function comes with a CloudWatch Logs log group\. The function runti
 
 **Topics**
 + [Java sample applications for AWS Lambda](java-samples.md)
-+ [AWS Lambda deployment package in Java](java-package.md)
 + [AWS Lambda function handler in Java](java-handler.md)
++ [Deploy Java Lambda functions with \.zip file archives](java-package.md)
++ [Deploy Java Lambda functions with container images](java-image.md)
 + [AWS Lambda context object in Java](java-context.md)
 + [AWS Lambda function logging in Java](java-logging.md)
 + [AWS Lambda function errors in Java](java-exceptions.md)

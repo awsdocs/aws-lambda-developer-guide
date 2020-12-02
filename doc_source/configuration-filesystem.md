@@ -9,7 +9,7 @@ If your function is not already connected to a VPC, see [Configuring a Lambda fu
 
 **To configure file system access**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
 1. Choose a function\.
 
@@ -174,4 +174,4 @@ For the AWS CloudFormation `AWS::Lambda::Function` type, the property name and f
 ## Sample applications<a name="configuration-filesystem-samples"></a>
 
 The GitHub repository for this guide includes a sample application that demonstrates the use of Amazon EFS with a Lambda function\.
-+ [efs\-nodejs](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/efs-nodejs) – A function that uses an Amazon EFS file system in a Amazon VPC\. This sample includes a VPC, file system, mount targets, and access point configured for use with Lambda\.
++ [efs\-nodejs](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/efs-nodejs) – A function that uses an Amazon EFS file system in a Amazon VPC\. This sample includes a VPC, file system, mount targets, and access point configured for use with Lambda\.

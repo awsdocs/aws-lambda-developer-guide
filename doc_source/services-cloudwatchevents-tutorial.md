@@ -9,7 +9,7 @@ In this tutorial, you do the following:
 
 ## Prerequisites<a name="services-cloudwatchevents-tutorial-prereqs"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with AWS Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with Lambda](getting-started.md) to create your first Lambda function\.
 
 ## Create a Lambda function<a name="services-cloudwatchevents-tutorial-create"></a>
 
@@ -43,7 +43,7 @@ CloudWatch Events emits an event every minute, based on the schedule expression\
 
 Test the function with a sample event provided by the Lambda console\.
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
 1. Choose **lambda\-canary**\.
 
@@ -111,7 +111,7 @@ Update the function configuration to cause the function to return an error, whic
 
 **To trigger an alarm**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
 1. Choose **lambda\-canary**\.
 

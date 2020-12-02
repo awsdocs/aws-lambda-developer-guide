@@ -9,7 +9,7 @@ You set environment variables on the unpublished version of your function by spe
 
 **To set environment variables in the Lambda console**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
 1. Choose a function\.
 
@@ -148,7 +148,7 @@ When you provide the key, only users in your account with access to the key can 
 
 **To use a customer managed CMK**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
 1. Choose a function\.
 
@@ -199,7 +199,7 @@ You can also encrypt environment variable values on the client side before sendi
 
 **To encrypt environment variables on the client side**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
 1. Choose a function\.
 
@@ -271,4 +271,4 @@ Sample applications in this guide's GitHub repository demonstrate the use of env
 
 **Sample applications**
 + [Blank function](samples-blank.md) – Create a function and an Amazon SNS topic in the same template\. Pass the name of the topic to the function in an environment variable\. Read environment variables in code \(multiple languages\)\.
-+ [RDS MySQL](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/rds-mysql) – Create a VPC and an Amazon RDS DB instance in one template, with a password stored in Secrets Manager\. In the application template, import database details from the VPC stack, read the password from Secrets Manager, and pass all connection configuration to the function in environment variables\.
++ [RDS MySQL](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/rds-mysql) – Create a VPC and an Amazon RDS DB instance in one template, with a password stored in Secrets Manager\. In the application template, import database details from the VPC stack, read the password from Secrets Manager, and pass all connection configuration to the function in environment variables\.

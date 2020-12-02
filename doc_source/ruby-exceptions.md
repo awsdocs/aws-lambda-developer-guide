@@ -63,7 +63,7 @@ Error raised from handler method
   ]
 }
 END RequestId: 5ce6a15a-f156-11e8-b8aa-25371a5ca2a3
-REPORT RequestId: 5ce6a15a-f156-11e8-b8aa-25371a5ca2a3  Duration: 22.74 ms      Billed Duration: 100 ms         Memory Size: 128 MB     Max Memory Used: 18 MB
+REPORT RequestId: 5ce6a15a-f156-11e8-b8aa-25371a5ca2a3  Duration: 22.74 ms      Billed Duration: 23 ms         Memory Size: 128 MB     Max Memory Used: 18 MB
 ```
 
 For more information about logs, see [AWS Lambda function logging in Ruby](ruby-logging.md)\.

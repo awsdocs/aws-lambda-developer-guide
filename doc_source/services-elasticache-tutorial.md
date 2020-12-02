@@ -9,9 +9,9 @@ For details on using Lambda with Amazon VPC, see [Configuring a Lambda function 
 
 ## Prerequisites<a name="vpc-ec-prereqs"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with AWS Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with Lambda](getting-started.md) to create your first Lambda function\.
 
-To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
+To complete the following steps, you need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
 ```
 ~/lambda-project$ this is a command
@@ -99,7 +99,7 @@ def handler(event, context):
 +  [pymemcache](https://pypi.python.org/pypi/pymemcache) – The Lambda function code uses this library to create a `HashClient` object to set and get items from memcache\. 
 + [elasticache\-auto\-discovery](https://pypi.python.org/pypi/elasticache-auto-discovery) – The Lambda function uses this library to get the nodes in your Amazon ElastiCache cluster\.
 
-Install dependencies with Pip and create a deployment package\. For instructions, see [AWS Lambda deployment package in Python](python-package.md)\.
+Install dependencies with Pip and create a deployment package\. For instructions, see [Deploy Python Lambda functions with \.zip file archives](python-package.md)\.
 
 ## Create the Lambda function<a name="vpc-ec-upload-deployment-pkg"></a>
 

@@ -10,7 +10,7 @@ To trace requests that don't have a tracing header, enable active tracing in you
 
 **To enable active tracing**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
 1. Choose a function\.
 
@@ -25,7 +25,7 @@ Your function needs permission to upload trace data to X\-Ray\. When you enable 
 
 X\-Ray applies a sampling algorithm to ensure that tracing is efficient, while still providing a representative sample of the requests that your application serves\. The default sampling rule is 1 request per second and 5 percent of additional requests\. This sampling rate cannot be configured for Lambda functions\.
 
-When active tracing is enabled, Lambda records a trace for a subset of invocations\. Lambda records two *segments*, which creates two nodes on the service map\. The first node represents the Lambda service that receives the invocation request\. The second node is recorded by the function's [runtime](gettingstarted-concepts.md#gettingstarted-concepts-runtimes)\.
+When active tracing is enabled, Lambda records a trace for a subset of invocations\. Lambda records two *segments*, which creates two nodes on the service map\. The first node represents the Lambda service that receives the invocation request\. The second node is recorded by the function's [runtime](gettingstarted-concepts.md#gettingstarted-concepts-runtime)\.
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/xray-servicemap-function.png)
 

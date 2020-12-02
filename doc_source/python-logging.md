@@ -25,7 +25,7 @@ environ({'AWS_LAMBDA_LOG_GROUP_NAME': '/aws/lambda/my-function', 'AWS_LAMBDA_LOG
 ## EVENT
 {'key': 'value'}
 END RequestId: 8f507cfc-xmpl-4697-b07a-ac58fc914c95
-REPORT RequestId: 8f507cfc-xmpl-4697-b07a-ac58fc914c95  Duration: 15.74 ms  Billed Duration: 100 ms Memory Size: 128 MB Max Memory Used: 56 MB  Init Duration: 130.49 ms    
+REPORT RequestId: 8f507cfc-xmpl-4697-b07a-ac58fc914c95  Duration: 15.74 ms  Billed Duration: 16 ms Memory Size: 128 MB Max Memory Used: 56 MB  Init Duration: 130.49 ms    
 XRAY TraceId: 1-5e34a614-10bdxmplf1fb44f07bc535a1   SegmentId: 07f5xmpl2d1f6f85 Sampled: true
 ```
 
@@ -85,7 +85,7 @@ $ aws lambda invoke --function-name my-function out --log-type Tail \
 START RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8 Version: $LATEST
   "AWS_SESSION_TOKEN": "AgoJb3JpZ2luX2VjELj...", "_X_AMZN_TRACE_ID": "Root=1-5d02e5ca-f5792818b6fe8368e5b51d50;Parent=191db58857df8395;Sampled=0"",ask/lib:/opt/lib",
 END RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8
-REPORT RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8  Duration: 79.67 ms      Billed Duration: 100 ms         Memory Size: 128 MB     Max Memory Used: 73 MB
+REPORT RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8  Duration: 79.67 ms      Billed Duration: 80 ms         Memory Size: 128 MB     Max Memory Used: 73 MB
 ```
 
 The `base64` utility is available on Linux, macOS, and [Ubuntu on Windows](https://docs.microsoft.com/en-us/windows/wsl/install-win10)\. For macOS, the command is `base64 -D`\.
@@ -135,7 +135,7 @@ $ ./get-logs.sh
         },
         {
             "timestamp": 1559763003218,
-            "message": "REPORT RequestId: 4ce9340a-b765-490f-ad8a-02ab3415e2bf\tDuration: 26.73 ms\tBilled Duration: 100 ms \tMemory Size: 128 MB\tMax Memory Used: 75 MB\t\n",
+            "message": "REPORT RequestId: 4ce9340a-b765-490f-ad8a-02ab3415e2bf\tDuration: 26.73 ms\tBilled Duration: 27 ms \tMemory Size: 128 MB\tMax Memory Used: 75 MB\t\n",
             "ingestionTime": 1559763018353
         }
     ],
@@ -178,6 +178,6 @@ START RequestId: 1c8df7d3-xmpl-46da-9778-518e6eca8125 Version: $LATEST
 [INFO]  2020-01-31T22:12:58.535Z    1c8df7d3-xmpl-46da-9778-518e6eca8125    {'key': 'value'}
 
 END RequestId: 1c8df7d3-xmpl-46da-9778-518e6eca8125
-REPORT RequestId: 1c8df7d3-xmpl-46da-9778-518e6eca8125  Duration: 2.75 ms   Billed Duration: 100 ms Memory Size: 128 MB Max Memory Used: 56 MB  Init Duration: 113.51 ms    
+REPORT RequestId: 1c8df7d3-xmpl-46da-9778-518e6eca8125  Duration: 2.75 ms   Billed Duration: 3 ms Memory Size: 128 MB Max Memory Used: 56 MB  Init Duration: 113.51 ms    
 XRAY TraceId: 1-5e34a66a-474xmpl7c2534a87870b4370   SegmentId: 073cxmpl3e442861 Sampled: true
 ```

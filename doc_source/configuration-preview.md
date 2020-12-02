@@ -7,25 +7,12 @@
 | --- |
 | Public preview The updated AWS Lambda console is in preview release and is subject to change\. The preview is available to AWS accounts on a region by region basis\.  The changes include a new function\-level configuration page, increased visibility into versions and aliases, and a dedicated section for your code\. To provide feedback, visit the updated console \([https://console\.aws\.amazon\.com/lambda/](https://console.aws.amazon.com/lambda/)\) and select **Tell us what you think**\. | 
 
- You can use the Lambda console to configure function settings, add triggers and destinations, and edit and update your code\. The following sections will cover how to perform those workflows in the updated Lambda console preview\.
-
-The text and workflows are subject to change throughout the preview\.
+ You can use the Lambda console to configure function settings, add triggers and destinations, and edit and update your code\. The following sections will cover how to perform those workflows in the updated Lambda console\.
 
 **Topics**
-+ [Manage preview settings](#configuration-preview-manage)
 + [Configure function settings](#configuration-preview-settings)
 + [Add and edit triggers and destinations](#configuration-preview-triggers)
 + [Edit and update code](#configuration-preview-code)
-
-## Manage preview settings<a name="configuration-preview-manage"></a>
-
-![\[The toggle to update your console experience.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sidebar.png)
-
-To manage your active console experience, activate the **Updated console \(preview\)** toggle in the console's left\-hand navigation\.
-
-To protect unsaved changes the console experience can only be updated on Lambda console pages where you are not creating or editing a resource\.
-
-The feedback option is available after activating the updated console\. Select **Tell us what you think** at any time to write feedback\. The feedback form will also be provided when you deactivate the updated console preview\. 
 
 ## Configure function settings<a name="configuration-preview-settings"></a>
 

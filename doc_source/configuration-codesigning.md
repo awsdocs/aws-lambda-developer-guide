@@ -2,6 +2,9 @@
 
 Code signing for AWS Lambda helps to ensure that only trusted code runs in your Lambda functions\. When you enable code signing for a function, Lambda checks every code deployment and verifies that the code package is signed by a trusted source\.
 
+**Note**  
+Functions defined as container images do not support code signing\.
+
 To verify code integrity, use [AWS Signer](https://docs.aws.amazon.com/signer/latest/developerguide/Welcome.html) to create digitally signed code packages for functions and layers\. When a user attempts to deploy a code package, Lambda performs validation checks on the code package before accepting the deployment\. Because code signing validation checks run at deployment time, there is no performance impact on function execution\.
 
 You also use AWS Signer to create *signing profiles*\. You use a signing profile to create the signed code package\. Use AWS Identity and Access Management \(IAM\) to control who can sign code packages and create signing profiles\. For more information, see [Authentication and Access Control](https://docs.aws.amazon.com/signer/latest/developerguide/accessctrl-toplevel.html) in the *AWS Signer Developer Guide*\.
@@ -116,7 +119,7 @@ To enable code signing for a function, you associate a code signing configuratio
 
 **To associate a code signing configuration with a function \(console\)**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
 1. Choose the function for which you want to enable code signing\.
 

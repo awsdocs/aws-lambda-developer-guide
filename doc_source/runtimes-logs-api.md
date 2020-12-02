@@ -200,7 +200,7 @@ The following example shows a function log message\.
 
 The [ compute blog post entry](https://aws.amazon.com/blogs/compute/using-aws-lambda-extensions-to-send-logs-to-custom-destinations) for Logs API includes sample code showing how to send logs to a custom destination\.
 
-Lambda provides [Python and Go code examples](https://github.com/aws-samples/aws-lambda-extensions) showing how to develop a basic extension and subscribe to the Logs API\. For more information about building a Lambda extension, see [AWS Lambda Extensions API](runtimes-extensions-api.md)\.
+Lambda provides [Python and Go code examples](https://github.com/aws-samples/aws-lambda-extensions) showing how to develop a basic extension and subscribe to the Logs API\. For more information about building a Lambda extension, see [Lambda Extensions API](runtimes-extensions-api.md)\.
 
 ## Logs API reference<a name="runtimes-logs-api-ref"></a>
 

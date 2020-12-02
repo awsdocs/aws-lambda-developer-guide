@@ -3,15 +3,15 @@
 The GitHub repository for this guide provides sample applications that demonstrate the use of Java in AWS Lambda\. Each sample application includes scripts for easy deployment and cleanup, an AWS CloudFormation template, and supporting resources\.
 
 **Sample Lambda applications in Java**
-+ [blank\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-java) – A Java function that shows the use of Lambda's Java libraries, logging, environment variables, layers, AWS X\-Ray tracing, unit tests, and the AWS SDK\.
-+ [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-basic) – A minimal Java function with unit tests and variable logging configuration\.
-+ [java\-events](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-events) – A minimal Java function that uses the [aws\-lambda\-java\-events](java-package.md) library with event types that don't require the AWS SDK as a dependency, such as Amazon API Gateway\.
-+ [java\-events\-v1sdk](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-events-v1sdk) – A Java function that uses the [aws\-lambda\-java\-events](java-package.md) library with event types that require the AWS SDK as a dependency \(Amazon Simple Storage Service, Amazon DynamoDB, and Amazon Kinesis\)\.
-+ [s3\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/s3-java) – A Java function that processes notification events from Amazon S3 and uses the Java Class Library \(JCL\) to create thumbnails from uploaded image files\.
++ [blank\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-java) – A Java function that shows the use of Lambda's Java libraries, logging, environment variables, layers, AWS X\-Ray tracing, unit tests, and the AWS SDK\.
++ [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-basic) – A minimal Java function with unit tests and variable logging configuration\.
++ [java\-events](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-events) – A minimal Java function that uses the [aws\-lambda\-java\-events](java-package.md) library with event types that don't require the AWS SDK as a dependency, such as Amazon API Gateway\.
++ [java\-events\-v1sdk](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-events-v1sdk) – A Java function that uses the [aws\-lambda\-java\-events](java-package.md) library with event types that require the AWS SDK as a dependency \(Amazon Simple Storage Service \(Amazon S3\), Amazon DynamoDB, and Amazon Kinesis\)\.
++ [s3\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/s3-java) – A Java function that processes notification events from Amazon S3 and uses the Java Class Library \(JCL\) to create thumbnails from uploaded image files\.
 
 Use the `blank-java` sample app to learn the basics, or as a starting point for your own application\. It shows the use of Lambda's Java libraries, environment variables, the AWS SDK, and the AWS X\-Ray SDK\. It uses a Lambda layer to package its dependencies separately from the function code, which speeds up deployment times when you are iterating on your function code\. The project requires minimal setup and can be deployed from the command line in less than a minute\.
 
-[https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-java)
+[https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-java)
 
 The other sample applications show other build configurations, handler interfaces, and use cases for services that integrate with Lambda\. The `java-basic` sample shows a function with minimal dependencies\. You can use this sample for cases where you don't need additional libraries like the AWS SDK, and can represent your function's input and output with standard Java types\. To try a different handler type, you can simply change the handler setting on the function\.
 

@@ -72,7 +72,7 @@ To view error output in the Lambda console, invoke it with a test event\.
 
 **To invoke a function in the Lambda console**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
 1. Choose a function\.
 
@@ -122,7 +122,7 @@ java.lang.ArithmeticException: / by zero
         at example.HandlerDivide.handleRequest(HandlerDivide.java:13)
 
 END RequestId: 081f7522-xmpl-48e2-8f67-96686904bb4f
-REPORT RequestId: 081f7522-xmpl-48e2-8f67-96686904bb4f  Duration: 4.20 ms       Billed Duration: 100 ms Memory Size: 512 MB     Max Memory Used: 95 MB
+REPORT RequestId: 081f7522-xmpl-48e2-8f67-96686904bb4f  Duration: 4.20 ms       Billed Duration: 5 ms Memory Size: 512 MB     Max Memory Used: 95 MB
 XRAY TraceId: 1-5e73162b-1919xmpl2592f4549e1c39be       SegmentId: 3dadxmpl48126cb8     Sampled: true
 ```
 
@@ -218,10 +218,10 @@ For details on how other services handler errors, see the topics in the [Using A
 The GitHub repository for this guide includes sample applications that demonstrate the use of the errors\. Each sample application includes scripts for easy deployment and cleanup, an AWS Serverless Application Model \(AWS SAM\) template, and supporting resources\.
 
 **Sample Lambda applications in Java**
-+ [blank\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-java) – A Java function that shows the use of Lambda's Java libraries, logging, environment variables, layers, AWS X\-Ray tracing, unit tests, and the AWS SDK\.
-+ [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-basic) – A minimal Java function with unit tests and variable logging configuration\.
-+ [java\-events](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-events) – A minimal Java function that uses the [aws\-lambda\-java\-events](java-package.md) library with event types that don't require the AWS SDK as a dependency, such as Amazon API Gateway\.
-+ [java\-events\-v1sdk](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-events-v1sdk) – A Java function that uses the [aws\-lambda\-java\-events](java-package.md) library with event types that require the AWS SDK as a dependency \(Amazon Simple Storage Service, Amazon DynamoDB, and Amazon Kinesis\)\.
-+ [s3\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/s3-java) – A Java function that processes notification events from Amazon S3 and uses the Java Class Library \(JCL\) to create thumbnails from uploaded image files\.
++ [blank\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-java) – A Java function that shows the use of Lambda's Java libraries, logging, environment variables, layers, AWS X\-Ray tracing, unit tests, and the AWS SDK\.
++ [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-basic) – A minimal Java function with unit tests and variable logging configuration\.
++ [java\-events](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-events) – A minimal Java function that uses the [aws\-lambda\-java\-events](java-package.md) library with event types that don't require the AWS SDK as a dependency, such as Amazon API Gateway\.
++ [java\-events\-v1sdk](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-events-v1sdk) – A Java function that uses the [aws\-lambda\-java\-events](java-package.md) library with event types that require the AWS SDK as a dependency \(Amazon Simple Storage Service \(Amazon S3\), Amazon DynamoDB, and Amazon Kinesis\)\.
++ [s3\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/s3-java) – A Java function that processes notification events from Amazon S3 and uses the Java Class Library \(JCL\) to create thumbnails from uploaded image files\.
 
 The `java-basic` function includes a handler \(`HandlerDivide`\) that returns a custom runtime exception\. The `HandlerStream` handler implements the `RequestStreamHandler` and can throw an `IOException` checked exception\.

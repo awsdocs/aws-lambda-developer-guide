@@ -44,7 +44,7 @@ START RequestId: dbda340c-xmpl-4031-8810-11bb609b4c71 Version: $LATEST
 2020/03/27 03:40:05 AWS_LAMBDA_FUNCTION_VERSION=$LATEST
 2020/03/27 03:40:05 AWS_EXECUTION_ENV=AWS_Lambda_go1.x
 END RequestId: dbda340c-xmpl-4031-8810-11bb609b4c71
-REPORT RequestId: dbda340c-xmpl-4031-8810-11bb609b4c71	Duration: 38.66 ms	Billed Duration: 100 ms	Memory Size: 128 MB	Max Memory Used: 54 MB	Init Duration: 203.69 ms	
+REPORT RequestId: dbda340c-xmpl-4031-8810-11bb609b4c71	Duration: 38.66 ms	Billed Duration: 39 ms	Memory Size: 128 MB	Max Memory Used: 54 MB	Init Duration: 203.69 ms	
 XRAY TraceId: 1-5e7d7595-212fxmpl9ee07c4884191322	SegmentId: 42ffxmpl0645f474	Sampled: true
 ```
 
@@ -103,7 +103,7 @@ $ aws lambda invoke --function-name my-function out --log-type Tail \
 START RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8 Version: $LATEST
   "AWS_SESSION_TOKEN": "AgoJb3JpZ2luX2VjELj...", "_X_AMZN_TRACE_ID": "Root=1-5d02e5ca-f5792818b6fe8368e5b51d50;Parent=191db58857df8395;Sampled=0"",ask/lib:/opt/lib",
 END RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8
-REPORT RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8  Duration: 79.67 ms      Billed Duration: 100 ms         Memory Size: 128 MB     Max Memory Used: 73 MB
+REPORT RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8  Duration: 79.67 ms      Billed Duration: 80 ms         Memory Size: 128 MB     Max Memory Used: 73 MB
 ```
 
 The `base64` utility is available on Linux, macOS, and [Ubuntu on Windows](https://docs.microsoft.com/en-us/windows/wsl/install-win10)\. For macOS, the command is `base64 -D`\.
@@ -153,7 +153,7 @@ $ ./get-logs.sh
         },
         {
             "timestamp": 1559763003218,
-            "message": "REPORT RequestId: 4ce9340a-b765-490f-ad8a-02ab3415e2bf\tDuration: 26.73 ms\tBilled Duration: 100 ms \tMemory Size: 128 MB\tMax Memory Used: 75 MB\t\n",
+            "message": "REPORT RequestId: 4ce9340a-b765-490f-ad8a-02ab3415e2bf\tDuration: 26.73 ms\tBilled Duration: 27 ms \tMemory Size: 128 MB\tMax Memory Used: 75 MB\t\n",
             "ingestionTime": 1559763018353
         }
     ],

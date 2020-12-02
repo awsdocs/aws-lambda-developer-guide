@@ -201,6 +201,8 @@ Content-type: application/json
          "URI": "string"
       }
    ],
+   "StartingPosition": "string",
+   "StartingPositionTimestamp": number,
    "State": "string",
    "StateTransitionReason": "string",
    "Topics": [ "string" ],
@@ -278,6 +280,15 @@ To reference the secret, use the following format: `[ { "Type": "BASIC_AUTH", "U
 The value of `Type` is always `BASIC_AUTH`\. To encrypt the secret, you can use customer or service managed keys\. When using a customer managed KMS key, the Lambda execution role requires `kms:Decrypt` permissions\.  
 Type: Array of [SourceAccessConfiguration](API_SourceAccessConfiguration.md) objects  
 Array Members: Fixed number of 1 item\.
+
+ ** [StartingPosition](#API_CreateEventSourceMapping_ResponseSyntax) **   <a name="SSS-CreateEventSourceMapping-response-StartingPosition"></a>
+The position in a stream from which to start reading\. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon MSK Streams sources\. `AT_TIMESTAMP` is only supported for Amazon Kinesis streams\.  
+Type: String  
+Valid Values:` TRIM_HORIZON | LATEST | AT_TIMESTAMP` 
+
+ ** [StartingPositionTimestamp](#API_CreateEventSourceMapping_ResponseSyntax) **   <a name="SSS-CreateEventSourceMapping-response-StartingPositionTimestamp"></a>
+With `StartingPosition` set to `AT_TIMESTAMP`, the time from which to start reading, in Unix time seconds\.  
+Type: Timestamp
 
  ** [State](#API_CreateEventSourceMapping_ResponseSyntax) **   <a name="SSS-CreateEventSourceMapping-response-State"></a>
 The state of the event source mapping\. It can be one of the following: `Creating`, `Enabling`, `Enabled`, `Disabling`, `Disabled`, `Updating`, or `Deleting`\.  

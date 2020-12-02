@@ -4,7 +4,7 @@ You can create one or more aliases for your Lambda function\. A Lambda alias is 
 
 **To create an alias**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
 1. Choose the name of a function\.
 
@@ -85,7 +85,7 @@ You can point an alias to a maximum of two Lambda function versions\. The versio
 
 **To configure routing on an alias**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
 1. Choose the name of a function\.
 

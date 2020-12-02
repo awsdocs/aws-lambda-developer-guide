@@ -4,7 +4,7 @@ A Lambda function's execution role is an AWS Identity and Access Management \(IA
 
 **To view a function's execution role**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
 1. Choose a function\.
 

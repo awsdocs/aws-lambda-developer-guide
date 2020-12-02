@@ -77,6 +77,8 @@ Content-type: application/json
                "URI": "string"
             }
          ],
+         "StartingPosition": "string",
+         "StartingPositionTimestamp": number,
          "State": "string",
          "StateTransitionReason": "string",
          "Topics": [ "string" ],

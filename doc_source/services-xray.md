@@ -10,7 +10,7 @@ To trace requests that don't have a tracing header, enable active tracing in you
 
 **To enable active tracing**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
 1. Choose a function\.
 

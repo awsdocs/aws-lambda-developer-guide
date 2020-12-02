@@ -58,16 +58,16 @@ The Lambda console uses AWS Cloud9 to provide an integrated development environm
 
 The `index.js` file exports a function named `handler` that takes an event object and a context object\. This is the [handler function](nodejs-handler.md) that Lambda calls when the function is invoked\. The Node\.js function runtime gets invocation events from Lambda and passes them to the handler\. In the function configuration, the handler value is `index.handler`\.
 
-Each time you save your function code, the Lambda console creates a deployment package, which is a ZIP archive that contains your function code\. As your function development progresses, you will want to store your function code in source control, add libraries, and automate deployments\. Start by [creating a deployment package](nodejs-package.md) and updating your code at the command line\.
+Each time you save your function code, the Lambda console creates a deployment package, which is a \.zip file archive that contains your function code\. As your function development progresses, you will want to store your function code in source control, add libraries, and automate deployments\. Start by [creating a deployment package](nodejs-package.md) and updating your code at the command line\.
 
 **Note**  
 To get started with application development in your local environment, deploy one of the sample applications available in this guide's GitHub repository\.  
-[blank\-nodejs](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-nodejs) – A Node\.js function that shows the use of logging, environment variables, AWS X\-Ray tracing, layers, unit tests and the AWS SDK\.
-[nodejs\-apig](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/nodejs-apig) – A function with a public API endpoint that processes an event from API Gateway and returns an HTTP response\.
-[rds\-mysql](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/rds-mysql) – A function that relays queries to a MySQL for RDS Database\. This sample includes a private VPC and database instance configured with a password in AWS Secrets Manager\.
-[efs\-nodejs](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/efs-nodejs) – A function that uses an Amazon EFS file system in a Amazon VPC\. This sample includes a VPC, file system, mount targets, and access point configured for use with Lambda\.
-[list\-manager](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/list-manager) – A function processes events from an Amazon Kinesis data stream and update aggregate lists in Amazon DynamoDB\. The function stores a record of each event in a MySQL for RDS Database in a private VPC\. This sample includes a private VPC with a VPC endpoint for DynamoDB and a database instance\.
-[error\-processor](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/error-processor) – A Node\.js function generates errors for a specified percentage of requests\. A CloudWatch Logs subscription invokes a second function when an error is recorded\. The processor function uses the AWS SDK to gather details about the request and stores them in an Amazon S3 bucket\.
+[blank\-nodejs](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-nodejs) – A Node\.js function that shows the use of logging, environment variables, AWS X\-Ray tracing, layers, unit tests and the AWS SDK\.
+[nodejs\-apig](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/nodejs-apig) – A function with a public API endpoint that processes an event from API Gateway and returns an HTTP response\.
+[rds\-mysql](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/rds-mysql) – A function that relays queries to a MySQL for RDS Database\. This sample includes a private VPC and database instance configured with a password in AWS Secrets Manager\.
+[efs\-nodejs](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/efs-nodejs) – A function that uses an Amazon EFS file system in a Amazon VPC\. This sample includes a VPC, file system, mount targets, and access point configured for use with Lambda\.
+[list\-manager](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/list-manager) – A function processes events from an Amazon Kinesis data stream and update aggregate lists in Amazon DynamoDB\. The function stores a record of each event in a MySQL for RDS Database in a private VPC\. This sample includes a private VPC with a VPC endpoint for DynamoDB and a database instance\.
+[error\-processor](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/error-processor) – A Node\.js function generates errors for a specified percentage of requests\. A CloudWatch Logs subscription invokes a second function when an error is recorded\. The processor function uses the AWS SDK to gather details about the request and stores them in an Amazon S3 bucket\.
 
 The function runtime passes a context object to the handler, in addition to the invocation event\. The [context object](nodejs-context.md) contains additional information about the invocation, the function, and the execution environment\. More information is available from environment variables\.
 
@@ -75,7 +75,8 @@ Your Lambda function comes with a CloudWatch Logs log group\. The function runti
 
 **Topics**
 + [AWS Lambda function handler in Node\.js](nodejs-handler.md)
-+ [AWS Lambda deployment package in Node\.js](nodejs-package.md)
++ [Deploy Node\.js Lambda functions with \.zip file archives](nodejs-package.md)
++ [Deploy Node\.js Lambda functions with container images](nodejs-image.md)
 + [AWS Lambda context object in Node\.js](nodejs-context.md)
 + [AWS Lambda function logging in Node\.js](nodejs-logging.md)
 + [AWS Lambda function errors in Node\.js](nodejs-exceptions.md)

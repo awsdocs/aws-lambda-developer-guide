@@ -9,9 +9,9 @@ For details on using Lambda with Amazon VPC, see [Configuring a Lambda function 
 
 ### Prerequisites<a name="vpc-rds-prereqs"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with AWS Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with Lambda](getting-started.md) to create your first Lambda function\.
 
-To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
+To complete the following steps, you need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
 ```
 ~/lambda-project$ this is a command
@@ -133,7 +133,7 @@ db_name = "ExampleDB"
 **Dependencies**
 + `pymysql` – The Lambda function code uses this library to access your MySQL instance \(see [PyMySQL](https://pypi.python.org/pypi/PyMySQL)\) \.
 
-Install dependencies with Pip and create a deployment package\. For instructions, see [AWS Lambda deployment package in Python](python-package.md)\.
+Install dependencies with Pip and create a deployment package\. For instructions, see [Deploy Python Lambda functions with \.zip file archives](python-package.md)\.
 
 ### Create the Lambda function<a name="vpc-rds-upload-deployment-pkg"></a>
 

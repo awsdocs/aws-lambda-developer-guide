@@ -58,11 +58,11 @@ The Lambda console uses AWS Cloud9 to provide an integrated development environm
 
 The `lambda_function.rb` file exports a function named `lambda_handler` that takes an event object and a context object\. This is the [handler function](ruby-handler.md) that Lambda calls when the function is invoked\. The Ruby function runtime gets invocation events from Lambda and passes them to the handler\. In the function configuration, the handler value is `lambda_function.lambda_handler`\.
 
-Each time you save your function code, the Lambda console creates a deployment package, which is a ZIP archive that contains your function code\. As your function development progresses, you will want to store your function code in source control, add libraries, and automate deployments\. Start by [creating a deployment package](ruby-package.md) and updating your code at the command line\.
+Each time you save your function code, the Lambda console creates a deployment package, which is a \.zip file archive that contains your function code\. As your function development progresses, you will want to store your function code in source control, add libraries, and automate deployments\. Start by [creating a deployment package](ruby-package.md) and updating your code at the command line\.
 
 **Note**  
 To get started with application development in your local environment, deploy one of the sample applications available in this guide's GitHub repository\.  
-[blank\-ruby](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-ruby) – A Ruby function that shows the use of logging, environment variables, AWS X\-Ray tracing, layers, unit tests and the AWS SDK\.
+[blank\-ruby](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-ruby) – A Ruby function that shows the use of logging, environment variables, AWS X\-Ray tracing, layers, unit tests and the AWS SDK\.
 
 The function runtime passes a context object to the handler, in addition to the invocation event\. The [context object](ruby-context.md) contains additional information about the invocation, the function, and the execution environment\. More information is available from environment variables\.
 
@@ -70,7 +70,8 @@ Your Lambda function comes with a CloudWatch Logs log group\. The function runti
 
 **Topics**
 + [AWS Lambda function handler in Ruby](ruby-handler.md)
-+ [AWS Lambda deployment package in Ruby](ruby-package.md)
++ [Deploy Ruby Lambda functions with \.zip file archives](ruby-package.md)
++ [Deploy Ruby Lambda functions with container images](ruby-image.md)
 + [AWS Lambda context object in Ruby](ruby-context.md)
 + [AWS Lambda function logging in Ruby](ruby-logging.md)
 + [AWS Lambda function errors in Ruby](ruby-exceptions.md)

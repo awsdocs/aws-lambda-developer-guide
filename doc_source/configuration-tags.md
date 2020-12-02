@@ -4,7 +4,7 @@ You can tag Lambda functions to organize them by owner, project or department\. 
 
 **To add tags to a function**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
 1. Choose a function\.
 
@@ -19,7 +19,7 @@ You can filter functions based on the presence or value of a tag with the Lambda
 
 **To filter functions with tags**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
 1. Click within the search bar to see a list of function attributes and tag keys\.  
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/configuration-tags-key.png)

@@ -1,4 +1,4 @@
-# Troubleshoot deployment issues in AWS Lambda<a name="troubleshooting-deployment"></a>
+# Troubleshoot deployment issues in Lambda<a name="troubleshooting-deployment"></a>
 
 When you update your function, Lambda deploys the change by launching new instances of the function with the updated code or settings\. Deployment errors prevent the new version from being used and can arise from issues with your deployment package, code, permissions, or tools\.
 
