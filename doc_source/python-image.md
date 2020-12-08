@@ -22,7 +22,7 @@ AWS provides the following base images for Python:
 
 Docker Hub repository: amazon/aws\-lambda\-python
 
-Amazon ECR repository: public\.ecr\.aws/lambda/python
+Amazon ECR repository: gallery\.ecr\.aws/lambda/python
 
 ## Python runtime interface clients<a name="python-image-clients"></a>
 

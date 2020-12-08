@@ -116,7 +116,8 @@ In this getting started exercise, you use the Docker CLI to create a container i
 
 **Topics**
 + [Prerequisites](#gettingstarted-images-prereq)
-+ [Create the image](#gettingstarted-images-package)
++ [Create the container image](#gettingstarted-images-package)
++ [Upload the image to the Amazon ECR repository](#gettingstarted-create-upload)
 + [Update the user permissions](#gettingstarted-images-permissions)
 + [Create a Lambda function defined as a container image](#gettingstarted-images-function)
 + [Invoke the Lambda function](#get-started-invoke-function)
@@ -137,13 +138,13 @@ On Linux and macOS, use your preferred shell and package manager\. On Windows 10
 
 This exercise uses Docker CLI commands to create the container image\. To install the Docker CLI, see [Get Docker](https://docs.docker.com/get-docker) on the Docker Docs website\.
 
-### Create the image<a name="gettingstarted-images-package"></a>
+### Create the container image<a name="gettingstarted-images-package"></a>
 
 AWS provides a set of base images in the Amazon Elastic Container Registry \(Amazon ECR\)\. In this getting started exercise, we use the Node\.js base image to create a container image\. For more information about base images, see [ AWS base images for Lambda](runtimes-images.md#runtimes-images-lp)\.
 
 In the following commands, replace `123456789012` with your AWS account ID\.
 
-**To create an image using an AWS base image for Lambda**
+**To create an image using the AWS Node\.js 12 base image**
 
 1. On your local machine, create a project directory for your new function\.
 
@@ -166,7 +167,7 @@ In the following commands, replace `123456789012` with your AWS account ID\.
    FROM public.ecr.aws/lambda/nodejs:12
    
    # Copy function code and package.json
-   COPY app.js package.json ${LAMBDA_TASK_ROOT}
+   COPY app.js package.json /var/task/
    
    # Install NPM dependencies for function
    RUN npm install
@@ -175,11 +176,33 @@ In the following commands, replace `123456789012` with your AWS account ID\.
    CMD [ "app.handler" ]
    ```
 
+1. Create the `package.json` file\. From your project directory, run the `npm init` command\. Accept all of the default values:
+
+   ```
+   npm init
+   ```
+
 1. Build your Docker image\. From your project directory, run the following command:
 
    ```
    docker build -t hello-world . 
    ```
+
+1. \(Optional\) AWS base images include the Lambda runtime interface emulator, so you can test your function locally\. 
+
+   1. Run your Docker image\. From your project directory, run the `docker run` command:
+
+      ```
+      docker run -p 9000:8080 hello-world:latest
+      ```
+
+   1. Test your Lambda function\. From your project directory, run a `curl` command to invoke your function:
+
+      ```
+      curl -XPOST "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{}'.
+      ```
+
+### Upload the image to the Amazon ECR repository<a name="gettingstarted-create-upload"></a>
 
 1. Authenticate the Docker CLI to your Amazon ECR registry\.
 
@@ -187,17 +210,22 @@ In the following commands, replace `123456789012` with your AWS account ID\.
    aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 123456789012.dkr.ecr.us-east-1.amazonaws.com  
    ```
 
-1. Create a repository in Amazon ECR using the `aws ecr create-repository` command\.
+1. Create a repository in Amazon ECR using the `create-repository` command\.
 
    ```
-   aws ecr create-repository --repository-name hello-world --image-scanning-configuration scanOnPush=true --image-tag-mutability MUTABLE
+   aws ecr create-repository --repository-name hello-world --image-scanning-configuration scanOnPush=true --image-tag-mutability MUTABLE        
    ```
 
-1. Tag your image to match your repository name, and deploy the image to Amazon ECR using the `docker push` command\. 
+1. Tag your image to match your repository name using the `docker tag` command\. 
 
    ```
    docker tag  hello-world:latest 123456789012.dkr.ecr.us-east-1.amazonaws.com/hello-world:latest
-   docker push 123456789012.dkr.ecr.us-east-1.amazonaws.com/hello-world-image:latest
+   ```
+
+1. Deploy the image to Amazon ECR using the `docker push` command\. 
+
+   ```
+   docker push 123456789012.dkr.ecr.us-east-1.amazonaws.com/hello-world:latest
    ```
 
 ### Update the user permissions<a name="gettingstarted-images-permissions"></a>
@@ -278,7 +306,7 @@ Invoke your Lambda function using the sample event data provided in the console\
 
 ### Clean up<a name="gettingstarted-image-cleanup"></a>
 
-If you are done with the container image, see [Deleting an image](https://docs.aws.amazon.com/AmazonECR/latest/userguide/delete_image.html) in the *Amazon Elastic Container Registry User Guide*
+If you are finished with the container image, see [Deleting an image](https://docs.aws.amazon.com/AmazonECR/latest/userguide/delete_image.html) in the *Amazon Elastic Container Registry User Guide*
 
 If you are done working with your function, delete it\. You can also delete the log group that stores the function's logs and the execution role that the console created\.
 

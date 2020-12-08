@@ -6,6 +6,8 @@ The AWS base images for Lambda include the RIE component\. If you use an alterna
 
 You can use the emulator to test whether your function code is compatible with the Lambda environment\. Also use the emulator to test that your function runs to completion successfully and provides the expected output\. If you build extensions and agents into your container image, use the emulator to test that the extensions and agents work correctly with the Lambda Extensions API\.
 
+For examples of how to use the RIE, see [Container image support for Lambda](http://aws.amazon.com/blogs/compute/new-for-aws-lambda-container-image-support/) on the AWS Compute Blog\.
+
 **Topics**
 + [Guidelines for using the RIE](#images-test-limitations)
 + [Environment variables](#images-test-env)

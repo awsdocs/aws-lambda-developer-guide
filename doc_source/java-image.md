@@ -21,7 +21,7 @@ AWS provides the following base images for Java:
 
 Docker Hub repository: amazon/aws\-lambda\-java
 
-Amazon ECR repository: public\.ecr\.aws/lambda/java
+Amazon ECR repository: gallery\.ecr\.aws/lambda/java
 
 ## Java runtime interface clients<a name="java-image-clients"></a>
 
@@ -35,6 +35,6 @@ Install the runtime interface client for Java using the Apache Maven package man
 </dependency>
 ```
 
-For package details, see [Lambda RIC](http://search.maven.org/artifact/com.amazonaws/aws-lambda-java-runtime-interface-client) in Maven Central Repository\.
+For package details, see [Lambda RIC](https://search.maven.org/artifact/com.amazonaws/aws-lambda-java-runtime-interface-client) in Maven Central Repository\.
 
 You can also view the Java client source code in the [AWS Lambda Java Support Libraries](https://github.com/aws/aws-lambda-java-libs) repository on GitHub\.

@@ -84,9 +84,7 @@ You add the extension to your function using the same method as you would for an
 
 ## Using extensions in container images<a name="invocation-images-extensions"></a>
 
-You can add extensions to your [container image](lambda-images.md)\. An internal extension runs in the same process as the Lambda function, and an external extension runs as an independent process\.
-
-The ENTRYPOINT container image setting specifies the main process for the function\. Configure the ENTRYPOINT setting in the Dockerfile, or as an override in the function configuration\. Internal extensions and other in\-process tools run in the process that ENTRYPOINT specifies\.
+You can add extensions to your [container image](lambda-images.md)\. The ENTRYPOINT container image setting specifies the main process for the function\. Configure the ENTRYPOINT setting in the Dockerfile, or as an override in the function configuration\. 
 
 You can run multiple processes within a container\. Lambda manages the lifecycle of the main process and any additional processes\. Lambda uses the [Extensions API](runtimes-extensions-api.md) to manage the extension lifecycle\. 
 

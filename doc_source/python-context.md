@@ -31,14 +31,16 @@ The following example shows a handler function that logs context information\.
 
 ```
 import time
-def get_my_log_stream(event, context):       
-    print("Log stream name:", context.log_stream_name)
-    print("Log group name:",  context.log_group_name)
-    print("Request ID:",context.aws_request_id)
-    print("Mem. limits(MB):", context.memory_limit_in_mb)
-    # Code will run quickly, so we add a 1 second intentional delay so you can see that in time remaining value.
+
+def lambda_handler(event, context):   
+    print("Lambda function ARN:", context.invoked_function_arn)
+    print("CloudWatch log stream name:", context.log_stream_name)
+    print("CloudWatch log group name:",  context.log_group_name)
+    print("Lambda Request ID:", context.aws_request_id)
+    print("Lambda function memory limits in MB:", context.memory_limit_in_mb)
+    # We have added a 1 second delay so you can see the time remaining in get_remaining_time_in_millis.
     time.sleep(1) 
-    print("Time remaining (MS):", context.get_remaining_time_in_millis())
+    print("Lambda time remaining in MS:", context.get_remaining_time_in_millis())
 ```
 
 In addition to the options listed above, you can also use the AWS X\-Ray SDK for [Instrumenting Python code in AWS Lambda](python-tracing.md) to identify critical code paths, trace their performance and capture the data for analysis\. 

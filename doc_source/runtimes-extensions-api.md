@@ -182,9 +182,7 @@ Lambda does not automatically shut down extensions that repeatedly fail\. Howeve
 
 ## Adding extensions to container images<a name="extensions-images"></a>
 
-You can add internal and external extensions to your [container image](lambda-images.md)\. An internal extension runs in the main container process, and an external extension runs as an independent process in the container\.
-
-The ENTRYPOINT [container image setting](images-create.md#images-parms) specifies the main process for the container\. Configure the ENTRYPOINT and CMD settings in the Dockerfile, or as an override in the function configuration\. Internal extensions and other in\-process tools run in the process that the ENTRYPOINT specifies\.
+You can add extensions to your [container image](lambda-images.md)\. The ENTRYPOINT [container image setting](images-create.md#images-parms) specifies the main process for the container\. Configure the ENTRYPOINT and CMD settings in the Dockerfile, or as an override in the function configuration\. 
 
 You can run multiple processes within a container\. Lambda provides a built\-in server that manages the lifecycle of the main process and any additional processes\. The server uses the Extensions API to communicate with each external extension\.
 

@@ -15,13 +15,13 @@ AWS provides the following base images for \.NET:
 
 | Tags | Runtime | Operating system | Dockerfile | 
 | --- | --- | --- | --- | 
-| 5\.0 | \.NET 5\.0 | Amazon Linux 2 | [Dockerfile for \.NET 5\.0 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/master/LambdaRuntimeDockerfiles/dotnet5/Dockerfile) | 
+| 5\.0 | \.NET 5\.0 | Amazon Linux 2 | [Dockerfile for \.NET 5\.0 on GitHub](https://github.com/aws/aws-lambda-dotnet/blob/master/LambdaRuntimeDockerfiles/dotnet5/Dockerfile) | 
 | core3\.1 | \.NET Core 3\.1 | Amazon Linux 2 | [Dockerfile for \.NET 3\.1 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/dotnetcore3.1/Dockerfile.dotnetcore3.1) | 
 | core2\.1 | \.NET Core 2\.1 | Amazon Linux 2018\.03 | [Dockerfile for \.NET 2\.1 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/dotnetcore2.1/Dockerfile.dotnetcore2.1) | 
 
 Docker Hub repository: amazon/aws\-lambda\-dotnet
 
-Amazon ECR repository: public\.ecr\.aws/lambda/dotnet
+Amazon ECR repository: gallery\.ecr\.aws/lambda/dotnet
 
 ## \.NET runtime interface clients<a name="csharp-image-clients"></a>
 

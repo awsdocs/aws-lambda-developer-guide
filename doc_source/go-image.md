@@ -15,11 +15,11 @@ AWS provides the following base image for Go:
 
 | Tags | Runtime | Operating system | Dockerfile | 
 | --- | --- | --- | --- | 
-| 1 | Go 1\.x | Amazon Linux 2018\.03 | [Dockerfile for Go 1\.x on GitHub](https://github.com/aws/aws-lambda-base-images/blob/go1.x/Dockerfile.go1.x) | 
+|  1  | Go 1\.x | Amazon Linux 2018\.03 | [Dockerfile for Go 1\.x on GitHub](https://github.com/aws/aws-lambda-base-images/blob/go1.x/Dockerfile.go1.x) | 
 
 Docker Hub repository: amazon/aws\-lambda\-go
 
-Amazon ECR repository: public\.ecr\.aws/lambda/go
+Amazon ECR repository: gallery\.ecr\.aws/lambda/go
 
 ## Go runtime interface clients<a name="go-image-clients"></a>
 

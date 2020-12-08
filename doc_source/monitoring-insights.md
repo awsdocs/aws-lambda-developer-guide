@@ -2,9 +2,6 @@
 
 Amazon CloudWatch Lambda Insights collects and aggregates Lambda function runtime performance metrics and logs for your serverless applications\.
 
-**Public preview**  
-Lambda Insights is in public preview\. The preview is open to all AWS accounts, and you do not need to request access\. Features may be added or changed before general availability\.
-
 **Topics**
 + [How Lambda Insights monitors serverless applications](#monitoring-insights-how)
 + [Pricing](#monitoring-insights-pricing)
@@ -45,7 +42,7 @@ You can use Lambda Insights with any of the following [Lambda function runtimes]
 
 ## Region availability<a name="monitoring-insights-regions"></a>
 
-For this preview release, Lambda Insights is currently available in the following AWS Regions:
+Lambda Insights is currently available in the following AWS Regions:
 + US East \(N\. Virginia\)
 + US East \(Ohio\)
 + US West \(N\. California\)
@@ -77,8 +74,7 @@ You can enable Lambda Insights enhanced monitoring on new and existing Lambda fu
 
 1. On the **Monitoring tools** pane, choose **Edit**\.
 
-1. Under **Lambda Insights \(preview\)**, turn on **Enhanced monitoring**\.  
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/lambdainsights-enable.png)
+1. Under **Lambda Insights**, turn on **Enhanced monitoring**\.
 
 1. Choose **Save**\.
 

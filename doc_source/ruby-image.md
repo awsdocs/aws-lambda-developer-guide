@@ -20,7 +20,7 @@ AWS provides the following base images for Ruby:
 
 Docker Hub repository: amazon/aws\-lambda\-ruby
 
-Amazon ECR repository: public\.ecr\.aws/lambda/ruby
+Amazon ECR repository: gallery\.ecr\.aws/lambda/ruby
 
 ## Ruby runtime interface clients<a name="ruby-image-clients"></a>
 

@@ -84,14 +84,12 @@ To prevent `distutils` errors on [Debian\-based systems](https://github.com/pypa
 1. Create a deployment package with the installed libraries at the root\.
 
    ```
-   ~/my-function$ cd package
-   ~/my-function/package$ zip -r my-deployment-package.zip ./*
+   ~/my-function$ zip -r my-deployment-package.zip ./package/
    ```
 
 1. Add function code files to the root of your deployment package\.
 
    ```
-   ~/my-function/package$ cd ..
    ~/my-function$ zip -g my-deployment-package.zip lambda_function.py
    ```
 

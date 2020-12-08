@@ -6,6 +6,8 @@ AWS provides a set of open\-source [base images](runtimes-images.md#runtimes-ima
 
 You can also use an alternative base image from another container registry\. Lambda provides open\-source runtime interface clients that you add to an alternative base image to make it compatible with Lambda\.
 
+For example applications, including a Node\.js example and a Python example, see [Container image support for Lambda](http://aws.amazon.com/blogs/aws/new-for-aws-lambda-container-image-support/) on the AWS Blog\.
+
 **Topics**
 + [Image types](#images-types)
 + [Container tools](#images-tools)
@@ -89,13 +91,13 @@ AWS periodically provides updates to the AWS base images for Lambda\. If your Do
    + LAMBDA\_TASK\_ROOT=/var/task
    + LAMBDA\_RUNTIME\_DIR=/var/runtime
 
-   The following shows an example Dockerfile for Node\.js version 12:
+   The following shows an example Dockerfile for Node\.js version 12\. :
 
    ```
    FROM public.ecr.aws/lambda/nodejs:12
    # Alternatively, you can pull the base image from Docker Hub: amazon/aws-lambda-nodejs:12
    
-   COPY app.js package.json ${LAMBDA_TASK_ROOT}
+   COPY app.js package.json /var/task/
    
    # Install NPM dependencies for function
    RUN npm install
@@ -107,7 +109,7 @@ AWS periodically provides updates to the AWS base images for Lambda\. If your Do
 1. Build your Docker image with the `docker build` command\. Enter a name for the image\. The following example names the image `hello-world`\.
 
    ```
-   docker build -t hello-world .
+   docker build -t hello-world .   
    ```
 
 1. \(Optional\) Test your application locally using the [runtime interface emulator](images-test.md)\.
@@ -118,10 +120,11 @@ AWS periodically provides updates to the AWS base images for Lambda\. If your Do
    aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 123456789012.dkr.ecr.us-east-1.amazonaws.com    
    ```
 
-1. Deploy your function to Amazon ECR using the `docker push` command\.
+1. Tag your image to match your repository name, and deploy the image to Amazon ECR using the `docker push` command\. 
 
    ```
-   docker push 123456789012.dkr.ecr.sa-east-1.amazonaws.com/image-name:latest
+   docker tag  hello-world:latest 123456789012.dkr.ecr.us-east-1.amazonaws.com/hello-world:latest
+   docker push 123456789012.dkr.ecr.us-east-1.amazonaws.com/hello-world:latest
    ```
 
 ## Create an image from an alternative base image<a name="images-create-2"></a>
@@ -193,7 +196,7 @@ AWS periodically provides updates to the AWS base images for Lambda\. If your Do
 1. Build your Docker image with the `docker build` command\. Enter a name for the image\. The following example names the image `hello-world`\.
 
    ```
-   docker build -t hello-world .
+   docker build -t hello-world .    
    ```
 
 1. \(Optional\) Test your application locally using the [Runtime interface emulator](images-test.md)\.
@@ -204,10 +207,11 @@ AWS periodically provides updates to the AWS base images for Lambda\. If your Do
    aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 123456789012.dkr.ecr.us-east-1.amazonaws.com    
    ```
 
-1. Deploy your function to Amazon ECR using the `docker push` command\.
+1. Tag your image to match your repository name, and deploy the image to Amazon ECR using the `docker push` command\. 
 
    ```
-   docker push 123456789012.dkr.ecr.sa-east-1.amazonaws.com/image-name:latest
+   docker tag  hello-world:latest 123456789012.dkr.ecr.us-east-1.amazonaws.com/hello-world:latest
+   docker push 123456789012.dkr.ecr.us-east-1.amazonaws.com/hello-world:latest
    ```
 
 ## Create an image using the AWS SAM toolkit<a name="images-create-sam"></a>

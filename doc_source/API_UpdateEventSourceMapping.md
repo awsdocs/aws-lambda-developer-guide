@@ -57,7 +57,7 @@ The request accepts the following data in JSON format\.
 The maximum number of items to retrieve in a single batch\.  
 +  **Amazon Kinesis** \- Default 100\. Max 10,000\.
 +  **Amazon DynamoDB Streams** \- Default 100\. Max 1,000\.
-+  **Amazon Simple Queue Service** \- Default 10\. Max 10\.
++  **Amazon Simple Queue Service** \- Default 10\. For standard queues the max is 10,000\. For FIFO queues the max is 10\.
 +  **Amazon Managed Streaming for Apache Kafka** \- Default 100\. Max 10,000\.
 Type: Integer  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.  
@@ -93,7 +93,7 @@ Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}
 Required: No
 
  ** [MaximumBatchingWindowInSeconds](#API_UpdateEventSourceMapping_RequestSyntax) **   <a name="SSS-UpdateEventSourceMapping-request-MaximumBatchingWindowInSeconds"></a>
-\(Streams\) The maximum amount of time to gather records before invoking the function, in seconds\.  
+\(Streams and SQS standard queues\) The maximum amount of time to gather records before invoking the function, in seconds\.  
 Type: Integer  
 Valid Range: Minimum value of 0\. Maximum value of 300\.  
 Required: No
@@ -203,7 +203,7 @@ The result of the last AWS Lambda invocation of your Lambda function\.
 Type: String
 
  ** [MaximumBatchingWindowInSeconds](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-MaximumBatchingWindowInSeconds"></a>
-\(Streams\) The maximum amount of time to gather records before invoking the function, in seconds\. The default value is zero\.  
+\(Streams and SQS standard queues\) The maximum amount of time to gather records before invoking the function, in seconds\. The default value is zero\.  
 Type: Integer  
 Valid Range: Minimum value of 0\. Maximum value of 300\.
 

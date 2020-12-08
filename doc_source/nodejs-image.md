@@ -20,7 +20,7 @@ AWS provides the following base images for Node\.js:
 
 Docker Hub repository: amazon/aws\-lambda\-nodejs
 
-Amazon ECR repository: public\.ecr\.aws/lambda/nodejs
+Amazon ECR repository: gallery\.ecr\.aws/lambda/nodejs
 
 ## Node\.js runtime interface clients<a name="nodejs-image-clients"></a>
 
