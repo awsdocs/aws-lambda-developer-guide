@@ -127,6 +127,7 @@ When you use an [event source mapping](invocation-eventsourcemapping.md) to invo
 + [Amazon Kinesis](with-kinesis.md)
 + [Amazon MQ](with-mq.md)
 + [Amazon Managed Streaming for Apache Kafka](with-msk.md)
++ [self\-managed Apache Kafka](kafka-smaa.md)
 + [Amazon Simple Queue Service](with-sqs.md)
 
 In addition to the AWS managed policies, the Lambda console provides templates for creating a custom policy with permissions for additional use cases\. When you create a function in the Lambda console, you can choose to create a new execution role with permissions from one or more templates\. These templates are also applied automatically when you create a function from a blueprint, or when you configure options that require access to other services\. Example templates are available in this guide's [GitHub repository](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/iam-policies)\.

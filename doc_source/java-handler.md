@@ -1,6 +1,6 @@
 # AWS Lambda function handler in Java<a name="java-handler"></a>
 
-Your Lambda function's handler is the method in your function code that processes events\. When your function is invoked, Lambda runs the handler method\. When the handler exits or returns a response, it becomes available to handle another event\.
+The AWS Lambda function handler is the method in your function code that processes events\. When your function is invoked, Lambda runs the handler method\. When the handler exits or returns a response, it becomes available to handle another event\.
 
 In the following example, a class named `Handler` defines a handler method named `handleRequest`\. The handler method takes an event and context object as input and returns a string\.
 

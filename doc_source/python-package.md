@@ -50,7 +50,7 @@ To create or update a function with the Lambda API, create a deployment package 
    ~/my-function$ aws lambda update-function-code --function-name MyLambdaFunction --zip-file fileb://my-deployment-package.zip
    {
        "FunctionName": "mylambdafunction",
-       "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:my-function",
+       "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:mylambdafunction",
        "Runtime": "python3.8",
        "Role": "arn:aws:iam::123456789012:role/lambda-role",
        "Handler": "lambda_function.lambda_handler",
@@ -112,7 +112,7 @@ To prevent `distutils` errors on [Debian\-based systems](https://github.com/pypa
    ~/my-function$ aws lambda update-function-code --function-name MyLambdaFunction --zip-file fileb://my-deployment-package.zip
    {
        "FunctionName": "mylambdafunction",
-       "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:my-function",
+       "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:mylambdafunction",
        "Runtime": "python3.8",
        "Role": "arn:aws:iam::123456789012:role/lambda-role",
        "Handler": "lambda_function.lambda_handler",
@@ -194,7 +194,7 @@ A library may appear in `site-packages` or `dist-packages` and the first folder 
    ~/my-function$ aws lambda update-function-code --function-name MyLambdaFunction --zip-file fileb://my-deployment-package.zip
    {
        "FunctionName": "mylambdafunction",
-       "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:my-function",
+       "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:mylambdafunction",
        "Runtime": "python3.8",
        "Role": "arn:aws:iam::123456789012:role/lambda-role",
        "Handler": "lambda_function.lambda_handler",

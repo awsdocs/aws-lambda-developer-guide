@@ -12,6 +12,9 @@ Lambda also integrates with [Application Auto Scaling](https://docs.aws.amazon.c
 
 Provisioned concurrency counts towards a function's reserved concurrency and Regional quotas\. If the amount of provisioned concurrency on a function's versions and aliases adds up to the function's reserved concurrency, all invocations run on provisioned concurrency\. This configuration also has the effect of throttling the unpublished version of the function \(`$LATEST`\), which prevents it from executing\.
 
+**Note**  
+You can't allocate more provisioned concurrency than reserved concurrency for a function\.
+
 **Topics**
 + [Configuring reserved concurrency](#configuration-concurrency-reserved)
 + [Configuring provisioned concurrency](#configuration-concurrency-provisioned)
@@ -55,7 +58,7 @@ Setting per\-function concurrency can impact the concurrency pool that is availa
 
 To manage provisioned concurrency settings for a version or alias, use the Lambda console\.
 
-**To reserve concurrency for an alias**
+**To provision concurrency for an alias**
 
 1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 

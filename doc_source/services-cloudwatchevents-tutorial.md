@@ -105,6 +105,8 @@ Configure an alarm in Amazon CloudWatch that monitors the Lambda function and se
    + Threshold – **Whenever Errors is >=****1**\.
    + **Send notification to** – **lambda\-canary\-notifications**\.
 
+
+
 ## Test the alarm<a name="services-cloudwatchevents-tutorial-testalarm"></a>
 
 Update the function configuration to cause the function to return an error, which triggers the alarm\.

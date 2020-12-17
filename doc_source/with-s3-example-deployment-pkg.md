@@ -282,9 +282,10 @@ Build the code with the Lambda library dependencies to create a deployment packa
 
 ## Python 3<a name="with-s3-example-deployment-pkg-python"></a>
 
-The following example code receives an Amazon S3 event input and processes the message that it contains\. It resizes an image in the source bucket and saves the output to the target bucket\.
+The following example code receives an Amazon S3 event input and processes the message that it contains\. It resizes an image in the source bucket and saves the output to the target bucket\. 
 
 **Example lambda\_function\.py**  
+Copy the sample code into a file named `lambda_function.py`\.  
 
 ```
 import boto3

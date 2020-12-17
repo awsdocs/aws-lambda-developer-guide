@@ -104,7 +104,7 @@ Resources:
   function:
     Type: [AWS::Lambda::Function](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html)
     Properties:
-      TracingConfig: 
+      TracingConfig:
         Mode: Active
       ...
 ```

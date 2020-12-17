@@ -53,6 +53,7 @@ For services that generate a queue or data stream, you create an [event source m
 + [Amazon Kinesis](with-kinesis.md)
 + [Amazon MQ](with-mq.md)
 + [Amazon Managed Streaming for Apache Kafka](with-msk.md)
++ [self\-managed Apache Kafka](kafka-smaa.md)
 + [Amazon Simple Queue Service](with-sqs.md)
 
 Other services invoke your function directly\. You grant the other service permission in the function's [resource\-based policy](access-control-resource-based.md), and configure the other service to generate events and invoke your function\. Depending on the service, the invocation can be synchronous or asynchronous\. For synchronous invocation, the other service waits for the response from your function and might [retry on errors](invocation-retries.md)\.

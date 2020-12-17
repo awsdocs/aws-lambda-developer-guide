@@ -4,6 +4,8 @@ The Lambda console provides a code editor for languages that do not require comp
 
 The code editor includes the *menu bar*, *windows*, and the *editor pane*\.
 
+
+
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/code-editor/code-editor.png)
 
 For a list of what the commands do, see the [Menu commands reference](https://docs.aws.amazon.com/cloud9/latest/user-guide/menu-commands.html) in the *AWS Cloud9 User Guide*\. Note that some of the commands listed in that reference are not available in the code editor\.
@@ -26,6 +28,8 @@ You can use the **Environment** window in the code editor to create, open, and m
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/code-editor/code-editor-env-menu.png)
 
+
+
 **To open a single file and show its contents in the editor pane**, double\-click the file in the **Environment** window\.
 
 **To open multiple files and show their contents in the editor pane**, choose the files in the **Environment** window\. Right\-click the selection, and then choose **Open**\.
@@ -33,8 +37,12 @@ You can use the **Environment** window in the code editor to create, open, and m
 **To create a new file**, do one of the following:
 + In the **Environment** window, right\-click the folder where you want the new file to go, and then choose **New File**\. Type the file's name and extension, and then press  Enter \.
 + Choose **File, New File** on the menu bar\. When you're ready to save the file, choose **File, Save** or **File, Save As** on the menu bar\. Then use the **Save As** dialog box that displays to name the file and choose where to save it\.
-+ In the tab buttons bar in the editor pane, choose the **\+** button, and then choose **New File**\. When you're ready to save the file, choose **File, Save** or **File, Save As** on the menu bar\. Then use the **Save As** dialog box that displays to name the file and choose where to save it\.  
++ In the tab buttons bar in the editor pane, choose the **\+** button, and then choose **New File**\. When you're ready to save the file, choose **File, Save** or **File, Save As** on the menu bar\. Then use the **Save As** dialog box that displays to name the file and choose where to save it\.
+
+    
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/code-editor/code-editor-env-new.png)
+
+  
 
 **To create a new folder**, right\-click the folder in the **Environment** window where you want the new folder to go, and then choose **New Folder**\. Type the folder's name, and then press  Enter \.
 
@@ -48,6 +56,8 @@ You can use the **Environment** window in the code editor to create, open, and m
 
 **To collapse folders**, choose the gear icon in the **Environment** window, and then choose **Collapse All Folders**\. 
 
+
+
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/code-editor/code-editor-env-collapse.png)
 
 **To show or hide hidden files**, choose the gear icon in the **Environment** window, and then choose **Show Hidden Files**\. 
@@ -58,16 +68,26 @@ Use the editor pane in the code editor to view and write code\.
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/code-editor/code-editor-editor-pane.png)
 
+
+
 ### Working with tab buttons<a name="code-editor-code-tab-buttons"></a>
 
 Use the *tab buttons bar* to select, view, and create files\.
 
+
+
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/code-editor/code-editor-tab-buttons-bar.png)
+
+
 
 **To display an open file's contents**, do one of the following:
 + Choose the file's tab\.
-+ Choose the drop\-down menu button in the tab buttons bar, and then choose the file's name\.  
++ Choose the drop\-down menu button in the tab buttons bar, and then choose the file's name\.
+
+    
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/code-editor/code-editor-drop-down-list.png)
+
+  
 
 **To close an open file**, do one of the following:
 + Choose the **X** icon in the file's tab\.
@@ -83,11 +103,19 @@ Use the status bar to move quickly to a line in the active file and to change ho
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/code-editor/code-editor-status-bar.png)
 
+
+
 **To move quickly to a line in the active file**, choose the line selector, type the line number to go to, and then press  Enter \.
+
+
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/code-editor/code-editor-line-selector.png)
 
+
+
 **To change the code color scheme in the active file**, choose the code color scheme selector, and then choose the new code color scheme\. 
+
+
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/code-editor/code-editor-code-color.png)
 
@@ -99,6 +127,8 @@ Use the status bar to move quickly to a line in the active file and to change ho
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/code-editor/code-editor-status-bar-settings.png)
 
+
+
 ## Working in fullscreen mode<a name="code-editor-fullscreen"></a>
 
 You can expand the code editor to get more room to work with your code\.
@@ -106,6 +136,8 @@ You can expand the code editor to get more room to work with your code\.
 To expand the code editor to the edges of the web browser window, choose the **Toggle fullscreen** button in the menu bar\.
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/code-editor/code-editor-menu-bar-fullscreen.png)
+
+
 
 To shrink the code editor to its original size, choose the **Toggle fullscreen** button again\.
 

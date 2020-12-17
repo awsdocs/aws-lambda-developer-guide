@@ -48,6 +48,8 @@ Each phase starts with an event from the Lambda service to the runtime and to al
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/Overview-Full-Sequence.png)
 
+ 
+
 **Topics**
 + [Init phase](#runtimes-extensions-api-reg)
 + [Invoke phase](#runtimes-lifecycle-invoke)
@@ -324,3 +326,5 @@ The extension uses this method to report an error to Lambda before exiting\. Cal
 + 400 – Bad Request
 + 403 – Forbidden
 + 500 – Container error\. Non\-recoverable state\. Extension should exit promptly\.
+
+ 

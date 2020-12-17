@@ -121,7 +121,7 @@ To enable or disable the trigger \(or delete it\), choose the **MQ** trigger in 
 
 ## Event source mapping API<a name="services-mq-api"></a>
 
-To manage event source mappings with the AWS CLI or AWS SDK, use the following API operations:
+To manage an event source with the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) or [AWS SDK](http://aws.amazon.com/getting-started/tools-sdks/), you can use the following API operations:
 + [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
 + [ListEventSourceMappings](API_ListEventSourceMappings.md)
 + [GetEventSourceMapping](API_GetEventSourceMapping.md)

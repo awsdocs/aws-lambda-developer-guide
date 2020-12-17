@@ -1,6 +1,6 @@
 # ImageConfig<a name="API_ImageConfig"></a>
 
-Configuration values that override the container image Dockerfile\. See [Override Container settings](https://docs.aws.amazon.com/lambda/latest/dg/configuration-images-settings.html)\. 
+Configuration values that override the container image Dockerfile settings\. See [Container settings](https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html)\. 
 
 ## Contents<a name="API_ImageConfig_Contents"></a>
 

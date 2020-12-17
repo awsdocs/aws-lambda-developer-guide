@@ -9,7 +9,7 @@ Your Lambda function's code consists of scripts or compiled programs and their d
 
 ## Container images<a name="gettingstarted-package-images"></a>
 
-A container image includes the base operating system, the runtime, Lambda extensions, your application code and it's dependencies\. You can also add static data, such as machine learning models, into the image\. 
+A container image includes the base operating system, the runtime, Lambda extensions, your application code and its dependencies\. You can also add static data, such as machine learning models, into the image\. 
 
 Lambda provides a set of open\-source base images that you can use to build your container image\. To create and test container images, you can use the AWS Serverless Application Model \(AWS SAM\) command line interface \(CLI\) or native container tools such as the Docker CLI\.
 

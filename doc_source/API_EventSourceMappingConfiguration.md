@@ -32,6 +32,13 @@ Type: String
 Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
 Required: No
 
+ **FunctionResponseTypes**   <a name="SSS-Type-EventSourceMappingConfiguration-FunctionResponseTypes"></a>
+\(Streams\) A list of current response type enums applied to the event source mapping\.  
+Type: Array of strings  
+Array Members: Fixed number of 1 item\.  
+Valid Values:` ReportBatchItemFailures`   
+Required: No
+
  **LastModified**   <a name="SSS-Type-EventSourceMappingConfiguration-LastModified"></a>
 The date that the event source mapping was last updated, or its state changed, in Unix time seconds\.  
 Type: Timestamp  
@@ -74,12 +81,15 @@ Length Constraints: Minimum length of 1\. Maximum length of 1000\.
 Pattern: `[\s\S]*`   
 Required: No
 
+ **SelfManagedEventSource**   <a name="SSS-Type-EventSourceMappingConfiguration-SelfManagedEventSource"></a>
+The Self\-Managed Apache Kafka cluster for your event source\.  
+Type: [SelfManagedEventSource](API_SelfManagedEventSource.md) object  
+Required: No
+
  **SourceAccessConfigurations**   <a name="SSS-Type-EventSourceMappingConfiguration-SourceAccessConfigurations"></a>
- \(MQ\) The Secrets Manager secret that stores your broker credentials\. To store your secret, use the following format: ` { "username": "your username", "password": "your password" }`   
-To reference the secret, use the following format: `[ { "Type": "BASIC_AUTH", "URI": "secretARN" } ]`   
-The value of `Type` is always `BASIC_AUTH`\. To encrypt the secret, you can use customer or service managed keys\. When using a customer managed KMS key, the Lambda execution role requires `kms:Decrypt` permissions\.  
+An array of the authentication protocol, or the VPC components to secure your event source\.  
 Type: Array of [SourceAccessConfiguration](API_SourceAccessConfiguration.md) objects  
-Array Members: Fixed number of 1 item\.  
+Array Members: Minimum number of 1 item\. Maximum number of 22 items\.  
 Required: No
 
  **StartingPosition**   <a name="SSS-Type-EventSourceMappingConfiguration-StartingPosition"></a>
@@ -104,11 +114,17 @@ Type: String
 Required: No
 
  **Topics**   <a name="SSS-Type-EventSourceMappingConfiguration-Topics"></a>
- \(MSK\) The name of the Kafka topic to consume\.   
+The name of the Kafka topic\.  
 Type: Array of strings  
 Array Members: Fixed number of 1 item\.  
 Length Constraints: Minimum length of 1\. Maximum length of 249\.  
 Pattern: `^[^.]([a-zA-Z0-9\-_.]+)`   
+Required: No
+
+ **TumblingWindowInSeconds**   <a name="SSS-Type-EventSourceMappingConfiguration-TumblingWindowInSeconds"></a>
+\(Streams\) The duration of a processing window in seconds\. The range is between 1 second up to 15 minutes\.  
+Type: Integer  
+Valid Range: Minimum value of 0\. Maximum value of 900\.  
 Required: No
 
  **UUID**   <a name="SSS-Type-EventSourceMappingConfiguration-UUID"></a>

@@ -25,6 +25,8 @@ The request payload you send in the `POST` request identifies the DynamoDB opera
   ```
 + The following is a sample request payload for a DynamoDB read item operation:
 
+   
+
   ```
   {
       "operation": "read",

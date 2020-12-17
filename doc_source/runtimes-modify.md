@@ -93,7 +93,7 @@ public java.lang.Object lambdainternal.EventHandlerLoader$PojoMethodRequestHandl
 
 ### Example: Adding a shutdown hook to the JVM runtime process<a name="runtimes-envvars-ex2"></a>
 
-When an extension is registered during a <code>Shutdown</code> event, the runtime process gets up to 500 ms to handle graceful shutdown\. You can hook into the runtime process, and when the JVM begins its shutdown process, it starts all registered hooks\. To register a shutdown hook, you must [register as an extension](runtimes-extensions-api.md#runtimes-extensions-registration-api)\. You do not need to explicitly register for the <code>Shutdown</code> event, as that is automatically sent to the runtime\.
+When an extension is registered during a `Shutdown` event, the runtime process gets up to 500 ms to handle graceful shutdown\. You can hook into the runtime process, and when the JVM begins its shutdown process, it starts all registered hooks\. To register a shutdown hook, you must [register as an extension](runtimes-extensions-api.md#runtimes-extensions-registration-api)\. You do not need to explicitly register for the `Shutdown` event, as that is automatically sent to the runtime\.
 
 ```
 import java.lang.instrument.Instrumentation;

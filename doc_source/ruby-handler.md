@@ -1,6 +1,8 @@
 # AWS Lambda function handler in Ruby<a name="ruby-handler"></a>
 
-Your Lambda function's handler is the method that Lambda calls when your function is invoked\. In the following example, the file `function.rb` defines a handler method named `handler`\. The handler function takes two objects as input and returns a JSON document\.
+The AWS Lambda function handler is the method in your function code that processes events\. When your function is invoked, Lambda runs the handler method\. When the handler exits or returns a response, it becomes available to handle another event\.
+
+In the following example, the file `function.rb` defines a handler method named `handler`\. The handler function takes two objects as input and returns a JSON document\.
 
 **Example function\.rb**  
 

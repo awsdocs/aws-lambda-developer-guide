@@ -40,6 +40,8 @@ For more information about Intel MKL and similar libraries, see [Math Kernel Lib
 
 If you don't use C or C\+\+ libraries and don't build with Intel MKL, you can still get some AVX2 performance improvement for your applications\. Note that the actual improvement depends on the compiler or interpreter's ability to utilize the AVX2 capabilities on your code\.
 
+
+
 Python  
 Python users generally use SciPy and NumPy libraries for compute\-intensive workloads\. You can compile these libraries to enable AVX2, or you can use the Intel MKL\-enabled versions of the libraries\.
 

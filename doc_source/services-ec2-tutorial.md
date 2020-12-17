@@ -8,6 +8,8 @@ This tutorial provides code that performs these tasks and a sample application t
 
 For more information about spot instances usage and best practices, see [Spot Instances](https://docs.aws.amazon.com/AWSEC2/latest/DeveloperGuide/using-spot-instances.html) in the Amazon EC2 user guide\.
 
+
+
 ## Prerequisites<a name="services-ec2-tutorial-prereqs"></a>
 
 To complete the following steps, you need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
