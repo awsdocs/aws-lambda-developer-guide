@@ -22,10 +22,11 @@ Follow the steps in this section to create a new Lambda function and an API Gate
 
 1. Configure the following settings\.
    + **Name** – **lambda\-microservice**\.
-   + **Role** – **Create a new role from one or more templates**\.
+   + **Role** – **Create a new role from AWS policy templates**\.
    + **Role name** – **lambda\-apigateway\-role**\.
    + **Policy templates** – **Simple microservice permissions**\.
    + **API** – **Create a new API**\.
+   + **API type** - **REST API**\.
    + **Security** – **Open**\.
 
    Choose **Create function**\.
@@ -40,7 +41,7 @@ In this step, you will use the console to test the Lambda function\. In addition
 
 **To test the API**
 
-1. With your `MyLambdaMicroService` function still open in the console, choose the **Actions** tab and then choose **Configure test event**\.
+1. With your `lambda-microservice` function still open in the console, choose **Configure test events** from the **Select a test event** dropdown list.
 
 1. Replace the existing text with the following:
 
@@ -53,4 +54,5 @@ In this step, you will use the console to test the Lambda function\. In addition
    }
    ```
 
-1. After entering the text above choose **Save and test**\.
+1. After entering the text above choose **Create**\.
+1. Choose the event and choose **Test**\.
