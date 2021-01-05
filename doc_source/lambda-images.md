@@ -8,6 +8,8 @@ Additionally, AWS provides a runtime interface emulator for you to test your fun
 
 There is no additional charge for packaging and deploying functions as container images\. When a function deployed as a container image is invoked, you pay for invocation requests and execution duration\. You do incur charges related to storing your container images in Amazon ECR\. For more information, see [Amazon ECR pricing](http://aws.amazon.com/ecr/pricing/)\. 
 
+**Note**: Using the container image currently only support for the image from Amazon ECR in the same AWS account.
+
 **Topics**
 + [Creating Lambda container images](images-create.md)
 + [Testing Lambda container images locally](images-test.md)
