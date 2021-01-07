@@ -1,4 +1,4 @@
-# Testing Lambda container images locally<a name="images-test"></a>
+# Testing AWS Lambda container images locally<a name="images-test"></a>
 
 The Lambda Runtime Interface Emulator \(RIE\) is a proxy for the Lambda Runtime API that allows you to locally test your Lambda function packaged as a container image\. The emulator is a lightweight web server that converts HTTP requests into JSON events to pass to the Lambda function in the container image\. 
 
@@ -26,15 +26,15 @@ Note the following guidelines when using the Runtime Interface Emulator:
 
 The runtime interface emulator supports a subset of [environment variables](configuration-envvars.md) for the Lambda function in the local running image\.
 
-If your function uses security credentials, you can configure the credentials by setting the following environment variables:
+If your Lambda function uses security credentials, you can configure the credentials by setting the following environment variables:
 + `AWS_ACCESS_KEY_ID`
 + `AWS_SECRET_ACCESS_KEY`
 + `AWS_SESSION_TOKEN`
 + `AWS_REGION`
 
-To set the function timeout, configure `AWS_LAMBDA_FUNCTION_TIMEOUT`\. Enter the maximum number of seconds that you want to allow the function to run\.
+To set the Lambda function timeout, configure `AWS_LAMBDA_FUNCTION_TIMEOUT`\. Enter the maximum number of seconds that you want to allow the Lambda function to run\.
 
-The emulator does not populate the following Lambda environment variables\. However, you can set them to match the values that you expect when the function runs in the Lambda service:
+The emulator does not populate the following Lambda environment variables\. However, you can set them to match the values that you expect when the Lambda function runs in the Lambda service:
 + `AWS_LAMBDA_FUNCTION_VERSION`
 + `AWS_LAMBDA_FUNCION_NAME`
 + `AWS_LAMBDA_MEMORY_SIZE`
@@ -65,7 +65,7 @@ The AWS base images for Lambda include the runtime interface emulator\. You can 
    curl -XPOST "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{}'.
    ```
 
-   This command invokes the function running in the container image and returns a response\.
+   This command invokes the Lambda function running in the container image and returns a response\.
 
 ## Build RIE into your base image<a name="images-test-alternative"></a>
 
@@ -101,7 +101,7 @@ You can build RIE into a base image\. Download the RIE from GitHub to your local
 
 ## Test an image without adding RIE to the image<a name="images-test-add"></a>
 
-You install the runtime interface emulator to your local machine\. When you run the image function, you set the entry point to be the emulator\. 
+You install the runtime interface emulator to your local machine\. When you run the Lambda image function, you set the entry point to be the emulator\. 
 
 **To test an image without adding RIE to the image**
 
@@ -128,4 +128,4 @@ You install the runtime interface emulator to your local machine\. When you run 
    curl -XPOST "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{}'.
    ```
 
-   This command invokes the function running in the container image and returns a response\.
+   This command invokes the Lambda function running in the container image and returns a response\.
