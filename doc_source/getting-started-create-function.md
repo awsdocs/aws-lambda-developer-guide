@@ -199,7 +199,7 @@ In the following commands, replace `123456789012` with your AWS account ID\.
    1. Test your Lambda function\. From your project directory, run a `curl` command to invoke your function:
 
       ```
-      curl -XPOST "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{}'.
+      curl -XPOST "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{}'
       ```
 
 ### Upload the image to the Amazon ECR repository<a name="gettingstarted-create-upload"></a>
