@@ -25,13 +25,13 @@ We look forward to receiving your pull requests for:
 To contribute, send us a pull request. For small changes, such as fixing a typo or adding a link, you can use the [GitHub Edit Button](https://blog.github.com/2011-04-26-forking-with-the-edit-button/). For larger changes:
 
 1. [Fork the repository](https://help.github.com/articles/fork-a-repo/).
-2. In your fork, make your change in a branch that's based on this repo's **master** branch.
+2. In your fork, make your change in a branch that's based on this repo's **main** branch.
 3. Commit the change to your fork, using a clear and descriptive commit message.
 4. [Create a pull request](https://help.github.com/articles/creating-a-pull-request-from-a-fork/), answering any questions in the pull request form.
 
 Before you send us a pull request, please be sure that:
 
-1. You're working from the latest source on the **master** branch.
+1. You're working from the latest source on the **main** branch.
 2. You check [existing open](https://github.com/awsdocs/aws-lambda-developer-guide/pulls), and [recently closed](https://github.com/awsdocs/aws-lambda-developer-guide/pulls?q=is%3Apr+is%3Aclosed), pull requests to be sure that someone else hasn't already addressed the problem.
 3. You [create an issue](https://github.com/awsdocs/aws-lambda-developer-guide/issues/new) before working on a contribution that will take a significant amount of your time.
 
@@ -53,4 +53,4 @@ If you discover a potential security issue, please notify AWS Security via our [
 
 ## Licensing
 
-See the [LICENSE](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/LICENSE) file for this project's licensing. We will ask you to confirm the licensing of your contribution. We may ask you to sign a [Contributor License Agreement (CLA)](http://en.wikipedia.org/wiki/Contributor_License_Agreement) for larger changes.
+See the [LICENSE](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/LICENSE) file for this project's licensing. We will ask you to confirm the licensing of your contribution. We may ask you to sign a [Contributor License Agreement (CLA)](http://en.wikipedia.org/wiki/Contributor_License_Agreement) for larger changes.
