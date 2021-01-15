@@ -42,16 +42,16 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "[NextMarker](#SSS-ListProvisionedConcurrencyConfigs-response-NextMarker)": "string",
-   "[ProvisionedConcurrencyConfigs](#SSS-ListProvisionedConcurrencyConfigs-response-ProvisionedConcurrencyConfigs)": [ 
+   "NextMarker": "string",
+   "ProvisionedConcurrencyConfigs": [ 
       { 
-         "[AllocatedProvisionedConcurrentExecutions](API_ProvisionedConcurrencyConfigListItem.md#SSS-Type-ProvisionedConcurrencyConfigListItem-AllocatedProvisionedConcurrentExecutions)": number,
-         "[AvailableProvisionedConcurrentExecutions](API_ProvisionedConcurrencyConfigListItem.md#SSS-Type-ProvisionedConcurrencyConfigListItem-AvailableProvisionedConcurrentExecutions)": number,
-         "[FunctionArn](API_ProvisionedConcurrencyConfigListItem.md#SSS-Type-ProvisionedConcurrencyConfigListItem-FunctionArn)": "string",
-         "[LastModified](API_ProvisionedConcurrencyConfigListItem.md#SSS-Type-ProvisionedConcurrencyConfigListItem-LastModified)": "string",
-         "[RequestedProvisionedConcurrentExecutions](API_ProvisionedConcurrencyConfigListItem.md#SSS-Type-ProvisionedConcurrencyConfigListItem-RequestedProvisionedConcurrentExecutions)": number,
-         "[Status](API_ProvisionedConcurrencyConfigListItem.md#SSS-Type-ProvisionedConcurrencyConfigListItem-Status)": "string",
-         "[StatusReason](API_ProvisionedConcurrencyConfigListItem.md#SSS-Type-ProvisionedConcurrencyConfigListItem-StatusReason)": "string"
+         "AllocatedProvisionedConcurrentExecutions": number,
+         "AvailableProvisionedConcurrentExecutions": number,
+         "FunctionArn": "string",
+         "LastModified": "string",
+         "RequestedProvisionedConcurrentExecutions": number,
+         "Status": "string",
+         "StatusReason": "string"
       }
    ]
 }

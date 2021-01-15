@@ -4,7 +4,7 @@ When a Lambda function is invoked, the Lambda handler invokes the PowerShell scr
 
 When the PowerShell script is invoked, the following variables are predefined:
 +  *$LambdaInput* – A PSObject that contains the input to the handler\. This input can be event data \(published by an event source\) or custom input that you provide, such as a string or any custom data object\. 
-+  *$LambdaContext* – An Amazon\.Lambda\.Core\.ILambdaContext object that you can use to access information about the current execution—such as the name of the current function, the memory limit, execution time remaining, and logging\. 
++  *$LambdaContext* – An Amazon\.Lambda\.Core\.ILambdaContext object that you can use to access information about the current invocation—such as the name of the current function, the memory limit, execution time remaining, and logging\. 
 
 For example, consider the following PowerShell example code\.
 
@@ -16,7 +16,7 @@ Write-Host 'Function Name:' $LambdaContext.FunctionName
 This script returns the FunctionName property that's obtained from the $LambdaContext variable\.
 
 **Note**  
-You're required to use the `#Requires` statement within your PowerShell scripts to indicate the modules that your scripts depend on\. This statement performs two important tasks\. 1\) It communicates to other developers which modules the script uses, and 2\) it identifies the dependent modules that AWS PowerShell tools need to package with the script, as part of the deployment\. For more information about the `#Requires` statement in PowerShell, see [ About requires](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_requires?view=powershell-6)\. For more information about PowerShell deployment packages, see [AWS Lambda deployment package in PowerShell](powershell-package.md)\.  
+You're required to use the `#Requires` statement within your PowerShell scripts to indicate the modules that your scripts depend on\. This statement performs two important tasks\. 1\) It communicates to other developers which modules the script uses, and 2\) it identifies the dependent modules that AWS PowerShell tools need to package with the script, as part of the deployment\. For more information about the `#Requires` statement in PowerShell, see [ About requires](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_requires?view=powershell-6)\. For more information about PowerShell deployment packages, see [Deploy PowerShell Lambda functions with \.zip file archives](powershell-package.md)\.  
 When your PowerShell Lambda function uses the AWS PowerShell cmdlets, be sure to set a `#Requires` statement that references the `AWSPowerShell.NetCore` module, which supports PowerShell Core—and not the `AWSPowerShell` module, which only supports Windows PowerShell\. Also, be sure to use version 3\.3\.270\.0 or newer of `AWSPowerShell.NetCore` which optimizes the cmdlet import process\. If you use an older version, you'll experience longer cold starts\. For more information, see [ AWS Tools for PowerShell](https://aws.amazon.com/documentation/powershell/?id=docs_gateway)\.
 
 ## Returning data<a name="powershell-handler-output"></a>

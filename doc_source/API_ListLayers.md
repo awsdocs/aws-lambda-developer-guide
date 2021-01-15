@@ -14,7 +14,7 @@ The request uses the following URI parameters\.
 
  ** [CompatibleRuntime](#API_ListLayers_RequestSyntax) **   <a name="SSS-ListLayers-request-CompatibleRuntime"></a>
 A runtime identifier\. For example, `go1.x`\.  
-Valid Values:` nodejs10.x | nodejs12.x | java8 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore2.1 | dotnetcore3.1 | go1.x | ruby2.5 | ruby2.7 | provided` 
+Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | nodejs10.x | nodejs12.x | java8 | java8.al2 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | dotnetcore3.1 | nodejs4.3-edge | go1.x | ruby2.5 | ruby2.7 | provided | provided.al2` 
 
  ** [Marker](#API_ListLayers_RequestSyntax) **   <a name="SSS-ListLayers-request-Marker"></a>
 A pagination token returned by a previous call\.
@@ -34,21 +34,21 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "[Layers](#SSS-ListLayers-response-Layers)": [ 
+   "Layers": [ 
       { 
-         "[LatestMatchingVersion](API_LayersListItem.md#SSS-Type-LayersListItem-LatestMatchingVersion)": { 
-            "[CompatibleRuntimes](API_LayerVersionsListItem.md#SSS-Type-LayerVersionsListItem-CompatibleRuntimes)": [ "string" ],
-            "[CreatedDate](API_LayerVersionsListItem.md#SSS-Type-LayerVersionsListItem-CreatedDate)": "string",
-            "[Description](API_LayerVersionsListItem.md#SSS-Type-LayerVersionsListItem-Description)": "string",
-            "[LayerVersionArn](API_LayerVersionsListItem.md#SSS-Type-LayerVersionsListItem-LayerVersionArn)": "string",
-            "[LicenseInfo](API_LayerVersionsListItem.md#SSS-Type-LayerVersionsListItem-LicenseInfo)": "string",
-            "[Version](API_LayerVersionsListItem.md#SSS-Type-LayerVersionsListItem-Version)": number
+         "LatestMatchingVersion": { 
+            "CompatibleRuntimes": [ "string" ],
+            "CreatedDate": "string",
+            "Description": "string",
+            "LayerVersionArn": "string",
+            "LicenseInfo": "string",
+            "Version": number
          },
-         "[LayerArn](API_LayersListItem.md#SSS-Type-LayersListItem-LayerArn)": "string",
-         "[LayerName](API_LayersListItem.md#SSS-Type-LayersListItem-LayerName)": "string"
+         "LayerArn": "string",
+         "LayerName": "string"
       }
    ],
-   "[NextMarker](#SSS-ListLayers-response-NextMarker)": "string"
+   "NextMarker": "string"
 }
 ```
 

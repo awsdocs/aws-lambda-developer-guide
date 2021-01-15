@@ -1,11 +1,14 @@
 # AWS Lambda layers<a name="configuration-layers"></a>
 
-You can configure your Lambda function to pull in additional code and content in the form of layers\. A layer is a ZIP archive that contains libraries, a [custom runtime](runtimes-custom.md), or other dependencies\. With layers, you can use libraries in your function without needing to include them in your deployment package\.
+You can configure your Lambda function to pull in additional code and content in the form of layers\. A layer is a \.zip file archive that contains libraries, a [custom runtime](runtimes-custom.md), or other dependencies\. With layers, you can use libraries in your function without needing to include them in your deployment package\.
+
+**Note**  
+Functions defined as a container images do not support Lambda layers\. You can package your preferred runtimes and dependencies as a part of the container image when you build the image\.
 
 Layers let you keep your deployment package small, which makes development easier\. You can avoid errors that can occur when you install and package dependencies with your function code\. For Node\.js, Python, and Ruby functions, you can [develop your function code in the Lambda console](code-editor.md) as long as you keep your deployment package under 3 MB\.
 
 **Note**  
-A function can use up to 5 layers at a time\. The total unzipped size of the function and all layers can't exceed the unzipped deployment package size limit of 250 MB\. For more information, see [AWS Lambda limits](gettingstarted-limits.md)\.
+A function can use up to 5 layers at a time\. The total unzipped size of the function and all layers can't exceed the unzipped deployment package size limit of 250 MB\. For more information, see [Lambda quotas](gettingstarted-limits.md)\.
 
 You can create layers, or use layers published by AWS and other AWS customers\. Layers support [resource\-based policies](#configuration-layers-permissions) for granting layer usage permissions to specific AWS accounts, [AWS Organizations](https://docs.aws.amazon.com/organizations/latest/userguide/), or all accounts\.
 
@@ -57,13 +60,13 @@ You must specify the version of each layer to use by providing the full ARN of t
 $ aws lambda update-function-configuration --function-name my-function --layers []
 ```
 
-Your function can access the content of the layer during execution in the `/opt` directory\. Layers are applied in the order that's specified, merging any folders with the same name\. If the same file appears in multiple layers, the version in the last applied layer is used\.
+While your function is running, it can access the content of the layer in the `/opt` directory\. Layers are applied in the order that's specified, merging any folders with the same name\. If the same file appears in multiple layers, the version in the last applied layer is used\.
 
 The creator of a layer can delete the version of the layer that you're using\. When this happens, your function continues to run as though the layer version still existed\. However, when you update the layer configuration, you must remove the reference to the deleted version\.
 
 ## Managing layers<a name="configuration-layers-manage"></a>
 
-To create a layer, use the `publish-layer-version` command with a name, description, ZIP archive, and a list of [runtimes](lambda-runtimes.md) that are compatible with the layer\. The list of runtimes is optional, but it makes the layer easier to discover\.
+To create a layer, use the `publish-layer-version` command with a name, description, \.zip file archive, and a list of [runtimes](lambda-runtimes.md) that are compatible with the layer\. The list of runtimes is optional, but it makes the layer easier to discover\.
 
 ```
 $ aws lambda publish-layer-version --layer-name my-layer --description "My layer" --license-info "MIT" \

@@ -4,9 +4,9 @@
 
 ## Prerequisites<a name="with-ddb-prepare"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with AWS Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with Lambda](getting-started.md) to create your first Lambda function\.
 
-To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
+To complete the following steps, you need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
 ```
 ~/lambda-project$ this is a command
@@ -174,7 +174,7 @@ In this step, you invoke your Lambda function manually using the `invoke` AWS La
 }
 ```
 
-Execute the following `invoke` command\. 
+Run the following `invoke` command\. 
 
 ```
 $ aws lambda invoke --function-name ProcessDynamoDBRecords --payload file://input.txt outputfile.txt
@@ -218,7 +218,7 @@ Write down the stream ARN\. You need this in the next step when you associate th
 
 Create an event source mapping in AWS Lambda\. This event source mapping associates the DynamoDB stream with your Lambda function\. After you create this event source mapping, AWS Lambda starts polling the stream\.
 
-Run the following AWS CLI `create-event-source-mapping` command\. After the command executes, note down the UUID\. You'll need this UUID to refer to the event source mapping in any commands, for example, when deleting the event source mapping\.
+Run the following AWS CLI `create-event-source-mapping` command\. After the command runs, note down the UUID\. You'll need this UUID to refer to the event source mapping in any commands, for example, when deleting the event source mapping\.
 
 ```
 $ aws lambda create-event-source-mapping --function-name ProcessDynamoDBRecords \
@@ -243,10 +243,46 @@ $ aws lambda list-event-source-mappings --function-name ProcessDynamoDBRecords
 
 ## Test the setup<a name="with-ddb-final-integration-test-no-iam"></a>
 
-Test the end\-to\-end experience\. As you perform table updates, DynamoDB writes event records to the stream\. As AWS Lambda polls the stream, it detects new records in the stream and executes your Lambda function on your behalf by passing events to the function\. 
+Test the end\-to\-end experience\. As you perform table updates, DynamoDB writes event records to the stream\. As AWS Lambda polls the stream, it detects new records in the stream and invokes your Lambda function on your behalf by passing events to the function\. 
 
 1. In the DynamoDB console, add, update, and delete items to the table\. DynamoDB writes records of these actions to the stream\.
 
 1. AWS Lambda polls the stream and when it detects updates to the stream, it invokes your Lambda function by passing in the event data it finds in the stream\.
 
-1. Your function executes and creates logs in Amazon CloudWatch\. You can verify the logs reported in the Amazon CloudWatch console\.
+1. Your function runs and creates logs in Amazon CloudWatch\. You can verify the logs reported in the Amazon CloudWatch console\.
+
+## Clean up your resources<a name="cleanup"></a>
+
+You can now delete the resources that you created for this tutorial, unless you want to retain them\. By deleting AWS resources that you are no longer using, you prevent unnecessary charges to your AWS account\.
+
+**To delete the Lambda function**
+
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
+
+1. Select the function that you created\.
+
+1. Choose **Actions**, **Delete**\.
+
+1. Choose **Delete**\.
+
+**To delete the execution role**
+
+1. Open the [Roles page](https://console.aws.amazon.com/iam/home#/roles) of the IAM console\.
+
+1. Select the execution role that you created\.
+
+1. Choose **Delete role**\.
+
+1. Choose **Yes, delete**\.
+
+**To delete the DynamoDB table**
+
+1. Open the [Tables page](https://console.aws.amazon.com/dynamodb/home#tables:) of the DynamoDB console\.
+
+1. Select the table you created\.
+
+1. Choose **Delete**\.
+
+1. Enter **delete** in the text box\.
+
+1. Choose **Delete**\.

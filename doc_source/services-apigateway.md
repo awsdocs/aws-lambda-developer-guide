@@ -4,7 +4,7 @@ You can create a web API with an HTTP endpoint for your Lambda function by using
 
 **To add a public endpoint to your Lambda function**
 
-1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
 1. Choose a function\.
 

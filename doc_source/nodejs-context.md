@@ -28,7 +28,7 @@ When Lambda runs your function, it passes a context object to the [handler](node
   + `env.model`
   + `env.locale`
   + `Custom` – Custom values that are set by the mobile application\. 
-+ `callbackWaitsForEmptyEventLoop` – Set to false to send the response right away when the [callback](nodejs-handler.md#nodejs-handler-sync) executes, instead of waiting for the Node\.js event loop to be empty\. If this is false, any outstanding events continue to run during the next invocation\.
++ `callbackWaitsForEmptyEventLoop` – Set to false to send the response right away when the [callback](nodejs-handler.md#nodejs-handler-sync) runs, instead of waiting for the Node\.js event loop to be empty\. If this is false, any outstanding events continue to run during the next invocation\.
 
 The following example function logs context information and returns the location of the logs\.
 

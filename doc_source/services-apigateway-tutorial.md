@@ -25,6 +25,8 @@ The request payload you send in the `POST` request identifies the DynamoDB opera
   ```
 + The following is a sample request payload for a DynamoDB read item operation:
 
+   
+
   ```
   {
       "operation": "read",
@@ -57,9 +59,9 @@ To learn more about these API Gateway features, see [Configure proxy integration
 
 ## Prerequisites<a name="services-apigateway-tutorial-prereqs"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with AWS Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with Lambda](getting-started.md) to create your first Lambda function\.
 
-To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
+To complete the following steps, you need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
 ```
 ~/lambda-project$ this is a command
@@ -213,7 +215,7 @@ Invoke the function manually using the sample event data\. We recommend that you
    }
    ```
 
-1.  Execute the following `invoke` command:
+1. Run the following `invoke` command:
 
    ```
    $ aws lambda  invoke --function-name LambdaFunctionOverHttps \
@@ -325,7 +327,7 @@ Set `content-type` of the `POST` method response and integration response to JSO
   ```
   $ aws apigateway put-method-response --rest-api-id $API \
   --resource-id $RESOURCE --http-method POST \
-  --status-code 200 --response-models "{\"application/json"\":""\"Empty"\"}"""
+  --status-code 200 --response-models application/json=Empty
   {
       "statusCode": "200",
       "responseModels": {
@@ -338,7 +340,7 @@ Set `content-type` of the `POST` method response and integration response to JSO
   ```
   $ aws apigateway put-integration-response --rest-api-id $API \
   --resource-id $RESOURCE --http-method POST \
-  --status-code 200 --response-templates "{\"application/json"\":""\"\"}""
+  --status-code 200 --response-templates application/json=""
   {
       "statusCode": "200",
       "responseTemplates": {
@@ -346,6 +348,8 @@ Set `content-type` of the `POST` method response and integration response to JSO
       }
   }
   ```
+**Note**  
+If you encounter an error running this command, you can use escape characters around the response template field for more clarity\. The text `application/json=""` becomes `"{\"application/json"\":""\"\"}""`\.
 
 ### Deploy the API<a name="with-on-demand-https-deploy-api-prod"></a>
 
@@ -474,3 +478,49 @@ Or, you can use the following Curl command:
 ```
 $ curl -X POST -d "{\"operation\":\"echo\",\"payload\":{\"somekey1\":\"somevalue1\",\"somekey2\":\"somevalue2\"}}" https://$API.execute-api.$REGION.amazonaws.com/prod/DynamoDBManager
 ```
+
+## Clean up your resources<a name="cleanup"></a>
+
+You can now delete the resources that you created for this tutorial, unless you want to retain them\. By deleting AWS resources that you are no longer using, you prevent unnecessary charges to your AWS account\.
+
+**To delete the Lambda function**
+
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
+
+1. Select the function that you created\.
+
+1. Choose **Actions**, **Delete**\.
+
+1. Choose **Delete**\.
+
+**To delete the execution role**
+
+1. Open the [Roles page](https://console.aws.amazon.com/iam/home#/roles) of the IAM console\.
+
+1. Select the execution role that you created\.
+
+1. Choose **Delete role**\.
+
+1. Choose **Yes, delete**\.
+
+**To delete the API**
+
+1. Open the [APIs page](https://console.aws.amazon.com/apigateway/main/apis) of the API Gateway console\.
+
+1. Select the API you created\.
+
+1. Choose **Actions**, **Delete**\.
+
+1. Choose **Delete**\.
+
+**To delete the DynamoDB table**
+
+1. Open the [Tables page](https://console.aws.amazon.com/dynamodb/home#tables:) of the DynamoDB console\.
+
+1. Select the table you created\.
+
+1. Choose **Delete**\.
+
+1. Enter **delete** in the text box\.
+
+1. Choose **Delete**\.

@@ -1,8 +1,8 @@
 # AWS Lambda function handler in C\#<a name="csharp-handler"></a>
 
-When you create a Lambda function, you specify a handler that AWS Lambda can invoke when the service executes the function on your behalf\. 
+The AWS Lambda function handler is the method in your function code that processes events\. When your function is invoked, Lambda runs the handler method\. When the handler exits or returns a response, it becomes available to handle another event\.
 
-You define a Lambda function handler as an instance or static method in a class\. If you want access to the Lambda context object, it is available by defining a method parameter of type *ILambdaContext*, an interface you can use to access information about the current execution, such as the name of the current function, the memory limit, execution time remaining, and logging\. 
+You define a Lambda function handler as an instance or static method in a class\. If you want access to the Lambda context object, it is available by defining a method parameter of type *ILambdaContext*, an interface you can use to access information about the current invocation, such as the name of the current function, the memory limit, execution time remaining, and logging\. 
 
 ```
 returnType handler-name(inputType input, ILambdaContext context) {
@@ -50,7 +50,7 @@ All other types, as listed below, require you to specify a serializer\.
 + For asynchronous invocations the return\-type will be ignored by Lambda\. The return type may be set to void in such cases\.
 + If you are using \.NET asynchronous programming, the return type can be Task and Task<T> types and use `async` and `await` keywords\. For more information, see [Using async in C\# functions with AWS Lambda](#csharp-handler-async)\.
 
-Unless your function input and output parameters are of type `System.IO.Stream`, you will need to serialize them\. AWS Lambda provides a default serializer that can be applied at the assembly or method level of your application, or you can define your own by implementing the `ILambdaSerializer` interface provided by the `Amazon.Lambda.Core` library\. For more information, see [AWS Lambda Deployment Package in C\#](csharp-package.md)\.
+Unless your function input and output parameters are of type `System.IO.Stream`, you will need to serialize them\. AWS Lambda provides a default serializer that can be applied at the assembly or method level of your application, or you can define your own by implementing the `ILambdaSerializer` interface provided by the `Amazon.Lambda.Core` library\. For more information, see [Deploy C\# Lambda functions with \.zip file archives](csharp-package.md)\.
 
  To add the default serializer attribute to a method, first add a dependency on `Amazon.Lambda.Serialization.Json` in your `project.json` file\. 
 
@@ -169,7 +169,7 @@ Note that there are some restrictions on the handler signature\.
 
 ## Using async in C\# functions with AWS Lambda<a name="csharp-handler-async"></a>
 
-If you know your Lambda function will require a long\-running process, such as uploading large files to Amazon S3 or reading a large stream of records from DynamoDB, you can take advantage of the async/await pattern\. When you use this signature, Lambda executes the function synchronously and waits for the function to return a response or for execution to [time out](configuration-console.md)\.
+If you know your Lambda function will require a long\-running process, such as uploading large files to Amazon S3 or reading a large stream of records from DynamoDB, you can take advantage of the async/await pattern\. When you use this signature, Lambda invokes the function synchronously and waits for the function to return a response or for execution to [time out](configuration-console.md)\.
 
 ```
 public async Task<Response> ProcessS3ImageResizeAsync(SimpleS3Event input)
@@ -181,7 +181,7 @@ public async Task<Response> ProcessS3ImageResizeAsync(SimpleS3Event input)
 
 If you use this pattern, there are some considerations you must take into account:
 + AWS Lambda does not support `async void` methods\.
-+ If you create an async Lambda function without implementing the `await` operator, \.NET will issue a compiler warning and you will observe unexpected behavior\. For example, some async actions will execute while others won't\. Or some async actions won't complete before the function execution is complete\.
++ If you create an async Lambda function without implementing the `await` operator, \.NET will issue a compiler warning and you will observe unexpected behavior\. For example, some async actions will run while others won't\. Or some async actions won't complete before the function invocation completes\.
 
   ```
   public async Task ProcessS3ImageResizeAsync(SimpleS3Event event) // Compiler warning

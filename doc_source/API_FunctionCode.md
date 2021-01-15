@@ -1,8 +1,13 @@
 # FunctionCode<a name="API_FunctionCode"></a>
 
-The code for the Lambda function\. You can specify either an object in Amazon S3, or upload a deployment package directly\.
+The code for the Lambda function\. You can specify either an object in Amazon S3, upload a \.zip file archive deployment package directly, or specify the URI of a container image\.
 
 ## Contents<a name="API_FunctionCode_Contents"></a>
+
+ **ImageUri**   <a name="SSS-Type-FunctionCode-ImageUri"></a>
+URI of a container image in the Amazon ECR registry\.  
+Type: String  
+Required: No
 
  **S3Bucket**   <a name="SSS-Type-FunctionCode-S3Bucket"></a>
 An Amazon S3 bucket in the same AWS Region as your function\. The bucket can be in a different AWS account\.  

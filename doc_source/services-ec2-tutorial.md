@@ -8,9 +8,11 @@ This tutorial provides code that performs these tasks and a sample application t
 
 For more information about spot instances usage and best practices, see [Spot Instances](https://docs.aws.amazon.com/AWSEC2/latest/DeveloperGuide/using-spot-instances.html) in the Amazon EC2 user guide\.
 
+
+
 ## Prerequisites<a name="services-ec2-tutorial-prereqs"></a>
 
-To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
+To complete the following steps, you need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
 ```
 ~/lambda-project$ this is a command
@@ -237,7 +239,7 @@ Run the code in Lambda as a starting point for creating a serverless application
    Lambda project successfully packaged: ec2spot.zip
    Uploading to ebd38e401cedd7d676d05d22b76f0209  1305107 / 1305107.0  (100.00%)
    Successfully packaged artifacts and wrote output template to file out.yaml.
-   Execute the following command to deploy the packaged template
+   Run the following command to deploy the packaged template
    aws cloudformation deploy --template-file out.yaml --stack-name <YOUR STACK NAME>
    
    Waiting for changeset to be created..

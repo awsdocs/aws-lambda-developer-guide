@@ -24,7 +24,7 @@ The diagram illustrates the following sequence:
 
 1. Amazon S3 invokes your Lambda function using the permissions provided by the [execution role](lambda-intro-execution-role.md)\.
 
-1. AWS Lambda executes the Lambda function, specifying the event as a parameter\.
+1. AWS Lambda runs the Lambda function, specifying the event as a parameter\.
 
 You configure Amazon S3 to invoke your function as a bucket notification action\. To grant Amazon S3 permission to invoke the function, update the function's [resource\-based policy](access-control-resource-based.md)\.
 

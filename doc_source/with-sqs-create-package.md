@@ -36,7 +36,7 @@ event.Records.forEach(function(record) {
 };
 ```
 
-Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda deployment package in Node\.js](nodejs-package.md)\.
+Zip up the sample code to create a deployment package\. For instructions, see [Deploy Node\.js Lambda functions with \.zip file archives](nodejs-package.md)\.
 
 ## Java<a name="with-sqs-example-deployment-pkg-java"></a>
 
@@ -70,7 +70,7 @@ public class Handler implements RequestHandler<SQSEvent, Void>{
 + `aws-lambda-java-core`
 + `aws-lambda-java-events`
 
-Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [AWS Lambda deployment package in Java](java-package.md)\.
+Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [Deploy Java Lambda functions with \.zip file archives](java-package.md)\.
 
 ## C\#<a name="with-sqs-example-deployment-pkg-dotnet"></a>
 
@@ -108,7 +108,7 @@ namespace SQSLambdaFunction
 }
 ```
 
-Replace the `Program.cs` in a \.NET Core project with the above sample\. For instructions, see [AWS Lambda Deployment Package in C\#](csharp-package.md)\.
+Replace the `Program.cs` in a \.NET Core project with the above sample\. For instructions, see [Deploy C\# Lambda functions with \.zip file archives](csharp-package.md)\.
 
 ## Go<a name="with-sqs-example-deployment-pkg-go"></a>
 
@@ -142,7 +142,7 @@ func main() {
 }
 ```
 
-Build the executable with `go build` and create a deployment package\. For instructions, see [AWS Lambda deployment package in Go](golang-package.md)\.
+Build the executable with `go build` and create a deployment package\. For instructions, see [Deploy Go Lambda functions with \.zip file archives](golang-package.md)\.
 
 ## Python<a name="with-sqs-example-deployment-pkg-python"></a>
 
@@ -162,4 +162,4 @@ def lambda_handler(event, context):
        print(str(payload))
 ```
 
-Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda deployment package in Python](python-package.md)\.
+Zip up the sample code to create a deployment package\. For instructions, see [Deploy Python Lambda functions with \.zip file archives](python-package.md)\.

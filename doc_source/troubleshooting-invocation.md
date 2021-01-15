@@ -1,4 +1,4 @@
-# Troubleshoot invocation issues in AWS Lambda<a name="troubleshooting-invocation"></a>
+# Troubleshoot invocation issues in Lambda<a name="troubleshooting-invocation"></a>
 
 When you invoke a Lambda function, Lambda validates the request and checks for scaling capacity before sending the event to your function or, for asynchronous invocation, to the event queue\. Invocation errors can be caused by issues with request parameters, event structure, function settings, user permissions, resource permissions, or limits\.
 

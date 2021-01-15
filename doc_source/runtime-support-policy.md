@@ -1,11 +1,11 @@
 # Runtime support policy<a name="runtime-support-policy"></a>
 
-[AWS Lambda runtimes](lambda-runtimes.md) are built around a combination of operating system, programming language, and software libraries that are subject to maintenance and security updates\. When a component of a runtime is no longer supported for security updates, Lambda deprecates the runtime\.
+[Lambda runtimes](lambda-runtimes.md) for \.zip file archives are built around a combination of operating system, programming language, and software libraries that are subject to maintenance and security updates\. When a component of a runtime is no longer supported for security updates, Lambda deprecates the runtime\.
 
 Deprecation occurs in two phases\. During the first phase, you can no longer create functions that use the deprecated runtime\. For at least 30 days, you can continue to update existing functions that use the deprecated runtime\. After this period, both function creation and updates are disabled permanently\. However, the function continues to be available to process invocation events\.
 
 **Note**  
-Python 2\.7 reached end\-of\-life on January 1st, 2020\. However, the Python 2\.7 runtime is still supported and is not scheduled to be deprecated at this time\. For details, see [Continued support for Python 2\.7 on AWS Lambda](https://aws.amazon.com/blogs/compute/continued-support-for-python-2-7-on-aws-lambda/)\.
+Python 2\.7 reached end of life on January 1, 2020\. However, the Python 2\.7 runtime is still supported and is not scheduled to be deprecated at this time\. For details, see [Continued support for Python 2\.7 on AWS Lambda](http://aws.amazon.com/blogs/compute/continued-support-for-python-2-7-on-aws-lambda/) on the AWS Compute Blog\.
 
 The following runtimes have been deprecated:
 
@@ -28,7 +28,7 @@ In most cases, the end\-of\-life date of a language version or operating system 
 + **Node\.js** – [github\.com](https://github.com/nodejs/Release#release-schedule)
 + **Python** – [devguide\.python\.org](https://devguide.python.org/#status-of-python-branches)
 + **Ruby** – [www\.ruby\-lang\.org](https://www.ruby-lang.org/en/downloads/branches/)
-+ **Java** – [www\.oracle\.com](https://www.oracle.com/technetwork/java/java-se-support-roadmap.html) and [aws\.amazon\.com/corretto](https://aws.amazon.com/corretto/faqs/) 
++ **Java** – [www\.oracle\.com](https://www.oracle.com/technetwork/java/java-se-support-roadmap.html) and [aws\.amazon\.com/corretto](https://aws.amazon.com/corretto/faqs/)
 + **Go** – [golang\.org](https://golang.org/s/release)
 + **\.NET Core** – [dotnet\.microsoft\.com](https://dotnet.microsoft.com/platform/support/policy/dotnet-core)
 

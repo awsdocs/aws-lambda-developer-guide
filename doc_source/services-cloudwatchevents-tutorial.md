@@ -9,7 +9,7 @@ In this tutorial, you do the following:
 
 ## Prerequisites<a name="services-cloudwatchevents-tutorial-prereqs"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with AWS Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with Lambda](getting-started.md) to create your first Lambda function\.
 
 ## Create a Lambda function<a name="services-cloudwatchevents-tutorial-create"></a>
 
@@ -43,7 +43,7 @@ CloudWatch Events emits an event every minute, based on the schedule expression\
 
 Test the function with a sample event provided by the Lambda console\.
 
-1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
 1. Choose **lambda\-canary**\.
 
@@ -105,13 +105,15 @@ Configure an alarm in Amazon CloudWatch that monitors the Lambda function and se
    + Threshold – **Whenever Errors is >=****1**\.
    + **Send notification to** – **lambda\-canary\-notifications**\.
 
+
+
 ## Test the alarm<a name="services-cloudwatchevents-tutorial-testalarm"></a>
 
 Update the function configuration to cause the function to return an error, which triggers the alarm\.
 
 **To trigger an alarm**
 
-1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
 1. Choose **lambda\-canary**\.
 
@@ -122,3 +124,47 @@ Update the function configuration to cause the function to return an error, whic
 1. Choose **Save**\.
 
 Wait a minute, and then check your email for a message from Amazon SNS\.
+
+## Clean up your resources<a name="cleanup"></a>
+
+You can now delete the resources that you created for this tutorial, unless you want to retain them\. By deleting AWS resources that you are no longer using, you prevent unnecessary charges to your AWS account\.
+
+**To delete the Lambda function**
+
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
+
+1. Select the function that you created\.
+
+1. Choose **Actions**, **Delete**\.
+
+1. Choose **Delete**\.
+
+**To delete the CloudWatch alarm**
+
+1. Open the [Alarms page](https://console.aws.amazon.com/cloudwatch/home#alarms:) of the CloudWatch console\.
+
+1. Select the alarm you created\.
+
+1. Choose **Actions**, **Delete**\.
+
+1. Choose **Delete**\.
+
+**To delete the Amazon SNS subscription**
+
+1. Open the [Subscriptions page](https://console.aws.amazon.com/sns/home#subscriptions:) of the Amazon SNS console\.
+
+1. Select the subscription you created\.
+
+1. Choose **Delete**, **Delete**\.
+
+**To delete the Amazon SNS topic**
+
+1. Open the [Topics page](https://console.aws.amazon.com/sns/home#topics:) of the Amazon SNS console\.
+
+1. Select the topic you created\.
+
+1. Choose **Delete**\.
+
+1. Enter **delete me** in the text box\.
+
+1. Choose **Delete**\.

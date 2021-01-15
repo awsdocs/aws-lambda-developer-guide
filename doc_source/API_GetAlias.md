@@ -41,13 +41,13 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "[AliasArn](#SSS-GetAlias-response-AliasArn)": "string",
-   "[Description](#SSS-GetAlias-response-Description)": "string",
-   "[FunctionVersion](#SSS-GetAlias-response-FunctionVersion)": "string",
-   "[Name](#SSS-GetAlias-response-Name)": "string",
-   "[RevisionId](#SSS-GetAlias-response-RevisionId)": "string",
-   "[RoutingConfig](#SSS-GetAlias-response-RoutingConfig)": { 
-      "[AdditionalVersionWeights](API_AliasRoutingConfiguration.md#SSS-Type-AliasRoutingConfiguration-AdditionalVersionWeights)": { 
+   "AliasArn": "string",
+   "Description": "string",
+   "FunctionVersion": "string",
+   "Name": "string",
+   "RevisionId": "string",
+   "RoutingConfig": { 
+      "AdditionalVersionWeights": { 
          "string" : number 
       }
    }

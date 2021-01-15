@@ -8,9 +8,9 @@ The mobile application retrieves AWS credentials from an Amazon Cognito identity
 
 ## Prerequisites<a name="with-android-prepare"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with AWS Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with Lambda](getting-started.md) to create your first Lambda function\.
 
-To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
+To complete the following steps, you need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
 ```
 ~/lambda-project$ this is a command
@@ -87,7 +87,7 @@ Invoke the function manually using the sample event data\.
    {   "firstName": "first-name",   "lastName": "last-name" }
    ```
 
-1.  Execute the following `invoke` command:
+1.  Run the following `invoke` command:
 
    ```
    $ aws lambda  invoke --function-name AndroidBackendLambdaFunction \
@@ -96,7 +96,7 @@ Invoke the function manually using the sample event data\.
 
 ## Create an Amazon Cognito identity pool<a name="with-on-demand-custom-android-create-cognito-pool"></a>
 
-In this section, you create an Amazon Cognito identity pool\. The identity pool has two IAM roles\. You update the IAM role for unauthenticated users and grant permissions to execute the `AndroidBackendLambdaFunction` Lambda function\. 
+In this section, you create an Amazon Cognito identity pool\. The identity pool has two IAM roles\. You update the IAM role for unauthenticated users and grant permissions to run the `AndroidBackendLambdaFunction` Lambda function\. 
 
 For more information about IAM roles, see [IAM roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *IAM User Guide*\. For more information about Amazon Cognito services, see the [Amazon Cognito](https://aws.amazon.com/cognito/) product detail page\. 
 

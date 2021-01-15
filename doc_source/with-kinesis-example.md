@@ -8,13 +8,13 @@ In this tutorial, you create a Lambda function to consume events from a Kinesis 
 
 1. AWS Lambda polls the stream and, when it detects new records in the stream, invokes your Lambda function\.
 
-1. AWS Lambda executes the Lambda function by assuming the execution role you specified at the time you created the Lambda function\.
+1. AWS Lambda runs the Lambda function by assuming the execution role you specified at the time you created the Lambda function\.
 
 ## Prerequisites<a name="with-kinesis-prepare"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with AWS Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with Lambda](getting-started.md) to create your first Lambda function\.
 
-To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
+To complete the following steps, you need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
 ```
 ~/lambda-project$ this is a command

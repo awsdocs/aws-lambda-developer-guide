@@ -10,7 +10,7 @@ To trace requests that don't have a tracing header, enable active tracing in you
 
 **To enable active tracing**
 
-1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
 1. Choose a function\.
 
@@ -23,11 +23,24 @@ X\-Ray has a perpetual free tier\. Beyond the free tier threshold, X\-Ray charge
 
 Your function needs permission to upload trace data to X\-Ray\. When you enable active tracing in the Lambda console, Lambda adds the required permissions to your function's [execution role](lambda-intro-execution-role.md)\. Otherwise, add the [AWSXRayDaemonWriteAccess](https://console.aws.amazon.com/iam/home#/policies/arn:aws:iam::aws:policy/AWSXRayDaemonWriteAccess) policy to the execution role\.
 
-X\-Ray applies a sampling algorithm to ensure that tracing is efficient, while still providing a representative sample of the requests that your application serves\. The default sampling rule is 1 request per second and 5 percent of additional requests\.
+X\-Ray applies a sampling algorithm to ensure that tracing is efficient, while still providing a representative sample of the requests that your application serves\. The default sampling rule is 1 request per second and 5 percent of additional requests\. This sampling rate cannot be configured for Lambda functions\.
 
-When active tracing is enabled, Lambda records a trace for a subset of invocations\. Lambda records two *segments*, which creates two nodes on the service map\. The first node represents the Lambda service that receives the invocation request\. The second node is recorded by the function's [runtime](gettingstarted-concepts.md#gettingstarted-concepts-runtimes)\.
+When active tracing is enabled, Lambda records a trace for a subset of invocations\. Lambda records two *segments*, which creates two nodes on the service map\. The first node represents the Lambda service that receives the invocation request\. The second node is recorded by the function's [runtime](gettingstarted-concepts.md#gettingstarted-concepts-runtime)\.
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/xray-servicemap-function.png)
+
+**Configuration**
+
+ The Lambda runtime sets some environment variables to configure the X\-Ray SDK, including `AWS_XRAY_CONTEXT_MISSING`\. To set a custom context missing strategy, override the environment variable in your function configuration to have no value, and then you can set the context missing strategy programmatically\. For more information, see [Runtime environment variables](configuration-envvars.md#configuration-envvars-runtime)\.
+
+**Example initialization code**  
+
+```
+const AWSXRay = require('aws-xray-sdk-core');
+
+// Configure the context missing strategy to do nothing
+AWSXRay.setContextMissingStrategy(() => {});
+```
 
 You can instrument your handler code to record metadata and trace downstream calls\. To record detail about calls that your handler makes to other resources and services, use the X\-Ray SDK for Node\.js\. To get the SDK, add the `aws-xray-sdk-core` package to your application's dependencies\.
 
@@ -111,7 +124,7 @@ Resources:
   function:
     Type: [AWS::Lambda::Function](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html)
     Properties:
-      TracingConfig: 
+      TracingConfig:
         Mode: Active
       ...
 ```

@@ -36,7 +36,7 @@ cron(Minutes Hours Day-of-month Month Day-of-week Year)
 |  9:00 AM on the first Monday of each month  |  `cron(0 9 ? * 2#1 *)`  | 
 
 Note the following:
-+ If you are using the Lambda console, do not include the `cron` prefix to your expression\.
++ If you are using the Lambda console, do not include the `cron` prefix in your expression\.
 + One of the day\-of\-month or day\-of\-week values must be a question mark \(`?`\)\.
 
 For more information, see [Schedule expressions for rules](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html) in the *CloudWatch Events User Guide*\.

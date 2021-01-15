@@ -50,7 +50,7 @@ $ aws lambda invoke --function-name my-function out.json --log-type Tail \
 START RequestId: fc4f8810-88ff-4800-974c-12cec018a4b9 Version: $LATEST
       return x + 10/lambda_function.py", line 2, in lambda_handler
 END RequestId: fc4f8810-88ff-4800-974c-12cec018a4b9
-REPORT RequestId: fc4f8810-88ff-4800-974c-12cec018a4b9	Duration: 12.33 ms	Billed Duration: 100 ms	Memory Size: 128 MB	Max Memory Used: 56 MB
+REPORT RequestId: fc4f8810-88ff-4800-974c-12cec018a4b9	Duration: 12.33 ms	Billed Duration: 13 ms	Memory Size: 128 MB	Max Memory Used: 56 MB
 ```
 
 For more information about logs, see [AWS Lambda function logging in Python](python-logging.md)\.

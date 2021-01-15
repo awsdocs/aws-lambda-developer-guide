@@ -1,6 +1,6 @@
 # Tutorial: Using AWS Lambda with Amazon S3<a name="with-s3-example"></a>
 
-Suppose you want to create a thumbnail for each image file that is uploaded to a bucket\. You can create a Lambda function \(`CreateThumbnail`\) that Amazon S3 can invoke when objects are created\. Then, the Lambda function can read the image object from the source bucket and create a thumbnail image target bucket\.
+Suppose you want to create a thumbnail for each image file that is uploaded to a bucket\. You can create a Lambda function \(`CreateThumbnail`\) that Amazon S3 can invoke when objects are created\. Then, the Lambda function can read the image object from the source bucket and create a thumbnail image to save in the target bucket\.
 
 Upon completing this tutorial, you will have the following Amazon S3, Lambda, and IAM resources in your account: 
 
@@ -19,9 +19,9 @@ Upon completing this tutorial, you will have the following Amazon S3, Lambda, an
 
 ## Prerequisites<a name="with-s3-prepare"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with AWS Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with Lambda](getting-started.md) to create your first Lambda function\.
 
-To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
+To complete the following steps, you need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
 ```
 ~/lambda-project$ this is a command
@@ -36,6 +36,66 @@ Install npm to manage the function's dependencies\.
 
 The tutorial uses AWS CLI commands to create and invoke the Lambda function\. Install the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) and [configure it with your AWS credentials](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) 
 
+## Create buckets and upload a sample object<a name="with-s3-example-prepare-create-buckets"></a>
+
+Follow the steps to create buckets and upload an object\.
+
+1. Open the [Amazon S3 console](https://console.aws.amazon.com/s3)\.
+
+1. Create two buckets\. The target bucket name must be *source* followed by **\-resized**, where *source* is the name of the bucket you want to use for the source\. For example, `mybucket` and `mybucket-resized`\.
+
+1. In the source bucket, upload a \.jpg object, `HappyFace.jpg`\. 
+
+   When you invoke the Lambda function manually before you connect to Amazon S3, you pass sample event data to the function that specifies the source bucket and `HappyFace.jpg` as the newly created object so you need to create this sample object first\.
+
+## Create the IAM Policy<a name="with-s3-example-create-policy"></a>
+
+Create an IAM policy that defines the permissions for the Lambda function\. The required permissions include:
++ Get the object from the source S3 bucket\.
++ Put the resized object into the target S3 bucket\.
++ Permissions related to the CloudWatch Logs\.
+
+**To create an IAM Policy**
+
+1. Open the [Policies page](https://console.aws.amazon.com/iam/home#/policies) in the IAM Console\.
+
+1. Choose **Create policy**
+
+1. Under the **JSON** tab, copy the following policy\. Make sure the source and target bucket names match the bucket names that you created previously\.
+
+   ```
+   {
+       "Version": "2012-10-17",
+       "Statement": [
+           {
+               "Effect": "Allow",
+               "Action": [
+                   "logs:PutLogEvents",
+                   "logs:CreateLogGroup",
+                   "logs:CreateLogStream"
+               ],
+               "Resource": "arn:aws:logs:*:*:*"
+           },
+           {
+               "Effect": "Allow",
+               "Action": [
+                   "s3:GetObject"
+               ],
+               "Resource": "arn:aws:s3:::mybucket/*"
+           },
+           {
+               "Effect": "Allow",
+               "Action": [
+                   "s3:PutObject"
+               ],
+               "Resource": "arn:aws:s3:::mybucket-resized/*"
+           }
+       ]
+   }
+   ```
+
+1. Choose **Review policy**, specify the policy name as `AWSLambdaS3Policy`, and create the policy\.
+
 ## Create the execution role<a name="with-s3-create-execution-role"></a>
 
 Create the [execution role](lambda-intro-execution-role.md) that gives your function permission to access AWS resources\.
@@ -48,22 +108,10 @@ Create the [execution role](lambda-intro-execution-role.md) that gives your func
 
 1. Create a role with the following properties\.
    + **Trusted entity** – **AWS Lambda**\.
-   + **Permissions** – **AWSLambdaExecute**\.
+   + **Permissions** – **AWSLambdaS3Policy**\.
    + **Role name** – **lambda\-s3\-role**\.
 
-The **AWSLambdaExecute** policy has the permissions that the function needs to manage objects in Amazon S3 and write logs to CloudWatch Logs\.
-
-## Create buckets and upload a sample object<a name="with-s3-example-prepare-create-buckets"></a>
-
-Follow the steps to create buckets and upload an object\.
-
-1. Open the [Amazon S3 console](https://console.aws.amazon.com/s3)\.
-
-1. Create two buckets\. The target bucket name must be *source* followed by **\-resized**, where *source* is the name of the bucket you want to use for the source\. For example, `mybucket` and `mybucket-resized`\.
-
-1. In the source bucket, upload a \.jpg object, `HappyFace.jpg`\. 
-
-   When you invoke the Lambda function manually before you connect to Amazon S3, you pass sample event data to the function that specifies the source bucket and `HappyFace.jpg` as the newly created object so you need to create this sample object first\.
+The **AWSLambdaS3Policy** policy has the permissions that the function needs to manage objects in Amazon S3 and write logs to CloudWatch Logs\.
 
 ## Create the function<a name="with-s3-example-create-function"></a>
 
@@ -163,6 +211,8 @@ The deployment package is a \.zip file containing your Lambda function code and 
 
 **To create a deployment package**
 
+1. Open a command line terminal or shell in a Linux environment\. Ensure that the Node\.js version in your local environment matches the Node\.js version of your function\. 
+
 1. Save the function code as `index.js` in a folder named `lambda-s3`\.
 
 1. Install the Sharp library with npm\. For Linux, use the following command\.
@@ -201,6 +251,12 @@ The deployment package is a \.zip file containing your Lambda function code and 
   --timeout 10 --memory-size 1024 \
   --role arn:aws:iam::123456789012:role/lambda-s3-role
   ```
+
+If you are using AWS CLI version 2, add the following command parameters: 
+
+```
+--cli-binary-format raw-in-base64-out
+```
 
 For the role parameter, replace the number sequence with your AWS account ID\. The preceding example command specifies a 10\-second timeout value as the function configuration\. Depending on the size of objects you upload, you might need to increase the timeout value using the following AWS CLI command\.
 
@@ -308,7 +364,7 @@ This procedure configures the bucket to invoke your function every time an objec
 
 1. Under **Events**, configure a notification with the following settings\.
    + **Name** – **lambda\-trigger**\.
-   + **Events** – **ObjectCreate \(All\)**\.
+   + **Events** – **All object create events**\.
    + **Send to** – **Lambda function**\.
    + **Lambda** – **CreateThumbnail**\.
 
@@ -323,3 +379,49 @@ Now you can test the setup as follows:
 1. Verify that the thumbnail was created in the target bucket using the `CreateThumbnail` function\.
 
 1. View logs in the CloudWatch console\. 
+
+## Clean up your resources<a name="cleanup"></a>
+
+You can now delete the resources that you created for this tutorial, unless you want to retain them\. By deleting AWS resources that you are no longer using, you prevent unnecessary charges to your AWS account\.
+
+**To delete the Lambda function**
+
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
+
+1. Select the function that you created\.
+
+1. Choose **Actions**, **Delete**\.
+
+1. Choose **Delete**\.
+
+**To delete the policy that you created**
+
+1. Open the [Policies page](https://console.aws.amazon.com/iam/home#/policies) of the IAM console\.
+
+1. Select the policy that you created\.
+
+1. From **Policy actions**, choose **Delete**\.
+
+1. Choose **Delete**\.
+
+**To delete the execution role**
+
+1. Open the [Roles page](https://console.aws.amazon.com/iam/home#/roles) of the IAM console\.
+
+1. Select the execution role that you created\.
+
+1. Choose **Delete role**\.
+
+1. Choose **Yes, delete**\.
+
+**To delete the S3 buckets**
+
+1. Open the [Amazon S3 console\.](https://console.aws.amazon.com/s3/home#)
+
+1. Select the source bucket you created\.
+
+1. Choose **Delete**\.
+
+1. Enter the name of the source bucket in the text box\.
+
+1. Choose **Confirm**\.

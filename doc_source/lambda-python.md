@@ -1,6 +1,6 @@
 # Building Lambda functions with Python<a name="lambda-python"></a>
 
-You can run Python code in AWS Lambda\. Lambda provides [runtimes](lambda-runtimes.md) for Python that execute your code to process events\. Your code runs in an environment that includes the SDK for Python \(Boto 3\), with credentials from an AWS Identity and Access Management \(IAM\) role that you manage\.
+You can run Python code in AWS Lambda\. Lambda provides [runtimes](lambda-runtimes.md) for Python that run your code to process events\. Your code runs in an environment that includes the SDK for Python \(Boto3\), with credentials from an AWS Identity and Access Management \(IAM\) role that you manage\.
 
 Lambda supports the following Python runtimes\.
 
@@ -9,10 +9,10 @@ Lambda supports the following Python runtimes\.
 
 | Name | Identifier | AWS SDK for Python | Operating system | 
 | --- | --- | --- | --- | 
-|  Python 3\.8  |  `python3.8`  |  boto3\-1\.12\.49 botocore\-1\.15\.49  |  Amazon Linux 2  | 
-|  Python 3\.7  |  `python3.7`  |  boto3\-1\.12\.49 botocore\-1\.15\.49  |  Amazon Linux  | 
-|  Python 3\.6  |  `python3.6`  |  boto3\-1\.12\.49 botocore\-1\.15\.49  |  Amazon Linux  | 
-|  Python 2\.7  |  `python2.7`  |  boto3\-1\.12\.49 botocore\-1\.15\.49  |  Amazon Linux  | 
+|  Python 3\.8  |  `python3.8`  |  boto3\-1\.15\.16 botocore\-1\.18\.16  |  Amazon Linux 2  | 
+|  Python 3\.7  |  `python3.7`  |  boto3\-1\.15\.16 botocore\-1\.18\.16  |  Amazon Linux  | 
+|  Python 3\.6  |  `python3.6`  |  boto3\-1\.15\.16 botocore\-1\.18\.16  |  Amazon Linux  | 
+|  Python 2\.7  |  `python2.7`  |  boto3\-1\.15\.16 botocore\-1\.18\.16  |  Amazon Linux  | 
 
 Lambda functions use an [execution role](lambda-intro-execution-role.md) to get permission to write logs to Amazon CloudWatch Logs, and to access other services and resources\. If you don't already have an execution role for function development, create one\.
 
@@ -51,7 +51,7 @@ You can add permissions to the role later, or swap it out for a different role t
 
 1. Choose **Create**\.
 
-1. To execute the function, choose **Test**\.
+1. To invoke the function, choose **Test**\.
 
 The console creates a Lambda function with a single source file named `lambda_function`\. You can edit this file and add more files in the built\-in [code editor](code-editor.md)\. To save your changes, choose **Save**\. Then, to run your code, choose **Test**\.
 
@@ -60,7 +60,7 @@ The Lambda console uses AWS Cloud9 to provide an integrated development environm
 
 The `lambda_function` file exports a function named `lambda_handler` that takes an event object and a context object\. This is the [handler function](python-handler.md) that Lambda calls when the function is invoked\. The Python function runtime gets invocation events from Lambda and passes them to the handler\. In the function configuration, the handler value is `lambda_function.lambda_handler`\.
 
-Each time you save your function code, the Lambda console creates a deployment package, which is a ZIP archive that contains your function code\. As your function development progresses, you will want to store your function code in source control, add libraries, and automate deployments\. Start by [creating a deployment package](python-package.md) and updating your code at the command line\.
+Each time you save your function code, the Lambda console creates a deployment package, which is a \.zip file archive that contains your function code\. As your function development progresses, you will want to store your function code in source control, add libraries, and automate deployments\. Start by [creating a deployment package](python-package.md) and updating your code at the command line\.
 
 **Note**  
 To get started with application development in your local environment, deploy one of the sample applications available in this guide's GitHub repository\.  
@@ -72,7 +72,8 @@ Your Lambda function comes with a CloudWatch Logs log group\. The function runti
 
 **Topics**
 + [AWS Lambda function handler in Python](python-handler.md)
-+ [AWS Lambda deployment package in Python](python-package.md)
++ [Deploy Python Lambda functions with \.zip file archives](python-package.md)
++ [Deploy Python Lambda functions with container images](python-image.md)
 + [AWS Lambda context object in Python](python-context.md)
 + [AWS Lambda function logging in Python](python-logging.md)
 + [AWS Lambda function errors in Python](python-exceptions.md)

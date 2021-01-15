@@ -42,18 +42,18 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "[DestinationConfig](#SSS-GetFunctionEventInvokeConfig-response-DestinationConfig)": { 
-      "[OnFailure](API_DestinationConfig.md#SSS-Type-DestinationConfig-OnFailure)": { 
-         "[Destination](API_OnFailure.md#SSS-Type-OnFailure-Destination)": "string"
+   "DestinationConfig": { 
+      "OnFailure": { 
+         "Destination": "string"
       },
-      "[OnSuccess](API_DestinationConfig.md#SSS-Type-DestinationConfig-OnSuccess)": { 
-         "[Destination](API_OnSuccess.md#SSS-Type-OnSuccess-Destination)": "string"
+      "OnSuccess": { 
+         "Destination": "string"
       }
    },
-   "[FunctionArn](#SSS-GetFunctionEventInvokeConfig-response-FunctionArn)": "string",
-   "[LastModified](#SSS-GetFunctionEventInvokeConfig-response-LastModified)": number,
-   "[MaximumEventAgeInSeconds](#SSS-GetFunctionEventInvokeConfig-response-MaximumEventAgeInSeconds)": number,
-   "[MaximumRetryAttempts](#SSS-GetFunctionEventInvokeConfig-response-MaximumRetryAttempts)": number
+   "FunctionArn": "string",
+   "LastModified": number,
+   "MaximumEventAgeInSeconds": number,
+   "MaximumRetryAttempts": number
 }
 ```
 

@@ -4,7 +4,7 @@ You can use the Lambda console to create an Amazon RDS Proxy database proxy for 
 
 **To create a database proxy**
 
-1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
 1. Choose a function\.
 

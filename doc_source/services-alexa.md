@@ -29,4 +29,4 @@ The Alexa Skills Kit is available on GitHub\.
 }
 ```
 
-For more information, see [Getting started with Alexa Skills Kit](https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit/getting-started-guide)\.
+For more information, see [ Host a custom skill as an AWS Lambda Function](https://developer.amazon.com/docs/alexa/custom-skills/host-a-custom-skill-as-an-aws-lambda-function.html) in the *Build Skills with the Alexa Skills Kit* guide\.

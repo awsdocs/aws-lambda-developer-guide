@@ -73,7 +73,7 @@ Lambda reads records from the stream and invokes your function [synchronously](i
 
 Lambda polls shards in your DynamoDB stream for records at a base rate of 4 times per second\. When records are available, Lambda invokes your function and waits for the result\. If processing succeeds, Lambda resumes polling until it receives more records\.
 
-By default, Lambda invokes your function as soon as records are available in the stream\. If the batch it reads from the stream only has one record in it, Lambda only sends one record to the function\. To avoid invoking the function with a small number of records, you can tell the event source to buffer records for up to 5 minutes by configuring a *batch window*\. Before invoking the function, Lambda continues to read records from the stream until it has gathered a full batch, or until the batch window expires\.
+By default, Lambda invokes your function as soon as records are available in the stream\. If the batch that Lambda reads from the stream only has one record in it, Lambda sends only one record to the function\. To avoid invoking the function with a small number of records, you can tell the event source to buffer records for up to five minutes by configuring a *batch window*\. Before invoking the function, Lambda continues to read records from the stream until it has gathered a full batch, or until the batch window expires\.
 
 If your function returns an error, Lambda retries the batch until processing succeeds or the data expires\. To avoid stalled shards, you can configure the event source mapping to retry with a smaller batch size, limit the number of retries, or discard records that are too old\. To retain discarded events, you can configure the event source mapping to send details about failed batches to an SQS queue or SNS topic\.
 
@@ -85,6 +85,8 @@ You can also increase concurrency by processing multiple batches from each shard
 + [Event source mapping APIs](#services-dynamodb-api)
 + [Error handling](#services-dynamodb-errors)
 + [Amazon CloudWatch metrics](#events-dynamodb-metrics)
++ [Time windows](#services-ddb-windows)
++ [Reporting batch item failures](#services-ddb-batchfailurereporting)
 + [Tutorial: Using AWS Lambda with Amazon DynamoDB streams](with-ddb-example.md)
 + [Sample function code](with-ddb-create-package.md)
 + [AWS SAM template for a DynamoDB application](kinesis-tutorial-spec.md)
@@ -111,7 +113,7 @@ To configure your function to read from DynamoDB Streams in the Lambda console, 
 
 **To create a trigger**
 
-1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
 1. Choose a function\.
 
@@ -140,13 +142,13 @@ Lambda supports the following options for DynamoDB event sources\.
 + **Enabled** – Set to true to enable the event source mapping\. Set to false to stop processing records\. Lambda keeps track of the last record processed and resumes processing from that point when the mapping is reenabled\.
 
 **Note**  
-DynamoDB charges for read requests that Lambda makes to get records from the stream\. For pricing details, see [Amazon DynamoDB pricing](https://aws.amazon.com/dynamodb/pricing)\.
+You are not charged for GetRecords API calls invoked by Lambda as part of DynamoDB triggers\.
 
 To manage the event source configuration later, choose the trigger in the designer\.
 
 ## Event source mapping APIs<a name="services-dynamodb-api"></a>
 
-To manage event source mappings with the AWS CLI or AWS SDK, use the following API actions:
+To manage an event source with the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) or [AWS SDK](http://aws.amazon.com/getting-started/tools-sdks/), you can use the following API operations:
 + [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
 + [ListEventSourceMappings](API_ListEventSourceMappings.md)
 + [GetEventSourceMapping](API_GetEventSourceMapping.md)
@@ -237,7 +239,7 @@ $ aws lambda update-event-source-mapping --uuid 2b733gdc-8ac3-cdf5-af3a-1827b3b1
 
 The event source mapping that reads records from your DynamoDB stream invokes your function synchronously and retries on errors\. If the function is throttled or the Lambda service returns an error without invoking the function, Lambda retries until the records expire or exceed the maximum age that you configure on the event source mapping\.
 
-If the function receives the records but returns an error, Lambda retries until the records in the batch expire, exceed the maximum age, or reach the configured retry limit\. For function errors, you can also configure the event source mapping to split a failed batch into two batches\. Retrying with smaller batches isolates bad records and works around timeout issues\. Splitting a batch does not count towards the retry limit\.
+If the function receives the records but returns an error, Lambda retries until the records in the batch expire, exceed the maximum age, or reach the configured retry quota\. For function errors, you can also configure the event source mapping to split a failed batch into two batches\. Retrying with smaller batches isolates bad records and works around timeout issues\. Splitting a batch does not count towards the retry quota\.
 
 If the error handling measures fail, Lambda discards the records and continues processing batches from the stream\. With the default settings, this means that a bad record can block processing on the affected shard for up to one day\. To avoid this, configure your function's event source mapping with a reasonable number of retries and a maximum record age that fits your use case\.
 
@@ -245,7 +247,7 @@ To retain a record of discarded batches, configure a failed\-event destination\.
 
 **To configure a destination for failed\-event records**
 
-1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
 1. Choose a function\.
 
@@ -299,3 +301,290 @@ You can use this information to retrieve the affected records from the stream fo
 Lambda emits the `IteratorAge` metric when your function finishes processing a batch of records\. The metric indicates how old the last record in the batch was when processing finished\. If your function is processing new events, you can use the iterator age to estimate the latency between when a record is added and when the function processes it\.
 
 An increasing trend in iterator age can indicate issues with your function\. For more information, see [Working with AWS Lambda function metrics](monitoring-metrics.md)\.
+
+## Time windows<a name="services-ddb-windows"></a>
+
+Lambda functions can run continuous stream processing applications\. A stream represents unbounded data that flows continuously through your application\. To analyze information from this continuously updating input, you can bound the included records using a window defined in terms of time\.
+
+Lambda invocations are stateless—you cannot use them for processing data across multiple continuous invocations without an external database\. However, with windowing enabled, you can maintain your state across invocations\. This state contains the aggregate result of the messages previously processed for the current window\. Your state can be a maximum of 1 MB per shard\. If it exceeds that size, Lambda terminates the window early\.
+
+### Tumbling windows<a name="streams-tumbling"></a>
+
+Lambda functions can aggregate data using tumbling windows: distinct time windows that open and close at regular intervals\. Tumbling windows enable you to process streaming data sources through contiguous, non\-overlapping time windows\.
+
+Each record of a stream belongs to a specific window\. A record is processed only once, when Lambda processes the window that the record belongs to\. In each window, you can perform calculations, such as a sum or average, at the [partition key](https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html#partition-key) level within a shard\.
+
+### Aggregation and processing<a name="streams-tumbling-processing"></a>
+
+Your user managed function is invoked both for aggregation and for processing the final results of that aggregation\. Lambda aggregates all records received in the window\. You can receive these records in multiple batches, each as a separate invocation\. Each invocation receives a state\. You can also process records and return a new state, which is passed in the next invocation\. Lambda returns a `TimeWindowEventResponse` in JSON in the following format:
+
+**Example `TimeWindowEventReponse` values**  
+
+```
+{
+    "state": {
+        "1": 282,
+        "2": 715
+    },
+    "batchItemFailures": []
+}
+```
+
+**Note**  
+For Java functions, we recommend using a Map<String, String> to represent the state\.
+
+At the end of the window, the flag `isFinalInvokeForWindow` is set to `true` to indicate that this is the final state and that it’s ready for processing\. After processing, the window completes and your final invocation completes, and then the state is dropped\.
+
+At the end of your window, Lambda uses final processing for actions on the aggregation results\. Your final processing is synchronously invoked\. After successful invocation, your function checkpoints the sequence number and stream processing continues\. If invocation is unsuccessful, your Lambda function suspends further processing until a successful invocation\.
+
+**Example DynamodbTimeWindowEvent**  
+
+```
+{
+   "Records":[
+      {
+         "eventID":"1",
+         "eventName":"INSERT",
+         "eventVersion":"1.0",
+         "eventSource":"aws:dynamodb",
+         "awsRegion":"us-east-1",
+         "dynamodb":{
+            "Keys":{
+               "Id":{
+                  "N":"101"
+               }
+            },
+            "NewImage":{
+               "Message":{
+                  "S":"New item!"
+               },
+               "Id":{
+                  "N":"101"
+               }
+            },
+            "SequenceNumber":"111",
+            "SizeBytes":26,
+            "StreamViewType":"NEW_AND_OLD_IMAGES"
+         },
+         "eventSourceARN":"stream-ARN"
+      },
+      {
+         "eventID":"2",
+         "eventName":"MODIFY",
+         "eventVersion":"1.0",
+         "eventSource":"aws:dynamodb",
+         "awsRegion":"us-east-1",
+         "dynamodb":{
+            "Keys":{
+               "Id":{
+                  "N":"101"
+               }
+            },
+            "NewImage":{
+               "Message":{
+                  "S":"This item has changed"
+               },
+               "Id":{
+                  "N":"101"
+               }
+            },
+            "OldImage":{
+               "Message":{
+                  "S":"New item!"
+               },
+               "Id":{
+                  "N":"101"
+               }
+            },
+            "SequenceNumber":"222",
+            "SizeBytes":59,
+            "StreamViewType":"NEW_AND_OLD_IMAGES"
+         },
+         "eventSourceARN":"stream-ARN"
+      },
+      {
+         "eventID":"3",
+         "eventName":"REMOVE",
+         "eventVersion":"1.0",
+         "eventSource":"aws:dynamodb",
+         "awsRegion":"us-east-1",
+         "dynamodb":{
+            "Keys":{
+               "Id":{
+                  "N":"101"
+               }
+            },
+            "OldImage":{
+               "Message":{
+                  "S":"This item has changed"
+               },
+               "Id":{
+                  "N":"101"
+               }
+            },
+            "SequenceNumber":"333",
+            "SizeBytes":38,
+            "StreamViewType":"NEW_AND_OLD_IMAGES"
+         },
+         "eventSourceARN":"stream-ARN"
+      }
+   ],
+    "window": {
+        "start": "2020-07-30T17:00:00Z",
+        "end": "2020-07-30T17:05:00Z"
+    },
+    "state": {
+        "1": "state1"
+    },
+    "shardId": "shard123456789",
+    "eventSourceARN": "stream-ARN",
+    "isFinalInvokeForWindow": false,
+    "isWindowTerminatedEarly": false
+}
+```
+
+### Configuration<a name="streams-tumbling-config"></a>
+
+You can configure tumbling windows when you create or update an [event source mapping](invocation-eventsourcemapping.md)\. To configure a tumbling window, specify the window in seconds\. The following example AWS Command Line Interface \(AWS CLI\) command creates a streaming event source mapping that has a tumbling window of 120 seconds\. The Lambda function defined for aggregation and processing is named `tumbling-window-example-function`\.
+
+```
+$ aws lambda create-event-source-mapping --event-source-arn arn:aws:dynamodb:us-east-1:123456789012:stream/lambda-stream --function-name "arn:aws:lambda:us-east-1:123456789018:function:tumbling-window-example-function" --region us-east-1 --starting-position TRIM_HORIZON --tumbling-window-in-seconds 120
+```
+
+Lambda determines tumbling window boundaries based on the time when records were inserted into the stream\. All records have an approximate timestamp available that Lambda uses in boundary determinations\.
+
+Tumbling window aggregations do not support resharding\. When the shard ends, Lambda considers the window closed, and the child shards start their own window in a fresh state\.
+
+Tumbling windows fully support the existing retry policies `maxRetryAttempts` and `maxRecordAge`\.
+
+**Example Handler\.py – Aggregation and processing**  
+The following Python function demonstrates how to aggregate and then process your final state:  
+
+```
+def lambda_handler(event, context):
+    print('Incoming event: ', event)
+    print('Incoming state: ', event['state'])
+
+#Check if this is the end of the window to either aggregate or process.
+    if event['isFinalInvokeForWindow']:
+        # logic to handle final state of the window
+        print('Destination invoke')
+    else:
+        print('Aggregate invoke')
+
+#Check for early terminations
+    if event['isWindowTerminatedEarly']:
+        print('Window terminated early')
+
+    #Aggregation logic
+    state = event['state']
+    for record in event['Records']:
+        state[record['dynamodb']['NewImage']['Id']] = state.get(record['dynamodb']['NewImage']['Id'], 0) + 1
+
+    print('Returning state: ', state)
+    return {'state': state}
+```
+
+## Reporting batch item failures<a name="services-ddb-batchfailurereporting"></a>
+
+When consuming and processing streaming data from an event source, by default Lambda checkpoints to the highest sequence number of a batch only when the batch is a complete success\. Lambda treats all other results as a complete failure and retries processing the batch up to the retry limit\. To allow for partial successes while processing batches from a stream, turn on `ReportBatchItemFailures`\. Allowing partial successes can help to reduce the number of retries on a record, though it doesn’t entirely prevent the possibility of retries n a successful record\.
+
+To turn on `ReportBatchItemFailures`, include the enum value **ReportBatchItemFailures** in the `FunctionResponseTypes` list\. This list indicates which response types are enabled for your function\. You can configure this list when you create or update an [event source mapping](invocation-eventsourcemapping.md)\.
+
+### Report syntax<a name="streams-batchfailurereporting-syntax"></a>
+
+When configuring reporting on batch item failures, the `StreamsEventResponse` class is returned with a list of batch item failures\. You can use a `StreamsEventResponse` object to return the sequence number of the first failed record in the batch\. You can also create your own custom class using the correct response syntax\. The following JSON structure shows the required response syntax:
+
+```
+{ 
+  "BatchItemFailures": [ 
+        {
+            "ItemIdentifier": "<id>"
+        }
+    ]
+}
+```
+
+### Success and failure conditions<a name="streams-batchfailurereporting-conditions"></a>
+
+Lambda treats a batch as a complete success if you return any of the following:
++ An empty `batchItemFailure` list
++ A null `batchItemFailure` list
++ An empty `EventResponse`
++ A null `EventResponse`
+
+Lambda treats a batch as a complete failure if you return any of the following:
++ An empty string `itemIdentifier`
++ A null `itemIdentifier`
++ An `itemIdentifier` with a bad key name
+
+Lambda retries failures based on your retry strategy\.
+
+### Bisecting a batch<a name="streams-batchfailurereporting-bisect"></a>
+
+If your invocation fails and `BisectBatchOnFunctionError` is turned on, the batch is bisected regardless of your `ReportBatchItemFailures` setting\.
+
+When a partial batch success response is received and both `BisectBatchOnFunctionError` and `ReportBatchItemFailures` are turned on, the batch is bisected at the returned sequence number and Lambda retries only the remaining records\.
+
+------
+#### [ Java ]
+
+**Example Handler\.java – return new StreamsEventResponse\(\)**  
+
+```
+import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.amazonaws.services.lambda.runtime.events.DynamodbEvent;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ProcessDynamodbRecords implements RequestHandler<DynamodbEvent, Serializable> {
+
+    @Override
+    public Serializable handleRequest(DynamodbEvent input, Context context) {
+
+        List<StreamsEventResponse.BatchItemFailure> batchItemFailures = new ArrayList<*gt;();
+        String curRecordSequenceNumber = "";
+
+        for (DynamodbEvent.DynamodbEventRecord dynamodbEventRecord : input.getRecords()) {
+            try {
+                //Process your record
+                DynamodbEvent.Record dynamodbRecord = dynamodbEventRecord.getDynamodb();
+                curRecordSequenceNumber = dynamodbRecord.getSequenceNumber();
+
+            } catch (Exception e) {
+                //Return failed record's sequence number
+                batchItemFailures.add(new StreamsEventResponse.BatchItemFailure(curRecordSequenceNumber));
+                    return new StreamsEventResponse(batchItemFailures);
+            }
+        }
+       
+       return new StreamsEventResponse(batchItemFailures);   
+    }
+}
+```
+
+------
+#### [ Python ]
+
+**Example Handler\.py – return batchItemFailures\[\]**  
+
+```
+def handler(event, context):
+    records = event.get("Records")
+    curRecordSequenceNumber = "";
+    
+    for record in records:
+        try:
+            # Process your record
+            curRecordSequenceNumber = record["dynamodb"]["sequenceNumber"]
+        except Exception as e:
+            # Return failed record's sequence number
+            return {"batchItemFailures":[{"itemIdentifier": curRecordSequenceNumber}]}
+
+    return {"batchItemFailures":[]}
+```
+
+------

@@ -47,21 +47,21 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "[Aliases](#SSS-ListAliases-response-Aliases)": [ 
+   "Aliases": [ 
       { 
-         "[AliasArn](API_AliasConfiguration.md#SSS-Type-AliasConfiguration-AliasArn)": "string",
-         "[Description](API_AliasConfiguration.md#SSS-Type-AliasConfiguration-Description)": "string",
-         "[FunctionVersion](API_AliasConfiguration.md#SSS-Type-AliasConfiguration-FunctionVersion)": "string",
-         "[Name](API_AliasConfiguration.md#SSS-Type-AliasConfiguration-Name)": "string",
-         "[RevisionId](API_AliasConfiguration.md#SSS-Type-AliasConfiguration-RevisionId)": "string",
-         "[RoutingConfig](API_AliasConfiguration.md#SSS-Type-AliasConfiguration-RoutingConfig)": { 
-            "[AdditionalVersionWeights](API_AliasRoutingConfiguration.md#SSS-Type-AliasRoutingConfiguration-AdditionalVersionWeights)": { 
+         "AliasArn": "string",
+         "Description": "string",
+         "FunctionVersion": "string",
+         "Name": "string",
+         "RevisionId": "string",
+         "RoutingConfig": { 
+            "AdditionalVersionWeights": { 
                "string" : number 
             }
          }
       }
    ],
-   "[NextMarker](#SSS-ListAliases-response-NextMarker)": "string"
+   "NextMarker": "string"
 }
 ```
 

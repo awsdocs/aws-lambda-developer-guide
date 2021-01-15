@@ -112,3 +112,32 @@ The `eventName` may include date and version information, such as `"GetFunction2
 ## Using CloudTrail to track function invocations<a name="tracking-function-invocations"></a>
 
 CloudTrail also logs data events\. You can turn on data event logging so that you log an event every time Lambda functions are invoked\. This helps you understand what identities are invoking the functions and the frequency of their invocations\. For more information on this option, see [ Logging data events for trails](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html)\.
+
+### Using CloudTrail to troubleshoot disabled event sources<a name="tracking-function-invocations-disabled"></a>
+
+One data event that can be encountered is a `LambdaESMDisabled` event\. There are five general categories of error that are associated with this event:
+
+**`RESOURCE_NOT_FOUND`**  
+The resource specified in the request does not exist\.
+
+**`FUNCTION_NOT_FOUND`**  
+The function attached to the event source does not exist\.
+
+**`REGION_NAME_NOT_VALID`**  
+A Region name provided to the event source or function is invalid\.
+
+**`AUTHORIZATION_ERROR`**  
+Permissions have not been set, or are misconfigured\.
+
+**`FUNCTION_IN_FAILED_STATE`**  
+The function code does not compile, has encountered an unrecoverable exception, or a bad deployment has occurred\.
+
+These errors are included in the CloudTrail event message within the `serviceEventDetails` entity\.
+
+**Example `serviceEventDetails` entity**  
+
+```
+ "serviceEventDetails":{
+    "ESMDisableReason":"Lambda Function not found"
+}
+```

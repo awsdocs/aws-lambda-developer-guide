@@ -29,9 +29,9 @@ The pipeline maps a single branch in a repository to a single application stack\
 
 ## Prerequisites<a name="applications-tutorial-prepare"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with AWS Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with Lambda](getting-started.md) to create your first Lambda function\.
 
-To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
+To complete the following steps, you need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
 ```
 ~/lambda-project$ this is a command
@@ -94,7 +94,7 @@ When the deployment process completes, invoke the function from the Lambda conso
 
 1. Choose **Test**\.
 
-The Lambda console executes your function and displays the result\. Expand the **Details** section under the result to see the output and execution details\.
+The Lambda console runs your function and displays the result\. Expand the **Details** section under the result to see the output and execution details\.
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/application-create-result.png)
 
@@ -277,7 +277,7 @@ For local development, AWS toolkits for integrated development environments \(ID
 
 As you develop your application, you will likely encounter the following types of errors\.
 + **Build errors** – Issues that occur during the build phase, including compilation, test, and packaging errors\.
-+ **Deployment errors** – Issues that occur when AWS CloudFormation isn't able to update the application stack\. These include permissions errors, account limits, service issues, or template errors\.
++ **Deployment errors** – Issues that occur when AWS CloudFormation isn't able to update the application stack\. These include permissions errors, account quotas, service issues, or template errors\.
 + **Invocation errors** – Errors that are returned by a function's code or runtime\.
 
 For build and deployment errors, you can identify the cause of an error in the Lambda console\.
@@ -326,7 +326,7 @@ You can continue to modify and use the sample to develop your own application\. 
 
 1. Open the [Amazon S3 console](https://console.aws.amazon.com/s3)\.
 
-1. Delete the artifact bucket – **aws\-*us\-east\-2*\-*123456789012*\-my\-app\-pipe**\.
+1. Delete the artifact bucket – ***us\-east\-2*\-*123456789012*\-my\-app\-pipe**\.
 
 1. Return to the AWS CloudFormation console and delete the infrastructure stack – **serverlessrepo\-my\-app\-toolchain**\.
 

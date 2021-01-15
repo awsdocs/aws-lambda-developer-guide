@@ -1,6 +1,17 @@
 # Using AWS Lambda with Amazon Kinesis<a name="with-kinesis"></a>
 
-You can use an AWS Lambda function to process records in an [Amazon Kinesis data stream](https://docs.aws.amazon.com/kinesis/latest/dev/amazon-kinesis-streams.html)\. With Kinesis, you can collect data from many sources and process them with multiple consumers\. Lambda supports standard data stream iterators and HTTP/2 stream consumers\.
+You can use an AWS Lambda function to process records in an [Amazon Kinesis data stream](https://docs.aws.amazon.com/kinesis/latest/dev/amazon-kinesis-streams.html)\. 
+
+A Kinesis data stream is a set of [shards](https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html#shard)\. Each shard contains a sequence of data records\. A **consumer** is an application that processes the data from a Kinesis data stream\. You can map a Lambda function to a shared\-throughput consumer \(standard iterator\), or to a dedicated\-throughput consumer with [enhanced fan\-out](https://docs.aws.amazon.com/kinesis/latest/dev/enhanced-consumers.html)\. 
+
+For standard iterators, Lambda polls each shard in your Kinesis stream for records using HTTP protocol\. The event source mapping shares read throughput with other consumers of the shard\. 
+
+To minimize latency and maximize read throughput, you can create a data stream consumer with enhanced fan\-out\. Stream consumers get a dedicated connection to each shard that doesn't impact other applications reading from the stream\. The dedicated throughput can help if you have many applications reading the same data, or if you're reprocessing a stream with large records\. Kinesis pushes records to Lambda over HTTP/2\. 
+
+ For details about Kinesis data streams, see [Reading Data from Amazon Kinesis Data Streams](https://docs.aws.amazon.com/kinesis/latest/dev/building-consumers.html)\. 
+
+**Note**  
+Error handling is not available for HTTP/2 stream consumers\.
 
 Lambda reads records from the data stream and invokes your function [synchronously](invocation-sync.md) with an event that contains stream records\. Lambda reads records in batches and invokes your function to process records from the batch\.
 
@@ -45,12 +56,7 @@ Lambda reads records from the data stream and invokes your function [synchronous
 }
 ```
 
-If you have multiple applications that are reading records from the same stream, you can use Kinesis stream consumers instead of standard iterators\. Consumers have dedicated read throughput so they don't have to compete with other consumers of the same data\. With consumers, Kinesis pushes records to Lambda over an HTTP/2 connection, which can also reduce latency between adding a record and function invocation\.
-
-**Note**  
-Error handling and concurrency settings are not available for HTTP/2 stream consumers\.
-
-By default, Lambda invokes your function as soon as records are available in the stream\. If the batch it reads from the stream only has one record in it, Lambda only sends one record to the function\. To avoid invoking the function with a small number of records, you can tell the event source to buffer records for up to 5 minutes by configuring a *batch window*\. Before invoking the function, Lambda continues to read records from the stream until it has gathered a full batch, or until the batch window expires\.
+By default, Lambda invokes your function as soon as records are available in the stream\. If the batch that Lambda reads from the stream only has one record in it, Lambda sends only one record to the function\. To avoid invoking the function with a small number of records, you can tell the event source to buffer records for up to five minutes by configuring a *batch window*\. Before invoking the function, Lambda continues to read records from the stream until it has gathered a full batch, or until the batch window expires\.
 
 If your function returns an error, Lambda retries the batch until processing succeeds or the data expires\. To avoid stalled shards, you can configure the event source mapping to retry with a smaller batch size, limit the number of retries, or discard records that are too old\. To retain discarded events, you can configure the event source mapping to send details about failed batches to an SQS queue or SNS topic\.
 
@@ -63,6 +69,8 @@ You can also increase concurrency by processing multiple batches from each shard
 + [Event source mapping API](#services-kinesis-api)
 + [Error handling](#services-kinesis-errors)
 + [Amazon CloudWatch metrics](#events-kinesis-metrics)
++ [Time windows](#services-kinesis-windows)
++ [Reporting batch item failures](#services-kinesis-batchfailurereporting)
 + [Tutorial: Using AWS Lambda with Amazon Kinesis](with-kinesis-example.md)
 + [Sample function code](with-kinesis-create-package.md)
 + [AWS SAM template for a Kinesis application](with-kinesis-example-use-app-spec.md)
@@ -73,9 +81,7 @@ Your Lambda function is a consumer application for your data stream\. It process
 
 For standard iterators, Lambda polls each shard in your Kinesis stream for records at a base rate of once per second\. When more records are available, Lambda keeps processing batches until the function catches up with the stream\. The event source mapping shares read throughput with other consumers of the shard\.
 
-To minimize latency and maximize read throughput, create a data stream consumer\. Stream consumers get a dedicated connection to each shard that doesn't impact other applications reading from the stream\. The dedicated throughput can help if you have many applications reading the same data, or if you're reprocessing a stream with large records\.
-
-Stream consumers use HTTP/2 to reduce latency by pushing records to Lambda over a long\-lived connection and by compressing request headers\. You can create a stream consumer with the Kinesis [RegisterStreamConsumer](https://docs.aws.amazon.com/kinesis/latest/APIReference/API_RegisterStreamConsumer.html) API\.
+To minimize latency and maximize read throughput, create a data stream consumer with enhanced fan\-out\. Enhanced fan\-out consumers get a dedicated connection to each shard that doesn't impact other applications reading from the stream\. Stream consumers use HTTP/2 to reduce latency by pushing records to Lambda over a long\-lived connection and by compressing request headers\. You can create a stream consumer with the Kinesis [RegisterStreamConsumer](https://docs.aws.amazon.com/kinesis/latest/APIReference/API_RegisterStreamConsumer.html) API\.
 
 ```
 $ aws kinesis register-stream-consumer --consumer-name con1 \
@@ -92,7 +98,7 @@ $ aws kinesis register-stream-consumer --consumer-name con1 \
 
 To increase the speed at which your function processes records, add shards to your data stream\. Lambda processes records in each shard in order\. It stops processing additional records in a shard if your function returns an error\. With more shards, there are more batches being processed at once, which lowers the impact of errors on concurrency\.
 
-If your function can't scale up to handle the total number of concurrent batches, [request a limit increase](gettingstarted-limits.md) or [reserve concurrency](configuration-concurrency.md) for your function\.
+If your function can't scale up to handle the total number of concurrent batches, [request a quota increase](gettingstarted-limits.md) or [reserve concurrency](configuration-concurrency.md) for your function\.
 
 ## Execution role permissions<a name="events-kinesis-permissions"></a>
 
@@ -119,7 +125,7 @@ To configure your function to read from Kinesis in the Lambda console, create a 
 
 **To create a trigger**
 
-1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
 1. Choose a function\.
 
@@ -156,7 +162,7 @@ To manage the event source configuration later, choose the trigger in the design
 
 ## Event source mapping API<a name="services-kinesis-api"></a>
 
-To manage event source mappings with the AWS CLI or AWS SDK, use the following API actions:
+To manage an event source with the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) or [AWS SDK](http://aws.amazon.com/getting-started/tools-sdks/), you can use the following API operations:
 + [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
 + [ListEventSourceMappings](API_ListEventSourceMappings.md)
 + [GetEventSourceMapping](API_GetEventSourceMapping.md)
@@ -250,7 +256,7 @@ $ aws lambda update-event-source-mapping --uuid 2b733gdc-8ac3-cdf5-af3a-1827b3b1
 
 The event source mapping that reads records from your Kinesis stream invokes your function synchronously and retries on errors\. If the function is throttled or the Lambda service returns an error without invoking the function, Lambda retries until the records expire or exceed the maximum age that you configure on the event source mapping\.
 
-If the function receives the records but returns an error, Lambda retries until the records in the batch expire, exceed the maximum age, or reach the configured retry limit\. For function errors, you can also configure the event source mapping to split a failed batch into two batches\. Retrying with smaller batches isolates bad records and works around timeout issues\. Splitting a batch does not count towards the retry limit\.
+If the function receives the records but returns an error, Lambda retries until the records in the batch expire, exceed the maximum age, or reach the configured retry quota\. For function errors, you can also configure the event source mapping to split a failed batch into two batches\. Retrying with smaller batches isolates bad records and works around timeout issues\. Splitting a batch does not count towards the retry quota\.
 
 If the error handling measures fail, Lambda discards the records and continues processing batches from the stream\. With the default settings, this means that a bad record can block processing on the affected shard for up to one week\. To avoid this, configure your function's event source mapping with a reasonable number of retries and a maximum record age that fits your use case\.
 
@@ -258,7 +264,7 @@ To retain a record of discarded batches, configure a failed\-event destination\.
 
 **To configure a destination for failed\-event records**
 
-1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
 1. Choose a function\.
 
@@ -312,3 +318,221 @@ You can use this information to retrieve the affected records from the stream fo
 Lambda emits the `IteratorAge` metric when your function finishes processing a batch of records\. The metric indicates how old the last record in the batch was when processing finished\. If your function is processing new events, you can use the iterator age to estimate the latency between when a record is added and when the function processes it\.
 
 An increasing trend in iterator age can indicate issues with your function\. For more information, see [Working with AWS Lambda function metrics](monitoring-metrics.md)\.
+
+## Time windows<a name="services-kinesis-windows"></a>
+
+Lambda functions can run continuous stream processing applications\. A stream represents unbounded data that flows continuously through your application\. To analyze information from this continuously updating input, you can bound the included records using a window defined in terms of time\.
+
+Lambda invocations are stateless—you cannot use them for processing data across multiple continuous invocations without an external database\. However, with windowing enabled, you can maintain your state across invocations\. This state contains the aggregate result of the messages previously processed for the current window\. Your state can be a maximum of 1 MB per shard\. If it exceeds that size, Lambda terminates the window early\.
+
+### Tumbling windows<a name="streams-tumbling"></a>
+
+Lambda functions can aggregate data using tumbling windows: distinct time windows that open and close at regular intervals\. Tumbling windows enable you to process streaming data sources through contiguous, non\-overlapping time windows\.
+
+Each record of a stream belongs to a specific window\. A record is processed only once, when Lambda processes the window that the record belongs to\. In each window, you can perform calculations, such as a sum or average, at the [partition key](https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html#partition-key) level within a shard\.
+
+### Aggregation and processing<a name="streams-tumbling-processing"></a>
+
+Your user managed function is invoked both for aggregation and for processing the final results of that aggregation\. Lambda aggregates all records received in the window\. You can receive these records in multiple batches, each as a separate invocation\. Each invocation receives a state\. You can also process records and return a new state, which is passed in the next invocation\. Lambda returns a `TimeWindowEventResponse` in JSON in the following format:
+
+**Example `TimeWindowEventReponse` values**  
+
+```
+{
+    "state": {
+        "1": 282,
+        "2": 715
+    },
+    "batchItemFailures": []
+}
+```
+
+**Note**  
+For Java functions, we recommend using a Map<String, String> to represent the state\.
+
+At the end of the window, the flag `isFinalInvokeForWindow` is set to `true` to indicate that this is the final state and that it’s ready for processing\. After processing, the window completes and your final invocation completes, and then the state is dropped\.
+
+At the end of your window, Lambda uses final processing for actions on the aggregation results\. Your final processing is synchronously invoked\. After successful invocation, your function checkpoints the sequence number and stream processing continues\. If invocation is unsuccessful, your Lambda function suspends further processing until a successful invocation\.
+
+**Example KinesisTimeWindowEvent**  
+
+```
+{
+    "Records": [
+        {
+            "kinesis": {
+                "kinesisSchemaVersion": "1.0",
+                "partitionKey": "1",
+                "sequenceNumber": "49590338271490256608559692538361571095921575989136588898",
+                "data": "SGVsbG8sIHRoaXMgaXMgYSB0ZXN0Lg==",
+                "approximateArrivalTimestamp": 1607497475.000
+            },
+            "eventSource": "aws:kinesis",
+            "eventVersion": "1.0",
+            "eventID": "shardId-000000000006:49590338271490256608559692538361571095921575989136588898",
+            "eventName": "aws:kinesis:record",
+            "invokeIdentityArn": "arn:aws:iam::123456789012:role/lambda-kinesis-role",
+            "awsRegion": "us-east-1",
+            "eventSourceARN": "arn:aws:kinesis:us-east-1:123456789012:stream/lambda-stream"
+        }
+    ],
+    "window": {
+        "start": "2020-12-09T07:04:00Z",
+        "end": "2020-12-09T07:06:00Z"
+    },
+    "state": {
+        "1": 282,
+        "2": 715
+    },
+    "shardId": "shardId-000000000006",
+    "eventSourceARN": "arn:aws:kinesis:us-east-1:123456789012:stream/lambda-stream",
+    "isFinalInvokeForWindow": false,
+    "isWindowTerminatedEarly": false
+}
+```
+
+### Configuration<a name="streams-tumbling-config"></a>
+
+You can configure tumbling windows when you create or update an [event source mapping](invocation-eventsourcemapping.md)\. To configure a tumbling window, specify the window in seconds\. The following example AWS Command Line Interface \(AWS CLI\) command creates a streaming event source mapping that has a tumbling window of 120 seconds\. The Lambda function defined for aggregation and processing is named `tumbling-window-example-function`\.
+
+```
+$ aws lambda create-event-source-mapping --event-source-arn arn:aws:kinesis:us-east-1:123456789012:stream/lambda-stream --function-name "arn:aws:lambda:us-east-1:123456789018:function:tumbling-window-example-function" --region us-east-1 --starting-position TRIM_HORIZON --tumbling-window-in-seconds 120
+```
+
+Lambda determines tumbling window boundaries based on the time when records were inserted into the stream\. All records have an approximate timestamp available that Lambda uses in boundary determinations\.
+
+Tumbling window aggregations do not support resharding\. When the shard ends, Lambda considers the window closed, and the child shards start their own window in a fresh state\.
+
+Tumbling windows fully support the existing retry policies `maxRetryAttempts` and `maxRecordAge`\.
+
+**Example Handler\.py – Aggregation and processing**  
+The following Python function demonstrates how to aggregate and then process your final state:  
+
+```
+def lambda_handler(event, context):
+    print('Incoming event: ', event)
+    print('Incoming state: ', event['state'])
+
+#Check if this is the end of the window to either aggregate or process.
+    if event['isFinalInvokeForWindow']:
+        # logic to handle final state of the window
+        print('Destination invoke')
+    else:
+        print('Aggregate invoke')
+
+#Check for early terminations
+    if event['isWindowTerminatedEarly']:
+        print('Window terminated early')
+
+    #Aggregation logic
+    state = event['state']
+    for record in event['Records']:
+        state[record['kinesis']['partitionKey']] = state.get(record['kinesis']['partitionKey'], 0) + 1
+
+    print('Returning state: ', state)
+    return {'state': state}
+```
+
+## Reporting batch item failures<a name="services-kinesis-batchfailurereporting"></a>
+
+When consuming and processing streaming data from an event source, by default Lambda checkpoints to the highest sequence number of a batch only when the batch is a complete success\. Lambda treats all other results as a complete failure and retries processing the batch up to the retry limit\. To allow for partial successes while processing batches from a stream, turn on `ReportBatchItemFailures`\. Allowing partial successes can help to reduce the number of retries on a record, though it doesn’t entirely prevent the possibility of retries n a successful record\.
+
+To turn on `ReportBatchItemFailures`, include the enum value **ReportBatchItemFailures** in the `FunctionResponseTypes` list\. This list indicates which response types are enabled for your function\. You can configure this list when you create or update an [event source mapping](invocation-eventsourcemapping.md)\.
+
+### Report syntax<a name="streams-batchfailurereporting-syntax"></a>
+
+When configuring reporting on batch item failures, the `StreamsEventResponse` class is returned with a list of batch item failures\. You can use a `StreamsEventResponse` object to return the sequence number of the first failed record in the batch\. You can also create your own custom class using the correct response syntax\. The following JSON structure shows the required response syntax:
+
+```
+{ 
+  "BatchItemFailures": [ 
+        {
+            "ItemIdentifier": "<id>"
+        }
+    ]
+}
+```
+
+### Success and failure conditions<a name="streams-batchfailurereporting-conditions"></a>
+
+Lambda treats a batch as a complete success if you return any of the following:
++ An empty `batchItemFailure` list
++ A null `batchItemFailure` list
++ An empty `EventResponse`
++ A null `EventResponse`
+
+Lambda treats a batch as a complete failure if you return any of the following:
++ An empty string `itemIdentifier`
++ A null `itemIdentifier`
++ An `itemIdentifier` with a bad key name
+
+Lambda retries failures based on your retry strategy\.
+
+### Bisecting a batch<a name="streams-batchfailurereporting-bisect"></a>
+
+If your invocation fails and `BisectBatchOnFunctionError` is turned on, the batch is bisected regardless of your `ReportBatchItemFailures` setting\.
+
+When a partial batch success response is received and both `BisectBatchOnFunctionError` and `ReportBatchItemFailures` are turned on, the batch is bisected at the returned sequence number and Lambda retries only the remaining records\.
+
+------
+#### [ Java ]
+
+**Example Handler\.java – return new StreamsEventResponse\(\)**  
+
+```
+import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.amazonaws.services.lambda.runtime.events.KinesisEvent;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ProcessKinesisRecords implements RequestHandler<KinesisEvent, Serializable> {
+
+    @Override
+    public Serializable handleRequest(KinesisEvent input, Context context) {
+
+        List<StreamsEventResponse.BatchItemFailure> batchItemFailures = new ArrayList<*gt;();
+        String curRecordSequenceNumber = "";
+
+        for (KinesisEvent.KinesisEventRecord kinesisEventRecord : input.getRecords()) {
+            try {
+                //Process your record
+                KinesisEvent.Record kinesisRecord = kinesisEventRecord.getKinesis();
+                curRecordSequenceNumber = kinesisRecord.getSequenceNumber();
+
+            } catch (Exception e) {
+                //Return failed record's sequence number
+                batchItemFailures.add(new StreamsEventResponse.BatchItemFailure(curRecordSequenceNumber));
+                    return new StreamsEventResponse(batchItemFailures);
+            }
+        }
+       
+       return new StreamsEventResponse(batchItemFailures);   
+    }
+}
+```
+
+------
+#### [ Python ]
+
+**Example Handler\.py – return batchItemFailures\[\]**  
+
+```
+def handler(event, context):
+    records = event.get("Records")
+    curRecordSequenceNumber = "";
+    
+    for record in records:
+        try:
+            # Process your record
+            curRecordSequenceNumber = record["kinesis"]["sequenceNumber"]
+        except Exception as e:
+            # Return failed record's sequence number
+            return {"batchItemFailures":[{"itemIdentifier": curRecordSequenceNumber}]}
+
+    return {"batchItemFailures":[]}
+```
+
+------

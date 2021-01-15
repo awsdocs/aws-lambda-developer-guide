@@ -69,11 +69,121 @@ The condition requires that the principal is Amazon SNS and not another service 
 For more information on resources and conditions for Lambda and other AWS services, see [Actions, resources, and condition keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html) in the *IAM User Guide*\.
 
 **Topics**
-+ [Functions](#permissions-resources-function)
-+ [Event source mappings](#permissions-resources-eventsource)
-+ [Layers](#permissions-resources-layers)
++ [Function resource names](#function-resources)
++ [Function actions](#permissions-resources-function)
++ [Event source mapping actions](#permissions-resources-eventsource)
++ [Layer actions](#permissions-resources-layers)
 
-## Functions<a name="permissions-resources-function"></a>
+## Function resource names<a name="function-resources"></a>
+
+You reference a Lambda function in a policy statement using an Amazon Resource Names \(ARN\)\. The format of a function ARN depends on whether you are referencing the whole function, a function [version](configuration-versions.md), or an [alias](configuration-aliases.md)\. 
+
+When making Lambda API calls, users can specify a version or alias by passing a version ARN or alias ARN in the [https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunction.html#API_GetFunction_RequestSyntax](https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunction.html#API_GetFunction_RequestSyntax) parameter, or by setting a value in the [https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunction.html#API_GetFunction_RequestSyntax](https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunction.html#API_GetFunction_RequestSyntax) parameter\. Lambda makes authorization decisions by comparing the resource element in the IAM policy with the `FunctionName` passed in the API calls\.
+
+You must use the correct function ARN types in your policies to achieve the results that you expect, especially in policies that deny access\. We recommend that you follow the best practices for using Deny statements with functions\.
+
+
+
+### Best practices for using Deny statements with functions<a name="authorization-bp"></a>
+
+The following table summarizes the resources to use in Deny effects\. In the **Resource** column, `MyFunction` is the name of the function, `:1` refers to version 1 of the function, and `MyAlias` is the name of a function alias\.
+
+
+**Resource best practices**  
+
+| Policy objective | Resource | 
+| --- | --- | 
+|  Deny access to all versions of a function  |  `MyFunction*`  | 
+|  Deny access to a specific alias  |  `MyFunction:MyAlias` and `MyFunction`  | 
+|  Deny access to a specific version of a function  |  `MyFunction:1` and `MyFunction`  | 
+
+The following sections provide example policy statements for each of the policy objectives\.
+
+**Note**  
+You can use only identity\-based policies to deny specific function resources\. Currently, Lambda does not support the `Deny` effect in resource\-based policies\.
+
+For the action list in a policy statement, you can add any of the [ actions defined by Lambda](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awslambda.html) that act on a function resource\.
+
+#### Deny access to all function versions<a name="authorization-deny-all"></a>
+
+The following identity\-based policy statement denies access to the `lambda:GetFunctionConfiguration` action for all versions of the `my-function` function\. The wildcard character at the end of the function ARN ensures that this policy applies to all version and alias ARNs\. 
+
+**Example identity\-based policy**  
+
+```
+{
+    "Version": "2020-07-20",
+    "Statement": [
+        {
+            "Effect": "Deny",
+            "Action": [
+                "lambda:GetFunctionConfiguration" 
+            ],
+            "Resource": "arn:aws:lambda:us-west-2:123456789012:function:my-function*"
+        }        
+    ]
+}
+```
+
+#### Deny access to a specific function alias<a name="authorization-deny-alias"></a>
+
+To deny access to a specific alias, you must specify both the alias ARN and the unqualified function ARN in the policy\. This prevents users from accessing the specific alias by passing the unqualified ARN as the `FunctionName` and the alias as the `Qualifier`\.
+
+**Note**  
+If you create this type of policy, API calls need to refer to the unpublished version of the function by specifying a qualified ARN with the $LATEST suffix in the `FunctionName` parameter\. 
+
+The following identity\-based policy statement denies access to the `lambda:InvokeFunction` action in the `my-alias` alias of the `my-function` function\.
+
+**Example identity\-based policy**  
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "DenySpecificAlias",
+            "Effect": "Deny",
+            "Action": "lambda:InvokeFunction",
+            "Resource": [
+                "arn:aws:lambda:us-west-2:123456789012:function:my-function:my-alias",
+                "arn:aws:lambda:us-west-2:123456789012:function:my-function"
+                ]
+        }
+    ]
+}
+```
+
+#### Deny access to a specific function version<a name="authorization-deny-specific"></a>
+
+To deny access to a specific version, you must specify both the qualified ARN and the unqualified ARN in the policy\. This prevents users from accessing the specific version by passing the unqualified ARN as the `FunctionName` and the version as the `Qualifier`\.
+
+**Note**  
+If you create this type of policy, API calls need to refer to the unpublished version of the function by specifying a qualified ARN with the $LATEST suffix in the `FunctionName` parameter\. 
+
+The following identity\-based policy statement denies access to the invoke action in version 1 of the `my-function` function\.
+
+**Example identity\-based policy**  
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "DenySpecificFunctionVersion",
+            "Effect": "Deny",
+            "Action": [
+                "lambda:InvokeFunction"
+            ],
+            "Resource": [
+                "arn:aws:lambda:us-west-2:123456789012:function:my-function:1",
+                "arn:aws:lambda:us-west-2:123456789012:function:my-function"
+                ]
+        }
+    ]
+}
+```
+
+## Function actions<a name="permissions-resources-function"></a>
 
 Actions that operate on a function can be restricted to a specific function by function, version, or alias ARN, as described in the following table\. Actions that don't support resource restrictions can only be granted for all resources \(`*`\)\.
 
@@ -84,11 +194,11 @@ Actions that operate on a function can be restricted to a specific function by f
 | --- | --- | --- | 
 |   [AddPermission](API_AddPermission.md)  [RemovePermission](API_RemovePermission.md)  |  Function Function version Function alias  |  `lambda:Principal`  | 
 |   [Invoke](API_Invoke.md) **Permission:** `lambda:InvokeFunction`  |  Function Function version Function alias  |  None  | 
-|   [CreateFunction](API_CreateFunction.md)  [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)  |  Function  |  `lambda:Layer`  | 
+|   [CreateFunction](API_CreateFunction.md)  [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)  |  Function  |  `lambda:Layer` `lambda:VpcIds` `lambda:SubnetIds` `lambda:SecurityGroupIds`  | 
 |   [CreateAlias](API_CreateAlias.md)  [DeleteAlias](API_DeleteAlias.md)  [DeleteFunction](API_DeleteFunction.md)  [DeleteFunctionConcurrency](API_DeleteFunctionConcurrency.md)  [GetAlias](API_GetAlias.md)  [GetFunction](API_GetFunction.md)  [GetFunctionConfiguration](API_GetFunctionConfiguration.md)  [GetPolicy](API_GetPolicy.md)  [ListAliases](API_ListAliases.md)  [ListVersionsByFunction](API_ListVersionsByFunction.md)  [PublishVersion](API_PublishVersion.md)  [PutFunctionConcurrency](API_PutFunctionConcurrency.md)  [UpdateAlias](API_UpdateAlias.md)  [UpdateFunctionCode](API_UpdateFunctionCode.md)  |  Function  |  None  | 
 |   [GetAccountSettings](API_GetAccountSettings.md)  [ListFunctions](API_ListFunctions.md)  [ListTags](API_ListTags.md)  [TagResource](API_TagResource.md)  [UntagResource](API_UntagResource.md)  |  `*`  |  None  | 
 
-## Event source mappings<a name="permissions-resources-eventsource"></a>
+## Event source mapping actions<a name="permissions-resources-eventsource"></a>
 
 For event source mappings, delete and update permissions can be restricted to a specific event source\. The `lambda:FunctionArn` condition lets you restrict which functions a user can configure an event source to invoke\.
 
@@ -103,9 +213,12 @@ For these actions, the resource is the event source mapping, so Lambda provides 
 |   [CreateEventSourceMapping](API_CreateEventSourceMapping.md)  |  `*`  |   `lambda:FunctionArn`   | 
 |   [GetEventSourceMapping](API_GetEventSourceMapping.md)  [ListEventSourceMappings](API_ListEventSourceMappings.md)  |  `*`  |  None  | 
 
-## Layers<a name="permissions-resources-layers"></a>
+## Layer actions<a name="permissions-resources-layers"></a>
 
 Layer actions let you restrict the layers that a user can manage or use with a function\. Actions related to layer use and permissions act on a version of a layer, while `PublishLayerVersion` acts on a layer name\. You can use either with wildcards to restrict the layers that a user can work with by name\.
+
+**Note**  
+Note: the [GetLayerVersion](API_GetLayerVersion.md) action also covers [GetLayerVersionByArn](API_GetLayerVersionByArn.md)\. Lambda does not support `GetLayerVersionByArn` as an IAM action\.
 
 
 **Layers**  
@@ -113,5 +226,5 @@ Layer actions let you restrict the layers that a user can manage or use with a f
 | Action | Resource | Condition | 
 | --- | --- | --- | 
 |   [AddLayerVersionPermission](API_AddLayerVersionPermission.md)  [RemoveLayerVersionPermission](API_RemoveLayerVersionPermission.md)  [GetLayerVersion](API_GetLayerVersion.md)  [GetLayerVersionPolicy](API_GetLayerVersionPolicy.md)  [DeleteLayerVersion](API_DeleteLayerVersion.md)  |  Layer version  | None | 
-|   [PublishLayerVersion](API_PublishLayerVersion.md)  [ListLayerVersions](API_ListLayerVersions.md)  |  Layer  | None | 
-|   [ListLayers](API_ListLayers.md)  |   `*`   | None | 
+|   [ListLayerVersions](API_ListLayerVersions.md)  [PublishLayerVersion](API_PublishLayerVersion.md)  |  Layer  | None | 
+|   [ListLayers](API_ListLayers.md)  |   `*`   |  None  | 

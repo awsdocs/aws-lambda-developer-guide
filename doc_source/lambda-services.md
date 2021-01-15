@@ -49,8 +49,11 @@ The Lambda runtime converts the event document into an object and passes it to y
 For services that generate a queue or data stream, you create an [event source mapping](invocation-eventsourcemapping.md) in Lambda and grant Lambda permission to access the other service in the [execution role](lambda-intro-execution-role.md)\. Lambda reads data from the other service, creates an event, and invokes your function\.
 
 **Services that Lambda reads events from**
-+ [Amazon Kinesis](with-kinesis.md)
 + [Amazon DynamoDB](with-ddb.md)
++ [Amazon Kinesis](with-kinesis.md)
++ [Amazon MQ](with-mq.md)
++ [Amazon Managed Streaming for Apache Kafka](with-msk.md)
++ [self\-managed Apache Kafka](kafka-smaa.md)
 + [Amazon Simple Queue Service](with-sqs.md)
 
 Other services invoke your function directly\. You grant the other service permission in the function's [resource\-based policy](access-control-resource-based.md), and configure the other service to generate events and invoke your function\. Depending on the service, the invocation can be synchronous or asynchronous\. For synchronous invocation, the other service waits for the response from your function and might [retry on errors](invocation-retries.md)\.
@@ -63,7 +66,6 @@ Other services invoke your function directly\. You grant the other service permi
 + [Amazon API Gateway](services-apigateway.md)
 + [Amazon CloudFront \(Lambda@Edge\)](lambda-edge.md)
 + [Amazon Kinesis Data Firehose](services-kinesisfirehose.md)
-+ [AWS Step Functions](services-stepfunctions.md)
 + [Amazon Simple Storage Service Batch](services-s3-batch.md)
 
 For asynchronous invocation, Lambda queues the event before passing it to your function\. The other service gets a success response as soon as the event is queued and isn't aware of what happens afterwards\. If an error occurs, Lambda handles [retries](invocation-retries.md), and can send failed events to a [destination](invocation-async.md#invocation-async-destinations) that you configure\.

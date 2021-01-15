@@ -1,6 +1,6 @@
 # Managing AWS Lambda functions<a name="lambda-functions"></a>
 
-You can use the AWS Lambda API or console to configure settings on your Lambda functions\. [Basic function settings](configuration-console.md) include the description, role, and runtime that you specify when you create a function in the Lambda console\. You can configure more settings after you create a function, or use the API to set things like the handler name, memory allocation, and security groups during creation\.
+You can use the AWS Lambda API or console to create functions and configure function settings\. [Basic function settings](configuration-console.md) include the description and the execution role that you specify when you create a function in the Lambda console\. You can configure more settings after you create a function, or use the API to modify configuration settings such as the handler name, memory allocation, and security groups during creation\.
 
 To keep secrets out of your function code, store them in the function's configuration and read them from the execution environment during initialization\. [Environment variables](configuration-envvars.md) are always encrypted at rest, and can be encrypted client\-side as well\. Use environment variables to make your function code portable by removing connection strings, passwords, and endpoints for external resources\.
 
@@ -10,14 +10,4 @@ As you add libraries and other dependencies to your function, creating and uploa
 
 To use your Lambda function with AWS resources in an Amazon VPC, configure it with security groups and subnets to [create a VPC connection](configuration-vpc.md)\. Connecting your function to a VPC lets you access resources in a private subnet such as relational databases and caches\. You can also [create a database proxy](configuration-database.md) for MySQL and Aurora DB instances\. A database proxy enables a function to reach high concurrency levels without exhausting database connections\.
 
-**Topics**
-+ [Configuring functions in the AWS Lambda console](configuration-console.md)
-+ [Using AWS Lambda environment variables](configuration-envvars.md)
-+ [Managing concurrency for a Lambda function](configuration-concurrency.md)
-+ [AWS Lambda function versions](configuration-versions.md)
-+ [AWS Lambda function aliases](configuration-aliases.md)
-+ [AWS Lambda layers](configuration-layers.md)
-+ [Configuring a Lambda function to access resources in a VPC](configuration-vpc.md)
-+ [Configuring database access for a Lambda function](configuration-database.md)
-+ [Configuring file system access for Lambda functions](configuration-filesystem.md)
-+ [Tagging Lambda Functions](configuration-tags.md)
+To use [code signing](configuration-codesigning.md) with your Lambda function, configure it with a code\-signing configuration\. When a user attempts to deploy a code package, Lambda checks that the code package has a valid signature from a trusted publisher\. The code\-signing configuration includes a set of signing profiles, which define the trusted publishers for this function\.

@@ -13,6 +13,7 @@ Managed policies grant permission to API actions without restricting the functio
 + [Function development](#permissions-user-function)
 + [Layer development and use](#permissions-user-layer)
 + [Cross\-account roles](#permissions-user-xaccount)
++ [Condition keys for VPC settings](#permissions-condition-keys)
 
 ## Function development<a name="permissions-user-function"></a>
 
@@ -166,7 +167,7 @@ The permissions in the policy are organized into statements based on the [resour
 
 This policy allows a user to get started with Lambda, without putting other users' resources at risk\. It doesn't allow a user to configure a function to be triggered by or call other AWS services, which requires broader IAM permissions\. It also doesn't include permission to services that don't support limited\-scope policies, like CloudWatch and X\-Ray\. Use the read\-only policies for these services to give the user access to metrics and trace data\.
 
-When you configure triggers for your function, you need access to use the AWS service that invokes your function\. For example, to configure an Amazon S3 trigger, you need permission to Amazon S3 actions to manage bucket notifications\. Many of these permissions are included in the **AWSLambdaFullAccess** managed policy\. Example policies are available in this guide's [GitHub repository](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/iam-policies)\.
+When you configure triggers for your function, you need access to use the AWS service that invokes your function\. For example, to configure an Amazon S3 trigger, you need permission to use the Amazon S3 actions that manage bucket notifications\. Many of these permissions are included in the **AWSLambdaFullAccess** managed policy\. Example policies are available in this guide's [GitHub repository](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/iam-policies)\.
 
 ## Layer development and use<a name="permissions-user-layer"></a>
 
@@ -234,3 +235,9 @@ You can apply any of the preceding policies and statements to a role, which you 
 You can use cross\-account roles to give accounts that you trust access to Lambda actions and resources\. If you just want to grant permission to invoke a function or use a layer, use [resource\-based policies](access-control-resource-based.md) instead\.
 
 For more information, see [IAM roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *IAM User Guide*\.
+
+## Condition keys for VPC settings<a name="permissions-condition-keys"></a>
+
+You can use condition keys for VPC settings to provide additional permission controls for your Lambda functions\. For example, you can enforce that all Lambda functions in your organization are connected to a VPC\. You can also specify the subnets and security groups that the functions are allowed to use, or are denied from using\.
+
+For more information, see [Using IAM condition keys for VPC settings](configuration-vpc.md#vpc-conditions)\.

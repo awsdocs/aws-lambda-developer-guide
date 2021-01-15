@@ -32,8 +32,9 @@ To get started with application development in your local environment, deploy on
 [ec2\-spot](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/ec2-spot) – A function that manages spot instance requests in Amazon EC2\.
 
 **Topics**
-+ [AWS Lambda Deployment Package in C\#](csharp-package.md)
 + [AWS Lambda function handler in C\#](csharp-handler.md)
++ [Deploy C\# Lambda functions with \.zip file archives](csharp-package.md)
++ [Deploy \.NET Lambda functions with container images](csharp-image.md)
 + [AWS Lambda context object in C\#](csharp-context.md)
 + [AWS Lambda function logging in C\#](csharp-logging.md)
 + [AWS Lambda function errors in C\#](csharp-exceptions.md)

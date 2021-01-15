@@ -1,5 +1,7 @@
 # AWS Lambda function handler in Go<a name="golang-handler"></a>
 
+The AWS Lambda function handler is the method in your function code that processes events\. When your function is invoked, Lambda runs the handler method\. When the handler exits or returns a response, it becomes available to handle another event\.
+
 A Lambda function written in [Go](https://golang.org/) is authored as a Go executable\. In your Lambda function code, you need to include the [github\.com/aws/aws\-lambda\-go/lambda](https://github.com/aws/aws-lambda-go/tree/master/lambda) package, which implements the Lambda programming model for Go\. In addition, you need to implement handler function code and a `main()` function\. 
 
 ```
@@ -35,7 +37,7 @@ Note the following:
   + **name MyEvent**: An input type with a variable name of `name` whose value will be returned in the `return` statement\.
   + **string, error**: Returns two values: string for success and standard [error](https://golang.org/pkg/builtin/#error) information\. For more information on custom error handling, see [AWS Lambda function errors in Go](golang-exceptions.md)\.
   + **return fmt\.Sprintf\("Hello %s\!", name\), nil**: Simply returns a formatted "Hello" greeting with the name you supplied in the input event\. `nil` indicates there were no errors and the function executed successfully\.
-+ **func main\(\)**: The entry point that executes your Lambda function code\. This is required\.
++ **func main\(\)**: The entry point that runs your Lambda function code\. This is required\.
 
   By adding `lambda.Start(HandleRequest)` between `func main(){}` code brackets, your Lambda function will be executed\. Per Go language standards, the opening bracket, `{` must be placed directly at end the of the `main` function signature\.
 

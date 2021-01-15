@@ -271,20 +271,21 @@ public class Handler implements
 }
 ```
 
-Amazon S3 invokes your Lambda function using the `Event` invocation type, where AWS Lambda executes the code asynchronously\. What you return does not matter\. However, in this case we are implementing an interface that requires us to specify a return type, so in this example the handler uses `String` as the return type\. 
+Amazon S3 invokes your Lambda function using the `Event` invocation type, where AWS Lambda runs the code asynchronously\. What you return does not matter\. However, in this case we are implementing an interface that requires us to specify a return type, so in this example the handler uses `String` as the return type\. 
 
 **Dependencies**
 + `aws-lambda-java-core`
 + `aws-lambda-java-events`
 + `aws-java-sdk`
 
-Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [AWS Lambda deployment package in Java](java-package.md)\.
+Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [Deploy Java Lambda functions with \.zip file archives](java-package.md)\.
 
 ## Python 3<a name="with-s3-example-deployment-pkg-python"></a>
 
-The following example code receives an Amazon S3 event input and processes the message that it contains\. It resizes an image in the source bucket and saves the output to the target bucket\.
+The following example code receives an Amazon S3 event input and processes the message that it contains\. It resizes an image in the source bucket and saves the output to the target bucket\. 
 
 **Example lambda\_function\.py**  
+Copy the sample code into a file named `lambda_function.py`\.  
 
 ```
 import boto3
@@ -314,38 +315,8 @@ def lambda_handler(event, context):
         s3_client.upload_file(upload_path, '{}-resized'.format(bucket), key)
 ```
 
-**Note**  
-The image library used by this code must be installed in a Linux environment in order to create a working deployment package\.
+**Dependencies**
++ [Pillow](https://pypi.org/project/Pillow/)
 
 **To create a deployment package**
-
-1. Copy the sample code into a file named `lambda_function.py`\.
-
-1. Create a virtual environment\.
-
-   ```
-   s3-python$ virtualenv v-env
-   s3-python$ source v-env/bin/activate
-   ```
-
-1. Install libraries in the virtual environment
-
-   ```
-   (v-env) s3-python$ pip install Pillow boto3
-   ```
-
-1. Create a deployment package with the contents of the installed libraries\.
-
-   ```
-   (v-env) s3-python$ cd $VIRTUAL_ENV/lib/python3.8/site-packages
-   (v-env) python-s3/v-env/lib/python3.8/site-packages$ zip -r9 ${OLDPWD}/function.zip .
-   ```
-
-1. Add the handler code to the deployment package and deactivate the virtual environment\.
-
-   ```
-   (v-env) python-s3/v-env/lib/python3.8/site-packages$  cd ${OLDPWD}
-   (v-env) python-s3$ zip -g function.zip lambda_function.py
-     adding: lambda_function.py (deflated 55%)
-   (v-env) python-s3$ deactivate
-   ```
++ We recommend using the AWS SAM CLI [sam build](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-build.html) command to create deployment packages that contain libraries written in C or C\+\+, such as the [Pillow](https://pypi.org/project/Pillow/) library\.

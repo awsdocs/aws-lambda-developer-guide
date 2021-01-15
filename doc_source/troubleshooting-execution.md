@@ -1,6 +1,6 @@
-# Troubleshoot execution issues in AWS Lambda<a name="troubleshooting-execution"></a>
+# Troubleshoot execution issues in Lambda<a name="troubleshooting-execution"></a>
 
-When the Lambda runtime executes your function code, the event might be processed on an instance of the function that's been processing events for some time, or it might require a new instance to be initialized\. Errors can occur when during function initialization, when your handler code processes the event, or when your function returns \(or fails to return\) a response\.
+When the Lambda runtime runs your function code, the event might be processed on an instance of the function that's been processing events for some time, or it might require a new instance to be initialized\. Errors can occur during function initialization, when your handler code processes the event, or when your function returns \(or fails to return\) a response\.
 
 Function execution errors can be caused by issues with your code, function configuration, downstream resources, or permissions\. If you invoke your function directly, you see function errors in the response from Lambda\. If you invoke your function asynchronously, with an event source mapping, or through another service, you might find errors in logs, a dead\-letter queue, or an on\-failure destination\. Error handling options and retry behavior vary depending on how you invoke your function and on the type of error\.
 
@@ -33,14 +33,14 @@ Some libraries don't return promises but can be wrapped in code that does\. For 
 **Issue:** *The AWS SDK included on the runtime updates automatically*
 
 Runtimes for scripting languages include the AWS SDK and are periodically updated to the latest version\. The current version for each runtime is listed on [runtimes page](lambda-runtimes.md)\. To use a newer version of the AWS SDK, or to lock your functions to a specific version, you can bundle the library with your function code, or [create a Lambda layer](configuration-layers.md)\. For details on creating a deployment package with dependencies, see the following topics:
-+  [AWS Lambda deployment package in Node\.js](nodejs-package.md) 
-+  [AWS Lambda deployment package in Python](python-package.md) 
-+  [AWS Lambda deployment package in Ruby](ruby-package.md) 
-+  [AWS Lambda deployment package in Java](java-package.md) 
-+  [AWS Lambda deployment package in Go](golang-package.md) 
-+  [AWS Lambda Deployment Package in C\#](csharp-package.md) 
-+  [AWS Lambda deployment package in PowerShell](powershell-package.md) 
++  [Deploy Node\.js Lambda functions with \.zip file archives](nodejs-package.md) 
++  [Deploy Python Lambda functions with \.zip file archives](python-package.md) 
++  [Deploy Ruby Lambda functions with \.zip file archives](ruby-package.md) 
++  [Deploy Java Lambda functions with \.zip file archives](java-package.md) 
++  [Deploy Go Lambda functions with \.zip file archives](golang-package.md) 
++  [Deploy C\# Lambda functions with \.zip file archives](csharp-package.md) 
++  [Deploy PowerShell Lambda functions with \.zip file archives](powershell-package.md) 
 
 **Issue:** \(Python\) *Some libraries don't load correctly from the deployment package*
 
-Libraries with extension modules written in C or C\+\+ must be compiled in an environment with the same processor architecture as Lambda \(Amazon Linux\)\. For more information, see [AWS Lambda deployment package in Python](python-package.md)\.
+Libraries with extension modules written in C or C\+\+ must be compiled in an environment with the same processor architecture as Lambda \(Amazon Linux\)\. For more information, see [Deploy Python Lambda functions with \.zip file archives](python-package.md)\.

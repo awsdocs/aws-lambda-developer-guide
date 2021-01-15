@@ -11,15 +11,15 @@ POST /2018-10-31/layers/LayerName/versions HTTP/1.1
 Content-type: application/json
 
 {
-   "[CompatibleRuntimes](#SSS-PublishLayerVersion-request-CompatibleRuntimes)": [ "string" ],
-   "[Content](#SSS-PublishLayerVersion-request-Content)": { 
-      "[S3Bucket](API_LayerVersionContentInput.md#SSS-Type-LayerVersionContentInput-S3Bucket)": "string",
-      "[S3Key](API_LayerVersionContentInput.md#SSS-Type-LayerVersionContentInput-S3Key)": "string",
-      "[S3ObjectVersion](API_LayerVersionContentInput.md#SSS-Type-LayerVersionContentInput-S3ObjectVersion)": "string",
-      "[ZipFile](API_LayerVersionContentInput.md#SSS-Type-LayerVersionContentInput-ZipFile)": blob
+   "CompatibleRuntimes": [ "string" ],
+   "Content": { 
+      "S3Bucket": "string",
+      "S3Key": "string",
+      "S3ObjectVersion": "string",
+      "ZipFile": blob
    },
-   "[Description](#SSS-PublishLayerVersion-request-Description)": "string",
-   "[LicenseInfo](#SSS-PublishLayerVersion-request-LicenseInfo)": "string"
+   "Description": "string",
+   "LicenseInfo": "string"
 }
 ```
 
@@ -40,8 +40,8 @@ The request accepts the following data in JSON format\.
  ** [CompatibleRuntimes](#API_PublishLayerVersion_RequestSyntax) **   <a name="SSS-PublishLayerVersion-request-CompatibleRuntimes"></a>
 A list of compatible [function runtimes](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)\. Used for filtering with [ListLayers](API_ListLayers.md) and [ListLayerVersions](API_ListLayerVersions.md)\.  
 Type: Array of strings  
-Array Members: Maximum number of 5 items\.  
-Valid Values:` nodejs10.x | nodejs12.x | java8 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore2.1 | dotnetcore3.1 | go1.x | ruby2.5 | ruby2.7 | provided`   
+Array Members: Maximum number of 15 items\.  
+Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | nodejs10.x | nodejs12.x | java8 | java8.al2 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | dotnetcore3.1 | nodejs4.3-edge | go1.x | ruby2.5 | ruby2.7 | provided | provided.al2`   
 Required: No
 
  ** [Content](#API_PublishLayerVersion_RequestSyntax) **   <a name="SSS-PublishLayerVersion-request-Content"></a>
@@ -71,18 +71,20 @@ HTTP/1.1 201
 Content-type: application/json
 
 {
-   "[CompatibleRuntimes](#SSS-PublishLayerVersion-response-CompatibleRuntimes)": [ "string" ],
-   "[Content](#SSS-PublishLayerVersion-response-Content)": { 
-      "[CodeSha256](API_LayerVersionContentOutput.md#SSS-Type-LayerVersionContentOutput-CodeSha256)": "string",
-      "[CodeSize](API_LayerVersionContentOutput.md#SSS-Type-LayerVersionContentOutput-CodeSize)": number,
-      "[Location](API_LayerVersionContentOutput.md#SSS-Type-LayerVersionContentOutput-Location)": "string"
+   "CompatibleRuntimes": [ "string" ],
+   "Content": { 
+      "CodeSha256": "string",
+      "CodeSize": number,
+      "Location": "string",
+      "SigningJobArn": "string",
+      "SigningProfileVersionArn": "string"
    },
-   "[CreatedDate](#SSS-PublishLayerVersion-response-CreatedDate)": "string",
-   "[Description](#SSS-PublishLayerVersion-response-Description)": "string",
-   "[LayerArn](#SSS-PublishLayerVersion-response-LayerArn)": "string",
-   "[LayerVersionArn](#SSS-PublishLayerVersion-response-LayerVersionArn)": "string",
-   "[LicenseInfo](#SSS-PublishLayerVersion-response-LicenseInfo)": "string",
-   "[Version](#SSS-PublishLayerVersion-response-Version)": number
+   "CreatedDate": "string",
+   "Description": "string",
+   "LayerArn": "string",
+   "LayerVersionArn": "string",
+   "LicenseInfo": "string",
+   "Version": number
 }
 ```
 
@@ -95,8 +97,8 @@ The following data is returned in JSON format by the service\.
  ** [CompatibleRuntimes](#API_PublishLayerVersion_ResponseSyntax) **   <a name="SSS-PublishLayerVersion-response-CompatibleRuntimes"></a>
 The layer's compatible runtimes\.  
 Type: Array of strings  
-Array Members: Maximum number of 5 items\.  
-Valid Values:` nodejs10.x | nodejs12.x | java8 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore2.1 | dotnetcore3.1 | go1.x | ruby2.5 | ruby2.7 | provided` 
+Array Members: Maximum number of 15 items\.  
+Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | nodejs10.x | nodejs12.x | java8 | java8.al2 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | dotnetcore3.1 | nodejs4.3-edge | go1.x | ruby2.5 | ruby2.7 | provided | provided.al2` 
 
  ** [Content](#API_PublishLayerVersion_ResponseSyntax) **   <a name="SSS-PublishLayerVersion-response-Content"></a>
 Details about the layer version\.  

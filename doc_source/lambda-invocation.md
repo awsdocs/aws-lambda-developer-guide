@@ -4,7 +4,7 @@ You can invoke Lambda functions directly [with the Lambda console](getting-start
 
 When you invoke a function, you can choose to invoke it synchronously or asynchronously\. With [synchronous invocation](invocation-sync.md), you wait for the function to process the event and return a response\. With [asynchronous](invocation-async.md) invocation, Lambda queues the event for processing and returns a response immediately\. For asynchronous invocation, Lambda handles retries and can send invocation records to a [destination](invocation-async.md#invocation-async-destinations)\.
 
-To use your function to process data automatically, add one or more triggers\. A trigger is a Lambda resource or a resource in another service that you configure to invoke your function in response to lifecycle events, external requests, or on a schedule\. Your function can have multiple triggers\. Each trigger acts as an client invoking your function independently\. Each event that Lambda passes to your function only has data from one client or trigger\.
+To use your function to process data automatically, add one or more triggers\. A trigger is a Lambda resource or a resource in another service that you configure to invoke your function in response to lifecycle events, external requests, or on a schedule\. Your function can have multiple triggers\. Each trigger acts as a client invoking your function independently\. Each event that Lambda passes to your function only has data from one client or trigger\.
 
 To process items from a stream or queue, you can create an [event source mapping](invocation-eventsourcemapping.md)\. An event source mapping is a resource in Lambda that reads items from an Amazon SQS queue, an Amazon Kinesis stream, or an Amazon DynamoDB stream, and sends them to your function in batches\. Each event that your function processes can contain hundreds or thousands of items\.
 
@@ -19,4 +19,6 @@ Depending on who invokes your function and how it's invoked, scaling behavior an
 + [Monitoring the state of a function with the Lambda API](functions-states.md)
 + [AWS Lambda function scaling](invocation-scaling.md)
 + [Error handling and automatic retries in AWS Lambda](invocation-retries.md)
++ [Using Lambda extensions](using-extensions.md)
++ [Invoking functions defined as container images](invocation-images.md)
 + [Invoking Lambda functions with the AWS Mobile SDK for Android](with-on-demand-custom-android.md)

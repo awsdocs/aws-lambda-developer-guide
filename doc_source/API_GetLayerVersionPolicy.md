@@ -33,8 +33,8 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "[Policy](#SSS-GetLayerVersionPolicy-response-Policy)": "string",
-   "[RevisionId](#SSS-GetLayerVersionPolicy-response-RevisionId)": "string"
+   "Policy": "string",
+   "RevisionId": "string"
 }
 ```
 

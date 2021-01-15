@@ -5,8 +5,8 @@ Updates an event source mapping\. You can change the function that AWS Lambda in
 The following error handling options are only available for stream sources \(DynamoDB and Kinesis\):
 +  `BisectBatchOnFunctionError` \- If the function returns an error, split the batch in two and retry\.
 +  `DestinationConfig` \- Send discarded records to an Amazon SQS queue or Amazon SNS topic\.
-+  `MaximumRecordAgeInSeconds` \- Discard records older than the specified age\.
-+  `MaximumRetryAttempts` \- Discard records after the specified number of retries\.
++  `MaximumRecordAgeInSeconds` \- Discard records older than the specified age\. The default value is infinite \(\-1\)\. When set to infinite \(\-1\), failed records are retried until the record expires
++  `MaximumRetryAttempts` \- Discard records after the specified number of retries\. The default value is infinite \(\-1\)\. When set to infinite \(\-1\), failed records are retried until the record expires\.
 +  `ParallelizationFactor` \- Process multiple batches from each shard concurrently\.
 
 ## Request Syntax<a name="API_UpdateEventSourceMapping_RequestSyntax"></a>
@@ -16,22 +16,30 @@ PUT /2015-03-31/event-source-mappings/UUID HTTP/1.1
 Content-type: application/json
 
 {
-   "[BatchSize](#SSS-UpdateEventSourceMapping-request-BatchSize)": number,
-   "[BisectBatchOnFunctionError](#SSS-UpdateEventSourceMapping-request-BisectBatchOnFunctionError)": boolean,
-   "[DestinationConfig](#SSS-UpdateEventSourceMapping-request-DestinationConfig)": { 
-      "[OnFailure](API_DestinationConfig.md#SSS-Type-DestinationConfig-OnFailure)": { 
-         "[Destination](API_OnFailure.md#SSS-Type-OnFailure-Destination)": "string"
+   "BatchSize": number,
+   "BisectBatchOnFunctionError": boolean,
+   "DestinationConfig": { 
+      "OnFailure": { 
+         "Destination": "string"
       },
-      "[OnSuccess](API_DestinationConfig.md#SSS-Type-DestinationConfig-OnSuccess)": { 
-         "[Destination](API_OnSuccess.md#SSS-Type-OnSuccess-Destination)": "string"
+      "OnSuccess": { 
+         "Destination": "string"
       }
    },
-   "[Enabled](#SSS-UpdateEventSourceMapping-request-Enabled)": boolean,
-   "[FunctionName](#SSS-UpdateEventSourceMapping-request-FunctionName)": "string",
-   "[MaximumBatchingWindowInSeconds](#SSS-UpdateEventSourceMapping-request-MaximumBatchingWindowInSeconds)": number,
-   "[MaximumRecordAgeInSeconds](#SSS-UpdateEventSourceMapping-request-MaximumRecordAgeInSeconds)": number,
-   "[MaximumRetryAttempts](#SSS-UpdateEventSourceMapping-request-MaximumRetryAttempts)": number,
-   "[ParallelizationFactor](#SSS-UpdateEventSourceMapping-request-ParallelizationFactor)": number
+   "Enabled": boolean,
+   "FunctionName": "string",
+   "FunctionResponseTypes": [ "string" ],
+   "MaximumBatchingWindowInSeconds": number,
+   "MaximumRecordAgeInSeconds": number,
+   "MaximumRetryAttempts": number,
+   "ParallelizationFactor": number,
+   "SourceAccessConfigurations": [ 
+      { 
+         "Type": "string",
+         "URI": "string"
+      }
+   ],
+   "TumblingWindowInSeconds": number
 }
 ```
 
@@ -51,7 +59,9 @@ The request accepts the following data in JSON format\.
 The maximum number of items to retrieve in a single batch\.  
 +  **Amazon Kinesis** \- Default 100\. Max 10,000\.
 +  **Amazon DynamoDB Streams** \- Default 100\. Max 1,000\.
-+  **Amazon Simple Queue Service** \- Default 10\. Max 10\.
++  **Amazon Simple Queue Service** \- Default 10\. For standard queues the max is 10,000\. For FIFO queues the max is 10\.
++  **Amazon Managed Streaming for Apache Kafka** \- Default 100\. Max 10,000\.
++  **Self\-Managed Apache Kafka** \- Default 100\. Max 10,000\.
 Type: Integer  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.  
 Required: No
@@ -85,28 +95,47 @@ Length Constraints: Minimum length of 1\. Maximum length of 140\.
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
 Required: No
 
+ ** [FunctionResponseTypes](#API_UpdateEventSourceMapping_RequestSyntax) **   <a name="SSS-UpdateEventSourceMapping-request-FunctionResponseTypes"></a>
+\(Streams\) A list of current response type enums applied to the event source mapping\.  
+Type: Array of strings  
+Array Members: Fixed number of 1 item\.  
+Valid Values:` ReportBatchItemFailures`   
+Required: No
+
  ** [MaximumBatchingWindowInSeconds](#API_UpdateEventSourceMapping_RequestSyntax) **   <a name="SSS-UpdateEventSourceMapping-request-MaximumBatchingWindowInSeconds"></a>
-\(Streams\) The maximum amount of time to gather records before invoking the function, in seconds\.  
+\(Streams and SQS standard queues\) The maximum amount of time to gather records before invoking the function, in seconds\.  
 Type: Integer  
 Valid Range: Minimum value of 0\. Maximum value of 300\.  
 Required: No
 
  ** [MaximumRecordAgeInSeconds](#API_UpdateEventSourceMapping_RequestSyntax) **   <a name="SSS-UpdateEventSourceMapping-request-MaximumRecordAgeInSeconds"></a>
-\(Streams\) The maximum age of a record that Lambda sends to a function for processing\.  
+\(Streams\) Discard records older than the specified age\. The default value is infinite \(\-1\)\.  
 Type: Integer  
-Valid Range: Minimum value of 60\. Maximum value of 604800\.  
+Valid Range: Minimum value of \-1\. Maximum value of 604800\.  
 Required: No
 
  ** [MaximumRetryAttempts](#API_UpdateEventSourceMapping_RequestSyntax) **   <a name="SSS-UpdateEventSourceMapping-request-MaximumRetryAttempts"></a>
-\(Streams\) The maximum number of times to retry when the function returns an error\.  
+\(Streams\) Discard records after the specified number of retries\. The default value is infinite \(\-1\)\. When set to infinite \(\-1\), failed records will be retried until the record expires\.  
 Type: Integer  
-Valid Range: Minimum value of 0\. Maximum value of 10000\.  
+Valid Range: Minimum value of \-1\. Maximum value of 10000\.  
 Required: No
 
  ** [ParallelizationFactor](#API_UpdateEventSourceMapping_RequestSyntax) **   <a name="SSS-UpdateEventSourceMapping-request-ParallelizationFactor"></a>
 \(Streams\) The number of batches to process from each shard concurrently\.  
 Type: Integer  
 Valid Range: Minimum value of 1\. Maximum value of 10\.  
+Required: No
+
+ ** [SourceAccessConfigurations](#API_UpdateEventSourceMapping_RequestSyntax) **   <a name="SSS-UpdateEventSourceMapping-request-SourceAccessConfigurations"></a>
+An array of the authentication protocol, or the VPC components to secure your event source\.  
+Type: Array of [SourceAccessConfiguration](API_SourceAccessConfiguration.md) objects  
+Array Members: Minimum number of 1 item\. Maximum number of 22 items\.  
+Required: No
+
+ ** [TumblingWindowInSeconds](#API_UpdateEventSourceMapping_RequestSyntax) **   <a name="SSS-UpdateEventSourceMapping-request-TumblingWindowInSeconds"></a>
+\(Streams\) The duration of a processing window in seconds\. The range is between 1 second up to 15 minutes\.  
+Type: Integer  
+Valid Range: Minimum value of 0\. Maximum value of 900\.  
 Required: No
 
 ## Response Syntax<a name="API_UpdateEventSourceMapping_ResponseSyntax"></a>
@@ -116,27 +145,44 @@ HTTP/1.1 202
 Content-type: application/json
 
 {
-   "[BatchSize](#SSS-UpdateEventSourceMapping-response-BatchSize)": number,
-   "[BisectBatchOnFunctionError](#SSS-UpdateEventSourceMapping-response-BisectBatchOnFunctionError)": boolean,
-   "[DestinationConfig](#SSS-UpdateEventSourceMapping-response-DestinationConfig)": { 
-      "[OnFailure](API_DestinationConfig.md#SSS-Type-DestinationConfig-OnFailure)": { 
-         "[Destination](API_OnFailure.md#SSS-Type-OnFailure-Destination)": "string"
+   "BatchSize": number,
+   "BisectBatchOnFunctionError": boolean,
+   "DestinationConfig": { 
+      "OnFailure": { 
+         "Destination": "string"
       },
-      "[OnSuccess](API_DestinationConfig.md#SSS-Type-DestinationConfig-OnSuccess)": { 
-         "[Destination](API_OnSuccess.md#SSS-Type-OnSuccess-Destination)": "string"
+      "OnSuccess": { 
+         "Destination": "string"
       }
    },
-   "[EventSourceArn](#SSS-UpdateEventSourceMapping-response-EventSourceArn)": "string",
-   "[FunctionArn](#SSS-UpdateEventSourceMapping-response-FunctionArn)": "string",
-   "[LastModified](#SSS-UpdateEventSourceMapping-response-LastModified)": number,
-   "[LastProcessingResult](#SSS-UpdateEventSourceMapping-response-LastProcessingResult)": "string",
-   "[MaximumBatchingWindowInSeconds](#SSS-UpdateEventSourceMapping-response-MaximumBatchingWindowInSeconds)": number,
-   "[MaximumRecordAgeInSeconds](#SSS-UpdateEventSourceMapping-response-MaximumRecordAgeInSeconds)": number,
-   "[MaximumRetryAttempts](#SSS-UpdateEventSourceMapping-response-MaximumRetryAttempts)": number,
-   "[ParallelizationFactor](#SSS-UpdateEventSourceMapping-response-ParallelizationFactor)": number,
-   "[State](#SSS-UpdateEventSourceMapping-response-State)": "string",
-   "[StateTransitionReason](#SSS-UpdateEventSourceMapping-response-StateTransitionReason)": "string",
-   "[UUID](#SSS-UpdateEventSourceMapping-response-UUID)": "string"
+   "EventSourceArn": "string",
+   "FunctionArn": "string",
+   "FunctionResponseTypes": [ "string" ],
+   "LastModified": number,
+   "LastProcessingResult": "string",
+   "MaximumBatchingWindowInSeconds": number,
+   "MaximumRecordAgeInSeconds": number,
+   "MaximumRetryAttempts": number,
+   "ParallelizationFactor": number,
+   "Queues": [ "string" ],
+   "SelfManagedEventSource": { 
+      "Endpoints": { 
+         "string" : [ "string" ]
+      }
+   },
+   "SourceAccessConfigurations": [ 
+      { 
+         "Type": "string",
+         "URI": "string"
+      }
+   ],
+   "StartingPosition": "string",
+   "StartingPositionTimestamp": number,
+   "State": "string",
+   "StateTransitionReason": "string",
+   "Topics": [ "string" ],
+   "TumblingWindowInSeconds": number,
+   "UUID": "string"
 }
 ```
 
@@ -152,7 +198,7 @@ Type: Integer
 Valid Range: Minimum value of 1\. Maximum value of 10000\.
 
  ** [BisectBatchOnFunctionError](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-BisectBatchOnFunctionError"></a>
-\(Streams\) If the function returns an error, split the batch in two and retry\.  
+\(Streams\) If the function returns an error, split the batch in two and retry\. The default value is false\.  
 Type: Boolean
 
  ** [DestinationConfig](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-DestinationConfig"></a>
@@ -169,6 +215,12 @@ The ARN of the Lambda function\.
 Type: String  
 Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
+ ** [FunctionResponseTypes](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-FunctionResponseTypes"></a>
+\(Streams\) A list of current response type enums applied to the event source mapping\.  
+Type: Array of strings  
+Array Members: Fixed number of 1 item\.  
+Valid Values:` ReportBatchItemFailures` 
+
  ** [LastModified](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-LastModified"></a>
 The date that the event source mapping was last updated, or its state changed, in Unix time seconds\.  
 Type: Timestamp
@@ -178,24 +230,49 @@ The result of the last AWS Lambda invocation of your Lambda function\.
 Type: String
 
  ** [MaximumBatchingWindowInSeconds](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-MaximumBatchingWindowInSeconds"></a>
-\(Streams\) The maximum amount of time to gather records before invoking the function, in seconds\.  
+\(Streams and SQS standard queues\) The maximum amount of time to gather records before invoking the function, in seconds\. The default value is zero\.  
 Type: Integer  
 Valid Range: Minimum value of 0\. Maximum value of 300\.
 
  ** [MaximumRecordAgeInSeconds](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-MaximumRecordAgeInSeconds"></a>
-\(Streams\) The maximum age of a record that Lambda sends to a function for processing\.  
+\(Streams\) Discard records older than the specified age\. The default value is infinite \(\-1\)\. When set to infinite \(\-1\), failed records are retried until the record expires\.  
 Type: Integer  
-Valid Range: Minimum value of 60\. Maximum value of 604800\.
+Valid Range: Minimum value of \-1\. Maximum value of 604800\.
 
  ** [MaximumRetryAttempts](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-MaximumRetryAttempts"></a>
-\(Streams\) The maximum number of times to retry when the function returns an error\.  
+\(Streams\) Discard records after the specified number of retries\. The default value is infinite \(\-1\)\. When set to infinite \(\-1\), failed records are retried until the record expires\.  
 Type: Integer  
-Valid Range: Minimum value of 0\. Maximum value of 10000\.
+Valid Range: Minimum value of \-1\. Maximum value of 10000\.
 
  ** [ParallelizationFactor](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-ParallelizationFactor"></a>
-\(Streams\) The number of batches to process from each shard concurrently\.  
+\(Streams\) The number of batches to process from each shard concurrently\. The default value is 1\.  
 Type: Integer  
 Valid Range: Minimum value of 1\. Maximum value of 10\.
+
+ ** [Queues](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-Queues"></a>
+ \(MQ\) The name of the Amazon MQ broker destination queue to consume\.   
+Type: Array of strings  
+Array Members: Fixed number of 1 item\.  
+Length Constraints: Minimum length of 1\. Maximum length of 1000\.  
+Pattern: `[\s\S]*` 
+
+ ** [SelfManagedEventSource](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-SelfManagedEventSource"></a>
+The Self\-Managed Apache Kafka cluster for your event source\.  
+Type: [SelfManagedEventSource](API_SelfManagedEventSource.md) object
+
+ ** [SourceAccessConfigurations](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-SourceAccessConfigurations"></a>
+An array of the authentication protocol, or the VPC components to secure your event source\.  
+Type: Array of [SourceAccessConfiguration](API_SourceAccessConfiguration.md) objects  
+Array Members: Minimum number of 1 item\. Maximum number of 22 items\.
+
+ ** [StartingPosition](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-StartingPosition"></a>
+The position in a stream from which to start reading\. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon MSK Streams sources\. `AT_TIMESTAMP` is only supported for Amazon Kinesis streams\.  
+Type: String  
+Valid Values:` TRIM_HORIZON | LATEST | AT_TIMESTAMP` 
+
+ ** [StartingPositionTimestamp](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-StartingPositionTimestamp"></a>
+With `StartingPosition` set to `AT_TIMESTAMP`, the time from which to start reading, in Unix time seconds\.  
+Type: Timestamp
 
  ** [State](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-State"></a>
 The state of the event source mapping\. It can be one of the following: `Creating`, `Enabling`, `Enabled`, `Disabling`, `Disabled`, `Updating`, or `Deleting`\.  
@@ -204,6 +281,18 @@ Type: String
  ** [StateTransitionReason](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-StateTransitionReason"></a>
 Indicates whether the last change to the event source mapping was made by a user, or by the Lambda service\.  
 Type: String
+
+ ** [Topics](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-Topics"></a>
+The name of the Kafka topic\.  
+Type: Array of strings  
+Array Members: Fixed number of 1 item\.  
+Length Constraints: Minimum length of 1\. Maximum length of 249\.  
+Pattern: `^[^.]([a-zA-Z0-9\-_.]+)` 
+
+ ** [TumblingWindowInSeconds](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-TumblingWindowInSeconds"></a>
+\(Streams\) The duration of a processing window in seconds\. The range is between 1 second up to 15 minutes\.  
+Type: Integer  
+Valid Range: Minimum value of 0\. Maximum value of 900\.
 
  ** [UUID](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-UUID"></a>
 The identifier of the event source mapping\.  

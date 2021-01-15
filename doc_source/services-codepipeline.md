@@ -25,7 +25,7 @@ CodePipeline invokes your function asynchronously with an event that contains de
                     "location": {
                         "type": "S3",
                         "s3Location": {
-                            "bucketName": "aws-us-west-2-123456789012-my-pipeline",
+                            "bucketName": "us-west-2-123456789012-my-pipeline",
                             "objectKey": "my-pipeline/test-api-2/TdOSFRV"
                         }
                     }
@@ -38,7 +38,7 @@ CodePipeline invokes your function asynchronously with an event that contains de
                     "location": {
                         "type": "S3",
                         "s3Location": {
-                            "bucketName": "aws-us-west-2-123456789012-my-pipeline",
+                            "bucketName": "us-west-2-123456789012-my-pipeline",
                             "objectKey": "my-pipeline/invokeOutp/D0YHsJn"
                         }
                     }
@@ -75,11 +75,11 @@ exports.handler = async (event) => {
 
 For asynchronous invocation, Lambda queues the message and [retries](invocation-retries.md) if your function returns an error\. Configure your function with a [destination](invocation-async.md#invocation-async-destinations) to retain events that your function could not process\.
 
-For details on configuring a pipeline to invoke a Lambda function, see [Invoke an AWS Lambda function in a pipeline](https://docs.aws.amazon.com/codepipeline/latest/userguide/actions-invoke-lambda-function.html) in the AWS CodePipeline User Guide\.
+For a tutorial on how to configure a pipeline to invoke a Lambda function, see [Invoke an AWS Lambda function in a pipeline](https://docs.aws.amazon.com/codepipeline/latest/userguide/actions-invoke-lambda-function.html) in the *AWS CodePipeline User Guide*\.
 
-**Topics**
-+ [Permissions](#services-codepipeline-permissions)
-+ [Building a continuous delivery pipeline for a Lambda application with AWS CodePipeline](build-pipeline.md)
+You can use AWS CodePipeline to create a continuous delivery pipeline for your Lambda application\. CodePipeline combines source control, build, and deployment resources to create a pipeline that runs whenever you make a change to your application's source code\.
+
+For an alternate method of creating a pipeline with AWS Serverless Application Model and AWS CloudFormation, watch [Automate your serverless application deployments](https://www.youtube.com/watch?v=0o3urdBeoII) on the Amazon Web Services YouTube channel\.
 
 ## Permissions<a name="services-codepipeline-permissions"></a>
 

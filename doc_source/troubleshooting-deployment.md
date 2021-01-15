@@ -1,4 +1,4 @@
-# Troubleshoot deployment issues in AWS Lambda<a name="troubleshooting-deployment"></a>
+# Troubleshoot deployment issues in Lambda<a name="troubleshooting-deployment"></a>
 
 When you update your function, Lambda deploys the change by launching new instances of the function with the updated code or settings\. Deployment errors prevent the new version from being used and can arise from issues with your deployment package, code, permissions, or tools\.
 
@@ -48,11 +48,11 @@ The name of the file or class in your function's handler configuration doesn't m
 
 **Error:** *undefined method `handler' for \#<LambdaHandler:0x000055b76ccebf98>*
 
-**Error:** *No public method named handleRequest with appropriate method signature found on class class function\.Handler*
+**Error:** *No public method named handleRequest with appropriate method signature found on class function\.Handler*
 
 **Error:** *Unable to find method 'handleRequest' in type 'Function\.Handler' from assembly 'Function'*
 
-The name of the handler method in your function's handler configuration doesn't match your code\. Each runtime defines a naming convention for handlers, such as *filename*\.*methodname*\. The handler is the method in your function's code that the runtime executes when your function is invoked\.
+The name of the handler method in your function's handler configuration doesn't match your code\. Each runtime defines a naming convention for handlers, such as *filename*\.*methodname*\. The handler is the method in your function's code that the runtime runs when your function is invoked\.
 
 For some languages, Lambda provides a library with an interface that expects a handler method to have a specific name\. For details about handler naming for each language, see the following topics\.
 + [Building Lambda functions with Node\.js](lambda-nodejs.md)

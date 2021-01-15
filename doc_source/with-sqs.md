@@ -2,7 +2,7 @@
 
 You can use an AWS Lambda function to process messages in an Amazon Simple Queue Service \(Amazon SQS\) queue\. Lambda [event source mappings](invocation-eventsourcemapping.md) support [standard queues](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/standard-queues.html) and [first\-in, first\-out \(FIFO\) queues](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/fifo-queues.html)\. With Amazon SQS, you can offload tasks from one component of your application by sending them to a queue and processing them asynchronously\.
 
-Lambda polls the queue and invokes your function [synchronously](invocation-sync.md) with an event that contains queue messages\. Lambda reads messages in batches and invokes your function once for each batch\. When your function successfully processes a batch, Lambda deletes its messages from the queue\. The following example shows an event for a batch of two messages\.
+Lambda polls the queue and invokes your Lambda function [synchronously](invocation-sync.md) with an event that contains queue messages\. Lambda reads messages in batches and invokes your function once for each batch\. When your function successfully processes a batch, Lambda deletes its messages from the queue\. The following example shows an event for a batch of two messages\.
 
 **Example Amazon SQS message event \(standard queue\)**  
 
@@ -45,6 +45,8 @@ Lambda polls the queue and invokes your function [synchronously](invocation-sync
 }
 ```
 
+By default, Lambda invokes your function as soon as records are available in the SQS queue\. Lambda will poll up to 10 messages in your queue at once and will send that batch to the function\. To avoid invoking the function with a small number of records, you can tell the event source to buffer records for up to five minutes by configuring a batch window\. Before invoking the function, Lambda continues to poll messages from the SQS standard queue until batch window expires, the [payload limit](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html) is reached or full batch size is reached\.
+
 For FIFO queues, records contain additional attributes that are related to deduplication and sequencing\.
 
 **Example Amazon SQS message event \(FIFO queue\)**  
@@ -85,7 +87,7 @@ For FIFO queues, Lambda sends messages to your function in the order that it rec
 
 Your function can scale in concurrency to the number of active message groups\. For more information, see [SQS FIFO as an event source](https://aws.amazon.com/blogs/compute/new-for-aws-lambda-sqs-fifo-as-an-event-source/) on the AWS Compute Blog\.
 
-## Configuring a queue for use with Lambda<a name="events-sqs-queueconfig"></a>
+## Configuring a queue to use with Lambda<a name="events-sqs-queueconfig"></a>
 
 [Create an SQS queue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/) to serve as an event source for your Lambda function\. Then configure the queue to allow time for your Lambda function to process each batch of events—and for Lambda to retry in response to throttling errors as it scales up\.
 
@@ -115,7 +117,7 @@ To configure your function to read from Amazon SQS in the Lambda console, create
 
 **To create a trigger**
 
-1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
 1. Choose a function\.
 
@@ -129,7 +131,10 @@ Lambda supports the following options for Amazon SQS event sources\.
 
 **Event source options**
 + **SQS queue** – The Amazon SQS queue to read records from\.
-+ **Batch size** – The number of items to read from the queue in each batch, up to 10\. The event might contain fewer items if the batch that Lambda read from the queue had fewer items\.
++ **Batch size** – The number of records to send to the function in each batch\. For a standard queue this can be up to 10,000 records\. For a FIFO queue the maximum is 10\. For a batch size over 10, you must also set the `MaximumBatchingWindowInSeconds` parameter to at least 1 second\. Lambda passes all of the records in the batch to the function in a single call, as long as the total size of the events doesn't exceed the [payload limit](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html) for synchronous invocation \(6 MB\)\.
++ **Batch window ** – Specify the maximum amount of time to gather records before invoking the function, in seconds\. Only applicable to standard queues\.
+
+  If you are using a batch window greater than 0 seconds, you must account for the increased processing time in your queue visibility timeout\. Set your queue visibility timeout to 6 times your function timeout, plus the value of `MaximumBatchingWindowInSeconds`\. This allows time for your Lambda function to process each batch of events and to retry in the event of a throttling error\.
 + **Enabled** – Set to true to enable the event source mapping\. Set to false to stop processing records\.
 
 **Note**  
@@ -141,21 +146,23 @@ Configure your function timeout to allow enough time to process an entire batch 
 
 ## Event source mapping APIs<a name="services-dynamodb-api"></a>
 
-To manage event source mappings with the AWS CLI or AWS SDK, use the following API actions:
+To manage an event source with the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) or [AWS SDK](http://aws.amazon.com/getting-started/tools-sdks/), you can use the following API operations:
 + [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
 + [ListEventSourceMappings](API_ListEventSourceMappings.md)
 + [GetEventSourceMapping](API_GetEventSourceMapping.md)
 + [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md)
 + [DeleteEventSourceMapping](API_DeleteEventSourceMapping.md)
 
-The following example uses the AWS CLI to map a function named `my-function` to an Amazon SQS queue that is specified by its Amazon Resource Name \(ARN\), with a batch size of 5\.
+The following example uses the AWS CLI to map a function named `my-function` to an Amazon SQS queue that is specified by its Amazon Resource Name \(ARN\), with a batch size of 5 and a batch window of 60 seconds\.
 
 ```
 $ aws lambda create-event-source-mapping --function-name my-function --batch-size 5 \
+--maximum-batching-window-in-seconds 60 \
 --event-source-arn arn:aws:sqs:us-east-2:123456789012:my-queue
 {
     "UUID": "2b733gdc-8ac3-cdf5-af3a-1827b3b11284",
     "BatchSize": 5,
+    "MaximumBatchingWindowInSeconds": 60,
     "EventSourceArn": "arn:aws:sqs:us-east-2:123456789012:my-queue",
     "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
     "LastModified": 1541139209.351,

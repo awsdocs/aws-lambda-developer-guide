@@ -40,8 +40,8 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "[Policy](#SSS-GetPolicy-response-Policy)": "string",
-   "[RevisionId](#SSS-GetPolicy-response-RevisionId)": "string"
+   "Policy": "string",
+   "RevisionId": "string"
 }
 ```
 

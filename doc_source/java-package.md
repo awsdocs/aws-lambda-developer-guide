@@ -1,13 +1,15 @@
-# AWS Lambda deployment package in Java<a name="java-package"></a>
+# Deploy Java Lambda functions with \.zip file archives<a name="java-package"></a>
 
-A deployment package is a ZIP archive that contains your compiled function code and dependencies\. You can upload the package directly to Lambda, or you can use an Amazon S3 bucket, and then upload it to Lambda\. If the deployment package is larger than 50 MB, you must use Amazon S3\.
+To create a container image to deploy your function code, see [Using container images with Lambda](lambda-images.md)\.
 
-AWS Lambda provides the following libraries for Java functions:
-+ [com\.amazonaws:aws\-lambda\-java\-core](https://github.com/aws/aws-lambda-java-libs/tree/master/aws-lambda-java-core) \(required\) – Defines handler method interfaces and the context object that the runtime passes to the handler\. If you define your own input types, this is the only library you need\.
+A \.zip file archive is a deployment package that contains your compiled function code and dependencies\. You can upload the package directly to Lambda, or you can use an Amazon Simple Storage Service \(Amazon S3\) bucket, and then upload it to Lambda\. If the deployment package is larger than 50 MB, you must use Amazon S3\.
+
+Lambda provides the following libraries for Java functions:
++ [com\.amazonaws:aws\-lambda\-java\-core](https://github.com/aws/aws-lambda-java-libs/tree/master/aws-lambda-java-core) \(required\) – Defines handler method interfaces and the context object that the runtime passes to the handler\. If you define your own input types, this is the only library that you need\.
 + [com\.amazonaws:aws\-lambda\-java\-events](https://github.com/aws/aws-lambda-java-libs/tree/master/aws-lambda-java-events) – Input types for events from services that invoke Lambda functions\.
-+ [com\.amazonaws:aws\-lambda\-java\-log4j2](https://github.com/aws/aws-lambda-java-libs/tree/master/aws-lambda-java-log4j2) – An appender library for Log4j 2 that you can use to add the request ID for the current invocation to your [function logs](java-logging.md)\.
++ [com\.amazonaws:aws\-lambda\-java\-log4j2](https://github.com/aws/aws-lambda-java-libs/tree/master/aws-lambda-java-log4j2) – An appender library for Apache Log4j 2 that you can use to add the request ID for the current invocation to your [function logs](java-logging.md)\.
 
-These libraries are available through [Maven central repository](https://search.maven.org/search?q=g:com.amazonaws)\. Add them to your build definition as follows\.
+These libraries are available through [Maven Central Repository](https://search.maven.org/search?q=g:com.amazonaws)\. Add them to your build definition as follows:
 
 ------
 #### [ Gradle ]
@@ -15,7 +17,7 @@ These libraries are available through [Maven central repository](https://search.
 ```
 dependencies {
     implementation 'com.amazonaws:aws-lambda-java-core:1.2.1'
-    implementation 'com.amazonaws:aws-lambda-java-events:2.2.9'
+    implementation 'com.amazonaws:aws-lambda-java-events:3.1.0'
     runtimeOnly 'com.amazonaws:aws-lambda-java-log4j2:1.2.0'
 }
 ```
@@ -33,7 +35,7 @@ dependencies {
     <dependency>
       <groupId>com.amazonaws</groupId>
       <artifactId>aws-lambda-java-events</artifactId>
-      <version>2.2.9</version>
+      <version>3.1.0</version>
     </dependency>
     <dependency>
       <groupId>com.amazonaws</groupId>
@@ -45,16 +47,16 @@ dependencies {
 
 ------
 
-To create a deployment package, compile your function code and dependencies into a single ZIP or Java Archive \(JAR\) file\. For Gradle, [use the Zip build type](#java-package-gradle)\. For Maven, [use the Maven Shade plugin](#java-package-maven)\.
+To create a deployment package, compile your function code and dependencies into a single \.zip file or Java Archive \(JAR\) file\. For Gradle, [use the `Zip` build type](#java-package-gradle)\. For Apache Maven, [use the Maven Shade plugin](#java-package-maven)\.
 
 **Note**  
-To keep your deployment package size small, package your function's dependencies in layers\. Layers let you manage your dependencies independently, can be used by multiple functions, and can be shared with other accounts\. For details, see [AWS Lambda layers](configuration-layers.md)\.
+To keep your deployment package size small, package your function's dependencies in layers\. Layers enable you to manage your dependencies independently, can be used by multiple functions, and can be shared with other accounts\. For more information, see [AWS Lambda layers](configuration-layers.md)\.
 
-You can upload your deployment package by using the Lambda console, the Lambda API, or AWS SAM\.
+You can upload your deployment package by using the Lambda console, the Lambda API, or AWS Serverless Application Model \(AWS SAM\)\.
 
 **To upload a deployment package with the Lambda console**
 
-1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
 1. Choose a function\.
 
@@ -72,7 +74,7 @@ You can upload your deployment package by using the Lambda console, the Lambda A
 
 ## Building a deployment package with Gradle<a name="java-package-gradle"></a>
 
-Use the `Zip` build type to create a deployment package with your function's code and dependencies\.
+To create a deployment package with your function's code and dependencies, use the `Zip` build type\.
 
 **Example build\.gradle – Build task**  
 
@@ -86,7 +88,7 @@ task buildZip(type: Zip) {
 }
 ```
 
-This build configuration produces a deployment package in the `build/distributions` folder\. The `compileJava` task compiles your function's classes\. The `processResources` tasks copies libraries from the build's classpath into a folder named `lib`\.
+This build configuration produces a deployment package in the `build/distributions` directory\. The `compileJava` task compiles your function's classes\. The `processResources` task copies libraries from the build's classpath into a directory named `lib`\.
 
 **Example build\.gradle – Dependencies**  
 
@@ -95,7 +97,7 @@ dependencies {
     implementation platform('software.amazon.awssdk:bom:2.10.73')
     implementation 'software.amazon.awssdk:lambda'
     implementation 'com.amazonaws:aws-lambda-java-core:1.2.1'
-    implementation 'com.amazonaws:aws-lambda-java-events:2.2.9'
+    implementation 'com.amazonaws:aws-lambda-java-events:3.1.0'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'org.apache.logging.log4j:log4j-api:2.13.0'
     implementation 'org.apache.logging.log4j:log4j-core:2.13.0'
@@ -106,7 +108,7 @@ dependencies {
 }
 ```
 
-Lambda loads JAR files in Unicode alphabetical order\. If multiple JAR files in the `lib` folder contain the same class, the first one is used\. You can use the following shell script to identify duplicate classes\.
+Lambda loads JAR files in Unicode alphabetical order\. If multiple JAR files in the `lib` directory contain the same class, the first one is used\. You can use the following shell script to identify duplicate classes:
 
 **Example test\-zip\.sh**  
 
@@ -154,7 +156,7 @@ To build the deployment package, use the `mvn package` command\.
 [INFO]
 [INFO] --- maven-shade-plugin:3.2.2:shade (default) @ java-maven ---
 [INFO] Including com.amazonaws:aws-lambda-java-core:jar:1.2.1 in the shaded jar.
-[INFO] Including com.amazonaws:aws-lambda-java-events:jar:2.2.9 in the shaded jar.
+[INFO] Including com.amazonaws:aws-lambda-java-events:jar:3.1.0 in the shaded jar.
 [INFO] Including joda-time:joda-time:jar:2.6 in the shaded jar.
 [INFO] Including com.google.code.gson:gson:jar:2.8.6 in the shaded jar.
 [INFO] Replacing original artifact with shaded artifact.
@@ -167,7 +169,7 @@ To build the deployment package, use the `mvn package` command\.
 [INFO] ------------------------------------------------------------------------
 ```
 
-This command generates a JAR file in the `target` folder\.
+This command generates a JAR file in the `target` directory\.
 
 If you use the appender library \(`aws-lambda-java-log4j2`\), you must also configure a transformer for the Maven Shade plugin\. The transformer library combines versions of a cache file that appear in both the appender library and in Log4j\.
 
@@ -207,7 +209,7 @@ If you use the appender library \(`aws-lambda-java-log4j2`\), you must also conf
 
 ## Uploading a deployment package with the Lambda API<a name="java-package-cli"></a>
 
-To update a function's code with the AWS CLI or AWS SDK, use the [UpdateFunctionCode](API_UpdateFunctionCode.md) API operation\. For the AWS CLI, use the `update-function-code` command\. The following command uploads a deployment package named `my-function.zip` in the current directory\.
+To update a function's code with the AWS Command Line Interface \(AWS CLI\) or AWS SDK, use the [UpdateFunctionCode](API_UpdateFunctionCode.md) API operation\. For the AWS CLI, use the `update-function-code` command\. The following command uploads a deployment package named `my-function.zip` in the current directory:
 
 ```
 ~/my-function$ aws lambda update-function-code --function-name my-function --zip-file fileb://my-function.zip
@@ -227,7 +229,7 @@ To update a function's code with the AWS CLI or AWS SDK, use the [UpdateFunction
 }
 ```
 
-If your deployment package is larger than 50 MB, you can't upload it directly\. Upload it to an Amazon S3 bucket and point Lambda to the object\. The following example commands upload a deployment package to a bucket named `my-bucket` and use it to update a function's code\.
+If your deployment package is larger than 50 MB, you can't upload it directly\. Upload it to an Amazon Simple Storage Service \(Amazon S3\) bucket and point Lambda to the object\. The following example commands upload a deployment package to an S3 bucket named `my-bucket` and use it to update a function's code:
 
 ```
 ~/my-function$ aws s3 cp my-function.zip s3://my-bucket
@@ -254,7 +256,7 @@ You can use this method to upload function packages up to 250 MB \(decompressed\
 
 ## Uploading a deployment package with AWS SAM<a name="java-package-cloudformation"></a>
 
-You can use the AWS Serverless Application Model to automate deployments of your function code, configuration, and dependencies\. AWS SAM is an extension of AWS CloudFormation that provides a simplified syntax for defining serverless applications\. The following example template defines a function with a deployment package in the `build/distributions` directory that Gradle uses\.
+You can use AWS SAM to automate deployments of your function code, configuration, and dependencies\. AWS SAM is an extension of AWS CloudFormation that provides a simplified syntax for defining serverless applications\. The following example template defines a function with a deployment package in the `build/distributions` directory that Gradle uses:
 
 **Example template\.yml**  
 
@@ -294,11 +296,11 @@ aws cloudformation package --template-file template.yml --s3-bucket MY_BUCKET --
 aws cloudformation deploy --template-file out.yml --stack-name java-basic --capabilities CAPABILITY_NAMED_IAM
 ```
 
-For a complete working example, see the following sample applications\.
+For a complete working example, see the following sample applications:
 
 **Sample Lambda applications in Java**
 + [blank\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-java) – A Java function that shows the use of Lambda's Java libraries, logging, environment variables, layers, AWS X\-Ray tracing, unit tests, and the AWS SDK\.
 + [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-basic) – A minimal Java function with unit tests and variable logging configuration\.
 + [java\-events](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-events) – A minimal Java function that uses the [aws\-lambda\-java\-events](#java-package) library with event types that don't require the AWS SDK as a dependency, such as Amazon API Gateway\.
-+ [java\-events\-v1sdk](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-events-v1sdk) – A Java function that uses the [aws\-lambda\-java\-events](#java-package) library with event types that require the AWS SDK as a dependency \(Amazon Simple Storage Service, Amazon DynamoDB, and Amazon Kinesis\)\.
++ [java\-events\-v1sdk](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-events-v1sdk) – A Java function that uses the [aws\-lambda\-java\-events](#java-package) library with event types that require the AWS SDK as a dependency \(Amazon Simple Storage Service \(Amazon S3\), Amazon DynamoDB, and Amazon Kinesis\)\.
 + [s3\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/s3-java) – A Java function that processes notification events from Amazon S3 and uses the Java Class Library \(JCL\) to create thumbnails from uploaded image files\.

@@ -59,8 +59,12 @@ If you are following other tutorial topics in this guide, the specific tutorials
    1. Open the context \(right\-click\) menu for the `src/main/java` subdirectory in the project, choose **New**, and then choose **Class**\.
 
    1. In the **New Java Class** window, type the following values:
+
+       
       + **Package**: **example** 
       + **Name**: **Hello**
+
+         
 **Note**  
 If you are following other tutorial topics in this guide, the specific tutorials might recommend different package name or class name\.
 
@@ -79,6 +83,8 @@ The resulting \.jar, `lambda-java-example-0.0.1-SNAPSHOT.jar`, is not the final 
    1. Open the context \(right\-click\) menu for the `pom.xml` file, choose **Maven**, and then choose **Add Plugin**\.
 
    1. In the **Add Plugin** window, type the following values:
+
+       
       + **Group Id:** org\.apache\.maven\.plugins
       + **Artifact Id:** maven\-shade\-plugin
       + **Version:** 3\.2\.2

@@ -13,9 +13,9 @@ POST /2015-03-31/functions/FunctionName/versions HTTP/1.1
 Content-type: application/json
 
 {
-   "[CodeSha256](#SSS-PublishVersion-request-CodeSha256)": "string",
-   "[Description](#SSS-PublishVersion-request-Description)": "string",
-   "[RevisionId](#SSS-PublishVersion-request-RevisionId)": "string"
+   "CodeSha256": "string",
+   "Description": "string",
+   "RevisionId": "string"
 }
 ```
 
@@ -62,58 +62,74 @@ HTTP/1.1 201
 Content-type: application/json
 
 {
-   "[CodeSha256](#SSS-PublishVersion-response-CodeSha256)": "string",
-   "[CodeSize](#SSS-PublishVersion-response-CodeSize)": number,
-   "[DeadLetterConfig](#SSS-PublishVersion-response-DeadLetterConfig)": { 
-      "[TargetArn](API_DeadLetterConfig.md#SSS-Type-DeadLetterConfig-TargetArn)": "string"
+   "CodeSha256": "string",
+   "CodeSize": number,
+   "DeadLetterConfig": { 
+      "TargetArn": "string"
    },
-   "[Description](#SSS-PublishVersion-response-Description)": "string",
-   "[Environment](#SSS-PublishVersion-response-Environment)": { 
-      "[Error](API_EnvironmentResponse.md#SSS-Type-EnvironmentResponse-Error)": { 
-         "[ErrorCode](API_EnvironmentError.md#SSS-Type-EnvironmentError-ErrorCode)": "string",
-         "[Message](API_EnvironmentError.md#SSS-Type-EnvironmentError-Message)": "string"
+   "Description": "string",
+   "Environment": { 
+      "Error": { 
+         "ErrorCode": "string",
+         "Message": "string"
       },
-      "[Variables](API_EnvironmentResponse.md#SSS-Type-EnvironmentResponse-Variables)": { 
+      "Variables": { 
          "string" : "string" 
       }
    },
-   "[FileSystemConfigs](#SSS-PublishVersion-response-FileSystemConfigs)": [ 
+   "FileSystemConfigs": [ 
       { 
-         "[Arn](API_FileSystemConfig.md#SSS-Type-FileSystemConfig-Arn)": "string",
-         "[LocalMountPath](API_FileSystemConfig.md#SSS-Type-FileSystemConfig-LocalMountPath)": "string"
+         "Arn": "string",
+         "LocalMountPath": "string"
       }
    ],
-   "[FunctionArn](#SSS-PublishVersion-response-FunctionArn)": "string",
-   "[FunctionName](#SSS-PublishVersion-response-FunctionName)": "string",
-   "[Handler](#SSS-PublishVersion-response-Handler)": "string",
-   "[KMSKeyArn](#SSS-PublishVersion-response-KMSKeyArn)": "string",
-   "[LastModified](#SSS-PublishVersion-response-LastModified)": "string",
-   "[LastUpdateStatus](#SSS-PublishVersion-response-LastUpdateStatus)": "string",
-   "[LastUpdateStatusReason](#SSS-PublishVersion-response-LastUpdateStatusReason)": "string",
-   "[LastUpdateStatusReasonCode](#SSS-PublishVersion-response-LastUpdateStatusReasonCode)": "string",
-   "[Layers](#SSS-PublishVersion-response-Layers)": [ 
-      { 
-         "[Arn](API_Layer.md#SSS-Type-Layer-Arn)": "string",
-         "[CodeSize](API_Layer.md#SSS-Type-Layer-CodeSize)": number
+   "FunctionArn": "string",
+   "FunctionName": "string",
+   "Handler": "string",
+   "ImageConfigResponse": { 
+      "Error": { 
+         "ErrorCode": "string",
+         "Message": "string"
+      },
+      "ImageConfig": { 
+         "Command": [ "string" ],
+         "EntryPoint": [ "string" ],
+         "WorkingDirectory": "string"
       }
-   ],
-   "[MasterArn](#SSS-PublishVersion-response-MasterArn)": "string",
-   "[MemorySize](#SSS-PublishVersion-response-MemorySize)": number,
-   "[RevisionId](#SSS-PublishVersion-response-RevisionId)": "string",
-   "[Role](#SSS-PublishVersion-response-Role)": "string",
-   "[Runtime](#SSS-PublishVersion-response-Runtime)": "string",
-   "[State](#SSS-PublishVersion-response-State)": "string",
-   "[StateReason](#SSS-PublishVersion-response-StateReason)": "string",
-   "[StateReasonCode](#SSS-PublishVersion-response-StateReasonCode)": "string",
-   "[Timeout](#SSS-PublishVersion-response-Timeout)": number,
-   "[TracingConfig](#SSS-PublishVersion-response-TracingConfig)": { 
-      "[Mode](API_TracingConfigResponse.md#SSS-Type-TracingConfigResponse-Mode)": "string"
    },
-   "[Version](#SSS-PublishVersion-response-Version)": "string",
-   "[VpcConfig](#SSS-PublishVersion-response-VpcConfig)": { 
-      "[SecurityGroupIds](API_VpcConfigResponse.md#SSS-Type-VpcConfigResponse-SecurityGroupIds)": [ "string" ],
-      "[SubnetIds](API_VpcConfigResponse.md#SSS-Type-VpcConfigResponse-SubnetIds)": [ "string" ],
-      "[VpcId](API_VpcConfigResponse.md#SSS-Type-VpcConfigResponse-VpcId)": "string"
+   "KMSKeyArn": "string",
+   "LastModified": "string",
+   "LastUpdateStatus": "string",
+   "LastUpdateStatusReason": "string",
+   "LastUpdateStatusReasonCode": "string",
+   "Layers": [ 
+      { 
+         "Arn": "string",
+         "CodeSize": number,
+         "SigningJobArn": "string",
+         "SigningProfileVersionArn": "string"
+      }
+   ],
+   "MasterArn": "string",
+   "MemorySize": number,
+   "PackageType": "string",
+   "RevisionId": "string",
+   "Role": "string",
+   "Runtime": "string",
+   "SigningJobArn": "string",
+   "SigningProfileVersionArn": "string",
+   "State": "string",
+   "StateReason": "string",
+   "StateReasonCode": "string",
+   "Timeout": number,
+   "TracingConfig": { 
+      "Mode": "string"
+   },
+   "Version": "string",
+   "VpcConfig": { 
+      "SecurityGroupIds": [ "string" ],
+      "SubnetIds": [ "string" ],
+      "VpcId": "string"
    }
 }
 ```
@@ -167,6 +183,10 @@ Type: String
 Length Constraints: Maximum length of 128\.  
 Pattern: `[^\s]+` 
 
+ ** [ImageConfigResponse](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-ImageConfigResponse"></a>
+The function's image configuration values\.  
+Type: [ImageConfigResponse](API_ImageConfigResponse.md) object
+
  ** [KMSKeyArn](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-KMSKeyArn"></a>
 The KMS key that's used to encrypt the function's environment variables\. This key is only returned if you've configured a customer managed CMK\.  
 Type: String  
@@ -188,7 +208,7 @@ Type: String
  ** [LastUpdateStatusReasonCode](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-LastUpdateStatusReasonCode"></a>
 The reason code for the last update that was performed on the function\.  
 Type: String  
-Valid Values:` EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses | InvalidSubnet | InvalidSecurityGroup` 
+Valid Values:` EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses | InvalidSubnet | InvalidSecurityGroup | ImageDeleted | ImageAccessDenied | InvalidImage` 
 
  ** [Layers](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-Layers"></a>
 The function's [ layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\.  
@@ -200,9 +220,14 @@ Type: String
 Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [MemorySize](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-MemorySize"></a>
-The memory that's allocated to the function\.  
+The amount of memory available to the function at runtime\.   
 Type: Integer  
-Valid Range: Minimum value of 128\. Maximum value of 3008\.
+Valid Range: Minimum value of 128\. Maximum value of 10240\.
+
+ ** [PackageType](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-PackageType"></a>
+The type of deployment package\. Set to `Image` for container image and set `Zip` for \.zip file archive\.  
+Type: String  
+Valid Values:` Zip | Image` 
 
  ** [RevisionId](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-RevisionId"></a>
 The latest updated revision of the function or alias\.  
@@ -216,7 +241,17 @@ Pattern: `arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+`
  ** [Runtime](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-Runtime"></a>
 The runtime environment for the Lambda function\.  
 Type: String  
-Valid Values:` nodejs10.x | nodejs12.x | java8 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore2.1 | dotnetcore3.1 | go1.x | ruby2.5 | ruby2.7 | provided` 
+Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | nodejs10.x | nodejs12.x | java8 | java8.al2 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | dotnetcore3.1 | nodejs4.3-edge | go1.x | ruby2.5 | ruby2.7 | provided | provided.al2` 
+
+ ** [SigningJobArn](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-SigningJobArn"></a>
+The ARN of the signing job\.  
+Type: String  
+Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)` 
+
+ ** [SigningProfileVersionArn](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-SigningProfileVersionArn"></a>
+The ARN of the signing profile version\.  
+Type: String  
+Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)` 
 
  ** [State](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-State"></a>
 The current state of the function\. When the state is `Inactive`, you can reactivate the function by invoking it\.  
@@ -230,7 +265,7 @@ Type: String
  ** [StateReasonCode](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-StateReasonCode"></a>
 The reason code for the function's current state\. When the code is `Creating`, you can't invoke or modify the function\.  
 Type: String  
-Valid Values:` Idle | Creating | Restoring | EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses | InvalidSubnet | InvalidSecurityGroup` 
+Valid Values:` Idle | Creating | Restoring | EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses | InvalidSubnet | InvalidSecurityGroup | ImageDeleted | ImageAccessDenied | InvalidImage` 
 
  ** [Timeout](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-Timeout"></a>
 The amount of time in seconds that Lambda allows a function to run before stopping it\.  

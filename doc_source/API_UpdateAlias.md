@@ -9,11 +9,11 @@ PUT /2015-03-31/functions/FunctionName/aliases/Name HTTP/1.1
 Content-type: application/json
 
 {
-   "[Description](#SSS-UpdateAlias-request-Description)": "string",
-   "[FunctionVersion](#SSS-UpdateAlias-request-FunctionVersion)": "string",
-   "[RevisionId](#SSS-UpdateAlias-request-RevisionId)": "string",
-   "[RoutingConfig](#SSS-UpdateAlias-request-RoutingConfig)": { 
-      "[AdditionalVersionWeights](API_AliasRoutingConfiguration.md#SSS-Type-AliasRoutingConfiguration-AdditionalVersionWeights)": { 
+   "Description": "string",
+   "FunctionVersion": "string",
+   "RevisionId": "string",
+   "RoutingConfig": { 
+      "AdditionalVersionWeights": { 
          "string" : number 
       }
    }
@@ -76,13 +76,13 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "[AliasArn](#SSS-UpdateAlias-response-AliasArn)": "string",
-   "[Description](#SSS-UpdateAlias-response-Description)": "string",
-   "[FunctionVersion](#SSS-UpdateAlias-response-FunctionVersion)": "string",
-   "[Name](#SSS-UpdateAlias-response-Name)": "string",
-   "[RevisionId](#SSS-UpdateAlias-response-RevisionId)": "string",
-   "[RoutingConfig](#SSS-UpdateAlias-response-RoutingConfig)": { 
-      "[AdditionalVersionWeights](API_AliasRoutingConfiguration.md#SSS-Type-AliasRoutingConfiguration-AdditionalVersionWeights)": { 
+   "AliasArn": "string",
+   "Description": "string",
+   "FunctionVersion": "string",
+   "Name": "string",
+   "RevisionId": "string",
+   "RoutingConfig": { 
+      "AdditionalVersionWeights": { 
          "string" : number 
       }
    }

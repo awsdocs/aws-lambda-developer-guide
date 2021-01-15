@@ -15,35 +15,40 @@ PUT /2015-03-31/functions/FunctionName/configuration HTTP/1.1
 Content-type: application/json
 
 {
-   "[DeadLetterConfig](#SSS-UpdateFunctionConfiguration-request-DeadLetterConfig)": { 
-      "[TargetArn](API_DeadLetterConfig.md#SSS-Type-DeadLetterConfig-TargetArn)": "string"
+   "DeadLetterConfig": { 
+      "TargetArn": "string"
    },
-   "[Description](#SSS-UpdateFunctionConfiguration-request-Description)": "string",
-   "[Environment](#SSS-UpdateFunctionConfiguration-request-Environment)": { 
-      "[Variables](API_Environment.md#SSS-Type-Environment-Variables)": { 
+   "Description": "string",
+   "Environment": { 
+      "Variables": { 
          "string" : "string" 
       }
    },
-   "[FileSystemConfigs](#SSS-UpdateFunctionConfiguration-request-FileSystemConfigs)": [ 
+   "FileSystemConfigs": [ 
       { 
-         "[Arn](API_FileSystemConfig.md#SSS-Type-FileSystemConfig-Arn)": "string",
-         "[LocalMountPath](API_FileSystemConfig.md#SSS-Type-FileSystemConfig-LocalMountPath)": "string"
+         "Arn": "string",
+         "LocalMountPath": "string"
       }
    ],
-   "[Handler](#SSS-UpdateFunctionConfiguration-request-Handler)": "string",
-   "[KMSKeyArn](#SSS-UpdateFunctionConfiguration-request-KMSKeyArn)": "string",
-   "[Layers](#SSS-UpdateFunctionConfiguration-request-Layers)": [ "string" ],
-   "[MemorySize](#SSS-UpdateFunctionConfiguration-request-MemorySize)": number,
-   "[RevisionId](#SSS-UpdateFunctionConfiguration-request-RevisionId)": "string",
-   "[Role](#SSS-UpdateFunctionConfiguration-request-Role)": "string",
-   "[Runtime](#SSS-UpdateFunctionConfiguration-request-Runtime)": "string",
-   "[Timeout](#SSS-UpdateFunctionConfiguration-request-Timeout)": number,
-   "[TracingConfig](#SSS-UpdateFunctionConfiguration-request-TracingConfig)": { 
-      "[Mode](API_TracingConfig.md#SSS-Type-TracingConfig-Mode)": "string"
+   "Handler": "string",
+   "ImageConfig": { 
+      "Command": [ "string" ],
+      "EntryPoint": [ "string" ],
+      "WorkingDirectory": "string"
    },
-   "[VpcConfig](#SSS-UpdateFunctionConfiguration-request-VpcConfig)": { 
-      "[SecurityGroupIds](API_VpcConfig.md#SSS-Type-VpcConfig-SecurityGroupIds)": [ "string" ],
-      "[SubnetIds](API_VpcConfig.md#SSS-Type-VpcConfig-SubnetIds)": [ "string" ]
+   "KMSKeyArn": "string",
+   "Layers": [ "string" ],
+   "MemorySize": number,
+   "RevisionId": "string",
+   "Role": "string",
+   "Runtime": "string",
+   "Timeout": number,
+   "TracingConfig": { 
+      "Mode": "string"
+   },
+   "VpcConfig": { 
+      "SecurityGroupIds": [ "string" ],
+      "SubnetIds": [ "string" ]
    }
 }
 ```
@@ -97,6 +102,11 @@ Length Constraints: Maximum length of 128\.
 Pattern: `[^\s]+`   
 Required: No
 
+ ** [ImageConfig](#API_UpdateFunctionConfiguration_RequestSyntax) **   <a name="SSS-UpdateFunctionConfiguration-request-ImageConfig"></a>
+Configuration values that override the container image Dockerfile\.  
+Type: [ImageConfig](API_ImageConfig.md) object  
+Required: No
+
  ** [KMSKeyArn](#API_UpdateFunctionConfiguration_RequestSyntax) **   <a name="SSS-UpdateFunctionConfiguration-request-KMSKeyArn"></a>
 The ARN of the AWS Key Management Service \(AWS KMS\) key that's used to encrypt your function's environment variables\. If it's not provided, AWS Lambda uses a default service key\.  
 Type: String  
@@ -111,9 +121,9 @@ Pattern: `arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+:[0-
 Required: No
 
  ** [MemorySize](#API_UpdateFunctionConfiguration_RequestSyntax) **   <a name="SSS-UpdateFunctionConfiguration-request-MemorySize"></a>
-The amount of memory that your function has access to\. Increasing the function's memory also increases its CPU allocation\. The default value is 128 MB\. The value must be a multiple of 64 MB\.  
+The amount of memory available to the function at runtime\. Increasing the function's memory also increases its CPU allocation\. The default value is 128 MB\. The value can be any multiple of 1 MB\.  
 Type: Integer  
-Valid Range: Minimum value of 128\. Maximum value of 3008\.  
+Valid Range: Minimum value of 128\. Maximum value of 10240\.  
 Required: No
 
  ** [RevisionId](#API_UpdateFunctionConfiguration_RequestSyntax) **   <a name="SSS-UpdateFunctionConfiguration-request-RevisionId"></a>
@@ -130,7 +140,7 @@ Required: No
  ** [Runtime](#API_UpdateFunctionConfiguration_RequestSyntax) **   <a name="SSS-UpdateFunctionConfiguration-request-Runtime"></a>
 The identifier of the function's [runtime](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)\.  
 Type: String  
-Valid Values:` nodejs10.x | nodejs12.x | java8 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore2.1 | dotnetcore3.1 | go1.x | ruby2.5 | ruby2.7 | provided`   
+Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | nodejs10.x | nodejs12.x | java8 | java8.al2 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | dotnetcore3.1 | nodejs4.3-edge | go1.x | ruby2.5 | ruby2.7 | provided | provided.al2`   
 Required: No
 
  ** [Timeout](#API_UpdateFunctionConfiguration_RequestSyntax) **   <a name="SSS-UpdateFunctionConfiguration-request-Timeout"></a>
@@ -156,58 +166,74 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "[CodeSha256](#SSS-UpdateFunctionConfiguration-response-CodeSha256)": "string",
-   "[CodeSize](#SSS-UpdateFunctionConfiguration-response-CodeSize)": number,
-   "[DeadLetterConfig](#SSS-UpdateFunctionConfiguration-response-DeadLetterConfig)": { 
-      "[TargetArn](API_DeadLetterConfig.md#SSS-Type-DeadLetterConfig-TargetArn)": "string"
+   "CodeSha256": "string",
+   "CodeSize": number,
+   "DeadLetterConfig": { 
+      "TargetArn": "string"
    },
-   "[Description](#SSS-UpdateFunctionConfiguration-response-Description)": "string",
-   "[Environment](#SSS-UpdateFunctionConfiguration-response-Environment)": { 
-      "[Error](API_EnvironmentResponse.md#SSS-Type-EnvironmentResponse-Error)": { 
-         "[ErrorCode](API_EnvironmentError.md#SSS-Type-EnvironmentError-ErrorCode)": "string",
-         "[Message](API_EnvironmentError.md#SSS-Type-EnvironmentError-Message)": "string"
+   "Description": "string",
+   "Environment": { 
+      "Error": { 
+         "ErrorCode": "string",
+         "Message": "string"
       },
-      "[Variables](API_EnvironmentResponse.md#SSS-Type-EnvironmentResponse-Variables)": { 
+      "Variables": { 
          "string" : "string" 
       }
    },
-   "[FileSystemConfigs](#SSS-UpdateFunctionConfiguration-response-FileSystemConfigs)": [ 
+   "FileSystemConfigs": [ 
       { 
-         "[Arn](API_FileSystemConfig.md#SSS-Type-FileSystemConfig-Arn)": "string",
-         "[LocalMountPath](API_FileSystemConfig.md#SSS-Type-FileSystemConfig-LocalMountPath)": "string"
+         "Arn": "string",
+         "LocalMountPath": "string"
       }
    ],
-   "[FunctionArn](#SSS-UpdateFunctionConfiguration-response-FunctionArn)": "string",
-   "[FunctionName](#SSS-UpdateFunctionConfiguration-response-FunctionName)": "string",
-   "[Handler](#SSS-UpdateFunctionConfiguration-response-Handler)": "string",
-   "[KMSKeyArn](#SSS-UpdateFunctionConfiguration-response-KMSKeyArn)": "string",
-   "[LastModified](#SSS-UpdateFunctionConfiguration-response-LastModified)": "string",
-   "[LastUpdateStatus](#SSS-UpdateFunctionConfiguration-response-LastUpdateStatus)": "string",
-   "[LastUpdateStatusReason](#SSS-UpdateFunctionConfiguration-response-LastUpdateStatusReason)": "string",
-   "[LastUpdateStatusReasonCode](#SSS-UpdateFunctionConfiguration-response-LastUpdateStatusReasonCode)": "string",
-   "[Layers](#SSS-UpdateFunctionConfiguration-response-Layers)": [ 
-      { 
-         "[Arn](API_Layer.md#SSS-Type-Layer-Arn)": "string",
-         "[CodeSize](API_Layer.md#SSS-Type-Layer-CodeSize)": number
+   "FunctionArn": "string",
+   "FunctionName": "string",
+   "Handler": "string",
+   "ImageConfigResponse": { 
+      "Error": { 
+         "ErrorCode": "string",
+         "Message": "string"
+      },
+      "ImageConfig": { 
+         "Command": [ "string" ],
+         "EntryPoint": [ "string" ],
+         "WorkingDirectory": "string"
       }
-   ],
-   "[MasterArn](#SSS-UpdateFunctionConfiguration-response-MasterArn)": "string",
-   "[MemorySize](#SSS-UpdateFunctionConfiguration-response-MemorySize)": number,
-   "[RevisionId](#SSS-UpdateFunctionConfiguration-response-RevisionId)": "string",
-   "[Role](#SSS-UpdateFunctionConfiguration-response-Role)": "string",
-   "[Runtime](#SSS-UpdateFunctionConfiguration-response-Runtime)": "string",
-   "[State](#SSS-UpdateFunctionConfiguration-response-State)": "string",
-   "[StateReason](#SSS-UpdateFunctionConfiguration-response-StateReason)": "string",
-   "[StateReasonCode](#SSS-UpdateFunctionConfiguration-response-StateReasonCode)": "string",
-   "[Timeout](#SSS-UpdateFunctionConfiguration-response-Timeout)": number,
-   "[TracingConfig](#SSS-UpdateFunctionConfiguration-response-TracingConfig)": { 
-      "[Mode](API_TracingConfigResponse.md#SSS-Type-TracingConfigResponse-Mode)": "string"
    },
-   "[Version](#SSS-UpdateFunctionConfiguration-response-Version)": "string",
-   "[VpcConfig](#SSS-UpdateFunctionConfiguration-response-VpcConfig)": { 
-      "[SecurityGroupIds](API_VpcConfigResponse.md#SSS-Type-VpcConfigResponse-SecurityGroupIds)": [ "string" ],
-      "[SubnetIds](API_VpcConfigResponse.md#SSS-Type-VpcConfigResponse-SubnetIds)": [ "string" ],
-      "[VpcId](API_VpcConfigResponse.md#SSS-Type-VpcConfigResponse-VpcId)": "string"
+   "KMSKeyArn": "string",
+   "LastModified": "string",
+   "LastUpdateStatus": "string",
+   "LastUpdateStatusReason": "string",
+   "LastUpdateStatusReasonCode": "string",
+   "Layers": [ 
+      { 
+         "Arn": "string",
+         "CodeSize": number,
+         "SigningJobArn": "string",
+         "SigningProfileVersionArn": "string"
+      }
+   ],
+   "MasterArn": "string",
+   "MemorySize": number,
+   "PackageType": "string",
+   "RevisionId": "string",
+   "Role": "string",
+   "Runtime": "string",
+   "SigningJobArn": "string",
+   "SigningProfileVersionArn": "string",
+   "State": "string",
+   "StateReason": "string",
+   "StateReasonCode": "string",
+   "Timeout": number,
+   "TracingConfig": { 
+      "Mode": "string"
+   },
+   "Version": "string",
+   "VpcConfig": { 
+      "SecurityGroupIds": [ "string" ],
+      "SubnetIds": [ "string" ],
+      "VpcId": "string"
    }
 }
 ```
@@ -261,6 +287,10 @@ Type: String
 Length Constraints: Maximum length of 128\.  
 Pattern: `[^\s]+` 
 
+ ** [ImageConfigResponse](#API_UpdateFunctionConfiguration_ResponseSyntax) **   <a name="SSS-UpdateFunctionConfiguration-response-ImageConfigResponse"></a>
+The function's image configuration values\.  
+Type: [ImageConfigResponse](API_ImageConfigResponse.md) object
+
  ** [KMSKeyArn](#API_UpdateFunctionConfiguration_ResponseSyntax) **   <a name="SSS-UpdateFunctionConfiguration-response-KMSKeyArn"></a>
 The KMS key that's used to encrypt the function's environment variables\. This key is only returned if you've configured a customer managed CMK\.  
 Type: String  
@@ -282,7 +312,7 @@ Type: String
  ** [LastUpdateStatusReasonCode](#API_UpdateFunctionConfiguration_ResponseSyntax) **   <a name="SSS-UpdateFunctionConfiguration-response-LastUpdateStatusReasonCode"></a>
 The reason code for the last update that was performed on the function\.  
 Type: String  
-Valid Values:` EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses | InvalidSubnet | InvalidSecurityGroup` 
+Valid Values:` EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses | InvalidSubnet | InvalidSecurityGroup | ImageDeleted | ImageAccessDenied | InvalidImage` 
 
  ** [Layers](#API_UpdateFunctionConfiguration_ResponseSyntax) **   <a name="SSS-UpdateFunctionConfiguration-response-Layers"></a>
 The function's [ layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\.  
@@ -294,9 +324,14 @@ Type: String
 Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [MemorySize](#API_UpdateFunctionConfiguration_ResponseSyntax) **   <a name="SSS-UpdateFunctionConfiguration-response-MemorySize"></a>
-The memory that's allocated to the function\.  
+The amount of memory available to the function at runtime\.   
 Type: Integer  
-Valid Range: Minimum value of 128\. Maximum value of 3008\.
+Valid Range: Minimum value of 128\. Maximum value of 10240\.
+
+ ** [PackageType](#API_UpdateFunctionConfiguration_ResponseSyntax) **   <a name="SSS-UpdateFunctionConfiguration-response-PackageType"></a>
+The type of deployment package\. Set to `Image` for container image and set `Zip` for \.zip file archive\.  
+Type: String  
+Valid Values:` Zip | Image` 
 
  ** [RevisionId](#API_UpdateFunctionConfiguration_ResponseSyntax) **   <a name="SSS-UpdateFunctionConfiguration-response-RevisionId"></a>
 The latest updated revision of the function or alias\.  
@@ -310,7 +345,17 @@ Pattern: `arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+`
  ** [Runtime](#API_UpdateFunctionConfiguration_ResponseSyntax) **   <a name="SSS-UpdateFunctionConfiguration-response-Runtime"></a>
 The runtime environment for the Lambda function\.  
 Type: String  
-Valid Values:` nodejs10.x | nodejs12.x | java8 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore2.1 | dotnetcore3.1 | go1.x | ruby2.5 | ruby2.7 | provided` 
+Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | nodejs10.x | nodejs12.x | java8 | java8.al2 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | dotnetcore3.1 | nodejs4.3-edge | go1.x | ruby2.5 | ruby2.7 | provided | provided.al2` 
+
+ ** [SigningJobArn](#API_UpdateFunctionConfiguration_ResponseSyntax) **   <a name="SSS-UpdateFunctionConfiguration-response-SigningJobArn"></a>
+The ARN of the signing job\.  
+Type: String  
+Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)` 
+
+ ** [SigningProfileVersionArn](#API_UpdateFunctionConfiguration_ResponseSyntax) **   <a name="SSS-UpdateFunctionConfiguration-response-SigningProfileVersionArn"></a>
+The ARN of the signing profile version\.  
+Type: String  
+Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)` 
 
  ** [State](#API_UpdateFunctionConfiguration_ResponseSyntax) **   <a name="SSS-UpdateFunctionConfiguration-response-State"></a>
 The current state of the function\. When the state is `Inactive`, you can reactivate the function by invoking it\.  
@@ -324,7 +369,7 @@ Type: String
  ** [StateReasonCode](#API_UpdateFunctionConfiguration_ResponseSyntax) **   <a name="SSS-UpdateFunctionConfiguration-response-StateReasonCode"></a>
 The reason code for the function's current state\. When the code is `Creating`, you can't invoke or modify the function\.  
 Type: String  
-Valid Values:` Idle | Creating | Restoring | EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses | InvalidSubnet | InvalidSecurityGroup` 
+Valid Values:` Idle | Creating | Restoring | EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses | InvalidSubnet | InvalidSecurityGroup | ImageDeleted | ImageAccessDenied | InvalidImage` 
 
  ** [Timeout](#API_UpdateFunctionConfiguration_ResponseSyntax) **   <a name="SSS-UpdateFunctionConfiguration-response-Timeout"></a>
 The amount of time in seconds that Lambda allows a function to run before stopping it\.  
@@ -346,6 +391,18 @@ The function's networking configuration\.
 Type: [VpcConfigResponse](API_VpcConfigResponse.md) object
 
 ## Errors<a name="API_UpdateFunctionConfiguration_Errors"></a>
+
+ **CodeSigningConfigNotFoundException**   
+The specified code signing configuration does not exist\.  
+HTTP Status Code: 404
+
+ **CodeVerificationFailedException**   
+The code signature failed one or more of the validation checks for signature mismatch or expiry, and the code signing policy is set to ENFORCE\. Lambda blocks the deployment\.   
+HTTP Status Code: 400
+
+ **InvalidCodeSignatureException**   
+The code signature failed the integrity check\. Lambda always blocks deployment if the integrity check fails, even if code signing policy is set to WARN\.  
+HTTP Status Code: 400
 
  **InvalidParameterValueException**   
 One of the parameters in the request is invalid\.  

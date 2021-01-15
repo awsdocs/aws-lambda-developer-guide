@@ -27,7 +27,7 @@ class InvokeTest {
     String requestId = context.getAwsRequestId();
     Handler handler = new Handler();
     APIGatewayV2ProxyResponseEvent result = handler.handleRequest(event, context);
-    assertEquals(result.getStatusCode(),200);
+    assertEquals(200, result.getStatusCode());
   }
 
 }

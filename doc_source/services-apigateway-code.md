@@ -63,7 +63,7 @@ exports.handler = function(event, context, callback) {
 };
 ```
 
-Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda deployment package in Node\.js](nodejs-package.md)\.
+Zip up the sample code to create a deployment package\. For instructions, see [Deploy Node\.js Lambda functions with \.zip file archives](nodejs-package.md)\.
 
 ## Python 3<a name="services-apigateway-code-python"></a>
 
@@ -110,7 +110,7 @@ def handler(event, context):
         raise ValueError('Unrecognized operation "{}"'.format(operation))
 ```
 
-Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda deployment package in Python](python-package.md)\.
+Zip up the sample code to create a deployment package\. For instructions, see [Deploy Python Lambda functions with \.zip file archives](python-package.md)\.
 
 ## Go<a name="services-apigateway-code-go"></a>
 
@@ -137,4 +137,4 @@ func handleRequest(ctx context.Context, request events.APIGatewayProxyRequest) (
 }
 ```
 
-Build the executable with `go build` and create a deployment package\. For instructions, see [AWS Lambda deployment package in Go](golang-package.md)\.
+Build the executable with `go build` and create a deployment package\. For instructions, see [Deploy Go Lambda functions with \.zip file archives](golang-package.md)\.

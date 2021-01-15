@@ -1,6 +1,8 @@
-# AWS Lambda runtimes<a name="lambda-runtimes"></a>
+# Lambda runtimes<a name="lambda-runtimes"></a>
 
-AWS Lambda supports multiple languages through the use of runtimes\. You choose a runtime when you create a function, and you can change runtimes by updating your function's configuration\. The underlying execution environment provides additional libraries and [environment variables](configuration-envvars.md) that you can access from your function code\.
+Lambda supports multiple languages through the use of runtimes\. For a [function defined as a container image](configuration-images.md), you choose a runtime and the Linux distribution when you [create the container image](images-create.md)\. To change the runtime, you create a new container image\.
+
+When you use a \.zip file archive for the deployment package, you choose a runtime when you create the function\. To change the runtime, you can [update your function's configuration](configuration-console.md)\. The runtime is paired with one of the Amazon Linux distributions\. The underlying execution environment provides additional libraries and [environment variables](configuration-envvars.md) that you can access from your function code\.
 
 **Amazon Linux**
 + Image – [amzn\-ami\-hvm\-2018\.03\.0\.20181129\-x86\_64\-gp2](https://console.aws.amazon.com/ec2/v2/home#Images:visibility=public-images;search=amzn-ami-hvm-2018.03.0.20181129-x86_64-gp2)
@@ -10,7 +12,7 @@ AWS Lambda supports multiple languages through the use of runtimes\. You choose 
 + Image – Custom
 + Linux kernel – 4\.14\.165\-102\.205\.amzn2\.x86\_64
 
-When your function is invoked, Lambda attempts to re\-use the execution environment from a previous invocation if one is available\. This saves time preparing the execution environment, and allows you to save resources like database connections and temporary files in the [execution context](runtimes-context.md) to avoid creating them every time your function runs\.
+When your function is invoked, Lambda attempts to re\-use the execution environment from a previous invocation if one is available\. This saves time preparing the execution environment, and it allows you to save resources such as database connections and temporary files in the [execution environment](runtimes-context.md) to avoid creating them every time your function runs\.
 
 A runtime can support a single version of a language, multiple versions of a language, or multiple languages\. Runtimes specific to a language or framework version are [deprecated](runtime-support-policy.md) when the version reaches end of life\.
 
@@ -19,18 +21,18 @@ A runtime can support a single version of a language, multiple versions of a lan
 
 | Name | Identifier | AWS SDK for JavaScript | Operating system | 
 | --- | --- | --- | --- | 
-|  Node\.js 12  |  `nodejs12.x`  |  2\.631\.0  |  Amazon Linux 2  | 
-|  Node\.js 10  |  `nodejs10.x`  |  2\.631\.0  |  Amazon Linux 2  | 
+|  Node\.js 12  |  `nodejs12.x`  |  2\.771\.0  |  Amazon Linux 2  | 
+|  Node\.js 10  |  `nodejs10.x`  |  2\.771\.0  |  Amazon Linux 2  | 
 
 
 **Python runtimes**  
 
 | Name | Identifier | AWS SDK for Python | Operating system | 
 | --- | --- | --- | --- | 
-|  Python 3\.8  |  `python3.8`  |  boto3\-1\.12\.49 botocore\-1\.15\.49  |  Amazon Linux 2  | 
-|  Python 3\.7  |  `python3.7`  |  boto3\-1\.12\.49 botocore\-1\.15\.49  |  Amazon Linux  | 
-|  Python 3\.6  |  `python3.6`  |  boto3\-1\.12\.49 botocore\-1\.15\.49  |  Amazon Linux  | 
-|  Python 2\.7  |  `python2.7`  |  boto3\-1\.12\.49 botocore\-1\.15\.49  |  Amazon Linux  | 
+|  Python 3\.8  |  `python3.8`  |  boto3\-1\.15\.16 botocore\-1\.18\.16  |  Amazon Linux 2  | 
+|  Python 3\.7  |  `python3.7`  |  boto3\-1\.15\.16 botocore\-1\.18\.16  |  Amazon Linux  | 
+|  Python 3\.6  |  `python3.6`  |  boto3\-1\.15\.16 botocore\-1\.18\.16  |  Amazon Linux  | 
+|  Python 2\.7  |  `python2.7`  |  boto3\-1\.15\.16 botocore\-1\.18\.16  |  Amazon Linux  | 
 
 
 **Ruby runtimes**  
@@ -46,6 +48,7 @@ A runtime can support a single version of a language, multiple versions of a lan
 | Name | Identifier | JDK | Operating system | 
 | --- | --- | --- | --- | 
 |  Java 11  |  `java11`  |  amazon\-corretto\-11  |  Amazon Linux 2  | 
+|  Java 8  |  `java8.al2`  |  amazon\-corretto\-8  |  Amazon Linux 2  | 
 |  Java 8  |  `java8`  |  java\-1\.8\.0\-openjdk  |  Amazon Linux  | 
 
 
@@ -70,11 +73,17 @@ To use other languages in Lambda, you can implement a [custom runtime](runtimes-
 
 | Name | Identifier | Operating system | 
 | --- | --- | --- | 
+|  Custom Runtime  |  `provided.al2`  |  Amazon Linux 2  | 
 |  Custom Runtime  |  `provided`  |  Amazon Linux  | 
 
 **Topics**
-+ [AWS Lambda execution context](runtimes-context.md)
 + [Runtime support policy](runtime-support-policy.md)
++ [AWS Lambda execution environment](runtimes-context.md)
++ [Runtime support for Lambda container images](runtimes-images.md)
++ [AWS Lambda runtime API](runtimes-api.md)
++ [Lambda Extensions API](runtimes-extensions-api.md)
++ [Modifying the runtime environment](runtimes-modify.md)
++ [AWS Lambda Logs API](runtimes-logs-api.md)
 + [Custom AWS Lambda runtimes](runtimes-custom.md)
-+ [AWS Lambda runtime interface](runtimes-api.md)
 + [Tutorial – Publishing a custom runtime](runtimes-walkthrough.md)
++ [Using AVX2 vectorization in Lambda](runtimes-avx2.md)

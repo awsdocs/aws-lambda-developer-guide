@@ -4,9 +4,9 @@ In this tutorial, you create a Lambda function with a custom runtime\. You start
 
 ## Prerequisites<a name="runtimes-walkthrough-prereqs"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with AWS Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with Lambda](getting-started.md) to create your first Lambda function\.
 
-To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
+To complete the following steps, you need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
 ```
 ~/lambda-project$ this is a command
@@ -58,7 +58,7 @@ do
   # Extract request ID by scraping response headers received above
   REQUEST_ID=$(grep -Fi Lambda-Runtime-Aws-Request-Id "$HEADERS" | tr -d '[:space:]' | cut -d: -f2)
 
-  # Execute the handler function from the script
+  # Run the handler function from the script
   RESPONSE=$($(echo "$_HANDLER" | cut -d. -f2) "$EVENT_DATA")
 
   # Send the response
@@ -93,7 +93,7 @@ runtime-tutorial
 └ function.sh
 ```
 
-Make the files executable and add them to a ZIP archive\.
+Make the files executable and add them to a \.zip file archive\.
 
 ```
 runtime-tutorial$ chmod 755 function.sh bootstrap
@@ -127,7 +127,7 @@ runtime-tutorial$ aws lambda create-function --function-name bash-runtime \
 Invoke the function and verify the response\.
 
 ```
-runtime-tutorial$ aws lambda invoke --function-name bash-runtime --payload '{"text":"Hello"}' response.txt
+runtime-tutorial$ aws lambda invoke --function-name bash-runtime --payload '{"text":"Hello"}' response.txt –cli-binary-format raw-in-base64-out
 {
     "StatusCode": 200,
     "ExecutedVersion": "$LATEST"

@@ -1,6 +1,6 @@
 # Synchronous invocation<a name="invocation-sync"></a>
 
-When you invoke a function synchronously, Lambda runs the function and waits for a response\. When the function execution ends, Lambda returns the response from the function's code with additional data, such as the version of the function that was executed\. To invoke a function synchronously with the AWS CLI, use the `invoke` command\.
+When you invoke a function synchronously, Lambda runs the function and waits for a response\. When the function completes, Lambda returns the response from the function's code with additional data, such as the version of the function that was invoked\. To invoke a function synchronously with the AWS CLI, use the `invoke` command\.
 
 ```
 $ aws lambda invoke --function-name my-function --payload '{ "key": "value" }' response.json
@@ -48,7 +48,7 @@ $ aws lambda invoke --function-name my-function out --log-type Tail \
 START RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8 Version: $LATEST
   "AWS_SESSION_TOKEN": "AgoJb3JpZ2luX2VjELj...", "_X_AMZN_TRACE_ID": "Root=1-5d02e5ca-f5792818b6fe8368e5b51d50;Parent=191db58857df8395;Sampled=0"",ask/lib:/opt/lib",
 END RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8
-REPORT RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8  Duration: 79.67 ms      Billed Duration: 100 ms         Memory Size: 128 MB     Max Memory Used: 73 MB
+REPORT RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8  Duration: 79.67 ms      Billed Duration: 80 ms         Memory Size: 128 MB     Max Memory Used: 73 MB
 ```
 
 The `base64` utility is available on Linux, macOS, and [Ubuntu on Windows](https://docs.microsoft.com/en-us/windows/wsl/install-win10)\. For macOS, the command is `base64 -D`\.

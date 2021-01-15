@@ -54,7 +54,7 @@ $ aws lambda invoke --function-name my-function out.json --log-type Tail \
 START RequestId: 8bbbfb91-a3ff-4502-b1b7-cb8f6658de64 Version: $LATEST
 2019-06-05T22:11:27.082Z        8bbbfb91-a3ff-4502-b1b7-cb8f6658de64    ERROR   Invoke Error    {"errorType":"ReferenceError","errorMessage":"x is not defined","stack":["ReferenceError: x is not defined","    at Runtime.exports.handler (/var/task/index.js:2:3)","    at Runtime.handleOnce (/var/runtime/Runtime.js:63:25)","    at process._tickCallback (internal/process/next_tick.js:68:7)"]}
 END RequestId: 8bbbfb91-a3ff-4502-b1b7-cb8f6658de64
-REPORT RequestId: 8bbbfb91-a3ff-4502-b1b7-cb8f6658de64  Duration: 76.85 ms      Billed Duration: 100 ms         Memory Size: 128 MB     Max Memory Used: 74 MB
+REPORT RequestId: 8bbbfb91-a3ff-4502-b1b7-cb8f6658de64  Duration: 76.85 ms      Billed Duration: 77 ms         Memory Size: 128 MB     Max Memory Used: 74 MB
 ```
 
 For more information about logs, see [AWS Lambda function logging in Node\.js](nodejs-logging.md)\.

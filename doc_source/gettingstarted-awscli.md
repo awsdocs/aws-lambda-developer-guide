@@ -6,9 +6,9 @@ In this tutorial, you manage and invoke Lambda functions with the AWS CLI\.
 
 ## Prerequisites<a name="with-userapp-walkthrough-custom-events-deploy"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with AWS Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with Lambda](getting-started.md) to create your first Lambda function\.
 
-To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
+To complete the following steps, you need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
 
 ```
 ~/lambda-project$ this is a command
@@ -148,7 +148,7 @@ $ aws lambda invoke --function-name my-function out --log-type Tail \
 START RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8 Version: $LATEST
   "AWS_SESSION_TOKEN": "AgoJb3JpZ2luX2VjELj...", "_X_AMZN_TRACE_ID": "Root=1-5d02e5ca-f5792818b6fe8368e5b51d50;Parent=191db58857df8395;Sampled=0"",ask/lib:/opt/lib",
 END RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8
-REPORT RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8  Duration: 79.67 ms      Billed Duration: 100 ms         Memory Size: 128 MB     Max Memory Used: 73 MB
+REPORT RequestId: 57f231fb-1730-4395-85cb-4f71bd2b87b8  Duration: 79.67 ms      Billed Duration: 80 ms         Memory Size: 128 MB     Max Memory Used: 73 MB
 ```
 
 The `base64` utility is available on Linux, macOS, and [Ubuntu on Windows](https://docs.microsoft.com/en-us/windows/wsl/install-win10)\. For macOS, the command is `base64 -D`\.
@@ -198,7 +198,7 @@ $ ./get-logs.sh
         },
         {
             "timestamp": 1559763003218,
-            "message": "REPORT RequestId: 4ce9340a-b765-490f-ad8a-02ab3415e2bf\tDuration: 26.73 ms\tBilled Duration: 100 ms \tMemory Size: 128 MB\tMax Memory Used: 75 MB\t\n",
+            "message": "REPORT RequestId: 4ce9340a-b765-490f-ad8a-02ab3415e2bf\tDuration: 26.73 ms\tBilled Duration: 27 ms \tMemory Size: 128 MB\tMax Memory Used: 75 MB\t\n",
             "ingestionTime": 1559763018353
         }
     ],
@@ -209,7 +209,7 @@ $ ./get-logs.sh
 
 ## List the Lambda functions in your account<a name="with-userapp-walkthrough-custom-events-list-functions"></a>
 
-Execute the following AWS CLI `list-functions` command to retrieve a list of functions that you have created\. 
+Run the following AWS CLI `list-functions` command to retrieve a list of functions that you have created\. 
 
 ```
 $ aws lambda list-functions --max-items 10
@@ -274,7 +274,7 @@ For more information, see [GetFunction](API_GetFunction.md)\.
 
 ## Clean up<a name="with-userapp-walkthrough-custom-events-delete-function"></a>
 
-Execute the following `delete-function` command to delete the `my-function` function\.
+Run the following `delete-function` command to delete the `my-function` function\.
 
 ```
 $ aws lambda delete-function --function-name my-function

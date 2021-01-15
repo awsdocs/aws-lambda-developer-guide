@@ -9,7 +9,7 @@ If your function is not already connected to a VPC, see [Configuring a Lambda fu
 
 **To configure file system access**
 
-1. Open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions)\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
 1. Choose a function\.
 
@@ -77,7 +77,7 @@ Use the following API operations to connect your Lambda function to a file syste
 + [CreateFunction](API_CreateFunction.md)
 + [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)
 
-To connect a function a file system, use the `update-function-configuration` command\. The following example connects a function named `my-function` to a file system with ARN of an access point\.
+To connect a function to a file system, use the `update-function-configuration` command\. The following example connects a function named `my-function` to a file system with ARN of an access point\.
 
 ```
 $ ARN=arn:aws:elasticfilesystem:us-east-2:123456789012:access-point/fsap-015cxmplb72b405fd
@@ -120,15 +120,51 @@ You can use AWS CloudFormation and the AWS Serverless Application Model \(AWS SA
 **Example template\.yml – File system configuration**  
 
 ```
-    function:
-      Type: [AWS::Serverless::Function](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html)
-      Properties:
-        CodeUri: function/.
-        Description: Use a file system.
-        FileSystemConfigs:
-        - LocalMountPath: "/mnt/efs0"
-          Arn: !GetAtt accessPoint.Arn
-      DependsOn: "my mount target"
+Resources:
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+  Subnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId:
+        Ref: VPC
+      CidrBlock: 10.0.1.0/24
+      AvailabilityZone: "eu-central-1a"
+  EfsSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      VpcId:
+        Ref: VPC
+      GroupDescription: "mnt target sg"
+      SecurityGroupEgress:
+      - IpProtocol: -1
+        CidrIp: "0.0.0.0/0"
+  FileSystem:
+    Type: AWS::EFS::FileSystem
+    Properties:
+      PerformanceMode: generalPurpose
+  MountTarget1:
+    Type: AWS::EFS::MountTarget
+    Properties:
+      FileSystemId:
+        Ref: FileSystem
+      SubnetId:
+        Ref: Subnet1
+      SecurityGroups:
+      - Ref: EfsSecurityGroup
+  MyFunctionWithEfs:
+    Type: [AWS::Serverless::Function](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html)
+    Properties:
+      CodeUri: function/.
+      Description: Use a file system.
+      FileSystemConfigs:
+      - 
+        Arn: !Sub
+          - "arn:aws:elasticfilesystem:eu-central-1:123456789101:access-point/fsap-015cxmplb72b405fd"
+        LocalMountPath: "/mnt/efs0"
+    DependsOn: "MountTarget1"
 ```
 
 You must add the `DependsOn` to ensure that the mount targets are fully created before the Lambda runs for the first time\.

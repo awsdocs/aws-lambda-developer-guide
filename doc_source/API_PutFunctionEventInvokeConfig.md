@@ -13,16 +13,16 @@ PUT /2019-09-25/functions/FunctionName/event-invoke-config?Qualifier=Qualifier H
 Content-type: application/json
 
 {
-   "[DestinationConfig](#SSS-PutFunctionEventInvokeConfig-request-DestinationConfig)": { 
-      "[OnFailure](API_DestinationConfig.md#SSS-Type-DestinationConfig-OnFailure)": { 
-         "[Destination](API_OnFailure.md#SSS-Type-OnFailure-Destination)": "string"
+   "DestinationConfig": { 
+      "OnFailure": { 
+         "Destination": "string"
       },
-      "[OnSuccess](API_DestinationConfig.md#SSS-Type-DestinationConfig-OnSuccess)": { 
-         "[Destination](API_OnSuccess.md#SSS-Type-OnSuccess-Destination)": "string"
+      "OnSuccess": { 
+         "Destination": "string"
       }
    },
-   "[MaximumEventAgeInSeconds](#SSS-PutFunctionEventInvokeConfig-request-MaximumEventAgeInSeconds)": number,
-   "[MaximumRetryAttempts](#SSS-PutFunctionEventInvokeConfig-request-MaximumRetryAttempts)": number
+   "MaximumEventAgeInSeconds": number,
+   "MaximumRetryAttempts": number
 }
 ```
 
@@ -81,18 +81,18 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "[DestinationConfig](#SSS-PutFunctionEventInvokeConfig-response-DestinationConfig)": { 
-      "[OnFailure](API_DestinationConfig.md#SSS-Type-DestinationConfig-OnFailure)": { 
-         "[Destination](API_OnFailure.md#SSS-Type-OnFailure-Destination)": "string"
+   "DestinationConfig": { 
+      "OnFailure": { 
+         "Destination": "string"
       },
-      "[OnSuccess](API_DestinationConfig.md#SSS-Type-DestinationConfig-OnSuccess)": { 
-         "[Destination](API_OnSuccess.md#SSS-Type-OnSuccess-Destination)": "string"
+      "OnSuccess": { 
+         "Destination": "string"
       }
    },
-   "[FunctionArn](#SSS-PutFunctionEventInvokeConfig-response-FunctionArn)": "string",
-   "[LastModified](#SSS-PutFunctionEventInvokeConfig-response-LastModified)": number,
-   "[MaximumEventAgeInSeconds](#SSS-PutFunctionEventInvokeConfig-response-MaximumEventAgeInSeconds)": number,
-   "[MaximumRetryAttempts](#SSS-PutFunctionEventInvokeConfig-response-MaximumRetryAttempts)": number
+   "FunctionArn": "string",
+   "LastModified": number,
+   "MaximumEventAgeInSeconds": number,
+   "MaximumRetryAttempts": number
 }
 ```
 

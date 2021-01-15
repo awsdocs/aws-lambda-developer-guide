@@ -1,6 +1,6 @@
 # Building Lambda functions with Node\.js<a name="lambda-nodejs"></a>
 
-You can run JavaScript code with Node\.js in AWS Lambda\. Lambda provides [runtimes](lambda-runtimes.md) for Node\.js that execute your code to process events\. Your code runs in an environment that includes the AWS SDK for JavaScript, with credentials from an AWS Identity and Access Management \(IAM\) role that you manage\.
+You can run JavaScript code with Node\.js in AWS Lambda\. Lambda provides [runtimes](lambda-runtimes.md) for Node\.js that run your code to process events\. Your code runs in an environment that includes the AWS SDK for JavaScript, with credentials from an AWS Identity and Access Management \(IAM\) role that you manage\.
 
 Lambda supports the following Node\.js runtimes\.
 
@@ -9,8 +9,8 @@ Lambda supports the following Node\.js runtimes\.
 
 | Name | Identifier | AWS SDK for JavaScript | Operating system | 
 | --- | --- | --- | --- | 
-|  Node\.js 12  |  `nodejs12.x`  |  2\.631\.0  |  Amazon Linux 2  | 
-|  Node\.js 10  |  `nodejs10.x`  |  2\.631\.0  |  Amazon Linux 2  | 
+|  Node\.js 12  |  `nodejs12.x`  |  2\.771\.0  |  Amazon Linux 2  | 
+|  Node\.js 10  |  `nodejs10.x`  |  2\.771\.0  |  Amazon Linux 2  | 
 
 Lambda functions use an [execution role](lambda-intro-execution-role.md) to get permission to write logs to Amazon CloudWatch Logs, and to access other services and resources\. If you don't already have an execution role for function development, create one\.
 
@@ -49,7 +49,7 @@ You can add permissions to the role later, or swap it out for a different role t
 
 1. Choose **Create**\.
 
-1. To execute the function, choose **Test**\.
+1. To invoke the function, choose **Test**\.
 
 The console creates a Lambda function with a single source file named `index.js`\. You can edit this file and add more files in the built\-in [code editor](code-editor.md)\. To save your changes, choose **Save**\. Then, to run your code, choose **Test**\.
 
@@ -58,7 +58,7 @@ The Lambda console uses AWS Cloud9 to provide an integrated development environm
 
 The `index.js` file exports a function named `handler` that takes an event object and a context object\. This is the [handler function](nodejs-handler.md) that Lambda calls when the function is invoked\. The Node\.js function runtime gets invocation events from Lambda and passes them to the handler\. In the function configuration, the handler value is `index.handler`\.
 
-Each time you save your function code, the Lambda console creates a deployment package, which is a ZIP archive that contains your function code\. As your function development progresses, you will want to store your function code in source control, add libraries, and automate deployments\. Start by [creating a deployment package](nodejs-package.md) and updating your code at the command line\.
+Each time you save your function code, the Lambda console creates a deployment package, which is a \.zip file archive that contains your function code\. As your function development progresses, you will want to store your function code in source control, add libraries, and automate deployments\. Start by [creating a deployment package](nodejs-package.md) and updating your code at the command line\.
 
 **Note**  
 To get started with application development in your local environment, deploy one of the sample applications available in this guide's GitHub repository\.  
@@ -75,7 +75,8 @@ Your Lambda function comes with a CloudWatch Logs log group\. The function runti
 
 **Topics**
 + [AWS Lambda function handler in Node\.js](nodejs-handler.md)
-+ [AWS Lambda deployment package in Node\.js](nodejs-package.md)
++ [Deploy Node\.js Lambda functions with \.zip file archives](nodejs-package.md)
++ [Deploy Node\.js Lambda functions with container images](nodejs-image.md)
 + [AWS Lambda context object in Node\.js](nodejs-context.md)
 + [AWS Lambda function logging in Node\.js](nodejs-logging.md)
 + [AWS Lambda function errors in Node\.js](nodejs-exceptions.md)

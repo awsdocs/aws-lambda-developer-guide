@@ -46,7 +46,7 @@ func main() {
 
 In the example above, `lc` is the variable used to consume the information that the context object captured and `log.Print(lc.Identity.CognitoIdentityPoolID)` prints that information, in this case, the CognitoIdentityPoolID\.
 
-The following example introduces how to use the context object to monitor how long it takes to execute your Lambda function\. This allows you to analyze performance expectations and adjust your function code accordingly, if needed\. 
+The following example introduces how to use the context object to monitor how long your Lambda function takes to complete\. This allows you to analyze performance expectations and adjust your function code accordingly, if needed\. 
 
 ```
 package main
