@@ -107,7 +107,7 @@ $ aws lambda add-permission --function-name SNS-X-Account \
 --principal sns.amazonaws.com --profile accountB
 {
     "Statement": "{\"Condition\":{\"ArnLike\":{\"AWS:SourceArn\":
-      \"arn:aws:lambda:us-east-2:12345678901B:function:SNS-X-Account\"}},
+      \"arn:aws:sns:us-east-2:12345678901A:lambda-x-account\"}},
       \"Action\":[\"lambda:InvokeFunction\"],
       \"Resource\":\"arn:aws:lambda:us-east-2:01234567891A:function:SNS-X-Account\",
       \"Effect\":\"Allow\",\"Principal\":{\"Service\":\"sns.amazonaws.com\"},
