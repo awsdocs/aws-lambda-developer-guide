@@ -80,7 +80,9 @@ The following is an example of an endpoint policy for Lambda\. When attached to 
 {
    "Statement":[
       {
-         "Principal": "arn:aws:iam::123412341234:user/MyUser",
+         "Principal": {
+            "AWS": "arn:aws:iam::123412341234:user/MyUser",
+         }
          "Effect":"Allow",
          "Action":[
             "lambda:InvokeFunction"
