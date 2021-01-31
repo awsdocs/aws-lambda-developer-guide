@@ -62,6 +62,9 @@ To create or update a function with the Lambda API, create a deployment package 
    }
    ```
 
+**Note**
+In order for your Python modules can be imported at runtime, ensure the files in the zip produced are globally readable (o+r) and any directories are globally readable (o+x).
+
 ## Updating a function with additional dependencies<a name="python-package-dependencies"></a>
 
 If your Lambda function depends on libraries other than the AWS SDK for Python \(Boto3\), install them to a local directory with [pip](https://pypi.org/project/pip/), and include them in your deployment package\.
