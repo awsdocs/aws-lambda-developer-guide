@@ -125,7 +125,7 @@ import (
 )
 
 func handleRequest(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-    fmt.Printf("Processing request data for request %s.\n", request.RequestContext.RequestId)
+    fmt.Printf("Processing request data for request %s.\n", request.RequestContext.RequestID)
     fmt.Printf("Body size = %d.\n", len(request.Body))
 
     fmt.Println("Headers:")
