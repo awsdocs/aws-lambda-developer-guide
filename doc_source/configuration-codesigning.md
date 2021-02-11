@@ -145,7 +145,8 @@ The following example policy statement grants permission to create, update, and 
           "lambda:CreateCodeSigningConfig",
           "lambda:UpdateCodeSigningConfig",
           "lambda:GetCodeSigningConfig"
-        ]
+        ],
+      "Resource": "*"
     }
   ]
 }
@@ -168,7 +169,7 @@ The following example policy statement grants permission to create a function\. 
       "Resource": "*",
       "Condition": {
           "StringEquals": {
-              "lambda:codeSigningConfig: {
+              "lambda:codeSigningConfig": 
                   “arn:aws:lambda:us-west-2:123456789012:code-signing-config:csc-0d4518bd353a0a7c6”
                }
           }
