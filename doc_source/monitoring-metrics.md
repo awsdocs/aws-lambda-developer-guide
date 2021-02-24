@@ -1,10 +1,20 @@
 # Working with AWS Lambda function metrics<a name="monitoring-metrics"></a>
 
-When your function finishes processing an event, Lambda sends metrics about the invocation to Amazon CloudWatch\. You can build graphs and dashboards with these metrics in the CloudWatch console, and set alarms to respond to changes in utilization, performance, or error rates\. Use dimensions to filter and sort function metrics by function name, alias, or version\.
+When your function finishes processing an event, Lambda sends metrics about the invocation to Amazon CloudWatch\. You can build graphs and dashboards with these metrics in the CloudWatch console, and set alarms to respond to changes in utilization, performance, or error rates\. 
+
+This page describes the Lambda function invocation, performance, and concurrency metrics available on the CloudWatch console\.
+
+**Topics**
++ [Viewing metrics in the CloudWatch console](#monitoring-metrics-console)
++ [Types of metrics](#monitoring-metrics-types)
+
+## Viewing metrics in the CloudWatch console<a name="monitoring-metrics-console"></a>
+
+You can use the CloudWatch console to filter and sort function metrics by function name, alias, or version\.
 
 **To view metrics in the CloudWatch console**
 
-1. Open the [Amazon CloudWatch console Metrics page](https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#metricsV2:graph=~();namespace=~'AWS*2fLambda) \(`AWS/Lambda` namespace\)\.
+1. Open the [Metrics page](https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#metricsV2:graph=~();namespace=~'AWS*2fLambda) \(`AWS/Lambda` namespace\) on the CloudWatch console\.
 
 1. Choose a dimension\.
    + **By Function Name** \(`FunctionName`\) – View aggregate metrics for all versions and aliases of a function\.
@@ -21,12 +31,11 @@ The timestamp on a metric reflects when the function was invoked\. Depending on 
 
 For more information about CloudWatch, see the [https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/)\.
 
-**Topics**
-+ [Using invocation metrics](#monitoring-metrics-invocation)
-+ [Using performance metrics](#monitoring-metrics-performance)
-+ [Using concurrency metrics](#monitoring-metrics-concurrency)
+## Types of metrics<a name="monitoring-metrics-types"></a>
 
-## Using invocation metrics<a name="monitoring-metrics-invocation"></a>
+The following section describes the type of metrics available on the CloudWatch console\.
+
+### Using invocation metrics<a name="monitoring-metrics-invocation"></a>
 
 Invocation metrics are binary indicators of the outcome of an invocation\. For example, if the function returns an error, Lambda sends the `Errors` metric with a value of 1\. To get a count of the number of function errors that occurred each minute, view the `Sum` of the `Errors` metric with a period of one minute\.
 
@@ -41,17 +50,18 @@ You should view the following metrics with the `Sum` statistic\.
 + `ProvisionedConcurrencyInvocations` – The number of times your function code is executed on [provisioned concurrency](configuration-concurrency.md)\.
 + `ProvisionedConcurrencySpilloverInvocations` – The number of times your function code is executed on standard concurrency when all provisioned concurrency is in use\.
 
-## Using performance metrics<a name="monitoring-metrics-performance"></a>
+### Using performance metrics<a name="monitoring-metrics-performance"></a>
 
 Performance metrics provide performance details about a single invocation\. For example, the `Duration` metric indicates the amount of time in milliseconds that your function spends processing an event\. To get a sense of how fast your function processes events, view these metrics with the `Average` or `Max` statistic\.
 
 **Performance metrics**
-+ `Duration` – The amount of time that your function code spends processing an event\. For the first event processed by an instance of your function, this includes [initialization time](gettingstarted-features.md#gettingstarted-features-programmingmodel)\. The billed duration for an invocation is the value of `Duration` rounded up to the nearest millisecond\.
++ `Duration` – The amount of time that your function code spends processing an event\. The billed duration for an invocation is the value of `Duration` rounded up to the nearest millisecond\.
++ `PostRuntimeExecutionDuration` – The cumulative amount of time that the runtime spends running code for extensions after the function code has completed\.
 + `IteratorAge` – For [event source mappings](invocation-eventsourcemapping.md) that read from streams, the age of the last record in the event\. The age is the amount of time between when the stream receives the record and when the event source mapping sends the event to the function\.
 
 `Duration` also supports [percentile statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Percentiles)\. Use percentiles to exclude outlier values that skew average and maximum statistics\. For example, the P95 statistic shows the maximum duration of 95 percent of executions, excluding the slowest 5 percent\.
 
-## Using concurrency metrics<a name="monitoring-metrics-concurrency"></a>
+### Using concurrency metrics<a name="monitoring-metrics-concurrency"></a>
 
 Lambda reports concurrency metrics as an aggregate count of the number of instances processing events across a function, version, alias, or AWS Region\. To see how close you are to hitting concurrency limits, view these metrics with the `Max` statistic\.
 

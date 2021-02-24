@@ -160,7 +160,7 @@ If you do not want to add the RIE to your image, you can test your image locally
 1. Post an event to the following endpoint using a `curl` command:
 
    ```
-   curl -XPOST "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{}'.
+   curl -XPOST "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{}'
    ```
 
    This command invokes the function running in the container image and returns a response\.

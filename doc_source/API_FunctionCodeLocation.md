@@ -4,11 +4,6 @@ Details about a function's deployment package\.
 
 ## Contents<a name="API_FunctionCodeLocation_Contents"></a>
 
- **ImageUri**   <a name="SSS-Type-FunctionCodeLocation-ImageUri"></a>
-URI of a container image in the Amazon ECR registry\.  
-Type: String  
-Required: No
-
  **Location**   <a name="SSS-Type-FunctionCodeLocation-Location"></a>
 A presigned URL that you can use to download the deployment package\.  
 Type: String  
@@ -16,11 +11,6 @@ Required: No
 
  **RepositoryType**   <a name="SSS-Type-FunctionCodeLocation-RepositoryType"></a>
 The service that's hosting the file\.  
-Type: String  
-Required: No
-
- **ResolvedImageUri**   <a name="SSS-Type-FunctionCodeLocation-ResolvedImageUri"></a>
-The resolved URI for the image\.  
 Type: String  
 Required: No
 

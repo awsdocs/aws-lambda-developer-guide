@@ -131,7 +131,7 @@ To enable code signing for a function, you associate a code signing configuratio
 
 ## Configuring IAM policies<a name="config-codesigning-policies"></a>
 
-To grant permission for a user to access the [code signing API operations](#config-codesigning-api), attach one or more policy statements to the user policy\. For more information about user policies, see [Identity\-based IAM policies for AWS Lambda](access-control-identity-based.md)\.
+To grant permission for a user to access the [code signing API operations](#config-codesigning-api), attach one or more policy statements to the user policy\. For more information about user policies, see [Identity\-based IAM policies for Lambda](access-control-identity-based.md)\.
 
 The following example policy statement grants permission to create, update, and retrieve code signing configurations\.
 
@@ -146,15 +146,15 @@ The following example policy statement grants permission to create, update, and 
           "lambda:UpdateCodeSigningConfig",
           "lambda:GetCodeSigningConfig"
         ],
-      "Resource": "*"
+      "Resource": "*" 
     }
   ]
 }
 ```
 
-Administrators can use the `CodeSigningConfig` condition key to specify the code signing configurations that developers must use to create or update your functions\.
+Administrators can use the `CodeSigningConfigArn` condition key to specify the code signing configurations that developers must use to create or update your functions\.
 
-The following example policy statement grants permission to create a function\. The policy statement includes a `lambda:codeSigningConfig` condition to specify the allowed code signing configuration\. Lambda blocks the `CreateFunction` API request if the `CodeSigningConfigArn` parameter is missing or does not match the value in the condition\. 
+The following example policy statement grants permission to create a function\. The policy statement includes a `lambda:CodeSigningConfigArn` condition to specify the allowed code signing configuration\. Lambda blocks any `CreateFunction` API request if its `CodeSigningConfigArn` parameter is missing or does not match the value in the condition\. 
 
 ```
 {
@@ -169,9 +169,8 @@ The following example policy statement grants permission to create a function\. 
       "Resource": "*",
       "Condition": {
           "StringEquals": {
-              "lambda:codeSigningConfig": 
+              "lambda:CodeSigningConfigArn":  
                   “arn:aws:lambda:us-west-2:123456789012:code-signing-config:csc-0d4518bd353a0a7c6”
-               }
           }
       }
     }

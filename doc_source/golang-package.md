@@ -1,61 +1,128 @@
 # Deploy Go Lambda functions with \.zip file archives<a name="golang-package"></a>
 
-To create a container image to deploy your function code, see [Using container images with Lambda](lambda-images.md)\.
+Your AWS Lambda function's code consists of scripts or compiled programs and their dependencies\. You use a *deployment package* to deploy your function code to Lambda\. Lambda supports two types of deployment packages: container images and \.zip files\.
 
-A \.zip file archive is a deployment package for your Lambda function that consists of your code \(a Go executable\) and any dependencies\.
+This page describes how to create a \.zip file as your deployment package for the Go runtime, and then use the \.zip file to deploy your function code to AWS Lambda using the AWS Command Line Interface \(AWS CLI\)\. To upload your \.zip file on the Lambda console, see [Deployment packages](gettingstarted-package.md)\.
 
-After you create the deployment package, you can upload it directly to an Amazon Simple Storage Service \(Amazon S3\) bucket in the AWS Region where you want to create the Lambda function\. Or, you can upload the \.zip file archive first and then specify the S3 bucket name and object key name when you create the function using the Lambda console or the AWS Command Line Interface \(AWS CLI\)\.
+**Topics**
++ [Prerequisites](#golang-package-prereqs)
++ [Tools and libraries](#golang-package-libraries)
++ [Sample applications](#golang-package-sample)
++ [Creating a \.zip file on macOS and Linux](#golang-package-mac-linux)
++ [Creating a \.zip file on Windows](#golang-package-windows)
++ [Creating the Lambda function using the AWS CLI](#golang-package-create)
 
-Download the Lambda library for Go with `go get`, and compile your executable\.
+## Prerequisites<a name="golang-package-prereqs"></a>
 
-**Note**  
-Use `aws-lambda-go` version 1\.18\.0 or later``\.
+The AWS Command Line Interface \(AWS CLI\) is an open source tool that enables you to interact with AWS services using commands in your command\-line shell\. To complete the steps in this section, you need the following:
++ [AWS CLI – Install version 2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
++ [AWS CLI – Quick configuration with `aws configure`](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)
 
-```
-~/my-function$ go get github.com/aws/aws-lambda-go/lambda
-~/my-function$ GOOS=linux go build main.go
-```
+## Tools and libraries<a name="golang-package-libraries"></a>
 
-Setting `GOOS` to `linux` ensures that the compiled executable is compatible with the [Go runtime](lambda-runtimes.md), even if you compile it in a non\-Linux environment\.
+Lambda provides the following tools and libraries for the Go runtime:
 
-Create a deployment package by packaging the executable in a \.zip file, and use the AWS CLI to create a function\. The handler parameter must match the name of the executable containing your handler\.
+**Tools and libraries for Go**
++ [AWS SDK for Go](https://github.com/aws/aws-sdk-go): the official AWS SDK for the Go programming language\.
++ [github\.com/aws/aws\-lambda\-go/lambda](https://github.com/aws/aws-lambda-go/tree/master/lambda): The implementation of the Lambda programming model for Go\. This package is used by AWS Lambda to invoke your [handler](golang-handler.md)\.
++ [github\.com/aws/aws\-lambda\-go/lambdacontext](https://github.com/aws/aws-lambda-go/tree/master/lambdacontext): Helpers for accessing execution context information from the [context object](golang-context.md)\.
++ [github\.com/aws/aws\-lambda\-go/events](https://github.com/aws/aws-lambda-go/tree/master/events): This library provides type definitions for common event source integrations\.
++ [github\.com/aws/aws\-lambda\-go/cmd/build\-lambda\-zip](https://github.com/aws/aws-lambda-go/tree/master/cmd/build-lambda-zip): This tool can be used to create a \.zip file archive on Windows\.
 
-```
-~/my-function$ zip function.zip main
-~/my-function$ aws lambda create-function --function-name my-function --runtime go1.x \
-  --zip-file fileb://function.zip --handler main \
-  --role arn:aws:iam::123456789012:role/execution_role
-```
+For more information, see [aws\-lambda\-go](https://github.com/aws/aws-lambda-go) on GitHub\.
 
-## Creating a deployment package on Windows<a name="golang-package-windows"></a>
+## Sample applications<a name="golang-package-sample"></a>
 
-To create a \.zip file archive that works on Lambda using Windows, we recommend installing the **build\-lambda\-zip** tool\.
+Lambda provides the following sample applications for the Go runtime:
+
+**Sample Lambda applications in Go**
++ [blank\-go](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-go) – A Go function that shows the use of Lambda's Go libraries, logging, environment variables, and the AWS SDK\.
+
+## Creating a \.zip file on macOS and Linux<a name="golang-package-mac-linux"></a>
+
+The following steps demonstrate how to download the [lambda](https://github.com/aws/aws-lambda-go/tree/main/lambda) library from GitHub with `go get`, and compile your executable with [go build](https://golang.org/cmd/go/)\.
+
+1. Download the **lambda** library from GitHub\.
+
+   ```
+   go get github.com/aws/aws-lambda-go/lambda
+   ```
+
+1. Compile your executable\.
+
+   ```
+   GOOS=linux go build main.go
+   ```
+
+   Setting `GOOS` to `linux` ensures that the compiled executable is compatible with the [Go runtime](lambda-runtimes.md), even if you compile it in a non\-Linux environment\.
+
+1. \(Optional\) If your `main` package consists of multiple files, use the following [go build](https://golang.org/cmd/go/) command to compile the package:
+
+   ```
+   GOOS=linux go build main
+   ```
+
+1. \(Optional\) You may need to compile packages with `CGO_ENABLED=0` set on Linux:
+
+   ```
+   GOOS=linux CGO_ENABLED=0 go build main.go
+   ```
+
+   This command creates a stable binary package for standard C library \(`libc`\) versions, which may be different on Lambda and other devices\.
+
+1. Create a deployment package by packaging the executable in a \.zip file\.
+
+   ```
+   zip function.zip main
+   ```
+
+## Creating a \.zip file on Windows<a name="golang-package-windows"></a>
+
+The following steps demonstrate how to download the [build\-lambda\-zip](https://github.com/aws/aws-lambda-go/tree/main/cmd/build-lambda-zip) tool for Windows from GitHub with `go get`, and compile your executable with [go build](https://golang.org/cmd/go/)\.
 
 **Note**  
 If you have not already done so, you must install [git](https://git-scm.com/) and then add the `git` executable to your Windows `%PATH%` environment variable\.
 
-To download the **build\-lambda\-zip** tool, run the following command:
+1. Download the **build\-lambda\-zip** tool from GitHub:
+
+   ```
+   go.exe get -u github.com/aws/aws-lambda-go/cmd/build-lambda-zip
+   ```
+
+1. Use the tool from your `GOPATH` to create a \.zip file\. If you have a default installation of Go, the tool is typically in `%USERPROFILE%\Go\bin`\. Otherwise, navigate to where you installed the Go runtime and do one of the following:
+
+------
+#### [ cmd\.exe ]
+
+   In cmd\.exe, run the following:
+
+   ```
+   set GOOS=linux
+   go build -o main main.go
+   %USERPROFILE%\Go\bin\build-lambda-zip.exe -output main.zip main
+   ```
+
+------
+#### [ PowerShell ]
+
+   In PowerShell, run the following:
+
+   ```
+   $env:GOOS = "linux"
+   $env:CGO_ENABLED = "0"
+   $env:GOARCH = "amd64"
+   go build -o main main.go
+   ~\Go\Bin\build-lambda-zip.exe -output main.zip main
+   ```
+
+------
+
+## Creating the Lambda function using the AWS CLI<a name="golang-package-create"></a>
+
+Lambda needs to know the [Lambda runtime](lambda-runtimes.md) environment to use for your function's code \(in `runtime`\), a name for your Lambda function \(in `function-name`\), the Lambda handler in your function code \(in `handler`\), and the [execution role](lambda-intro-execution-role.md) it can use to invoke your function \(in `role`\)\. 
+
+Use the [create\-function](https://docs.aws.amazon.com/cli/latest/reference/lambda/create-function.html) command to create the Lambda function\.
 
 ```
-go.exe get -u github.com/aws/aws-lambda-go/cmd/build-lambda-zip
-```
-
-Use the tool from your `GOPATH`\. If you have a default installation of Go, the tool is typically in `%USERPROFILE%\Go\bin`\. Otherwise, navigate to where you installed the Go runtime and do one of the following:
-
-In cmd\.exe, run the following:
-
-```
-set GOOS=linux
-go build -o main main.go
-%USERPROFILE%\Go\bin\build-lambda-zip.exe -output main.zip main
-```
-
-In PowerShell, run the following:
-
-```
-$env:GOOS = "linux"
-$env:CGO_ENABLED = "0"
-$env:GOARCH = "amd64"
-go build -o main main.go
-~\Go\Bin\build-lambda-zip.exe -output main.zip main
+aws lambda create-function --function-name my-function --runtime go1.x --zip-file fileb://function.zip --handler main --role arn:aws:iam::your-account-id:role/execution_role
 ```

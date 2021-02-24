@@ -64,22 +64,27 @@ When you add a trigger to your function with the Lambda console, the console upd
 Add a statement with the `add-permission` command\. The simplest resource\-based policy statement allows a service to invoke a function\. The following command grants Amazon SNS permission to invoke a function named `my-function`\.
 
 ```
-$ aws lambda add-permission --function-name my-function --action lambda:InvokeFunction --statement-id sns \
+aws lambda add-permission --function-name my-function --action lambda:InvokeFunction --statement-id sns \
 --principal sns.amazonaws.com --output text
+```
+
+You should see the following output:
+
+```
 {"Sid":"sns","Effect":"Allow","Principal":{"Service":"sns.amazonaws.com"},"Action":"lambda:InvokeFunction","Resource":"arn:aws:lambda:us-east-2:123456789012:function:my-function"}
 ```
 
 This lets Amazon SNS call the `lambda:Invoke` API for the function, but it doesn't restrict the Amazon SNS topic that triggers the invocation\. To ensure that your function is only invoked by a specific resource, specify the Amazon Resource Name \(ARN\) of the resource with the `source-arn` option\. The following command only allows Amazon SNS to invoke the function for subscriptions to a topic named `my-topic`\.
 
 ```
-$ aws lambda add-permission --function-name my-function --action lambda:InvokeFunction --statement-id sns-my-topic \
+aws lambda add-permission --function-name my-function --action lambda:InvokeFunction --statement-id sns-my-topic \
 --principal sns.amazonaws.com --source-arn arn:aws:sns:us-east-2:123456789012:my-topic
 ```
 
 Some services can invoke functions in other accounts\. If you specify a source ARN that has your account ID in it, that isn't an issue\. For Amazon S3, however, the source is a bucket whose ARN doesn't have an account ID in it\. It's possible that you could delete the bucket and another account could create a bucket with the same name\. Use the `source-account` option with your account ID to ensure that only resources in your account can invoke the function\.
 
 ```
-$ aws lambda add-permission --function-name my-function --action lambda:InvokeFunction --statement-id s3-account \
+aws lambda add-permission --function-name my-function --action lambda:InvokeFunction --statement-id s3-account \
 --principal s3.amazonaws.com --source-arn arn:aws:s3:::my-bucket-123456 --source-account 123456789012
 ```
 
@@ -88,19 +93,29 @@ $ aws lambda add-permission --function-name my-function --action lambda:InvokeFu
 To grant permissions to another AWS account, specify the account ID as the `principal`\. The following example grants account `210987654321` permission to invoke `my-function` with the `prod` alias\.
 
 ```
-$ aws lambda add-permission --function-name my-function:prod --statement-id xaccount --action lambda:InvokeFunction \
+aws lambda add-permission --function-name my-function:prod --statement-id xaccount --action lambda:InvokeFunction \
 --principal 210987654321 --output text
+```
+
+You should see the following output:
+
+```
 {"Sid":"xaccount","Effect":"Allow","Principal":{"AWS":"arn:aws:iam::210987654321:root"},"Action":"lambda:InvokeFunction","Resource":"arn:aws:lambda:us-east-2:123456789012:function:my-function"}
 ```
 
 The resource\-based policy grants permission for the other account to access the function, but doesn't allow users in that account to exceed their permissions\. Users in the other account must have the corresponding [user permissions](access-control-identity-based.md) to use the Lambda API\.
 
-To limit access to a user, group, or role in another account, specify the full ARN of the identity as the principal\. For example, `arn:aws:iam::123456789012:user/developer`\.
+To limit access to a user or role in another account, specify the full ARN of the identity as the principal\. For example, `arn:aws:iam::123456789012:user/developer`\.
 
 The [alias](configuration-aliases.md) limits which version the other account can invoke\. It requires the other account to include the alias in the function ARN\.
 
 ```
-$ aws lambda invoke --function-name arn:aws:lambda:us-west-2:123456789012:function:my-function:prod out
+aws lambda invoke --function-name arn:aws:lambda:us-west-2:123456789012:function:my-function:prod out
+```
+
+You should see the following output:
+
+```
 {
     "StatusCode": 200,
     "ExecutedVersion": "1"
@@ -140,19 +155,29 @@ To grant other accounts permission for multiple functions, or for actions that d
 To grant layer\-usage permission to another account, add a statement to the layer version's permissions policy with the `add-layer-version-permission` command\. In each statement, you can grant permission to a single account, all accounts, or an organization\.
 
 ```
-$ aws lambda add-layer-version-permission --layer-name xray-sdk-nodejs --statement-id xaccount \
+aws lambda add-layer-version-permission --layer-name xray-sdk-nodejs --statement-id xaccount \
 --action lambda:GetLayerVersion  --principal 210987654321 --version-number 1 --output text
+```
+
+You should see the following output:
+
+```
 e210ffdc-e901-43b0-824b-5fcd0dd26d16    {"Sid":"xaccount","Effect":"Allow","Principal":{"AWS":"arn:aws:iam::210987654321:root"},"Action":"lambda:GetLayerVersion","Resource":"arn:aws:lambda:us-east-2:123456789012:layer:xray-sdk-nodejs:1"}
 ```
 
-Permissions only apply to a single version of a layer\. Repeat the procedure each time you create a new layer version\.
+Permissions apply only to a single version of a layer\. Repeat the process each time that you create a new layer version\.
 
 To grant permission to all accounts in an organization, use the `organization-id` option\. The following example grants all accounts in an organization permission to use version 3 of a layer\.
 
 ```
-$ aws lambda add-layer-version-permission --layer-name my-layer \
+aws lambda add-layer-version-permission --layer-name my-layer \
 --statement-id engineering-org --version-number 3 --principal '*' \
 --action lambda:GetLayerVersion --organization-id o-t194hfs8cz --output text
+```
+
+You should see the following output:
+
+```
 b0cd9796-d4eb-4564-939f-de7fe0b42236    {"Sid":"engineering-org","Effect":"Allow","Principal":"*","Action":"lambda:GetLayerVersion","Resource":"arn:aws:lambda:us-east-2:123456789012:layer:my-layer:3","Condition":{"StringEquals":{"aws:PrincipalOrgID":"o-t194hfs8cz"}}}"
 ```
 
@@ -163,27 +188,41 @@ To grant permission to all AWS accounts, use `*` for the principal, and omit the
 To view a function's resource\-based policy, use the `get-policy` command\.
 
 ```
-$ aws lambda get-policy --function-name my-function --output text
+aws lambda get-policy --function-name my-function --output text
+```
+
+You should see the following output:
+
+```
 {"Version":"2012-10-17","Id":"default","Statement":[{"Sid":"sns","Effect":"Allow","Principal":{"Service":"s3.amazonaws.com"},"Action":"lambda:InvokeFunction","Resource":"arn:aws:lambda:us-east-2:123456789012:function:my-function","Condition":{"ArnLike":{"AWS:SourceArn":"arn:aws:sns:us-east-2:123456789012:lambda*"}}}]}      7c681fc9-b791-4e91-acdf-eb847fdaa0f0
 ```
 
 For versions and aliases, append the version number or alias to the function name\.
 
 ```
-$ aws lambda get-policy --function-name my-function:PROD
+aws lambda get-policy --function-name my-function:PROD
 ```
 
 To remove permissions from your function, use `remove-permission`\.
 
 ```
-$ aws lambda remove-permission --function-name example --statement-id sns
+aws lambda remove-permission --function-name example --statement-id sns
 ```
 
-Use the `get-layer-version-policy` command to view the permissions on a layer\. Use `remove-layer-version-permission` to remove statements from the policy\.
+Use the `get-layer-version-policy` command to view the permissions on a layer\.
 
 ```
-$ aws lambda get-layer-version-policy --layer-name my-layer --version-number 3 --output text
+aws lambda get-layer-version-policy --layer-name my-layer --version-number 3 --output text
+```
+
+You should see the following output:
+
+```
 b0cd9796-d4eb-4564-939f-de7fe0b42236    {"Sid":"engineering-org","Effect":"Allow","Principal":"*","Action":"lambda:GetLayerVersion","Resource":"arn:aws:lambda:us-west-2:123456789012:layer:my-layer:3","Condition":{"StringEquals":{"aws:PrincipalOrgID":"o-t194hfs8cz"}}}"
+```
 
-$ aws lambda remove-layer-version-permission --layer-name my-layer --version-number 3 --statement-id engineering-org
+Use `remove-layer-version-permission` to remove statements from the policy\.
+
+```
+aws lambda remove-layer-version-permission --layer-name my-layer --version-number 3 --statement-id engineering-org
 ```

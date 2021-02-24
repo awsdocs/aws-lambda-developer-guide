@@ -4,12 +4,17 @@ In this tutorial, you create a Lambda function with a custom runtime\. You start
 
 ## Prerequisites<a name="runtimes-walkthrough-prereqs"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with Lambda](getting-started-create-function.md) to create your first Lambda function\.
 
-To complete the following steps, you need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
+To complete the following steps, you need a command line terminal or shell to run commands\. Commands and the expected output are listed in separate blocks:
 
 ```
-~/lambda-project$ this is a command
+this is a command
+```
+
+You should see the following output:
+
+```
 this is output
 ```
 
@@ -127,7 +132,7 @@ runtime-tutorial$ aws lambda create-function --function-name bash-runtime \
 Invoke the function and verify the response\.
 
 ```
-runtime-tutorial$ aws lambda invoke --function-name bash-runtime --payload '{"text":"Hello"}' response.txt –cli-binary-format raw-in-base64-out
+runtime-tutorial$ aws lambda invoke --function-name bash-runtime --payload '{"text":"Hello"}' response.txt --cli-binary-format raw-in-base64-out
 {
     "StatusCode": 200,
     "ExecutedVersion": "$LATEST"

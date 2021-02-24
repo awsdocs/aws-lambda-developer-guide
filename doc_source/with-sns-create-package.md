@@ -3,12 +3,12 @@
 Sample code is available for the following languages\.
 
 **Topics**
-+ [Node\.js 8](#with-sns-example-deployment-pkg-nodejs)
++ [Node\.js 12\.x](#with-sns-example-deployment-pkg-nodejs)
 + [Java 11](#with-sns-example-deployment-pkg-java)
 + [Go](#with-sns-example-deployment-pkg-go)
 + [Python 3](#with-sns-example-deployment-pkg-python)
 
-## Node\.js 8<a name="with-sns-example-deployment-pkg-nodejs"></a>
+## Node\.js 12\.x<a name="with-sns-example-deployment-pkg-nodejs"></a>
 
 The following example processes messages from Amazon SNS, and logs their contents\.
 
@@ -61,7 +61,7 @@ public class LogEvent implements RequestHandler<SNSEvent, Object> {
 + `aws-lambda-java-core`
 + `aws-lambda-java-events`
 
-Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [Deploy Java Lambda functions with \.zip file archives](java-package.md)\.
+Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [Deploy Java Lambda functions with \.zip or JAR file archives](java-package.md)\.
 
 ## Go<a name="with-sns-example-deployment-pkg-go"></a>
 

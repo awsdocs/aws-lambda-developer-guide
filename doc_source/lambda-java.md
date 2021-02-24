@@ -68,7 +68,7 @@ Your Lambda function comes with a CloudWatch Logs log group\. The function runti
 **Topics**
 + [Java sample applications for AWS Lambda](java-samples.md)
 + [AWS Lambda function handler in Java](java-handler.md)
-+ [Deploy Java Lambda functions with \.zip file archives](java-package.md)
++ [Deploy Java Lambda functions with \.zip or JAR file archives](java-package.md)
 + [Deploy Java Lambda functions with container images](java-image.md)
 + [AWS Lambda context object in Java](java-context.md)
 + [AWS Lambda function logging in Java](java-logging.md)

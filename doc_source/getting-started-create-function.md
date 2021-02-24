@@ -24,7 +24,7 @@ In this getting started exercise, you create a Node\.js Lambda function using th
 
    1. For **Function name**, enter **my\-function**\.
 
-   1. For **Runtime**, confirm that **Node\.js 12\.x** is selected\.
+   1. For **Runtime**, confirm that **Node\.js 14\.x** is selected\.
 
 1. Choose **Create function**\.
 
@@ -125,10 +125,15 @@ In this getting started exercise, you use the Docker CLI to create a container i
 
 ### Prerequisites<a name="gettingstarted-images-prereq"></a>
 
-To complete the following steps, you need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
+To complete the following steps, you need a command line terminal or shell to run commands\. Commands and the expected output are listed in separate blocks:
 
 ```
-~/lambda-project$ this is a command
+this is a command
+```
+
+You should see the following output:
+
+```
 this is output
 ```
 
@@ -185,7 +190,7 @@ In the following commands, replace `123456789012` with your AWS account ID\.
 1. Build your Docker image\. From your project directory, run the following command:
 
    ```
-   docker build -t hello-world . 
+   docker build -t hello-world .
    ```
 
 1. \(Optional\) AWS base images include the Lambda runtime interface emulator, so you can test your function locally\. 
@@ -196,7 +201,7 @@ In the following commands, replace `123456789012` with your AWS account ID\.
       docker run -p 9000:8080 hello-world:latest
       ```
 
-   1. Test your Lambda function\. From your project directory, run a `curl` command to invoke your function:
+   1. Test your Lambda function\. In a new terminal window, run a `curl` command to invoke your function:
 
       ```
       curl -XPOST "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{}'
@@ -207,13 +212,13 @@ In the following commands, replace `123456789012` with your AWS account ID\.
 1. Authenticate the Docker CLI to your Amazon ECR registry\.
 
    ```
-   aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 123456789012.dkr.ecr.us-east-1.amazonaws.com  
+   aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 123456789012.dkr.ecr.us-east-1.amazonaws.com
    ```
 
 1. Create a repository in Amazon ECR using the `create-repository` command\.
 
    ```
-   aws ecr create-repository --repository-name hello-world --image-scanning-configuration scanOnPush=true --image-tag-mutability MUTABLE        
+   aws ecr create-repository --repository-name hello-world --image-scanning-configuration scanOnPush=true --image-tag-mutability MUTABLE
    ```
 
 1. Tag your image to match your repository name using the `docker tag` command\. 

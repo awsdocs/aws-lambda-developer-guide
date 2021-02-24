@@ -8,13 +8,13 @@ The code on this page does not support [aggregated records](https://docs.aws.ama
 Sample code is available for the following languages\.
 
 **Topics**
-+ [Node\.js 8](#with-kinesis-example-deployment-pkg-nodejs)
++ [Node\.js 12\.x](#with-kinesis-example-deployment-pkg-nodejs)
 + [Java 11](#with-kinesis-example-deployment-pkg-java)
 + [C\#](#with-kinesis-example-deployment-pkg-dotnet)
 + [Python 3](#with-kinesis-example-deployment-pkg-python)
 + [Go](#with-kinesis-example-deployment-pkg-go)
 
-## Node\.js 8<a name="with-kinesis-example-deployment-pkg-nodejs"></a>
+## Node\.js 12\.x<a name="with-kinesis-example-deployment-pkg-nodejs"></a>
 
 The following example code receives a Kinesis event input and processes the messages that it contains\. For illustration, the code writes some of the incoming event data to CloudWatch Logs\.
 
@@ -70,7 +70,7 @@ If the handler returns normally without exceptions, Lambda considers the input b
 + `aws-lambda-java-events`
 + `aws-java-sdk`
 
-Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [Deploy Java Lambda functions with \.zip file archives](java-package.md)\.
+Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [Deploy Java Lambda functions with \.zip or JAR file archives](java-package.md)\.
 
 ## C\#<a name="with-kinesis-example-deployment-pkg-dotnet"></a>
 

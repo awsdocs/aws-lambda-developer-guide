@@ -2,7 +2,7 @@
 
 You can configure a Lambda function to connect to private subnets in a virtual private cloud \(VPC\) in your AWS account\. Use Amazon Virtual Private Cloud \(Amazon VPC\) to create a private network for resources such as databases, cache instances, or internal services\. Connect your function to the VPC to access private resources while the function is running\.
 
-When you connect a function to a VPC, Lambda creates an [elastic network interface](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ElasticNetworkInterfaces.html) for each combination of security group and subnet in your function's VPC configuration\. This process can take about a minute\.
+When you connect a function to a VPC, Lambda creates an [elastic network interface](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ElasticNetworkInterfaces.html) for each subnet in your function's VPC configuration\. This process can take about a minute\.
 
 While Lambda creates a network interface, you can't perform additional operations that target the function, such as [creating versions](configuration-versions.md) or updating the function's code\. For new functions, you can't invoke the function until its state changes from `Pending` to `Active`\. For existing functions, you can still invoke an earlier version while the update is in progress\. For more information about function states, see [Monitoring the state of a function with the Lambda API](functions-states.md)\.
 
@@ -84,7 +84,7 @@ To connect a Lambda function to a VPC, you can use the following API operations:
 To create a function and connect it to a VPC using the AWS Command Line Interface \(AWS CLI\), you can use the `create-function` command with the `vpc-config` option\. The following example creates a function with a connection to a VPC with two subnets and one security group\.
 
 ```
-$ aws lambda create-function --function-name my-function \
+aws lambda create-function --function-name my-function \
 --runtime nodejs12.x --handler index.js --zip-file fileb://function.zip \
 --role arn:aws:iam::123456789012:role/lambda-role \
 --vpc-config SubnetIds=subnet-071f712345678e7c8,subnet-07fd123456788a036,SecurityGroupIds=sg-085912345678492fb
@@ -93,14 +93,14 @@ $ aws lambda create-function --function-name my-function \
 To connect an existing function to a VPC, use the `update-function-configuration` command with the `vpc-config` option\.
 
 ```
-$ aws lambda update-function-configuration --function-name my-function \
+aws lambda update-function-configuration --function-name my-function \
 --vpc-config SubnetIds=subnet-071f712345678e7c8,subnet-07fd123456788a036,SecurityGroupIds=sg-085912345678492fb
 ```
 
 To disconnect your function from a VPC, update the function configuration with an empty list of subnets and security groups\.
 
 ```
-$ aws lambda update-function-configuration --function-name my-function \
+aws lambda update-function-configuration --function-name my-function \
 --vpc-config SubnetIds=[],SecurityGroupIds=[]
 ```
 
@@ -296,7 +296,7 @@ In the following tutorials, you connect a Lambda function to resources in your V
 ## Sample VPC configurations<a name="vpc-samples"></a>
 
 You can use the following sample AWS CloudFormation templates to create VPC configurations to use with Lambda functions\. There are two templates available in this guide's GitHub repository:
-+ [vpc\-private\.yaml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/templates/vpc-private.yaml) – A VPC with two private subnets and VPC endpoints for Amazon Simple Storage Service \(Amazon S3\) and Amazon DynamoDB\. Use this template to create a VPC for functions that don't need internet access\. This configuration supports use of Amazon S3 and DynamoDB with the AWS SDKs, and access to database resources in the same VPC over a local network connection\.
-+ [vpc\-privatepublic\.yaml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/templates/vpc-privatepublic.yaml) – A VPC with two private subnets, VPC endpoints, a public subnet with a NAT gateway, and an internet gateway\. Internet\-bound traffic from functions in the private subnets is routed to the NAT gateway using a route table\.
++ [vpc\-private\.yaml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/templates/vpc-private.yaml) – A VPC with two private subnets and VPC endpoints for Amazon Simple Storage Service \(Amazon S3\) and Amazon DynamoDB\. Use this template to create a VPC for functions that don't need internet access\. This configuration supports use of Amazon S3 and DynamoDB with the AWS SDKs, and access to database resources in the same VPC over a local network connection\.
++ [vpc\-privatepublic\.yaml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/templates/vpc-privatepublic.yaml) – A VPC with two private subnets, VPC endpoints, a public subnet with a NAT gateway, and an internet gateway\. Internet\-bound traffic from functions in the private subnets is routed to the NAT gateway using a route table\.
 
 To create a VPC using a template, on the AWS CloudFormation console [Stacks page](https://console.aws.amazon.com/cloudformation/home#/stacks), choose **Create stack**, and then follow the instructions in the **Create stack** wizard\.

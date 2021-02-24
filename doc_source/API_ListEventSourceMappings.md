@@ -64,7 +64,6 @@ Content-type: application/json
          },
          "EventSourceArn": "string",
          "FunctionArn": "string",
-         "FunctionResponseTypes": [ "string" ],
          "LastModified": number,
          "LastProcessingResult": "string",
          "MaximumBatchingWindowInSeconds": number,
@@ -72,23 +71,15 @@ Content-type: application/json
          "MaximumRetryAttempts": number,
          "ParallelizationFactor": number,
          "Queues": [ "string" ],
-         "SelfManagedEventSource": { 
-            "Endpoints": { 
-               "string" : [ "string" ]
-            }
-         },
          "SourceAccessConfigurations": [ 
             { 
                "Type": "string",
                "URI": "string"
             }
          ],
-         "StartingPosition": "string",
-         "StartingPositionTimestamp": number,
          "State": "string",
          "StateTransitionReason": "string",
          "Topics": [ "string" ],
-         "TumblingWindowInSeconds": number,
          "UUID": "string"
       }
    ],

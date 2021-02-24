@@ -35,7 +35,12 @@ To publish a version of a function, use the [PublishVersion](API_PublishVersion.
 The following example publishes a new version of a function\. The response returns configuration information about the new version, including the version number and the function ARN with the version suffix\.
 
 ```
-$ aws lambda publish-version --function-name my-function
+aws lambda publish-version --function-name my-function
+```
+
+You should see the following output:
+
+```
 {
   "FunctionName": "my-function",
   "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function:1",

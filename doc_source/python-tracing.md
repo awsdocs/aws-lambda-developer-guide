@@ -14,7 +14,9 @@ To trace requests that don't have a tracing header, enable active tracing in you
 
 1. Choose a function\.
 
-1. Under **AWS X\-Ray**, choose **Active tracing**\.
+1. Under **Monitoring tools**, choose **Edit**\.
+
+1. Choose **Active tracing** on the **AWS X\-Ray** pane\.
 
 1. Choose **Save**\.
 
@@ -31,7 +33,7 @@ When active tracing is enabled, Lambda records a trace for a subset of invocatio
 
 You can instrument your handler code to record metadata and trace downstream calls\. To record detail about calls that your handler makes to other resources and services, use the X\-Ray SDK for Python\. To get the SDK, add the `aws-xray-sdk` package to your application's dependencies\.
 
-**Example [blank\-python/function/requirements\.txt](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-python/function/requirements.txt)**  
+**Example [blank\-python/function/requirements\.txt](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/blank-python/function/requirements.txt)**  
 
 ```
 jsonpickle==1.3
@@ -40,7 +42,7 @@ aws-xray-sdk==2.4.3
 
 To instrument AWS SDK clients, patch the `boto3` library with the `aws_xray_sdk.core` module\.
 
-**Example [blank\-python/function/lambda\_function\.py](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-python/function/lambda_function.py) – Tracing an AWS SDK client**  
+**Example [blank\-python/function/lambda\_function\.py](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/blank-python/function/lambda_function.py) – Tracing an AWS SDK client**  
 
 ```
 import boto3
@@ -85,7 +87,7 @@ To manage tracing configuration with the AWS CLI or AWS SDK, use the following A
 The following example AWS CLI command enables active tracing on a function named my\-function\.
 
 ```
-$ aws lambda update-function-configuration --function-name my-function \
+aws lambda update-function-configuration --function-name my-function \
 --tracing-config Mode=Active
 ```
 
@@ -95,7 +97,7 @@ Tracing mode is part of the version\-specific configuration that is locked when 
 
 To enable active tracing on an `AWS::Lambda::Function` resource in an AWS CloudFormation template, use the `TracingConfig` property\.
 
-**Example [function\-inline\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/templates/function-inline.yml) – Tracing configuration**  
+**Example [function\-inline\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/templates/function-inline.yml) – Tracing configuration**  
 
 ```
 Resources:
@@ -109,7 +111,7 @@ Resources:
 
 For an AWS Serverless Application Model \(AWS SAM\) `AWS::Serverless::Function` resource, use the `Tracing` property\.
 
-**Example [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-nodejs/template.yml) – Tracing configuration**  
+**Example [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/blank-nodejs/template.yml) – Tracing configuration**  
 
 ```
 Resources:
@@ -126,7 +128,7 @@ If you use the X\-Ray SDK to instrument AWS SDK clients your function code, your
 
 The following example shows an `AWS::Serverless::LayerVersion` resource that stores X\-Ray SDK for Python\.
 
-**Example [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-python/template.yml) – Dependencies layer**  
+**Example [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/blank-python/template.yml) – Dependencies layer**  
 
 ```
 Resources:
@@ -150,4 +152,4 @@ Resources:
 
 With this configuration, you only update library layer if you change your runtime dependencies\. The function deployment package only contains your code\. When you update your function code, upload time is much faster than if you include dependencies in the deployment package\.
 
-Creating a layer for dependencies requires build changes to generate the layer archive prior to deployment\. For a working example, see the [blank\-python](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-python) sample application\.
+Creating a layer for dependencies requires build changes to generate the layer archive prior to deployment\. For a working example, see the [blank\-python](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-python) sample application\.

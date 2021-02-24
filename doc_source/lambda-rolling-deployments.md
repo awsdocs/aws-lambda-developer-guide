@@ -16,8 +16,6 @@ In a rolling deployment, AWS SAM performs these tasks:
 + It detects when you create a new version of your Lambda function\.
 + It triggers CodeDeploy to start the deployment of the new version\.
 
- 
-
 ## Example AWS SAM Lambda template<a name="sam-template"></a>
 
 The following example shows an [AWS SAM template](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-template-basics.html) for a simple rolling deployment\. 

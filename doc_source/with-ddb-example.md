@@ -4,12 +4,17 @@
 
 ## Prerequisites<a name="with-ddb-prepare"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with Lambda](getting-started-create-function.md) to create your first Lambda function\.
 
-To complete the following steps, you need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
+To complete the following steps, you need a command line terminal or shell to run commands\. Commands and the expected output are listed in separate blocks:
 
 ```
-~/lambda-project$ this is a command
+this is a command
+```
+
+You should see the following output:
+
+```
 this is output
 ```
 
@@ -64,13 +69,13 @@ exports.handler = function(event, context, callback) {
 1. Create a deployment package\.
 
    ```
-   $ zip function.zip index.js
+   zip function.zip index.js
    ```
 
 1. Create a Lambda function with the `create-function` command\.
 
    ```
-   $ aws lambda create-function --function-name ProcessDynamoDBRecords \
+   aws lambda create-function --function-name ProcessDynamoDBRecords \
    --zip-file fileb://function.zip --handler index.handler --runtime nodejs12.x \
    --role arn:aws:iam::123456789012:role/lambda-dynamodb-role
    ```
@@ -177,7 +182,7 @@ In this step, you invoke your Lambda function manually using the `invoke` AWS La
 Run the following `invoke` command\. 
 
 ```
-$ aws lambda invoke --function-name ProcessDynamoDBRecords --payload file://input.txt outputfile.txt
+aws lambda invoke --function-name ProcessDynamoDBRecords --payload file://input.txt outputfile.txt
 ```
 
 The function returns the string `message` in the response body\. 
@@ -221,7 +226,7 @@ Create an event source mapping in AWS Lambda\. This event source mapping associa
 Run the following AWS CLI `create-event-source-mapping` command\. After the command runs, note down the UUID\. You'll need this UUID to refer to the event source mapping in any commands, for example, when deleting the event source mapping\.
 
 ```
-$ aws lambda create-event-source-mapping --function-name ProcessDynamoDBRecords \
+aws lambda create-event-source-mapping --function-name ProcessDynamoDBRecords \
  --batch-size 100 --starting-position LATEST --event-source DynamoDB-stream-arn
 ```
 
@@ -230,7 +235,7 @@ $ aws lambda create-event-source-mapping --function-name ProcessDynamoDBRecords 
 You can get the list of event source mappings by running the following command\.
 
 ```
-$ aws lambda list-event-source-mappings
+aws lambda list-event-source-mappings
 ```
 
 The list returns all of the event source mappings you created, and for each mapping it shows the `LastProcessingResult`, among other things\. This field is used to provide an informative message if there are any problems\. Values such as `No records processed` \(indicates that AWS Lambda has not started polling or that there are no records in the stream\) and `OK` \(indicates AWS Lambda successfully read records from the stream and invoked your Lambda function\) indicate that there are no issues\. If there are issues, you receive an error message\.
@@ -238,7 +243,7 @@ The list returns all of the event source mappings you created, and for each mapp
 If you have a lot of event source mappings, use the function name parameter to narrow down the results\.
 
 ```
-$ aws lambda list-event-source-mappings --function-name ProcessDynamoDBRecords
+aws lambda list-event-source-mappings --function-name ProcessDynamoDBRecords
 ```
 
 ## Test the setup<a name="with-ddb-final-integration-test-no-iam"></a>

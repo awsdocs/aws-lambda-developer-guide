@@ -119,6 +119,8 @@ Lambda [runtimes](lambda-runtimes.md) set several environment variables during i
 + `AWS_LAMBDA_FUNCTION_NAME` – The name of the function\.
 + `AWS_LAMBDA_FUNCTION_MEMORY_SIZE` – The amount of memory available to the function in MB\.
 + `AWS_LAMBDA_FUNCTION_VERSION` – The version of the function being executed\.
+
+  `AWS_LAMBDA_INITIALIZATION_TYPE` – The initialization type of the function, which is either `on-demand` or `provisioned-concurrency`\. For information, see [ Configuring provisioned concurrency](configuration-concurrency.md#configuration-concurrency-provisioned)\. 
 + `AWS_LAMBDA_LOG_GROUP_NAME`, `AWS_LAMBDA_LOG_STREAM_NAME` – The name of the Amazon CloudWatch Logs group and stream for the function\.
 + `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_SESSION_TOKEN` – The access keys obtained from the function's [execution role](lambda-intro-execution-role.md)\.
 + `AWS_LAMBDA_RUNTIME_API` – \([Custom runtime](runtimes-custom.md)\) The host and port of the [runtime API](runtimes-api.md)\.
@@ -137,6 +139,7 @@ The following additional environment variables aren't reserved and can be extend
 + `GEM_PATH` – \([Ruby](lambda-ruby.md)\) The Ruby library path \(`$LAMBDA_TASK_ROOT/vendor/bundle/ruby/2.5.0:/opt/ruby/gems/2.5.0`\)\.
 + `AWS_XRAY_CONTEXT_MISSING` – For X\-Ray tracing, Lambda sets this to `LOG_ERROR` to avoid throwing runtime errors from the X\-Ray SDK\.
 + `AWS_XRAY_DAEMON_ADDRESS` – For X\-Ray tracing, the IP address and port of the X\-Ray daemon\.
++ `AWS_LAMBDA_DOTNET_PREJIT` – For the \.NET 3\.1 runtime, set this variable to enable or disable \.NET 3\.1 specific runtime optimizations\. Values include `always`, `never`, and `provisioned-concurrency`\. For information, see [ Configuring provisioned concurrency](configuration-concurrency.md#configuration-concurrency-provisioned)\.
 
 The sample values shown reflect the latest runtimes\. The presence of specific variables or their values can vary on earlier runtimes\.
 
@@ -230,7 +233,7 @@ To manage environment variables with the AWS CLI or AWS SDK, use the following A
 The following example sets two environment variables on a function named `my-function`\.
 
 ```
-$ aws lambda update-function-configuration --function-name my-function \
+aws lambda update-function-configuration --function-name my-function \
     --environment "Variables={BUCKET=my-bucket,KEY=file.txt}"
 ```
 
@@ -239,7 +242,12 @@ When you apply environment variables with the `update-function-configuration` co
 To get the current configuration, use the `get-function-configuration` command\.
 
 ```
-$ aws lambda get-function-configuration --function-name my-function
+aws lambda get-function-configuration --function-name my-function
+```
+
+You should see the following output:
+
+```
 {
     "FunctionName": "my-function",
     "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
@@ -261,7 +269,7 @@ To ensure that the values don't change between when you read the configuration a
 To configure a function's encryption key, set the `KMSKeyARN` option\.
 
 ```
-$ aws lambda update-function-configuration --function-name my-function \
+aws lambda update-function-configuration --function-name my-function \
    --kms-key-arn arn:aws:kms:us-east-2:123456789012:key/055efbb4-xmpl-4336-ba9c-538c7d31f599
 ```
 
@@ -271,4 +279,4 @@ Sample applications in this guide's GitHub repository demonstrate the use of env
 
 **Sample applications**
 + [Blank function](samples-blank.md) – Create a function and an Amazon SNS topic in the same template\. Pass the name of the topic to the function in an environment variable\. Read environment variables in code \(multiple languages\)\.
-+ [RDS MySQL](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/rds-mysql) – Create a VPC and an Amazon RDS DB instance in one template, with a password stored in Secrets Manager\. In the application template, import database details from the VPC stack, read the password from Secrets Manager, and pass all connection configuration to the function in environment variables\.
++ [RDS MySQL](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/rds-mysql) – Create a VPC and an Amazon RDS DB instance in one template, with a password stored in Secrets Manager\. In the application template, import database details from the VPC stack, read the password from Secrets Manager, and pass all connection configuration to the function in environment variables\.

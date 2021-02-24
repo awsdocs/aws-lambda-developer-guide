@@ -1,13 +1,16 @@
-# Identity\-based IAM policies for AWS Lambda<a name="access-control-identity-based"></a>
+# Identity\-based IAM policies for Lambda<a name="access-control-identity-based"></a>
 
 You can use identity\-based policies in AWS Identity and Access Management \(IAM\) to grant users in your account access to Lambda\. Identity\-based policies can apply to users directly, or to groups and roles that are associated with a user\. You can also grant users in another account permission to assume a role in your account and access your Lambda resources\.
 
-Lambda provides managed policies that grant access to Lambda API actions and, in some cases, access to other services used to develop and manage Lambda resources\. Lambda updates the managed policies as needed, to ensure that your users have access to new features when they're released\.
-+ **AWSLambdaFullAccess** – Grants full access to AWS Lambda actions and other services used to develop and maintain Lambda resources\.
-+ **AWSLambdaReadOnlyAccess** – Grants read\-only access to AWS Lambda resources\.
-+ **AWSLambdaRole** – Grants permissions to invoke Lambda functions\. 
+Lambda provides AWS managed policies that grant access to Lambda API actions and, in some cases, access to other AWS services used to develop and manage Lambda resources\. Lambda updates these managed policies as needed to ensure that your users have access to new features when they're released\.
 
-Managed policies grant permission to API actions without restricting the functions or layers that a user can modify\. For finer\-grained control, you can create your own policies that limit the scope of a user's permissions\.
+**Note**  
+The AWS managed policies **AWSLambdaFullAccess** and **AWSLambdaReadOnlyAccess** will be [deprecated](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-deprecated.html) on March 1, 2021\. After this date, you cannot attach these policies to new IAM users\. For more information, see the related [troubleshooting topic](security_iam_troubleshoot.md#security_iam_troubleshoot-admin-deprecation)\.
++ **AWSLambdaFullAccess** – Grants full access to Lambda actions and other AWS services used to develop and maintain Lambda resources\.
++ **AWSLambdaReadOnlyAccess** – Grants read\-only access to Lambda resources\.
++ **AWSLambdaRole** – Grants permissions to invoke Lambda functions\.
+
+AWS managed policies grant permission to API actions without restricting the Lambda functions or layers that a user can modify\. For finer\-grained control, you can create your own policies that limit the scope of a user's permissions\.
 
 **Topics**
 + [Function development](#permissions-user-function)
@@ -147,7 +150,7 @@ The permissions in the policy are organized into statements based on the [resour
               ],
               "Resource": "arn:aws:iam::*:role/intern-lambda-execution-role"
   ```
-+ `ViewExecutionRolePolicies` – View the AWS\-provided managed policies that are attached to the execution role\. This lets you view the function's permissions in the console, but doesn't include permission to view policies that were created by other users in the account\.
++ `ViewExecutionRolePolicies` – View the AWS managed policies that are attached to the execution role\. This lets you view the function's permissions in the console, but doesn't include permission to view policies that were created by other users in the account\.
 
   ```
               "Action": [
@@ -167,7 +170,7 @@ The permissions in the policy are organized into statements based on the [resour
 
 This policy allows a user to get started with Lambda, without putting other users' resources at risk\. It doesn't allow a user to configure a function to be triggered by or call other AWS services, which requires broader IAM permissions\. It also doesn't include permission to services that don't support limited\-scope policies, like CloudWatch and X\-Ray\. Use the read\-only policies for these services to give the user access to metrics and trace data\.
 
-When you configure triggers for your function, you need access to use the AWS service that invokes your function\. For example, to configure an Amazon S3 trigger, you need permission to use the Amazon S3 actions that manage bucket notifications\. Many of these permissions are included in the **AWSLambdaFullAccess** managed policy\. Example policies are available in this guide's [GitHub repository](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/iam-policies)\.
+When you configure triggers for your function, you need access to use the AWS service that invokes your function\. For example, to configure an Amazon S3 trigger, you need permission to use the Amazon S3 actions that manage bucket notifications\. Many of these permissions are included in the **AWSLambdaFullAccess** managed policy\. Example policies are available in this guide's [GitHub repository](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/iam-policies)\.
 
 ## Layer development and use<a name="permissions-user-layer"></a>
 

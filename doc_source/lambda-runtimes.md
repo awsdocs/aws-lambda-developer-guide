@@ -1,6 +1,6 @@
 # Lambda runtimes<a name="lambda-runtimes"></a>
 
-Lambda supports multiple languages through the use of runtimes\. For a [function defined as a container image](configuration-images.md), you choose a runtime and the Linux distribution when you [create the container image](images-create.md)\. To change the runtime, you create a new container image\.
+Lambda supports multiple languages through the use of [runtimes](gettingstarted-concepts.md#gettingstarted-concepts-runtime)\. For a [function defined as a container image](configuration-images.md), you choose a runtime and the Linux distribution when you [create the container image](images-create.md)\. To change the runtime, you create a new container image\.
 
 When you use a \.zip file archive for the deployment package, you choose a runtime when you create the function\. To change the runtime, you can [update your function's configuration](configuration-console.md)\. The runtime is paired with one of the Amazon Linux distributions\. The underlying execution environment provides additional libraries and [environment variables](configuration-envvars.md) that you can access from your function code\.
 
@@ -21,18 +21,19 @@ A runtime can support a single version of a language, multiple versions of a lan
 
 | Name | Identifier | AWS SDK for JavaScript | Operating system | 
 | --- | --- | --- | --- | 
-|  Node\.js 12  |  `nodejs12.x`  |  2\.771\.0  |  Amazon Linux 2  | 
-|  Node\.js 10  |  `nodejs10.x`  |  2\.771\.0  |  Amazon Linux 2  | 
+|  Node\.js 14  |  `nodejs14.x`  |  2\.804\.0  |  Amazon Linux 2  | 
+|  Node\.js 12  |  `nodejs12.x`  |  2\.804\.0  |  Amazon Linux 2  | 
+|  Node\.js 10  |  `nodejs10.x`  |  2\.804\.0  |  Amazon Linux 2  | 
 
 
 **Python runtimes**  
 
 | Name | Identifier | AWS SDK for Python | Operating system | 
 | --- | --- | --- | --- | 
-|  Python 3\.8  |  `python3.8`  |  boto3\-1\.15\.16 botocore\-1\.18\.16  |  Amazon Linux 2  | 
-|  Python 3\.7  |  `python3.7`  |  boto3\-1\.15\.16 botocore\-1\.18\.16  |  Amazon Linux  | 
-|  Python 3\.6  |  `python3.6`  |  boto3\-1\.15\.16 botocore\-1\.18\.16  |  Amazon Linux  | 
-|  Python 2\.7  |  `python2.7`  |  boto3\-1\.15\.16 botocore\-1\.18\.16  |  Amazon Linux  | 
+|  Python 3\.8  |  `python3.8`  |  boto3\-1\.16\.31 botocore\-1\.19\.31  |  Amazon Linux 2  | 
+|  Python 3\.7  |  `python3.7`  |  boto3\-1\.16\.31 botocore\-1\.19\.31  |  Amazon Linux  | 
+|  Python 3\.6  |  `python3.6`  |  boto3\-1\.16\.31 botocore\-1\.19\.32  |  Amazon Linux  | 
+|  Python 2\.7  |  `python2.7`  |  boto3\-1\.16\.31 botocore\-1\.19\.32  |  Amazon Linux  | 
 
 
 **Ruby runtimes**  

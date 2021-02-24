@@ -4,12 +4,17 @@ In this tutorial, you create a Lambda function to consume messages from an [Amaz
 
 ## Prerequisites<a name="with-sqs-prepare"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with Lambda](getting-started-create-function.md) to create your first Lambda function\.
 
-To complete the following steps, you need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
+To complete the following steps, you need a command line terminal or shell to run commands\. Commands and the expected output are listed in separate blocks:
 
 ```
-~/lambda-project$ this is a command
+this is a command
+```
+
+You should see the following output:
+
+```
 this is output
 ```
 
@@ -60,13 +65,13 @@ exports.handler = async function(event, context) {
 1. Create a deployment package\.
 
    ```
-   $ zip function.zip index.js
+   zip function.zip index.js
    ```
 
 1. Create a Lambda function with the `create-function` command\.
 
    ```
-   $ aws lambda create-function --function-name ProcessSQSRecord \
+   aws lambda create-function --function-name ProcessSQSRecord \
    --zip-file fileb://function.zip --handler index.handler --runtime nodejs12.x \
    --role arn:aws:iam::123456789012:role/lambda-sqs-role
    ```
@@ -105,7 +110,7 @@ If the handler returns normally without exceptions, Lambda considers the message
 1. Run the following `invoke` command\. 
 
    ```
-   $ aws lambda invoke --function-name ProcessSQSRecord \
+   aws lambda invoke --function-name ProcessSQSRecord \
    --payload file://input.txt outputfile.txt
    ```
 
@@ -132,14 +137,14 @@ Test the end\-to\-end experience\. As you perform queue updates, Amazon Simple Q
 To create a mapping between the specified Amazon SQS queue and the Lambda function, run the following AWS CLI `create-event-source-mapping` command\. After the command runs, write down or otherwise record the UUID\. You'll need this UUID to refer to the event source mapping in any other commands, for example, if you choose to delete the event source mapping\.
 
 ```
-$ aws lambda create-event-source-mapping --function-name ProcessSQSRecord  --batch-size 10 \
+aws lambda create-event-source-mapping --function-name ProcessSQSRecord  --batch-size 10 \
 --event-source-arn arn:aws:sqs:us-east-2:123456789012:my-queue
 ```
 
 You can get the list of event source mappings by running the following command\.
 
 ```
-$ aws lambda list-event-source-mappings --function-name ProcessSQSRecord \
+aws lambda list-event-source-mappings --function-name ProcessSQSRecord \
 --event-source-arn arn:aws:sqs:us-east-2:123456789012:my-queue
 ```
 
@@ -154,3 +159,39 @@ Now you can test the setup as follows:
 1. AWS Lambda polls the queue and when it detects updates, it invokes your Lambda function by passing in the event data it finds in the queue\.
 
 1. Your function runs and creates logs in Amazon CloudWatch\. You can verify the logs reported in the Amazon CloudWatch console\.
+
+## Clean up your resources<a name="cleanup"></a>
+
+You can now delete the resources that you created for this tutorial, unless you want to retain them\. By deleting AWS resources that you are no longer using, you prevent unnecessary charges to your AWS account\.
+
+**To delete the execution role**
+
+1. Open the [Roles page](https://console.aws.amazon.com/iam/home#/roles) of the IAM console\.
+
+1. Select the execution role that you created\.
+
+1. Choose **Delete role**\.
+
+1. Choose **Yes, delete**\.
+
+**To delete the Lambda function**
+
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
+
+1. Select the function that you created\.
+
+1. Choose **Actions**, **Delete**\.
+
+1. Choose **Delete**\.
+
+**To delete the Amazon SQS queue**
+
+1. Sign in to the AWS Management Console and open the Amazon SQS console at [https://console\.aws\.amazon\.com/sqs/](https://console.aws.amazon.com/sqs/)\.
+
+1. Select the queue you created\.
+
+1. Choose **Delete**\.
+
+1. Enter **delete** in the text box\.
+
+1. Choose **Delete**\.

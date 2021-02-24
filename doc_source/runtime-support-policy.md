@@ -21,6 +21,7 @@ The following runtimes have been deprecated:
 |  Node\.js 4\.3 edge  |  `nodejs4.3-edge`  |  Amazon Linux  |  April 30, 2019  | 
 |  Node\.js 6\.10  |  `nodejs6.10`  |  Amazon Linux  |  August 12, 2019  | 
 |  Node\.js 8\.10  |  `nodejs8.10`  |  Amazon Linux  |  March 6, 2020  | 
+|  Node\.js 10\.x  |  `nodejs10.x`  |  Amazon Linux 2  |  May 28, 2021  | 
 
 In most cases, the end\-of\-life date of a language version or operating system is known well in advance\. If you have functions running on a runtime that will be deprecated in the next 60 days, Lambda notifies you by email that you should prepare by migrating your function to a supported runtime\. In some cases, such as security issues that require a backwards\-incompatible update, or software that doesn't support a long\-term support \(LTS\) schedule, advance notice might not be possible\.
 

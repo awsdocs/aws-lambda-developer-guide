@@ -6,7 +6,7 @@ In this tutorial, you create the following resources\.
 + **Application** – A Node\.js Lambda function, build specification, and AWS Serverless Application Model \(AWS SAM\) template\.
 + **Pipeline** – An AWS CodePipeline pipeline that connects the other resources to enable continuous delivery\.
 + **Repository** – A Git repository in AWS CodeCommit\. When you push a change, the pipeline copies the source code into an Amazon S3 bucket and passes it to the build project\.
-+ **Trigger** – An Amazon CloudWatch Events rule that watches the master branch of the repository and triggers the pipeline\.
++ **Trigger** – An Amazon CloudWatch Events rule that watches the main branch of the repository and triggers the pipeline\.
 + **Build project** – An AWS CodeBuild build that gets the source code from the pipeline and packages the application\. The source includes a build specification with commands that install dependencies and prepare the application template for deployment\.
 + **Deployment configuration** – The pipeline's deployment stage defines a set of actions that take the processed AWS SAM template from the build output, and deploy the new version with AWS CloudFormation\.
 + **Bucket** – An Amazon Simple Storage Service \(Amazon S3\) bucket for deployment artifact storage\.
@@ -29,12 +29,17 @@ The pipeline maps a single branch in a repository to a single application stack\
 
 ## Prerequisites<a name="applications-tutorial-prepare"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with Lambda](getting-started-create-function.md) to create your first Lambda function\.
 
-To complete the following steps, you need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
+To complete the following steps, you need a command line terminal or shell to run commands\. Commands and the expected output are listed in separate blocks:
 
 ```
-~/lambda-project$ this is a command
+this is a command
+```
+
+You should see the following output:
+
+```
 this is output
 ```
 
@@ -115,7 +120,7 @@ In the previous step, Lambda console created a Git repository that contains func
 1. To clone the repository, use the `git clone` command\.
 
    ```
-   ~$ git clone ssh://git-codecommit.us-east-2.amazonaws.com/v1/repos/my-app-repo
+   git clone ssh://git-codecommit.us-east-2.amazonaws.com/v1/repos/my-app-repo
    ```
 
 To add a DynamoDB table to the application, define an `AWS::Serverless::SimpleTable` resource in the template\.
@@ -160,8 +165,8 @@ To add a DynamoDB table to the application, define an `AWS::Serverless::SimpleTa
 1. Commit and push the change\.
 
    ```
-   ~/my-app-repo$ git commit -am "Add DynamoDB table"
-   ~/my-app-repo$ git push
+   git commit -am "Add DynamoDB table"
+   git push
    ```
 
 When you push a change, it triggers the application's pipeline\. Use the **Deployments** tab of the application screen to track the change as it flows through the pipeline\. When the deployment is complete, proceed to the next step\.
@@ -239,8 +244,8 @@ Next, update the function code to use the table\. The following code uses the Dy
 1. Commit and push the change\.
 
    ```
-   ~/my-app-repo$ git add . && git commit -m "Use DynamoDB table"
-   ~/my-app-repo$ git push
+   git add . && git commit -m "Use DynamoDB table"
+   git push
    ```
 
 After the code change is deployed, invoke the function a few times to update the DynamoDB table\.

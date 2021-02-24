@@ -7,7 +7,7 @@ An event source mapping is an AWS Lambda resource that reads from an event sourc
 + [Amazon Kinesis](with-kinesis.md)
 + [Amazon MQ](with-mq.md)
 + [Amazon Managed Streaming for Apache Kafka](with-msk.md)
-+ [self\-managed Apache Kafka](kafka-smaa.md)
++ [Self\-managed Apache Kafka](kafka-smaa.md)
 + [Amazon Simple Queue Service](with-sqs.md)
 
 An event source mapping uses permissions in the function's [execution role](lambda-intro-execution-role.md) to read and manage items in the event source\. Permissions, event structure, settings, and polling behavior vary by event source\. For more information, see the linked topic for the service that you use as an event source\.
@@ -22,8 +22,13 @@ To manage an event source with the [AWS CLI](https://docs.aws.amazon.com/cli/lat
 The following example uses the AWS CLI to map a function named `my-function` to a DynamoDB stream that is specified by its Amazon Resource Name \(ARN\), with a batch size of 500\.
 
 ```
-$ aws lambda create-event-source-mapping --function-name my-function --batch-size 500 --starting-position LATEST \
+aws lambda create-event-source-mapping --function-name my-function --batch-size 500 --starting-position LATEST \
 --event-source-arn arn:aws:dynamodb:us-east-2:123456789012:table/my-table/stream/2019-06-10T19:26:16.525
+```
+
+You should see the following output:
+
+```
 {
     "UUID": "14e0db71-5d35-4eb5-b481-8945cf9d10c2",
     "BatchSize": 500,

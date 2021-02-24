@@ -41,7 +41,6 @@ Content-type: application/json
    },
    "EventSourceArn": "string",
    "FunctionArn": "string",
-   "FunctionResponseTypes": [ "string" ],
    "LastModified": number,
    "LastProcessingResult": "string",
    "MaximumBatchingWindowInSeconds": number,
@@ -49,23 +48,15 @@ Content-type: application/json
    "MaximumRetryAttempts": number,
    "ParallelizationFactor": number,
    "Queues": [ "string" ],
-   "SelfManagedEventSource": { 
-      "Endpoints": { 
-         "string" : [ "string" ]
-      }
-   },
    "SourceAccessConfigurations": [ 
       { 
          "Type": "string",
          "URI": "string"
       }
    ],
-   "StartingPosition": "string",
-   "StartingPositionTimestamp": number,
    "State": "string",
    "StateTransitionReason": "string",
    "Topics": [ "string" ],
-   "TumblingWindowInSeconds": number,
    "UUID": "string"
 }
 ```
@@ -99,12 +90,6 @@ The ARN of the Lambda function\.
 Type: String  
 Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
- ** [FunctionResponseTypes](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-FunctionResponseTypes"></a>
-\(Streams\) A list of current response type enums applied to the event source mapping\.  
-Type: Array of strings  
-Array Members: Fixed number of 1 item\.  
-Valid Values:` ReportBatchItemFailures` 
-
  ** [LastModified](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-LastModified"></a>
 The date that the event source mapping was last updated, or its state changed, in Unix time seconds\.  
 Type: Timestamp
@@ -114,7 +99,7 @@ The result of the last AWS Lambda invocation of your Lambda function\.
 Type: String
 
  ** [MaximumBatchingWindowInSeconds](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-MaximumBatchingWindowInSeconds"></a>
-\(Streams and SQS standard queues\) The maximum amount of time to gather records before invoking the function, in seconds\. The default value is zero\.  
+\(Streams\) The maximum amount of time to gather records before invoking the function, in seconds\. The default value is zero\.  
 Type: Integer  
 Valid Range: Minimum value of 0\. Maximum value of 300\.
 
@@ -140,23 +125,12 @@ Array Members: Fixed number of 1 item\.
 Length Constraints: Minimum length of 1\. Maximum length of 1000\.  
 Pattern: `[\s\S]*` 
 
- ** [SelfManagedEventSource](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-SelfManagedEventSource"></a>
-The Self\-Managed Apache Kafka cluster for your event source\.  
-Type: [SelfManagedEventSource](API_SelfManagedEventSource.md) object
-
  ** [SourceAccessConfigurations](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-SourceAccessConfigurations"></a>
-An array of the authentication protocol, or the VPC components to secure your event source\.  
+ \(MQ\) The Secrets Manager secret that stores your broker credentials\. To store your secret, use the following format: ` { "username": "your username", "password": "your password" }`   
+To reference the secret, use the following format: `[ { "Type": "BASIC_AUTH", "URI": "secretARN" } ]`   
+The value of `Type` is always `BASIC_AUTH`\. To encrypt the secret, you can use customer or service managed keys\. When using a customer managed KMS key, the Lambda execution role requires `kms:Decrypt` permissions\.  
 Type: Array of [SourceAccessConfiguration](API_SourceAccessConfiguration.md) objects  
-Array Members: Minimum number of 1 item\. Maximum number of 22 items\.
-
- ** [StartingPosition](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-StartingPosition"></a>
-The position in a stream from which to start reading\. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon MSK Streams sources\. `AT_TIMESTAMP` is only supported for Amazon Kinesis streams\.  
-Type: String  
-Valid Values:` TRIM_HORIZON | LATEST | AT_TIMESTAMP` 
-
- ** [StartingPositionTimestamp](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-StartingPositionTimestamp"></a>
-With `StartingPosition` set to `AT_TIMESTAMP`, the time from which to start reading, in Unix time seconds\.  
-Type: Timestamp
+Array Members: Fixed number of 1 item\.
 
  ** [State](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-State"></a>
 The state of the event source mapping\. It can be one of the following: `Creating`, `Enabling`, `Enabled`, `Disabling`, `Disabled`, `Updating`, or `Deleting`\.  
@@ -167,16 +141,11 @@ Indicates whether the last change to the event source mapping was made by a user
 Type: String
 
  ** [Topics](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-Topics"></a>
-The name of the Kafka topic\.  
+ \(MSK\) The name of the Kafka topic to consume\.   
 Type: Array of strings  
 Array Members: Fixed number of 1 item\.  
 Length Constraints: Minimum length of 1\. Maximum length of 249\.  
 Pattern: `^[^.]([a-zA-Z0-9\-_.]+)` 
-
- ** [TumblingWindowInSeconds](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-TumblingWindowInSeconds"></a>
-\(Streams\) The duration of a processing window in seconds\. The range is between 1 second up to 15 minutes\.  
-Type: Integer  
-Valid Range: Minimum value of 0\. Maximum value of 900\.
 
  ** [UUID](#API_DeleteEventSourceMapping_ResponseSyntax) **   <a name="SSS-DeleteEventSourceMapping-response-UUID"></a>
 The identifier of the event source mapping\.  

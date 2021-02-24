@@ -58,9 +58,14 @@ To configure an Application Load Balancer as a function trigger, grant Elastic L
 Use the `add-permission` command to add a permission statement to your function's resource\-based policy\.
 
 ```
-$ aws lambda add-permission --function-name alb-function \
+aws lambda add-permission --function-name alb-function \
 --statement-id load-balancer --action "lambda:InvokeFunction" \
 --principal elasticloadbalancing.amazonaws.com
+```
+
+You should see the following output:
+
+```
 {
     "Statement": "{\"Sid\":\"load-balancer\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"elasticloadbalancing.amazonaws.com\"},\"Action\":\"lambda:InvokeFunction\",\"Resource\":\"arn:aws:lambda:us-west-2:123456789012:function:alb-function\"}"
 }

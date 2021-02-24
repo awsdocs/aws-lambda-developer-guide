@@ -1,7 +1,5 @@
 # Using an Apache Kafka cluster as an event source for Lambda<a name="kafka-using-cluster"></a>
 
-
-
 You can host an Apache Kafka cluster on AWS, or on any other cloud provider of your choice\. Lambda supports Kafka as an [event source](invocation-eventsourcemapping.md) regardless of where it is hosted, as long as Lambda can access the cluster\.
 
 This page describes how to use your Kafka cluster as an event source for your Lambda function\.
@@ -12,8 +10,6 @@ This page describes how to use your Kafka cluster as an event source for your La
 
 ## How it works<a name="kafka-hosting-how-it-works"></a>
 
-
-
 When you add your Apache Kafka cluster as a trigger for your Lambda function, the cluster is used as an [event source](invocation-eventsourcemapping.md)\. When you add your Kafka cluster and topic as an event source, Lambda creates a consumer group with an event source `UUID`\.
 + If you use an Amazon Managed Streaming for Apache Kafka \(Amazon MSK\) cluster as your event source in [https://docs.aws.amazon.com/lambda/latest/dg/API_CreateEventSourceMapping.html#SSS-CreateEventSourceMapping-request-EventSourceArn](https://docs.aws.amazon.com/lambda/latest/dg/API_CreateEventSourceMapping.html#SSS-CreateEventSourceMapping-request-EventSourceArn), Lambda reads event data using the Amazon MSK cluster and the Kafka topic that you specify\.
 + If you use a non\-AWS hosted Apache Kafka cluster—or an AWS hosted Apache Kafka cluster on another AWS service—as your event source in [https://docs.aws.amazon.com/lambda/latest/dg/API_CreateEventSourceMapping.html#SSS-CreateEventSourceMapping-request-SelfManagedEventSource](https://docs.aws.amazon.com/lambda/latest/dg/API_CreateEventSourceMapping.html#SSS-CreateEventSourceMapping-request-SelfManagedEventSource), Lambda reads event data using the Kafka host, topic, and connection details that you specify\.
@@ -21,7 +17,7 @@ When you add your Apache Kafka cluster as a trigger for your Lambda function, th
 + Lambda processes records from one or more Kafka topic partitions that you specify and sends a JSON payload to your Lambda function\. When more records are available, Lambda continues processing records in batches, based on the value that you specify in [https://docs.aws.amazon.com/lambda/latest/dg/API_CreateEventSourceMapping.html#SSS-CreateEventSourceMapping-request-BatchSize](https://docs.aws.amazon.com/lambda/latest/dg/API_CreateEventSourceMapping.html#SSS-CreateEventSourceMapping-request-BatchSize), until the function catches up with the topic\.
 + Lambda supports Simple Authentication and Security Layer/Salted Challenge Response Authentication Mechanism \(SASL/SCRAM\) authentication for your Kafka brokers\. Lambda uses the SASL/SCRAM user name and password that you specify in your AWS Secrets Manager secret in [https://docs.aws.amazon.com/lambda/latest/dg/API_CreateEventSourceMapping.html#SSS-CreateEventSourceMapping-request-SourceAccessConfigurations](https://docs.aws.amazon.com/lambda/latest/dg/API_CreateEventSourceMapping.html#SSS-CreateEventSourceMapping-request-SourceAccessConfigurations)\.
 
-For Amazon MSK and self\-managed Apache Kafka, the maximum amount of time that Lambda allows a function to run before stopping it is 14 minutes\.
+For Amazon MSK and Self\-managed Apache Kafka, the maximum amount of time that Lambda allows a function to run before stopping it is 14 minutes\.
 
 ## Event source API operations<a name="kafka-hosting-api-operations"></a>
 

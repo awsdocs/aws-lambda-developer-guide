@@ -110,7 +110,6 @@ The following Amazon States Language definition of the `WhichCoat` state machine
     }
 ```
 
-
 **Example Python function**  
 The following Lambda function in Python \(`wear_heavy_coat`\) can be invoked for the state machine defined in the previous example\. If the `WhichCoat` state machine equals a string value of `FREEZING`, the `wear_heavy_coat` function is invoked from Lambda, and the user receives the message that corresponds with the function: "You should wear a heavy coat today\."  
 

@@ -10,9 +10,6 @@ To minimize latency and maximize read throughput, you can create a data stream c
 
  For details about Kinesis data streams, see [Reading Data from Amazon Kinesis Data Streams](https://docs.aws.amazon.com/kinesis/latest/dev/building-consumers.html)\. 
 
-**Note**  
-Error handling is not available for HTTP/2 stream consumers\.
-
 Lambda reads records from the data stream and invokes your function [synchronously](invocation-sync.md) with an event that contains stream records\. Lambda reads records in batches and invokes your function to process records from the batch\.
 
 **Example Kinesis record event**  
@@ -62,6 +59,8 @@ If your function returns an error, Lambda retries the batch until processing suc
 
 You can also increase concurrency by processing multiple batches from each shard in parallel\. Lambda can process up to 10 batches in each shard simultaneously\. If you increase the number of concurrent batches per shard, Lambda still ensures in\-order processing at the partition\-key level\.
 
+Configure the `ParallelizationFactor` setting to process one shard of a Kinesis or DynamoDB data stream with more than one Lambda invocation simultaneously\. You can specify the number of concurrent batches that Lambda polls from a shard via a parallelization factor from 1 \(default\) to 10\. For example, when `ParallelizationFactor` is set to 2, you can have 200 concurrent Lambda invocations at maximum to process 100 Kinesis data shards\. This helps scale up the processing throughput when the data volume is volatile and the `IteratorAge` is high\. For more information, see [New AWS Lambda scaling controls for Kinesis and DynamoDB event sources](http://aws.amazon.com/blogs/compute/new-aws-lambda-scaling-controls-for-kinesis-and-dynamodb-event-sources/)\.
+
 **Topics**
 + [Configuring your data stream and function](#services-kinesis-configure)
 + [Execution role permissions](#events-kinesis-permissions)
@@ -84,8 +83,13 @@ For standard iterators, Lambda polls each shard in your Kinesis stream for recor
 To minimize latency and maximize read throughput, create a data stream consumer with enhanced fan\-out\. Enhanced fan\-out consumers get a dedicated connection to each shard that doesn't impact other applications reading from the stream\. Stream consumers use HTTP/2 to reduce latency by pushing records to Lambda over a long\-lived connection and by compressing request headers\. You can create a stream consumer with the Kinesis [RegisterStreamConsumer](https://docs.aws.amazon.com/kinesis/latest/APIReference/API_RegisterStreamConsumer.html) API\.
 
 ```
-$ aws kinesis register-stream-consumer --consumer-name con1 \
+aws kinesis register-stream-consumer --consumer-name con1 \
 --stream-arn arn:aws:kinesis:us-east-2:123456789012:stream/lambda-stream
+```
+
+You should see the following output:
+
+```
 {
     "Consumer": {
         "ConsumerName": "con1",
@@ -172,9 +176,14 @@ To manage an event source with the [AWS CLI](https://docs.aws.amazon.com/cli/lat
 To create the event source mapping with the AWS CLI, use the `create-event-source-mapping` command\. The following example uses the AWS CLI to map a function named `my-function` to a Kinesis data stream\. The data stream is specified by an Amazon Resource Name \(ARN\), with a batch size of 500, starting from the timestamp in Unix time\.
 
 ```
-$ aws lambda create-event-source-mapping --function-name my-function \
+aws lambda create-event-source-mapping --function-name my-function \
 --batch-size 500 --starting-position AT_TIMESTAMP --starting-position-timestamp 1541139109 \
 --event-source-arn arn:aws:kinesis:us-east-2:123456789012:stream/lambda-stream
+```
+
+You should see the following output:
+
+```
 {
     "UUID": "2b733gdc-8ac3-cdf5-af3a-1827b3b11284",
     "BatchSize": 500,
@@ -198,9 +207,14 @@ To use a consumer, specify the consumer's ARN instead of the stream's ARN\.
 Configure additional options to customize how batches are processed and to specify when to discard records that can't be processed\. The following example updates an event source mapping to send a failure record to an SQS queue after two retry attempts, or if the records are more than an hour old\.
 
 ```
-$ aws lambda update-event-source-mapping --uuid f89f8514-cdd9-4602-9e1f-01a5b77d449b \
+aws lambda update-event-source-mapping --uuid f89f8514-cdd9-4602-9e1f-01a5b77d449b \
 --maximum-retry-attempts 2  --maximum-record-age-in-seconds 3600
 --destination-config '{"OnFailure": {"Destination": "arn:aws:sqs:us-east-2:123456789012:dlq"}}'
+```
+
+You should see this output:
+
+```
 {
     "UUID": "f89f8514-cdd9-4602-9e1f-01a5b77d449b",
     "BatchSize": 100,
@@ -222,7 +236,12 @@ $ aws lambda update-event-source-mapping --uuid f89f8514-cdd9-4602-9e1f-01a5b77d
 Updated settings are applied asynchronously and aren't reflected in the output until the process completes\. Use the `get-event-source-mapping` command to view the current status\.
 
 ```
-$ aws lambda get-event-source-mapping --uuid f89f8514-cdd9-4602-9e1f-01a5b77d449b
+aws lambda get-event-source-mapping --uuid f89f8514-cdd9-4602-9e1f-01a5b77d449b
+```
+
+You should see this output:
+
+```
 {
     "UUID": "f89f8514-cdd9-4602-9e1f-01a5b77d449b",
     "BatchSize": 100,
@@ -248,7 +267,7 @@ $ aws lambda get-event-source-mapping --uuid f89f8514-cdd9-4602-9e1f-01a5b77d449
 To process multiple batches concurrently, use the `--parallelization-factor` option\.
 
 ```
-$ aws lambda update-event-source-mapping --uuid 2b733gdc-8ac3-cdf5-af3a-1827b3b11284 \
+aws lambda update-event-source-mapping --uuid 2b733gdc-8ac3-cdf5-af3a-1827b3b11284 \
 --parallelization-factor 5
 ```
 
@@ -396,7 +415,7 @@ At the end of your window, Lambda uses final processing for actions on the aggre
 You can configure tumbling windows when you create or update an [event source mapping](invocation-eventsourcemapping.md)\. To configure a tumbling window, specify the window in seconds\. The following example AWS Command Line Interface \(AWS CLI\) command creates a streaming event source mapping that has a tumbling window of 120 seconds\. The Lambda function defined for aggregation and processing is named `tumbling-window-example-function`\.
 
 ```
-$ aws lambda create-event-source-mapping --event-source-arn arn:aws:kinesis:us-east-1:123456789012:stream/lambda-stream --function-name "arn:aws:lambda:us-east-1:123456789018:function:tumbling-window-example-function" --region us-east-1 --starting-position TRIM_HORIZON --tumbling-window-in-seconds 120
+aws lambda create-event-source-mapping --event-source-arn arn:aws:kinesis:us-east-1:123456789012:stream/lambda-stream --function-name "arn:aws:lambda:us-east-1:123456789018:function:tumbling-window-example-function" --region us-east-1 --starting-position TRIM_HORIZON --tumbling-window-in-seconds 120
 ```
 
 Lambda determines tumbling window boundaries based on the time when records were inserted into the stream\. All records have an approximate timestamp available that Lambda uses in boundary determinations\.
@@ -435,7 +454,7 @@ def lambda_handler(event, context):
 
 ## Reporting batch item failures<a name="services-kinesis-batchfailurereporting"></a>
 
-When consuming and processing streaming data from an event source, by default Lambda checkpoints to the highest sequence number of a batch only when the batch is a complete success\. Lambda treats all other results as a complete failure and retries processing the batch up to the retry limit\. To allow for partial successes while processing batches from a stream, turn on `ReportBatchItemFailures`\. Allowing partial successes can help to reduce the number of retries on a record, though it doesn’t entirely prevent the possibility of retries n a successful record\.
+When consuming and processing streaming data from an event source, by default Lambda checkpoints to the highest sequence number of a batch only when the batch is a complete success\. Lambda treats all other results as a complete failure and retries processing the batch up to the retry limit\. To allow for partial successes while processing batches from a stream, turn on `ReportBatchItemFailures`\. Allowing partial successes can help to reduce the number of retries on a record, though it doesn’t entirely prevent the possibility of retries in a successful record\.
 
 To turn on `ReportBatchItemFailures`, include the enum value **ReportBatchItemFailures** in the `FunctionResponseTypes` list\. This list indicates which response types are enabled for your function\. You can configure this list when you create or update an [event source mapping](invocation-eventsourcemapping.md)\.
 

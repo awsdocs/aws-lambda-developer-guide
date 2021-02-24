@@ -8,14 +8,17 @@ This tutorial provides code that performs these tasks and a sample application t
 
 For more information about spot instances usage and best practices, see [Spot Instances](https://docs.aws.amazon.com/AWSEC2/latest/DeveloperGuide/using-spot-instances.html) in the Amazon EC2 user guide\.
 
-
-
 ## Prerequisites<a name="services-ec2-tutorial-prereqs"></a>
 
-To complete the following steps, you need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
+To complete the following steps, you need a command line terminal or shell to run commands\. Commands and the expected output are listed in separate blocks:
 
 ```
-~/lambda-project$ this is a command
+this is a command
+```
+
+You should see the following output:
+
+```
 this is output
 ```
 
@@ -31,7 +34,7 @@ To use the sample code you need the following tools:
 + **Lambda \.NET Core Global Tool** – To build the deployment package for Lambda, install the [\.NET Core global tool](https://dotnet.microsoft.com/download/dotnet-core/2.1) with the \.NET Core CLI\.
 
   ```
-  $ dotnet tool install -g [Amazon\.Lambda\.Tools](https://www.nuget.org/packages/Amazon.Lambda.Tools)
+  dotnet tool install -g [Amazon\.Lambda\.Tools](https://www.nuget.org/packages/Amazon.Lambda.Tools)
   ```
 
 The code in this tutorial manages spot requests that launch Amazon EC2 instances\. To run the code locally, you need SDK credentials with permission to use the following APIs\.
@@ -48,11 +51,11 @@ Standard charges apply for each service\.
 
 ## Review the code<a name="services-ec2-tutorial-code"></a>
 
-Locate the sample project in the guide repository under [sample\-apps/ec2\-spot](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/ec2-spot)\. This directory contains Lambda function code, tests, project files, scripts, and a AWS CloudFormation template\.
+Locate the sample project in the guide repository under [sample\-apps/ec2\-spot](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/ec2-spot)\. This directory contains Lambda function code, tests, project files, scripts, and a AWS CloudFormation template\.
 
 The `Function` class includes a `FunctionHandler` method that calls other methods to create spot requests, check their status, and clean up\. It creates an Amazon EC2 client with the AWS SDK for \.NET in a static constructor to allow it to be used throughout the class\.
 
-**Example [Function\.cs – FunctionHandler](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/ec2-spot/src/ec2spot/Function.cs#L17)**  
+**Example [Function\.cs – FunctionHandler](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/ec2-spot/src/ec2spot/Function.cs#L17)**  
 
 ```
 using Amazon.EC2;
@@ -180,13 +183,18 @@ Run the code on your local machine to create a spot instance request\. After the
 1. Navigate to the `ec2Spot.Tests` directory\.
 
    ```
-   $ cd test/ec2Spot.Tests
+   cd test/ec2Spot.Tests
    ```
 
 1. Use the \.NET CLI to run the project's unit tests\.
 
    ```
-   test/ec2Spot.Tests$ dotnet test
+   dotnet test
+   ```
+
+   You should see the following output:
+
+   ```
    Starting test execution, please wait...
    sir-x5tgs5ij
    open
@@ -216,20 +224,30 @@ Run the code in Lambda as a starting point for creating a serverless application
 1. Set your region to `us-east-2`\.
 
    ```
-   $ export AWS_DEFAULT_REGION=us-east-2
+   export AWS_DEFAULT_REGION=us-east-2
    ```
 
 1. Create a bucket for deployment artifacts\.
 
    ```
-   $ ./create-bucket.sh
+   ./create-bucket.sh
+   ```
+
+   You should see the following output:
+
+   ```
    make_bucket: lambda-artifacts-63d5cbbf18fa5ecc
    ```
 
 1. Create a deployment package and deploy the application\.
 
    ```
-   $ ./deploy.sh
+   ./deploy.sh
+   ```
+
+   You should see the following output:
+
+   ```
    Amazon Lambda Tools for .NET Core applications (3.3.0)
    Project Home: https://github.com/aws/aws-extensions-for-dotnet-cli, https://github.com/aws/aws-lambda-dotnet
    
@@ -283,7 +301,12 @@ The code provided in this tutorial is designed to create and delete spot instanc
 To clean up the sample function and support resources, delete its AWS CloudFormation stack and the artifacts bucket that you created\.
 
 ```
-$ ./cleanup.sh
+./cleanup.sh
+```
+
+You should see the following output:
+
+```
 Delete deployment artifacts and bucket (lambda-artifacts-63d5cbbf18fa5ecc)?y
 delete: s3://lambda-artifacts-63d5cbbf18fa5ecc/ebd38e401cedd7d676d05d22b76f0209
 remove_bucket: lambda-artifacts-63d5cbbf18fa5ecc

@@ -44,7 +44,7 @@ For more information, see [Lambda deployment packages](gettingstarted-package.md
 
 A Lambda layer is a \.zip file archive that contains libraries, a [custom runtime](runtimes-custom.md), or other dependencies\. You can use a layer to distribute a dependency to multiple functions\. You do not use layers with container images\. Instead, you package your preferred runtime, libraries, and other dependencies into the container image when you build the image\.
 
-For more information, see [AWS Lambda layers](configuration-layers.md)\.
+For more information, see [Lambda layers](configuration-layers.md)\.
 
 ## Runtime<a name="gettingstarted-concepts-runtime"></a>
 

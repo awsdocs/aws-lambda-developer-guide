@@ -14,7 +14,9 @@ To trace requests that don't have a tracing header, enable active tracing in you
 
 1. Choose a function\.
 
-1. Under **AWS X\-Ray**, choose **Active tracing**\.
+1. Under **Monitoring tools**, choose **Edit**\.
+
+1. Choose **Active tracing** on the **AWS X\-Ray** pane\.
 
 1. Choose **Save**\.
 
@@ -32,13 +34,19 @@ When active tracing is enabled, Lambda records a trace for a subset of invocatio
 You can instrument your handler code to record metadata and trace downstream calls\. To record detail about calls that your handler makes to other resources and services, use the X\-Ray SDK for Go\. Download the SDK from its [GitHub repository](https://github.com/aws/aws-xray-sdk-go) with `go get`:
 
 ```
-$ go get github.com/aws/aws-xray-sdk-go
+go get github.com/aws/aws-xray-sdk-go
 ```
 
 To instrument AWS SDK clients, pass the client to the `xray.AWS()` method\.
 
 ```
     xray.AWS(s3.Client)
+```
+
+Then you can trace your calls by using the `WithContext` version of the method\.
+
+```
+    svc.ListBucketsWithContext(ctx aws.Context, input *ListBucketsInput)
 ```
 
 The following example shows a trace with 2 segments\. Both are named **my\-function**, but one is type `AWS::Lambda` and the other is `AWS::Lambda::Function`\. The function segment is expanded to show its subsegments\.
@@ -66,7 +74,7 @@ To manage tracing configuration with the AWS CLI or AWS SDK, use the following A
 The following example AWS CLI command enables active tracing on a function named my\-function\.
 
 ```
-$ aws lambda update-function-configuration --function-name my-function \
+aws lambda update-function-configuration --function-name my-function \
 --tracing-config Mode=Active
 ```
 
@@ -76,7 +84,7 @@ Tracing mode is part of the version\-specific configuration that is locked when 
 
 To enable active tracing on an `AWS::Lambda::Function` resource in an AWS CloudFormation template, use the `TracingConfig` property\.
 
-**Example [function\-inline\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/templates/function-inline.yml) – Tracing configuration**  
+**Example [function\-inline\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/templates/function-inline.yml) – Tracing configuration**  
 
 ```
 Resources:
@@ -90,7 +98,7 @@ Resources:
 
 For an AWS Serverless Application Model \(AWS SAM\) `AWS::Serverless::Function` resource, use the `Tracing` property\.
 
-**Example [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-nodejs/template.yml) – Tracing configuration**  
+**Example [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/blank-nodejs/template.yml) – Tracing configuration**  
 
 ```
 Resources:

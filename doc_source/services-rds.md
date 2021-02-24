@@ -2,8 +2,6 @@
 
 You can use AWS Lambda to process event notifications from an Amazon Relational Database Service \(Amazon RDS\) database\. Amazon RDS sends notifications to an Amazon Simple Notification Service \(Amazon SNS\) topic, which you can configure to invoke a Lambda function\. Amazon SNS wraps the message from Amazon RDS in its own event document and sends it to your function\.
 
-## Example<a name="example"></a>
-
 **Example Amazon RDS message in an Amazon SNS event**  
 
 ```
@@ -31,21 +29,13 @@ You can use AWS Lambda to process event notifications from an Amazon Relational 
     }
 ```
 
-## Configuring the function<a name="configuration"></a>
-
-**Configuring the maximum concurrency of a function**
-
-If too many function instances run concurrently, one or more instances may fail to obtain a database connection\. You can use reserved concurrency to limit the maximum concurrency of the function\. Set the reserved concurrency to be less than the number of database connections\. Reserved concurrency also reserves those instances for this function, which may not be ideal\. If you are invoking the Lambda functions from your application, we recommend you write code that limits the number of concurrent instances\. For more information, see [Managing concurrency for a Lambda function](https://docs.aws.amazon.com/lambda/latest/dg/configuration-concurrency.html)\.
-
-**Sending notifications from a database**
-
-For instructions on configuring an Amazon RDS database to send notifications, see [Using Amazon RDS event notification](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html) in the Amazon RDS User Guide\.
-
-**Using Amazon SNS as a trigger**
-
-For details on using Amazon SNS as trigger, see [Using AWS Lambda with Amazon SNS](with-sns.md)\.
-
-## What's Next?<a name="whatsnext"></a>
-
 **Topics**
 + [Tutorial: Configuring a Lambda function to access Amazon RDS in an Amazon VPC](services-rds-tutorial.md)
++ [Configuring the function](#configuration)
+
+## Configuring the function<a name="configuration"></a>
+
+The following section shows additional configurations and topics we recommend as part of this tutorial\.
++ If too many function instances run concurrently, one or more instances may fail to obtain a database connection\. You can use reserved concurrency to limit the maximum concurrency of the function\. Set the reserved concurrency to be less than the number of database connections\. Reserved concurrency also reserves those instances for this function, which may not be ideal\. If you are invoking the Lambda functions from your application, we recommend you write code that limits the number of concurrent instances\. For more information, see [Managing concurrency for a Lambda function](https://docs.aws.amazon.com/lambda/latest/dg/configuration-concurrency.html)\.
++ For more information on configuring an Amazon RDS database to send notifications, see [Using Amazon RDS event notifications](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html)\. 
++ For more information on using Amazon SNS as trigger, see [Using Lambda with Amazon SNS](with-sns.md)\.

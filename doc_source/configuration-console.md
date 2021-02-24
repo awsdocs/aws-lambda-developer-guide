@@ -52,7 +52,7 @@ To configure functions with the Lambda API, use the following actions:
 For example, to update a function's memory setting with the AWS CLI, use the `update-function-configuration` command\.
 
 ```
-$ aws lambda update-function-configuration --function-name my-function --memory-size 256
+aws lambda update-function-configuration --function-name my-function --memory-size 256
 ```
 
 For function configuration best practices, see [Function configuration](best-practices.md#function-configuration)\.

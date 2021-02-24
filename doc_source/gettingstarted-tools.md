@@ -20,7 +20,7 @@ To set up the AWS CLI, see the following topics in the *AWS Command Line Interfa
 To verify that the AWS CLI is configured correctly, run the `list-functions` command to see a list of your Lambda functions in the current AWS Region\.
 
 ```
-$ aws lambda list-functions
+aws lambda list-functions
 ```
 
 ## AWS SAM<a name="gettingstarted-tools-awssam"></a>

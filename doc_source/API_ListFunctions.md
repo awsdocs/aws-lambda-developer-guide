@@ -66,17 +66,6 @@ Content-type: application/json
          "FunctionArn": "string",
          "FunctionName": "string",
          "Handler": "string",
-         "ImageConfigResponse": { 
-            "Error": { 
-               "ErrorCode": "string",
-               "Message": "string"
-            },
-            "ImageConfig": { 
-               "Command": [ "string" ],
-               "EntryPoint": [ "string" ],
-               "WorkingDirectory": "string"
-            }
-         },
          "KMSKeyArn": "string",
          "LastModified": "string",
          "LastUpdateStatus": "string",
@@ -85,19 +74,14 @@ Content-type: application/json
          "Layers": [ 
             { 
                "Arn": "string",
-               "CodeSize": number,
-               "SigningJobArn": "string",
-               "SigningProfileVersionArn": "string"
+               "CodeSize": number
             }
          ],
          "MasterArn": "string",
          "MemorySize": number,
-         "PackageType": "string",
          "RevisionId": "string",
          "Role": "string",
          "Runtime": "string",
-         "SigningJobArn": "string",
-         "SigningProfileVersionArn": "string",
          "State": "string",
          "StateReason": "string",
          "StateReasonCode": "string",

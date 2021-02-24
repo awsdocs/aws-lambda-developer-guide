@@ -42,7 +42,7 @@ With AWS Billing and Cost Management, you can use tags to customize billing repo
 When you create a new Lambda function, you can include tags with the `--tags` option\.
 
 ```
-$ aws lambda create-function --function-name my-function
+aws lambda create-function --function-name my-function
 --handler index.js --runtime nodejs12.x \
 --role arn:aws:iam::123456789012:role/lambda-role \
 --tags Department=Marketing,CostCenter=1234ABCD
@@ -51,7 +51,7 @@ $ aws lambda create-function --function-name my-function
 To add tags to an existing function, use the `tag-resource` command\. 
 
 ```
-$ aws lambda tag-resource \
+aws lambda tag-resource \
 --resource arn:aws:lambda:us-east-2:123456789012:function:my-function \
 --tags Department=Marketing,CostCenter=1234ABCD
 ```
@@ -59,7 +59,7 @@ $ aws lambda tag-resource \
 To remove tags, use the `untag-resource` command\. 
 
 ```
-$ aws lambda untag-resource --resource function arn \
+aws lambda untag-resource --resource function arn \
 --tag-keys Department
 ```
 
@@ -67,12 +67,12 @@ If you want to view the tags that are applied to a specific Lambda function, you
 + [ListTags](API_ListTags.md) – You supply your Lambda function ARN \(Amazon Resource Name\) to view a list of the tags associated with this function:
 
   ```
-  $ aws lambda list-tags --resource function arn
+  aws lambda list-tags --resource function arn
   ```
 + [GetFunction](API_GetFunction.md) – You supply your Lambda function name to a view a list of the tags associated with this function:
 
   ```
-  $ aws lambda get-function --function-name my-function
+  aws lambda get-function --function-name my-function
   ```
 
 You can also use the AWS Tagging Service’s [GetResources](https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html) API to filter your resources by tags\. The GetResources API receives up to 10 filters, with each filter containing a tag key and up to 10 tag values\. You provide GetResources with a ‘ResourceType’ to filter by specific resource types\. For more information about the AWS Tagging Service, see [Working with Resource Groups](https://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/resource-groups.html)\. 

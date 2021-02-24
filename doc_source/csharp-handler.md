@@ -52,24 +52,23 @@ All other types, as listed below, require you to specify a serializer\.
 
 Unless your function input and output parameters are of type `System.IO.Stream`, you will need to serialize them\. AWS Lambda provides a default serializer that can be applied at the assembly or method level of your application, or you can define your own by implementing the `ILambdaSerializer` interface provided by the `Amazon.Lambda.Core` library\. For more information, see [Deploy C\# Lambda functions with \.zip file archives](csharp-package.md)\.
 
- To add the default serializer attribute to a method, first add a dependency on `Amazon.Lambda.Serialization.Json` in your `project.json` file\. 
+ To add the default serializer attribute to a method, first add a dependency on `Amazon.Lambda.Serialization.Json` in your `.csproj` file\. 
 
 ```
-{
-    "version": "1.0.0-*",
-    "dependencies":{
-        "Microsoft.NETCore.App": {
-            "type": "platform",
-            "version": "1.0.1"
-        },
-        "Amazon.Lambda.Serialization.Json": "1.3.0"
-    },
-    "frameworks": {
-        "netcoreapp1.0": {
-            "imports": "dnxcore50"
-        }
-    }
-}
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <AssemblyName>AssemblyName</AssemblyName>
+    </PropertyGroup>
+      
+    <ItemGroup>
+    <PackageReference Include="Amazon.Lambda.Core" Version="1.2.0" />
+    <PackageReference Include="Amazon.Lambda.APIGatewayEvents" Version="2.3.0" />
+    <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="1.8.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    </ItemGroup>
+</Project>
 ```
 
  The example below illustrates the flexibility you can leverage by specifying the default Json\.NET serializer on one method and another of your choosing on a different method:
@@ -98,7 +97,7 @@ If you are using \.NET Core 3\.1, we recommend that you use the [ Amazon\.Lambda
 When creating Lambda functions, you have to provide a handler string that tells AWS Lambda where to look for the code to invoke\. In C\#, the format is:
 
  *ASSEMBLY::TYPE::METHOD* where:
-+ *ASSEMBLY* is the name of the \.NET assembly file for your application\. When using the \.NET Core CLI to build your application, if you haven't set the assembly name using the `buildOptions.outputName` setting in project\.json, the *ASSEMBLY* name will be the name of the folder that contains your project\.json file\. For more information, see [\.NET Core CLI](csharp-package-cli.md)\. In this case, let's assume the folder name is `HelloWorldApp`\.
++ *ASSEMBLY* is the name of the \.NET assembly file for your application\. When using the \.NET Core CLI to build your application, if you haven't set the assembly name using the `AssemblyName` property in \.csproj, the *ASSEMBLY* name will be the name of the folder that contains your \.csproj file once the build is complete\. For more information, see [\.NET Core CLI](csharp-package-cli.md)\. In this case, let's assume the folder name is `HelloWorldApp`\.
 + *TYPE* is the full name of the handler type, which consists of the *Namespace* and the *ClassName*\. In this case `Example.Hello`\.
 + *METHOD* is name of the function handler, in this case `MyHandler`\.
 

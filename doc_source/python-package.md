@@ -1,53 +1,49 @@
 # Deploy Python Lambda functions with \.zip file archives<a name="python-package"></a>
 
-To create a container image to deploy your function code, see [Using container images with Lambda](lambda-images.md)\.
+Your AWS Lambda function's code consists of scripts or compiled programs and their dependencies\. You use a *deployment package* to deploy your function code to Lambda\. Lambda supports two types of deployment packages: container images and \.zip files\.
 
-A \.zip file archive is a deployment package that contains your function code and dependencies\. You must create a \.zip file archive if you use the Lambda API to manage functions, or if you need to include libraries and dependencies other than the AWS SDK\. You can upload the package directly to Lambda, or you can use an Amazon Simple Storage Service \(Amazon S3\) bucket, and then upload it to Lambda\. If the deployment package is larger than 50 MB, you must use Amazon S3\.
+You can use a built\-in ZIP archive utility, or any other ZIP utility \(such as [7zip](https://www.7-zip.org/download.html)\) for your command line tool to create a deployment package\.
++ The \.zip file must contain your function's code, and any dependencies used to run your function's code \(if applicable\) on Lambda\. If your function depends only on standard libraries, or AWS SDK libraries, you do not need to include the libraries in your \.zip file\. These libraries are included with our supported [Lambda runtime](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) environments\.
++ If your \.zip file is larger than 50 MB, we recommend uploading it to an Amazon S3 bucket\. For more information, see [Using other AWS services to build a deployment package](gettingstarted-package.md)\.
++ If your \.zip file contains C\-extension libraries, such as the Pillow \(PIL\) library, we recommend using the AWS SAM CLI to build a deployment package\. For more information, see [Lambda deployment packages](gettingstarted-package.md)\.
 
-If you use the [Lambda console editor](code-editor.md) to author your function, the console manages the deployment package\. You can use this method as long as you don't need to add any libraries\. You can also use it to update a function that already has libraries in the deployment package, as long as the total size doesn't exceed 3 MB\.
-
-You can also use the AWS Serverless Application Model \(AWS SAM\) CLI `build` command to create a deployment package for your Python function code and dependencies\. The AWS SAM CLI also provides an option to build your deployment package inside a Docker image that is compatible with the Lambda execution environment\. For more information, see [Building applications](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-build.html) in the *AWS Serverless Application Model Developer Guide*\.
-
-**Note**  
-We recommend using the AWS SAM CLI [sam build](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-build.html) command to create deployment packages that contain libraries written in C or C\+\+, such as the [Pillow](https://pypi.org/project/Pillow/) library\.
+This page describes how to create a \.zip file as your deployment package, and then use the \.zip file to deploy your function code to Lambda using the AWS Command Line Interface \(AWS CLI\)\. To upload your \.zip file on the Lambda console, see [Deployment packages](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package-zip)\.
 
 **Topics**
 + [Prerequisites](#python-package-prereqs)
 + [Updating a function with no dependencies](#python-package-codeonly)
 + [Updating a function with additional dependencies](#python-package-dependencies)
-+ [With a virtual environment](#python-package-venv)
++ [Using a virtual environment](#python-package-venv)
 
 ## Prerequisites<a name="python-package-prereqs"></a>
 
-These instructions assume that you have already created a Lambda function and are updating the deployment package for your function\. If you haven't created a function yet, see [Building Lambda functions with Python](lambda-python.md)\.
+The following steps assume that you have created a Lambda function, and are updating the deployment package for your function\. If you haven't created a function yet, see [Building Lambda functions with Python](lambda-python.md)\.
 
-To complete the following steps, you need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
-
-```
-~/lambda-project$ this is a command
-this is output
-```
-
-For long commands, an escape character \(`\`\) is used to split a command over multiple lines\.
-
-On Linux and macOS, use your preferred shell and package manager\. On Windows 10, you can [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows\-integrated version of Ubuntu and Bash\.
+The AWS Command Line Interface \(AWS CLI\) is an open source tool that enables you to interact with AWS services using commands in your command\-line shell\. To complete the steps in this section, you need the following:
++ [AWS CLI – Install version 2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
++ [AWS CLI – Quick configuration with `aws configure`](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)
 
 ## Updating a function with no dependencies<a name="python-package-codeonly"></a>
 
-To create or update a function with the Lambda API, create a deployment package that contains your function code and upload it with the AWS Command Line Interface \(AWS CLI\)\.
+The following steps show how to create a deployment package that contains only your function code, and upload it to Lambda using the AWS CLI\.
 
 **To update a Python function with no dependencies**
 
 1. Add function code files to the root of your deployment package\.
 
    ```
-   ~/my-function$ zip my-deployment-package.zip lambda_function.py
+   zip my-deployment-package.zip lambda_function.py
    ```
 
-1. Use the [fileb://](https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-file.html#cli-usage-parameters-file-binary) prefix to upload the binary \.zip file deployment package to Lambda and update the function code\.
+1. Use the [update\-function\-code](https://docs.aws.amazon.com/cli/latest/reference/lambda/update-function-code.html) command with the [fileb://](https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-file.html#cli-usage-parameters-file-binary) prefix to upload the binary \.zip file to Lambda and update the function code\.
 
    ```
-   ~/my-function$ aws lambda update-function-code --function-name MyLambdaFunction --zip-file fileb://my-deployment-package.zip
+   aws lambda update-function-code --function-name MyLambdaFunction --zip-file fileb://my-deployment-package.zip
+   ```
+
+   You should see the following output:
+
+   ```
    {
        "FunctionName": "mylambdafunction",
        "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:mylambdafunction",
@@ -62,38 +58,54 @@ To create or update a function with the Lambda API, create a deployment package 
    }
    ```
 
-**Note**
-In order for your Python modules can be imported at runtime, ensure the files in the zip produced are globally readable (o+r) and any directories are globally readable (o+x).
+The Lambda function in the last step uses a function handler of `lambda_function.lambda_handler`\. For more information about function handler naming conventions, see [AWS Lambda function handler in Python](python-handler.md)\.
 
 ## Updating a function with additional dependencies<a name="python-package-dependencies"></a>
 
-If your Lambda function depends on libraries other than the AWS SDK for Python \(Boto3\), install them to a local directory with [pip](https://pypi.org/project/pip/), and include them in your deployment package\.
-
-The following example shows how to create a deployment package that contains the [requests](https://pypi.org/project/requests/) library and upload it to Lambda using the AWS CLI\. The steps assume that you are not using a virtual environment\.
+If your Lambda function depends on libraries other than the [AWS SDK for Python \(Boto3\)](http://aws.amazon.com/sdk-for-python/), install the libraries to a local directory with [pip](https://pypi.org/project/pip/), and include them in your deployment package \(\.zip file\)\. 
 
 **Note**  
-If you are creating a deployment package used in a layer, see [Including library dependencies in a layer](configuration-layers.md#configuration-layers-path)\.
+Make sure that the files and directories in the deployment package have their permissions set to be globally readable, so that Lambda can import your Python modules at runtime\.
+
+ The following steps show how to install the [requests](https://pypi.org/project/requests/) library, create a deployment package, and upload it to Lambda using the AWS CLI\. The steps assume that you are not using a virtual environment\.  It also assumes that your function code uses Python 3\.8 and the [`python3.8` Lambda runtime](lambda-runtimes.md)\.
+
+**Note**  
+If you are creating a deployment package used in a layer, see [Include library dependencies in a layer](configuration-layers.md#configuration-layers-path)\.
 
 **To update a Python function with dependencies**
 
 1. Install libraries in a `package` directory with `pip`'s `--target` option\.
 
    ```
-   ~/my-function$ pip install --target ./package requests
+   pip install --target ./package requests
    ```
 **Note**  
 To prevent `distutils` errors on [Debian\-based systems](https://github.com/pypa/pip/issues/3826) such as Ubuntu, you may need to pass the `--system` option\.
 
+1. Navigate to the `package` directory\.
+
+   ```
+   cd package
+   ```
+
 1. Create a deployment package with the installed libraries at the root\.
 
    ```
-   ~/my-function$ zip -r my-deployment-package.zip ./package/
+   zip -r ../my-deployment-package.zip .
+   ```
+
+   The last command saves the deployment package to the root of the `my-function` directory\.
+
+1. Navigate back to the `my-function` directory\.
+
+   ```
+   cd.. 
    ```
 
 1. Add function code files to the root of your deployment package\.
 
    ```
-   ~/my-function$ zip -g my-deployment-package.zip lambda_function.py
+   zip -g my-deployment-package.zip lambda_function.py
    ```
 
    After you complete this step, you should have the following directory structure:
@@ -109,10 +121,15 @@ To prevent `distutils` errors on [Debian\-based systems](https://github.com/pypa
      ...
    ```
 
-1. Use the [fileb://](https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-file.html#cli-usage-parameters-file-binary) prefix to upload the binary \.zip file deployment package to Lambda and update the function code\.
+1. Use the [update\-function\-code](https://docs.aws.amazon.com/cli/latest/reference/lambda/update-function-code.html) command with the [fileb://](https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-file.html#cli-usage-parameters-file-binary) prefix to upload the binary \.zip file to Lambda and update the function code\.
 
    ```
-   ~/my-function$ aws lambda update-function-code --function-name MyLambdaFunction --zip-file fileb://my-deployment-package.zip
+   aws lambda update-function-code --function-name MyLambdaFunction --zip-file fileb://my-deployment-package.zip
+   ```
+
+   You should see the following output:
+
+   ```
    {
        "FunctionName": "mylambdafunction",
        "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:mylambdafunction",
@@ -127,55 +144,61 @@ To prevent `distutils` errors on [Debian\-based systems](https://github.com/pypa
    }
    ```
 
-## With a virtual environment<a name="python-package-venv"></a>
+The Lambda function in the last step uses a function handler of `lambda_function.lambda_handler`\. For more information about function handler naming conventions, see [AWS Lambda function handler in Python](python-handler.md)\.
 
-In some cases, you may need to use a [virtual environment](https://virtualenv.pypa.io/en/latest) to install dependencies for your function\. This can occur if your function or its dependencies have dependencies on native libraries, or if you used Homebrew to install Python\.
+## Using a virtual environment<a name="python-package-venv"></a>
 
-The following example shows how to create a deployment package that contains the [requests](https://pypi.org/project/requests/) library and upload it to Lambda using the AWS CLI\.
+If your Lambda function depends on libraries other than the [AWS SDK for Python \(Boto3\)](http://aws.amazon.com/sdk-for-python/), install the libraries to a local directory with [pip](https://pypi.org/project/pip/), and include them in your deployment package \(\.zip file\)\. 
+
+ The following steps show how to install the [requests](https://pypi.org/project/requests/) library, create a deployment package, and upload it to Lambda using the AWS CLI\. The steps assume that you are using the [virtualenv](https://docs.python.org/3/library/venv.html) module for a virtual environment\.  It also assumes that your function code uses Python 3\.8 and the [`python3.8` Lambda runtime](lambda-runtimes.md)\.
 
 **Note**  
-If you are creating a deployment package used in a layer, see [Including library dependencies in a layer](configuration-layers.md#configuration-layers-path)\.
+If you are creating a deployment package used in a layer, see [Include library dependencies in a layer](configuration-layers.md#configuration-layers-path)\.
 
 **To update a Python function with a virtual environment**
 
 1. Create a virtual environment\.
 
    ```
-   ~/my-function$ virtualenv myvenv
+   virtualenv myvenv
    ```
+**Note**  
+The [virtualenv](https://docs.python.org/3/library/venv.html) module uses Python 2\.7 by default\. You may need to add a local export path to your command line profile, such as `export VIRTUALENV_PYTHON=/usr/bin/python3.8` when using the *virtualenv* module with Python 3 and pip 3\. 
 
 1. Activate the environment\.
 
    ```
-   ~/my-function$ source myvenv/bin/activate
+   source myvenv/bin/activate
    ```
 
 1. Install libraries with pip\.
 
    ```
-   (myvenv) ~/my-function$ pip install requests
+   pip install requests
    ```
 
 1. Deactivate the virtual environment\.
 
    ```
-   (myvenv) ~/my-function$ deactivate
+   deactivate
    ```
 
-1. Create a deployment package with the installed libraries at the root\.
+1. Create a deployment package with the installed libraries at the root\. 
 
    ```
-   ~/my-function$ cd myvenv/lib/python3.8/site-packages
-   ~/my-function/myvenv/lib/python3.8/site-packages$ zip -r my-deployment-package.zip .
+   cd myvenv/lib/python3.8/site-packages
+   zip -r ../../../../my-deployment-package.zip .
    ```
-**Note**  
+
+   The last command saves the deployment package to the root of the `my-function` directory\.
+**Tip**  
 A library may appear in `site-packages` or `dist-packages` and the first folder `lib` or `lib64`\. You can use the `pip show` command to locate a specific package\.
 
 1. Add function code files to the root of your deployment package\.
 
    ```
-   ~/my-function/myvenv/lib/python3.8/site-packages$ cd ../../../../
-   ~/my-function$ zip -g my-deployment-package.zip lambda_function.py
+   cd ../../../../
+   zip -g my-deployment-package.zip lambda_function.py
    ```
 
    After you complete this step, you should have the following directory structure:
@@ -191,10 +214,15 @@ A library may appear in `site-packages` or `dist-packages` and the first folder 
      ...
    ```
 
-1. Use the [fileb://](https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-file.html#cli-usage-parameters-file-binary) prefix to upload the binary \.zip file deployment package to Lambda and update the function code\.
+1. Use the [update\-function\-code](https://docs.aws.amazon.com/cli/latest/reference/lambda/update-function-code.html) command with the [fileb://](https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-file.html#cli-usage-parameters-file-binary) prefix to upload the binary \.zip file to Lambda and update the function code\.
 
    ```
-   ~/my-function$ aws lambda update-function-code --function-name MyLambdaFunction --zip-file fileb://my-deployment-package.zip
+   aws lambda update-function-code --function-name MyLambdaFunction --zip-file fileb://my-deployment-package.zip
+   ```
+
+   You should see the following output:
+
+   ```
    {
        "FunctionName": "mylambdafunction",
        "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:mylambdafunction",
@@ -208,3 +236,5 @@ A library may appear in `site-packages` or `dist-packages` and the first folder 
        ...
    }
    ```
+
+The Lambda function in the last step uses a function handler of `lambda_function.lambda_handler`\. For more information about function handler naming conventions, see [AWS Lambda function handler in Python](python-handler.md)\.

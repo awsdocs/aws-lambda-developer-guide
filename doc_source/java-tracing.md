@@ -14,7 +14,9 @@ To trace requests that don't have a tracing header, enable active tracing in you
 
 1. Choose a function\.
 
-1. Under **AWS X\-Ray**, choose **Active tracing**\.
+1. Under **Monitoring tools**, choose **Edit**\.
+
+1. Choose **Active tracing** on the **AWS X\-Ray** pane\.
 
 1. Choose **Save**\.
 
@@ -31,7 +33,7 @@ When active tracing is enabled, Lambda records a trace for a subset of invocatio
 
 To record detail about calls that your function makes to other resources and services, add the X\-Ray SDK for Java to your build configuration\. The following example shows a Gradle build configuration that includes the libraries that enable automatic instrumentation of AWS SDK for Java 2\.x clients\.
 
-**Example [build\.gradle](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-java/build.gradle) – Tracing dependencies**  
+**Example [build\.gradle](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/blank-java/build.gradle) – Tracing dependencies**  
 
 ```
 dependencies {
@@ -73,7 +75,7 @@ To manage tracing configuration with the AWS CLI or AWS SDK, use the following A
 The following example AWS CLI command enables active tracing on a function named my\-function\.
 
 ```
-$ aws lambda update-function-configuration --function-name my-function \
+aws lambda update-function-configuration --function-name my-function \
 --tracing-config Mode=Active
 ```
 
@@ -83,7 +85,7 @@ Tracing mode is part of the version\-specific configuration that is locked when 
 
 To enable active tracing on an `AWS::Lambda::Function` resource in an AWS CloudFormation template, use the `TracingConfig` property\.
 
-**Example [function\-inline\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/templates/function-inline.yml) – Tracing configuration**  
+**Example [function\-inline\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/templates/function-inline.yml) – Tracing configuration**  
 
 ```
 Resources:
@@ -97,7 +99,7 @@ Resources:
 
 For an AWS Serverless Application Model \(AWS SAM\) `AWS::Serverless::Function` resource, use the `Tracing` property\.
 
-**Example [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-nodejs/template.yml) – Tracing configuration**  
+**Example [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/blank-nodejs/template.yml) – Tracing configuration**  
 
 ```
 Resources:
@@ -114,7 +116,7 @@ If you use the X\-Ray SDK to instrument AWS SDK clients your function code, your
 
 The following example shows an `AWS::Serverless::LayerVersion` resource that stores the SDK for Java and X\-Ray SDK for Java\.
 
-**Example [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-java/template.yml) – Dependencies layer**  
+**Example [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/blank-java/template.yml) – Dependencies layer**  
 
 ```
 Resources:
@@ -138,18 +140,18 @@ Resources:
 
 With this configuration, you only update library layer if you change your runtime dependencies\. The function deployment package only contains your code\. When you update your function code, upload time is much faster than if you include dependencies in the deployment package\.
 
-Creating a layer for dependencies requires build configuration changes to generate the layer archive prior to deployment\. For a working example, see the [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-basic) sample application\.
+Creating a layer for dependencies requires build configuration changes to generate the layer archive prior to deployment\. For a working example, see the [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-basic) sample application\.
 
 ## Tracing in sample applications<a name="java-tracing-samples"></a>
 
 The GitHub repository for this guide includes sample applications that demonstrate the use of tracing\. Each sample application includes scripts for easy deployment and cleanup, an AWS SAM template, and supporting resources\.
 
 **Sample Lambda applications in Java**
-+ [blank\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-java) – A Java function that shows the use of Lambda's Java libraries, logging, environment variables, layers, AWS X\-Ray tracing, unit tests, and the AWS SDK\.
-+ [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-basic) – A minimal Java function with unit tests and variable logging configuration\.
-+ [java\-events](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-events) – A minimal Java function that uses the [aws\-lambda\-java\-events](java-package.md) library with event types that don't require the AWS SDK as a dependency, such as Amazon API Gateway\.
-+ [java\-events\-v1sdk](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-events-v1sdk) – A Java function that uses the [aws\-lambda\-java\-events](java-package.md) library with event types that require the AWS SDK as a dependency \(Amazon Simple Storage Service \(Amazon S3\), Amazon DynamoDB, and Amazon Kinesis\)\.
-+ [s3\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/s3-java) – A Java function that processes notification events from Amazon S3 and uses the Java Class Library \(JCL\) to create thumbnails from uploaded image files\.
++ [blank\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-java) – A Java function that shows the use of Lambda's Java libraries, logging, environment variables, layers, AWS X\-Ray tracing, unit tests, and the AWS SDK\.
++ [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-basic) – A minimal Java function with unit tests and variable logging configuration\.
++ [java\-events](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-events) – A minimal Java function that uses the [aws\-lambda\-java\-events](java-package.md) library with event types that don't require the AWS SDK as a dependency, such as Amazon API Gateway\.
++ [java\-events\-v1sdk](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-events-v1sdk) – A Java function that uses the [aws\-lambda\-java\-events](java-package.md) library with event types that require the AWS SDK as a dependency \(Amazon Simple Storage Service \(Amazon S3\), Amazon DynamoDB, and Amazon Kinesis\)\.
++ [s3\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/s3-java) – A Java function that processes notification events from Amazon S3 and uses the Java Class Library \(JCL\) to create thumbnails from uploaded image files\.
 
 All of the sample applications have active tracing enabled for Lambda functions\. The `blank-java` application shows automatic instrumentation of AWS SDK for Java 2\.x clients, segment management for tests, custom subsegments, and the use of Lambda layers to store runtime dependencies\.
 

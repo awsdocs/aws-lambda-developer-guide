@@ -9,7 +9,12 @@ When you create a function, the function is initially in the `Pending` state\. W
 You can use the Lambda API to get information about a function's state\. State information is included in the [FunctionConfiguration](API_FunctionConfiguration.md) document returned by several API actions\. To view the function's state with the AWS CLI, use the `get-function-configuration` command\.
 
 ```
-$ aws lambda get-function-configuration --function-name my-function
+aws lambda get-function-configuration --function-name my-function
+```
+
+You should see the following output:
+
+```
 {
     "FunctionName": "my-function",
     "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",

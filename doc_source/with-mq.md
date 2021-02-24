@@ -87,8 +87,6 @@ To read records from an Amazon MQ broker, your Lambda function needs the followi
 + [ec2:DescribeSubnets](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSubnets.html)
 + [ec2:DescribeVpcs](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpcs.html)
 
-The AWS managed policy `AWSLambdaMQExecutionRole` includes these permissions\. For more information, see [AWS managed policies for Lambda features](lambda-intro-execution-role.md#permissions-executionrole-features)\.
-
 **Note**  
 When using an encrypted customer managed key, add the `[kms:Decrypt](https://docs.aws.amazon.com/msk/1.0/apireference/clusters-clusterarn-bootstrap-brokers.html#clusters-clusterarn-bootstrap-brokersget)` permission as well\.
 
@@ -145,11 +143,16 @@ The Amazon VPC configuration is discoverable through the [Amazon MQ API](https:/
 The following example AWS CLI command creates an event source which maps a Lambda function named `MQ-Example-Function` to an Amazon MQ broker named `ExampleMQBroker`\. The command also provides a Secrets Manager secret named `ExampleMQBrokerUserPassword` that stores the broker credentials\.
 
 ```
-$ aws lambda create-event-source-mapping \
+aws lambda create-event-source-mapping \
 --event-source-arn arn:aws:mq:us-east-1:12345678901:broker:ExampleMQBroker:b-b4d492ef-bdc3-45e3-a781-cd1a3102ecca \
 --function-name MQ-Example-Function \
 --source-access-configuration Type=BASIC_AUTH,URI=arn:aws:secretsmanager:us-east-1:12345678901:secret:ExampleMQBrokerUserPassword-xPBMTt \
---queues ExampleQueue 
+--queues ExampleQueue
+```
+
+You should see the following output:
+
+```
 {
     "UUID": "91eaeb7e-c976-1234-9451-8709db01f137",
     "BatchSize": 100,
@@ -174,9 +177,14 @@ $ aws lambda create-event-source-mapping \
 Using the `[update\-event\-source\-mapping](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/update-event-source-mapping.html)` command, you can configure additional options such as how batches are processed and to specify when to discard records that can't be processed\. The following example command updates an event source mapping to have a batch size of 2\.
 
 ```
-$ aws lambda update-event-source-mapping \
+aws lambda update-event-source-mapping \
 --uuid 91eaeb7e-c976-1234-9451-8709db01f137 \
 --batch-size 2
+```
+
+You should see the following output:
+
+```
 {
     "UUID": "91eaeb7e-c976-1234-9451-8709db01f137",
     "BatchSize": 2,
@@ -192,8 +200,13 @@ $ aws lambda update-event-source-mapping \
 Updated settings are applied asynchronously and aren't reflected in the output until the process completes\. To view the current status of your resource, use the [https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/get-event-source-mapping.html](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/get-event-source-mapping.html) command\.
 
 ```
-$ aws lambda get-event-source-mapping \
+aws lambda get-event-source-mapping \
 --uuid 91eaeb7e-c976-4939-9451-8709db01f137
+```
+
+You should see the following output:
+
+```
 {
     "UUID": "91eaeb7e-c976-4939-9451-8709db01f137",
     "BatchSize": 2,

@@ -1,6 +1,6 @@
 # Sample Amazon S3 function code<a name="with-s3-example-deployment-pkg"></a>
 
-Sample code is available for the following languages\.
+The following sample code is available for the [Tutorial: Using AWS Lambda with Amazon S3](with-s3-example.md)\.
 
 **Topics**
 + [Node\.js 12\.x](#with-s3-example-deployment-pkg-nodejs)
@@ -11,131 +11,144 @@ Sample code is available for the following languages\.
 
 The following example code receives an Amazon S3 event input and processes the message that it contains\. It resizes an image in the source bucket and saves the output to the target bucket\.
 
+### Create the function code<a name="with-s3-example-deployment-pkg-nodejs-functioncode"></a>
+
+Copy the sample code into a file named `index.js` into a new folder named `lambda-s3`\.
+
 **Example index\.js**  
 
 ```
 // dependencies
-const AWS = require('aws-sdk');
-const util = require('util');
-const sharp = require('sharp');
+  const AWS = require('aws-sdk');
+  const util = require('util');
+  const sharp = require('sharp');
 
-// get reference to S3 client
-const s3 = new AWS.S3();
+  // get reference to S3 client
+  const s3 = new AWS.S3();
 
-exports.handler = async (event, context, callback) => {
+  exports.handler = async (event, context, callback) => {
 
-    // Read options from the event parameter.
-    console.log("Reading options from event:\n", util.inspect(event, {depth: 5}));
-    const srcBucket = event.Records[0].s3.bucket.name;
-    // Object key may have spaces or unicode non-ASCII characters.
-    const srcKey    = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, " "));
-    const dstBucket = srcBucket + "-resized";
-    const dstKey    = "resized-" + srcKey;
+      // Read options from the event parameter.
+      console.log("Reading options from event:\n", util.inspect(event, {depth: 5}));
+      const srcBucket = event.Records[0].s3.bucket.name;
+      // Object key may have spaces or unicode non-ASCII characters.
+      const srcKey    = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, " "));
+      const dstBucket = srcBucket + "-resized";
+      const dstKey    = "resized-" + srcKey;
 
-    // Infer the image type from the file suffix.
-    const typeMatch = srcKey.match(/\.([^.]*)$/);
-    if (!typeMatch) {
-        console.log("Could not determine the image type.");
-        return;
-    }
+      // Infer the image type from the file suffix.
+      const typeMatch = srcKey.match(/\.([^.]*)$/);
+      if (!typeMatch) {
+          console.log("Could not determine the image type.");
+          return;
+      }
 
-    // Check that the image type is supported  
-    const imageType = typeMatch[1].toLowerCase();
-    if (imageType != "jpg" && imageType != "png") {
-        console.log(`Unsupported image type: ${imageType}`);
-        return;
-    }
+      // Check that the image type is supported  
+      const imageType = typeMatch[1].toLowerCase();
+      if (imageType != "jpg" && imageType != "png") {
+          console.log(`Unsupported image type: ${imageType}`);
+          return;
+      }
 
-    // Download the image from the S3 source bucket. 
+      // Download the image from the S3 source bucket. 
 
-    try {
-        const params = {
-            Bucket: srcBucket,
-            Key: srcKey
-        };
-        var origimage = await s3.getObject(params).promise();
+      try {
+          const params = {
+              Bucket: srcBucket,
+              Key: srcKey
+          };
+          var origimage = await s3.getObject(params).promise();
 
-    } catch (error) {
-        console.log(error);
-        return;
-    }  
+      } catch (error) {
+          console.log(error);
+          return;
+      }  
 
-    // set thumbnail width. Resize will set the height automatically to maintain aspect ratio.
-    const width  = 200;
+      // set thumbnail width. Resize will set the height automatically to maintain aspect ratio.
+      const width  = 200;
 
-    // Use the Sharp module to resize the image and save in a buffer.
-    try { 
-        var buffer = await sharp(origimage.Body).resize(width).toBuffer();
-            
-    } catch (error) {
-        console.log(error);
-        return;
-    } 
+      // Use the Sharp module to resize the image and save in a buffer.
+      try { 
+          var buffer = await sharp(origimage.Body).resize(width).toBuffer();
+              
+      } catch (error) {
+          console.log(error);
+          return;
+      } 
 
-    // Upload the thumbnail image to the destination bucket
-    try {
-        const destparams = {
-            Bucket: dstBucket,
-            Key: dstKey,
-            Body: buffer,
-            ContentType: "image"
-        };
+      // Upload the thumbnail image to the destination bucket
+      try {
+          const destparams = {
+              Bucket: dstBucket,
+              Key: dstKey,
+              Body: buffer,
+              ContentType: "image"
+          };
 
-        const putResult = await s3.putObject(destparams).promise(); 
-        
-    } catch (error) {
-        console.log(error);
-        return;
-    } 
-        
-    console.log('Successfully resized ' + srcBucket + '/' + srcKey +
-        ' and uploaded to ' + dstBucket + '/' + dstKey);
-};
+          const putResult = await s3.putObject(destparams).promise(); 
+          
+      } catch (error) {
+          console.log(error);
+          return;
+      } 
+          
+      console.log('Successfully resized ' + srcBucket + '/' + srcKey +
+          ' and uploaded to ' + dstBucket + '/' + dstKey);
+  };
 ```
++ Review the preceding code and note the following:
+  + The function knows the source bucket name and the key name of the object from the event data it receives as parameters\. If the object is a \.jpg, the code creates a thumbnail and saves it to the target bucket\. 
+  + The code assumes that the destination bucket exists and its name is a concatenation of the source bucket name followed by the string `-resized`\. For example, if the source bucket identified in the event data is `examplebucket`, the code assumes you have an `examplebucket-resized` destination bucket\.
+  + For the thumbnail it creates, the code derives its key name as the concatenation of the string `resized-` followed by the source object key name\. For example, if the source object key is `sample.jpg`, the code creates a thumbnail object that has the key `resized-sample.jpg`\.
 
-The deployment package is a \.zip file containing your Lambda function code and dependencies\. 
+### Create the deployment package<a name="with-s3-example-deployment-pkg-nodejs-dependencies"></a>
+
+A deployment package is a \.zip file containing your Lambda function code and dependencies\. The sample function code has the following dependencies:
+
+**Dependencies**
++ Sharp for node\.js
 
 **To create a deployment package**
 
-1. Create a folder \(`examplefolder`\), and then create a subfolder \(`node_modules`\)\. 
-
-1. Install dependencies\. The code examples use the following libraries:
-   + AWS SDK for JavaScript in Node\.js
-   + Sharp for node\.js
-
-   The AWS Lambda runtime already has the AWS SDK for JavaScript in Node\.js, so you only need to install the Sharp library\. Open a command prompt, navigate to the `examplefolder`, and install the libraries using the `npm` command, which is part of Node\.js\. For Linux, use the following command\.
+1. Install the Sharp library with npm\. For Linux, use the following command\.
 
    ```
-   $ npm install sharp
+   lambda-s3$ npm install sharp
    ```
 
    For macOS, use the following command\.
 
    ```
-   $ npm install --arch=x64 --platform=linux --target=12.13.0 sharp
+   lambda-s3$ npm install --arch=x64 --platform=linux --target=12.13.0 sharp
    ```
 
-1. Save the sample code to a file named index\.js\.
-
-1. Review the preceding code and note the following:
-   + The function knows the source bucket name and the key name of the object from the event data it receives as parameters\. If the object is a \.jpg, the code creates a thumbnail and saves it to the target bucket\. 
-   + The code assumes that the destination bucket exists and its name is a concatenation of the source bucket name followed by the string `-resized`\. For example, if the source bucket identified in the event data is `examplebucket`, the code assumes you have an `examplebucket-resized` destination bucket\.
-   + For the thumbnail it creates, the code derives its key name as the concatenation of the string `resized-` followed by the source object key name\. For example, if the source object key is `sample.jpg`, the code creates a thumbnail object that has the key `resized-sample.jpg`\.
-
-1. Save the file as `index.js` in `examplefolder`\. After you complete this step, you will have the following folder structure:
+1. After you complete this step, you should have the following folder structure:
 
    ```
-   index.js
-   /node_modules/sharp
+   lambda-s3
+   |- index.js
+   |- /node_modules/sharp
+   └ /node_modules/...
    ```
 
-1. Zip the index\.js file and the node\_modules folder as `CreateThumbnail.zip`\.
+1. Create a deployment package with the function code and dependencies\.
+
+   ```
+   lambda-s3$ zip -r function.zip .
+   ```
+
+**To create and test the function**
++ After you have created a deployment package with your function code and your Lambda function, return to the S3 tutorial to [Create the Lambda function](with-s3-example.md)\.
 
 ## Java 11<a name="with-s3-example-deployment-pkg-java"></a>
 
 The following is example Java code that reads incoming Amazon S3 events and creates a thumbnail\. Note that it implements the `RequestHandler` interface provided in the `aws-lambda-java-core` library\. Therefore, at the time you create a Lambda function you specify the class as the handler \(that is, `example.handler`\)\. For more information about using interfaces to provide a handler, see [Handler interfaces](java-handler.md#java-handler-interfaces)\.
 
 The `S3Event` type that the handler uses as the input type is one of the predefined classes in the `aws-lambda-java-events`  library that provides methods for you to easily read information from the incoming Amazon S3 event\. The handler returns a string as output\.
+
+### Create the function code<a name="with-s3-example-deployment-pkg-java-functioncode"></a>
+
+Copy the sample code into a file named `Handler.java`\.
 
 **Example Handler\.java**  
 
@@ -273,19 +286,30 @@ public class Handler implements
 
 Amazon S3 invokes your Lambda function using the `Event` invocation type, where AWS Lambda runs the code asynchronously\. What you return does not matter\. However, in this case we are implementing an interface that requires us to specify a return type, so in this example the handler uses `String` as the return type\. 
 
+### Create the deployment package<a name="with-s3-example-deployment-pkg-java-dependencies"></a>
+
+A deployment package is a \.zip file containing your Lambda function code and dependencies\. The sample function code has the following dependencies:
+
 **Dependencies**
 + `aws-lambda-java-core`
 + `aws-lambda-java-events`
 + `aws-java-sdk`
 
-Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [Deploy Java Lambda functions with \.zip file archives](java-package.md)\.
+**To create a deployment package**
++ Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [Deploy Java Lambda functions with \.zip or JAR file archives](java-package.md)\.
+
+**To create and test the function**
++ After you have created a deployment package with your function code and your Lambda function, return to the S3 tutorial to [Create the Lambda function](with-s3-example.md)\.
 
 ## Python 3<a name="with-s3-example-deployment-pkg-python"></a>
 
 The following example code receives an Amazon S3 event input and processes the message that it contains\. It resizes an image in the source bucket and saves the output to the target bucket\. 
 
+### Create the function code<a name="with-s3-example-deployment-pkg-python-functioncode"></a>
+
+Copy the sample code into a file named `lambda_function.py`\.
+
 **Example lambda\_function\.py**  
-Copy the sample code into a file named `lambda_function.py`\.  
 
 ```
 import boto3
@@ -315,8 +339,15 @@ def lambda_handler(event, context):
         s3_client.upload_file(upload_path, '{}-resized'.format(bucket), key)
 ```
 
+### Create the deployment package<a name="with-s3-example-deployment-pkg-python-dependencies"></a>
+
+A deployment package is a \.zip file containing your Lambda function code and dependencies\. The sample function code has the following dependencies:
+
 **Dependencies**
 + [Pillow](https://pypi.org/project/Pillow/)
 
 **To create a deployment package**
-+ We recommend using the AWS SAM CLI [sam build](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-build.html) command to create deployment packages that contain libraries written in C or C\+\+, such as the [Pillow](https://pypi.org/project/Pillow/) library\.
++ We recommend using the AWS SAM CLI [sam build](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-build.html) command with the `--use-container` option to create deployment packages that contain libraries written in C or C\+\+, such as the [Pillow \(PIL\)](https://pypi.org/project/Pillow/) library\.
+
+**To create and test the function**
++ After you have created a deployment package with your function code and your Lambda function, return to the S3 tutorial to [Create the Lambda function](with-s3-example.md)\.

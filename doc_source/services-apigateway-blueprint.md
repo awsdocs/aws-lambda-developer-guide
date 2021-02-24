@@ -26,7 +26,6 @@ Follow the steps in this section to create a new Lambda function and an API Gate
    + **Role name** – **lambda\-apigateway\-role**\.
    + **Policy templates** – **Simple microservice permissions**\.
    + **API** – **Create a new API**\.
-   + **API type** - **REST API**\.
    + **Security** – **Open**\.
 
    Choose **Create function**\.
@@ -35,15 +34,17 @@ When you complete the wizard and create your function, Lambda creates a proxy re
 
 A proxy resource has an `AWS_PROXY` integration type and a catch\-all method `ANY`\. The `AWS_PROXY` integration type applies a default mapping template to pass through the entire request to the Lambda function and transforms the output from the Lambda function to HTTP responses\. The `ANY` method defines the same integration setup for all the supported methods, including `GET`, `POST`, `PATCH`, `DELETE `and others\. 
 
-## Test sending an HTTPS request<a name="services-apigateway-blueprint-test"></a>
+## Test sending an HTTP request<a name="services-apigateway-blueprint-test"></a>
 
-In this step, you will use the console to test the Lambda function\. In addition, you can run a `curl` command to test the end\-to\-end experience\. That is, send an HTTPS request to your API method and have Amazon API Gateway invoke your Lambda function\. In order to complete the steps, make sure you have created a DynamoDB table and named it "MyTable"\. For more information, see [Create a DynamoDB table with a stream enabled](with-ddb-example.md#with-ddb-create-buckets)
+In this step, you will use the console to test the Lambda function\. In addition, you can run a `curl` command to test the end\-to\-end experience\. That is, [send an HTTP request](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api.html) to your API method and have Amazon API Gateway invoke your Lambda function\. In order to complete the steps, make sure you have created a DynamoDB table and named it "MyTable"\. For more information, see [Create a DynamoDB table with a stream enabled](with-ddb-example.md#with-ddb-create-buckets)
 
 **To test the API**
 
-1. With your `lambda-microservice` function still open in the console, choose **Configure test events** from the **Select a test event** dropdown list.
+1. With your `lambda-microservice` function still open in the console, in the upper right hand corner of the console, choose **Test**\.
 
-1. Replace the existing text with the following:
+1. In **Event name**, enter a name for the test event\.
+
+1. In the text entry panel, replace the existing text with the following:
 
    ```
    {
@@ -55,4 +56,5 @@ In this step, you will use the console to test the Lambda function\. In addition
    ```
 
 1. After entering the text above choose **Create**\.
-1. Choose the event and choose **Test**\.
+
+1. Choose the event that you created and choose **Test**\.

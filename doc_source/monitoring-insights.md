@@ -1,17 +1,17 @@
 # Using Lambda Insights in Amazon CloudWatch<a name="monitoring-insights"></a>
 
-Amazon CloudWatch Lambda Insights collects and aggregates Lambda function runtime performance metrics and logs for your serverless applications\.
+Amazon CloudWatch Lambda Insights collects and aggregates Lambda function runtime performance metrics and logs for your serverless applications\. This page describes how to enable and use Lambda Insights to diagnose issues with your Lambda functions\.
 
 **Topics**
 + [How Lambda Insights monitors serverless applications](#monitoring-insights-how)
 + [Pricing](#monitoring-insights-pricing)
 + [Supported runtimes](#monitoring-insights-runtimes)
-+ [Region availability](#monitoring-insights-regions)
 + [Enabling Lambda Insights in the Lambda console](#monitoring-insights-enabling-console)
 + [Enabling Lambda Insights programmatically](#monitoring-insights-enabling-programmatically)
 + [Using the Lambda Insights dashboard](#monitoring-insights-multifunction)
 + [Example workflow to detect function anomalies](#monitoring-insights-anomalies)
 + [Example workflow using queries to troubleshoot a function](#monitoring-insights-queries)
++ [What's next?](#monitoring-console-next-up)
 
 ## How Lambda Insights monitors serverless applications<a name="monitoring-insights-how"></a>
 
@@ -23,7 +23,7 @@ The Lambda Insights layer extends the `CreateLogStream` and `PutLogEvents` for t
 
 ## Pricing<a name="monitoring-insights-pricing"></a>
 
-For each Lambda function enabled for Lambda Insights, you only pay for what you use for metrics and logs\. For a pricing example, see [Amazon CloudWatch pricing](http://aws.amazon.com/cloudwatch/pricing/)\.
+For each Lambda function enabled for Lambda Insights, you only pay for what you use for metrics and logs\. For a pricing example, see�[Amazon CloudWatch pricing](http://aws.amazon.com/cloudwatch/pricing/)\.
 
 ## Supported runtimes<a name="monitoring-insights-runtimes"></a>
 
@@ -40,29 +40,9 @@ You can use Lambda Insights with any of the following [Lambda function runtimes]
 + Ruby 2\.7 \(`ruby2.7`\)
 + Ruby 2\.5 \(`ruby2.5`\)
 
-## Region availability<a name="monitoring-insights-regions"></a>
-
-Lambda Insights is currently available in the following AWS Regions:
-+ US East \(N\. Virginia\)
-+ US East \(Ohio\)
-+ US West \(N\. California\)
-+ US West \(Oregon\)
-+ Asia Pacific \(Mumbai\)
-+ Asia Pacific \(Seoul\)
-+ Asia Pacific \(Singapore\)
-+ Asia Pacific \(Sydney\)
-+ Asia Pacific \(Tokyo\)
-+ Canada \(Central\)
-+ Europe \(Frankfurt\)
-+ Europe \(Ireland\)
-+ Europe \(London\)
-+ Europe \(Paris\)
-+ Europe \(Stockholm\)
-+ South America \(São Paulo\)
-
 ## Enabling Lambda Insights in the Lambda console<a name="monitoring-insights-enabling-console"></a>
 
-You can enable Lambda Insights enhanced monitoring on new and existing Lambda functions\. When you enable Lambda Insights on a function in the Lambda console for a supported runtime, Lambda adds the Lambda Insights [extension](https://docs.aws.amazon.com/lambda/latest/dg/using-extensions.html) as a layer to your function, and verifies or attempts to attach the [https://console.aws.amazon.com/iam/home#/policies/arn:aws:iam::aws:policy/CloudWatchLambdaInsightsExecutionRolePolicy$jsonEditor](https://console.aws.amazon.com/iam/home#/policies/arn:aws:iam::aws:policy/CloudWatchLambdaInsightsExecutionRolePolicy$jsonEditor) policy to your function’s [execution role](https://docs.aws.amazon.com/lambda/latest/dg/lambda-intro-execution-role.html)\.
+You can enable Lambda Insights enhanced monitoring on new and existing Lambda functions\. When you enable Lambda Insights on a function in the Lambda console for a supported runtime, Lambda adds the Lambda Insights [extension](https://docs.aws.amazon.com/lambda/latest/dg/using-extensions.html) as a layer to your function, and verifies or attempts to attach the [https://console.aws.amazon.com/iam/home#/policies/arn:aws:iam::aws:policy/CloudWatchLambdaInsightsExecutionRolePolicy$jsonEditor](https://console.aws.amazon.com/iam/home#/policies/arn:aws:iam::aws:policy/CloudWatchLambdaInsightsExecutionRolePolicy$jsonEditor) policy to your function's [execution role](https://docs.aws.amazon.com/lambda/latest/dg/lambda-intro-execution-role.html)\.
 
 **To enable Lambda Insights in the Lambda console**
 
@@ -80,7 +60,7 @@ You can enable Lambda Insights enhanced monitoring on new and existing Lambda fu
 
 ## Enabling Lambda Insights programmatically<a name="monitoring-insights-enabling-programmatically"></a>
 
-You can also enable Lambda Insights using the AWS Command Line Interface \(AWS CLI\), AWS Serverless Application Model \(SAM\) CLI, AWS CloudFormation, or the AWS Cloud Development Kit \(AWS CDK\)\. When you enable Lambda Insights programmatically on a function for a supported runtime, CloudWatch attaches the [https://console.aws.amazon.com/iam/home#/policies/arn:aws:iam::aws:policy/CloudWatchLambdaInsightsExecutionRolePolicy$jsonEditor](https://console.aws.amazon.com/iam/home#/policies/arn:aws:iam::aws:policy/CloudWatchLambdaInsightsExecutionRolePolicy$jsonEditor) policy to your function’s [execution role](https://docs.aws.amazon.com/lambda/latest/dg/lambda-intro-execution-role.html)\.
+You can also enable Lambda Insights using the AWS Command Line Interface \(AWS CLI\), AWS Serverless Application Model \(SAM\) CLI, AWS CloudFormation, or the AWS Cloud Development Kit \(AWS CDK\)\. When you enable Lambda Insights programmatically on a function for a supported runtime, CloudWatch attaches the [https://console.aws.amazon.com/iam/home#/policies/arn:aws:iam::aws:policy/CloudWatchLambdaInsightsExecutionRolePolicy$jsonEditor](https://console.aws.amazon.com/iam/home#/policies/arn:aws:iam::aws:policy/CloudWatchLambdaInsightsExecutionRolePolicy$jsonEditor) policy to your function's [execution role](https://docs.aws.amazon.com/lambda/latest/dg/lambda-intro-execution-role.html)\.
 
 For more information, see [Getting started with Lambda Insights](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Lambda-Insights-Getting-Started.html) in the *Amazon CloudWatch User Guide*\.
 
@@ -162,3 +142,7 @@ You can use the single\-function view on the Lambda Insights dashboard to identi
 
 1. Choose **Run query** to generate a **Logs** message for the invocation request\.  
 ![\[Querying the selected function in the Logs Insights dashboard.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/lambdainsights-query.png)
+
+## What's next?<a name="monitoring-console-next-up"></a>
++ Learn how to create a CloudWatch Logs dashboard in [Create a Dashboard](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/create_dashboard.html) in the *Amazon CloudWatch User Guide*\.
++ Learn how to add queries to a CloudWatch Logs dashboard in [Add Query to Dashboard or Export Query Results](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_ExportQueryResults.html) in the *Amazon CloudWatch User Guide*\.

@@ -9,7 +9,7 @@ In this tutorial, you do the following:
 
 ## Prerequisites<a name="services-cloudwatchevents-tutorial-prereqs"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with Lambda](getting-started-create-function.md) to create your first Lambda function\.
 
 ## Create a Lambda function<a name="services-cloudwatchevents-tutorial-create"></a>
 
@@ -104,8 +104,6 @@ Configure an alarm in Amazon CloudWatch that monitors the Lambda function and se
    + **Description** – **Lambda canary alarm**\.
    + Threshold – **Whenever Errors is >=****1**\.
    + **Send notification to** – **lambda\-canary\-notifications**\.
-
-
 
 ## Test the alarm<a name="services-cloudwatchevents-tutorial-testalarm"></a>
 

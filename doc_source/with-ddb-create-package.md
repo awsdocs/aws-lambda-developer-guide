@@ -67,7 +67,7 @@ If the handler returns normally without exceptions, Lambda considers the input b
 + `aws-lambda-java-core`
 + `aws-lambda-java-events`
 
-Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [Deploy Java Lambda functions with \.zip file archives](java-package.md)\.
+Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [Deploy Java Lambda functions with \.zip or JAR file archives](java-package.md)\.
 
 ## C\#<a name="with-ddb-example-deployment-pkg-dotnet"></a>
 

@@ -1,6 +1,19 @@
 # AWS Lambda function errors in Ruby<a name="ruby-exceptions"></a>
 
-When your code raises an error, Lambda generates a JSON representation of the error\. This error document appears in the invocation log and, for synchronous invocations, in the output\.
+You can invoke your AWS Lambda function with a test payload and view the output on the Lambda console, the AWS Command Line Interface \(AWS CLI\), using Lambda APIs, or the AWS SDK\. When your Lambda function's code raises an error, Lambda generates a JSON representation of the error that is returned to an invocation log and, for synchronous invocations, in the output\.
+
+This page describes how to view Lambda function invocation errors for the Ruby runtime using the Lambda console and the AWS CLI\.
+
+**Topics**
++ [Syntax](#ruby-exceptions-syntax)
++ [How it works](#ruby-exceptions-how)
++ [Using the Lambda console](#ruby-exceptions-console)
++ [Using the AWS Command Line Interface \(AWS CLI\)](#ruby-exceptions-cli)
++ [Error handling in other AWS services](#ruby-exceptions-other-services)
++ [Sample applications](#ruby-exceptions-samples)
++ [What's next?](#ruby-exceptions-next-up)
+
+## Syntax<a name="ruby-exceptions-syntax"></a>
 
 **Example function\.rb**  
 
@@ -25,10 +38,81 @@ This code results in a type error\. Lambda catches the error and generates a JSO
 }
 ```
 
-When you invoke the function from the command line, the AWS CLI splits the response into two documents\. To indicate that a function error occurred, the response displayed in the terminal includes a `FunctionError` field\. The response or error returned by the function is written to the output file\.
+## How it works<a name="ruby-exceptions-how"></a>
+
+When you invoke a Lambda function, Lambda receives the invocation request and validates the permissions in your execution role, verifies that the event document is a valid JSON document, and checks parameter values\.
+
+If the request passes validation, Lambda sends the request to a function instance\. The [Lambda runtime](lambda-runtimes.md) environment converts the event document into an object, and passes it to your function handler\. 
+
+If Lambda encounters an error, it returns an exception type, message, and HTTP status code that indicates the cause of the error\. The client or service that invoked the Lambda function can handle the error programmatically, or pass it along to an end user\. The correct error handling behavior depends on the type of application, the audience, and the source of the error\.
+
+The following list describes the range of status codes you can receive from Lambda\.
+
+**`2xx`**  
+A `2xx` series error with a `X-Amz-Function-Error` header in the response indicates a Lambda runtime or function error\. A `2xx` series status code indicates that Lambda accepted the request, but instead of an error code, Lambda indicates the error by including the `X-Amz-Function-Error` header in the response\.
+
+**`4xx`**  
+A `4xx` series error indicates an error that the invoking client or service can fix by modifying the request, requesting permission, or by retrying the request\. `4xx` series errors other than `429` generally indicate an error with the request\. 
+
+**`5xx`**  
+A `5xx` series error indicates an issue with Lambda, or an issue with the function's configuration or resources\. `5xx` series errors can indicate a temporary condition that can be resolved without any action by the user\. These issues can't be addressed by the invoking client or service, but a Lambda function's owner may be able to fix the issue\.
+
+For a complete list of invocation errors, see [Invoke API Errors](API_Invoke.md#API_Invoke_Errors)\.
+
+## Using the Lambda console<a name="ruby-exceptions-console"></a>
+
+You can invoke your function on the Lambda console by configuring a test event and viewing the output\. The output is captured in the function's execution logs and, when [active tracing](services-xray.md) is enabled, in AWS X\-Ray\.
+
+**To invoke a function on the Lambda console**
+
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+
+1. Choose a function\.
+
+1. Choose **Configure test events** from the drop\-down menu next to the **Test** button\.  
+![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/console-test-config.png)
+
+1. Choose an **Event template** from the dropdown list\.
+
+1. Enter a name for the test event\.
+
+1. Enter the JSON for the test event\.
+
+1. Choose **Create**\.
+
+1. Choose **Test**\.
+
+The Lambda console invokes your function [synchronously](invocation-sync.md) and displays the result\. To see the response, logs, and other information, expand the **Details** section\.
+
+## Using the AWS Command Line Interface \(AWS CLI\)<a name="ruby-exceptions-cli"></a>
+
+The AWS Command Line Interface \(AWS CLI\) is an open source tool that enables you to interact with AWS services using commands in your command\-line shell\. To complete the steps in this section, you need the following:
++ [AWS CLI – Install version 2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
++ [AWS CLI – Quick configuration with `aws configure`](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)
+
+When you invoke a Lambda function in the AWS CLI, the AWS CLI splits the response into two documents\. The AWS CLI response is displayed in your command prompt\. If an error has occurred, the response contains a `FunctionError` field\. The invocation response or error returned by the function is written to an output file\. For example, `output.json` or `output.txt`\.
+
+The following [invoke](https://docs.aws.amazon.com/cli/latest/reference/lambda/invoke.html) command example demonstrates how to invoke a function and write the invocation response to an `output.txt` file\.
+
+------
+#### [ mac OS/Linux OS ]
 
 ```
-$ aws lambda invoke --function-name my-function out.json
+aws lambda invoke --function-name my-function --payload '{"key1": "value1", "key2": "value2", "key3": "value3"}' output.txt
+```
+
+------
+#### [ Windows OS ]
+
+```
+aws lambda invoke --function-name my-function --cli-binary-format raw-in-base64-out --payload '{"key1": "value1", "key2": "value2", "key3": "value3"}' output.txt
+```
+
+------
+
+You should see the AWS CLI response in your command prompt:
+
+```
 {
     "StatusCode": 200,
     "FunctionError": "Unhandled",
@@ -36,36 +120,37 @@ $ aws lambda invoke --function-name my-function out.json
 }
 ```
 
-View the output file to see the error document\.
+You should see the function invocation response in the `output.txt` file\. In the same command prompt, you can also view the output in your command prompt using:
 
 ```
-$ cat out.json
+cat output.txt
+```
+
+You should see the invocation response in your command prompt\.
+
+```
 {"errorMessage":"no implicit conversion of String into Integer","errorType":"Function<TypeError>","stackTrace":["/var/task/function.rb:3:in `first'","/var/task/function.rb:3:in `handler'"]}
 ```
 
-**Note**  
-The 200 \(success\) status code in the response from Lambda indicates that there wasn't an error with the request that you sent to Lambda\. For issues that result in an error status code, see [Errors](API_Invoke.md#API_Invoke_Errors)\.
+## Error handling in other AWS services<a name="ruby-exceptions-other-services"></a>
 
-Lambda also records up to 256 KB of the error object in the function's logs\. To view logs when you invoke the function from the command line, use the `--log-type` option and decode the base64 string in the response\.
+When another AWS service invokes your function, the service chooses the invocation type and retry behavior\. AWS services can invoke your function on a schedule, in response to a lifecycle event on a resource, or to serve a request from a user\. Some services invoke functions asynchronously and let Lambda handle errors, while others retry or pass errors back to the user\.
 
-```
-$ aws lambda invoke --function-name my-function out.json --log-type Tail \
---query 'LogResult' --output text |  base64 -d
-START RequestId: 5ce6a15a-f156-11e8-b8aa-25371a5ca2a3 Version: $LATEST
-Processing event...
-Error raised from handler method
-{
-  "errorMessage": "no implicit conversion of String into Integer",
-  "errorType": "Function<TypeError>",
-  "stackTrace": [
-    "/var/task/function.rb:3:in `first'",
-    "/var/task/function.rb:3:in `handler'"
-  ]
-}
-END RequestId: 5ce6a15a-f156-11e8-b8aa-25371a5ca2a3
-REPORT RequestId: 5ce6a15a-f156-11e8-b8aa-25371a5ca2a3  Duration: 22.74 ms      Billed Duration: 23 ms         Memory Size: 128 MB     Max Memory Used: 18 MB
-```
+For example, API Gateway treats all invocation and function errors as internal errors\. If the Lambda API rejects the invocation request, API Gateway returns a `500` error code\. If the function runs but returns an error, or returns a response in the wrong format, API Gateway returns a 502 error code\. To customize the error response, you must catch errors in your code and format a response in the required format\.
 
-For more information about logs, see [AWS Lambda function logging in Ruby](ruby-logging.md)\.
+We recommend using AWS X\-Ray to determine the source of an error and its cause\. X\-Ray allows you to find out which component encountered an error, and see details about the errors\. The following example shows a function error that resulted in a `502` response from API Gateway\.
 
-Depending on the event source, AWS Lambda might retry the failed Lambda function\. For example, if Kinesis is the event source, AWS Lambda retries the failed invocation until the Lambda function succeeds or the records in the stream expire\. For more information on retries, see [Error handling and automatic retries in AWS Lambda](invocation-retries.md)\.
+![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/tracemap-apig-502.png)
+
+For more information, see [Instrumenting Ruby code in AWS Lambda](ruby-tracing.md)\.
+
+## Sample applications<a name="ruby-exceptions-samples"></a>
+
+The following sample code is available for the Ruby runtime\.
+
+**Sample Lambda applications in Ruby**
++ [blank\-ruby](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-ruby) – A Ruby function that shows the use of logging, environment variables, AWS X\-Ray tracing, layers, unit tests and the AWS SDK\.
++ [Ruby Code Samples for AWS Lambda](https://docs.aws.amazon.com/code-samples/latest/catalog/code-catalog-ruby-example_code-lambda.html) – Code samples written in Ruby that demonstrate how to interact with AWS Lambda\.
+
+## What's next?<a name="ruby-exceptions-next-up"></a>
++ Learn how to show logging events for your Lambda function on the [AWS Lambda function logging in Ruby](ruby-logging.md) page\.

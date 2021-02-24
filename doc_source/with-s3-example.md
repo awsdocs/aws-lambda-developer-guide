@@ -19,12 +19,17 @@ Upon completing this tutorial, you will have the following Amazon S3, Lambda, an
 
 ## Prerequisites<a name="with-s3-prepare"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with Lambda](getting-started-create-function.md) to create your first Lambda function\.
 
-To complete the following steps, you need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
+To complete the following steps, you need a command line terminal or shell to run commands\. Commands and the expected output are listed in separate blocks:
 
 ```
-~/lambda-project$ this is a command
+this is a command
+```
+
+You should see the following output:
+
+```
 this is output
 ```
 
@@ -120,6 +125,8 @@ The following example code receives an Amazon S3 event input and processes the m
 **Note**  
 For sample code in other languages, see [Sample Amazon S3 function code](with-s3-example-deployment-pkg.md)\.
 
+### Create the function code<a name="with-s3-example-create-function-code"></a>
+
 **Example index\.js**  
 
 ```
@@ -207,6 +214,8 @@ Review the preceding code and note the following:
 + The code assumes that the destination bucket exists and its name is a concatenation of the source bucket name followed by the string `-resized`\. For example, if the source bucket identified in the event data is `examplebucket`, the code assumes you have an `examplebucket-resized` destination bucket\.
 + For the thumbnail it creates, the code derives its key name as the concatenation of the string `resized-` followed by the source object key name\. For example, if the source object key is `sample.jpg`, the code creates a thumbnail object that has the key `resized-sample.jpg`\.
 
+### Create the deployment package<a name="with-s3-example-create-function-package"></a>
+
 The deployment package is a \.zip file containing your Lambda function code and dependencies\. 
 
 **To create a deployment package**
@@ -218,13 +227,13 @@ The deployment package is a \.zip file containing your Lambda function code and 
 1. Install the Sharp library with npm\. For Linux, use the following command\.
 
    ```
-   lambda-s3$ npm install sharp
+   npm install sharp
    ```
 
    For macOS, use the following command\.
 
    ```
-   lambda-s3$ npm install --arch=x64 --platform=linux --target=12.13.0  sharp
+   npm install --arch=x64 --platform=linux --target=12.13.0  sharp
    ```
 
    After you complete this step, you will have the following folder structure:
@@ -236,32 +245,36 @@ The deployment package is a \.zip file containing your Lambda function code and 
    └ /node_modules/...
    ```
 
-1. Create a deployment package with the function code and dependencies\.
+1. Create a deployment package with the function code and dependencies\. Set the \-r \(recursive\) option for the zip command to compress the subfolders\. 
 
    ```
-   lambda-s3$ zip -r function.zip .
+   zip -r function.zip .
    ```
+
+### Create the Lambda function<a name="with-s3-example-create-function-createfunction"></a>
 
 **To create the function**
 + Create a Lambda function with the `create-function` command\.
 
   ```
-  $ aws lambda create-function --function-name CreateThumbnail \
+  aws lambda create-function --function-name CreateThumbnail \
   --zip-file fileb://function.zip --handler index.handler --runtime nodejs12.x \
   --timeout 10 --memory-size 1024 \
   --role arn:aws:iam::123456789012:role/lambda-s3-role
   ```
+**Note**  
+If you are using AWS CLI version 2, add the following command parameters:   
 
-If you are using AWS CLI version 2, add the following command parameters: 
+  ```
+  --cli-binary-format raw-in-base64-out
+  ```
 
-```
---cli-binary-format raw-in-base64-out
-```
+  The Lambda function in the last step uses a Node\.js function handler of `index.handler`\. This name reflects the function name as `handler`, and the file where the handler code is stored in `index.js`\. For more information, see [AWS Lambda function handler in Node\.js](nodejs-handler.md)\. It also specifies a runtime of `nodejs12.x`\. For more information, see [Lambda runtimes](lambda-runtimes.md)\.
 
 For the role parameter, replace the number sequence with your AWS account ID\. The preceding example command specifies a 10\-second timeout value as the function configuration\. Depending on the size of objects you upload, you might need to increase the timeout value using the following AWS CLI command\.
 
 ```
-$ aws lambda update-function-configuration --function-name CreateThumbnail --timeout 30
+aws lambda update-function-configuration --function-name CreateThumbnail --timeout 30
 ```
 
 ## Test the Lambda function<a name="walkthrough-s3-events-adminuser-create-test-function-upload-zip-test-manual-invoke"></a>
@@ -316,8 +329,14 @@ In this step, you invoke the Lambda function manually using sample Amazon S3 eve
 1. Run the following Lambda CLI `invoke` command to invoke the function\. Note that the command requests asynchronous execution\. You can optionally invoke it synchronously by specifying `RequestResponse` as the `invocation-type` parameter value\.
 
    ```
-   $ aws lambda invoke --function-name CreateThumbnail --invocation-type Event \
+   aws lambda invoke --function-name CreateThumbnail --invocation-type Event \
    --payload file://inputFile.txt outputfile.txt
+   ```
+**Note**  
+If you are using AWS CLI version 2, add the following command parameters:   
+
+   ```
+   --cli-binary-format raw-in-base64-out
    ```
 
 1. Verify that the thumbnail was created in the target bucket\.
@@ -337,7 +356,7 @@ In this step, you add the remaining configuration so that Amazon S3 can publish 
    + The bucket is owned by your account\. If you delete a bucket, it is possible for another account to create a bucket with the same ARN\.
 
    ```
-   $ aws lambda add-permission --function-name CreateThumbnail --principal s3.amazonaws.com \
+   aws lambda add-permission --function-name CreateThumbnail --principal s3.amazonaws.com \
    --statement-id s3invoke --action "lambda:InvokeFunction" \
    --source-arn arn:aws:s3:::sourcebucket \
    --source-account account-id
@@ -346,7 +365,7 @@ In this step, you add the remaining configuration so that Amazon S3 can publish 
 1. Verify the function's access policy by running the AWS CLI `get-policy` command\.
 
    ```
-   $ aws lambda get-policy --function-name CreateThumbnail
+   aws lambda get-policy --function-name CreateThumbnail
    ```
 
 Add notification configuration on the source bucket to request Amazon S3 to publish object\-created events to Lambda\.

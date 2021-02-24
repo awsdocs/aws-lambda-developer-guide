@@ -13,8 +13,8 @@ When you deploy updates to your function directly with the Lambda API or with a 
 The Lambda runtime needs permission to read the files in your deployment package\. You can use the `chmod` command to change the file mode\. The following example commands make all files and folders in the current directory readable by any user\.
 
 ```
-my-function$ chmod 644 $(find . -type f)
-my-function$ chmod 755 $(find . -type d)
+chmod 644 $(find . -type f)
+chmod 755 $(find . -type d)
 ```
 
 **Error:** *An error occurred \(RequestEntityTooLargeException\) when calling the UpdateFunctionCode operation*

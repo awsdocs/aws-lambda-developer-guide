@@ -7,7 +7,7 @@ Lambda sets quotas for the amount of compute and storage resources that you can 
 | --- | --- | --- | 
 | Concurrent executions | 1,000 | Hundreds of thousands | 
 | Function and layer storage \(\.zip file archives\) | 75 GB | Terabytes | 
-| Function storage \(container images\) | See [Amazon ECR service quotas](https://docs.aws.amazon.com/AmazonECR/latest/userguide/service-quotas.html)\. |   | 
+| Function storage \(container images\) | See [Amazon ECR service quotas](https://docs.aws.amazon.com/AmazonECR/latest/userguide/service-quotas.html)\. |  | 
 |  [Elastic network interfaces per virtual private cloud \(VPC\)](configuration-vpc.md)  This quota is shared with other services, such as Amazon Elastic File System \(Amazon EFS\)\. See [Amazon VPC quotas](https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html)\.   | 250 | Hundreds | 
 
 For details on concurrency and how Lambda scales your function concurrency in response to traffic, see [AWS Lambda function scaling](invocation-scaling.md)\.
@@ -21,10 +21,10 @@ The following quotas apply to function configuration, deployments, and execution
 | Function [timeout](configuration-console.md) | 900 seconds \(15 minutes\) | 
 | Function [environment variables](configuration-envvars.md) | 4 KB | 
 | Function [resource\-based policy](access-control-resource-based.md) | 20 KB | 
-| Function [layers](configuration-layers.md) | 5 layers | 
+| Function [layers](configuration-layers.md) | five layers | 
 | Function [burst concurrency](invocation-scaling.md) | 500 \- 3000 \(varies per Region\) | 
 | [Invocation payload](lambda-invocation.md) \(request and response\) |  6 MB \(synchronous\) 256 KB \(asynchronous\)  | 
-| [Deployment package \(\.zip file archive\)](gettingstarted-package.md) size |  50 MB \(zipped, for direct upload\) 250 MB \(unzipped, including layers\) 3 MB \(console editor\)  | 
+| [Deployment package \(\.zip file archive\)](gettingstarted-package.md) size |  50 MB \(zipped, for direct upload\) 250 MB \(unzipped, including layers\) 3 MB \(console editor\), 512 KB maximum for an individual file  | 
 | [Container image](lambda-images.md) code package size |  10 GB  | 
 | Test events \(console editor\) | 10 | 
 | `/tmp` directory storage | 512 MB | 

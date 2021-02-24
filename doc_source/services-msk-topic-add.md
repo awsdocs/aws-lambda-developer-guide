@@ -45,7 +45,7 @@ Use the following example AWS CLI commands to create and view an Amazon MSK trig
 The following example uses the [https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/create-event-source-mapping.html](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/create-event-source-mapping.html) AWS CLI command to map a Lambda function named `my-kafka-function` to a Kafka topic named `AWSKafkaTopic`\. The topic's starting position is set to `latest`\.
 
 ```
-$ aws lambda create-event-source-mapping --event-source-arn arn:aws:kafka:us-west-2:arn:aws:kafka:us-west-2:111111111111:cluster/my-cluster/fc2f5bdf-fd1b-45ad-85dd-15b4a5a6247e-2 --topics AWSKafkaTopic --starting-position LATEST --function-name my-kafka-function
+aws lambda create-event-source-mapping --event-source-arn arn:aws:kafka:us-west-2:arn:aws:kafka:us-west-2:111111111111:cluster/my-cluster/fc2f5bdf-fd1b-45ad-85dd-15b4a5a6247e-2 --topics AWSKafkaTopic --starting-position LATEST --function-name my-kafka-function
 ```
 
 For more information, see the [CreateEventSourceMapping](https://docs.aws.amazon.com/lambda/latest/dg/API_CreateEventSourceMapping.html) API reference documentation\.
@@ -55,5 +55,5 @@ For more information, see the [CreateEventSourceMapping](https://docs.aws.amazon
 The following example uses the [https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/get-event-source-mapping.html](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/get-event-source-mapping.html) AWS CLI command to describe the status of the event source mapping that you created\.
 
 ```
-$ aws lambda get-event-source-mapping --uuid 6d9bce8e-836b-442c-8070-74e77903c815
+aws lambda get-event-source-mapping --uuid 6d9bce8e-836b-442c-8070-74e77903c815
 ```

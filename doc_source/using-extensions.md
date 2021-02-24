@@ -14,6 +14,7 @@ The following [Lambda runtimes](lambda-runtimes.md) support external extensions:
 + Custom runtime on Amazon Linux 2 \(`provided.al2`\)
 + Java 11 \(Corretto\) \(`java11`\)
 + Java 8 \(Corretto\) \(`java8.al2`\)
++ Node\.js 14\.x \(`nodejs14.x`\)
 + Node\.js 12\.x \(`nodejs12.x`\)
 + Node\.js 10\.x \(`nodejs10.x`\)
 + Python 3\.8 \(`python3.8`\)
@@ -64,7 +65,7 @@ For a \.zip file archive, you can create an AWS CloudFormation template to simpl
 
 You can add an extension to your function as a [Lambda layer](configuration-layers.md)\. Using layers enables you to share extensions across your organization or to the entire community of Lambda developers\. You can add one or more extensions to a layer\. You can register up to 10 extensions for a function\.
 
-You add the extension to your function using the same method as you would for any layer\. For more information, see [Configuring a function to use layers](configuration-layers.md#configuration-layers-using)\.
+You add the extension to your function using the same method as you would for any layer\. For more information, see [Configure a function to use layers](configuration-layers.md#configuration-layers-using)\.
 
 **Add an extension to your function \(console\)**
 

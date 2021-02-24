@@ -7,6 +7,7 @@ Use the following information to help you diagnose and fix common issues that yo
 + [I am not authorized to perform iam:PassRole](#security_iam_troubleshoot-passrole)
 + [I want to view my access keys](#security_iam_troubleshoot-access-keys)
 + [I'm an administrator and want to allow others to access Lambda](#security_iam_troubleshoot-admin-delegate)
++ [I'm an administrator and want to migrate from AWS managed policies for Lambda that will be deprecated](#security_iam_troubleshoot-admin-deprecation)
 + [I want to allow people outside of my AWS account to access my Lambda resources](#security_iam_troubleshoot-cross-account-access)
 
 ## I am not authorized to perform an action in Lambda<a name="security_iam_troubleshoot-no-permissions"></a>
@@ -52,6 +53,26 @@ To allow others to access Lambda, you must create an IAM entity \(user or role\)
 
 To get started right away, see [Creating your first IAM delegated user and group](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-delegated-user.html) in the *IAM User Guide*\.
 
+## I'm an administrator and want to migrate from AWS managed policies for Lambda that will be deprecated<a name="security_iam_troubleshoot-admin-deprecation"></a>
+
+After March 1, 2021, the AWS managed policies **AWSLambdaReadOnlyAccess** and **AWSLambdaFullAccess** will be deprecated and can no longer be attached to new IAM users\. For more information about policy deprecations, see [Deprecated AWS managed policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-deprecated.html) in the *IAM User Guide*\.
+
+Lambda has introduced two new AWS managed policies:
++ The **AWSLambda\_ReadOnlyAccess** policy grants read\-only access to Lambda, Lambda console features, and other related AWS services\. This policy was created by scoping down the previous policy **AWSLambdaReadOnlyAccess**\.
++ The **AWSLambda\_FullAccess** policy grants full access to Lambda, Lambda console features, and other related AWS services\. This policy was created by scoping down the previous policy **AWSLambdaFullAccess**\.
+
+### Using the AWS managed policies<a name="security_iam_troubleshoot-admin-deprecation-aws"></a>
+
+We recommend using the newly launched managed policies to grant users, groups, and roles access to Lambda; however, review the permissions granted in the policies to ensure they meet your requirements\.
++ To review the permissions of the **AWSLambda\_ReadOnlyAccess** policy, see the [AWSLambda\_ReadOnlyAccess](https://console.aws.amazon.com/iam/home#/policies/arn:aws:iam::aws:policy/AWSLambda_ReadOnlyAccess$jsonEditor) policy page in the IAM console\.
++ To review the permissions of the **AWSLambda\_FullAccess** policy, see the [AWSLambda\_FullAccess](https://console.aws.amazon.com/iam/home#/policies/arn:aws:iam::aws:policy/AWSLambda_FullAccess$jsonEditor) policy page in the IAM console\.
+
+After reviewing the permissions, you can attach the policies to an IAM identity \(groups, users, or roles\)\. For instructions about attaching an AWS managed policy, see [Adding and removing IAM identity permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html) in the *IAM User Guide*\.
+
+### Using customer managed policies<a name="security_iam_troubleshoot-admin-deprecation-customer"></a>
+
+If you need more fine\-grained access control or would like to add permissions, you can create your own [customer managed policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#customer-managed-policies)\. For more information, see [Creating policies on the JSON tab](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html#access_policies_create-json-editor) in the *IAM User Guide*\.
+
 ## I want to allow people outside of my AWS account to access my Lambda resources<a name="security_iam_troubleshoot-cross-account-access"></a>
 
 You can create a role that users in other accounts or people outside of your organization can use to access your resources\. You can specify who is trusted to assume the role\. For services that support resource\-based policies or access control lists \(ACLs\), you can use those policies to grant people access to your resources\.
@@ -59,6 +80,6 @@ You can create a role that users in other accounts or people outside of your org
 To learn more, consult the following:
 + To learn whether Lambda supports these features, see [How AWS Lambda works with IAM](security_iam_service-with-iam.md)\.
 + To learn how to provide access to your resources across AWS accounts that you own, see [Providing access to an IAM user in another AWS account that you own](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_aws-accounts.html) in the *IAM User Guide*\.
-+ To learn how to provide access to your resources to third\-party AWS accounts, see [Providing access to AWS accounts owned by third parties](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html) in the *IAM User Guide*\.
++ To learn how to provide access to your resources to third\-party AWS accounts, see [Providing ccess to AWS accounts owned by third parties](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html) in the *IAM User Guide*\.
 + To learn how to provide access through identity federation, see [Providing access to externally authenticated users \(identity federation\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_federated-users.html) in the *IAM User Guide*\.
 + To learn the difference between using roles and resource\-based policies for cross\-account access, see [How IAM roles differ from resource\-based policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_compare-resource-policies.html) in the *IAM User Guide*\.

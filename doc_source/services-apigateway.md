@@ -34,7 +34,7 @@ A Lambda integration maps a path and HTTP method combination to a Lambda functio
 
 Amazon API Gateway invokes your function [synchronously](invocation-sync.md) with an event that contains a JSON representation of the HTTP request\. For a custom integration, the event is the body of the request\. For a proxy integration, the event has a defined structure\. The following example shows a proxy event from an API Gateway REST API\.
 
-**Example [event\.json](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/nodejs-apig/event.json) API Gateway proxy event \(REST API\)**  
+**Example [event\.json](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/nodejs-apig/event.json) API Gateway proxy event \(REST API\)**  
 
 ```
 {
@@ -79,7 +79,7 @@ API Gateway waits for a response from your function and relays the result to the
 
 The following example shows a response object from a Node\.js function\. The response object represents a successful HTTP response that contains a JSON document\.
 
-**Example [index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/nodejs-apig/function/index.js) – Proxy integration response object \(Node\.js\)**  
+**Example [index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/nodejs-apig/function/index.js) – Proxy integration response object \(Node\.js\)**  
 
 ```
 var response = {
@@ -168,10 +168,15 @@ You can manage function policy permissions manually with the following API opera
 To grant invocation permission to an existing API, use the `add-permission` command\.
 
 ```
-$ aws lambda add-permission --function-name my-function \
+aws lambda add-permission --function-name my-function \
 --statement-id apigateway-get --action lambda:InvokeFunction \
 --principal apigateway.amazonaws.com \
 --source-arn "arn:aws:execute-api:us-east-2:123456789012:mnh1xmpli7/default/GET/"
+```
+
+You should see the following output:
+
+```
 {
     "Statement": "{\"Sid\":\"apigateway-test-2\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"apigateway.amazonaws.com\"},\"Action\":\"lambda:InvokeFunction\",\"Resource\":\"arn:aws:lambda:us-east-2:123456789012:function:my-function\",\"Condition\":{\"ArnLike\":{\"AWS:SourceArn\":\"arn:aws:execute-api:us-east-2:123456789012:mnh1xmpli7/default/GET\"}}}"
 }
@@ -193,13 +198,16 @@ For details on viewing the policy and removing statements, see [Cleaning up reso
 
 API Gateway treats all invocation and function errors as internal errors\. If the Lambda API rejects the invocation request, API Gateway returns a 500 error code\. If the function runs but returns an error, or returns a response in the wrong format, API Gateway returns a 502\. In both cases, the body of the response from API Gateway is `{"message": "Internal server error"}`\.
 
+**Note**  
+API Gateway does not retry any Lambda invocations\. If Lambda returns an error, API Gateway returns an error response to the client\.
+
 The following example shows an X\-Ray trace map for a request that resulted in a function error and a 502 from API Gateway\. The client receives the generic error message\.
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/tracemap-apig-502.png)
 
 To customize the error response, you must catch errors in your code and format a response in the required format\.
 
-**Example [index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/nodejs-apig/function/index.js) – Error formatting**  
+**Example [index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/nodejs-apig/function/index.js) – Error formatting**  
 
 ```
 var formatError = function(error){
@@ -247,7 +255,7 @@ WebSocket APIs also use the API Gateway version 2 API and support a similar feat
 
 HTTP APIs support a simplified event format \(version 2\.0\)\. The following example shows an event from an HTTP API\.
 
-**Example [event\-v2\.json](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/nodejs-apig/event-v2.json) – API Gateway proxy event \(HTTP API\)**  
+**Example [event\-v2\.json](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/nodejs-apig/event-v2.json) – API Gateway proxy event \(HTTP API\)**  
 
 ```
 {
@@ -291,6 +299,6 @@ For more information, see [AWS Lambda integrations](https://docs.aws.amazon.com/
 ## Sample applications<a name="services-apigateway-samples"></a>
 
 The GitHub repository for this guide provides the following sample application for API Gateway\.
-+ [API Gateway with Node\.js](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/nodejs-apig) – A function with an AWS SAM template that creates a REST API that has AWS X\-Ray tracing enabled\. It includes scripts for deploying, invoking the function, testing the API, and cleanup\.
++ [API Gateway with Node\.js](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/nodejs-apig) – A function with an AWS SAM template that creates a REST API that has AWS X\-Ray tracing enabled\. It includes scripts for deploying, invoking the function, testing the API, and cleanup\.
 
 Lambda also provides [blueprints](gettingstarted-features.md#gettingstarted-features-blueprints) and [templates](gettingstarted-features.md#gettingstarted-features-templates) that you can use to create an API Gateway application in the Lambda console\.

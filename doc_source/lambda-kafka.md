@@ -10,4 +10,4 @@ This section describes how to use an AWS or non\-AWS hosted Kafka cluster with L
 + [Hosting an Apache Kafka cluster](kafka-hosting.md)
 + [Using an Apache Kafka cluster as an event source for Lambda](kafka-using-cluster.md)
 + [Using Lambda with Amazon MSK](with-msk.md)
-+ [Using Lambda with self\-managed Apache Kafka](kafka-smaa.md)
++ [Using Lambda with Self\-managed Apache Kafka](kafka-smaa.md)

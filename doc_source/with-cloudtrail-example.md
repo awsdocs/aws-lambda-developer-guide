@@ -10,10 +10,10 @@ Use the following instructions to create a Lambda function that notifies you whe
 
 ## Requirements<a name="with-cloudtrail-tutorial-requirements"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with Lambda](getting-started-create-function.md) to create your first Lambda function\.
 
 Before you begin, make sure that you have the following tools:
-+ [Node\.js 8 with `npm`](https://nodejs.org/en/download/releases/)\.
++ [Node\.js 12\.x with `npm`](https://nodejs.org/en/download/releases/)\.
 + The Bash shell\. For Linux and macOS, this is included by default\. In Windows 10, you can install the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows\-integrated version of Ubuntu and Bash\.
 + [The AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)\.
 
@@ -189,19 +189,19 @@ The following Lambda function processes CloudTrail logs, and sends a notificatio
 1. In the *lambda\-cloudtrail* folder, run the following script\. It creates a `package-lock.json` file and a `node_modules` folder, which handle all dependencies\.
 
    ```
-   $ npm install async
+   npm install async
    ```
 
 1. Run the following script to create a deployment package\.
 
    ```
-   $ zip -r function.zip .
+   zip -r function.zip .
    ```
 
 1. Create a Lambda function named CloudTrailEventProcessing with the `create-function` command by running the following script\. Make the indicated replacements\.
 
    ```
-   $ aws lambda create-function --function-name CloudTrailEventProcessing \
+   aws lambda create-function --function-name CloudTrailEventProcessing \
    --zip-file fileb://function.zip --handler index.handler --runtime nodejs12.x --timeout 10 --memory-size 1024 \
    --role arn:aws:iam::123456789012:role/lambda-cloudtrail-role
    ```
@@ -215,7 +215,7 @@ The Lambda function's resource policy needs permissions to allow Amazon S3 to in
 1. Run the following `add-permission` command\. Replace the ARN and account ID with your own\.
 
    ```
-   $ aws lambda add-permission --function-name CloudTrailEventProcessing \
+   aws lambda add-permission --function-name CloudTrailEventProcessing \
    --statement-id Id-1 --action "lambda:InvokeFunction" --principal s3.amazonaws.com \
    --source-arn arn:aws:s3:::my-bucket \
    --source-account 123456789012
@@ -228,7 +228,7 @@ The Lambda function's resource policy needs permissions to allow Amazon S3 to in
 1. To view the Lambda function's access policy, run the following `get-policy` command, and replace the function name\.
 
    ```
-   $ aws lambda get-policy --function-name function-name
+   aws lambda get-policy --function-name function-name
    ```
 
 ## Step 6: Configuring notifications on an Amazon S3 bucket<a name="with-cloudtrail-example-configure-event-source-add-notif-config"></a>

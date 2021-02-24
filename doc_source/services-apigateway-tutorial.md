@@ -25,8 +25,6 @@ The request payload you send in the `POST` request identifies the DynamoDB opera
   ```
 + The following is a sample request payload for a DynamoDB read item operation:
 
-   
-
   ```
   {
       "operation": "read",
@@ -59,12 +57,17 @@ To learn more about these API Gateway features, see [Configure proxy integration
 
 ## Prerequisites<a name="services-apigateway-tutorial-prereqs"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with Lambda](getting-started-create-function.md) to create your first Lambda function\.
 
-To complete the following steps, you need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
+To complete the following steps, you need a command line terminal or shell to run commands\. Commands and the expected output are listed in separate blocks:
 
 ```
-~/lambda-project$ this is a command
+this is a command
+```
+
+You should see the following output:
+
+```
 this is output
 ```
 
@@ -186,13 +189,13 @@ exports.handler = function(event, context, callback) {
 1. Create a deployment package\.
 
    ```
-   $ zip function.zip index.js
+   zip function.zip index.js
    ```
 
-1. Create a Lambda function with the `create-function` command\.
+1. Create a Lambda function with the `create-function` command\. For the `role` parameter, enter the ARN of the execution role that you created earlier\.
 
    ```
-   $ aws lambda create-function --function-name LambdaFunctionOverHttps \
+   aws lambda create-function --function-name LambdaFunctionOverHttps \
    --zip-file fileb://function.zip --handler index.handler --runtime nodejs12.x \
    --role arn:aws:iam::123456789012:role/service-role/lambda-apigateway-role
    ```
@@ -218,7 +221,7 @@ Invoke the function manually using the sample event data\. We recommend that you
 1. Run the following `invoke` command:
 
    ```
-   $ aws lambda  invoke --function-name LambdaFunctionOverHttps \
+   aws lambda  invoke --function-name LambdaFunctionOverHttps \
    --payload fileb://input.txt outputfile.txt
    ```
 
@@ -233,7 +236,12 @@ First, you create an API \(`DynamoDBOperations`\) using Amazon API Gateway with 
 Run the following `create-rest-api` command to create the `DynamoDBOperations` API for this tutorial\.
 
 ```
-$ aws apigateway create-rest-api --name DynamoDBOperations
+aws apigateway create-rest-api --name DynamoDBOperations
+```
+
+You should see the following output:
+
+```
 {
     "id": "bs8fqo6bp0",
     "name": "DynamoDBOperations",
@@ -250,8 +258,13 @@ $ aws apigateway create-rest-api --name DynamoDBOperations
 Save the API ID for use in further commands\. You also need the ID of the API root resource\. To get the ID, run the `get-resources` command\.
 
 ```
-$ API=bs8fqo6bp0
-$ aws apigateway get-resources --rest-api-id $API
+API=bs8fqo6bp0
+aws apigateway get-resources --rest-api-id $API
+```
+
+You should see the following output:
+
+```
 {
     "items": [
         {
@@ -269,8 +282,13 @@ At this time you only have the root resource, but you add more resources in the 
 Run the following `create-resource` command to create a resource \(`DynamoDBManager`\) in the API that you created in the preceding section\.
 
 ```
-$ aws apigateway create-resource --rest-api-id $API  --path-part DynamoDBManager \
+aws apigateway create-resource --rest-api-id $API  --path-part DynamoDBManager \
 --parent-id e8kitthgdb
+```
+
+You should see the following output:
+
+```
 {
     "path": "/DynamoDBManager",
     "pathPart": "DynamoDBManager",
@@ -286,9 +304,14 @@ Note the ID in the response\. This is the ID of the `DynamoDBManager` resource t
 Run the following `put-method` command to create a `POST` method on the `DynamoDBManager` resource in your API\.
 
 ```
-$ RESOURCE=iuig5w
-$ aws apigateway put-method --rest-api-id $API --resource-id $RESOURCE \
+RESOURCE=iuig5w
+aws apigateway put-method --rest-api-id $API --resource-id $RESOURCE \
 --http-method POST --authorization-type NONE
+```
+
+You should see the following output:
+
+```
 {
     "apiKeyRequired": false,
     "httpMethod": "POST",
@@ -303,11 +326,16 @@ We specify `NONE` for the `--authorization-type` parameter, which means that una
 Run the following command to set the Lambda function as the integration point for the `POST` method\. This is the method Amazon API Gateway invokes when you make an HTTP request for the `POST` method endpoint\. This command and others use ARNs that include your account ID and region\. Save these to variables \(you can find your account ID in the role ARN that you used to create the function\)\.
 
 ```
-$ REGION=us-east-2
-$ ACCOUNT=123456789012
-$ aws apigateway put-integration --rest-api-id $API --resource-id $RESOURCE \
+REGION=us-east-2
+ACCOUNT=123456789012
+aws apigateway put-integration --rest-api-id $API --resource-id $RESOURCE \
 --http-method POST --type AWS --integration-http-method POST \
 --uri arn:aws:apigateway:$REGION:lambda:path/2015-03-31/functions/arn:aws:lambda:$REGION:$ACCOUNT:function:LambdaFunctionOverHttps/invocations
+```
+
+You should see the following output:
+
+```
 {
     "type": "AWS",
     "httpMethod": "POST",
@@ -325,9 +353,14 @@ Set `content-type` of the `POST` method response and integration response to JSO
 + Run the following command to set the `POST` method response to JSON\. This is the response type that your API method returns\.
 
   ```
-  $ aws apigateway put-method-response --rest-api-id $API \
+  aws apigateway put-method-response --rest-api-id $API \
   --resource-id $RESOURCE --http-method POST \
   --status-code 200 --response-models application/json=Empty
+  ```
+
+  You should see the following output:
+
+  ```
   {
       "statusCode": "200",
       "responseModels": {
@@ -338,9 +371,14 @@ Set `content-type` of the `POST` method response and integration response to JSO
 + Run the following command to set the `POST` method integration response to JSON\. This is the response type that Lambda function returns\.
 
   ```
-  $ aws apigateway put-integration-response --rest-api-id $API \
+  aws apigateway put-integration-response --rest-api-id $API \
   --resource-id $RESOURCE --http-method POST \
   --status-code 200 --response-templates application/json=""
+  ```
+
+  You should see the following output:
+
+  ```
   {
       "statusCode": "200",
       "responseTemplates": {
@@ -356,7 +394,12 @@ If you encounter an error running this command, you can use escape characters ar
 In this step, you deploy the API that you created to a stage called `prod`\. 
 
 ```
-$ aws apigateway create-deployment --rest-api-id $API --stage-name prod
+aws apigateway create-deployment --rest-api-id $API --stage-name prod
+```
+
+You should see the following output:
+
+```
 {
     "id": "20vgsz",
     "createdDate": 1539820012
@@ -370,10 +413,15 @@ Now that you have an API created using Amazon API Gateway and you've deployed it
 To do this, you need to add a permission to the permissions policy associated with your Lambda function\. Run the following `add-permission` AWS Lambda command to grant the Amazon API Gateway service principal \(`apigateway.amazonaws.com`\) permissions to invoke your Lambda function \(`LambdaFunctionOverHttps`\)\. 
 
 ```
-$ aws lambda add-permission --function-name LambdaFunctionOverHttps \
+aws lambda add-permission --function-name LambdaFunctionOverHttps \
 --statement-id apigateway-test-2 --action lambda:InvokeFunction \
 --principal apigateway.amazonaws.com \
 --source-arn "arn:aws:execute-api:$REGION:$ACCOUNT:$API/*/POST/DynamoDBManager"
+```
+
+You should see the following output:
+
+```
 {
     "Statement": "{\"Sid\":\"apigateway-test-2\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"apigateway.amazonaws.com\"},\"Action\":\"lambda:InvokeFunction\",\"Resource\":\"arn:aws:lambda:us-east-2:123456789012:function:LambdaFunctionOverHttps\",\"Condition\":{\"ArnLike\":{\"AWS:SourceArn\":\"arn:aws:execute-api:us-east-2:123456789012:mnh1yprki7/*/POST/DynamoDBManager\"}}}"
 }
@@ -387,10 +435,15 @@ If your function and API are in different regions, the region identifier in the 
 Now, run the same command again, but this time you grant to your deployed API permissions to invoke the Lambda function\.
 
 ```
-$ aws lambda add-permission --function-name LambdaFunctionOverHttps \
+aws lambda add-permission --function-name LambdaFunctionOverHttps \
 --statement-id apigateway-prod-2 --action lambda:InvokeFunction \
 --principal apigateway.amazonaws.com \
 --source-arn "arn:aws:execute-api:$REGION:$ACCOUNT:$API/prod/POST/DynamoDBManager"
+```
+
+You should see the following output:
+
+```
 {
     "Statement": "{\"Sid\":\"apigateway-prod-2\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"apigateway.amazonaws.com\"},\"Action\":\"lambda:InvokeFunction\",\"Resource\":\"arn:aws:lambda:us-east-2:123456789012:function:LambdaFunctionOverHttps\",\"Condition\":{\"ArnLike\":{\"AWS:SourceArn\":\"arn:aws:execute-api:us-east-2:123456789012:mnh1yprki7/prod/POST/DynamoDBManager\"}}}"
 }
@@ -440,7 +493,7 @@ The Lambda function supports using the `create` operation to create an item in y
 Save the test input to a file named `create-item.json`\. Run the `test-invoke-method` Amazon API Gateway command to send an HTTP `POST` method request to the resource \(`DynamoDBManager`\) endpoint\.
 
 ```
-$ aws apigateway test-invoke-method --rest-api-id $API \
+aws apigateway test-invoke-method --rest-api-id $API \
 --resource-id $RESOURCE --http-method POST --path-with-query-string "" \
 --body file://create-item.json
 ```
@@ -448,7 +501,7 @@ $ aws apigateway test-invoke-method --rest-api-id $API \
 Or, you can use the following Curl command:
 
 ```
-$ curl -X POST -d "{\"operation\":\"create\",\"tableName\":\"lambda-apigateway\",\"payload\":{\"Item\":{\"id\":\"1\",\"name\":\"Bob\"}}}" https://$API.execute-api.$REGION.amazonaws.com/prod/DynamoDBManager
+curl -X POST -d "{\"operation\":\"create\",\"tableName\":\"lambda-apigateway\",\"payload\":{\"Item\":{\"id\":\"1\",\"name\":\"Bob\"}}}" https://$API.execute-api.$REGION.amazonaws.com/prod/DynamoDBManager
 ```
 
 To send request for the `echo` operation that your Lambda function supports, you can use the following request payload:
@@ -468,7 +521,7 @@ To send request for the `echo` operation that your Lambda function supports, you
 Save the test input to a file named `echo.json`\. Run the `test-invoke-method` Amazon API Gateway CLI command to send an HTTP `POST` method request to the resource \(`DynamoDBManager`\) endpoint using the preceding JSON in the request body\.
 
 ```
-$ aws apigateway test-invoke-method --rest-api-id $API \
+aws apigateway test-invoke-method --rest-api-id $API \
 --resource-id $RESOURCE --http-method POST --path-with-query-string "" \
 --body file://echo.json
 ```
@@ -476,7 +529,7 @@ $ aws apigateway test-invoke-method --rest-api-id $API \
 Or, you can use the following Curl command:
 
 ```
-$ curl -X POST -d "{\"operation\":\"echo\",\"payload\":{\"somekey1\":\"somevalue1\",\"somekey2\":\"somevalue2\"}}" https://$API.execute-api.$REGION.amazonaws.com/prod/DynamoDBManager
+curl -X POST -d "{\"operation\":\"echo\",\"payload\":{\"somekey1\":\"somevalue1\",\"somekey2\":\"somevalue2\"}}" https://$API.execute-api.$REGION.amazonaws.com/prod/DynamoDBManager
 ```
 
 ## Clean up your resources<a name="cleanup"></a>

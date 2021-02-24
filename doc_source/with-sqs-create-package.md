@@ -13,7 +13,7 @@ Sample code is available for the following languages\.
 
 The following is example code that receives an Amazon SQS event message as input and processes it\. For illustration, the code writes some of the incoming event data to CloudWatch Logs\. 
 
-**Example index\.js \(Node\.js 8\)**  
+**Example index\.js \(Node\.js 12\)**  
 
 ```
 exports.handler = async function(event, context) {
@@ -23,17 +23,6 @@ exports.handler = async function(event, context) {
   });
   return {};
 }
-```
-
-**Example index\.js \(Node\.js 6\)**  
-
-```
-event.Records.forEach(function(record) {
-    var body = record.body;
-    console.log(body);
-  });
-  callback(null, "message");
-};
 ```
 
 Zip up the sample code to create a deployment package\. For instructions, see [Deploy Node\.js Lambda functions with \.zip file archives](nodejs-package.md)\.
@@ -70,7 +59,7 @@ public class Handler implements RequestHandler<SQSEvent, Void>{
 + `aws-lambda-java-core`
 + `aws-lambda-java-events`
 
-Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [Deploy Java Lambda functions with \.zip file archives](java-package.md)\.
+Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [Deploy Java Lambda functions with \.zip or JAR file archives](java-package.md)\.
 
 ## C\#<a name="with-sqs-example-deployment-pkg-dotnet"></a>
 

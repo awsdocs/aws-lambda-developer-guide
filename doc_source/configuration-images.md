@@ -23,7 +23,7 @@ In Amazon ECR, if you reassign the image tag to another image, Lambda does not u
 
 ## Function version $LATEST<a name="configuration-images-latest"></a>
 
-When you publish a function version, the code and most of the configuration settings are locked to maintain a consistent experience for users of that version\. You can change the code and many configuration settings only on the unpublished version of the function\. The unpublished version is named **$LATEST**\. To view the current function version, choose the function, then choose **Qualifiers**\.
+When you publish a function version, the code and most of the configuration settings are locked to maintain a consistent experience for users of that version\. You can change the code and many configuration settings only on the unpublished version of the function\. By default, the console displays configuration information for the unpublished version of the function\. To view the versions of a function, choose **Qualifiers**\. The unpublished version is named **$LATEST**\. 
 
 Note that Amazon Elastic Container Registry \(Amazon ECR\) also uses a *latest* tag to denote the latest version of the container image\. Be careful not to confuse this tag with the **$LATEST** function version\.
 
@@ -153,7 +153,7 @@ To manage functions defined as container images, use the following API operation
 + [UpdateFunctionCode](API_UpdateFunctionCode.md)
 + [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)
 
-To create a function defined as container image, use the `create-function` command\. Set the `package-type` to `Image` and specify your container image URI using the `code` parameter\.
+To create a function defined as container image, use the `create-function` command\. Set the `package-type` to `Image` and specify your container image URI using the `code` parameter\. Note that you must create the function from the same account as the container registry in Amazon EFS\.
 
 ```
 aws lambda create-function --region sa-east-1 --function-name my-function \
@@ -169,7 +169,7 @@ You cannot change the `package-type` of a function\.
 
 ```
 aws lambda update-function-code --region sa-east-1 --function-name my-function \
-    --imageUri <ECR Image URI>   \
+    --image-uri <ECR Image URI>   \
 ```
 
 To update the function parameters, use the `update-function-configuration` operation\. Specify `EntryPoint` and `Command` as arrays of strings, and `WorkingDirectory` as a string\.

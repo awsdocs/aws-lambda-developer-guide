@@ -14,6 +14,7 @@ The following [Lambda runtimes](lambda-runtimes.md) support external extensions:
 + Custom runtime on Amazon Linux 2 \(`provided.al2`\)
 + Java 11 \(Corretto\) \(`java11`\)
 + Java 8 \(Corretto\) \(`java8.al2`\)
++ Node\.js 14\.x \(`nodejs14.x`\)
 + Node\.js 12\.x \(`nodejs12.x`\)
 + Node\.js 10\.x \(`nodejs10.x`\)
 + Python 3\.8 \(`python3.8`\)
@@ -47,8 +48,6 @@ The lifecycle of the execution environment includes the following phases:
 Each phase starts with an event from the Lambda service to the runtime and to all registered extensions\. The runtime and each extension signal completion by sending a `Next` API request\. Lambda freezes the execution environment when each process has completed and there are no pending events\.
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/Overview-Full-Sequence.png)
-
- 
 
 **Topics**
 + [Init phase](#runtimes-extensions-api-reg)
@@ -106,9 +105,7 @@ Here is an example payload:
 
 **Performance impact and extension overhead**: Extensions can impact function performance\. As an extension author, you have control over the performance impact of your extension\. For example, if your extension performs compute\-intensive operations, the function's duration increases because the extension and the function code share the same CPU resources\. In addition, if your extension performs extensive operations after the function invocation completes, the function duration increases because the `Invoke` phase continues until all extensions signal that they are completed\.
 
-To help identify the overhead introduced by extensions on the `Invoke` phase, Lambda outputs the `PostRuntimeExecutionDuration` metric\. This metric measures the cumulative time spent between the runtime `Next` API request and the last extension `Next` API request\.
-
-You can assess the performance impact of an extension by using the `PostRuntimeExtensionsDuration` metric to measure the extra time an extension adds to the function execution\. To measure the increase in memory used, use the `MaxMemoryUsed` metric\. For more information about function metrics, see [Working with AWS Lambda function metrics](monitoring-metrics.md)\.
+To help identify the performance impact introduced by extensions on the `Invoke` phase, Lambda outputs the `PostRuntimeExecutionDuration` metric\. This metric measures the cumulative time spent between the runtime `Next` API request and the last extension `Next` API request\. To measure the increase in memory used, use the `MaxMemoryUsed` metric\. For more information about function metrics, see [Working with AWS Lambda function metrics](monitoring-metrics.md)\.
 
 Function developers can run different versions of their functions side by side to understand the impact of a specific extension\. We recommend that extension authors publish expected resource consumption to make it easier for function developers to choose a suitable extension\.
 
@@ -326,5 +323,3 @@ The extension uses this method to report an error to Lambda before exiting\. Cal
 + 400 – Bad Request
 + 403 – Forbidden
 + 500 – Container error\. Non\-recoverable state\. Extension should exit promptly\.
-
- 

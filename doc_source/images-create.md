@@ -1,6 +1,6 @@
 # Creating Lambda container images<a name="images-create"></a>
 
-You can package your Lambda function code and dependencies as a container image, using tools such as the Docker CLI\. You can then upload the image to your container registry hosted on Amazon Elastic Container Registry \(Amazon ECR\)\.
+You can package your Lambda function code and dependencies as a container image, using tools such as the Docker CLI\. You can then upload the image to your container registry hosted on Amazon Elastic Container Registry \(Amazon ECR\)\. Note that you must create the Lambda function from the same account as the container registry in Amazon ECR\.
 
 AWS provides a set of open\-source [base images](runtimes-images.md#runtimes-images-lp) that you can use to create your container image\. These base images include a [runtime interface client](runtimes-images.md#runtimes-api-client) to manage the interaction between Lambda and your function code\.
 
@@ -112,7 +112,13 @@ AWS periodically provides updates to the AWS base images for Lambda\. If your Do
    docker build -t hello-world .   
    ```
 
-1. \(Optional\) Test your application locally using the [runtime interface emulator](images-test.md)\.
+1. \(Optional\) Test your application locally using the [runtime interface emulator](images-test.md)\. From a new terminal window, post an event to the following endpoint using a `curl` command:
+
+   ```
+   curl -XPOST "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{}'
+   ```
+
+   This command invokes the function running in the container image and returns a response\.
 
 1. Authenticate the Docker CLI to your Amazon ECR registry\.
 

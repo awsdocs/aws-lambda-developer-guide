@@ -8,6 +8,8 @@ The [AWS Serverless Application Repository](https://docs.aws.amazon.com/serverle
 
 The [AWS CLI](gettingstarted-tools.md#gettingstarted-tools-awscli) and [SAM CLI](gettingstarted-tools.md#gettingstarted-tools-samcli) are command line tools for managing Lambda application stacks\. In addition to commands for managing application stacks with the AWS CloudFormation API, the AWS CLI supports higher\-level commands that simplify tasks like uploading deployment packages and updating templates\. The AWS SAM CLI provides additional functionality, including validating templates and testing locally\.
 
+When creating an application, you can create its Git repository using either CodeCommit or an AWS CodeStar connection to GitHub\. CodeCommit enables you to use the IAM console to manage SSH keys and HTTP credentials for your users\. AWS CodeStar connections enables you to connect to your GitHub account\. For more information about connections, see [What are connections?](https://docs.aws.amazon.com/dtconsole/latest/userguide/welcome-connections.html) in the *Developer Tools console User Guide*\.
+
 **Topics**
 + [Managing applications in the AWS Lambda console](applications-console.md)
 + [Creating an application with continuous delivery in the Lambda console](applications-tutorial.md)

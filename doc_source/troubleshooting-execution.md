@@ -36,7 +36,7 @@ Runtimes for scripting languages include the AWS SDK and are periodically update
 +  [Deploy Node\.js Lambda functions with \.zip file archives](nodejs-package.md) 
 +  [Deploy Python Lambda functions with \.zip file archives](python-package.md) 
 +  [Deploy Ruby Lambda functions with \.zip file archives](ruby-package.md) 
-+  [Deploy Java Lambda functions with \.zip file archives](java-package.md) 
++  [Deploy Java Lambda functions with \.zip or JAR file archives](java-package.md) 
 +  [Deploy Go Lambda functions with \.zip file archives](golang-package.md) 
 +  [Deploy C\# Lambda functions with \.zip file archives](csharp-package.md) 
 +  [Deploy PowerShell Lambda functions with \.zip file archives](powershell-package.md) 

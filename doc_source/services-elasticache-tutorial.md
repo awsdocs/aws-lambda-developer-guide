@@ -9,12 +9,17 @@ For details on using Lambda with Amazon VPC, see [Configuring a Lambda function 
 
 ## Prerequisites<a name="vpc-ec-prereqs"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with Lambda](getting-started-create-function.md) to create your first Lambda function\.
 
-To complete the following steps, you need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
+To complete the following steps, you need a command line terminal or shell to run commands\. Commands and the expected output are listed in separate blocks:
 
 ```
-~/lambda-project$ this is a command
+this is a command
+```
+
+You should see the following output:
+
+```
 this is output
 ```
 
@@ -46,7 +51,7 @@ Create an ElastiCache cluster in your default VPC\.
 1. Run the following AWS CLI command to create a Memcached cluster\. 
 
    ```
-   $ aws elasticache create-cache-cluster --cache-cluster-id ClusterForLambdaTest --cache-node-type cache.t3.medium --engine memcached --num-cache-nodes 1 --security-group-ids sg-0123a1b123456c1de
+   aws elasticache create-cache-cluster --cache-cluster-id ClusterForLambdaTest --cache-node-type cache.t3.medium --engine memcached --num-cache-nodes 1 --security-group-ids sg-0123a1b123456c1de
    ```
 
    You can look up the default VPC security group in the VPC console under **Security Groups**\. Your example Lambda function will add and retrieve an item from this cluster\.
@@ -106,7 +111,7 @@ Install dependencies with Pip and create a deployment package\. For instructions
 Create the Lambda function with the `create-function` command\.
 
 ```
-$ aws lambda create-function --function-name AccessMemCache --timeout 30 --memory-size 1024 \
+aws lambda create-function --function-name AccessMemCache --timeout 30 --memory-size 1024 \
 --zip-file fileb://function.zip --handler app.handler --runtime python3.8 \
 --role arn:aws:iam::123456789012:role/lambda-vpc-role \
 --vpc-config SubnetIds=subnet-0532bb6758ce7c71f,subnet-d6b7fda068036e11f,SecurityGroupIds=sg-0897d5f549934c2fb
@@ -121,7 +126,7 @@ In this step, you invoke the Lambda function manually using the `invoke` command
 1. Invoke the Lambda function with the `invoke` command\.
 
    ```
-   $ aws lambda invoke --function-name AccessMemCache output.txt
+   aws lambda invoke --function-name AccessMemCache output.txt
    ```
 
 1. Verify that the Lambda function executed successfully as follows:

@@ -50,7 +50,12 @@ For detailed instructions, see [Creating a role for an AWS service \(console\)](
 To create an execution role with the AWS Command Line Interface \(AWS CLI\), use the `create-role` command\.
 
 ```
-$ aws iam create-role --role-name lambda-ex --assume-role-policy-document file://trust-policy.json
+aws iam create-role --role-name lambda-ex --assume-role-policy-document file://trust-policy.json
+```
+
+You should see the following output:
+
+```
 {
     "Role": {
         "Path": "/",
@@ -96,13 +101,13 @@ The `trust-policy.json` file is a JSON file in the current directory that define
 You can also specify the trust policy inline\. Requirements for escaping quotes in the JSON string vary depending on your shell\.
 
 ```
-$ aws iam create-role --role-name lambda-ex --assume-role-policy-document '{"Version": "2012-10-17","Statement": [{ "Effect": "Allow", "Principal": {"Service": "lambda.amazonaws.com"}, "Action": "sts:AssumeRole"}]}'
+aws iam create-role --role-name lambda-ex --assume-role-policy-document '{"Version": "2012-10-17","Statement": [{ "Effect": "Allow", "Principal": {"Service": "lambda.amazonaws.com"}, "Action": "sts:AssumeRole"}]}'
 ```
 
 To add permissions to the role, use the `attach-policy-to-role` command\. Start by adding the `AWSLambdaBasicExecutionRole` managed policy\.
 
 ```
-$ aws iam attach-role-policy --role-name lambda-ex --policy-arn arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+aws iam attach-role-policy --role-name lambda-ex --policy-arn arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
 ```
 
 ## AWS managed policies for Lambda features<a name="permissions-executionrole-features"></a>
@@ -127,7 +132,7 @@ When you use an [event source mapping](invocation-eventsourcemapping.md) to invo
 + [Amazon Kinesis](with-kinesis.md)
 + [Amazon MQ](with-mq.md)
 + [Amazon Managed Streaming for Apache Kafka](with-msk.md)
-+ [self\-managed Apache Kafka](kafka-smaa.md)
++ [Self\-managed Apache Kafka](kafka-smaa.md)
 + [Amazon Simple Queue Service](with-sqs.md)
 
-In addition to the AWS managed policies, the Lambda console provides templates for creating a custom policy with permissions for additional use cases\. When you create a function in the Lambda console, you can choose to create a new execution role with permissions from one or more templates\. These templates are also applied automatically when you create a function from a blueprint, or when you configure options that require access to other services\. Example templates are available in this guide's [GitHub repository](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/iam-policies)\.
+In addition to the AWS managed policies, the Lambda console provides templates for creating a custom policy with permissions for additional use cases\. When you create a function in the Lambda console, you can choose to create a new execution role with permissions from one or more templates\. These templates are also applied automatically when you create a function from a blueprint, or when you configure options that require access to other services\. Example templates are available in this guide's [GitHub repository](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/iam-policies)\.

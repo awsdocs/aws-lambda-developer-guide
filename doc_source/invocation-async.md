@@ -9,7 +9,12 @@ The following diagram shows clients invoking a Lambda function asynchronously\. 
 For asynchronous invocation, Lambda places the event in a queue and returns a success response without additional information\. A separate process reads events from the queue and sends them to your function\. To invoke a function asynchronously, set the invocation type parameter to `Event`\.
 
 ```
-$ aws lambda invoke --function-name my-function  --invocation-type Event --payload '{ "key": "value" }' response.json
+aws lambda invoke --function-name my-function  --invocation-type Event --payload '{ "key": "value" }' response.json
+```
+
+You should see the following output:
+
+```
 {
     "StatusCode": 202
 }
@@ -147,8 +152,13 @@ To manage asynchronous invocation settings with the AWS CLI or AWS SDK, use the 
 To configure asynchronous invocation with the AWS CLI, use the `put-function-event-invoke-config` command\. The following example configures a function with a maximum event age of 1 hour and no retries\.
 
 ```
-$ aws lambda put-function-event-invoke-config --function-name error \
+aws lambda put-function-event-invoke-config --function-name error \
 --maximum-event-age-in-seconds 3600 --maximum-retry-attempts 0
+```
+
+You should see the following output:
+
+```
 {
     "LastModified": 1573686021.479,
     "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:error:$LATEST",
@@ -164,8 +174,13 @@ $ aws lambda put-function-event-invoke-config --function-name error \
 The `put-function-event-invoke-config` command overwrites any existing configuration on the function, version, or alias\. To configure an option without resetting others, use `update-function-event-invoke-config`\. The following example configures Lambda to send a record to an SQS queue named `destination` when an event can't be processed\.
 
 ```
-$ aws lambda update-function-event-invoke-config --function-name error \
+aws lambda update-function-event-invoke-config --function-name error \
 --destination-config '{"OnFailure":{"Destination": "arn:aws:sqs:us-east-2:123456789012:destination"}}'
+```
+
+You should see the following output:
+
+```
 {
     "LastModified": 1573687896.493,
     "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:error:$LATEST",
@@ -217,7 +232,7 @@ After creating the target and updating your function's execution role, add the d
 To configure a dead\-letter queue with the AWS CLI, use the `update-function-configuration` command\.
 
 ```
-$ aws lambda update-function-configuration --function-name my-function \
+aws lambda update-function-configuration --function-name my-function \
 --dead-letter-config TargetArn=arn:aws:sns:us-east-2:123456789012:my-topic
 ```
 

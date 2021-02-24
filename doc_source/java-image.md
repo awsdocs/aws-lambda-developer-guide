@@ -8,6 +8,10 @@ You can deploy your Lambda function code as a [container image](images-create.md
 
   If you use a community or private enterprise base image, add a runtime interface client to the base image to make it compatible with Lambda\.
 
+**Topics**
++ [AWS base images for Java](#java-image-base)
++ [Java runtime interface clients](#java-image-clients)
+
 ## AWS base images for Java<a name="java-image-base"></a>
 
 AWS provides the following base images for Java:
@@ -15,9 +19,9 @@ AWS provides the following base images for Java:
 
 | Tags | Runtime | Operating system | Dockerfile | 
 | --- | --- | --- | --- | 
-| 11 | Java 11 \(Corretto\) | Amazon Linux 2 | [Dockerfile for Java 11 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/java11/Dockerfile.java11) | 
-| 8\.al2 | Java 8 \(Corretto\) | Amazon Linux 2 | [Dockerfile for Java 8\.al2 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/java8.al2/Dockerfile.java8.al2) | 
-| 8 | Java 8 \(OpenJDK\) | Amazon Linux 2018\.03 | [Dockerfile for Java 8 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/java8/Dockerfile.java8) | 
+|  11  | Java 11 \(Corretto\) | Amazon Linux 2 | [Dockerfile for Java 11 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/java11/Dockerfile.java11) | 
+|  8\.al2  | Java 8 \(Corretto\) | Amazon Linux 2 | [Dockerfile for Java 8\.al2 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/java8.al2/Dockerfile.java8.al2) | 
+|  8  | Java 8 \(OpenJDK\) | Amazon Linux 2018\.03 | [Dockerfile for Java 8 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/java8/Dockerfile.java8) | 
 
 Docker Hub repository: amazon/aws\-lambda\-java
 

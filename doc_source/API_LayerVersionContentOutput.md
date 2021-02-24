@@ -19,16 +19,6 @@ A link to the layer archive in Amazon S3 that is valid for 10 minutes\.
 Type: String  
 Required: No
 
- **SigningJobArn**   <a name="SSS-Type-LayerVersionContentOutput-SigningJobArn"></a>
-The Amazon Resource Name \(ARN\) of a signing job\.  
-Type: String  
-Required: No
-
- **SigningProfileVersionArn**   <a name="SSS-Type-LayerVersionContentOutput-SigningProfileVersionArn"></a>
-The Amazon Resource Name \(ARN\) for a signing profile version\.  
-Type: String  
-Required: No
-
 ## See Also<a name="API_LayerVersionContentOutput_SeeAlso"></a>
 
 For more information about using this API in one of the language\-specific AWS SDKs, see the following:

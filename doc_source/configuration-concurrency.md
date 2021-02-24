@@ -1,8 +1,14 @@
 # Managing concurrency for a Lambda function<a name="configuration-concurrency"></a>
 
-Concurrency is the number of requests that your function is serving at any given time\. When your function is invoked, Lambda allocates an instance of it to process the event\. When the function code finishes running, it can handle another request\. If the function is invoked again while a request is still being processed, another instance is allocated, which increases the function's concurrency\.
+Concurrency is the number of requests that your function is serving at any given time\. When your function is invoked, Lambda allocates an instance of it to process the event\. When the function code finishes running, it can handle another request\. If the function is invoked again while a request is still being processed, another instance is allocated, which increases the function's concurrency\. Concurrency is subject to a Regional [quota](gettingstarted-limits.md) that is shared by all functions in a Region\.
 
-Concurrency is subject to a Regional [quota](gettingstarted-limits.md) that is shared by all functions in a Region\. To ensure that a function can always reach a certain level of concurrency, you can configure the function with [reserved concurrency](#configuration-concurrency-reserved)\. When a function has reserved concurrency, no other function can use that concurrency\. Reserved concurrency also limits the maximum concurrency for the function, and applies to the function as a whole, including versions and aliases\.
+There are two types of concurrency available:
++ Reserved concurrency – Reserved concurrency creates a pool of requests that can only be used by its function, and also prevents its function from using unreserved concurrency\.
++ Provisioned concurrency – Provisioned concurrency initializes a requested number of execution environments so that they are prepared to respond to your function's invocations\.
+
+This topic details how to manage and configure reserved and provisioned concurrency\. To learn about how concurrency interacts with scaling, [see AWS Lambda function scaling](https://docs.aws.amazon.com/lambda/latest/dg/invocation-scaling.html)\.
+
+To ensure that a function can always reach a certain level of concurrency, configure the function with [reserved concurrency](#configuration-concurrency-reserved)\. When a function has reserved concurrency, no other function can use that concurrency\. Reserved concurrency also limits the maximum concurrency for the function, and applies to the function as a whole, including versions and aliases\.
 
 When Lambda allocates an instance of your function, the [runtime](lambda-runtimes.md) loads your function's code and runs initialization code that you define outside of the handler\. If your code and dependencies are large, or you create SDK clients during initialization, this process can take some time\. As your function [scales up](invocation-scaling.md), this causes the portion of requests that are served by new instances to have higher latency than the rest\.
 
@@ -95,7 +101,13 @@ Provisioned concurrency does not come online immediately after you configure it\
 + ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/features-scaling-provisioned.provisioned.png) Provisioned concurrency
 + ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/features-scaling-provisioned.standard.png) Standard concurrency
 
-Your function's [initialization code](gettingstarted-features.md#gettingstarted-features-programmingmodel) runs during allocation and every few hours, as running instances of your function are recycled\. You can see the initialization time in logs and [traces](services-xray.md) after an instance processes a request\. However, initialization is billed even if the instance never processes a request\. Provisioned concurrency runs continually and is billed separately from initialization and invocation costs\. For details, see [AWS Lambda pricing](https://aws.amazon.com/lambda/pricing/)\.
+To optimize latency, you can customize the initialization behavior for functions that use provisioned concurrency \. You can run initialization code for provisioned concurrency instances without impacting latency, because the initialization code runs at allocation time\. However, the initialization code for an on\-demand instance directly impacts the latency of the first invocation\. For an on\-demand instance, you may choose to defer initialization for a specific capability until the function needs that capability\. 
+
+To determine the type of initialization, check the value of AWS\_LAMBDA\_INITIALIZATION\_TYPE\. Lambda sets this environment variable to `provisioned-concurrency` or `on-demand`\. The value of AWS\_LAMBDA\_INITIALIZATION\_TYPE is immutable and does not change over the lifetime of the execution environment\.
+
+If you use the \.NET 3\.1 runtime, you can configure the AWS\_LAMBDA\_DOTNET\_PREJIT environment variable to improve the latency for functions that use provisioned concurrency\. The \.NET runtime lazily compiles and initializes each library that your code calls for the first time\. As a result, the first invocation of a Lambda function can take longer than subsequent invocations\. When you set AWS\_LAMBDA\_DOTNET\_PREJIT to `ProvisionedConcurrency`, Lambda performs ahead\-of\-time JIT compilation for common system dependencies\. Lambda performs this initialization optimization for provisioned concurrency instances only, which results in faster performance for the first invocation\. If you set the environment variable to `Always`, Lambda performs ahead\-of\-time JIT compilation for every initialization\. If you set the environment variable to `Never`, ahead\-of\-time JIT compilation is disabled\. The default value for AWS\_LAMBDA\_DOTNET\_PREJIT is `ProvisionedConcurrency`\. 
+
+For provisioned concurrency instances, your function's [initialization code](gettingstarted-features.md#gettingstarted-features-programmingmodel) runs during allocation and every few hours, as running instances of your function are recycled\. You can see the initialization time in logs and [traces](services-xray.md) after an instance processes a request\. However, initialization is billed even if the instance never processes a request\. Provisioned concurrency runs continually and is billed separately from initialization and invocation costs\. For details, see [AWS Lambda pricing](https://aws.amazon.com/lambda/pricing/)\.
 
 Each version of a function can only have one provisioned concurrency configuration\. This can be directly on the version itself, or on an alias that points to the version\. Two aliases can't allocate provisioned concurrency for the same version\. Also, you can't allocate provisioned concurrency on an alias that points to the unpublished version \(`$LATEST`\)\.
 
@@ -128,7 +140,12 @@ To manage concurrency settings and autoscaling with the AWS CLI or AWS SDK, use 
 To configure reserved concurrency with the AWS CLI, use the `put-function-concurrency` command\. The following command reserves a concurrency of 100 for a function named `my-function`:
 
 ```
-$ aws lambda put-function-concurrency --function-name my-function --reserved-concurrent-executions 100
+aws lambda put-function-concurrency --function-name my-function --reserved-concurrent-executions 100
+```
+
+You should see the following output:
+
+```
 {
     "ReservedConcurrentExecutions": 100
 }
@@ -137,8 +154,13 @@ $ aws lambda put-function-concurrency --function-name my-function --reserved-con
 To allocate provisioned concurrency for a function, use `put-provisioned-concurrency-config`\. The following command allocates a concurrency of 100 for the `BLUE` alias of a function named `my-function`:
 
 ```
-$ aws lambda put-provisioned-concurrency-config --function-name my-function \
+aws lambda put-provisioned-concurrency-config --function-name my-function \
 --qualifier BLUE --provisioned-concurrent-executions 100
+```
+
+You should see the following output:
+
+```
 {
     "Requested ProvisionedConcurrentExecutions": 100,
     "Allocated ProvisionedConcurrentExecutions": 0,
@@ -150,7 +172,7 @@ $ aws lambda put-provisioned-concurrency-config --function-name my-function \
 To configure Application Auto Scaling to manage provisioned concurrency, use the Application Auto Scaling to configure [target tracking scaling](https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html)\. First, register a function's alias as a scaling target\. The following example registers the `BLUE` alias of a function named `my-function`:
 
 ```
-$ aws application-autoscaling register-scalable-target --service-namespace lambda \
+aws application-autoscaling register-scalable-target --service-namespace lambda \
       --resource-id function:my-function:BLUE --min-capacity 1 --max-capacity 100 \
       --scalable-dimension lambda:function:ProvisionedConcurrency
 ```
@@ -158,10 +180,15 @@ $ aws application-autoscaling register-scalable-target --service-namespace lambd
 Next, apply a scaling policy to the target\. The following example configures Application Auto Scaling to adjust the provisioned concurrency configuration for an alias to keep utilization near 70 percent:
 
 ```
-$ aws application-autoscaling put-scaling-policy --service-namespace lambda \
+aws application-autoscaling put-scaling-policy --service-namespace lambda \
 --scalable-dimension lambda:function:ProvisionedConcurrency --resource-id function:my-function:BLUE \
 --policy-name my-policy --policy-type TargetTrackingScaling \
 --target-tracking-scaling-policy-configuration '{ "TargetValue": 0.7, "PredefinedMetricSpecification": { "PredefinedMetricType": "LambdaProvisionedConcurrencyUtilization" }}'
+```
+
+You should see the following output:
+
+```
 {
     "PolicyARN": "arn:aws:autoscaling:us-east-2:123456789012:scalingPolicy:12266dbb-1524-xmpl-a64e-9a0a34b996fa:resource/lambda/function:my-function:BLUE:policyName/my-policy",
     "Alarms": [
@@ -192,7 +219,12 @@ In the following example, a function scales between a minimum and maximum amount
 To view your account's concurrency quotas in a Region, use `get-account-settings`\.
 
 ```
-$ aws lambda get-account-settings
+aws lambda get-account-settings
+```
+
+You should see the following output:
+
+```
 {
     "AccountLimit": {
         "TotalCodeSize": 80530636800,

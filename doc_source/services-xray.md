@@ -14,7 +14,9 @@ To trace requests that don't have a tracing header, enable active tracing in you
 
 1. Choose a function\.
 
-1. Under **AWS X\-Ray**, choose **Active tracing**\.
+1. Under **Monitoring tools**, choose **Edit**\.
+
+1. Choose **Active tracing** on the **AWS X\-Ray** pane\.
 
 1. Choose **Save**\.
 
@@ -78,7 +80,7 @@ To manage tracing configuration with the AWS CLI or AWS SDK, use the following A
 The following example AWS CLI command enables active tracing on a function named my\-function\.
 
 ```
-$ aws lambda update-function-configuration --function-name my-function \
+aws lambda update-function-configuration --function-name my-function \
 --tracing-config Mode=Active
 ```
 
@@ -88,7 +90,7 @@ Tracing mode is part of the version\-specific configuration that is locked when 
 
 To enable active tracing on an `AWS::Lambda::Function` resource in an AWS CloudFormation template, use the `TracingConfig` property\.
 
-**Example [function\-inline\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/templates/function-inline.yml) – Tracing configuration**  
+**Example [function\-inline\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/templates/function-inline.yml) – Tracing configuration**  
 
 ```
 Resources:
@@ -102,7 +104,7 @@ Resources:
 
 For an AWS Serverless Application Model \(AWS SAM\) `AWS::Serverless::Function` resource, use the `Tracing` property\.
 
-**Example [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-nodejs/template.yml) – Tracing configuration**  
+**Example [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/blank-nodejs/template.yml) – Tracing configuration**  
 
 ```
 Resources:

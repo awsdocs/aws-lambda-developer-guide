@@ -30,19 +30,19 @@ To view the aliases that are currently defined for a function, on the function c
 To create an alias using the AWS Command Line Interface \(AWS CLI\), use the [https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/create-alias.html](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/create-alias.html) command\.
 
 ```
-$ aws lambda create-alias --function-name my-function --name alias-name --function-version version-number --description " "
+aws lambda create-alias --function-name my-function --name alias-name --function-version version-number --description " "
 ```
 
 To change an alias to point a new version of the function, use the [https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/update-alias.html](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/update-alias.html) command\.
 
 ```
-$ aws lambda update-alias --function-name my-function --name alias-name --function-version version-number 
+aws lambda update-alias --function-name my-function --name alias-name --function-version version-number 
 ```
 
 To delete an alias, use the [https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/delete-alias.html](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/delete-alias.html) command\.
 
 ```
-$ aws lambda delete-alias --function-name my-function --name alias-name 
+aws lambda delete-alias --function-name my-function --name alias-name 
 ```
 
  The AWS CLI commands in the preceding steps correspond to the following Lambda API operations:
@@ -67,7 +67,7 @@ If you attempt to invoke the function without an alias or a specific version, th
 For example, the following AWS CLI command grants Amazon S3 permissions to invoke the PROD alias of the `helloworld` function when Amazon S3 is acting on behalf of `examplebucket`\.
 
 ```
-$ aws lambda add-permission --function-name helloworld \
+aws lambda add-permission --function-name helloworld \
 --qualifier PROD --statement-id 1 --principal s3.amazonaws.com --action lambda:InvokeFunction \
 --source-arn arn:aws:s3:::examplebucket --source-account 123456789012
 ```
@@ -116,21 +116,21 @@ Use the `create-alias` and `update-alias` AWS CLI commands to configure the traf
 The following example creates a Lambda function alias named **routing\-alias** that points to version 1 of the function\. Version 2 of the function receives 3 percent of the traffic\. The remaining 97 percent of traffic is routed to version 1\.
 
 ```
-$ aws lambda create-alias --name routing-alias --function-name my-function --function-version 1  \
+aws lambda create-alias --name routing-alias --function-name my-function --function-version 1  \
 --routing-config AdditionalVersionWeights={"2"=0.03}
 ```
 
 Use the `update-alias` command to increase the percentage of incoming traffic to version 2\. In the following example, you increase the traffic to 5 percent\.
 
 ```
-$ aws lambda update-alias --name routing-alias --function-name my-function  \
+aws lambda update-alias --name routing-alias --function-name my-function  \
 --routing-config AdditionalVersionWeights={"2"=0.05}
 ```
 
 To route all traffic to version 2, use the `update-alias` command to change the `function-version` property to point the alias to version 2\. The command also resets the routing configuration\.
 
 ```
-$ aws lambda update-alias --name routing-alias --function-name my-function  \ 
+aws lambda update-alias --name routing-alias --function-name my-function  \ 
 --function-version 2 --routing-config AdditionalVersionWeights={}
 ```
 
@@ -147,5 +147,3 @@ When you configure traffic weights between two function versions, there are two 
 
   For alias invocations, Lambda uses the `Executed Version` dimension to filter the metric data by the invoked version\. For more information, see [Working with AWS Lambda function metrics](monitoring-metrics.md)\.
 + **Response payload \(synchronous invocations\)** – Responses to synchronous function invocations include an `x-amz-executed-version` header to indicate which function version has been invoked\.
-
- 

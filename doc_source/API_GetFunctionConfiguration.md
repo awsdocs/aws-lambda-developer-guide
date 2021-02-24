@@ -66,17 +66,6 @@ Content-type: application/json
    "FunctionArn": "string",
    "FunctionName": "string",
    "Handler": "string",
-   "ImageConfigResponse": { 
-      "Error": { 
-         "ErrorCode": "string",
-         "Message": "string"
-      },
-      "ImageConfig": { 
-         "Command": [ "string" ],
-         "EntryPoint": [ "string" ],
-         "WorkingDirectory": "string"
-      }
-   },
    "KMSKeyArn": "string",
    "LastModified": "string",
    "LastUpdateStatus": "string",
@@ -85,19 +74,14 @@ Content-type: application/json
    "Layers": [ 
       { 
          "Arn": "string",
-         "CodeSize": number,
-         "SigningJobArn": "string",
-         "SigningProfileVersionArn": "string"
+         "CodeSize": number
       }
    ],
    "MasterArn": "string",
    "MemorySize": number,
-   "PackageType": "string",
    "RevisionId": "string",
    "Role": "string",
    "Runtime": "string",
-   "SigningJobArn": "string",
-   "SigningProfileVersionArn": "string",
    "State": "string",
    "StateReason": "string",
    "StateReasonCode": "string",
@@ -163,10 +147,6 @@ Type: String
 Length Constraints: Maximum length of 128\.  
 Pattern: `[^\s]+` 
 
- ** [ImageConfigResponse](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-ImageConfigResponse"></a>
-The function's image configuration values\.  
-Type: [ImageConfigResponse](API_ImageConfigResponse.md) object
-
  ** [KMSKeyArn](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-KMSKeyArn"></a>
 The KMS key that's used to encrypt the function's environment variables\. This key is only returned if you've configured a customer managed CMK\.  
 Type: String  
@@ -188,7 +168,7 @@ Type: String
  ** [LastUpdateStatusReasonCode](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-LastUpdateStatusReasonCode"></a>
 The reason code for the last update that was performed on the function\.  
 Type: String  
-Valid Values:` EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses | InvalidSubnet | InvalidSecurityGroup | ImageDeleted | ImageAccessDenied | InvalidImage` 
+Valid Values:` EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses | InvalidSubnet | InvalidSecurityGroup` 
 
  ** [Layers](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-Layers"></a>
 The function's [ layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\.  
@@ -200,14 +180,9 @@ Type: String
 Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [MemorySize](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-MemorySize"></a>
-The amount of memory available to the function at runtime\.   
+The memory that's allocated to the function\.  
 Type: Integer  
-Valid Range: Minimum value of 128\. Maximum value of 10240\.
-
- ** [PackageType](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-PackageType"></a>
-The type of deployment package\. Set to `Image` for container image and set `Zip` for \.zip file archive\.  
-Type: String  
-Valid Values:` Zip | Image` 
+Valid Range: Minimum value of 128\. Maximum value of 3008\.
 
  ** [RevisionId](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-RevisionId"></a>
 The latest updated revision of the function or alias\.  
@@ -221,17 +196,7 @@ Pattern: `arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+`
  ** [Runtime](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-Runtime"></a>
 The runtime environment for the Lambda function\.  
 Type: String  
-Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | nodejs10.x | nodejs12.x | java8 | java8.al2 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | dotnetcore3.1 | nodejs4.3-edge | go1.x | ruby2.5 | ruby2.7 | provided | provided.al2` 
-
- ** [SigningJobArn](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-SigningJobArn"></a>
-The ARN of the signing job\.  
-Type: String  
-Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)` 
-
- ** [SigningProfileVersionArn](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-SigningProfileVersionArn"></a>
-The ARN of the signing profile version\.  
-Type: String  
-Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)` 
+Valid Values:` nodejs10.x | nodejs12.x | java8 | java8.al2 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore2.1 | dotnetcore3.1 | go1.x | ruby2.5 | ruby2.7 | provided | provided.al2` 
 
  ** [State](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-State"></a>
 The current state of the function\. When the state is `Inactive`, you can reactivate the function by invoking it\.  
@@ -245,7 +210,7 @@ Type: String
  ** [StateReasonCode](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-StateReasonCode"></a>
 The reason code for the function's current state\. When the code is `Creating`, you can't invoke or modify the function\.  
 Type: String  
-Valid Values:` Idle | Creating | Restoring | EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses | InvalidSubnet | InvalidSecurityGroup | ImageDeleted | ImageAccessDenied | InvalidImage` 
+Valid Values:` Idle | Creating | Restoring | EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses | InvalidSubnet | InvalidSecurityGroup` 
 
  ** [Timeout](#API_GetFunctionConfiguration_ResponseSyntax) **   <a name="SSS-GetFunctionConfiguration-response-Timeout"></a>
 The amount of time in seconds that Lambda allows a function to run before stopping it\.  
