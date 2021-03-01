@@ -131,7 +131,7 @@ The steps are the same as described for a `provided.al2` base image, with one ad
    ```
    #!/bin/sh
    if [ -z "${AWS_LAMBDA_RUNTIME_API}" ]; then
-     exec /usr/local/bin/aws-lambda-rie "$@"
+     exec /usr/bin/aws-lambda-rie "$@"
    else
      exec "$@"
    fi
