@@ -90,7 +90,7 @@ And the response would look like this:
 }
 ```
 
-To be exported, field names in the event struct must be capitalized\. For more information on handling events from AWS event sources, see [aws\-lambda\-go/events](https://github.com/aws/aws-lambda-go/tree/main/events)\.
+To be exported, field names in the event struct must be capitalized\. For more information on handling events from AWS event sources, see [aws\-lambda\-go/events](https://github.com/aws/aws-lambda-go/tree/master/events)\.
 
 ### Valid handler signatures<a name="golang-handler-signatures"></a>
 
