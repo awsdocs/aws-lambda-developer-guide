@@ -60,6 +60,8 @@ Use the Lambda console to configure error handling settings on a function, a ver
 
 1. Choose a function\.
 
+1. Choose **Configuration** and then choose **Asynchronous invocation**\.
+
 1. Under **Asynchronous invocation**, choose **Edit**\.
 
 1. Configure the following settings\.
@@ -84,7 +86,7 @@ To send events to a destination, your function needs additional permissions\. Ad
 + **Lambda** – [lambda:InvokeFunction](https://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html)
 + **EventBridge** – [events:PutEvents](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html)
 
-Add destinations to your function in the Lambda console's function designer\.
+Add destinations to your function in the Lambda console's function visualization\.
 
 **To configure a destination for asynchronous invocation records**
 
@@ -92,7 +94,7 @@ Add destinations to your function in the Lambda console's function designer\.
 
 1. Choose a function\.
 
-1. Under **Designer**, choose **Add destination**\.
+1. Under **Function overview**, choose **Add destination**\.
 
 1. For **Source**, choose **Asynchronous invocation**\.
 
@@ -220,6 +222,8 @@ After creating the target and updating your function's execution role, add the d
 1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
 1. Choose a function\.
+
+1. Choose **Configuration** and then choose **Asynchronous invocation**\.
 
 1. Under **Asynchronous invocation**, choose **Edit**\.
 

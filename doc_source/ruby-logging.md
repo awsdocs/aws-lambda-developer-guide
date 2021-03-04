@@ -13,7 +13,7 @@ This page describes how to produce log output from your Lambda function's code, 
 
 ## Creating a function that returns logs<a name="ruby-logging-output"></a>
 
-After your function finishes processing an event, Lambda sends metrics about the invocation to CloudWatch\. You can also create a Lambda function that returns logs for the invocation\. To output logs from your function code, you can use `puts` statements, or any logging library that writes to `stdout` or `stderr`\. The following example logs the values of environment variables and the event object\.
+ To output logs from your function code, you can use `puts` statements, or any logging library that writes to `stdout` or `stderr`\. The following example logs the values of environment variables and the event object\.
 
 **Example lambda\_function\.rb**  
 
@@ -109,7 +109,7 @@ To use a sample application that correlates logs and traces with X\-Ray, see [Er
 
 ## Using the AWS Command Line Interface \(AWS CLI\)<a name="ruby-logging-cli"></a>
 
-The AWS Command Line Interface \(AWS CLI\) is an open source tool that enables you to interact with AWS services using commands in your command\-line shell\. To complete the steps in this section, you need the following:
+The AWS CLI is an open\-source tool that enables you to interact with AWS services using commands in your command line shell\. To complete the steps in this section, you must have the following:
 + [AWS CLI – Install version 2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
 + [AWS CLI – Quick configuration with `aws configure`](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)
 

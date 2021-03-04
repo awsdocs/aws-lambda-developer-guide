@@ -102,7 +102,7 @@ To configure your function to read from Amazon MQ, create an **MQ** trigger in t
 
 1. Choose a function\.
 
-1. Under **Designer**, choose **Add trigger**\.
+1. Under **Function overview**, choose **Add trigger**\.
 
 1. Choose a trigger type\.
 
@@ -115,7 +115,7 @@ Lambda supports the following options for Amazon MQ event sources:
 + **Source access configuration** – Select the AWS Secrets Manager secret that stores your broker credentials\.
 + **Enable trigger** – Disable the trigger to stop processing records\.
 
-To enable or disable the trigger \(or delete it\), choose the **MQ** trigger in the [designer](getting-started-create-function.md#get-started-designer)\. To reconfigure the trigger, use the event source mapping API operations\.
+To enable or disable the trigger \(or delete it\), choose the **MQ** trigger in the designer\. To reconfigure the trigger, use the event source mapping API operations\.
 
 ## Event source mapping API<a name="services-mq-api"></a>
 

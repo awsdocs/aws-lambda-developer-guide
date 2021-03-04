@@ -6,10 +6,9 @@ You can create one or more aliases for your Lambda function\. A Lambda alias is 
 
 1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
-1. Choose the name of a function\.
+1. Choose a function\.
 
-1. On the function configuration page, choose **Actions**, **Create alias**\.  
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/version-actions.png)
+1. Choose **Aliases** and then choose **Create alias**\.
 
 1. On the **Create alias** page, do the following:
 
@@ -22,8 +21,6 @@ You can create one or more aliases for your Lambda function\. A Lambda alias is 
    1. \(Optional\) To configure routing on the alias, expand **Weighted alias**\. For more information, see [Alias routing configuration](#configuring-alias-routing)\.
 
    1. Choose **Save**\.
-
-To view the aliases that are currently defined for a function, on the function configuration page, choose **Qualifiers**, and then choose the **Aliases** tab\.
 
 ## Managing aliases with the Lambda API<a name="versioning-aliases-api"></a>
 
@@ -84,14 +81,14 @@ You can point an alias to a maximum of two Lambda function versions\. The versio
 + Both versions must be published\. The alias cannot point to `$LATEST`\.
 
 **To configure routing on an alias**
+**Note**  
+Verify that the function has at least two published versions\. To create additional versions, follow the instructions in [Lambda function versions](configuration-versions.md)\.
 
 1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
-1. Choose the name of a function\.
+1. Choose a function\.
 
-1. Verify that the function has at least two published versions\. On the function configuration page, choose **Qualifiers**, and then choose the **Versions** tab to display the list of versions\. To create additional versions, follow the instructions in [Lambda function versions](configuration-versions.md)\.
-
-1. Choose **Actions**, **Create alias**\.
+1. Choose **Aliases** and then choose **Create alias**\.
 
 1. On the **Create alias** page, do the following:
 
@@ -130,7 +127,7 @@ aws lambda update-alias --name routing-alias --function-name my-function  \
 To route all traffic to version 2, use the `update-alias` command to change the `function-version` property to point the alias to version 2\. The command also resets the routing configuration\.
 
 ```
-aws lambda update-alias --name routing-alias --function-name my-function  \ 
+aws lambda update-alias --name routing-alias --function-name my-function  \
 --function-version 2 --routing-config AdditionalVersionWeights={}
 ```
 

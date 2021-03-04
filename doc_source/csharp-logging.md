@@ -13,9 +13,9 @@ This page describes how to produce log output from your Lambda function's code, 
 
 ## Creating a function that returns logs<a name="csharp-logging-output"></a>
 
-After your function finishes processing an event, Lambda sends metrics about the invocation to CloudWatch\. You can also create a Lambda function that returns logs for the invocation\. To output logs from your function code, you can use methods on [the Console class](https://docs.microsoft.com/en-us/dotnet/api/system.console), or any logging library that writes to `stdout` or `stderr`\. The following example uses the `LambdaLogger` class from the [Amazon\.Lambda\.Core](lambda-csharp.md) library\.
+ To output logs from your function code, you can use methods on [the Console class](https://docs.microsoft.com/en-us/dotnet/api/system.console), or any logging library that writes to `stdout` or `stderr`\. The following example uses the `LambdaLogger` class from the [Amazon\.Lambda\.Core](lambda-csharp.md) library\.
 
-**Example [src/blank\-csharp/Function\.cs](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/blank-csharp/src/blank-csharp/Function.cs) – Logging**  
+**Example [src/blank\-csharp/Function\.cs](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-csharp/src/blank-csharp/Function.cs) – Logging**  
 
 ```
 public async Task<AccountUsage> FunctionHandler(SQSEvent invocationEvent, ILambdaContext context)
@@ -109,7 +109,7 @@ To use a sample application that correlates logs and traces with X\-Ray, see [Er
 
 ## Using the AWS Command Line Interface \(AWS CLI\)<a name="csharp-logging-cli"></a>
 
-The AWS Command Line Interface \(AWS CLI\) is an open source tool that enables you to interact with AWS services using commands in your command\-line shell\. To complete the steps in this section, you need the following:
+The AWS CLI is an open\-source tool that enables you to interact with AWS services using commands in your command line shell\. To complete the steps in this section, you must have the following:
 + [AWS CLI – Install version 2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
 + [AWS CLI – Quick configuration with `aws configure`](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)
 

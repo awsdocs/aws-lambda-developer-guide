@@ -45,15 +45,15 @@ Test the function with a sample event provided by the Lambda console\.
 
 1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
-1. Choose **lambda\-canary**\.
+1. Choose the **lambda\-canary** function\.
 
-1. Next to the **Test** button at the top of the page, choose **Configure test events** from the drop\-down menu\.
+1. Choose **Test**\.
 
 1. Create a new event using the **CloudWatch Events** event template\.
 
-1. Choose **Create**\.
+1. Choose **Create event**\.
 
-1. Choose **Test**\.
+1. Choose **Invoke**\.
 
 The output from the function execution is shown at the top of the page\.
 
@@ -113,9 +113,9 @@ Update the function configuration to cause the function to return an error, whic
 
 1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
-1. Choose **lambda\-canary**\.
+1. Choose the **lambda\-canary** function\.
 
-1. Under **Environment variables**, choose **Edit**\.
+1. Scroll down\. Under **Environment variables**, choose **Edit**\.
 
 1. Set **expected** to **404**\.
 
@@ -125,7 +125,7 @@ Wait a minute, and then check your email for a message from Amazon SNS\.
 
 ## Clean up your resources<a name="cleanup"></a>
 
-You can now delete the resources that you created for this tutorial, unless you want to retain them\. By deleting AWS resources that you are no longer using, you prevent unnecessary charges to your AWS account\.
+You can now delete the resources that you created for this tutorial, unless you want to retain them\. By deleting AWS resources that you're no longer using, you prevent unnecessary charges to your AWS account\.
 
 **To delete the Lambda function**
 

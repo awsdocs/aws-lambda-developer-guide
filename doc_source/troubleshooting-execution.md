@@ -6,9 +6,13 @@ Function execution errors can be caused by issues with your code, function confi
 
 When your function code or the Lambda runtime return an error, the status code in the response from Lambda is 200 OK\. The presence of an error in the response is indicated by a header named `X-Amz-Function-Error`\. 400 and 500\-series status codes are reserved for [invocation errors](troubleshooting-invocation.md)\.
 
+## Lambda: Execution takes too long<a name="troubleshooting-execution-toolong"></a>
+
 **Issue:** *Function execution takes too long\.*
 
 If your code takes much longer to run in Lambda than on your local machine, it may be constrained by the memory or processing power available to the function\. [Configure the function with additional memory](configuration-console.md) to increase both memory and CPU\.
+
+## Lambda: Logs or traces don't appear<a name="troubleshooting-execution-logstraces"></a>
 
 **Issue:** *Logs don't appear in CloudWatch Logs\.*
 
@@ -20,6 +24,8 @@ Your function needs permission to call CloudWatch Logs and X\-Ray\. Update its [
 
 When you add permissions to your function, make an update to its code or configuration as well\. This forces running instances of your function, which have out\-of\-date credentials, to stop and be replaced\.
 
+## Lambda: The function returns before execution finishes<a name="troubleshooting-execution-unfinished"></a>
+
 **Issue: \(Node\.js\)** *Function returns before code finishes executing*
 
 Many libraries, including the AWS SDK, operate asynchronously\. When you make a network call or perform another operation that requires waiting for a response, libraries return an object called a promise that tracks the progress of the operation in the background\.
@@ -27,6 +33,8 @@ Many libraries, including the AWS SDK, operate asynchronously\. When you make a 
 To wait for the promise to resolve into a response, use the `await` keyword\. This blocks your handler code from executing until the promise is resolved into an object that contains the response\. If you don't need to use the data from the response in your code, you can return the promise directly to the runtime\.
 
 Some libraries don't return promises but can be wrapped in code that does\. For more information, see [AWS Lambda function handler in Node\.js](nodejs-handler.md)\.
+
+## AWS SDK: Versions and updates<a name="troubleshooting-execution-versions"></a>
 
 **Issue:** *The AWS SDK included on the runtime is not the latest version*
 
@@ -40,6 +48,8 @@ Runtimes for scripting languages include the AWS SDK and are periodically update
 +  [Deploy Go Lambda functions with \.zip file archives](golang-package.md) 
 +  [Deploy C\# Lambda functions with \.zip file archives](csharp-package.md) 
 +  [Deploy PowerShell Lambda functions with \.zip file archives](powershell-package.md) 
+
+## Python: Libraries load incorrectly<a name="troubleshooting-execution-libraries"></a>
 
 **Issue:** \(Python\) *Some libraries don't load correctly from the deployment package*
 

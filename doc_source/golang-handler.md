@@ -2,7 +2,7 @@
 
 The AWS Lambda function handler is the method in your function code that processes events\. When your function is invoked, Lambda runs the handler method\. When the handler exits or returns a response, it becomes available to handle another event\.
 
-A Lambda function written in [Go](https://golang.org/) is authored as a Go executable\. In your Lambda function code, you need to include the [github\.com/aws/aws\-lambda\-go/lambda](https://github.com/aws/aws-lambda-go/tree/main/lambda) package, which implements the Lambda programming model for Go\. In addition, you need to implement handler function code and a `main()` function\. 
+A Lambda function written in [Go](https://golang.org/) is authored as a Go executable\. In your Lambda function code, you need to include the [github\.com/aws/aws\-lambda\-go/lambda](https://github.com/aws/aws-lambda-go/tree/master/lambda) package, which implements the Lambda programming model for Go\. In addition, you need to implement handler function code and a `main()` function\. 
 
 ```
 package main
@@ -90,7 +90,7 @@ And the response would look like this:
 }
 ```
 
-To be exported, field names in the event struct must be capitalized\. For more information on handling events from AWS event sources, see [aws\-lambda\-go/events](https://github.com/aws/aws-lambda-go/tree/main/events)\.
+To be exported, field names in the event struct must be capitalized\. For more information on handling events from AWS event sources, see [aws\-lambda\-go/events](https://github.com/aws/aws-lambda-go/tree/master/events)\.
 
 ### Valid handler signatures<a name="golang-handler-signatures"></a>
 

@@ -8,6 +8,8 @@ You can tag Lambda functions to organize them by owner, project or department\. 
 
 1. Choose a function\.
 
+1. Choose **Configuration** and then choose **Tags**\.
+
 1. Under **Tags**, choose **Manage tags**\.
 
 1. Enter a key and value\. To add additional tags, choose **Add new tag**\.  

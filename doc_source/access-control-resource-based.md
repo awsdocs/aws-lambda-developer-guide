@@ -10,9 +10,9 @@ For Lambda functions, you can [grant an account permission](#permissions-resourc
 
 1. Choose a function\.
 
-1. Choose **Permissions**\.
+1. Choose **Configuration** and then choose **Permissions**\.
 
-1. The resource\-based policy shows the permissions that are applied when another account or AWS service attempts to access the function\. The following example shows a statement that allows Amazon S3 to invoke a function named `my-function` for a bucket named `my-bucket` in account `123456789012`\.  
+1. Scroll down to **Resource\-based policy** and then choose **View policy document**\. The resource\-based policy shows the permissions that are applied when another account or AWS service attempts to access the function\. The following example shows a statement that allows Amazon S3 to invoke a function named `my-function` for a bucket named `my-bucket` in account `123456789012`\.  
 **Example Resource\-based policy**  
 
    ```
@@ -22,7 +22,7 @@ For Lambda functions, you can [grant an account permission](#permissions-resourc
        "Statement": [
            {
                "Sid": "lambda-allow-s3-my-function",
-               "Effect": "Allow",  
+               "Effect": "Allow",
                "Principal": {
                  "Service": "s3.amazonaws.com"
                },
@@ -31,12 +31,12 @@ For Lambda functions, you can [grant an account permission](#permissions-resourc
                "Condition": {
                  "StringEquals": {
                    "AWS:SourceAccount": "123456789012"
-                 },  
+                 },
                  "ArnLike": {
-                   "AWS:SourceArn": "arn:aws:s3:::my-bucket"   
+                   "AWS:SourceArn": "arn:aws:s3:::my-bucket"
                  }
-               } 
-           } 
+               }
+           }
         ]
    }
    ```

@@ -4,6 +4,8 @@ When you update your function, Lambda deploys the change by launching new instan
 
 When you deploy updates to your function directly with the Lambda API or with a client such as the AWS CLI, you can see errors from Lambda directly in the output\. If you use services like AWS CloudFormation, AWS CodeDeploy, or AWS CodePipeline, look for the response from Lambda in the logs or event stream for that service\.
 
+## General: Permission is denied / Cannot load such file<a name="troubleshooting-deployment-denied"></a>
+
 **Error:** *EACCES: permission denied, open '/var/task/index\.js'*
 
 **Error:** *cannot load such file \-\- function*
@@ -17,6 +19,8 @@ chmod 644 $(find . -type f)
 chmod 755 $(find . -type d)
 ```
 
+## General: Error occurs when calling the UpdateFunctionCode<a name="troubleshooting-deployment-updatefunctioncode"></a>
+
 **Error:** *An error occurred \(RequestEntityTooLargeException\) when calling the UpdateFunctionCode operation*
 
 When you upload a deployment package or layer archive directly to Lambda, the size of the ZIP file is limited to 50 MB\. To upload a larger file, store it in Amazon S3 and use the [S3Bucket and S3Key](API_UpdateFunctionCode.md#SSS-UpdateFunctionCode-request-S3Bucket) parameters\.
@@ -24,9 +28,13 @@ When you upload a deployment package or layer archive directly to Lambda, the si
 **Note**  
 When you upload a file directly with the AWS CLI, AWS SDK, or otherwise, the binary ZIP file is converted to base64, which increases its size by about 30%\. To allow for this, and the size of other parameters in the request, the actual request size limit that Lambda applies is larger\. Due to this, the 50 MB limit is approximate\.
 
+## Amazon S3: Error Code PermanentRedirect\.<a name="troubleshooting-deployment-PermanentRedirect"></a>
+
 **Error:** *Error occurred while GetObject\. S3 Error Code: PermanentRedirect\. S3 Error Message: The bucket is in this region: us\-east\-2\. Please use this region to retry the request*
 
 When you upload a function's deployment package from an Amazon S3 bucket, the bucket must be in the same Region as the function\. This issue can occur when you specify an Amazon S3 object in a call to [UpdateFunctionCode](API_UpdateFunctionCode.md), or use the package and deploy commands in the AWS CLI or AWS SAM CLI\. Create a deployment artifact bucket for each Region where you develop applications\.
+
+## General: Cannot find, cannot load, unable to import, class not found, no such file or directory<a name="troubleshooting-deployment-functionHandler1"></a>
 
 **Error:** *Cannot find module 'function'*
 
@@ -41,6 +49,8 @@ When you upload a function's deployment package from an Amazon S3 bucket, the bu
 **Error:** *Unable to load type 'Function\.Handler' from assembly 'Function'\.*
 
 The name of the file or class in your function's handler configuration doesn't match your code\. See the following entry for more information\.
+
+## General: Undefined method handler<a name="troubleshooting-deployment-functionHandler2"></a>
 
 **Error:** *index\.handler is undefined or not exported*
 
@@ -62,6 +72,8 @@ For some languages, Lambda provides a library with an interface that expects a h
 + [Building Lambda functions with Go](lambda-golang.md)
 + [Building Lambda functions with C\#](lambda-csharp.md)
 + [Building Lambda functions with PowerShell](lambda-powershell.md)
+
+## Lambda: InvalidParameterValueException or RequestEntityTooLargeException<a name="troubleshooting-deployment-InvalidParameterValueException1"></a>
 
 **Error:** *InvalidParameterValueException: Lambda was unable to configure your environment variables because the environment variables you have provided exceeded the 4KB limit\. String measured: \{"A1":"uSFeY5cyPiPn7AtnX5BsM\.\.\.*
 
@@ -86,6 +98,8 @@ The maximum size of the variables object that is stored in the function's config
 ```
 
 In this example, the object is 39 characters and takes up 39 bytes when it's stored \(without white space\) as the string `{"BUCKET":"my-bucket","KEY":"file.txt"}`\. Standard ASCII characters in environment variable values use one byte each\. Extended ASCII and Unicode characters can use between 2 bytes and 4 bytes per character\.
+
+## Lambda: InvalidParameterValueException<a name="troubleshooting-deployment-InvalidParameterValueException2"></a>
 
 **Error:** *InvalidParameterValueException: Lambda was unable to configure your environment variables because the environment variables you have provided contains reserved keys that are currently not supported for modification\.*
 

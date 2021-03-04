@@ -17,13 +17,13 @@ When Lambda runs your function, it passes a context object to the [handler](java
 
 The following example shows a function that uses the context object to access the Lambda logger\.
 
-**Example [Handler\.java](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/java-basic/src/main/java/example/Handler.java)**  
+**Example [Handler\.java](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/java-basic/src/main/java/example/Handler.java)**  
 
 ```
 package example;
-import [com\.amazonaws\.services\.lambda\.runtime\.Context](https://github.com/aws/aws-lambda-java-libs/blob/main/aws-lambda-java-core/src/main/java/com/amazonaws/services/lambda/runtime/Context.java)
-import [com\.amazonaws\.services\.lambda\.runtime\.RequestHandler](https://github.com/aws/aws-lambda-java-libs/blob/main/aws-lambda-java-core/src/main/java/com/amazonaws/services/lambda/runtime/RequestHandler.java)
-import [com\.amazonaws\.services\.lambda\.runtime\.LambdaLogger](https://github.com/aws/aws-lambda-java-libs/blob/main/aws-lambda-java-core/src/main/java/com/amazonaws/services/lambda/runtime/LambdaLogger.java)
+import [com\.amazonaws\.services\.lambda\.runtime\.Context](https://github.com/aws/aws-lambda-java-libs/blob/master/aws-lambda-java-core/src/main/java/com/amazonaws/services/lambda/runtime/Context.java)
+import [com\.amazonaws\.services\.lambda\.runtime\.RequestHandler](https://github.com/aws/aws-lambda-java-libs/blob/master/aws-lambda-java-core/src/main/java/com/amazonaws/services/lambda/runtime/RequestHandler.java)
+import [com\.amazonaws\.services\.lambda\.runtime\.LambdaLogger](https://github.com/aws/aws-lambda-java-libs/blob/master/aws-lambda-java-core/src/main/java/com/amazonaws/services/lambda/runtime/LambdaLogger.java)
 ...
 
 // Handler value: example.Handler
@@ -64,17 +64,17 @@ END RequestId: 6bc28136-xmpl-4365-b021-0ce6b2e64ab0
 REPORT RequestId: 6bc28136-xmpl-4365-b021-0ce6b2e64ab0	Duration: 198.50 ms	Billed Duration: 200 ms	Memory Size: 512 MB	Max Memory Used: 90 MB	Init Duration: 524.75 ms
 ```
 
-The interface for the context object is available in the [aws\-lambda\-java\-core](https://github.com/aws/aws-lambda-java-libs/tree/main/aws-lambda-java-core) library\. You can implement this interface to create a context class for testing\. The following example shows a context class that returns dummy values for most properties and a working test logger\.
+The interface for the context object is available in the [aws\-lambda\-java\-core](https://github.com/aws/aws-lambda-java-libs/tree/master/aws-lambda-java-core) library\. You can implement this interface to create a context class for testing\. The following example shows a context class that returns dummy values for most properties and a working test logger\.
 
-**Example [src/test/java/example/TestContext\.java](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/java-basic/src/test/java/example/TestContext.java)**  
+**Example [src/test/java/example/TestContext\.java](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/java-basic/src/test/java/example/TestContext.java)**  
 
 ```
 package example;
 
-import [com\.amazonaws\.services\.lambda\.runtime\.Context](https://github.com/aws/aws-lambda-java-libs/blob/main/aws-lambda-java-core/src/main/java/com/amazonaws/services/lambda/runtime/Context.java);
-import [com\.amazonaws\.services\.lambda\.runtime\.CognitoIdentity](https://github.com/aws/aws-lambda-java-libs/blob/main/aws-lambda-java-core/src/main/java/com/amazonaws/services/lambda/runtime/CognitoIdentity.java);
-import [com\.amazonaws\.services\.lambda\.runtime\.ClientContext](https://github.com/aws/aws-lambda-java-libs/blob/main/aws-lambda-java-core/src/main/java/com/amazonaws/services/lambda/runtime/ClientContext.java);
-import [com\.amazonaws\.services\.lambda\.runtime\.LambdaLogger](https://github.com/aws/aws-lambda-java-libs/blob/main/aws-lambda-java-core/src/main/java/com/amazonaws/services/lambda/runtime/LambdaLogger.java)
+import [com\.amazonaws\.services\.lambda\.runtime\.Context](https://github.com/aws/aws-lambda-java-libs/blob/master/aws-lambda-java-core/src/main/java/com/amazonaws/services/lambda/runtime/Context.java);
+import [com\.amazonaws\.services\.lambda\.runtime\.CognitoIdentity](https://github.com/aws/aws-lambda-java-libs/blob/master/aws-lambda-java-core/src/main/java/com/amazonaws/services/lambda/runtime/CognitoIdentity.java);
+import [com\.amazonaws\.services\.lambda\.runtime\.ClientContext](https://github.com/aws/aws-lambda-java-libs/blob/master/aws-lambda-java-core/src/main/java/com/amazonaws/services/lambda/runtime/ClientContext.java);
+import [com\.amazonaws\.services\.lambda\.runtime\.LambdaLogger](https://github.com/aws/aws-lambda-java-libs/blob/master/aws-lambda-java-core/src/main/java/com/amazonaws/services/lambda/runtime/LambdaLogger.java)
 
 public class TestContext implements Context{
   public TestContext() {}

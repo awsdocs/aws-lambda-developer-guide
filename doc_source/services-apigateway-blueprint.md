@@ -40,9 +40,13 @@ In this step, you will use the console to test the Lambda function\. In addition
 
 **To test the API**
 
-1. With your `lambda-microservice` function still open in the console, in the upper right hand corner of the console, choose **Test**\.
+1. With your `lambda-microservice` function still open in the console, choose the **Test** tab\.
 
-1. In **Event name**, enter a name for the test event\.
+1. Choose **New event**\.
+
+1. Choose the **Hello World** template\.
+
+1. In **Name**, enter a name for the test event\.
 
 1. In the text entry panel, replace the existing text with the following:
 
@@ -55,6 +59,6 @@ In this step, you will use the console to test the Lambda function\. In addition
    }
    ```
 
-1. After entering the text above choose **Create**\.
+1. After entering the text above choose **Create event**\.
 
-1. Choose the event that you created and choose **Test**\.
+1. Choose the event that you created and choose **Invoke**\.

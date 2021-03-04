@@ -133,7 +133,7 @@ To configure your function to read from Kinesis in the Lambda console, create a 
 
 1. Choose a function\.
 
-1. Under **Designer**, choose **Add trigger**\.
+1. Under **Function overview**, choose **Add trigger**\.
 
 1. Choose a trigger type\.
 
@@ -287,7 +287,7 @@ To retain a record of discarded batches, configure a failed\-event destination\.
 
 1. Choose a function\.
 
-1. Under **Designer**, choose **Add destination**\.
+1. Under **Function overview**, choose **Add destination**\.
 
 1. For **Source**, choose **Stream invocation**\.
 

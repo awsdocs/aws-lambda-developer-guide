@@ -13,6 +13,8 @@ If your function is not already connected to a VPC, see [Configuring a Lambda fu
 
 1. Choose a function\.
 
+1. Choose **Configuration** and then choose **File systems**\.
+
 1. Under **File system**, choose **Add file system**\.
 
 1. Configure the following properties:

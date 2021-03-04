@@ -13,9 +13,9 @@ This page describes how to produce log output from your Lambda function's code, 
 
 ## Creating a function that returns logs<a name="powershell-logging-output"></a>
 
-After your function finishes processing an event, Lambda sends metrics about the invocation to CloudWatch\. You can also create a Lambda function that returns logs for the invocation\. To output logs from your function code, you can use cmdlets on [Microsoft\.PowerShell\.Utility ](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility), or any logging module that writes to `stdout` or `stderr`\. The following example uses `Write-Host`\.
+ To output logs from your function code, you can use cmdlets on [Microsoft\.PowerShell\.Utility ](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility), or any logging module that writes to `stdout` or `stderr`\. The following example uses `Write-Host`\.
 
-**Example [function/Handler\.ps1](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/blank-powershell/function/Handler.ps1) – Logging**  
+**Example [function/Handler\.ps1](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-powershell/function/Handler.ps1) – Logging**  
 
 ```
 #Requires -Modules @{ModuleName='AWSPowerShell.NetCore';ModuleVersion='3.3.618.0'}
@@ -97,7 +97,7 @@ To use a sample application that correlates logs and traces with X\-Ray, see [Er
 
 ## Using the AWS Command Line Interface \(AWS CLI\)<a name="powershell-logging-cli"></a>
 
-The AWS Command Line Interface \(AWS CLI\) is an open source tool that enables you to interact with AWS services using commands in your command\-line shell\. To complete the steps in this section, you need the following:
+The AWS CLI is an open\-source tool that enables you to interact with AWS services using commands in your command line shell\. To complete the steps in this section, you must have the following:
 + [AWS CLI – Install version 2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
 + [AWS CLI – Quick configuration with `aws configure`](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)
 

@@ -1,4 +1,4 @@
-# Adding a Self\-managed Apache Kafka cluster as an event source<a name="services-smaa-topic-add"></a>
+# Adding a self\-managed Apache Kafka cluster as an event source<a name="services-smaa-topic-add"></a>
 
 You can use a Lambda function to process records from your Apache Kafka cluster when the cluster is configured as an [event](gettingstarted-concepts.md#gettingstarted-concepts-event) source\. To create an [event source mapping](invocation-eventsourcemapping.md), you can add your Kafka cluster as a Lambda function [trigger](gettingstarted-concepts.md#gettingstarted-concepts-trigger) using the Lambda console, [AWS SDK](http://aws.amazon.com/getting-started/tools-sdks/), or [AWS Command Line Interface \(AWS CLI\)](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)\.
 
@@ -6,11 +6,11 @@ This section describes how to add your Kafka cluster and topic as a function tri
 
 ## Prerequisites<a name="services-smaa-prereqs"></a>
 + A non\-AWS hosted Apache Kafka cluster, or an AWS hosted Apache Kafka cluster on another AWS service\. For more information, see [Hosting an Apache Kafka cluster](kafka-hosting.md)\.
-+ A [Lambda execution role](lambda-intro-execution-role.md) with permission to access the AWS resources that your self\-managed Kafka cluster uses\. For more information, see [Managing access and permissions for a Self\-managed Apache Kafka cluster](smaa-permissions.md)\.
++ A [Lambda execution role](lambda-intro-execution-role.md) with permission to access the AWS resources that your self\-managed Kafka cluster uses\. For more information, see [Managing access and permissions for a self\-managed Apache Kafka cluster](smaa-permissions.md)\.
 
-## Adding a Self\-managed Apache Kafka cluster using the Lambda console<a name="services-smaa-trigger"></a>
+## Adding a self\-managed Apache Kafka cluster using the Lambda console<a name="services-smaa-trigger"></a>
 
-Follow these steps to add your Self\-managed Apache Kafka cluster and a Kafka topic as a trigger for your Lambda function\.
+Follow these steps to add your self\-managed Apache Kafka cluster and a Kafka topic as a trigger for your Lambda function\.
 
 **To add an Apache Kafka trigger to your Lambda function \(console\)**
 
@@ -18,15 +18,15 @@ Follow these steps to add your Self\-managed Apache Kafka cluster and a Kafka to
 
 1. Choose the name of your Lambda function\.
 
-1. Under **Designer**, choose **Add trigger**\.
+1. Under **Function overview**, choose **Add trigger**\.
 
 1. Under **Trigger configuration**, choose the **Apache Kafka** trigger type\.
 
 1. Configure the remaining options, and then choose **Add**\.
 
-## Adding a Self\-managed Apache Kafka cluster using the AWS CLI<a name="services-smak-aws-cli"></a>
+## Adding a self\-managed Apache Kafka cluster using the AWS CLI<a name="services-smak-aws-cli"></a>
 
-Use the following example AWS CLI commands to create and view a Self\-managed Apache Kafka trigger for your Lambda function\.
+Use the following example AWS CLI commands to create and view a self\-managed Apache Kafka trigger for your Lambda function\.
 
 ### Using SASL/SCRAM<a name="services-smak-aws-cli-create"></a>
 

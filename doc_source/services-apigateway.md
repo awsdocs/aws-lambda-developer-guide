@@ -8,19 +8,15 @@ You can create a web API with an HTTP endpoint for your Lambda function by using
 
 1. Choose a function\.
 
-1. Under **Designer**, choose **Add trigger**\.
+1. Under **Functional overview**, choose **Add trigger**\.
 
-1. Choose **API Gateway**\.
+1. Select **API Gateway**\.
 
 1. For **API**, choose **Create an API**\.
 
 1. For **Security**, choose **Open**\.
 
 1. Choose **Add**\.
-
-With the **API Gateway** trigger selected in the designer, choose the endpoint to invoke the function with API Gateway\.
-
-![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/console-apig-endpoint.png)
 
 API Gateway APIs are comprised of stages, resources, methods, and integrations\. The stage and resource determine the path of the endpoint:
 
@@ -34,7 +30,7 @@ A Lambda integration maps a path and HTTP method combination to a Lambda functio
 
 Amazon API Gateway invokes your function [synchronously](invocation-sync.md) with an event that contains a JSON representation of the HTTP request\. For a custom integration, the event is the body of the request\. For a proxy integration, the event has a defined structure\. The following example shows a proxy event from an API Gateway REST API\.
 
-**Example [event\.json](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/nodejs-apig/event.json) API Gateway proxy event \(REST API\)**  
+**Example [event\.json](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/nodejs-apig/event.json) API Gateway proxy event \(REST API\)**  
 
 ```
 {
@@ -79,7 +75,7 @@ API Gateway waits for a response from your function and relays the result to the
 
 The following example shows a response object from a Node\.js function\. The response object represents a successful HTTP response that contains a JSON document\.
 
-**Example [index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/nodejs-apig/function/index.js) – Proxy integration response object \(Node\.js\)**  
+**Example [index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/nodejs-apig/function/index.js) – Proxy integration response object \(Node\.js\)**  
 
 ```
 var response = {
@@ -207,7 +203,7 @@ The following example shows an X\-Ray trace map for a request that resulted in a
 
 To customize the error response, you must catch errors in your code and format a response in the required format\.
 
-**Example [index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/nodejs-apig/function/index.js) – Error formatting**  
+**Example [index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/nodejs-apig/function/index.js) – Error formatting**  
 
 ```
 var formatError = function(error){
@@ -255,7 +251,7 @@ WebSocket APIs also use the API Gateway version 2 API and support a similar feat
 
 HTTP APIs support a simplified event format \(version 2\.0\)\. The following example shows an event from an HTTP API\.
 
-**Example [event\-v2\.json](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/nodejs-apig/event-v2.json) – API Gateway proxy event \(HTTP API\)**  
+**Example [event\-v2\.json](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/nodejs-apig/event-v2.json) – API Gateway proxy event \(HTTP API\)**  
 
 ```
 {

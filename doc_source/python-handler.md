@@ -10,7 +10,7 @@ def handler_name(event, context):
     return some_value
 ```
 
-## Naming<a name="Naming"></a>
+## Naming<a name="naming"></a>
 
 The Lambda function *handler* name specified at the time you create a Lambda function is derived from the following:
 + the name of the file in which the Lambda handler function is located
@@ -108,7 +108,7 @@ The function in this example depends on a successful response \(in `200`\) from 
 
 ### Returning a calculation<a name="python-example-userinputcalc"></a>
 
-The following example [Lambda Python function code on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/python/example_code/lambda/boto_client_examples/lambda_handler_basic.py) shows a function called `lambda_handler` that uses the `python3.6` [Lambda runtime](lambda-runtimes.md)\. The function accepts user input and returns a calculation to the user\.
+The following example [Lambda Python function code on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/python/example_code/lambda/boto_client_examples/lambda_handler_basic.py) shows a function called `lambda_handler` that uses the `python3.6` [Lambda runtime](lambda-runtimes.md)\. The function accepts user input and returns a calculation to the user\.
 
 You can use the following event data to [invoke the function](https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html#get-started-invoke-manually):
 

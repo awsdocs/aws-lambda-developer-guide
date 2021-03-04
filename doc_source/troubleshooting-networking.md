@@ -4,6 +4,8 @@ By default, Lambda runs your functions in an internal virtual private cloud \(VP
 
 Network connectivity errors can result from issues in routing configuration, security group rules, role permissions, network address translation, or the availability of resources such as IP addresses or network interfaces\. They may result in a specific error or, if a request can't reach its destination, a timeout\.
 
+## VPC: Function loses internet access or times out<a name="troubleshooting-networking-cfn"></a>
+
 **Issue:** *Function loses internet access after connecting to a VPC*
 
 **Error:** *Error: connect ETIMEDOUT 176\.32\.98\.189:443*
@@ -12,9 +14,13 @@ Network connectivity errors can result from issues in routing configuration, sec
 
 When you connect a function to a VPC, all outbound requests go through your VPC\. To connect to the internet, configure your VPC to send outbound traffic from the function's subnet to a NAT gateway in a public subnet\. For more information and sample VPC configurations, see [Internet and service access for VPC\-connected functions](configuration-vpc.md#vpc-internet)\.
 
+## VPC: Function needs access to AWS services without using the internet<a name="troubleshooting-networking-access"></a>
+
 **Issue:** *Function needs access to AWS services without using the internet*
 
 To connect to AWS services from a private subnet with no internet access, use VPC endpoints\. For a sample template with VPC endpoints for DynamoDB and Amazon S3, see [Sample VPC configurations](configuration-vpc.md#vpc-samples)\.
+
+## VPC: Limit was reached for the function's VPC<a name="troubleshooting-networking-limit"></a>
 
 **Error:** *ENILimitReachedException: The elastic network interface limit was reached for the function's VPC\.*
 

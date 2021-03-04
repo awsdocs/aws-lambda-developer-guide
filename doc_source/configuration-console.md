@@ -2,18 +2,18 @@
 
 You can use the Lambda console to configure function settings, add triggers and destinations, and update and test your code\.
 
-To manage a function, open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions) and choose a function\. Under **Aliases**, choose `Latest`\. The function designer is near the top of the page\.
+To manage a function, open the Lambda console [Functions page](https://console.aws.amazon.com/lambda/home#/functions) and choose a function\.
 
-![\[The function designer in the AWS Lambda console.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/console-designer.png)
+![\[The function overview in the AWS Lambda console.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/console-designer.png)
 
-The designer shows an overview of your function and its upstream and downstream resources\. 
+The function overview shows a visualization of your function and its upstream and downstream resources\. 
 
 You can use it to configure triggers, layers, and destinations\.
 + **Triggers** – Triggers are services and resources that you have configured to invoke your function\. Choose **Add trigger** to create a Lambda [event source mapping](invocation-eventsourcemapping.md) or to configure a trigger in another service that the Lambda console integrates with\. For details about these services and others, see [Using AWS Lambda with other services](lambda-services.md)\.
 + **Layers** – Choose the **Layers** node to add [layers](configuration-layers.md) to your application\. A layer is a \.zip file archive that contains libraries, a custom runtime, or other dependencies\.
 + **Destinations** – Add a destination to your function to send details about invocation results to another service\. You can send invocation records when your function is invoked [asynchronously](invocation-async.md), or by an [event source mapping](invocation-eventsourcemapping.md) that reads from a stream\.
 
-With the `Latest` function version selected, you can modify the following settings\.
+By default you are working with the `Latest` function version\. You can modify the following settings in this version:
 
 **Function settings**
 + **Code** – The code and dependencies of your function\. For scripting languages, you can edit your function code in the embedded [editor](code-editor.md)\. To add libraries, or for languages that the editor doesn't support, or to create a function deployed as a container image, upload a [deployment package](gettingstarted-package.md)\. If your deployment package is larger than 50 MB, choose **Upload a file from Amazon S3**\.

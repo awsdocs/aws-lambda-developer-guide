@@ -67,6 +67,8 @@ To access private resources, connect your function to private subnets\. If your 
 
 1. Choose a function\.
 
+1. Choose **Configuration** and then choose **VPC**\.
+
 1. Under **VPC**, choose **Edit**\.
 
 1. Choose a VPC, subnets, and security groups\.

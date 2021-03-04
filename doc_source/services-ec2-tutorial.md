@@ -51,11 +51,11 @@ Standard charges apply for each service\.
 
 ## Review the code<a name="services-ec2-tutorial-code"></a>
 
-Locate the sample project in the guide repository under [sample\-apps/ec2\-spot](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/ec2-spot)\. This directory contains Lambda function code, tests, project files, scripts, and a AWS CloudFormation template\.
+Locate the sample project in the guide repository under [sample\-apps/ec2\-spot](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/ec2-spot)\. This directory contains Lambda function code, tests, project files, scripts, and a AWS CloudFormation template\.
 
 The `Function` class includes a `FunctionHandler` method that calls other methods to create spot requests, check their status, and clean up\. It creates an Amazon EC2 client with the AWS SDK for \.NET in a static constructor to allow it to be used throughout the class\.
 
-**Example [Function\.cs – FunctionHandler](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/ec2-spot/src/ec2spot/Function.cs#L17)**  
+**Example [Function\.cs – FunctionHandler](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/ec2-spot/src/ec2spot/Function.cs#L17)**  
 
 ```
 using Amazon.EC2;

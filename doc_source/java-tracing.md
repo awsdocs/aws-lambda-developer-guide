@@ -14,9 +14,11 @@ To trace requests that don't have a tracing header, enable active tracing in you
 
 1. Choose a function\.
 
-1. Under **Monitoring tools**, choose **Edit**\.
+1. Choose **Configuration** and then choose **Monitoring tools**\.
 
-1. Choose **Active tracing** on the **AWS X\-Ray** pane\.
+1. Choose **Edit**\.
+
+1. Under **AWS X\-Ray**, enable **Active tracing**\.
 
 1. Choose **Save**\.
 
@@ -33,7 +35,7 @@ When active tracing is enabled, Lambda records a trace for a subset of invocatio
 
 To record detail about calls that your function makes to other resources and services, add the X\-Ray SDK for Java to your build configuration\. The following example shows a Gradle build configuration that includes the libraries that enable automatic instrumentation of AWS SDK for Java 2\.x clients\.
 
-**Example [build\.gradle](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/blank-java/build.gradle) – Tracing dependencies**  
+**Example [build\.gradle](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-java/build.gradle) – Tracing dependencies**  
 
 ```
 dependencies {
@@ -85,7 +87,7 @@ Tracing mode is part of the version\-specific configuration that is locked when 
 
 To enable active tracing on an `AWS::Lambda::Function` resource in an AWS CloudFormation template, use the `TracingConfig` property\.
 
-**Example [function\-inline\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/templates/function-inline.yml) – Tracing configuration**  
+**Example [function\-inline\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/templates/function-inline.yml) – Tracing configuration**  
 
 ```
 Resources:
@@ -99,7 +101,7 @@ Resources:
 
 For an AWS Serverless Application Model \(AWS SAM\) `AWS::Serverless::Function` resource, use the `Tracing` property\.
 
-**Example [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/blank-nodejs/template.yml) – Tracing configuration**  
+**Example [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-nodejs/template.yml) – Tracing configuration**  
 
 ```
 Resources:
@@ -116,7 +118,7 @@ If you use the X\-Ray SDK to instrument AWS SDK clients your function code, your
 
 The following example shows an `AWS::Serverless::LayerVersion` resource that stores the SDK for Java and X\-Ray SDK for Java\.
 
-**Example [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/blank-java/template.yml) – Dependencies layer**  
+**Example [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-java/template.yml) – Dependencies layer**  
 
 ```
 Resources:

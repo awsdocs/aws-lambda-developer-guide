@@ -30,7 +30,7 @@ Follow these steps to add your Amazon MSK cluster and a Kafka topic as a trigger
 
 1. Choose the name of your Lambda function\.
 
-1. Under **Designer**, choose **Add trigger**\.
+1. Under **Function overview**, choose **Add trigger**\.
 
 1. Under **Trigger configuration**, choose the **MSK** trigger type\.
 

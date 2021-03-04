@@ -30,13 +30,11 @@ In this getting started exercise, you create a Node\.js Lambda function using th
 
 Lambda creates a Node\.js function and an [execution role](lambda-intro-execution-role.md) that grants the function permission to upload logs\. The Lambda function assumes the execution role when you invoke your function, and uses the execution role to create credentials for the AWS SDK and to read data from event sources\.
 
-### Use the designer<a name="get-started-designer"></a>
+### Use the function overview<a name="get-started-designer"></a>
 
-The **Designer** shows an overview of your function and its upstream and downstream resources\. You can use it to configure triggers, layers, and destinations\.
+The **Function overview** shows a visualization of your function and its upstream and downstream resources\. You can use it to jump to trigger, destination, and layer configuration\.
 
 ![\[A Lambda function with an Amazon S3 trigger and an Amazon EventBridge destination.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/console-designer.png)
-
-Choose **my\-function** in the designer to return to the function's code and configuration\. For scripting languages, Lambda includes sample code that returns a success response\. You can edit your function code with the embedded [AWS Cloud9](https://docs.aws.amazon.com/cloud9/latest/user-guide/welcome.html) editor as long as your source code doesn't exceed the 3 MB limit\.
 
 ### Invoke the Lambda function<a name="get-started-invoke-manually"></a>
 
@@ -44,9 +42,9 @@ Invoke your Lambda function using the sample event data provided in the console\
 
 **To invoke a function**
 
-1. In the upper right corner, choose **Test**\.
+1. After selecting your function, choose the **Test** tab\.
 
-1. In the **Configure test event** dialog box, choose **Create new test event**\. In **Event template**, leave the default **Hello World** option\. Enter an **Event name** and note the following sample event template:
+1. In the **Test event** section, choose **New event**\. In **Template**, leave the default **hello\-world** option\. Enter an **Name** and note the following sample event template:
 
    ```
    {
@@ -56,18 +54,16 @@ Invoke your Lambda function using the sample event data provided in the console\
      }
    ```
 
-   You can change keys and values in the sample JSON, but don't change the event structure\. If you do change any keys and values, you must update the sample code accordingly\.
-
-1. Choose **Create**, and then choose **Test**\. Each user can create up to 10 test events per function\. Those test events are not available to other users\.
+1. Choose **Create event**, and then choose **Invoke**\. Each user can create up to 10 test events per function\. Those test events are not available to other users\.
 
    Lambda runs your function on your behalf\. The function handler receives and then processes the sample event\.
 
 1. Upon successful completion, view the results in the console\.
-   + The **Execution result** section \(below the **Test** button\) shows the execution status as **succeeded**\. To view the function execution results, expand **Details**\. Note that the **logs** link opens the **Log groups** page in the CloudWatch console\.
+   + The **Execution result** shows the execution status as **succeeded**\. To view the function execution results, expand **Details**\. Note that the **logs** link opens the **Log groups** page in the CloudWatch console\.
    + The **Summary** section shows the key information reported in the **Log output** section \(the *REPORT* line in the execution log\)\.
    + The **Log output** section shows the log that Lambda generates for each invocation\. The function writes these logs to CloudWatch\. The Lambda console shows these logs for your convenience\. Choose **Click here** to add logs to the CloudWatch log group and open the **Log groups** page in the CloudWatch console\.
 
-1. Run the function \(choose **Test**\) a few more times to gather some metrics that you can view in the next step\.
+1. Run the function \(choose **Invoke**\) a few more times to gather some metrics that you can view in the next step\.
 
 1. Near the top of the page, choose the **Monitoring** tab\. This page shows graphs for the metrics that Lambda sends to CloudWatch\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/metrics-functions-list.png)
@@ -281,9 +277,9 @@ Invoke your Lambda function using the sample event data provided in the console\
 
 **To invoke a function**
 
-1. In the upper right corner, choose **Test**\.
+1. After selecting your function, choose the **Test** tab\.
 
-1. In the **Configure test event** dialog box, choose **Create new test event**\. In **Event template**, leave the default **Hello World** option\. Enter an **Event name** and note the following sample event template:
+1. In the **Test event** section, choose **New event**\. In **Template**, leave the default **hello\-world** option\. Enter an **Name** and note the following sample event template:
 
    ```
    {
@@ -293,16 +289,16 @@ Invoke your Lambda function using the sample event data provided in the console\
      }
    ```
 
-1. Choose **Create**, and then choose **Test**\. Each user can create up to 10 test events per function\. Those test events are not available to other users\.
+1. Choose **Create event**, and then choose **Invoke**\. Each user can create up to 10 test events per function\. Those test events are not available to other users\.
 
    Lambda runs your function on your behalf\. The function handler receives and then processes the sample event\.
 
 1. Upon successful completion, view the results in the console\.
-   + The **Execution result** section \(below the **Test** button\) shows the execution status as **succeeded**\. To view the function execution results, expand **Details**\. Note that the **logs** link opens the **Log groups** page in the CloudWatch console\.
+   + The **Execution result** shows the execution status as **succeeded**\. To view the function execution results, expand **Details**\. Note that the **logs** link opens the **Log groups** page in the CloudWatch console\.
    + The **Summary** section shows the key information reported in the **Log output** section \(the *REPORT* line in the execution log\)\.
    + The **Log output** section shows the log that Lambda generates for each invocation\. The function writes these logs to CloudWatch\. The Lambda console shows these logs for your convenience\. Choose **Click here** to add logs to the CloudWatch log group and open the **Log groups** page in the CloudWatch console\.
 
-1. Run the function \(choose **Test**\) a few more times to gather some metrics that you can view in the next step\.
+1. Run the function \(choose **Invoke**\) a few more times to gather some metrics that you can view in the next step\.
 
 1. Near the top of the page, choose the **Monitoring** tab\. This page shows graphs for the metrics that Lambda sends to CloudWatch\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/metrics-functions-list.png)

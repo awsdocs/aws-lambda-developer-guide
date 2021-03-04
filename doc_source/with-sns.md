@@ -49,9 +49,9 @@ For more information, see [Fanout to Lambda functions](https://docs.aws.amazon.c
 **Input types for Amazon SNS events**
 
 For input type examples for Amazon SNS events in Java, \.NET, and Go, see the following on the AWS GitHub repository:
-+ [SNSEvent\.java](https://github.com/aws/aws-lambda-java-libs/blob/main/aws-lambda-java-events/src/main/java/com/amazonaws/services/lambda/runtime/events/SNSEvent.java)
-+ [SNSEvent\.cs](https://github.com/aws/aws-lambda-dotnet/blob/main/Libraries/src/Amazon.Lambda.SNSEvents/SNSEvent.cs)
-+ [sns\.go](https://github.com/aws/aws-lambda-go/blob/main/events/sns.go)
++ [SNSEvent\.java](https://github.com/aws/aws-lambda-java-libs/blob/master/aws-lambda-java-events/src/main/java/com/amazonaws/services/lambda/runtime/events/SNSEvent.java)
++ [SNSEvent\.cs](https://github.com/aws/aws-lambda-dotnet/blob/master/Libraries/src/Amazon.Lambda.SNSEvents/SNSEvent.cs)
++ [sns\.go](https://github.com/aws/aws-lambda-go/blob/master/events/sns.go)
 
 **Topics**
 + [Tutorial: Using AWS Lambda with Amazon Simple Notification Service](with-sns-example.md)

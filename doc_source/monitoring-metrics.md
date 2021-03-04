@@ -56,7 +56,7 @@ Performance metrics provide performance details about a single invocation\. For 
 
 **Performance metrics**
 + `Duration` – The amount of time that your function code spends processing an event\. The billed duration for an invocation is the value of `Duration` rounded up to the nearest millisecond\.
-+ `PostRuntimeExecutionDuration` – The cumulative amount of time that the runtime spends running code for extensions after the function code has completed\.
++ `PostRuntimeExtensionsDuration` – The cumulative amount of time that the runtime spends running code for extensions after the function code has completed\.
 + `IteratorAge` – For [event source mappings](invocation-eventsourcemapping.md) that read from streams, the age of the last record in the event\. The age is the amount of time between when the stream receives the record and when the event source mapping sends the event to the function\.
 
 `Duration` also supports [percentile statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Percentiles)\. Use percentiles to exclude outlier values that skew average and maximum statistics\. For example, the P95 statistic shows the maximum duration of 95 percent of executions, excluding the slowest 5 percent\.

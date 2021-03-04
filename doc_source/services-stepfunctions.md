@@ -23,7 +23,7 @@ Step Functions can invoke Lambda functions directly from a `Task` state in an [A
 
 You can create a `Task` state that invokes your Lambda function with the input to the state machine or any JSON document\.
 
-**Example [event\.json](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/error-processor/event.json) – Input to [random\-error function](samples-errorprocessor.md)**  
+**Example [event\.json](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/error-processor/event.json) – Input to [random\-error function](samples-errorprocessor.md)**  
 
 ```
 {

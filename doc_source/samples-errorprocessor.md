@@ -5,8 +5,8 @@ The Error Processor sample application demonstrates the use of AWS Lambda to han
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-errorprocessor.png)
 
 Function code is available in the following files:
-+ Random error – [random\-error/index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/error-processor/random-error/index.js)
-+ Processor – [processor/index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/error-processor/processor/index.js)
++ Random error – [random\-error/index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/error-processor/random-error/index.js)
++ Processor – [processor/index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/error-processor/processor/index.js)
 
 You can deploy the sample in a few minutes with the AWS CLI and AWS CloudFormation\. To download, configure, and deploy it in your account, follow the instructions in the [README](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/error-processor)\.
 
@@ -84,7 +84,7 @@ The application is implemented in two Node\.js modules and deployed with an AWS 
 + Resource\-based policy – A permission statement on the processor function that allows CloudWatch Logs to invoke it\.
 + Amazon S3 bucket – A storage location for output from the processor function\.
 
-View the [application template](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/error-processor/template.yml) on GitHub\.
+View the [application template](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/error-processor/template.yml) on GitHub\.
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-errorprocessor-stack.png)
 

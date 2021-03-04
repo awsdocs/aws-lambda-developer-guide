@@ -36,6 +36,8 @@ To manage reserved concurrency settings for a function, use the Lambda console\.
 
 1. Choose a function\.
 
+1. Choose **Configuration** and then choose **Concurrency**\. 
+
 1. Under **Concurrency**, choose **Edit**\. 
 
 1. Choose **Reserve concurrency**\. Enter the amount of concurrency to reserve for the function\.
@@ -70,7 +72,9 @@ To manage provisioned concurrency settings for a version or alias, use the Lambd
 
 1. Choose a function\.
 
-1. Under **Provisioned concurrency configurations**, choose **Add**\.
+1. Choose **Configuration** and then choose **Concurrency**\. 
+
+1. Under **Provisioned concurrency configurations**, choose **Add configuration**\.
 
 1. Choose an alias or version\.
 

@@ -1,6 +1,6 @@
 # AWS Lambda function errors in Java<a name="java-exceptions"></a>
 
-You can invoke your AWS Lambda function with a test payload and view the output on the Lambda console, the AWS Command Line Interface \(AWS CLI\), using Lambda APIs, or the AWS SDK\. When your Lambda function's code raises an error, Lambda generates a JSON representation of the error that is returned to an invocation log and, for synchronous invocations, in the output\.
+When your code raises an error, Lambda generates a JSON representation of the error\. This error document appears in the invocation log and, for synchronous invocations, in the output\.
 
 This page describes how to view Lambda function invocation errors for the Java runtime using the Lambda console and the AWS CLI\.
 
@@ -68,9 +68,9 @@ For a complete list of invocation errors, see [Invoke API Errors](API_Invoke.md#
 You can create a Lambda function that displays human\-readable error messages to users\.
 
 **Note**  
-To test this code, you need to include [InputLengthException\.java](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/java-basic/src/main/java/example/InputLengthException.java) in your project src folder\.
+To test this code, you need to include [InputLengthException\.java](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/java-basic/src/main/java/example/InputLengthException.java) in your project src folder\.
 
-**Example [src/main/java/example/HandlerDivide\.java](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/java-basic/src/main/java/example/HandlerDivide.java) – Runtime exception**  
+**Example [src/main/java/example/HandlerDivide\.java](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/java-basic/src/main/java/example/HandlerDivide.java) – Runtime exception**  
 
 ```
 import java.util.List;
@@ -111,7 +111,7 @@ When the function throws `InputLengthException`, the Java runtime serializes it 
   }
 ```
 
-In this example, [InputLengthException](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/java-basic/src/main/java/example/InputLengthException.java) is a `RuntimeException`\. The `RequestHandler` [interface](java-handler.md#java-handler-interfaces) does not allow checked exceptions\. The `RequestStreamHandler` interface supports throwing `IOException` errors\.
+In this example, [InputLengthException](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/java-basic/src/main/java/example/InputLengthException.java) is a `RuntimeException`\. The `RequestHandler` [interface](java-handler.md#java-handler-interfaces) does not allow checked exceptions\. The `RequestStreamHandler` interface supports throwing `IOException` errors\.
 
 The return statement in the previous example can also throw a runtime exception\.
 
@@ -135,24 +135,23 @@ You can invoke your function on the Lambda console by configuring a test event a
 
 1. Choose a function\.
 
-1. Choose **Configure test events** from the drop\-down menu next to the **Test** button\.  
-![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/console-test-config.png)
+1. Choose **Test**\.
 
-1. Choose an **Event template** from the dropdown list\.
+1. Select **New event** and then choose an **Event template** from the dropdown list\.
 
 1. Enter a name for the test event\.
 
 1. Enter the JSON for the test event\.
 
-1. Choose **Create**\.
+1. Choose **Create event**\.
 
-1. Choose **Test**\.
+1. Choose **Invoke**\.
 
 The Lambda console invokes your function [synchronously](invocation-sync.md) and displays the result\. To see the response, logs, and other information, expand the **Details** section\.
 
 ## Using the AWS Command Line Interface \(AWS CLI\)<a name="java-exceptions-cli"></a>
 
-The AWS Command Line Interface \(AWS CLI\) is an open source tool that enables you to interact with AWS services using commands in your command\-line shell\. To complete the steps in this section, you need the following:
+The AWS CLI is an open\-source tool that enables you to interact with AWS services using commands in your command line shell\. To complete the steps in this section, you must have the following:
 + [AWS CLI – Install version 2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
 + [AWS CLI – Quick configuration with `aws configure`](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)
 

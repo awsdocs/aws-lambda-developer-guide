@@ -73,9 +73,9 @@ You add the extension to your function using the same method as you would for an
 
 1. Choose a function\.
 
-1. Under **Designer**, choose **Layers**\.
+1. Choose the **Code** tab if it is not already selected\.
 
-1. Under **Layers**, choose **Add a layer**\.
+1. Under **Layers**, choose **Edit**\.
 
 1. For **Choose a layer**, choose **Specify an ARN**\.
 

@@ -5,7 +5,7 @@ You can configure your Lambda function to pull in additional code and content in
 **Note**  
 Functions defined as container images do not support layers\. When you build a container image, you can package your preferred runtimes and dependencies as a part of the image\.
 
-Layers let you keep your deployment package small, which makes development easier\. You can avoid errors that can occur when you install and package dependencies with your function code\. For Node\.js, Python, and Ruby functions, you can [develop your function code in the Lambda console](code-editor.md) as long as you keep your deployment package under 3 MB\.
+Layers let you keep your deployment package small, which makes development easier\. You can avoid errors that can occur when you install and package dependencies with your function code\. For Node\.js, Python, and Ruby functions, you can [develop your function code in the Lambda console](code-editor.md) as long as you keep your deployment package under 3 MB \(and each code file under `512 KB`\)\.
 
 **Note**  
 A function can use up to five layers at a time\. The total unzipped size of the function and all layers can't exceed the unzipped deployment package size limit of 250 MB\. For more information, see [Lambda quotas](gettingstarted-limits.md)\.
@@ -200,53 +200,76 @@ When you delete a layer version, you can no longer configure functions to use it
 
 ## Include library dependencies in a layer<a name="configuration-layers-path"></a>
 
-You can move runtime dependencies out of your Lambda function code by placing them in a layer\. Lambda runtimes include paths in the `/opt` directory to ensure that your function code has access to libraries that are included in layers\.
+You can move runtime dependencies out of your Lambda function by placing them in a layer\. Each Lambda runtime includes the paths to specific folders in the `/opt` directory\. Define the same folder structure in your layer \.zip archive to ensure that your function code has access to the libraries in that layer\.
 
-To include libraries in a layer, place them in one of the folders that your runtime supports, or modify that path variable for your language\.
-+ **Node\.js** – `nodejs/node_modules`, `nodejs/node8/node_modules` \(`NODE_PATH`\)  
-**Example AWS X\-Ray SDK for Node\.js**  
+To include libraries in a layer, place them in one of the folders that your runtime supports, or modify that path variable for your language\. The following table lists the folder paths that each runtime supports\. 
 
-  ```
-  xray-sdk.zip
-  └ nodejs/node_modules/aws-xray-sdk
-  ```
-+ **Python** – `python`, `python/lib/python3.8/site-packages` \(site directories\)  
-**Example Pillow**  
 
-  ```
-  pillow.zip
-  │ python/PIL
-  └ python/Pillow-5.3.0.dist-info
-  ```
-+ **Ruby** – `ruby/gems/2.5.0` \(`GEM_PATH`\), `ruby/lib` \(`RUBYLIB`\)  
-**Example JSON**  
+**Layer paths for each Lambda runtime**  
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
 
-  ```
-  json.zip
-  └ ruby/gems/2.5.0/
-                 | build_info
-                 | cache
-                 | doc
-                 | extensions
-                 | gems
-                 | └ json-2.1.0
-                 └ specifications
-                   └ json-2.1.0.gemspec
-  ```
-+ **Java** – `java/lib` \(classpath\)  
-**Example Jackson**  
+The following examples show how you can structure the folders for your layer\.
 
-  ```
-  jackson.zip
-  └ java/lib/jackson-core-2.2.3.jar
-  ```
-+ **All** – `bin` \(`PATH`\), `lib` \(`LD_LIBRARY_PATH`\)  
-**Example JQ**  
+------
+#### [ Node\.js ]
 
-  ```
-  jq.zip
-  └ bin/jq
-  ```
+**Example file structure for AWS X\-Ray SDK**  
+
+```
+xray-sdk.zip
+└ nodejs/node_modules/aws-xray-sdk
+```
+
+------
+#### [ Python ]
+
+**Example file structure for the Pillow library**  
+
+```
+pillow.zip
+│ python/PIL
+└ python/Pillow-5.3.0.dist-info
+```
+
+------
+#### [ Ruby ]
+
+**Example file structure for JSON gem**  
+
+```
+json.zip
+└ ruby/gems/2.5.0/
+               | build_info
+               | cache
+               | doc
+               | extensions
+               | gems
+               | └ json-2.1.0
+               └ specifications
+                 └ json-2.1.0.gemspec
+```
+
+------
+#### [ Java ]
+
+**Example file structure for Jackson jar file**  
+
+```
+jackson.zip
+└ java/lib/jackson-core-2.2.3.jar
+```
+
+------
+#### [ All ]
+
+**Example file structure for JQ library**  
+
+```
+jq.zip
+└ bin/jq
+```
+
+------
 
 For more information about path settings in the Lambda execution environment, see [Runtime environment variables](configuration-envvars.md#configuration-envvars-runtime)\.
 
@@ -275,7 +298,7 @@ For more examples, see [Granting layer access to other accounts](access-control-
 
 To automate the creation and mapping of layers in your application, use AWS SAM in your AWS CloudFormation templates\. The `AWS::Serverless::LayerVersion` resource type creates a layer version that you can reference from your Lambda function configuration\.
 
-**Example [blank\-nodejs/template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/blank-nodejs/template.yml) – Serverless resources**  
+**Example [blank\-nodejs/template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-nodejs/template.yml) – Serverless resources**  
 
 ```
 AWSTemplateFormatVersion: '2010-09-09'

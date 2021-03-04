@@ -7,14 +7,10 @@ This page describes how to create your deployment package as a \.zip file or Jar
 **Topics**
 + [Prerequisites](#java-package-prereqs)
 + [Tools and libraries](#java-package-libraries)
-+ [Building a deployment package with Gradle](#java-package-gradle)
-+ [Building a deployment package with Maven](#java-package-maven)
-+ [Uploading a deployment package with the Lambda API](#java-package-cli)
-+ [Uploading a deployment package with AWS SAM](#java-package-cloudformation)
 
 ## Prerequisites<a name="java-package-prereqs"></a>
 
-The AWS Command Line Interface \(AWS CLI\) is an open source tool that enables you to interact with AWS services using commands in your command\-line shell\. To complete the steps in this section, you need the following:
+The AWS CLI is an open\-source tool that enables you to interact with AWS services using commands in your command line shell\. To complete the steps in this section, you must have the following:
 + [AWS CLI – Install version 2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
 + [AWS CLI – Quick configuration with `aws configure`](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)
 
@@ -68,7 +64,27 @@ To create a deployment package, compile your function code and dependencies into
 **Note**  
 To keep your deployment package size small, package your function's dependencies in layers\. Layers enable you to manage your dependencies independently, can be used by multiple functions, and can be shared with other accounts\. For more information, see [Lambda layers](configuration-layers.md)\.
 
-## Building a deployment package with Gradle<a name="java-package-gradle"></a>
+You can upload your deployment package by using the Lambda console, the Lambda API, or AWS Serverless Application Model \(AWS SAM\)\.
+
+**To upload a deployment package with the Lambda console**
+
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+
+1. Choose a function\.
+
+1. Under **Code source**, choose **Upload from**\.
+
+1. Upload the deployment package\.
+
+1. Choose **Save**\.
+
+**Topics**
++ [Building a deployment package with Gradle](#java-package-gradle)
++ [Building a deployment package with Maven](#java-package-maven)
++ [Uploading a deployment package with the Lambda API](#java-package-cli)
++ [Uploading a deployment package with AWS SAM](#java-package-cloudformation)
+
+### Building a deployment package with Gradle<a name="java-package-gradle"></a>
 
 To create a deployment package with your function's code and dependencies, use the `Zip` build type\.
 
@@ -114,7 +130,7 @@ unzip path/to/my/function.zip -d expanded
 find ./expanded/lib -name '*.jar' | xargs -n1 zipinfo -1 | grep '.*.class' | sort | uniq -c | sort
 ```
 
-## Building a deployment package with Maven<a name="java-package-maven"></a>
+### Building a deployment package with Maven<a name="java-package-maven"></a>
 
 To build a deployment package with Maven, use the [Maven Shade plugin](https://maven.apache.org/plugins/maven-shade-plugin/)\. The plugin creates a JAR file that contains the compiled function code and all of its dependencies\.
 
@@ -203,7 +219,7 @@ If you use the appender library \(`aws-lambda-java-log4j2`\), you must also conf
       </plugin>
 ```
 
-## Uploading a deployment package with the Lambda API<a name="java-package-cli"></a>
+### Uploading a deployment package with the Lambda API<a name="java-package-cli"></a>
 
 To update a function's code with the AWS Command Line Interface \(AWS CLI\) or AWS SDK, use the [UpdateFunctionCode](API_UpdateFunctionCode.md) API operation\. For the AWS CLI, use the `update-function-code` command\. The following command uploads a deployment package named `my-function.zip` in the current directory:
 
@@ -268,7 +284,7 @@ You should see the following output:
 
 You can use this method to upload function packages up to 250 MB \(decompressed\)\.
 
-## Uploading a deployment package with AWS SAM<a name="java-package-cloudformation"></a>
+### Uploading a deployment package with AWS SAM<a name="java-package-cloudformation"></a>
 
 You can use AWS SAM to automate deployments of your function code, configuration, and dependencies\. AWS SAM is an extension of AWS CloudFormation that provides a simplified syntax for defining serverless applications\. The following example template defines a function with a deployment package in the `build/distributions` directory that Gradle uses:
 

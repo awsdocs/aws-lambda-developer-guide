@@ -14,7 +14,7 @@ This page describes how to create a \.zip file as your deployment package for th
 
 ## Prerequisites<a name="golang-package-prereqs"></a>
 
-The AWS Command Line Interface \(AWS CLI\) is an open source tool that enables you to interact with AWS services using commands in your command\-line shell\. To complete the steps in this section, you need the following:
+The AWS CLI is an open\-source tool that enables you to interact with AWS services using commands in your command line shell\. To complete the steps in this section, you must have the following:
 + [AWS CLI – Install version 2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
 + [AWS CLI – Quick configuration with `aws configure`](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)
 
@@ -40,7 +40,7 @@ Lambda provides the following sample applications for the Go runtime:
 
 ## Creating a \.zip file on macOS and Linux<a name="golang-package-mac-linux"></a>
 
-The following steps demonstrate how to download the [lambda](https://github.com/aws/aws-lambda-go/tree/main/lambda) library from GitHub with `go get`, and compile your executable with [go build](https://golang.org/cmd/go/)\.
+The following steps demonstrate how to download the [lambda](https://github.com/aws/aws-lambda-go/tree/master/lambda) library from GitHub with `go get`, and compile your executable with [go build](https://golang.org/cmd/go/)\.
 
 1. Download the **lambda** library from GitHub\.
 
@@ -78,7 +78,7 @@ The following steps demonstrate how to download the [lambda](https://github.com/
 
 ## Creating a \.zip file on Windows<a name="golang-package-windows"></a>
 
-The following steps demonstrate how to download the [build\-lambda\-zip](https://github.com/aws/aws-lambda-go/tree/main/cmd/build-lambda-zip) tool for Windows from GitHub with `go get`, and compile your executable with [go build](https://golang.org/cmd/go/)\.
+The following steps demonstrate how to download the [build\-lambda\-zip](https://github.com/aws/aws-lambda-go/tree/master/cmd/build-lambda-zip) tool for Windows from GitHub with `go get`, and compile your executable with [go build](https://golang.org/cmd/go/)\.
 
 **Note**  
 If you have not already done so, you must install [git](https://git-scm.com/) and then add the `git` executable to your Windows `%PATH%` environment variable\.

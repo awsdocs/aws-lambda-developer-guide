@@ -108,7 +108,7 @@ To use a sample application that correlates logs and traces with X\-Ray, see [Er
 
 ## Using the AWS Command Line Interface \(AWS CLI\)<a name="java-logging-cli"></a>
 
-The AWS Command Line Interface \(AWS CLI\) is an open source tool that enables you to interact with AWS services using commands in your command\-line shell\. To complete the steps in this section, you need the following:
+The AWS CLI is an open\-source tool that enables you to interact with AWS services using commands in your command line shell\. To complete the steps in this section, you must have the following:
 + [AWS CLI – Install version 2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
 + [AWS CLI – Quick configuration with `aws configure`](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)
 
@@ -222,7 +222,7 @@ To customize log output, support logging during unit tests, and log AWS SDK call
 
 To add the request ID to your function's logs, use the appender in the [aws\-lambda\-java\-log4j2](java-package.md) library\. The following example shows a Log4j 2 configuration file that adds a timestamp and request ID to all logs\.
 
-**Example [src/main/resources/log4j2\.xml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/blank-java/src/main/resources/log4j2.xml) – Appender configuration**  
+**Example [src/main/resources/log4j2\.xml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-java/src/main/resources/log4j2.xml) – Appender configuration**  
 
 ```
 <Configuration status="WARN">
@@ -269,7 +269,7 @@ SLF4J is a facade library for logging in Java code\. In your function code, you 
 
 In the following example, the handler class uses SLF4J to retrieve a logger\.
 
-**Example [src/main/java/example/Handler\.java](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/blank-java/src/main/java/example/Handler.java) – Logging with SLF4J**  
+**Example [src/main/java/example/Handler\.java](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-java/src/main/java/example/Handler.java) – Logging with SLF4J**  
 
 ```
 import org.slf4j.Logger;
@@ -295,7 +295,7 @@ public class Handler implements RequestHandler<SQSEvent, String>{
 
 The build configuration takes runtime dependencies on the Lambda appender and SLF4J adapter, and implementation dependencies on Log4J 2\.
 
-**Example [build\.gradle](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/blank-java/build.gradle) – Logging dependencies**  
+**Example [build\.gradle](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-java/build.gradle) – Logging dependencies**  
 
 ```
 dependencies {

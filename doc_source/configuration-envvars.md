@@ -13,7 +13,9 @@ You set environment variables on the unpublished version of your function by spe
 
 1. Choose a function\.
 
-1. Under **Environment variables**, choose **Edit**\.
+1. Choose **Code** if it is not already selected\.
+
+1. Scroll down\. Under **Environment variables**, choose **Edit**\.
 
 1. Choose **Add environment variable**\.
 
@@ -155,7 +157,9 @@ When you provide the key, only users in your account with access to the key can 
 
 1. Choose a function\.
 
-1. Under **Environment variables**, choose **Edit**\.
+1. Choose **Code** if it is not already selected\.
+
+1. Scroll down\. Under **Environment variables**, choose **Edit**\.
 
 1. Expand **Encryption configuration**\.
 
@@ -206,7 +210,9 @@ You can also encrypt environment variable values on the client side before sendi
 
 1. Choose a function\.
 
-1. Under **Environment variables**, choose **Edit**\.
+1. Choose **Code** if it is not already selected\.
+
+1. Scroll down\. Under **Environment variables**, choose **Edit**\.
 
 1. Expand **Encryption configuration**\.
 

@@ -15,7 +15,7 @@ Use the `blank-java` sample app to learn the basics, or as a starting point for 
 
 The other sample applications show other build configurations, handler interfaces, and use cases for services that integrate with Lambda\. The `java-basic` sample shows a function with minimal dependencies\. You can use this sample for cases where you don't need additional libraries like the AWS SDK, and can represent your function's input and output with standard Java types\. To try a different handler type, you can simply change the handler setting on the function\.
 
-**Example [java\-basic/src/main/java/example/HandlerStream\.java](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/java-basic/src/main/java/example/HandlerStream.java) – Stream handler**  
+**Example [java\-basic/src/main/java/example/HandlerStream\.java](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/java-basic/src/main/java/example/HandlerStream.java) – Stream handler**  
 
 ```
 // Handler value: example.HandlerStream
@@ -38,7 +38,7 @@ public class HandlerStream implements RequestStreamHandler {
 
 The `java-events` and `java-events-v1sdk` samples show the use of the event types provided by the `aws-lambda-java-events` library\. These types represent the event documents that [AWS services](lambda-services.md) send to your function\. `java-events` includes handlers for types that don't require additional dependencies\. For event types like `DynamodbEvent` that require types from the AWS SDK for Java, `java-events-v1sdk` includes the SDK in its build configuration\.
 
-**Example [java\-events\-v1sdk/src/main/java/example/HandlerDynamoDB\.java](https://github.com/awsdocs/aws-lambda-developer-guide/blob/main/sample-apps/java-events-v1sdk/src/main/java/example/HandlerDynamoDB.java) – DynamoDB records**  
+**Example [java\-events\-v1sdk/src/main/java/example/HandlerDynamoDB\.java](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/java-events-v1sdk/src/main/java/example/HandlerDynamoDB.java) – DynamoDB records**  
 
 ```
 import com.amazonaws.services.lambda.runtime.events.DynamodbEvent;

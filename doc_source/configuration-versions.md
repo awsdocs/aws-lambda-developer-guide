@@ -14,19 +14,13 @@ You can change the function code and settings only on the unpublished version of
 
 1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
-1. Choose the name of the function that you want to publish\.
+1. Choose a function and then choose **Versions**\.
 
-1. On the function configuration page, choose **Actions**, **Publish new version**\.
+1. On the versions configuration page, choose **Publish new version**\.
 
 1. \(Optional\) Enter a version description\.
 
 1. Choose **Publish**\.
-
-After you publish the first version of a function, the Lambda console displays a dropdown list of the available versions\. The **Designer** panel displays a version qualifier at the end of the function name\.
-
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/version-1-created.png)
-
-To view the current versions of a function, on the function configuration page, choose **Qualifiers**, and then choose the **Versions** tab to see a list of versions for the function\. If you haven't published a new version of the function, the list only displays the `$LATEST` version\.
 
 ## Managing versions with the Lambda API<a name="versioning-versions-api"></a>
 

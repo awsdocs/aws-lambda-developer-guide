@@ -109,16 +109,16 @@ You install the runtime interface emulator to your local machine\. When you run 
 
    ```
    mkdir -p ~/.aws-lambda-rie && curl -Lo ~/.aws-lambda-rie/aws-lambda-rie \
-    https://github.com/aws/aws-lambda-runtime-interface-emulator/releases/latest/download/aws-lambda-rie \
-      && chmod +x ~/.aws-lambda-rie/aws-lambda-rie
+   https://github.com/aws/aws-lambda-runtime-interface-emulator/releases/latest/download/aws-lambda-rie \
+   && chmod +x ~/.aws-lambda-rie/aws-lambda-rie
    ```
 
 1. Run your Lambda function using the `docker run` command\. 
 
    ```
-   docker run -d -v ~/.aws-lambda-rie:/aws-lambda -p 9000:8080 \ 
+   docker run -d -v ~/.aws-lambda-rie:/aws-lambda -p 9000:8080 \
      --entrypoint /aws-lambda/aws-lambda-rie myfunction:latest <image entrypoint> \
-             <(optional) image command>
+         <(optional) image command>
    ```
 
    This runs the image as a container and starts up an endpoint locally at `localhost:9000/2015-03-31/functions/function/invocations`\.

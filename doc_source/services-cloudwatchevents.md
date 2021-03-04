@@ -56,7 +56,7 @@ You can also create a Lambda function and direct AWS Lambda to invoke it on a re
 
 1. Choose a function
 
-1. Under **Designer**, choose **Add trigger**\.
+1. Under **Function overview**, choose **Add trigger**\.
 
 1. Set the trigger type to **CloudWatch Events/EventBridge**\.
 
