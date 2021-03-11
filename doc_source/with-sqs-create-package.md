@@ -144,11 +144,12 @@ Follow the instructions to create a AWS Lambda function deployment package\.
 ```
 from __future__ import print_function
 
+
 def lambda_handler(event, context):
     for record in event['Records']:
-       print ("test")
-       payload=record["body"]
-       print(str(payload))
+        print("test")
+        payload = record["body"]
+        print(str(payload))
 ```
 
 Zip up the sample code to create a deployment package\. For instructions, see [Deploy Python Lambda functions with \.zip file archives](python-package.md)\.
