@@ -119,10 +119,18 @@ The following example processes messages from API Gateway, and logs information 
 **Example LambdaFunctionOverHttps\.go**  
 
 ```
+package main
+
 import (
-    "strings"
+    "context"
+    "fmt"
     "github.com/aws/aws-lambda-go/events"
+    runtime "github.com/aws/aws-lambda-go/lambda"
 )
+
+func main() {
+    runtime.Start(handleRequest)
+}
 
 func handleRequest(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
     fmt.Printf("Processing request data for request %s.\n", request.RequestContext.RequestID)
@@ -133,7 +141,7 @@ func handleRequest(ctx context.Context, request events.APIGatewayProxyRequest) (
         fmt.Printf("    %s: %s\n", key, value)
     }
 
-    return events.APIGatewayProxyResponse { Body: request.Body, StatusCode: 200 }, nil
+    return events.APIGatewayProxyResponse{Body: request.Body, StatusCode: 200}, nil
 }
 ```
 
