@@ -86,6 +86,17 @@ Content-type: application/json
    "FunctionArn": "string",
    "FunctionName": "string",
    "Handler": "string",
+   "ImageConfigResponse": { 
+      "Error": { 
+         "ErrorCode": "string",
+         "Message": "string"
+      },
+      "ImageConfig": { 
+         "Command": [ "string" ],
+         "EntryPoint": [ "string" ],
+         "WorkingDirectory": "string"
+      }
+   },
    "KMSKeyArn": "string",
    "LastModified": "string",
    "LastUpdateStatus": "string",
@@ -94,14 +105,19 @@ Content-type: application/json
    "Layers": [ 
       { 
          "Arn": "string",
-         "CodeSize": number
+         "CodeSize": number,
+         "SigningJobArn": "string",
+         "SigningProfileVersionArn": "string"
       }
    ],
    "MasterArn": "string",
    "MemorySize": number,
+   "PackageType": "string",
    "RevisionId": "string",
    "Role": "string",
    "Runtime": "string",
+   "SigningJobArn": "string",
+   "SigningProfileVersionArn": "string",
    "State": "string",
    "StateReason": "string",
    "StateReasonCode": "string",
@@ -167,6 +183,10 @@ Type: String
 Length Constraints: Maximum length of 128\.  
 Pattern: `[^\s]+` 
 
+ ** [ImageConfigResponse](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-ImageConfigResponse"></a>
+The function's image configuration values\.  
+Type: [ImageConfigResponse](API_ImageConfigResponse.md) object
+
  ** [KMSKeyArn](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-KMSKeyArn"></a>
 The KMS key that's used to encrypt the function's environment variables\. This key is only returned if you've configured a customer managed CMK\.  
 Type: String  
@@ -188,7 +208,7 @@ Type: String
  ** [LastUpdateStatusReasonCode](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-LastUpdateStatusReasonCode"></a>
 The reason code for the last update that was performed on the function\.  
 Type: String  
-Valid Values:` EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses | InvalidSubnet | InvalidSecurityGroup` 
+Valid Values:` EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses | InvalidSubnet | InvalidSecurityGroup | ImageDeleted | ImageAccessDenied | InvalidImage` 
 
  ** [Layers](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-Layers"></a>
 The function's [ layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\.  
@@ -200,9 +220,14 @@ Type: String
 Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [MemorySize](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-MemorySize"></a>
-The memory that's allocated to the function\.  
+The amount of memory available to the function at runtime\.   
 Type: Integer  
-Valid Range: Minimum value of 128\. Maximum value of 3008\.
+Valid Range: Minimum value of 128\. Maximum value of 10240\.
+
+ ** [PackageType](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-PackageType"></a>
+The type of deployment package\. Set to `Image` for container image and set `Zip` for \.zip file archive\.  
+Type: String  
+Valid Values:` Zip | Image` 
 
  ** [RevisionId](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-RevisionId"></a>
 The latest updated revision of the function or alias\.  
@@ -216,7 +241,17 @@ Pattern: `arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+`
  ** [Runtime](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-Runtime"></a>
 The runtime environment for the Lambda function\.  
 Type: String  
-Valid Values:` nodejs10.x | nodejs12.x | java8 | java8.al2 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore2.1 | dotnetcore3.1 | go1.x | ruby2.5 | ruby2.7 | provided | provided.al2` 
+Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | nodejs10.x | nodejs12.x | nodejs14.x | java8 | java8.al2 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | dotnetcore3.1 | nodejs4.3-edge | go1.x | ruby2.5 | ruby2.7 | provided | provided.al2` 
+
+ ** [SigningJobArn](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-SigningJobArn"></a>
+The ARN of the signing job\.  
+Type: String  
+Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)` 
+
+ ** [SigningProfileVersionArn](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-SigningProfileVersionArn"></a>
+The ARN of the signing profile version\.  
+Type: String  
+Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)` 
 
  ** [State](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-State"></a>
 The current state of the function\. When the state is `Inactive`, you can reactivate the function by invoking it\.  
@@ -230,7 +265,7 @@ Type: String
  ** [StateReasonCode](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-StateReasonCode"></a>
 The reason code for the function's current state\. When the code is `Creating`, you can't invoke or modify the function\.  
 Type: String  
-Valid Values:` Idle | Creating | Restoring | EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses | InvalidSubnet | InvalidSecurityGroup` 
+Valid Values:` Idle | Creating | Restoring | EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses | InvalidSubnet | InvalidSecurityGroup | ImageDeleted | ImageAccessDenied | InvalidImage` 
 
  ** [Timeout](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-Timeout"></a>
 The amount of time in seconds that Lambda allows a function to run before stopping it\.  
@@ -288,7 +323,7 @@ For more information about using this API in one of the language\-specific AWS S
 +  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/PublishVersion) 
 +  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/PublishVersion) 
 +  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/PublishVersion) 
-+  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/PublishVersion) 
++  [AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/PublishVersion) 
 +  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/PublishVersion) 
 +  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/PublishVersion) 
 +  [AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/PublishVersion) 

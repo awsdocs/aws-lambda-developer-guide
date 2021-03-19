@@ -61,6 +61,8 @@ Lambda has introduced two new AWS managed policies:
 + The **AWSLambda\_ReadOnlyAccess** policy grants read\-only access to Lambda, Lambda console features, and other related AWS services\. This policy was created by scoping down the previous policy **AWSLambdaReadOnlyAccess**\.
 + The **AWSLambda\_FullAccess** policy grants full access to Lambda, Lambda console features, and other related AWS services\. This policy was created by scoping down the previous policy **AWSLambdaFullAccess**\.
 
+
+
 ### Using the AWS managed policies<a name="security_iam_troubleshoot-admin-deprecation-aws"></a>
 
 We recommend using the newly launched managed policies to grant users, groups, and roles access to Lambda; however, review the permissions granted in the policies to ensure they meet your requirements\.
@@ -80,6 +82,6 @@ You can create a role that users in other accounts or people outside of your org
 To learn more, consult the following:
 + To learn whether Lambda supports these features, see [How AWS Lambda works with IAM](security_iam_service-with-iam.md)\.
 + To learn how to provide access to your resources across AWS accounts that you own, see [Providing access to an IAM user in another AWS account that you own](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_aws-accounts.html) in the *IAM User Guide*\.
-+ To learn how to provide access to your resources to third\-party AWS accounts, see [Providing ccess to AWS accounts owned by third parties](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html) in the *IAM User Guide*\.
++ To learn how to provide access to your resources to third\-party AWS accounts, see [Providing access to AWS accounts owned by third parties](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html) in the *IAM User Guide*\.
 + To learn how to provide access through identity federation, see [Providing access to externally authenticated users \(identity federation\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_federated-users.html) in the *IAM User Guide*\.
 + To learn the difference between using roles and resource\-based policies for cross\-account access, see [How IAM roles differ from resource\-based policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_compare-resource-policies.html) in the *IAM User Guide*\.

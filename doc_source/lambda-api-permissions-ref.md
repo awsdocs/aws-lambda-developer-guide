@@ -82,6 +82,8 @@ When making Lambda API calls, users can specify a version or alias by passing a 
 
 You must use the correct function ARN types in your policies to achieve the results that you expect, especially in policies that deny access\. We recommend that you follow the best practices for using Deny statements with functions\.
 
+
+
 ### Best practices for using Deny statements with functions<a name="authorization-bp"></a>
 
 The following table summarizes the resources to use in Deny effects\. In the **Resource** column, `MyFunction` is the name of the function, `:1` refers to version 1 of the function, and `MyAlias` is the name of a function alias\.

@@ -1,5 +1,7 @@
 # Using an Apache Kafka cluster as an event source for Lambda<a name="kafka-using-cluster"></a>
 
+
+
 You can host an Apache Kafka cluster on AWS, or on any other cloud provider of your choice\. Lambda supports Kafka as an [event source](invocation-eventsourcemapping.md) regardless of where it is hosted, as long as Lambda can access the cluster\.
 
 This page describes how to use your Kafka cluster as an event source for your Lambda function\.
@@ -9,6 +11,8 @@ This page describes how to use your Kafka cluster as an event source for your La
 + A [Lambda execution role](lambda-intro-execution-role.md)
 
 ## How it works<a name="kafka-hosting-how-it-works"></a>
+
+
 
 When you add your Apache Kafka cluster as a trigger for your Lambda function, the cluster is used as an [event source](invocation-eventsourcemapping.md)\. When you add your Kafka cluster and topic as an event source, Lambda creates a consumer group with an event source `UUID`\.
 + If you use an Amazon Managed Streaming for Apache Kafka \(Amazon MSK\) cluster as your event source in [https://docs.aws.amazon.com/lambda/latest/dg/API_CreateEventSourceMapping.html#SSS-CreateEventSourceMapping-request-EventSourceArn](https://docs.aws.amazon.com/lambda/latest/dg/API_CreateEventSourceMapping.html#SSS-CreateEventSourceMapping-request-EventSourceArn), Lambda reads event data using the Amazon MSK cluster and the Kafka topic that you specify\.

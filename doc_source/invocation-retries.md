@@ -9,7 +9,7 @@ Issues with the request, caller, or account can cause invocation errors\. Invoca
 + **Caller** – The user or service doesn't have permission to invoke the function\.
 + **Account** – The maximum number of function instances are already running, or requests are being made too quickly\.
 
-Clients such as the AWS CLI and the AWS SDK retry on client timeouts, throttling errors \(429\), and other errors that aren't caused by a bad request \(500 series\)\. For a full list of invocation errors, see [Invoke](API_Invoke.md)\.
+Clients such as the AWS CLI and the AWS SDK retry on client timeouts, throttling errors \(429\), and other errors that aren't caused by a bad request\. For a full list of invocation errors, see [Invoke](API_Invoke.md)\.
 
 Function errors occur when your function code or the runtime that it uses return an error\.
 

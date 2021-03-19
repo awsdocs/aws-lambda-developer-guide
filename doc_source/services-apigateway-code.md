@@ -119,8 +119,6 @@ The following example processes messages from API Gateway, and logs information 
 **Example LambdaFunctionOverHttps\.go**  
 
 ```
-package main
-
 import (
     "context"
     "fmt"

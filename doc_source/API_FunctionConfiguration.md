@@ -56,6 +56,11 @@ Length Constraints: Maximum length of 128\.
 Pattern: `[^\s]+`   
 Required: No
 
+ **ImageConfigResponse**   <a name="SSS-Type-FunctionConfiguration-ImageConfigResponse"></a>
+The function's image configuration values\.  
+Type: [ImageConfigResponse](API_ImageConfigResponse.md) object  
+Required: No
+
  **KMSKeyArn**   <a name="SSS-Type-FunctionConfiguration-KMSKeyArn"></a>
 The KMS key that's used to encrypt the function's environment variables\. This key is only returned if you've configured a customer managed CMK\.  
 Type: String  
@@ -81,7 +86,7 @@ Required: No
  **LastUpdateStatusReasonCode**   <a name="SSS-Type-FunctionConfiguration-LastUpdateStatusReasonCode"></a>
 The reason code for the last update that was performed on the function\.  
 Type: String  
-Valid Values:` EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses | InvalidSubnet | InvalidSecurityGroup`   
+Valid Values:` EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses | InvalidSubnet | InvalidSecurityGroup | ImageDeleted | ImageAccessDenied | InvalidImage`   
 Required: No
 
  **Layers**   <a name="SSS-Type-FunctionConfiguration-Layers"></a>
@@ -96,9 +101,15 @@ Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:functi
 Required: No
 
  **MemorySize**   <a name="SSS-Type-FunctionConfiguration-MemorySize"></a>
-The memory that's allocated to the function\.  
+The amount of memory available to the function at runtime\.   
 Type: Integer  
-Valid Range: Minimum value of 128\. Maximum value of 3008\.  
+Valid Range: Minimum value of 128\. Maximum value of 10240\.  
+Required: No
+
+ **PackageType**   <a name="SSS-Type-FunctionConfiguration-PackageType"></a>
+The type of deployment package\. Set to `Image` for container image and set `Zip` for \.zip file archive\.  
+Type: String  
+Valid Values:` Zip | Image`   
 Required: No
 
  **RevisionId**   <a name="SSS-Type-FunctionConfiguration-RevisionId"></a>
@@ -115,7 +126,19 @@ Required: No
  **Runtime**   <a name="SSS-Type-FunctionConfiguration-Runtime"></a>
 The runtime environment for the Lambda function\.  
 Type: String  
-Valid Values:` nodejs10.x | nodejs12.x | java8 | java8.al2 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore2.1 | dotnetcore3.1 | go1.x | ruby2.5 | ruby2.7 | provided | provided.al2`   
+Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | nodejs10.x | nodejs12.x | nodejs14.x | java8 | java8.al2 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | dotnetcore3.1 | nodejs4.3-edge | go1.x | ruby2.5 | ruby2.7 | provided | provided.al2`   
+Required: No
+
+ **SigningJobArn**   <a name="SSS-Type-FunctionConfiguration-SigningJobArn"></a>
+The ARN of the signing job\.  
+Type: String  
+Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)`   
+Required: No
+
+ **SigningProfileVersionArn**   <a name="SSS-Type-FunctionConfiguration-SigningProfileVersionArn"></a>
+The ARN of the signing profile version\.  
+Type: String  
+Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)`   
 Required: No
 
  **State**   <a name="SSS-Type-FunctionConfiguration-State"></a>
@@ -132,7 +155,7 @@ Required: No
  **StateReasonCode**   <a name="SSS-Type-FunctionConfiguration-StateReasonCode"></a>
 The reason code for the function's current state\. When the code is `Creating`, you can't invoke or modify the function\.  
 Type: String  
-Valid Values:` Idle | Creating | Restoring | EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses | InvalidSubnet | InvalidSecurityGroup`   
+Valid Values:` Idle | Creating | Restoring | EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses | InvalidSubnet | InvalidSecurityGroup | ImageDeleted | ImageAccessDenied | InvalidImage`   
 Required: No
 
  **Timeout**   <a name="SSS-Type-FunctionConfiguration-Timeout"></a>
@@ -163,5 +186,5 @@ Required: No
 For more information about using this API in one of the language\-specific AWS SDKs, see the following:
 +  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/FunctionConfiguration) 
 +  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/FunctionConfiguration) 
-+  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/FunctionConfiguration) 
++  [AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/FunctionConfiguration) 
 +  [AWS SDK for Ruby V3](https://docs.aws.amazon.com/goto/SdkForRubyV3/lambda-2015-03-31/FunctionConfiguration) 

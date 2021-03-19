@@ -90,7 +90,7 @@ public class ProductService{
 ```
 
 **Note**  
-If you are using \.NET Core 3\.1, we recommend that you use the [ Amazon\.Lambda\.Serialization\.SystemTextJson](https://github.com/aws/aws-lambda-dotnet/tree/0eff7ab687bbfc1e026feee1de336849e0315bc6/Libraries/src/Amazon.Lambda.Serialization.SystemTextJson) serializer\. This package provides a performance improvement over `Amazon.Lambda.Serialization.Json`\. 
+If you are using \.NET Core 3\.1, we recommend that you use the [ Amazon\.Lambda\.Serialization\.SystemTextJson](https://github.com/aws/aws-lambda-dotnet/tree/master/Libraries/src/Amazon.Lambda.Serialization.SystemTextJson) serializer\. This package provides a performance improvement over `Amazon.Lambda.Serialization.Json`\. 
 
 ## Handler signatures<a name="csharp-handler-signatures"></a>
 
@@ -130,7 +130,7 @@ If the method specified in your handler string is overloaded, you must provide t
 For any Lambda functions that use input or output types other than a `Stream` object, you will need to add a serialization library to your application\. You can do this in the following ways:
 + Use the `Amazon.Lambda.Serialization.Json` NuGet package\. This library uses JSON\.NET to handle serialization\.
 **Note**  
-If you are using \.NET Core 3\.1, we recommend that you use the [ Amazon\.Lambda\.Serialization\.SystemTextJson](https://github.com/aws/aws-lambda-dotnet/tree/0eff7ab687bbfc1e026feee1de336849e0315bc6/Libraries/src/Amazon.Lambda.Serialization.SystemTextJson) serializer\. This package provides a performance improvement over `Amazon.Lambda.Serialization.Json`\. 
+If you are using \.NET Core 3\.1, we recommend that you use the [ Amazon\.Lambda\.Serialization\.SystemTextJson](https://github.com/aws/aws-lambda-dotnet/tree/master/Libraries/src/Amazon.Lambda.Serialization.SystemTextJson) serializer\. This package provides a performance improvement over `Amazon.Lambda.Serialization.Json`\. 
 + Create your own serialization library by implementing the `ILambdaSerializer` interface, which is available as part of the `Amazon.Lambda.Core` library\. The interface defines two methods:
   + `T Deserialize<T>(Stream requestStream);`
 

@@ -17,13 +17,13 @@ This tutorial assumes that you have some knowledge of basic Lambda operations an
 
 1. Choose **Create function**\.
 
-1. Choose **Blueprints**\.
+1. Choose **Use a blueprint**\.
 
 1. Enter **canary** in the search bar\. Choose the **lambda\-canary** blueprint, and then choose **Configure**\.
 
 1. Configure the following settings\.
    + **Name** – **lambda\-canary**\.
-   + **Role** – **Create a new role from one or more templates**\.
+   + **Role** – **Create a new role from AWS policy templates**\.
    + **Role name** – **lambda\-apigateway\-role**\.
    + **Policy templates** – **Simple microservice permissions**\.
    + **Rule** – **Create a new rule**\.
@@ -104,6 +104,8 @@ Configure an alarm in Amazon CloudWatch that monitors the Lambda function and se
    + **Description** – **Lambda canary alarm**\.
    + Threshold – **Whenever Errors is >=****1**\.
    + **Send notification to** – **lambda\-canary\-notifications**\.
+
+
 
 ## Test the alarm<a name="services-cloudwatchevents-tutorial-testalarm"></a>
 

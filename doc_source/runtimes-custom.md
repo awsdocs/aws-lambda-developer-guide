@@ -46,7 +46,7 @@ Your runtime code is responsible for completing some initialization tasks\. Then
   + `LAMBDA_TASK_ROOT` – The directory that contains the function code\.
   + `AWS_LAMBDA_RUNTIME_API` – The host and port of the runtime API\.
 
-  See [Runtime environment variables](configuration-envvars.md#configuration-envvars-runtime) for a full list of available variables\.
+  See [Defined runtime environment variables](configuration-envvars.md#configuration-envvars-runtime) for a full list of available variables\.
 + **Initialize the function** – Load the handler file and run any global or static code that it contains\. Functions should create static resources like SDK clients and database connections once, and reuse them for multiple invocations\.
 + **Handle errors** – If an error occurs, call the [initialization error](runtimes-api.md#runtimes-api-initerror) API and exit immediately\.
 

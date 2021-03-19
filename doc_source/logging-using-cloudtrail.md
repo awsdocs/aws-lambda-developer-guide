@@ -15,6 +15,7 @@ For an ongoing record of events in your AWS account, including events for AWS La
 + [Receiving CloudTrail log files from multiple regions](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/receive-cloudtrail-log-files-from-multiple-regions.html) and [Receiving CloudTrail log files from multiple accounts](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-receive-logs-from-multiple-accounts.html)
 
 AWS Lambda supports logging the following actions as events in CloudTrail log files:
++ [AddLayerVersionPermission](API_AddLayerVersionPermission.md)
 + [AddPermission](API_AddPermission.md)
 + [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
 + [CreateFunction](API_CreateFunction.md)
@@ -25,6 +26,7 @@ AWS Lambda supports logging the following actions as events in CloudTrail log fi
 + [GetEventSourceMapping](API_GetEventSourceMapping.md)
 + [GetFunction](API_GetFunction.md)
 + [GetFunctionConfiguration](API_GetFunctionConfiguration.md)
++ [GetLayerVersionPolicy](API_GetLayerVersionPolicy.md)
 + [GetPolicy](API_GetPolicy.md)
 + [ListEventSourceMappings](API_ListEventSourceMappings.md)
 + [ListFunctions](API_ListFunctions.md)

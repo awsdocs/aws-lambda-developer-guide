@@ -2,6 +2,17 @@
 
 You can create one or more aliases for your Lambda function\. A Lambda alias is like a pointer to a specific function version\. Users can access the function version using the alias Amazon Resource Name \(ARN\)\.
 
+**Topics**
++ [Creating a function alias \(Console\)](#configuration-aliases-config)
++ [Managing aliases with the Lambda API](#versioning-aliases-api)
++ [Using aliases](#using-aliases)
++ [Resource policies](#versioning-permissions-alias)
++ [Alias routing configuration](#configuring-alias-routing)
+
+## Creating a function alias \(Console\)<a name="configuration-aliases-config"></a>
+
+You can create a function alias using the Lambda console\.
+
 **To create an alias**
 
 1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
@@ -144,3 +155,5 @@ When you configure traffic weights between two function versions, there are two 
 
   For alias invocations, Lambda uses the `Executed Version` dimension to filter the metric data by the invoked version\. For more information, see [Working with AWS Lambda function metrics](monitoring-metrics.md)\.
 + **Response payload \(synchronous invocations\)** – Responses to synchronous function invocations include an `x-amz-executed-version` header to indicate which function version has been invoked\.
+
+ 

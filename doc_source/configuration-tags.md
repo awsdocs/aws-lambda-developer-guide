@@ -2,6 +2,14 @@
 
 You can tag Lambda functions to organize them by owner, project or department\. Tags are freeform key\-value pairs that are supported across AWS services for use in filtering resources and adding detail to billing reports\.
 
+**Topics**
++ [Adding tags to a function \(console\)](#configuration-tags-config)
++ [Using tags to filter functions \(console\)](#configuration-tags-filter)
++ [Using Tags with the AWS CLI](#configuration-tags-cli)
++ [Tag Key and Value Requirements](#configuration-tags-restrictions)
+
+## Adding tags to a function \(console\)<a name="configuration-tags-config"></a>
+
 **To add tags to a function**
 
 1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
@@ -16,6 +24,8 @@ You can tag Lambda functions to organize them by owner, project or department\. 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/configuration-tags-add.png)
 
 1. Choose **Save**\.
+
+## Using tags to filter functions \(console\)<a name="configuration-tags-filter"></a>
 
 You can filter functions based on the presence or value of a tag with the Lambda console or with the AWS Resource Groups API\. Tags apply at the function level, not to versions or aliases\. Tags are not part of the version\-specific configuration that is snapshotted when you publish a version\.
 
@@ -34,10 +44,6 @@ You can filter functions based on the presence or value of a tag with the Lambda
 The search bar also supports searching for tag keys\. Type `tag` to see just a list of tag keys, or start typing the name of a key to find it in the list\.
 
 With AWS Billing and Cost Management, you can use tags to customize billing reports and create cost\-allocation reports\. For more information, see see [Monthly Cost Allocation Report](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/configurecostallocreport.html) and [Using Cost Allocation Tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html) in the *AWS Billing and Cost Management User Guide*\.
-
-**Topics**
-+ [Using Tags with the AWS CLI](#configuration-tags-cli)
-+ [Tag Key and Value Requirements](#configuration-tags-restrictions)
 
 ## Using Tags with the AWS CLI<a name="configuration-tags-cli"></a>
 

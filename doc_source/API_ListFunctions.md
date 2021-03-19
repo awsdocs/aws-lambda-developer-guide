@@ -2,7 +2,10 @@
 
 Returns a list of Lambda functions, with the version\-specific configuration of each\. Lambda returns up to 50 functions per call\.
 
-Set `FunctionVersion` to `ALL` to include all published versions of each function in addition to the unpublished version\. To get more information about a function or version, use [GetFunction](API_GetFunction.md)\.
+Set `FunctionVersion` to `ALL` to include all published versions of each function in addition to the unpublished version\. 
+
+**Note**  
+The `ListFunctions` action returns a subset of the [FunctionConfiguration](API_FunctionConfiguration.md) fields\. To get the additional fields \(State, StateReasonCode, StateReason, LastUpdateStatus, LastUpdateStatusReason, LastUpdateStatusReasonCode\) for a function or version, use [GetFunction](API_GetFunction.md)\.
 
 ## Request Syntax<a name="API_ListFunctions_RequestSyntax"></a>
 
@@ -26,7 +29,7 @@ For Lambda@Edge functions, the AWS Region of the master function\. For example, 
 Pattern: `ALL|[a-z]{2}(-gov)?-[a-z]+-\d{1}` 
 
  ** [MaxItems](#API_ListFunctions_RequestSyntax) **   <a name="SSS-ListFunctions-request-MaxItems"></a>
-The maximum number of functions to return\.  
+The maximum number of functions to return in the response\. Note that `ListFunctions` returns a maximum of 50 items in each response, even if you set the number higher\.  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.
 
 ## Request Body<a name="API_ListFunctions_RequestBody"></a>
@@ -66,6 +69,17 @@ Content-type: application/json
          "FunctionArn": "string",
          "FunctionName": "string",
          "Handler": "string",
+         "ImageConfigResponse": { 
+            "Error": { 
+               "ErrorCode": "string",
+               "Message": "string"
+            },
+            "ImageConfig": { 
+               "Command": [ "string" ],
+               "EntryPoint": [ "string" ],
+               "WorkingDirectory": "string"
+            }
+         },
          "KMSKeyArn": "string",
          "LastModified": "string",
          "LastUpdateStatus": "string",
@@ -74,14 +88,19 @@ Content-type: application/json
          "Layers": [ 
             { 
                "Arn": "string",
-               "CodeSize": number
+               "CodeSize": number,
+               "SigningJobArn": "string",
+               "SigningProfileVersionArn": "string"
             }
          ],
          "MasterArn": "string",
          "MemorySize": number,
+         "PackageType": "string",
          "RevisionId": "string",
          "Role": "string",
          "Runtime": "string",
+         "SigningJobArn": "string",
+         "SigningProfileVersionArn": "string",
          "State": "string",
          "StateReason": "string",
          "StateReasonCode": "string",
@@ -136,7 +155,7 @@ For more information about using this API in one of the language\-specific AWS S
 +  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/ListFunctions) 
 +  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/ListFunctions) 
 +  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/ListFunctions) 
-+  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/ListFunctions) 
++  [AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/ListFunctions) 
 +  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/ListFunctions) 
 +  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/ListFunctions) 
 +  [AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/ListFunctions) 

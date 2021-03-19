@@ -8,9 +8,19 @@ A function version includes the following information:
 + All of the function settings, including the environment variables\.
 + A unique Amazon Resource Name \(ARN\) to identify the specific version of the function\.
 
+**Topics**
++ [Creating function versions](#configuration-versions-config)
++ [Managing versions with the Lambda API](#versioning-versions-api)
++ [Using versions](#versioning-versions-using)
++ [Granting permissions](#versioning-permissions)
+
+## Creating function versions<a name="configuration-versions-config"></a>
+
 You can change the function code and settings only on the unpublished version of a function\. When you publish a version, the code and most of the settings are locked to maintain a consistent experience for users of that version\. For more information about configuring function settings, see [Configuring functions in the console](configuration-console.md)\.
 
-**To create a new version of a function**
+You can create a function version using the Lambda console\.
+
+**To create a new function version**
 
 1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 

@@ -512,7 +512,7 @@ public class ProcessKinesisRecords implements RequestHandler<KinesisEvent, Seria
     @Override
     public Serializable handleRequest(KinesisEvent input, Context context) {
 
-        List<StreamsEventResponse.BatchItemFailure> batchItemFailures = new ArrayList<*gt;();
+        List<StreamsEventResponse.BatchItemFailure> batchItemFailures = new ArrayList<*>();
         String curRecordSequenceNumber = "";
 
         for (KinesisEvent.KinesisEventRecord kinesisEventRecord : input.getRecords()) {

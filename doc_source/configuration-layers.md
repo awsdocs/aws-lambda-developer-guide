@@ -271,7 +271,7 @@ jq.zip
 
 ------
 
-For more information about path settings in the Lambda execution environment, see [Runtime environment variables](configuration-envvars.md#configuration-envvars-runtime)\.
+For more information about path settings in the Lambda execution environment, see [Defined runtime environment variables](configuration-envvars.md#configuration-envvars-runtime)\.
 
 ## Layer permissions<a name="configuration-layers-permissions"></a>
 

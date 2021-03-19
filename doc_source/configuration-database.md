@@ -1,6 +1,15 @@
 # Configuring database access for a Lambda function<a name="configuration-database"></a>
 
-You can use the Lambda console to create an Amazon RDS Proxy database proxy for your function\. A database proxy manages a pool of database connections and relays queries from a function\. This enables a function to reach high [concurrency](gettingstarted-concepts.md#gettingstarted-concepts-concurrency) levels without exhausting database connections\.
+You can create an Amazon RDS Proxy database proxy for your function\. A database proxy manages a pool of database connections and relays queries from a function\. This enables a function to reach high [concurrency](gettingstarted-concepts.md#gettingstarted-concepts-concurrency) levels without exhausting database connections\.
+
+**Topics**
++ [Creating a database proxy \(console\)](#configuration-database-config)
++ [Using the function's permissions for authentication](#configuration-database-auth)
++ [Sample application](#configuration-database-sample)
+
+## Creating a database proxy \(console\)<a name="configuration-database-config"></a>
+
+You can use the Lambda console to create an Amazon RDS Proxy database proxy\. 
 
 **To create a database proxy**
 
@@ -20,9 +29,9 @@ You can use the Lambda console to create an Amazon RDS Proxy database proxy for 
 
      ```
      {
-       "username": "admin",
-       "password": "e2abcecxmpldc897"
-     }
+         "username": "admin",
+         "password": "e2abcecxmpldc897"
+       }
      ```
    + **IAM role** – An IAM role with permission to use the secret, and a trust policy that allows Amazon RDS to assume the role\.
    + **Authentication** – The authentication and authorization method for connecting to the proxy from your function code\.
@@ -35,10 +44,6 @@ Amazon RDS charges a hourly price for proxies that that is determined by the ins
 Proxy creation takes a few minutes\. When the proxy is available, configure your function to connect to the proxy endpoint instead of the database endpoint\.
 
 Standard [Amazon RDS Proxy pricing](https://aws.amazon.com/rds/proxy/pricing/) applies\. For more information, see [Managing connections with the Amazon RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-proxy.html) in the Amazon Aurora User Guide\.
-
-**Topics**
-+ [Using the function's permissions for authentication](#configuration-database-auth)
-+ [Sample application](#configuration-database-sample)
 
 ## Using the function's permissions for authentication<a name="configuration-database-auth"></a>
 

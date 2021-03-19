@@ -563,7 +563,7 @@ public class ProcessDynamodbRecords implements RequestHandler<DynamodbEvent, Ser
     @Override
     public Serializable handleRequest(DynamodbEvent input, Context context) {
 
-        List<StreamsEventResponse.BatchItemFailure> batchItemFailures = new ArrayList<*gt;();
+        List<StreamsEventResponse.BatchItemFailure> batchItemFailures = new ArrayList<*>();
         String curRecordSequenceNumber = "";
 
         for (DynamodbEvent.DynamodbEventRecord dynamodbEventRecord : input.getRecords()) {

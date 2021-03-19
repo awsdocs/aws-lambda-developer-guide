@@ -7,7 +7,7 @@ Lambda sets quotas for the amount of compute and storage resources that you can 
 | --- | --- | --- | 
 | Concurrent executions | 1,000 | Hundreds of thousands | 
 | Function and layer storage \(\.zip file archives\) | 75 GB | Terabytes | 
-| Function storage \(container images\) | See [Amazon ECR service quotas](https://docs.aws.amazon.com/AmazonECR/latest/userguide/service-quotas.html)\. |  | 
+| Function storage \(container images\) | See [Amazon ECR service quotas](https://docs.aws.amazon.com/AmazonECR/latest/userguide/service-quotas.html)\. |   | 
 |  [Elastic network interfaces per virtual private cloud \(VPC\)](configuration-vpc.md)  This quota is shared with other services, such as Amazon Elastic File System \(Amazon EFS\)\. See [Amazon VPC quotas](https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html)\.   | 250 | Hundreds | 
 
 For details on concurrency and how Lambda scales your function concurrency in response to traffic, see [AWS Lambda function scaling](invocation-scaling.md)\.

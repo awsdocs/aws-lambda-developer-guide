@@ -37,6 +37,7 @@ You can also create a Lambda function and direct AWS Lambda to invoke it on a re
 
 ```
 {
+  "version": "0",
   "account": "123456789012",
   "region": "us-east-2",
   "detail": {},
@@ -45,7 +46,7 @@ You can also create a Lambda function and direct AWS Lambda to invoke it on a re
   "time": "2019-03-01T01:23:45Z",
   "id": "cdc73f9d-aea9-11e3-9d5a-835b769c0d9c",
   "resources": [
-    "arn:aws:events:us-east-1:123456789012:rule/my-schedule"
+    "arn:aws:events:us-east-2:123456789012:rule/my-schedule"
   ]
 }
 ```
@@ -58,7 +59,7 @@ You can also create a Lambda function and direct AWS Lambda to invoke it on a re
 
 1. Under **Function overview**, choose **Add trigger**\.
 
-1. Set the trigger type to **CloudWatch Events/EventBridge**\.
+1. Set the trigger type to **EventBridge\(CloudWatch Events\)**\.
 
 1. For **Rule**, choose **Create a new rule**\.
 

@@ -63,7 +63,6 @@ Create an application in the Lambda console\. In Lambda, an application is an AW
 
 1. Configure application settings\.
    + **Application name** – **my\-app**\.
-   + **Application description** – **my application**\.
    + **Runtime** – **Node\.js 10\.x**\.
    + **Source control service** – **CodeCommit**\.
    + **Repository name** – **my\-app\-repo**\.

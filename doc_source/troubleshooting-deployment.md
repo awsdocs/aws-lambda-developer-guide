@@ -103,4 +103,4 @@ In this example, the object is 39 characters and takes up 39 bytes when it's sto
 
 **Error:** *InvalidParameterValueException: Lambda was unable to configure your environment variables because the environment variables you have provided contains reserved keys that are currently not supported for modification\.*
 
-Lambda reserves some environment variable keys for internal use\. For example, `AWS_REGION` is used by the runtime to determine the current Region and cannot be overridden\. Other variables, like `PATH`, are used by the runtime but can be extended in your function configuration\. For a full list, see [Runtime environment variables](configuration-envvars.md#configuration-envvars-runtime)\.
+Lambda reserves some environment variable keys for internal use\. For example, `AWS_REGION` is used by the runtime to determine the current Region and cannot be overridden\. Other variables, like `PATH`, are used by the runtime but can be extended in your function configuration\. For a full list, see [Defined runtime environment variables](configuration-envvars.md#configuration-envvars-runtime)\.

@@ -6,6 +6,11 @@ To establish a private connection between your VPC and Lambda, create an [interf
 
 Each interface endpoint is represented by one or more [elastic network interfaces](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html) in your subnets\. A network interface provides a private IP address that serves as an entry point for traffic to Lambda\.
 
+**Topics**
++ [Considerations for Lambda interface endpoints](#vpc-endpoint-considerations)
++ [Creating an interface endpoint for Lambda](#vpc-endpoint-create)
++ [Creating an interface endpoint policy for Lambda](#vpc-endpoint-policy)
+
 ## Considerations for Lambda interface endpoints<a name="vpc-endpoint-considerations"></a>
 
 Before you set up an interface endpoint for Lambda, be sure to review [Interface endpoint properties and limitations](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#vpce-interface-limitations) in the *Amazon VPC User Guide*\.

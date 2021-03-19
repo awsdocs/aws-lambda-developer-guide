@@ -2,6 +2,16 @@
 
 You can configure a function to mount an Amazon Elastic File System \(Amazon EFS\) file system to a local directory\. With Amazon EFS, your function code can access and modify shared resources safely and at high concurrency\.
 
+**Topics**
++ [Connecting to a file system \(console\)](#configuration-filesystem-config)
++ [Configuring a file system and access point](#configuration-filesystem-setup)
++ [Execution role and user permissions](#configuration-filesystem-permissions)
++ [Configuring file system access with the Lambda API](#configuration-filesystem-api)
++ [AWS CloudFormation and AWS SAM](#configuration-filesystem-cloudformation)
++ [Sample applications](#configuration-filesystem-samples)
+
+## Connecting to a file system \(console\)<a name="configuration-filesystem-config"></a>
+
 A function connects to a file system over the local network in a VPC\. The subnets that your function connects to can be the same subnets that contain mount points for your file system, or subnets in the same Availability Zone that can route NFS traffic \(port 2049\) to the file system\.
 
 **Note**  
@@ -26,13 +36,6 @@ Amazon EFS charges for storage and throughput, with rates that vary by storage c
 Lambda charges for data transfer between VPCs\. This only applies if your function's VPC is peered to another VPC with a file system\. The rates are the same as for Amazon EC2 data transfer between VPCs in the same Region\. For details, see [Lambda pricing](https://aws.amazon.com/lambda/pricing)\.
 
 For more information about Lambda's integration with Amazon EFS, see [Using Amazon EFS with Lambda](services-efs.md)\.
-
-**Topics**
-+ [Configuring a file system and access point](#configuration-filesystem-setup)
-+ [Execution role and user permissions](#configuration-filesystem-permissions)
-+ [Configuring file system access with the Lambda API](#configuration-filesystem-api)
-+ [AWS CloudFormation and AWS SAM](#configuration-filesystem-cloudformation)
-+ [Sample applications](#configuration-filesystem-samples)
 
 ## Configuring a file system and access point<a name="configuration-filesystem-setup"></a>
 

@@ -14,8 +14,8 @@ Lambda functions can't connect directly to a VPC with [ dedicated instance tenan
 
 **Topics**
 + [Execution role and user permissions](#vpc-permissions)
-+ [Configuring VPC access with the Lambda console](#vpc-configuring)
-+ [Configuring VPC access with the Lambda API](#vpc-configuring-api)
++ [Configuring VPC access \(console\)](#vpc-configuring)
++ [Configuring VPC access \(API\)](#vpc-configuring-api)
 + [Using IAM condition keys for VPC settings](#vpc-conditions)
 + [Internet and service access for VPC\-connected functions](#vpc-internet)
 + [VPC tutorials](#vpc-tutorials)
@@ -39,7 +39,7 @@ When you configure VPC connectivity, Lambda uses your permissions to verify netw
 + **ec2:DescribeSubnets**
 + **ec2:DescribeVpcs**
 
-## Configuring VPC access with the Lambda console<a name="vpc-configuring"></a>
+## Configuring VPC access \(console\)<a name="vpc-configuring"></a>
 
 If your [IAM permissions](#vpc-conditions) allow you only to create Lambda functions that connect to your VPC, you must configure the VPC when you create the function\. If your IAM permissions allow you to create functions that aren't connected to your VPC, you can add the VPC configuration after you create the function\.
 
@@ -77,7 +77,7 @@ To access private resources, connect your function to private subnets\. If your 
 
 1. Choose **Save**\.
 
-## Configuring VPC access with the Lambda API<a name="vpc-configuring-api"></a>
+## Configuring VPC access \(API\)<a name="vpc-configuring-api"></a>
 
 To connect a Lambda function to a VPC, you can use the following API operations:
 + [CreateFunction](API_CreateFunction.md)

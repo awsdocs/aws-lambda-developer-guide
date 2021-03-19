@@ -42,19 +42,17 @@ For example, use the IAM console to create a role with the following policy:
 ```
 {
     "Version": "2012-10-17",
-    "Statement": {
-        [
-            {
-                "Sid": "VisualEditor0",
-                "Effect": "Allow",
-                "Action": [
-                    "ecr:SetRepositoryPolicy",
-                    "ecr:GetRepositoryPolicy"
-                ],
-                "Resource": "arn:aws:ecr:<region>:<account>:repository/<repo name>/"
-            }
-        ]
-    }
+    "Statement":  [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "ecr:SetRepositoryPolicy",
+                "ecr:GetRepositoryPolicy"
+            ],
+            "Resource": "arn:aws:ecr:<region>:<account>:repository/<repo name>/"
+        }
+    ]
 }
 ```
 

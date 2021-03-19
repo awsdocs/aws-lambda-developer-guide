@@ -61,6 +61,7 @@ Other services invoke your function directly\. You grant the other service permi
 **Services that invoke Lambda functions synchronously**
 + [Elastic Load Balancing \(Application Load Balancer\)](services-alb.md)
 + [Amazon Cognito](services-cognito.md)
++ [Amazon connect](services-connect.md)
 + [Amazon Lex](services-lex.md)
 + [Amazon Alexa](services-alexa.md)
 + [Amazon API Gateway](services-apigateway.md)

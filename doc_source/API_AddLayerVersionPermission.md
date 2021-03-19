@@ -1,6 +1,6 @@
 # AddLayerVersionPermission<a name="API_AddLayerVersionPermission"></a>
 
-Adds permissions to the resource\-based policy of a version of an [AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\. Use this action to grant layer usage permission to other accounts\. You can grant permission to a single account, all AWS accounts, or all accounts in an organization\.
+Adds permissions to the resource\-based policy of a version of an [AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\. Use this action to grant layer usage permission to other accounts\. You can grant permission to a single account, all accounts in an organization, or all AWS accounts\. 
 
 To revoke permission, call [RemoveLayerVersionPermission](API_RemoveLayerVersionPermission.md) with the statement ID that you specified when you added it\.
 
@@ -52,7 +52,7 @@ Pattern: `o-[a-z0-9]{10,32}`
 Required: No
 
  ** [Principal](#API_AddLayerVersionPermission_RequestSyntax) **   <a name="SSS-AddLayerVersionPermission-request-Principal"></a>
-An account ID, or `*` to grant permission to all AWS accounts\.  
+An account ID, or `*` to grant layer usage permission to all accounts in an organization, or all AWS accounts \(if `organizationId` is not specified\)\. For the last case, make sure that you really do want all AWS accounts to have usage permission to this layer\.   
 Type: String  
 Pattern: `\d{12}|\*|arn:(aws[a-zA-Z-]*):iam::\d{12}:root`   
 Required: Yes
@@ -127,7 +127,7 @@ For more information about using this API in one of the language\-specific AWS S
 +  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/AddLayerVersionPermission) 
 +  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/AddLayerVersionPermission) 
 +  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/AddLayerVersionPermission) 
-+  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/AddLayerVersionPermission) 
++  [AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/AddLayerVersionPermission) 
 +  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/AddLayerVersionPermission) 
 +  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/AddLayerVersionPermission) 
 +  [AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/AddLayerVersionPermission) 

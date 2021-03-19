@@ -5,7 +5,22 @@ You can use environment variables to adjust your function's behavior without upd
 **Note**  
 To increase database security, we recommend that you use AWS Secrets Manager instead of environment variables to store database credentials\. For more information, see [Configuring database access for a Lambda function](https://docs.aws.amazon.com/lambda/latest/dg/configuration-database.html)\.
 
-You set environment variables on the unpublished version of your function by specifying a key and value\. When you publish a version, the environment variables are locked for that version along with other [version\-specific configuration](configuration-console.md)\. 
+Environment variables are not evaluated prior to the function invocation\. Any value you define is considered a literal string and not expanded\. Perform the variable evaluation in your function code\.
+
+**Topics**
++ [Configuring environment variables](#configuration-envvars-config)
++ [Configuring environment variables with the API](#configuration-envvars-api)
++ [Example scenario for environment variables](#configuration-envvars-example)
++ [Retrieve environment variables](#configuration-envvars-retrieve)
++ [Defined runtime environment variables](#configuration-envvars-runtime)
++ [Securing environment variables](#configuration-envvars-encryption)
++ [Sample code and templates](#configuration-envvars-samples)
+
+## Configuring environment variables<a name="configuration-envvars-config"></a>
+
+You define environment variables on the unpublished version of your function\. When you publish a version, the environment variables are locked for that version along with other [version\-specific configuration](configuration-console.md)\. 
+
+You create an environment variable on your function by defining a key and a value\. Your function uses the name of the key to retrieve the value of environment variable\.
 
 **To set environment variables in the Lambda console**
 
@@ -13,9 +28,9 @@ You set environment variables on the unpublished version of your function by spe
 
 1. Choose a function\.
 
-1. Choose **Code** if it is not already selected\.
+1. Choose **Configuration**, then choose **Environment variables**\.
 
-1. Scroll down\. Under **Environment variables**, choose **Edit**\.
+1. Under **Environment variables**, choose **Edit**\.
 
 1. Choose **Add environment variable**\.
 
@@ -29,7 +44,59 @@ You set environment variables on the unpublished version of your function by spe
 
 1. Choose **Save**\.
 
-Use environment variables to pass environment\-specific settings to your code\. For example, you can have two functions with the same code but different configuration\. One function connects to a test database, and the other connects to a production database\. In this situation, you use environment variables to tell the function the hostname and other connection details for the database\. 
+## Configuring environment variables with the API<a name="configuration-envvars-api"></a>
+
+To manage environment variables with the AWS CLI or AWS SDK, use the following API operations\.
++ [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)
++ [GetFunctionConfiguration](API_GetFunctionConfiguration.md)
++ [CreateFunction](API_CreateFunction.md)
+
+The following example sets two environment variables on a function named `my-function`\.
+
+```
+aws lambda update-function-configuration --function-name my-function \
+    --environment "Variables={BUCKET=my-bucket,KEY=file.txt}"
+```
+
+When you apply environment variables with the `update-function-configuration` command, the entire contents of the `Variables` structure is replaced\. To retain existing environment variables when you add a new one, include all existing values in your request\.
+
+To get the current configuration, use the `get-function-configuration` command\.
+
+```
+aws lambda get-function-configuration --function-name my-function
+```
+
+You should see the following output:
+
+```
+{
+    "FunctionName": "my-function",
+    "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
+    "Runtime": "nodejs12.x",
+    "Role": "arn:aws:iam::123456789012:role/lambda-role",
+    "Environment": {
+        "Variables": {
+            "BUCKET": "my-bucket",
+            "KEY": "file.txt"
+        }
+    },
+    "RevisionId": "0894d3c1-2a3d-4d48-bf7f-abade99f3c15",
+    ...
+}
+```
+
+To ensure that the values don't change between when you read the configuration and when you update it, you can pass the revision ID from the output of `get-function-configuration` as a parameter to `update-function-configuration`\.
+
+To configure a function's encryption key, set the `KMSKeyARN` option\.
+
+```
+aws lambda update-function-configuration --function-name my-function \
+   --kms-key-arn arn:aws:kms:us-east-2:123456789012:key/055efbb4-xmpl-4336-ba9c-538c7d31f599
+```
+
+## Example scenario for environment variables<a name="configuration-envvars-example"></a>
+
+You can use environment variables to customize function behavior in your test environment and production environment\. For example, you can create two functions with the same code but different configurations\. One function connects to a test database, and the other connects to a production database\. In this situation, you use environment variables to tell the function the hostname and other connection details for the database\. 
 
 The following example shows how to define the database host and database name as environment variables\.
 
@@ -37,8 +104,7 @@ The following example shows how to define the database host and database name as
 
 If you want your test environment to generate more debug information than the production environment, you could set an environment variable to configure your test environment to use more verbose logging or more detailed tracing\.
 
-**Note**  
-Environment variables are not evaluated prior to the function invocation\. Any value you define is considered a literal string and not expanded\. Perform the variable evaluation in the function code\.
+## Retrieve environment variables<a name="configuration-envvars-retrieve"></a>
 
 To retrieve environment variables in your function code, use the standard method for your programming language\.
 
@@ -54,7 +120,7 @@ let region = process.env.AWS_REGION
 
 ```
 import os
-region = os.environ['AWS_REGION']
+  region = os.environ['AWS_REGION']
 ```
 
 **Note**  
@@ -103,13 +169,7 @@ $region = $env:AWS_REGION
 
 Lambda stores environment variables securely by encrypting them at rest\. You can [configure Lambda to use a different encryption key](#configuration-envvars-encryption), encrypt environment variable values on the client side, or set environment variables in an AWS CloudFormation template with AWS Secrets Manager\.
 
-**Topics**
-+ [Runtime environment variables](#configuration-envvars-runtime)
-+ [Securing environment variables](#configuration-envvars-encryption)
-+ [Configuring environment variables with the Lambda API](#configuration-envvars-api)
-+ [Sample code and templates](#configuration-envvars-samples)
-
-## Runtime environment variables<a name="configuration-envvars-runtime"></a>
+## Defined runtime environment variables<a name="configuration-envvars-runtime"></a>
 
 Lambda [runtimes](lambda-runtimes.md) set several environment variables during initialization\. Most of the environment variables provide information about the function or runtime\. The keys for these environment variables are *reserved* and cannot be set in your function configuration\.
 
@@ -157,9 +217,9 @@ When you provide the key, only users in your account with access to the key can 
 
 1. Choose a function\.
 
-1. Choose **Code** if it is not already selected\.
+1. Choose **Configuration**, then choose **Environment variables**\.
 
-1. Scroll down\. Under **Environment variables**, choose **Edit**\.
+1. Under **Environment variables**, choose **Edit**\.
 
 1. Expand **Encryption configuration**\.
 
@@ -210,9 +270,9 @@ You can also encrypt environment variable values on the client side before sendi
 
 1. Choose a function\.
 
-1. Choose **Code** if it is not already selected\.
+1. Choose **Configuration**, then choose **Environment variables**\.
 
-1. Scroll down\. Under **Environment variables**, choose **Edit**\.
+1. Under **Environment variables**, choose **Edit**\.
 
 1. Expand **Encryption configuration**\.
 
@@ -228,56 +288,6 @@ When you use the console encryption helpers, your function needs permission to c
 To view sample code for your function's language, choose **Code** next to an environment variable\. The sample code shows how to retrieve an environment variable in a function and decrypt its value\.
 
 Another option is to store passwords in AWS Secrets Manager secrets\. You can reference the secret in your AWS CloudFormation templates to set passwords on databases\. You can also set the value of an environment variable on the Lambda function\. For an example, see the next section\.
-
-## Configuring environment variables with the Lambda API<a name="configuration-envvars-api"></a>
-
-To manage environment variables with the AWS CLI or AWS SDK, use the following API operations\.
-+ [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)
-+ [GetFunctionConfiguration](API_GetFunctionConfiguration.md)
-+ [CreateFunction](API_CreateFunction.md)
-
-The following example sets two environment variables on a function named `my-function`\.
-
-```
-aws lambda update-function-configuration --function-name my-function \
-    --environment "Variables={BUCKET=my-bucket,KEY=file.txt}"
-```
-
-When you apply environment variables with the `update-function-configuration` command, the entire contents of the `Variables` structure is replaced\. To retain existing environment variables when you add a new one, include all existing values in your request\.
-
-To get the current configuration, use the `get-function-configuration` command\.
-
-```
-aws lambda get-function-configuration --function-name my-function
-```
-
-You should see the following output:
-
-```
-{
-    "FunctionName": "my-function",
-    "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
-    "Runtime": "nodejs12.x",
-    "Role": "arn:aws:iam::123456789012:role/lambda-role",
-    "Environment": {
-        "Variables": {
-            "BUCKET": "my-bucket",
-            "KEY": "file.txt"
-        }
-    },
-    "RevisionId": "0894d3c1-2a3d-4d48-bf7f-abade99f3c15",
-    ...
-}
-```
-
-To ensure that the values don't change between when you read the configuration and when you update it, you can pass the revision ID from the output of `get-function-configuration` as a parameter to `update-function-configuration`\.
-
-To configure a function's encryption key, set the `KMSKeyARN` option\.
-
-```
-aws lambda update-function-configuration --function-name my-function \
-   --kms-key-arn arn:aws:kms:us-east-2:123456789012:key/055efbb4-xmpl-4336-ba9c-538c7d31f599
-```
 
 ## Sample code and templates<a name="configuration-envvars-samples"></a>
 

@@ -1,12 +1,14 @@
 # CreateFunction<a name="API_CreateFunction"></a>
 
-Creates a Lambda function\. To create a function, you need a [deployment package](https://docs.aws.amazon.com/lambda/latest/dg/deployment-package-v2.html) and an [execution role](https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role)\. The deployment package contains your function code\. The execution role grants the function permission to use AWS services, such as Amazon CloudWatch Logs for log streaming and AWS X\-Ray for request tracing\.
+Creates a Lambda function\. To create a function, you need a [deployment package](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html) and an [execution role](https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role)\. The deployment package is a \.zip file archive or container image that contains your function code\. The execution role grants the function permission to use AWS services, such as Amazon CloudWatch Logs for log streaming and AWS X\-Ray for request tracing\.
 
 When you create a function, Lambda provisions an instance of the function and its supporting resources\. If your function connects to a VPC, this process can take a minute or so\. During this time, you can't invoke or modify the function\. The `State`, `StateReason`, and `StateReasonCode` fields in the response from [GetFunctionConfiguration](API_GetFunctionConfiguration.md) indicate when the function is ready to invoke\. For more information, see [Function States](https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html)\.
 
 A function has an unpublished version, and can have published versions and aliases\. The unpublished version changes when you update your function's code and configuration\. A published version is a snapshot of your function code and configuration that can't be changed\. An alias is a named resource that maps to a version, and can be changed to map to a different version\. Use the `Publish` parameter to create version `1` of your function from its initial configuration\.
 
 The other parameters let you configure version\-specific and function\-level settings\. You can modify version\-specific settings later with [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)\. Function\-level settings apply to both the unpublished and published versions of the function, and include tags \([TagResource](API_TagResource.md)\) and per\-function concurrency limits \([PutFunctionConcurrency](API_PutFunctionConcurrency.md)\)\.
+
+You can use code signing if your deployment package is a \.zip file archive\. To enable code signing for this function, specify the ARN of a code\-signing configuration\. When a user attempts to deploy a code package with [UpdateFunctionCode](API_UpdateFunctionCode.md), Lambda checks that the code package has a valid signature from a trusted publisher\. The code\-signing configuration includes set set of signing profiles, which define the trusted publishers for this function\.
 
 If another account or an AWS service invokes your function, use [AddPermission](API_AddPermission.md) to grant permission by creating a resource\-based IAM policy\. You can grant permissions at the function level, on a version, or on an alias\.
 
@@ -20,11 +22,13 @@ Content-type: application/json
 
 {
    "Code": { 
+      "ImageUri": "string",
       "S3Bucket": "string",
       "S3Key": "string",
       "S3ObjectVersion": "string",
       "ZipFile": blob
    },
+   "CodeSigningConfigArn": "string",
    "DeadLetterConfig": { 
       "TargetArn": "string"
    },
@@ -42,9 +46,15 @@ Content-type: application/json
    ],
    "FunctionName": "string",
    "Handler": "string",
+   "ImageConfig": { 
+      "Command": [ "string" ],
+      "EntryPoint": [ "string" ],
+      "WorkingDirectory": "string"
+   },
    "KMSKeyArn": "string",
    "Layers": [ "string" ],
    "MemorySize": number,
+   "PackageType": "string",
    "Publish": boolean,
    "Role": "string",
    "Runtime": "string",
@@ -74,6 +84,13 @@ The request accepts the following data in JSON format\.
 The code for the function\.  
 Type: [FunctionCode](API_FunctionCode.md) object  
 Required: Yes
+
+ ** [CodeSigningConfigArn](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-CodeSigningConfigArn"></a>
+To enable code signing for this function, specify the ARN of a code\-signing configuration\. A code\-signing configuration includes a set of signing profiles, which define the trusted publishers for this function\.  
+Type: String  
+Length Constraints: Maximum length of 200\.  
+Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:code-signing-config:csc-[a-z0-9]{17}`   
+Required: No
 
  ** [DeadLetterConfig](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-DeadLetterConfig"></a>
 A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing\. For more information, see [Dead Letter Queues](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq)\.  
@@ -115,7 +132,12 @@ The name of the method within your code that Lambda calls to execute your functi
 Type: String  
 Length Constraints: Maximum length of 128\.  
 Pattern: `[^\s]+`   
-Required: Yes
+Required: No
+
+ ** [ImageConfig](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-ImageConfig"></a>
+ [Container image configuration values](https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html) that override the values in the container image Dockerfile\.  
+Type: [ImageConfig](API_ImageConfig.md) object  
+Required: No
 
  ** [KMSKeyArn](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-KMSKeyArn"></a>
 The ARN of the AWS Key Management Service \(AWS KMS\) key that's used to encrypt your function's environment variables\. If it's not provided, AWS Lambda uses a default service key\.  
@@ -131,9 +153,15 @@ Pattern: `arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+:[0-
 Required: No
 
  ** [MemorySize](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-MemorySize"></a>
-The amount of memory that your function has access to\. Increasing the function's memory also increases its CPU allocation\. The default value is 128 MB\. The value must be a multiple of 64 MB\.  
+The amount of memory available to the function at runtime\. Increasing the function's memory also increases its CPU allocation\. The default value is 128 MB\. The value can be any multiple of 1 MB\.  
 Type: Integer  
-Valid Range: Minimum value of 128\. Maximum value of 3008\.  
+Valid Range: Minimum value of 128\. Maximum value of 10240\.  
+Required: No
+
+ ** [PackageType](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-PackageType"></a>
+The type of deployment package\. Set to `Image` for container image and set `Zip` for ZIP archive\.  
+Type: String  
+Valid Values:` Zip | Image`   
 Required: No
 
  ** [Publish](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-Publish"></a>
@@ -150,8 +178,8 @@ Required: Yes
  ** [Runtime](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-Runtime"></a>
 The identifier of the function's [runtime](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)\.  
 Type: String  
-Valid Values:` nodejs10.x | nodejs12.x | java8 | java8.al2 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore2.1 | dotnetcore3.1 | go1.x | ruby2.5 | ruby2.7 | provided | provided.al2`   
-Required: Yes
+Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | nodejs10.x | nodejs12.x | nodejs14.x | java8 | java8.al2 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | dotnetcore3.1 | nodejs4.3-edge | go1.x | ruby2.5 | ruby2.7 | provided | provided.al2`   
+Required: No
 
  ** [Tags](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-Tags"></a>
 A list of [tags](https://docs.aws.amazon.com/lambda/latest/dg/tagging.html) to apply to the function\.  
@@ -205,6 +233,17 @@ Content-type: application/json
    "FunctionArn": "string",
    "FunctionName": "string",
    "Handler": "string",
+   "ImageConfigResponse": { 
+      "Error": { 
+         "ErrorCode": "string",
+         "Message": "string"
+      },
+      "ImageConfig": { 
+         "Command": [ "string" ],
+         "EntryPoint": [ "string" ],
+         "WorkingDirectory": "string"
+      }
+   },
    "KMSKeyArn": "string",
    "LastModified": "string",
    "LastUpdateStatus": "string",
@@ -213,14 +252,19 @@ Content-type: application/json
    "Layers": [ 
       { 
          "Arn": "string",
-         "CodeSize": number
+         "CodeSize": number,
+         "SigningJobArn": "string",
+         "SigningProfileVersionArn": "string"
       }
    ],
    "MasterArn": "string",
    "MemorySize": number,
+   "PackageType": "string",
    "RevisionId": "string",
    "Role": "string",
    "Runtime": "string",
+   "SigningJobArn": "string",
+   "SigningProfileVersionArn": "string",
    "State": "string",
    "StateReason": "string",
    "StateReasonCode": "string",
@@ -286,6 +330,10 @@ Type: String
 Length Constraints: Maximum length of 128\.  
 Pattern: `[^\s]+` 
 
+ ** [ImageConfigResponse](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-ImageConfigResponse"></a>
+The function's image configuration values\.  
+Type: [ImageConfigResponse](API_ImageConfigResponse.md) object
+
  ** [KMSKeyArn](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-KMSKeyArn"></a>
 The KMS key that's used to encrypt the function's environment variables\. This key is only returned if you've configured a customer managed CMK\.  
 Type: String  
@@ -307,7 +355,7 @@ Type: String
  ** [LastUpdateStatusReasonCode](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-LastUpdateStatusReasonCode"></a>
 The reason code for the last update that was performed on the function\.  
 Type: String  
-Valid Values:` EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses | InvalidSubnet | InvalidSecurityGroup` 
+Valid Values:` EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses | InvalidSubnet | InvalidSecurityGroup | ImageDeleted | ImageAccessDenied | InvalidImage` 
 
  ** [Layers](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-Layers"></a>
 The function's [ layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\.  
@@ -319,9 +367,14 @@ Type: String
 Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [MemorySize](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-MemorySize"></a>
-The memory that's allocated to the function\.  
+The amount of memory available to the function at runtime\.   
 Type: Integer  
-Valid Range: Minimum value of 128\. Maximum value of 3008\.
+Valid Range: Minimum value of 128\. Maximum value of 10240\.
+
+ ** [PackageType](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-PackageType"></a>
+The type of deployment package\. Set to `Image` for container image and set `Zip` for \.zip file archive\.  
+Type: String  
+Valid Values:` Zip | Image` 
 
  ** [RevisionId](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-RevisionId"></a>
 The latest updated revision of the function or alias\.  
@@ -335,7 +388,17 @@ Pattern: `arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+`
  ** [Runtime](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-Runtime"></a>
 The runtime environment for the Lambda function\.  
 Type: String  
-Valid Values:` nodejs10.x | nodejs12.x | java8 | java8.al2 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore2.1 | dotnetcore3.1 | go1.x | ruby2.5 | ruby2.7 | provided | provided.al2` 
+Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | nodejs10.x | nodejs12.x | nodejs14.x | java8 | java8.al2 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | dotnetcore3.1 | nodejs4.3-edge | go1.x | ruby2.5 | ruby2.7 | provided | provided.al2` 
+
+ ** [SigningJobArn](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-SigningJobArn"></a>
+The ARN of the signing job\.  
+Type: String  
+Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)` 
+
+ ** [SigningProfileVersionArn](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-SigningProfileVersionArn"></a>
+The ARN of the signing profile version\.  
+Type: String  
+Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)` 
 
  ** [State](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-State"></a>
 The current state of the function\. When the state is `Inactive`, you can reactivate the function by invoking it\.  
@@ -349,7 +412,7 @@ Type: String
  ** [StateReasonCode](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-StateReasonCode"></a>
 The reason code for the function's current state\. When the code is `Creating`, you can't invoke or modify the function\.  
 Type: String  
-Valid Values:` Idle | Creating | Restoring | EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses | InvalidSubnet | InvalidSecurityGroup` 
+Valid Values:` Idle | Creating | Restoring | EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses | InvalidSubnet | InvalidSecurityGroup | ImageDeleted | ImageAccessDenied | InvalidImage` 
 
  ** [Timeout](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-Timeout"></a>
 The amount of time in seconds that Lambda allows a function to run before stopping it\.  
@@ -372,8 +435,20 @@ Type: [VpcConfigResponse](API_VpcConfigResponse.md) object
 
 ## Errors<a name="API_CreateFunction_Errors"></a>
 
+ **CodeSigningConfigNotFoundException**   
+The specified code signing configuration does not exist\.  
+HTTP Status Code: 404
+
  **CodeStorageExceededException**   
 You have exceeded your maximum total code size per account\. [Learn more](https://docs.aws.amazon.com/lambda/latest/dg/limits.html)   
+HTTP Status Code: 400
+
+ **CodeVerificationFailedException**   
+The code signature failed one or more of the validation checks for signature mismatch or expiry, and the code signing policy is set to ENFORCE\. Lambda blocks the deployment\.   
+HTTP Status Code: 400
+
+ **InvalidCodeSignatureException**   
+The code signature failed the integrity check\. Lambda always blocks deployment if the integrity check fails, even if code signing policy is set to WARN\.  
 HTTP Status Code: 400
 
  **InvalidParameterValueException**   
@@ -403,7 +478,7 @@ For more information about using this API in one of the language\-specific AWS S
 +  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/CreateFunction) 
 +  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/CreateFunction) 
 +  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/CreateFunction) 
-+  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/CreateFunction) 
++  [AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/CreateFunction) 
 +  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/CreateFunction) 
 +  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/CreateFunction) 
 +  [AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/CreateFunction) 
