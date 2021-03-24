@@ -36,7 +36,7 @@ The following steps demonstrate how to upload a \.zip file as your deployment pa
 
 1. Select a function\.
 
-1. Choose **Actions**, **Upload a \.zip file** in the **Function code** pane\.
+1. Choose **Upload from**, **\.zip file** in the **Code Source** pane\.
 
 1. Choose **Upload** to select your local \.zip file\.
 
