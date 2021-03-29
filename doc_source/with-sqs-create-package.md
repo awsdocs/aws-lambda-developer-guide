@@ -137,7 +137,7 @@ Build the executable with `go build` and create a deployment package\. For instr
 
 The following is example Python code that accepts an Amazon SQS record as input and processes it\. For illustration, the code writes to some of the incoming event data to CloudWatch Logs\. 
 
-Follow the instructions to create a AWS Lambda function deployment package\. 
+Follow the instructions to create an AWS Lambda function deployment package\. 
 
 **Example ProcessSQSRecords\.py**  
 
