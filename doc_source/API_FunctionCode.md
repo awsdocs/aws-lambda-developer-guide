@@ -5,7 +5,7 @@ The code for the Lambda function\. You can specify either an object in Amazon S3
 ## Contents<a name="API_FunctionCode_Contents"></a>
 
  **ImageUri**   <a name="SSS-Type-FunctionCode-ImageUri"></a>
-URI of a container image in the Amazon ECR registry\.  
+URI of a [container image](https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html) in the Amazon ECR registry\.  
 Type: String  
 Required: No
 

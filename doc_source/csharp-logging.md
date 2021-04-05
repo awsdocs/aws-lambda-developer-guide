@@ -15,7 +15,7 @@ This page describes how to produce log output from your Lambda function's code, 
 
  To output logs from your function code, you can use methods on [the Console class](https://docs.microsoft.com/en-us/dotnet/api/system.console), or any logging library that writes to `stdout` or `stderr`\. The following example uses the `LambdaLogger` class from the [Amazon\.Lambda\.Core](lambda-csharp.md) library\.
 
-**Example [src/blank\-csharp/Function\.cs](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-csharp/src/blank-csharp/Function.cs) – Logging**  
+**Example [src/blank\-csharp/Function\.cs](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-csharp/src/blank-csharp/Function.cs) – Logging**  
 
 ```
 public async Task<AccountUsage> FunctionHandler(SQSEvent invocationEvent, ILambdaContext context)

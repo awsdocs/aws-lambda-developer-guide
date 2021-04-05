@@ -98,7 +98,7 @@ Required: No
  ** [FunctionResponseTypes](#API_UpdateEventSourceMapping_RequestSyntax) **   <a name="SSS-UpdateEventSourceMapping-request-FunctionResponseTypes"></a>
 \(Streams\) A list of current response type enums applied to the event source mapping\.  
 Type: Array of strings  
-Array Members: Fixed number of 1 item\.  
+Array Members: Minimum number of 0 items\. Maximum number of 1 item\.  
 Valid Values:` ReportBatchItemFailures`   
 Required: No
 
@@ -198,11 +198,11 @@ Type: Integer
 Valid Range: Minimum value of 1\. Maximum value of 10000\.
 
  ** [BisectBatchOnFunctionError](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-BisectBatchOnFunctionError"></a>
-\(Streams\) If the function returns an error, split the batch in two and retry\. The default value is false\.  
+\(Streams only\) If the function returns an error, split the batch in two and retry\. The default value is false\.  
 Type: Boolean
 
  ** [DestinationConfig](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-DestinationConfig"></a>
-\(Streams\) An Amazon SQS queue or Amazon SNS topic destination for discarded records\.  
+\(Streams only\) An Amazon SQS queue or Amazon SNS topic destination for discarded records\.  
 Type: [DestinationConfig](API_DestinationConfig.md) object
 
  ** [EventSourceArn](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-EventSourceArn"></a>
@@ -218,7 +218,7 @@ Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:functi
  ** [FunctionResponseTypes](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-FunctionResponseTypes"></a>
 \(Streams\) A list of current response type enums applied to the event source mapping\.  
 Type: Array of strings  
-Array Members: Fixed number of 1 item\.  
+Array Members: Minimum number of 0 items\. Maximum number of 1 item\.  
 Valid Values:` ReportBatchItemFailures` 
 
  ** [LastModified](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-LastModified"></a>
@@ -235,17 +235,17 @@ Type: Integer
 Valid Range: Minimum value of 0\. Maximum value of 300\.
 
  ** [MaximumRecordAgeInSeconds](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-MaximumRecordAgeInSeconds"></a>
-\(Streams\) Discard records older than the specified age\. The default value is infinite \(\-1\)\. When set to infinite \(\-1\), failed records are retried until the record expires\.  
+\(Streams only\) Discard records older than the specified age\. The default value is infinite \(\-1\)\. When set to infinite \(\-1\), failed records are retried until the record expires\.  
 Type: Integer  
 Valid Range: Minimum value of \-1\. Maximum value of 604800\.
 
  ** [MaximumRetryAttempts](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-MaximumRetryAttempts"></a>
-\(Streams\) Discard records after the specified number of retries\. The default value is infinite \(\-1\)\. When set to infinite \(\-1\), failed records are retried until the record expires\.  
+\(Streams only\) Discard records after the specified number of retries\. The default value is infinite \(\-1\)\. When set to infinite \(\-1\), failed records are retried until the record expires\.  
 Type: Integer  
 Valid Range: Minimum value of \-1\. Maximum value of 10000\.
 
  ** [ParallelizationFactor](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-ParallelizationFactor"></a>
-\(Streams\) The number of batches to process from each shard concurrently\. The default value is 1\.  
+\(Streams only\) The number of batches to process from each shard concurrently\. The default value is 1\.  
 Type: Integer  
 Valid Range: Minimum value of 1\. Maximum value of 10\.
 

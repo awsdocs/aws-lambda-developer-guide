@@ -11,12 +11,12 @@ Valid Range: Minimum value of 1\. Maximum value of 10000\.
 Required: No
 
  **BisectBatchOnFunctionError**   <a name="SSS-Type-EventSourceMappingConfiguration-BisectBatchOnFunctionError"></a>
-\(Streams\) If the function returns an error, split the batch in two and retry\. The default value is false\.  
+\(Streams only\) If the function returns an error, split the batch in two and retry\. The default value is false\.  
 Type: Boolean  
 Required: No
 
  **DestinationConfig**   <a name="SSS-Type-EventSourceMappingConfiguration-DestinationConfig"></a>
-\(Streams\) An Amazon SQS queue or Amazon SNS topic destination for discarded records\.  
+\(Streams only\) An Amazon SQS queue or Amazon SNS topic destination for discarded records\.  
 Type: [DestinationConfig](API_DestinationConfig.md) object  
 Required: No
 
@@ -35,7 +35,7 @@ Required: No
  **FunctionResponseTypes**   <a name="SSS-Type-EventSourceMappingConfiguration-FunctionResponseTypes"></a>
 \(Streams\) A list of current response type enums applied to the event source mapping\.  
 Type: Array of strings  
-Array Members: Fixed number of 1 item\.  
+Array Members: Minimum number of 0 items\. Maximum number of 1 item\.  
 Valid Values:` ReportBatchItemFailures`   
 Required: No
 
@@ -56,19 +56,19 @@ Valid Range: Minimum value of 0\. Maximum value of 300\.
 Required: No
 
  **MaximumRecordAgeInSeconds**   <a name="SSS-Type-EventSourceMappingConfiguration-MaximumRecordAgeInSeconds"></a>
-\(Streams\) Discard records older than the specified age\. The default value is infinite \(\-1\)\. When set to infinite \(\-1\), failed records are retried until the record expires\.  
+\(Streams only\) Discard records older than the specified age\. The default value is infinite \(\-1\)\. When set to infinite \(\-1\), failed records are retried until the record expires\.  
 Type: Integer  
 Valid Range: Minimum value of \-1\. Maximum value of 604800\.  
 Required: No
 
  **MaximumRetryAttempts**   <a name="SSS-Type-EventSourceMappingConfiguration-MaximumRetryAttempts"></a>
-\(Streams\) Discard records after the specified number of retries\. The default value is infinite \(\-1\)\. When set to infinite \(\-1\), failed records are retried until the record expires\.  
+\(Streams only\) Discard records after the specified number of retries\. The default value is infinite \(\-1\)\. When set to infinite \(\-1\), failed records are retried until the record expires\.  
 Type: Integer  
 Valid Range: Minimum value of \-1\. Maximum value of 10000\.  
 Required: No
 
  **ParallelizationFactor**   <a name="SSS-Type-EventSourceMappingConfiguration-ParallelizationFactor"></a>
-\(Streams\) The number of batches to process from each shard concurrently\. The default value is 1\.  
+\(Streams only\) The number of batches to process from each shard concurrently\. The default value is 1\.  
 Type: Integer  
 Valid Range: Minimum value of 1\. Maximum value of 10\.  
 Required: No

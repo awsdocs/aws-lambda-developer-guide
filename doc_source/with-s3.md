@@ -55,6 +55,6 @@ To invoke your function, Amazon S3 needs permission from the function's [resourc
 If your function uses the AWS SDK to manage Amazon S3 resources, it also needs Amazon S3 permissions in its [execution role](lambda-intro-execution-role.md)\. 
 
 **Topics**
-+ [Tutorial: Using AWS Lambda with Amazon S3](with-s3-example.md)
-+ [Sample Amazon S3 function code](with-s3-example-deployment-pkg.md)
++ [Tutorial: Using an Amazon S3 trigger to invoke a Lambda function](with-s3-example.md)
++ [Tutorial: Using an Amazon S3 trigger to create thumbnail images](with-s3-tutorial.md)
 + [AWS SAM template for an Amazon S3 application](with-s3-example-use-app-spec.md)

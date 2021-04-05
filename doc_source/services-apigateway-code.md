@@ -58,7 +58,7 @@ exports.handler = function(event, context, callback) {
             callback(null, "pong");
             break;
         default:
-            callback('Unknown operation: ${operation}');
+            callback(`Unknown operation: ${operation}`);
     }
 };
 ```

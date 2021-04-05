@@ -15,7 +15,7 @@ This page describes how to produce log output from your Lambda function's code, 
 
  To output logs from your function code, you can use methods on [the fmt package](https://golang.org/pkg/fmt/), or any logging library that writes to `stdout` or `stderr`\. The following example uses [the log package](https://golang.org/pkg/log/)\.
 
-**Example [main\.go](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-go/function/main.go) – Logging**  
+**Example [main\.go](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-go/function/main.go) – Logging**  
 
 ```
 func handleRequest(ctx context.Context, event events.SQSEvent) (string, error) {

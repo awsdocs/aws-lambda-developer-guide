@@ -123,6 +123,12 @@ Invoke your Lambda function manually using the `invoke` AWS Lambda CLI command a
    ```
    aws lambda invoke --function-name ProcessKinesisRecords --payload file://input.txt out.txt
    ```
+**Note**  
+If you are using AWS CLI version 2, add the following command parameter:   
+
+   ```
+   --cli-binary-format raw-in-base64-out
+   ```
 
    The response is saved to `out.txt`\.
 

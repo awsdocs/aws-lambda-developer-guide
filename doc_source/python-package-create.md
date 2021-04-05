@@ -186,21 +186,15 @@ Invoke the Lambda function [synchronously](invocation-sync.md) using the event i
 **To invoke the function**
 + Use the [invoke](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/invoke.html) command\.
 
-------
-#### [ macOS/Linux ]
-
   ```
   aws lambda invoke --function-name my-math-function --payload '{"action": "square","number": 3}' output.txt
   ```
-
-------
-#### [ Windows ]
+**Note**  
+If you are using AWS CLI version 2, add the following command parameter:   
 
   ```
-  aws lambda invoke --function-name my-math-function --cli-binary-format raw-in-base64-out --payload "{"action": "square","number": 3}" output.txt
+  --cli-binary-format raw-in-base64-out
   ```
-
-------
 
   This command produces the following output:
 

@@ -6,8 +6,8 @@ Lambda provides AWS managed policies that grant access to Lambda API actions and
 
 **Note**  
 The AWS managed policies **AWSLambdaFullAccess** and **AWSLambdaReadOnlyAccess** will be [deprecated](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-deprecated.html) on March 1, 2021\. After this date, you cannot attach these policies to new IAM users\. For more information, see the related [troubleshooting topic](security_iam_troubleshoot.md#security_iam_troubleshoot-admin-deprecation)\.
-+ **AWSLambdaFullAccess** – Grants full access to Lambda actions and other AWS services used to develop and maintain Lambda resources\.
-+ **AWSLambdaReadOnlyAccess** – Grants read\-only access to Lambda resources\.
++ **AWSLambda\_FullAccess** – Grants full access to Lambda actions and other AWS services used to develop and maintain Lambda resources\. This policy was created by scoping down the previous policy **AWSLambdaFullAccess**\.
++ **AWSLambda\_ReadOnlyAccess** – Grants read\-only access to Lambda resources\. This policy was created by scoping down the previous policy **AWSLambdaReadOnlyAccess**\.
 + **AWSLambdaRole** – Grants permissions to invoke Lambda functions\.
 
 AWS managed policies grant permission to API actions without restricting the Lambda functions or layers that a user can modify\. For finer\-grained control, you can create your own policies that limit the scope of a user's permissions\.

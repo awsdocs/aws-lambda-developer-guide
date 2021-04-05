@@ -1,6 +1,9 @@
-# AWS Lambda function handler in Python<a name="python-handler"></a>
+# Lambda function handler in Python<a name="python-handler"></a>
 
-The AWS Lambda function handler is the method in your function code that processes events\. When your function is invoked, Lambda runs the handler method\. When the handler exits or returns a response, it becomes available to handle another event\.
+**Note**  
+End of support for the Python 2\.7 runtime starts on July 15, 2021\. For more information, see [Runtime support policy](runtime-support-policy.md)\.
+
+The Lambda function *handler* is the method in your function code that processes events\. When your function is invoked, Lambda runs the handler method\. When the handler exits or returns a response, it becomes available to handle another event\.
 
 You can use the following general syntax when creating a function handler in Python:
 
@@ -12,19 +15,19 @@ def handler_name(event, context):
 
 ## Naming<a name="naming"></a>
 
-The Lambda function *handler* name specified at the time you create a Lambda function is derived from the following:
-+ the name of the file in which the Lambda handler function is located
-+ the name of the Python handler function
+The Lambda function handler name specified at the time that you create a Lambda function is derived from:
++ The name of the file in which the Lambda handler function is located\.
++ The name of the Python handler function\.
 
-A function handler can be any name; however, the default on the Lambda console is `lambda_function.lambda_handler`\. This name reflects the function name as `lambda_handler`, and the file where the handler code is stored in `lambda_function.py`\.
+A function handler can be any name; however, the default name in the Lambda console is `lambda_function.lambda_handler`\. This function handler name reflects the function name \(`lambda_handler`\) and the file where the handler code is stored \(`lambda_function.py`\)\.
 
-If you choose a different name for your function handler on the Lambda console, you must update the name on the **Runtime settings** pane\. The following example shows the Lambda function handler on the Lambda console:
+To change the function handler name in the Lambda console, on the **Runtime settings** pane, choose **Edit**\.
 
-![\[The following image shows the function handler on the Lambda console.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/python-console-handler.png)
+![\[A function handler name in the Lambda console.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/python-console-handler.png)
 
 ## How it works<a name="python-handler-how"></a>
 
-When your function handler is invoked by Lambda, the [Lambda runtime](lambda-runtimes.md) passes two arguments to the function handler:
+When Lambda invokes your function handler, the [Lambda runtime](lambda-runtimes.md) passes two arguments to the function handler:
 + The first argument is the [event object](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-concepts.html#gettingstarted-concepts-event)\. An event is a JSON\-formatted document that contains data for a Lambda function to process\. The [Lambda runtime](lambda-runtimes.md) converts the event to an object and passes it to your function code\. It is usually of the Python `dict` type\. It can also be `list`, `str`, `int`, `float`, or the `NoneType` type\.
 
   The event object contains information from the invoking service\. When you invoke a function, you determine the structure and contents of the event\. When an AWS service invokes your function, the service defines the event structure\. For more information about events from AWS services, see [Using AWS Lambda with other services](lambda-services.md)\.

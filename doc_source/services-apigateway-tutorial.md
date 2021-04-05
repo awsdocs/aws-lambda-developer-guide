@@ -179,7 +179,7 @@ exports.handler = function(event, context, callback) {
             callback(null, "pong");
             break;
         default:
-            callback('Unknown operation: ${operation}');
+            callback(`Unknown operation: ${operation}`);
     }
 };
 ```
@@ -224,7 +224,13 @@ Invoke the function manually using the sample event data\. We recommend that you
 
    ```
    aws lambda  invoke --function-name LambdaFunctionOverHttps \
-   --payload fileb://input.txt outputfile.txt
+   --payload file://input.txt outputfile.txt
+   ```
+**Note**  
+If you are using AWS CLI version 2, add the following command parameter:   
+
+   ```
+   --cli-binary-format raw-in-base64-out
    ```
 
 ## Create an API using Amazon API Gateway<a name="services-apigateway-tutorial-api"></a>

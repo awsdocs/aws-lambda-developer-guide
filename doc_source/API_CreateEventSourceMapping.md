@@ -2,13 +2,13 @@
 
 Creates a mapping between an event source and an AWS Lambda function\. Lambda reads items from the event source and triggers the function\.
 
-For details about each event source type, see the following topics\.
-+  [Using AWS Lambda with Amazon DynamoDB](https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html) 
-+  [Using AWS Lambda with Amazon Kinesis](https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html) 
-+  [Using AWS Lambda with Amazon SQS](https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html) 
-+  [Using AWS Lambda with Amazon MQ](https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html) 
-+  [Using AWS Lambda with Amazon MSK](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html) 
-+  [Using AWS Lambda with Self\-Managed Apache Kafka](https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html) 
+For details about each event source type, see the following topics\. In particular, each of the topics describes the required and optional parameters for the specific event source\. 
++  [ Configuring a Dynamo DB stream as an event source](https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-dynamodb-eventsourcemapping) 
++  [ Configuring a Kinesis stream as an event source](https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-eventsourcemapping) 
++  [ Configuring an SQS queue as an event source](https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-eventsource) 
++  [ Configuring an MQ broker as an event source](https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-eventsourcemapping) 
++  [ Configuring MSK as an event source](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html) 
++  [ Configuring Self\-Managed Apache Kafka as an event source](https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html) 
 
 The following error handling options are only available for stream sources \(DynamoDB and Kinesis\):
 +  `BisectBatchOnFunctionError` \- If the function returns an error, split the batch in two and retry\.
@@ -122,7 +122,7 @@ Required: Yes
  ** [FunctionResponseTypes](#API_CreateEventSourceMapping_RequestSyntax) **   <a name="SSS-CreateEventSourceMapping-request-FunctionResponseTypes"></a>
 \(Streams\) A list of current response type enums applied to the event source mapping\.  
 Type: Array of strings  
-Array Members: Fixed number of 1 item\.  
+Array Members: Minimum number of 0 items\. Maximum number of 1 item\.  
 Valid Values:` ReportBatchItemFailures`   
 Required: No
 
@@ -254,11 +254,11 @@ Type: Integer
 Valid Range: Minimum value of 1\. Maximum value of 10000\.
 
  ** [BisectBatchOnFunctionError](#API_CreateEventSourceMapping_ResponseSyntax) **   <a name="SSS-CreateEventSourceMapping-response-BisectBatchOnFunctionError"></a>
-\(Streams\) If the function returns an error, split the batch in two and retry\. The default value is false\.  
+\(Streams only\) If the function returns an error, split the batch in two and retry\. The default value is false\.  
 Type: Boolean
 
  ** [DestinationConfig](#API_CreateEventSourceMapping_ResponseSyntax) **   <a name="SSS-CreateEventSourceMapping-response-DestinationConfig"></a>
-\(Streams\) An Amazon SQS queue or Amazon SNS topic destination for discarded records\.  
+\(Streams only\) An Amazon SQS queue or Amazon SNS topic destination for discarded records\.  
 Type: [DestinationConfig](API_DestinationConfig.md) object
 
  ** [EventSourceArn](#API_CreateEventSourceMapping_ResponseSyntax) **   <a name="SSS-CreateEventSourceMapping-response-EventSourceArn"></a>
@@ -274,7 +274,7 @@ Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:functi
  ** [FunctionResponseTypes](#API_CreateEventSourceMapping_ResponseSyntax) **   <a name="SSS-CreateEventSourceMapping-response-FunctionResponseTypes"></a>
 \(Streams\) A list of current response type enums applied to the event source mapping\.  
 Type: Array of strings  
-Array Members: Fixed number of 1 item\.  
+Array Members: Minimum number of 0 items\. Maximum number of 1 item\.  
 Valid Values:` ReportBatchItemFailures` 
 
  ** [LastModified](#API_CreateEventSourceMapping_ResponseSyntax) **   <a name="SSS-CreateEventSourceMapping-response-LastModified"></a>
@@ -291,17 +291,17 @@ Type: Integer
 Valid Range: Minimum value of 0\. Maximum value of 300\.
 
  ** [MaximumRecordAgeInSeconds](#API_CreateEventSourceMapping_ResponseSyntax) **   <a name="SSS-CreateEventSourceMapping-response-MaximumRecordAgeInSeconds"></a>
-\(Streams\) Discard records older than the specified age\. The default value is infinite \(\-1\)\. When set to infinite \(\-1\), failed records are retried until the record expires\.  
+\(Streams only\) Discard records older than the specified age\. The default value is infinite \(\-1\)\. When set to infinite \(\-1\), failed records are retried until the record expires\.  
 Type: Integer  
 Valid Range: Minimum value of \-1\. Maximum value of 604800\.
 
  ** [MaximumRetryAttempts](#API_CreateEventSourceMapping_ResponseSyntax) **   <a name="SSS-CreateEventSourceMapping-response-MaximumRetryAttempts"></a>
-\(Streams\) Discard records after the specified number of retries\. The default value is infinite \(\-1\)\. When set to infinite \(\-1\), failed records are retried until the record expires\.  
+\(Streams only\) Discard records after the specified number of retries\. The default value is infinite \(\-1\)\. When set to infinite \(\-1\), failed records are retried until the record expires\.  
 Type: Integer  
 Valid Range: Minimum value of \-1\. Maximum value of 10000\.
 
  ** [ParallelizationFactor](#API_CreateEventSourceMapping_ResponseSyntax) **   <a name="SSS-CreateEventSourceMapping-response-ParallelizationFactor"></a>
-\(Streams\) The number of batches to process from each shard concurrently\. The default value is 1\.  
+\(Streams only\) The number of batches to process from each shard concurrently\. The default value is 1\.  
 Type: Integer  
 Valid Range: Minimum value of 1\. Maximum value of 10\.
 

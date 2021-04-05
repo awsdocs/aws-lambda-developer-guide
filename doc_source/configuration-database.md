@@ -53,7 +53,7 @@ You can create a database proxy that uses the function's IAM credentials for aut
 
 The Lambda console adds the required permission \(`rds-db:connect`\) to the execution role\. You can then use the AWS SDK to generate a token that allows it to connect to the proxy\. The following example shows how to configure a database connection with the `mysql2` library in Node\.js\.
 
-**Example [dbadmin/index\-iam\.js](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/rds-mysql/dbadmin/index-iam.js) – AWS SDK signer**  
+**Example [dbadmin/index\-iam\.js](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/rds-mysql/dbadmin/index-iam.js) – AWS SDK signer**  
 
 ```
 const signer = new AWS.RDS.Signer({
@@ -89,4 +89,4 @@ Sample applications that demonstrate the use of Lambda with an Amazon RDS databa
 
   [ ![\[The processor function processes Kinesis events and stores the events in a MySQL database.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-listmanager.png)](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/list-manager)
 
-To use the sample applications, follow the instructions in the GitHub repository: [RDS MySQL](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/rds-mysql/README.md), [List Manager](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/list-manager/README.md)\.
+To use the sample applications, follow the instructions in the GitHub repository: [RDS MySQL](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/rds-mysql/README.md), [List Manager](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/list-manager/README.md)\.

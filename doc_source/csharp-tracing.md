@@ -35,7 +35,7 @@ When active tracing is enabled, Lambda records a trace for a subset of invocatio
 
 You can instrument your function code to record metadata and trace downstream calls\. To record detail about calls that your function makes to other resources and services, use the X\-Ray SDK for \.NET\. To get the SDK, add the `AWSXRayRecorder` packages to your project file\.
 
-**Example [src/blank\-csharp/blank\-csharp\.csproj](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-csharp/src/blank-csharp/blank-csharp.csproj)**  
+**Example [src/blank\-csharp/blank\-csharp\.csproj](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-csharp/src/blank-csharp/blank-csharp.csproj)**  
 
 ```
 <Project Sdk="Microsoft.NET.Sdk">
@@ -59,7 +59,7 @@ You can instrument your function code to record metadata and trace downstream ca
 
 To instrument AWS SDK clients, call the `RegisterXRayForAllServices` method in your initialization code\.
 
-**Example [src/blank\-csharp/Function\.cs](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-csharp/src/blank-csharp/Function.cs) – Initialize X\-Ray**  
+**Example [src/blank\-csharp/Function\.cs](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-csharp/src/blank-csharp/Function.cs) – Initialize X\-Ray**  
 
 ```
     static async void initialize() {
@@ -118,7 +118,7 @@ Resources:
 
 For an AWS Serverless Application Model \(AWS SAM\) `AWS::Serverless::Function` resource, use the `Tracing` property\.
 
-**Example [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-nodejs/template.yml) – Tracing configuration**  
+**Example [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-nodejs/template.yml) – Tracing configuration**  
 
 ```
 Resources:

@@ -79,6 +79,16 @@ For FIFO queues, records contain additional attributes that are related to dedup
 
 When Lambda reads a batch, the messages stay in the queue but become hidden for the length of the queue's [visibility timeout](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html)\. If your function successfully processes the batch, Lambda deletes the messages from the queue\. If your function is [throttled](invocation-scaling.md), returns an error, or doesn't respond, the message becomes visible again\. All messages in a failed batch return to the queue, so your function code must be able to process the same message multiple times without side effects\.
 
+**Topics**
++ [Scaling and processing](#events-sqs-scaling)
++ [Configuring a queue to use with Lambda](#events-sqs-queueconfig)
++ [Execution role permissions](#events-sqs-permissions)
++ [Configuring a queue as an event source](#events-sqs-eventsource)
++ [Event source mapping APIs](#services-dynamodb-api)
++ [Tutorial: Using AWS Lambda with Amazon Simple Queue Service](with-sqs-example.md)
++ [Sample Amazon SQS function code](with-sqs-create-package.md)
++ [AWS SAM template for an Amazon SQS application](with-sqs-example-use-app-spec.md)
+
 ## Scaling and processing<a name="events-sqs-scaling"></a>
 
 For standard queues, Lambda uses [long polling](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-long-polling.html) to poll a queue until it becomes active\. When messages are available, Lambda reads up to 5 batches and sends them to your function\. If messages are still available, Lambda increases the number of processes that are reading batches by up to 60 more instances per minute\. The maximum number of batches that can be processed simultaneously by an event source mapping is 1000\.

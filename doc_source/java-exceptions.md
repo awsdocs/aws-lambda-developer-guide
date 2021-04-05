@@ -68,9 +68,9 @@ For a complete list of invocation errors, see [Invoke API Errors](API_Invoke.md#
 You can create a Lambda function that displays human\-readable error messages to users\.
 
 **Note**  
-To test this code, you need to include [InputLengthException\.java](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/java-basic/src/main/java/example/InputLengthException.java) in your project src folder\.
+To test this code, you need to include [InputLengthException\.java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-basic/src/main/java/example/InputLengthException.java) in your project src folder\.
 
-**Example [src/main/java/example/HandlerDivide\.java](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/java-basic/src/main/java/example/HandlerDivide.java) – Runtime exception**  
+**Example [src/main/java/example/HandlerDivide\.java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-basic/src/main/java/example/HandlerDivide.java) – Runtime exception**  
 
 ```
 import java.util.List;
@@ -111,7 +111,7 @@ When the function throws `InputLengthException`, the Java runtime serializes it 
   }
 ```
 
-In this example, [InputLengthException](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/java-basic/src/main/java/example/InputLengthException.java) is a `RuntimeException`\. The `RequestHandler` [interface](java-handler.md#java-handler-interfaces) does not allow checked exceptions\. The `RequestStreamHandler` interface supports throwing `IOException` errors\.
+In this example, [InputLengthException](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-basic/src/main/java/example/InputLengthException.java) is a `RuntimeException`\. The `RequestHandler` [interface](java-handler.md#java-handler-interfaces) does not allow checked exceptions\. The `RequestStreamHandler` interface supports throwing `IOException` errors\.
 
 The return statement in the previous example can also throw a runtime exception\.
 

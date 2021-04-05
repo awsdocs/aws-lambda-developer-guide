@@ -15,6 +15,8 @@ You can restrict user permissions by the resource an action affects and, in some
 
 For more information about IAM, see [What is IAM?](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) in the *IAM User Guide*\.
 
+For more information about applying security principles to Lambda applications, see [Security](https://docs.aws.amazon.com/lambda/latest/operatorguide/security-ops.html) in the *Lambda operator guide*\.
+
 **Topics**
 + [AWS Lambda execution role](lambda-intro-execution-role.md)
 + [Using resource\-based policies for AWS Lambda](access-control-resource-based.md)

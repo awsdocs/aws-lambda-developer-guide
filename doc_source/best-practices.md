@@ -8,6 +8,8 @@ The following are recommended best practices for using AWS Lambda:
 + [Metrics and alarms](#alarming-metrics)
 + [Working with streams](#stream-events)
 
+For more information about best practices for Lambda applications, see [Application design](https://docs.aws.amazon.com/lambda/latest/operatorguide/application-design.html) in the *Lambda operator guide*\.
+
 ## Function code<a name="function-code"></a>
 + **Separate the Lambda handler from your core logic\.** This allows you to make a more unit\-testable function\. In Node\.js this may look like: 
 

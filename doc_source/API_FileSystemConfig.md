@@ -1,6 +1,6 @@
 # FileSystemConfig<a name="API_FileSystemConfig"></a>
 
-Details about the connection between a Lambda function and an Amazon EFS file system\.
+Details about the connection between a Lambda function and an [Amazon EFS file system](https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html)\.
 
 ## Contents<a name="API_FileSystemConfig_Contents"></a>
 

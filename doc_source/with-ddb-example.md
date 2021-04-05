@@ -185,6 +185,13 @@ Run the following `invoke` command\.
 aws lambda invoke --function-name ProcessDynamoDBRecords --payload file://input.txt outputfile.txt
 ```
 
+**Note**  
+If you are using AWS CLI version 2, add the following command parameter:   
+
+```
+--cli-binary-format raw-in-base64-out
+```
+
 The function returns the string `message` in the response body\. 
 
 Verify the output in the `outputfile.txt` file\.

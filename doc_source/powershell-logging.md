@@ -15,7 +15,7 @@ This page describes how to produce log output from your Lambda function's code, 
 
  To output logs from your function code, you can use cmdlets on [Microsoft\.PowerShell\.Utility ](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility), or any logging module that writes to `stdout` or `stderr`\. The following example uses `Write-Host`\.
 
-**Example [function/Handler\.ps1](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-powershell/function/Handler.ps1) – Logging**  
+**Example [function/Handler\.ps1](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-powershell/function/Handler.ps1) – Logging**  
 
 ```
 #Requires -Modules @{ModuleName='AWSPowerShell.NetCore';ModuleVersion='3.3.618.0'}

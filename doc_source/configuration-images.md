@@ -189,12 +189,12 @@ In the `AWS::Lambda::Function` resource, set the following properties to create 
   + Code – Enter your container image URI in the `ImageUri` field\.
   + ImageConfig – \(Optional\) Override the container image configuration properties\.
 
-The `AWS::Lambda::Function::ImageConfig` resource contains the following fields:
+The `ImageConfig` property in `AWS::Lambda::Function` contains the following fields:
 + Command – Specifies parameters that you want to pass in with `EntryPoint`\.
 + EntryPoint – Specifies the entry point to the application\.
 + WorkingDirectory – Specifies the working directory\.
 
 **Note**  
-If you declare an `ImageConfig` resource in your AWS CloudFormation template, you must provide values for all three of the `ImageConfig` properties\.
+If you declare an `ImageConfig` property in your AWS CloudFormation template, you must provide values for all three of the `ImageConfig` properties\.
 
-For information about the `ImageConfig` resource, see [ImageConfig](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-function-imageconfig.html) in the *AWS Serverless Application Model Developer Guide*\.
+For more information, see [ImageConfig](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-imageconfig) in the *AWS CloudFormation User Guide*\.

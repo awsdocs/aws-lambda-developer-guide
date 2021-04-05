@@ -17,7 +17,7 @@ When Lambda runs your function, it passes a context object to the [handler](java
 
 The following example shows a function that uses the context object to access the Lambda logger\.
 
-**Example [Handler\.java](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/java-basic/src/main/java/example/Handler.java)**  
+**Example [Handler\.java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-basic/src/main/java/example/Handler.java)**  
 
 ```
 package example;
@@ -66,7 +66,7 @@ REPORT RequestId: 6bc28136-xmpl-4365-b021-0ce6b2e64ab0	Duration: 198.50 ms	Bille
 
 The interface for the context object is available in the [aws\-lambda\-java\-core](https://github.com/aws/aws-lambda-java-libs/tree/master/aws-lambda-java-core) library\. You can implement this interface to create a context class for testing\. The following example shows a context class that returns dummy values for most properties and a working test logger\.
 
-**Example [src/test/java/example/TestContext\.java](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/java-basic/src/test/java/example/TestContext.java)**  
+**Example [src/test/java/example/TestContext\.java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-basic/src/test/java/example/TestContext.java)**  
 
 ```
 package example;

@@ -58,6 +58,8 @@ For services that generate a queue or data stream, you create an [event source m
 
 Other services invoke your function directly\. You grant the other service permission in the function's [resource\-based policy](access-control-resource-based.md), and configure the other service to generate events and invoke your function\. Depending on the service, the invocation can be synchronous or asynchronous\. For synchronous invocation, the other service waits for the response from your function and might [retry on errors](invocation-retries.md)\.
 
+For more information about Lambda service architectures, see [Event driven architectures](https://docs.aws.amazon.com/lambda/latest/operatorguide/event-driven-architectures.html) in the *Lambda operator guide*\.
+
 **Services that invoke Lambda functions synchronously**
 + [Elastic Load Balancing \(Application Load Balancer\)](services-alb.md)
 + [Amazon Cognito](services-cognito.md)

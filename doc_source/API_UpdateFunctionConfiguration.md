@@ -121,7 +121,7 @@ Pattern: `arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+:[0-
 Required: No
 
  ** [MemorySize](#API_UpdateFunctionConfiguration_RequestSyntax) **   <a name="SSS-UpdateFunctionConfiguration-request-MemorySize"></a>
-The amount of memory available to the function at runtime\. Increasing the function's memory also increases its CPU allocation\. The default value is 128 MB\. The value can be any multiple of 1 MB\.  
+The amount of [memory available to the function](https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html) at runtime\. Increasing the function memory also increases its CPU allocation\. The default value is 128 MB\. The value can be any multiple of 1 MB\.  
 Type: Integer  
 Valid Range: Minimum value of 128\. Maximum value of 10240\.  
 Required: No
@@ -144,13 +144,13 @@ Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | nodejs10.x | nodej
 Required: No
 
  ** [Timeout](#API_UpdateFunctionConfiguration_RequestSyntax) **   <a name="SSS-UpdateFunctionConfiguration-request-Timeout"></a>
-The amount of time that Lambda allows a function to run before stopping it\. The default is 3 seconds\. The maximum allowed value is 900 seconds\.  
+The amount of time that Lambda allows a function to run before stopping it\. The default is 3 seconds\. The maximum allowed value is 900 seconds\. For additional information, see [Lambda execution environment](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html)\.  
 Type: Integer  
 Valid Range: Minimum value of 1\.  
 Required: No
 
  ** [TracingConfig](#API_UpdateFunctionConfiguration_RequestSyntax) **   <a name="SSS-UpdateFunctionConfiguration-request-TracingConfig"></a>
-Set `Mode` to `Active` to sample and trace a subset of incoming requests with AWS X\-Ray\.  
+Set `Mode` to `Active` to sample and trace a subset of incoming requests with [AWS X\-Ray](https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html)\.  
 Type: [TracingConfig](API_TracingConfig.md) object  
 Required: No
 
@@ -262,11 +262,11 @@ Type: String
 Length Constraints: Minimum length of 0\. Maximum length of 256\.
 
  ** [Environment](#API_UpdateFunctionConfiguration_ResponseSyntax) **   <a name="SSS-UpdateFunctionConfiguration-response-Environment"></a>
-The function's environment variables\.  
+The function's [environment variables](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html)\.  
 Type: [EnvironmentResponse](API_EnvironmentResponse.md) object
 
  ** [FileSystemConfigs](#API_UpdateFunctionConfiguration_ResponseSyntax) **   <a name="SSS-UpdateFunctionConfiguration-response-FileSystemConfigs"></a>
-Connection settings for an Amazon EFS file system\.  
+Connection settings for an [Amazon EFS file system](https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html)\.  
 Type: Array of [FileSystemConfig](API_FileSystemConfig.md) objects  
 Array Members: Maximum number of 1 item\.
 

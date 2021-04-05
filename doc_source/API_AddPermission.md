@@ -64,7 +64,7 @@ Required: No
  ** [Principal](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-Principal"></a>
 The AWS service or account that invokes the function\. If you specify a service, use `SourceArn` or `SourceAccount` to limit who can invoke the function through that service\.  
 Type: String  
-Pattern: `.*`   
+Pattern: `[^\s]+`   
 Required: Yes
 
  ** [RevisionId](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-RevisionId"></a>
@@ -75,6 +75,7 @@ Required: No
  ** [SourceAccount](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-SourceAccount"></a>
 For Amazon S3, the ID of the account that owns the resource\. Use this together with `SourceArn` to ensure that the resource is owned by the specified account\. It is possible for an Amazon S3 bucket to be deleted by its owner and recreated by another account\.  
 Type: String  
+Length Constraints: Maximum length of 12\.  
 Pattern: `\d{12}`   
 Required: No
 

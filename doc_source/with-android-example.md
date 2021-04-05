@@ -98,6 +98,12 @@ Invoke the function manually using the sample event data\.
    aws lambda  invoke --function-name AndroidBackendLambdaFunction \
    --payload file://file-path/input.txt outputfile.txt
    ```
+**Note**  
+If you are using AWS CLI version 2, add the following command parameter:   
+
+   ```
+   --cli-binary-format raw-in-base64-out
+   ```
 
 ## Create an Amazon Cognito identity pool<a name="with-on-demand-custom-android-create-cognito-pool"></a>
 

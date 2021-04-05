@@ -113,6 +113,12 @@ If the handler returns normally without exceptions, Lambda considers the message
    aws lambda invoke --function-name ProcessSQSRecord \
    --payload file://input.txt outputfile.txt
    ```
+**Note**  
+If you are using AWS CLI version 2, add the following command parameter:   
+
+   ```
+   --cli-binary-format raw-in-base64-out
+   ```
 
 1. Verify the output in the `outputfile.txt` file\.
 

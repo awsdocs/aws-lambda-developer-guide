@@ -1,5 +1,8 @@
 # Deploy Python Lambda functions with container images<a name="python-image"></a>
 
+**Note**  
+End of support for the Python 2\.7 runtime starts on July 15, 2021\. For more information, see [Runtime support policy](runtime-support-policy.md)\.
+
 You can deploy your Lambda function code as a [container image](images-create.md)\. AWS provides the following resources to help you build a container image for your Python function:
 + AWS base images for Lambda
 

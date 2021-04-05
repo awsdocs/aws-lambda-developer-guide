@@ -105,10 +105,10 @@ To prevent `distutils` errors on [Debian\-based systems](https://github.com/pypa
    my-deployment-package.zip$
      │ lambda_function.py
      │ __pycache__
-     │ certifi/ 
-     │ certifi-2020.6.20.dist-info/ 
-     │ chardet/ 
-     │ chardet-3.0.4.dist-info/ 
+     │ certifi/
+     │ certifi-2020.6.20.dist-info/
+     │ chardet/
+     │ chardet-3.0.4.dist-info/
      ...
    ```
 
@@ -188,10 +188,10 @@ A library may appear in `site-packages` or `dist-packages` and the first folder 
    my-deployment-package.zip$
      │ lambda_function.py
      │ __pycache__
-     │ certifi/ 
-     │ certifi-2020.6.20.dist-info/ 
-     │ chardet/ 
-     │ chardet-3.0.4.dist-info/ 
+     │ certifi/
+     │ certifi-2020.6.20.dist-info/
+     │ chardet/
+     │ chardet-3.0.4.dist-info/
      ...
    ```
 

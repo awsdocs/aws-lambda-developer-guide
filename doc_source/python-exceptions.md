@@ -1,5 +1,8 @@
 # AWS Lambda function errors in Python<a name="python-exceptions"></a>
 
+**Note**  
+End of support for the Python 2\.7 runtime starts on July 15, 2021\. For more information, see [Runtime support policy](runtime-support-policy.md)\.
+
 When your code raises an error, Lambda generates a JSON representation of the error\. This error document appears in the invocation log and, for synchronous invocations, in the output\.
 
 This page describes how to view Lambda function invocation errors for the Python runtime using the Lambda console and the AWS CLI\.

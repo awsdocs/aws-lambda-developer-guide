@@ -1,6 +1,6 @@
 # CodeSigningConfig<a name="API_CodeSigningConfig"></a>
 
-Details about a Code signing configuration\. 
+Details about a [Code signing configuration](https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html)\. 
 
 ## Contents<a name="API_CodeSigningConfig_Contents"></a>
 

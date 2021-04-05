@@ -158,11 +158,11 @@ Type: String
 Length Constraints: Minimum length of 0\. Maximum length of 256\.
 
  ** [Environment](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-Environment"></a>
-The function's environment variables\.  
+The function's [environment variables](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html)\.  
 Type: [EnvironmentResponse](API_EnvironmentResponse.md) object
 
  ** [FileSystemConfigs](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-FileSystemConfigs"></a>
-Connection settings for an Amazon EFS file system\.  
+Connection settings for an [Amazon EFS file system](https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html)\.  
 Type: Array of [FileSystemConfig](API_FileSystemConfig.md) objects  
 Array Members: Maximum number of 1 item\.
 

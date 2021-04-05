@@ -35,7 +35,7 @@ When active tracing is enabled, Lambda records a trace for a subset of invocatio
 
 You can instrument your handler code to record metadata and trace downstream calls\. To record detail about calls that your handler makes to other resources and services, use the X\-Ray SDK for Ruby\. To get the SDK, add the `aws-xray-sdk` package to your application's dependencies\.
 
-**Example [blank\-ruby/function/Gemfile](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-ruby/function/Gemfile)**  
+**Example [blank\-ruby/function/Gemfile](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-ruby/function/Gemfile)**  
 
 ```
 # Gemfile
@@ -48,7 +48,7 @@ gem 'test-unit', '3.3.5'
 
 To instrument AWS SDK clients, require the `aws-xray-sdk/lambda` module after creating a client in initialization code\.
 
-**Example [blank\-ruby/function/lambda\_function\.rb](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-ruby/function/lambda_function.rb) – Tracing an AWS SDK client**  
+**Example [blank\-ruby/function/lambda\_function\.rb](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-ruby/function/lambda_function.rb) – Tracing an AWS SDK client**  
 
 ```
 # lambda_function.rb
@@ -115,7 +115,7 @@ Resources:
 
 For an AWS Serverless Application Model \(AWS SAM\) `AWS::Serverless::Function` resource, use the `Tracing` property\.
 
-**Example [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-nodejs/template.yml) – Tracing configuration**  
+**Example [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-nodejs/template.yml) – Tracing configuration**  
 
 ```
 Resources:
@@ -132,7 +132,7 @@ If you use the X\-Ray SDK to instrument AWS SDK clients your function code, your
 
 The following example shows an `AWS::Serverless::LayerVersion` resource that stores X\-Ray SDK for Ruby\.
 
-**Example [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-ruby/template.yml) – Dependencies layer**  
+**Example [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-ruby/template.yml) – Dependencies layer**  
 
 ```
 Resources:

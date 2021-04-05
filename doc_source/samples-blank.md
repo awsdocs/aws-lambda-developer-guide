@@ -39,7 +39,7 @@ Standard charges apply for each service\. For more information, see [AWS Pricing
 
 The function code shows a basic workflow for processing an event\. The handler takes an Amazon Simple Queue Service \(Amazon SQS\) event as input and iterates through the records that it contains, logging the contents of each message\. It logs the contents of the event, the context object, and environment variables\. Then it makes a call with the AWS SDK and passes the response back to the Lambda runtime\.
 
-**Example [blank\-nodejs/function/index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-nodejs/function/index.js) – Handler code**  
+**Example [blank\-nodejs/function/index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-nodejs/function/index.js) – Handler code**  
 
 ```
 // Handler
@@ -66,7 +66,7 @@ var serialize = function(object) {
 
 The input/output types for the handler and support for asynchronous programming vary per runtime\. In this example, the handler method is `async`, so in Node\.js this means that it must return a promise back to the runtime\. The Lambda runtime waits for the promise to be resolved and returns the response to the invoker\. If the function code or AWS SDK client return an error, the runtime formats the error into a JSON document and returns that\.
 
-The sample application doesn't include an Amazon SQS queue to send events, but uses an event from Amazon SQS \([event\.json](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-nodejs/event.json)\) to illustrate how events are processed\. To add an Amazon SQS queue to your application, see [Using AWS Lambda with Amazon SQS](with-sqs.md)\.
+The sample application doesn't include an Amazon SQS queue to send events, but uses an event from Amazon SQS \([event\.json](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-nodejs/event.json)\) to illustrate how events are processed\. To add an Amazon SQS queue to your application, see [Using AWS Lambda with Amazon SQS](with-sqs.md)\.
 
 ## Deployment automation with AWS CloudFormation and the AWS CLI<a name="samples-blank-automation"></a>
 
@@ -96,7 +96,7 @@ Resources:
       # Function's execution role
       Policies:
         - AWSLambdaBasicExecutionRole
-        - AWSLambdaReadOnlyAccess
+        - AWSLambda_ReadOnlyAccess
         - AWSXrayWriteOnlyAccess
       Tracing: Active
       Layers:
@@ -152,7 +152,7 @@ In this example, the `Code` property specifies an object in an Amazon S3 bucket\
 
 To upload the project files to Amazon S3, the deployment script uses commands in the AWS CLI\. The `cloudformation package` command preprocesses the template, uploads artifacts, and replaces local paths with Amazon S3 object locations\. The `cloudformation deploy` command deploys the processed template with a AWS CloudFormation change set\.
 
-**Example [blank\-nodejs/3\-deploy\.sh](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-nodejs/3-deploy.sh) – Package and deploy**  
+**Example [blank\-nodejs/3\-deploy\.sh](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-nodejs/3-deploy.sh) – Package and deploy**  
 
 ```
 #!/bin/bash
@@ -164,7 +164,7 @@ aws cloudformation deploy --template-file out.yml --stack-name blank-nodejs --ca
 
 The first time you run this script, it creates a AWS CloudFormation stack named `blank-nodejs`\. If you make changes to the function code or template, you can run it again to update the stack\.
 
-The cleanup script \([blank\-nodejs/5\-cleanup\.sh](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-nodejs/5-cleanup.sh)\) deletes the stack and optionally deletes the deployment bucket and function logs\.
+The cleanup script \([blank\-nodejs/5\-cleanup\.sh](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-nodejs/5-cleanup.sh)\) deletes the stack and optionally deletes the deployment bucket and function logs\.
 
 ## Instrumentation with the AWS X\-Ray<a name="samples-blank-instrumentation"></a>
 
@@ -176,7 +176,7 @@ The first service node \(`AWS::Lambda`\) represents the Lambda service, which va
 
 To record additional detail, the sample function uses the X\-Ray SDK\. With minimal changes to the function code, the X\-Ray SDK records details about calls made with the AWS SDK to AWS services\.
 
-**Example [blank\-nodejs/function/index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-nodejs/function/index.js) – Instrumentation**  
+**Example [blank\-nodejs/function/index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-nodejs/function/index.js) – Instrumentation**  
 
 ```
 const AWSXRay = require('aws-xray-sdk-core')
@@ -200,7 +200,7 @@ You can include the X\-Ray SDK and other libraries in your function's deployment
 
 You can install libraries locally and include them in the deployment package that you upload to Lambda, but this has its drawbacks\. Larger file sizes cause increased deployment times and can prevent you from testing changes to your function code in the Lambda console\. To keep the deployment package small and avoid uploading dependencies that haven't changed, the sample app creates a [Lambda layer](configuration-layers.md) and associates it with the function\.
 
-**Example [blank\-nodejs/template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-nodejs/template.yml) – Dependency layer**  
+**Example [blank\-nodejs/template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-nodejs/template.yml) – Dependency layer**  
 
 ```
 Resources:
@@ -215,7 +215,7 @@ Resources:
       # Function's execution role
       Policies:
         - AWSLambdaBasicExecutionRole
-        - AWSLambdaReadOnlyAccess
+        - AWSLambda_ReadOnlyAccess
         - AWSXrayWriteOnlyAccess
       Tracing: Active
       Layers:
@@ -232,7 +232,7 @@ Resources:
 
 The `2-build-layer.sh` script installs the function's dependencies with npm and places them in a folder with the [structure required by the Lambda runtime](configuration-layers.md#configuration-layers-path)\.
 
-**Example [2\-build\-layer\.sh](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-nodejs/2-build-layer.sh) – Preparing the layer**  
+**Example [2\-build\-layer\.sh](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-nodejs/2-build-layer.sh) – Preparing the layer**  
 
 ```
 #!/bin/bash

@@ -42,12 +42,14 @@ The request accepts the following data in JSON format\.
  ** [Action](#API_AddLayerVersionPermission_RequestSyntax) **   <a name="SSS-AddLayerVersionPermission-request-Action"></a>
 The API action that grants access to the layer\. For example, `lambda:GetLayerVersion`\.  
 Type: String  
+Length Constraints: Maximum length of 22\.  
 Pattern: `lambda:GetLayerVersion`   
 Required: Yes
 
  ** [OrganizationId](#API_AddLayerVersionPermission_RequestSyntax) **   <a name="SSS-AddLayerVersionPermission-request-OrganizationId"></a>
 With the principal set to `*`, grant permission to all accounts in the specified organization\.  
 Type: String  
+Length Constraints: Maximum length of 34\.  
 Pattern: `o-[a-z0-9]{10,32}`   
 Required: No
 

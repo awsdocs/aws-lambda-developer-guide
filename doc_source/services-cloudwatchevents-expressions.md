@@ -39,4 +39,4 @@ Note the following:
 + If you are using the Lambda console, do not include the `cron` prefix in your expression\.
 + One of the day\-of\-month or day\-of\-week values must be a question mark \(`?`\)\.
 
-For more information, see [Schedule expressions for rules](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html) in the *CloudWatch Events User Guide*\.
+For more information, see [Schedule expressions for rules](https://docs.aws.amazon.com/https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-schedule-expressions.html) in the *EventBridge User Guide*\.

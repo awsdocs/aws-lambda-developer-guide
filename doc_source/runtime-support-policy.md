@@ -1,36 +1,42 @@
 # Runtime support policy<a name="runtime-support-policy"></a>
 
-[Lambda runtimes](lambda-runtimes.md) for \.zip file archives are built around a combination of operating system, programming language, and software libraries that are subject to maintenance and security updates\. When a component of a runtime is no longer supported for security updates, Lambda deprecates the runtime\.
+[Lambda runtimes](lambda-runtimes.md) for \.zip file archives are built around a combination of operating system, programming language, and software libraries that are subject to maintenance and security updates\. When security updates are no longer available for a component of a runtime, Lambda deprecates the runtime\.
 
-Deprecation occurs in two phases\. During the first phase, you can no longer create functions that use the deprecated runtime\. For at least 30 days, you can continue to update existing functions that use the deprecated runtime\. After this period, both function creation and updates are disabled permanently\. However, the function continues to be available to process invocation events\.
+Deprecation \(end of support\) for a runtime occurs in two phases\. In phase 1, Lambda no longer applies security patches or other updates to the runtime\. You can no longer create functions that use the runtime, but you can continue to update existing functions\. Note that existing functions that use the runtime are no longer eligible for technical support\.
 
-**Note**  
-Python 2\.7 reached end of life on January 1, 2020\. However, the Python 2\.7 runtime is still supported and is not scheduled to be deprecated at this time\. For details, see [Continued support for Python 2\.7 on AWS Lambda](http://aws.amazon.com/blogs/compute/continued-support-for-python-2-7-on-aws-lambda/) on the AWS Compute Blog\.
+In phase 2, which starts at least 30 days after the start of phase 1, you can no longer create or update functions that use the runtime\. However, existing functions that use the runtime remain available to process invocation events\.
 
-The following runtimes have been deprecated:
+**Important**  
+Python 2\.7 reached end of life on January 1, 2020\. End of support \(phase 1\) for the Python 2\.7 runtime starts on July 15, 2021\. For more information, see [Announcing end of support for Python 2\.7 in AWS Lambda](http://aws.amazon.com/blogs/compute/announcing-end-of-support-for-python-2-7-in-aws-lambda/) on the AWS Compute Blog\.
+
+The following runtimes have reached or are scheduled for end of support:
 
 
-**Deprecated runtimes**  
+**Runtime end of support dates**  
 
-| Name | Identifier | Operating system | Deprecation completed date | 
-| --- | --- | --- | --- | 
-|  \.NET Core 1\.0  |  `dotnetcore1.0`  |  Amazon Linux  |  July 30, 2019  | 
-|  \.NET Core 2\.0  |  `dotnetcore2.0`  |  Amazon Linux  |  May 30, 2019  | 
-|  Node\.js 0\.10  |  `nodejs`  |  Amazon Linux  |  October 31, 2016  | 
-|  Node\.js 4\.3  |  `nodejs4.3`  |  Amazon Linux  |  March 6, 2020  | 
-|  Node\.js 4\.3 edge  |  `nodejs4.3-edge`  |  Amazon Linux  |  April 30, 2019  | 
-|  Node\.js 6\.10  |  `nodejs6.10`  |  Amazon Linux  |  August 12, 2019  | 
-|  Node\.js 8\.10  |  `nodejs8.10`  |  Amazon Linux  |  March 6, 2020  | 
-|  Node\.js 10\.x  |  `nodejs10.x`  |  Amazon Linux 2  |  May 28, 2021  | 
+| Name | Identifier | Operating system | End of support phase 1 start | End of support phase 2 start | 
+| --- | --- | --- | --- | --- | 
+|  Python 2\.7  |  `python2.7`  |  Amazon Linux  |  July 15, 2021  |  Sept 30, 2021  | 
+|  Ruby 2\.5  |  `ruby2.5`  |  Amazon Linux  |  May 31, 2021  |  June 30, 2021  | 
+|  Node\.js 10\.x  |  `nodejs10.x`  |  Amazon Linux 2  |  May 31, 2021  |  June 30, 2021  | 
+|  Node\.js 8\.10  |  `nodejs8.10`  |  Amazon Linux  |     |  March 6, 2020  | 
+|  Node\.js 6\.10  |  `nodejs6.10`  |  Amazon Linux  |     |  August 12, 2019  | 
+|  Node\.js 4\.3 edge  |  `nodejs4.3-edge`  |  Amazon Linux  |     |  April 30, 2019  | 
+|  Node\.js 4\.3  |  `nodejs4.3`  |  Amazon Linux  |     |  March 6, 2020  | 
+|  Node\.js 0\.10  |  `nodejs`  |  Amazon Linux  |     |  October 31, 2016  | 
+|  \.NET Core 2\.0  |  `dotnetcore2.0`  |  Amazon Linux  |     |  May 30, 2019  | 
+|  \.NET Core 1\.0  |  `dotnetcore1.0`  |  Amazon Linux  |     |  July 30, 2019  | 
 
-In most cases, the end\-of\-life date of a language version or operating system is known well in advance\. If you have functions running on a runtime that will be deprecated in the next 60 days, Lambda notifies you by email that you should prepare by migrating your function to a supported runtime\. In some cases, such as security issues that require a backwards\-incompatible update, or software that doesn't support a long\-term support \(LTS\) schedule, advance notice might not be possible\.
+In most cases, the end\-of\-life date of a language version or operating system is known well in advance\. Lambda notifies you by email if you have functions using a runtime that is scheduled for end of support in the next 60 days\. AWS strongly recommends that you migrate functions to a supported runtime version so that you continue to receive security patches and remain eligible for technical support\.
+
+In some cases, advance notice of support ending might not be possible\. For example, security issues that require a backwards\-incompatible update, or a runtime component that doesn't provide a long\-term support \(LTS\) schedule\.
 
 **Language and framework support policies**
 + **Node\.js** – [github\.com](https://github.com/nodejs/Release#release-schedule)
 + **Python** – [devguide\.python\.org](https://devguide.python.org/#status-of-python-branches)
 + **Ruby** – [www\.ruby\-lang\.org](https://www.ruby-lang.org/en/downloads/branches/)
-+ **Java** – [www\.oracle\.com](https://www.oracle.com/technetwork/java/java-se-support-roadmap.html) and [aws\.amazon\.com/corretto](https://aws.amazon.com/corretto/faqs/)
-+ **Go** – [golang\.org](https://golang.org/s/release)
++ **Java** – [www\.oracle\.com](https://www.oracle.com/java/technologies/java-se-support-roadmap.html) and [aws\.amazon\.com/corretto](https://aws.amazon.com/corretto/faqs/)
++ **Go** – [golang\.org](https://golang.org/doc/devel/release.html)
 + **\.NET Core** – [dotnet\.microsoft\.com](https://dotnet.microsoft.com/platform/support/policy/dotnet-core)
 
-After a runtime is deprecated, Lambda might retire it completely at any time by disabling invocation\. Deprecated runtimes aren't eligible for security updates or technical support\. Before retiring a runtime, Lambda sends additional notifications to affected customers\. No runtimes are scheduled to be retired at this time\.
+After ending support for a runtime, Lambda might retire it completely at any time by disabling invocation\. Before retiring a runtime, Lambda sends additional notifications to affected customers\. No runtimes are scheduled for retirement at this time\.

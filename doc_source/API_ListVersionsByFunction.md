@@ -28,7 +28,7 @@ Required: Yes
 Specify the pagination token that's returned by a previous request to retrieve the next page of results\.
 
  ** [MaxItems](#API_ListVersionsByFunction_RequestSyntax) **   <a name="SSS-ListVersionsByFunction-request-MaxItems"></a>
-The maximum number of versions to return\.  
+The maximum number of versions to return\. Note that `ListVersionsByFunction` returns a maximum of 50 items in each response, even if you set the number higher\.  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.
 
 ## Request Body<a name="API_ListVersionsByFunction_RequestBody"></a>

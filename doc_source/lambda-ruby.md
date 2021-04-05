@@ -12,6 +12,9 @@ Lambda supports the following Ruby runtimes\.
 |  Ruby 2\.7  |  `ruby2.7`  |  3\.0\.1  |  Amazon Linux 2  | 
 |  Ruby 2\.5  |  `ruby2.5`  |  3\.0\.1  |  Amazon Linux  | 
 
+**Note**  
+For end of support information about Ruby 2\.5, see [Runtime support policy](runtime-support-policy.md)\.
+
 Lambda functions use an [execution role](lambda-intro-execution-role.md) to get permission to write logs to Amazon CloudWatch Logs, and to access other services and resources\. If you don't already have an execution role for function development, create one\.
 
 **To create an execution role**

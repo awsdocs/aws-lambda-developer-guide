@@ -35,7 +35,7 @@ When active tracing is enabled, Lambda records a trace for a subset of invocatio
 
 To record detail about calls that your function makes to other resources and services, add the X\-Ray SDK for Java to your build configuration\. The following example shows a Gradle build configuration that includes the libraries that enable automatic instrumentation of AWS SDK for Java 2\.x clients\.
 
-**Example [build\.gradle](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-java/build.gradle) – Tracing dependencies**  
+**Example [build\.gradle](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-java/build.gradle) – Tracing dependencies**  
 
 ```
 dependencies {
@@ -101,7 +101,7 @@ Resources:
 
 For an AWS Serverless Application Model \(AWS SAM\) `AWS::Serverless::Function` resource, use the `Tracing` property\.
 
-**Example [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-nodejs/template.yml) – Tracing configuration**  
+**Example [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-nodejs/template.yml) – Tracing configuration**  
 
 ```
 Resources:
@@ -118,7 +118,7 @@ If you use the X\-Ray SDK to instrument AWS SDK clients your function code, your
 
 The following example shows an `AWS::Serverless::LayerVersion` resource that stores the SDK for Java and X\-Ray SDK for Java\.
 
-**Example [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/blank-java/template.yml) – Dependencies layer**  
+**Example [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-java/template.yml) – Dependencies layer**  
 
 ```
 Resources:

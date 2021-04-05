@@ -1,6 +1,6 @@
 # AWS Lambda function handler in Node\.js<a name="nodejs-handler"></a>
 
-The AWS Lambda function handler is the method in your function code that processes events\. When your function is invoked, Lambda runs the handler method\. When the handler exits or returns a response, it becomes available to handle another event\.
+The Lambda function *handler* is the method in your function code that processes events\. When your function is invoked, Lambda runs the handler method\. When the handler exits or returns a response, it becomes available to handle another event\.
 
 The following example function logs the contents of the event object and returns the location of the logs\.
 

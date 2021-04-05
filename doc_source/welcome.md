@@ -6,6 +6,8 @@ You can use Lambda to run your code in response to events, such as changes to da
 
 You can also build serverless applications composed of functions that are triggered by events, and automatically deploy them using AWS CodePipeline and AWS CodeBuild\. For more information, see [AWS Lambda applications](deploying-lambda-apps.md)\.
 
+For more information about designing, operating, and troubleshooting Lambda\-based applications, see [Introduction](https://docs.aws.amazon.com/lambda/latest/operatorguide/intro.html) in the *Lambda operator guide*\.
+
 **Topics**
 + [When should I use AWS Lambda?](#when-to-use-cloud-functions)
 + [Are you a first\-time user of AWS Lambda?](#welcome-first-time-user)

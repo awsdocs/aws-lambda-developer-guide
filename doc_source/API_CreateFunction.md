@@ -2,6 +2,10 @@
 
 Creates a Lambda function\. To create a function, you need a [deployment package](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html) and an [execution role](https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role)\. The deployment package is a \.zip file archive or container image that contains your function code\. The execution role grants the function permission to use AWS services, such as Amazon CloudWatch Logs for log streaming and AWS X\-Ray for request tracing\.
 
+You set the package type to `Image` if the deployment package is a [container image](https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html)\. For a container image, the code property must include the URI of a container image in the Amazon ECR registry\. You do not need to specify the handler and runtime properties\. 
+
+You set the package type to `Zip` if the deployment package is a [\.zip file archive](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip)\. For a \.zip file archive, the code property specifies the location of the \.zip file\. You must also specify the handler and runtime properties\.
+
 When you create a function, Lambda provisions an instance of the function and its supporting resources\. If your function connects to a VPC, this process can take a minute or so\. During this time, you can't invoke or modify the function\. The `State`, `StateReason`, and `StateReasonCode` fields in the response from [GetFunctionConfiguration](API_GetFunctionConfiguration.md) indicate when the function is ready to invoke\. For more information, see [Function States](https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html)\.
 
 A function has an unpublished version, and can have published versions and aliases\. The unpublished version changes when you update your function's code and configuration\. A published version is a snapshot of your function code and configuration that can't be changed\. An alias is a named resource that maps to a version, and can be changed to map to a different version\. Use the `Publish` parameter to create version `1` of your function from its initial configuration\.
@@ -135,7 +139,7 @@ Pattern: `[^\s]+`
 Required: No
 
  ** [ImageConfig](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-ImageConfig"></a>
- [Container image configuration values](https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html) that override the values in the container image Dockerfile\.  
+Container image [configuration values](https://docs.aws.amazon.com/lambda/latest/dg/configuration-images.html#configuration-images-settings) that override the values in the container image Dockerfile\.  
 Type: [ImageConfig](API_ImageConfig.md) object  
 Required: No
 
@@ -153,7 +157,7 @@ Pattern: `arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+:[0-
 Required: No
 
  ** [MemorySize](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-MemorySize"></a>
-The amount of memory available to the function at runtime\. Increasing the function's memory also increases its CPU allocation\. The default value is 128 MB\. The value can be any multiple of 1 MB\.  
+The amount of [memory available to the function](https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html) at runtime\. Increasing the function memory also increases its CPU allocation\. The default value is 128 MB\. The value can be any multiple of 1 MB\.  
 Type: Integer  
 Valid Range: Minimum value of 128\. Maximum value of 10240\.  
 Required: No
@@ -187,13 +191,13 @@ Type: String to string map
 Required: No
 
  ** [Timeout](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-Timeout"></a>
-The amount of time that Lambda allows a function to run before stopping it\. The default is 3 seconds\. The maximum allowed value is 900 seconds\.  
+The amount of time that Lambda allows a function to run before stopping it\. The default is 3 seconds\. The maximum allowed value is 900 seconds\. For additional information, see [Lambda execution environment](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html)\.  
 Type: Integer  
 Valid Range: Minimum value of 1\.  
 Required: No
 
  ** [TracingConfig](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-TracingConfig"></a>
-Set `Mode` to `Active` to sample and trace a subset of incoming requests with AWS X\-Ray\.  
+Set `Mode` to `Active` to sample and trace a subset of incoming requests with [AWS X\-Ray](https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html)\.  
 Type: [TracingConfig](API_TracingConfig.md) object  
 Required: No
 
@@ -305,11 +309,11 @@ Type: String
 Length Constraints: Minimum length of 0\. Maximum length of 256\.
 
  ** [Environment](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-Environment"></a>
-The function's environment variables\.  
+The function's [environment variables](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html)\.  
 Type: [EnvironmentResponse](API_EnvironmentResponse.md) object
 
  ** [FileSystemConfigs](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-FileSystemConfigs"></a>
-Connection settings for an Amazon EFS file system\.  
+Connection settings for an [Amazon EFS file system](https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html)\.  
 Type: Array of [FileSystemConfig](API_FileSystemConfig.md) objects  
 Array Members: Maximum number of 1 item\.
 

@@ -1,6 +1,6 @@
 # TracingConfig<a name="API_TracingConfig"></a>
 
-The function's AWS X\-Ray tracing configuration\. To sample and record incoming requests, set `Mode` to `Active`\.
+The function's [AWS X\-Ray](https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html) tracing configuration\. To sample and record incoming requests, set `Mode` to `Active`\.
 
 ## Contents<a name="API_TracingConfig_Contents"></a>
 
