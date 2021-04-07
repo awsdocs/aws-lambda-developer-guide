@@ -168,7 +168,6 @@ Invoke the Lambda function manually using sample Amazon S3 event data\.
 
       ```
       {
-        {
         "Records": [
           {
             "eventVersion": "2.0",
