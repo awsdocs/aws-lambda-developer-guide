@@ -88,9 +88,12 @@ Create the [execution role](lambda-intro-execution-role.md) that gives your func
 1. Choose **Create role**\.
 
 1. Create a role with the following properties\.
-   + **Trusted entity** – Lambda\.
-   + **Role name** – **lambda\-apigateway\-role**\.
-   + **Permissions** – Custom policy with permission to DynamoDB and CloudWatch Logs\.
+   + **Trusted entity** – AWS Service\.
+   + **Use Case** – **Lambda**\.
+
+1. Choose Next: Permissions
+   + Choose **Create policy**\. This will open a new tab\.
+   + Choose the **JSON** tab and paste this custom policy with permission to DynamoDB and CloudWatch Logs\.
 
      ```
      {
