@@ -73,7 +73,7 @@ As an alternative, you can create the deployment package using an Amazon EC2 ins
 
 1. Open a command line terminal or shell\. Ensure that the Node\.js version in your local environment matches the Node\.js version of your function\.
 
-1. Create a folder for the deployment package\. The following steps assume that the folder is named `my-function>`\.
+1. Create a folder for the deployment package\. The following steps assume that the folder is named `my-function`\.
 
 1. Install libraries in the node\_modules directory using the `npm install` command\.
 
