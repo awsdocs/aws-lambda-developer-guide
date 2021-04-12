@@ -157,7 +157,7 @@ The permissions in the policy are organized into statements based on the [resour
                   "iam:GetPolicy",
                   "iam:GetPolicyVersion"
               ],
-              "Resource": "arn:aws:iam::aws:policy/*"
+              "Resource": "arn:aws:iam::accountNumber:policy/*"
   ```
 + `ViewLogs` – Use CloudWatch Logs to view logs for functions that are prefixed with `intern-`\.
 
