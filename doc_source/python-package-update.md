@@ -167,8 +167,7 @@ If you are creating a deployment package used in a layer, see [Include library d
 
    ```
    ~/my-function$ cd myvenv/lib/python3.8/site-packages
-   ~/my-function/myvenv/lib/python3.8/site-packages$ cd myvenv/lib/python3.8/site-packages
-   zip -r ../../../../my-deployment-package.zip .
+   ~/my-function/myvenv/lib/python3.8/site-packages$ zip -r ../../../../my-deployment-package.zip .
    ```
 
    The last command saves the deployment package to the root of the `my-function` directory\.
