@@ -24,7 +24,7 @@ In this getting started exercise, you create a Node\.js Lambda function using th
 
    1. For **Function name**, enter **my\-function**\.
 
-   1. For **Runtime**, confirm that **Node\.js 14\.x** is selected\. (Note that AWS Lambda natively supports Java, Go, PowerShell, Node.js, C#, Python, and Ruby code, and provides a Runtime API which allows you to use any additional programming languages to author your functions.)
+   1. For **Runtime**, confirm that **Node\.js 14\.x** is selected\. Note that Lambda provides runtimes for \.NET \(PowerShell,C\#\) Go, Java, Node\.js, Python, and Ruby\.
 
 1. Choose **Create function**\.
 
@@ -32,9 +32,9 @@ Lambda creates a Node\.js function and an [execution role](lambda-intro-executio
 
 ### Use the function overview<a name="get-started-designer"></a>
 
-The **Function overview** shows a visualization of your function and its upstream and downstream resources\. You can use it to jump to trigger, destination, and layer configuration\.
+The **Function overview** shows a visualization of your function, including any triggers, destinations, and layer that you have configured for the function\.
 
-![\[A Lambda function with an Amazon S3 trigger and an Amazon EventBridge destination.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/console-designer.png)
+![\[A Lambda function with no triggers, destinations or layers.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/console-designer.png)
 
 ### Invoke the Lambda function<a name="get-started-invoke-manually"></a>
 
@@ -42,11 +42,9 @@ Invoke your Lambda function using the sample event data provided in the console\
 
 **To invoke a function**
 
-1. In the console, open the file with the lambda function. For this Node\.js app, it's called index\.js.
+1. After selecting your function, choose the **Test** tab\.
 
-1. Click on the orange **Test** button to create a new test event. Each user can create up to 10 test events per function\. Those test events are not available to other users\.
-
-1. Enter an **Event name** and note the following sample event template:
+1. In the **Test event** section, choose **New event**\. In **Template**, leave the default **hello\-world** option\. Enter a **Name** for this test and note the following sample event template:
 
    ```
    {
@@ -56,15 +54,16 @@ Invoke your Lambda function using the sample event data provided in the console\
      }
    ```
 
-1. Choose **Create**, and then choose **Test** again to run the function\. 
+1. Choose **Save changes**, and then choose **Test**\. Each user can create up to 10 test events per function\. Those test events are not available to other users\.
 
    Lambda runs your function on your behalf\. The function handler receives and then processes the sample event\.
 
 1. Upon successful completion, view the results in the console\.
-   + The **Execution results** tab shows the execution status as **succeeded**\. Here you will also see **Function Logs**\.
+   + The **Execution result** shows the execution status as **succeeded**\. To view the function execution results, expand **Details**\. Note that the **logs** link opens the **Log groups** page in the CloudWatch console\.
+   + The **Summary** section shows the key information reported in the **Log output** section \(the *REPORT* line in the execution log\)\.
+   + The **Log output** section shows the log that Lambda generates for each invocation\. The function writes these logs to CloudWatch\. The Lambda console shows these logs for your convenience\. Choose **Click here** to add logs to the CloudWatch log group and open the **Log groups** page in the CloudWatch console\.
 
-1. To make changes to your lambda function, edit the `index.js` file, and choose **Deploy**\. This will store those changes in S3. Then, choose **Test** again to run the function.
-  
+1. Run the function \(choose **Test**\) a few more times to gather some metrics that you can view in the next step\.
 
 1. Choose the **Monitor** tab\. This page shows graphs for the metrics that Lambda sends to CloudWatch\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/metrics-functions-list.png)
@@ -232,7 +231,7 @@ In the following commands, replace `123456789012` with your AWS account ID\.
 
 ### Update the user permissions<a name="gettingstarted-images-permissions"></a>
 
-Make sure that the permissions for the IAM user or role that creates the function contain the AWS managed policies `GetRepositoryPolicy` and `SetRepositoryPolicy`\. For information about access policies, see [ Access Management](https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html) in the *IAM User Guide*
+Make sure that the permissions for the IAM user or role that creates the function contain the AWS managed policies `GetRepositoryPolicy`, `SetRepositoryPolicy`, and `InitiateLayerUpload`\. For information about access policies, see [ Access Management](https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html) in the *IAM User Guide*
 
 For example, use the IAM console to create a role with the following policy:
 
@@ -243,7 +242,7 @@ For example, use the IAM console to create a role with the following policy:
     {
     "Sid": "VisualEditor0",
     "Effect": "Allow",
-    "Action": ["ecr:SetRepositoryPolicy","ecr:GetRepositoryPolicy"],
+    "Action": ["ecr:SetRepositoryPolicy","ecr:GetRepositoryPolicy", "ecr:InitiateLayerUpload],
     "Resource": "arn:aws:ecr:<region>:<account>:repository/<repo name>/"
     }
   ]
@@ -280,7 +279,7 @@ Invoke your Lambda function using the sample event data provided in the console\
 
 1. After selecting your function, choose the **Test** tab\.
 
-1. In the **Test event** section, choose **New event**\. In **Template**, leave the default **hello\-world** option\. Enter an **Name** and note the following sample event template:
+1. In the **Test event** section, choose **New event**\. In **Template**, leave the default **hello\-world** option\. Enter a **Name** for this test and note the following sample event template:
 
    ```
    {
@@ -290,7 +289,7 @@ Invoke your Lambda function using the sample event data provided in the console\
      }
    ```
 
-1. Choose **Create event**, and then choose **Invoke**\. Each user can create up to 10 test events per function\. Those test events are not available to other users\.
+1. Choose **Save changes**, and then choose **Test**\. Each user can create up to 10 test events per function\. Those test events are not available to other users\.
 
    Lambda runs your function on your behalf\. The function handler receives and then processes the sample event\.
 
@@ -299,9 +298,9 @@ Invoke your Lambda function using the sample event data provided in the console\
    + The **Summary** section shows the key information reported in the **Log output** section \(the *REPORT* line in the execution log\)\.
    + The **Log output** section shows the log that Lambda generates for each invocation\. The function writes these logs to CloudWatch\. The Lambda console shows these logs for your convenience\. Choose **Click here** to add logs to the CloudWatch log group and open the **Log groups** page in the CloudWatch console\.
 
-1. Run the function \(choose **Invoke**\) a few more times to gather some metrics that you can view in the next step\.
+1. Run the function \(choose **Test**\) a few more times to gather some metrics that you can view in the next step\.
 
-1. Near the top of the page, choose the **Monitoring** tab\. This page shows graphs for the metrics that Lambda sends to CloudWatch\.  
+1. Choose the **Monitor** tab\. This page shows graphs for the metrics that Lambda sends to CloudWatch\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/metrics-functions-list.png)
 
    For more information on these graphs, see [Monitoring functions in the AWS Lambda console](monitoring-functions-access-metrics.md)\.

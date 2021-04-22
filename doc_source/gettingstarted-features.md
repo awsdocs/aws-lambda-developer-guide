@@ -95,13 +95,13 @@ For more information, see [Configuring destinations for asynchronous invocation]
 
 When you create a function in the Lambda console, you can choose to start from scratch, use a blueprint, use a [container image](gettingstarted-package.md#gettingstarted-package-images), or deploy an application from the [AWS Serverless Application Repository](https://docs.aws.amazon.com/serverlessrepo/latest/devguide/what-is-serverlessrepo.html)\. A blueprint provides sample code that shows how to use Lambda with an AWS service or a popular third\-party application\. Blueprints include sample code and function configuration presets for Node\.js and Python runtimes\.
 
-Blueprints are provided for use under the [Creative Commons Zero](https://spdx.org/licenses/CC0-1.0.html) license\. They are available only in the Lambda console\.
+Blueprints are provided for use under the [Amazon Software License](https://aws.amazon.com/asl/)\. They are available only in the Lambda console\.
 
 ## Testing and deployment tools<a name="gettingstarted-features-tools"></a>
 
 Lambda supports deploying code as is or as [container images](gettingstarted-package.md#gettingstarted-package-images)\. You can use a rich tools ecosystem for authoring, building, and deploying your Lambda functions using AWS and popular community tools like the Docker command line interface \(CLI\)\.
 
-For more information, see [Tools for working with Lambda](gettingstarted-tools.md)\.
+To set up the Docker CLI, see [Get Docker](https://docs.docker.com/get-docker) on the Docker Docs website\. For an introduction to using Docker with AWS, see [Getting started with Amazon ECR using the AWS CLI](https://docs.aws.amazon.com/AmazonECR/latest/userguide/getting-started-cli.html) in the *Amazon Elastic Container Registry User Guide*\.
 
 ## Application templates<a name="gettingstarted-features-templates"></a>
 

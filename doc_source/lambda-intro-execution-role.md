@@ -19,6 +19,12 @@ You can add or remove permissions from a function's execution role at any time, 
 
 When you add permissions to your function, make an update to its code or configuration as well\. This forces running instances of your function, which have out\-of\-date credentials, to stop and be replaced\.
 
+**Topics**
++ [Creating an execution role in the IAM console](#permissions-executionrole-console)
++ [Grant least privilege access to your Lambda execution role](#permissions-executionrole-least-privilege)
++ [Managing roles with the IAM API](#permissions-executionrole-api)
++ [AWS managed policies for Lambda features](#permissions-executionrole-features)
+
 ## Creating an execution role in the IAM console<a name="permissions-executionrole-console"></a>
 
 By default, Lambda creates an execution role with minimal permissions when you [create a function in the Lambda console](getting-started-create-function.md)\. You can also create an execution role in the IAM console\.
@@ -44,6 +50,14 @@ By default, Lambda creates an execution role with minimal permissions when you [
 1. Choose **Create role**\.
 
 For detailed instructions, see [Creating a role for an AWS service \(console\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html#roles-creatingrole-service-console) in the *IAM User Guide*\.
+
+## Grant least privilege access to your Lambda execution role<a name="permissions-executionrole-least-privilege"></a>
+
+When you first create an IAM role for your Lambda function during the development phase, you might sometimes grant permissions beyond what is required\. Before publishing your function in the production environment, best practice is to adjust the policy to include only the required permissions\. For more information, see [granting least privilege](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege)\. 
+
+Use IAM Access Analyzer to help identify the required permissions for the IAM execution role policy\. IAM Access Analyzer reviews your AWS CloudTrail logs over the date range that you specify and generates a policy template with only the permissions that the function used during that time\. You can use the template to create a managed policy with fine\-grained permissions, and then attach it to the IAM role\. That way, you grant only the permissions that the role needs to interact with AWS resources for your specific use case\. 
+
+To learn more, see [Generate policies based on access activity](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_generate-policy.html) in the *IAM User Guide*\.
 
 ## Managing roles with the IAM API<a name="permissions-executionrole-api"></a>
 

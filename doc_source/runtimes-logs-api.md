@@ -52,7 +52,7 @@ We also recommend setting up the local HTTP listener or the TCP port before subs
 ## Buffering configuration<a name="runtimes-logs-api-buffering"></a>
 
 Lambda can buffer logs and deliver them to the subscriber\. You can configure this behavior in the subscription request by specifying the following optional fields\. Lambda uses the default value for any field that you do not specify:
-+ **timeoutMs** – The maximum time \(in milliseconds\) to buffer a batch\. Default: 1000\. Minimum: 100\. Maximum: 30000\.
++ **timeoutMs** – The maximum time \(in milliseconds\) to buffer a batch\. Default: 1000\. Minimum: 25\. Maximum: 30000\.
 + **maxBytes** – The maximum size \(in bytes\) of the logs to buffer in memory\. Default: 262144\. Minimum: 262144\. Maximum: 1048576\.
 + **maxItems** – The maximum number of events to buffer in memory\. Default: 10000\. Minimum: 1000\. Maximum: 10000\.
 

@@ -22,6 +22,12 @@ Docker Hub repository: amazon/aws\-lambda\-ruby
 
 Amazon ECR repository: gallery\.ecr\.aws/lambda/ruby
 
+## Using a Ruby base image<a name="ruby-image-instructions"></a>
+
+For instructions on how to use a Ruby base image, choose the **usage** tab on [AWS Lambda base images for Ruby](https://gallery.ecr.aws/lambda/ruby) in the *Amazon ECR repository*\. 
+
+The instructions are also available on [AWS Lambda base images for Ruby](https://hub.docker.com/r/amazon/aws-lambda-ruby) in the *Docker Hub repository*\.
+
 ## Ruby runtime interface clients<a name="ruby-image-clients"></a>
 
 Install the runtime interface client for Ruby using the RubyGems\.org package manager:

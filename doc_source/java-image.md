@@ -10,6 +10,7 @@ You can deploy your Lambda function code as a [container image](images-create.md
 
 **Topics**
 + [AWS base images for Java](#java-image-base)
++ [Using a Java base image](#java-image-instructions)
 + [Java runtime interface clients](#java-image-clients)
 
 ## AWS base images for Java<a name="java-image-base"></a>
@@ -26,6 +27,12 @@ AWS provides the following base images for Java:
 Docker Hub repository: amazon/aws\-lambda\-java
 
 Amazon ECR repository: gallery\.ecr\.aws/lambda/java
+
+## Using a Java base image<a name="java-image-instructions"></a>
+
+For instructions on how to use a Java base image, choose the **usage** tab on [AWS Lambda base images for Java](https://gallery.ecr.aws/lambda/java) in the *Amazon ECR repository*\. 
+
+The instructions are also available on [AWS Lambda base images for Java](https://hub.docker.com/r/amazon/aws-lambda-java) in the *Docker Hub repository*\.
 
 ## Java runtime interface clients<a name="java-image-clients"></a>
 

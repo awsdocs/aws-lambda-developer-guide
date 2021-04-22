@@ -27,18 +27,7 @@ For each Lambda function enabled for Lambda Insights, you only pay for what you 
 
 ## Supported runtimes<a name="monitoring-insights-runtimes"></a>
 
-You can use Lambda Insights with any of the following [Lambda function runtimes](lambda-runtimes.md):
-+ \.NET Core 3\.1 \(C\#/PowerShell\) \(`dotnetcore3.1`\)
-+ Custom runtime \(`provided`\)
-+ Custom runtime on Amazon Linux 2 \(`provided.al2`\)
-+ Java 11 \(Corretto\) \(`java11`\)
-+ Java 8 \(Corretto\) \(`java8.al2`\)
-+ Node\.js 12\.x \(`nodejs12.x`\)
-+ Node\.js 10\.x \(`nodejs10.x`\)
-+ Python 3\.8 \(`python3.8`\)
-+ Python 3\.7 \(`python3.7`\)
-+ Ruby 2\.7 \(`ruby2.7`\)
-+ Ruby 2\.5 \(`ruby2.5`\)
+You can use Lambda Insights with any of the runtimes that support [Lambda extensions](runtimes-extensions-api.md)\.
 
 ## Enabling Lambda Insights in the Lambda console<a name="monitoring-insights-enabling-console"></a>
 

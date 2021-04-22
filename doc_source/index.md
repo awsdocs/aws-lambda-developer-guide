@@ -15,6 +15,7 @@ Amazon's trademarks and trade dress may not be used in
 -----
 ## Contents
 + [What is AWS Lambda?](welcome.md)
++ [Setting up with Lambda](lambda-settingup.md)
 + [Getting started with Lambda](getting-started.md)
    + [Create a Lambda function with the console](getting-started-create-function.md)
    + [Creating functions using the AWS Lambda console editor](code-editor.md)
@@ -22,7 +23,6 @@ Amazon's trademarks and trade dress may not be used in
    + [Lambda concepts](gettingstarted-concepts.md)
    + [Lambda features](gettingstarted-features.md)
    + [Lambda deployment packages](gettingstarted-package.md)
-   + [Tools for working with Lambda](gettingstarted-tools.md)
    + [Lambda quotas](gettingstarted-limits.md)
 + [AWS Lambda permissions](lambda-permissions.md)
    + [AWS Lambda execution role](lambda-intro-execution-role.md)

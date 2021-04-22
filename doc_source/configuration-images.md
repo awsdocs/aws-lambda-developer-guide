@@ -35,7 +35,7 @@ When you deploy code as a container image to a Lambda function, the image underg
 
 ## Update the user permissions<a name="configuration-images-permissions"></a>
 
-Make sure that the permissions for the AWS Identity and Access Management \(IAM\) user or role that creates the function contain the AWS managed policies `GetRepositoryPolicy` and `SetRepositoryPolicy`\.
+Make sure that the permissions for the AWS Identity and Access Management \(IAM\) user or role that creates the function contain the AWS managed policies `GetRepositoryPolicy`, `SetRepositoryPolicy`, and `InitiateLayerUpload`\.
 
 For example, use the IAM console to create a role with the following policy:
 
@@ -48,7 +48,8 @@ For example, use the IAM console to create a role with the following policy:
             "Effect": "Allow",
             "Action": [
                 "ecr:SetRepositoryPolicy",
-                "ecr:GetRepositoryPolicy"
+                "ecr:GetRepositoryPolicy", 
+                "ecr:InitiateLayerUpload"
             ],
             "Resource": "arn:aws:ecr:<region>:<account>:repository/<repo name>/"
         }

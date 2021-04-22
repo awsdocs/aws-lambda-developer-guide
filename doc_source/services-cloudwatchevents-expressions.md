@@ -14,7 +14,7 @@ Where *Value* is a positive integer and *Unit* can be minute\(s\), hour\(s\), or
 | Frequency | Expression | 
 | --- | --- | 
 |  Every 5 minutes  |  `rate(5 minutes)`  | 
-|  Every hour  |  `rate(1 hour)`  | 
+|  Every hour  |  `rate(1 hours)`  | 
 |  Every seven days  |  `rate(7 days)`  | 
 
 Cron expressions have the following format\.
@@ -39,4 +39,4 @@ Note the following:
 + If you are using the Lambda console, do not include the `cron` prefix in your expression\.
 + One of the day\-of\-month or day\-of\-week values must be a question mark \(`?`\)\.
 
-For more information, see [Schedule expressions for rules](https://docs.aws.amazon.com/https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-schedule-expressions.html) in the *EventBridge User Guide*\.
+For more information, see [Schedule expressions for rules](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-schedule-expressions.html) in the *EventBridge User Guide*\.

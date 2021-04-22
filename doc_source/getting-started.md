@@ -19,5 +19,4 @@ You deploy your function code to Lambda using a deployment package\. Lambda supp
 + [Lambda concepts](gettingstarted-concepts.md)
 + [Lambda features](gettingstarted-features.md)
 + [Lambda deployment packages](gettingstarted-package.md)
-+ [Tools for working with Lambda](gettingstarted-tools.md)
 + [Lambda quotas](gettingstarted-limits.md)

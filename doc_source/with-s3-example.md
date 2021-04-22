@@ -6,7 +6,7 @@ We recommend that you complete this console\-based tutorial before you try the [
 
 ## Prerequisites<a name="with-s3-example-prepare"></a>
 
-To use Lambda, you need an AWS account\. If you do not have an account, visit [aws\.amazon\.com](https://aws.amazon.com/) and choose **Create an AWS Account**\. For instructions, see [How do I create and activate a new AWS account?](http://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/)
+To use Lambda and other AWS services, you need an AWS account\. If you do not have an account, visit [aws\.amazon\.com](https://aws.amazon.com/) and choose **Create an AWS Account**\. For instructions, see [How do I create and activate a new AWS account?](http://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/)
 
 This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with Lambda](getting-started-create-function.md) to create your first Lambda function\.
 

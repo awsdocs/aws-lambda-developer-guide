@@ -17,8 +17,8 @@ The following runtimes have reached or are scheduled for end of support:
 | Name | Identifier | Operating system | End of support phase 1 start | End of support phase 2 start | 
 | --- | --- | --- | --- | --- | 
 |  Python 2\.7  |  `python2.7`  |  Amazon Linux  |  July 15, 2021  |  Sept 30, 2021  | 
-|  Ruby 2\.5  |  `ruby2.5`  |  Amazon Linux  |  May 31, 2021  |  June 30, 2021  | 
-|  Node\.js 10\.x  |  `nodejs10.x`  |  Amazon Linux 2  |  May 31, 2021  |  June 30, 2021  | 
+|  Ruby 2\.5  |  `ruby2.5`  |  Amazon Linux  |  July 30, 2021  |  Aug 30, 2021  | 
+|  Node\.js 10\.x  |  `nodejs10.x`  |  Amazon Linux 2  |  July 30, 2021  |  Aug 30, 2021  | 
 |  Node\.js 8\.10  |  `nodejs8.10`  |  Amazon Linux  |     |  March 6, 2020  | 
 |  Node\.js 6\.10  |  `nodejs6.10`  |  Amazon Linux  |     |  August 12, 2019  | 
 |  Node\.js 4\.3 edge  |  `nodejs4.3-edge`  |  Amazon Linux  |     |  April 30, 2019  | 

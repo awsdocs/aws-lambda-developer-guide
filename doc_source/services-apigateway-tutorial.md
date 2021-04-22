@@ -79,7 +79,56 @@ On Linux and macOS, use your preferred shell and package manager\. On Windows 10
 
 ## Create the execution role<a name="services-apigateway-tutorial-role"></a>
 
-Create the [execution role](lambda-intro-execution-role.md) that gives your function permission to access AWS resources\.
+Create the [execution role](lambda-intro-execution-role.md)\. This role uses a custom policy to give your function permission to access the required AWS resources\. You first create the policy and then create the execution role\.
+
+**To create a custom policy**
+
+1. Open the [policy page](https://console.aws.amazon.com/iam/home#/policies) in the IAM console\.
+
+1. Choose **Create Policy**\.
+
+1. Choose the **JSON** tab\. Paste the following custom policy into the input box\.
+
+   ```
+   {
+     "Version": "2012-10-17",
+     "Statement": [
+       {
+         "Sid": "Stmt1428341300017",
+         "Action": [
+           "dynamodb:DeleteItem",
+           "dynamodb:GetItem",
+           "dynamodb:PutItem",
+           "dynamodb:Query",
+           "dynamodb:Scan",
+           "dynamodb:UpdateItem"
+         ],
+         "Effect": "Allow",
+         "Resource": "*"
+       },
+       {
+         "Sid": "",
+         "Resource": "*",
+         "Action": [
+           "logs:CreateLogGroup",
+           "logs:CreateLogStream",
+           "logs:PutLogEvents"
+         ],
+         "Effect": "Allow"
+       }
+     ]
+   }
+   ```
+
+1. Choose **Next: Tags**\.
+
+1. Choose **Next: Review**\. 
+
+1. For the policy name, enter **lambda\-apigateway\-policy**\. 
+
+1. Enter **Create policy**\.
+
+This policy includes permissions for the function to access DynamoDB and CloudWatch Logs\.
 
 **To create an execution role**
 
@@ -87,55 +136,21 @@ Create the [execution role](lambda-intro-execution-role.md) that gives your func
 
 1. Choose **Create role**\.
 
-1. Create a role with the following properties\.
-   + **Trusted entity** – AWS Service\.
-   + **Use Case** – **Lambda**\.
+1. For the trusted entity, choose **AWS Service**, and for the use case choose **Lambda**\.
 
-1. Choose Next: Permissions
-   + Choose **Create policy**\. This will open a new tab\.
-   + Choose the **JSON** tab and paste this custom policy with permission to DynamoDB and CloudWatch Logs\.
+1. Choose **Next: Permissions**\.
 
-     ```
-     {
-       "Version": "2012-10-17",
-       "Statement": [
-         {
-           "Sid": "Stmt1428341300017",
-           "Action": [
-             "dynamodb:DeleteItem",
-             "dynamodb:GetItem",
-             "dynamodb:PutItem",
-             "dynamodb:Query",
-             "dynamodb:Scan",
-             "dynamodb:UpdateItem"
-           ],
-           "Effect": "Allow",
-           "Resource": "*"
-         },
-         {
-           "Sid": "",
-           "Resource": "*",
-           "Action": [
-             "logs:CreateLogGroup",
-             "logs:CreateLogStream",
-             "logs:PutLogEvents"
-           ],
-           "Effect": "Allow"
-         }
-       ]
-     }
-     ```
+1. In the policy search box, enter **lambda\-apigateway\-policy**\. 
 
-1. Choose **Next: Tags**\.
-   + Tags are key-value pairs that you can add to AWS resources to help identify, organize, or search for resources. Note that this is optional.
+1. In the results, select `lambda-apigateway-policy` and choose **Next: Tags**\.
 
 1. Choose **Next: Review**\.
-   + Enter a **Name** for your policy\.
-   + Verify that you see write access for CloudWatch Logs and both read and write access for DynamoDB\.
 
-1. Choose **Create Policy**\.
+1. For the role name, enter **lambda\-apigateway\-role**\. 
 
-The custom policy has the permissions that the function needs to write data to DynamoDB and upload logs\. Note the Amazon Resource Name \(ARN\) of the role for later use\. 
+1. Enter **Create role**\.
+
+ Note the Amazon Resource Name \(ARN\) of the execution role for later use\. 
 
 ## Create the function<a name="services-apigateway-tutorial-function"></a>
 

@@ -399,6 +399,12 @@ Invoke the Lambda function [synchronously](invocation-sync.md) using the event i
   ```
 
 ------
+**Note**  
+If you are using AWS CLI version 2, add the following command parameter:   
+
+  ```
+  --cli-binary-format raw-in-base64-out
+  ```
 
   This command produces the following output:
 

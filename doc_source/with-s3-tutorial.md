@@ -35,7 +35,7 @@ This tutorial requires a moderate level of AWS and Lambda domain knowledge\. We 
 ## Prerequisites<a name="with-s3-tutorial-prepare"></a>
 + AWS account
 
-  To use Lambda, you need an AWS account\. If you do not have an account, visit [aws\.amazon\.com](https://aws.amazon.com/) and choose **Create an AWS Account**\. For instructions, see [How do I create and activate a new AWS account?](http://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/)
+  To use Lambda and other AWS services, you need an AWS account\. If you do not have an account, visit [aws\.amazon\.com](https://aws.amazon.com/) and choose **Create an AWS Account**\. For instructions, see [How do I create and activate a new AWS account?](http://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/)
 + Command line
 
   To complete the following steps, you need a command line terminal or shell to run commands\. Commands and the expected output are listed in separate blocks:
@@ -58,7 +58,7 @@ This tutorial requires a moderate level of AWS and Lambda domain knowledge\. We 
   In this tutorial, you use AWS CLI commands to create and invoke the Lambda function\. [Install the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) and [configure it with your AWS credentials](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)\.
 + Language tools
 
-  Install the language support tools and a package manager for the language that you want to use: Node\.js, Python, or Java\. For suggested tools, see [Code authoring tools](gettingstarted-tools.md#lambda-app-author)\.
+  Install the language support tools and a package manager for the language that you want to use: Node\.js, Python, or Java\. For suggested tools, see [Code authoring tools](lambda-settingup.md#lambda-settingup-author)\.
 
 ## Step 1\. Create S3 buckets and upload a sample object<a name="with-s3-tutorial-prepare-create-buckets"></a>
 

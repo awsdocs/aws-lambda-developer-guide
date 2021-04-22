@@ -23,6 +23,12 @@ Docker Hub repository: amazon/aws\-lambda\-nodejs
 
 Amazon ECR repository: gallery\.ecr\.aws/lambda/nodejs
 
+## Using a Node\.js base image<a name="nodejs-image-instructions"></a>
+
+For instructions on how to use a Node\.js base image, choose the **usage** tab on [AWS Lambda base images for Node\.js](https://gallery.ecr.aws/lambda/nodejs) in the *Amazon ECR repository*\. 
+
+The instructions are also available on [AWS Lambda base images for Node\.js](https://hub.docker.com/r/amazon/aws-lambda-nodejs) in the *Docker Hub repository*\.
+
 ## Node\.js runtime interface clients<a name="nodejs-image-clients"></a>
 
 Install the runtime interface client for Node\.js using the npm package manager:

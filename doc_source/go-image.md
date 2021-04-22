@@ -11,6 +11,7 @@ You can deploy your Lambda function code as a [container image](images-create.md
 **Topics**
 + [AWS base images for Go](#go-image-base)
 + [Go runtime interface clients](#go-image-clients)
++ [Using the Go:1\.x base image](#go-image-v1)
 + [Deploying Go with the `provided.al2` base image](#go-image-al2)
 + [Deploying Go with an alternative base image](#go-image-other)
 
@@ -30,6 +31,12 @@ Amazon ECR repository: gallery\.ecr\.aws/lambda/go
 ## Go runtime interface clients<a name="go-image-clients"></a>
 
 AWS does not provide a separate runtime interface client for Go\. The `aws-lambda-go/lambda` package includes an implementation of the runtime interface\. 
+
+## Using the Go:1\.x base image<a name="go-image-v1"></a>
+
+For instructions on how to use the base image for Go:1\.x, choose the **usage** tab on [AWS Lambda base images for Go](https://gallery.ecr.aws/lambda/go) in the *Amazon ECR repository*\. 
+
+The instructions are also available on [AWS Lambda base images for Go](https://hub.docker.com/r/amazon/aws-lambda-go) in the *Docker Hub repository*\.
 
 ## Deploying Go with the `provided.al2` base image<a name="go-image-al2"></a>
 
@@ -99,9 +106,10 @@ You can build a container image for Go from an alternative base image\. The foll
 FROM alpine as build
 # install build tools
 RUN apk add go git
+RUN go env -w GOPROXY=direct
 # cache dependencies
 ADD go.mod go.sum ./
-RUN go mod download GOPROXY=direct
+RUN go mod download 
 # build
 ADD . .
 RUN go build -o /main

@@ -79,15 +79,6 @@ The following shows an example of a permissions policy with limited scope\. It a
             "Resource": "arn:aws:iam::*:role/intern-lambda-execution-role"
         },
         {
-            "Sid": "ViewExecutionRolePolicies",
-            "Effect": "Allow", 
-            "Action": [
-                "iam:GetPolicy",
-                "iam:GetPolicyVersion"
-            ],
-            "Resource": "arn:aws:iam::aws:policy/*"
-        },
-        {
             "Sid": "ViewLogs",
             "Effect": "Allow", 
             "Action": [
@@ -149,15 +140,6 @@ The permissions in the policy are organized into statements based on the [resour
                   "iam:SimulatePrincipalPolicy"
               ],
               "Resource": "arn:aws:iam::*:role/intern-lambda-execution-role"
-  ```
-+ `ViewExecutionRolePolicies` – View the AWS managed policies that are attached to the execution role\. This lets you view the function's permissions in the console, but doesn't include permission to view policies that were created by other users in the account\.
-
-  ```
-              "Action": [
-                  "iam:GetPolicy",
-                  "iam:GetPolicyVersion"
-              ],
-              "Resource": "arn:aws:iam::accountNumber:policy/*"
   ```
 + `ViewLogs` – Use CloudWatch Logs to view logs for functions that are prefixed with `intern-`\.
 
