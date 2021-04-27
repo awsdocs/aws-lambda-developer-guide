@@ -78,7 +78,7 @@ You can build RIE into a base image\. Download the RIE from GitHub to your local
    ```
    #!/bin/sh
    if [ -z "${AWS_LAMBDA_RUNTIME_API}" ]; then
-     exec /usr/local/bin/aws-lambda-rie /usr/bin/npx aws-lambda-ric
+     exec /usr/local/bin/aws-lambda-rie /usr/bin/npx aws-lambda-rie
    else
      exec /usr/bin/npx aws-lambda-ric
    fi
@@ -90,7 +90,7 @@ You can build RIE into a base image\. Download the RIE from GitHub to your local
 
    ```
    ADD aws-lambda-rie /usr/local/bin/aws-lambda-rie
-   ENTRYPOINT [ “/entry_script.sh” ]
+   ENTRYPOINT [ "/entry_script.sh" ]
    ```
 
 1. Build your image locally using the `docker build` command\.
