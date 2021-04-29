@@ -83,7 +83,7 @@ var getTrace = function(context){
 
 exports.handler = function(event, context) {
     console.log("Event: " + JSON.stringify(event, null, 2))
-    var payload = new Buffer(event.awslogs.data, 'base64')
+    var payload = new Buffer.from(event.awslogs.data, 'base64')
     zlib.gunzip(payload, function(e, decodedEvent) {
         if (e) {
             context.fail(e)
