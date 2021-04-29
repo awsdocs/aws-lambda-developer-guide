@@ -388,14 +388,14 @@ Invoke the Lambda function [synchronously](invocation-sync.md) using the event i
 #### [ macOS/Linux ]
 
   ```
-  aws lambda invoke --function-name requests-function --payload '{"key1": "value1", "key2": "value2", "key3": "value3"}' output.txt
+  aws lambda invoke --function-name my-sourcecode-function --payload '{"key1": "value1", "key2": "value2", "key3": "value3"}' output.txt
   ```
 
 ------
 #### [ Windows ]
 
   ```
-  aws lambda invoke --function-name requests-function --cli-binary-format raw-in-base64-out --payload '{"key1": "value1", "key2": "value2", "key3": "value3"}' output.txt
+  aws lambda invoke --function-name my-sourcecode-function --cli-binary-format raw-in-base64-out --payload '{"key1": "value1", "key2": "value2", "key3": "value3"}' output.txt
   ```
 
 ------
