@@ -39,7 +39,7 @@ You can use the Lambda console to create an Amazon RDS Proxy database proxy\.
 1. Choose **Add**\.
 
 **Pricing**  
-Amazon RDS charges a hourly price for proxies that that is determined by the instance size of your database\. For details, see [RDS Proxy pricing](https://aws.amazon.com/rds/proxy/pricing/)\.
+Amazon RDS charges a hourly price for proxies that is determined by the instance size of your database\. For details, see [RDS Proxy pricing](https://aws.amazon.com/rds/proxy/pricing/)\.
 
 Proxy creation takes a few minutes\. When the proxy is available, configure your function to connect to the proxy endpoint instead of the database endpoint\.
 

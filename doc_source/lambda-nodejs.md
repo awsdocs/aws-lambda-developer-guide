@@ -7,7 +7,7 @@ Lambda supports the following Node\.js runtimes\.
 
 **Node\.js runtimes**  
 
-| Name | Identifier | AWS SDK for JavaScript | Operating system | 
+| Name | Identifier | SDK for JavaScript | Operating system | 
 | --- | --- | --- | --- | 
 |  Node\.js 14  |  `nodejs14.x`  |  2\.804\.0  |  Amazon Linux 2  | 
 |  Node\.js 12  |  `nodejs12.x`  |  2\.804\.0  |  Amazon Linux 2  | 
@@ -58,7 +58,7 @@ You can add permissions to the role later, or swap it out for a different role t
 The console creates a Lambda function with a single source file named `index.js`\. You can edit this file and add more files in the built\-in [code editor](code-editor.md)\. To save your changes, choose **Save**\. Then, to run your code, choose **Test**\.
 
 **Note**  
-The Lambda console uses AWS Cloud9 to provide an integrated development environment in the browser\. You can also use AWS Cloud9 to develop Lambda functions in your own environment\. For more information, see [Working with AWS Lambda Functions](https://docs.aws.amazon.com/cloud9/latest/user-guide/lambda-functions.html) in the AWS Cloud9 user guide\.
+The Lambda console uses AWS Cloud9 to provide an integrated development environment in the browser\. You can also use AWS Cloud9 to develop Lambda functions in your own environment\. For more information, see [Working with Lambda Functions](https://docs.aws.amazon.com/cloud9/latest/user-guide/lambda-functions.html) in the AWS Cloud9 user guide\.
 
 The `index.js` file exports a function named `handler` that takes an event object and a context object\. This is the [handler function](nodejs-handler.md) that Lambda calls when the function is invoked\. The Node\.js function runtime gets invocation events from Lambda and passes them to the handler\. In the function configuration, the handler value is `index.handler`\.
 

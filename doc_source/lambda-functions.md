@@ -11,5 +11,3 @@ As you add libraries and other dependencies to your function, creating and uploa
 To use your Lambda function with AWS resources in an Amazon VPC, configure it with security groups and subnets to [create a VPC connection](configuration-vpc.md)\. Connecting your function to a VPC lets you access resources in a private subnet such as relational databases and caches\. You can also [create a database proxy](configuration-database.md) for MySQL and Aurora DB instances\. A database proxy enables a function to reach high concurrency levels without exhausting database connections\.
 
 To use [code signing](configuration-codesigning.md) with your Lambda function, configure it with a code\-signing configuration\. When a user attempts to deploy a code package, Lambda checks that the code package has a valid signature from a trusted publisher\. The code\-signing configuration includes a set of signing profiles, which define the trusted publishers for this function\.
-
-For more information about designing Lambda applications, see [Application design](https://docs.aws.amazon.com/lambda/latest/operatorguide/application-design.html) in the *Lambda operator guide*\.

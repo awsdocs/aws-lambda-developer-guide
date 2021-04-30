@@ -1,8 +1,8 @@
 # Deploy Go Lambda functions with \.zip file archives<a name="golang-package"></a>
 
-Your AWS Lambda function's code consists of scripts or compiled programs and their dependencies\. You use a *deployment package* to deploy your function code to Lambda\. Lambda supports two types of deployment packages: container images and \.zip files\.
+Your AWS Lambda function's code consists of scripts or compiled programs and their dependencies\. You use a *deployment package* to deploy your function code to Lambda\. Lambda supports two types of deployment packages: container images and \.zip file archives\.
 
-This page describes how to create a \.zip file as your deployment package for the Go runtime, and then use the \.zip file to deploy your function code to AWS Lambda using the AWS Command Line Interface \(AWS CLI\)\. To upload your \.zip file on the Lambda console, see [Deployment packages](gettingstarted-package.md)\.
+This page describes how to create a \.zip file as your deployment package for the Go runtime, and then use the \.zip file to deploy your function code to AWS Lambda using the AWS Command Line Interface \(AWS CLI\)\. 
 
 **Topics**
 + [Prerequisites](#golang-package-prereqs)
@@ -10,7 +10,6 @@ This page describes how to create a \.zip file as your deployment package for th
 + [Sample applications](#golang-package-sample)
 + [Creating a \.zip file on macOS and Linux](#golang-package-mac-linux)
 + [Creating a \.zip file on Windows](#golang-package-windows)
-+ [Creating the Lambda function using the AWS CLI](#golang-package-create)
 
 ## Prerequisites<a name="golang-package-prereqs"></a>
 
@@ -70,6 +69,8 @@ The following steps demonstrate how to download the [lambda](https://github.com/
 
    This command creates a stable binary package for standard C library \(`libc`\) versions, which may be different on Lambda and other devices\.
 
+1. Lambda uses POSIX file permissions, so you may need to [ set permissions for the deployment package folder](https://aws.amazon.com/premiumsupport/knowledge-center/lambda-deployment-package-errors/) before you create the \.zip file archive\.
+
 1. Create a deployment package by packaging the executable in a \.zip file\.
 
    ```
@@ -116,13 +117,3 @@ If you have not already done so, you must install [git](https://git-scm.com/) an
    ```
 
 ------
-
-## Creating the Lambda function using the AWS CLI<a name="golang-package-create"></a>
-
-Lambda needs to know the [Lambda runtime](lambda-runtimes.md) environment to use for your function's code \(in `runtime`\), a name for your Lambda function \(in `function-name`\), the Lambda handler in your function code \(in `handler`\), and the [execution role](lambda-intro-execution-role.md) it can use to invoke your function \(in `role`\)\. 
-
-Use the [create\-function](https://docs.aws.amazon.com/cli/latest/reference/lambda/create-function.html) command to create the Lambda function\.
-
-```
-aws lambda create-function --function-name my-function --runtime go1.x --zip-file fileb://function.zip --handler main --role arn:aws:iam::your-account-id:role/execution_role
-```

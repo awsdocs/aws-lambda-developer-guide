@@ -18,7 +18,7 @@ To trace requests that don't have a tracing header, enable active tracing in you
 
 1. Choose **Edit**\.
 
-1. Under **AWS X\-Ray**, enable **Active tracing**\.
+1. Under **X\-Ray**, enable **Active tracing**\.
 
 1. Choose **Save**\.
 
@@ -74,7 +74,7 @@ For more information, see [The X\-Ray daemon](https://docs.aws.amazon.com/xray/l
 
 ## Enabling active tracing with the Lambda API<a name="services-xray-api"></a>
 
-To manage tracing configuration with the AWS CLI or AWS SDK, use the following API operations:
+To manage tracing configuration with the AWS CLI orAWS SDK, use the following API operations:
 + [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)
 + [GetFunctionConfiguration](API_GetFunctionConfiguration.md)
 + [CreateFunction](API_CreateFunction.md)

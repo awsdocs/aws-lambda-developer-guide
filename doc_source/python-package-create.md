@@ -95,7 +95,7 @@ The sample code contains standard math and logging Python libraries, which are u
 
 ### Create the deployment package<a name="python-package-create-package-no-dependency"></a>
 
-Your AWS Lambda function's code consists of scripts or compiled programs and their dependencies\. You use a *deployment package* to deploy your function code to Lambda\. Lambda supports two types of deployment packages: container images and \.zip files\.
+Your AWS Lambda function's code consists of scripts or compiled programs and their dependencies\. You use a *deployment package* to deploy your function code to Lambda\. Lambda supports two types of deployment packages: container images and \.zip file archives\.
 
 Create the \.zip file that Lambda uses as your deployment package\.
 
@@ -265,7 +265,7 @@ You'll learn how to:
 
 ### Create the deployment package<a name="python-package-create-package-with-dependency"></a>
 
-Your AWS Lambda function's code consists of scripts or compiled programs and their dependencies\. You use a *deployment package* to deploy your function code to Lambda\. Lambda supports two types of deployment packages: container images and \.zip files\.
+Your AWS Lambda function's code consists of scripts or compiled programs and their dependencies\. You use a *deployment package* to deploy your function code to Lambda\. Lambda supports two types of deployment packages: container images and \.zip file archives\.
 
 Create the \.zip file that Lambda uses as your deployment package\.
 

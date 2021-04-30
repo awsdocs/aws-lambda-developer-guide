@@ -38,5 +38,3 @@ In some cases, advance notice of support ending might not be possible\. For exam
 + **Java** – [www\.oracle\.com](https://www.oracle.com/java/technologies/java-se-support-roadmap.html) and [aws\.amazon\.com/corretto](https://aws.amazon.com/corretto/faqs/)
 + **Go** – [golang\.org](https://golang.org/doc/devel/release.html)
 + **\.NET Core** – [dotnet\.microsoft\.com](https://dotnet.microsoft.com/platform/support/policy/dotnet-core)
-
-After ending support for a runtime, Lambda might retire it completely at any time by disabling invocation\. Before retiring a runtime, Lambda sends additional notifications to affected customers\. No runtimes are scheduled for retirement at this time\.

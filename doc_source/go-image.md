@@ -34,9 +34,9 @@ AWS does not provide a separate runtime interface client for Go\. The `aws-lambd
 
 ## Using the Go:1\.x base image<a name="go-image-v1"></a>
 
-For instructions on how to use the base image for Go:1\.x, choose the **usage** tab on [AWS Lambda base images for Go](https://gallery.ecr.aws/lambda/go) in the *Amazon ECR repository*\. 
+For instructions on how to use the base image for Go:1\.x, choose the **usage** tab on [Lambda base images for Go](https://gallery.ecr.aws/lambda/go) in the *Amazon ECR repository*\. 
 
-The instructions are also available on [AWS Lambda base images for Go](https://hub.docker.com/r/amazon/aws-lambda-go) in the *Docker Hub repository*\.
+The instructions are also available on [Lambda base images for Go](https://hub.docker.com/r/amazon/aws-lambda-go) in the *Docker Hub repository*\.
 
 ## Deploying Go with the `provided.al2` base image<a name="go-image-al2"></a>
 

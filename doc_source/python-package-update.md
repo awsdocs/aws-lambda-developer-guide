@@ -61,7 +61,7 @@ For more information, see [What is a runtime dependency?](python-package.md#pyth
  The following steps show how to install the [requests](https://pypi.org/project/requests/) library, create a deployment package, and upload it to Lambda using the AWS CLI\. The steps assume that you are not using a virtual environment\.  It also assumes that your function code uses Python 3\.8 and the [`python3.8` Lambda runtime](lambda-runtimes.md)\.
 
 **Note**  
-If you are creating a deployment package used in a layer, see [Include library dependencies in a layer](configuration-layers.md#configuration-layers-path)\.
+If you are creating a deployment package used in a layer, see [Including library dependencies in a layer](configuration-layers.md#configuration-layers-path)\.
 
 **To update a Python function with dependencies**
 
@@ -141,7 +141,7 @@ A dependency can be any package, module or other assembly dependency that is not
  The following steps show how to install the [requests](https://pypi.org/project/requests/) library, create a deployment package, and upload it to Lambda using the AWS CLI\.  It also assumes that your function code uses Python 3\.8 and the [`python3.8` Lambda runtime](lambda-runtimes.md)\.
 
 **Note**  
-If you are creating a deployment package used in a layer, see [Include library dependencies in a layer](configuration-layers.md#configuration-layers-path)\.
+If you are creating a deployment package used in a layer, see [Including library dependencies in a layer](configuration-layers.md#configuration-layers-path)\.
 
 **To update a Python function with a virtual environment**
 

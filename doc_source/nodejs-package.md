@@ -1,11 +1,14 @@
 # Deploy Node\.js Lambda functions with \.zip file archives<a name="nodejs-package"></a>
 
-Your AWS Lambda function's code consists of scripts or compiled programs and their dependencies\. You use a *deployment package* to deploy your function code to Lambda\. Lambda supports two types of deployment packages: container images and \.zip files\.
+Your AWS Lambda function's code consists of scripts or compiled programs and their dependencies\. You use a *deployment package* to deploy your function code to Lambda\. Lambda supports two types of deployment packages: container images and \.zip file archives\.
 
-To create a deployment package, you can use a built\-in \.zip file archive utility or any other \.zip file utility \(such as [7zip](https://www.7-zip.org/download.html)\) for your command line tool\. Note the following requirements for using a \.zip file as your deployment package:
-+ The \.zip file must contain your function's code and any dependencies used to run your function's code \(if applicable\) on Lambda\. If your function depends only on standard libraries, or AWS SDK libraries, you don't need to include these libraries in your \.zip file\. These libraries are included with the supported [Lambda runtime](lambda-runtimes.md) environments\.
-+ The \.zip file must be less than 50 MB\. If it's larger than 50 MB, we recommend uploading it to an Amazon Simple Storage Service \(Amazon S3\) bucket\.
-+ The \.zip file can't contain libraries written in C or C\+\+\. If your \.zip file contains C\-extension libraries, such as the Pillow \(PIL\) or numpy libraries, we recommend using the AWS Serverless Application Model \(AWS SAM\) command line interface \(CLI\) to build a deployment package\.
+To create the deployment package for a \.zip file archive, you can use a built\-in \.zip file archive utility or any other \.zip file utility \(such as [7zip](https://www.7-zip.org/download.html)\) for your command line tool\. Note the following requirements for using a \.zip file as your deployment package:
++ The \.zip file contains your function's code and any dependencies used to run your function's code \(if applicable\) on Lambda\. If your function depends only on standard libraries, or AWS SDK libraries, you don't need to include these libraries in your \.zip file\. These libraries are included with the supported [Lambda runtime](lambda-runtimes.md) environments\.
++ If the \.zip file is larger than 50 MB, we recommend uploading it to your function from an Amazon Simple Storage Service \(Amazon S3\) bucket\.
++ If your deployment package contains native libraries, you can build the deployment package with AWS Serverless Application Model \(AWS SAM\)\. You can use the AWS SAM CLI `sam build` command with the `--use-container` to create your deployment package\. This option builds a deployment package inside a Docker image that is compatible with the Lambda execution environment\. 
+
+  For more information, see [sam build](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-build.html) in the *AWS Serverless Application Model Developer Guide*\.
++ Lambda uses POSIX file permissions, so you may need to [ set permissions for the deployment package folder](https://aws.amazon.com/premiumsupport/knowledge-center/lambda-deployment-package-errors/) before you create the \.zip file archive\.
 
 This section describes how to create a \.zip file as your deployment package, and then use the \.zip file to deploy your function code to Lambda using the AWS Command Line Interface \(AWS CLI\)\.
 

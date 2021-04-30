@@ -26,7 +26,7 @@ chmod 755 $(find . -type d)
 When you upload a deployment package or layer archive directly to Lambda, the size of the ZIP file is limited to 50 MB\. To upload a larger file, store it in Amazon S3 and use the [S3Bucket and S3Key](API_UpdateFunctionCode.md#SSS-UpdateFunctionCode-request-S3Bucket) parameters\.
 
 **Note**  
-When you upload a file directly with the AWS CLI, AWS SDK, or otherwise, the binary ZIP file is converted to base64, which increases its size by about 30%\. To allow for this, and the size of other parameters in the request, the actual request size limit that Lambda applies is larger\. Due to this, the 50 MB limit is approximate\.
+When you upload a file directly with the AWS CLI,AWS SDK, or otherwise, the binary ZIP file is converted to base64, which increases its size by about 30%\. To allow for this, and the size of other parameters in the request, the actual request size limit that Lambda applies is larger\. Due to this, the 50 MB limit is approximate\.
 
 ## Amazon S3: Error Code PermanentRedirect\.<a name="troubleshooting-deployment-PermanentRedirect"></a>
 

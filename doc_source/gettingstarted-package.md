@@ -1,6 +1,6 @@
 # Lambda deployment packages<a name="gettingstarted-package"></a>
 
-Your AWS Lambda function's code consists of scripts or compiled programs and their dependencies\. You use a *deployment package* to deploy your function code to Lambda\. Lambda supports two types of deployment packages: container images and \.zip files\.
+Your AWS Lambda function's code consists of scripts or compiled programs and their dependencies\. You use a *deployment package* to deploy your function code to Lambda\. Lambda supports two types of deployment packages: container images and \.zip file archives\.
 
 **Topics**
 + [Container images](#gettingstarted-package-images)
@@ -63,7 +63,7 @@ If you deploy your function code using a \.zip file archive, you can use Lambda 
 
 You do not use layers with container images\. Instead, you package your preferred runtime, libraries, and other dependencies into the container image when you build the image\.
 
-For more information about layers, see [Lambda layers](configuration-layers.md)\.
+For more information about layers, see [Creating and sharing Lambda layers](configuration-layers.md)\.
 
 ## Using other AWS services to build a deployment package<a name="gettingstarted-package-awsother"></a>
 
@@ -79,6 +79,6 @@ For more information, see [sam build](https://docs.aws.amazon.com/serverless-app
 
 If your deployment package is larger than 50 MB, we recommend uploading your function code and dependencies to an Amazon S3 bucket\.
 
-You can create a deployment package and upload the \.zip file to your Amazon S3 bucket in the AWS Region where you want to create a Lambda function\. When you create your Lambda function, specify the S3 bucket name and object key name on the Lambda console, or using the AWS Command Line Interface \(AWS CLI\)\.
+You can create a deployment package and upload the \.zip file to your Amazon S3 bucket in the AWS Region where you want to create a Lambda function\. When you create your Lambda function, specify the S3 bucket name and object key name on the Lambda console, or using the AWS CLI\.
 
 To create a bucket using the Amazon S3 console, see [How do I create an S3 Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\.

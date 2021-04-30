@@ -28,7 +28,7 @@ When you add permissions to your function, make an update to its code or configu
 
 **Issue: \(Node\.js\)** *Function returns before code finishes executing*
 
-Many libraries, including the AWS SDK, operate asynchronously\. When you make a network call or perform another operation that requires waiting for a response, libraries return an object called a promise that tracks the progress of the operation in the background\.
+Many libraries, including theAWS SDK, operate asynchronously\. When you make a network call or perform another operation that requires waiting for a response, libraries return an object called a promise that tracks the progress of the operation in the background\.
 
 To wait for the promise to resolve into a response, use the `await` keyword\. This blocks your handler code from executing until the promise is resolved into an object that contains the response\. If you don't need to use the data from the response in your code, you can return the promise directly to the runtime\.
 
@@ -36,11 +36,11 @@ Some libraries don't return promises but can be wrapped in code that does\. For 
 
 ## AWS SDK: Versions and updates<a name="troubleshooting-execution-versions"></a>
 
-**Issue:** *The AWS SDK included on the runtime is not the latest version*
+**Issue:** *TheAWS SDK included on the runtime is not the latest version*
 
-**Issue:** *The AWS SDK included on the runtime updates automatically*
+**Issue:** *TheAWS SDK included on the runtime updates automatically*
 
-Runtimes for scripting languages include the AWS SDK and are periodically updated to the latest version\. The current version for each runtime is listed on [runtimes page](lambda-runtimes.md)\. To use a newer version of the AWS SDK, or to lock your functions to a specific version, you can bundle the library with your function code, or [create a Lambda layer](configuration-layers.md)\. For details on creating a deployment package with dependencies, see the following topics:
+Runtimes for scripting languages include theAWS SDK and are periodically updated to the latest version\. The current version for each runtime is listed on [runtimes page](lambda-runtimes.md)\. To use a newer version of theAWS SDK, or to lock your functions to a specific version, you can bundle the library with your function code, or [create a Lambda layer](configuration-layers.md)\. For details on creating a deployment package with dependencies, see the following topics:
 +  [Deploy Node\.js Lambda functions with \.zip file archives](nodejs-package.md) 
 +  [Deploy Python Lambda functions with \.zip file archives](python-package.md) 
 +  [Deploy Ruby Lambda functions with \.zip file archives](ruby-package.md) 

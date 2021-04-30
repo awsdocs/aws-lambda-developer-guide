@@ -6,7 +6,7 @@ You can build \.NET\-based Lambda applications using the Lambda plugin to the [A
 
    1. From the **File** menu, choose **New**, and then choose **Project**\.
 
-   1. In the **New Project** window, choose **AWS Lambda Project \(\.NET Core\)**, and then choose **OK**\.
+   1. In the **New Project** window, choose **Lambda Project \(\.NET Core\)**, and then choose **OK**\.
 
    1. In the **Select Blueprint** window, you can select from a list of sample applications that provide you with sample code to get started with creating a \.NET\-based Lambda application\.
 

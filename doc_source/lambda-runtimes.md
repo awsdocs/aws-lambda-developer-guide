@@ -19,7 +19,7 @@ A runtime can support a single version of a language, multiple versions of a lan
 
 **Node\.js runtimes**  
 
-| Name | Identifier | AWS SDK for JavaScript | Operating system | 
+| Name | Identifier | SDK for JavaScript | Operating system | 
 | --- | --- | --- | --- | 
 |  Node\.js 14  |  `nodejs14.x`  |  2\.804\.0  |  Amazon Linux 2  | 
 |  Node\.js 12  |  `nodejs12.x`  |  2\.804\.0  |  Amazon Linux 2  | 
@@ -44,7 +44,7 @@ Python 2\.7 reached end of life on January 1, 2020\. End of support \(phase 1\) 
 
 **Ruby runtimes**  
 
-| Name | Identifier | AWS SDK for Ruby | Operating system | 
+| Name | Identifier | SDK for Ruby | Operating system | 
 | --- | --- | --- | --- | 
 |  Ruby 2\.7  |  `ruby2.7`  |  3\.0\.1  |  Amazon Linux 2  | 
 |  Ruby 2\.5  |  `ruby2.5`  |  3\.0\.1  |  Amazon Linux  | 

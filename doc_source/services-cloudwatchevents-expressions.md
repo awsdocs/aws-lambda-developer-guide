@@ -14,7 +14,7 @@ Where *Value* is a positive integer and *Unit* can be minute\(s\), hour\(s\), or
 | Frequency | Expression | 
 | --- | --- | 
 |  Every 5 minutes  |  `rate(5 minutes)`  | 
-|  Every hour  |  `rate(1 hours)`  | 
+|  Every hour  |  `rate(1 hour)`  | 
 |  Every seven days  |  `rate(7 days)`  | 
 
 Cron expressions have the following format\.

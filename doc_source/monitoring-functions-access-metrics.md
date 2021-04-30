@@ -73,7 +73,7 @@ The following section describes how to view and add reports from CloudWatch Logs
 
 1. \(Optional\) Choose **Save**\.
 
-![\[The AWS CloudWatch Logs Insights reports on the CloudWatch dashboard.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/console-monitoring-insights.png)
+![\[The CloudWatch Logs Insights reports on the CloudWatch dashboard.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/console-monitoring-insights.png)
 
 ## What's next?<a name="monitoring-console-next-up"></a>
 + Learn about the metrics that Lambda records and sends to CloudWatch in [Working with AWS Lambda function metrics](monitoring-metrics.md)\.

@@ -38,7 +38,7 @@ For more information about best practices for Lambda applications, see [Applicat
 + **Avoid using recursive code** in your Lambda function, wherein the function automatically calls itself until some arbitrary criteria is met\. This could lead to unintended volume of function invocations and escalated costs\. If you do accidentally do so, set the function reserved concurrency to `0` immediately to throttle all invocations to the function, while you update the code\.
 
 ## Function configuration<a name="function-configuration"></a>
-+ **Performance testing your Lambda function** is a crucial part in ensuring you pick the optimum memory size configuration\. Any increase in memory size triggers an equivalent increase in CPU available to your function\. The memory usage for your function is determined per\-invoke and can be viewed in [AWS CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatchLogs.html)\. On each invoke a `REPORT:` entry will be made, as shown below: 
++ **Performance testing your Lambda function** is a crucial part in ensuring you pick the optimum memory size configuration\. Any increase in memory size triggers an equivalent increase in CPU available to your function\. The memory usage for your function is determined per\-invoke and can be viewed in [Amazon CloudWatch](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatchLogs.html)\. On each invoke a `REPORT:` entry will be made, as shown below: 
 
   ```
   REPORT RequestId: 3604209a-e9a3-11e6-939a-754dd98c7be3	Duration: 12.34 ms	Billed Duration: 100 ms Memory Size: 128 MB	Max Memory Used: 18 MB

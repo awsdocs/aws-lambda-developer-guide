@@ -73,7 +73,11 @@ You can build RIE into a base image\. Download the RIE from GitHub to your local
 
 **To build the emulator into your image**
 
-1. Create a script and save it in your project directory\. The following example shows a typical script for a Node\.js function\. The presence of the `AWS_LAMBDA_RUNTIME_API` environment variable indicates the presence of the runtime API\. If the runtime API is present, the script runs the [runtime interface client](runtimes-images.md#runtimes-api-client)\. Otherwise, the script runs the runtime interface emulator\.
+1. Create a script and save it in your project directory\. Set execution permissions for the script file\.
+
+   The script checks for the presence of the `AWS_LAMBDA_RUNTIME_API` environment variable, which indicates the presence of the runtime API\. If the runtime API is present, the script runs the [runtime interface client](runtimes-images.md#runtimes-api-client)\. Otherwise, the script runs the runtime interface emulator\. 
+
+   The following example shows a typical script for a Node\.js function\.
 
    ```
    #!/bin/sh
@@ -81,6 +85,17 @@ You can build RIE into a base image\. Download the RIE from GitHub to your local
      exec /usr/local/bin/aws-lambda-rie /usr/bin/npx aws-lambda-ric
    else
      exec /usr/bin/npx aws-lambda-ric
+   fi
+   ```
+
+   The following example shows a typical script for a Python function\.
+
+   ```
+   #!/bin/sh
+   if [ -z "${AWS_LAMBDA_RUNTIME_API}" ]; then
+     exec /usr/local/bin/aws-lambda-rie usr/local/bin/python -m awslambdaric  $@
+   else
+     exec usr/local/bin/python -m awslambdaric  $@
    fi
    ```
 

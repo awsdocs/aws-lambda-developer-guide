@@ -124,13 +124,13 @@ In this getting started exercise, you use the Docker CLI to create a container i
 To complete the following steps, you need a command line terminal or shell to run commands\. Commands and the expected output are listed in separate blocks:
 
 ```
-this is a command
+aws --version
 ```
 
 You should see the following output:
 
 ```
-this is output
+aws-cli/2.0.57 Python/3.7.4 Darwin/19.6.0 exe/x86_64
 ```
 
 For long commands, an escape character \(`\`\) is used to split a command over multiple lines\.

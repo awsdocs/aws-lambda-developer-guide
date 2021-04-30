@@ -6,7 +6,7 @@ There are two types of concurrency available:
 + Reserved concurrency – Reserved concurrency creates a pool of requests that can only be used by its function, and also prevents its function from using unreserved concurrency\.
 + Provisioned concurrency – Provisioned concurrency initializes a requested number of execution environments so that they are prepared to respond to your function's invocations\.
 
-This topic details how to manage and configure reserved and provisioned concurrency\. To learn about how concurrency interacts with scaling, [see AWS Lambda function scaling](https://docs.aws.amazon.com/lambda/latest/dg/invocation-scaling.html)\.
+This topic details how to manage and configure reserved and provisioned concurrency\. To learn about how concurrency interacts with scaling, [see Lambda function scaling](https://docs.aws.amazon.com/lambda/latest/dg/invocation-scaling.html)\.
 
 To ensure that a function can always reach a certain level of concurrency, configure the function with [reserved concurrency](#configuration-concurrency-reserved)\. When a function has reserved concurrency, no other function can use that concurrency\. Reserved concurrency also limits the maximum concurrency for the function, and applies to the function as a whole, including versions and aliases\.
 

@@ -1,6 +1,6 @@
 # Deploy Java Lambda functions with \.zip or JAR file archives<a name="java-package"></a>
 
-Your AWS Lambda function's code consists of scripts or compiled programs and their dependencies\. You use a *deployment package* to deploy your function code to Lambda\. Lambda supports two types of deployment packages: container images and \.zip files\.
+Your AWS Lambda function's code consists of scripts or compiled programs and their dependencies\. You use a *deployment package* to deploy your function code to Lambda\. Lambda supports two types of deployment packages: container images and \.zip file archives\.
 
 This page describes how to create your deployment package as a \.zip file or Jar file, and then use the deployment package to deploy your function code to AWS Lambda using the AWS Command Line Interface \(AWS CLI\)\.
 
@@ -62,7 +62,7 @@ dependencies {
 To create a deployment package, compile your function code and dependencies into a single \.zip file or Java Archive \(JAR\) file\. For Gradle, [use the `Zip` build type](#java-package-gradle)\. For Apache Maven, [use the Maven Shade plugin](#java-package-maven)\.
 
 **Note**  
-To keep your deployment package size small, package your function's dependencies in layers\. Layers enable you to manage your dependencies independently, can be used by multiple functions, and can be shared with other accounts\. For more information, see [Lambda layers](configuration-layers.md)\.
+To keep your deployment package size small, package your function's dependencies in layers\. Layers enable you to manage your dependencies independently, can be used by multiple functions, and can be shared with other accounts\. For more information, see [Creating and sharing Lambda layers](configuration-layers.md)\.
 
 You can upload your deployment package by using the Lambda console, the Lambda API, or AWS Serverless Application Model \(AWS SAM\)\.
 

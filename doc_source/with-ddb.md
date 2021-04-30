@@ -79,7 +79,7 @@ If your function returns an error, Lambda retries the batch until processing suc
 
 You can also increase concurrency by processing multiple batches from each shard in parallel\. Lambda can process up to 10 batches in each shard simultaneously\. If you increase the number of concurrent batches per shard, Lambda still ensures in\-order processing at the partition\-key level\.
 
-Configure the `ParallelizationFactor` setting to process one shard of a Kinesis or DynamoDB data stream with more than one Lambda invocation simultaneously\. You can specify the number of concurrent batches that Lambda polls from a shard via a parallelization factor from 1 \(default\) to 10\. For example, when `ParallelizationFactor` is set to 2, you can have 200 concurrent Lambda invocations at maximum to process 100 Kinesis data shards\. This helps scale up the processing throughput when the data volume is volatile and the `IteratorAge` is high\. For more information, see [New AWS Lambda scaling controls for Kinesis and DynamoDB event sources](http://aws.amazon.com/blogs/compute/new-aws-lambda-scaling-controls-for-kinesis-and-dynamodb-event-sources/)\.
+Configure the `ParallelizationFactor` setting to process one shard of a Kinesis or DynamoDB data stream with more than one Lambda invocation simultaneously\. You can specify the number of concurrent batches that Lambda polls from a shard via a parallelization factor from 1 \(default\) to 10\. For example, when `ParallelizationFactor` is set to 2, you can have 200 concurrent Lambda invocations at maximum to process 100 Kinesis data shards\. This helps scale up the processing throughput when the data volume is volatile and the `IteratorAge` is high\. For more information, see [ New AWS Lambda scaling controls for Kinesis and DynamoDB event sources](http://aws.amazon.com/blogs/compute/new-aws-lambda-scaling-controls-for-kinesis-and-dynamodb-event-sources/)\.
 
 **Topics**
 + [Execution role permissions](#events-dynamodb-permissions)
@@ -515,9 +515,9 @@ When configuring reporting on batch item failures, the `StreamsEventResponse` cl
 
 ```
 { 
-  "BatchItemFailures": [ 
+  "batchItemFailures": [ 
         {
-            "ItemIdentifier": "<id>"
+            "itemIdentifier": "<id>"
         }
     ]
 }

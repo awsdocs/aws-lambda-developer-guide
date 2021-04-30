@@ -30,9 +30,9 @@ Amazon ECR repository: gallery\.ecr\.aws/lambda/java
 
 ## Using a Java base image<a name="java-image-instructions"></a>
 
-For instructions on how to use a Java base image, choose the **usage** tab on [AWS Lambda base images for Java](https://gallery.ecr.aws/lambda/java) in the *Amazon ECR repository*\. 
+For instructions on how to use a Java base image, choose the **usage** tab on [Lambda base images for Java](https://gallery.ecr.aws/lambda/java) in the *Amazon ECR repository*\. 
 
-The instructions are also available on [AWS Lambda base images for Java](https://hub.docker.com/r/amazon/aws-lambda-java) in the *Docker Hub repository*\.
+The instructions are also available on [Lambda base images for Java](https://hub.docker.com/r/amazon/aws-lambda-java) in the *Docker Hub repository*\.
 
 ## Java runtime interface clients<a name="java-image-clients"></a>
 

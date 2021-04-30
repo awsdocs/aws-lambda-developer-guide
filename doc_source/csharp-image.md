@@ -27,7 +27,7 @@ Amazon ECR repository: gallery\.ecr\.aws/lambda/dotnet
 
 For instructions on how to use a \.NET base image, choose the **usage** tab on [AWS Lambda base images for \.NET](https://gallery.ecr.aws/lambda/dotnet) in the *Amazon ECR repository*\. 
 
-The instructions are also available on [AWS Lambda base images for \.NET](https://hub.docker.com/r/amazon/aws-lambda-dotnet) in the *Docker Hub repository*\.
+The instructions are also available on [Lambda base images for \.NET](https://hub.docker.com/r/amazon/aws-lambda-dotnet) in the *Docker Hub repository*\.
 
 ## \.NET runtime interface clients<a name="csharp-image-clients"></a>
 

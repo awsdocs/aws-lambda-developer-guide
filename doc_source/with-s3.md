@@ -52,7 +52,7 @@ Amazon S3 invokes your function [asynchronously](invocation-async.md) with an ev
 
 To invoke your function, Amazon S3 needs permission from the function's [resource\-based policy](access-control-resource-based.md)\. When you configure an Amazon S3 trigger in the Lambda console, the console modifies the resource\-based policy to allow Amazon S3 to invoke the function if the bucket name and account ID match\. If you configure the notification in Amazon S3, you use the Lambda API to update the policy\. You can also use the Lambda API to grant permission to another account, or restrict permission to a designated alias\.
 
-If your function uses the AWS SDK to manage Amazon S3 resources, it also needs Amazon S3 permissions in its [execution role](lambda-intro-execution-role.md)\. 
+If your function uses theAWS SDK to manage Amazon S3 resources, it also needs Amazon S3 permissions in its [execution role](lambda-intro-execution-role.md)\. 
 
 **Topics**
 + [Tutorial: Using an Amazon S3 trigger to invoke a Lambda function](with-s3-example.md)

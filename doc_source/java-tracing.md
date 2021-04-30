@@ -2,7 +2,7 @@
 
 Lambda integrates with AWS X\-Ray to enable you to trace, debug, and optimize Lambda applications\. You can use X\-Ray to trace a request as it traverses resources in your application, from the frontend API to storage and database on the backend\. By simply adding the X\-Ray SDK library to your build configuration, you can record errors and latency for any call that your function makes to an AWS service\.
 
-The X\-Ray *service map* shows the flow of requests through your application\. The following example from the [error processor](samples-errorprocessor.md) sample application shows an application with two functions\. The primary function processes events and sometimes returns errors\. The second function processes errors that appear in the first's log group and uses the AWS SDK to call X\-Ray, Amazon S3 and Amazon CloudWatch Logs\.
+The X\-Ray *service map* shows the flow of requests through your application\. The following example from the [error processor](samples-errorprocessor.md) sample application shows an application with two functions\. The primary function processes events and sometimes returns errors\. The second function processes errors that appear in the first's log group and uses theAWS SDK to call X\-Ray, Amazon S3 and Amazon CloudWatch Logs\.
 
 [images/sample-errorprocessor-servicemap-l.png](images/sample-errorprocessor-servicemap-l.png)
 
@@ -18,7 +18,7 @@ To trace requests that don't have a tracing header, enable active tracing in you
 
 1. Choose **Edit**\.
 
-1. Under **AWS X\-Ray**, enable **Active tracing**\.
+1. Under **X\-Ray**, enable **Active tracing**\.
 
 1. Choose **Save**\.
 
@@ -114,7 +114,7 @@ Resources:
 
 ## Storing runtime dependencies in a layer<a name="java-tracing-layers"></a>
 
-If you use the X\-Ray SDK to instrument AWS SDK clients your function code, your deployment package can become quite large\. To avoid uploading runtime dependencies every time you update your functions code, package them in a [Lambda layer](configuration-layers.md)\.
+If you use the X\-Ray SDK to instrumentAWS SDK clients your function code, your deployment package can become quite large\. To avoid uploading runtime dependencies every time you update your functions code, package them in a [Lambda layer](configuration-layers.md)\.
 
 The following example shows an `AWS::Serverless::LayerVersion` resource that stores the SDK for Java and X\-Ray SDK for Java\.
 

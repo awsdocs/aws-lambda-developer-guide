@@ -36,7 +36,7 @@ If a function is stuck in the `Pending` state for more than six minutes, call on
 
 Lambda cancels the pending operation and puts the function into the `Failed` state\. You can then delete the function and recreate it, or attempt another update\.
 
-## Lambda: One function is using all concurrency<a name="troubleshooting-invocation-pending"></a>
+## Lambda: One function is using all concurrency<a name="troubleshooting-invocation-allconcurrency"></a>
 
 **Issue:** *One function is using all of the available concurrency, causing other functions to be throttled\.*
 

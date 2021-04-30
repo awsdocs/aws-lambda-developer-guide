@@ -152,20 +152,20 @@ To grant other accounts permission for multiple functions, or for actions that d
 
 ## Granting layer access to other accounts<a name="permissions-resource-xaccountlayer"></a>
 
-To grant layer\-usage permission to another account, add a statement to the layer version's permissions policy with the `add-layer-version-permission` command\. In each statement, you can grant permission to a single account, all accounts, or an organization\.
+To grant layer\-usage permission to another account, add a statement to the layer version's permissions policy using the add\-layer\-version\-permission command\. In each statement, you can grant permission to a single account, all accounts, or an organization\.
 
 ```
 aws lambda add-layer-version-permission --layer-name xray-sdk-nodejs --statement-id xaccount \
 --action lambda:GetLayerVersion  --principal 210987654321 --version-number 1 --output text
 ```
 
-You should see the following output:
+You should see output similar to the following:
 
 ```
 e210ffdc-e901-43b0-824b-5fcd0dd26d16    {"Sid":"xaccount","Effect":"Allow","Principal":{"AWS":"arn:aws:iam::210987654321:root"},"Action":"lambda:GetLayerVersion","Resource":"arn:aws:lambda:us-east-2:123456789012:layer:xray-sdk-nodejs:1"}
 ```
 
-Permissions apply only to a single version of a layer\. Repeat the process each time that you create a new layer version\.
+Permissions apply only to a single layer version\. Repeat the process each time that you create a new layer version\.
 
 To grant permission to all accounts in an organization, use the `organization-id` option\. The following example grants all accounts in an organization permission to use version 3 of a layer\.
 

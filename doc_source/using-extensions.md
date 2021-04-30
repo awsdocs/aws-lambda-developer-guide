@@ -65,7 +65,7 @@ For a \.zip file archive, you can create an AWS CloudFormation template to simpl
 
 You can add an extension to your function as a [Lambda layer](configuration-layers.md)\. Using layers enables you to share extensions across your organization or to the entire community of Lambda developers\. You can add one or more extensions to a layer\. You can register up to 10 extensions for a function\.
 
-You add the extension to your function using the same method as you would for any layer\. For more information, see [Configure a function to use layers](configuration-layers.md#configuration-layers-using)\.
+You add the extension to your function using the same method as you would for any layer\. For more information, see [Using layers with your Lambda function](invocation-layers.md)\.
 
 **Add an extension to your function \(console\)**
 

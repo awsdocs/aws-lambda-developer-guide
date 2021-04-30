@@ -79,9 +79,17 @@ For more information, see [Lambda runtimes](lambda-runtimes.md)\.
 
 ## Layer<a name="gettingstarted-concepts-layer"></a>
 
-A Lambda layer is a \.zip file archive that contains libraries, a [custom runtime](runtimes-custom.md), or other dependencies\. You can use a layer to distribute a dependency to multiple functions\. You do not use layers with container images\. Instead, you package your preferred runtime, libraries, and other dependencies into the container image when you build the image\.
+A Lambda *layer* is a \.zip file archive that can contain additional code or other content\. A layer can contain libraries, a [custom runtime](runtimes-custom.md), data, or configuration files\.
 
-For more information, see [Lambda layers](configuration-layers.md)\.
+Layers provide a convenient way to package libraries and other dependencies that you can use with your Lambda functions\. Using layers reduces the size of uploaded deployment archives and makes it faster to deploy your code\. Layers also promote code sharing and separation of responsibilities so that you can iterate faster on writing business logic\.
+
+You can include up to five layers per function\. Layers count towards the standard Lambda [deployment size quotas](https://docs.amazonaws.cn/en_us/lambda/latest/dg/gettingstarted-limits.html)\. When you include a layer in a function, the contents are extracted to the `/opt` directory in the execution environment\.
+
+By default, the layers that you create are private to your AWS account\. You can choose to share a layer with other accounts or to make the layer public\. If your functions consume a layer that a different account published, your functions can continue to use the layer version after it has been deleted, or after your permission to access the layer is revoked\. However, you cannot create a new function or update functions using a deleted layer version\.
+
+Functions deployed as a container image do not use layers\. Instead, you package your preferred runtime, libraries, and other dependencies into the container image when you build the image\.
+
+For more information, see [Creating and sharing Lambda layers](configuration-layers.md)\.
 
 ## Extension<a name="gettingstarted-concepts-extensions"></a>
 
