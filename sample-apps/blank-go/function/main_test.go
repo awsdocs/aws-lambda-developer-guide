@@ -33,7 +33,7 @@ func TestMain(t *testing.T) {
 	}
 	t.Log(result)
 	if !strings.Contains(result, "FunctionCount") {
-		t.Errorf("Output does not contain FunctionCode.")
+		t.Errorf("Output does not contain FunctionCount.")
 	}
 }
 func ReadJSONFromFile(t *testing.T, inputFile string) []byte {
