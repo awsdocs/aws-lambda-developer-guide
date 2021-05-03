@@ -14,13 +14,6 @@ import (
 
 var client = lambda.New(session.New())
 
-func init() {
-	_, err := callLambda()
-	if err != nil {
-		log.Printf("ERROR calling GetAccountSettings API: %s", err)
-	}
-}
-
 func callLambda() (string, error) {
 	input := &lambda.GetAccountSettingsInput{}
 	req, resp := client.GetAccountSettingsRequest(input)
