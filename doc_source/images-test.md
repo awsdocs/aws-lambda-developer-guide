@@ -82,9 +82,9 @@ You can build RIE into a base image\. Download the RIE from GitHub to your local
    ```
    #!/bin/sh
    if [ -z "${AWS_LAMBDA_RUNTIME_API}" ]; then
-     exec /usr/local/bin/aws-lambda-rie /usr/bin/npx aws-lambda-ric
+     exec /usr/local/bin/aws-lambda-rie /usr/bin/npx aws-lambda-ric $@
    else
-     exec /usr/bin/npx aws-lambda-ric
+     exec /usr/bin/npx aws-lambda-ric $@
    fi
    ```
 
