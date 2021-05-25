@@ -138,4 +138,4 @@ For more information, see [Configuring database access](https://docs.aws.amazon.
 
 To delete the application, run the cleanup script.
 
-    rds-mysql$ ./8-cleanup.sh
+    rds-mysql$ ./7-cleanup.sh
