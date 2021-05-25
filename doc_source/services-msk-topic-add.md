@@ -12,6 +12,7 @@ This section describes how to add your Kafka cluster and topic as a function tri
 
 To get Apache Kafka records from Amazon MSK brokers, Lambda must have access to the Amazon Virtual Private Cloud \(Amazon VPC\) resources associated with your MSK cluster\. To meet Amazon VPC access requirements, we recommend:
 + Configuring one NAT gateway per public subnet\. For more information, see [Internet and service access for VPC\-connected functions](configuration-vpc.md#vpc-internet)\.
++ Alternatively, instead of NAT gateway, deploy VPC Endpoints (PrivateLink) for Lambda and STS services\. If authentication is required, then deploy also VPC Endpoint for Secrets Manager\. 
 
 Your Amazon VPC security groups must be configured with the following rules \(at minimum\):
 + Inbound rules – Allow all traffic on all ports for the security group specified as your event source\.
