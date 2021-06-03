@@ -2,9 +2,9 @@
 
 Concurrency is the number of requests that your function is serving at any given time\. When your function is invoked, Lambda allocates an instance of it to process the event\. When the function code finishes running, it can handle another request\. If the function is invoked again while a request is still being processed, another instance is allocated, which increases the function's concurrency\. Concurrency is subject to a Regional [quota](gettingstarted-limits.md) that is shared by all functions in a Region\.
 
-There are two types of concurrency available:
-+ Reserved concurrency – Reserved concurrency creates a pool of requests that can only be used by its function, and also prevents its function from using unreserved concurrency\.
-+ Provisioned concurrency – Provisioned concurrency initializes a requested number of execution environments so that they are prepared to respond to your function's invocations\.
+There are two types of concurrency controls available:
++ Reserved concurrency – Reserved concurrency guarantees the maximum number of concurrent instances for the function\. When a function has reserved concurrency, no other function can use that concurrency\. There is no charge for configuring reserved concurrency for a function\.
++ Provisioned concurrency – Provisioned concurrency initializes a requested number of execution environments so that they are prepared to respond immediately to your function's invocations\. Note that configuring provisioned concurrency incurs charges to your AWS account\.
 
 This topic details how to manage and configure reserved and provisioned concurrency\. To learn about how concurrency interacts with scaling, [see Lambda function scaling](https://docs.aws.amazon.com/lambda/latest/dg/invocation-scaling.html)\.
 

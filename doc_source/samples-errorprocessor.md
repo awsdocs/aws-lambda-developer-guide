@@ -72,7 +72,7 @@ The two Node\.js functions are configured for active tracing in the template, an
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-errorprocessor-trace.png)
 
-The processor function gets the request ID from the CloudWatch Logs event, and uses the AWS SDK for JavaScript to search X\-Ray for that request\. It usesAWS SDK clients, which are instrumented with the X\-Ray SDK, to download the trace and log stream\. Then it stores them in the output bucket\. The X\-Ray SDK records these calls, and they appear as subsegments in the trace\.
+The processor function gets the request ID from the CloudWatch Logs event, and uses the AWS SDK for JavaScript to search X\-Ray for that request\. It uses AWS SDK clients, which are instrumented with the X\-Ray SDK, to download the trace and log stream\. Then it stores them in the output bucket\. The X\-Ray SDK records these calls, and they appear as subsegments in the trace\.
 
 ## AWS CloudFormation template and additional resources<a name="sample-errorprocessor-template"></a>
 

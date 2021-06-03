@@ -33,7 +33,7 @@ If your code performs an asynchronous task, return a promise to make sure that i
 
 ```
 const https = require('https')
-let url = "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html"
+let url = "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html"   
 
 exports.handler = async function(event) {
   const promise = new Promise(function(resolve, reject) {

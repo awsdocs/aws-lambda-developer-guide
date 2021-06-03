@@ -27,9 +27,13 @@ These packages are available at [Nuget packages](https://www.nuget.org/packages/
 |  \.NET Core 2\.1  |  `dotnetcore2.1`  |  Amazon Linux  | 
 
 **Note**  
-To get started with application development in your local environment, deploy one of the sample applications available in this guide's GitHub repository\.  
-[blank\-csharp](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-csharp) – A C\# function that shows the use of Lambda's \.NET libraries, logging, environment variables, AWS X\-Ray tracing, unit tests, and the AWS SDK\.
-[ec2\-spot](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/ec2-spot) – A function that manages spot instance requests in Amazon EC2\.
+For end of support information about \.NET Core 2\.1, see [Runtime support policy](runtime-support-policy.md)\.
+
+To get started with application development in your local environment, deploy one of the sample applications available in this guide's GitHub repository\.
+
+**Sample Lambda applications in C\#**
++ [blank\-csharp](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-csharp) – A C\# function that shows the use of Lambda's \.NET libraries, logging, environment variables, AWS X\-Ray tracing, unit tests, and the AWS SDK\.
++ [ec2\-spot](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/ec2-spot) – A function that manages spot instance requests in Amazon EC2\.
 
 **Topics**
 + [AWS Lambda function handler in C\#](csharp-handler.md)

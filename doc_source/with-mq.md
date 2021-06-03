@@ -127,7 +127,7 @@ To manage an event source with the [AWS CLI](https://docs.aws.amazon.com/cli/lat
 + [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md)
 + [DeleteEventSourceMapping](API_DeleteEventSourceMapping.md)
 
-To create the event source mapping with the AWS Command Line Interface \(AWS CLI\), use the [https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/create-event-source-mapping.html](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/create-event-source-mapping.html) command\.
+To create the event source mapping with the AWS Command Line Interface \(AWS CLI\), use the [https://docs.aws.amazon.com/cli/latest/reference/lambda/create-event-source-mapping.html](https://docs.aws.amazon.com/cli/latest/reference/lambda/create-event-source-mapping.html) command\.
 
 By default, Amazon MQ brokers are created with the `PubliclyAccessible` flag set to false\. It is only when `PubliclyAccessible` is set to true that the broker is given a public IP address\. 
 
@@ -175,7 +175,7 @@ You should see the following output:
 }
 ```
 
-Using the `[update\-event\-source\-mapping](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/update-event-source-mapping.html)` command, you can configure additional options such as how batches are processed and to specify when to discard records that can't be processed\. The following example command updates an event source mapping to have a batch size of 2\.
+Using the `[update\-event\-source\-mapping](https://docs.aws.amazon.com/cli/latest/reference/lambda/update-event-source-mapping.html)` command, you can configure additional options such as how batches are processed and to specify when to discard records that can't be processed\. The following example command updates an event source mapping to have a batch size of 2\.
 
 ```
 aws lambda update-event-source-mapping \
@@ -198,7 +198,7 @@ You should see the following output:
 }
 ```
 
-Updated settings are applied asynchronously and aren't reflected in the output until the process completes\. To view the current status of your resource, use the [https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/get-event-source-mapping.html](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/get-event-source-mapping.html) command\.
+Updated settings are applied asynchronously and aren't reflected in the output until the process completes\. To view the current status of your resource, use the [https://docs.aws.amazon.com/cli/latest/reference/lambda/get-event-source-mapping.html](https://docs.aws.amazon.com/cli/latest/reference/lambda/get-event-source-mapping.html) command\.
 
 ```
 aws lambda get-event-source-mapping \

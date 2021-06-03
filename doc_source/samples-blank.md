@@ -1,6 +1,6 @@
 # Blank function sample application for AWS Lambda<a name="samples-blank"></a>
 
-The blank function sample application is a starter application that demonstrates common operations in Lambda with a function that calls the Lambda API\. It shows the use of logging, environment variables, AWS X\-Ray tracing, layers, unit tests and theAWS SDK\. Explore this application to learn about building Lambda functions in your programming language, or use it as a starting point for your own projects\.
+The blank function sample application is a starter application that demonstrates common operations in Lambda with a function that calls the Lambda API\. It shows the use of logging, environment variables, AWS X\-Ray tracing, layers, unit tests and the AWS SDK\. Explore this application to learn about building Lambda functions in your programming language, or use it as a starting point for your own projects\.
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-blank.png)
 
@@ -37,7 +37,7 @@ The sample application consists of function code, an AWS CloudFormation template
 
 Standard charges apply for each service\. For more information, see [AWS Pricing](https://aws.amazon.com/pricing)\.
 
-The function code shows a basic workflow for processing an event\. The handler takes an Amazon Simple Queue Service \(Amazon SQS\) event as input and iterates through the records that it contains, logging the contents of each message\. It logs the contents of the event, the context object, and environment variables\. Then it makes a call with theAWS SDK and passes the response back to the Lambda runtime\.
+The function code shows a basic workflow for processing an event\. The handler takes an Amazon Simple Queue Service \(Amazon SQS\) event as input and iterates through the records that it contains, logging the contents of each message\. It logs the contents of the event, the context object, and environment variables\. Then it makes a call with the AWS SDK and passes the response back to the Lambda runtime\.
 
 **Example [blank\-nodejs/function/index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-nodejs/function/index.js) – Handler code**  
 
@@ -64,7 +64,7 @@ var serialize = function(object) {
 }
 ```
 
-The input/output types for the handler and support for asynchronous programming vary per runtime\. In this example, the handler method is `async`, so in Node\.js this means that it must return a promise back to the runtime\. The Lambda runtime waits for the promise to be resolved and returns the response to the invoker\. If the function code orAWS SDK client return an error, the runtime formats the error into a JSON document and returns that\.
+The input/output types for the handler and support for asynchronous programming vary per runtime\. In this example, the handler method is `async`, so in Node\.js this means that it must return a promise back to the runtime\. The Lambda runtime waits for the promise to be resolved and returns the response to the invoker\. If the function code or AWS SDK client return an error, the runtime formats the error into a JSON document and returns that\.
 
 The sample application doesn't include an Amazon SQS queue to send events, but uses an event from Amazon SQS \([event\.json](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-nodejs/event.json)\) to illustrate how events are processed\. To add an Amazon SQS queue to your application, see [Using AWS Lambda with Amazon SQS](with-sqs.md)\.
 
@@ -174,7 +174,7 @@ The sample function is configured for tracing with [AWS X\-Ray](https://console.
 
 The first service node \(`AWS::Lambda`\) represents the Lambda service, which validates the invocation request and sends it to the function\. The second node, `AWS::Lambda::Function`, represents the function itself\.
 
-To record additional detail, the sample function uses the X\-Ray SDK\. With minimal changes to the function code, the X\-Ray SDK records details about calls made with theAWS SDK to AWS services\.
+To record additional detail, the sample function uses the X\-Ray SDK\. With minimal changes to the function code, the X\-Ray SDK records details about calls made with the AWS SDK to AWS services\.
 
 **Example [blank\-nodejs/function/index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-nodejs/function/index.js) – Instrumentation**  
 
@@ -186,15 +186,15 @@ const AWS = AWSXRay.captureAWS(require('aws-sdk'))
 const lambda = new AWS.Lambda()
 ```
 
-Instrumenting theAWS SDK client adds an additional node to the service map and more detail in traces\. In this example, the service map shows the sample function calling the Lambda API to get details about storage and concurrency usage in the current Region\.
+Instrumenting the AWS SDK client adds an additional node to the service map and more detail in traces\. In this example, the service map shows the sample function calling the Lambda API to get details about storage and concurrency usage in the current Region\.
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/blank-servicemap.png)
 
-The trace shows timing details for the invocation, with subsegments for function initialization, invocation, and overhead\. The invocation subsegment has a subsegment for theAWS SDK call to the `GetAccountSettings` API operation\.
+The trace shows timing details for the invocation, with subsegments for function initialization, invocation, and overhead\. The invocation subsegment has a subsegment for the AWS SDK call to the `GetAccountSettings` API operation\.
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/blank-trace.png)
 
-You can include the X\-Ray SDK and other libraries in your function's deployment package, or deploy them separately in a Lambda layer\. For Node\.js, Ruby, and Python, the Lambda runtime includes theAWS SDK in the execution environment\.
+You can include the X\-Ray SDK and other libraries in your function's deployment package, or deploy them separately in a Lambda layer\. For Node\.js, Ruby, and Python, the Lambda runtime includes the AWS SDK in the execution environment\.
 
 ## Dependency management with layers<a name="samples-blank-dependencies"></a>
 

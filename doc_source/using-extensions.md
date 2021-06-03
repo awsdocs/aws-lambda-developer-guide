@@ -29,7 +29,7 @@ You are charged for the execution time that the extension consumes \(in 1 ms inc
 + [Impact on performance and resources](#using-extensions-reg)
 + [Permissions](#using-extensions-permissions)
 + [Configuring extensions \(\.zip file archive\)](#using-extensions-config)
-+ [Using extensions in container images](#invocation-images-extensions)
++ [Using extensions in container images](#invocation-extensions-images)
 + [Next steps](#using-extensions-next)
 
 ## Execution environment<a name="using-extensions-env"></a>
@@ -41,7 +41,7 @@ The lifecycle of the execution environment includes the following phases:
 
   The `Init` phase is split into three sub\-phases: `Extension init`, `Runtime init`, and `Function init`\. These sub\-phases ensure that all extensions and the runtime complete their setup tasks before the function code runs\.
 + `Invoke`: In this phase, Lambda invokes the function handler\. After the function runs to completion, Lambda prepares to handle another function invocation\.
-+ `Shutdown`: This phase is triggered if the Lambda function does not receive any invocations for a period of time\. In the `Shutdown` phase, Lambda terminates the runtime, alerts the extensions to let them stop cleanly, and then removes the environment\. Lambda sends a `Shutdown` event to each extension, which tells the extension that the environment is about to be shut down\.
++ `Shutdown`: This phase is triggered if the Lambda function does not receive any invocations for a period of time\. In the `Shutdown` phase, Lambda shuts down the runtime, alerts the extensions to let them stop cleanly, and then removes the environment\. Lambda sends a `Shutdown` event to each extension, which tells the extension that the environment is about to be shut down\.
 
 During the `Init` phase, Lambda extracts layers containing extensions into the `/opt` directory in the execution environment\. Lambda looks for extensions in the `/opt/extensions/` directory, interprets each file as an executable bootstrap for launching the extension, and starts all extensions in parallel\.
 
@@ -83,7 +83,7 @@ You add the extension to your function using the same method as you would for an
 
 1. Choose **Add**\.
 
-## Using extensions in container images<a name="invocation-images-extensions"></a>
+## Using extensions in container images<a name="invocation-extensions-images"></a>
 
 You can add extensions to your [container image](lambda-images.md)\. The ENTRYPOINT container image setting specifies the main process for the function\. Configure the ENTRYPOINT setting in the Dockerfile, or as an override in the function configuration\. 
 
@@ -111,6 +111,6 @@ CMD python ./index.py
 ## Next steps<a name="using-extensions-next"></a>
 
 To learn more about extensions, we recommend the following resources:
-+ For a basic working example, see [Building Extensions for AWS Lambda](https://aws.amazon.com/blogs/compute/building-extensions-for-aws-lambda-in-preview/) on the AWS Compute Blog\.
-+ For information about extensions that AWS Lambda Partners provides, see [Introducing AWS Lambda Extensions](https://aws.amazon.com/blogs/compute/introducing-aws-lambda-extensions-in-preview/) on the AWS Compute Blog\.
++ For a basic working example, see [Building Extensions for AWS Lambda](http://aws.amazon.com/blogs/compute/building-extensions-for-aws-lambda-in-preview/) on the AWS Compute Blog\.
++ For information about extensions that AWS Lambda Partners provides, see [Introducing AWS Lambda Extensions](http://aws.amazon.com/blogs/compute/introducing-aws-lambda-extensions-in-preview/) on the AWS Compute Blog\.
 + To view available example extensions and wrapper scripts, see [AWS Lambda Extensions](https://github.com/aws-samples/aws-lambda-extensions) on the AWS Samples GitHub repository\.

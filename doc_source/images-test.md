@@ -82,9 +82,9 @@ You can build RIE into a base image\. Download the RIE from GitHub to your local
    ```
    #!/bin/sh
    if [ -z "${AWS_LAMBDA_RUNTIME_API}" ]; then
-     exec /usr/local/bin/aws-lambda-rie /usr/bin/npx aws-lambda-ric
+     exec /usr/local/bin/aws-lambda-rie /usr/bin/npx aws-lambda-ric $@
    else
-     exec /usr/bin/npx aws-lambda-ric
+     exec /usr/bin/npx aws-lambda-ric $@
    fi
    ```
 
@@ -93,9 +93,9 @@ You can build RIE into a base image\. Download the RIE from GitHub to your local
    ```
    #!/bin/sh
    if [ -z "${AWS_LAMBDA_RUNTIME_API}" ]; then
-     exec /usr/local/bin/aws-lambda-rie usr/local/bin/python -m awslambdaric  $@
+     exec /usr/local/bin/aws-lambda-rie /usr/local/bin/python -m awslambdaric $@
    else
-     exec usr/local/bin/python -m awslambdaric  $@
+     exec /usr/local/bin/python -m awslambdaric $@
    fi
    ```
 
@@ -132,7 +132,7 @@ You install the runtime interface emulator to your local machine\. When you run 
 
    ```
    docker run -d -v ~/.aws-lambda-rie:/aws-lambda -p 9000:8080 \
-     --entrypoint /aws-lambda/aws-lambda-rie myfunction:latest <image entrypoint> \
+     --entrypoint /aws-lambda/aws-lambda-rie hello-world:latest <image entrypoint> \
          <(optional) image command>
    ```
 

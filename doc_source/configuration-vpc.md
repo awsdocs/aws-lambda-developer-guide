@@ -2,11 +2,11 @@
 
 You can configure a Lambda function to connect to private subnets in a virtual private cloud \(VPC\) in your AWS account\. Use Amazon Virtual Private Cloud \(Amazon VPC\) to create a private network for resources such as databases, cache instances, or internal services\. Connect your function to the VPC to access private resources while the function is running\.
 
-When you connect a function to a VPC, Lambda creates an [elastic network interface](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ElasticNetworkInterfaces.html) for each subnet in your function's VPC configuration\. This process can take about a minute\.
+When you connect a function to a VPC, Lambda creates an [elastic network interface](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ElasticNetworkInterfaces.html) for each subnet in your function's VPC configuration\. This process can take several minutes\.
 
 While Lambda creates a network interface, you can't perform additional operations that target the function, such as [creating versions](configuration-versions.md) or updating the function's code\. For new functions, you can't invoke the function until its state changes from `Pending` to `Active`\. For existing functions, you can still invoke an earlier version while the update is in progress\. For more information about function states, see [Monitoring the state of a function with the Lambda API](functions-states.md)\.
 
-Multiple functions connected to the same subnets share network interfaces\. Connecting additional functions to a subnet that has an existing Lambda\-managed network interface is much quicker than having Lambda create additional network interfaces\. However, if you have many functions or functions with high network usage, Lambda might still create additional network interfaces\.
+Multiple functions can share a network interface, if the functions share the same subnet and security group\. Connecting additional functions to a subnet that has an existing Lambda\-managed network interface is much quicker than having Lambda create additional network interfaces\. However, if you have many functions or functions with high network usage, Lambda might still create additional network interfaces\.
 
 If your functions aren't active for a long period of time, Lambda reclaims its network interfaces, and the functions become `Idle`\. To reactivate an idle function, invoke it\. This invocation fails, and the function enters a `Pending` state again until a network interface is available\.
 

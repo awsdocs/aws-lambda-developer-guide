@@ -1,7 +1,7 @@
 # AWS Lambda Developer Guide
 
 -----
-*****Copyright &copy;  Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -70,8 +70,8 @@ Amazon's trademarks and trade dress may not be used in
    + [Runtime support for Lambda container images](runtimes-images.md)
    + [AWS Lambda runtime API](runtimes-api.md)
    + [Lambda Extensions API](runtimes-extensions-api.md)
+   + [Lambda Logs API](runtimes-logs-api.md)
    + [Modifying the runtime environment](runtimes-modify.md)
-   + [AWS Lambda Logs API](runtimes-logs-api.md)
    + [Custom AWS Lambda runtimes](runtimes-custom.md)
    + [Tutorial – Publishing a custom runtime](runtimes-walkthrough.md)
    + [Using AVX2 vectorization in Lambda](runtimes-avx2.md)
@@ -112,6 +112,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Using Amazon EFS with Lambda](services-efs.md)
    + [Using AWS Lambda with AWS IoT](services-iot.md)
    + [Using AWS Lambda with AWS IoT Events](services-iotevents.md)
+   + [Using Lambda with an Apache Kafka cluster](with-kafka.md)
    + [Using AWS Lambda with Amazon Kinesis Data Firehose](services-kinesisfirehose.md)
    + [Using AWS Lambda with Amazon Kinesis](with-kinesis.md)
       + [Tutorial: Using AWS Lambda with Amazon Kinesis](with-kinesis-example.md)
@@ -119,6 +120,7 @@ Amazon's trademarks and trade dress may not be used in
       + [AWS SAM template for a Kinesis application](with-kinesis-example-use-app-spec.md)
    + [Using AWS Lambda with Amazon Lex](services-lex.md)
    + [Using Lambda with Amazon MQ](with-mq.md)
+   + [Using Lambda with Amazon MSK](with-msk.md)
    + [Using AWS Lambda with Amazon RDS](services-rds.md)
       + [Tutorial: Configuring a Lambda function to access Amazon RDS in an Amazon VPC](services-rds-tutorial.md)
    + [Using AWS Lambda with Amazon S3](with-s3.md)
@@ -139,15 +141,6 @@ Amazon's trademarks and trade dress may not be used in
    + [State machine application patterns](stepfunctions-patterns.md)
    + [Managing state machines in the Lambda console](stepfunctions-lc.md)
    + [Orchestration examples with Step Functions](services-stepfunctions.md)
-+ [Using Lambda with an Apache Kafka cluster](lambda-kafka.md)
-   + [Hosting an Apache Kafka cluster](kafka-hosting.md)
-   + [Using an Apache Kafka cluster as an event source for Lambda](kafka-using-cluster.md)
-   + [Using Lambda with Amazon MSK](with-msk.md)
-      + [Managing access and permissions for an Amazon MSK cluster](msk-permissions.md)
-      + [Adding an Amazon MSK cluster as an event source](services-msk-topic-add.md)
-   + [Using Lambda with self-managed Apache Kafka](kafka-smaa.md)
-      + [Managing access and permissions for a self-managed Apache Kafka cluster](smaa-permissions.md)
-      + [Adding a self-managed Apache Kafka cluster as an event source](services-smaa-topic-add.md)
 + [Lambda sample applications](lambda-samples.md)
    + [Blank function sample application for AWS Lambda](samples-blank.md)
    + [Error processor sample application for AWS Lambda](samples-errorprocessor.md)

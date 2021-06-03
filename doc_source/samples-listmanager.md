@@ -98,7 +98,7 @@ The application uses [AWS X\-Ray](services-xray.md) to trace function invocation
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/listmanager-servicemap.png)
 
-The Node\.js function is configured for active tracing in the template, and is instrumented with the AWS X\-Ray SDK for Node\.js in code\. The X\-Ray SDK records a subsegment for each call made with anAWS SDK or MySQL client\.
+The Node\.js function is configured for active tracing in the template, and is instrumented with the AWS X\-Ray SDK for Node\.js in code\. The X\-Ray SDK records a subsegment for each call made with an AWS SDK or MySQL client\.
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/listmanager-trace.png)
 

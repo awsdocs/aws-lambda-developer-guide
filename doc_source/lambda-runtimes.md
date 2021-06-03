@@ -21,9 +21,9 @@ A runtime can support a single version of a language, multiple versions of a lan
 
 | Name | Identifier | SDK for JavaScript | Operating system | 
 | --- | --- | --- | --- | 
-|  Node\.js 14  |  `nodejs14.x`  |  2\.804\.0  |  Amazon Linux 2  | 
-|  Node\.js 12  |  `nodejs12.x`  |  2\.804\.0  |  Amazon Linux 2  | 
-|  Node\.js 10  |  `nodejs10.x`  |  2\.804\.0  |  Amazon Linux 2  | 
+|  Node\.js 14  |  `nodejs14.x`  |  2\.880\.0  |  Amazon Linux 2  | 
+|  Node\.js 12  |  `nodejs12.x`  |  2\.880\.0  |  Amazon Linux 2  | 
+|  Node\.js 10  |  `nodejs10.x`  |  2\.880\.0  |  Amazon Linux 2  | 
 
 **Note**  
 For end of support information about Node\.js 10, see [Runtime support policy](runtime-support-policy.md)\.
@@ -33,10 +33,10 @@ For end of support information about Node\.js 10, see [Runtime support policy](r
 
 | Name | Identifier | AWS SDK for Python | Operating system | 
 | --- | --- | --- | --- | 
-|  Python 3\.8  |  `python3.8`  |  boto3\-1\.16\.31 botocore\-1\.19\.31  |  Amazon Linux 2  | 
-|  Python 3\.7  |  `python3.7`  |  boto3\-1\.16\.31 botocore\-1\.19\.31  |  Amazon Linux  | 
-|  Python 3\.6  |  `python3.6`  |  boto3\-1\.16\.31 botocore\-1\.19\.32  |  Amazon Linux  | 
-|  Python 2\.7  |  `python2.7`  |  boto3\-1\.16\.31 botocore\-1\.19\.32  |  Amazon Linux  | 
+|  Python 3\.8  |  `python3.8`  |  boto3\-1\.17\.42 botocore\-1\.20\.42  |  Amazon Linux 2  | 
+|  Python 3\.7  |  `python3.7`  |  boto3\-1\.17\.42 botocore\-1\.20\.42  |  Amazon Linux  | 
+|  Python 3\.6  |  `python3.6`  |  boto3\-1\.17\.42 botocore\-1\.20\.42  |  Amazon Linux  | 
+|  Python 2\.7  |  `python2.7`  |  boto3\-1\.17\.42 botocore\-1\.20\.42  |  Amazon Linux  | 
 
 **Important**  
 Python 2\.7 reached end of life on January 1, 2020\. End of support \(phase 1\) for the Python 2\.7 runtime starts on July 15, 2021\. For more information, see [Announcing end of support for Python 2\.7 in AWS Lambda](http://aws.amazon.com/blogs/compute/announcing-end-of-support-for-python-2-7-in-aws-lambda/) on the AWS Compute Blog\.
@@ -76,6 +76,9 @@ For end of support information about Ruby 2\.5, see [Runtime support policy](run
 |  \.NET Core 3\.1  |  `dotnetcore3.1`  |  Amazon Linux 2  | 
 |  \.NET Core 2\.1  |  `dotnetcore2.1`  |  Amazon Linux  | 
 
+**Note**  
+For end of support information about \.NET Core 2\.1, see [Runtime support policy](runtime-support-policy.md)\.
+
 To use other languages in Lambda, you can implement a [custom runtime](runtimes-custom.md)\. The Lambda execution environment provides a [runtime interface](runtimes-api.md) for getting invocation events and sending responses\. You can deploy a custom runtime alongside your function code, or in a [layer](configuration-layers.md)\.
 
 
@@ -92,8 +95,8 @@ To use other languages in Lambda, you can implement a [custom runtime](runtimes-
 + [Runtime support for Lambda container images](runtimes-images.md)
 + [AWS Lambda runtime API](runtimes-api.md)
 + [Lambda Extensions API](runtimes-extensions-api.md)
++ [Lambda Logs API](runtimes-logs-api.md)
 + [Modifying the runtime environment](runtimes-modify.md)
-+ [AWS Lambda Logs API](runtimes-logs-api.md)
 + [Custom AWS Lambda runtimes](runtimes-custom.md)
 + [Tutorial – Publishing a custom runtime](runtimes-walkthrough.md)
 + [Using AVX2 vectorization in Lambda](runtimes-avx2.md)

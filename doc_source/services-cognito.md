@@ -1,6 +1,6 @@
 # Using AWS Lambda with Amazon Cognito<a name="services-cognito"></a>
 
-The Amazon Cognito Events feature enables you to run Lambda functions in response to events in Amazon Cognito\. For example, you can invoke a Lambda function for the Sync Trigger events, that is published each time a dataset is synchronized\. To learn more and walk through an example, see [Introducing Amazon Cognito Events: Sync Triggers](https://aws.amazon.com/blogs/mobile/introducing-amazon-cognito-events-sync-triggers/) in the Mobile Development blog\. 
+The Amazon Cognito Events feature enables you to run Lambda functions in response to events in Amazon Cognito\. For example, you can invoke a Lambda function for the Sync Trigger events, that is published each time a dataset is synchronized\. To learn more and walk through an example, see [Introducing Amazon Cognito Events: Sync Triggers](http://aws.amazon.com/blogs/mobile/introducing-amazon-cognito-events-sync-triggers/) in the Mobile Development blog\. 
 
 **Example Amazon Cognito message event**  
 

@@ -9,7 +9,6 @@ When the event occurs, AWS IoT Events invokes your Lambda function asynchronousl
 **Example AWS IoT Events message event**  
 
 ```
- 
 {
   "event: ":{
     "eventName": "myChargedEvent",
@@ -17,7 +16,7 @@ When the event occurs, AWS IoT Events invokes your Lambda function asynchronousl
     "payload":{
       "detector":{
          "detectorModelName": "AWS_IoTEvents_Hello_World1567793458261",
-         "detectorModelVersion": "4", 
+         "detectorModelVersion": "4",
          "keyValue": "100009"
       },
       "eventTriggerDetails":{

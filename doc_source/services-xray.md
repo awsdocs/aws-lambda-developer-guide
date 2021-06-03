@@ -29,7 +29,13 @@ Your function needs permission to upload trace data to X\-Ray\. When you enable 
 
 X\-Ray applies a sampling algorithm to ensure that tracing is efficient, while still providing a representative sample of the requests that your application serves\. The default sampling rule is 1 request per second and 5 percent of additional requests\. This sampling rate cannot be configured for Lambda functions\.
 
-In X\-Ray, a *trace* records information about a request that is processed by one or more *services*\. Services record *segments* that contain layers of *subsegments*\. Lambda records a segment for the Lambda service that handles the invocation request, and one for the work done by the function\. The function segment comes with subsegments for `Initialization`, `Invocation` and `Overhead`\.
+In X\-Ray, a *trace* records information about a request that is processed by one or more *services*\. Services record *segments* that contain layers of *subsegments*\. Lambda records a segment for the Lambda service that handles the invocation request, and one for the work done by the function\. The function segment comes with subsegments for `Initialization`, `Invocation` and `Overhead`\. For more information see [ Lambda execution environment lifecycle](runtimes-context.md)\.
+
+The `Initialization` subsegment represents the init phase of the Lambda execution environment lifecycle\. During this phase, Lambda creates or unfreezes an execution environment with the resources you have configured, downloads the function code and all layers, initializes extensions, initializes the runtime, and runs the function's initialization code\.
+
+The `Invocation` subsegment represents the invoke phase where Lambda invokes the function handler\. This begins with runtime and extension registration and it ends when the runtime is ready to send the response\.
+
+The `Overhead` subsegment represents the phase that occurs between the time when the runtime sends the response and the signal for the next invoke\. During this time, the runtime finishes all tasks related to an invoke and prepares to freeze the sandbox\.
 
 The following example shows a trace with 2 segments\. Both are named **my\-function**, but one is type `AWS::Lambda` and the other is `AWS::Lambda::Function`\. The function segment is expanded to show its subsegments\.
 
@@ -74,7 +80,7 @@ For more information, see [The X\-Ray daemon](https://docs.aws.amazon.com/xray/l
 
 ## Enabling active tracing with the Lambda API<a name="services-xray-api"></a>
 
-To manage tracing configuration with the AWS CLI orAWS SDK, use the following API operations:
+To manage tracing configuration with the AWS CLI or AWS SDK, use the following API operations:
 + [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)
 + [GetFunctionConfiguration](API_GetFunctionConfiguration.md)
 + [CreateFunction](API_CreateFunction.md)

@@ -83,7 +83,7 @@ A Lambda *layer* is a \.zip file archive that can contain additional code or oth
 
 Layers provide a convenient way to package libraries and other dependencies that you can use with your Lambda functions\. Using layers reduces the size of uploaded deployment archives and makes it faster to deploy your code\. Layers also promote code sharing and separation of responsibilities so that you can iterate faster on writing business logic\.
 
-You can include up to five layers per function\. Layers count towards the standard Lambda [deployment size quotas](https://docs.amazonaws.cn/en_us/lambda/latest/dg/gettingstarted-limits.html)\. When you include a layer in a function, the contents are extracted to the `/opt` directory in the execution environment\.
+You can include up to five layers per function\. Layers count towards the standard Lambda [deployment size quotas](gettingstarted-limits.md)\. When you include a layer in a function, the contents are extracted to the `/opt` directory in the execution environment\.
 
 By default, the layers that you create are private to your AWS account\. You can choose to share a layer with other accounts or to make the layer public\. If your functions consume a layer that a different account published, your functions can continue to use the layer version after it has been deleted, or after your permission to access the layer is revoked\. However, you cannot create a new function or update functions using a deleted layer version\.
 

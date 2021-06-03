@@ -2,7 +2,7 @@
 
 The first time you invoke your function, AWS Lambda creates an instance of the function and runs its handler method to process the event\. When the function returns a response, it stays active and waits to process additional events\. If you invoke the function again while the first event is being processed, Lambda initializes another instance, and the function processes the two events concurrently\. As more events come in, Lambda routes them to available instances and creates new instances as needed\. When the number of requests decreases, Lambda stops unused instances to free up scaling capacity for other functions\.
 
- Your functions' *concurrency* is the number of instances that serve requests at a given time\. For an initial burst of traffic, your functions' cumulative concurrency in a Region can reach an initial level of between 500 and 3000, which varies per Region\.
+ Your functions' *concurrency* is the number of instances that serve requests at a given time\. For an initial burst of traffic, your functions' cumulative concurrency in a Region can reach an initial level of between 500 and 3000, which varies per Region\. Note that the burst concurrency quota is not per\-function; it applies to all of your functions in the Region\.
 
 **Burst concurrency quotas**
 + **3000** – US West \(Oregon\), US East \(N\. Virginia\), Europe \(Ireland\)

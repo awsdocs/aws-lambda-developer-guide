@@ -35,19 +35,19 @@ You can create a function alias using the Lambda console\.
 
 ## Managing aliases with the Lambda API<a name="versioning-aliases-api"></a>
 
-To create an alias using the AWS Command Line Interface \(AWS CLI\), use the [https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/create-alias.html](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/create-alias.html) command\.
+To create an alias using the AWS Command Line Interface \(AWS CLI\), use the [https://docs.aws.amazon.com/cli/latest/reference/lambda/create-alias.html](https://docs.aws.amazon.com/cli/latest/reference/lambda/create-alias.html) command\.
 
 ```
 aws lambda create-alias --function-name my-function --name alias-name --function-version version-number --description " "
 ```
 
-To change an alias to point a new version of the function, use the [https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/update-alias.html](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/update-alias.html) command\.
+To change an alias to point a new version of the function, use the [https://docs.aws.amazon.com/cli/latest/reference/lambda/update-alias.html](https://docs.aws.amazon.com/cli/latest/reference/lambda/update-alias.html) command\.
 
 ```
 aws lambda update-alias --function-name my-function --name alias-name --function-version version-number 
 ```
 
-To delete an alias, use the [https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/delete-alias.html](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/delete-alias.html) command\.
+To delete an alias, use the [https://docs.aws.amazon.com/cli/latest/reference/lambda/delete-alias.html](https://docs.aws.amazon.com/cli/latest/reference/lambda/delete-alias.html) command\.
 
 ```
 aws lambda delete-alias --function-name my-function --name alias-name 

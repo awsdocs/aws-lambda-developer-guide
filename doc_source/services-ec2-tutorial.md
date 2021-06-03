@@ -73,7 +73,7 @@ using Amazon.EC2;
 
         public async Task<string> FunctionHandler(Dictionary<string, string> input, ILambdaContext context)
         {
-          // More AMI IDs: [aws\.amazon\.com/amazon\-linux\-2/release\-notes/](https://aws.amazon.com/amazon-linux-2/release-notes/)
+          // More AMI IDs: [amazon\-linux\-2/release\-notes/](http://aws.amazon.com/amazon-linux-2/release-notes/)
           // us-east-2  HVM  EBS-Backed  64-bit  Amazon Linux 2
           string ami = "ami-09d9edae5eb90d556";
           string sg = "default";

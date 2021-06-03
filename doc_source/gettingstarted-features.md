@@ -95,7 +95,7 @@ For more information, see [Configuring destinations for asynchronous invocation]
 
 When you create a function in the Lambda console, you can choose to start from scratch, use a blueprint, use a [container image](gettingstarted-package.md#gettingstarted-package-images), or deploy an application from the [AWS Serverless Application Repository](https://docs.aws.amazon.com/serverlessrepo/latest/devguide/what-is-serverlessrepo.html)\. A blueprint provides sample code that shows how to use Lambda with an AWS service or a popular third\-party application\. Blueprints include sample code and function configuration presets for Node\.js and Python runtimes\.
 
-Blueprints are provided for use under the [Amazon Software License](https://aws.amazon.com/asl/)\. They are available only in the Lambda console\.
+Blueprints are provided for use under the [Amazon Software License](http://aws.amazon.com/asl/)\. They are available only in the Lambda console\.
 
 ## Testing and deployment tools<a name="gettingstarted-features-tools"></a>
 

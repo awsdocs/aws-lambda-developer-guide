@@ -75,6 +75,7 @@ exports.handler = async (event) => {
   var query = event.query
   var result
   connection.connect()
+}
 ```
 
 For more information, see [IAM database authentication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html) in the Amazon RDS User Guide\.

@@ -8,6 +8,8 @@ You can also use an alternative base image from another container registry\. Lam
 
 For example applications, including a Node\.js example and a Python example, see [Container image support for Lambda](http://aws.amazon.com/blogs/aws/new-for-aws-lambda-container-image-support/) on the AWS Blog\.
 
+After you create a container image in the Amazon ECR container registry, you can [create and run](configuration-images.md) the Lambda function\.
+
 **Topics**
 + [Image types](#images-types)
 + [Container tools](#images-tools)
@@ -83,7 +85,7 @@ AWS periodically provides updates to the AWS base images for Lambda\. If your Do
 
 1. On your local machine, create a project directory for your new function\.
 
-1. Create an app directory in the project directory, and then add your function handler code to the app directory\.
+1. Create a directory named **app** in in the project directory, and then add your function handler code to the app directory\.
 
 1. Use a text editor to create a new Dockerfile\.
 
@@ -91,13 +93,14 @@ AWS periodically provides updates to the AWS base images for Lambda\. If your Do
    + LAMBDA\_TASK\_ROOT=/var/task
    + LAMBDA\_RUNTIME\_DIR=/var/runtime
 
-   The following shows an example Dockerfile for Node\.js version 12\. :
+   The following shows an example Dockerfile for Node\.js version 14\. :
 
    ```
-   FROM public.ecr.aws/lambda/nodejs:12
+   FROM public.ecr.aws/lambda/nodejs:14
    # Alternatively, you can pull the base image from Docker Hub: amazon/aws-lambda-nodejs:12
    
-   COPY app.js package.json /var/task/
+   # Assumes your function is named "app.js", and there is a package.json file in the app directory.
+   COPY app.js package.json  /var/task/
    
    # Install NPM dependencies for function
    RUN npm install
@@ -110,6 +113,12 @@ AWS periodically provides updates to the AWS base images for Lambda\. If your Do
 
    ```
    docker build -t hello-world .   
+   ```
+
+1. Start the Docker image with the `docker run` command\. For this example, enter `hello-world` as the image name\.
+
+   ```
+   docker run -p 9000:8080 hello-world 
    ```
 
 1. \(Optional\) Test your application locally using the [runtime interface emulator](images-test.md)\. From a new terminal window, post an event to the following endpoint using a `curl` command:
@@ -126,12 +135,20 @@ AWS periodically provides updates to the AWS base images for Lambda\. If your Do
    aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 123456789012.dkr.ecr.us-east-1.amazonaws.com    
    ```
 
+1. Create a repository in Amazon ECR using the `create-repository` command\.
+
+   ```
+   aws ecr create-repository --repository-name hello-world --image-scanning-configuration scanOnPush=true --image-tag-mutability MUTABLE
+   ```
+
 1. Tag your image to match your repository name, and deploy the image to Amazon ECR using the `docker push` command\. 
 
    ```
    docker tag  hello-world:latest 123456789012.dkr.ecr.us-east-1.amazonaws.com/hello-world:latest
    docker push 123456789012.dkr.ecr.us-east-1.amazonaws.com/hello-world:latest
    ```
+
+Now that your container image resides in the Amazon ECR container registry, you can [create and run](configuration-images.md) the Lambda function\.
 
 ## Create an image from an alternative base image<a name="images-create-2"></a>
 
@@ -146,7 +163,7 @@ AWS periodically provides updates to the AWS base images for Lambda\. If your Do
 
 1. On your local machine, create a project directory for your new function\.
 
-1. Create an app directory in the project directory, and then add your function handler code to the app directory\.
+1. Create a directory named **app** in the project directory, and then add your function handler code to the app directory\.
 
 1. Use a text editor to create a new Dockerfile with the following configuration:
    + Set the `FROM` property to the URI of the base image\.
@@ -213,12 +230,20 @@ AWS periodically provides updates to the AWS base images for Lambda\. If your Do
    aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 123456789012.dkr.ecr.us-east-1.amazonaws.com    
    ```
 
+1. Create a repository in Amazon ECR using the `create-repository` command\.
+
+   ```
+   aws ecr create-repository --repository-name hello-world --image-scanning-configuration scanOnPush=true --image-tag-mutability MUTABLE
+   ```
+
 1. Tag your image to match your repository name, and deploy the image to Amazon ECR using the `docker push` command\. 
 
    ```
    docker tag  hello-world:latest 123456789012.dkr.ecr.us-east-1.amazonaws.com/hello-world:latest
    docker push 123456789012.dkr.ecr.us-east-1.amazonaws.com/hello-world:latest
    ```
+
+Now that your container image resides in the Amazon ECR container registry, you can [create and run](configuration-images.md) the Lambda function\.
 
 ## Create an image using the AWS SAM toolkit<a name="images-create-sam"></a>
 

@@ -14,6 +14,14 @@ You can invoke your Lambda functions using the Lambda API, or Lambda can run you
 
 Lambda is a highly available service\. For more information, see the [AWS Lambda Service Level Agreement](http://aws.amazon.com/lambda/sla/)\.
 
+**Topics**
++ [When should I use Lambda?](#when-to-use-cloud-functions)
++ [Lambda features](#features)
++ [Getting started with Lambda](#welcome-first-time-user)
++ [Related services](#related-services)
++ [Accessing Lambda](#accessing)
++ [Pricing for Lambda](#pricing)
+
 ## When should I use Lambda?<a name="when-to-use-cloud-functions"></a>
 
 Lambda is an ideal compute service for many application scenarios, as long as you can run your application code using the Lambda [standard runtime environment](runtimes-context.md) and within the resources that Lambda provides\.
@@ -28,8 +36,8 @@ If you need to manage your own compute resources, AWS has other compute services
 
 The following key features help you develop Lambda applications that are scalable, secure, and easily extensible:
 
-**Concurrency controls**  
-[Concurrency limits and provisioned concurrency](invocation-scaling.md) give you fine\-grained control over the scaling and responsiveness of your production applications\.
+**Concurrency and scaling controls**  
+[Concurrency and scaling controls](invocation-scaling.md) such as concurrency limits and provisioned concurrency give you fine\-grained control over the scaling and responsiveness of your production applications\.
 
 **Functions defined as container images**  
 Use your preferred [container image](lambda-images.md) tooling, workflows, and dependencies to build, test, and deploy your Lambda functions\.
@@ -76,7 +84,7 @@ If you are a first\-time user of Lambda, we recommend that you start with the fo
 
 [Lambda integrates with other AWS services](lambda-services.md) to invoke functions based on events that you specify\. For example:
 + Use [API Gateway](services-apigateway.md) to provide a secure and scalable gateway for web APIs that route HTTP requests to Lambda functions\.
-+ For services that generate a queue or data stream \(such as [DynamoDB](with-ddb.md) and [Kinesis](with-kinesis.md)\), have Lambda read data from the services, create an event, and invoke your function to process the event\.
++ For services that generate a queue or data stream \(such as [DynamoDB](with-ddb.md) and [Kinesis](with-kinesis.md)\), Lambda polls the queue or data stream from the service and invokes your function to process the received data\.
 + Define [Amazon S3](with-s3.md) events that invoke a Lambda function to process Amazon S3 objects, for example, when an object is created or deleted\.
 + Use a Lambda function to process [Amazon SQS](with-sqs.md) messages or [Amazon Simple Notification Service \(Amazon SNS\)](with-sns.md) notifications\.
 + Use [AWS Step Functions](lambda-stepfunctions.md) to connect Lambda functions together into serverless workflows called state machines\.
@@ -87,7 +95,7 @@ You can create, invoke, and manage your Lambda functions using any of the follow
 +  **AWS Management Console** – Provides a web interface for you to access your functions\. For more information, see [Configuring functions in the console](configuration-console.md)\.
 +  **AWS Command Line Interface \(AWS CLI\)** – Provides commands for a broad set of AWS services, including Lambda, and is supported on Windows, macOS, and Linux\. For more information, see [Using AWS Lambda with the AWS Command Line Interface](gettingstarted-awscli.md)\.
 + **AWS SDKs** – Provide language\-specific APIs and manage many of the connection details, such as signature calculation, request retry handling, and error handling\. For more information, see [AWS SDKs](http://aws.amazon.com/tools/#SDKs)\.
-+  **AWS CloudFormation** – Enables you to create templates that define your Lambda applications\. For more information, see [AWS Lambda applications](deploying-lambda-apps.md)\. AWS CloudFormation also supports the [AWS Cloud Development Kit \(AWS CDK\)](http://aws.amazon.com/cdk)\.
++  **AWS CloudFormation** – Enables you to create templates that define your Lambda applications\. For more information, see [AWS Lambda applications](deploying-lambda-apps.md)\. AWS CloudFormation also supports the [AWS Cloud Development Kit \(CDK\)](http://aws.amazon.com/cdk)\.
 +  **AWS Serverless Application Model \(AWS SAM\)** – Provides templates and a CLI to configure and manage AWS serverless applications\. For more information, see [AWS SAM](lambda-settingup.md#lambda-settingup-awssam)\.
 
 

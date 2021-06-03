@@ -23,7 +23,7 @@ Your Lambda function's [execution role](lambda-intro-execution-role.md) is an AW
 
 **To create the execution role**
 
-1. Open a command prompt and use the [create\-role](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/iam/create-role.html) command to create an execution role named `lambda-ex`\.
+1. Open a command prompt and use the [create\-role](https://docs.aws.amazon.com/cli/latest/reference/iam/create-role.html) command to create an execution role named `lambda-ex`\.
 
 ------
 #### [ macOS/Linux ]
@@ -67,7 +67,7 @@ Your Lambda function's [execution role](lambda-intro-execution-role.md) is an AW
        }
    ```
 
-1. Use the [attach\-role\-policy](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/iam/attach-role-policy.html) command to add `AWSLambdaBasicExecutionRole` permissions to the role\.
+1. Use the [attach\-role\-policy](https://docs.aws.amazon.com/cli/latest/reference/iam/attach-role-policy.html) command to add `AWSLambdaBasicExecutionRole` permissions to the role\.
 
    ```
    $ aws iam attach-role-policy --role-name lambda-ex --policy-arn arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
@@ -184,7 +184,7 @@ Create the Lambda function using the execution role and deployment package that 
 Invoke the Lambda function [synchronously](invocation-sync.md) using the event input defined for the sample code\. For more information, see [How it works](python-handler.md#python-handler-how) in **AWS Lambda function handler in Python**\.
 
 **To invoke the function**
-+ Use the [invoke](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/invoke.html) command\.
++ Use the [invoke](https://docs.aws.amazon.com/cli/latest/reference/lambda/invoke.html) command\.
 
   ```
   aws lambda invoke --function-name my-math-function --payload '{"action": "square","number": 3}' output.txt
@@ -223,7 +223,7 @@ If you are using AWS CLI version 2, add the following command parameter:
 You can now delete the resources that you created for this tutorial, unless you want to retain them\. By deleting AWS resources that you're no longer using, you prevent unnecessary charges to your AWS account\.
 
 **To delete the Lambda function**
-+ Use the [delete\-function](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/delete-function.html) command\.
++ Use the [delete\-function](https://docs.aws.amazon.com/cli/latest/reference/lambda/delete-function.html) command\.
 
   ```
   aws lambda delete-function --function-name my-function
@@ -232,14 +232,14 @@ You can now delete the resources that you created for this tutorial, unless you 
   This command produces no output\.
 
 **To delete the execution role policy**
-+ Use the [delete\-policy](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/iam/delete-policy.html) command\.
++ Use the [delete\-policy](https://docs.aws.amazon.com/cli/latest/reference/iam/delete-policy.html) command\.
 
   ```
   aws iam delete-role-policy --role-name lambda-ex --policy-name AWSLambdaBasicExecutionRole
   ```
 
 **To delete the execution role**
-+ Use the [delete\-role](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/iam/delete-role.html) command\.
++ Use the [delete\-role](https://docs.aws.amazon.com/cli/latest/reference/iam/delete-role.html) command\.
 
   ```
   aws iam delete-role --role-name lambda-ex
@@ -255,7 +255,7 @@ This section describes how to create a Lambda function with runtime dependencies
 
 ### Overview<a name="python-package-create-about"></a>
 
-In this tutorial, you use sample code to create a Lambda function using the AWS CLI\. The sample code uses the requests library to get the source code for [https://docs\.aws\.amazon\.com/](https://docs.aws.amazon.com/)\. The requests library is not included with the `python3.8` [runtime](lambda-runtimes.md), so you install it to a `package` directory\.
+In this tutorial, you use sample code to create a Lambda function using the AWS CLI\. The sample code uses the requests library to get the source code for [https://www\.test\.com/](https://www.test.com/)\. The requests library is not included with the `python3.8` [runtime](lambda-runtimes.md), so you install it to a `package` directory\.
 
 You'll learn how to:
 + Set up the directory structure of a deployment package \(\.zip file\)\.
@@ -288,7 +288,7 @@ Create the \.zip file that Lambda uses as your deployment package\.
    ```
    import requests
    def main(event, context):   
-       response = requests.get("https://docs.aws.amazon.com")
+       response = requests.get("https://www.test.com/")
        print(response.text)
        return response.text
    if __name__ == "__main__":   
@@ -382,7 +382,7 @@ Create the Lambda function using the execution role and deployment package that 
 Invoke the Lambda function [synchronously](invocation-sync.md) using the event input defined for the sample code\. For more information, see [How it works](python-handler.md#python-handler-how) in **AWS Lambda function handler in Python**\.
 
 **To invoke the function**
-+ Use the [invoke](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/invoke.html) command\.
++ Use the [invoke](https://docs.aws.amazon.com/cli/latest/reference/lambda/invoke.html) command\.
 
 ------
 #### [ macOS/Linux ]
@@ -429,7 +429,7 @@ If you are using AWS CLI version 2, add the following command parameter:
 You can now delete the resources that you created for this tutorial, unless you want to retain them\. By deleting AWS resources that you're no longer using, you prevent unnecessary charges to your AWS account\.
 
 **To delete the Lambda function**
-+ Use the [delete\-function](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/delete-function.html) command\.
++ Use the [delete\-function](https://docs.aws.amazon.com/cli/latest/reference/lambda/delete-function.html) command\.
 
   ```
   aws lambda delete-function --function-name my-function
@@ -438,14 +438,14 @@ You can now delete the resources that you created for this tutorial, unless you 
   This command produces no output\.
 
 **To delete the execution role policy**
-+ Use the [delete\-policy](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/iam/delete-policy.html) command\.
++ Use the [delete\-policy](https://docs.aws.amazon.com/cli/latest/reference/iam/delete-policy.html) command\.
 
   ```
   aws iam delete-role-policy --role-name lambda-ex --policy-name AWSLambdaBasicExecutionRole
   ```
 
 **To delete the execution role**
-+ Use the [delete\-role](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/iam/delete-role.html) command\.
++ Use the [delete\-role](https://docs.aws.amazon.com/cli/latest/reference/iam/delete-role.html) command\.
 
   ```
   aws iam delete-role --role-name lambda-ex

@@ -1,12 +1,10 @@
 # Lambda Extensions API<a name="runtimes-extensions-api"></a>
 
-You use the Extensions API to create Lambda extensions\. Extensions provide a method for monitoring, security, and other tools to integrate with the Lambda [execution environment](runtimes-context.md)\. For more information, see [Introducing AWS Lambda Extensions](http://aws.amazon.com/blogs/compute/introducing-aws-lambda-extensions-in-preview/) on the AWS Compute Blog\.
+Lambda function authors use extensions to integrate Lambda with their preferred tools for monitoring, observability, security, and governance\. Function authors can use extensions from AWS, AWS Partners, and open\-source projects\. For more information on using extensions, see [Introducing AWS Lambda Extensions](http://aws.amazon.com/blogs/compute/introducing-aws-lambda-extensions-in-preview/) on the AWS Compute Blog\.
 
-The Extensions API builds on the existing [Runtime API](runtimes-api.md), which provides an HTTP API for custom runtimes to receive invocation events from Lambda\. As an extension author, you can use the Extensions API to register for function and execution environment lifecycle events\. In response to these events, you can start new processes or run logic\.
+As an extension author, you can use the Lambda Extensions API to integrate deeply into the Lambda [execution environment](runtimes-context.md)\. Your extension can register for function and execution environment lifecycle events\. In response to these events, you can start new processes, run logic, and control and participate in all phases of the Lambda lifecycle: initialization, invocation, and shutdown\. In addition, you can use the [Runtime Logs API](runtimes-logs-api.md) to receive a stream of logs\.
 
-Lambda supports internal and external extensions\. *Internal extensions* allow you to configure the runtime environment and modify the startup of the runtime process\. Internal extensions use language\-specific [environment variables and wrapper scripts](runtimes-modify.md), and start and shut down within the runtime process\. Internal extensions run as separate threads within the runtime process, which starts and stops them\.
-
-An *external extension* runs as an independent process in the execution environment and continues to run after the function invoke is fully processed\. An external extension must register for the `Shutdown` event, which triggers the extension to shut down\. Because external extensions run as processes, you can write them in a different language than the function\.
+An extension runs as an independent process in the execution environment and can continue to run after the function invocation is fully processed\. Because extensions run as processes, you can write them in a different language than the function\. We recommend that you implement extensions using a compiled language\. In this case, the extension is a self\-contained binary that is compatible with all of the supported runtimes\. If you use a non\-compiled language, ensure that you include a compatible runtime in the extension\.
 
 The following [Lambda runtimes](lambda-runtimes.md) support external extensions:
 + \.NET Core 3\.1 \(C\#/PowerShell\) \(`dotnetcore3.1`\)
@@ -22,18 +20,15 @@ The following [Lambda runtimes](lambda-runtimes.md) support external extensions:
 + Ruby 2\.7 \(`ruby2.7`\)
 + Ruby 2\.5 \(`ruby2.5`\)
 
-We recommend that you implement external extensions using a compiled language\. In this case, the extension is a self\-contained binary that is compatible with all of the supported runtimes\. If you use a non\-compiled language, ensure that you include a compatible runtime in the extension\.
+Lambda also supports *internal extensions*\. An internal extension runs as a separate thread in the runtime process\. The runtime starts and stops the internal extension\. An alternative way to integrate with the Lambda environment is to use language\-specific [environment variables and wrapper scripts](runtimes-modify.md)\. You can use these to configure the runtime environment and modify the startup behavior of the runtime process\.
 
-You share your extension as a [Lambda layer](configuration-layers.md) to make it available within your organization or to the entire community of Lambda developers\. Function developers can find, manage, and install extensions through layers\.
-
-You can install and manage extensions using the Lambda console, the AWS Command Line Interface \(AWS CLI\), or infrastructure as code \(IaC\) services and tools such as AWS CloudFormation, AWS Serverless Application Model \(AWS SAM\), and Terraform\.
+You can add extensions to a function in two ways\. For a function deployed as a [\.zip file archive](gettingstarted-package.md#gettingstarted-package-zip), you deploy your extension as a [layer](configuration-layers.md)\. For a function defined as a container image, you add [the extensions](using-extensions.md#invocation-extensions-images) to your container image\.
 
 **Note**  
 For example extensions and wrapper scripts, see [AWS Lambda Extensions](https://github.com/aws-samples/aws-lambda-extensions) on the AWS Samples GitHub repository\.
 
 **Topics**
 + [Lambda execution environment lifecycle](#runtimes-extensions-api-lifecycle)
-+ [Adding extensions to container images](#extensions-images)
 + [Extensions API reference](#runtimes-extensions-registration-api)
 
 ## Lambda execution environment lifecycle<a name="runtimes-extensions-api-lifecycle"></a>
@@ -43,9 +38,9 @@ The lifecycle of the execution environment includes the following phases:
 
   The `Init` phase is split into three sub\-phases: `Extension init`, `Runtime init`, and `Function init`\. These sub\-phases ensure that all extensions and the runtime complete their setup tasks before the function code runs\.
 + `Invoke`: In this phase, Lambda invokes the function handler\. After the function runs to completion, Lambda prepares to handle another function invocation\.
-+ `Shutdown`: This phase is triggered if the Lambda function does not receive any invocations for a period of time\. In the `Shutdown` phase, Lambda terminates the runtime, alerts the extensions to let them stop cleanly, and then removes the environment\. Lambda sends a `Shutdown` event to each extension, which tells the extension that the environment is about to be shut down\.
++ `Shutdown`: This phase is triggered if the Lambda function does not receive any invocations for a period of time\. In the `Shutdown` phase, Lambda shuts down the runtime, alerts the extensions to let them stop cleanly, and then removes the environment\. Lambda sends a `Shutdown` event to each extension, which tells the extension that the environment is about to be shut down\.
 
-Each phase starts with an event from the Lambda service to the runtime and to all registered extensions\. The runtime and each extension signal completion by sending a `Next` API request\. Lambda freezes the execution environment when each process has completed and there are no pending events\.
+Each phase starts with an event from Lambda to the runtime and to all registered extensions\. The runtime and each extension signal completion by sending a `Next` API request\. Lambda freezes the execution environment when each process has completed and there are no pending events\.
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/Overview-Full-Sequence.png)
 
@@ -78,7 +73,9 @@ Extensions can complete their initialization at any point in the `Init` phase\.
 
 When a Lambda function is invoked in response to a `Next` API request, Lambda sends an `Invoke` event to the runtime and to each extension that is registered for the `Invoke` event\.
 
-During the invocation, external extensions run in parallel with the function\. They also continue running after the function has completed\. This enables you to capture diagnostic information or send logs, metrics, and traces to a location of your choice\.
+During the invocation, external extensions run in parallel with the function\. They also continue running after the function has completed\. This enables you to capture diagnostic information or to send logs, metrics, and traces to a location of your choice\.
+
+After receiving the function response from the runtime, Lambda returns the response to the client, even if extensions are still running\.
 
 The `Invoke` phase ends after the runtime and all extensions signal that they are done by sending a `Next` API request\. 
 
@@ -103,9 +100,12 @@ Here is an example payload:
  }
 ```
 
-**Duration limit**: The function's [timeout setting](configuration-console.md) limits the duration of the entire `Invoke` phase\. For example, if you set the function timeout as 360 seconds, the function and all extensions need to complete within 360 seconds\. Note that there is no independent post\-invoke phase\. The duration is the sum of all invocation time \(runtime \+ extensions\) and is not calculated until the function and all extensions have finished executing\.
+**Duration limit**: The function's [timeout setting](configuration-console.md) limits the duration of the entire `Invoke` phase\. For example, if you set the function timeout as 360 seconds, the function and all extensions need to complete within 360 seconds\. Note that there is no independent post\-invoke phase\. The duration is the sum of all invocation time \(runtime \+ extensions\) and is not calculated until the function and all extensions have finished running\.
 
 **Performance impact and extension overhead**: Extensions can impact function performance\. As an extension author, you have control over the performance impact of your extension\. For example, if your extension performs compute\-intensive operations, the function's duration increases because the extension and the function code share the same CPU resources\. In addition, if your extension performs extensive operations after the function invocation completes, the function duration increases because the `Invoke` phase continues until all extensions signal that they are completed\.
+
+**Note**  
+Lambda allocates CPU power in proportion to the function's memory setting\. You might see increased execution and initialization duration at lower memory settings because the function and extension processes are competing for the same CPU resources\. To reduce the execution and initialization duration, try increasing the memory setting\.
 
 To help identify the performance impact introduced by extensions on the `Invoke` phase, Lambda outputs the `PostRuntimeExecutionDuration` metric\. This metric measures the cumulative time spent between the runtime `Next` API request and the last extension `Next` API request\. To measure the increase in memory used, use the `MaxMemoryUsed` metric\. For more information about function metrics, see [Working with AWS Lambda function metrics](monitoring-metrics.md)\.
 
@@ -113,7 +113,7 @@ Function developers can run different versions of their functions side by side t
 
 ### Shutdown phase<a name="runtimes-lifecycle-shutdown"></a>
 
-When Lambda is about to terminate the runtime, it sends a `Shutdown` event to the runtime and then to each registered external extension\. Extensions can use this time for final cleanup tasks\. The `Shutdown` event is sent in response to a `Next` API request\.
+When Lambda is about to shut down the runtime, it sends a `Shutdown` event to the runtime and then to each registered external extension\. Extensions can use this time for final cleanup tasks\. The `Shutdown` event is sent in response to a `Next` API request\.
 
 **Duration limit**: The maximum duration of the `Shutdown` phase depends on the configuration of registered extensions:
 + 300 ms – A function with no registered extensions
@@ -122,7 +122,7 @@ When Lambda is about to terminate the runtime, it sends a `Shutdown` event to th
 
 For a function with external extensions, Lambda reserves up to 300 ms \(500 ms for a runtime with an internal extension\) for the runtime process to perform a graceful shutdown\. Lambda allocates the remainder of the 2,000 ms limit for external extensions to shut down\.
 
-If the runtime or an extension does not respond to the `Shutdown` event within the limit, Lambda terminates the process using a `SIGKILL` signal\.
+If the runtime or an extension does not respond to the `Shutdown` event within the limit, Lambda ends the process using a `SIGKILL` signal\.
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/Shutdown-Phase.png)
 
@@ -145,7 +145,7 @@ If the runtime or an extension does not respond to the `Shutdown` event within t
 
 Extensions run in the same execution environment as the Lambda function\. Extensions also share resources with the function, such as CPU, memory, and `/tmp` disk storage\. In addition, extensions use the same AWS Identity and Access Management \(IAM\) role and security context as the function\.
 
-**File system and network access permissions**: Extensions run in the same file system and network name namespace as the function runtime\. This means that extensions need to be compatible with the associated operating system\. If an extension requires any additional network egress rules, you must apply these rules to the function configuration\.
+**File system and network access permissions**: Extensions run in the same file system and network name namespace as the function runtime\. This means that extensions need to be compatible with the associated operating system\. If an extension requires any additional outbound network traffic rules, you must apply these rules to the function configuration\.
 
 **Note**  
 Because the function code directory is read\-only, extensions cannot modify the function code\.
@@ -172,20 +172,11 @@ If there is a failure \(such as a function timeout or runtime error\) during `In
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/Overview-Invoke-with-Error.png)
 
-**Note**  
-Lambda does not automatically shut down extensions that repeatedly fail\. However, Lambda reports these errors through Amazon CloudWatch metrics and logs so that function developers and extension authors can understand and diagnose such failures\.
-
 **Extension logs**: Lambda sends the log output of extensions to CloudWatch Logs\. Lambda also generates an additional log event for each extension during `Init`\. The log event records the name and registration preference \(event, config\) on success, or the failure reason on failure\.
 
 ### Troubleshooting extensions<a name="runtimes-extensions-api-trbl"></a>
 + If a `Register` request fails, make sure that the `Lambda-Extension-Name` header in the `Register` API call contains the full file name of the extension\.
 + If the `Register` request fails for an internal extension, make sure that the request does not register for the `Shutdown` event\.
-
-## Adding extensions to container images<a name="extensions-images"></a>
-
-You can add extensions to your [container image](lambda-images.md)\. The ENTRYPOINT [container image setting](images-create.md#images-parms) specifies the main process for the container\. Configure the ENTRYPOINT and CMD settings in the Dockerfile, or as an override in the function configuration\. 
-
-You can run multiple processes within a container\. Lambda provides a built\-in server that manages the lifecycle of the main process and any additional processes\. The server uses the Extensions API to communicate with each external extension\.
 
 ## Extensions API reference<a name="runtimes-extensions-registration-api"></a>
 
@@ -194,7 +185,7 @@ The OpenAPI specification for the extensions API version **2020\-01\-01** is ava
 You can retrieve the value of the API endpoint from the `AWS_LAMBDA_RUNTIME_API` environment variable\. To send a `Register` request, use the prefix `2020-01-01/` before each API path\. For example:
 
 ```
-http://${AWS_LAMBDA_RUNTIME_API}/2020-01-01/extension/register
+http://${AWS_LAMBDA_RUNTIME_API}/2020-01-01/extension/register 
 ```
 
 **Topics**
@@ -274,7 +265,7 @@ Do not set a timeout on the GET call, as the extension can be suspended for a pe
 
 ### Init error<a name="runtimes-extensions-init-error"></a>
 
-The extension uses this method to report an initialization error to Lambda\. Call it when the extension fails to initialize after it has registered\. After Lambda receives the error, no further API calls succeed\. The extension should exit\.
+The extension uses this method to report an initialization error to Lambda\. Call it when the extension fails to initialize after it has registered\. After Lambda receives the error, no further API calls succeed\. The extension should exit after it receives the response from Lambda\.
 
 **Path** – `/extension/init/error`
 
@@ -284,11 +275,41 @@ The extension uses this method to report an initialization error to Lambda\. Cal
 
 `Lambda-Extension-Identifier` – Unique identifier for extension\. Required: yes\. Type: UUID string\.
 
-`Lambda-Extension-Function-Error-Type` – Error enum\. Required: yes\. Type: String error enum \(for example, Fatal\.ConnectFailed\)\.
+`Lambda-Extension-Function-Error-Type` – Error type that the extension encountered\. Required: yes\.
+
+This header consists of a string value\. Lambda accepts any string, but we recommend a format of <category\.reason>\. For example:
++ Runtime\.NoSuchHandler
++ Extension\.APIKeyNotFound
++ Extension\.ConfigInvalid
++ Extension\.UnknownReason
 
 **Body parameters**
 
-`ErrorRequest` – JSON object with the error type, error message, and stack trace\.
+`ErrorRequest` – Information about the error\. Required: no\. 
+
+This field is a JSON object with the following structure:
+
+```
+{
+      errorMessage: string (text description of the error),
+      errorType: string,
+      stackTrace: array of strings
+}
+```
+
+Note that Lambda accepts any value for `errorType`\.
+
+The following example shows a Lambda function error message in which the function could not parse the event data provided in the invocation\.
+
+**Example Function error**  
+
+```
+{
+      "errorMessage" : "Error parsing event data.",
+      "errorType" : "InvalidEventDataException",
+      "stackTrace": [ ]
+}
+```
 
 **Response body**
 + `Lambda-Extension-Identifier` – Unique agent identifier \(UUID string\)\.
@@ -301,7 +322,7 @@ The extension uses this method to report an initialization error to Lambda\. Cal
 
 ### Exit error<a name="runtimes-extensions-exit-error"></a>
 
-The extension uses this method to report an error to Lambda before exiting\. Call it when you encounter an unexpected failure\. After Lambda receives the error, no further API calls succeed\. The extension should exit\.
+The extension uses this method to report an error to Lambda before exiting\. Call it when you encounter an unexpected failure\. After Lambda receives the error, no further API calls succeed\. The extension should exit after it receives the response from Lambda\.
 
 **Path** – `/extension/exit/error`
 
@@ -311,11 +332,41 @@ The extension uses this method to report an error to Lambda before exiting\. Cal
 
 `Lambda-Extension-Identifier` – Unique identifier for extension\. Required: yes\. Type: UUID string\.
 
-`Lambda-Extension-Function-Error-Type` – Error enum\. Required: yes\. Type: String error enum \(for example, Fatal\.ConnectFailed\)\.
+`Lambda-Extension-Function-Error-Type` – Error type that the extension encountered\. Required: yes\.
+
+This header consists of a string value\. Lambda accepts any string, but we recommend a format of <category\.reason>\. For example:
++ Runtime\.NoSuchHandler
++ Extension\.APIKeyNotFound
++ Extension\.ConfigInvalid
++ Extension\.UnknownReason
 
 **Body parameters**
 
-`ErrorRequest` – JSON object with the error type, error message, and stack trace\.
+`ErrorRequest` – Information about the error\. Required: no\.
+
+This field is a JSON object with the following structure:
+
+```
+{
+      errorMessage: string (text description of the error),
+      errorType: string,
+      stackTrace: array of strings
+}
+```
+
+Note that Lambda accepts any value for `errorType`\.
+
+The following example shows a Lambda function error message in which the function could not parse the event data provided in the invocation\.
+
+**Example Function error**  
+
+```
+{
+      "errorMessage" : "Error parsing event data.",
+      "errorType" : "InvalidEventDataException",
+      "stackTrace": [ ]
+}
+```
 
 **Response body**
 + `Lambda-Extension-Identifier` – Unique agent identifier \(UUID string\)\.

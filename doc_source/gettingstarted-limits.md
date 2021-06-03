@@ -6,8 +6,8 @@ Lambda sets quotas for the amount of compute and storage resources that you can 
 | Resource | Default quota | Can be increased up to | 
 | --- | --- | --- | 
 | Concurrent executions | 1,000 | Hundreds of thousands | 
-| Function and layer storage \(\.zip file archives\) | 75 GB | Terabytes | 
-| Function storage \(container images\) | See [Amazon ECR service quotas](https://docs.aws.amazon.com/AmazonECR/latest/userguide/service-quotas.html)\. |   | 
+| Storage for uploaded functions \(\.zip file archives\) and layers\. Each function version and layer version consumes storage\.  | 75 GB | Terabytes | 
+| Storage for functions defined as container images\. These images are stored in Amazon ECR\. | See [Amazon ECR service quotas](https://docs.aws.amazon.com/AmazonECR/latest/userguide/service-quotas.html)\. |   | 
 |  [Elastic network interfaces per virtual private cloud \(VPC\)](configuration-vpc.md)  This quota is shared with other services, such as Amazon Elastic File System \(Amazon EFS\)\. See [Amazon VPC quotas](https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html)\.   | 250 | Hundreds | 
 
 For details on concurrency and how Lambda scales your function concurrency in response to traffic, see [AWS Lambda function scaling](invocation-scaling.md)\.
@@ -24,7 +24,7 @@ The following quotas apply to function configuration, deployments, and execution
 | Function [layers](configuration-layers.md) | five layers | 
 | Function [burst concurrency](invocation-scaling.md) | 500 \- 3000 \(varies per Region\) | 
 | [Invocation payload](lambda-invocation.md) \(request and response\) |  6 MB \(synchronous\) 256 KB \(asynchronous\)  | 
-| [Deployment package \(\.zip file archive\)](gettingstarted-package.md) size |  50 MB \(zipped, for direct upload\) 250 MB \(unzipped, including layers\) 3 MB \(console editor\), 512 KB maximum for an individual file  | 
+| [Deployment package \(\.zip file archive\)](gettingstarted-package.md) size |  50 MB \(zipped, for direct upload\) 250 MB \(unzipped, including layers\) 3 MB \(console editor\)  | 
 | [Container image](lambda-images.md) code package size |  10 GB  | 
 | Test events \(console editor\) | 10 | 
 | `/tmp` directory storage | 512 MB | 
