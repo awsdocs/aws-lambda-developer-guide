@@ -82,9 +82,9 @@ You can build RIE into a base image\. Download the RIE from GitHub to your local
    ```
    #!/bin/sh
    if [ -z "${AWS_LAMBDA_RUNTIME_API}" ]; then
-     exec /usr/local/bin/aws-lambda-rie /usr/bin/npx aws-lambda-ric $@
+     exec /usr/local/bin/aws-lambda-rie /usr/local/bin/npx aws-lambda-ric $@
    else
-     exec /usr/bin/npx aws-lambda-ric $@
+     exec /usr/local/bin/npx aws-lambda-ric $@
    fi
    ```
 
@@ -101,9 +101,10 @@ You can build RIE into a base image\. Download the RIE from GitHub to your local
 
 1. Download the [runtime interface emulator](https://github.com/aws/aws-lambda-runtime-interface-emulator/releases/latest/download/aws-lambda-rie) from GitHub into your project directory\.
 
-1. Install the emulator package and change `ENTRYPOINT` to run the new script by adding the following lines to your Dockerfile:
+1. Copy the script, install the emulator package and change `ENTRYPOINT` to run the new script by adding the following lines to your Dockerfile:
 
    ```
+   COPY ./entry_script.sh /entry_script.sh
    ADD aws-lambda-rie /usr/local/bin/aws-lambda-rie
    ENTRYPOINT [ "/entry_script.sh" ]
    ```
