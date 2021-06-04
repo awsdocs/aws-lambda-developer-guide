@@ -101,7 +101,7 @@ You can build RIE into a base image\. Download the RIE from GitHub to your local
 
 1. Download the [runtime interface emulator](https://github.com/aws/aws-lambda-runtime-interface-emulator/releases/latest/download/aws-lambda-rie) from GitHub into your project directory\.
 
-1. Copy the script and install the emulator package and change `ENTRYPOINT` to run the new script by adding the following lines to your Dockerfile:
+1. Copy the script, install the emulator package and change `ENTRYPOINT` to run the new script by adding the following lines to your Dockerfile:
 
    ```
    COPY ./entry_script.sh /entry_script.sh
