@@ -8,10 +8,13 @@ You can deploy your Lambda function code as a [container image](images-create.md
 
   If you use a community or private enterprise base image, add a runtime interface client to the base image to make it compatible with Lambda\.
 
-**Topics**
-+ [AWS base images for Java](#java-image-base)
-+ [Using a Java base image](#java-image-instructions)
-+ [Java runtime interface clients](#java-image-clients)
+The workflow for a function defined as a container image includes these steps:
+
+1. Build your container image using the resources listed in this topic\.
+
+1. Upload the image to your Amazon ECR container registry\. See steps 7\-9 in [Create image](images-create.md#images-create-from-base)\.
+
+1. [Create](configuration-images.md) the Lambda function and deploy the image\.
 
 ## AWS base images for Java<a name="java-image-base"></a>
 
@@ -49,3 +52,10 @@ Install the runtime interface client for Java using the Apache Maven package man
 For package details, see [Lambda RIC](https://search.maven.org/artifact/com.amazonaws/aws-lambda-java-runtime-interface-client) in Maven Central Repository\.
 
 You can also view the Java client source code in the [AWS Lambda Java Support Libraries](https://github.com/aws/aws-lambda-java-libs) repository on GitHub\.
+
+After your container image resides in the Amazon ECR container registry, you can [create and run](configuration-images.md) the Lambda function\.
+
+**Topics**
++ [AWS base images for Java](#java-image-base)
++ [Using a Java base image](#java-image-instructions)
++ [Java runtime interface clients](#java-image-clients)

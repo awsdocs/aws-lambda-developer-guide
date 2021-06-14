@@ -1,6 +1,6 @@
 # LayerVersionContentOutput<a name="API_LayerVersionContentOutput"></a>
 
-Details about a version of an [AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\.
+Details about a version of an [ AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\.
 
 ## Contents<a name="API_LayerVersionContentOutput_Contents"></a>
 

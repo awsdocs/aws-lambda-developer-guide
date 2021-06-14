@@ -33,7 +33,7 @@ Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:functi
 Required: No
 
  **FunctionResponseTypes**   <a name="SSS-Type-EventSourceMappingConfiguration-FunctionResponseTypes"></a>
-\(Streams\) A list of current response type enums applied to the event source mapping\.  
+\(Streams only\) A list of current response type enums applied to the event source mapping\.  
 Type: Array of strings  
 Array Members: Minimum number of 0 items\. Maximum number of 1 item\.  
 Valid Values:` ReportBatchItemFailures`   
@@ -56,13 +56,13 @@ Valid Range: Minimum value of 0\. Maximum value of 300\.
 Required: No
 
  **MaximumRecordAgeInSeconds**   <a name="SSS-Type-EventSourceMappingConfiguration-MaximumRecordAgeInSeconds"></a>
-\(Streams only\) Discard records older than the specified age\. The default value is infinite \(\-1\)\. When set to infinite \(\-1\), failed records are retried until the record expires\.  
+\(Streams only\) Discard records older than the specified age\. The default value is \-1, which sets the maximum age to infinite\. When the value is set to infinite, Lambda never discards old records\.   
 Type: Integer  
 Valid Range: Minimum value of \-1\. Maximum value of 604800\.  
 Required: No
 
  **MaximumRetryAttempts**   <a name="SSS-Type-EventSourceMappingConfiguration-MaximumRetryAttempts"></a>
-\(Streams only\) Discard records after the specified number of retries\. The default value is infinite \(\-1\)\. When set to infinite \(\-1\), failed records are retried until the record expires\.  
+\(Streams only\) Discard records after the specified number of retries\. The default value is \-1, which sets the maximum number of retries to infinite\. When MaximumRetryAttempts is infinite, Lambda retries failed records until the record expires in the event source\.  
 Type: Integer  
 Valid Range: Minimum value of \-1\. Maximum value of 10000\.  
 Required: No
@@ -122,7 +122,7 @@ Pattern: `^[^.]([a-zA-Z0-9\-_.]+)`
 Required: No
 
  **TumblingWindowInSeconds**   <a name="SSS-Type-EventSourceMappingConfiguration-TumblingWindowInSeconds"></a>
-\(Streams\) The duration in seconds of a processing window\. The range is between 1 second up to 900 seconds\.  
+\(Streams only\) The duration in seconds of a processing window\. The range is between 1 second up to 900 seconds\.  
 Type: Integer  
 Valid Range: Minimum value of 0\. Maximum value of 900\.  
 Required: No

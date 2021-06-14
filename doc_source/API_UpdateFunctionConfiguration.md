@@ -150,7 +150,7 @@ Valid Range: Minimum value of 1\.
 Required: No
 
  ** [TracingConfig](#API_UpdateFunctionConfiguration_RequestSyntax) **   <a name="SSS-UpdateFunctionConfiguration-request-TracingConfig"></a>
-Set `Mode` to `Active` to sample and trace a subset of incoming requests with [AWS X\-Ray](https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html)\.  
+Set `Mode` to `Active` to sample and trace a subset of incoming requests with [X\-Ray](https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html)\.  
 Type: [TracingConfig](API_TracingConfig.md) object  
 Required: No
 

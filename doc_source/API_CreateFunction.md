@@ -1,6 +1,6 @@
 # CreateFunction<a name="API_CreateFunction"></a>
 
-Creates a Lambda function\. To create a function, you need a [deployment package](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html) and an [execution role](https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role)\. The deployment package is a \.zip file archive or container image that contains your function code\. The execution role grants the function permission to use AWS services, such as Amazon CloudWatch Logs for log streaming and AWS X\-Ray for request tracing\.
+Creates a Lambda function\. To create a function, you need a [deployment package](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html) and an [execution role](https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role)\. The deployment package is a \.zip file archive or container image that contains your function code\. The execution role grants the function permission to use AWS services, such as Amazon CloudWatch Logs for log streaming and X\-Ray for request tracing\.
 
 You set the package type to `Image` if the deployment package is a [container image](https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html)\. For a container image, the code property must include the URI of a container image in the Amazon ECR registry\. You do not need to specify the handler and runtime properties\. 
 
@@ -197,7 +197,7 @@ Valid Range: Minimum value of 1\.
 Required: No
 
  ** [TracingConfig](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-TracingConfig"></a>
-Set `Mode` to `Active` to sample and trace a subset of incoming requests with [AWS X\-Ray](https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html)\.  
+Set `Mode` to `Active` to sample and trace a subset of incoming requests with [X\-Ray](https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html)\.  
 Type: [TracingConfig](API_TracingConfig.md) object  
 Required: No
 

@@ -1,6 +1,6 @@
 # DeleteLayerVersion<a name="API_DeleteLayerVersion"></a>
 
-Deletes a version of an [AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\. Deleted versions can no longer be viewed or added to functions\. To avoid breaking functions, a copy of the version remains in Lambda until no functions refer to it\.
+Deletes a version of an [ AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\. Deleted versions can no longer be viewed or added to functions\. To avoid breaking functions, a copy of the version remains in Lambda until no functions refer to it\.
 
 ## Request Syntax<a name="API_DeleteLayerVersion_RequestSyntax"></a>
 

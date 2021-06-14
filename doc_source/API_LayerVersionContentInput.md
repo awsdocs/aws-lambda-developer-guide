@@ -1,6 +1,6 @@
 # LayerVersionContentInput<a name="API_LayerVersionContentInput"></a>
 
-A ZIP archive that contains the contents of an [AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\. You can specify either an Amazon S3 location, or upload a layer archive directly\.
+A ZIP archive that contains the contents of an [ AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\. You can specify either an Amazon S3 location, or upload a layer archive directly\.
 
 ## Contents<a name="API_LayerVersionContentInput_Contents"></a>
 

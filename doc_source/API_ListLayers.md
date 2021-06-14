@@ -1,6 +1,6 @@
 # ListLayers<a name="API_ListLayers"></a>
 
-Lists [AWS Lambda layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) and shows information about the latest version of each\. Specify a [runtime identifier](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) to list only layers that indicate that they're compatible with that runtime\.
+Lists [ AWS Lambda layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) and shows information about the latest version of each\. Specify a [runtime identifier](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) to list only layers that indicate that they're compatible with that runtime\.
 
 ## Request Syntax<a name="API_ListLayers_RequestSyntax"></a>
 

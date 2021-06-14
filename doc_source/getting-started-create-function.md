@@ -24,7 +24,7 @@ In this getting started exercise, you create a Node\.js Lambda function using th
 
    1. For **Function name**, enter **my\-function**\.
 
-   1. For **Runtime**, confirm that **Node\.js 14\.x** is selected\. Note that Lambda provides runtimes for \.NET \(PowerShell, C\#\) Go, Java, Node\.js, Python, and Ruby\.
+   1. For **Runtime**, confirm that **Node\.js 14\.x** is selected\. Note that Lambda provides runtimes for \.NET \(PowerShell, C\#\), Go, Java, Node\.js, Python, and Ruby\.
 
 1. Choose **Create function**\.
 
@@ -242,7 +242,7 @@ For example, use the IAM console to create a role with the following policy:
     {
     "Sid": "VisualEditor0",
     "Effect": "Allow",
-    "Action": ["ecr:SetRepositoryPolicy","ecr:GetRepositoryPolicy", "ecr:InitiateLayerUpload"],
+    "Action": ["ecr:SetRepositoryPolicy","ecr:GetRepositoryPolicy", "ecr:InitiateLayerUpload],
     "Resource": "arn:aws:ecr:<region>:<account>:repository/<repo name>/"
     }
   ]

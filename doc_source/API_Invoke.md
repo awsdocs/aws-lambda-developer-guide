@@ -110,11 +110,11 @@ Need additional permissions to configure VPC settings\.
 HTTP Status Code: 502
 
  **EC2ThrottledException**   
-AWS Lambda was throttled by Amazon EC2 during Lambda function initialization using the execution role provided for the Lambda function\.  
+ AWS Lambda was throttled by Amazon EC2 during Lambda function initialization using the execution role provided for the Lambda function\.  
 HTTP Status Code: 502
 
  **EC2UnexpectedException**   
-AWS Lambda received an unexpected EC2 client exception while setting up for the Lambda function\.  
+ AWS Lambda received an unexpected EC2 client exception while setting up for the Lambda function\.  
 HTTP Status Code: 502
 
  **EFSIOException**   
@@ -134,7 +134,7 @@ The function was able to make a network connection to the configured file system
 HTTP Status Code: 408
 
  **ENILimitReachedException**   
-AWS Lambda was not able to create an elastic network interface in the VPC, specified as part of Lambda function configuration, because the limit for network interfaces has been reached\.  
+ AWS Lambda was not able to create an elastic network interface in the VPC, specified as part of Lambda function configuration, because the limit for network interfaces has been reached\.  
 HTTP Status Code: 502
 
  **InvalidParameterValueException**   
@@ -158,7 +158,7 @@ The Subnet ID provided in the Lambda function VPC configuration is invalid\.
 HTTP Status Code: 502
 
  **InvalidZipFileException**   
-AWS Lambda could not unzip the deployment package\.  
+ AWS Lambda could not unzip the deployment package\.  
 HTTP Status Code: 502
 
  **KMSAccessDeniedException**   
@@ -198,7 +198,7 @@ The AWS Lambda service encountered an internal error\.
 HTTP Status Code: 500
 
  **SubnetIPAddressLimitReachedException**   
-AWS Lambda was not able to set up VPC access for the Lambda function because one or more configured subnets has no available IP addresses\.  
+ AWS Lambda was not able to set up VPC access for the Lambda function because one or more configured subnets has no available IP addresses\.  
 HTTP Status Code: 502
 
  **TooManyRequestsException**   

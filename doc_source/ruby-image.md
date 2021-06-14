@@ -8,6 +8,14 @@ You can deploy your Lambda function code as a [container image](images-create.md
 
   If you use a community or private enterprise base image, add a runtime interface client to the base image to make it compatible with Lambda\.
 
+The workflow for a function defined as a container image includes these steps:
+
+1. Build your container image using the resources listed in this topic\.
+
+1. Upload the image to your Amazon ECR container registry\. See steps 7\-9 in [Create image](images-create.md#images-create-from-base)\.
+
+1. [Create](configuration-images.md) the Lambda function and deploy the image\.
+
 ## AWS base images for Ruby<a name="ruby-image-base"></a>
 
 AWS provides the following base images for Ruby:

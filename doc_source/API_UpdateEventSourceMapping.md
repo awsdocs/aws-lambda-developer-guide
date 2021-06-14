@@ -67,12 +67,12 @@ Valid Range: Minimum value of 1\. Maximum value of 10000\.
 Required: No
 
  ** [BisectBatchOnFunctionError](#API_UpdateEventSourceMapping_RequestSyntax) **   <a name="SSS-UpdateEventSourceMapping-request-BisectBatchOnFunctionError"></a>
-\(Streams\) If the function returns an error, split the batch in two and retry\.  
+\(Streams only\) If the function returns an error, split the batch in two and retry\.  
 Type: Boolean  
 Required: No
 
  ** [DestinationConfig](#API_UpdateEventSourceMapping_RequestSyntax) **   <a name="SSS-UpdateEventSourceMapping-request-DestinationConfig"></a>
-\(Streams\) An Amazon SQS queue or Amazon SNS topic destination for discarded records\.  
+\(Streams only\) An Amazon SQS queue or Amazon SNS topic destination for discarded records\.  
 Type: [DestinationConfig](API_DestinationConfig.md) object  
 Required: No
 
@@ -96,7 +96,7 @@ Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}
 Required: No
 
  ** [FunctionResponseTypes](#API_UpdateEventSourceMapping_RequestSyntax) **   <a name="SSS-UpdateEventSourceMapping-request-FunctionResponseTypes"></a>
-\(Streams\) A list of current response type enums applied to the event source mapping\.  
+\(Streams only\) A list of current response type enums applied to the event source mapping\.  
 Type: Array of strings  
 Array Members: Minimum number of 0 items\. Maximum number of 1 item\.  
 Valid Values:` ReportBatchItemFailures`   
@@ -109,19 +109,19 @@ Valid Range: Minimum value of 0\. Maximum value of 300\.
 Required: No
 
  ** [MaximumRecordAgeInSeconds](#API_UpdateEventSourceMapping_RequestSyntax) **   <a name="SSS-UpdateEventSourceMapping-request-MaximumRecordAgeInSeconds"></a>
-\(Streams\) Discard records older than the specified age\. The default value is infinite \(\-1\)\.  
+\(Streams only\) Discard records older than the specified age\. The default value is infinite \(\-1\)\.  
 Type: Integer  
 Valid Range: Minimum value of \-1\. Maximum value of 604800\.  
 Required: No
 
  ** [MaximumRetryAttempts](#API_UpdateEventSourceMapping_RequestSyntax) **   <a name="SSS-UpdateEventSourceMapping-request-MaximumRetryAttempts"></a>
-\(Streams\) Discard records after the specified number of retries\. The default value is infinite \(\-1\)\. When set to infinite \(\-1\), failed records will be retried until the record expires\.  
+\(Streams only\) Discard records after the specified number of retries\. The default value is infinite \(\-1\)\. When set to infinite \(\-1\), failed records will be retried until the record expires\.  
 Type: Integer  
 Valid Range: Minimum value of \-1\. Maximum value of 10000\.  
 Required: No
 
  ** [ParallelizationFactor](#API_UpdateEventSourceMapping_RequestSyntax) **   <a name="SSS-UpdateEventSourceMapping-request-ParallelizationFactor"></a>
-\(Streams\) The number of batches to process from each shard concurrently\.  
+\(Streams only\) The number of batches to process from each shard concurrently\.  
 Type: Integer  
 Valid Range: Minimum value of 1\. Maximum value of 10\.  
 Required: No
@@ -133,7 +133,7 @@ Array Members: Minimum number of 0 items\. Maximum number of 22 items\.
 Required: No
 
  ** [TumblingWindowInSeconds](#API_UpdateEventSourceMapping_RequestSyntax) **   <a name="SSS-UpdateEventSourceMapping-request-TumblingWindowInSeconds"></a>
-\(Streams\) The duration in seconds of a processing window\. The range is between 1 second up to 900 seconds\.  
+\(Streams only\) The duration in seconds of a processing window\. The range is between 1 second up to 900 seconds\.  
 Type: Integer  
 Valid Range: Minimum value of 0\. Maximum value of 900\.  
 Required: No
@@ -216,7 +216,7 @@ Type: String
 Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [FunctionResponseTypes](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-FunctionResponseTypes"></a>
-\(Streams\) A list of current response type enums applied to the event source mapping\.  
+\(Streams only\) A list of current response type enums applied to the event source mapping\.  
 Type: Array of strings  
 Array Members: Minimum number of 0 items\. Maximum number of 1 item\.  
 Valid Values:` ReportBatchItemFailures` 
@@ -235,12 +235,12 @@ Type: Integer
 Valid Range: Minimum value of 0\. Maximum value of 300\.
 
  ** [MaximumRecordAgeInSeconds](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-MaximumRecordAgeInSeconds"></a>
-\(Streams only\) Discard records older than the specified age\. The default value is infinite \(\-1\)\. When set to infinite \(\-1\), failed records are retried until the record expires\.  
+\(Streams only\) Discard records older than the specified age\. The default value is \-1, which sets the maximum age to infinite\. When the value is set to infinite, Lambda never discards old records\.   
 Type: Integer  
 Valid Range: Minimum value of \-1\. Maximum value of 604800\.
 
  ** [MaximumRetryAttempts](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-MaximumRetryAttempts"></a>
-\(Streams only\) Discard records after the specified number of retries\. The default value is infinite \(\-1\)\. When set to infinite \(\-1\), failed records are retried until the record expires\.  
+\(Streams only\) Discard records after the specified number of retries\. The default value is \-1, which sets the maximum number of retries to infinite\. When MaximumRetryAttempts is infinite, Lambda retries failed records until the record expires in the event source\.  
 Type: Integer  
 Valid Range: Minimum value of \-1\. Maximum value of 10000\.
 
@@ -290,7 +290,7 @@ Length Constraints: Minimum length of 1\. Maximum length of 249\.
 Pattern: `^[^.]([a-zA-Z0-9\-_.]+)` 
 
  ** [TumblingWindowInSeconds](#API_UpdateEventSourceMapping_ResponseSyntax) **   <a name="SSS-UpdateEventSourceMapping-response-TumblingWindowInSeconds"></a>
-\(Streams\) The duration in seconds of a processing window\. The range is between 1 second up to 900 seconds\.  
+\(Streams only\) The duration in seconds of a processing window\. The range is between 1 second up to 900 seconds\.  
 Type: Integer  
 Valid Range: Minimum value of 0\. Maximum value of 900\.
 

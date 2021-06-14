@@ -15,8 +15,8 @@ After you create a container image in the Amazon ECR container registry, you can
 + [Container tools](#images-tools)
 + [Lambda requirements for container images](#images-reqs)
 + [Container image settings](#images-parms)
-+ [Create an image from an AWS base image for Lambda](#images-create-1)
-+ [Create an image from an alternative base image](#images-create-2)
++ [Create an image from an AWS base image for Lambda](#images-create-from-base)
++ [Create an image from an alternative base image](#images-create-from-alt)
 + [Create an image using the AWS SAM toolkit](#images-create-sam)
 
 ## Image types<a name="images-types"></a>
@@ -41,7 +41,7 @@ To deploy a container image to Lambda, note the following requirements:
 
 1. The container image must implement the Lambda [Runtime API](runtimes-api.md)\. The AWS open\-source [runtime interface clients](runtimes-images.md#runtimes-api-client) implement the API\. You can add a runtime interface client to your preferred base image to make it compatible with Lambda\.
 
-1. The container image must be able to run on a read\-only file system\. Your function code can access a writable `/tmp` directory with 512 MB of storage\. If you are using an image that requires a writable directory outside of `/tmp`, configure it to write to a directory under the `/tmp` directory\.
+1. The container image must be able to run on a read\-only file system\. Your function code can access a writable `/tmp` directory with 512 MB of storage\. 
 
 1. The default Lambda user must be able to read all the files required to run your function code\. Lambda follows security best practices by defining a default Linux user with least\-privileged permissions\. Verify that your application code does not rely on files that other Linux users are restricted from running\.
 
@@ -65,7 +65,7 @@ You can specify the container image settings in the Dockerfile when you build yo
 **Warning**  
 When you specify ENTRYPOINT or CMD in the Dockerfile or as an override, make sure that you enter the absolute path\. Also, do not use symlinks as the entry point to the container\.
 
-## Create an image from an AWS base image for Lambda<a name="images-create-1"></a>
+## Create an image from an AWS base image for Lambda<a name="images-create-from-base"></a>
 
 To build a container image for a new Lambda function, you can start with an AWS base image for Lambda\.
 
@@ -150,7 +150,7 @@ AWS periodically provides updates to the AWS base images for Lambda\. If your Do
 
 Now that your container image resides in the Amazon ECR container registry, you can [create and run](configuration-images.md) the Lambda function\.
 
-## Create an image from an alternative base image<a name="images-create-2"></a>
+## Create an image from an alternative base image<a name="images-create-from-alt"></a>
 
 **Prerequisites**
 + The AWS CLI

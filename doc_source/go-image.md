@@ -8,6 +8,14 @@ You can deploy your Lambda function code as a [container image](images-create.md
 
   If you use a community or private enterprise base image, add a runtime interface client to the base image to make it compatible with Lambda\.
 
+The workflow for a function defined as a container image includes these steps:
+
+1. Build your container image using the resources listed in this topic\.
+
+1. Upload the image to your Amazon ECR container registry\. See steps 7\-9 in [Create image](images-create.md#images-create-from-base)\.
+
+1. [Create](configuration-images.md) the Lambda function and deploy the image\.
+
 **Topics**
 + [AWS base images for Go](#go-image-base)
 + [Go runtime interface clients](#go-image-clients)
@@ -98,6 +106,8 @@ Note that the first three steps are identical whether you deploy your function a
    docker push 123456789012.dkr.ecr.us-east-1.amazonaws.com/hello-world:latest
    ```
 
+Now that your container image resides in the Amazon ECR container registry, you can [create](configuration-images.md) the Lambda function and deploy the image\.
+
 ## Deploying Go with an alternative base image<a name="go-image-other"></a>
 
 You can build a container image for Go from an alternative base image\. The following example Dockerfile uses [alpine](https://gallery.ecr.aws/h1a5s9h8/alpine) as the base image\. 
@@ -119,7 +129,7 @@ COPY --from=build /main /main
 ENTRYPOINT [ "/main" ]
 ```
 
-The steps are the same as described for a `provided.al2` base image, with one additional consideration: if you want to add the RIE to your image, you need to follow these additional steps before you run the `docker build` command\.
+The steps are the same as described for a `provided.al2` base image, with one additional consideration: if you want to add the RIE to your image, you need to follow these additional steps before you run the `docker build` command\. For more information about testing your image locally with the RIE, see [Testing Lambda container images locally](images-test.md)\. 
 
 **To add RIE to the image**
 
@@ -173,4 +183,4 @@ If you do not want to add the RIE to your image, you can test your image locally
 
    This command invokes the function running in the container image and returns a response\.
 
-For more information about testing your image locally with the RIE, see [Testing Lambda container images locally](images-test.md)\. 
+Now that your container image resides in the Amazon ECR container registry, you can you can [create](configuration-images.md) the Lambda function and deploy the image\.

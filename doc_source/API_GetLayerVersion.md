@@ -1,6 +1,6 @@
 # GetLayerVersion<a name="API_GetLayerVersion"></a>
 
-Returns information about a version of an [AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html), with a link to download the layer archive that's valid for 10 minutes\.
+Returns information about a version of an [ AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html), with a link to download the layer archive that's valid for 10 minutes\.
 
 ## Request Syntax<a name="API_GetLayerVersion_RequestSyntax"></a>
 

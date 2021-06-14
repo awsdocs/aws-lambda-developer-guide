@@ -1,6 +1,6 @@
 # LayersListItem<a name="API_LayersListItem"></a>
 
-Details about an [AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\.
+Details about an [ AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\.
 
 ## Contents<a name="API_LayersListItem_Contents"></a>
 

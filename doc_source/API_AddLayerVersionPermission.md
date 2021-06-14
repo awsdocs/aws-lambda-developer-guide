@@ -1,6 +1,6 @@
 # AddLayerVersionPermission<a name="API_AddLayerVersionPermission"></a>
 
-Adds permissions to the resource\-based policy of a version of an [AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\. Use this action to grant layer usage permission to other accounts\. You can grant permission to a single account, all accounts in an organization, or all AWS accounts\. 
+Adds permissions to the resource\-based policy of a version of an [ AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\. Use this action to grant layer usage permission to other accounts\. You can grant permission to a single account, all accounts in an organization, or all AWS accounts\. 
 
 To revoke permission, call [RemoveLayerVersionPermission](API_RemoveLayerVersionPermission.md) with the statement ID that you specified when you added it\.
 

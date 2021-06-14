@@ -1,6 +1,6 @@
 # RemoveLayerVersionPermission<a name="API_RemoveLayerVersionPermission"></a>
 
-Removes a statement from the permissions policy for a version of an [AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\. For more information, see [AddLayerVersionPermission](API_AddLayerVersionPermission.md)\.
+Removes a statement from the permissions policy for a version of an [ AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\. For more information, see [AddLayerVersionPermission](API_AddLayerVersionPermission.md)\.
 
 ## Request Syntax<a name="API_RemoveLayerVersionPermission_RequestSyntax"></a>
 

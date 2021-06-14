@@ -1,6 +1,6 @@
 # ListLayerVersions<a name="API_ListLayerVersions"></a>
 
-Lists the versions of an [AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\. Versions that have been deleted aren't listed\. Specify a [runtime identifier](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) to list only versions that indicate that they're compatible with that runtime\.
+Lists the versions of an [ AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\. Versions that have been deleted aren't listed\. Specify a [runtime identifier](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) to list only versions that indicate that they're compatible with that runtime\.
 
 ## Request Syntax<a name="API_ListLayerVersions_RequestSyntax"></a>
 

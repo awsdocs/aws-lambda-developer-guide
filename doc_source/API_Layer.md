@@ -1,6 +1,6 @@
 # Layer<a name="API_Layer"></a>
 
-An [AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\.
+An [ AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\.
 
 ## Contents<a name="API_Layer_Contents"></a>
 

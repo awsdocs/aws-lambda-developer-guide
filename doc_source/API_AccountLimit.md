@@ -10,7 +10,7 @@ Type: Long
 Required: No
 
  **CodeSizeZipped**   <a name="SSS-Type-AccountLimit-CodeSizeZipped"></a>
-The maximum size of a deployment package when it's uploaded directly to AWS Lambda\. Use Amazon S3 for larger files\.  
+The maximum size of a deployment package when it's uploaded directly to Lambda\. Use Amazon S3 for larger files\.  
 Type: Long  
 Required: No
 

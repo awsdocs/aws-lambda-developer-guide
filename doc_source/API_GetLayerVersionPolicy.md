@@ -1,6 +1,6 @@
 # GetLayerVersionPolicy<a name="API_GetLayerVersionPolicy"></a>
 
-Returns the permission policy for a version of an [AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\. For more information, see [AddLayerVersionPermission](API_AddLayerVersionPermission.md)\.
+Returns the permission policy for a version of an [ AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\. For more information, see [AddLayerVersionPermission](API_AddLayerVersionPermission.md)\.
 
 ## Request Syntax<a name="API_GetLayerVersionPolicy_RequestSyntax"></a>
 

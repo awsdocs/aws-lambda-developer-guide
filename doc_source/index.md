@@ -128,6 +128,7 @@ Amazon's trademarks and trade dress may not be used in
       + [Tutorial: Using an Amazon S3 trigger to create thumbnail images](with-s3-tutorial.md)
       + [AWS SAM template for an Amazon S3 application](with-s3-example-use-app-spec.md)
    + [Using AWS Lambda with Amazon S3 batch operations](services-s3-batch.md)
+   + [Using AWS Lambda with Secrets Manager](with-secrets-manager.md)
    + [Using AWS Lambda with Amazon SES](services-ses.md)
    + [Using Lambda with Amazon SNS](with-sns.md)
       + [Tutorial: Using AWS Lambda with Amazon Simple Notification Service](with-sns-example.md)

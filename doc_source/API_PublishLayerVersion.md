@@ -1,6 +1,6 @@
 # PublishLayerVersion<a name="API_PublishLayerVersion"></a>
 
-Creates an [AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) from a ZIP archive\. Each time you call `PublishLayerVersion` with the same layer name, a new version is created\.
+Creates an [ AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) from a ZIP archive\. Each time you call `PublishLayerVersion` with the same layer name, a new version is created\.
 
 Add layers to your function with [CreateFunction](API_CreateFunction.md) or [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)\.
 
