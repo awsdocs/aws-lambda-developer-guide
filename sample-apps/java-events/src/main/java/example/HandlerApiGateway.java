@@ -18,7 +18,6 @@ public class HandlerApiGateway implements RequestHandler<APIGatewayProxyRequestE
   @Override
   public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent event, Context context)
   {
-    LambdaLogger logger = context.getLogger();
     APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
     response.setIsBase64Encoded(false);
     response.setStatusCode(200);
