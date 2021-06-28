@@ -113,12 +113,8 @@ If the handler returns normally without exceptions, Lambda considers the message
    aws lambda invoke --function-name ProcessSQSRecord \
    --payload file://input.txt outputfile.txt
    ```
-**Note**  
-If you are using AWS CLI version 2, add the following command parameter:   
 
-   ```
-   --cli-binary-format raw-in-base64-out
-   ```
+   The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [ AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)
 
 1. Verify the output in the `outputfile.txt` file\.
 

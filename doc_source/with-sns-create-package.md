@@ -32,7 +32,7 @@ Zip up the sample code to create a deployment package\. For instructions, see [D
 
 The following example processes messages from Amazon SNS, and logs their contents\.
 
-**Example LambdaWithSNS\.java**  
+**Example LogEvent\.java**  
 
 ```
 package example;

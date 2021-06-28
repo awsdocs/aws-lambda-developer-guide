@@ -83,6 +83,14 @@ A dependency can be any package, module or other assembly dependency that is not
 
 This section describes how to create a Lambda function without runtime dependencies\.
 
+**Topics**
++ [Overview](#python-package-create-about-no-dependency)
++ [Create the deployment package](#python-package-create-package-no-dependency)
++ [Create the Lambda function](#python-package-create-createfunction-no-dependency)
++ [Invoke the Lambda function](#python-package-create-invokefunction-no-dependency)
++ [What's next?](#python-package-create-next-no-dependency)
++ [Clean up your resources](#python-package-create-cleanup-no-dependency)
+
 ### Overview<a name="python-package-create-about-no-dependency"></a>
 
 In this tutorial, you use the [sample code from the AWS SDK for Python \(Boto3\) project on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/python/example_code/lambda/boto_client_examples/lambda_handler_basic.py) to create a Lambda function using the AWS CLI\. You'll learn how to:
@@ -187,14 +195,13 @@ Invoke the Lambda function [synchronously](invocation-sync.md) using the event i
 + Use the [invoke](https://docs.aws.amazon.com/cli/latest/reference/lambda/invoke.html) command\.
 
   ```
-  aws lambda invoke --function-name my-math-function --payload '{"action": "square","number": 3}' output.txt
+  aws lambda invoke \
+    --function-name my-math-function \
+        --cli-binary-format raw-in-base64-out \
+            --payload '{"action": "square","number": 3}' output.txt
   ```
-**Note**  
-If you are using AWS CLI version 2, add the following command parameter:   
 
-  ```
-  --cli-binary-format raw-in-base64-out
-  ```
+  The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [ AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)
 
   This command produces the following output:
 
@@ -252,6 +259,14 @@ A dependency can be any package, module or other assembly dependency that is not
 For more information, see [What is a runtime dependency?](python-package.md#python-package-dependencies)
 
 This section describes how to create a Lambda function with runtime dependencies\.
+
+**Topics**
++ [Overview](#python-package-create-about)
++ [Create the deployment package](#python-package-create-package-with-dependency)
++ [Create the Lambda function](#python-package-create-createfunction-with-dependency)
++ [Invoke the Lambda function](#python-package-create-invokefunction-with-dependency)
++ [What's next?](#python-package-create-next-with-dependency)
++ [Clean up your resources](#python-package-create-cleanup-with-dependency)
 
 ### Overview<a name="python-package-create-about"></a>
 
@@ -384,27 +399,14 @@ Invoke the Lambda function [synchronously](invocation-sync.md) using the event i
 **To invoke the function**
 + Use the [invoke](https://docs.aws.amazon.com/cli/latest/reference/lambda/invoke.html) command\.
 
-------
-#### [ macOS/Linux ]
-
   ```
-  aws lambda invoke --function-name my-sourcecode-function --payload '{"key1": "value1", "key2": "value2", "key3": "value3"}' output.txt
-  ```
-
-------
-#### [ Windows ]
-
-  ```
-  aws lambda invoke --function-name my-sourcecode-function --cli-binary-format raw-in-base64-out --payload '{"key1": "value1", "key2": "value2", "key3": "value3"}' output.txt
+  aws lambda invoke \
+    --function-name my-sourcecode-function \
+        --cli-binary-format raw-in-base64-out \
+            --payload '{"key1": "value1", "key2": "value2", "key3": "value3"}' output.txt
   ```
 
-------
-**Note**  
-If you are using AWS CLI version 2, add the following command parameter:   
-
-  ```
-  --cli-binary-format raw-in-base64-out
-  ```
+  The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [ AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)
 
   This command produces the following output:
 

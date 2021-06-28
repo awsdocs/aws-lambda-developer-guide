@@ -36,7 +36,7 @@ Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}
 A pagination token returned by a previous call\.
 
  ** [MaxItems](#API_ListEventSourceMappings_RequestSyntax) **   <a name="SSS-ListEventSourceMappings-request-MaxItems"></a>
-The maximum number of event source mappings to return\.  
+The maximum number of event source mappings to return\. Note that ListEventSourceMappings returns a maximum of 100 items in each response, even if you set the number higher\.  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.
 
 ## Request Body<a name="API_ListEventSourceMappings_RequestBody"></a>

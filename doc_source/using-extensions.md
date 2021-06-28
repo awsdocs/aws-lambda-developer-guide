@@ -53,7 +53,7 @@ Extensions can impact the performance of your function because they share functi
 
 Each extension must complete its initialization before Lambda invokes the function\. Therefore, an extension that consumes significant initialization time can increase the latency of the function invocation\.
 
-To measure the extra time that the extension takes after the function execution, you can use the `PostRuntimeExecutionDuration` [function metric](monitoring-metrics.md)\. To measure the increase in memory used, you can use the `MaxMemoryUsed` metric\. To understand the impact of a specific extension, you can run different versions of your functions side by side\.
+To measure the extra time that the extension takes after the function execution, you can use the `PostRuntimeExtensionsDuration` [function metric](monitoring-metrics.md)\. To measure the increase in memory used, you can use the `MaxMemoryUsed` metric\. To understand the impact of a specific extension, you can run different versions of your functions side by side\.
 
 ## Permissions<a name="using-extensions-permissions"></a>
 

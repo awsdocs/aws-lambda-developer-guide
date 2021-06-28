@@ -37,6 +37,12 @@ The `Invocation` subsegment represents the invoke phase where Lambda invokes the
 
 The `Overhead` subsegment represents the phase that occurs between the time when the runtime sends the response and the signal for the next invoke\. During this time, the runtime finishes all tasks related to an invoke and prepares to freeze the sandbox\.
 
+
+
+**Note**  
+If your Lambda function uses [provisioned concurrency](configuration-concurrency.md#configuration-concurrency-provisioned), your X\-Ray trace might display a function initialization with a very long duration\.   
+Provisioned concurrency initializes function instances in advance, to reduce lag at the time of invocation\. Over time, provisioned concurrency refreshes these instances by creating new instances to replace the old ones\. For workloads with steady traffic, the new instances are initialized well in advance of their first invocation\. The time gap gets recorded in the X\-Ray trace as the initialization duration\. 
+
 The following example shows a trace with 2 segments\. Both are named **my\-function**, but one is type `AWS::Lambda` and the other is `AWS::Lambda::Function`\. The function segment is expanded to show its subsegments\.
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/nodejs-xray-timeline.png)

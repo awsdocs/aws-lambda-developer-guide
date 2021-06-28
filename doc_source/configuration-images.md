@@ -13,7 +13,7 @@ In Amazon ECR, if you reassign the image tag to another image, Lambda does not u
 **Topics**
 + [Function version $LATEST](#configuration-images-latest)
 + [Container image deployment](#configuration-images-optimization)
-+ [Update the user permissions](#configuration-images-permissions)
++ [Amazon ECR permissions](#configuration-images-permissions)
 + [Override the container settings](#configuration-images-settings)
 + [Creating a function \(console\)](#configuration-images-create)
 + [Updating the function code \(console\)](#configuration-images-update)
@@ -33,29 +33,29 @@ For more information about managing versions, see [Lambda function versions](con
 
 When you deploy code as a container image to a Lambda function, the image undergoes an optimization process for running on Lambda\. This process can take a few seconds, during which the function is in pending state\. When the optimization process completes, the function enters the active state\.
 
-## Update the user permissions<a name="configuration-images-permissions"></a>
+## Amazon ECR permissions<a name="configuration-images-permissions"></a>
 
-Make sure that the permissions for the AWS Identity and Access Management \(IAM\) user or role that creates the function contain the AWS managed policies `GetRepositoryPolicy`, `SetRepositoryPolicy`, and `InitiateLayerUpload`\.
-
-For example, use the IAM console to create a role with the following policy:
+For your function to access the container image in Amazon ECR, you can add `ecr:BatchGetImage` and `ecr:GetDownloadUrlForLayer` permissions to your Amazon ECR repository\. The following example shows the minumum policy:
 
 ```
 {
-    "Version": "2012-10-17",
-    "Statement":  [
-        {
-            "Sid": "VisualEditor0",
-            "Effect": "Allow",
-            "Action": [
-                "ecr:SetRepositoryPolicy",
-                "ecr:GetRepositoryPolicy", 
-                "ecr:InitiateLayerUpload"
-            ],
-            "Resource": "arn:aws:ecr:<region>:<account>:repository/<repo name>/"
-        }
-    ]
+      "Sid": "LambdaECRImageRetrievalPolicy",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "lambda.amazonaws.com"
+      },
+      "Action": [
+        "ecr:BatchGetImage",
+        "ecr:GetDownloadUrlForLayer"
+      ]
 }
 ```
+
+For more information about Amazon ECR repository permissions, see [Repository policies](https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policies.html) in the *Amazon Elastic Container Registry User Guide*\.
+
+If the Amazon ECR repository does not include these permissions, Lambda adds `ecr:BatchGetImage` and `ecr:GetDownloadUrlForLayer` to the container image repository permissions\. Lambda can add these permissions only if the Principal calling Lambda has `ecr:getRepositoryPolicy` and `ecr:setRepositoryPolicy` permissions\. 
+
+To view or edit your Amazon ECR repository permissions, follow the directions in [Setting a repository policy statement](https://docs.aws.amazon.com/AmazonECR/latest/userguide/set-repository-policy.html) in the *Amazon Elastic Container Registry User Guide*\.
 
 ## Override the container settings<a name="configuration-images-settings"></a>
 

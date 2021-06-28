@@ -97,7 +97,7 @@ If you are using \.NET Core 3\.1, we recommend that you use the [ Amazon\.Lambda
 When creating Lambda functions, you have to provide a handler string that tells AWS Lambda where to look for the code to invoke\. In C\#, the format is:
 
  *ASSEMBLY::TYPE::METHOD* where:
-+ *ASSEMBLY* is the name of the \.NET assembly file for your application\. When using the \.NET Core CLI to build your application, if you haven't set the assembly name using the `AssemblyName` property in \.csproj, the *ASSEMBLY* name will be the name of the folder that contains your \.csproj file once the build is complete\. For more information, see [\.NET Core CLI](csharp-package-cli.md)\. In this case, let's assume the folder name is `HelloWorldApp`\.
++ *ASSEMBLY* is the name of the \.NET assembly file for your application\. When using the \.NET Core CLI to build your application, if you haven't set the assembly name using the `AssemblyName` property in \.csproj, the *ASSEMBLY* name will be the \.csproj file name\. For more information, see [\.NET Core CLI](csharp-package-cli.md)\. In this case, let's assume the \.csproj file is `HelloWorldApp.csproj`\.
 + *TYPE* is the full name of the handler type, which consists of the *Namespace* and the *ClassName*\. In this case `Example.Hello`\.
 + *METHOD* is name of the function handler, in this case `MyHandler`\.
 

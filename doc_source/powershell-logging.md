@@ -139,10 +139,11 @@ The `base64` utility is available on Linux, macOS, and [Ubuntu on Windows](https
 **Example get\-logs\.sh script**  
 In the same command prompt, use the following script to download the last five log events\. The script uses `sed` to remove quotes from the output file, and sleeps for 15 seconds to allow time for the logs to become available\. The output includes the response from Lambda and the output from the `get-log-events` command\.   
 Copy the contents of the following code sample and save in your Lambda project directory as `get-logs.sh`\.  
+The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [ AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)  
 
 ```
 #!/bin/bash
-aws lambda invoke --function-name my-function --payload '{"key": "value"}' out
+aws lambda invoke --function-name my-function --cli-binary-format raw-in-base64-out --payload '{"key": "value"}' out
 sed -i'' -e 's/"//g' out
 sleep 15
 aws logs get-log-events --log-group-name /aws/lambda/my-function --log-stream-name $(cat out) --limit 5

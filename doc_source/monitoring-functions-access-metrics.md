@@ -25,7 +25,7 @@ You can use the Lambda console's monitoring dashboard to monitor your Lambda fun
 The following section describes the monitoring graphs on the Lambda console\.
 
 **Lambda monitoring graphs**
-+ **Invocations** – The number of times that the function was invoked in each 5\-minute period\.
++ **Invocations** – The number of times that the function was invoked\.
 + **Duration** – The average, minimum, and maximum execution times\.
 + **Error count and success rate \(%\)** – The number of errors and the percentage of executions that completed without error\.
 + **Throttles** – The number of times that execution failed due to concurrency limits\.

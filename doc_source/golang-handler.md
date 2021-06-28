@@ -113,7 +113,7 @@ The following lists valid handler signatures\. `TIn` and `TOut` represent types 
 + 
 
   ```
-  func (TIn), error
+  func (TIn) error
   ```
 + 
 

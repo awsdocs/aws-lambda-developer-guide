@@ -71,21 +71,14 @@ When you invoke a Lambda function in the AWS CLI, the AWS CLI splits the respons
 
 The following [invoke](https://docs.aws.amazon.com/cli/latest/reference/lambda/invoke.html) command example demonstrates how to invoke a function and write the invocation response to an `output.txt` file\.
 
-------
-#### [ mac OS/Linux OS ]
-
 ```
-aws lambda invoke --function-name my-function --payload '{"key1": "value1", "key2": "value2", "key3": "value3"}' output.txt
-```
-
-------
-#### [ Windows OS ]
-
-```
-aws lambda invoke --function-name my-function --cli-binary-format raw-in-base64-out --payload '{"key1": "value1", "key2": "value2", "key3": "value3"}' output.txt
+aws lambda invoke   \
+  --function-name my-function   \
+      --cli-binary-format raw-in-base64-out  \
+          --payload '{"key1": "value1", "key2": "value2", "key3": "value3"}' output.txt
 ```
 
-------
+The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [ AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)
 
 You should see the AWS CLI response in your command prompt:
 

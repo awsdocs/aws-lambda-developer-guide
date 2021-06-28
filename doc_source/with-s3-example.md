@@ -242,7 +242,10 @@ Invoke your function when you upload a file to the Amazon S3 source bucket\.
 
 1. Choose the name of your function \(**my\-s3\-function**\)\.
 
-1. Choose the **Monitor** tab, then verify that the function ran once for each file that you uploaded\.
+1. To verify that the function ran once for each file that you uploaded, choose the **Monitor** tab\. This page shows graphs for the metrics that Lambda sends to CloudWatch\. The count in the **Invocations** graph should match the number of files that you uploaded to the Amazon S3 bucket\.   
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/metrics-functions-list.png)
+
+   For more information on these graphs, see [Monitoring functions in the AWS Lambda console](monitoring-functions-access-metrics.md)\.
 
 1. \(Optional\) To view the logs in the CloudWatch console, choose **View logs in CloudWatch**\. Choose a log stream to view the logs output for one of the function invocations\.
 

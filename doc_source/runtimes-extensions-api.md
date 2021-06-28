@@ -10,6 +10,7 @@ The following [Lambda runtimes](lambda-runtimes.md) support external extensions:
 + \.NET Core 3\.1 \(C\#/PowerShell\) \(`dotnetcore3.1`\)
 + Custom runtime \(`provided`\)
 + Custom runtime on Amazon Linux 2 \(`provided.al2`\)
++ Go 1\.x \(`go1.x`\)
 + Java 11 \(Corretto\) \(`java11`\)
 + Java 8 \(Corretto\) \(`java8.al2`\)
 + Node\.js 14\.x \(`nodejs14.x`\)
@@ -107,7 +108,7 @@ Here is an example payload:
 **Note**  
 Lambda allocates CPU power in proportion to the function's memory setting\. You might see increased execution and initialization duration at lower memory settings because the function and extension processes are competing for the same CPU resources\. To reduce the execution and initialization duration, try increasing the memory setting\.
 
-To help identify the performance impact introduced by extensions on the `Invoke` phase, Lambda outputs the `PostRuntimeExecutionDuration` metric\. This metric measures the cumulative time spent between the runtime `Next` API request and the last extension `Next` API request\. To measure the increase in memory used, use the `MaxMemoryUsed` metric\. For more information about function metrics, see [Working with AWS Lambda function metrics](monitoring-metrics.md)\.
+To help identify the performance impact introduced by extensions on the `Invoke` phase, Lambda outputs the `PostRuntimeExtensionsDuration` metric\. This metric measures the cumulative time spent between the runtime `Next` API request and the last extension `Next` API request\. To measure the increase in memory used, use the `MaxMemoryUsed` metric\. For more information about function metrics, see [Working with AWS Lambda function metrics](monitoring-metrics.md)\.
 
 Function developers can run different versions of their functions side by side to understand the impact of a specific extension\. We recommend that extension authors publish expected resource consumption to make it easier for function developers to choose a suitable extension\.
 

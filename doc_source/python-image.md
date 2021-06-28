@@ -19,6 +19,12 @@ The workflow for a function defined as a container image includes these steps:
 
 1. [Create](configuration-images.md) the Lambda function and deploy the image\.
 
+**Topics**
++ [AWS base images for Python](#python-image-base)
++ [Python runtime interface clients](#python-image-clients)
++ [Deploying Python with an AWS base image](#python-image-create)
++ [Create a Python image from an alternative base image](#python-image-create-alt)
+
 ## AWS base images for Python<a name="python-image-base"></a>
 
 AWS provides the following base images for Python:
@@ -73,6 +79,34 @@ When you build a container image for Python using an AWS base image, you only ne
    ```
 
 1. To create the container image, follow steps 4 through 7 in [Create an image from an AWS base image for Lambda](images-create.md#images-create-from-base.title)\.
+
+### Adding dependencies when you create a Python image<a name="python-image-create-deps"></a>
+
+If your Lambda function depends on external Python libraries, modify the previous procedure as follows:
+
+1. In your project directory, add a file named `requirements.txt`\. List each required library as a separate line in this file\.
+
+1. Modify your Dockerfile to add the required libraries to the container image\. The following example copies the requirements file and installs the required libraries into the `app` directory\. Do not install the dependencies globally or in user space\.
+
+   ```
+   FROM public.ecr.aws/lambda/python:3.8
+    
+   # Create function directory
+   WORKDIR /app
+   
+   # Install the function's dependencies 
+   # Copy file requirements.txt from your project folder and install
+   # the requirements in the app directory. 
+   
+   COPY requirements.txt  .
+   RUN  pip3 install -r requirements.txt
+   
+   # Copy handler function (from the local app directory)
+   COPY  app.py  .
+   
+   # Overwrite the command by providing a different command directly in the template.
+   CMD ["/app/app.handler"]
+   ```
 
 ## Create a Python image from an alternative base image<a name="python-image-create-alt"></a>
 

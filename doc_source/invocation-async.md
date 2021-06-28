@@ -9,8 +9,14 @@ The following diagram shows clients invoking a Lambda function asynchronously\. 
 For asynchronous invocation, Lambda places the event in a queue and returns a success response without additional information\. A separate process reads events from the queue and sends them to your function\. To invoke a function asynchronously, set the invocation type parameter to `Event`\.
 
 ```
-aws lambda invoke --function-name my-function  --invocation-type Event --payload '{ "key": "value" }' response.json
+aws lambda invoke \
+  --function-name my-function  \
+      --invocation-type Event \
+          --cli-binary-format raw-in-base64-out \
+              --payload '{ "key": "value" }' response.json
 ```
+
+The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [ AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)
 
 You should see the following output:
 

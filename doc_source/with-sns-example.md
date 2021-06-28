@@ -29,7 +29,7 @@ In the tutorial, you use two accounts\. The AWS CLI commands illustrate this by 
 From account A \(01234567891A\), create the source Amazon SNS topic\.
 
 ```
-aws sns create-topic --name lambda-x-account --profile accountA
+aws sns create-topic --name sns-topic-for-lambda --profile accountA
 ```
 
 Note the topic ARN that is returned by the command\. You will need it when you add permissions to the Lambda function to subscribe to the topic\.
@@ -85,7 +85,7 @@ exports.handler = function(event, context, callback) {
 1. Create a Lambda function with the `create-function` command\.
 
    ```
-   aws lambda create-function --function-name SNS-X-Account \
+   aws lambda create-function --function-name Function-With-SNS \
    --zip-file fileb://function.zip --handler index.handler --runtime nodejs12.x \
    --role arn:aws:iam::01234567891B:role/service-role/lambda-sns-execution-role  \
    --timeout 60 --profile accountB
@@ -99,16 +99,16 @@ From account A \(01234567891A\), grant permission to account B \(01234567891B\) 
 
 ```
 aws sns add-permission --label lambda-access --aws-account-id 12345678901B \
---topic-arn arn:aws:sns:us-east-2:12345678901A:lambda-x-account \
+--topic-arn arn:aws:sns:us-east-2:12345678901A:sns-topic-for-lambda \
 --action-name Subscribe ListSubscriptionsByTopic --profile accountA
 ```
 
 From account B \(01234567891B\), add the Lambda permission to allow invocation from Amazon SNS\.
 
 ```
-aws lambda add-permission --function-name SNS-X-Account \
---source-arn arn:aws:sns:us-east-2:12345678901A:lambda-x-account \
---statement-id sns-x-account --action "lambda:InvokeFunction" \
+aws lambda add-permission --function-name Function-With-SNS \
+--source-arn arn:aws:sns:us-east-2:12345678901A:sns-topic-for-lambda \
+--statement-id function-with-sns --action "lambda:InvokeFunction" \
 --principal sns.amazonaws.com --profile accountB
 ```
 
@@ -117,11 +117,11 @@ You should see the following output:
 ```
 {
     "Statement": "{\"Condition\":{\"ArnLike\":{\"AWS:SourceArn\":
-      \"arn:aws:sns:us-east-2:12345678901A:lambda-x-account\"}},
+      \"arn:aws:sns:us-east-2:12345678901A:sns-topic-for-lambda\"}},
       \"Action\":[\"lambda:InvokeFunction\"],
-      \"Resource\":\"arn:aws:lambda:us-east-2:01234567891B:function:SNS-X-Account\",
+      \"Resource\":\"arn:aws:lambda:us-east-2:01234567891B:function:Function-With-SNS\",
       \"Effect\":\"Allow\",\"Principal\":{\"Service\":\"sns.amazonaws.com\"},
-      \"Sid\":\"sns-x-account1\"}"
+      \"Sid\":\"function-with-sns1\"}"
 }
 ```
 
@@ -132,12 +132,12 @@ If the account with the SNS topic is hosted in an opt\-in region, you need to sp
 
 ## Create a subscription<a name="with-sns-create-supscription"></a>
 
-From account B, subscribe the Lambda function to the topic\. When a message is sent to the `lambda-x-account` topic in account A \(01234567891A\), Amazon SNS invokes the `SNS-X-Account` function in account B \(01234567891B\)\.
+From account B, subscribe the Lambda function to the topic\. When a message is sent to the `sns-topic-for-lambda` topic in account A \(01234567891A\), Amazon SNS invokes the `Function-With-SNS` function in account B \(01234567891B\)\.
 
 ```
 aws sns subscribe --protocol lambda \
---topic-arn arn:aws:sns:us-east-2:12345678901A:lambda-x-account \
---notification-endpoint arn:aws:lambda:us-east-2:12345678901B:function:SNS-X-Account \
+--topic-arn arn:aws:sns:us-east-2:12345678901A:sns-topic-for-lambda \
+--notification-endpoint arn:aws:lambda:us-east-2:12345678901B:function:Function-With-SNS \
 --profile accountB
 ```
 
@@ -145,7 +145,7 @@ You should see the following output:
 
 ```
 {
-    "SubscriptionArn": "arn:aws:sns:us-east-2:12345678901A:lambda-x-account:5d906xxxx-7c8x-45dx-a9dx-0484e31c98xx"
+    "SubscriptionArn": "arn:aws:sns:us-east-2:12345678901A:sns-topic-for-lambda:5d906xxxx-7c8x-45dx-a9dx-0484e31c98xx"
 }
 ```
 
@@ -157,7 +157,7 @@ From account A \(01234567891A\), test the subscription\. Type `Hello World` into
 
 ```
 aws sns publish --message file://message.txt --subject Test \
---topic-arn arn:aws:sns:us-east-2:12345678901A:lambda-x-account \
+--topic-arn arn:aws:sns:us-east-2:12345678901A:sns-topic-for-lambda \
 --profile accountA
 ```
 
