@@ -31,7 +31,7 @@ The AWS CLI is an open\-source tool that enables you to interact with AWS servic
 
 A [deployment package](gettingstarted-package.md) is required to create or update a Lambda function with or without runtime dependencies\. The deployment package acts as the source bundle to run your function's code and dependencies \(if applicable\) on Lambda\.
 
-A dependency can be any package, module or other assembly dependency that is not included with the [Lambda runtime](lambda-runtimes.md) environment for your function's code\. For more information, see [What is a runtime dependency?](#python-package)\.
+A dependency can be any package, module or other assembly dependency that is not included with the [Lambda runtime](lambda-runtimes.md) environment for your function's code\.
 
 The following example describes a Lambda function without runtime dependencies:
 + If your function's code is in Python 3\.8, and it depends only on standard Python math and logging libraries, you don't need to include the libraries in your \.zip file\. These libraries are included with the `python3.8` runtime\.

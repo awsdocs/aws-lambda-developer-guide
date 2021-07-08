@@ -6,6 +6,9 @@ You can insert logging statements into your code to help you validate that your 
 
 You can view logs for Lambda functions using the Lambda console, the CloudWatch console, the AWS Command Line Interface \(AWS CLI\), or the CloudWatch API\. This page describes how to view logs using the Lambda console\.
 
+**Note**  
+It may take 5 to 10 minutes for logs to show up after a function invocation\.
+
 **Topics**
 + [Prerequisites](#monitoring-cloudwatchlogs-prereqs)
 + [Pricing](#monitoring-cloudwatchlogs-pricing)
@@ -31,15 +34,12 @@ The following section describes how to view logs for your function on the Lambda
 
 1. Choose a function\.
 
-1. Choose **Monitoring**\.  
+1. Choose **Monitor**\.  
 ![\[Events\]](http://docs.aws.amazon.com/lambda/latest/dg/images/metrics-functions-list.png)![\[Events\]](http://docs.aws.amazon.com/lambda/latest/dg/)![\[Events\]](http://docs.aws.amazon.com/lambda/latest/dg/)
 
    A graphical representation of the metrics for the Lambda function are shown\.
 
 1. Choose **View logs in CloudWatch**\.
-
-**Note**  
-Logs may not be immediately available after invocation\. We recommend waiting 5 to 10 minutes before checking your execution role\.
 
 ## Using the AWS CLI<a name="monitoring-cloudwatchlogs-cli"></a>
 

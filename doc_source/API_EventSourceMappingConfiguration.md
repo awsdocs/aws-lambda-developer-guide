@@ -1,6 +1,6 @@
 # EventSourceMappingConfiguration<a name="API_EventSourceMappingConfiguration"></a>
 
-A mapping between an AWS resource and an AWS Lambda function\. See [CreateEventSourceMapping](API_CreateEventSourceMapping.md) for details\.
+A mapping between an AWS resource and a Lambda function\. For details, see [CreateEventSourceMapping](API_CreateEventSourceMapping.md)\.
 
 ## Contents<a name="API_EventSourceMappingConfiguration_Contents"></a>
 
@@ -40,17 +40,17 @@ Valid Values:` ReportBatchItemFailures`
 Required: No
 
  **LastModified**   <a name="SSS-Type-EventSourceMappingConfiguration-LastModified"></a>
-The date that the event source mapping was last updated, or its state changed, in Unix time seconds\.  
+The date that the event source mapping was last updated or that its state changed, in Unix time seconds\.  
 Type: Timestamp  
 Required: No
 
  **LastProcessingResult**   <a name="SSS-Type-EventSourceMappingConfiguration-LastProcessingResult"></a>
-The result of the last AWS Lambda invocation of your Lambda function\.  
+The result of the last Lambda invocation of your function\.  
 Type: String  
 Required: No
 
  **MaximumBatchingWindowInSeconds**   <a name="SSS-Type-EventSourceMappingConfiguration-MaximumBatchingWindowInSeconds"></a>
-\(Streams and SQS standard queues\) The maximum amount of time to gather records before invoking the function, in seconds\. The default value is zero\.  
+\(Streams and Amazon SQS standard queues\) The maximum amount of time to gather records before invoking the function, in seconds\. The default value is zero\.  
 Type: Integer  
 Valid Range: Minimum value of 0\. Maximum value of 300\.  
 Required: No
@@ -68,13 +68,13 @@ Valid Range: Minimum value of \-1\. Maximum value of 10000\.
 Required: No
 
  **ParallelizationFactor**   <a name="SSS-Type-EventSourceMappingConfiguration-ParallelizationFactor"></a>
-\(Streams only\) The number of batches to process from each shard concurrently\. The default value is 1\.  
+\(Streams only\) The number of batches to process concurrently from each shard\. The default value is 1\.  
 Type: Integer  
 Valid Range: Minimum value of 1\. Maximum value of 10\.  
 Required: No
 
  **Queues**   <a name="SSS-Type-EventSourceMappingConfiguration-Queues"></a>
- \(MQ\) The name of the Amazon MQ broker destination queue to consume\.   
+ \(Amazon MQ\) The name of the Amazon MQ broker destination queue to consume\.  
 Type: Array of strings  
 Array Members: Fixed number of 1 item\.  
 Length Constraints: Minimum length of 1\. Maximum length of 1000\.  
@@ -82,18 +82,18 @@ Pattern: `[\s\S]*`
 Required: No
 
  **SelfManagedEventSource**   <a name="SSS-Type-EventSourceMappingConfiguration-SelfManagedEventSource"></a>
-The Self\-Managed Apache Kafka cluster for your event source\.  
+The self\-managed Apache Kafka cluster for your event source\.  
 Type: [SelfManagedEventSource](API_SelfManagedEventSource.md) object  
 Required: No
 
  **SourceAccessConfigurations**   <a name="SSS-Type-EventSourceMappingConfiguration-SourceAccessConfigurations"></a>
-An array of the authentication protocol, or the VPC components to secure your event source\.  
+An array of the authentication protocol, VPC components, or virtual host to secure and define your event source\.  
 Type: Array of [SourceAccessConfiguration](API_SourceAccessConfiguration.md) objects  
 Array Members: Minimum number of 0 items\. Maximum number of 22 items\.  
 Required: No
 
  **StartingPosition**   <a name="SSS-Type-EventSourceMappingConfiguration-StartingPosition"></a>
-The position in a stream from which to start reading\. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon MSK Streams sources\. `AT_TIMESTAMP` is only supported for Amazon Kinesis streams\.  
+The position in a stream from which to start reading\. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon MSK stream sources\. `AT_TIMESTAMP` is supported only for Amazon Kinesis streams\.  
 Type: String  
 Valid Values:` TRIM_HORIZON | LATEST | AT_TIMESTAMP`   
 Required: No
@@ -109,7 +109,7 @@ Type: String
 Required: No
 
  **StateTransitionReason**   <a name="SSS-Type-EventSourceMappingConfiguration-StateTransitionReason"></a>
-Indicates whether the last change to the event source mapping was made by a user, or by the Lambda service\.  
+Indicates whether a user or Lambda made the last change to the event source mapping\.  
 Type: String  
 Required: No
 
@@ -122,7 +122,7 @@ Pattern: `^[^.]([a-zA-Z0-9\-_.]+)`
 Required: No
 
  **TumblingWindowInSeconds**   <a name="SSS-Type-EventSourceMappingConfiguration-TumblingWindowInSeconds"></a>
-\(Streams only\) The duration in seconds of a processing window\. The range is between 1 second up to 900 seconds\.  
+\(Streams only\) The duration in seconds of a processing window\. The range is 1–900 seconds\.  
 Type: Integer  
 Valid Range: Minimum value of 0\. Maximum value of 900\.  
 Required: No

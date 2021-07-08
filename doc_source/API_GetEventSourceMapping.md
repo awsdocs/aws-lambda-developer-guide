@@ -104,15 +104,15 @@ Array Members: Minimum number of 0 items\. Maximum number of 1 item\.
 Valid Values:` ReportBatchItemFailures` 
 
  ** [LastModified](#API_GetEventSourceMapping_ResponseSyntax) **   <a name="SSS-GetEventSourceMapping-response-LastModified"></a>
-The date that the event source mapping was last updated, or its state changed, in Unix time seconds\.  
+The date that the event source mapping was last updated or that its state changed, in Unix time seconds\.  
 Type: Timestamp
 
  ** [LastProcessingResult](#API_GetEventSourceMapping_ResponseSyntax) **   <a name="SSS-GetEventSourceMapping-response-LastProcessingResult"></a>
-The result of the last AWS Lambda invocation of your Lambda function\.  
+The result of the last Lambda invocation of your function\.  
 Type: String
 
  ** [MaximumBatchingWindowInSeconds](#API_GetEventSourceMapping_ResponseSyntax) **   <a name="SSS-GetEventSourceMapping-response-MaximumBatchingWindowInSeconds"></a>
-\(Streams and SQS standard queues\) The maximum amount of time to gather records before invoking the function, in seconds\. The default value is zero\.  
+\(Streams and Amazon SQS standard queues\) The maximum amount of time to gather records before invoking the function, in seconds\. The default value is zero\.  
 Type: Integer  
 Valid Range: Minimum value of 0\. Maximum value of 300\.
 
@@ -127,28 +127,28 @@ Type: Integer
 Valid Range: Minimum value of \-1\. Maximum value of 10000\.
 
  ** [ParallelizationFactor](#API_GetEventSourceMapping_ResponseSyntax) **   <a name="SSS-GetEventSourceMapping-response-ParallelizationFactor"></a>
-\(Streams only\) The number of batches to process from each shard concurrently\. The default value is 1\.  
+\(Streams only\) The number of batches to process concurrently from each shard\. The default value is 1\.  
 Type: Integer  
 Valid Range: Minimum value of 1\. Maximum value of 10\.
 
  ** [Queues](#API_GetEventSourceMapping_ResponseSyntax) **   <a name="SSS-GetEventSourceMapping-response-Queues"></a>
- \(MQ\) The name of the Amazon MQ broker destination queue to consume\.   
+ \(Amazon MQ\) The name of the Amazon MQ broker destination queue to consume\.  
 Type: Array of strings  
 Array Members: Fixed number of 1 item\.  
 Length Constraints: Minimum length of 1\. Maximum length of 1000\.  
 Pattern: `[\s\S]*` 
 
  ** [SelfManagedEventSource](#API_GetEventSourceMapping_ResponseSyntax) **   <a name="SSS-GetEventSourceMapping-response-SelfManagedEventSource"></a>
-The Self\-Managed Apache Kafka cluster for your event source\.  
+The self\-managed Apache Kafka cluster for your event source\.  
 Type: [SelfManagedEventSource](API_SelfManagedEventSource.md) object
 
  ** [SourceAccessConfigurations](#API_GetEventSourceMapping_ResponseSyntax) **   <a name="SSS-GetEventSourceMapping-response-SourceAccessConfigurations"></a>
-An array of the authentication protocol, or the VPC components to secure your event source\.  
+An array of the authentication protocol, VPC components, or virtual host to secure and define your event source\.  
 Type: Array of [SourceAccessConfiguration](API_SourceAccessConfiguration.md) objects  
 Array Members: Minimum number of 0 items\. Maximum number of 22 items\.
 
  ** [StartingPosition](#API_GetEventSourceMapping_ResponseSyntax) **   <a name="SSS-GetEventSourceMapping-response-StartingPosition"></a>
-The position in a stream from which to start reading\. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon MSK Streams sources\. `AT_TIMESTAMP` is only supported for Amazon Kinesis streams\.  
+The position in a stream from which to start reading\. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon MSK stream sources\. `AT_TIMESTAMP` is supported only for Amazon Kinesis streams\.  
 Type: String  
 Valid Values:` TRIM_HORIZON | LATEST | AT_TIMESTAMP` 
 
@@ -161,7 +161,7 @@ The state of the event source mapping\. It can be one of the following: `Creatin
 Type: String
 
  ** [StateTransitionReason](#API_GetEventSourceMapping_ResponseSyntax) **   <a name="SSS-GetEventSourceMapping-response-StateTransitionReason"></a>
-Indicates whether the last change to the event source mapping was made by a user, or by the Lambda service\.  
+Indicates whether a user or Lambda made the last change to the event source mapping\.  
 Type: String
 
  ** [Topics](#API_GetEventSourceMapping_ResponseSyntax) **   <a name="SSS-GetEventSourceMapping-response-Topics"></a>
@@ -172,7 +172,7 @@ Length Constraints: Minimum length of 1\. Maximum length of 249\.
 Pattern: `^[^.]([a-zA-Z0-9\-_.]+)` 
 
  ** [TumblingWindowInSeconds](#API_GetEventSourceMapping_ResponseSyntax) **   <a name="SSS-GetEventSourceMapping-response-TumblingWindowInSeconds"></a>
-\(Streams only\) The duration in seconds of a processing window\. The range is between 1 second up to 900 seconds\.  
+\(Streams only\) The duration in seconds of a processing window\. The range is 1–900 seconds\.  
 Type: Integer  
 Valid Range: Minimum value of 0\. Maximum value of 900\.
 

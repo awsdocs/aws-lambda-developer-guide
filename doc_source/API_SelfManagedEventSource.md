@@ -1,6 +1,6 @@
 # SelfManagedEventSource<a name="API_SelfManagedEventSource"></a>
 
-The Self\-Managed Apache Kafka cluster for your event source\.
+The self\-managed Apache Kafka cluster for your event source\.
 
 ## Contents<a name="API_SelfManagedEventSource_Contents"></a>
 

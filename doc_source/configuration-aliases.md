@@ -86,6 +86,8 @@ For more information about using resource names in policies, see [Resources and 
 
 Use routing configuration on an alias to send a portion of traffic to a second function version\. For example, you can reduce the risk of deploying a new version by configuring the alias to send most of the traffic to the existing version, and only a small percentage of traffic to the new version\.
 
+Note that Lambda uses a simple probabilistic model to distribute the traffic between the two function versions\. At low traffic levels, you might see a high variance between the configured and actual percentage of traffic on each version\. If your function uses provisioned concurrency, you can avoid [spillover invocations](monitoring-metrics.md#monitoring-metrics-invocation) by configuring a higher number of provisioned concurrency instances during the time that alias routing is active\. 
+
 You can point an alias to a maximum of two Lambda function versions\. The versions must meet the following criteria:
 + Both versions must have the same [execution role](lambda-intro-execution-role.md)\.
 + Both versions must have the same [dead\-letter queue](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq) configuration, or no dead\-letter queue configuration\.
@@ -117,7 +119,7 @@ Verify that the function has at least two published versions\. To create additio
 
    1. Choose **Save**\.
 
-### Configuring alias routing<a name="configuring-routing"></a>
+### Configuring alias routing using CLI<a name="configuring-routing"></a>
 
 Use the `create-alias` and `update-alias` AWS CLI commands to configure the traffic weights between two function versions\. When you create or update the alias, you specify the traffic weight in the `routing-config` parameter\.
 

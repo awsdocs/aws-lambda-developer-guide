@@ -18,7 +18,7 @@ The AWS CLI is an open\-source tool that enables you to interact with AWS servic
 
 ## Updating a function without runtime dependencies<a name="python-package-update-codeonly"></a>
 
-A dependency can be any package, module or other assembly dependency that is not included with the [Lambda runtime](lambda-runtimes.md) environment for your function's code\. For more information, see [What is a runtime dependency?](python-package.md)\.
+A dependency can be any package, module or other assembly dependency that is not included with the [Lambda runtime](lambda-runtimes.md) environment for your function's code\.
 
 For more information, see [What is a runtime dependency?](python-package.md#python-package-dependencies)\.
 
@@ -54,7 +54,7 @@ The Lambda function in this step uses a function handler of `lambda_function.lam
 
 ## Updating a function with runtime dependencies<a name="python-package-update-dependencies"></a>
 
-A dependency can be any package, module or other assembly dependency that is not included with the [Lambda runtime](lambda-runtimes.md) environment for your function's code\. For more information, see [What is a runtime dependency?](python-package.md)\.
+A dependency can be any package, module or other assembly dependency that is not included with the [Lambda runtime](lambda-runtimes.md) environment for your function's code\.
 
 For more information, see [What is a runtime dependency?](python-package.md#python-package-dependencies)\. 
 
@@ -134,7 +134,7 @@ The Lambda function in this step uses a function handler of `lambda_function.lam
 
 ## Using a virtual environment<a name="python-package-update-venv"></a>
 
-A dependency can be any package, module or other assembly dependency that is not included with the [Lambda runtime](lambda-runtimes.md) environment for your function's code\. For more information, see [What is a runtime dependency?](python-package.md)\.
+A dependency can be any package, module or other assembly dependency that is not included with the [Lambda runtime](lambda-runtimes.md) environment for your function's code\.
 
  For more information, see [What is a runtime dependency?](python-package.md#python-package-dependencies)\. 
 

@@ -1,21 +1,23 @@
 # Using Lambda with Amazon MQ<a name="with-mq"></a>
 
-Amazon MQ is a managed message broker service for [Apache ActiveMQ](https://activemq.apache.org/) and [RabbitMQ](https://www.rabbitmq.com)\. Lambda only supports Apache ActiveMQ\. A *message broker* allows software applications and components to communicate using various programming languages, operating systems, and formal messaging protocols through either topic or queue event destinations\.
+Amazon MQ is a managed message broker service for [Apache ActiveMQ](https://activemq.apache.org/) and [RabbitMQ](https://www.rabbitmq.com)\. A *message broker* enables software applications and components to communicate using various programming languages, operating systems, and formal messaging protocols through either topic or queue event destinations\.
 
-Amazon MQ can also manage Amazon Elastic Compute Cloud \(Amazon EC2\) instances on your behalf by installing ActiveMQ brokers and by providing different network topologies and other infrastructure needs\.
+Amazon MQ can also manage Amazon Elastic Compute Cloud \(Amazon EC2\) instances on your behalf by installing ActiveMQ or RabbitMQ brokers and by providing different network topologies and other infrastructure needs\.
 
-You can use a Lambda function to process records from your Amazon MQ message broker\. Your function is triggered through an [event source mapping](invocation-eventsourcemapping.md), a Lambda resource that reads messages from your broker and invokes the function [synchronously](invocation-sync.md)\.
+You can use a Lambda function to process records from your Amazon MQ message broker\. Lambda invokes your function through an [event source mapping](invocation-eventsourcemapping.md), a Lambda resource that reads messages from your broker and invokes the function [synchronously](invocation-sync.md)\.
 
 The Amazon MQ event source mapping has the following configuration restrictions:
-+ Cross account – Cross account processing is not supported\. You cannot use Lambda to process records from an Amazon MQ message broker that is in a different account\.
-+ Authentication – Only the ActiveMQ [SimpleAuthenticationPlugin](https://activemq.apache.org/security#simple-authentication-plugin) is supported\. User credentials associated with the broker are the only method of connection\. For more information about authentication, see [Messaging Authentication and Authorization for ActiveMQ](https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/security-authentication-authorization.html) in the *Amazon MQ Developer Guide*\.
++ Cross account – Lambda does not support cross\-account processing\. You cannot use Lambda to process records from an Amazon MQ message broker that is in a different AWSaccount\.
++ Authentication – For ActiveMQ, only the ActiveMQ [SimpleAuthenticationPlugin](https://activemq.apache.org/security#simple-authentication-plugin) is supported\. For RabbitMQ, only the [PLAIN](https://www.rabbitmq.com/access-control.html#mechanisms) authentication mechanism is supported\. Users must use AWS Secrets Manager to manage their credentials\. For more information about ActiveMQ authentication, see [Integrating ActiveMQ brokers with LDAP](https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/security-authentication-authorization.html) in the *Amazon MQ Developer Guide*\.
 + Connection quota – Brokers have a maximum number of allowed connections per wire\-level protocol\. This quota is based on the broker instance type\. For more information, see the [Brokers](https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/amazon-mq-limits.html#broker-limits) section of **Quotas in Amazon MQ** in the *Amazon MQ Developer Guide*\.
-+ Connectivity – You can create brokers in a public or private virtual private cloud \(VPC\)\. For private VPCs, your Lambda function needs access to the VPC to interact with the records\. For more information, see [Event source mapping API](#services-mq-api) later in this topic\.
-+ Event destinations – Only queue destinations are supported\. However, you can use a virtual topic, which behaves as a topic internally while interacting with Lambda as a queue\. For more information, see [Virtual Destinations](https://activemq.apache.org/virtual-destinations) on the Apache ActiveMQ website\.
-+ Network topology – Only one single\-instance or standby broker is supported per event source mapping\. Single\-instance brokers require a failover endpoint\. For more information about these broker deployment modes, see [Amazon MQ Broker Architecture](https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/amazon-mq-broker-architecture.html) in the *Amazon MQ Developer Guide*\.
-+ Protocols – Lambda consumes messages using the OpenWire/Java Message Service \(JMS\) protocol\. No other protocols are supported\. Within the JMS protocol, only [https://activemq.apache.org/maven/apidocs/org/apache/activemq/command/ActiveMQTextMessage.html](https://activemq.apache.org/maven/apidocs/org/apache/activemq/command/ActiveMQTextMessage.html) and [https://activemq.apache.org/maven/apidocs/org/apache/activemq/command/ActiveMQBytesMessage.html](https://activemq.apache.org/maven/apidocs/org/apache/activemq/command/ActiveMQBytesMessage.html) are supported\. For more information about the OpenWire protocol, see [OpenWire](https://activemq.apache.org/openwire.html) on the Apache ActiveMQ website\.
++ Connectivity – You can create brokers in a public or private virtual private cloud \(VPC\)\. For private VPCs, your Lambda function needs access to the VPC to receive messages\. For more information, see [Event source mapping API](#services-mq-api) later in this topic\.
++ Event destinations – Only queue destinations are supported\. However, you can use a virtual topic, which behaves as a topic internally while interacting with Lambda as a queue\. For more information, see [Virtual Destinations](https://activemq.apache.org/virtual-destinations) on the Apache ActiveMQ website, and [Virtual Hosts](https://www.rabbitmq.com/vhosts.html) on the RabbitMQ website\.
++ Network topology – For ActiveMQ, only one single\-instance or standby broker is supported per event source mapping\. For RabbitMQ, only one single\-instance broker or cluster deployment is supported per event source mapping\. Single\-instance brokers require a failover endpoint\. For more information about these broker deployment modes, see [Active MQ Broker Architecture](https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/amazon-mq-broker-architecture.html) and [Rabbit MQ Broker Architecture](https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/rabbitmq-broker-architecture.html)in the *Amazon MQ Developer Guide*\.
++ Protocols – Supported protocols depend on the type of Amazon MQ integration\.
+  + For ActiveMQ integrations, Lambda consumes messages using the OpenWire/Java Message Service \(JMS\) protocol\. No other protocols are supported for consuming messages\. Within the JMS protocol, only [https://activemq.apache.org/maven/apidocs/org/apache/activemq/command/ActiveMQTextMessage.html](https://activemq.apache.org/maven/apidocs/org/apache/activemq/command/ActiveMQTextMessage.html) and [https://activemq.apache.org/maven/apidocs/org/apache/activemq/command/ActiveMQBytesMessage.html](https://activemq.apache.org/maven/apidocs/org/apache/activemq/command/ActiveMQBytesMessage.html) are supported\. For more information about the OpenWire protocol, see [OpenWire](https://activemq.apache.org/openwire.html) on the Apache ActiveMQ website\.
+  + For RabbitMQ integrations, Lambda consumes messages using the AMQP 0\-9\-1 protocol\. No other protocols are supported for consuming messages\. For more information about RabbitMQ's implementation of the AMQP 0\-9\-1 protocol, see [AMQP 0\-9\-1 Complete Reference Guide](https://www.rabbitmq.com/amqp-0-9-1-reference.html) on the RabbitMQ website\.
 
-Lambda automatically supports the latest versions of ActiveMQ that Amazon MQ supports\. For the latest supported versions, see [Amazon MQ Release Notes](https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/amazon-mq-release-notes.html) in the *Amazon MQ Developer Guide*\.
+Lambda automatically supports the latest versions of ActiveMQ and RabbitMQ that Amazon MQ supports\. For the latest supported versions, see [Amazon MQ release notes](https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/amazon-mq-release-notes.html) in the *Amazon MQ Developer Guide*\.
 
 **Note**  
 By default, Amazon MQ has a weekly maintenance window for brokers\. During that window of time, brokers are unavailable\. For brokers without standby, Lambda cannot process any messages during that window\.
@@ -36,45 +38,101 @@ Lambda will pull messages until it has processed a maximum of 6 MB, until timeou
 **Note**  
 The maximum function invocation time is 14 minutes\. 
 
-Lambda processes all incoming batches concurrently and automatically scales the concurrency to meet demands\. You can monitor a given function's concurrency usage using the `ConcurrentExecutions` metric in Amazon CloudWatch\. For more information about concurrency, see [Managing concurrency for a Lambda function](configuration-concurrency.md)\.
+You can monitor a given function's concurrency usage using the `ConcurrentExecutions` metric in Amazon CloudWatch\. For more information about concurrency, see [Managing concurrency for a Lambda function](configuration-concurrency.md)\.
 
-**Example Amazon MQ record event**  
+**Example Amazon MQ record events**  
 
 ```
 {
-    "eventSource": "aws:amq",
-    "eventSourceArn": "arn:aws:mq:us-west-2:112556298976:broker:test:b-9bcfa592-423a-4942-879d-eb284b418fc8",
-    "messages": { [
-            {
-                "messageID": "ID:b-9bcfa592-423a-4942-879d-eb284b418fc8-1.mq.us-west-2.amazonaws.com-37557-1234520418293-4:1:1:1:1",
-                "messageType": "jms/text-message",
-                "data": "QUJDOkFBQUE=",
-                "connectionId": "myJMSCoID",
-                "redelivered": false,
-                "destination": {
-                   "physicalname": "testQueue" 
-                }, 
-                "timestamp": 1598827811958,
-                "brokerInTime": 1598827811958,
-                "brokerOutTime": 1598827811959
-            },
-            {
-                "messageID": "ID:b-9bcfa592-423a-4942-879d-eb284b418fc8-1.mq.us-west-2.amazonaws.com-37557-1234520418293-4:1:1:1:1",
-                "messageType":"jms/bytes-message",
-                "data": "3DTOOW7crj51prgVLQaGQ82S48k=",
-                "connectionId": "myJMSCoID1",
-                "persistent": false,
-                "destination": {
-                   "physicalname": "testQueue" 
-                }, 
-                "timestamp": 1598827811958,
-                "brokerInTime": 1598827811958,
-                "brokerOutTime": 1598827811959
-            }
-        ]
-    }
+  "eventSource": "aws:amq",
+  "eventSourceArn": "arn:aws:mq:us-west-2:112556298976:broker:test:b-9bcfa592-423a-4942-879d-eb284b418fc8",
+  "messages": {
+    [
+      {
+        "messageID": "ID:b-9bcfa592-423a-4942-879d-eb284b418fc8-1.mq.us-west-2.amazonaws.com-37557-1234520418293-4:1:1:1:1",
+        "messageType": "jms/text-message",
+        "data": "QUJDOkFBQUE=",
+        "connectionId": "myJMSCoID",
+        "redelivered": false,
+        "destination": {
+          "physicalname": "testQueue" 
+        }, 
+        "timestamp": 1598827811958,
+        "brokerInTime": 1598827811958,
+        "brokerOutTime": 1598827811959
+      },
+      {
+        "messageID": "ID:b-9bcfa592-423a-4942-879d-eb284b418fc8-1.mq.us-west-2.amazonaws.com-37557-1234520418293-4:1:1:1:1",
+        "messageType":"jms/bytes-message",
+        "data": "3DTOOW7crj51prgVLQaGQ82S48k=",
+        "connectionId": "myJMSCoID1",
+        "persistent": false,
+        "destination": {
+          "physicalname": "testQueue" 
+        }, 
+        "timestamp": 1598827811958,
+        "brokerInTime": 1598827811958,
+        "brokerOutTime": 1598827811959
+      }
+    ]
+  }
 }
 ```
+
+```
+{
+  "eventSource": "aws:rmq",
+  "eventSourceArn": "arn:aws:mq:us-west-2:112556298976:broker:test:b-9bcfa592-423a-4942-879d-eb284b418fc8",
+  "rmqMessagesByQueue": {
+    "test::/": [
+      {
+        "basicProperties": {
+          "contentType": "text/plain",
+          "contentEncoding": null,
+          "headers": {
+            "header1": {
+              "bytes": [
+                118,
+                97,
+                108,
+                117,
+                101,
+                49
+              ]
+            },
+            "header2": {
+              "bytes": [
+                118,
+                97,
+                108,
+                117,
+                101,
+                50
+              ]
+            },
+            "numberInHeader": 10
+          }
+          "deliveryMode": 1,
+          "priority": 34,
+          "correlationId": null,
+          "replyTo": null,
+          "expiration": "60000",
+          "messageId": null,
+          "timestamp": "Jan 1, 1970, 12:33:41 AM",
+          "type": null,
+          "userId": "AIDACKCEVSQ6C2EXAMPLE",
+          "appId": null,
+          "clusterId": null,
+          "bodySize": 80
+        },
+        "redelivered": false,
+        "data": "eyJ0aW1lb3V0IjowLCJkYXRhIjoiQ1pybWYwR3c4T3Y0YnFMUXhENEUifQ=="
+      }
+    ]
+  }
+}
+```
+In the RabbitMQ example, `test` is the name of the RabbitMQ queue, and `/` is the name of the virtual host\. When receiving messages, the event source lists messages under `test::/`\.
 
 ## Execution role permissions<a name="events-mq-permissions"></a>
 
@@ -87,6 +145,9 @@ To read records from an Amazon MQ broker, your Lambda function needs the followi
 + [ec2:DescribeSecurityGroups](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html)
 + [ec2:DescribeSubnets](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSubnets.html)
 + [ec2:DescribeVpcs](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpcs.html)
++ [logs:CreateLogGroup](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogGroup.html)
++ [logs:CreateLogStream](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogStream.html)
++ [logs:PutLogEvents](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html)
 
 **Note**  
 When using an encrypted customer managed key, add the `[kms:Decrypt](https://docs.aws.amazon.com/msk/1.0/apireference/clusters-clusterarn-bootstrap-brokers.html#clusters-clusterarn-bootstrap-brokersget)` permission as well\.
@@ -113,7 +174,7 @@ Lambda supports the following options for Amazon MQ event sources:
 + **MQ broker** – Select an Amazon MQ broker\.
 + **Batch size** – Set the maximum number of messages to retrieve in a single batch\.
 + **Queue name** – Enter the Amazon MQ queue to consume\.
-+ **Source access configuration** – Select the AWS Secrets Manager secret that stores your broker credentials\.
++ **Source access configuration** – Enter virtual host information and the Secrets Manager secret that stores your broker credentials\.
 + **Enable trigger** – Disable the trigger to stop processing records\.
 
 To enable or disable the trigger \(or delete it\), choose the **MQ** trigger in the designer\. To reconfigure the trigger, use the event source mapping API operations\.
@@ -129,26 +190,26 @@ To manage an event source with the [AWS CLI](https://docs.aws.amazon.com/cli/lat
 
 To create the event source mapping with the AWS Command Line Interface \(AWS CLI\), use the [https://docs.aws.amazon.com/cli/latest/reference/lambda/create-event-source-mapping.html](https://docs.aws.amazon.com/cli/latest/reference/lambda/create-event-source-mapping.html) command\.
 
-By default, Amazon MQ brokers are created with the `PubliclyAccessible` flag set to false\. It is only when `PubliclyAccessible` is set to true that the broker is given a public IP address\. 
+By default, Amazon MQ brokers are created with the `PubliclyAccessible` flag set to false\. It is only when `PubliclyAccessible` is set to true that the broker receives a public IP address\.
 
-For full access with your event source mapping, your broker must either use a public endpoint or provide access to the VPC\. To meet the Amazon VPC access requirements, you can do one of the following:
+For full access with your event source mapping, your broker must either use a public endpoint or provide access to the VPC\. To meet the Amazon Virtual Private Cloud \(Amazon VPC\) access requirements, you can do one of the following:
 + Configure one NAT gateway per public subnet\. For more information, see [Internet and service access for VPC\-connected functions](configuration-vpc.md#vpc-internet)\.
-+ Create a connection between your Amazon VPC and Lambda\. Your Amazon VPC must also connect to AWS STS and Secrets Manager endpoints\. For more information, see [Configuring interface VPC endpoints for Lambda](configuration-vpc-endpoints.md)\.
++ Create a connection between your Amazon VPC and Lambda\. Your Amazon VPC must also connect to AWS Security Token Service \(AWS STS\) and Secrets Manager endpoints\. For more information, see [Configuring interface VPC endpoints for Lambda](configuration-vpc-endpoints.md)\.
 
-The Amazon Virtual Private Cloud \(Amazon VPC\) security group rules that you configure should have the following settings at minimum:
+The Amazon VPC security group rules that you configure should have the following settings at minimum:
 + Inbound rules – For a broker without public accessibility, allow all traffic on all ports for the security group that's specified as your source\. For a broker with public accessibility, allow all traffic on all ports for all destinations\.
 + Outbound rules – Allow all traffic on all ports for all destinations\.
 
 The Amazon VPC configuration is discoverable through the [Amazon MQ API](https://docs.aws.amazon.com/amazon-mq/latest/api-reference/resources.html) and does not need to be configured in the `create-event-source-mapping` setup\.
 
-The following example AWS CLI command creates an event source which maps a Lambda function named `MQ-Example-Function` to an Amazon MQ broker named `ExampleMQBroker`\. The command also provides a Secrets Manager secret named `ExampleMQBrokerUserPassword` that stores the broker credentials\.
+The following example AWS CLI command creates an event source which maps a Lambda function named `MQ-Example-Function` to an Amazon MQ RabbitMQ\-based broker named `ExampleMQBroker`\. The command also provides the virtual host name and a Secrets Manager secret ARN that stores the broker credentials\.
 
 ```
 aws lambda create-event-source-mapping \
---event-source-arn arn:aws:mq:us-east-1:12345678901:broker:ExampleMQBroker:b-b4d492ef-bdc3-45e3-a781-cd1a3102ecca \
---function-name MQ-Example-Function \
---source-access-configuration Type=BASIC_AUTH,URI=arn:aws:secretsmanager:us-east-1:12345678901:secret:ExampleMQBrokerUserPassword-xPBMTt \
---queues ExampleQueue
+--event-source-arn arn:aws:mq:us-east-1:123456789012:broker:ExampleMQBroker:b-24cacbb4-b295-49b7-8543-7ce7ce9dfb98 \
+--function-name arn:aws:lambda:us-east-1:123456789012:function:MQ-Example-Function \
+--queues ExampleQueue \
+--source-access-configuration Type=VIRTUAL_HOST,URI="/" Type=BASIC_AUTH,URI=arn:aws:secretsmanager:us-east-1:123456789012:secret:ExampleMQBrokerUserPassword-xPBMTt \
 ```
 
 You should see the following output:
@@ -157,8 +218,8 @@ You should see the following output:
 {
     "UUID": "91eaeb7e-c976-1234-9451-8709db01f137",
     "BatchSize": 100,
-    "EventSourceArn": "arn:aws:mq:us-east-1:12345678901:broker:ExampleMQBroker:b-b4d492ef-bdc3-45e3-a781-cd1a3102ecca",
-    "FunctionArn": "arn:aws:lambda:us-east-1:12345678901:function:MQ-Example-Function",
+    "EventSourceArn": "arn:aws:mq:us-east-1:123456789012:broker:ExampleMQBroker:b-b4d492ef-bdc3-45e3-a781-cd1a3102ecca",
+    "FunctionArn": "arn:aws:lambda:us-east-1:123456789012:function:MQ-Example-Function",
     "LastModified": 1601927898.741,
     "LastProcessingResult": "No records processed",
     "State": "Creating",
@@ -169,13 +230,13 @@ You should see the following output:
     "SourceAccessConfigurations": [
         {
             "Type": "BASIC_AUTH",
-            "URI": "arn:aws:secretsmanager:us-east-1:12345678901:secret:ExampleMQBrokerUserPassword-xPBMTt"
+            "URI": "arn:aws:secretsmanager:us-east-1:123456789012:secret:ExampleMQBrokerUserPassword-xPBMTt"
         }
     ]
 }
 ```
 
-Using the `[update\-event\-source\-mapping](https://docs.aws.amazon.com/cli/latest/reference/lambda/update-event-source-mapping.html)` command, you can configure additional options such as how batches are processed and to specify when to discard records that can't be processed\. The following example command updates an event source mapping to have a batch size of 2\.
+Using the `[update\-event\-source\-mapping](https://docs.aws.amazon.com/cli/latest/reference/lambda/update-event-source-mapping.html)` command, you can configure additional options such as how Lambda processes batches and to specify when to discard records that cannot be processed\. The following example command updates an event source mapping to have a batch size of 2\.
 
 ```
 aws lambda update-event-source-mapping \
@@ -189,8 +250,8 @@ You should see the following output:
 {
     "UUID": "91eaeb7e-c976-1234-9451-8709db01f137",
     "BatchSize": 2,
-    "EventSourceArn": "arn:aws:mq:us-east-1:12345678901:broker:ExampleMQBroker:b-b4d492ef-bdc3-45e3-a781-cd1a3102ecca",
-    "FunctionArn": "arn:aws:lambda:us-east-1:12345678901:function:MQ-Example-Function",
+    "EventSourceArn": "arn:aws:mq:us-east-1:123456789012:broker:ExampleMQBroker:b-b4d492ef-bdc3-45e3-a781-cd1a3102ecca",
+    "FunctionArn": "arn:aws:lambda:us-east-1:123456789012:function:MQ-Example-Function",
     "LastModified": 1601928393.531,
     "LastProcessingResult": "No records processed",
     "State": "Updating",
@@ -198,7 +259,7 @@ You should see the following output:
 }
 ```
 
-Updated settings are applied asynchronously and aren't reflected in the output until the process completes\. To view the current status of your resource, use the [https://docs.aws.amazon.com/cli/latest/reference/lambda/get-event-source-mapping.html](https://docs.aws.amazon.com/cli/latest/reference/lambda/get-event-source-mapping.html) command\.
+Lambda updates these settings asynchronously\. The output will not reflect changes until this process completes\. To view the current status of your resource, use the [https://docs.aws.amazon.com/cli/latest/reference/lambda/get-event-source-mapping.html](https://docs.aws.amazon.com/cli/latest/reference/lambda/get-event-source-mapping.html) command\.
 
 ```
 aws lambda get-event-source-mapping \
@@ -211,8 +272,8 @@ You should see the following output:
 {
     "UUID": "91eaeb7e-c976-4939-9451-8709db01f137",
     "BatchSize": 2,
-    "EventSourceArn": "arn:aws:mq:us-east-1:12345678901:broker:ExampleMQBroker:b-b4d492ef-bdc3-45e3-a781-cd1a3102ecca",
-    "FunctionArn": "arn:aws:lambda:us-east-1:12345678901:function:MQ-Example-Function",
+    "EventSourceArn": "arn:aws:mq:us-east-1:123456789012:broker:ExampleMQBroker:b-b4d492ef-bdc3-45e3-a781-cd1a3102ecca",
+    "FunctionArn": "arn:aws:lambda:us-east-1:123456789012:function:MQ-Example-Function",
     "LastModified": 1601928393.531,
     "LastProcessingResult": "No records processed",
     "State": "Enabled",
@@ -222,7 +283,7 @@ You should see the following output:
 
 ## Event source mapping errors<a name="services-mq-errors"></a>
 
-When a Lambda function encounters an unrecoverable error, your Amazon MQ consumer stops processing records\. Any other consumers can continue processing, provided they don't encounter the same error\. To determine the potential cause of a stopped consumer, check the `StateTransitionReason` field in the return details of your `EventSourceMapping` for one of the following codes:
+When a Lambda function encounters an unrecoverable error, your Amazon MQ consumer stops processing records\. Any other consumers can continue processing, provided that they do not encounter the same error\. To determine the potential cause of a stopped consumer, check the `StateTransitionReason` field in the return details of your `EventSourceMapping` for one of the following codes:
 
 **`ESM_CONFIG_NOT_VALID`**  
 The event source mapping configuration is not valid\.
@@ -236,4 +297,4 @@ Lambda does not have the required permissions to access the event source\.
 **`FUNCTION_CONFIG_NOT_VALID`**  
 The function's configuration is not valid\.
 
-Records also go unprocessed if they are dropped due to their size\. The size limit for Lambda records is 6 MB\. To redeliver messages upon function error, you can use a redelivery policy and dead\-letter queue \(DLQ\) handling with Amazon MQ\. For more information, see [Message Redelivery and DLQ Handling](https://activemq.apache.org/message-redelivery-and-dlq-handling) on the Apache ActiveMQ website\.
+Records also go unprocessed if Lambda drops them due to their size\. The size limit for Lambda records is 6 MB\. To redeliver messages upon function error, you can use a redelivery policy and dead\-letter queue \(DLQ\) handling with Amazon MQ\. For more information, see [Message Redelivery and DLQ Handling](https://activemq.apache.org/message-redelivery-and-dlq-handling) on the Apache ActiveMQ website and [Reliability Guide](https://www.rabbitmq.com/reliability.html) on the RabbitMQ website\.

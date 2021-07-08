@@ -8,7 +8,7 @@ An internal extension runs as part of the runtime process\. Your function access
 
 You can add extensions to a function using the Lambda console, the AWS Command Line Interface \(AWS CLI\), or infrastructure as code \(IaC\) services and tools such as AWS CloudFormation, AWS Serverless Application Model \(AWS SAM\), and Terraform\.
 
-The following [Lambda runtimes](lambda-runtimes.md) support external extensions:
+The following [Lambda runtimes](lambda-runtimes.md) support extensions:
 + \.NET Core 3\.1 \(C\#/PowerShell\) \(`dotnetcore3.1`\)
 + Custom runtime \(`provided`\)
 + Custom runtime on Amazon Linux 2 \(`provided.al2`\)
@@ -21,6 +21,8 @@ The following [Lambda runtimes](lambda-runtimes.md) support external extensions:
 + Python 3\.7 \(`python3.7`\)
 + Ruby 2\.7 \(`ruby2.7`\)
 + Ruby 2\.5 \(`ruby2.5`\)
+
+Note that the Go 1\.x runtime does not support extensions\. To support extensions, you can create Go functions on the `provided.al2` runtime\. For more information, see [ Migrating Lambda functions to Amazon Linux 2](http://aws.amazon.com/blogs/compute/migrating-aws-lambda-functions-to-al2/)\.
 
 You are charged for the execution time that the extension consumes \(in 1 ms increments\)\. For more pricing information for extensions, see [AWS Lambda Pricing](http://aws.amazon.com/lambda/pricing/)\. For pricing information for partner extensions, see those partners' websites\. There is no cost to install your own extensions\.
 

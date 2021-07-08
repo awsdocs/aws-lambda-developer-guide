@@ -77,7 +77,7 @@ Your Lambda function's [execution role](lambda-intro-execution-role.md) is an AW
 
 ## Creating a function without runtime dependencies<a name="python-package-create-no-dependency"></a>
 
-A dependency can be any package, module or other assembly dependency that is not included with the [Lambda runtime](lambda-runtimes.md) environment for your function's code\. For more information, see [What is a runtime dependency?](python-package.md)\.
+A dependency can be any package, module or other assembly dependency that is not included with the [Lambda runtime](lambda-runtimes.md) environment for your function's code\.
 
  For more information, see [What is a runtime dependency?](python-package.md#python-package-dependencies)
 
@@ -254,7 +254,7 @@ You can now delete the resources that you created for this tutorial, unless you 
 
 ## Creating a function with runtime dependencies<a name="python-package-create-with-dependency"></a>
 
-A dependency can be any package, module or other assembly dependency that is not included with the [Lambda runtime](lambda-runtimes.md) environment for your function's code\. For more information, see [What is a runtime dependency?](python-package.md)\.
+A dependency can be any package, module or other assembly dependency that is not included with the [Lambda runtime](lambda-runtimes.md) environment for your function's code\.
 
 For more information, see [What is a runtime dependency?](python-package.md#python-package-dependencies)
 

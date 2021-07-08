@@ -54,6 +54,12 @@ You grant [other services](lambda-services.md) and accounts permission to invoke
 
 This typically occurs when your function manages resources in the same AWS service that triggers it\. For example, it's possible to create a function that stores an object in an Amazon Simple Storage Service \(Amazon S3\) bucket that's configured with a [notification that invokes the function again](with-s3.md)\. To stop the function from running, on the [function configuration page](configuration-console.md), choose **Throttle**\. Then, identify the code path or configuration error that caused the recursive invocation\.
 
+## Lambda: Alias routing with provisioned concurrency<a name="troubleshooting-invocation-alias"></a>
+
+**Issue:** *Provisioned concurrency spillover invocations during alias routing\.*
+
+Lambda uses a simple probabilistic model to distribute the traffic between the two function versions\. At low traffic levels, you might see a high variance between the configured and actual percentage of traffic on each version\. If your function uses provisioned concurrency, you can avoid [spillover invocations](monitoring-metrics.md#monitoring-metrics-invocation) by configuring a higher number of provisioned concurrency instances during the time that alias routing is active\. 
+
 ## Lambda: Cold starts with provisioned concurrency<a name="troubleshooting-invocation-coldstart"></a>
 
 **Issue:** *You see cold starts after enabling provisioned concurrency\.*

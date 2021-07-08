@@ -1,24 +1,49 @@
 # Using Lambda with Amazon MSK<a name="with-msk"></a>
 
-[Amazon Managed Streaming for Apache Kafka \(Amazon MSK\)](https://docs.aws.amazon.com/msk/latest/developerguide/what-is-msk.html) is a fully managed service that enables you to build and run applications that use Apache Kafka to process streaming data\. Amazon MSK provides the control\-plane operations, such as those for creating, updating, and deleting clusters\. It supports multiple open\-source versions of Kafka\.
+[Amazon Managed Streaming for Apache Kafka \(Amazon MSK\)](https://docs.aws.amazon.com/msk/latest/developerguide/what-is-msk.html) is a fully managed service that you can use to build and run applications that use Apache Kafka to process streaming data\. Amazon MSK simplifies the setup, scaling, and management of clusters running Kafka\. Amazon MSK also makes it easier to configure your application for multiple Availability Zones and for security with AWS Identity and Access Management \(IAM\)\. Additionally, Amazon MSK supports multiple open\-source versions of Kafka\.
 
-When you create an Amazon MSK cluster, you receive the required hosting and connection information of the cluster\. This information includes the Kafka cluster hostname, topic name, SASL/SCRAM user name and password, and bootstrap server host\-port pairs\.
+Amazon MSK as an event source operates similarly to using Amazon Simple Queue Service \(Amazon SQS\) or Amazon Kinesis\. Lambda internally polls for new messages from the event source and then synchronously invokes the target Lambda function\. Lambda reads the messages in batches and provides these to your function as an event payload\. The maximum batch size is configurable\. \(The default is 100 messages\.\)
 
-To support your Kafka cluster on Amazon MSK, you might need to create Amazon Virtual Private Cloud \(Amazon VPC\) networking components\. For more information, see [Using Amazon MSK as an event source for AWS Lambda](http://aws.amazon.com/blogs/compute/using-amazon-msk-as-an-event-source-for-aws-lambda/) on the AWS Compute Blog\.
+For an example of how to configure Amazon MSK as an event source, see [Using Amazon MSK as an event source for AWS Lambda](http://aws.amazon.com/blogs/compute/using-amazon-msk-as-an-event-source-for-aws-lambda/) on the AWS Compute Blog\.
+
+Lambda reads the messages sequentially for each partition\. After Lambda processes each batch, it commits the offsets of the messages in that batch\. If your function returns an error for any of the messages in a batch, Lambda retries the whole batch of messages until processing succeeds or the messages expire\.
+
+Lambda allows a function to run for up to 14 minutes before stopping it\.
+
+Lambda sends the batch of messages in the event parameter when it invokes your function\. The event payload contains an array of messages\. Each array item contains details of the Amazon MSK topic and partition identifier, together with a timestamp and a base64\-encoded message\.
+
+```
+{   "eventSource": "aws:kafka",
+    "eventSourceArn": "arn:aws:kafka:sa-east-1:123456789012:cluster/vpc-2priv-2pub/751d2973-a626-431c-9d4e-d7975eb44dd7-2",
+    "records": {
+      "mytopic-0": [
+          {
+            "topic": "mytopic"
+            "partition": "0",
+            "offset": 15,
+            "timestamp": 1545084650987,
+            "timestampType": "CREATE_TIME",
+            "value": "SGVsbG8sIHRoaXMgaXMgYSB0ZXN0Lg==",
+          }
+      ]
+    }
+}
+```
 
 **Topics**
-+ [Managing access and permissions for an Amazon MSK cluster](#msk-permissions)
-+ [Adding an Amazon MSK cluster as an event source](#services-msk-topic-add)
++ [Managing access and permissions](#msk-permissions)
++ [Network configuration](#services-msk-vpc-config)
++ [Adding Amazon MSK as an event source](#services-msk-topic-add)
++ [Auto scaling of the Amazon MSK event source](#services-msk-ops-scaling)
++ [Amazon MSK configuration parameters](#services-msk-parms)
 
-## Managing access and permissions for an Amazon MSK cluster<a name="msk-permissions"></a>
+## Managing access and permissions<a name="msk-permissions"></a>
 
-Lambda polls your Apache Kafka topic partitions for new records and invokes your Lambda function [synchronously](invocation-sync.md)\. To update other AWS resources that your cluster uses, your Lambda function—as well as your AWS Identity and Access Management \(IAM\) users and roles—must have permission to perform these actions\.
-
-This page describes how to grant permission to Lambda and other users of your Amazon MSK cluster\.
+For Lambda to poll your Kafka topic and update other cluster resources, your Lambda function—as well as your IAM users and roles—must have the following permissions\.
 
 ### Required Lambda function permissions<a name="msk-api-actions"></a>
 
-To read records from your Amazon MSK cluster on your behalf, your Lambda function's [execution role](lambda-intro-execution-role.md) must have permission\. You can either add the AWS managed policy `AWSLambdaMSKExecutionRole` to your execution role, or create a custom policy with permission to perform the following actions:
+Your Lambda function's [execution role](lambda-intro-execution-role.md) must have permission to read records from your Amazon MSK cluster on your behalf\. You can either add the AWS managed policy `AWSLambdaMSKExecutionRole` to your execution role, or create a custom policy with permission to perform the following actions:
 + [kafka:DescribeCluster](https://docs.aws.amazon.com/msk/1.0/apireference/clusters-clusterarn.html#clusters-clusterarnget)
 + [kafka:GetBootstrapBrokers](https://docs.aws.amazon.com/msk/1.0/apireference/clusters-clusterarn-bootstrap-brokers.html#clusters-clusterarn-bootstrap-brokersget)
 + [ec2:CreateNetworkInterface](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html)
@@ -43,46 +68,48 @@ Follow these steps to add the AWS managed policy `AWSLambdaMSKExecutionRole` to 
 
 1. Select the policy from the list, and then choose **Policy actions**, **Attach**\.
 
-1. Select your execution role from the list, and then choose **Attach policy**\.
+1. On the **Attach policy** page, select your execution role from the list, and then choose **Attach policy**\.
 
 ### Granting users access with an IAM policy<a name="msk-permissions-add-users"></a>
 
-By default, IAM users and roles don't have permission to perform Amazon MSK API operations\. To grant access to users in your organization or account, you might need an identity\-based policy\. For more information, see [Amazon Managed Streaming for Apache Kafka Identity\-Based Policy Examples](https://docs.aws.amazon.com/msk/latest/developerguide/security_iam_id-based-policy-examples.html) in the *Amazon Managed Streaming for Apache Kafka Developer Guide*\.
+By default, IAM users and roles do not have permission to perform Amazon MSK API operations\. To grant access to users in your organization or account, you might need an identity\-based policy\. For more information, see [Amazon MSK Identity\-Based Policy Examples](https://docs.aws.amazon.com/msk/latest/developerguide/security_iam_id-based-policy-examples.html) in the *Amazon Managed Streaming for Apache Kafka Developer Guide*\.
 
 ### Using SASL/SCRAM authentication<a name="msk-permissions-add-secret"></a>
 
-Amazon MSK supports Simple Authentication and Security Layer/Salted Challenge Response Authentication Mechanism \(SASL/SCRAM\) authentication\. You can control access to your Amazon MSK clusters by setting up user name and password authentication using an AWS Secrets Manager secret\. For more information, see [Using Username and Password Authentication with AWS Secrets Manager](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password.html) in the *Amazon Managed Streaming for Apache Kafka Developer Guide*\.
+Amazon MSK supports Simple Authentication and Security Layer/Salted Challenge Response Authentication Mechanism \(SASL/SCRAM\) authentication\. You can control access to your Amazon MSK clusters by setting up user name and password authentication using an AWS Secrets Manager secret\. For more information, see [Username and password authentication with AWS Secrets Manager](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password.html) in the *Amazon Managed Streaming for Apache Kafka Developer Guide*\.
 
-## Adding an Amazon MSK cluster as an event source<a name="services-msk-topic-add"></a>
+Note that Amazon MSK does not support SASL/PLAIN authentication\.
 
-You can use a Lambda function to process records from your Apache Kafka cluster when the cluster is configured as an [event](gettingstarted-concepts.md#gettingstarted-concepts-event) source\. To create an [event source mapping](invocation-eventsourcemapping.md), you can add your Kafka cluster as a Lambda function [trigger](gettingstarted-concepts.md#gettingstarted-concepts-trigger) using the Lambda console, [AWS SDK](http://aws.amazon.com/getting-started/tools-sdks/), or [AWS Command Line Interface \(AWS CLI\)](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)\.
+## Network configuration<a name="services-msk-vpc-config"></a>
 
-This section describes how to add your Kafka cluster and topic as a function trigger using the Lambda console or AWS CLI\.
+Lambda must have access to the Amazon Virtual Private Cloud \(Amazon VPC\) resources associated with your Amazon MSK cluster\. We recommend that you deploy AWS PrivateLink [VPC endpoints](https://docs.aws.amazon.com/vpc/latest/privatelink/endpoint-services-overview.html) for Lambda and AWS Security Token Service \(AWS STS\)\. If authentication is required, also deploy a VPC endpoint for Secrets Manager\.
 
-### Prerequisites<a name="services-msk-prereqs"></a>
-+ An Amazon Managed Streaming for Apache Kafka \(Amazon MSK\) cluster and a Kafka topic\. For more information, see [Getting Started Using Amazon MSK](https://docs.aws.amazon.com/msk/latest/developerguide/getting-started.html) in the *Amazon Managed Streaming for Apache Kafka Developer Guide*\.
-+ A [Lambda execution role](lambda-intro-execution-role.md) with permission to access the AWS resources that your MSK cluster uses\. For more information, see [Managing access and permissions for an Amazon MSK cluster](#msk-permissions)\.
+Alternatively, ensure that the VPC associated with your Amazon MSK cluster includes one NAT gateway per public subnet\. For more information, see [Internet and service access for VPC\-connected functions](configuration-vpc.md#vpc-internet)\.
 
-### VPC configuration<a name="services-msk-vpc-config"></a>
-
-To get Apache Kafka records from Amazon MSK brokers, Lambda must have access to the Amazon Virtual Private Cloud \(Amazon VPC\) resources associated with your MSK cluster\. To meet Amazon VPC access requirements, do one of the following:
-+ We recommend that you deploy Amazon VPC Endpoints \(PrivateLink\) for Lambda and AWS STS services\. For more information, see [Configuring interface VPC endpoints for Lambda](configuration-vpc-endpoints.md)\.
-
-  If authentication is required, also deploy an Amazon VPC Endpoint for the Secrets Manager\.
-+ Alternatively, you can configure one NAT gateway per public subnet\. For more information, see [Internet and service access for VPC\-connected functions](configuration-vpc.md#vpc-internet)\.
-
-Your Amazon VPC security groups must be configured with the following rules \(at minimum\):
+You must configure your Amazon VPC security groups with the following rules \(at minimum\):
 + Inbound rules – Allow all traffic on all ports for the security group specified as your event source\.
 + Outbound rules – Allow all traffic on all ports for all destinations\.
 
 **Note**  
-Your Amazon VPC configuration is discoverable through the [Amazon MSK API](https://docs.aws.amazon.com/msk/1.0/apireference/resources.html), and doesn't need to be configured in your `create-event-source-mapping` setup\.
+Your Amazon VPC configuration is discoverable through the [Amazon MSK API](https://docs.aws.amazon.com/msk/1.0/apireference/resources.html), and does not need to be configured during setup using the create\-event\-source\-mapping command\.
 
-### Adding an Amazon MSK cluster using the Lambda console<a name="services-msk-trigger"></a>
+For more information about configuring the network, see [Setting up AWS Lambda with an Apache Kafka cluster within a VPC](http://aws.amazon.com/blogs/compute/setting-up-aws-lambda-with-an-apache-kafka-cluster-within-a-vpc/) on the AWS Compute Blog\.
+
+## Adding Amazon MSK as an event source<a name="services-msk-topic-add"></a>
+
+To create an [event source mapping](invocation-eventsourcemapping.md), add Amazon MSK as a Lambda function [trigger](gettingstarted-concepts.md#gettingstarted-concepts-trigger) using the Lambda console, an [AWS SDK](http://aws.amazon.com/getting-started/tools-sdks/), or the [AWS Command Line Interface \(AWS CLI\)](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)\.
+
+This section describes how to create an event source mapping using the Lambda console and the AWS CLI\.
+
+### Prerequisites<a name="services-msk-prereqs"></a>
++ An Amazon MSK cluster and a Kafka topic\. For more information, see [Getting Started Using Amazon MSK](https://docs.aws.amazon.com/msk/latest/developerguide/getting-started.html) in the *Amazon Managed Streaming for Apache Kafka Developer Guide*\.
++ A [Lambda execution role](lambda-intro-execution-role.md) with permission to access the AWS resources that your Amazon MSK cluster uses\.
+
+### Adding an Amazon MSK trigger \(console\)<a name="services-msk-trigger"></a>
 
 Follow these steps to add your Amazon MSK cluster and a Kafka topic as a trigger for your Lambda function\.
 
-**To add an MSK trigger to your Lambda function \(console\)**
+**To add an Amazon MSK trigger to your Lambda function \(console\)**
 
 1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
@@ -90,20 +117,38 @@ Follow these steps to add your Amazon MSK cluster and a Kafka topic as a trigger
 
 1. Under **Function overview**, choose **Add trigger**\.
 
-1. Under **Trigger configuration**, choose the **MSK** trigger type\.
+1. Under **Trigger configuration**, do the following:
 
-1. Configure the remaining options, and then choose **Add**\.
+   1. Choose the **MSK** trigger type\.
 
-### Adding an Amazon MSK cluster using the AWS CLI<a name="services-msk-aws-cli"></a>
+   1. For **MSK cluster**, select your cluster\.
+
+   1. For **Batch size**, enter the maximum number of messages to receive in a single batch\.
+
+   1. For **Topic name**, enter the name of a Kafka topic\.
+
+   1. \(Optional\) For **Starting position**, choose **Latest** to start reading the stream from the latest record\. Or, choose **Trim horizon** to start at the earliest available record\.
+
+   1. \(Optional\) For **Secret key**, choose the secret key for SASL/SCRAM authentication of the brokers in your Amazon MSK cluster\.
+
+   1. To create the trigger in a disabled state for testing \(recommended\), clear **Enable trigger**\. Or, to enable the trigger immediately, select **Enable trigger**\.
+
+1. To create the trigger, choose **Add**\.
+
+### Adding an Amazon MSK trigger \(AWS CLI\)<a name="services-msk-aws-cli"></a>
 
 Use the following example AWS CLI commands to create and view an Amazon MSK trigger for your Lambda function\.
 
 #### Creating a trigger using the AWS CLI<a name="services-msk-aws-cli-create"></a>
 
-The following example uses the [https://docs.aws.amazon.com/cli/latest/reference/lambda/create-event-source-mapping.html](https://docs.aws.amazon.com/cli/latest/reference/lambda/create-event-source-mapping.html) AWS CLI command to map a Lambda function named `my-kafka-function` to a Kafka topic named `AWSKafkaTopic`\. The topic's starting position is set to `latest`\.
+The following example uses the [https://docs.aws.amazon.com/cli/latest/reference/lambda/create-event-source-mapping.html](https://docs.aws.amazon.com/cli/latest/reference/lambda/create-event-source-mapping.html) AWS CLI command to map a Lambda function named `my-kafka-function` to a Kafka topic named `AWSKafkaTopic`\. The topic's starting position is set to `LATEST`\.
 
 ```
-aws lambda create-event-source-mapping --event-source-arn arn:aws:kafka:us-west-2:arn:aws:kafka:us-west-2:111111111111:cluster/my-cluster/fc2f5bdf-fd1b-45ad-85dd-15b4a5a6247e-2 --topics AWSKafkaTopic --starting-position LATEST --function-name my-kafka-function
+aws lambda create-event-source-mapping \
+  --event-source-arn arn:aws:kafka:us-west-2:arn:aws:kafka:us-west-2:111111111111:cluster/my-cluster/fc2f5bdf-fd1b-45ad-85dd-15b4a5a6247e-2 \
+  --topics AWSKafkaTopic \
+  --starting-position LATEST \
+  --function-name my-kafka-function
 ```
 
 For more information, see the [CreateEventSourceMapping](https://docs.aws.amazon.com/lambda/latest/dg/API_CreateEventSourceMapping.html) API reference documentation\.
@@ -113,5 +158,36 @@ For more information, see the [CreateEventSourceMapping](https://docs.aws.amazon
 The following example uses the [https://docs.aws.amazon.com/cli/latest/reference/lambda/get-event-source-mapping.html](https://docs.aws.amazon.com/cli/latest/reference/lambda/get-event-source-mapping.html) AWS CLI command to describe the status of the event source mapping that you created\.
 
 ```
-aws lambda get-event-source-mapping --uuid 6d9bce8e-836b-442c-8070-74e77903c815
+aws lambda get-event-source-mapping \
+  --uuid 6d9bce8e-836b-442c-8070-74e77903c815
 ```
+
+## Auto scaling of the Amazon MSK event source<a name="services-msk-ops-scaling"></a>
+
+When you initially create an Amazon MSK event source, Lambda allocates one consumer to process all of the partitions in the Kafka topic\. Lambda automatically scales up or down the number of consumers, based on workload\. To preserve message ordering in each partition, the maximum number of consumers is one consumer per partition in the topic\.
+
+Every 15 minutes, Lambda evaluates the consumer offset lag of all the partitions in the topic\. If the lag is too high, the partition is receiving messages faster than Lambda can process them\. If necessary, Lambda adds or removes consumers from the topic\.
+
+If your target Lambda function is overloaded, Lambda reduces the number of consumers\. This action reduces the workload on the function by reducing the number of messages that consumers can retrieve and send to the function\.
+
+To monitor the throughput of your Kafka topic, you can view the [Amazon MSK consumer\-lag metrics](https://docs.aws.amazon.com/msk/latest/developerguide/consumer-lag.html)\. To help you find the metrics for this Lambda function, the value of the consumer group field in the logs is set to the event source UUID\.
+
+To check how many function invocations occur in parallel, you can also monitor the [concurrency metrics](monitoring-metrics.md#monitoring-metrics-concurrency) for your function\.
+
+## Amazon MSK configuration parameters<a name="services-msk-parms"></a>
+
+All Lambda event source types share the same [CreateEventSourceMapping](API_CreateEventSourceMapping.md) and [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md) API operations\. However, only some of the parameters apply to Amazon MSK\.
+
+
+**Event source parameters that apply to Amazon MSK**  
+
+| Parameter | Required | Default | Notes | 
+| --- | --- | --- | --- | 
+|  BatchSize  |  N  |  100  |  Maximum: 10,000  | 
+|  DestinationConfig  |  N  |  none  |     | 
+|  Enabled  |  N  |  Enabled  |     | 
+|  EventSourceArn  |  Y  |  |  Can set only on Create  | 
+|  FunctionName  |  Y  |     |     | 
+|  SourceAccessConfigurations  |  N  |  No credentials  |  VPC information or SASL/SCRAM authentication credentials for your event source  | 
+|  StartingPosition  |  Y  |     |  TRIM\_HORIZON or LATEST Can set only on Create  | 
+|  Topics  |  Y  |     |  Kafka topic name Can set only on Create  | 

@@ -4,6 +4,7 @@ AWS provides a set of open\-source base images that you can use\. You can also u
 
 **Topics**
 + [AWS base images for Lambda](#runtimes-images-lp)
++ [Base images for custom runtimes](#runtimes-images-custom)
 + [Runtime interface clients](#runtimes-api-client)
 + [Runtime interface emulator](#runtimes-test-emulator)
 
@@ -21,7 +22,7 @@ Lambda provides base images for the following runtimes:
 +  [Go](go-image.md) 
 +  [Ruby](ruby-image.md) 
 
-### Base images for custom runtimes<a name="runtimes-images-custom"></a>
+## Base images for custom runtimes<a name="runtimes-images-custom"></a>
 
 AWS provides base images that contain the required Lambda components and the Amazon Linux or Amazon Linux2 operating system\. You can add your preferred runtime, dependencies and code to these images\.
 
@@ -39,7 +40,7 @@ ECR Public: public\.ecr\.aws/lambda/provided
 
 The runtime interface client in your container image manages the interaction between Lambda and your function code\. The [Runtime API](runtimes-api.md), along with the [ Extensions API](runtimes-extensions-api.md), defines a simple HTTP interface for runtimes to receive invocation events from Lambda and respond with success or failure indications\. 
 
-Each of the AWS base images for Lambda include a runtime interface client\. If you choose an alternative base image, you need to add the appropriate runtime interface client\. 
+Each of the AWS base images for Lambda include a runtime interface client\. If you choose one of the base images for custom runtimes or an alternative base image, you need to add the appropriate runtime interface client\. 
 
 For your convenience, Lambda provides an open source runtime interface client for each of the supported Lambda runtimes: 
 +  [Node\.js](nodejs-image.md#nodejs-image-clients) 
@@ -51,4 +52,4 @@ For your convenience, Lambda provides an open source runtime interface client fo
 
 ## Runtime interface emulator<a name="runtimes-test-emulator"></a>
 
-Lambda provides a runtime interface emulator \(RIE\) for you to test your function locally\. The AWS base images for Lambda include the RIE\. For other base images, you can download the [Runtime interface emulator](https://github.com/aws/aws-lambda-runtime-interface-emulator/releases/latest/download/aws-lambda-rie) from the AWS GitHub repository\. 
+Lambda provides a runtime interface emulator \(RIE\) for you to test your function locally\. The AWS base images for Lambda and base images for custom runtimes include the RIE\. For other base images, you can download the [Runtime interface emulator](https://github.com/aws/aws-lambda-runtime-interface-emulator/releases/latest/download/aws-lambda-rie) from the AWS GitHub repository\. 

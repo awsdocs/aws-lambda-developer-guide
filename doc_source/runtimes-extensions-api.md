@@ -6,11 +6,10 @@ As an extension author, you can use the Lambda Extensions API to integrate deepl
 
 An extension runs as an independent process in the execution environment and can continue to run after the function invocation is fully processed\. Because extensions run as processes, you can write them in a different language than the function\. We recommend that you implement extensions using a compiled language\. In this case, the extension is a self\-contained binary that is compatible with all of the supported runtimes\. If you use a non\-compiled language, ensure that you include a compatible runtime in the extension\.
 
-The following [Lambda runtimes](lambda-runtimes.md) support external extensions:
+The following [Lambda runtimes](lambda-runtimes.md) support extensions:
 + \.NET Core 3\.1 \(C\#/PowerShell\) \(`dotnetcore3.1`\)
 + Custom runtime \(`provided`\)
 + Custom runtime on Amazon Linux 2 \(`provided.al2`\)
-+ Go 1\.x \(`go1.x`\)
 + Java 11 \(Corretto\) \(`java11`\)
 + Java 8 \(Corretto\) \(`java8.al2`\)
 + Node\.js 14\.x \(`nodejs14.x`\)
@@ -20,6 +19,8 @@ The following [Lambda runtimes](lambda-runtimes.md) support external extensions:
 + Python 3\.7 \(`python3.7`\)
 + Ruby 2\.7 \(`ruby2.7`\)
 + Ruby 2\.5 \(`ruby2.5`\)
+
+Note that the Go 1\.x runtime does not support extensions\. To support extensions, you can create Go functions on the `provided.al2` runtime\. For more information, see [ Migrating Lambda functions to Amazon Linux 2](http://aws.amazon.com/blogs/compute/migrating-aws-lambda-functions-to-al2/)\.
 
 Lambda also supports *internal extensions*\. An internal extension runs as a separate thread in the runtime process\. The runtime starts and stops the internal extension\. An alternative way to integrate with the Lambda environment is to use language\-specific [environment variables and wrapper scripts](runtimes-modify.md)\. You can use these to configure the runtime environment and modify the startup behavior of the runtime process\.
 

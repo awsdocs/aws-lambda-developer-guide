@@ -112,7 +112,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Using Amazon EFS with Lambda](services-efs.md)
    + [Using AWS Lambda with AWS IoT](services-iot.md)
    + [Using AWS Lambda with AWS IoT Events](services-iotevents.md)
-   + [Using Lambda with an Apache Kafka cluster](with-kafka.md)
+   + [Using Lambda with self-managed Apache Kafka](with-kafka.md)
    + [Using AWS Lambda with Amazon Kinesis Data Firehose](services-kinesisfirehose.md)
    + [Using AWS Lambda with Amazon Kinesis](with-kinesis.md)
       + [Tutorial: Using AWS Lambda with Amazon Kinesis](with-kinesis-example.md)
