@@ -4,6 +4,8 @@ The Lambda function *handler* is the method in your function code that processes
 
 A Lambda function written in [Go](https://golang.org/) is authored as a Go executable\. In your Lambda function code, you need to include the [github\.com/aws/aws\-lambda\-go/lambda](https://github.com/aws/aws-lambda-go/tree/master/lambda) package, which implements the Lambda programming model for Go\. In addition, you need to implement handler function code and a `main()` function\. 
 
+Definitions of the structure of AWS events can be found in the [github\.com/aws/aws\-lambda\-go/events](https://github.com/aws/aws-lambda-go/tree/master/events) package\.
+
 ```
 package main
 
@@ -11,18 +13,15 @@ import (
         "fmt"
         "context"
         "github.com/aws/aws-lambda-go/lambda"
+ 	"github.com/aws/aws-lambda-go/events"
 )
 
-type MyEvent struct {
-        Name string `json:"name"`
-}
-
-func HandleRequest(ctx context.Context, name MyEvent) (string, error) {
-        return fmt.Sprintf("Hello %s!", name.Name ), nil
+func HandleAPIGatewayRequest(ctx context.Context, req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+        return events.APIGatewayProxyResponse{ StatusCode: 200, Body: "Hello, World!" }, nil
 }
 
 func main() {
-        lambda.Start(HandleRequest)
+        lambda.Start(HandleAPIGatewayRequest)
 }
 ```
 
@@ -32,18 +31,19 @@ Note the following:
   + **context: **[AWS Lambda context object in Go](golang-context.md)\.
   + **fmt:** The Go [Formatting](https://golang.org/pkg/fmt/) object used to format the return value of your function\.
   + **github\.com/aws/aws\-lambda\-go/lambda:** As mentioned previously, implements the Lambda programming model for Go\.
-+ **func HandleRequest\(ctx context\.Context, name MyEvent\) \(string, error\)**: This is your Lambda handler signature and includes the code which will be executed\. In addition, the parameters included denote the following: 
+  + **github\.com/aws/aws\-lambda\-go/events:** Provides type definitions for AWS service Lambda triggers.
++ **func HandleAPIGatewayRequest\(ctx context\.Context, req events.APIGatewayProxyRequest\) \(events.APIGatewayProxyResponse, error\)**: This is your Lambda handler signature and includes the code which will be executed\. In addition, the parameters included denote the following: 
   + **ctx context\.Context**: Provides runtime information for your Lambda function invocation\. `ctx` is the variable you declare to leverage the information available via [AWS Lambda context object in Go](golang-context.md)\.
-  + **name MyEvent**: An input type with a variable name of `name` whose value will be returned in the `return` statement\.
-  + **string, error**: Returns two values: string for success and standard [error](https://golang.org/pkg/builtin/#error) information\. For more information on custom error handling, see [AWS Lambda function errors in Go](golang-exceptions.md)\.
-  + **return fmt\.Sprintf\("Hello %s\!", name\), nil**: Simply returns a formatted "Hello" greeting with the name you supplied in the input event\. `nil` indicates there were no errors and the function executed successfully\.
+  + **req events.APIGatewayProxyRequest**: An input type which represents an API Gateway request.
+  + **events.APIGatewayProxyResponse, error**: Returns two values: an API Gateway response and standard [error](https://golang.org/pkg/builtin/#error) information\. For more information on custom error handling, see [AWS Lambda function errors in Go](golang-exceptions.md)\.
+  + **return events\.APIGatewayProxyResponse{ StatusCode: 200, Body: "Hello, World!" }, nil**: Returns an API Gateway response containing the text "Hello, World"\. `nil` indicates there were no errors and the function executed successfully\.
 + **func main\(\)**: The entry point that runs your Lambda function code\. This is required\.
 
   By adding `lambda.Start(HandleRequest)` between `func main(){}` code brackets, your Lambda function will be executed\. Per Go language standards, the opening bracket, `{` must be placed directly at end the of the `main` function signature\.
 
 ## Lambda function handler using structured types<a name="golang-handler-structs"></a>
 
-In the example above, the input type was a simple string\. But you can also pass in structured events to your function handler:
+In the example above, the input type was an API Gateway request\. But you can also pass in structured events to your function handler:
 
 ```
 package main
