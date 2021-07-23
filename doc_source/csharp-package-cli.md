@@ -167,7 +167,7 @@ dotnet lambda deploy-function MyFunction --function-role role
 
 After deployment, you can re\-test it in a production environment using the following command, and pass in a different value to your Lambda function handler:
 
-The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [ AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)
+The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [ AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.
 
 ```
 dotnet lambda invoke-function MyFunction --cli-binary-format raw-in-base64-out --payload "Just Checking If Everything is OK"

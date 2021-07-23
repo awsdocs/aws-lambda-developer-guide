@@ -297,4 +297,7 @@ Lambda does not have the required permissions to access the event source\.
 **`FUNCTION_CONFIG_NOT_VALID`**  
 The function's configuration is not valid\.
 
-Records also go unprocessed if Lambda drops them due to their size\. The size limit for Lambda records is 6 MB\. To redeliver messages upon function error, you can use a redelivery policy and dead\-letter queue \(DLQ\) handling with Amazon MQ\. For more information, see [Message Redelivery and DLQ Handling](https://activemq.apache.org/message-redelivery-and-dlq-handling) on the Apache ActiveMQ website and [Reliability Guide](https://www.rabbitmq.com/reliability.html) on the RabbitMQ website\.
+Records also go unprocessed if Lambda drops them due to their size\. The size limit for Lambda records is 6 MB\. To redeliver messages upon function error, you can use a dead\-letter queue \(DLQ\)\. For more information, see [Message Redelivery and DLQ Handling](https://activemq.apache.org/message-redelivery-and-dlq-handling) on the Apache ActiveMQ website and [Reliability Guide](https://www.rabbitmq.com/reliability.html) on the RabbitMQ website\.
+
+**Note**  
+Lambda does not support custom redelivery policies\. Instead, Lambda uses a policy with the default values from the [Redelivery Policy](https://activemq.apache.org/redelivery-policy) page on the Apache ActiveMQ website, with `maximumRedeliveries` set to 5\.

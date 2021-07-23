@@ -33,10 +33,14 @@ The following shows an example of a permissions policy with limited scope\. It a
             "Effect": "Allow", 
             "Action": [
                 "lambda:GetAccountSettings",
-                "lambda:ListFunctions",
-                "lambda:ListTags",
                 "lambda:GetEventSourceMapping",
+                "lambda:GetFunction",
+                "lambda:GetFunctionConfiguration",           
+                "lambda:GetFunctionCodeSigningConfig",
+                "lambda:GetFunctionConcurrency",                
                 "lambda:ListEventSourceMappings",
+                "lambda:ListFunctions",      
+                "lambda:ListTags"
                 "iam:ListRoles"
             ],
             "Resource": "*"
@@ -96,10 +100,14 @@ The permissions in the policy are organized into statements based on the [resour
   ```
               "Action": [
                   "lambda:GetAccountSettings",
-                  "lambda:ListFunctions",
-                  "lambda:ListTags",
                   "lambda:GetEventSourceMapping",
+                  "lambda:GetFunction",
+                  "lambda:GetFunctionConfiguration",           
+                  "lambda:GetFunctionCodeSigningConfig",
+                  "lambda:GetFunctionConcurrency",                
                   "lambda:ListEventSourceMappings",
+                  "lambda:ListFunctions",      
+                  "lambda:ListTags"
                   "iam:ListRoles"
               ],
               "Resource": "*"

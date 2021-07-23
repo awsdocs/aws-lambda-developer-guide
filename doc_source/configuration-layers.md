@@ -10,6 +10,7 @@ You can create layers using the Lambda console, the Lambda API, AWS CloudFormati
 + [Creating layer content](#configuration-layers-upload)
 + [Compiling the \.zip file archive for your layer](#configuration-layers-compile)
 + [Including library dependencies in a layer](#configuration-layers-path)
++ [Language\-specific instructions](#configuration-layers-zip-cli)
 + [Creating a layer](#configuration-layers-create)
 + [Deleting a layer version](#configuration-layers-delete)
 + [Configuring layer permissions](#configuration-layers-permissions)
@@ -19,20 +20,9 @@ You can create layers using the Lambda console, the Lambda API, AWS CloudFormati
 
 When you create a layer, you must bundle all its content into a \.zip file archive\. You upload the \.zip file archive to your layer from Amazon Simple Storage Service \(Amazon S3\) or your local machine\. Lambda extracts the layer contents into the `/opt` directory when setting up the execution environment for the function\.
 
-### Using the AWS CLI<a name="configuration-layers-zip-cli"></a>
-
-You can create and upload a \.zip file for your layer using the Lambda console or the AWS Command Line Interface \(AWS CLI\)\. For language\-specific instructions, see the following topics\.
-+  [Deploy Node\.js Lambda functions with \.zip file archives](nodejs-package.md) 
-+  [Deploy Python Lambda functions with \.zip file archives](python-package.md) 
-+  [Deploy Ruby Lambda functions with \.zip file archives](ruby-package.md) 
-+  [Deploy Java Lambda functions with \.zip or JAR file archives](java-package.md) 
-+  [Deploy Go Lambda functions with \.zip file archives](golang-package.md) 
-+  [Deploy C\# Lambda functions with \.zip file archives](csharp-package.md) 
-+  [Deploy PowerShell Lambda functions with \.zip file archives](powershell-package.md) 
-
 ## Compiling the \.zip file archive for your layer<a name="configuration-layers-compile"></a>
 
-You build your layer code into a \.zip file archive using the same procedure as you would for a function\. If your layer includes any native code libraries, you must compile and build these libraries using a Linux development machine so that the binaries are compatible with [Amazon Linux](lambda-runtimes.md)\. 
+You build your layer code into a \.zip file archive using the same procedure as you would for a function deployment package\. If your layer includes any native code libraries, you must compile and build these libraries using a Linux development machine so that the binaries are compatible with [Amazon Linux](lambda-runtimes.md)\. 
 
 One way to ensure that you package libraries correctly for Lambda is to use [AWS Cloud9](http://aws.amazon.com/cloud9/)\. For more information, see [Using Lambda layers to simplify your development process](http://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process/) on the AWS Compute Blog\.
 
@@ -110,6 +100,17 @@ jq.zip
 ------
 
 For more information about path settings in the Lambda execution environment, see [Defined runtime environment variables](configuration-envvars.md#configuration-envvars-runtime)\.
+
+## Language\-specific instructions<a name="configuration-layers-zip-cli"></a>
+
+ For language\-specific instructions on how to create a \.zip file archive, see the following topics\.
++  [Deploy Node\.js Lambda functions with \.zip file archives](nodejs-package.md) 
++  [Deploy Python Lambda functions with \.zip file archives](python-package.md) 
++  [Deploy Ruby Lambda functions with \.zip file archives](ruby-package.md) 
++  [Deploy Java Lambda functions with \.zip or JAR file archives](java-package.md) 
++  [Deploy Go Lambda functions with \.zip file archives](golang-package.md) 
++  [Deploy C\# Lambda functions with \.zip file archives](csharp-package.md) 
++  [Deploy PowerShell Lambda functions with \.zip file archives](powershell-package.md) 
 
 ## Creating a layer<a name="configuration-layers-create"></a>
 
@@ -234,7 +235,9 @@ Resources:
     Properties:
       LayerName: blank-nodejs-lib
       Description: Dependencies for the blank sample app.
-      ContentUri: lib/.
+      Content:
+        S3Bucket: my-bucket-region-123456789012
+        S3Key: layer.zip
       CompatibleRuntimes:
         - nodejs12.x
 ```

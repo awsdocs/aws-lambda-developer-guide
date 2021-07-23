@@ -11,8 +11,6 @@ The following sections explain how common programming patterns and core concepts
 |  \.NET Core 2\.1  |  `dotnetcore2.1`  |  Amazon Linux  | 
 
 Lambda provides the following sample applications for the PowerShell runtime:
-
-**Sample Lambda applications in PowerShell**
 + [blank\-powershell](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-powershell) – A PowerShell function that shows the use of logging, environment variables, and the AWS SDK\.
 
 Before you get started, you must first set up a PowerShell development environment\. For instructions on how to do this, see [Setting Up a PowerShell Development Environment](powershell-devenv.md)\.

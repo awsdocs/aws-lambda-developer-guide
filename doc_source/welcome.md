@@ -62,7 +62,7 @@ You can configure a function to mount an [Amazon Elastic File System \(Amazon EF
 To work effectively with Lambda, you need coding experience and expertise in the following domains:
 + Linux OS and commands, as well as concepts such as processes, threads, and file permissions\.
 + Cloud concepts and IP networking concepts \(for public and private networks\)\.
-+ Distributed computing concepts such as HTML as an IPC, queues, messaging, notifications, and concurrency\.
++ Distributed computing concepts such as HTTP as an IPC, queues, messaging, notifications, and concurrency\.
 + Familiarity with security services and concepts: AWS Identity and Access Management \(IAM\) and access control principles, and AWS Key Management Service \(AWS KMS\) and public key infrastructure\.
 + Familiarity with key services that interact with Lambda: Amazon API Gateway, Amazon S3, Amazon Simple Queue Service \(Amazon SQS\), and DynamoDB\.
 + Configuring EC2 instances with Linux\.

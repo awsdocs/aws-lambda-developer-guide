@@ -13,6 +13,7 @@ With Lambda, you run functions to process events\. To send events to your functi
 + [Extension](#gettingstarted-concepts-extensions)
 + [Concurrency](#gettingstarted-concepts-concurrency)
 + [Qualifier](#gettingstarted-concepts-qualifier)
++ [Destination](#gettingstarted-concepts-destinations)
 
 ## Function<a name="gettingstarted-concepts-function"></a>
 
@@ -110,3 +111,9 @@ Concurrency is subject to [quotas](gettingstarted-limits.md) at the AWS Region l
 When you invoke or view a function, you can include a *qualifier* to specify a version or alias\. A *version* is an immutable snapshot of a function's code and configuration that has a numerical qualifier\. For example, `my-function:1`\. An *alias* is a pointer to a version that you can update to map to a different version, or split traffic between two versions\. For example, `my-function:BLUE`\. You can use versions and aliases together to provide a stable interface for clients to invoke your function\.
 
 For more information, see [Lambda function versions](configuration-versions.md)\.
+
+## Destination<a name="gettingstarted-concepts-destinations"></a>
+
+A *destination* is an AWS resource where Lambda can send events from an asynchronous invocation\. You can configure a destination for events that fail processing\. Some services also support a destination for events that are successfully processed\.
+
+For more information, see [Configuring destinations for asynchronous invocation](invocation-async.md#invocation-async-destinations)\.

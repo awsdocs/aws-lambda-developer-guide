@@ -2,29 +2,6 @@
 
 A deployment package for the PowerShell runtime contains your PowerShell script, PowerShell modules that are required for your PowerShell script, and the assemblies needed to host PowerShell Core\.
 
-## Tools and libraries<a name="powershell-package-libraries"></a>
-
-Lambda provides the following sample applications for the PowerShell runtime:
-
-**Tools and libraries for PowerShell**
-+ [AWS Lambda and AWS Tools for PowerShell](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-lambda.html): the steps to install PowerShell, the \.NET Core 2\.1 SDK, and the `AWSLambdaPSCore` module\.
-+ [aws\-lambda\-dotnet](https://github.com/aws/aws-lambda-dotnet/tree/master/PowerShell): Lambda tools for Powershell on GitHub\.
-
-The AWSLambdaPSCore module has the following new cmdlets to help author and publish PowerShell Lambda functions:
-
-**AWSLambdaPSCore cmdlets**
-+ **Get\-AWSPowerShellLambdaTemplate** – Returns a list of getting started templates\.
-+ **New\-AWSPowerShellLambda** – Creates an initial PowerShell script based on a template\.
-+ **Publish\-AWSPowerShellLambda** – Publishes a given PowerShell script to Lambda\.
-+ **New\-AWSPowerShellLambdaPackage** – Creates a Lambda deployment package that you can use in a CI/CD system for deployment\.
-
-## Sample applications<a name="powershell-package-libraries"></a>
-
-Lambda provides the following sample applications for the PowerShell runtime:
-
-**Sample Lambda applications in PowerShell**
-+ [blank\-powershell](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-powershell) – A PowerShell function that shows the use of logging, environment variables, and the AWS SDK\.
-
 ## Creating the Lambda function<a name="powershell-package-create"></a>
 
 To get started writing and invoking a PowerShell script with Lambda, you can use the `New-AWSPowerShellLambda` cmdlet to create a starter script based on a template\. You can use the `Publish-AWSPowerShellLambda` cmdlet to deploy your script to Lambda\. Then you can test your script either through the command line or the Lambda console\.

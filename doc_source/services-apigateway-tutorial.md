@@ -254,7 +254,7 @@ Invoke the function manually using the sample event data\. We recommend that you
    --payload file://input.txt outputfile.txt
    ```
 
-   The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [ AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)
+   The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [ AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.
 
 ## Create an API using Amazon API Gateway<a name="services-apigateway-tutorial-api"></a>
 

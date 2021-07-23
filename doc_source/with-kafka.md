@@ -41,7 +41,7 @@ Lambda sends the batch of messages in the event parameter when it invokes your L
 + [Auto scaling of the Kafka event source](#services-kafka-scaling)
 + [Event source API operations](#kafka-hosting-api-operations)
 + [Event source mapping errors](#services-event-errors)
-+ [Event source configuration parameters](#services-msk-parms)
++ [Event source configuration parameters](#services-kafka-parms)
 
 ## Managing access and permissions<a name="smaa-permissions"></a>
 
@@ -278,7 +278,7 @@ The function configuration is not valid\.
 **Note**  
 If your Lambda event records exceed the allowed size limit of 6 MB, they can go unprocessed\.
 
-## Event source configuration parameters<a name="services-msk-parms"></a>
+## Event source configuration parameters<a name="services-kafka-parms"></a>
 
 All Lambda event source types share the same [CreateEventSourceMapping](API_CreateEventSourceMapping.md) and [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md) API operations\. However, only some of the parameters apply to Apache Kafka\.
 
@@ -288,14 +288,9 @@ All Lambda event source types share the same [CreateEventSourceMapping](API_Crea
 | Parameter | Required | Default | Notes | 
 | --- | --- | --- | --- | 
 |  BatchSize  |  N  |  100  |  Maximum: 10,000  | 
-|  DestinationConfig  |  N  |  none  |     | 
 |  Enabled  |  N  |  Enabled  |     | 
-|  KafkaBrokerList  |  Y  |  |  Can set only on Create  | 
 |  FunctionName  |  Y  |     |     | 
-|  MaximumBatchingWindowInSeconds  |  N  |  0  |  Maximum: 300  | 
-|  MaximumRecordAgeInSeconds  |  N  |  604,800 \(7 days\)  |  Maximum: no limit  | 
-|  MaximumRetryAttempts  |  N  |  10,000  |  Maximum: no limit  | 
-|  ParallelizationFactor  |  N  |  1  |     | 
+|  SelfManagedEventSource   |  Y  |  |  List of Kafka Brokers\. Can set only on Create  | 
 |  SourceAccessConfigurations  |  N  |  No credentials  |  VPC information or authentication credentials for the cluster   For SASL\_PLAIN, set to BASIC\_AUTH  | 
 |  StartingPosition  |  Y  |     |  TRIM\_HORIZON or LATEST Can set only on Create  | 
 |  Topics  |  Y  |     |  Topic name Can set only on Create  | 

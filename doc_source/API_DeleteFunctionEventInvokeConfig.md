@@ -51,6 +51,10 @@ If the action is successful, the service sends back an HTTP 204 response with an
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
+ **ResourceConflictException**   
+The resource already exists, or another operation is in progress\.  
+HTTP Status Code: 409
+
  **ResourceNotFoundException**   
 The resource specified in the request does not exist\.  
 HTTP Status Code: 404

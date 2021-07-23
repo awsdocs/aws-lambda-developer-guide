@@ -201,7 +201,7 @@ Invoke the Lambda function [synchronously](invocation-sync.md) using the event i
             --payload '{"action": "square","number": 3}' output.txt
   ```
 
-  The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [ AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)
+  The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [ AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.
 
   This command produces the following output:
 
@@ -406,7 +406,7 @@ Invoke the Lambda function [synchronously](invocation-sync.md) using the event i
             --payload '{"key1": "value1", "key2": "value2", "key3": "value3"}' output.txt
   ```
 
-  The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [ AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)
+  The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [ AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.
 
   This command produces the following output:
 

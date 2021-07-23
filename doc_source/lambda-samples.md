@@ -55,8 +55,6 @@ Lambda provides the following sample applications for the Go runtime:
 #### [ PowerShell ]
 
 Lambda provides the following sample applications for the PowerShell runtime:
-
-**Sample Lambda applications in PowerShell**
 + [blank\-powershell](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-powershell) – A PowerShell function that shows the use of logging, environment variables, and the AWS SDK\.
 
 ------

@@ -12,10 +12,10 @@ End of support for the Python 2\.7 runtime starts on July 15, 2021\. For more in
 
 | Name | Identifier | AWS SDK for Python | Operating system | 
 | --- | --- | --- | --- | 
-|  Python 3\.8  |  `python3.8`  |  boto3\-1\.17\.42 botocore\-1\.20\.42  |  Amazon Linux 2  | 
-|  Python 3\.7  |  `python3.7`  |  boto3\-1\.17\.42 botocore\-1\.20\.42  |  Amazon Linux  | 
-|  Python 3\.6  |  `python3.6`  |  boto3\-1\.17\.42 botocore\-1\.20\.42  |  Amazon Linux  | 
-|  Python 2\.7  |  `python2.7`  |  boto3\-1\.17\.42 botocore\-1\.20\.42  |  Amazon Linux  | 
+|  Python 3\.8  |  `python3.8`  |  boto3\-1\.17\.100 botocore\-1\.20\.100  |  Amazon Linux 2  | 
+|  Python 3\.7  |  `python3.7`  |  boto3\-1\.17\.100 botocore\-1\.20\.100  |  Amazon Linux  | 
+|  Python 3\.6  |  `python3.6`  |  boto3\-1\.17\.100 botocore\-1\.20\.100  |  Amazon Linux  | 
+|  Python 2\.7  |  `python2.7`  |  boto3\-1\.17\.100 botocore\-1\.20\.100  |  Amazon Linux  | 
 
 **To create a Python function**
 

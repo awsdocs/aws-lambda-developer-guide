@@ -170,9 +170,7 @@ Resources:
       CodeUri: function/.
       Description: Use a file system.
       FileSystemConfigs:
-      - 
-        Arn: !Sub
-          - "arn:aws:elasticfilesystem:eu-central-1:123456789101:access-point/fsap-015cxmplb72b405fd"
+      - Arn: "arn:aws:elasticfilesystem:eu-central-1:123456789101:access-point/fsap-015cxmplb72b405fd"
         LocalMountPath: "/mnt/efs0"
     DependsOn: "MountTarget1"
 ```

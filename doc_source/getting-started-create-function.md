@@ -231,7 +231,7 @@ In the following commands, replace `123456789012` with your AWS account ID\.
 
 ### Update the user permissions<a name="gettingstarted-images-permissions"></a>
 
-Make sure that the permissions for the IAM user or role that creates the function contain the AWS managed policies `GetRepositoryPolicy`, `SetRepositoryPolicy`, and `InitiateLayerUpload`\. For information about access policies, see [ Access Management](https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html) in the *IAM User Guide*
+Make sure that the permissions for the IAM user or role that creates the function contain the AWS managed policies `GetRepositoryPolicy` and `SetRepositoryPolicy`\. For information about user permissions to access images in the Amazon ECR repository, see [ Amazon ECR permissions](configuration-images.md#configuration-images-permissions)
 
 For example, use the IAM console to create a role with the following policy:
 
@@ -242,7 +242,7 @@ For example, use the IAM console to create a role with the following policy:
     {
     "Sid": "VisualEditor0",
     "Effect": "Allow",
-    "Action": ["ecr:SetRepositoryPolicy","ecr:GetRepositoryPolicy", "ecr:InitiateLayerUpload],
+    "Action": ["ecr:SetRepositoryPolicy","ecr:GetRepositoryPolicy"],
     "Resource": "arn:aws:ecr:<region>:<account>:repository/<repo name>/"
     }
   ]

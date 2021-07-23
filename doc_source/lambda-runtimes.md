@@ -33,10 +33,10 @@ For end of support information about Node\.js 10, see [Runtime support policy](r
 
 | Name | Identifier | AWS SDK for Python | Operating system | 
 | --- | --- | --- | --- | 
-|  Python 3\.8  |  `python3.8`  |  boto3\-1\.17\.42 botocore\-1\.20\.42  |  Amazon Linux 2  | 
-|  Python 3\.7  |  `python3.7`  |  boto3\-1\.17\.42 botocore\-1\.20\.42  |  Amazon Linux  | 
-|  Python 3\.6  |  `python3.6`  |  boto3\-1\.17\.42 botocore\-1\.20\.42  |  Amazon Linux  | 
-|  Python 2\.7  |  `python2.7`  |  boto3\-1\.17\.42 botocore\-1\.20\.42  |  Amazon Linux  | 
+|  Python 3\.8  |  `python3.8`  |  boto3\-1\.17\.100 botocore\-1\.20\.100  |  Amazon Linux 2  | 
+|  Python 3\.7  |  `python3.7`  |  boto3\-1\.17\.100 botocore\-1\.20\.100  |  Amazon Linux  | 
+|  Python 3\.6  |  `python3.6`  |  boto3\-1\.17\.100 botocore\-1\.20\.100  |  Amazon Linux  | 
+|  Python 2\.7  |  `python2.7`  |  boto3\-1\.17\.100 botocore\-1\.20\.100  |  Amazon Linux  | 
 
 **Important**  
 Python 2\.7 reached end of life on January 1, 2020\. End of support \(phase 1\) for the Python 2\.7 runtime starts on July 15, 2021\. For more information, see [Announcing end of support for Python 2\.7 in AWS Lambda](http://aws.amazon.com/blogs/compute/announcing-end-of-support-for-python-2-7-in-aws-lambda/) on the AWS Compute Blog\.

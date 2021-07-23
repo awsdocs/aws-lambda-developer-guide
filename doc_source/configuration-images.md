@@ -35,7 +35,7 @@ When you deploy code as a container image to a Lambda function, the image underg
 
 ## Amazon ECR permissions<a name="configuration-images-permissions"></a>
 
-For your function to access the container image in Amazon ECR, you can add `ecr:BatchGetImage` and `ecr:GetDownloadUrlForLayer` permissions to your Amazon ECR repository\. The following example shows the minumum policy:
+For your function to access the container image in Amazon ECR, you can add `ecr:BatchGetImage` and `ecr:GetDownloadUrlForLayer` permissions to your Amazon ECR repository\. The following example shows the minimum policy:
 
 ```
 {

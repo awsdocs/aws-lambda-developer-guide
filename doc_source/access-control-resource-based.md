@@ -27,7 +27,7 @@ For Lambda functions, you can [grant an account permission](#permissions-resourc
                  "Service": "s3.amazonaws.com"
                },
                "Action": "lambda:InvokeFunction",
-               "Resource":  "arn:aws:lambda:us-east-2:123456789012:function:my-function”,
+               "Resource":  "arn:aws:lambda:us-east-2:123456789012:function:my-function",
                "Condition": {
                  "StringEquals": {
                    "AWS:SourceAccount": "123456789012"
