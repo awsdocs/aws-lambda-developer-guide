@@ -2,6 +2,8 @@
 
 This sample application shows the use of the `aws-lambda-java-events` library with event types that require AWS SDK as a dependency. A separate handler class is defined for each input type. For other event types (which don't require the AWS SDK), see the `java-events` sample.
 
+**Note: The `java-events-v1sdk` examples are deprecated.** As of version 3.0.0 of the `aws-lambda-java-events` package, [users are no longer required to pull in SDK dependencies in order to use that library](https://github.com/aws/aws-lambda-java-libs/tree/master/aws-lambda-java-events). Please see the [`java-events` package](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-events) for updated examples.
+
 ![Architecture](/sample-apps/java-events-v1sdk/images/sample-java-events-v1sdk.png)
 
 The project includes function code and supporting resources:
