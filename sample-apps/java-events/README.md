@@ -90,8 +90,11 @@ By default, the function uses a handler class named `Handler` that takes an API 
 - `HandlerCognito.java` - Takes `CognitoEvent` as input.
 - `HandlerCWEvents.java` - Takes `ScheduledEventEvent` as input.
 - `HandlerCWLogs.java` - Takes `CloudWatchLogsEvent` as input.
+- `HandlerDynamoDB.java` - Takes `DynamodbEvent` as input.
 - `HandlerFirehose.java` - Takes `KinesisFirehoseEvent` as input.
+- `HandlerKinesis.java` - Takes `KinesisEvent` as input.
 - `HandlerLex.java` - Takes `LexEvent` as input.
+- `HandlerS3.java` - Takes `S3Event` as input.
 - `HandlerSNS.java` - Takes `SNSEvent` as input.
 
 To use a different handler, change the value of the Handler setting in the application template (`template.yml` or `template-mvn.yaml`). For example, to use the Amazon Lex handler:
@@ -118,8 +121,11 @@ The following event type keys are supported:
 - `cfg` - Config rule (`events/config-rule.json`)
 - `cc` - CodeCommit push (`events/codecommit-push.json`)
 - `cog` - Cognito Sync (`events/cognito-sync.json`)
+- `kin` - Kinesis record (`events/kinesis-record.json`)
 - `fh` - Kinesis Firehose record (`events/firehose-record.json`)
 - `lex` - Lex dialog (`events/lex-flowers.json`)
+- `ddb` - DynamoDB record (`events/dynamodb-record.json`)
+- `s3` - S3Event record (`events/s3-notification.json`)
 
 # Cleanup
 To delete the application, run `4-cleanup.sh`.

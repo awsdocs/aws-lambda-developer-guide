@@ -25,11 +25,20 @@ then
     cog)
       PAYLOAD='file://events/cognito-sync.json'
       ;;
+    kin)
+      PAYLOAD='file://events/kinesis-record.json'
+      ;;
     fh)
       PAYLOAD='file://events/firehose-record.json'
       ;;
     lex)
       PAYLOAD='file://events/lex-flowers.json'
+      ;;
+    ddb)
+      PAYLOAD='file://events/dynamodb-record.json'
+      ;;
+    s3)
+      PAYLOAD='file://events/s3-notification.json'
       ;;
     *)
       echo -n "Unknown event type"
