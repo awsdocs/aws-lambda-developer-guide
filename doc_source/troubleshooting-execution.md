@@ -10,7 +10,7 @@ When your function code or the Lambda runtime return an error, the status code i
 
 **Issue:** *Function execution takes too long\.*
 
-If your code takes much longer to run in Lambda than on your local machine, it may be constrained by the memory or processing power available to the function\. [Configure the function with additional memory](configuration-console.md) to increase both memory and CPU\.
+If your code takes much longer to run in Lambda than on your local machine, it may be constrained by the memory or processing power available to the function\. [Configure the function with additional memory](configuration-function-common.md) to increase both memory and CPU\.
 
 ## Lambda: Logs or traces don't appear<a name="troubleshooting-execution-logstraces"></a>
 

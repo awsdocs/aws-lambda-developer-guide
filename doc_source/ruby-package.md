@@ -77,7 +77,8 @@ If your function depends on libraries other than the AWS SDK for Ruby, install t
 1. Install libraries in the vendor directory using the `bundle` command\.
 
    ```
-   bundle install --path vendor/bundle
+   bundle config set --local path 'vendor/bundle' \ 
+   bundle install
    ```
 
    You should see the following output:
@@ -90,7 +91,7 @@ If your function depends on libraries other than the AWS SDK for Ruby, install t
    ...
    ```
 
-   The `--path` installs the gems in the project directory instead of the system location, and sets this as the default path for future installations\. To later install gems globally, use the `--system` option\.
+   This installs the gems in the project directory instead of the system location, and sets `vendor/bundle` as the default path for future installations\. To later install gems globally, use `bundle config set --local system 'true'`\.
 
 1. Create a \.zip file archive\.
 

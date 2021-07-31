@@ -1,4 +1,4 @@
-# Creating functions using the AWS Lambda console editor<a name="code-editor"></a>
+# Creating functions using the AWS Lambda console editor<a name="functions-code-editor"></a>
 
 The Lambda console provides a code editor for languages that do not require compiling, such as Node\.js or Python\. The code editor in the AWS Lambda console enables you to write, test, and view the execution results of your Lambda function code\.
 
@@ -11,12 +11,12 @@ The code editor includes the *menu bar*, *windows*, and the *editor pane*\.
 For a list of what the commands do, see the [Menu commands reference](https://docs.aws.amazon.com/cloud9/latest/user-guide/menu-commands.html) in the *AWS Cloud9 User Guide*\. Note that some of the commands listed in that reference are not available in the code editor\.
 
 **Topics**
-+ [Working with files and folders](#code-editor-files)
-+ [Working with code](#code-editor-code)
-+ [Working in fullscreen mode](#code-editor-fullscreen)
-+ [Working with preferences](#code-editor-prefs)
++ [Working with files and folders](#functions-code-editor-files)
++ [Working with code](#functions-code-editor-code)
++ [Working in fullscreen mode](#functions-code-editor-fullscreen)
++ [Working with preferences](#functions-code-editor-prefs)
 
-## Working with files and folders<a name="code-editor-files"></a>
+## Working with files and folders<a name="functions-code-editor-files"></a>
 
 You can use the **Environment** window in the code editor to create, open, and manage files for your function\.
 
@@ -62,7 +62,7 @@ You can use the **Environment** window in the code editor to create, open, and m
 
 **To show or hide hidden files**, choose the gear icon in the **Environment** window, and then choose **Show Hidden Files**\. 
 
-## Working with code<a name="code-editor-code"></a>
+## Working with code<a name="functions-code-editor-code"></a>
 
 Use the editor pane in the code editor to view and write code\.
 
@@ -70,7 +70,7 @@ Use the editor pane in the code editor to view and write code\.
 
 
 
-### Working with tab buttons<a name="code-editor-code-tab-buttons"></a>
+### Working with tab buttons<a name="functions-code-editor-code-tab-buttons"></a>
 
 Use the *tab buttons bar* to select, view, and create files\.
 
@@ -97,7 +97,7 @@ Use the *tab buttons bar* to select, view, and create files\.
 
 **To create a new file**, choose the **\+** button in the tab buttons bar, and then choose **New File**\. When you're ready to save the file, choose **File, Save** or **File, Save As** on the menu bar\. Then use the **Save As** dialog box that displays to name the file and choose where to save it\.
 
-### Working with the status bar<a name="code-editor-code-status-bar"></a>
+### Working with the status bar<a name="functions-code-editor-code-status-bar"></a>
 
 Use the status bar to move quickly to a line in the active file and to change how code is displayed\.
 
@@ -129,7 +129,7 @@ Use the status bar to move quickly to a line in the active file and to change ho
 
 
 
-## Working in fullscreen mode<a name="code-editor-fullscreen"></a>
+## Working in fullscreen mode<a name="functions-code-editor-fullscreen"></a>
 
 You can expand the code editor to get more room to work with your code\.
 
@@ -143,7 +143,7 @@ To shrink the code editor to its original size, choose the **Toggle fullscreen**
 
 In fullscreen mode, additional options are displayed on the menu bar: **Save** and **Test**\. Choosing **Save** saves the function code\. Choosing **Test** or **Configure Events** enables you to create or edit the function's test events\. 
 
-## Working with preferences<a name="code-editor-prefs"></a>
+## Working with preferences<a name="functions-code-editor-prefs"></a>
 
 You can change various code editor settings such as which coding hints and warnings are displayed, code folding behaviors, code autocompletion behaviors, and much more\. 
 

@@ -16,7 +16,7 @@ A function version includes the following information:
 
 ## Creating function versions<a name="configuration-versions-config"></a>
 
-You can change the function code and settings only on the unpublished version of a function\. When you publish a version, the code and most of the settings are locked to maintain a consistent experience for users of that version\. For more information about configuring function settings, see [Configuring functions in the console](configuration-console.md)\.
+You can change the function code and settings only on the unpublished version of a function\. When you publish a version, the code and most of the settings are locked to maintain a consistent experience for users of that version\. For more information about configuring function settings, see [Configuring Lambda function options](configuration-function-common.md)\.
 
 You can create a function version using the Lambda console\.
 

@@ -1,4 +1,6 @@
-# Configuring functions defined as container images<a name="configuration-images"></a>
+# Creating Lambda functions defined as container images<a name="configuration-images"></a>
+
+When you create a Lambda function, you use a [deployment package](gettingstarted-package.md) to deploy your function code\. Lambda supports two types of deployment packages: [\.zip file archives](configuration-function-zip.md) and container images\. 
 
 You can use the Lambda console and the Lambda API to create a function defined as a container image, update and test the image code, and configure other function settings\.
 

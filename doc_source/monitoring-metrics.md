@@ -1,6 +1,6 @@
 # Working with AWS Lambda function metrics<a name="monitoring-metrics"></a>
 
-When your function finishes processing an event, Lambda sends metrics about the invocation to Amazon CloudWatch\. You can build graphs and dashboards with these metrics in the CloudWatch console, and set alarms to respond to changes in utilization, performance, or error rates\. 
+When your function finishes processing an event, Lambda sends metrics about the invocation to Amazon CloudWatch\. You can build graphs and dashboards with these metrics in the CloudWatch console, and set alarms to respond to changes in utilization, performance, or error rates\. Lambda sends metric data to CloudWatch in 1\-minute intervals\.
 
 This page describes the Lambda function invocation, performance, and concurrency metrics available on the CloudWatch console\.
 

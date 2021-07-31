@@ -20,6 +20,11 @@ AWS managed policies grant permission to API actions without restricting the Lam
 
 ## Function development<a name="permissions-user-function"></a>
 
+Use identity\-based policies to allow users to perform operations on Lambda functions\. 
+
+**Note**  
+For a function defined as a container image, the user permission to access the image MUST be configured in the Amazon Elastic Container Registry For an example, see [Amazon ECR permissions\.](configuration-images.md#configuration-images-permissions)
+
 The following shows an example of a permissions policy with limited scope\. It allows a user to create and manage Lambda functions named with a designated prefix \(`intern-`\), and configured with a designated execution role\.
 
 **Example Function development policy**  

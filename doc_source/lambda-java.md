@@ -48,7 +48,7 @@ You can add permissions to the role later, or swap it out for a different role t
 
 1. For **Event name**, enter **test**\.
 
-1. Choose **Create**\.
+1. Choose **Save changes**\.
 
 1. To invoke the function, choose **Test**\.
 

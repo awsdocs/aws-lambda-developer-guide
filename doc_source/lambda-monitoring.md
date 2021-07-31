@@ -11,4 +11,5 @@ For more information about monitoring Lambda applications, see [Monitoring and o
 + [Using Lambda Insights in Amazon CloudWatch](monitoring-insights.md)
 + [Working with AWS Lambda function metrics](monitoring-metrics.md)
 + [Accessing Amazon CloudWatch logs for AWS Lambda](monitoring-cloudwatchlogs.md)
++ [Using CodeGuru Profiler with your Lambda function](monitoring-code-profiler.md)
 + [Example workflows using other AWS services](monitoring-servicemap.md)

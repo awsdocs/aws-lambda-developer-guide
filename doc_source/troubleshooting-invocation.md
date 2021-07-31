@@ -52,7 +52,7 @@ You grant [other services](lambda-services.md) and accounts permission to invoke
 
 **Issue:** *Function is invoked continuously in a loop\.*
 
-This typically occurs when your function manages resources in the same AWS service that triggers it\. For example, it's possible to create a function that stores an object in an Amazon Simple Storage Service \(Amazon S3\) bucket that's configured with a [notification that invokes the function again](with-s3.md)\. To stop the function from running, on the [function configuration page](configuration-console.md), choose **Throttle**\. Then, identify the code path or configuration error that caused the recursive invocation\.
+This typically occurs when your function manages resources in the same AWS service that triggers it\. For example, it's possible to create a function that stores an object in an Amazon Simple Storage Service \(Amazon S3\) bucket that's configured with a [notification that invokes the function again](with-s3.md)\. To stop the function from running, on the [function configuration page](configuration-function-common.md), choose **Throttle**\. Then, identify the code path or configuration error that caused the recursive invocation\.
 
 ## Lambda: Alias routing with provisioned concurrency<a name="troubleshooting-invocation-alias"></a>
 

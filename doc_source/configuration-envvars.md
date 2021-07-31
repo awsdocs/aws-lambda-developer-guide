@@ -18,7 +18,7 @@ Environment variables are not evaluated prior to the function invocation\. Any v
 
 ## Configuring environment variables<a name="configuration-envvars-config"></a>
 
-You define environment variables on the unpublished version of your function\. When you publish a version, the environment variables are locked for that version along with other [version\-specific configuration](configuration-console.md)\. 
+You define environment variables on the unpublished version of your function\. When you publish a version, the environment variables are locked for that version along with other [version\-specific configuration](configuration-function-common.md)\. 
 
 You create an environment variable on your function by defining a key and a value\. Your function uses the name of the key to retrieve the value of environment variable\.
 

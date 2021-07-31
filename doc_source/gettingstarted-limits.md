@@ -17,8 +17,8 @@ The following quotas apply to function configuration, deployments, and execution
 
 | Resource | Quota | 
 | --- | --- | 
-| Function [memory allocation](configuration-console.md) | 128 MB to 10,240 MB, in 1\-MB increments\. | 
-| Function [timeout](configuration-console.md) | 900 seconds \(15 minutes\) | 
+| Function [memory allocation](configuration-function-common.md) | 128 MB to 10,240 MB, in 1\-MB increments\. | 
+| Function [timeout](configuration-function-common.md) | 900 seconds \(15 minutes\) | 
 | Function [environment variables](configuration-envvars.md) | 4 KB | 
 | Function [resource\-based policy](access-control-resource-based.md) | 20 KB | 
 | Function [layers](configuration-layers.md) | five layers | 

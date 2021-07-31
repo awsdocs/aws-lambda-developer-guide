@@ -50,18 +50,18 @@ You can add permissions to the role later, or swap it out for a different role t
 
 1. For **Event name**, enter **test**\.
 
-1. Choose **Create**\.
+1. Choose **Save changes**\.
 
 1. To invoke the function, choose **Test**\.
 
-The console creates a Lambda function with a single source file named `lambda_function.rb`\. You can edit this file and add more files in the built\-in [code editor](code-editor.md)\. To save your changes, choose **Save**\. Then, to run your code, choose **Test**\.
+The console creates a Lambda function with a single source file named `lambda_function.rb`\. You can edit this file and add more files in the built\-in [code editor](foundation-console.md#code-editor)\. To save your changes, choose **Save**\. Then, to run your code, choose **Test**\.
 
 **Note**  
 The Lambda console uses AWS Cloud9 to provide an integrated development environment in the browser\. You can also use AWS Cloud9 to develop Lambda functions in your own environment\. For more information, see [Working with Lambda Functions](https://docs.aws.amazon.com/cloud9/latest/user-guide/lambda-functions.html) in the AWS Cloud9 user guide\.
 
 The `lambda_function.rb` file exports a function named `lambda_handler` that takes an event object and a context object\. This is the [handler function](ruby-handler.md) that Lambda calls when the function is invoked\. The Ruby function runtime gets invocation events from Lambda and passes them to the handler\. In the function configuration, the handler value is `lambda_function.lambda_handler`\.
 
-Each time you save your function code, the Lambda console creates a deployment package, which is a \.zip file archive that contains your function code\. As your function development progresses, you will want to store your function code in source control, add libraries, and automate deployments\. Start by [creating a deployment package](ruby-package.md) and updating your code at the command line\.
+When you save your function code, the Lambda console creates a \.zip file archive deployment package\. When you develop your function code outside of the console \(using an SDE\) you need to [create a deployment package](ruby-package.md) to upload your code to the Lambda function\.
 
 **Note**  
 To get started with application development in your local environment, deploy one of the sample applications available in this guide's GitHub repository\.  

@@ -208,7 +208,7 @@ In the following example, you create a wrapper script to start the Python interp
 
 1. Add the code and the environment variable to your function\.
 
-   1. In the function [code editor](code-editor.md), paste the following function code:
+   1. In the function [code editor](foundation-console.md#code-editor), paste the following function code:
 
       ```
       import json

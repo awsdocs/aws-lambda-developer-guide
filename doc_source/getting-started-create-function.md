@@ -2,7 +2,7 @@
 
 In the following getting started exercises, you create Lambda functions using the console\.
 
-In the first exercise, you create a function and use the default code that Lambda creates\. The Lambda console provides a [code editor](code-editor.md) for non\-compiled languages that lets you modify and test code quickly\.
+In the first exercise, you create a function and use the default code that Lambda creates\. The Lambda console provides a [code editor](foundation-console.md#code-editor) for non\-compiled languages that lets you modify and test code quickly\.
 
 In the next exercise, you create a function defined as a container image\. First, create a container image for your function code, and then use the Lambda console to create a function from the container image\.
 

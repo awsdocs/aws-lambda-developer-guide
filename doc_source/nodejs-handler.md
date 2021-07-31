@@ -13,7 +13,7 @@ exports.handler =  async function(event, context) {
 }
 ```
 
-When you [configure a function](configuration-console.md), the value of the handler setting is the file name and the name of the exported handler method, separated by a dot\. The default in the console and for examples in this guide is `index.handler`\. This indicates the `handler` method that's exported from the `index.js` file\.
+When you configure a function, the value of the handler setting is the file name and the name of the exported handler method, separated by a dot\. The default in the console and for examples in this guide is `index.handler`\. This indicates the `handler` method that's exported from the `index.js` file\.
 
 The runtime passes three arguments to the handler method\. The first argument is the `event` object, which contains information from the invoker\. The invoker passes this information as a JSON\-formatted string when it calls [Invoke](API_Invoke.md), and the runtime converts it to an object\. When an AWS service invokes your function, the event structure [varies by service](lambda-services.md)\.
 
