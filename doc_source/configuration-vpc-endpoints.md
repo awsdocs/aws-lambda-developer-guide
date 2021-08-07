@@ -13,7 +13,7 @@ Each interface endpoint is represented by one or more [elastic network interface
 
 ## Considerations for Lambda interface endpoints<a name="vpc-endpoint-considerations"></a>
 
-Before you set up an interface endpoint for Lambda, be sure to review [Interface endpoint properties and limitations](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#vpce-interface-limitations) in the *Amazon VPC User Guide*\.
+Before you set up an interface endpoint for Lambda, be sure to review [Interface endpoint properties and limitations](https://docs.aws.amazon.com/vpc/latest/privatelink/vpce-interface.html#vpce-interface-limitations) in the *Amazon VPC User Guide*\.
 
 You can call any of the Lambda API operations from your VPC\. For example, you can invoke the Lambda function by calling the `Invoke` API from within your VPC\. For the full list of Lambda APIs, see [Actions](https://docs.aws.amazon.com/lambda/latest/dg/API_Operations.html) in the Lambda API reference\.
 
