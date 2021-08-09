@@ -434,7 +434,7 @@ You can now delete the resources that you created for this tutorial, unless you 
 + Use the [delete\-function](https://docs.aws.amazon.com/cli/latest/reference/lambda/delete-function.html) command\.
 
   ```
-  aws lambda delete-function --function-name my-function
+  aws lambda delete-function --function-name my-sourcecode-function
   ```
 
   This command produces no output\.
