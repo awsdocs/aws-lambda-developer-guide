@@ -10,7 +10,7 @@ To minimize latency and maximize read throughput, you can create a data stream c
 
  For details about Kinesis data streams, see [Reading Data from Amazon Kinesis Data Streams](https://docs.aws.amazon.com/kinesis/latest/dev/building-consumers.html)\. 
 
-Lambda reads records from the data stream and invokes your function [synchronously](invocation-sync.md) with an event that contains stream records\. Lambda reads records in batches and invokes your function to process records from the batch\.
+Lambda reads records from the data stream and invokes your function [synchronously](invocation-sync.md) with an event that contains stream records\. Lambda reads records in batches and invokes your function to process records from the batch\. Each batch contains records from a single shard/data stream\.
 
 **Example Kinesis record event**  
 
@@ -123,7 +123,7 @@ To send records of failed batches to a queue or topic, your function needs addit
 
 ## Configuring a stream as an event source<a name="services-kinesis-eventsourcemapping"></a>
 
-Create an event source mapping to tell Lambda to send records from your data stream to a Lambda function\. You can create multiple event source mappings to process the same data with multiple Lambda functions, or to process items from multiple data streams with a single function\.
+Create an event source mapping to tell Lambda to send records from your data stream to a Lambda function\. You can create multiple event source mappings to process the same data with multiple Lambda functions, or to process items from multiple data streams with a single function\. When processing items from multiple data streams, each batch will only contain records from a single shard/stream\.
 
 To configure your function to read from Kinesis in the Lambda console, create a **Kinesis** trigger\.
 

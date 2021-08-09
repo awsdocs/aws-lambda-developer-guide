@@ -9,14 +9,9 @@ As a best practice, create an AWS Identity and Access Management \(IAM\) user wi
 You can author functions in the Lambda console, or with an IDE toolkit, command line tools, or the AWS SDKs\. The Lambda console provides a [code editor](foundation-console.md#code-editor) for non\-compiled languages that lets you modify and test code quickly\. The [AWS Command Line Interface \(AWS CLI\)](gettingstarted-awscli.md) gives you direct access to the Lambda API for advanced configuration and automation use cases\.
 
 You deploy your function code to Lambda using a deployment package\. Lambda supports two types of deployment packages:
-+ A \.zip file archive that contains your function code and its dependencies\. For an example tutorial, see [Using AWS Lambda with the AWS Command Line Interface](gettingstarted-awscli.md)\.
-+ A container image that is compatible with the [Open Container Initiative \(OCI\)](https://opencontainers.org/) specification\. For an example tutorial, see [Create a function defined as a container image](getting-started-create-function.md#gettingstarted-images)\.
++ A \.zip file archive that contains your function code and its dependencies\. For an example tutorial, see [Create a Lambda function with the console](getting-started-create-function.md)\.
++ A container image that is compatible with the [Open Container Initiative \(OCI\)](https://opencontainers.org/) specification\. For an example tutorial, see [Create a function defined as a container image](gettingstarted-images.md)\.
 
 **Topics**
 + [Create a Lambda function with the console](getting-started-create-function.md)
-+ [Creating functions using the AWS Lambda console editor](functions-code-editor.md)
-+ [Using AWS Lambda with the AWS Command Line Interface](gettingstarted-awscli.md)
-+ [Lambda concepts](gettingstarted-concepts.md)
-+ [Lambda features](gettingstarted-features.md)
-+ [Lambda deployment packages](gettingstarted-package.md)
-+ [Lambda quotas](gettingstarted-limits.md)
++ [Create a function defined as a container image](gettingstarted-images.md)

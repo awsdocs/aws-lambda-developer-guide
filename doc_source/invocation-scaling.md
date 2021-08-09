@@ -1,4 +1,4 @@
-# AWS Lambda function scaling<a name="invocation-scaling"></a>
+# Lambda function scaling<a name="invocation-scaling"></a>
 
 The first time you invoke your function, AWS Lambda creates an instance of the function and runs its handler method to process the event\. When the function returns a response, it stays active and waits to process additional events\. If you invoke the function again while the first event is being processed, Lambda initializes another instance, and the function processes the two events concurrently\. As more events come in, Lambda routes them to available instances and creates new instances as needed\. When the number of requests decreases, Lambda stops unused instances to free up scaling capacity for other functions\.
 
@@ -24,7 +24,7 @@ The function continues to scale until the account's concurrency limit for the fu
 
 The regional concurrency limit starts at 1,000\. You can increase the limit by submitting a request in the [Support Center console](https://console.aws.amazon.com/support/v1#/case/create?issueType=service-limit-increase)\. To allocate capacity on a per\-function basis, you can configure functions with [reserved concurrency](configuration-concurrency.md)\. Reserved concurrency creates a pool that can only be used by its function, and also prevents its function from using unreserved concurrency\.
 
-When your function scales up, the first request served by each instance is impacted by the time it takes to load and initialize your code\. If your [initialization code](gettingstarted-features.md#gettingstarted-features-programmingmodel) takes a long time, the impact on average and percentile latency can be significant\. To enable your function to scale without fluctuations in latency, use [provisioned concurrency](configuration-concurrency.md)\. The following example shows a function with provisioned concurrency processing a spike in traffic\.
+When your function scales up, the first request served by each instance is impacted by the time it takes to load and initialize your code\. If your [initialization code](foundation-progmodel.md) takes a long time, the impact on average and percentile latency can be significant\. To enable your function to scale without fluctuations in latency, use [provisioned concurrency](configuration-concurrency.md)\. The following example shows a function with provisioned concurrency processing a spike in traffic\.
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/features-scaling-provisioned.png)
 

@@ -184,7 +184,6 @@ All Lambda event source types share the same [CreateEventSourceMapping](API_Crea
 | Parameter | Required | Default | Notes | 
 | --- | --- | --- | --- | 
 |  BatchSize  |  N  |  100  |  Maximum: 10,000  | 
-|  DestinationConfig  |  N  |  none  |     | 
 |  Enabled  |  N  |  Enabled  |     | 
 |  EventSourceArn  |  Y  |  |  Can set only on Create  | 
 |  FunctionName  |  Y  |     |     | 

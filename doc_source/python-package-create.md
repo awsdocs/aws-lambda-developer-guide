@@ -302,11 +302,11 @@ Create the \.zip file that Lambda uses as your deployment package\.
 
    ```
    import requests
-   def main(event, context):   
+   def main(event, context):
        response = requests.get("https://www.test.com/")
        print(response.text)
        return response.text
-   if __name__ == "__main__":   
+   if __name__ == "__main__":
        main('', '')
    ```
 
@@ -434,7 +434,7 @@ You can now delete the resources that you created for this tutorial, unless you 
 + Use the [delete\-function](https://docs.aws.amazon.com/cli/latest/reference/lambda/delete-function.html) command\.
 
   ```
-  aws lambda delete-function --function-name my-sourcecode-function
+  aws lambda delete-function --function-name my-function
   ```
 
   This command produces no output\.

@@ -1,4 +1,4 @@
-# Using the Lambda console<a name="foundation-console"></a>
+# Lambda console<a name="foundation-console"></a>
 
 You can use the Lambda console to configure applications, functions, code signing configurations, and layers\.
 

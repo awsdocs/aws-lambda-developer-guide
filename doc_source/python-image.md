@@ -69,44 +69,27 @@ When you build a container image for Python using an AWS base image, you only ne
        return 'Hello from AWS Lambda using Python' + sys.version + '!'
    ```
 
-1. Use a text editor to create a Dockerfile in your project directory\. The following example shows the Dockerfile for the handler that you created in the previous step\.
+1. In your project directory, add a file named `requirements.txt`\. List each required library as a separate line in this file\. Leave the file empty if there are no dependencies\.
+
+1. Use a text editor to create a Dockerfile in your project directory\. The following example shows the Dockerfile for the handler that you created in the previous step\. Install any dependencies under the $\{LAMBDA\_TASK\_ROOT\} directory alongside the function handler to ensure that the Lambda runtime can locate them when the function is invoked\.
 
    ```
    FROM public.ecr.aws/lambda/python:3.8
    
-   COPY app.py   ./
-   CMD ["app.handler"]
-   ```
-
-1. To create the container image, follow steps 4 through 7 in [Create an image from an AWS base image for Lambda](images-create.md#images-create-from-base.title)\.
-
-### Adding dependencies when you create a Python image<a name="python-image-create-deps"></a>
-
-If your Lambda function depends on external Python libraries, modify the previous procedure as follows:
-
-1. In your project directory, add a file named `requirements.txt`\. List each required library as a separate line in this file\.
-
-1. Modify your Dockerfile to add the required libraries to the container image\. The following example copies the requirements file and installs the required libraries into the `app` directory\. Do not install the dependencies globally or in user space\.
-
-   ```
-   FROM public.ecr.aws/lambda/python:3.8
-    
-   # Create function directory
-   WORKDIR /app
+   # Copy function code
+   COPY app.py ${LAMBDA_TASK_ROOT}
    
-   # Install the function's dependencies 
-   # Copy file requirements.txt from your project folder and install
-   # the requirements in the app directory. 
+   # Install the function's dependencies using file requirements.txt
+   # from your project folder.
    
    COPY requirements.txt  .
-   RUN  pip3 install -r requirements.txt
+   RUN  pip3 install -r requirements.txt --target "${LAMBDA_TASK_ROOT}"
    
-   # Copy handler function (from the local app directory)
-   COPY  app.py  .
-   
-   # Overwrite the command by providing a different command directly in the template.
-   CMD ["/app/app.handler"]
+   # Set the CMD to your handler (could also be done as a parameter override outside of the Dockerfile)
+   CMD [ "app.handler" ]
    ```
+
+1. To create the container image, follow steps 4 through 7 in [Create an image from an AWS base image for Lambda](images-create.md#images-create-from-base)\.
 
 ## Create a Python image from an alternative base image<a name="python-image-create-alt"></a>
 

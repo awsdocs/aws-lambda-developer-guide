@@ -73,7 +73,7 @@ If you are a first\-time user of Lambda, we recommend that you start with the fo
 
 1. **To create and test a Lambda function using the Lambda console, try the [console\-based getting started exercise](getting-started.md)\.** This exercise teaches you about the Lambda programming model and other concepts\.
 
-1. **If you are familiar with container image workflows, try the getting started exercise to [create a Lambda function defined as a container image](getting-started-create-function.md#gettingstarted-images)\.**
+1. **If you are familiar with container image workflows, try the getting started exercise to [create a Lambda function defined as a container image](gettingstarted-images.md)\.**
 
  AWS also provides the following resources for learning about serverless applications and Lambda:
 + The [AWS Compute Blog](http://aws.amazon.com/blogs/compute/ ) includes useful articles about Lambda\.
@@ -92,8 +92,8 @@ If you are a first\-time user of Lambda, we recommend that you start with the fo
 ## Accessing Lambda<a name="accessing"></a>
 
 You can create, invoke, and manage your Lambda functions using any of the following interfaces:
-+  **AWS Management Console** – Provides a web interface for you to access your functions\. For more information, see [Using the Lambda console](foundation-console.md)\.
-+  **AWS Command Line Interface \(AWS CLI\)** – Provides commands for a broad set of AWS services, including Lambda, and is supported on Windows, macOS, and Linux\. For more information, see [Using AWS Lambda with the AWS Command Line Interface](gettingstarted-awscli.md)\.
++  **AWS Management Console** – Provides a web interface for you to access your functions\. For more information, see [Lambda console](foundation-console.md)\.
++  **AWS Command Line Interface \(AWS CLI\)** – Provides commands for a broad set of AWS services, including Lambda, and is supported on Windows, macOS, and Linux\. For more information, see [Using Lambda with the AWS CLI](gettingstarted-awscli.md)\.
 + **AWS SDKs** – Provide language\-specific APIs and manage many of the connection details, such as signature calculation, request retry handling, and error handling\. For more information, see [AWS SDKs](http://aws.amazon.com/tools/#SDKs)\.
 +  **AWS CloudFormation** – Enables you to create templates that define your Lambda applications\. For more information, see [AWS Lambda applications](deploying-lambda-apps.md)\. AWS CloudFormation also supports the [AWS Cloud Development Kit \(CDK\)](http://aws.amazon.com/cdk)\.
 +  **AWS Serverless Application Model \(AWS SAM\)** – Provides templates and a CLI to configure and manage AWS serverless applications\. For more information, see [AWS SAM](lambda-settingup.md#lambda-settingup-awssam)\.

@@ -3,7 +3,6 @@
 Lambda provides a management console and API for managing and invoking functions\. It provides runtimes that support a standard set of features so that you can easily switch between languages and frameworks, depending on your needs\. In addition to functions, you can also create versions, aliases, layers, and custom runtimes\.
 
 **Topics**
-+ [Programming model](#gettingstarted-features-programmingmodel)
 + [Scaling](#gettingstarted-features-scaling)
 + [Concurrency controls](#gettingstarted-features-concurrency)
 + [Asynchronous invocation](#gettingstarted-features-async)
@@ -13,41 +12,13 @@ Lambda provides a management console and API for managing and invoking functions
 + [Testing and deployment tools](#gettingstarted-features-tools)
 + [Application templates](#gettingstarted-features-templates)
 
-## Programming model<a name="gettingstarted-features-programmingmodel"></a>
-
-Authoring specifics vary between runtimes, but all runtimes share a common programming model that defines the interface between your code and the runtime code\. You tell the runtime which method to run by defining a *handler* in the function configuration, and the runtime runs that method\. The runtime passes in objects to the handler that contain the invocation *event* and the *context*, such as the function name and request ID\.
-
-When the handler finishes processing the first event, the runtime sends it another\. The function's class stays in memory, so clients and variables that are declared outside of the handler method in *initialization code* can be reused\. To save processing time on subsequent events, create reusable resources like AWS SDK clients during initialization\. Once initialized, each instance of your function can process thousands of requests\.
-
-When [AWS X\-Ray tracing](services-xray.md) is enabled, the runtime records separate subsegments for initialization and execution\.
-
-![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/features-initialization-trace.png)
-
-Your function also has access to local storage in the `/tmp` directory\. Instances of your function that are serving requests remain active for a few hours before being recycled\.
-
-The runtime captures logging output from your function and sends it to Amazon CloudWatch Logs\. In addition to logging your function's output, the runtime also logs entries when function invocation starts and ends\. This includes a report log with the request ID, billed duration, initialization duration, and other details\. If your function throws an error, the runtime returns that error to the invoker\.
-
-**Note**  
-Logging is subject to [CloudWatch Logs quotas](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/cloudwatch_limits_cwl.html)\. Log data can be lost due to throttling or, in some cases, when an instance of your function is stopped\.
-
-For a hands\-on introduction to the programming model in your preferred programming language, see the following chapters\.
-+ [Building Lambda functions with Node\.js](lambda-nodejs.md)
-+ [Building Lambda functions with Python](lambda-python.md)
-+ [Building Lambda functions with Ruby](lambda-ruby.md)
-+ [Building Lambda functions with Java](lambda-java.md)
-+ [Building Lambda functions with Go](lambda-golang.md)
-+ [Building Lambda functions with C\#](lambda-csharp.md)
-+ [Building Lambda functions with PowerShell](lambda-powershell.md)
-
-Lambda scales your function by running additional instances of it as demand increases, and by stopping instances as demand decreases\. Unless noted otherwise, incoming requests might be processed out of order or concurrently\. Store your application's state in other services, and don't rely on instances of your function being long lived\. Use local storage and class\-level objects to increase performance, but keep to a minimum the size of your deployment package and the amount of data that you transfer onto the execution environment\.
-
 ## Scaling<a name="gettingstarted-features-scaling"></a>
 
 Lambda manages the infrastructure that runs your code, and scales automatically in response to incoming requests\. When your function is invoked more quickly than a single instance of your function can process events, Lambda scales up by running additional instances\. When traffic subsides, inactive instances are frozen or stopped\. You only pay for the time that your function is initializing or processing events\.
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/features-scaling.png)
 
-For more information, see [AWS Lambda function scaling](invocation-scaling.md)\.
+For more information, see [Lambda function scaling](invocation-scaling.md)\.
 
 ## Concurrency controls<a name="gettingstarted-features-concurrency"></a>
 

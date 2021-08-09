@@ -93,14 +93,19 @@ AWS periodically provides updates to the AWS base images for Lambda\. If your Do
    + LAMBDA\_TASK\_ROOT=/var/task
    + LAMBDA\_RUNTIME\_DIR=/var/runtime
 
-   The following shows an example Dockerfile for Node\.js version 14\. :
+   Install any dependencies under the $\{LAMBDA\_TASK\_ROOT\} directory alongside the function handler to ensure that the Lambda runtime can locate them when the function is invoked\.
+
+   The following shows an example Dockerfile for Node\.js, Python, and Ruby:
+
+------
+#### [ Node\.js 14 ]
 
    ```
    FROM public.ecr.aws/lambda/nodejs:14
    # Alternatively, you can pull the base image from Docker Hub: amazon/aws-lambda-nodejs:12
    
    # Assumes your function is named "app.js", and there is a package.json file in the app directory.
-   COPY app.js package.json  /var/task/
+   COPY app.js package.json  ${LAMBDA_TASK_ROOT}
    
    # Install NPM dependencies for function
    RUN npm install
@@ -108,6 +113,47 @@ AWS periodically provides updates to the AWS base images for Lambda\. If your Do
    # Set the CMD to your handler (could also be done as a parameter override outside of the Dockerfile)
    CMD [ "app.handler" ]
    ```
+
+------
+#### [ Python 3\.8 ]
+
+   ```
+   FROM public.ecr.aws/lambda/python:3.8
+   
+   # Copy function code
+   COPY app.py ${LAMBDA_TASK_ROOT}
+   
+   # Install the function's dependencies using file requirements.txt
+   # from your project folder.
+   
+   COPY requirements.txt  .
+   RUN  pip3 install -r requirements.txt --target "${LAMBDA_TASK_ROOT}"
+   
+   # Set the CMD to your handler (could also be done as a parameter override outside of the Dockerfile)
+   CMD [ "app.handler" ]
+   ```
+
+------
+#### [ Ruby 2\.7 ]
+
+   ```
+   FROM public.ecr.aws/lambda/ruby:2.7
+   
+   # Copy function code
+   COPY app.rb ${LAMBDA_TASK_ROOT}
+   
+   # Copy dependency management file
+   COPY Gemfile ${LAMBDA_TASK_ROOT}
+   
+   # Install dependencies under LAMBDA_TASK_ROOT
+   ENV GEM_HOME=${LAMBDA_TASK_ROOT}
+   RUN bundle install
+   
+   # Set the CMD to your handler (could also be done as a parameter override outside of the Dockerfile)
+   CMD [ "app.LambdaFunction::Handler.process" ]
+   ```
+
+------
 
 1. Build your Docker image with the `docker build` command\. Enter a name for the image\. The following example names the image `hello-world`\.
 

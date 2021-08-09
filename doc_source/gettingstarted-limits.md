@@ -10,7 +10,7 @@ Lambda sets quotas for the amount of compute and storage resources that you can 
 | Storage for functions defined as container images\. These images are stored in Amazon ECR\. | See [Amazon ECR service quotas](https://docs.aws.amazon.com/AmazonECR/latest/userguide/service-quotas.html)\. |   | 
 |  [Elastic network interfaces per virtual private cloud \(VPC\)](configuration-vpc.md)  This quota is shared with other services, such as Amazon Elastic File System \(Amazon EFS\)\. See [Amazon VPC quotas](https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html)\.   | 250 | Hundreds | 
 
-For details on concurrency and how Lambda scales your function concurrency in response to traffic, see [AWS Lambda function scaling](invocation-scaling.md)\.
+For details on concurrency and how Lambda scales your function concurrency in response to traffic, see [Lambda function scaling](invocation-scaling.md)\.
 
 The following quotas apply to function configuration, deployments, and execution\. They cannot be changed\.
 
@@ -19,7 +19,7 @@ The following quotas apply to function configuration, deployments, and execution
 | --- | --- | 
 | Function [memory allocation](configuration-function-common.md) | 128 MB to 10,240 MB, in 1\-MB increments\. | 
 | Function [timeout](configuration-function-common.md) | 900 seconds \(15 minutes\) | 
-| Function [environment variables](configuration-envvars.md) | 4 KB | 
+| Function [environment variables](configuration-envvars.md) | 4 KB, for all environment variables associated with the function, in aggregate | 
 | Function [resource\-based policy](access-control-resource-based.md) | 20 KB | 
 | Function [layers](configuration-layers.md) | five layers | 
 | Function [burst concurrency](invocation-scaling.md) | 500 \- 3000 \(varies per Region\) | 

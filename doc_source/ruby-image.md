@@ -47,3 +47,44 @@ gem install aws_lambda_ric
 For package details, see [Lambda RIC](https://rubygems.org/gems/aws_lambda_ric) on [RubyGems\.org](https://rubygems.org/pages/about)\.
 
 You can also download the [Ruby runtime interface client](https://github.com/aws/aws-lambda-ruby-runtime-interface-client) from GitHub\.
+
+## Deploying Ruby with an AWS base image<a name="ruby-image-create"></a>
+
+When you build a container image for Ruby using an AWS base image, you only need to copy the ruby app to the container and install any dependencies\. 
+
+**To build and deploy a Ruby function with the `ruby:2.7` base image\.**
+
+1. On your local machine, create a project directory for your new function\.
+
+1. In your project directory, add a file named `app.rb` containing your function code\. The following example shows a simple Ruby handler\. 
+
+   ```
+   module LambdaFunction
+     class Handler
+       def self.process(event:,context:)
+         "Hello from Ruby 2.7 container image!"
+       end
+     end
+   end
+   ```
+
+1. Use a text editor to create a Dockerfile in your project directory\. The following example shows the Dockerfile for the handler that you created in the previous step\. Install any dependencies under the $\{LAMBDA\_TASK\_ROOT\} directory alongside the function handler to ensure that the Lambda runtime can locate them when the function is invoked\.
+
+   ```
+   FROM public.ecr.aws/lambda/ruby:2.7
+   
+   # Copy function code
+   COPY app.rb ${LAMBDA_TASK_ROOT}
+   
+   # Copy dependency management file
+   COPY Gemfile ${LAMBDA_TASK_ROOT}
+   
+   # Install dependencies under LAMBDA_TASK_ROOT
+   ENV GEM_HOME=${LAMBDA_TASK_ROOT}
+   RUN bundle install
+   
+   # Set the CMD to your handler (could also be done as a parameter override outside of the Dockerfile)
+   CMD [ "app.LambdaFunction::Handler.process" ]
+   ```
+
+1. To create the container image, follow steps 4 through 7 in [Create an image from an AWS base image for Lambda](images-create.md#images-create-from-base)\.

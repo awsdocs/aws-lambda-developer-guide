@@ -2,6 +2,15 @@
 
 Several AWS services, such as Amazon Simple Storage Service \(Amazon S3\) and Amazon Simple Notification Service \(Amazon SNS\), invoke functions asynchronously to process events\. When you invoke a function asynchronously, you don't wait for a response from the function code\. You hand off the event to Lambda and Lambda handles the rest\. You can configure how Lambda handles errors, and can send invocation records to a downstream resource to chain together components of your application\.
 
+**Topics**
++ [How Lambda handles asynchronous invocations](#async-overview)
++ [Configuring error handling for asynchronous invocation](#invocation-async-errors)
++ [Configuring destinations for asynchronous invocation](#invocation-async-destinations)
++ [Asynchronous invocation configuration API](#invocation-async-api)
++ [AWS Lambda function dead\-letter queues](#dlq)
+
+## How Lambda handles asynchronous invocations<a name="async-overview"></a>
+
 The following diagram shows clients invoking a Lambda function asynchronously\. Lambda queues the events before sending them to the function\.
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/features-async.png)
@@ -47,12 +56,6 @@ You can also configure Lambda to send an invocation record to another service\. 
 + **Amazon EventBridge** – An EventBridge event bus\.
 
 The invocation record contains details about the request and response in JSON format\. You can configure separate destinations for events that are processed successfully, and events that fail all processing attempts\. Alternatively, you can configure an SQS queue or SNS topic as a [dead\-letter queue](#dlq) for discarded events\. For dead\-letter queues, Lambda only sends the content of the event, without details about the response\.
-
-**Topics**
-+ [Configuring error handling for asynchronous invocation](#invocation-async-errors)
-+ [Configuring destinations for asynchronous invocation](#invocation-async-destinations)
-+ [Asynchronous invocation configuration API](#invocation-async-api)
-+ [AWS Lambda function dead\-letter queues](#dlq)
 
 ## Configuring error handling for asynchronous invocation<a name="invocation-async-errors"></a>
 
@@ -205,11 +208,13 @@ You should see the following output:
 
 As an alternative to an [on\-failure destination](#invocation-async-destinations), you can configure your function with a dead\-letter queue to save discarded events for further processing\. A dead\-letter queue acts the same as an on\-failure destination in that it is used when an event fails all processing attempts or expires without being processed\. However, a dead\-letter queue is part of a function's version\-specific configuration, so it is locked in when you publish a version\. On\-failure destinations also support additional targets and include details about the function's response in the invocation record\.
 
-If you don't have a queue or topic, create one\. Choose the target type that matches your use case\.
-+ [Amazon SQS queue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-create-queue.html) – A queue holds failed events until they're retrieved\. You can retrieve events manually, or you can [configure Lambda to read from the queue](with-sqs.md) and invoke a function\.
+To reprocess events in a dead\-letter queue, you can set it as an event source for your Lambda function\. Alternatively, you can manually retrieve the events\.
+
+You can choose an Amazon SQS queue or Amazon SNS topic for your dead\-letter queue\. If you don't have a queue or topic, create one\. Choose the target type that matches your use case\.
++ [Amazon SQS queue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-create-queue.html) – A queue holds failed events until they're retrieved\. Choose an Amazon SQS queue if you expect a single entity, such as a Lambda function or CloudWatch alarm, to process the failed event\. For more information, see [Using AWS Lambda with Amazon SQS](with-sqs.md)\.
 
   Create a queue in the [Amazon SQS console](https://console.aws.amazon.com/sqs)\.
-+ [Amazon SNS topic](https://docs.aws.amazon.com/sns/latest/gsg/CreateTopic.html) – A topic relays failed events to one or more destinations\. You can configure a topic to send events to an email address, a Lambda function, or an HTTP endpoint\.
++ [Amazon SNS topic](https://docs.aws.amazon.com/sns/latest/gsg/CreateTopic.html) – A topic relays failed events to one or more destinations\. Choose an Amazon SNS topic if you expect multiple entities to act on a failed event\. For example, you can configure a topic to send events to an email address, a Lambda function, and/or an HTTP endpoint\. For more information, see [Using Lambda with Amazon SNS](with-sqs.md)\.
 
   Create a topic in the [Amazon SNS console](https://console.aws.amazon.com/sns/home)\.
 

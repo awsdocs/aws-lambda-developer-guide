@@ -1,6 +1,8 @@
-# Managing AWS Lambda functions<a name="lambda-functions"></a>
+# Configuring AWS Lambda functions<a name="lambda-functions"></a>
 
-You can use the AWS Lambda API or console to create functions and configure function settings\. [Basic function settings](configuration-function-common.md) include the description and the execution role that you specify when you create a function in the Lambda console\. You can configure more settings after you create a function, or use the API to modify configuration settings such as the handler name, memory allocation, and security groups during creation\.
+You can use the AWS Lambda API or console to create functions and configure function settings\. The workflow to create a function is different for a function deployed as a [container image](configuration-images.md) and for a function deployed as a [\.zip file archive](configuration-function-zip.md)\. 
+
+After you create the function, you can configure settings for many [function capabilities and options ](configuration-function-common.md) such as permissions, environment variables, tags, and layers\.
 
 To keep secrets out of your function code, store them in the function's configuration and read them from the execution environment during initialization\. [Environment variables](configuration-envvars.md) are always encrypted at rest, and can be encrypted client\-side as well\. Use environment variables to make your function code portable by removing connection strings, passwords, and endpoints for external resources\.
 

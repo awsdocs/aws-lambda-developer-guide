@@ -1,6 +1,6 @@
 # Using AWS Lambda environment variables<a name="configuration-envvars"></a>
 
-You can use environment variables to adjust your function's behavior without updating code\. An environment variable is a pair of strings that are stored in a function's version\-specific configuration\. The Lambda runtime makes environment variables available to your code and sets additional environment variables that contain information about the function and invocation request\.
+You can use environment variables to adjust your function's behavior without updating code\. An environment variable is a pair of strings that is stored in a function's version\-specific configuration\. The Lambda runtime makes environment variables available to your code and sets additional environment variables that contain information about the function and invocation request\.
 
 **Note**  
 To increase database security, we recommend that you use AWS Secrets Manager instead of environment variables to store database credentials\. For more information, see [Configuring database access for a Lambda function](https://docs.aws.amazon.com/lambda/latest/dg/configuration-database.html)\.
@@ -20,7 +20,7 @@ Environment variables are not evaluated prior to the function invocation\. Any v
 
 You define environment variables on the unpublished version of your function\. When you publish a version, the environment variables are locked for that version along with other [version\-specific configuration](configuration-function-common.md)\. 
 
-You create an environment variable on your function by defining a key and a value\. Your function uses the name of the key to retrieve the value of environment variable\.
+You create an environment variable for your function by defining a key and a value\. Your function uses the name of the key to retrieve the value of environment variable\.
 
 **To set environment variables in the Lambda console**
 

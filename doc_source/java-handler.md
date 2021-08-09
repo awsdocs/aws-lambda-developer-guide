@@ -38,7 +38,7 @@ The [Lambda runtime](lambda-runtimes.md) receives an event as a JSON\-formatted 
 + `package.Class::method` – Full format\. For example: `example.Handler::handleRequest`\.
 + `package.Class` – Abbreviated format for functions that implement a [handler interface](#java-handler-interfaces)\. For example: `example.Handler`\.
 
-You can add [initialization code](gettingstarted-features.md#gettingstarted-features-programmingmodel) outside of your handler method to reuse resources across multiple invocations\. When the runtime loads your handler, it runs static code and the class constructor\. Resources that are created during initialization stay in memory between invocations, and can be reused by the handler thousands of times\.
+You can add [initialization code](foundation-progmodel.md) outside of your handler method to reuse resources across multiple invocations\. When the runtime loads your handler, it runs static code and the class constructor\. Resources that are created during initialization stay in memory between invocations, and can be reused by the handler thousands of times\.
 
 In the following example, the logger, serializer, and AWS SDK client are created when the function serves its first event\. Subsequent events served by the same function instance are much faster because those resources already exist\.
 
@@ -57,7 +57,7 @@ public class Handler implements RequestHandler<SQSEvent, String>{
     String response = new String();
     // call Lambda API
     logger.info("Getting account settings");
-    CompletableFuture<GetAccountSettingsResponse> accountSettings = 
+    CompletableFuture<GetAccountSettingsResponse> accountSettings =
         lambdaClient.getAccountSettings(GetAccountSettingsRequest.builder().build());
     // log execution details
     logger.info("ENVIRONMENT VARIABLES: " + gson.toJson(System.getenv()));

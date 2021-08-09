@@ -24,7 +24,7 @@ Lambda provides the following tools and libraries for the Go runtime:
 **Tools and libraries for Go**
 + [AWS SDK for Go](https://github.com/aws/aws-sdk-go): the official AWS SDK for the Go programming language\.
 + [github\.com/aws/aws\-lambda\-go/lambda](https://github.com/aws/aws-lambda-go/tree/master/lambda): The implementation of the Lambda programming model for Go\. This package is used by AWS Lambda to invoke your [handler](golang-handler.md)\.
-+ [github\.com/aws/aws\-lambda\-go/lambdacontext](https://github.com/aws/aws-lambda-go/tree/master/lambdacontext): Helpers for accessing execution context information from the [context object](golang-context.md)\.
++ [github\.com/aws/aws\-lambda\-go/lambdacontext](https://github.com/aws/aws-lambda-go/tree/master/lambdacontext): Helpers for accessing context information from the [context object](golang-context.md)\.
 + [github\.com/aws/aws\-lambda\-go/events](https://github.com/aws/aws-lambda-go/tree/master/events): This library provides type definitions for common event source integrations\.
 + [github\.com/aws/aws\-lambda\-go/cmd/build\-lambda\-zip](https://github.com/aws/aws-lambda-go/tree/master/cmd/build-lambda-zip): This tool can be used to create a \.zip file archive on Windows\.
 

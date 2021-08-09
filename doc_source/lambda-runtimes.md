@@ -12,7 +12,7 @@ When you use a \.zip file archive for the deployment package, you choose a runti
 + Image – Custom
 + Linux kernel – 4\.14\.165\-102\.205\.amzn2\.x86\_64
 
-When your function is invoked, Lambda attempts to re\-use the execution environment from a previous invocation if one is available\. When an [execution environment](runtimes-context.md) is reused, time is saved because your resources, such as database connections and temporary files, do not have to be recreated before your function runs\.
+Lambda invokes your function in an [execution environment](runtimes-context.md)\. The execution environment provides a secure and isolated runtime environment that manages the resources required to run your function\. Lambda re\-uses the execution environment from a previous invocation if one is available, or it can create a new execution environment\. 
 
 A runtime can support a single version of a language, multiple versions of a language, or multiple languages\. Runtimes specific to a language or framework version are [deprecated](runtime-support-policy.md) when the version reaches end of life\.
 

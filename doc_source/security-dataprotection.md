@@ -34,6 +34,6 @@ Additionally, you can use the following features to customize how environment va
 
 For more information, see [Using AWS Lambda environment variables](configuration-envvars.md)\.
 
-Lambda always encrypts files that you upload to Lambda, including [deployment packages](getting-started-create-function.md#gettingstarted-images-package) and [layer archives](configuration-layers.md)\.
+Lambda always encrypts files that you upload to Lambda, including [deployment packages](gettingstarted-images.md#gettingstarted-images-package) and [layer archives](configuration-layers.md)\.
 
 Amazon CloudWatch Logs and AWS X\-Ray also encrypt data by default, and can be configured to use a customer managed key\. For details, see [Encrypt log data in CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/encrypt-log-data-kms.html) and [Data protection in AWS X\-Ray](https://docs.aws.amazon.com/xray/latest/devguide/xray-console-encryption.html)\.

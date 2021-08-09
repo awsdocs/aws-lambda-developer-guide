@@ -2,7 +2,7 @@
 
 If you use Amazon Virtual Private Cloud \(Amazon VPC\) to host your AWS resources, you can establish a connection between your VPC and Lambda\. You can use this connection to invoke your Lambda function without crossing the public internet\.
 
-To establish a private connection between your VPC and Lambda, create an [interface VPC endpoint](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html)\. Interface endpoints are powered by [AWS PrivateLink](http://aws.amazon.com/privatelink), which enables you to privately access Lambda APIs without an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection\. Instances in your VPC don't need public IP addresses to communicate with Lambda APIs\. Traffic between your VPC and Lambda does not leave the AWS network\.
+To establish a private connection between your VPC and Lambda, create an [interface VPC endpoint](https://docs.aws.amazon.com/vpc/latest/privatelink/vpce-interface.html)\. Interface endpoints are powered by [AWS PrivateLink](http://aws.amazon.com/privatelink), which enables you to privately access Lambda APIs without an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection\. Instances in your VPC don't need public IP addresses to communicate with Lambda APIs\. Traffic between your VPC and Lambda does not leave the AWS network\.
 
 Each interface endpoint is represented by one or more [elastic network interfaces](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html) in your subnets\. A network interface provides a private IP address that serves as an entry point for traffic to Lambda\.
 
@@ -35,7 +35,7 @@ Traffic between peered VPCs stays on the AWS network and does not traverse the p
 
 ## Creating an interface endpoint for Lambda<a name="vpc-endpoint-create"></a>
 
-You can create an interface endpoint for Lambda using either the Amazon VPC console or the AWS Command Line Interface \(AWS CLI\)\. For more information, see [Creating an interface endpoint](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint) in the *Amazon VPC User Guide*\.
+You can create an interface endpoint for Lambda using either the Amazon VPC console or the AWS Command Line Interface \(AWS CLI\)\. For more information, see [Creating an interface endpoint](https://docs.aws.amazon.com/vpc/latest/privatelink/vpce-interface.html#create-interface-endpoint) in the *Amazon VPC User Guide*\.
 
 **To create an interface endpoint for Lambda \(console\)**
 
@@ -57,7 +57,7 @@ You can create an interface endpoint for Lambda using either the Amazon VPC cons
 
 To use the private DNS option, you must set the `enableDnsHostnames` and `enableDnsSupportattributes` of your VPC\. For more information, see [Viewing and updating DNS support for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html#vpc-dns-updating) in the *Amazon VPC User Guide*\. If you enable private DNS for the interface endpoint, you can make API requests to Lambda using its default DNS name for the Region, for example, `lambda.us-east-1.amazonaws.com`\. For more service endpoints, see [Service endpoints and quotas](https://docs.aws.amazon.com/general/latest/gr/aws-service-information.html) in the *AWS General Reference*\.
 
-For more information, see [Accessing a service through an interface endpoint](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#access-service-though-endpoint) in the *Amazon VPC User Guide*\.
+For more information, see [Accessing a service through an interface endpoint](https://docs.aws.amazon.com/vpc/latest/privatelink/vpce-interface.html#access-service-though-endpoint) in the *Amazon VPC User Guide*\.
 
 For information about creating and configuring an endpoint using AWS CloudFormation, see the [AWS::EC2::VPCEndpoint](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpcendpoint.html) resource in the *AWS CloudFormation User Guide*\.
 
@@ -76,7 +76,7 @@ To control who can use your interface endpoint and which Lambda functions the us
 + The actions that the principal can perform\.
 + The resources on which the principal can perform actions\.
 
-For more information, see [Controlling access to services with VPC endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints-access.html) in the *Amazon VPC User Guide*\.
+For more information, see [Controlling access to services with VPC endpoints](https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints-access.html) in the *Amazon VPC User Guide*\.
 
 **Example: Interface endpoint policy for Lambda actions**  
 The following is an example of an endpoint policy for Lambda\. When attached to an endpoint, this policy allows user `MyUser` to invoke the function `my-function`\.

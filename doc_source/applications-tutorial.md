@@ -63,7 +63,7 @@ Create an application in the Lambda console\. In Lambda, an application is an AW
 
 1. Configure application settings\.
    + **Application name** – **my\-app**\.
-   + **Runtime** – **Node\.js 10\.x**\.
+   + **Runtime** – **Node\.js 14\.x**\.
    + **Source control service** – **CodeCommit**\.
    + **Repository name** – **my\-app\-repo**\.
    + **Permissions** – **Create roles and permissions boundary**\.
@@ -148,7 +148,7 @@ To add a DynamoDB table to the application, define an `AWS::Serverless::SimpleTa
        Properties:
          CodeUri: ./
          Handler: src/handlers/hello-from-lambda.helloFromLambdaHandler
-         Runtime: nodejs10.x
+         Runtime: nodejs14.x
          MemorySize: 128
          Timeout: 60
          Description: A Lambda function that returns a static string.
@@ -237,7 +237,7 @@ Next, update the function code to use the table\. The following code uses the Dy
        Properties:
          CodeUri: ./
          Handler: src/handlers/index.handler
-         Runtime: nodejs10.x
+         Runtime: nodejs14.x
    ```
 
 1. Commit and push the change\.
@@ -261,7 +261,7 @@ After the code change is deployed, invoke the function a few times to update the
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/application-create-ddbtable.png)
 
-Lambda creates additional instances of your function to handle multiple concurrent invocations\. Each log stream in the CloudWatch Logs log group corresponds to a function instance\. A new function instance is also created when you change your function's code or configuration\. For more information on scaling, see [AWS Lambda function scaling](invocation-scaling.md)\.
+Lambda creates additional instances of your function to handle multiple concurrent invocations\. Each log stream in the CloudWatch Logs log group corresponds to a function instance\. A new function instance is also created when you change your function's code or configuration\. For more information on scaling, see [Lambda function scaling](invocation-scaling.md)\.
 
 ## Next steps<a name="applications-tutorial-nextsteps"></a>
 

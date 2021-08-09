@@ -10,14 +10,13 @@ To process items from a stream or queue, you can create an [event source mapping
 
 Other AWS services and resources invoke your function directly\. For example, you can configure CloudWatch Events to invoke your function on a timer, or you can configure Amazon S3 to invoke your function when an object is created\. Each service varies in the method it uses to invoke your function, the structure of the event, and how you configure it\. For more information, see [Using AWS Lambda with other services](lambda-services.md)\.
 
-Depending on who invokes your function and how it's invoked, scaling behavior and the types of errors that occur can vary\. When you invoke a function synchronously, you receive errors in the response and can retry\. When you invoke asynchronously, use an event source mapping, or configure another service to invoke your function, the retry requirements and the way that your function scales to handle large numbers of events can vary\. For details, see [AWS Lambda function scaling](invocation-scaling.md) and [Error handling and automatic retries in AWS Lambda](invocation-retries.md)\.
+Depending on who invokes your function and how it's invoked, scaling behavior and the types of errors that occur can vary\. When you invoke a function synchronously, you receive errors in the response and can retry\. When you invoke asynchronously, use an event source mapping, or configure another service to invoke your function, the retry requirements and the way that your function scales to handle large numbers of events can vary\. For details, see [Lambda function scaling](invocation-scaling.md) and [Error handling and automatic retries in AWS Lambda](invocation-retries.md)\.
 
 **Topics**
 + [Synchronous invocation](invocation-sync.md)
 + [Asynchronous invocation](invocation-async.md)
 + [AWS Lambda event source mappings](invocation-eventsourcemapping.md)
 + [Monitoring the state of a function with the Lambda API](functions-states.md)
-+ [AWS Lambda function scaling](invocation-scaling.md)
 + [Error handling and automatic retries in AWS Lambda](invocation-retries.md)
 + [Using Lambda extensions](using-extensions.md)
 + [Invoking functions defined as container images](invocation-images.md)

@@ -182,14 +182,14 @@ exports.handler = async (event, context, callback) => {
       return;
   }
 
-  // Check that the image type is supported  
+  // Check that the image type is supported
   const imageType = typeMatch[1].toLowerCase();
   if (imageType != "jpg" && imageType != "png") {
       console.log(`Unsupported image type: ${imageType}`);
       return;
   }
 
-  // Download the image from the S3 source bucket. 
+  // Download the image from the S3 source bucket.
 
   try {
       const params = {
@@ -201,19 +201,19 @@ exports.handler = async (event, context, callback) => {
   } catch (error) {
       console.log(error);
       return;
-  }  
+  }
 
   // set thumbnail width. Resize will set the height automatically to maintain aspect ratio.
   const width  = 200;
 
   // Use the sharp module to resize the image and save in a buffer.
-  try { 
+  try {
       var buffer = await sharp(origimage.Body).resize(width).toBuffer();
-          
+
   } catch (error) {
       console.log(error);
       return;
-  } 
+  }
 
   // Upload the thumbnail image to the destination bucket
   try {
@@ -224,15 +224,15 @@ exports.handler = async (event, context, callback) => {
           ContentType: "image"
       };
 
-      const putResult = await s3.putObject(destparams).promise(); 
-      
+      const putResult = await s3.putObject(destparams).promise();
+
   } catch (error) {
       console.log(error);
       return;
-  } 
-      
+  }
+
   console.log('Successfully resized ' + srcBucket + '/' + srcKey +
-      ' and uploaded to ' + dstBucket + '/' + dstKey); 
+      ' and uploaded to ' + dstBucket + '/' + dstKey);
 };
 ```
 
@@ -580,7 +580,7 @@ Invoke the Lambda function manually using sample Amazon S3 event data\.
 1. Invoke the function with the following invoke command\. Note that the command requests asynchronous execution \(`--invocation-type Event`\)\. Optionally, you can invoke the function synchronously by specifying `RequestResponse` as the `invocation-type` parameter value\.
 
    ```
-   aws lambda invoke 
+   aws lambda invoke
      --function-name CreateThumbnail \
        --invocation-type Event \
          --payload file://inputFile.txt outputfile.txt

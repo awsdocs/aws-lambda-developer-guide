@@ -1,6 +1,6 @@
 # Lambda concepts<a name="gettingstarted-concepts"></a>
 
-With Lambda, you run functions to process events\. To send events to your function, you can invoke it using the Lambda API, or you can configure an AWS service or resource to invoke it\.
+Lambda runs instances of your function to process events\. To send events to your function, you can invoke it using the Lambda API, or you can configure an AWS service or resource to invoke it\.
 
 **Topics**
 + [Function](#gettingstarted-concepts-function)
@@ -19,11 +19,11 @@ With Lambda, you run functions to process events\. To send events to your functi
 
 A *function* is a resource that you can invoke to run your code in Lambda\. A function has code to process the [events](#gettingstarted-concepts-event) that you pass into the function or that other AWS services send to the function\.
 
-For more information, see [Managing AWS Lambda functions](lambda-functions.md)\.
+For more information, see [Configuring AWS Lambda functions](lambda-functions.md)\.
 
 ## Trigger<a name="gettingstarted-concepts-trigger"></a>
 
-A *trigger* is a resource or configuration that invokes a Lambda function\. This includes AWS services that you can configure to invoke a function, applications that you develop, and [event source mappings](invocation-eventsourcemapping.md)\. An event source mapping is a resource in Lambda that reads items from a stream or queue and invokes a function\. For more information, see [Invoking AWS Lambda functions](lambda-invocation.md) and [Using AWS Lambda with other services](lambda-services.md)\.
+A *trigger* is a resource or configuration that invokes a Lambda function\. Triggers include AWS services that you can configure to invoke a function and [event source mappings](invocation-eventsourcemapping.md)\. An event source mapping is a resource in Lambda that reads items from a stream or queue and invokes a function\. For more information, see [Invoking AWS Lambda functions](lambda-invocation.md) and [Using AWS Lambda with other services](lambda-services.md)\.
 
 ## Event<a name="gettingstarted-concepts-event"></a>
 

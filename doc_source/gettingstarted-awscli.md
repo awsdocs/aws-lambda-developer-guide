@@ -1,4 +1,4 @@
-# Using AWS Lambda with the AWS Command Line Interface<a name="gettingstarted-awscli"></a>
+# Using Lambda with the AWS CLI<a name="gettingstarted-awscli"></a>
 
 You can use the AWS Command Line Interface to manage functions and other AWS Lambda resources\. The AWS CLI uses the AWS SDK for Python \(Boto\) to interact with the Lambda API\. You can use it to learn about the API, and apply that knowledge in building applications that use Lambda with the AWS SDK\. 
 
@@ -30,6 +30,31 @@ This tutorial uses the AWS Command Line Interface \(AWS CLI\) to call service AP
 
 Create the [execution role](lambda-intro-execution-role.md) that gives your function permission to access AWS resources\. To create an execution role with the AWS CLI, use the `create-role` command\.
 
+In the following example, you specify the trust policy inline\. Requirements for escaping quotes in the JSON string vary depending on your shell\.
+
+```
+aws iam create-role --role-name lambda-ex --assume-role-policy-document '{"Version": "2012-10-17","Statement": [{ "Effect": "Allow", "Principal": {"Service": "lambda.amazonaws.com"}, "Action": "sts:AssumeRole"}]}'
+```
+
+You can also define the [trust policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html) for the role using a JSON file\. In the following example, `trust-policy.json` is a file in the current directory\. This trust policy allows Lambda to use the role's permissions by giving the service principal `lambda.amazonaws.com` permission to call the AWS Security Token Service `AssumeRole` action\.
+
+**Example trust\-policy\.json**  
+
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "lambda.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+```
+
 ```
 aws iam create-role --role-name lambda-ex --assume-role-policy-document file://trust-policy.json
 ```
@@ -58,31 +83,6 @@ You should see the following output:
         }
     }
 }
-```
-
-The `trust-policy.json` file is a JSON file in the current directory that defines the [trust policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html) for the role\. This trust policy allows Lambda to use the role's permissions by giving the service principal `lambda.amazonaws.com` permission to call the AWS Security Token Service `AssumeRole` action\.
-
-**Example trust\-policy\.json**  
-
-```
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Principal": {
-        "Service": "lambda.amazonaws.com"
-      },
-      "Action": "sts:AssumeRole"
-    }
-  ]
-}
-```
-
-You can also specify the trust policy inline\. Requirements for escaping quotes in the JSON string vary depending on your shell\.
-
-```
-aws iam create-role --role-name lambda-ex --assume-role-policy-document '{"Version": "2012-10-17","Statement": [{ "Effect": "Allow", "Principal": {"Service": "lambda.amazonaws.com"}, "Action": "sts:AssumeRole"}]}'
 ```
 
 To add permissions to the role, use the `attach-policy-to-role` command\. Start by adding the `AWSLambdaBasicExecutionRole` managed policy\.
