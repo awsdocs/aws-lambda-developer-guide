@@ -29,7 +29,7 @@ For a full list of API endpoints, see [AWS Regions and endpoints](https://docs.a
 You can use environment variables to store secrets securely for use with Lambda functions\. Lambda always encrypts environment variables at rest\.
 
 Additionally, you can use the following features to customize how environment variables are encrypted\.
-+ **Key configuration** – On a per\-function basis, you can configure Lambda to use an encryption key that you create and manage in AWS Key Management Service\. These are referred to as *customer managed* customer master keys \(CMKs\) or customer managed keys\. If you don't configure a customer managed key, Lambda uses an AWS managed CMK named `aws/lambda`, which Lambda creates in your account\.
++ **Key configuration** – On a per\-function basis, you can configure Lambda to use an encryption key that you create and manage in AWS Key Management Service\. These are referred to as *customer managed* customer master keys \(CMKs\)\. If you don't configure a customer managed key, Lambda uses an AWS managed CMK named `aws/lambda`, which Lambda creates in your account\.
 + **Encryption helpers** – The Lambda console lets you encrypt environment variable values client side, before sending them to Lambda\. This enhances security further by preventing secrets from being displayed unencrypted in the Lambda console, or in function configuration that's returned by the Lambda API\. The console also provides sample code that you can adapt to decrypt the values in your function handler\.
 
 For more information, see [Using AWS Lambda environment variables](configuration-envvars.md)\.
