@@ -130,7 +130,7 @@ Do not use the `--source-account` parameter to add a source account to the Lambd
 **Note**  
 If the account with the SNS topic is hosted in an opt\-in region, you need to specify the region in the principal\. For an example, see [Invoking Lambda functions using Amazon SNS notifications](https://docs.aws.amazon.com/sns/latest/dg/sns-lambda.html) in the *Amazon Simple Notification Service Developer Guide*\. 
 
-## Create a subscription<a name="with-sns-create-supscription"></a>
+## Create a subscription<a name="with-sns-create-subscription"></a>
 
 From account B, subscribe the Lambda function to the topic\. When a message is sent to the `sns-topic-for-lambda` topic in account A \(01234567891A\), Amazon SNS invokes the `Function-With-SNS` function in account B \(01234567891B\)\.
 

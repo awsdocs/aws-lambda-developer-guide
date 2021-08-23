@@ -118,7 +118,7 @@ HTTP Status Code: 502
 HTTP Status Code: 502
 
  **EFSIOException**   
-An error occured when reading from or writing to a connected file system\.  
+An error occurred when reading from or writing to a connected file system\.  
 HTTP Status Code: 410
 
  **EFSMountConnectivityException**   

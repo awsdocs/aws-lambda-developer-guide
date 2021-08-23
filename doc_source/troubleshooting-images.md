@@ -6,7 +6,7 @@
 
 Verify that the ENTRYPOINT to your container image includes the absolute path as the location\. Also verify that the image does not contain a symlink as the ENTRYPOINT\. 
 
-## Lambda: System provisioning additonal capacity<a name="troubleshooting-images-capacity"></a>
+## Lambda: System provisioning additional capacity<a name="troubleshooting-images-capacity"></a>
 
 **Error:** *“Error: We currently do not have sufficient capacity in the region you requested\. Our system will be working on provisioning additional capacity\.*
 
