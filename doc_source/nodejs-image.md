@@ -25,7 +25,6 @@ AWS provides the following base images for Node\.js:
 | --- | --- | --- | --- | 
 | 14 | NodeJS 14\.x | Amazon Linux 2 | [Dockerfile for Node\.js 14\.x on GitHub](https://github.com/aws/aws-lambda-base-images/blob/nodejs14.x/Dockerfile.nodejs14.x) | 
 | 12 | NodeJS 12\.x | Amazon Linux 2 | [Dockerfile for Node\.js 12\.x on GitHub](https://github.com/aws/aws-lambda-base-images/blob/nodejs12.x/Dockerfile.nodejs12.x) | 
-| 10 | NodeJS 10\.x | Amazon Linux 2 | [Dockerfile for Node\.js 10\.x on GitHub](https://github.com/aws/aws-lambda-base-images/blob/nodejs10.x/Dockerfile.nodejs10.x) | 
 
 Docker Hub repository: amazon/aws\-lambda\-nodejs
 
