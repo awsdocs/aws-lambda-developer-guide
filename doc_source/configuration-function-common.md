@@ -1,6 +1,6 @@
 # Configuring Lambda function options<a name="configuration-function-common"></a>
 
-After you create a function, you can configure additional capabilities for the function, such as triggers, network acccess, and file system access\. You can also adjust resources associated with the function, such as memory and concurrency\. These configurations apply to functions defined as \.zip file archives and to functions defined as container images\.
+After you create a function, you can configure additional capabilities for the function, such as triggers, network access, and file system access\. You can also adjust resources associated with the function, such as memory and concurrency\. These configurations apply to functions defined as \.zip file archives and to functions defined as container images\.
 
 You can also create and edit test events to test your function using the console\.
 
