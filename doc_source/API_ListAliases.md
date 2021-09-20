@@ -12,7 +12,7 @@ GET /2015-03-31/functions/FunctionName/aliases?FunctionVersion=FunctionVersion&M
 
 The request uses the following URI parameters\.
 
- ** [FunctionName](#API_ListAliases_RequestSyntax) **   <a name="SSS-ListAliases-request-FunctionName"></a>
+ ** [ FunctionName ](#API_ListAliases_RequestSyntax) **   <a name="SSS-ListAliases-request-FunctionName"></a>
 The name of the Lambda function\.  
 
 **Name formats**
@@ -24,15 +24,15 @@ Length Constraints: Minimum length of 1\. Maximum length of 140\.
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
 Required: Yes
 
- ** [FunctionVersion](#API_ListAliases_RequestSyntax) **   <a name="SSS-ListAliases-request-FunctionVersion"></a>
+ ** [ FunctionVersion ](#API_ListAliases_RequestSyntax) **   <a name="SSS-ListAliases-request-FunctionVersion"></a>
 Specify a function version to only list aliases that invoke that version\.  
 Length Constraints: Minimum length of 1\. Maximum length of 1024\.  
 Pattern: `(\$LATEST|[0-9]+)` 
 
- ** [Marker](#API_ListAliases_RequestSyntax) **   <a name="SSS-ListAliases-request-Marker"></a>
+ ** [ Marker ](#API_ListAliases_RequestSyntax) **   <a name="SSS-ListAliases-request-Marker"></a>
 Specify the pagination token that's returned by a previous request to retrieve the next page of results\.
 
- ** [MaxItems](#API_ListAliases_RequestSyntax) **   <a name="SSS-ListAliases-request-MaxItems"></a>
+ ** [ MaxItems ](#API_ListAliases_RequestSyntax) **   <a name="SSS-ListAliases-request-MaxItems"></a>
 Limit the number of aliases returned\.  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.
 
@@ -71,29 +71,29 @@ If the action is successful, the service sends back an HTTP 200 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** [Aliases](#API_ListAliases_ResponseSyntax) **   <a name="SSS-ListAliases-response-Aliases"></a>
+ ** [ Aliases ](#API_ListAliases_ResponseSyntax) **   <a name="SSS-ListAliases-response-Aliases"></a>
 A list of aliases\.  
-Type: Array of [AliasConfiguration](API_AliasConfiguration.md) objects
+Type: Array of [ AliasConfiguration ](API_AliasConfiguration.md) objects
 
- ** [NextMarker](#API_ListAliases_ResponseSyntax) **   <a name="SSS-ListAliases-response-NextMarker"></a>
+ ** [ NextMarker ](#API_ListAliases_ResponseSyntax) **   <a name="SSS-ListAliases-response-NextMarker"></a>
 The pagination token that's included if more results are available\.  
 Type: String
 
 ## Errors<a name="API_ListAliases_Errors"></a>
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **ResourceNotFoundException**   
+ ** ResourceNotFoundException **   
 The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 
- **TooManyRequestsException**   
+ ** TooManyRequestsException **   
 The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 

@@ -12,12 +12,12 @@ DELETE /2017-03-31/tags/ARN?tagKeys=TagKeys HTTP/1.1
 
 The request uses the following URI parameters\.
 
- ** [ARN](#API_UntagResource_RequestSyntax) **   <a name="SSS-UntagResource-request-Resource"></a>
+ ** [ ARN ](#API_UntagResource_RequestSyntax) **   <a name="SSS-UntagResource-request-Resource"></a>
 The function's Amazon Resource Name \(ARN\)\.  
 Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
 Required: Yes
 
- ** [TagKeys](#API_UntagResource_RequestSyntax) **   <a name="SSS-UntagResource-request-TagKeys"></a>
+ ** [ TagKeys ](#API_UntagResource_RequestSyntax) **   <a name="SSS-UntagResource-request-TagKeys"></a>
 A list of tag keys to remove from the function\.  
 Required: Yes
 
@@ -37,23 +37,23 @@ If the action is successful, the service sends back an HTTP 204 response with an
 
 ## Errors<a name="API_UntagResource_Errors"></a>
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **ResourceConflictException**   
+ ** ResourceConflictException **   
 The resource already exists, or another operation is in progress\.  
 HTTP Status Code: 409
 
- **ResourceNotFoundException**   
+ ** ResourceNotFoundException **   
 The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 
- **TooManyRequestsException**   
+ ** TooManyRequestsException **   
 The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 

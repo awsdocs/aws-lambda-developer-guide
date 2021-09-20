@@ -4,12 +4,12 @@ Error response to GetFunctionConfiguration\.
 
 ## Contents<a name="API_ImageConfigError_Contents"></a>
 
- **ErrorCode**   <a name="SSS-Type-ImageConfigError-ErrorCode"></a>
+ ** ErrorCode **   <a name="SSS-Type-ImageConfigError-ErrorCode"></a>
 Error code\.  
 Type: String  
 Required: No
 
- **Message**   <a name="SSS-Type-ImageConfigError-Message"></a>
+ ** Message **   <a name="SSS-Type-ImageConfigError-Message"></a>
 Error message\.  
 Type: String  
 Required: No

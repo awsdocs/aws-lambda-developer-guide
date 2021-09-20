@@ -9,13 +9,13 @@ For a Lambda function defined as a container image, function behavior during inv
 
 ## Function lifecycle<a name="invocation-images-lifecycle"></a>
 
-Lambda optimizes a new or updated container image in preparation for the function to receive invocations\. The optimization process can take a few seconds\. The function remains in the `Pending` state until the process completes\. The function then transitions to the `Active` state\. While the state is `Pending`, you can invoke the function, but other operations on the function fail\. Invocations that occur while an image update is in progress run the code from the previous image\.
+After you upload a new or updated container image, Lambda optimizes the image before the function can process invocations\. The optimization process can take a few seconds\. The function remains in the `Pending` state until the process completes\. The function then transitions to the `Active` state\. While the state is `Pending`, you can invoke the function, but other operations on the function fail\. Invocations that occur while an image update is in progress run the code from the previous image\.
 
 If a function is not invoked for multiple weeks, Lambda reclaims its optimized version, and the function transitions to the `Inactive` state\. To reactivate the function, you must invoke it\. Lambda rejects the first invocation and the function enters the `Pending` state until Lambda re\-optimizes the image\. The function then returns to the `Active` state\.
 
-Lambda periodically fetches the associated container image from the Amazon Elastic Container Registry \(Amazon ECR\) repository\. If the corresponding container image no longer exists on Amazon ECR, the function enters the `Failed` state, and Lambda returns a failure for any function invocations\.
+Lambda periodically fetches the associated container image from the Amazon Elastic Container Registry \(Amazon ECR\) repository\. If the corresponding container image no longer exists on Amazon ECR or permissions are revoked, the function enters the `Failed` state, and Lambda returns a failure for any function invocations\.
 
-You can use the Lambda API to get information about a function's state\. For more information, see [Monitoring the state of a function with the Lambda API](functions-states.md)\.
+You can use the Lambda API to get information about a function's state\. For more information, see [Lambda function states](functions-states.md)\.
 
 ## Invoking the function<a name="invocation-images-update"></a>
 

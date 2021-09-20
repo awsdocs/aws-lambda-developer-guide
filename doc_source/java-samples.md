@@ -6,7 +6,6 @@ The GitHub repository for this guide provides sample applications that demonstra
 + [blank\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-java) – A Java function that shows the use of Lambda's Java libraries, logging, environment variables, layers, AWS X\-Ray tracing, unit tests, and the AWS SDK\.
 + [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-basic) – A minimal Java function with unit tests and variable logging configuration\.
 + [java\-events](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-events) – A minimal Java function that uses the latest version \(3\.0\.0 and newer\) of the [aws\-lambda\-java\-events](java-package.md) library\. These examples do not require the AWS SDK as a dependency\.
-+ [java\-events\-v1sdk](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-events-v1sdk) – A Java function that uses an older version \(2\.2\.9\) of the [aws\-lambda\-java\-events](java-package.md) library\. These examples require the AWS SDK as a dependency\. **These examples are deprecated\. We recommend following the `java-events` examples and using version 3\.0\.0 or above of the `aws-lambda-java-events` library\.**
 + [s3\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/s3-java) – A Java function that processes notification events from Amazon S3 and uses the Java Class Library \(JCL\) to create thumbnails from uploaded image files\.
 
 Use the `blank-java` sample app to learn the basics, or as a starting point for your own application\. It shows the use of Lambda's Java libraries, environment variables, the AWS SDK, and the AWS X\-Ray SDK\. It uses a Lambda layer to package its dependencies separately from the function code, which speeds up deployment times when you are iterating on your function code\. The project requires minimal setup and can be deployed from the command line in less than a minute\.
@@ -36,14 +35,13 @@ public class HandlerStream implements RequestStreamHandler {
     ...
 ```
 
-The `java-events` and `java-events-v1sdk` samples show the use of the event types provided by the `aws-lambda-java-events` library\. These types represent the event documents that [AWS services](lambda-services.md) send to your function\. `java-events` includes handlers for types that don't require additional dependencies\. For event types like `DynamodbEvent` that require types from the AWS SDK for Java, `java-events-v1sdk` includes the SDK in its build configuration\.
+The `java-events` samples show the use of the event types provided by the `aws-lambda-java-events` library\. These types represent the event documents that [AWS services](lambda-services.md) send to your function\. `java-events` includes handlers for types that don't require additional dependencies\.
 
-**Example [java\-events\-v1sdk/src/main/java/example/HandlerDynamoDB\.java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-events-v1sdk/src/main/java/example/HandlerDynamoDB.java) – DynamoDB records**  
+**Example [java\-events/src/main/java/example/HandlerDynamoDB\.java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-events/src/main/java/example/HandlerDynamoDB.java) – DynamoDB records**  
 
 ```
 import com.amazonaws.services.lambda.runtime.events.DynamodbEvent;
 import com.amazonaws.services.lambda.runtime.events.DynamodbEvent.DynamodbStreamRecord;
-import com.amazonaws.services.dynamodbv2.model.Record;
 ...
 // Handler value: example.HandlerDynamoDB
 public class HandlerDynamoDB implements RequestHandler<DynamodbEvent, String>{

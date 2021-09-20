@@ -20,6 +20,7 @@ Lambda provides the following libraries for Java functions:
 + [com\.amazonaws:aws\-lambda\-java\-core](https://github.com/aws/aws-lambda-java-libs/tree/master/aws-lambda-java-core) \(required\) – Defines handler method interfaces and the context object that the runtime passes to the handler\. If you define your own input types, this is the only library that you need\.
 + [com\.amazonaws:aws\-lambda\-java\-events](https://github.com/aws/aws-lambda-java-libs/tree/master/aws-lambda-java-events) – Input types for events from services that invoke Lambda functions\.
 + [com\.amazonaws:aws\-lambda\-java\-log4j2](https://github.com/aws/aws-lambda-java-libs/tree/master/aws-lambda-java-log4j2) – An appender library for Apache Log4j 2 that you can use to add the request ID for the current invocation to your [function logs](java-logging.md)\.
++ [AWS SDK for Java 2\.0](https://github.com/aws/aws-sdk-java-v2) – The official AWS SDK for the Java programming language\.
 
 These libraries are available through [Maven Central Repository](https://search.maven.org/search?q=g:com.amazonaws)\. Add them to your build definition as follows:
 
@@ -332,5 +333,4 @@ For a complete working example, see the following sample applications:
 + [blank\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-java) – A Java function that shows the use of Lambda's Java libraries, logging, environment variables, layers, AWS X\-Ray tracing, unit tests, and the AWS SDK\.
 + [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-basic) – A minimal Java function with unit tests and variable logging configuration\.
 + [java\-events](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-events) – A minimal Java function that uses the latest version \(3\.0\.0 and newer\) of the [aws\-lambda\-java\-events](#java-package) library\. These examples do not require the AWS SDK as a dependency\.
-+ [java\-events\-v1sdk](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-events-v1sdk) – A Java function that uses an older version \(2\.2\.9\) of the [aws\-lambda\-java\-events](#java-package) library\. These examples require the AWS SDK as a dependency\. **These examples are deprecated\. We recommend following the `java-events` examples and using version 3\.0\.0 or above of the `aws-lambda-java-events` library\.**
 + [s3\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/s3-java) – A Java function that processes notification events from Amazon S3 and uses the Java Class Library \(JCL\) to create thumbnails from uploaded image files\.

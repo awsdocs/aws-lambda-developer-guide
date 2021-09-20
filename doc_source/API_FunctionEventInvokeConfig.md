@@ -2,7 +2,7 @@
 
 ## Contents<a name="API_FunctionEventInvokeConfig_Contents"></a>
 
- **DestinationConfig**   <a name="SSS-Type-FunctionEventInvokeConfig-DestinationConfig"></a>
+ ** DestinationConfig **   <a name="SSS-Type-FunctionEventInvokeConfig-DestinationConfig"></a>
 A destination for events after they have been sent to a function for processing\.  
 
 **Destinations**
@@ -10,27 +10,27 @@ A destination for events after they have been sent to a function for processing\
 +  **Queue** \- The ARN of an SQS queue\.
 +  **Topic** \- The ARN of an SNS topic\.
 +  **Event Bus** \- The ARN of an Amazon EventBridge event bus\.
-Type: [DestinationConfig](API_DestinationConfig.md) object  
+Type: [ DestinationConfig ](API_DestinationConfig.md) object  
 Required: No
 
- **FunctionArn**   <a name="SSS-Type-FunctionEventInvokeConfig-FunctionArn"></a>
+ ** FunctionArn **   <a name="SSS-Type-FunctionEventInvokeConfig-FunctionArn"></a>
 The Amazon Resource Name \(ARN\) of the function\.  
 Type: String  
 Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
 Required: No
 
- **LastModified**   <a name="SSS-Type-FunctionEventInvokeConfig-LastModified"></a>
+ ** LastModified **   <a name="SSS-Type-FunctionEventInvokeConfig-LastModified"></a>
 The date and time that the configuration was last updated, in Unix time seconds\.  
 Type: Timestamp  
 Required: No
 
- **MaximumEventAgeInSeconds**   <a name="SSS-Type-FunctionEventInvokeConfig-MaximumEventAgeInSeconds"></a>
+ ** MaximumEventAgeInSeconds **   <a name="SSS-Type-FunctionEventInvokeConfig-MaximumEventAgeInSeconds"></a>
 The maximum age of a request that Lambda sends to a function for processing\.  
 Type: Integer  
 Valid Range: Minimum value of 60\. Maximum value of 21600\.  
 Required: No
 
- **MaximumRetryAttempts**   <a name="SSS-Type-FunctionEventInvokeConfig-MaximumRetryAttempts"></a>
+ ** MaximumRetryAttempts **   <a name="SSS-Type-FunctionEventInvokeConfig-MaximumRetryAttempts"></a>
 The maximum number of times to retry when the function returns an error\.  
 Type: Integer  
 Valid Range: Minimum value of 0\. Maximum value of 2\.  

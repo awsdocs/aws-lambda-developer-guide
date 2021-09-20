@@ -2,8 +2,6 @@
 
 In this tutorial, you create a simple Android mobile application that uses Amazon Cognito to get credentials and invokes a Lambda function\.
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/lambda-android.png)
-
 The mobile application retrieves AWS credentials from an Amazon Cognito identity pool and uses them to invoke a Lambda function with an event that contains request data\. The function processes the request and returns a response to the front\-end\.
 
 ## Prerequisites<a name="with-android-prepare"></a>

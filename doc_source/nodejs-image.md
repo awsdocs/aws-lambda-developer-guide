@@ -14,7 +14,13 @@ The workflow for a function defined as a container image includes these steps:
 
 1. Upload the image to your Amazon ECR container registry\. See steps 7\-9 in [Create image](images-create.md#images-create-from-base)\.
 
-1. [Create](configuration-images.md) the Lambda function and deploy the image\.
+1. [Create](configuration-images.md#configuration-images-create) the Lambda function or [update the function code](configuration-images.md#configuration-images-update) to deploy the image to an existing function\.
+
+**Topics**
++ [AWS base images for Node\.js](#nodejs-image-base)
++ [Using a Node\.js base image](#nodejs-image-instructions)
++ [Node\.js runtime interface clients](#nodejs-image-clients)
++ [Deploy the container image](#nodejs-image-deploy)
 
 ## AWS base images for Node\.js<a name="nodejs-image-base"></a>
 
@@ -48,3 +54,7 @@ npm install aws-lambda-ric
 For package details, see [Lambda RIC](http://npmjs.com/package/aws-lambda-ric) on the npm website\.
 
 You can also download the [Node\.js runtime interface client](https://github.com/aws/aws-lambda-nodejs-runtime-interface-client) from GitHub\.
+
+## Deploy the container image<a name="nodejs-image-deploy"></a>
+
+For a new function, you deploy the Node\.js image when you [create the function](configuration-images.md#configuration-images-create)\. For an existing function, if you rebuild the container image, you need to redeploy the image by [updating the function code](configuration-images.md#configuration-images-update)\.

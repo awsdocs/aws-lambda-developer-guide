@@ -4,7 +4,7 @@ The function's [ AWS X\-Ray ](https://docs.aws.amazon.com/lambda/latest/dg/servi
 
 ## Contents<a name="API_TracingConfig_Contents"></a>
 
- **Mode**   <a name="SSS-Type-TracingConfig-Mode"></a>
+ ** Mode **   <a name="SSS-Type-TracingConfig-Mode"></a>
 The tracing mode\.  
 Type: String  
 Valid Values:` Active | PassThrough`   

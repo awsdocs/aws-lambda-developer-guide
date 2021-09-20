@@ -104,7 +104,7 @@ For more information, see [Using Lambda extensions](using-extensions.md)\.
 
 *Concurrency* is the number of requests that your function is serving at any given time\. When your function is invoked, Lambda provisions an instance of it to process the event\. When the function code finishes running, it can handle another request\. If the function is invoked again while a request is still being processed, another instance is provisioned, increasing the function's concurrency\.
 
-Concurrency is subject to [quotas](gettingstarted-limits.md) at the AWS Region level\. You can configure individual functions to limit their concurrency, or to enable them to reach a specific level of concurrency\. For more information, see [Managing concurrency for a Lambda function](configuration-concurrency.md)\.
+Concurrency is subject to [quotas](gettingstarted-limits.md) at the AWS Region level\. You can configure individual functions to limit their concurrency, or to enable them to reach a specific level of concurrency\. For more information, see [Managing Lambda reserved concurrency](configuration-concurrency.md)\.
 
 ## Qualifier<a name="gettingstarted-concepts-qualifier"></a>
 

@@ -12,10 +12,10 @@ GET /2020-04-22/code-signing-configs/?Marker=Marker&MaxItems=MaxItems HTTP/1.1
 
 The request uses the following URI parameters\.
 
- ** [Marker](#API_ListCodeSigningConfigs_RequestSyntax) **   <a name="SSS-ListCodeSigningConfigs-request-Marker"></a>
+ ** [ Marker ](#API_ListCodeSigningConfigs_RequestSyntax) **   <a name="SSS-ListCodeSigningConfigs-request-Marker"></a>
 Specify the pagination token that's returned by a previous request to retrieve the next page of results\.
 
- ** [MaxItems](#API_ListCodeSigningConfigs_RequestSyntax) **   <a name="SSS-ListCodeSigningConfigs-request-MaxItems"></a>
+ ** [ MaxItems ](#API_ListCodeSigningConfigs_RequestSyntax) **   <a name="SSS-ListCodeSigningConfigs-request-MaxItems"></a>
 Maximum number of items to return\.  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.
 
@@ -54,21 +54,21 @@ If the action is successful, the service sends back an HTTP 200 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** [CodeSigningConfigs](#API_ListCodeSigningConfigs_ResponseSyntax) **   <a name="SSS-ListCodeSigningConfigs-response-CodeSigningConfigs"></a>
+ ** [ CodeSigningConfigs ](#API_ListCodeSigningConfigs_ResponseSyntax) **   <a name="SSS-ListCodeSigningConfigs-response-CodeSigningConfigs"></a>
 The code signing configurations  
-Type: Array of [CodeSigningConfig](API_CodeSigningConfig.md) objects
+Type: Array of [ CodeSigningConfig ](API_CodeSigningConfig.md) objects
 
- ** [NextMarker](#API_ListCodeSigningConfigs_ResponseSyntax) **   <a name="SSS-ListCodeSigningConfigs-response-NextMarker"></a>
+ ** [ NextMarker ](#API_ListCodeSigningConfigs_ResponseSyntax) **   <a name="SSS-ListCodeSigningConfigs-response-NextMarker"></a>
 The pagination token that's included if more results are available\.  
 Type: String
 
 ## Errors<a name="API_ListCodeSigningConfigs_Errors"></a>
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 

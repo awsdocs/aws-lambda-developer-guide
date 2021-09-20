@@ -17,6 +17,7 @@ The following [Lambda runtimes](lambda-runtimes.md) support extensions:
 + Node\.js 14\.x \(`nodejs14.x`\)
 + Node\.js 12\.x \(`nodejs12.x`\)
 + Node\.js 10\.x \(`nodejs10.x`\)
++ Python 3\.9 \(`python3.9`\)
 + Python 3\.8 \(`python3.8`\)
 + Python 3\.7 \(`python3.7`\)
 + Ruby 2\.7 \(`ruby2.7`\)
@@ -39,7 +40,7 @@ You are charged for the execution time that the extension consumes \(in 1 ms inc
 Lambda invokes your function in an [execution environment](runtimes-context.md), which provides a secure and isolated runtime environment\. The execution environment manages the resources required to run your function and provides lifecycle support for the function's runtime and extensions\.
 
 The lifecycle of the execution environment includes the following phases:
-+ `Init`: In this phase, Lambda creates or unfreezes an execution environment with the configured resources, downloads the code for the function and all layers, initializes any extensions, initializes the runtime, and then runs the function’s initialization code \(the code outside the main handler\)\. The `Init` phase happens either during the first invocation, or in advance of function invocations if you have enabled [provisioned concurrency](configuration-concurrency.md#configuration-concurrency-provisioned)\.
++ `Init`: In this phase, Lambda creates or unfreezes an execution environment with the configured resources, downloads the code for the function and all layers, initializes any extensions, initializes the runtime, and then runs the function’s initialization code \(the code outside the main handler\)\. The `Init` phase happens either during the first invocation, or in advance of function invocations if you have enabled [provisioned concurrency](provisioned-concurrency.md)\.
 
   The `Init` phase is split into three sub\-phases: `Extension init`, `Runtime init`, and `Function init`\. These sub\-phases ensure that all extensions and the runtime complete their setup tasks before the function code runs\.
 + `Invoke`: In this phase, Lambda invokes the function handler\. After the function runs to completion, Lambda prepares to handle another function invocation\.

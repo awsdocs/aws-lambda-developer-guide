@@ -5,7 +5,7 @@ When you create a Lambda function, you use a [deployment package](gettingstarted
 You can use the Lambda console and the Lambda API to create a function defined as a container image, update and test the image code, and configure other function settings\.
 
 **Note**  
-You cannot convert an existing \.zip file archive function to use a container image\. You must create a new function\.
+You cannot convert an existing container image function to use a \.zip file archive\. You must create a new function\.
 
 When you select an image using an image tag, Lambda translates the tag to the underlying image digest\. To retrieve the digest for your image, use the [GetFunctionConfiguration](API_GetFunctionConfiguration.md) API operation\. To update the function to a newer image version, you must use the Lambda console to [update the function code](#configuration-images-update), or use the [UpdateFunctionCode](API_UpdateFunctionCode.md) API operation\. Configuration operations such as [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md) do not update the function's container image\.
 

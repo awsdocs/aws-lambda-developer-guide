@@ -5,7 +5,7 @@ Returns a list of Lambda functions, with the version\-specific configuration of 
 Set `FunctionVersion` to `ALL` to include all published versions of each function in addition to the unpublished version\. 
 
 **Note**  
-The `ListFunctions` action returns a subset of the [FunctionConfiguration](API_FunctionConfiguration.md) fields\. To get the additional fields \(State, StateReasonCode, StateReason, LastUpdateStatus, LastUpdateStatusReason, LastUpdateStatusReasonCode\) for a function or version, use [GetFunction](API_GetFunction.md)\.
+The `ListFunctions` action returns a subset of the [ FunctionConfiguration ](API_FunctionConfiguration.md) fields\. To get the additional fields \(State, StateReasonCode, StateReason, LastUpdateStatus, LastUpdateStatusReason, LastUpdateStatusReasonCode\) for a function or version, use [ GetFunction ](API_GetFunction.md)\.
 
 ## Request Syntax<a name="API_ListFunctions_RequestSyntax"></a>
 
@@ -17,18 +17,18 @@ GET /2015-03-31/functions/?FunctionVersion=FunctionVersion&Marker=Marker&MasterR
 
 The request uses the following URI parameters\.
 
- ** [FunctionVersion](#API_ListFunctions_RequestSyntax) **   <a name="SSS-ListFunctions-request-FunctionVersion"></a>
+ ** [ FunctionVersion ](#API_ListFunctions_RequestSyntax) **   <a name="SSS-ListFunctions-request-FunctionVersion"></a>
 Set to `ALL` to include entries for all published versions of each function\.  
 Valid Values:` ALL` 
 
- ** [Marker](#API_ListFunctions_RequestSyntax) **   <a name="SSS-ListFunctions-request-Marker"></a>
+ ** [ Marker ](#API_ListFunctions_RequestSyntax) **   <a name="SSS-ListFunctions-request-Marker"></a>
 Specify the pagination token that's returned by a previous request to retrieve the next page of results\.
 
- ** [MasterRegion](#API_ListFunctions_RequestSyntax) **   <a name="SSS-ListFunctions-request-MasterRegion"></a>
+ ** [ MasterRegion ](#API_ListFunctions_RequestSyntax) **   <a name="SSS-ListFunctions-request-MasterRegion"></a>
 For Lambda@Edge functions, the AWS Region of the master function\. For example, `us-east-1` filters the list of functions to only include Lambda@Edge functions replicated from a master function in US East \(N\. Virginia\)\. If specified, you must set `FunctionVersion` to `ALL`\.  
 Pattern: `ALL|[a-z]{2}(-gov)?-[a-z]+-\d{1}` 
 
- ** [MaxItems](#API_ListFunctions_RequestSyntax) **   <a name="SSS-ListFunctions-request-MaxItems"></a>
+ ** [ MaxItems ](#API_ListFunctions_RequestSyntax) **   <a name="SSS-ListFunctions-request-MaxItems"></a>
 The maximum number of functions to return in the response\. Note that `ListFunctions` returns a maximum of 50 items in each response, even if you set the number higher\.  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.
 
@@ -126,25 +126,25 @@ If the action is successful, the service sends back an HTTP 200 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** [Functions](#API_ListFunctions_ResponseSyntax) **   <a name="SSS-ListFunctions-response-Functions"></a>
+ ** [ Functions ](#API_ListFunctions_ResponseSyntax) **   <a name="SSS-ListFunctions-response-Functions"></a>
 A list of Lambda functions\.  
-Type: Array of [FunctionConfiguration](API_FunctionConfiguration.md) objects
+Type: Array of [ FunctionConfiguration ](API_FunctionConfiguration.md) objects
 
- ** [NextMarker](#API_ListFunctions_ResponseSyntax) **   <a name="SSS-ListFunctions-response-NextMarker"></a>
+ ** [ NextMarker ](#API_ListFunctions_ResponseSyntax) **   <a name="SSS-ListFunctions-response-NextMarker"></a>
 The pagination token that's included if more results are available\.  
 Type: String
 
 ## Errors<a name="API_ListFunctions_Errors"></a>
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 
- **TooManyRequestsException**   
+ ** TooManyRequestsException **   
 The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 

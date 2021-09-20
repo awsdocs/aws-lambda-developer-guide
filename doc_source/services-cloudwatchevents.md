@@ -1,5 +1,8 @@
 # Using AWS Lambda with Amazon CloudWatch Events<a name="services-cloudwatchevents"></a>
 
+**Note**  
+Amazon EventBridge is the preferred way to manage your events\. CloudWatch Events and EventBridge are the same underlying service and API, but EventBridge provides more features\. Changes you make in either CloudWatch or EventBridge will appear in each console\. For more information, see the [Amazon EventBridge documentation](https://docs.aws.amazon.com/eventbridge/index.html)\.
+
 [Amazon CloudWatch events](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatchEvents.html) help you to respond to state changes in your AWS resources\. When your resources change state, they automatically send events into an event stream\. You can create rules that match selected events in the stream and route them to your AWS Lambda function to take action\. For example, you can automatically invoke an AWS Lambda function to log the state of an [EC2 instance](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/LogEC2InstanceState.html) or [AutoScaling group](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/LogASGroupState.html)\.
 
 CloudWatch Events invokes your function asynchronously with an event document that wraps the event from its source\. The following example shows an event that originated from a database snapshot in Amazon Relational Database Service\.

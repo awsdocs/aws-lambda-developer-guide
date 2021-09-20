@@ -12,7 +12,7 @@ GET /2018-10-31/layers?find=LayerVersion&Arn=Arn HTTP/1.1
 
 The request uses the following URI parameters\.
 
- ** [Arn](#API_GetLayerVersionByArn_RequestSyntax) **   <a name="SSS-GetLayerVersionByArn-request-Arn"></a>
+ ** [ Arn ](#API_GetLayerVersionByArn_RequestSyntax) **   <a name="SSS-GetLayerVersionByArn-request-Arn"></a>
 The ARN of the layer version\.  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
 Pattern: `arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+:[0-9]+`   
@@ -52,61 +52,61 @@ If the action is successful, the service sends back an HTTP 200 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** [CompatibleRuntimes](#API_GetLayerVersionByArn_ResponseSyntax) **   <a name="SSS-GetLayerVersionByArn-response-CompatibleRuntimes"></a>
+ ** [ CompatibleRuntimes ](#API_GetLayerVersionByArn_ResponseSyntax) **   <a name="SSS-GetLayerVersionByArn-response-CompatibleRuntimes"></a>
 The layer's compatible runtimes\.  
 Type: Array of strings  
 Array Members: Maximum number of 15 items\.  
-Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | nodejs10.x | nodejs12.x | nodejs14.x | java8 | java8.al2 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | dotnetcore3.1 | nodejs4.3-edge | go1.x | ruby2.5 | ruby2.7 | provided | provided.al2` 
+Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | nodejs10.x | nodejs12.x | nodejs14.x | java8 | java8.al2 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | python3.9 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | dotnetcore3.1 | nodejs4.3-edge | go1.x | ruby2.5 | ruby2.7 | provided | provided.al2` 
 
- ** [Content](#API_GetLayerVersionByArn_ResponseSyntax) **   <a name="SSS-GetLayerVersionByArn-response-Content"></a>
+ ** [ Content ](#API_GetLayerVersionByArn_ResponseSyntax) **   <a name="SSS-GetLayerVersionByArn-response-Content"></a>
 Details about the layer version\.  
-Type: [LayerVersionContentOutput](API_LayerVersionContentOutput.md) object
+Type: [ LayerVersionContentOutput ](API_LayerVersionContentOutput.md) object
 
- ** [CreatedDate](#API_GetLayerVersionByArn_ResponseSyntax) **   <a name="SSS-GetLayerVersionByArn-response-CreatedDate"></a>
+ ** [ CreatedDate ](#API_GetLayerVersionByArn_ResponseSyntax) **   <a name="SSS-GetLayerVersionByArn-response-CreatedDate"></a>
 The date that the layer version was created, in [ISO\-8601 format](https://www.w3.org/TR/NOTE-datetime) \(YYYY\-MM\-DDThh:mm:ss\.sTZD\)\.  
 Type: String
 
- ** [Description](#API_GetLayerVersionByArn_ResponseSyntax) **   <a name="SSS-GetLayerVersionByArn-response-Description"></a>
+ ** [ Description ](#API_GetLayerVersionByArn_ResponseSyntax) **   <a name="SSS-GetLayerVersionByArn-response-Description"></a>
 The description of the version\.  
 Type: String  
 Length Constraints: Minimum length of 0\. Maximum length of 256\.
 
- ** [LayerArn](#API_GetLayerVersionByArn_ResponseSyntax) **   <a name="SSS-GetLayerVersionByArn-response-LayerArn"></a>
+ ** [ LayerArn ](#API_GetLayerVersionByArn_ResponseSyntax) **   <a name="SSS-GetLayerVersionByArn-response-LayerArn"></a>
 The ARN of the layer\.  
 Type: String  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
 Pattern: `arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+` 
 
- ** [LayerVersionArn](#API_GetLayerVersionByArn_ResponseSyntax) **   <a name="SSS-GetLayerVersionByArn-response-LayerVersionArn"></a>
+ ** [ LayerVersionArn ](#API_GetLayerVersionByArn_ResponseSyntax) **   <a name="SSS-GetLayerVersionByArn-response-LayerVersionArn"></a>
 The ARN of the layer version\.  
 Type: String  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
 Pattern: `arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+:[0-9]+` 
 
- ** [LicenseInfo](#API_GetLayerVersionByArn_ResponseSyntax) **   <a name="SSS-GetLayerVersionByArn-response-LicenseInfo"></a>
+ ** [ LicenseInfo ](#API_GetLayerVersionByArn_ResponseSyntax) **   <a name="SSS-GetLayerVersionByArn-response-LicenseInfo"></a>
 The layer's software license\.  
 Type: String  
 Length Constraints: Maximum length of 512\.
 
- ** [Version](#API_GetLayerVersionByArn_ResponseSyntax) **   <a name="SSS-GetLayerVersionByArn-response-Version"></a>
+ ** [ Version ](#API_GetLayerVersionByArn_ResponseSyntax) **   <a name="SSS-GetLayerVersionByArn-response-Version"></a>
 The version number\.  
 Type: Long
 
 ## Errors<a name="API_GetLayerVersionByArn_Errors"></a>
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **ResourceNotFoundException**   
+ ** ResourceNotFoundException **   
 The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 
- **TooManyRequestsException**   
+ ** TooManyRequestsException **   
 The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 

@@ -4,14 +4,14 @@ Response to GetFunctionConfiguration request\.
 
 ## Contents<a name="API_ImageConfigResponse_Contents"></a>
 
- **Error**   <a name="SSS-Type-ImageConfigResponse-Error"></a>
+ ** Error **   <a name="SSS-Type-ImageConfigResponse-Error"></a>
 Error response to GetFunctionConfiguration\.  
-Type: [ImageConfigError](API_ImageConfigError.md) object  
+Type: [ ImageConfigError ](API_ImageConfigError.md) object  
 Required: No
 
- **ImageConfig**   <a name="SSS-Type-ImageConfigResponse-ImageConfig"></a>
+ ** ImageConfig **   <a name="SSS-Type-ImageConfigResponse-ImageConfig"></a>
 Configuration values that override the container image Dockerfile\.  
-Type: [ImageConfig](API_ImageConfig.md) object  
+Type: [ ImageConfig ](API_ImageConfig.md) object  
 Required: No
 
 ## See Also<a name="API_ImageConfigResponse_SeeAlso"></a>

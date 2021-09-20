@@ -58,8 +58,6 @@ Initialization counts towards billed execution time and timeout\. When an execut
 REPORT RequestId: f8ac1208... Init Duration: 48.26 ms   Duration: 237.17 ms   Billed Duration: 300 ms   Memory Size: 128 MB   Max Memory Used: 26 MB
 ```
 
-![\[Initialization time in an X-Ray trace.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/runtimes-custom-init.png)
-
 While it runs, a runtime uses the [Lambda runtime interface](runtimes-api.md) to manage incoming events and report errors\. After completing initialization tasks, the runtime processes incoming events in a loop\. In your runtime code, perform the following steps in order\.
 
 **Processing tasks**

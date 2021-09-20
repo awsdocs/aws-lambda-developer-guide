@@ -4,7 +4,7 @@ List of signing profiles that can sign a code package\.
 
 ## Contents<a name="API_AllowedPublishers_Contents"></a>
 
- **SigningProfileVersionArns**   <a name="SSS-Type-AllowedPublishers-SigningProfileVersionArns"></a>
+ ** SigningProfileVersionArns **   <a name="SSS-Type-AllowedPublishers-SigningProfileVersionArns"></a>
 The Amazon Resource Name \(ARN\) for each of the signing profiles\. A signing profile defines a trusted user who can sign a code package\.   
 Type: Array of strings  
 Array Members: Minimum number of 1 item\. Maximum number of 20 items\.  

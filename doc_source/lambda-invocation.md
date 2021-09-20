@@ -16,7 +16,7 @@ Depending on who invokes your function and how it's invoked, scaling behavior an
 + [Synchronous invocation](invocation-sync.md)
 + [Asynchronous invocation](invocation-async.md)
 + [AWS Lambda event source mappings](invocation-eventsourcemapping.md)
-+ [Monitoring the state of a function with the Lambda API](functions-states.md)
++ [Lambda function states](functions-states.md)
 + [Error handling and automatic retries in AWS Lambda](invocation-retries.md)
 + [Using Lambda extensions](using-extensions.md)
 + [Invoking functions defined as container images](invocation-images.md)

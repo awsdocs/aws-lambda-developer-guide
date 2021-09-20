@@ -1,7 +1,7 @@
 # AWS Lambda function logging in Python<a name="python-logging"></a>
 
 **Note**  
-End of support for the Python 2\.7 runtime starts on July 15, 2021\. For more information, see [Runtime support policy](runtime-support-policy.md)\.
+End of support for the Python 2\.7 runtime started on July 15, 2021\. For more information, see [Runtime support policy](runtime-support-policy.md)\.
 
 AWS Lambda automatically monitors Lambda functions on your behalf and sends function metrics to Amazon CloudWatch\. Your Lambda function comes with a CloudWatch Logs log group and a log stream for each instance of your function\. The Lambda runtime environment sends details about each invocation to the log stream, and relays logs and other output from your function's code\. 
 
@@ -73,7 +73,7 @@ You can use the Amazon CloudWatch console to view logs for all Lambda function i
 
 1. Choose a log stream\.
 
-Each log stream corresponds to an [instance of your function](runtimes-context.md)\. A log stream appears when you update your Lambda function, and when additional instances are created to handle multiple concurrent invocations\. To find logs for a specific invocation, we recommend intrumenting your function with AWS X\-Ray\. X\-Ray records details about the request and the log stream in the trace\.
+Each log stream corresponds to an [instance of your function](runtimes-context.md)\. A log stream appears when you update your Lambda function, and when additional instances are created to handle multiple concurrent invocations\. To find logs for a specific invocation, we recommend instrumenting your function with AWS X\-Ray\. X\-Ray records details about the request and the log stream in the trace\.
 
 To use a sample application that correlates logs and traces with X\-Ray, see [Error processor sample application for AWS Lambda](samples-errorprocessor.md)\.
 

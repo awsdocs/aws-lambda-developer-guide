@@ -9,9 +9,9 @@ Lambda supports the following Node\.js runtimes\.
 
 | Name | Identifier | SDK for JavaScript | Operating system | 
 | --- | --- | --- | --- | 
-|  Node\.js 14  |  `nodejs14.x`  |  2\.880\.0  |  Amazon Linux 2  | 
-|  Node\.js 12  |  `nodejs12.x`  |  2\.880\.0  |  Amazon Linux 2  | 
-|  Node\.js 10  |  `nodejs10.x`  |  2\.880\.0  |  Amazon Linux 2  | 
+|  Node\.js 14  |  `nodejs14.x`  |  2\.952\.0  |  Amazon Linux 2  | 
+|  Node\.js 12  |  `nodejs12.x`  |  2\.952\.0  |  Amazon Linux 2  | 
+|  Node\.js 10  |  `nodejs10.x`  |  2\.952\.0  |  Amazon Linux 2  | 
 
 **Note**  
 For end of support information about Node\.js 10, see [Runtime support policy](runtime-support-policy.md)\.

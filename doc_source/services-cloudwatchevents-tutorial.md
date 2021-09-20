@@ -29,8 +29,8 @@ This tutorial assumes that you have some knowledge of basic Lambda operations an
    + **Rule** – **Create a new rule**\.
    + **Rule name** – **CheckWebsiteScheduledEvent**\.
    + **Rule description** – **CheckWebsiteScheduledEvent trigger**\.
+   + **Rule type** – **Schedule expression**\.
    + **Schedule expression** – **rate\(1 minute\)**\.
-   + **Enabled** – True \(checked\)\.
    + **Environment variables**
      + **site** – **https://docs\.aws\.amazon\.com/lambda/latest/dg/welcome\.html**\.
      + **expected** – **What is AWS Lambda?**\.

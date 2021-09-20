@@ -2,8 +2,6 @@
 
 The Error Processor sample application demonstrates the use of AWS Lambda to handle events from an [Amazon CloudWatch Logs subscription](services-cloudwatchlogs.md)\. CloudWatch Logs lets you invoke a Lambda function when a log entry matches a pattern\. The subscription in this application monitors the log group of a function for entries that contain the word `ERROR`\. It invokes a processor Lambda function in response\. The processor function retrieves the full log stream and trace data for the request that caused the error, and stores them for later use\.
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-errorprocessor.png)
-
 Function code is available in the following files:
 + Random error – [random\-error/index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/error-processor/random-error/index.js)
 + Processor – [processor/index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/error-processor/processor/index.js)
@@ -64,13 +62,9 @@ The processor function uses information from the CloudWatch Logs event to downlo
 
 ## Instrumentation with AWS X\-Ray<a name="sample-errorprocessor-instrumentation"></a>
 
-The application uses [AWS X\-Ray](services-xray.md) to trace function invocations and the calls that functions make to AWS services\. X\-Ray uses the trace data that it receives from functions to create a service map that helps you identify errors\. The following service map shows the random error function generating errors for some requests\. It also shows the processor function calling X\-Ray, CloudWatch Logs, and Amazon S3\.
+The application uses [AWS X\-Ray](services-xray.md) to trace function invocations and the calls that functions make to AWS services\. X\-Ray uses the trace data that it receives from functions to create a service map that helps you identify errors\. 
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-errorprocessor-servicemap.png)
-
-The two Node\.js functions are configured for active tracing in the template, and are instrumented with the AWS X\-Ray SDK for Node\.js in code\. With active tracing, Lambda tags adds a tracing header to incoming requests and sends a trace with timing details to X\-Ray\. Additionally, the random error function uses the X\-Ray SDK to record the request ID and user information in annotations\. The annotations are attached to the trace, and you can use them to locate the trace for a specific request\.
-
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-errorprocessor-trace.png)
+The two Node\.js functions are configured for active tracing in the template, and are instrumented with the AWS X\-Ray SDK for Node\.js in code\. With active tracing, Lambda tags adds a tracing header to incoming requests and sends a trace with timing details to X\-Ray\. Additionally, the random error function uses the X\-Ray SDK to record the request ID and user information in annotations\. The annotations are attached to the trace, and you can use them to locate the trace for a specific request\. 
 
 The processor function gets the request ID from the CloudWatch Logs event, and uses the AWS SDK for JavaScript to search X\-Ray for that request\. It uses AWS SDK clients, which are instrumented with the X\-Ray SDK, to download the trace and log stream\. Then it stores them in the output bucket\. The X\-Ray SDK records these calls, and they appear as subsegments in the trace\.
 

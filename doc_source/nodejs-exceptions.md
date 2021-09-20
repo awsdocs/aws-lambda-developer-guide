@@ -56,7 +56,7 @@ A `4xx` series error indicates an error that the invoking client or service can 
 **`5xx`**  
 A `5xx` series error indicates an issue with Lambda, or an issue with the function's configuration or resources\. `5xx` series errors can indicate a temporary condition that can be resolved without any action by the user\. These issues can't be addressed by the invoking client or service, but a Lambda function's owner may be able to fix the issue\.
 
-For a complete list of invocation errors, see [Invoke API Errors](API_Invoke.md#API_Invoke_Errors)\.
+For a complete list of invocation errors, see [InvokeFunction errors](API_Invoke.md#API_Invoke_Errors)\.
 
 ## Using the Lambda console<a name="nodejs-exceptions-console"></a>
 

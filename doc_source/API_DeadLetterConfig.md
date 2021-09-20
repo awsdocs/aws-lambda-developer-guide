@@ -4,7 +4,7 @@ The [dead\-letter queue](https://docs.aws.amazon.com/lambda/latest/dg/invocation
 
 ## Contents<a name="API_DeadLetterConfig_Contents"></a>
 
- **TargetArn**   <a name="SSS-Type-DeadLetterConfig-TargetArn"></a>
+ ** TargetArn **   <a name="SSS-Type-DeadLetterConfig-TargetArn"></a>
 The Amazon Resource Name \(ARN\) of an Amazon SQS queue or Amazon SNS topic\.  
 Type: String  
 Pattern: `(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()`   

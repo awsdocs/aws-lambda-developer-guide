@@ -23,7 +23,7 @@ For more information, see [AWS Lambda permissions](lambda-permissions.md)\.
 
 When you connect a function to a virtual private cloud \(VPC\) at the time of creation, the function enters a `Pending` state while Lambda creates elastic network interfaces\. During this time, you can't invoke or modify your function\. If you connect your function to a VPC after creation, you can invoke it while the update is pending, but you can't modify its code or configuration\.
 
-For more information, see [Monitoring the state of a function with the Lambda API](functions-states.md)\.
+For more information, see [Lambda function states](functions-states.md)\.
 
 ## Lambda: Function is stuck in Pending<a name="troubleshooting-invocation-pending"></a>
 
@@ -64,8 +64,8 @@ Lambda uses a simple probabilistic model to distribute the traffic between the t
 
 **Issue:** *You see cold starts after enabling provisioned concurrency\.*
 
-When the number of concurrent executions on a function is less than or equal to the [configured level of provisioned concurrency](configuration-concurrency.md#configuration-concurrency-provisioned), there shouldn't be any cold starts\. To help you confirm if provisioned concurrency is operating normally, do the following:
-+ [Check that provisioned concurrency is enabled](configuration-concurrency.md#configuration-concurrency-provisioned) on the function version or alias\.
+When the number of concurrent executions on a function is less than or equal to the [configured level of provisioned concurrency](provisioned-concurrency.md), there shouldn't be any cold starts\. To help you confirm if provisioned concurrency is operating normally, do the following:
++ [Check that provisioned concurrency is enabled](provisioned-concurrency.md) on the function version or alias\.
 **Note**  
 Provisioned concurrency is not configurable on the [$LATEST version](configuration-images.md#configuration-images-latest)\.
 + Ensure that your triggers invoke the correct function version or alias\. For example, if you're using Amazon API Gateway, check that API Gateway invokes the function version or alias with provisioned concurrency, not $LATEST\. To confirm that provisioned concurrency is being used, you can check the [ProvisionedConcurrencyInvocations Amazon CloudWatch metric](monitoring-metrics.md#monitoring-metrics-invocation)\. A non\-zero value indicates that the function is processing invocations on initialized execution environments\.

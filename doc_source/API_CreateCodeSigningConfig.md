@@ -27,17 +27,17 @@ The request does not use any URI parameters\.
 
 The request accepts the following data in JSON format\.
 
- ** [AllowedPublishers](#API_CreateCodeSigningConfig_RequestSyntax) **   <a name="SSS-CreateCodeSigningConfig-request-AllowedPublishers"></a>
+ ** [ AllowedPublishers ](#API_CreateCodeSigningConfig_RequestSyntax) **   <a name="SSS-CreateCodeSigningConfig-request-AllowedPublishers"></a>
 Signing profiles for this code signing configuration\.  
-Type: [AllowedPublishers](API_AllowedPublishers.md) object  
+Type: [ AllowedPublishers ](API_AllowedPublishers.md) object  
 Required: Yes
 
- ** [CodeSigningPolicies](#API_CreateCodeSigningConfig_RequestSyntax) **   <a name="SSS-CreateCodeSigningConfig-request-CodeSigningPolicies"></a>
+ ** [ CodeSigningPolicies ](#API_CreateCodeSigningConfig_RequestSyntax) **   <a name="SSS-CreateCodeSigningConfig-request-CodeSigningPolicies"></a>
 The code signing policies define the actions to take if the validation checks fail\.   
-Type: [CodeSigningPolicies](API_CodeSigningPolicies.md) object  
+Type: [ CodeSigningPolicies ](API_CodeSigningPolicies.md) object  
 Required: No
 
- ** [Description](#API_CreateCodeSigningConfig_RequestSyntax) **   <a name="SSS-CreateCodeSigningConfig-request-Description"></a>
+ ** [ Description ](#API_CreateCodeSigningConfig_RequestSyntax) **   <a name="SSS-CreateCodeSigningConfig-request-Description"></a>
 Descriptive name for this code signing configuration\.  
 Type: String  
 Length Constraints: Minimum length of 0\. Maximum length of 256\.  
@@ -71,17 +71,17 @@ If the action is successful, the service sends back an HTTP 201 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** [CodeSigningConfig](#API_CreateCodeSigningConfig_ResponseSyntax) **   <a name="SSS-CreateCodeSigningConfig-response-CodeSigningConfig"></a>
+ ** [ CodeSigningConfig ](#API_CreateCodeSigningConfig_ResponseSyntax) **   <a name="SSS-CreateCodeSigningConfig-response-CodeSigningConfig"></a>
 The code signing configuration\.  
-Type: [CodeSigningConfig](API_CodeSigningConfig.md) object
+Type: [ CodeSigningConfig ](API_CodeSigningConfig.md) object
 
 ## Errors<a name="API_CreateCodeSigningConfig_Errors"></a>
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 

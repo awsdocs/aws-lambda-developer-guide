@@ -4,8 +4,6 @@ You can use the AWS SDK for \.NET to manage Amazon EC2 spot instances with C\# c
 
 This tutorial provides code that performs these tasks and a sample application that you can run locally or on AWS\. It includes a sample project that you can deploy to AWS Lambda's \.NET Core 2\.1 runtime\.
 
-![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-ec2spot.png)
-
 For more information about spot instances usage and best practices, see [Spot Instances](https://docs.aws.amazon.com/AWSEC2/latest/DeveloperGuide/using-spot-instances.html) in the Amazon EC2 user guide\.
 
 
@@ -280,11 +278,7 @@ View the logs and trace information to see the spot request ID and sequence of c
 
 To view the service map, open the [Service map page](https://console.aws.amazon.com/xray/home#/service-map) in the X\-Ray console\.
 
-![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-ec2spot-servicemap.png)
-
 Choose a node in the service map and then choose **View traces** to see a list of traces\. Choose a trace from the list to see the timeline of calls that the function made to Amazon EC2\.
-
-![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-ec2spot-timeline.png)
 
 ## Clean up<a name="services-ec2-tutorial-cleanup"></a>
 

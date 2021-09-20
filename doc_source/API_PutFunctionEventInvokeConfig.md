@@ -1,8 +1,8 @@
 # PutFunctionEventInvokeConfig<a name="API_PutFunctionEventInvokeConfig"></a>
 
-Configures options for [asynchronous invocation](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html) on a function, version, or alias\. If a configuration already exists for a function, version, or alias, this operation overwrites it\. If you exclude any settings, they are removed\. To set one option without affecting existing settings for other options, use [UpdateFunctionEventInvokeConfig](API_UpdateFunctionEventInvokeConfig.md)\.
+Configures options for [asynchronous invocation](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html) on a function, version, or alias\. If a configuration already exists for a function, version, or alias, this operation overwrites it\. If you exclude any settings, they are removed\. To set one option without affecting existing settings for other options, use [ UpdateFunctionEventInvokeConfig ](API_UpdateFunctionEventInvokeConfig.md)\.
 
-By default, Lambda retries an asynchronous invocation twice if the function returns an error\. It retains events in a queue for up to six hours\. When an event fails all processing attempts or stays in the asynchronous invocation queue for too long, Lambda discards it\. To retain discarded events, configure a dead\-letter queue with [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)\.
+By default, Lambda retries an asynchronous invocation twice if the function returns an error\. It retains events in a queue for up to six hours\. When an event fails all processing attempts or stays in the asynchronous invocation queue for too long, Lambda discards it\. To retain discarded events, configure a dead\-letter queue with [ UpdateFunctionConfiguration ](API_UpdateFunctionConfiguration.md)\.
 
 To send an invocation record to a queue, topic, function, or event bus, specify a [destination](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-async-destinations)\. You can configure separate destinations for successful invocations \(on\-success\) and events that fail all processing attempts \(on\-failure\)\. You can configure destinations in addition to or instead of a dead\-letter queue\.
 
@@ -30,7 +30,7 @@ Content-type: application/json
 
 The request uses the following URI parameters\.
 
- ** [FunctionName](#API_PutFunctionEventInvokeConfig_RequestSyntax) **   <a name="SSS-PutFunctionEventInvokeConfig-request-FunctionName"></a>
+ ** [ FunctionName ](#API_PutFunctionEventInvokeConfig_RequestSyntax) **   <a name="SSS-PutFunctionEventInvokeConfig-request-FunctionName"></a>
 The name of the Lambda function, version, or alias\.  
 
 **Name formats**
@@ -42,7 +42,7 @@ Length Constraints: Minimum length of 1\. Maximum length of 140\.
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
 Required: Yes
 
- ** [Qualifier](#API_PutFunctionEventInvokeConfig_RequestSyntax) **   <a name="SSS-PutFunctionEventInvokeConfig-request-Qualifier"></a>
+ ** [ Qualifier ](#API_PutFunctionEventInvokeConfig_RequestSyntax) **   <a name="SSS-PutFunctionEventInvokeConfig-request-Qualifier"></a>
 A version number or alias name\.  
 Length Constraints: Minimum length of 1\. Maximum length of 128\.  
 Pattern: `(|[a-zA-Z0-9$_-]+)` 
@@ -51,7 +51,7 @@ Pattern: `(|[a-zA-Z0-9$_-]+)`
 
 The request accepts the following data in JSON format\.
 
- ** [DestinationConfig](#API_PutFunctionEventInvokeConfig_RequestSyntax) **   <a name="SSS-PutFunctionEventInvokeConfig-request-DestinationConfig"></a>
+ ** [ DestinationConfig ](#API_PutFunctionEventInvokeConfig_RequestSyntax) **   <a name="SSS-PutFunctionEventInvokeConfig-request-DestinationConfig"></a>
 A destination for events after they have been sent to a function for processing\.  
 
 **Destinations**
@@ -59,16 +59,16 @@ A destination for events after they have been sent to a function for processing\
 +  **Queue** \- The ARN of an SQS queue\.
 +  **Topic** \- The ARN of an SNS topic\.
 +  **Event Bus** \- The ARN of an Amazon EventBridge event bus\.
-Type: [DestinationConfig](API_DestinationConfig.md) object  
+Type: [ DestinationConfig ](API_DestinationConfig.md) object  
 Required: No
 
- ** [MaximumEventAgeInSeconds](#API_PutFunctionEventInvokeConfig_RequestSyntax) **   <a name="SSS-PutFunctionEventInvokeConfig-request-MaximumEventAgeInSeconds"></a>
+ ** [ MaximumEventAgeInSeconds ](#API_PutFunctionEventInvokeConfig_RequestSyntax) **   <a name="SSS-PutFunctionEventInvokeConfig-request-MaximumEventAgeInSeconds"></a>
 The maximum age of a request that Lambda sends to a function for processing\.  
 Type: Integer  
 Valid Range: Minimum value of 60\. Maximum value of 21600\.  
 Required: No
 
- ** [MaximumRetryAttempts](#API_PutFunctionEventInvokeConfig_RequestSyntax) **   <a name="SSS-PutFunctionEventInvokeConfig-request-MaximumRetryAttempts"></a>
+ ** [ MaximumRetryAttempts ](#API_PutFunctionEventInvokeConfig_RequestSyntax) **   <a name="SSS-PutFunctionEventInvokeConfig-request-MaximumRetryAttempts"></a>
 The maximum number of times to retry when the function returns an error\.  
 Type: Integer  
 Valid Range: Minimum value of 0\. Maximum value of 2\.  
@@ -102,7 +102,7 @@ If the action is successful, the service sends back an HTTP 200 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** [DestinationConfig](#API_PutFunctionEventInvokeConfig_ResponseSyntax) **   <a name="SSS-PutFunctionEventInvokeConfig-response-DestinationConfig"></a>
+ ** [ DestinationConfig ](#API_PutFunctionEventInvokeConfig_ResponseSyntax) **   <a name="SSS-PutFunctionEventInvokeConfig-response-DestinationConfig"></a>
 A destination for events after they have been sent to a function for processing\.  
 
 **Destinations**
@@ -110,46 +110,46 @@ A destination for events after they have been sent to a function for processing\
 +  **Queue** \- The ARN of an SQS queue\.
 +  **Topic** \- The ARN of an SNS topic\.
 +  **Event Bus** \- The ARN of an Amazon EventBridge event bus\.
-Type: [DestinationConfig](API_DestinationConfig.md) object
+Type: [ DestinationConfig ](API_DestinationConfig.md) object
 
- ** [FunctionArn](#API_PutFunctionEventInvokeConfig_ResponseSyntax) **   <a name="SSS-PutFunctionEventInvokeConfig-response-FunctionArn"></a>
+ ** [ FunctionArn ](#API_PutFunctionEventInvokeConfig_ResponseSyntax) **   <a name="SSS-PutFunctionEventInvokeConfig-response-FunctionArn"></a>
 The Amazon Resource Name \(ARN\) of the function\.  
 Type: String  
 Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
- ** [LastModified](#API_PutFunctionEventInvokeConfig_ResponseSyntax) **   <a name="SSS-PutFunctionEventInvokeConfig-response-LastModified"></a>
+ ** [ LastModified ](#API_PutFunctionEventInvokeConfig_ResponseSyntax) **   <a name="SSS-PutFunctionEventInvokeConfig-response-LastModified"></a>
 The date and time that the configuration was last updated, in Unix time seconds\.  
 Type: Timestamp
 
- ** [MaximumEventAgeInSeconds](#API_PutFunctionEventInvokeConfig_ResponseSyntax) **   <a name="SSS-PutFunctionEventInvokeConfig-response-MaximumEventAgeInSeconds"></a>
+ ** [ MaximumEventAgeInSeconds ](#API_PutFunctionEventInvokeConfig_ResponseSyntax) **   <a name="SSS-PutFunctionEventInvokeConfig-response-MaximumEventAgeInSeconds"></a>
 The maximum age of a request that Lambda sends to a function for processing\.  
 Type: Integer  
 Valid Range: Minimum value of 60\. Maximum value of 21600\.
 
- ** [MaximumRetryAttempts](#API_PutFunctionEventInvokeConfig_ResponseSyntax) **   <a name="SSS-PutFunctionEventInvokeConfig-response-MaximumRetryAttempts"></a>
+ ** [ MaximumRetryAttempts ](#API_PutFunctionEventInvokeConfig_ResponseSyntax) **   <a name="SSS-PutFunctionEventInvokeConfig-response-MaximumRetryAttempts"></a>
 The maximum number of times to retry when the function returns an error\.  
 Type: Integer  
 Valid Range: Minimum value of 0\. Maximum value of 2\.
 
 ## Errors<a name="API_PutFunctionEventInvokeConfig_Errors"></a>
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **ResourceConflictException**   
+ ** ResourceConflictException **   
 The resource already exists, or another operation is in progress\.  
 HTTP Status Code: 409
 
- **ResourceNotFoundException**   
+ ** ResourceNotFoundException **   
 The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 
- **TooManyRequestsException**   
+ ** TooManyRequestsException **   
 The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 

@@ -29,8 +29,7 @@ You can build \.NET\-based Lambda applications using the Lambda plugin to the [A
      }
      ```
 
-1. Open the **Function\.cs** file\. You are provided with a template to implement your Lambda function handler code\.  
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/lambda-function.png)
+1. Open the **Function\.cs** file\. You are provided with a template to implement your Lambda function handler code\.
 
 1. Once you have written the code that represents your Lambda function, upload it by opening the context \(right\-click\) menu for the **Project** node in your application and then choosing **Publish to AWS Lambda**\.
 
@@ -42,7 +41,7 @@ You can build \.NET\-based Lambda applications using the Lambda plugin to the [A
    + **Memory** – The amount of memory available to the function at runtime\. Choose an amount [between 128 MB and 10,240 MB](gettingstarted-limits.md) in 1\-MB increments\.
    + **Timeout** – The amount of time that Lambda allows a function to run before stopping it\. The default is three seconds\. The maximum allowed value is 900 seconds\.
    + **VPC** – If your function needs network access to resources that are not available over the internet, [configure it to connect to a virtual private cloud \(VPC\)](configuration-vpc.md)\.
-   + **DLQ** – If your function is invoked asynchronously, [choose a dead\-letter queue](invocation-async.md#dlq) to receive failed invocations\.
+   + **DLQ** – If your function is invoked asynchronously, [choose a dead\-letter queue](invocation-async.md#invocation-dlq) to receive failed invocations\.
    + **Enable active tracing** – Sample incoming requests and [trace sampled requests with AWS X\-Ray](services-xray.md)\.
 
 1. Choose **Next**, and then choose **Upload** to deploy your application\.

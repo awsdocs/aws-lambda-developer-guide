@@ -10,8 +10,6 @@ To create the deployment package for a \.zip file archive, you can use a built\-
   For more information, see [sam build](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-build.html) in the *AWS Serverless Application Model Developer Guide*\.
 + Lambda uses POSIX file permissions, so you may need to [ set permissions for the deployment package folder](http://aws.amazon.com/premiumsupport/knowledge-center/lambda-deployment-package-errors/) before you create the \.zip file archive\.
 
-This section describes how to create a \.zip file as your deployment package, and then use the \.zip file to deploy your function code to Lambda using the AWS Command Line Interface \(AWS CLI\)\.
-
 **Topics**
 + [Prerequisites](#node-package-prereqs)
 + [Updating a function with no dependencies](#nodejs-package-codeonly)

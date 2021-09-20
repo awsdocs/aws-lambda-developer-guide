@@ -12,7 +12,7 @@ DELETE /2017-10-31/functions/FunctionName/concurrency HTTP/1.1
 
 The request uses the following URI parameters\.
 
- ** [FunctionName](#API_DeleteFunctionConcurrency_RequestSyntax) **   <a name="SSS-DeleteFunctionConcurrency-request-FunctionName"></a>
+ ** [ FunctionName ](#API_DeleteFunctionConcurrency_RequestSyntax) **   <a name="SSS-DeleteFunctionConcurrency-request-FunctionName"></a>
 The name of the Lambda function\.  
 
 **Name formats**
@@ -40,23 +40,23 @@ If the action is successful, the service sends back an HTTP 204 response with an
 
 ## Errors<a name="API_DeleteFunctionConcurrency_Errors"></a>
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **ResourceConflictException**   
+ ** ResourceConflictException **   
 The resource already exists, or another operation is in progress\.  
 HTTP Status Code: 409
 
- **ResourceNotFoundException**   
+ ** ResourceNotFoundException **   
 The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 
- **TooManyRequestsException**   
+ ** TooManyRequestsException **   
 The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 

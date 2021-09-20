@@ -4,7 +4,7 @@
 
 Amazon MSK as an event source operates similarly to using Amazon Simple Queue Service \(Amazon SQS\) or Amazon Kinesis\. Lambda internally polls for new messages from the event source and then synchronously invokes the target Lambda function\. Lambda reads the messages in batches and provides these to your function as an event payload\. The maximum batch size is configurable\. \(The default is 100 messages\.\)
 
-For an example of how to configure Amazon MSK as an event source, see [Using Amazon MSK as an event source for AWS Lambda](http://aws.amazon.com/blogs/compute/using-amazon-msk-as-an-event-source-for-aws-lambda/) on the AWS Compute Blog\.
+For an example of how to configure Amazon MSK as an event source, see [Using Amazon MSK as an event source for AWS Lambda](http://aws.amazon.com/blogs/compute/using-amazon-msk-as-an-event-source-for-aws-lambda/) on the AWS Compute Blog\. Also, see [ Amazon MSK Lambda Integration](https://amazonmsk-labs.workshop.aws/en/msklambda.html) in the Amazon MSK Labs for a complete tutorial\.
 
 Lambda reads the messages sequentially for each partition\. After Lambda processes each batch, it commits the offsets of the messages in that batch\. If your function returns an error for any of the messages in a batch, Lambda retries the whole batch of messages until processing succeeds or the messages expire\.
 
@@ -13,20 +13,38 @@ Lambda allows a function to run for up to 14 minutes before stopping it\.
 Lambda sends the batch of messages in the event parameter when it invokes your function\. The event payload contains an array of messages\. Each array item contains details of the Amazon MSK topic and partition identifier, together with a timestamp and a base64\-encoded message\.
 
 ```
-{   "eventSource": "aws:kafka",
-    "eventSourceArn": "arn:aws:kafka:sa-east-1:123456789012:cluster/vpc-2priv-2pub/751d2973-a626-431c-9d4e-d7975eb44dd7-2",
-    "records": {
-      "mytopic-0": [
-          {
-            "topic": "mytopic"
-            "partition": "0",
-            "offset": 15,
-            "timestamp": 1545084650987,
-            "timestampType": "CREATE_TIME",
-            "value": "SGVsbG8sIHRoaXMgaXMgYSB0ZXN0Lg==",
-          }
+{
+   "eventSource":"aws:kafka",
+   "eventSourceArn":"arn:aws:kafka:sa-east-1:123456789012:cluster/vpc-2priv-2pub/751d2973-a626-431c-9d4e-d7975eb44dd7-2",
+   "records":{
+      "mytopic-0":[
+         {
+            "topic":"mytopic",
+            "partition":"0",
+            "offset":15,
+            "timestamp":1545084650987,
+            "timestampType":"CREATE_TIME",
+            "value":"SGVsbG8sIHRoaXMgaXMgYSB0ZXN0Lg==",
+            "headers":[
+               {
+                  "headerKey":[
+                     104,
+                     101,
+                     97,
+                     100,
+                     101,
+                     114,
+                     86,
+                     97,
+                     108,
+                     117,
+                     101
+                  ]
+               }
+            ]
+         }
       ]
-    }
+   }
 }
 ```
 
@@ -76,7 +94,7 @@ By default, IAM users and roles do not have permission to perform Amazon MSK API
 
 ### Using SASL/SCRAM authentication<a name="msk-permissions-add-secret"></a>
 
-Amazon MSK supports Simple Authentication and Security Layer/Salted Challenge Response Authentication Mechanism \(SASL/SCRAM\) authentication\. You can control access to your Amazon MSK clusters by setting up user name and password authentication using an AWS Secrets Manager secret\. For more information, see [Username and password authentication with AWS Secrets Manager](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password.html) in the *Amazon Managed Streaming for Apache Kafka Developer Guide*\.
+Amazon MSK supports Simple Authentication and Security Layer/Salted Challenge Response Authentication Mechanism \(SASL/SCRAM\) authentication with TLS encryption\. You can control access to your Amazon MSK clusters by setting up user name and password authentication using an AWS Secrets Manager secret\. For more information, see [Username and password authentication with AWS Secrets Manager](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password.html) in the *Amazon Managed Streaming for Apache Kafka Developer Guide*\.
 
 Note that Amazon MSK does not support SASL/PLAIN authentication\.
 
@@ -151,7 +169,7 @@ aws lambda create-event-source-mapping \
   --function-name my-kafka-function
 ```
 
-For more information, see the [CreateEventSourceMapping](https://docs.aws.amazon.com/lambda/latest/dg/API_CreateEventSourceMapping.html) API reference documentation\.
+For more information, see the API reference documentation\.
 
 #### Viewing the status using the AWS CLI<a name="services-msk-aws-cli-view"></a>
 

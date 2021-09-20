@@ -13,7 +13,7 @@ An event source mapping is an AWS Lambda resource that reads from an event sourc
 An event source mapping uses permissions in the function's [execution role](lambda-intro-execution-role.md) to read and manage items in the event source\. Permissions, event structure, settings, and polling behavior vary by event source\. For more information, see the linked topic for the service that you use as an event source\.
 
 To manage an event source with the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) or [AWS SDK](http://aws.amazon.com/getting-started/tools-sdks/), you can use the following API operations:
-+ [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
++  [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
 + [ListEventSourceMappings](API_ListEventSourceMappings.md)
 + [GetEventSourceMapping](API_GetEventSourceMapping.md)
 + [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md)

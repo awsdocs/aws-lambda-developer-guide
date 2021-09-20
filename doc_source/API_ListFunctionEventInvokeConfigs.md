@@ -2,7 +2,7 @@
 
 Retrieves a list of configurations for asynchronous invocation for a function\.
 
-To configure options for asynchronous invocation, use [PutFunctionEventInvokeConfig](API_PutFunctionEventInvokeConfig.md)\.
+To configure options for asynchronous invocation, use [ PutFunctionEventInvokeConfig ](API_PutFunctionEventInvokeConfig.md)\.
 
 ## Request Syntax<a name="API_ListFunctionEventInvokeConfigs_RequestSyntax"></a>
 
@@ -14,7 +14,7 @@ GET /2019-09-25/functions/FunctionName/event-invoke-config/list?Marker=Marker&Ma
 
 The request uses the following URI parameters\.
 
- ** [FunctionName](#API_ListFunctionEventInvokeConfigs_RequestSyntax) **   <a name="SSS-ListFunctionEventInvokeConfigs-request-FunctionName"></a>
+ ** [ FunctionName ](#API_ListFunctionEventInvokeConfigs_RequestSyntax) **   <a name="SSS-ListFunctionEventInvokeConfigs-request-FunctionName"></a>
 The name of the Lambda function\.  
 
 **Name formats**
@@ -26,10 +26,10 @@ Length Constraints: Minimum length of 1\. Maximum length of 140\.
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
 Required: Yes
 
- ** [Marker](#API_ListFunctionEventInvokeConfigs_RequestSyntax) **   <a name="SSS-ListFunctionEventInvokeConfigs-request-Marker"></a>
+ ** [ Marker ](#API_ListFunctionEventInvokeConfigs_RequestSyntax) **   <a name="SSS-ListFunctionEventInvokeConfigs-request-Marker"></a>
 Specify the pagination token that's returned by a previous request to retrieve the next page of results\.
 
- ** [MaxItems](#API_ListFunctionEventInvokeConfigs_RequestSyntax) **   <a name="SSS-ListFunctionEventInvokeConfigs-request-MaxItems"></a>
+ ** [ MaxItems ](#API_ListFunctionEventInvokeConfigs_RequestSyntax) **   <a name="SSS-ListFunctionEventInvokeConfigs-request-MaxItems"></a>
 The maximum number of configurations to return\.  
 Valid Range: Minimum value of 1\. Maximum value of 50\.
 
@@ -70,29 +70,29 @@ If the action is successful, the service sends back an HTTP 200 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** [FunctionEventInvokeConfigs](#API_ListFunctionEventInvokeConfigs_ResponseSyntax) **   <a name="SSS-ListFunctionEventInvokeConfigs-response-FunctionEventInvokeConfigs"></a>
+ ** [ FunctionEventInvokeConfigs ](#API_ListFunctionEventInvokeConfigs_ResponseSyntax) **   <a name="SSS-ListFunctionEventInvokeConfigs-response-FunctionEventInvokeConfigs"></a>
 A list of configurations\.  
-Type: Array of [FunctionEventInvokeConfig](API_FunctionEventInvokeConfig.md) objects
+Type: Array of [ FunctionEventInvokeConfig ](API_FunctionEventInvokeConfig.md) objects
 
- ** [NextMarker](#API_ListFunctionEventInvokeConfigs_ResponseSyntax) **   <a name="SSS-ListFunctionEventInvokeConfigs-response-NextMarker"></a>
+ ** [ NextMarker ](#API_ListFunctionEventInvokeConfigs_ResponseSyntax) **   <a name="SSS-ListFunctionEventInvokeConfigs-response-NextMarker"></a>
 The pagination token that's included if more results are available\.  
 Type: String
 
 ## Errors<a name="API_ListFunctionEventInvokeConfigs_Errors"></a>
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **ResourceNotFoundException**   
+ ** ResourceNotFoundException **   
 The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 
- **TooManyRequestsException**   
+ ** TooManyRequestsException **   
 The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 

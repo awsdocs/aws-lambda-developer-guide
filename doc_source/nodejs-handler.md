@@ -23,6 +23,8 @@ The third argument, `callback`, is a function that you can call in [non\-async h
 
 For async handlers, you return a response, error, or promise to the runtime instead of using `callback`\.
 
+If your function has additional dependencies, [use npm to include them in your deployment package](nodejs-package.md#nodejs-package-dependencies)\.
+
 ## Async handlers<a name="nodejs-handler-async"></a>
 
 For async handlers, you can use `return` and `throw` to send a response or error, respectively\. Functions must use the `async` keyword to use these methods to return a response or error\.

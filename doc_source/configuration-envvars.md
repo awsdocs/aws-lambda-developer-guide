@@ -182,7 +182,7 @@ Lambda [runtimes](lambda-runtimes.md) set several environment variables during i
 + `AWS_LAMBDA_FUNCTION_MEMORY_SIZE` – The amount of memory available to the function in MB\.
 + `AWS_LAMBDA_FUNCTION_VERSION` – The version of the function being executed\.
 
-  `AWS_LAMBDA_INITIALIZATION_TYPE` – The initialization type of the function, which is either `on-demand` or `provisioned-concurrency`\. For information, see [ Configuring provisioned concurrency](configuration-concurrency.md#configuration-concurrency-provisioned)\. 
+  `AWS_LAMBDA_INITIALIZATION_TYPE` – The initialization type of the function, which is either `on-demand` or `provisioned-concurrency`\. For information, see [ Configuring provisioned concurrency](provisioned-concurrency.md)\. 
 + `AWS_LAMBDA_LOG_GROUP_NAME`, `AWS_LAMBDA_LOG_STREAM_NAME` – The name of the Amazon CloudWatch Logs group and stream for the function\.
 + `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_SESSION_TOKEN` – The access keys obtained from the function's [execution role](lambda-intro-execution-role.md)\.
 + `AWS_LAMBDA_RUNTIME_API` – \([Custom runtime](runtimes-custom.md)\) The host and port of the [runtime API](runtimes-api.md)\.
@@ -201,7 +201,7 @@ The following additional environment variables aren't reserved and can be extend
 + `GEM_PATH` – \([Ruby](lambda-ruby.md)\) The Ruby library path \(`$LAMBDA_TASK_ROOT/vendor/bundle/ruby/2.5.0:/opt/ruby/gems/2.5.0`\)\.
 + `AWS_XRAY_CONTEXT_MISSING` – For X\-Ray tracing, Lambda sets this to `LOG_ERROR` to avoid throwing runtime errors from the X\-Ray SDK\.
 + `AWS_XRAY_DAEMON_ADDRESS` – For X\-Ray tracing, the IP address and port of the X\-Ray daemon\.
-+ `AWS_LAMBDA_DOTNET_PREJIT` – For the \.NET 3\.1 runtime, set this variable to enable or disable \.NET 3\.1 specific runtime optimizations\. Values include `always`, `never`, and `provisioned-concurrency`\. For information, see [ Configuring provisioned concurrency](configuration-concurrency.md#configuration-concurrency-provisioned)\.
++ `AWS_LAMBDA_DOTNET_PREJIT` – For the \.NET 3\.1 runtime, set this variable to enable or disable \.NET 3\.1 specific runtime optimizations\. Values include `always`, `never`, and `provisioned-concurrency`\. For information, see [ Configuring provisioned concurrency](provisioned-concurrency.md)\.
 
 The sample values shown reflect the latest runtimes\. The presence of specific variables or their values can vary on earlier runtimes\.
 

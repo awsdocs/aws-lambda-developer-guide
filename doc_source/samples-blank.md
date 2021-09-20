@@ -2,8 +2,6 @@
 
 The blank function sample application is a starter application that demonstrates common operations in Lambda with a function that calls the Lambda API\. It shows the use of logging, environment variables, AWS X\-Ray tracing, layers, unit tests and the AWS SDK\. Explore this application to learn about building Lambda functions in your programming language, or use it as a starting point for your own projects\.
 
-![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-blank.png)
-
 Variants of this sample application are available for the following languages:
 
 **Variants**
@@ -71,8 +69,6 @@ The sample application doesn't include an Amazon SQS queue to send events, but u
 ## Deployment automation with AWS CloudFormation and the AWS CLI<a name="samples-blank-automation"></a>
 
 The sample application's resources are defined in an AWS CloudFormation template and deployed with the AWS CLI\. The project includes simple shell scripts that automate the process of setting up, deploying, invoking, and tearing down the application\.
-
-![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-blank-stack.png)
 
 The application template uses an AWS Serverless Application Model \(AWS SAM\) resource type to define the model\. AWS SAM simplifies template authoring for serverless applications by automating the definition of execution roles, APIs, and other resources\.
 
@@ -168,9 +164,7 @@ The cleanup script \([blank\-nodejs/5\-cleanup\.sh](https://github.com/awsdocs/a
 
 ## Instrumentation with the AWS X\-Ray<a name="samples-blank-instrumentation"></a>
 
-The sample function is configured for tracing with [AWS X\-Ray](https://console.aws.amazon.com/xray/home)\. With the tracing mode set to active, Lambda records timing information for a subset of invocations and sends it to X\-Ray\. X\-Ray processes the data to generate a *service map* that shows a client node and two service nodes:
-
-![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/blank-servicemap-basic.png)
+The sample function is configured for tracing with [AWS X\-Ray](https://console.aws.amazon.com/xray/home)\. With the tracing mode set to active, Lambda records timing information for a subset of invocations and sends it to X\-Ray\. X\-Ray processes the data to generate a *service map* that shows a client node and two service nodes\.
 
 The first service node \(`AWS::Lambda`\) represents the Lambda service, which validates the invocation request and sends it to the function\. The second node, `AWS::Lambda::Function`, represents the function itself\.
 
@@ -188,11 +182,7 @@ const lambda = new AWS.Lambda()
 
 Instrumenting the AWS SDK client adds an additional node to the service map and more detail in traces\. In this example, the service map shows the sample function calling the Lambda API to get details about storage and concurrency usage in the current Region\.
 
-![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/blank-servicemap.png)
-
 The trace shows timing details for the invocation, with subsegments for function initialization, invocation, and overhead\. The invocation subsegment has a subsegment for the AWS SDK call to the `GetAccountSettings` API operation\.
-
-![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/blank-trace.png)
 
 You can include the X\-Ray SDK and other libraries in your function's deployment package, or deploy them separately in a Lambda layer\. For Node\.js, Ruby, and Python, the Lambda runtime includes the AWS SDK in the execution environment\.
 

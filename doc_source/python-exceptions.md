@@ -1,7 +1,7 @@
 # AWS Lambda function errors in Python<a name="python-exceptions"></a>
 
 **Note**  
-End of support for the Python 2\.7 runtime starts on July 15, 2021\. For more information, see [Runtime support policy](runtime-support-policy.md)\.
+End of support for the Python 2\.7 runtime started on July 15, 2021\. For more information, see [Runtime support policy](runtime-support-policy.md)\.
 
 When your code raises an error, Lambda generates a JSON representation of the error\. This error document appears in the invocation log and, for synchronous invocations, in the output\.
 
@@ -35,7 +35,7 @@ A `4xx` series error indicates an error that the invoking client or service can 
 **`5xx`**  
 A `5xx` series error indicates an issue with Lambda, or an issue with the function's configuration or resources\. `5xx` series errors can indicate a temporary condition that can be resolved without any action by the user\. These issues can't be addressed by the invoking client or service, but a Lambda function's owner may be able to fix the issue\.
 
-For a complete list of invocation errors, see [Invoke API Errors](API_Invoke.md#API_Invoke_Errors)\.
+For a complete list of invocation errors, see [InvokeFunction errors](API_Invoke.md#API_Invoke_Errors)\.
 
 ## Using the Lambda console<a name="python-exceptions-console"></a>
 

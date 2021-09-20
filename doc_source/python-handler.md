@@ -1,7 +1,7 @@
 # Lambda function handler in Python<a name="python-handler"></a>
 
 **Note**  
-End of support for the Python 2\.7 runtime starts on July 15, 2021\. For more information, see [Runtime support policy](runtime-support-policy.md)\.
+End of support for the Python 2\.7 runtime started on July 15, 2021\. For more information, see [Runtime support policy](runtime-support-policy.md)\.
 
 The Lambda function *handler* is the method in your function code that processes events\. When your function is invoked, Lambda runs the handler method\. When the handler exits or returns a response, it becomes available to handle another event\.
 
@@ -35,11 +35,14 @@ When Lambda invokes your function handler, the [Lambda runtime](lambda-runtimes.
 
 ## Returning a value<a name="python-handler-return"></a>
 
-Optionally, a handler can return a value\. What happens to the returned value depends on the [invocation type](lambda-invocation.md) and the [Using AWS Lambda with other services](lambda-services.md)\. For example:
+Optionally, a handler can return a value\. What happens to the returned value depends on the [invocation type](lambda-invocation.md) and the [service](lambda-services.md) that invoked the function\. For example:
 + If you use the `RequestResponse` invocation type, such as [Synchronous invocation](invocation-sync.md), AWS Lambda returns the result of the Python function call to the client invoking the Lambda function \(in the HTTP response to the invocation request, serialized into JSON\)\. For example, AWS Lambda console uses the `RequestResponse` invocation type, so when you invoke the function on the console, the console will display the returned value\.
 + If the handler returns objects that can't be serialized by `json.dumps`, the runtime returns an error\.
 + If the handler returns `None`, as Python functions without a `return` statement implicitly do, the runtime returns `null`\.
 + If you use an `Event` an [Asynchronous invocation](invocation-async.md) invocation type, the value is discarded\.
+
+**Note**  
+In Python 3\.9 and later releases, Lambda includes the requestId of the invocation in the error response\. 
 
 ## Examples<a name="python-example"></a>
 
@@ -107,7 +110,7 @@ You can use any event data to [invoke the function](https://docs.aws.amazon.com/
 
 Lambda runtimes set several environment variables during initialization\. For more information on the environment variables returned in the response at runtime, see [Using AWS Lambda environment variables](configuration-envvars.md)\.
 
-The function in this example depends on a successful response \(in `200`\) from the Invoke API\. For more information on the Invoke API status, see the [Invoke API Response Syntax](https://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html#API_Invoke_ResponseSyntax)\.
+The function in this example depends on a successful response \(in `200`\) from the Invoke API\. For more information on the Invoke API status, see the [Invoke](API_Invoke.md) Response Syntax\.
 
 ### Returning a calculation<a name="python-example-userinputcalc"></a>
 

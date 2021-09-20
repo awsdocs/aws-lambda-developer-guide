@@ -4,19 +4,19 @@ Details about an [ AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/d
 
 ## Contents<a name="API_LayersListItem_Contents"></a>
 
- **LatestMatchingVersion**   <a name="SSS-Type-LayersListItem-LatestMatchingVersion"></a>
+ ** LatestMatchingVersion **   <a name="SSS-Type-LayersListItem-LatestMatchingVersion"></a>
 The newest version of the layer\.  
-Type: [LayerVersionsListItem](API_LayerVersionsListItem.md) object  
+Type: [ LayerVersionsListItem ](API_LayerVersionsListItem.md) object  
 Required: No
 
- **LayerArn**   <a name="SSS-Type-LayersListItem-LayerArn"></a>
+ ** LayerArn **   <a name="SSS-Type-LayersListItem-LayerArn"></a>
 The Amazon Resource Name \(ARN\) of the function layer\.  
 Type: String  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
 Pattern: `arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+`   
 Required: No
 
- **LayerName**   <a name="SSS-Type-LayersListItem-LayerName"></a>
+ ** LayerName **   <a name="SSS-Type-LayersListItem-LayerName"></a>
 The name of the layer\.  
 Type: String  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  

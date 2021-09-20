@@ -6,8 +6,6 @@ When the handler finishes processing the first event, the runtime sends it anoth
 
 When [AWS X\-Ray tracing](services-xray.md) is enabled, the runtime records separate subsegments for initialization and execution\.
 
-![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/features-initialization-trace.png)
-
 Your function also has access to local storage in the `/tmp` directory\. Instances of your function that are serving requests remain active for a few hours before being recycled\.
 
 The runtime captures logging output from your function and sends it to Amazon CloudWatch Logs\. In addition to logging your function's output, the runtime also logs entries when function invocation starts and ends\. This includes a report log with the request ID, billed duration, initialization duration, and other details\. If your function throws an error, the runtime returns that error to the invoker\.

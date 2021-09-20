@@ -10,8 +10,7 @@ A Lambda function's execution role is an AWS Identity and Access Management \(IA
 
 1. Choose **Configuration** and then choose **Permissions**\.
 
-1. Under **Resource summary**, view the services and resources that the function can access\. The following example shows the CloudWatch Logs permissions that Lambda adds to an execution role when you create it in the Lambda console\.  
-![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/permissions-executionrole.png)
+1. Under **Resource summary**, view the services and resources that the function can access\. 
 
 1. Choose a service from the dropdown list to see permissions related to that service\.
 
@@ -136,6 +135,7 @@ The following AWS managed policies provide permissions that are required to use 
 + **AWSLambdaVPCAccessExecutionRole** – Permission to manage elastic network interfaces to connect your function to a virtual private cloud \(VPC\)\.
 + **AWSXRayDaemonWriteAccess** – Permission to upload trace data to X\-Ray\.
 + **CloudWatchLambdaInsightsExecutionRolePolicy** – Permission to write runtime metrics to CloudWatch Lambda Insights\.
++ **AmazonS3ObjectLambdaExecutionRolePolicy** – Permission to interact with Amazon S3 Object Lambda\.
 
 For some features, the Lambda console attempts to add missing permissions to your execution role in a customer managed policy\. These policies can become numerous\. To avoid creating extra policies, add the relevant AWS managed policies to your execution role before enabling features\.
 

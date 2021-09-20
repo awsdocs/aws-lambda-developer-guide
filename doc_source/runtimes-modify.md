@@ -146,6 +146,7 @@ The following [Lambda runtimes](lambda-runtimes.md) support wrapper scripts:
 + Node\.js 14\.x
 + Node\.js 12\.x
 + Node\.js 10\.x
++ Python 3\.9
 + Python 3\.8
 + Ruby 2\.7
 + Java 11

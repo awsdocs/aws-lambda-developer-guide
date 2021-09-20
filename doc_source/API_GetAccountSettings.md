@@ -43,21 +43,21 @@ If the action is successful, the service sends back an HTTP 200 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** [AccountLimit](#API_GetAccountSettings_ResponseSyntax) **   <a name="SSS-GetAccountSettings-response-AccountLimit"></a>
+ ** [ AccountLimit ](#API_GetAccountSettings_ResponseSyntax) **   <a name="SSS-GetAccountSettings-response-AccountLimit"></a>
 Limits that are related to concurrency and code storage\.  
-Type: [AccountLimit](API_AccountLimit.md) object
+Type: [ AccountLimit ](API_AccountLimit.md) object
 
- ** [AccountUsage](#API_GetAccountSettings_ResponseSyntax) **   <a name="SSS-GetAccountSettings-response-AccountUsage"></a>
+ ** [ AccountUsage ](#API_GetAccountSettings_ResponseSyntax) **   <a name="SSS-GetAccountSettings-response-AccountUsage"></a>
 The number of functions and amount of storage in use\.  
-Type: [AccountUsage](API_AccountUsage.md) object
+Type: [ AccountUsage ](API_AccountUsage.md) object
 
 ## Errors<a name="API_GetAccountSettings_Errors"></a>
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 
- **TooManyRequestsException**   
+ ** TooManyRequestsException **   
 The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 

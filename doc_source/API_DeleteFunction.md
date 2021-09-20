@@ -2,7 +2,7 @@
 
 Deletes a Lambda function\. To delete a specific function version, use the `Qualifier` parameter\. Otherwise, all versions and aliases are deleted\.
 
-To delete Lambda event source mappings that invoke a function, use [DeleteEventSourceMapping](API_DeleteEventSourceMapping.md)\. For AWS services and resources that invoke your function directly, delete the trigger in the service where you originally configured it\.
+To delete Lambda event source mappings that invoke a function, use [ DeleteEventSourceMapping ](API_DeleteEventSourceMapping.md)\. For AWS services and resources that invoke your function directly, delete the trigger in the service where you originally configured it\.
 
 ## Request Syntax<a name="API_DeleteFunction_RequestSyntax"></a>
 
@@ -14,7 +14,7 @@ DELETE /2015-03-31/functions/FunctionName?Qualifier=Qualifier HTTP/1.1
 
 The request uses the following URI parameters\.
 
- ** [FunctionName](#API_DeleteFunction_RequestSyntax) **   <a name="SSS-DeleteFunction-request-FunctionName"></a>
+ ** [ FunctionName ](#API_DeleteFunction_RequestSyntax) **   <a name="SSS-DeleteFunction-request-FunctionName"></a>
 The name of the Lambda function or version\.  
 
 **Name formats**
@@ -26,7 +26,7 @@ Length Constraints: Minimum length of 1\. Maximum length of 140\.
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
 Required: Yes
 
- ** [Qualifier](#API_DeleteFunction_RequestSyntax) **   <a name="SSS-DeleteFunction-request-Qualifier"></a>
+ ** [ Qualifier ](#API_DeleteFunction_RequestSyntax) **   <a name="SSS-DeleteFunction-request-Qualifier"></a>
 Specify a version to delete\. You can't delete a version that's referenced by an alias\.  
 Length Constraints: Minimum length of 1\. Maximum length of 128\.  
 Pattern: `(|[a-zA-Z0-9$_-]+)` 
@@ -47,23 +47,23 @@ If the action is successful, the service sends back an HTTP 204 response with an
 
 ## Errors<a name="API_DeleteFunction_Errors"></a>
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **ResourceConflictException**   
+ ** ResourceConflictException **   
 The resource already exists, or another operation is in progress\.  
 HTTP Status Code: 409
 
- **ResourceNotFoundException**   
+ ** ResourceNotFoundException **   
 The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 
- **TooManyRequestsException**   
+ ** TooManyRequestsException **   
 The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 

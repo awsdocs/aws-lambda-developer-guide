@@ -12,11 +12,9 @@ The following are introductory examples of event sources and how the end\-to\-en
 
 ## Example 1: Amazon S3 pushes events and invokes a Lambda function<a name="example-lambda-pushes-events-invokes-function"></a>
 
-Amazon S3 can publish events of different types, such as PUT, POST, COPY, and DELETE object events on a bucket\. Using the bucket notification feature, you can configure an event source mapping that directs Amazon S3 to invoke a Lambda function when a specific type of event occurs, as shown in the following illustration\. 
+Amazon S3 can publish events of different types, such as PUT, POST, COPY, and DELETE object events on a bucket\. Using the bucket notification feature, you can configure an event source mapping that directs Amazon S3 to invoke a Lambda function when a specific type of event occurs\. 
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/push-s3-example-10.png)
-
-The diagram illustrates the following sequence:
+The following is a typical sequence:
 
 1. The user creates an object in a bucket\.
 
@@ -34,11 +32,7 @@ For poll\-based event sources, AWS Lambda polls the source and then invokes the 
 + [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
 + [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md)
 
-The following diagram shows how a custom application writes records to a Kinesis stream\.
-
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/kinesis-pull-10.png)
-
-The diagram illustrates the following sequence:
+The following steps describe how a custom application writes records to a Kinesis stream:
 
 1. The custom application writes records to a Kinesis stream\.
 

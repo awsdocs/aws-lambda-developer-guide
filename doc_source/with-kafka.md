@@ -15,20 +15,38 @@ For an example of how to use self\-managed Kafka as an event source, see [Using 
 Lambda sends the batch of messages in the event parameter when it invokes your Lambda function\. The event payload contains an array of messages\. Each array item contains details of the Kafka topic and Kafka partition identifier, together with a timestamp and a base64\-encoded message\.
 
 ```
-{   "eventSource": "aws:kafka",
-    "eventSourceArn": "arn:aws:kafka:sa-east-1:123456789012:cluster/vpc-2priv-2pub/751d2973-a626-431c-9d4e-d7975eb44dd7-2",
-    "records": {
-      "mytopic-0": [
-          {
-            "topic": "mytopic"
-            "partition": "0",
-            "offset": 15,
-            "timestamp": 1545084650987,
-            "timestampType": "CREATE_TIME",
-            "value": "SGVsbG8sIHRoaXMgaXMgYSB0ZXN0Lg==",
-          }
+{
+   "eventSource":"aws:SelfManagedKafka",
+   "bootstrapServers":"b-2.demo-cluster-1.a1bcde.c1.kafka.us-east-1.amazonaws.com:9092,b-1.demo-cluster-1.a1bcde.c1.kafka.us-east-1.amazonaws.com:9092",
+   "records":{
+      "mytopic-0":[
+         {
+            "topic":"mytopic",
+            "partition":"0",
+            "offset":15,
+            "timestamp":1545084650987,
+            "timestampType":"CREATE_TIME",
+            "value":"SGVsbG8sIHRoaXMgaXMgYSB0ZXN0Lg==",
+            "headers":[
+               {
+                  "headerKey":[
+                     104,
+                     101,
+                     97,
+                     100,
+                     101,
+                     114,
+                     86,
+                     97,
+                     108,
+                     117,
+                     101
+                  ]
+               }
+            ]
+         }
       ]
-    }
+   }
 }
 ```
 
@@ -114,10 +132,10 @@ Lambda supports several methods to authenticate with your self\-managed Apache K
   If only Kafka users within your VPC access your Kafka brokers, you must configure the event source with VPC access\.
 + SASL/SCRAM
 
-  With Simple Authentication and Security Layer/Salted Challenge Response Authentication Mechanism \(SASL/SCRAM\) authentication, the cluster encrypts the credentials using SSL encryption\. Lambda sends the encrypted credentials to authenticate with the cluster\. Because the credentials are encrypted, the connection to the cluster does not need to be encrypted\. For more information about SASL/SCRAM authentication, see [RFC 5802](https://tools.ietf.org/html/rfc5802)\.
+  Lambda supports Simple Authentication and Security Layer/Salted Challenge Response Authentication Mechanism \(SASL/SCRAM\) authentication with TLS encryption\. Lambda sends the encrypted credentials to authenticate with the cluster\. Because the credentials are encrypted, the connection to the cluster does not need to be encrypted\. For more information about SASL/SCRAM authentication, see [RFC 5802](https://tools.ietf.org/html/rfc5802)\.
 + SASL/PLAIN
 
-  With SASL/PLAIN authentication, credentials are sent as clear text \(unencrypted\) to the server\. Because the credentials are clear text, the connection to the server must use TLS encryption\.
+  Lambda supports SASL/PLAIN authentication with TLS encryption\. With SASL/PLAIN authentication, credentials are sent as clear text \(unencrypted\) to the server\. Because the credentials are clear text, the connection to the server must use TLS encryption\.
 
 For SASL authentication, you must store the user name and password as a secret in Secrets Manager\. For more information, see [Tutorial: Creating and retrieving a secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/tutorials_basic.html) in the *AWS Secrets Manager User Guide*\.
 
@@ -194,7 +212,7 @@ aws lambda create-event-source-mapping --topics AWSKafkaTopic
           --self-managed-event-source '{"Endpoints":{"KAFKA_BOOTSTRAP_SERVERS":["abc3.xyz.com:9092", "abc2.xyz.com:9092"]}}'
 ```
 
-For more information, see the [CreateEventSourceMapping](https://docs.aws.amazon.com/lambda/latest/dg/API_CreateEventSourceMapping.html) API reference documentation\.
+For more information, see the API reference documentation\.
 
 #### Using a VPC<a name="services-smak-aws-cli-create-vpc"></a>
 
@@ -211,7 +229,7 @@ aws lambda create-event-source-mapping
           "abc2.xyz.com:9092"]}}'
 ```
 
-For more information, see the [CreateEventSourceMapping](https://docs.aws.amazon.com/lambda/latest/dg/API_CreateEventSourceMapping.html) API reference documentation\.
+For more information, see the API reference documentation\.
 
 #### Viewing the status using the AWS CLI<a name="services-smak-aws-cli-view"></a>
 
@@ -226,11 +244,11 @@ aws lambda get-event-source-mapping
 
 When you add your Apache Kafka cluster as a trigger for your Lambda function, the cluster is used as an [event source](invocation-eventsourcemapping.md)\.
 
-Lambda reads event data from the Kafka topics that you specify in [ `Topics`](https://docs.aws.amazon.com/lambda/latest/dg/API_CreateEventSourceMapping.html#SSS-CreateEventSourceMapping-request-Topics) based on the starting position that you specify in [ `StartingPosition`](https://docs.aws.amazon.com/lambda/latest/dg/API_CreateEventSourceMapping.html#SSS-CreateEventSourceMapping-request-StartingPosition)\. After successful processing, your Kafka topic is committed to your Kafka cluster\.
+Lambda reads event data from the Kafka topics that you specify in [CreateEventSourceMapping](API_CreateEventSourceMapping.md) `Topics` based on the starting position that you specify in [CreateEventSourceMapping](API_CreateEventSourceMapping.md) `StartingPosition`\. After successful processing, your Kafka topic is committed to your Kafka cluster\.
 
 If you specify `LATEST` as the starting position, Lambda starts reading from the latest message in each partition belonging to the topic\. Because there can be some delay after trigger configuration before Lambda starts reading the messages, Lambda does not read any messages produced during this window\.
 
-Lambda processes records from one or more Kafka topic partitions that you specify and sends a JSON payload to your Lambda function\. When more records are available, Lambda continues processing records in batches, based on the value that you specify in [https://docs.aws.amazon.com/lambda/latest/dg/API_CreateEventSourceMapping.html#SSS-CreateEventSourceMapping-request-BatchSize](https://docs.aws.amazon.com/lambda/latest/dg/API_CreateEventSourceMapping.html#SSS-CreateEventSourceMapping-request-BatchSize), until the function catches up with the topic\.
+Lambda processes records from one or more Kafka topic partitions that you specify and sends a JSON payload to your Lambda function\. When more records are available, Lambda continues processing records in batches, based on the value that you specify in [CreateEventSourceMapping](API_CreateEventSourceMapping.md) >`BatchSize`, until the function catches up with the topic\.
 
 If your Lambda function returns an error for any of the messages in a batch, Lambda retries the whole batch of messages until processing succeeds or the messages expire\.
 
@@ -251,7 +269,7 @@ To monitor the throughput of your Kafka topic, you can view the Apache Kafka con
 When you add your Kafka cluster as an [event source](invocation-eventsourcemapping.md) for your Lambda function using the Lambda console, an AWS SDK, or the AWS CLI, Lambda uses APIs to process your request\.
 
 To manage an event source with the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) or [AWS SDK](http://aws.amazon.com/getting-started/tools-sdks/), you can use the following API operations:
-+ [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
++  [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
 + [ListEventSourceMappings](API_ListEventSourceMappings.md)
 + [GetEventSourceMapping](API_GetEventSourceMapping.md)
 + [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md)

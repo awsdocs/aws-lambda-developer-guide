@@ -14,7 +14,13 @@ The workflow for a function defined as a container image includes these steps:
 
 1. Upload the image to your Amazon ECR container registry\. See steps 7\-9 in [Create image](images-create.md#images-create-from-base)\.
 
-1. [Create](configuration-images.md) the Lambda function and deploy the image\.
+1. [Create](configuration-images.md#configuration-images-create) the Lambda function or [update the function code](configuration-images.md#configuration-images-update) to deploy the image to an existing function\.
+
+**Topics**
++ [AWS base images for Java](#java-image-base)
++ [Using a Java base image](#java-image-instructions)
++ [Java runtime interface clients](#java-image-clients)
++ [Deploy the container image](#java-image-deploy)
 
 ## AWS base images for Java<a name="java-image-base"></a>
 
@@ -55,7 +61,6 @@ You can also view the Java client source code in the [AWS Lambda Java Support Li
 
 After your container image resides in the Amazon ECR container registry, you can [create and run](configuration-images.md) the Lambda function\.
 
-**Topics**
-+ [AWS base images for Java](#java-image-base)
-+ [Using a Java base image](#java-image-instructions)
-+ [Java runtime interface clients](#java-image-clients)
+## Deploy the container image<a name="java-image-deploy"></a>
+
+For a new function, you deploy the Java image when you [create the function](configuration-images.md#configuration-images-create)\. For an existing function, if you rebuild the container image, you need to redeploy the image by [updating the function code](configuration-images.md#configuration-images-update)\.

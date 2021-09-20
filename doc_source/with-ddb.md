@@ -79,7 +79,7 @@ If your function returns an error, Lambda retries the batch until processing suc
 
 You can also increase concurrency by processing multiple batches from each shard in parallel\. Lambda can process up to 10 batches in each shard simultaneously\. If you increase the number of concurrent batches per shard, Lambda still ensures in\-order processing at the partition\-key level\.
 
-Configure the `ParallelizationFactor` setting to process one shard of a Kinesis or DynamoDB data stream with more than one Lambda invocation simultaneously\. You can specify the number of concurrent batches that Lambda polls from a shard via a parallelization factor from 1 \(default\) to 10\. For example, when `ParallelizationFactor` is set to 2, you can have 200 concurrent Lambda invocations at maximum to process 100 Kinesis data shards\. This helps scale up the processing throughput when the data volume is volatile and the `IteratorAge` is high\. For more information, see [ New AWS Lambda scaling controls for Kinesis and DynamoDB event sources](http://aws.amazon.com/blogs/compute/new-aws-lambda-scaling-controls-for-kinesis-and-dynamodb-event-sources/)\.
+Configure the `ParallelizationFactor` setting to process one shard of a Kinesis or DynamoDB data stream with more than one Lambda invocation simultaneously\. You can specify the number of concurrent batches that Lambda polls from a shard via a parallelization factor from 1 \(default\) to 10\. For example, when `ParallelizationFactor` is set to 2, you can have 200 concurrent Lambda invocations at maximum to process 100 Kinesis data shards\. This helps scale up the processing throughput when the data volume is volatile and the `IteratorAge` is high\. Note that parallelization factor will not work if you are using Kinesis aggregation\. For more information, see [New AWS Lambda scaling controls for Kinesis and DynamoDB event sources](http://aws.amazon.com/blogs/compute/new-aws-lambda-scaling-controls-for-kinesis-and-dynamodb-event-sources/)\. Also, see the [Serverless Data Processing on AWS](https://data-processing.serverlessworkshops.io/) workshop for complete tutorials\.
 
 **Topics**
 + [Execution role permissions](#events-dynamodb-permissions)
@@ -152,7 +152,7 @@ To manage the event source configuration later, choose the trigger in the design
 ## Event source mapping APIs<a name="services-dynamodb-api"></a>
 
 To manage an event source with the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) or [AWS SDK](http://aws.amazon.com/getting-started/tools-sdks/), you can use the following API operations:
-+ [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
++  [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
 + [ListEventSourceMappings](API_ListEventSourceMappings.md)
 + [GetEventSourceMapping](API_GetEventSourceMapping.md)
 + [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md)
@@ -324,19 +324,15 @@ An increasing trend in iterator age can indicate issues with your function\. For
 
 Lambda functions can run continuous stream processing applications\. A stream represents unbounded data that flows continuously through your application\. To analyze information from this continuously updating input, you can bound the included records using a window defined in terms of time\.
 
-Lambda invocations are stateless—you cannot use them for processing data across multiple continuous invocations without an external database\. However, with windowing enabled, you can maintain your state across invocations\. This state contains the aggregate result of the messages previously processed for the current window\. Your state can be a maximum of 1 MB per shard\. If it exceeds that size, Lambda terminates the window early\.
-
-### Tumbling windows<a name="streams-tumbling"></a>
-
-Lambda functions can aggregate data using tumbling windows: distinct time windows that open and close at regular intervals\. Tumbling windows enable you to process streaming data sources through contiguous, non\-overlapping time windows\.
+Tumbling windows are distinct time windows that open and close at regular intervals\. By default, Lambda invocations are stateless—you cannot use them for processing data across multiple continuous invocations without an external database\. However, with tumbling windows, you can maintain your state across invocations\. This state contains the aggregate result of the messages previously processed for the current window\. Your state can be a maximum of 1 MB per shard\. If it exceeds that size, Lambda terminates the window early\.
 
 Each record of a stream belongs to a specific window\. A record is processed only once, when Lambda processes the window that the record belongs to\. In each window, you can perform calculations, such as a sum or average, at the [partition key](https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html#partition-key) level within a shard\.
 
 ### Aggregation and processing<a name="streams-tumbling-processing"></a>
 
-Your user managed function is invoked both for aggregation and for processing the final results of that aggregation\. Lambda aggregates all records received in the window\. You can receive these records in multiple batches, each as a separate invocation\. Each invocation receives a state\. You can also process records and return a new state, which is passed in the next invocation\. Lambda returns a `TimeWindowEventResponse` in JSON in the following format:
+Your user managed function is invoked both for aggregation and for processing the final results of that aggregation\. Lambda aggregates all records received in the window\. You can receive these records in multiple batches, each as a separate invocation\. Each invocation receives a state\. Thus, when using tumbling windows, your Lambda function response must contain a `state` property\. If the response does not contain a `state` property, Lambda considers this a failed invocation\. To satisfy this condition, your function can return a `TimeWindowEventResponse` object, which has the following JSON shape:
 
-**Example `TimeWindowEventReponse` values**  
+**Example `TimeWindowEventResponse` values**  
 
 ```
 {
@@ -349,7 +345,7 @@ Your user managed function is invoked both for aggregation and for processing th
 ```
 
 **Note**  
-For Java functions, we recommend using a Map<String, String> to represent the state\.
+For Java functions, we recommend using a `Map<String, String>` to represent the state\.
 
 At the end of the window, the flag `isFinalInvokeForWindow` is set to `true` to indicate that this is the final state and that it’s ready for processing\. After processing, the window completes and your final invocation completes, and then the state is dropped\.
 

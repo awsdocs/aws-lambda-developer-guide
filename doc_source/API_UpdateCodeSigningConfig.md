@@ -23,7 +23,7 @@ Content-type: application/json
 
 The request uses the following URI parameters\.
 
- ** [CodeSigningConfigArn](#API_UpdateCodeSigningConfig_RequestSyntax) **   <a name="SSS-UpdateCodeSigningConfig-request-CodeSigningConfigArn"></a>
+ ** [ CodeSigningConfigArn ](#API_UpdateCodeSigningConfig_RequestSyntax) **   <a name="SSS-UpdateCodeSigningConfig-request-CodeSigningConfigArn"></a>
 The The Amazon Resource Name \(ARN\) of the code signing configuration\.  
 Length Constraints: Maximum length of 200\.  
 Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:code-signing-config:csc-[a-z0-9]{17}`   
@@ -33,17 +33,17 @@ Required: Yes
 
 The request accepts the following data in JSON format\.
 
- ** [AllowedPublishers](#API_UpdateCodeSigningConfig_RequestSyntax) **   <a name="SSS-UpdateCodeSigningConfig-request-AllowedPublishers"></a>
+ ** [ AllowedPublishers ](#API_UpdateCodeSigningConfig_RequestSyntax) **   <a name="SSS-UpdateCodeSigningConfig-request-AllowedPublishers"></a>
 Signing profiles for this code signing configuration\.  
-Type: [AllowedPublishers](API_AllowedPublishers.md) object  
+Type: [ AllowedPublishers ](API_AllowedPublishers.md) object  
 Required: No
 
- ** [CodeSigningPolicies](#API_UpdateCodeSigningConfig_RequestSyntax) **   <a name="SSS-UpdateCodeSigningConfig-request-CodeSigningPolicies"></a>
+ ** [ CodeSigningPolicies ](#API_UpdateCodeSigningConfig_RequestSyntax) **   <a name="SSS-UpdateCodeSigningConfig-request-CodeSigningPolicies"></a>
 The code signing policy\.  
-Type: [CodeSigningPolicies](API_CodeSigningPolicies.md) object  
+Type: [ CodeSigningPolicies ](API_CodeSigningPolicies.md) object  
 Required: No
 
- ** [Description](#API_UpdateCodeSigningConfig_RequestSyntax) **   <a name="SSS-UpdateCodeSigningConfig-request-Description"></a>
+ ** [ Description ](#API_UpdateCodeSigningConfig_RequestSyntax) **   <a name="SSS-UpdateCodeSigningConfig-request-Description"></a>
 Descriptive name for this code signing configuration\.  
 Type: String  
 Length Constraints: Minimum length of 0\. Maximum length of 256\.  
@@ -77,21 +77,21 @@ If the action is successful, the service sends back an HTTP 200 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** [CodeSigningConfig](#API_UpdateCodeSigningConfig_ResponseSyntax) **   <a name="SSS-UpdateCodeSigningConfig-response-CodeSigningConfig"></a>
+ ** [ CodeSigningConfig ](#API_UpdateCodeSigningConfig_ResponseSyntax) **   <a name="SSS-UpdateCodeSigningConfig-response-CodeSigningConfig"></a>
 The code signing configuration  
-Type: [CodeSigningConfig](API_CodeSigningConfig.md) object
+Type: [ CodeSigningConfig ](API_CodeSigningConfig.md) object
 
 ## Errors<a name="API_UpdateCodeSigningConfig_Errors"></a>
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **ResourceNotFoundException**   
+ ** ResourceNotFoundException **   
 The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 

@@ -12,14 +12,14 @@ GET /2018-10-31/layers?CompatibleRuntime=CompatibleRuntime&Marker=Marker&MaxItem
 
 The request uses the following URI parameters\.
 
- ** [CompatibleRuntime](#API_ListLayers_RequestSyntax) **   <a name="SSS-ListLayers-request-CompatibleRuntime"></a>
+ ** [ CompatibleRuntime ](#API_ListLayers_RequestSyntax) **   <a name="SSS-ListLayers-request-CompatibleRuntime"></a>
 A runtime identifier\. For example, `go1.x`\.  
-Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | nodejs10.x | nodejs12.x | nodejs14.x | java8 | java8.al2 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | dotnetcore3.1 | nodejs4.3-edge | go1.x | ruby2.5 | ruby2.7 | provided | provided.al2` 
+Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | nodejs10.x | nodejs12.x | nodejs14.x | java8 | java8.al2 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | python3.9 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | dotnetcore3.1 | nodejs4.3-edge | go1.x | ruby2.5 | ruby2.7 | provided | provided.al2` 
 
- ** [Marker](#API_ListLayers_RequestSyntax) **   <a name="SSS-ListLayers-request-Marker"></a>
+ ** [ Marker ](#API_ListLayers_RequestSyntax) **   <a name="SSS-ListLayers-request-Marker"></a>
 A pagination token returned by a previous call\.
 
- ** [MaxItems](#API_ListLayers_RequestSyntax) **   <a name="SSS-ListLayers-request-MaxItems"></a>
+ ** [ MaxItems ](#API_ListLayers_RequestSyntax) **   <a name="SSS-ListLayers-request-MaxItems"></a>
 The maximum number of layers to return\.  
 Valid Range: Minimum value of 1\. Maximum value of 50\.
 
@@ -58,25 +58,25 @@ If the action is successful, the service sends back an HTTP 200 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** [Layers](#API_ListLayers_ResponseSyntax) **   <a name="SSS-ListLayers-response-Layers"></a>
+ ** [ Layers ](#API_ListLayers_ResponseSyntax) **   <a name="SSS-ListLayers-response-Layers"></a>
 A list of function layers\.  
-Type: Array of [LayersListItem](API_LayersListItem.md) objects
+Type: Array of [ LayersListItem ](API_LayersListItem.md) objects
 
- ** [NextMarker](#API_ListLayers_ResponseSyntax) **   <a name="SSS-ListLayers-response-NextMarker"></a>
+ ** [ NextMarker ](#API_ListLayers_ResponseSyntax) **   <a name="SSS-ListLayers-response-NextMarker"></a>
 A pagination token returned when the response doesn't contain all layers\.  
 Type: String
 
 ## Errors<a name="API_ListLayers_Errors"></a>
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 
- **TooManyRequestsException**   
+ ** TooManyRequestsException **   
 The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 

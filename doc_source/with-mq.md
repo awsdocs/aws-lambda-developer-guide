@@ -38,7 +38,7 @@ Lambda will pull messages until it has processed a maximum of 6 MB, until timeou
 **Note**  
 The maximum function invocation time is 14 minutes\. 
 
-You can monitor a given function's concurrency usage using the `ConcurrentExecutions` metric in Amazon CloudWatch\. For more information about concurrency, see [Managing concurrency for a Lambda function](configuration-concurrency.md)\.
+You can monitor a given function's concurrency usage using the `ConcurrentExecutions` metric in Amazon CloudWatch\. For more information about concurrency, see [Managing Lambda reserved concurrency](configuration-concurrency.md)\.
 
 **Example Amazon MQ record events**  
 
@@ -82,9 +82,9 @@ You can monitor a given function's concurrency usage using the `ConcurrentExecut
 ```
 {
   "eventSource": "aws:rmq",
-  "eventSourceArn": "arn:aws:mq:us-west-2:112556298976:broker:test:b-9bcfa592-423a-4942-879d-eb284b418fc8",
+  "eventSourceArn": "arn:aws:mq:us-west-2:112556298976:broker:pizzaBroker:b-9bcfa592-423a-4942-879d-eb284b418fc8",
   "rmqMessagesByQueue": {
-    "test::/": [
+    "pizzaQueue::/": [
       {
         "basicProperties": {
           "contentType": "text/plain",
@@ -132,7 +132,7 @@ You can monitor a given function's concurrency usage using the `ConcurrentExecut
   }
 }
 ```
-In the RabbitMQ example, `test` is the name of the RabbitMQ queue, and `/` is the name of the virtual host\. When receiving messages, the event source lists messages under `test::/`\.
+In the RabbitMQ example, `pizzaQueue` is the name of the RabbitMQ queue, and `/` is the name of the virtual host\. When receiving messages, the event source lists messages under `pizzaQueue::/`\.
 
 ## Execution role permissions<a name="events-mq-permissions"></a>
 
@@ -182,7 +182,7 @@ To enable or disable the trigger \(or delete it\), choose the **MQ** trigger in 
 ## Event source mapping API<a name="services-mq-api"></a>
 
 To manage an event source with the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) or [AWS SDK](http://aws.amazon.com/getting-started/tools-sdks/), you can use the following API operations:
-+ [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
++  [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
 + [ListEventSourceMappings](API_ListEventSourceMappings.md)
 + [GetEventSourceMapping](API_GetEventSourceMapping.md)
 + [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md)

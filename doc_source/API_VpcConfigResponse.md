@@ -4,19 +4,19 @@ The VPC security groups and subnets that are attached to a Lambda function\.
 
 ## Contents<a name="API_VpcConfigResponse_Contents"></a>
 
- **SecurityGroupIds**   <a name="SSS-Type-VpcConfigResponse-SecurityGroupIds"></a>
+ ** SecurityGroupIds **   <a name="SSS-Type-VpcConfigResponse-SecurityGroupIds"></a>
 A list of VPC security groups IDs\.  
 Type: Array of strings  
 Array Members: Maximum number of 5 items\.  
 Required: No
 
- **SubnetIds**   <a name="SSS-Type-VpcConfigResponse-SubnetIds"></a>
+ ** SubnetIds **   <a name="SSS-Type-VpcConfigResponse-SubnetIds"></a>
 A list of VPC subnet IDs\.  
 Type: Array of strings  
 Array Members: Maximum number of 16 items\.  
 Required: No
 
- **VpcId**   <a name="SSS-Type-VpcConfigResponse-VpcId"></a>
+ ** VpcId **   <a name="SSS-Type-VpcConfigResponse-VpcId"></a>
 The ID of the VPC\.  
 Type: String  
 Required: No

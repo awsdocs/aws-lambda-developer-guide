@@ -37,7 +37,7 @@ AWS provides a set of base images in the Amazon Elastic Container Registry \(Ama
 
 In the following commands, replace `123456789012` with your AWS account ID\.
 
-**To create an image using the AWS Node\.js 12 base image**
+**To create an image using the AWS Node\.js 14 base image**
 
 1. On your local machine, create a project directory for your new function\.
 

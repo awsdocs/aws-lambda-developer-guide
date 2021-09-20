@@ -72,7 +72,7 @@ For more information about Lambda service architectures, see [Event driven archi
 + [Amazon Simple Storage Service Batch](services-s3-batch.md)
 + [Secrets Manager](with-secrets-manager.md)
 
-For asynchronous invocation, Lambda queues the event before passing it to your function\. The other service gets a success response as soon as the event is queued and isn't aware of what happens afterwards\. If an error occurs, Lambda handles [retries](invocation-retries.md), and can send failed events to a [destination](invocation-async.md#invocation-async-destinations) that you configure\.
+For asynchronous invocation, Lambda queues the event before passing it to your function\. The other service gets a success response as soon as the event is queued and isn't aware of what happens afterwards\. If an error occurs, Lambda handles [retries](invocation-retries.md), and can send failed events to a [destination](invocation-async.md#invocation-async-destinations) that you configure\. You can disable retries for a function by setting the function's reserved concurrency value to zero\.
 
 **Services that invoke Lambda functions asynchronously**
 + [Amazon Simple Storage Service](with-s3.md)

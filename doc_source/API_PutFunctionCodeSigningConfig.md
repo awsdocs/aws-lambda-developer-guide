@@ -17,7 +17,7 @@ Content-type: application/json
 
 The request uses the following URI parameters\.
 
- ** [FunctionName](#API_PutFunctionCodeSigningConfig_RequestSyntax) **   <a name="SSS-PutFunctionCodeSigningConfig-request-FunctionName"></a>
+ ** [ FunctionName ](#API_PutFunctionCodeSigningConfig_RequestSyntax) **   <a name="SSS-PutFunctionCodeSigningConfig-request-FunctionName"></a>
 The name of the Lambda function\.  
 
 **Name formats**
@@ -33,7 +33,7 @@ Required: Yes
 
 The request accepts the following data in JSON format\.
 
- ** [CodeSigningConfigArn](#API_PutFunctionCodeSigningConfig_RequestSyntax) **   <a name="SSS-PutFunctionCodeSigningConfig-request-CodeSigningConfigArn"></a>
+ ** [ CodeSigningConfigArn ](#API_PutFunctionCodeSigningConfig_RequestSyntax) **   <a name="SSS-PutFunctionCodeSigningConfig-request-CodeSigningConfigArn"></a>
 The The Amazon Resource Name \(ARN\) of the code signing configuration\.  
 Type: String  
 Length Constraints: Maximum length of 200\.  
@@ -58,13 +58,13 @@ If the action is successful, the service sends back an HTTP 200 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** [CodeSigningConfigArn](#API_PutFunctionCodeSigningConfig_ResponseSyntax) **   <a name="SSS-PutFunctionCodeSigningConfig-response-CodeSigningConfigArn"></a>
+ ** [ CodeSigningConfigArn ](#API_PutFunctionCodeSigningConfig_ResponseSyntax) **   <a name="SSS-PutFunctionCodeSigningConfig-response-CodeSigningConfigArn"></a>
 The The Amazon Resource Name \(ARN\) of the code signing configuration\.  
 Type: String  
 Length Constraints: Maximum length of 200\.  
 Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:code-signing-config:csc-[a-z0-9]{17}` 
 
- ** [FunctionName](#API_PutFunctionCodeSigningConfig_ResponseSyntax) **   <a name="SSS-PutFunctionCodeSigningConfig-response-FunctionName"></a>
+ ** [ FunctionName ](#API_PutFunctionCodeSigningConfig_ResponseSyntax) **   <a name="SSS-PutFunctionCodeSigningConfig-response-FunctionName"></a>
 The name of the Lambda function\.  
 
 **Name formats**
@@ -78,27 +78,27 @@ Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}
 
 ## Errors<a name="API_PutFunctionCodeSigningConfig_Errors"></a>
 
- **CodeSigningConfigNotFoundException**   
+ ** CodeSigningConfigNotFoundException **   
 The specified code signing configuration does not exist\.  
 HTTP Status Code: 404
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **ResourceConflictException**   
+ ** ResourceConflictException **   
 The resource already exists, or another operation is in progress\.  
 HTTP Status Code: 409
 
- **ResourceNotFoundException**   
+ ** ResourceNotFoundException **   
 The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 
- **TooManyRequestsException**   
+ ** TooManyRequestsException **   
 The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 

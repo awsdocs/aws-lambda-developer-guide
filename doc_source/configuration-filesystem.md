@@ -87,7 +87,7 @@ To connect a function to a file system, use the `update-function-configuration` 
 ```
 ARN=arn:aws:elasticfilesystem:us-east-2:123456789012:access-point/fsap-015cxmplb72b405fd
 aws lambda update-function-configuration --function-name my-function \
-      --fs-config FileSystemArn=$ARN,LocalMountPath=/mnt/efs0
+      --file-system-configs Arn=$ARN,LocalMountPath=/mnt/efs0
 ```
 
 You can get the ARN of a file system's access point with the `describe-access-points` command\.

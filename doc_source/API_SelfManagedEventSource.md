@@ -4,7 +4,7 @@ The self\-managed Apache Kafka cluster for your event source\.
 
 ## Contents<a name="API_SelfManagedEventSource_Contents"></a>
 
- **Endpoints**   <a name="SSS-Type-SelfManagedEventSource-Endpoints"></a>
+ ** Endpoints **   <a name="SSS-Type-SelfManagedEventSource-Endpoints"></a>
 The list of bootstrap servers for your Kafka brokers in the following format: `"KAFKA_BOOTSTRAP_SERVERS": ["abc.xyz.com:xxxx","abc2.xyz.com:xxxx"]`\.  
 Type: String to array of strings map  
 Map Entries: Maximum number of 2 items\.  

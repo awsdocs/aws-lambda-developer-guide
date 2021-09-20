@@ -45,7 +45,7 @@ The following shows an example of a permissions policy with limited scope\. It a
                 "lambda:GetFunctionConcurrency",                
                 "lambda:ListEventSourceMappings",
                 "lambda:ListFunctions",      
-                "lambda:ListTags"
+                "lambda:ListTags",
                 "iam:ListRoles"
             ],
             "Resource": "*"
@@ -112,7 +112,7 @@ The permissions in the policy are organized into statements based on the [resour
                   "lambda:GetFunctionConcurrency",                
                   "lambda:ListEventSourceMappings",
                   "lambda:ListFunctions",      
-                  "lambda:ListTags"
+                  "lambda:ListTags",
                   "iam:ListRoles"
               ],
               "Resource": "*"
