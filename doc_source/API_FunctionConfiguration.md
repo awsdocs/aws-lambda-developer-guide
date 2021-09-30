@@ -4,6 +4,13 @@ Details about a function's configuration\.
 
 ## Contents<a name="API_FunctionConfiguration_Contents"></a>
 
+ ** Architectures **   <a name="SSS-Type-FunctionConfiguration-Architectures"></a>
+The instruction set architecture that the function supports\. Architecture is a string array with one of the valid values\. The default architecture value is `x86_64`\.  
+Type: Array of strings  
+Array Members: Fixed number of 1 item\.  
+Valid Values:` x86_64 | arm64`   
+Required: No
+
  ** CodeSha256 **   <a name="SSS-Type-FunctionConfiguration-CodeSha256"></a>
 The SHA256 hash of the function's deployment package\.  
 Type: String  
@@ -62,7 +69,7 @@ Type: [ ImageConfigResponse ](API_ImageConfigResponse.md) object
 Required: No
 
  ** KMSKeyArn **   <a name="SSS-Type-FunctionConfiguration-KMSKeyArn"></a>
-The KMS key that's used to encrypt the function's environment variables\. This key is only returned if you've configured a customer managed CMK\.  
+The AWS KMS key that's used to encrypt the function's environment variables\. This key is only returned if you've configured a customer managed key\.  
 Type: String  
 Pattern: `(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()`   
 Required: No
@@ -95,7 +102,7 @@ Type: Array of [ Layer ](API_Layer.md) objects
 Required: No
 
  ** MasterArn **   <a name="SSS-Type-FunctionConfiguration-MasterArn"></a>
-For Lambda@Edge functions, the ARN of the master function\.  
+For Lambda@Edge functions, the ARN of the main function\.  
 Type: String  
 Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
 Required: No

@@ -1,6 +1,6 @@
 # Creating Lambda functions defined as container images<a name="configuration-images"></a>
 
-When you create a Lambda function, you use a [deployment package](gettingstarted-package.md) to deploy your function code\. Lambda supports two types of deployment packages: [\.zip file archives](configuration-function-zip.md) and container images\. 
+When you create a Lambda function, you package your function code into a deployment package\. Lambda supports two types of deployment packages: [container images](gettingstarted-package.md#gettingstarted-package-images) and [\.zip file archives](gettingstarted-package.md#gettingstarted-package-zip)\. The workflow to create a function is different depending on the deployment package type\. To configure a function defined as a \.zip file archive, see [Creating Lambda functions defined as \.zip file archives](configuration-function-zip.md)\.
 
 You can use the Lambda console and the Lambda API to create a function defined as a container image, update and test the image code, and configure other function settings\.
 
@@ -85,27 +85,32 @@ To create a function defined as a container image, you must first [create the im
 
    1. For **Function name**, enter the function name\.
 
-   1. For **Container image URI**, enter the Amazon ECR image URI\.
+   1. For **Container image URI**, provide a container image that is compatible with the instruction set architecture that you want for your function code\. 
+
+      You can enter the Amazon ECR image URI or browse for the Amazon ECR image\.
+      + Enter the Amazon ECR image URI\.
       + Or, to browse an Amazon ECR repository for the image, choose **Browse images**\. Select the Amazon ECR repository from the dropdown list, and then select the image\.
 
-   1. \(Optional\) To override configuration settings that are included in the Dockerfile, expand **Container image overrides**\. You can override any of the following settings:
-      + For **Entrypoint**, enter the full path of the runtime executable\. The following example shows an entrypoint for a Node\.js function:
+1. \(Optional\) To override configuration settings that are included in the Dockerfile, expand **Container image overrides**\. You can override any of the following settings:
+   + For **Entrypoint**, enter the full path of the runtime executable\. The following example shows an entrypoint for a Node\.js function:
 
-        ```
-        "/usr/bin/npx", "aws-lambda-ric"
-        ```
-      + For **Command**, enter additional parameters to pass in to the image with **Entrypoint**\. The following example shows a command for a Node\.js function:
+     ```
+     "/usr/bin/npx", "aws-lambda-ric"
+     ```
+   + For **Command**, enter additional parameters to pass in to the image with **Entrypoint**\. The following example shows a command for a Node\.js function:
 
-        ```
-        "app.handler"
-        ```
-      + For **Working directory**, enter the full path of the working directory for the function\. The following example shows the working directory for an AWS base image for Lambda:
+     ```
+     "app.handler"
+     ```
+   + For **Working directory**, enter the full path of the working directory for the function\. The following example shows the working directory for an AWS base image for Lambda:
 
-        ```
-        "/var/task"
-        ```
+     ```
+     "/var/task"
+     ```
 **Note**  
 For the override settings, make sure that you enclose each string in quotation marks \(" "\)\.
+
+1. \(Optional\) For **Architecture**, choose the instruction set architecture for the function\. The default architecture is x86\_64\. Note: when you build the container image for your function, make sure that it is compatible with this [instruction set architecture](foundation-arch.md)\.
 
 1. \(Optional\) Under **Permissions**, expand **Change default execution role**\. Then, choose to create a new **Execution role**, or to use an existing role\.
 
@@ -154,7 +159,11 @@ To manage functions defined as container images, use the following API operation
 + [UpdateFunctionCode](API_UpdateFunctionCode.md)
 + [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)
 
-To create a function defined as container image, use the `create-function` command\. Set the `package-type` to `Image` and specify your container image URI using the `code` parameter\. Note that you must create the function from the same account as the container registry in Amazon EFS\.
+To create a function defined as container image, use the `create-function` command\. Set the `package-type` to `Image` and specify your container image URI using the `code` parameter\.
+
+When you create the function, you can specify the instruction set architecture\. The default architecture is `x86-64`\. Make sure that the code in your container image is compatible with the architecture\.
+
+ Note that you must create the function from the same account as the container registry in Amazon ECR\.
 
 ```
 aws lambda create-function --region sa-east-1 --function-name my-function \

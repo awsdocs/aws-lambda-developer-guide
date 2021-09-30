@@ -153,19 +153,17 @@ You can invoke your function on the Lambda console by configuring a test event a
 
 1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
-1. Choose a function\.
+1. Choose the function to test, and choose **Test**\.
+
+1. Under **Test event**, select **New event**\.
+
+1. Select a **Template**\.
+
+1. For **Name**, enter a name for the test\. In the text entry box, enter the JSON test event\.
+
+1. Choose **Save changes**\.
 
 1. Choose **Test**\.
-
-1. Select **New event** and then choose an **Event template** from the dropdown list\.
-
-1. Enter a name for the test event\.
-
-1. Enter the JSON for the test event\.
-
-1. Choose **Create event**\.
-
-1. Choose **Invoke**\.
 
 The Lambda console invokes your function [synchronously](invocation-sync.md) and displays the result\. To see the response, logs, and other information, expand the **Details** section\.
 

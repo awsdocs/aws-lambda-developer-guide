@@ -8,6 +8,7 @@ To create the deployment package for a \.zip file archive, you can use a built\-
 + If your deployment package contains native libraries, you can build the deployment package with AWS Serverless Application Model \(AWS SAM\)\. You can use the AWS SAM CLI `sam build` command with the `--use-container` to create your deployment package\. This option builds a deployment package inside a Docker image that is compatible with the Lambda execution environment\. 
 
   For more information, see [sam build](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-build.html) in the *AWS Serverless Application Model Developer Guide*\.
++ You need to build the deployment package to be compatible with this [instruction set architecture](foundation-arch.md) of the function\.
 + Lambda uses POSIX file permissions, so you may need to [ set permissions for the deployment package folder](http://aws.amazon.com/premiumsupport/knowledge-center/lambda-deployment-package-errors/) before you create the \.zip file archive\.
 
 **Topics**

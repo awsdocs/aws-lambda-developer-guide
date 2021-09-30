@@ -28,6 +28,7 @@ By default, Amazon MQ has a weekly maintenance window for brokers\. During that 
 + [Configuring a broker as an event source](#services-mq-eventsourcemapping)
 + [Event source mapping API](#services-mq-api)
 + [Event source mapping errors](#services-mq-errors)
++ [Amazon MQ and RabbitMQ configuration parameters](#services-mq-params)
 
 ## Lambda consumer group<a name="services-mq-configure"></a>
 
@@ -182,11 +183,11 @@ To enable or disable the trigger \(or delete it\), choose the **MQ** trigger in 
 ## Event source mapping API<a name="services-mq-api"></a>
 
 To manage an event source with the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) or [AWS SDK](http://aws.amazon.com/getting-started/tools-sdks/), you can use the following API operations:
-+  [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
-+ [ListEventSourceMappings](API_ListEventSourceMappings.md)
-+ [GetEventSourceMapping](API_GetEventSourceMapping.md)
-+ [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md)
-+ [DeleteEventSourceMapping](API_DeleteEventSourceMapping.md)
++  [CreateEventSourceMapping](API_CreateEventSourceMapping.md) 
++  
++  [GetEventSourceMapping](API_GetEventSourceMapping.md) 
++ [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md) 
++ [DeleteEventSourceMapping](API_DeleteEventSourceMapping.md) 
 
 To create the event source mapping with the AWS Command Line Interface \(AWS CLI\), use the [https://docs.aws.amazon.com/cli/latest/reference/lambda/create-event-source-mapping.html](https://docs.aws.amazon.com/cli/latest/reference/lambda/create-event-source-mapping.html) command\.
 
@@ -301,3 +302,18 @@ Records also go unprocessed if Lambda drops them due to their size\. The size li
 
 **Note**  
 Lambda does not support custom redelivery policies\. Instead, Lambda uses a policy with the default values from the [Redelivery Policy](https://activemq.apache.org/redelivery-policy) page on the Apache ActiveMQ website, with `maximumRedeliveries` set to 5\.
+
+## Amazon MQ and RabbitMQ configuration parameters<a name="services-mq-params"></a>
+
+All Lambda event source types share the same [CreateEventSourceMapping](API_CreateEventSourceMapping.md) and [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md) API operations\. However, only some of the parameters apply to Amazon MQ and RabbitMQ\.
+
+
+**Event source parameters that apply to Amazon MQ and RabbitMQ**  
+
+| Parameter | Required | Default | Notes | 
+| --- | --- | --- | --- | 
+|  BatchSize  |  N  |  100  |  Maximum: 10000  | 
+|  Enabled  |  N  |  true  |   | 
+|  FunctionName  |  Y  |   |   | 
+|  Queues  |  N  |   |  The name of the Amazon MQ broker destination queue to consume\.  | 
+|  SourceAccessConfigurations  |  N  |   |  An array of the authentication protocol, VPC components, or virtual host to secure and define your Amazon MQ event source\.  | 

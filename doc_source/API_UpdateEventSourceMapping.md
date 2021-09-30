@@ -2,12 +2,28 @@
 
 Updates an event source mapping\. You can change the function that AWS Lambda invokes, or pause invocation and resume later from the same location\.
 
+For details about how to configure different event sources, see the following topics\. 
++  [ Amazon DynamoDB Streams](https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-dynamodb-eventsourcemapping) 
++  [ Amazon Kinesis](https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-eventsourcemapping) 
++  [ Amazon SQS](https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-eventsource) 
++  [ Amazon MQ and RabbitMQ](https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-eventsourcemapping) 
++  [ Amazon MSK](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html) 
++  [ Apache Kafka](https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html) 
+
 The following error handling options are only available for stream sources \(DynamoDB and Kinesis\):
 +  `BisectBatchOnFunctionError` \- If the function returns an error, split the batch in two and retry\.
 +  `DestinationConfig` \- Send discarded records to an Amazon SQS queue or Amazon SNS topic\.
 +  `MaximumRecordAgeInSeconds` \- Discard records older than the specified age\. The default value is infinite \(\-1\)\. When set to infinite \(\-1\), failed records are retried until the record expires
 +  `MaximumRetryAttempts` \- Discard records after the specified number of retries\. The default value is infinite \(\-1\)\. When set to infinite \(\-1\), failed records are retried until the record expires\.
 +  `ParallelizationFactor` \- Process multiple batches from each shard concurrently\.
+
+For information about which configuration parameters apply to each event source, see the following topics\.
++  [ Amazon DynamoDB Streams](https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-ddb-params) 
++  [ Amazon Kinesis](https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-params) 
++  [ Amazon SQS](https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#services-sqs-params) 
++  [ Amazon MQ and RabbitMQ](https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-params) 
++  [ Amazon MSK](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-parms) 
++  [ Apache Kafka](https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-kafka-parms) 
 
 ## Request Syntax<a name="API_UpdateEventSourceMapping_RequestSyntax"></a>
 

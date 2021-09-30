@@ -1,16 +1,20 @@
 # ListLayers<a name="API_ListLayers"></a>
 
-Lists [ AWS Lambda layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) and shows information about the latest version of each\. Specify a [runtime identifier](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) to list only layers that indicate that they're compatible with that runtime\.
+Lists [ AWS Lambda layers](https://docs.aws.amazon.com/lambda/latest/dg/invocation-layers.html) and shows information about the latest version of each\. Specify a [runtime identifier](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) to list only layers that indicate that they're compatible with that runtime\. Specify a compatible architecture to include only layers that are compatible with that [instruction set architecture](https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html)\.
 
 ## Request Syntax<a name="API_ListLayers_RequestSyntax"></a>
 
 ```
-GET /2018-10-31/layers?CompatibleRuntime=CompatibleRuntime&Marker=Marker&MaxItems=MaxItems HTTP/1.1
+GET /2018-10-31/layers?CompatibleArchitecture=CompatibleArchitecture&CompatibleRuntime=CompatibleRuntime&Marker=Marker&MaxItems=MaxItems HTTP/1.1
 ```
 
 ## URI Request Parameters<a name="API_ListLayers_RequestParameters"></a>
 
 The request uses the following URI parameters\.
+
+ ** [ CompatibleArchitecture ](#API_ListLayers_RequestSyntax) **   <a name="SSS-ListLayers-request-CompatibleArchitecture"></a>
+The compatible [instruction set architecture](https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html)\.  
+Valid Values:` x86_64 | arm64` 
 
  ** [ CompatibleRuntime ](#API_ListLayers_RequestSyntax) **   <a name="SSS-ListLayers-request-CompatibleRuntime"></a>
 A runtime identifier\. For example, `go1.x`\.  
@@ -37,6 +41,7 @@ Content-type: application/json
    "Layers": [ 
       { 
          "LatestMatchingVersion": { 
+            "CompatibleArchitectures": [ "string" ],
             "CompatibleRuntimes": [ "string" ],
             "CreatedDate": "string",
             "Description": "string",

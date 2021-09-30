@@ -50,6 +50,7 @@ Content-type: application/json
       "ReservedConcurrentExecutions": number
    },
    "Configuration": { 
+      "Architectures": [ "string" ],
       "CodeSha256": "string",
       "CodeSize": number,
       "DeadLetterConfig": { 

@@ -11,6 +11,7 @@ POST /2018-10-31/layers/LayerName/versions HTTP/1.1
 Content-type: application/json
 
 {
+   "CompatibleArchitectures": [ "string" ],
    "CompatibleRuntimes": [ "string" ],
    "Content": { 
       "S3Bucket": "string",
@@ -36,6 +37,13 @@ Required: Yes
 ## Request Body<a name="API_PublishLayerVersion_RequestBody"></a>
 
 The request accepts the following data in JSON format\.
+
+ ** [ CompatibleArchitectures ](#API_PublishLayerVersion_RequestSyntax) **   <a name="SSS-PublishLayerVersion-request-CompatibleArchitectures"></a>
+A list of compatible [instruction set architectures](https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html)\.  
+Type: Array of strings  
+Array Members: Maximum number of 2 items\.  
+Valid Values:` x86_64 | arm64`   
+Required: No
 
  ** [ CompatibleRuntimes ](#API_PublishLayerVersion_RequestSyntax) **   <a name="SSS-PublishLayerVersion-request-CompatibleRuntimes"></a>
 A list of compatible [function runtimes](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)\. Used for filtering with [ ListLayers ](API_ListLayers.md) and [ ListLayerVersions ](API_ListLayerVersions.md)\.  
@@ -71,6 +79,7 @@ HTTP/1.1 201
 Content-type: application/json
 
 {
+   "CompatibleArchitectures": [ "string" ],
    "CompatibleRuntimes": [ "string" ],
    "Content": { 
       "CodeSha256": "string",
@@ -93,6 +102,12 @@ Content-type: application/json
 If the action is successful, the service sends back an HTTP 201 response\.
 
 The following data is returned in JSON format by the service\.
+
+ ** [ CompatibleArchitectures ](#API_PublishLayerVersion_ResponseSyntax) **   <a name="SSS-PublishLayerVersion-response-CompatibleArchitectures"></a>
+A list of compatible [instruction set architectures](https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html)\.  
+Type: Array of strings  
+Array Members: Maximum number of 2 items\.  
+Valid Values:` x86_64 | arm64` 
 
  ** [ CompatibleRuntimes ](#API_PublishLayerVersion_ResponseSyntax) **   <a name="SSS-PublishLayerVersion-response-CompatibleRuntimes"></a>
 The layer's compatible runtimes\.  

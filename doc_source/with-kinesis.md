@@ -70,6 +70,7 @@ Configure the `ParallelizationFactor` setting to process one shard of a Kinesis 
 + [Amazon CloudWatch metrics](#events-kinesis-metrics)
 + [Time windows](#services-kinesis-windows)
 + [Reporting batch item failures](#services-kinesis-batchfailurereporting)
++ [Amazon Kinesis configuration parameters](#services-kinesis-params)
 + [Tutorial: Using AWS Lambda with Amazon Kinesis](with-kinesis-example.md)
 + [Sample function code](with-kinesis-create-package.md)
 + [AWS SAM template for a Kinesis application](with-kinesis-example-use-app-spec.md)
@@ -167,11 +168,11 @@ To manage the event source configuration later, choose the trigger in the design
 ## Event source mapping API<a name="services-kinesis-api"></a>
 
 To manage an event source with the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) or [AWS SDK](http://aws.amazon.com/getting-started/tools-sdks/), you can use the following API operations:
-+  [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
-+ [ListEventSourceMappings](API_ListEventSourceMappings.md)
-+ [GetEventSourceMapping](API_GetEventSourceMapping.md)
-+ [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md)
-+ [DeleteEventSourceMapping](API_DeleteEventSourceMapping.md)
++  [CreateEventSourceMapping](API_CreateEventSourceMapping.md) 
++  
++  [GetEventSourceMapping](API_GetEventSourceMapping.md) 
++ [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md) 
++ [DeleteEventSourceMapping](API_DeleteEventSourceMapping.md) 
 
 To create the event source mapping with the AWS CLI, use the `create-event-source-mapping` command\. The following example uses the AWS CLI to map a function named `my-function` to a Kinesis data stream\. The data stream is specified by an Amazon Resource Name \(ARN\), with a batch size of 500, starting from the timestamp in Unix time\.
 
@@ -551,3 +552,26 @@ def handler(event, context):
 ```
 
 ------
+
+## Amazon Kinesis configuration parameters<a name="services-kinesis-params"></a>
+
+All Lambda event source types share the same [CreateEventSourceMapping](API_CreateEventSourceMapping.md) and [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md) API operations\. However, only some of the parameters apply to Kinesis\.
+
+
+**Event source parameters that apply to Kinesis**  
+
+| Parameter | Required | Default | Notes | 
+| --- | --- | --- | --- | 
+|  BatchSize  |  N  |  100  |  Maximum: 10000  | 
+|  BisectBatchOnFunctionError  |  N  |  false  |   | 
+|  DestinationConfig  |  N  |   |  Amazon SQS queue or Amazon SNS topic destination for discarded records  | 
+|  Enabled  |  N  |  true  |   | 
+|  EventSourceArn  |  Y  |  |  ARN of the data stream or a stream consumer  | 
+|  FunctionName  |  Y  |   |   | 
+|  MaximumBatchingWindowInSeconds  |  N  |  0  |   | 
+|  MaximumRecordAgeInSeconds  |  N  |  \-1  |  \-1 means infinite: failed records are retried until the record expires Minimum: \-1 Maximum: 604800  | 
+|  MaximumRetryAttempts  |  N  |  \-1  |  \-1 means infinite: failed records are retried until the record expires Minimum: \-1 Maximum: 604800  | 
+|  ParallelizationFactor  |  N  |  1  |  Maximum: 10  | 
+|  StartingPosition  |  Y  |   |  AT\_TIMESTAMP, TRIM\_HORIZON, or LATEST  | 
+|  StartingPositionTimestamp  |  N  |   |  Only valid if StartingPosition is set to AT\_TIMESTAMP\. The time from which to start reading, in Unix time seconds  | 
+|  TumblingWindowInSeconds  |  N  |   |  Minimum: 0 Maximum: 900  | 

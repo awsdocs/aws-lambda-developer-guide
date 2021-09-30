@@ -95,6 +95,9 @@ You can configure the memory of your function in the Lambda console\.
 
 If you have administrator permissions in AWS Identity and Access Management \(IAM\), you can opt in to receive Lambda function memory setting recommendations from AWS Compute Optimizer\. For instructions on opting in to memory recommendations for your account or organization, see [Opting in your account](https://docs.aws.amazon.com/compute-optimizer/latest/ug/getting-started.html#account-opt-in) in the *AWS Compute Optimizer User Guide*\.
 
+**Note**  
+Compute Optimizer supports only functions that use x86\_64 architecture\.
+
 When you've opted in and your [Lambda function meets Compute Optimizer requirements](https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html#requirements-lambda-functions), you can view and accept function memory recommendations from Compute Optimizer in the Lambda console\.
 
 **To accept a function memory recommendation**

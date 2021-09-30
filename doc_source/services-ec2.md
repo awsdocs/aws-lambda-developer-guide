@@ -1,8 +1,8 @@
 # Using AWS Lambda with Amazon EC2<a name="services-ec2"></a>
 
-You can use AWS Lambda to process lifecycle events from Amazon Elastic Compute Cloud and manage Amazon EC2 resources\. Amazon EC2 sends events to Amazon CloudWatch Events for lifecycle events such as when an instance changes state, when an Amazon Elastic Block Store volume snapshot completes, or when a spot instance is scheduled to be terminated\. You configure CloudWatch Events to forward those events to a Lambda function for processing\.
+You can use AWS Lambda to process lifecycle events from Amazon Elastic Compute Cloud and manage Amazon EC2 resources\. Amazon EC2 sends events to Amazon EventBridge \(CloudWatch Events\) for lifecycle events such as when an instance changes state, when an Amazon Elastic Block Store volume snapshot completes, or when a spot instance is scheduled to be terminated\. You configure EventBridge \(CloudWatch Events\) to forward those events to a Lambda function for processing\.
 
-CloudWatch Events invokes your Lambda function asynchronously with the event document from Amazon EC2\.
+EventBridge \(CloudWatch Events\) invokes your Lambda function asynchronously with the event document from Amazon EC2\.
 
 **Example instance lifecycle event**  
 
@@ -25,13 +25,13 @@ CloudWatch Events invokes your Lambda function asynchronously with the event doc
 }
 ```
 
-For details on configuring events in CloudWatch Events, see [Using AWS Lambda with Amazon CloudWatch Events](services-cloudwatchevents.md)\. For an example function that processes Amazon EBS snapshot notifications, see [Amazon CloudWatch Events for Amazon EBS](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-cloud-watch-events.html) in the Amazon EC2 User Guide for Linux Instances\.
+For details on configuring events in EventBridge \(CloudWatch Events\), see [Using AWS Lambda with Amazon EventBridge \(CloudWatch Events\)](services-cloudwatchevents.md)\. For an example function that processes Amazon EBS snapshot notifications, see [Amazon EventBridge \(CloudWatch Events\) for Amazon EBS](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-cloud-watch-events.html) in the Amazon EC2 User Guide for Linux Instances\.
 
 You can also use the AWS SDK to manage instances and other resources with the Amazon EC2 API\. For a tutorial with a sample application in C\#, see [Tutorial: Using AWS SDK for \.NET to manage Amazon EC2 Spot Instances](services-ec2-tutorial.md)\.
 
 ## Permissions<a name="services-ec2-permissions"></a>
 
-To process lifecycle events from Amazon EC2, CloudWatch Events needs permission to invoke your function\. This permission comes from the function's [resource\-based policy](access-control-resource-based.md)\. If you use the CloudWatch Events console to configure an event trigger, the console updates the resource\-based policy on your behalf\. Otherwise, add a statement like the following:
+To process lifecycle events from Amazon EC2, EventBridge \(CloudWatch Events\) needs permission to invoke your function\. This permission comes from the function's [resource\-based policy](access-control-resource-based.md)\. If you use the EventBridge \(CloudWatch Events\) console to configure an event trigger, the console updates the resource\-based policy on your behalf\. Otherwise, add a statement like the following:
 
 **Example resource\-based policy statement for Amazon EC2 lifecycle notifications**  
 

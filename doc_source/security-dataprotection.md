@@ -18,21 +18,17 @@ We strongly recommend that you never put confidential or sensitive information, 
 
 ## Encryption in transit<a name="security-privacy-intransit"></a>
 
-Lambda API endpoints only support secure connections over HTTPS\. When you manage Lambda resources with the AWS Management Console,AWS SDK, or the Lambda API, all communication is encrypted with Transport Layer Security \(TLS\)\.
+Lambda API endpoints only support secure connections over HTTPS\. When you manage Lambda resources with the AWS Management Console,AWS SDK, or the Lambda API, all communication is encrypted with Transport Layer Security \(TLS\)\. For a full list of API endpoints, see [AWS Regions and endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html) in the AWS General Reference\.
 
-When you [connect your function to a file system](configuration-filesystem.md), Lambda uses [Encryption in transit](https://docs.aws.amazon.com/efs/latest/ug/encryption.html) for all connections\.
+When you [connect your function to a file system](configuration-filesystem.md), Lambda uses encryption in transit for all connections\. For more information, see [Data encryption in Amazon EFS](https://docs.aws.amazon.com/efs/latest/ug/encryption.html) in the *Amazon Elastic File System User Guide*\.
 
-For a full list of API endpoints, see [AWS Regions and endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html) in the AWS General Reference\.
+When you use [environment variables](configuration-envvars.md), you can enable console encryption helpers to use client\-side encryption to protect the environment variables in transit\. For more information, see [Securing environment variables](configuration-envvars.md#configuration-envvars-encryption)\.
 
 ## Encryption at rest<a name="security-privacy-atrest"></a>
 
-You can use environment variables to store secrets securely for use with Lambda functions\. Lambda always encrypts environment variables at rest\.
+You can use [environment variables](configuration-envvars.md) to store secrets securely for use with Lambda functions\. Lambda always encrypts environment variables at rest\. By default, Lambda uses an AWS KMS key that Lambda creates in your account to encrypt your environment variables\. This AWS managed key is named `aws/lambda`\.
 
-Additionally, you can use the following features to customize how environment variables are encrypted\.
-+ **Key configuration** – On a per\-function basis, you can configure Lambda to use an encryption key that you create and manage in AWS Key Management Service\. These are referred to as *customer managed* CMKs\. For functions that do not have a configured customer managed CMK, Lambda uses an AWS managed CMK named `aws/lambda`, which Lambda creates in your account\.
-+ **Encryption helpers** – The Lambda console lets you encrypt environment variable values client side, before sending them to Lambda\. This enhances security further by preventing secrets from being displayed unencrypted in the Lambda console, or in function configuration that's returned by the Lambda API\. The console also provides sample code that you can adapt to decrypt the values in your function handler\.
-
-For more information, see [Using AWS Lambda environment variables](configuration-envvars.md)\.
+On a per\-function basis, you can optionally configure Lambda to use a customer managed key instead of the default AWS managed key to encrypt your environment variables\. For more information, see [Securing environment variables](configuration-envvars.md#configuration-envvars-encryption)\.
 
 Lambda always encrypts files that you upload to Lambda, including [deployment packages](gettingstarted-images.md#gettingstarted-images-package) and [layer archives](configuration-layers.md)\.
 

@@ -59,7 +59,7 @@ Lambda sends the batch of messages in the event parameter when it invokes your L
 + [Auto scaling of the Kafka event source](#services-kafka-scaling)
 + [Event source API operations](#kafka-hosting-api-operations)
 + [Event source mapping errors](#services-event-errors)
-+ [Event source configuration parameters](#services-kafka-parms)
++ [Self\-managed Apache Kafka configuration parameters](#services-kafka-parms)
 
 ## Managing access and permissions<a name="smaa-permissions"></a>
 
@@ -74,11 +74,14 @@ To create and store logs to a log group in Amazon CloudWatch Logs, your Lambda f
 
 ### Optional Lambda function permissions<a name="smaa-api-actions-optional"></a>
 
-Your Lambda function might need permission to describe your AWS Secrets Manager secret or your AWS Key Management Service \(AWS KMS\) [customer managed customer master key \(CMK\)](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk), or to access your virtual private cloud \(VPC\)\.
+Your Lambda function might need these permissions:
++ Describe your AWS Secrets Manager secret
++ Access your AWS Key Management Service \(AWS KMS\) customer managed key
++ Access your Amazon Virtual Private Cloud \(Amazon VPC\)
 
 #### Secrets Manager and AWS KMS permissions<a name="smaa-api-actions-vpc"></a>
 
-If your Apache Kafka users access your Kafka brokers over the internet, you must specify a Secrets Manager secret\. Your Lambda function might need permission to describe your Secrets Manager secret or to decrypt your AWS KMS customer managed CMK\. To access these resources, your function's [execution role](lambda-intro-execution-role.md) must have the following permissions:
+If your Apache Kafka users access your Kafka brokers over the internet, you must specify a Secrets Manager secret\. Your Lambda function might need permission to describe your Secrets Manager secret or to decrypt your AWS KMS customer managed key\. To access these resources, your function's [execution role](lambda-intro-execution-role.md) must have the following permissions:
 + [secretsmanager:GetSecretValue](https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html)
 + [kms:Decrypt](https://docs.aws.amazon.com/kms/latest/APIReference/API_Decrypt.html)
 
@@ -269,11 +272,11 @@ To monitor the throughput of your Kafka topic, you can view the Apache Kafka con
 When you add your Kafka cluster as an [event source](invocation-eventsourcemapping.md) for your Lambda function using the Lambda console, an AWS SDK, or the AWS CLI, Lambda uses APIs to process your request\.
 
 To manage an event source with the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) or [AWS SDK](http://aws.amazon.com/getting-started/tools-sdks/), you can use the following API operations:
-+  [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
-+ [ListEventSourceMappings](API_ListEventSourceMappings.md)
-+ [GetEventSourceMapping](API_GetEventSourceMapping.md)
-+ [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md)
-+ [DeleteEventSourceMapping](API_DeleteEventSourceMapping.md)
++  [CreateEventSourceMapping](API_CreateEventSourceMapping.md) 
++  
++  [GetEventSourceMapping](API_GetEventSourceMapping.md) 
++ [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md) 
++ [DeleteEventSourceMapping](API_DeleteEventSourceMapping.md) 
 
 ## Event source mapping errors<a name="services-event-errors"></a>
 
@@ -296,7 +299,7 @@ The function configuration is not valid\.
 **Note**  
 If your Lambda event records exceed the allowed size limit of 6 MB, they can go unprocessed\.
 
-## Event source configuration parameters<a name="services-kafka-parms"></a>
+## Self\-managed Apache Kafka configuration parameters<a name="services-kafka-parms"></a>
 
 All Lambda event source types share the same [CreateEventSourceMapping](API_CreateEventSourceMapping.md) and [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md) API operations\. However, only some of the parameters apply to Apache Kafka\.
 

@@ -7,9 +7,14 @@ You can deploy your Lambda function code as a [container image](images-create.md
 + AWS base images for Lambda
 
   These base images are preloaded with a language runtime and other components that are required to run the image on Lambda\. AWS provides a Dockerfile for each of the base images to help with building your container image\.
-+ Open\-source runtime interface clients
 
-  If you use a community or private enterprise base image, add a runtime interface client to the base image to make it compatible with Lambda\.
+  AWS provides base images for x86\_64 architecture and arm64 architecture\.
++ Open\-source runtime interface clients \(RIC\)
+
+  If you use a community or private enterprise base image, you must add a [Runtime interface client](runtimes-images.md#runtimes-api-client) to the base image to make it compatible with Lambda\.
++ Open\-source runtime interface emulator \(RIE\)
+
+   Lambda provides a runtime interface emulator for you to test your function locally\. The base images for Lambda and base images for custom runtimes include the RIE\. For other base images, you can download the RIE to [testing your image](images-test.md) locally\.
 
 The workflow for a function defined as a container image includes these steps:
 
@@ -21,9 +26,9 @@ The workflow for a function defined as a container image includes these steps:
 
 **Topics**
 + [AWS base images for Python](#python-image-base)
-+ [Python runtime interface clients](#python-image-clients)
 + [Create a Python image from an AWS base image](#python-image-create)
 + [Create a Python image from an alternative base image](#python-image-create-alt)
++ [Python runtime interface clients](#python-image-clients)
 + [Deploy the container image](#python-image-deploy)
 
 ## AWS base images for Python<a name="python-image-base"></a>
@@ -42,18 +47,6 @@ AWS provides the following base images for Python:
 Docker Hub repository: amazon/aws\-lambda\-python
 
 Amazon ECR repository: gallery\.ecr\.aws/lambda/python
-
-## Python runtime interface clients<a name="python-image-clients"></a>
-
-Install the runtime interface client for Python using the pip package manager:
-
-```
-pip install awslambdaric
-```
-
-For package details, see [Lambda RIC](https://pypi.org/project/awslambdaric) on the Python Package Index \(PyPI\) website\.
-
-You can also download the [Python runtime interface client](https://github.com/aws/aws-lambda-python-runtime-interface-client/) from GitHub\.
 
 ## Create a Python image from an AWS base image<a name="python-image-create"></a>
 
@@ -95,7 +88,21 @@ When you build a container image for Python using an AWS base image, you only ne
 
 ## Create a Python image from an alternative base image<a name="python-image-create-alt"></a>
 
+When you use an alternative base image, you need to install the [Python runtime interface client](#python-image-clients)
+
 For an example of how to create a Python image from an Alpine base image, see [Container image support for Lambda](http://aws.amazon.com/blogs/aws/new-for-aws-lambda-container-image-support/) on the AWS Blog\.
+
+## Python runtime interface clients<a name="python-image-clients"></a>
+
+Install the [runtime interface client](runtimes-images.md#runtimes-api-client) for Python using the pip package manager:
+
+```
+pip install awslambdaric
+```
+
+For package details, see [Lambda RIC](https://pypi.org/project/awslambdaric) on the Python Package Index \(PyPI\) website\.
+
+You can also download the [Python runtime interface client](https://github.com/aws/aws-lambda-python-runtime-interface-client/) from GitHub\.
 
 ## Deploy the container image<a name="python-image-deploy"></a>
 

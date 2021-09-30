@@ -1,16 +1,20 @@
 # ListLayerVersions<a name="API_ListLayerVersions"></a>
 
-Lists the versions of an [ AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\. Versions that have been deleted aren't listed\. Specify a [runtime identifier](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) to list only versions that indicate that they're compatible with that runtime\.
+Lists the versions of an [ AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\. Versions that have been deleted aren't listed\. Specify a [runtime identifier](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) to list only versions that indicate that they're compatible with that runtime\. Specify a compatible architecture to include only layer versions that are compatible with that architecture\.
 
 ## Request Syntax<a name="API_ListLayerVersions_RequestSyntax"></a>
 
 ```
-GET /2018-10-31/layers/LayerName/versions?CompatibleRuntime=CompatibleRuntime&Marker=Marker&MaxItems=MaxItems HTTP/1.1
+GET /2018-10-31/layers/LayerName/versions?CompatibleArchitecture=CompatibleArchitecture&CompatibleRuntime=CompatibleRuntime&Marker=Marker&MaxItems=MaxItems HTTP/1.1
 ```
 
 ## URI Request Parameters<a name="API_ListLayerVersions_RequestParameters"></a>
 
 The request uses the following URI parameters\.
+
+ ** [ CompatibleArchitecture ](#API_ListLayerVersions_RequestSyntax) **   <a name="SSS-ListLayerVersions-request-CompatibleArchitecture"></a>
+The compatible [instruction set architecture](https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html)\.  
+Valid Values:` x86_64 | arm64` 
 
  ** [ CompatibleRuntime ](#API_ListLayerVersions_RequestSyntax) **   <a name="SSS-ListLayerVersions-request-CompatibleRuntime"></a>
 A runtime identifier\. For example, `go1.x`\.  
@@ -42,6 +46,7 @@ Content-type: application/json
 {
    "LayerVersions": [ 
       { 
+         "CompatibleArchitectures": [ "string" ],
          "CompatibleRuntimes": [ "string" ],
          "CreatedDate": "string",
          "Description": "string",

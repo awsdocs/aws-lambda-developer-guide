@@ -25,4 +25,4 @@ Lambda then runs the function by calling the code entry point specified in the f
 
 ## Image security<a name="invocation-images-security"></a>
 
-When Lambda first downloads the container image from its original source \(Amazon ECR\), the container image is optimized, encrypted, and stored using authenticated convergent encryption methods\. All keys that are required to decrypt customer data are protected using customer managed AWS Key Management Service \(AWS KMS\) customer master keys \(CMKs\)\. To track and audit Lambda's usage of CMKs, you can view the [AWS CloudTrail logs](logging-using-cloudtrail.md)\.
+When Lambda first downloads the container image from its original source \(Amazon ECR\), the container image is optimized, encrypted, and stored using authenticated convergent encryption methods\. All keys that are required to decrypt customer data are protected using AWS KMS customer managed keys\. To track and audit Lambda's usage of customer managed keys, you can view the [AWS CloudTrail logs](logging-using-cloudtrail.md)\.

@@ -44,13 +44,43 @@ Some libraries don't return promises but can be wrapped in code that does\. For 
 **Issue:** *The AWS SDK included on the runtime updates automatically*
 
 Runtimes for scripting languages include the AWS SDK and are periodically updated to the latest version\. The current version for each runtime is listed on [runtimes page](lambda-runtimes.md)\. To use a newer version of the AWS SDK, or to lock your functions to a specific version, you can bundle the library with your function code, or [create a Lambda layer](configuration-layers.md)\. For details on creating a deployment package with dependencies, see the following topics:
-+  [Deploy Node\.js Lambda functions with \.zip file archives](nodejs-package.md) 
-+  [Deploy Python Lambda functions with \.zip file archives](python-package.md) 
-+  [Deploy Ruby Lambda functions with \.zip file archives](ruby-package.md) 
-+  [Deploy Java Lambda functions with \.zip or JAR file archives](java-package.md) 
-+  [Deploy Go Lambda functions with \.zip file archives](golang-package.md) 
-+  [Deploy C\# Lambda functions with \.zip file archives](csharp-package.md) 
-+  [Deploy PowerShell Lambda functions with \.zip file archives](powershell-package.md) 
+
+------
+#### [ Node\.js ]
+
+[Deploy Node\.js Lambda functions with \.zip file archives](nodejs-package.md) 
+
+------
+#### [ Python ]
+
+ [Deploy Python Lambda functions with \.zip file archives](python-package.md) 
+
+------
+#### [ Ruby ]
+
+ [Deploy Ruby Lambda functions with \.zip file archives](ruby-package.md) 
+
+------
+#### [ Java ]
+
+ [Deploy Java Lambda functions with \.zip or JAR file archives](java-package.md) 
+
+------
+#### [ Go ]
+
+ [Deploy Go Lambda functions with \.zip file archives](golang-package.md) 
+
+------
+#### [ C\# ]
+
+ [Deploy C\# Lambda functions with \.zip file archives](csharp-package.md) 
+
+------
+#### [ PowerShell ]
+
+ [Deploy PowerShell Lambda functions with \.zip file archives](powershell-package.md) 
+
+------
 
 ## Python: Libraries load incorrectly<a name="troubleshooting-execution-libraries"></a>
 

@@ -1,12 +1,13 @@
 # Lambda concepts<a name="gettingstarted-concepts"></a>
 
-Lambda runs instances of your function to process events\. To send events to your function, you can invoke it using the Lambda API, or you can configure an AWS service or resource to invoke it\.
+Lambda runs instances of your function to process events\. You can invoke your function directly using the Lambda API, or you can configure an AWS service or resource to invoke your function\.
 
 **Topics**
 + [Function](#gettingstarted-concepts-function)
 + [Trigger](#gettingstarted-concepts-trigger)
 + [Event](#gettingstarted-concepts-event)
 + [Execution environment](#gettingstarted-concepts-ee)
++ [Instruction set architecture](#gettingstarted-concepts-arch)
 + [Deployment package](#gettingstarted-concepts-dp)
 + [Runtime](#gettingstarted-concepts-runtime)
 + [Layer](#gettingstarted-concepts-layer)
@@ -63,6 +64,14 @@ For more information about events from AWS services, see [Using AWS Lambda with 
 An *execution environment* provides a secure and isolated runtime environment for your Lambda function\. An execution environment manages the processes and resources that are required to run the function\. The execution environment provides lifecycle support for the function and for any [extensions](#gettingstarted-concepts-extensions) associated with your function\.
 
 For more information, see [AWS Lambda execution environment](runtimes-context.md)\.
+
+## Instruction set architecture<a name="gettingstarted-concepts-arch"></a>
+
+ The *instruction set architecture* determines the type of computer processor that Lambda uses to run the function\. Lambda provides a choice of instruction set architectures:
++ arm64 – 64\-bit ARM architecture, for the AWS Graviton2 processor\.
++ x86\_64 – 64\-bit x86 architecture, for x86\-based processors\.
+
+For more information, see [Lambda instruction set architectures](foundation-arch.md)\.
 
 ## Deployment package<a name="gettingstarted-concepts-dp"></a>
 

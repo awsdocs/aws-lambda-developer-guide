@@ -1,96 +1,75 @@
 # Using AWS Lambda with other services<a name="lambda-services"></a>
 
-AWS Lambda integrates with other AWS services to invoke functions\. You can configure triggers to invoke a function in response to resource lifecycle events, respond to incoming HTTP requests, consume events from a queue, or [run on a schedule](services-cloudwatchevents.md)\.
+AWS Lambda integrates with other AWS services to invoke functions or take other actions\. These are some common use cases:
++ Invoke a function in response to resource lifecycle events, such as with Amazon Simple Storage Service \(Amazon S3\)\. For more information, see [Using AWS Lambda with Amazon S3](with-s3.md)\.
++ Respond to incoming HTTP requests\. For more information, see [Tutorial: Using Lambda with API Gateway](services-apigateway-tutorial.md)\.
++ Consume events from a queue\. For more information, see [Using AWS Lambda with Amazon SQS](with-sqs.md)\.
++ Run a function on a schedule\. For more information, see [Using AWS Lambda with Amazon EventBridge \(CloudWatch Events\)](services-cloudwatchevents.md)\.
 
-Each service that integrates with Lambda sends data to your function in JSON as an event\. The structure of the event document is different for each event type, and contains data about the resource or request that triggered the function\. Lambda runtimes convert the event into an object and pass it to your function\.
+Depending on which service you're using with Lambda, the invocation generally works in one of two ways\. An event drives the invocation or Lambda polls a queue or data stream and invokes the function in response to activity in the queue or data stream\. Lambda integrates with Amazon Elastic File System and AWS X\-Ray in a way that doesn't involve invoking functions\. 
 
-The following example shows a test event from an [Application Load Balancer](services-alb.md) that represents a GET request to `/lambda?query=1234ABCD`\.
+For more information, see [Event\-driven invocation](#event-driven-invocation) and [Lambda polling](#lambda-polling)\. Or, look up the service that you want to work with in the following section to find a link to information about using that service with Lambda\.
 
-**Example event from an Application Load Balancer**  
+## Listing of services and links to more information<a name="listing-of-services-and-links-to-more-information"></a>
 
-```
-{
-    "requestContext": {
-        "elb": {
-            "targetGroupArn": "arn:aws:elasticloadbalancing:us-east-2:123456789012:targetgroup/lambda-279XGJDqGZ5rsrHC2Fjr/49e9d65c45c6791a"
-        }
-    },
-    "httpMethod": "GET",
-    "path": "/lambda",
-    "queryStringParameters": {
-        "query": "1234ABCD"
-    },
-    "headers": {
-        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
-        "accept-encoding": "gzip",
-        "accept-language": "en-US,en;q=0.9",
-        "connection": "keep-alive",
-        "host": "lambda-alb-123578498.us-east-2.elb.amazonaws.com",
-        "upgrade-insecure-requests": "1",
-        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36",
-        "x-amzn-trace-id": "Root=1-5c536348-3d683b8b04734faae651f476",
-        "x-forwarded-for": "72.12.164.125",
-        "x-forwarded-port": "80",
-        "x-forwarded-proto": "http",
-        "x-imforwards": "20"
-    },
-    "body": "",
-    "isBase64Encoded": false
-}
-```
+Find the service that you want to work with in the following table, to determine which method of invocation you should use\. Follow the link from the service name to find information about how to set up the integration between the services\. These topics also include example events that you can use to test your function\.
 
-**Note**  
-The Lambda runtime converts the event document into an object and passes it to your [function handler](gettingstarted-concepts.md)\. For compiled languages, Lambda provides definitions for event types in a library\. See the following topics for more information\.  
-[Building Lambda functions with Java](lambda-java.md)
-[Building Lambda functions with Go](lambda-golang.md)
-[Building Lambda functions with C\#](lambda-csharp.md)
-[Building Lambda functions with PowerShell](lambda-powershell.md)
+**Tip**  
+Entries in this table are alphabetical by service name, excluding the "Amazon" or "AWS" prefix\. You can also use your browser's search functionality to find your service in the list\.
 
-For services that generate a queue or data stream, you create an [event source mapping](invocation-eventsourcemapping.md) in Lambda and grant Lambda permission to access the other service in the [execution role](lambda-intro-execution-role.md)\. Lambda reads data from the other service, creates an event, and invokes your function\.
 
-**Services that Lambda reads events from**
-+ [Amazon DynamoDB](with-ddb.md)
-+ [Amazon Kinesis](with-kinesis.md)
-+ [Amazon MQ](with-mq.md)
-+ [Amazon Managed Streaming for Apache Kafka](with-msk.md)
-+ [self\-managed Apache Kafka](with-kafka.md)
-+ [Amazon Simple Queue Service](with-sqs.md)
+****  
 
-Other services invoke your function directly\. You grant the other service permission in the function's [resource\-based policy](access-control-resource-based.md), and configure the other service to generate events and invoke your function\. Depending on the service, the invocation can be synchronous or asynchronous\. For synchronous invocation, the other service waits for the response from your function and might [retry on errors](invocation-retries.md)\.
+| Service | Method of invocation | 
+| --- | --- | 
+|  [Amazon Alexa](services-alexa.md)  |  Event\-driven; synchronous invocation  | 
+|  [Amazon Managed Streaming for Apache Kafka](with-msk.md)  |  Lambda polling  | 
+|  [Self\-managed Apache Kafka](with-kafka.md)  |  Lambda polling  | 
+|  [Amazon API Gateway](services-apigateway.md)  |  Event\-driven; synchronous invocation  | 
+|  [AWS CloudFormation](services-cloudformation.md)  |  Event\-driven; asynchronous invocation  | 
+|  [Amazon CloudFront \(Lambda@Edge\)](lambda-edge.md)  |  Event\-driven; synchronous invocation  | 
+|  [Amazon EventBridge \(CloudWatch Events\)](services-cloudwatchevents.md)  |  Event\-driven; asynchronous invocation  | 
+|  [Amazon CloudWatch Logs](services-cloudwatchlogs.md)  |  Event\-driven; asynchronous invocation  | 
+|  [AWS CodeCommit](services-codecommit.md)  |  Event\-driven; asynchronous invocation  | 
+|  [AWS CodePipeline](services-codepipeline.md)  |  Event\-driven; asynchronous invocation  | 
+|  [Amazon Cognito](services-cognito.md)  |  Event\-driven; synchronous invocation  | 
+|  [AWS Config](services-config.md)  |  Event\-driven; asynchronous invocation  | 
+|  [Amazon Connect](services-connect.md)  |  Event\-driven; synchronous invocation  | 
+|  [Amazon DynamoDB](with-ddb.md)  |  Lambda polling  | 
+|  [Amazon Elastic File System](services-efs.md)  |  Special integration  | 
+|  [Elastic Load Balancing \(Application Load Balancer\)](services-alb.md)  |  Event\-driven; synchronous invocation  | 
+|  [AWS IoT](services-iot.md)  |  Event\-driven; asynchronous invocation  | 
+|  [AWS IoT Events](services-iotevents.md)  |  Event\-driven; asynchronous invocation  | 
+|  [Amazon Kinesis](with-kinesis.md)  |  Lambda polling  | 
+|  [Amazon Kinesis Data Firehose](services-kinesisfirehose.md)  |  Event\-driven; synchronous invocation  | 
+|  [Amazon Lex](services-lex.md)  |  Event\-driven; synchronous invocation  | 
+|  [Amazon MQ](with-mq.md)  |  Lambda polling  | 
+|  [Amazon Simple Email Service](services-ses.md)  |  Event\-driven; asynchronous invocation  | 
+|  [Amazon Simple Notification Service](with-sns.md)  |  Event\-driven; asynchronous invocation  | 
+|  [Amazon Simple Queue Service \(Amazon S3\)](with-sqs.md)  |  Lambda polling  | 
+|  [Amazon Simple Storage Service](with-s3.md)  |  Event\-driven; asynchronous invocation  | 
+|  [Amazon Simple Storage Service Batch](services-s3-batch.md)  |  Event\-driven; synchronous invocation  | 
+|  [Secrets Manager](with-secrets-manager.md)  |  Event\-driven; synchronous invocation  | 
+|  [AWS X\-Ray](services-xray.md)  |  Special integration  | 
 
-For more information about Lambda service architectures, see [Event driven architectures](https://docs.aws.amazon.com/lambda/latest/operatorguide/event-driven-architectures.html) in the *Lambda operator guide*\.
+## Event\-driven invocation<a name="event-driven-invocation"></a>
 
-**Services that invoke Lambda functions synchronously**
-+ [Elastic Load Balancing \(Application Load Balancer\)](services-alb.md)
-+ [Amazon Cognito](services-cognito.md)
-+ [Amazon connect](services-connect.md)
-+ [Amazon Lex](services-lex.md)
-+ [Amazon Alexa](services-alexa.md)
-+ [Amazon API Gateway](services-apigateway.md)
-+ [Amazon CloudFront \(Lambda@Edge\)](lambda-edge.md)
-+ [Amazon Kinesis Data Firehose](services-kinesisfirehose.md)
-+ [Amazon Simple Storage Service Batch](services-s3-batch.md)
-+ [Secrets Manager](with-secrets-manager.md)
+Some services generate events that can invoke your Lambda function\. For more information about designing these types of architectures , see [Event driven architectures](https://docs.aws.amazon.com/lambda/latest/operatorguide/event-driven-architectures.html) in the *Lambda operator guide*\.
 
-For asynchronous invocation, Lambda queues the event before passing it to your function\. The other service gets a success response as soon as the event is queued and isn't aware of what happens afterwards\. If an error occurs, Lambda handles [retries](invocation-retries.md), and can send failed events to a [destination](invocation-async.md#invocation-async-destinations) that you configure\. You can disable retries for a function by setting the function's reserved concurrency value to zero\.
+When you implement an event\-driven architecture, you grant the event\-generating service permission to invoke your function in the function's [resource\-based policy](access-control-resource-based.md)\. Then you configure that service to generate events that invoke your function\.
 
-**Services that invoke Lambda functions asynchronously**
-+ [Amazon Simple Storage Service](with-s3.md)
-+ [Amazon Simple Notification Service](with-sns.md)
-+ [Amazon Simple Email Service](services-ses.md)
-+ [AWS CloudFormation](services-cloudformation.md)
-+ [Amazon CloudWatch Logs](services-cloudwatchlogs.md)
-+ [Amazon CloudWatch Events](services-cloudwatchevents.md)
-+ [AWS CodeCommit](services-codecommit.md)
-+ [AWS Config](services-config.md)
-+ [AWS IoT](services-iot.md)
-+ [AWS IoT Events](services-iotevents.md)
-+ [AWS CodePipeline](services-codepipeline.md)
+The events are data structured in JSON format\. The JSON structure varies depending on the service that generates it and the event type, but they all contain the data that the function needs to process the event\.
 
-Additionally, some services integrate with Lambda in other ways that don't involve invoking functions\.
+Lambda converts the event document into an object and passes it to your [function handler](gettingstarted-concepts.md)\. For compiled languages, Lambda provides definitions for event types in a library\. For more information, see the topic about building functions with your language: [Building Lambda functions with C\#](lambda-csharp.md), [Building Lambda functions with Go](lambda-golang.md), [Building Lambda functions with Java](lambda-java.md), or  [Building Lambda functions with PowerShell](lambda-powershell.md)\.
 
-**Services that integrate with Lambda in other ways**
-+ [Amazon Elastic File System](services-efs.md)
-+ [AWS X\-Ray](services-xray.md)
+Depending on the service, the event\-driven invocation can be synchronous or asynchronous\.
++ For synchronous invocation, the service that generates the event waits for the response from your function\. That service defines the data that the function needs to return in the response\. The service controls the error strategy, such as whether to retry on errors\. For more information, see [Synchronous invocation](invocation-sync.md)\.
++ For asynchronous invocation, Lambda queues the event before passing it to your function\. When Lambda queues the event, it immediately sends a success response to the service that generated the event\. After the function processes the event, Lambda doesn’t return a response to the event\-generating service\. For more information, see [Asynchronous invocation](invocation-async.md)\.
 
-See the topics in this chapter for more details about each service, and example events that you can use to test your function\.
+For more information about how Lambda manages error handling for synchronously and asychronously invoked functions, see [Error handling and automatic retries in AWS Lambda](invocation-retries.md)\.
+
+## Lambda polling<a name="lambda-polling"></a>
+
+For services that generate a queue or data stream, you set up an [event source mapping](invocation-eventsourcemapping.md) in Lambda to have Lambda poll the queue or a data stream\.
+
+When you implement a Lambda polling architecture, you grant Lambda permission to access the other service in the function's [execution role](lambda-intro-execution-role.md)\. Lambda reads data from the other service, creates an event, and invokes your function\.

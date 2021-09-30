@@ -22,7 +22,9 @@ When you create a layer, you must bundle all its content into a \.zip file archi
 
 ## Compiling the \.zip file archive for your layer<a name="configuration-layers-compile"></a>
 
-You build your layer code into a \.zip file archive using the same procedure as you would for a function deployment package\. If your layer includes any native code libraries, you must compile and build these libraries using a Linux development machine so that the binaries are compatible with [Amazon Linux](lambda-runtimes.md)\. 
+You build your layer code into a \.zip file archive using the same procedure that you would use for a function deployment package\. If your layer includes any native code libraries, you must compile and build these libraries using a Linux development machine so that the binaries are compatible with [Amazon Linux](lambda-runtimes.md)\. 
+
+When you create a layer, you can specify whether the layer is compatible with one or both of the instruction set architectures\. You may need to set specific compile flags to build a layer that is compatible with the `arm64` architecture\.
 
 One way to ensure that you package libraries correctly for Lambda is to use [AWS Cloud9](http://aws.amazon.com/cloud9/)\. For more information, see [Using Lambda layers to simplify your development process](http://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process/) on the AWS Compute Blog\.
 
@@ -104,13 +106,43 @@ For more information about path settings in the Lambda execution environment, se
 ## Language\-specific instructions<a name="configuration-layers-zip-cli"></a>
 
  For language\-specific instructions on how to create a \.zip file archive, see the following topics\.
-+  [Deploy Node\.js Lambda functions with \.zip file archives](nodejs-package.md) 
-+  [Deploy Python Lambda functions with \.zip file archives](python-package.md) 
-+  [Deploy Ruby Lambda functions with \.zip file archives](ruby-package.md) 
-+  [Deploy Java Lambda functions with \.zip or JAR file archives](java-package.md) 
-+  [Deploy Go Lambda functions with \.zip file archives](golang-package.md) 
-+  [Deploy C\# Lambda functions with \.zip file archives](csharp-package.md) 
-+  [Deploy PowerShell Lambda functions with \.zip file archives](powershell-package.md) 
+
+------
+#### [ Node\.js ]
+
+[Deploy Node\.js Lambda functions with \.zip file archives](nodejs-package.md) 
+
+------
+#### [ Python ]
+
+ [Deploy Python Lambda functions with \.zip file archives](python-package.md) 
+
+------
+#### [ Ruby ]
+
+ [Deploy Ruby Lambda functions with \.zip file archives](ruby-package.md) 
+
+------
+#### [ Java ]
+
+ [Deploy Java Lambda functions with \.zip or JAR file archives](java-package.md) 
+
+------
+#### [ Go ]
+
+ [Deploy Go Lambda functions with \.zip file archives](golang-package.md) 
+
+------
+#### [ C\# ]
+
+ [Deploy C\# Lambda functions with \.zip file archives](csharp-package.md) 
+
+------
+#### [ PowerShell ]
+
+ [Deploy PowerShell Lambda functions with \.zip file archives](powershell-package.md) 
+
+------
 
 ## Creating a layer<a name="configuration-layers-create"></a>
 
@@ -132,6 +164,8 @@ Layers can have one or more version\. When you create a layer, Lambda sets the l
    + To upload a \.zip file from your computer, choose **Upload a \.zip file**\. Then, choose **Upload** to select your local \.zip file\.
    + To upload a file from Amazon S3, choose **Upload a file from Amazon S3**\. Then, for **Amazon S3 link URL**, enter a link to the file\.
 
+1. \(Optional\) For **Compatible instruction set architectures**, choose one value or both values\.
+
 1. \(Optional\) For **Compatible runtimes**, choose up to 15 runtimes\.
 
 1. \(Optional\) For **License**, enter any necessary license information\.
@@ -140,12 +174,13 @@ Layers can have one or more version\. When you create a layer, Lambda sets the l
 
 **To create a layer \(API\)**
 
-To create a layer, use the publish\-layer\-version command with a name, description, \.zip file archive, and list of [runtimes](lambda-runtimes.md) that are compatible with the layer\. The list of runtimes is optional\.
+To create a layer, use the publish\-layer\-version command with a name, description, \.zip file archive, a list of [runtimes](lambda-runtimes.md) and a list of architectures that are compatible with the layer\. The runtimes and architecture parameters are optional\.
 
 ```
 aws lambda publish-layer-version --layer-name my-layer --description "My layer"  \ 
 --license-info "MIT" --content S3Bucket=lambda-layers-us-east-2-123456789012,S3Key=layer.zip \
  --compatible-runtimes python3.6 python3.7 python3.8
+  --compatible-architectures "arm64" "x86_64"
 ```
 
 You should see output similar to the following:
@@ -162,6 +197,10 @@ You should see output similar to the following:
     "Description": "My layer",
     "CreatedDate": "2018-11-14T23:03:52.894+0000",
     "Version": 1,
+    "CompatibleArchitectures": [
+        "arm64",
+        "x86_64"
+     ],
     "LicenseInfo": "MIT",
     "CompatibleRuntimes": [
         "python3.6",

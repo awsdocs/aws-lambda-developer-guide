@@ -5,9 +5,9 @@ The following sections explain how common programming patterns and core concepts
 
 **Go runtimes**  
 
-| Name | Identifier | Operating system | 
-| --- | --- | --- | 
-|  Go 1\.x  |  `go1.x`  |  Amazon Linux  | 
+| Name | Identifier | Operating system | Architectures | 
+| --- | --- | --- | --- | 
+|  Go 1\.x  |  `go1.x`  |  Amazon Linux  |  x86\_64  | 
 
 Lambda provides the following tools and libraries for the Go runtime:
 

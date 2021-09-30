@@ -1,7 +1,7 @@
 # Tutorial: Using AWS Lambda with scheduled events<a name="services-cloudwatchevents-tutorial"></a>
 
 In this tutorial, you do the following:
-+ Create a Lambda function using the **lambda\-canary** blueprint\. You configure the Lambda function to run every minute\. Note that if the function returns an error, AWS Lambda logs error metrics to CloudWatch\. 
++ Create a Lambda function using the **lambda\-canary** blueprint\. You configure the Lambda function to run every minute\. Note that if the function returns an error, Lambda logs error metrics to Amazon CloudWatch\. 
 + Configure a CloudWatch alarm on the `Errors` metric of your Lambda function to post a message to your Amazon SNS topic when AWS Lambda emits error metrics to CloudWatch\. You subscribe to the Amazon SNS topics to get email notification\. In this tutorial, you do the following to set this up:
   + Create an Amazon SNS topic\.
   + Subscribe to the topic so you can get email notifications when a new message is posted to the topic\.
@@ -37,7 +37,7 @@ This tutorial assumes that you have some knowledge of basic Lambda operations an
 
 1. Choose **Create function**\.
 
-CloudWatch Events emits an event every minute, based on the schedule expression\. The event triggers the Lambda function, which verifies that the expected string appears in the specified page\. For more information on expressions schedules, see [Schedule expressions using rate or cron](services-cloudwatchevents-expressions.md)\.
+EventBridge \(CloudWatch Events\) emits an event every minute, based on the schedule expression\. The event triggers the Lambda function, which verifies that the expected string appears in the specified page\. For more information on expressions schedules, see [Schedule expressions using rate or cron](services-cloudwatchevents-expressions.md)\.
 
 ## Test the Lambda function<a name="services-cloudwatchevents-tutorial-test"></a>
 
@@ -49,7 +49,7 @@ Test the function with a sample event provided by the Lambda console\.
 
 1. Choose **Test**\.
 
-1. Create a new event using the **CloudWatch Events** event template\.
+1. Create a new event using the **EventBridge \(CloudWatch Events\)** event template\.
 
 1. Choose **Create event**\.
 
@@ -135,7 +135,7 @@ You can now delete the resources that you created for this tutorial, unless you 
 
 1. Select the function that you created\.
 
-1. Choose **Actions**, **Delete**\.
+1. Choose **Actions**, then choose **Delete**\.
 
 1. Choose **Delete**\.
 

@@ -4,9 +4,14 @@ You can deploy your Lambda function code as a [container image](images-create.md
 + AWS base images for Lambda
 
   These base images are preloaded with a language runtime and other components that are required to run the image on Lambda\. AWS provides a Dockerfile for each of the base images to help with building your container image\.
-+ Open\-source runtime interface clients
 
-  If you use a community or private enterprise base image, add a runtime interface client to the base image to make it compatible with Lambda\.
+  AWS provides base images for x86\_64 architecture and arm64 architecture\.
++ Open\-source runtime interface clients \(RIC\)
+
+  If you use a community or private enterprise base image, you must add a [Runtime interface client](runtimes-images.md#runtimes-api-client) to the base image to make it compatible with Lambda\.
++ Open\-source runtime interface emulator \(RIE\)
+
+   Lambda provides a runtime interface emulator for you to test your function locally\. The base images for Lambda and base images for custom runtimes include the RIE\. For other base images, you can download the RIE to [testing your image](images-test.md) locally\.
 
 The workflow for a function defined as a container image includes these steps:
 

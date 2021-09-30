@@ -33,6 +33,7 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
+   "CompatibleArchitectures": [ "string" ],
    "CompatibleRuntimes": [ "string" ],
    "Content": { 
       "CodeSha256": "string",
@@ -55,6 +56,12 @@ Content-type: application/json
 If the action is successful, the service sends back an HTTP 200 response\.
 
 The following data is returned in JSON format by the service\.
+
+ ** [ CompatibleArchitectures ](#API_GetLayerVersion_ResponseSyntax) **   <a name="SSS-GetLayerVersion-response-CompatibleArchitectures"></a>
+A list of compatible [instruction set architectures](https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html)\.  
+Type: Array of strings  
+Array Members: Maximum number of 2 items\.  
+Valid Values:` x86_64 | arm64` 
 
  ** [ CompatibleRuntimes ](#API_GetLayerVersion_ResponseSyntax) **   <a name="SSS-GetLayerVersion-response-CompatibleRuntimes"></a>
 The layer's compatible runtimes\.  

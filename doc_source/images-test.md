@@ -2,7 +2,7 @@
 
 The AWS Lambda Runtime Interface Emulator \(RIE\) is a proxy for the Lambda Runtime API that allows you to locally test your Lambda function packaged as a container image\. The emulator is a lightweight web server that converts HTTP requests into JSON events to pass to the Lambda function in the container image\. 
 
-The AWS base images for Lambda include the RIE component\. If you use an alternate base image, you can test your image without adding RIE to the image\. You can also build the RIE component into your base image\. AWS provides an open\-sourced RIE component on the AWS GitHub repository\. 
+The AWS base images for Lambda include the RIE component\. If you use an alternate base image, you can test your image without adding RIE to the image\. You can also build the RIE component into your base image\. AWS provides an open\-sourced RIE component on the AWS GitHub repository\. Note that there are separate RIE components for the x86\-64 architecture and the arm64 architecture\.
 
 You can use the emulator to test whether your function code is compatible with the Lambda environment\. Also use the emulator to test that your Lambda function runs to completion successfully and provides the expected output\. If you build extensions and agents into your container image, you can use the emulator to test that the extensions and agents work correctly with the Lambda Extensions API\.
 
@@ -19,7 +19,7 @@ For examples of how to use the RIE, see [Container image support for Lambda](htt
 
 Note the following guidelines when using the Runtime Interface Emulator:
 + The RIE does not emulate Lambda’s security and authentication configurations, or Lambda orchestration\. 
-+ The emulator supports only Linux x86\-64 architectures\.
++ Lambda provides an emulator for each of the instruction set architectures\.
 + The emulator does not support AWS X\-Ray tracing or other Lambda integrations\.
 
 ## Environment variables<a name="images-test-env"></a>
@@ -41,7 +41,7 @@ The emulator does not populate the following Lambda environment variables\. Howe
 
 ## Test an image with RIE included in the image<a name="images-test-AWSbase"></a>
 
-The AWS base images for Lambda include the runtime interface emulator\. You can also follow these steps if you built the RIE into your alternative base image\. 
+The AWS base images for Lambda include the runtime interface emulator\. You can also follow these steps after you build the RIE into your alternative base image\. 
 
 **To test your Lambda function with the emulator**
 
@@ -69,7 +69,7 @@ The AWS base images for Lambda include the runtime interface emulator\. You can 
 
 ## Build RIE into your base image<a name="images-test-alternative"></a>
 
-You can build RIE into a base image\. Download the RIE from GitHub to your local machine and update your Dockerfile to install RIE\. 
+You can build RIE into a base image\. The following steps show how to download the RIE from GitHub to your local machine and update your Dockerfile to install RIE\. 
 
 **To build the emulator into your image**
 
@@ -99,13 +99,25 @@ You can build RIE into a base image\. Download the RIE from GitHub to your local
    fi
    ```
 
-1. Download the [runtime interface emulator](https://github.com/aws/aws-lambda-runtime-interface-emulator/releases/latest/download/aws-lambda-rie) from GitHub into your project directory\.
+1. Download the runtime interface emulator for your target architecture from GitHub into your project directory\. Lambda provides an emulator for each of the instruction set architectures\.
+   + x86\_64 – Download [aws\-lambda\-rie](https://github.com/aws/aws-lambda-runtime-interface-emulator/releases/latest/aws-lambda-rie)
+   + arm64 – Download [aws\-lambda\-rie\-arm64](https://github.com/aws/aws-lambda-runtime-interface-emulator/releases/latest/aws-lambda-rie-arm64)
 
-1. Copy the script, install the emulator package, and change `ENTRYPOINT` to run the new script by adding the following lines to your Dockerfile:
+1. Copy the script, install the emulator package, and change `ENTRYPOINT` to run the new script by adding the following lines to your Dockerfile\. 
+
+   To use the default x86\-64 architecture:
 
    ```
    COPY ./entry_script.sh /entry_script.sh
-   ADD aws-lambda-rie /usr/local/bin/aws-lambda-rie
+   ADD aws-lambda-rie-x86_64 /usr/local/bin/aws-lambda-rie
+   ENTRYPOINT [ "/entry_script.sh" ]
+   ```
+
+   To use the arm64 architecture:
+
+   ```
+   COPY ./entry_script.sh /entry_script.sh
+   ADD aws-lambda-rie-arm64 /usr/local/bin/aws-lambda-rie
    ENTRYPOINT [ "/entry_script.sh" ]
    ```
 
@@ -121,12 +133,18 @@ You install the runtime interface emulator to your local machine\. When you run 
 
 **To test an image without adding RIE to the image**
 
-1. From your project directory, run the following command to download the RIE from GitHub and install it on your local machine\.
+1. From your project directory, run the following command to download the RIE \(x86\-64 architecture\) from GitHub and install it on your local machine\.
 
    ```
    mkdir -p ~/.aws-lambda-rie && curl -Lo ~/.aws-lambda-rie/aws-lambda-rie \
    https://github.com/aws/aws-lambda-runtime-interface-emulator/releases/latest/download/aws-lambda-rie \
    && chmod +x ~/.aws-lambda-rie/aws-lambda-rie
+   ```
+
+   To download the RIE for arm64 architecture, use the previous command with a different GitHub download url\.
+
+   ```
+    https://github.com/aws/aws-lambda-runtime-interface-emulator/releases/latest/download/aws-lambda-rie-arm64 \            
    ```
 
 1. Run your Lambda function using the `docker run` command\. 

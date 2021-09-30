@@ -118,7 +118,7 @@ Resources in your API define one or more methods, such as GET or POST\. Methods 
 + [Handling errors with an API Gateway API](#services-apigateway-errors)
 + [Choosing an API type](#services-apigateway-apitypes)
 + [Sample applications](#services-apigateway-samples)
-+ [Tutorial: Using AWS Lambda with Amazon API Gateway](services-apigateway-tutorial.md)
++ [Tutorial: Using Lambda with API Gateway](services-apigateway-tutorial.md)
 + [Sample function code](services-apigateway-code.md)
 + [Create a simple microservice using Lambda and API Gateway](services-apigateway-blueprint.md)
 + [AWS SAM template for an API Gateway application](services-apigateway-template.md)

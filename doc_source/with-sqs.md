@@ -47,6 +47,9 @@ Lambda polls the queue and invokes your Lambda function [synchronously](invocati
 
 By default, Lambda polls up to 10 messages in your queue at once and sends that batch to your function\. To avoid invoking the function with a small number of records, you can tell the event source to buffer records for up to five minutes by configuring a batch window\. Before invoking the function, Lambda continues to poll messages from the SQS standard queue until batch window expires, the [payload limit](gettingstarted-limits.md) is reached or full batch size is reached\.
 
+**Note**  
+If you're using a batch window and your SQS queue contains very low traffic, Lambda might wait for up to 20 seconds before invoking your function\. This is true even if you set a batch window lower than 20 seconds\.
+
 For FIFO queues, records contain additional attributes that are related to deduplication and sequencing\.
 
 **Example Amazon SQS message event \(FIFO queue\)**  
@@ -85,7 +88,9 @@ When Lambda reads a batch, the messages stay in the queue but become hidden for 
 + [Execution role permissions](#events-sqs-permissions)
 + [Configuring a queue as an event source](#events-sqs-eventsource)
 + [Event source mapping APIs](#services-dynamodb-api)
++ [Amazon SQS configuration parameters](#services-sqs-params)
 + [Tutorial: Using Lambda with Amazon SQS](with-sqs-example.md)
++ [Tutorial: Using a cross\-account Amazon SQS queue as an event source](with-sqs-cross-account-example.md)
 + [Sample Amazon SQS function code](with-sqs-create-package.md)
 + [AWS SAM template for an Amazon SQS application](with-sqs-example-use-app-spec.md)
 
@@ -101,7 +106,7 @@ Your function can scale in concurrency to the number of active message groups\. 
 
 [Create an SQS queue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/) to serve as an event source for your Lambda function\. Then configure the queue to allow time for your Lambda function to process each batch of events—and for Lambda to retry in response to throttling errors as it scales up\.
 
-To allow your function time to process each batch of records, set the source queue's visibility timeout to at least 6 times the [timeout](configuration-function-common.md) that you configure on your function\. The extra time allows for Lambda to retry if your function execution is throttled while your function is processing a previous batch\.
+To allow your function time to process each batch of records, set the source queue's visibility timeout to at least 6 times the [ timeout](https://docs.aws.amazon.com/whitepapers/latest/serverless-architectures-lambda/timeout.html) that you configure on your function\. The extra time allows for Lambda to retry if your function execution is throttled while your function is processing a previous batch\.
 
 If a message fails to be processed multiple times, Amazon SQS can send it to a [dead\-letter queue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html)\. When your function returns an error, Lambda leaves it in the queue\. After the visibility timeout occurs, Lambda receives the message again\. To send messages to a second queue after a number of receives, configure a dead\-letter queue on your source queue\.
 
@@ -163,11 +168,11 @@ Configure your function timeout to allow enough time to process an entire batch 
 ## Event source mapping APIs<a name="services-dynamodb-api"></a>
 
 To manage an event source with the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) or [AWS SDK](http://aws.amazon.com/getting-started/tools-sdks/), you can use the following API operations:
-+  [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
-+ [ListEventSourceMappings](API_ListEventSourceMappings.md)
-+ [GetEventSourceMapping](API_GetEventSourceMapping.md)
-+ [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md)
-+ [DeleteEventSourceMapping](API_DeleteEventSourceMapping.md)
++  [CreateEventSourceMapping](API_CreateEventSourceMapping.md) 
++  
++  [GetEventSourceMapping](API_GetEventSourceMapping.md) 
++ [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md) 
++ [DeleteEventSourceMapping](API_DeleteEventSourceMapping.md) 
 
 The following example uses the AWS CLI to map a function named `my-function` to an Amazon SQS queue that is specified by its Amazon Resource Name \(ARN\), with a batch size of 5 and a batch window of 60 seconds\.
 
@@ -191,3 +196,18 @@ You should see the following output:
     "StateTransitionReason": "USER_INITIATED"
 }
 ```
+
+## Amazon SQS configuration parameters<a name="services-sqs-params"></a>
+
+All Lambda event source types share the same [CreateEventSourceMapping](API_CreateEventSourceMapping.md) and [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md) API operations\. However, only some of the parameters apply to Amazon SQS\.
+
+
+**Event source parameters that apply to Amazon SQS**  
+
+| Parameter | Required | Default | Notes | 
+| --- | --- | --- | --- | 
+|  BatchSize  |  N  |  100  |  Maximum: 10000  | 
+|  Enabled  |  N  |  true  |   | 
+|  EventSourceArn  |  Y  |  |  ARN of the data stream or a stream consumer  | 
+|  FunctionName  |  Y  |   |   | 
+|  MaximumBatchingWindowInSeconds  |  N  |  0  |   | 

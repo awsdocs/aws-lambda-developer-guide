@@ -8,7 +8,7 @@ To use your function to process data automatically, add one or more triggers\. A
 
 To process items from a stream or queue, you can create an [event source mapping](invocation-eventsourcemapping.md)\. An event source mapping is a resource in Lambda that reads items from an Amazon SQS queue, an Amazon Kinesis stream, or an Amazon DynamoDB stream, and sends them to your function in batches\. Each event that your function processes can contain hundreds or thousands of items\.
 
-Other AWS services and resources invoke your function directly\. For example, you can configure CloudWatch Events to invoke your function on a timer, or you can configure Amazon S3 to invoke your function when an object is created\. Each service varies in the method it uses to invoke your function, the structure of the event, and how you configure it\. For more information, see [Using AWS Lambda with other services](lambda-services.md)\.
+Other AWS services and resources invoke your function directly\. For example, you can configure EventBridge \(CloudWatch Events\) to invoke your function on a timer, or you can configure Amazon S3 to invoke your function when an object is created\. Each service varies in the method it uses to invoke your function, the structure of the event, and how you configure it\. For more information, see [Using AWS Lambda with other services](lambda-services.md)\.
 
 Depending on who invokes your function and how it's invoked, scaling behavior and the types of errors that occur can vary\. When you invoke a function synchronously, you receive errors in the response and can retry\. When you invoke asynchronously, use an event source mapping, or configure another service to invoke your function, the retry requirements and the way that your function scales to handle large numbers of events can vary\. For details, see [Lambda function scaling](invocation-scaling.md) and [Error handling and automatic retries in AWS Lambda](invocation-retries.md)\.
 
@@ -20,4 +20,3 @@ Depending on who invokes your function and how it's invoked, scaling behavior an
 + [Error handling and automatic retries in AWS Lambda](invocation-retries.md)
 + [Using Lambda extensions](using-extensions.md)
 + [Invoking functions defined as container images](invocation-images.md)
-+ [Invoking Lambda functions with the AWS Mobile SDK for Android](with-on-demand-custom-android.md)

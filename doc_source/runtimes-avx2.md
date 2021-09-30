@@ -2,6 +2,9 @@
 
 Advanced Vector Extensions 2 \(AVX2\) is a vectorization extension to the Intel x86 instruction set that can perform single instruction multiple data \(SIMD\) instructions over vectors of 256 bits\. For vectorizable algorithms with [highly parallelizable](https://en.wikipedia.org/wiki/Massively_parallel) operation, using AVX2 can enhance CPU performance, resulting in lower latencies and higher throughput\. Use the AVX2 instruction set for compute\-intensive workloads such as machine learning inferencing, multimedia processing, scientific simulations, and financial modeling applications\.
 
+**Note**  
+Lambda arm64 uses NEON SIMD architecture and does not support the x86 AVX2 extensions\.
+
 To use AVX2 with your Lambda function, make sure that your function code is accessing AVX2\-optimized code\. For some languages, you can install the AVX2\-supported version of libraries and packages\. For other languages, you can recompile your code and dependencies with the appropriate compiler flags set \(if the compiler supports auto\-vectorization\)\. You can also compile your code with third\-party libraries that use AVX2 to optimize math operations\. For example, Intel Math Kernel Library \(Intel MKL\), OpenBLAS \(Basic Linear Algebra Subprograms\), and AMD BLAS\-like Library Instantiation Software \(BLIS\)\. Auto\-vectorized languages, such as Java, automatically use AVX2 for computations\.
 
 You can create new Lambda workloads or move existing AVX2\-enabled workloads to Lambda at no additional cost\.

@@ -4,7 +4,7 @@ Creates a Lambda function\. To create a function, you need a [deployment package
 
 You set the package type to `Image` if the deployment package is a [container image](https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html)\. For a container image, the code property must include the URI of a container image in the Amazon ECR registry\. You do not need to specify the handler and runtime properties\. 
 
-You set the package type to `Zip` if the deployment package is a [\.zip file archive](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip)\. For a \.zip file archive, the code property specifies the location of the \.zip file\. You must also specify the handler and runtime properties\.
+You set the package type to `Zip` if the deployment package is a [\.zip file archive](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip)\. For a \.zip file archive, the code property specifies the location of the \.zip file\. You must also specify the handler and runtime properties\. The code in the deployment package must be compatible with the target instruction set architecture of the function \(`x86-64` or `arm64`\)\. If you do not specify the architecture, the default value is `x86-64`\.
 
 When you create a function, Lambda provisions an instance of the function and its supporting resources\. If your function connects to a VPC, this process can take a minute or so\. During this time, you can't invoke or modify the function\. The `State`, `StateReason`, and `StateReasonCode` fields in the response from [ GetFunctionConfiguration ](API_GetFunctionConfiguration.md) indicate when the function is ready to invoke\. For more information, see [Function States](https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html)\.
 
@@ -25,6 +25,7 @@ POST /2015-03-31/functions HTTP/1.1
 Content-type: application/json
 
 {
+   "Architectures": [ "string" ],
    "Code": { 
       "ImageUri": "string",
       "S3Bucket": "string",
@@ -83,6 +84,13 @@ The request does not use any URI parameters\.
 ## Request Body<a name="API_CreateFunction_RequestBody"></a>
 
 The request accepts the following data in JSON format\.
+
+ ** [ Architectures ](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-Architectures"></a>
+The instruction set architecture that the function supports\. Enter a string array with one of the valid values\. The default value is `x86_64`\.  
+Type: Array of strings  
+Array Members: Fixed number of 1 item\.  
+Valid Values:` x86_64 | arm64`   
+Required: No
 
  ** [ Code ](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-Code"></a>
 The code for the function\.  
@@ -213,6 +221,7 @@ HTTP/1.1 201
 Content-type: application/json
 
 {
+   "Architectures": [ "string" ],
    "CodeSha256": "string",
    "CodeSize": number,
    "DeadLetterConfig": { 
@@ -291,6 +300,12 @@ If the action is successful, the service sends back an HTTP 201 response\.
 
 The following data is returned in JSON format by the service\.
 
+ ** [ Architectures ](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-Architectures"></a>
+The instruction set architecture that the function supports\. Architecture is a string array with one of the valid values\. The default architecture value is `x86_64`\.  
+Type: Array of strings  
+Array Members: Fixed number of 1 item\.  
+Valid Values:` x86_64 | arm64` 
+
  ** [ CodeSha256 ](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-CodeSha256"></a>
 The SHA256 hash of the function's deployment package\.  
 Type: String
@@ -339,7 +354,7 @@ The function's image configuration values\.
 Type: [ ImageConfigResponse ](API_ImageConfigResponse.md) object
 
  ** [ KMSKeyArn ](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-KMSKeyArn"></a>
-The KMS key that's used to encrypt the function's environment variables\. This key is only returned if you've configured a customer managed CMK\.  
+The AWS KMS key that's used to encrypt the function's environment variables\. This key is only returned if you've configured a customer managed key\.  
 Type: String  
 Pattern: `(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()` 
 
@@ -366,7 +381,7 @@ The function's [ layers](https://docs.aws.amazon.com/lambda/latest/dg/configurat
 Type: Array of [ Layer ](API_Layer.md) objects
 
  ** [ MasterArn ](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-MasterArn"></a>
-For Lambda@Edge functions, the ARN of the master function\.  
+For Lambda@Edge functions, the ARN of the main function\.  
 Type: String  
 Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 

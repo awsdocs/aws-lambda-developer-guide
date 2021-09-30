@@ -25,7 +25,7 @@ The Lambda documentation, log messages, and console use the abbreviation MB \(ra
 | Resource | Quota | 
 | --- | --- | 
 |  Function [memory allocation](configuration-function-common.md)  |  128 MB to 10,240 MB, in 1\-MB increments\.  | 
-|  Function [timeout](configuration-function-common.md)  |  900 seconds \(15 minutes\)  | 
+|  Function [ timeout](https://docs.aws.amazon.com/whitepapers/latest/serverless-architectures-lambda/timeout.html)  |  900 seconds \(15 minutes\)  | 
 |  Function [environment variables](configuration-envvars.md)  |  4 KB, for all environment variables associated with the function, in aggregate  | 
 |  Function [resource\-based policy](access-control-resource-based.md)  |  20 KB  | 
 |  Function [layers](configuration-layers.md)  |  five layers  | 

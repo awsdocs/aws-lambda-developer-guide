@@ -225,7 +225,7 @@ You can now delete the resources that you created for this tutorial, unless you 
 
 1. Select the function that you created\.
 
-1. Choose **Actions**, **Delete**\.
+1. Choose **Actions**, then choose **Delete**\.
 
 1. Choose **Delete**\.
 

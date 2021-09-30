@@ -7,10 +7,10 @@ Lambda supports the following Ruby runtimes\.
 
 **Ruby runtimes**  
 
-| Name | Identifier | SDK for Ruby | Operating system | 
-| --- | --- | --- | --- | 
-|  Ruby 2\.7  |  `ruby2.7`  |  3\.0\.1  |  Amazon Linux 2  | 
-|  Ruby 2\.5  |  `ruby2.5`  |  3\.0\.1  |  Amazon Linux  | 
+| Name | Identifier | SDK for Ruby | Operating system | Architectures | 
+| --- | --- | --- | --- | --- | 
+|  Ruby 2\.7  |  `ruby2.7`  |  3\.0\.1  |  Amazon Linux 2  |  x86\_64, arm64  | 
+|  Ruby 2\.5  |  `ruby2.5`  |  3\.0\.1  |  Amazon Linux  |  x86\_64  | 
 
 **Note**  
 For end of support information about Ruby 2\.5, see [Runtime support policy](runtime-support-policy.md)\.

@@ -208,10 +208,10 @@ As an alternative to an [on\-failure destination](#invocation-async-destinations
 To reprocess events in a dead\-letter queue, you can set it as an event source for your Lambda function\. Alternatively, you can manually retrieve the events\.
 
 You can choose an Amazon SQS queue or Amazon SNS topic for your dead\-letter queue\. If you don't have a queue or topic, create one\. Choose the target type that matches your use case\.
-+ [Amazon SQS queue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-create-queue.html) – A queue holds failed events until they're retrieved\. Choose an Amazon SQS queue if you expect a single entity, such as a Lambda function or CloudWatch alarm, to process the failed event\. For more information, see [Using AWS Lambda with Amazon SQS](with-sqs.md) and invoke a function\.
++ [Amazon SQS queue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-create-queue.html) – A queue holds failed events until they're retrieved\. Choose an Amazon SQS queue if you expect a single entity, such as a Lambda function or CloudWatch alarm, to process the failed event\. For more information, see [Using AWS Lambda with Amazon SQS](with-sqs.md)\.
 
   Create a queue in the [Amazon SQS console](https://console.aws.amazon.com/sqs)\.
-+ [Amazon SNS topic](https://docs.aws.amazon.com/sns/latest/gsg/CreateTopic.html) – A topic relays failed events to one or more destinations\. Choose an Amazon SNS topic if you expect multiple entities to act on a failed event\. For example, you can configure a topic to send events to an email address, a Lambda function, and/or an HTTP endpoint\. For more information, see [Using Lambda with Amazon SNS](with-sqs.md)\.
++ [Amazon SNS topic](https://docs.aws.amazon.com/sns/latest/gsg/CreateTopic.html) – A topic relays failed events to one or more destinations\. Choose an Amazon SNS topic if you expect multiple entities to act on a failed event\. For example, you can configure a topic to send events to an email address, a Lambda function, and/or an HTTP endpoint\. For more information, see [Using AWS Lambda with Amazon SNS](with-sns.md)\.
 
   Create a topic in the [Amazon SNS console](https://console.aws.amazon.com/sns/home)\.
 

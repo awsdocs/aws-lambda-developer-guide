@@ -8,7 +8,7 @@ Function states do not change the behavior of function invocations or how your f
 + `Failed` – Indicates that resource configuration or provisioning encountered an error\.
 + `Inactive` – A function becomes inactive when it has been idle long enough for Lambda to reclaim the external resources that were configured for it\. When you try to invoke a function that is inactive, the invocation fails and Lambda sets the function to pending state until the function resources are recreated\. If Lambda fails to recreate the resources, the function is set to the inactive state\.
 
-Check a function's state before invocation to verify that it is active\. You can do this using the Lambda API action [GetFunctionConfiguration](API_GetFunctionConfiguration.md), or by configuring a waiter with the [AWS SDK for Java API Reference](https://docs.aws.amazon.com/sdk-for-java/latest/reference/AWSLambdaWaiters.html)\.
+Check a function's state before invocation to verify that it is active\. You can do this using the Lambda API action [GetFunctionConfiguration](API_GetFunctionConfiguration.md), or by configuring a waiter using the [AWS SDK for Java 2\.0](https://github.com/aws/aws-sdk-java-v2)\.
 
 To view the function's state with the AWS CLI, use `get-function-configuration`\.
 

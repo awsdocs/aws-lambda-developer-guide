@@ -287,7 +287,7 @@ By default, Lambda runs your functions in a secure VPC with access to AWS servic
 **Note**  
 Several AWS services offer [VPC endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html)\. You can use VPC endpoints to connect to AWS services from within a VPC without internet access\.
 
-Internet access from a private subnet requires network address translation \(NAT\)\. To give your function access to the internet, route outbound traffic to a [NAT gateway](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html) in a public subnet\. The NAT gateway has a public IP address and can connect to the internet through the VPC's internet gateway\. For more information, see [How do I give internet access to my Lambda function in a VPC?](https://aws.amazon.com/premiumsupport/knowledge-center/internet-access-lambda-function/)
+Internet access from a private subnet requires network address translation \(NAT\)\. To give your function access to the internet, route outbound traffic to a [NAT gateway](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html) in a public subnet\. The NAT gateway has a public IP address and can connect to the internet through the VPC's internet gateway\. An idle NAT gateway connection will [ time out after 350 seconds\.](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-troubleshooting.html#nat-gateway-troubleshooting-timeout) For more information, see [How do I give internet access to my Lambda function in a VPC?](https://aws.amazon.com/premiumsupport/knowledge-center/internet-access-lambda-function/)
 
 ## VPC tutorials<a name="vpc-tutorials"></a>
 

@@ -45,6 +45,7 @@ Content-type: application/json
    "NextMarker": "string",
    "Versions": [ 
       { 
+         "Architectures": [ "string" ],
          "CodeSha256": "string",
          "CodeSize": number,
          "DeadLetterConfig": { 

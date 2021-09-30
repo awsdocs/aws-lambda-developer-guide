@@ -19,6 +19,31 @@ A Lambda function can use up to five layers at a time\. The total unzipped size 
 
 If your functions consume a layer that a different AWS account publishes, your functions can continue to use the layer version after it has been deleted, or after your permission to access the layer is revoked\. However, you cannot create a new function that uses a deleted layer version\.
 
+**Note**  
+Make sure that the layers that you add to a function are compatible with the runtime and instruction set architecture of the function\. 
+
+Console
+
+**Configuring a function to use layers \(Console\)**
+
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+
+1. Under **Layers**, choose **Add a layer**
+
+1. Under **Add layer**, choose a layer source\. 
+
+1. For the **AWS layers** or **Custom layers** layer source:
+
+   1. Choose a layer from the pull\-down menu\. 
+
+   1. Choose a layer version from the pull\-down menu\. Each layer version entry lists its compatible runtimes and architectures\.
+
+1. For the **Specify an ARN** layer source::
+
+   1. Enter an ARN in the text box
+
+API
+
 To add layers to your function, use the update\-function\-configuration command\. The following example adds two layers: one from the same AWS account as the function, and one from a different account\.
 
 ```

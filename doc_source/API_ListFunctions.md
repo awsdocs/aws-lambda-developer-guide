@@ -45,6 +45,7 @@ Content-type: application/json
 {
    "Functions": [ 
       { 
+         "Architectures": [ "string" ],
          "CodeSha256": "string",
          "CodeSize": number,
          "DeadLetterConfig": { 

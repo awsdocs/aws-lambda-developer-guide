@@ -16,5 +16,4 @@ For more information about designing Lambda applications, see [Application desig
 + [Managing applications in the AWS Lambda console](applications-console.md)
 + [Creating an application with continuous delivery in the Lambda console](applications-tutorial.md)
 + [Rolling deployments for Lambda functions](lambda-rolling-deployments.md)
-+ [Common Lambda application types and use cases](applications-usecases.md)
-+ [Best practices for working with AWS Lambda functions](best-practices.md)
++ [Invoking Lambda functions with the AWS Mobile SDK for Android](with-on-demand-custom-android.md)

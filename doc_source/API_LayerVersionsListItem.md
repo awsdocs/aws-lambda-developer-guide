@@ -4,6 +4,13 @@ Details about a version of an [ AWS Lambda layer](https://docs.aws.amazon.com/la
 
 ## Contents<a name="API_LayerVersionsListItem_Contents"></a>
 
+ ** CompatibleArchitectures **   <a name="SSS-Type-LayerVersionsListItem-CompatibleArchitectures"></a>
+A list of compatible [instruction set architectures](https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html)\.  
+Type: Array of strings  
+Array Members: Maximum number of 2 items\.  
+Valid Values:` x86_64 | arm64`   
+Required: No
+
  ** CompatibleRuntimes **   <a name="SSS-Type-LayerVersionsListItem-CompatibleRuntimes"></a>
 The layer's compatible runtimes\.  
 Type: Array of strings  

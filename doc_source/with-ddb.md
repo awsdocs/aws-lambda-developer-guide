@@ -89,6 +89,7 @@ Configure the `ParallelizationFactor` setting to process one shard of a Kinesis 
 + [Amazon CloudWatch metrics](#events-dynamodb-metrics)
 + [Time windows](#services-ddb-windows)
 + [Reporting batch item failures](#services-ddb-batchfailurereporting)
++ [Amazon DynamoDB Streams configuration parameters](#services-ddb-params)
 + [Tutorial: Using AWS Lambda with Amazon DynamoDB streams](with-ddb-example.md)
 + [Sample function code](with-ddb-create-package.md)
 + [AWS SAM template for a DynamoDB application](kinesis-tutorial-spec.md)
@@ -152,11 +153,11 @@ To manage the event source configuration later, choose the trigger in the design
 ## Event source mapping APIs<a name="services-dynamodb-api"></a>
 
 To manage an event source with the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) or [AWS SDK](http://aws.amazon.com/getting-started/tools-sdks/), you can use the following API operations:
-+  [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
-+ [ListEventSourceMappings](API_ListEventSourceMappings.md)
-+ [GetEventSourceMapping](API_GetEventSourceMapping.md)
-+ [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md)
-+ [DeleteEventSourceMapping](API_DeleteEventSourceMapping.md)
++  [CreateEventSourceMapping](API_CreateEventSourceMapping.md) 
++  
++  [GetEventSourceMapping](API_GetEventSourceMapping.md) 
++ [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md) 
++ [DeleteEventSourceMapping](API_DeleteEventSourceMapping.md) 
 
 The following example uses the AWS CLI to map a function named `my-function` to a DynamoDB stream that is specified by its Amazon Resource Name \(ARN\), with a batch size of 500\.
 
@@ -602,3 +603,25 @@ def handler(event, context):
 ```
 
 ------
+
+## Amazon DynamoDB Streams configuration parameters<a name="services-ddb-params"></a>
+
+All Lambda event source types share the same [CreateEventSourceMapping](API_CreateEventSourceMapping.md) and [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md) API operations\. However, only some of the parameters apply to DynamoDB Streams\.
+
+
+**Event source parameters that apply to DynamoDB Streams**  
+
+| Parameter | Required | Default | Notes | 
+| --- | --- | --- | --- | 
+|  BatchSize  |  N  |  100  |  Maximum: 10000  | 
+|  BisectBatchOnFunctionError  |  N  |  false  |   | 
+|  DestinationConfig  |  N  |   |  Amazon SQS queue or Amazon SNS topic destination for discarded records  | 
+|  Enabled  |  N  |  true  |   | 
+|  EventSourceArn  |  Y  |  |  ARN of the data stream or a stream consumer  | 
+|  FunctionName  |  Y  |   |   | 
+|  MaximumBatchingWindowInSeconds  |  N  |  0  |   | 
+|  MaximumRecordAgeInSeconds  |  N  |  \-1  |  \-1 means infinite: failed records are retried until the record expires Minimum: \-1 Maximum: 604800  | 
+|  MaximumRetryAttempts  |  N  |  \-1  |  \-1 means infinite: failed records are retried until the record expires Minimum: \-1 Maximum: 604800  | 
+|  ParallelizationFactor  |  N  |  1  |  Maximum: 10  | 
+|  StartingPosition  |  Y  |   |  TRIM\_HORIZON or LATEST  | 
+|  TumblingWindowInSeconds  |  N  |   |  Minimum: 0 Maximum: 900  | 

@@ -1,4 +1,4 @@
-# Using Lambda with Amazon SNS<a name="with-sns"></a>
+# Using AWS Lambda with Amazon SNS<a name="with-sns"></a>
 
 You can use a Lambda function to process Amazon Simple Notification Service \(Amazon SNS\) notifications\. Amazon SNS supports Lambda functions as a target for messages sent to a topic\. You can subscribe your function to topics in the same account or in other AWS accounts\.
 

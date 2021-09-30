@@ -115,6 +115,9 @@ The `eventName` may include date and version information, such as `"GetFunction2
 
 CloudTrail also logs data events\. You can turn on data event logging so that you log an event every time Lambda functions are invoked\. This helps you understand what identities are invoking the functions and the frequency of their invocations\. For more information on this option, see [ Logging data events for trails](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html)\.
 
+**Note**  
+CloudTrail logs only authenticated and authorized requests\. CloudTrail does not log requests that fail authentication \(credentials are missing or the provided credentials are not valid\) or requests with credentials that are not authorized to invoke the function\.
+
 ### Using CloudTrail to troubleshoot disabled event sources<a name="tracking-function-invocations-disabled"></a>
 
 One data event that can be encountered is a `LambdaESMDisabled` event\. There are five general categories of error that are associated with this event:
