@@ -6,7 +6,7 @@
 
 ## Advantages of using arm64 architecture<a name="foundation-arch-adv"></a>
 
-Lambda functions that use arm64 architecture \(AWS Graviton2 processor\) can achieve significantly better better price and performance than the equivalent function running on x86\_64 architecture\. Consider using arm64 for compute\-intensive applications such as high\-performance computing, video encoding, and simulation workloads\.
+Lambda functions that use arm64 architecture \(AWS Graviton2 processor\) can achieve significantly better price and performance than the equivalent function running on x86\_64 architecture\. Consider using arm64 for compute\-intensive applications such as high\-performance computing, video encoding, and simulation workloads\.
 
 The Graviton2 CPU uses the Neoverse N1 core and supports Armv8\.2 \(including CRC and crypto extensions\) plus several other architectural extensions\.
 
