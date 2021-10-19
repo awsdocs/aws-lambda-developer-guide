@@ -151,7 +151,7 @@ The following procedure assumes that you have packaged the updated layer code in
 1. \(Optional\) If the function has more than one layer, get the current layer versions associated with the function\.
 
    ```
-   aws lambda get-function-config --function-name my-function  --query 'Layers[*].Arn' --output yaml
+   aws lambda get-function-configuration --function-name my-function  --query 'Layers[*].Arn' --output yaml
    ```
 
 1. Add the new layer version to the function\. In the following example command, the function also has a layer version named `other-layer:5`:
