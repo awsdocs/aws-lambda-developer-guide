@@ -99,7 +99,7 @@ except pymysql.MySQLError as e:
     sys.exit()
 
 logger.info("SUCCESS: Connection to RDS MySQL instance succeeded")
-def handler(event, context):
+def lambda_handler(event, context):
     """
     This function fetches content from MySQL RDS instance
     """
