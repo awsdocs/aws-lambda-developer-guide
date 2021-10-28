@@ -162,6 +162,7 @@ For more information about the Amazon\.Lambda\.Tools \.NET Core Global Tool, see
 With the Amazon\.Lambda\.Tools installed, you can deploy your function using the following command:
 
 ```
+cd MyFunction/src/MyFunction
 dotnet lambda deploy-function MyFunction --function-role role
 ```
 
