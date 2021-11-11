@@ -43,7 +43,7 @@ You can filter functions based on the presence or value of a tag with the Lambda
 
 The search bar also supports searching for tag keys\. Type `tag` to see just a list of tag keys, or start typing the name of a key to find it in the list\.
 
-With AWS Billing and Cost Management, you can use tags to customize billing reports and create cost\-allocation reports\. For more information, see see [Monthly Cost Allocation Report](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/configurecostallocreport.html) and [Using Cost Allocation Tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html) in the *AWS Billing and Cost Management User Guide*\.
+With AWS Billing and Cost Management, you can use tags to customize billing reports and create cost\-allocation reports\. For more information, see [Monthly Cost Allocation Report](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/configurecostallocreport.html) and [Using Cost Allocation Tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html) in the *AWS Billing and Cost Management User Guide*\.
 
 ## Using Tags with the AWS CLI<a name="configuration-tags-cli"></a>
 
@@ -77,7 +77,7 @@ If you want to view the tags that are applied to a specific Lambda function, you
   ```
   aws lambda list-tags --resource function arn
   ```
-+ [GetFunction](API_GetFunction.md) – You supply your Lambda function name to a view a list of the tags associated with this function:
++ [GetFunction](API_GetFunction.md) – You supply your Lambda function name to view a list of the tags associated with this function:
 
   ```
   aws lambda get-function --function-name my-function
