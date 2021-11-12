@@ -49,7 +49,7 @@ Test the function with a sample event provided by the Lambda console\.
 
 1. Choose **Test**\.
 
-1. Create a new event using the **EventBridge \(CloudWatch Events\)** event template\.
+1. Create a new event using the **CloudWatch** event template\.
 
 1. Choose **Create event**\.
 

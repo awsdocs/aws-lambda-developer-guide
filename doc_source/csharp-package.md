@@ -4,9 +4,6 @@ A \.NET Core deployment package \(\.zip file archive\) contains your function's 
 
 Although it is possible to create the deployment package with the `dotnet publish` command, we recommend that you create the deployment package with either the [\.NET Core CLI](csharp-package-cli.md) or the [AWS Toolkit for Visual Studio](csharp-package-toolkit.md)\. These are tools optimized specifically for Lambda to ensure that the `lambda-project.runtimeconfig.json` file exists and optimizes the package bundle, including the removal of any non\-Linux\-based dependencies\.
 
-**Note**  
-Lambda does not support arm64 architecture for \.NET runtimes\.
-
 **Topics**
 + [\.NET Core CLI](csharp-package-cli.md)
 + [AWS Toolkit for Visual Studio](csharp-package-toolkit.md)

@@ -88,6 +88,8 @@ In the following commands, replace `123456789012` with your AWS account ID\.
 
 ## Upload the image to the Amazon ECR repository<a name="gettingstarted-create-upload"></a>
 
+In the following commands, replace `123456789012` with your AWS account ID\.
+
 1. Authenticate the Docker CLI to your Amazon ECR registry\.
 
    ```

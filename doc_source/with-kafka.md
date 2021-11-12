@@ -79,7 +79,7 @@ Your Lambda function might need these permissions:
 + Access your AWS Key Management Service \(AWS KMS\) customer managed key
 + Access your Amazon Virtual Private Cloud \(Amazon VPC\)
 
-#### Secrets Manager and AWS KMS permissions<a name="smaa-api-actions-vpc"></a>
+#### Secrets Manager and AWS KMS permissions<a name="smaa-api-actions-secret"></a>
 
 If your Apache Kafka users access your Kafka brokers over the internet, you must specify a Secrets Manager secret\. Your Lambda function might need permission to describe your Secrets Manager secret or to decrypt your AWS KMS customer managed key\. To access these resources, your function's [execution role](lambda-intro-execution-role.md) must have the following permissions:
 + [secretsmanager:GetSecretValue](https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html)
@@ -97,31 +97,9 @@ If only users within a VPC can access your self\-managed Apache Kafka cluster, y
 
 ### Adding permissions to your execution role<a name="smaa-permissions-add-policy"></a>
 
-To access other AWS services that your self\-managed Apache Kafka cluster uses, Lambda uses the permissions policies that you define in your Lambda function's [execution role](lambda-intro-execution-role.md)\.
+To access other AWS services that your self\-managed Apache Kafka cluster uses, Lambda uses the permissions policies that you define in your Lambda function's execution role\.
 
-By default, Lambda is not permitted to perform the required or optional actions for a self\-managed Apache Kafka cluster\. You must create and define these actions in an [IAM trust policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#term_trust-policy), and then attach the policy to your execution role\. This example shows how you might create a policy that allows Lambda to access your Amazon VPC resources\.
-
-```
-{
-        "Version":"2012-10-17",
-        "Statement":[
-           {
-              "Effect":"Allow",
-              "Action":[
-                 "ec2:CreateNetworkInterface",
-                 "ec2:DescribeNetworkInterfaces",
-                 "ec2:DescribeVpcs",
-                 "ec2:DeleteNetworkInterface",
-                 "ec2:DescribeSubnets",
-                 "ec2:DescribeSecurityGroups"
-              ],
-              "Resource":"arn:aws:ec2:us-east-1:01234567890:instance/my-instance-name"
-           }
-        ]
-     }
-```
-
-For information about creating a JSON policy document in the IAM console, see [Creating policies on the JSON tab](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html#access_policies_create-json-editor) in the *IAM User Guide*\.
+By default, Lambda is not permitted to perform the required or optional actions for a self\-managed Apache Kafka cluster\. You must create and define these actions in an IAM trust policy, and then attach the policy to your execution role\. For more information, see [AWS Lambda execution role](lambda-intro-execution-role.md)
 
 ### Adding users to an IAM policy<a name="smaa-permissions-add-users"></a>
 
@@ -215,7 +193,7 @@ aws lambda create-event-source-mapping --topics AWSKafkaTopic
           --self-managed-event-source '{"Endpoints":{"KAFKA_BOOTSTRAP_SERVERS":["abc3.xyz.com:9092", "abc2.xyz.com:9092"]}}'
 ```
 
-For more information, see the API reference documentation\.
+For more information, see the [CreateEventSourceMapping](API_CreateEventSourceMapping.md) API reference documentation\.
 
 #### Using a VPC<a name="services-smak-aws-cli-create-vpc"></a>
 
@@ -232,7 +210,7 @@ aws lambda create-event-source-mapping
           "abc2.xyz.com:9092"]}}'
 ```
 
-For more information, see the API reference documentation\.
+For more information, see the [CreateEventSourceMapping](API_CreateEventSourceMapping.md) API reference documentation\.
 
 #### Viewing the status using the AWS CLI<a name="services-smak-aws-cli-view"></a>
 
@@ -273,7 +251,7 @@ When you add your Kafka cluster as an [event source](invocation-eventsourcemappi
 
 To manage an event source with the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) or [AWS SDK](http://aws.amazon.com/getting-started/tools-sdks/), you can use the following API operations:
 +  [CreateEventSourceMapping](API_CreateEventSourceMapping.md) 
-+  
++  [ListEventSourceMappings](API_ListEventSourceMappings.md) 
 +  [GetEventSourceMapping](API_GetEventSourceMapping.md) 
 + [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md) 
 + [DeleteEventSourceMapping](API_DeleteEventSourceMapping.md) 

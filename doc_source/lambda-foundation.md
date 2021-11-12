@@ -7,6 +7,7 @@ The Lambda function is the foundational principle of Lambda\. You can configure 
 + [Lambda features](gettingstarted-features.md)
 + [Lambda programming model](foundation-progmodel.md)
 + [Lambda instruction set architectures](foundation-arch.md)
++ [VPC networking for Lambda](foundation-networking.md)
 + [Lambda function scaling](invocation-scaling.md)
 + [Lambda deployment packages](gettingstarted-package.md)
 + [Lambda console](foundation-console.md)

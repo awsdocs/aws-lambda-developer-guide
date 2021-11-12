@@ -112,7 +112,7 @@ The following identity\-based policy statement denies access to the `lambda:GetF
 
 ```
 {
-    "Version": "2020-07-20",
+    "Version": "2012-10-17",
     "Statement": [
         {
             "Effect": "Deny",

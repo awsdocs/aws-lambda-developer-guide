@@ -12,7 +12,7 @@ The type of authentication protocol, VPC components, or virtual host for your ev
 +  `VPC_SECURITY_GROUP` \- The VPC security group used to manage access to your self\-managed Apache Kafka brokers\.
 +  `SASL_SCRAM_256_AUTH` \- The Secrets Manager ARN of your secret key used for SASL SCRAM\-256 authentication of your self\-managed Apache Kafka brokers\.
 +  `SASL_SCRAM_512_AUTH` \- The Secrets Manager ARN of your secret key used for SASL SCRAM\-512 authentication of your self\-managed Apache Kafka brokers\.
-+  `VIRTUAL_HOST` \- \(Amazon MQ\) The name of the virtual host in your RabbitMQ broker\. Lambda uses this RabbitMQ host as the event source\.
++  `VIRTUAL_HOST` \- \(Amazon MQ\) The name of the virtual host in your RabbitMQ broker\. Lambda uses this RabbitMQ host as the event source\. This property cannot be specified in an UpdateEventSourceMapping API call\.
 Type: String  
 Valid Values:` BASIC_AUTH | VPC_SUBNET | VPC_SECURITY_GROUP | SASL_SCRAM_512_AUTH | SASL_SCRAM_256_AUTH | VIRTUAL_HOST`   
 Required: No

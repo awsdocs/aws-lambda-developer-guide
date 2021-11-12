@@ -100,8 +100,8 @@ You can build RIE into a base image\. The following steps show how to download t
    ```
 
 1. Download the runtime interface emulator for your target architecture from GitHub into your project directory\. Lambda provides an emulator for each of the instruction set architectures\.
-   + x86\_64 – Download [aws\-lambda\-rie](https://github.com/aws/aws-lambda-runtime-interface-emulator/releases/latest/aws-lambda-rie)
-   + arm64 – Download [aws\-lambda\-rie\-arm64](https://github.com/aws/aws-lambda-runtime-interface-emulator/releases/latest/aws-lambda-rie-arm64)
+   + x86\_64 – Download [aws\-lambda\-rie](https://github.com/aws/aws-lambda-runtime-interface-emulator/releases/latest/download/aws-lambda-rie)
+   + arm64 – Download [aws\-lambda\-rie\-arm64](https://github.com/aws/aws-lambda-runtime-interface-emulator/releases/latest/download/aws-lambda-rie-arm64)
 
 1. Copy the script, install the emulator package, and change `ENTRYPOINT` to run the new script by adding the following lines to your Dockerfile\. 
 

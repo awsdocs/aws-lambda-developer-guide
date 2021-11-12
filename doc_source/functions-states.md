@@ -1,37 +1,24 @@
 # Lambda function states<a name="functions-states"></a>
 
-When you create or update a function, AWS Lambda provisions the compute and networking resources that enable it to run\. In most cases your function is ready to be invoked or modified after a few seconds\. However, there are situations where this action can take longer, for example, configuring your function to connect to a virtual private cloud \(VPC\)\. This may lead to situations where invocation of your function fails due to resources not being available\. To indicate when your function is ready to invoke, Lambda includes a state field in the function configuration for all functions\. `State` provides information about the current status of the function, including whether you can successfully invoke the function\.
-
-Function states do not change the behavior of function invocations or how your function runs the code\. Function states include:
+Lambda includes a state field in the function configuration for all functions to indicate when your function is ready to invoke\. `State` provides information about the current status of the function, including whether you can successfully invoke the function\. Function states do not change the behavior of function invocations or how your function runs the code\. Function states include:
 + `Pending` – After Lambda creates the function, it sets the state to pending\. While in pending state, Lambda attempts to create or configure resources for the function, such as VPC or EFS resources\. Lambda does not invoke a function during pending state\. Any invocations or other API actions that operate on the function will fail\.
 + `Active` – Your function transitions to active state after Lambda completes resource configuration and provisioning\. Functions can only be successfully invoked while active\.
 + `Failed` – Indicates that resource configuration or provisioning encountered an error\.
 + `Inactive` – A function becomes inactive when it has been idle long enough for Lambda to reclaim the external resources that were configured for it\. When you try to invoke a function that is inactive, the invocation fails and Lambda sets the function to pending state until the function resources are recreated\. If Lambda fails to recreate the resources, the function is set to the inactive state\.
 
-Check a function's state before invocation to verify that it is active\. You can do this using the Lambda API action [GetFunctionConfiguration](API_GetFunctionConfiguration.md), or by configuring a waiter using the [AWS SDK for Java 2\.0](https://github.com/aws/aws-sdk-java-v2)\.
-
-To view the function's state with the AWS CLI, use `get-function-configuration`\.
+If you are utilzing SDK\-based automation workflows or calling Lambda’s service APIs directly, ensure that you check a function's state before invocation to verify that it is active\. You can do this with the Lambda API action [GetFunction](API_GetFunction.md), or by configuring a waiter using the [AWS SDK for Java 2\.0](https://github.com/aws/aws-sdk-java-v2)\.
 
 ```
-aws lambda get-function-configuration --function-name my-function
+aws lambda get-function --function-name my-function --query 'Configuration.[State, LastUpdateStatus]'
 ```
 
 You should see the following output:
 
 ```
-{
-    "FunctionName": "my-function",
-    "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
-    "Runtime": "nodejs12.x",
-    "Role": "arn:aws:iam::123456789012:role/lambda-role",
-    "TracingConfig": {
-        "Mode": "Active"
-    },
-    "State": "Pending",
-    "StateReason": "The function is being created.",
-    "StateReasonCode": "Creating",
-    ...
-}
+[
+ "Active",
+ "Successful" 
+]
 ```
 
 Functions have two other attributes, `StateReason` and `StateReasonCode`\. These provide information and context about the function’s state when it is not active for troubleshooting issues\.

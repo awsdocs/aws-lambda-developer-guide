@@ -8,13 +8,13 @@ You can deploy your Lambda function code as a [container image](images-create.md
 
   These base images are preloaded with a language runtime and other components that are required to run the image on Lambda\. AWS provides a Dockerfile for each of the base images to help with building your container image\.
 
-  AWS provides base images for x86\_64 architecture and arm64 architecture\.
+  For runtimes that use the Amazon Linux 2 operating system, AWS provides base images for x86\_64 architecture and arm64 architecture\.
 + Open\-source runtime interface clients \(RIC\)
 
   If you use a community or private enterprise base image, you must add a [Runtime interface client](runtimes-images.md#runtimes-api-client) to the base image to make it compatible with Lambda\.
 + Open\-source runtime interface emulator \(RIE\)
 
-   Lambda provides a runtime interface emulator for you to test your function locally\. The base images for Lambda and base images for custom runtimes include the RIE\. For other base images, you can download the RIE to [testing your image](images-test.md) locally\.
+   Lambda provides a runtime interface emulator for you to test your function locally\. The base images for Lambda and base images for custom runtimes include the RIE\. For other base images, you can download the RIE for [testing your image](images-test.md) locally\.
 
 The workflow for a function defined as a container image includes these steps:
 
@@ -50,7 +50,9 @@ Amazon ECR repository: gallery\.ecr\.aws/lambda/python
 
 ## Create a Python image from an AWS base image<a name="python-image-create"></a>
 
-When you build a container image for Python using an AWS base image, you only need to copy the python app to the container and install any dependencies\. 
+When you build a container image for Python using an AWS base image, you only need to copy the python app to the container and install any dependencies\.
+
+If your function has dependencies, your local Python environment must match the version in the base image that you specify in the Dockerfile\.
 
 **To build and deploy a Python function with the `python:3.8` base image\.**
 

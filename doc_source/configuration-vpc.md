@@ -2,17 +2,14 @@
 
 You can configure a Lambda function to connect to private subnets in a virtual private cloud \(VPC\) in your AWS account\. Use Amazon Virtual Private Cloud \(Amazon VPC\) to create a private network for resources such as databases, cache instances, or internal services\. Connect your function to the VPC to access private resources while the function is running\.
 
-When you connect a function to a VPC, Lambda creates an [elastic network interface](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ElasticNetworkInterfaces.html) for each subnet in your function's VPC configuration\. This process can take several minutes\.
+When you connect a function to a VPC, Lambda assigns your function to a Hyperplane ENI \(elastic network interface\) for each subnet in your function's VPC configuration\. Lambda creates a Hyperplane ENI the first time a unique subnet and security group combination is defined for a VPC\-enabled function in an account\.
 
-While Lambda creates a network interface, you can't perform additional operations that target the function, such as [creating versions](configuration-versions.md) or updating the function's code\. For new functions, you can't invoke the function until its state changes from `Pending` to `Active`\. For existing functions, you can still invoke an earlier version while the update is in progress\. For more information about function states, see [Lambda function states](functions-states.md)\.
-
-Multiple functions can share a network interface, if the functions share the same subnet and security group\. Connecting additional functions to the same VPC configuration \(subnet and security group\) that has an existing Lambda\-managed network interface is much quicker than having Lambda create additional network interfaces\. However, if you have many functions or functions with high network usage, Lambda might still create additional network interfaces\.
-
-If your functions aren't active for a long period of time, Lambda reclaims its network interfaces, and the functions become `Idle`\. To reactivate an idle function, invoke it\. This invocation fails, and the function enters a `Pending` state again until a network interface is available\.
+While Lambda creates a Hyperplane ENI, you can't perform additional operations that target the function, such as [creating versions](configuration-versions.md) or updating the function's code\. For new functions, you can't invoke the function until its state changes from `Pending` to `Active`\. For existing functions, you can still invoke an earlier version while the update is in progress\. For details about the Hyperplane ENI lifecycle, see [Lambda Hyperplane ENIs](foundation-networking.md#foundation-nw-eni)\.
 
 Lambda functions can't connect directly to a VPC with [ dedicated instance tenancy](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html)\. To connect to resources in a dedicated VPC, [peer it to a second VPC with default tenancy](https://aws.amazon.com/premiumsupport/knowledge-center/lambda-dedicated-vpc/)\.
 
 **Topics**
++ [Managing VPC connections](#vpc-managing-eni)
 + [Execution role and user permissions](#vpc-permissions)
 + [Configuring VPC access \(console\)](#vpc-configuring)
 + [Configuring VPC access \(API\)](#vpc-configuring-api)
@@ -20,6 +17,18 @@ Lambda functions can't connect directly to a VPC with [ dedicated instance tenan
 + [Internet and service access for VPC\-connected functions](#vpc-internet)
 + [VPC tutorials](#vpc-tutorials)
 + [Sample VPC configurations](#vpc-samples)
+
+## Managing VPC connections<a name="vpc-managing-eni"></a>
+
+This section provides a summary of Lambda VPC connections\. For details about VPC networking in Lambda, see [ VPC networking for Lambda](foundation-networking.md)\.
+
+Multiple functions can share a network interface, if the functions share the same subnet and security group\. Connecting additional functions to the same VPC configuration \(subnet and security group\) that has an existing Lambda\-managed network interface is much quicker than creating a new network interface\. 
+
+If your functions aren't active for a long period of time, Lambda reclaims its network interfaces, and the functions become `Idle`\. To reactivate an idle function, invoke it\. This invocation fails, and the function enters a `Pending` state again until a network interface is available\.
+
+If you update your function to access a different VPC, it terminates connectivity from the Hyperplane ENI to the previous VPC\. The process to update the connectivity to a new VPC can take several minutes\. During this time, Lambda connects funtion invocations to the previous VPC\. After the update is complete, new invocations start using the the new VPC and the Lambda function is no longer connected to the older VPC\.
+
+For short\-lived operations, such as DynamoDB queries, the latency overhead of setting up a TCP connection might be greater than the operation itself\. To ensure connection reuse for short\-lived/infrequently invoked functions, we recommend that you use *TCP keep\-alive* for connections that were created during your function initialization, to avoid creating new connections for subsequent invokes\. For more information on reusing connections using keep\-alive, refer to [Lambda documentation on reusing connections](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/node-reusing-connections.html)[\.](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/node-reusing-connections.html)
 
 ## Execution role and user permissions<a name="vpc-permissions"></a>
 

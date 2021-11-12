@@ -65,7 +65,8 @@ Pattern: `(|[a-zA-Z0-9$_-]+)`
 The request accepts the following binary data\.
 
  ** [ Payload ](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-Payload"></a>
-The JSON that you want to provide to your Lambda function as input\.
+The JSON that you want to provide to your Lambda function as input\.  
+You can enter the JSON directly\. For example, `--payload '{ "key": "value" }'`\. You can also specify a file path\. For example, `--payload file://payload.json`\. 
 
 ## Response Syntax<a name="API_Invoke_ResponseSyntax"></a>
 

@@ -2,21 +2,18 @@
 
 You can deploy your Lambda function code as a [container image](images-create.md)\. 
 
-**Note**  
-Lambda does not support arm64 architecture for \.NET runtimes\.
-
 AWS provides the following resources to help you build a container image for your \.NET function:
 + AWS base images for Lambda
 
   These base images are preloaded with a language runtime and other components that are required to run the image on Lambda\. AWS provides a Dockerfile for each of the base images to help with building your container image\.
 
-  AWS provides base images for x86\_64 architecture and arm64 architecture\.
+  For runtimes that use the Amazon Linux 2 operating system, AWS provides base images for x86\_64 architecture and arm64 architecture\.
 + Open\-source runtime interface clients \(RIC\)
 
   If you use a community or private enterprise base image, you must add a [Runtime interface client](runtimes-images.md#runtimes-api-client) to the base image to make it compatible with Lambda\.
 + Open\-source runtime interface emulator \(RIE\)
 
-   Lambda provides a runtime interface emulator for you to test your function locally\. The base images for Lambda and base images for custom runtimes include the RIE\. For other base images, you can download the RIE to [testing your image](images-test.md) locally\.
+   Lambda provides a runtime interface emulator for you to test your function locally\. The base images for Lambda and base images for custom runtimes include the RIE\. For other base images, you can download the RIE for [testing your image](images-test.md) locally\.
 
 The workflow for a function defined as a container image includes these steps:
 
@@ -39,7 +36,7 @@ AWS provides the following base images for \.NET:
 
 | Tags | Runtime | Operating system | Dockerfile | 
 | --- | --- | --- | --- | 
-| 5\.0 | \.NET 5\.0 | Amazon Linux 2 | [Dockerfile for \.NET 5\.0 on GitHub](https://github.com/aws/aws-lambda-dotnet/blob/master/LambdaRuntimeDockerfiles/dotnet5/Dockerfile) | 
+| 5\.0 | \.NET 5\.0 | Amazon Linux 2 | [Dockerfile for \.NET 5\.0 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/dotnet5.0/Dockerfile.dotnet5.0) | 
 | core3\.1 | \.NET Core 3\.1 | Amazon Linux 2 | [Dockerfile for \.NET 3\.1 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/dotnetcore3.1/Dockerfile.dotnetcore3.1) | 
 | core2\.1 | \.NET Core 2\.1 | Amazon Linux 2018\.03 | [Dockerfile for \.NET 2\.1 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/dotnetcore2.1/Dockerfile.dotnetcore2.1) | 
 

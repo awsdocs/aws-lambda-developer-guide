@@ -49,6 +49,9 @@ The invoke phase ends after the runtime and all extensions signal that they are 
 
 If the Lambda function crashes or times out during the `Invoke` phase, Lambda resets the execution environment\. The reset behaves like a `Shutdown` event\. First, Lambda shuts down the runtime\. Then Lambda sends a `Shutdown` event to each registered external extension\. The event includes the reason for the shutdown\. If another `Invoke` event results in this execution environment being reused, Lambda initializes the runtime and extensions as part of the next invocation\.
 
+**Note**  
+The Lambda reset does not clear the `/tmp` directory content prior to the next init phase\. This behavior is consistent with the regular shutdown phase\.
+
 ![\[This is my image.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/Overview-Invoke-with-Error.png)
 
 ### Shutdown phase<a name="runtimes-lifecycle-shutdown"></a>

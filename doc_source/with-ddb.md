@@ -154,7 +154,7 @@ To manage the event source configuration later, choose the trigger in the design
 
 To manage an event source with the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) or [AWS SDK](http://aws.amazon.com/getting-started/tools-sdks/), you can use the following API operations:
 +  [CreateEventSourceMapping](API_CreateEventSourceMapping.md) 
-+  
++  [ListEventSourceMappings](API_ListEventSourceMappings.md) 
 +  [GetEventSourceMapping](API_GetEventSourceMapping.md) 
 + [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md) 
 + [DeleteEventSourceMapping](API_DeleteEventSourceMapping.md) 

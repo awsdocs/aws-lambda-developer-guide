@@ -79,21 +79,20 @@ The following example shows a request to subscribe to the platform and function 
 
 ```
 PUT http://${AWS_LAMBDA_RUNTIME_API}/2020-08-15/logs/ HTTP/1.1
-{
-    "schemaVersion": "2020-08-15",
-    "types": [
-        "platform",
-        "function"
+{ "schemaVersion": "2020-08-15",
+  "types": [
+      "platform",
+      "function"
     ],
-    "buffering": {
-        "maxItems": 1000,
-        "maxBytes": 262144,
-        "timeoutMs": 100
+  "buffering": {
+      "maxItems": 1000,
+      "maxBytes": 262144,
+      "timeoutMs": 100
     },
-    "destination": {
-        "protocol": "HTTP",
-        "URI": "http://sandbox.localdomain:8080/lambda_logs"
-    }
+  "destination": {
+    "protocol": "HTTP",
+    "URI": "http://sandbox.localdomain:8080/lambda_logs"
+  }
 }
 ```
 

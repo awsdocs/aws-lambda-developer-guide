@@ -14,9 +14,6 @@ You can activate CodeGuru Profiler from the Lambda console if your function's ru
 + For Java runtimes, see [ Profiling your Java applications that run on AWS Lambda](https://docs.aws.amazon.com/codeguru/latest/profiler-ug/setting-up-lambda.html)\.
 + For Python runtimes, see [ Profiling your Python applications that run on AWS Lambda](https://docs.aws.amazon.com/codeguru/latest/profiler-ug/python-lambda.html)\.
 
-**Note**  
-CodeGuru Profiler supports functions that use x86\_64 architecture and arm64 architecture\.?????
-
 ## Activating CodeGuru Profiler from the Lambda console<a name="monitoring-code-profiler-activate-console"></a>
 
 This section describes how to activate CodeGuru Profiler from the Lambda console\.

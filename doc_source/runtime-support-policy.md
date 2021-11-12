@@ -11,17 +11,17 @@ Lambda does not block invocations of functions that use deprecated runtime versi
 **Important**  
 Python 2\.7 reached end of life on January 1, 2020\. End of support \(phase 1\) for the Python 2\.7 runtime started on July 15, 2021\. For more information, see [Announcing end of support for Python 2\.7 in AWS Lambda](http://aws.amazon.com/blogs/compute/announcing-end-of-support-for-python-2-7-in-aws-lambda/) on the AWS Compute Blog\.
 
-The following runtimes have reached or are scheduled for end of support:
+In the table below, each of the phases starts at midnight \(Pacific time zone\) on the specified date\. The following runtimes have reached or are scheduled for end of support:
 
 
 **Runtime end of support dates**  
 
 | Name | Identifier | Operating system | End of support phase 1 start | End of support phase 2 start | 
 | --- | --- | --- | --- | --- | 
-|  \.NET Core 2\.1  |  `dotnetcore2.1`  |  Amazon Linux  |  Sept 20, 2021  |  Oct 20, 2021  | 
-|  Python 2\.7  |  `python2.7`  |  Amazon Linux  |  July 15, 2021  |  Sept 30, 2021  | 
-|  Ruby 2\.5  |  `ruby2.5`  |  Amazon Linux  |  July 30, 2021  |  Aug 30, 2021  | 
-|  Node\.js 10\.x  |  `nodejs10.x`  |  Amazon Linux 2  |  July 30, 2021  |  Sept 17, 2021  | 
+|  \.NET Core 2\.1  |  `dotnetcore2.1`  |  Amazon Linux  |  Oct 26, 2021  |  Nov 30, 2021  | 
+|  Python 2\.7  |  `python2.7`  |  Amazon Linux  |  July 15, 2021  |  Nov 22, 2021  | 
+|  Ruby 2\.5  |  `ruby2.5`  |  Amazon Linux  |  July 30, 2021  |  Nov 30, 2021  | 
+|  Node\.js 10\.x  |  `nodejs10.x`  |  Amazon Linux 2  |  July 30, 2021  |  Nov 30, 2021  | 
 |  Node\.js 8\.10  |  `nodejs8.10`  |  Amazon Linux  |     |  March 6, 2020  | 
 |  Node\.js 6\.10  |  `nodejs6.10`  |  Amazon Linux  |     |  August 12, 2019  | 
 |  Node\.js 4\.3 edge  |  `nodejs4.3-edge`  |  Amazon Linux  |     |  April 30, 2019  | 

@@ -45,36 +45,36 @@ You can monitor a given function's concurrency usage using the `ConcurrentExecut
 
 ```
 {
-	"eventSource":"aws:amq",
-	"eventSourceArn":"arn:aws:mq:us-west-2:112556298976:broker:test:b-9bcfa592-423a-4942-879d-eb284b418fc8",
-	"messages":[
-		{
-			"messageID":"ID:b-9bcfa592-423a-4942-879d-eb284b418fc8-1.mq.us-west-2.amazonaws.com-37557-1234520418293-4:1:1:1:1",
-			"messageType":"jms/text-message",
-			"data":"QUJDOkFBQUE=",
-			"connectionId":"myJMSCoID",
-			"redelivered":false,
-			"destination":{
-				"physicalname":"testQueue"
-			},
-			"timestamp":1598827811958,
-			"brokerInTime":1598827811958,
-			"brokerOutTime":1598827811959
-		},
-		{
-			"messageID":"ID:b-9bcfa592-423a-4942-879d-eb284b418fc8-1.mq.us-west-2.amazonaws.com-37557-1234520418293-4:1:1:1:1",
-			"messageType":"jms/bytes-message",
-			"data":"3DTOOW7crj51prgVLQaGQ82S48k=",
-			"connectionId":"myJMSCoID1",
-			"persistent":false,
-			"destination":{
-				"physicalname":"testQueue"
-			},
-			"timestamp":1598827811958,
-			"brokerInTime":1598827811958,
-			"brokerOutTime":1598827811959
-		}
-	]
+   "eventSource": "aws:amq",
+   "eventSourceArn": "arn:aws:mq:us-west-2:112556298976:broker:test:b-9bcfa592-423a-4942-879d-eb284b418fc8",
+   "messages": [
+      {
+         "messageID": "ID:b-9bcfa592-423a-4942-879d-eb284b418fc8-1.mq.us-west-2.amazonaws.com-37557-1234520418293-4:1:1:1:1",
+         "messageType": "jms/text-message",
+         "data": "QUJDOkFBQUE=",
+         "connectionId": "myJMSCoID",
+         "redelivered": false,
+         "destination": {
+            "physicalname": "testQueue"
+         },
+         "timestamp": 1598827811958,
+         "brokerInTime": 1598827811958,
+         "brokerOutTime": 1598827811959
+      },
+      {
+         "messageID": "ID:b-9bcfa592-423a-4942-879d-eb284b418fc8-1.mq.us-west-2.amazonaws.com-37557-1234520418293-4:1:1:1:1",
+         "messageType": "jms/bytes-message",
+         "data": "3DTOOW7crj51prgVLQaGQ82S48k=",
+         "connectionId": "myJMSCoID1",
+         "persistent": false,
+         "destination": {
+            "physicalname": "testQueue"
+         },
+         "timestamp": 1598827811958,
+         "brokerInTime": 1598827811958,
+         "brokerOutTime": 1598827811959
+      }
+   ]
 }
 ```
 
@@ -182,7 +182,7 @@ To enable or disable the trigger \(or delete it\), choose the **MQ** trigger in 
 
 To manage an event source with the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) or [AWS SDK](http://aws.amazon.com/getting-started/tools-sdks/), you can use the following API operations:
 +  [CreateEventSourceMapping](API_CreateEventSourceMapping.md) 
-+  
++  [ListEventSourceMappings](API_ListEventSourceMappings.md) 
 +  [GetEventSourceMapping](API_GetEventSourceMapping.md) 
 + [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md) 
 + [DeleteEventSourceMapping](API_DeleteEventSourceMapping.md) 

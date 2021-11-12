@@ -78,6 +78,7 @@ The maximum number of records in each batch that Lambda pulls from your stream o
 +  **Amazon Simple Queue Service** \- Default 10\. For standard queues the max is 10,000\. For FIFO queues the max is 10\.
 +  **Amazon Managed Streaming for Apache Kafka** \- Default 100\. Max 10,000\.
 +  **Self\-Managed Apache Kafka** \- Default 100\. Max 10,000\.
++  **Amazon MQ \(ActiveMQ and RabbitMQ\)** \- Default 100\. Max 10,000\.
 Type: Integer  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.  
 Required: No

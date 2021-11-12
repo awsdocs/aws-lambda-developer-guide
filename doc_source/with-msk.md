@@ -6,9 +6,9 @@ Amazon MSK as an event source operates similarly to using Amazon Simple Queue Se
 
 For an example of how to configure Amazon MSK as an event source, see [Using Amazon MSK as an event source for AWS Lambda](http://aws.amazon.com/blogs/compute/using-amazon-msk-as-an-event-source-for-aws-lambda/) on the AWS Compute Blog\. Also, see [ Amazon MSK Lambda Integration](https://amazonmsk-labs.workshop.aws/en/msklambda.html) in the Amazon MSK Labs for a complete tutorial\.
 
-Lambda reads the messages sequentially for each partition\. After Lambda processes each batch, it commits the offsets of the messages in that batch\. If your function returns an error for any of the messages in a batch, Lambda retries the whole batch of messages until processing succeeds or the messages expire\.
+Lambda reads the messages sequentially for each partition\. After Lambda processes each batch, it commits the offsets of the messages in that batch\. If your function times out or returns an error for any of the messages in a batch, Lambda retries the whole batch of messages until processing succeeds or the messages expire\.
 
-Lambda allows a function to run for up to 14 minutes before stopping it\.
+For Amazon MSK invocations, Lambda allows the function to run for up to 14 minutes\. Set your function timeout value to 14 minutes or less \(the default timeout value is 3 seconds\)\.
 
 Lambda sends the batch of messages in the event parameter when it invokes your function\. The event payload contains an array of messages\. Each array item contains details of the Amazon MSK topic and partition identifier, together with a timestamp and a base64\-encoded message\.
 
@@ -57,7 +57,9 @@ Lambda sends the batch of messages in the event parameter when it invokes your f
 
 ## Managing access and permissions<a name="msk-permissions"></a>
 
-For Lambda to poll your Kafka topic and update other cluster resources, your Lambda function—as well as your IAM users and roles—must have the following permissions\.
+You can use IAM access control to handle both authentication and authorization for your Amazon MSK cluster\. This eliminates the need to use one mechanism for authentication and a different mechanism for authorization\. For example, when a client tries to write to your cluster, Amazon MSK uses IAM to check whether that client is an authenticated identity and also whether it is authorized to produce to your cluster\. 
+
+As an alternative, you can use SASL/SCRAM to authenticate clients and [Apache Kafka ACLs](https://docs.aws.amazon.com/msk/latest/developerguide/msk-acls.html) to control access\. 
 
 ### Required Lambda function permissions<a name="msk-api-actions"></a>
 
@@ -73,6 +75,36 @@ Your Lambda function's [execution role](lambda-intro-execution-role.md) must hav
 + [logs:CreateLogGroup](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogGroup.html)
 + [logs:CreateLogStream](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogStream.html)
 + [logs:PutLogEvents](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html)
+
+### Additional function permissions for IAM authorization<a name="msk-permissions-iam-auth"></a>
+
+If you plan to use IAM authorization, you need to add the following additional permissions:
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "kafka-cluster:Connect",
+                "kafka-cluster:DescribeGroup",
+                "kafka-cluster:AlterGroup",
+                "kafka-cluster:DescribeTopic",
+                "kafka-cluster:ReadData",
+                "kafka-cluster:DescribeClusterDynamicConfiguration"
+            ],
+            "Resource": [
+                "arn:aws:kafka:<region>:<account>:cluster/<clusterName>/<clusterUUID>",
+                "arn:aws:kafka:<region>:<account>:topic/<clusterName>/<clusterUUID>/<topicName>",
+                "arn:aws:kafka:<region>:<account>:group/<clusterName>/<clusterUUID>/<eventSourceMappingUUID>"
+            ]
+        }
+    ]
+}
+```
+
+You can scope these permissions to a specific cluster, topic and group\. See [Amazon MSK Kafka actions](https://docs.aws.amazon.com/msk/latest/developerguide/iam-access-control.html#kafka-actions) in the *Amazon Managed Streaming for Apache Kafka Developer Guide*\. The group name that Lambda uses is equivalent to the event source mapping’s UUID\.
 
 ### Adding a policy to your execution role<a name="msk-permissions-add-policy"></a>
 
@@ -98,6 +130,30 @@ Amazon MSK supports Simple Authentication and Security Layer/Salted Challenge Re
 
 Note that Amazon MSK does not support SASL/PLAIN authentication\.
 
+### Authentication and authorization Errors<a name="msk-permissions-errors"></a>
+
+If any of the required permissions to consume data from the Amazon MSK cluster are missing, Lambda displays an error message in the event source mapping under **LastProcessingResult**\. 
+
+The following error message results from authorization errors\.
+
+**Example Cluster failed to authorize Lambda**  
+For SASL/SCRAM, the provided user does not have all of the required Kafka ACL permissions:  
++ DescribeConfigs Cluster
++ Describe Group
++ Read Group
++ Describe Topic
++ Read Topic
+For IAM access control, the execution role is missing one or more of the permissions required to access the group or topic\. To add the missing permissions to the role, see the example in [Additional function permissions for IAM authorization](#msk-permissions-iam-auth)  
+When you create either Kafka ACLs or an IAM policy with the required kafka\-cluster permissions listed previously, you must specify the topic and group as resources\. The topic name must match the topic in the event source mapping and the group name must match the event source mapping’s UUID\.  
+After you add the required permissions to the execution role, there might be a delay of several minutes before the changes take effect\.
+
+The following error message results from authentication failures\.
+
+**Example SASL authentication failed**  
+For SASL/SCRAM, this failure indicates that the provided username and password are invalid\.  
+For IAM access control, the execution role is missing `kafka-cluster:Connect` permissions for the cluster\. Add this permission to the role and specify the cluster ARN as a resource\.  
+You might see this error intermittently if the cluster rejects connections because it reached the TCP connection limit set by [Amazon MSK](https://docs.aws.amazon.com/msk/latest/developerguide/limits.html)\. Lambda backs off and retries until a connection is successful\. The last processing result will eventually change to “OK” after Lambda successfully connects to and polls from the cluster\.
+
 ## Network configuration<a name="services-msk-vpc-config"></a>
 
 Lambda must have access to the Amazon Virtual Private Cloud \(Amazon VPC\) resources associated with your Amazon MSK cluster\. We recommend that you deploy AWS PrivateLink [VPC endpoints](https://docs.aws.amazon.com/vpc/latest/privatelink/endpoint-services-overview.html) for Lambda and AWS Security Token Service \(AWS STS\)\. If authentication is required, also deploy a VPC endpoint for Secrets Manager\.
@@ -105,8 +161,9 @@ Lambda must have access to the Amazon Virtual Private Cloud \(Amazon VPC\) resou
 Alternatively, ensure that the VPC associated with your Amazon MSK cluster includes one NAT gateway per public subnet\. For more information, see [Internet and service access for VPC\-connected functions](configuration-vpc.md#vpc-internet)\.
 
 You must configure your Amazon VPC security groups with the following rules \(at minimum\):
-+ Inbound rules – Allow all traffic on all ports for the security group specified as your event source\.
-+ Outbound rules – Allow all traffic on all ports for all destinations\.
++ Inbound rules – Allow all traffic on the MSK broker port \(9092 for plaintext, 9094 for TLS, 9096 for SASL, 9098 for IAM\) for the security groups specified for your event source\.
++ Outbound rules – Allow all traffic on port 443 for all destinations\. Allow all traffic on the MSK broker port \(9092 for plaintext, 9094 for TLS, 9096 for SASL, 9098 for IAM\) for the security groups specified for your event source\.
++ if you are using VPC endpoints instead of NAT Gateway, the security groups associated with the VPC endpoints must allow all inbound traffic on port 443 from the event source's security groups\.
 
 **Note**  
 Your Amazon VPC configuration is discoverable through the [Amazon MSK API](https://docs.aws.amazon.com/msk/1.0/apireference/resources.html), and does not need to be configured during setup using the create\-event\-source\-mapping command\.
@@ -147,7 +204,7 @@ Follow these steps to add your Amazon MSK cluster and a Kafka topic as a trigger
 
    1. \(Optional\) For **Starting position**, choose **Latest** to start reading the stream from the latest record\. Or, choose **Trim horizon** to start at the earliest available record\.
 
-   1. \(Optional\) For **Secret key**, choose the secret key for SASL/SCRAM authentication of the brokers in your Amazon MSK cluster\.
+   1. \(Optional\) For **Secret key**, choose the secret key for SASL/SCRAM authentication of the brokers in your Amazon MSK cluster\. If you are using IAM access control, do not choose a secret key\.
 
    1. To create the trigger in a disabled state for testing \(recommended\), clear **Enable trigger**\. Or, to enable the trigger immediately, select **Enable trigger**\.
 
@@ -169,7 +226,7 @@ aws lambda create-event-source-mapping \
   --function-name my-kafka-function
 ```
 
-For more information, see the API reference documentation\.
+For more information, see the [CreateEventSourceMapping](API_CreateEventSourceMapping.md) API reference documentation\.
 
 #### Viewing the status using the AWS CLI<a name="services-msk-aws-cli-view"></a>
 

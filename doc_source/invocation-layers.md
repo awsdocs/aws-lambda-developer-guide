@@ -5,44 +5,79 @@ A Lambda layer is a \.zip file archive that can contain additional code or other
 You can use layers only with Lambda functions [deployed as a \.zip file archive](gettingstarted-package.md#gettingstarted-package-zip)\. For a function [defined as a container image](lambda-images.md), you can package your preferred runtime and all code dependencies when you create the container image\. For more information, see [ Working with Lambda layers and extensions in container images](http://aws.amazon.com/blogs/compute/working-with-lambda-layers-and-extensions-in-container-images/) on the AWS Compute Blog\.
 
 **Topics**
-+ [Configuring a function to use layers](#invocation-layers-using)
-+ [Accessing the contents of a layer](#invocation-layers-accessing)
++ [Configuring functions to use layers](#invocation-layers-using)
++ [Accessing layer content from your function](#invocation-layers-accessing)
 + [Finding layer information](#configuration-layers-finding)
-+ [Updating a layer version that your function uses](#invocation-layers-script)
 + [Adding layer permissions](#invocation-layers-permissions)
 + [Using AWS SAM to add a layer to a function](#invocation-layers-cloudformation)
 + [Sample applications](#invocation-layers-samples)
 
-## Configuring a function to use layers<a name="invocation-layers-using"></a>
+## Configuring functions to use layers<a name="invocation-layers-using"></a>
 
-A Lambda function can use up to five layers at a time\. The total unzipped size of the function and all layers cannot exceed the unzipped deployment package size quota of 250 MB\. For more information, see [Lambda quotas](gettingstarted-limits.md)\.
+You can add up to five layers to a Lambda function\. The total unzipped size of the function and all layers cannot exceed the unzipped deployment package size quota of 250 MB\. For more information, see [Lambda quotas](gettingstarted-limits.md)\.
 
 If your functions consume a layer that a different AWS account publishes, your functions can continue to use the layer version after it has been deleted, or after your permission to access the layer is revoked\. However, you cannot create a new function that uses a deleted layer version\.
 
 **Note**  
 Make sure that the layers that you add to a function are compatible with the runtime and instruction set architecture of the function\. 
 
-Console
+### Configuring layers with the console<a name="invocation-layers-console"></a>
 
-**Configuring a function to use layers \(Console\)**
+**Adding a layer to a function**
 
 1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
+1. Choose the function to configure\.
+
 1. Under **Layers**, choose **Add a layer**
 
-1. Under **Add layer**, choose a layer source\. 
+1. Under **Choose a layer**, choose a layer source\. 
 
 1. For the **AWS layers** or **Custom layers** layer source:
 
    1. Choose a layer from the pull\-down menu\. 
 
-   1. Choose a layer version from the pull\-down menu\. Each layer version entry lists its compatible runtimes and architectures\.
+   1. Under **Version**, choose a layer version from the pull\-down menu\. Each layer version entry lists its compatible runtimes and architectures\.
 
-1. For the **Specify an ARN** layer source::
+   1. Choose **Add**\.
 
-   1. Enter an ARN in the text box
+1. For the **Specify an ARN** layer source:
 
-API
+   1. Enter an ARN in the text box and choose **Verify**\.
+
+   1. Choose **Add**\.
+
+The order in which you add the layers is the order in which Lambda later merges the layer content into the execution environment\. You can change the layer merge order using the console\. 
+
+**Update layer order for your function**
+
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+
+1. Choose the function to configure\.
+
+1. Under **Layers**, choose **Edit**
+
+1. Choose one of the layers\.
+
+1. Choose **Merge earlier** or **Merge later** to adjust the order of the layers\.
+
+1. Choose **Save**\.
+
+Layers are versioned, and the content of each layer version is immutable\. The layer owner can release a new layer version to provide updated content\. You can use the console to update your function's layer versions\. 
+
+**Update layer versions for your function**
+
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+
+1. Choose the function to configure\.
+
+1. Under **Layers**, choose **Edit**
+
+1. Under **Layer version**, enter the new layer version\. You can change the version for one or more of the listed layers\.
+
+1. Choose **Save**\.
+
+### Configuring layers with the API<a name="invocation-layers-api"></a>
 
 To add layers to your function, use the update\-function\-configuration command\. The following example adds two layers: one from the same AWS account as the function, and one from a different account\.
 
@@ -75,7 +110,11 @@ You should see output similar to the following:
 }
 ```
 
-To specify the layer versions to use, you must provide the full Amazon Resource Name \(ARN\) of each layer version\. When you add layers to a function that already has layers, you overwrite the previous list of layers\. Be sure to include all layers every time that you update the layer configuration\. Or, to remove all layers, specify an empty list\.
+To specify the layer versions to use, you must provide the full Amazon Resource Name \(ARN\) of each layer version\. When you add layers to a function that already has layers, you overwrite the previous list of layers\. Be sure to include all layers every time that you update the layer configuration\. The order in which you add the layers is the order in which Lambda later extracts the layer content into the execution environment\.
+
+
+
+To remove all layers, specify an empty list\.
 
 ```
 aws lambda update-function-configuration --function-name my-function --layers []
@@ -83,9 +122,38 @@ aws lambda update-function-configuration --function-name my-function --layers []
 
 The creator of a layer can delete a version of the layer\. If you're using that layer version in a function, your function continues to run as though the layer version still exists\. However, when you update the layer configuration, you must remove the reference to the deleted version\.
 
-## Accessing the contents of a layer<a name="invocation-layers-accessing"></a>
+Layers are versioned, and the content of each layer version is immutable\. The layer owner can release a new layer version to provide updated content\. You can use the API to update the layer versions that your function uses\. 
 
-When you include a layer in a Lambda function, Lambda extracts the layer's contents into the `/opt` directory in the function execution environment\. Lambda extracts layers in the order that you specified them, merging any folders with the same name\. If the same file appears in multiple layers, the function uses the version in the last extracted layer\.
+**Update layer versions for your function**
+
+To update one or more layer versions for your function, use the update\-function\-configuration command\. Use the `--layers` option with this command to include all of the layer versions for the function, even if you are updating one of the layer versions\. If the function already has layers, the new list overwrites the previous list\.
+
+The following procedure steps assume that you have packaged the updated layer code into a local file named `layer.zip`\.
+
+1. \(Optional\) If the new layer version is not published yet, publish the new version\.
+
+   ```
+    aws lambda publish-layer-version --layer-name my-layer --description "My layer" --license-info "MIT" \
+   --zip-file  "fileb://layer.zip"  --compatible-runtimes python3.6 python3.7
+   ```
+
+1. \(Optional\) If the function has more than one layer, get the current layer versions associated with the function\.
+
+   ```
+   aws lambda get-function-configuration --function-name my-function  --query 'Layers[*].Arn' --output yaml
+   ```
+
+1. Add the new layer version to the function\. In the following example command, the function also has a layer version named `other-layer:5`:
+
+   ```
+   aws lambda update-function-configuration --function-name my-function \
+   --layers arn:aws:lambda:us-east-2:123456789012:layer:my-layer:2 \        
+               arn:aws:lambda:us-east-2:123456789012:layer:other-layer:5
+   ```
+
+## Accessing layer content from your function<a name="invocation-layers-accessing"></a>
+
+If your Lambda function includes layers, Lambda extracts the layer contents into the `/opt` directory in the function execution environment\. Lambda extracts the layers in the order \(low to high\) listed by the function\. Lambda merges folders with the same name, so if the same file appears in multiple layers, the function uses the version in the last extracted layer\.
 
 Each [Lambda runtime](lambda-runtimes.md) adds specific `/opt` directory folders to the PATH variable\. Your function code can access the layer content without the need to specify the path\. For more information about path settings in the Lambda execution environment, see [Defined runtime environment variables](configuration-envvars.md#configuration-envvars-runtime)\.
 
@@ -128,39 +196,6 @@ You can also get the latest version of a layer using the list\-layer\-versions c
 ```
 aws lambda list-layer-versions --layer-name my-layer --query 'LayerVersions[0].LayerVersionArn
 ```
-
-## Updating a layer version that your function uses<a name="invocation-layers-script"></a>
-
-Layers are versioned, and the content of each layer version is immutable\. The layer owner can release a new layer version to provide updated content\.
-
-To add an updated layer version to your function, use the update\-function\-configuration command\. Use the `--layers` option with this command to list all of the layer versions that you want to add\. If the function already has layers, the new list overwrites the previous list\.
-
-To update only one of the layer versions, you must include the ARNs of the existing layer versions with the `--layers` option\.
-
-The following procedure assumes that you have packaged the updated layer code into a local file named `layer.zip`\.
-
-**Add an updated layer version to your function**
-
-1. \(Optional\) If the new layer version is not published yet, publish the new version\.
-
-   ```
-    aws lambda publish-layer-version --layer-name my-layer --description "My layer" --license-info "MIT" \
-   --zip-file  "fileb://layer.zip"  --compatible-runtimes python3.6 python3.7
-   ```
-
-1. \(Optional\) If the function has more than one layer, get the current layer versions associated with the function\.
-
-   ```
-   aws lambda get-function-configuration --function-name my-function  --query 'Layers[*].Arn' --output yaml
-   ```
-
-1. Add the new layer version to the function\. In the following example command, the function also has a layer version named `other-layer:5`:
-
-   ```
-   aws lambda update-function-configuration --function-name my-function \
-   --layers arn:aws:lambda:us-east-2:123456789012:layer:my-layer:2 \        
-               arn:aws:lambda:us-east-2:123456789012:layer:other-layer:5
-   ```
 
 ## Adding layer permissions<a name="invocation-layers-permissions"></a>
 

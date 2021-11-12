@@ -4,6 +4,13 @@
 + arm64 – 64\-bit ARM architecture, for the AWS Graviton2 processor\.
 + x86\_64 – 64\-bit x86 architecture, for x86\-based processors\.
 
+**Topics**
++ [Advantages of using arm64 architecture](#foundation-arch-adv)
++ [Function migration to arm64 architecture](#foundation-arch-consider)
++ [Function code compatibility with arm64 architecture](#foundation-arch-considerations)
++ [Suggested migration steps](#foundation-arch-steps)
++ [Configuring the instruction set architecture](#foundation-arch-adv)
+
 ## Advantages of using arm64 architecture<a name="foundation-arch-adv"></a>
 
 Lambda functions that use arm64 architecture \(AWS Graviton2 processor\) can achieve significantly better price and performance than the equivalent function running on x86\_64 architecture\. Consider using arm64 for compute\-intensive applications such as high\-performance computing, video encoding, and simulation workloads\.
@@ -71,6 +78,7 @@ Lambda provides the following runtimes for the arm64 architecture\. These runtim
 + Ruby 2\.7
 + Custom Runtime on Amazon Linux 2
 
-Runtimes that use the Amazon Linux operating system, such as Go 1\.x, do not support the arm64 instruction set architecture\. You can use the custom runtime \(provided\.al2\) to run Go functions with arm64 architecture\. 
+**Note**  
+Runtimes that use the Amazon Linux operating system, such as Go 1\.x, do not support the arm64 architecture\. To use arm64 architecture, you can run Go with the provided\.al2 runtime\. For example, see [Build a Go function for the provided\.al2 runtime](golang-package.md#golang-package-al2) or [Create a Go image from the provided\.al2 base image](go-image.md#go-image-al2)\. 
 
 For an example of how to create a function with arm64 architecture, see [ AWS Lambda Functions Powered by AWS Graviton2 Processor](http://aws.amazon.com/blogs/aws/aws-lambda-functions-powered-by-aws-graviton2-processor-run-your-functions-on-arm-and-get-up-to-34-better-price-performance/)\.

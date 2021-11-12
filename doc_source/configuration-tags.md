@@ -1,16 +1,25 @@
-# Tagging Lambda Functions<a name="configuration-tags"></a>
+# Using tags on AWS Lambda functions<a name="configuration-tags"></a>
 
 You can tag Lambda functions to organize them by owner, project or department\. Tags are freeform key\-value pairs that are supported across AWS services for use in filtering resources and adding detail to billing reports\.
 
 **Topics**
-+ [Adding tags to a function \(console\)](#configuration-tags-config)
-+ [Using tags to filter functions \(console\)](#configuration-tags-filter)
-+ [Using Tags with the AWS CLI](#configuration-tags-cli)
-+ [Tag Key and Value Requirements](#configuration-tags-restrictions)
++ [Using tags with the Lambda console](#using-tags-with-the-console)
++ [Using tags with the AWS Command Line Interface](#configuration-tags-cli)
++ [Requirements for tags](#configuration-tags-restrictions)
 
-## Adding tags to a function \(console\)<a name="configuration-tags-config"></a>
+## Using tags with the Lambda console<a name="using-tags-with-the-console"></a>
 
-**To add tags to a function**
+You can use the console to add tags to existing functions and to filter functions by the tags that you add\.
+
+### Adding tags to a function<a name="configuration-tags-config"></a>
+
+**To add tags to a function \(console\)**
+
+1. Grant appropriate permissions to the IAM identity \(user, group, or role\) for the person working with the function:
+   + **lambda:ListTags**—When a function has tags, grant this permission to anyone who needs to view the function\.
+   + **lambda:TagResource**—Grant this permission to anyone who needs to add tags to a function\.
+
+   For more information, see [Identity\-based IAM policies for Lambda](access-control-identity-based.md)\.
 
 1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
@@ -20,16 +29,24 @@ You can tag Lambda functions to organize them by owner, project or department\. 
 
 1. Under **Tags**, choose **Manage tags**\.
 
-1. Enter a key and value\. To add additional tags, choose **Add new tag**\.  
+1. Enter a key and value\. To add additional tags, choose **Add new tag**\.
+
+   Make sure that any tags you use conform to the [tag requirements](#configuration-tags-restrictions)\.  
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/configuration-tags-add.png)
 
 1. Choose **Save**\.
 
-## Using tags to filter functions \(console\)<a name="configuration-tags-filter"></a>
+### Filtering functions by tag<a name="configuration-tags-filter"></a>
 
-You can filter functions based on the presence or value of a tag with the Lambda console or with the AWS Resource Groups API\. Tags apply at the function level, not to versions or aliases\. Tags are not part of the version\-specific configuration that is snapshotted when you publish a version\.
+You can filter functions based on the presence or value of a tag with the Lambda console or with the AWS Resource Groups API\.
 
-**To filter functions with tags**
+Tags apply at the function level, not to versions or aliases\. Tags are not part of the version\-specific configuration that is snapshotted when you publish a version\.
+
+**To filter functions with tags \(console\)**
+
+1. Make sure that you have the permissions you need:
+   + lambda:ListTags grants permission to view functions that have tags\.
+   + lambda:TagResource grants permission to add tags to a function\.
 
 1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
@@ -45,7 +62,21 @@ The search bar also supports searching for tag keys\. Type `tag` to see just a l
 
 With AWS Billing and Cost Management, you can use tags to customize billing reports and create cost\-allocation reports\. For more information, see see [Monthly Cost Allocation Report](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/configurecostallocreport.html) and [Using Cost Allocation Tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html) in the *AWS Billing and Cost Management User Guide*\.
 
-## Using Tags with the AWS CLI<a name="configuration-tags-cli"></a>
+## Using tags with the AWS Command Line Interface<a name="configuration-tags-cli"></a>
+
+You can use the console to create functions that have tags, add tags to existing functions, and to filter functions by the tags that you add\.
+
+### Permissions required for working with tags<a name="permissions-required-for-working-with-tags-cli"></a>
+
+Grant appropriate permissions to the IAM identity \(user, group, or role\) for the person working with the function:
++ **lambda:ListTags**—When a function has tags, grant this permission to anyone who needs to call `GetFunction` or `ListTags` on it\.
++ **lambda:TagResource**—Grant this permission to anyone who needs to call `CreateFunction` or `TagResource`\.
+
+For more information, see [Identity\-based IAM policies for Lambda](access-control-identity-based.md)\.
+
+### Creating tags when you create a function<a name="creating-tags-when-you-create-a-function-cli"></a>
+
+Make sure that any tags you use conform to the [tag requirements](#configuration-tags-restrictions)\.
 
 When you create a new Lambda function, you can include tags with the `--tags` option\.
 
@@ -71,6 +102,8 @@ aws lambda untag-resource --resource function arn \
 --tag-keys Department
 ```
 
+### Viewing tags on a function<a name="viewing-tags-on-a-function-cli"></a>
+
 If you want to view the tags that are applied to a specific Lambda function, you can use either of the following Lambda API commands:
 + [ListTags](API_ListTags.md) – You supply your Lambda function ARN \(Amazon Resource Name\) to view a list of the tags associated with this function:
 
@@ -83,9 +116,13 @@ If you want to view the tags that are applied to a specific Lambda function, you
   aws lambda get-function --function-name my-function
   ```
 
-You can also use the AWS Tagging Service’s [GetResources](https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html) API to filter your resources by tags\. The GetResources API receives up to 10 filters, with each filter containing a tag key and up to 10 tag values\. You provide GetResources with a ‘ResourceType’ to filter by specific resource types\. For more information about the AWS Tagging Service, see [Working with Resource Groups](https://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/resource-groups.html)\. 
+#### Filtering functions by tag<a name="filtering-functions-by-tag-cli"></a>
 
-## Tag Key and Value Requirements<a name="configuration-tags-restrictions"></a>
+You can use the AWS Resource Groups Tagging API [GetResources](https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html) action to filter your resources by tags\. The GetResources API receives up to 10 filters, with each filter containing a tag key and up to 10 tag values\. You provide GetResources with a ‘ResourceType’ to filter by specific resource types\.
+
+For more information about the AWS Resource Groups service, see [What are resource groups?](https://docs.aws.amazon.com/ARG/latest/userguide/resource-groups.html) in the *AWS Resource Groups and Tags User Guide*\. 
+
+## Requirements for tags<a name="configuration-tags-restrictions"></a>
 
 The following requirements apply to tags:
 + Maximum number of tags per resource—50

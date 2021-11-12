@@ -2,10 +2,13 @@
 
 You can use versions to manage the deployment of your functions\. For example, you can publish a new version of a function for beta testing without affecting users of the stable production version\. Lambda creates a new version of your function each time that you publish the function\. The new version is a copy of the unpublished version of the function\. 
 
+**Note**  
+Lambda doesn't create a new version if the code in the unpublished version is the same as the previous published version\. You need to deploy code changes in $LATEST before you can create a new version\.
+
 A function version includes the following information:
 + The function code and all associated dependencies\.
 + The Lambda runtime that invokes the function\.
-+ All of the function settings, including the environment variables\.
++ All the function settings, including the environment variables\.
 + A unique Amazon Resource Name \(ARN\) to identify the specific version of the function\.
 
 **Topics**
@@ -16,7 +19,7 @@ A function version includes the following information:
 
 ## Creating function versions<a name="configuration-versions-config"></a>
 
-You can change the function code and settings only on the unpublished version of a function\. When you publish a version, the code and most of the settings are locked to maintain a consistent experience for users of that version\. For more information about configuring function settings, see [Configuring Lambda function options](configuration-function-common.md)\.
+You can change the function code and settings only on the unpublished version of a function\. When you publish a version, Lambda locks the code and most of the settings to maintain a consistent experience for users of that version\. For more information about configuring function settings, see [Configuring Lambda function options](configuration-function-common.md)\.
 
 You can create a function version using the Lambda console\.
 

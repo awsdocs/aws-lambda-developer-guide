@@ -46,8 +46,8 @@ Entries in this table are alphabetical by service name, excluding the "Amazon" o
 |  [Amazon MQ](with-mq.md)  |  Lambda polling  | 
 |  [Amazon Simple Email Service](services-ses.md)  |  Event\-driven; asynchronous invocation  | 
 |  [Amazon Simple Notification Service](with-sns.md)  |  Event\-driven; asynchronous invocation  | 
-|  [Amazon Simple Queue Service \(Amazon S3\)](with-sqs.md)  |  Lambda polling  | 
-|  [Amazon Simple Storage Service](with-s3.md)  |  Event\-driven; asynchronous invocation  | 
+|  [Amazon Simple Queue Service](with-sqs.md)  |  Lambda polling  | 
+|  [Amazon Simple Storage Service \(Amazon S3\)](with-s3.md)  |  Event\-driven; asynchronous invocation  | 
 |  [Amazon Simple Storage Service Batch](services-s3-batch.md)  |  Event\-driven; synchronous invocation  | 
 |  [Secrets Manager](with-secrets-manager.md)  |  Event\-driven; synchronous invocation  | 
 |  [AWS X\-Ray](services-xray.md)  |  Special integration  | 

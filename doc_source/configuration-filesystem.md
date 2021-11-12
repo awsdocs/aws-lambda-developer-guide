@@ -3,12 +3,51 @@
 You can configure a function to mount an Amazon Elastic File System \(Amazon EFS\) file system to a local directory\. With Amazon EFS, your function code can access and modify shared resources safely and at high concurrency\.
 
 **Topics**
-+ [Connecting to a file system \(console\)](#configuration-filesystem-config)
-+ [Configuring a file system and access point](#configuration-filesystem-setup)
 + [Execution role and user permissions](#configuration-filesystem-permissions)
++ [Configuring a file system and access point](#configuration-filesystem-setup)
++ [Connecting to a file system \(console\)](#configuration-filesystem-config)
 + [Configuring file system access with the Lambda API](#configuration-filesystem-api)
 + [AWS CloudFormation and AWS SAM](#configuration-filesystem-cloudformation)
 + [Sample applications](#configuration-filesystem-samples)
+
+## Execution role and user permissions<a name="configuration-filesystem-permissions"></a>
+
+Lambda uses your function's permissions to mount file systems\. To connect to a file system, your function's execution role must have the following permissions in addition to the [permissions required to connect to the file system's VPC](configuration-vpc.md#vpc-permissions):
+
+**Execution role permissions**
++ **elasticfilesystem:ClientMount**
++ **elasticfilesystem:ClientWrite \(not required for read\-only connections\)**
+
+These permissions are included in the **AmazonElasticFileSystemClientReadWriteAccess** managed policy\.
+
+When you configure a file system, Lambda uses your permissions to verify mount targets\. To configure a function to connect to a file system, your IAM user needs the following permissions:
+
+**User permissions**
++ **elasticfilesystem:DescribeMountTargets**
+
+## Configuring a file system and access point<a name="configuration-filesystem-setup"></a>
+
+Create a file system in Amazon EFS with a mount target in every Availability Zone that your function connects to\. For performance and resilience, use at least two Availability Zones\. For example, in a simple configuration you could have a VPC with two private subnets in separate Availability Zones\. The function connects to both subnets and a mount target is available in each\. Ensure that NFS traffic \(port 2049\) is allowed by the security groups used by the function and mount targets\.
+
+**Note**  
+When you create a file system, you choose a performance mode that can't be changed later\. **General purpose** mode has lower latency, and **Max I/O** mode supports a higher maximum throughput and IOPS\. For help choosing, see [Amazon EFS performance](https://docs.aws.amazon.com/efs/latest/ug/performance.html) in the *Amazon Elastic File System User Guide*\.
+
+An access point connects each instance of the function to the right mount target for the Availability Zone it connects to\. For best performance, create an access point with a non\-root path, and limit the number of files that you create in each directory\. User and owner IDs are required, but they don't need to have a specific value\. The following example creates a directory named `my-function` on the file system and sets the owner ID to 1001 with standard directory permissions \(755\)\.
+
+**Example access point configuration**  
++ **Name** – `files`
++ **User ID** – `1001`
++ **Group ID** – `1001`
++ **Path** – `/my-function`
++ **Permissions** – `755`
++ **Owner user ID** – `1001`
++ **Group user ID** – `1001`
+
+When a function uses the access point, it is given user ID 1001 and has full access to the directory\.
+
+For more information, see the following topics in the *Amazon Elastic File System User Guide*:
++ [Creating resources for Amazon EFS](https://docs.aws.amazon.com/efs/latest/ug/creating-using.html)
++ [Working with users, groups, and permissions](https://docs.aws.amazon.com/efs/latest/ug/accessing-fs-nfs-permissions.html)
 
 ## Connecting to a file system \(console\)<a name="configuration-filesystem-config"></a>
 
@@ -36,45 +75,6 @@ Amazon EFS charges for storage and throughput, with rates that vary by storage c
 Lambda charges for data transfer between VPCs\. This only applies if your function's VPC is peered to another VPC with a file system\. The rates are the same as for Amazon EC2 data transfer between VPCs in the same Region\. For details, see [Lambda pricing](https://aws.amazon.com/lambda/pricing)\.
 
 For more information about Lambda's integration with Amazon EFS, see [Using Amazon EFS with Lambda](services-efs.md)\.
-
-## Configuring a file system and access point<a name="configuration-filesystem-setup"></a>
-
-Create a file system in Amazon EFS with a mount target in every Availability Zone that your function connects to\. For performance and resilience, use at least two Availability Zones\. For example, in a simple configuration you could have a VPC with two private subnets in separate Availability Zones\. The function connects to both subnets and a mount target is available in each\. Ensure that NFS traffic \(port 2049\) is allowed by the security groups used by the function and mount targets\.
-
-**Note**  
-When you create a file system, you choose a performance mode that can't be changed later\. **General purpose** mode has lower latency, and **Max I/O** mode supports a higher maximum throughput and IOPS\. For help choosing, see [Amazon EFS performance](https://docs.aws.amazon.com/efs/latest/ug/performance.html) in the *Amazon Elastic File System User Guide*\.
-
-An access point connects each instance of the function to the right mount target for the Availability Zone it connects to\. For best performance, create an access point with a non\-root path, and limit the number of files that you create in each directory\. User and owner IDs are required, but they don't need to have a specific value\. The following example creates a directory named `my-function` on the file system and sets the owner ID to 1001 with standard directory permissions \(755\)\.
-
-**Example access point configuration**  
-+ **Name** – `files`
-+ **User ID** – `1001`
-+ **Group ID** – `1001`
-+ **Path** – `/my-function`
-+ **Permissions** – `755`
-+ **Owner user ID** – `1001`
-+ **Group user ID** – `1001`
-
-When a function uses the access point, it is given user ID 1001 and has full access to the directory\.
-
-For more information, see the following topics in the *Amazon Elastic File System User Guide*:
-+ [Creating resources for Amazon EFS](https://docs.aws.amazon.com/efs/latest/ug/creating-using.html)
-+ [Working with users, groups, and permissions](https://docs.aws.amazon.com/efs/latest/ug/accessing-fs-nfs-permissions.html)
-
-## Execution role and user permissions<a name="configuration-filesystem-permissions"></a>
-
-Lambda uses your function's permissions to mount file systems\. To connect to a file system, your function's execution role must have the following permissions in addition to the [permissions required to connect to the file system's VPC](configuration-vpc.md#vpc-permissions):
-
-**Execution role permissions**
-+ **elasticfilesystem:ClientMount**
-+ **elasticfilesystem:ClientWrite \(not required for read\-only connections\)**
-
-These permissions are included in the **AmazonElasticFileSystemClientReadWriteAccess** managed policy\.
-
-When you configure a file system, Lambda uses your permissions to verify mount targets\. To configure a function to connect to a file system, your IAM user needs the following permissions:
-
-**User permissions**
-+ **elasticfilesystem:DescribeMountTargets**
 
 ## Configuring file system access with the Lambda API<a name="configuration-filesystem-api"></a>
 
@@ -130,6 +130,7 @@ You can use AWS CloudFormation and the AWS Serverless Application Model \(AWS SA
 **Example template\.yml – File system configuration**  
 
 ```
+Transform: AWS::Serverless-2016-10-31
 Resources:
   VPC:
     Type: AWS::EC2::VPC
@@ -141,20 +142,33 @@ Resources:
       VpcId:
         Ref: VPC
       CidrBlock: 10.0.1.0/24
-      AvailabilityZone: "eu-central-1a"
+      AvailabilityZone: "us-west-2a"
   EfsSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
       VpcId:
         Ref: VPC
       GroupDescription: "mnt target sg"
-      SecurityGroupEgress:
+      SecurityGroupIngress:
       - IpProtocol: -1
         CidrIp: "0.0.0.0/0"
   FileSystem:
     Type: AWS::EFS::FileSystem
     Properties:
       PerformanceMode: generalPurpose
+  AccessPoint:
+    Type: AWS::EFS::AccessPoint
+    Properties:
+      FileSystemId:
+        Ref: FileSystem
+      PosixUser:
+        Uid: "1001"
+        Gid: "1001"
+      RootDirectory:
+        CreationInfo:
+          OwnerGid: "1001"
+          OwnerUid: "1001"
+          Permissions: "755"
   MountTarget1:
     Type: AWS::EFS::MountTarget
     Properties:
@@ -167,11 +181,17 @@ Resources:
   MyFunctionWithEfs:
     Type: [AWS::Serverless::Function](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html)
     Properties:
-      CodeUri: function/.
-      Description: Use a file system.
+      Handler: index.handler
+      Runtime: python3.9
+      VpcConfig:
+        SecurityGroupIds:
+        - Ref: EfsSecurityGroup
+        SubnetIds:
+        - Ref: Subnet1
       FileSystemConfigs:
-      - Arn: "arn:aws:elasticfilesystem:eu-central-1:123456789101:access-point/fsap-015cxmplb72b405fd"
-        LocalMountPath: "/mnt/efs0"
+      - Arn: !GetAtt AccessPoint.Arn
+        LocalMountPath: "/mnt/efs"
+      Description: Use a file system.
     DependsOn: "MountTarget1"
 ```
 

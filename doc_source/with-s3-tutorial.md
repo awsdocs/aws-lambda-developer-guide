@@ -636,7 +636,7 @@ This procedure configures the S3 bucket to invoke your function every time that 
    + **Destination** – **Lambda function**
    + **Lambda function** – **CreateThumbnail**
 
-For more information on event configuration, see [Enabling and configuring event notifications using the Amazon S3 console](https://docs.aws.amazon.com/AmazonS3/latest/userguide/enable-event-notifications.html) in the *Amazon Simple Storage Service Console User Guide*\.
+For more information on event configuration, see [Enabling and configuring event notifications using the Amazon S3 console](https://docs.aws.amazon.com/AmazonS3/latest/userguide/enable-event-notifications.html) in the *Amazon Simple Storage Service User Guide*\.
 
 ## Step 9\. Test using the S3 trigger<a name="with-s3-tutorial-configure-event-source-test-end-to-end"></a>
 

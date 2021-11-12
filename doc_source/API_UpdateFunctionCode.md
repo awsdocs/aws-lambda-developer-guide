@@ -47,7 +47,7 @@ Required: Yes
 The request accepts the following data in JSON format\.
 
  ** [ Architectures ](#API_UpdateFunctionCode_RequestSyntax) **   <a name="SSS-UpdateFunctionCode-request-Architectures"></a>
-The instruction set architecture that the function supports\. Enter a string array with one of the valid values\. The default value is `x86_64`\.  
+The instruction set architecture that the function supports\. Enter a string array with one of the valid values \(arm64 or x86\_64\)\. The default value is `x86_64`\.  
 Type: Array of strings  
 Array Members: Fixed number of 1 item\.  
 Valid Values:` x86_64 | arm64`   

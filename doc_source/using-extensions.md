@@ -108,7 +108,7 @@ RUN pip install -r requirements.txt
 
 # Add an extension from the local directory into /opt
 ADD my-extension.zip /opt
-CMD python ./index.py
+CMD python ./my-function.py
 ```
 
 ## Next steps<a name="using-extensions-next"></a>

@@ -217,7 +217,7 @@ Lambda always provides server\-side encryption at rest with an AWS KMS key\. By 
 
 If you prefer, you can provide an AWS KMS customer managed key instead\. You might do this to have control over rotation of the KMS key or to meet the requirements of your organization for managing KMS keys\. When you use a customer managed key, only users in your account with access to the KMS key can view or manage environment variables on the function\.
 
-Customer managed keys incur standard AWS KMS charges\. For more information, see [AWS Key Management Service pricing](https://aws.amazon.com/kms/pricing/), in the *AWS KMS produt pages*\.
+Customer managed keys incur standard AWS KMS charges\. For more information, see [AWS Key Management Service pricing](https://aws.amazon.com/kms/pricing/), in the *AWS KMS product pages*\.
 
 **Security in transit**  
 For additional security, you can enable helpers for encryption in transit, which ensures that your environment variables are encrypted client\-side for protection in transit\.

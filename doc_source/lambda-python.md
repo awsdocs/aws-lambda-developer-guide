@@ -12,10 +12,10 @@ End of support for the Python 2\.7 runtime started on July 15, 2021\. For more i
 
 | Name | Identifier | AWS SDK for Python | Operating system | Architectures | 
 | --- | --- | --- | --- | --- | 
-|  Python 3\.9  |  `python3.9`  |  boto3\-1\.17\.100 botocore\-1\.20\.100  |  Amazon Linux 2  |  x86\_64, arm64  | 
-|  Python 3\.8  |  `python3.8`  |  boto3\-1\.17\.100 botocore\-1\.20\.100  |  Amazon Linux 2  |  x86\_64, arm64  | 
-|  Python 3\.7  |  `python3.7`  |  boto3\-1\.17\.100 botocore\-1\.20\.100  |  Amazon Linux  |  x86\_64  | 
-|  Python 3\.6  |  `python3.6`  |  boto3\-1\.17\.100 botocore\-1\.20\.100  |  Amazon Linux  |  x86\_64  | 
+|  Python 3\.9  |  `python3.9`  |  boto3\-1\.18\.55 botocore\-1\.21\.55  |  Amazon Linux 2  |  x86\_64, arm64  | 
+|  Python 3\.8  |  `python3.8`  |  boto3\-1\.18\.55 botocore\-1\.21\.55  |  Amazon Linux 2  |  x86\_64, arm64  | 
+|  Python 3\.7  |  `python3.7`  |  boto3\-1\.18\.55 botocore\-1\.21\.55  |  Amazon Linux  |  x86\_64  | 
+|  Python 3\.6  |  `python3.6`  |  boto3\-1\.18\.55 botocore\-1\.21\.55  |  Amazon Linux  |  x86\_64  | 
 |  Python 2\.7  |  `python2.7`  |  boto3\-1\.17\.100 botocore\-1\.20\.100  |  Amazon Linux  |  x86\_64  | 
 
 **To create a Python function**
