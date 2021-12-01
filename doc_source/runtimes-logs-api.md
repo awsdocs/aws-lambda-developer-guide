@@ -86,9 +86,9 @@ PUT http://${AWS_LAMBDA_RUNTIME_API}/2020-08-15/logs/ HTTP/1.1
     ],
   "buffering": {
       "maxItems": 1000,
-      "maxBytes": 10240,
+      "maxBytes": 262144,
       "timeoutMs": 100
-    }
+    },
   "destination": {
     "protocol": "HTTP",
     "URI": "http://sandbox.localdomain:8080/lambda_logs"

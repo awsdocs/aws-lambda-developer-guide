@@ -4,7 +4,7 @@ The function's AWS X\-Ray tracing configuration\.
 
 ## Contents<a name="API_TracingConfigResponse_Contents"></a>
 
- **Mode**   <a name="SSS-Type-TracingConfigResponse-Mode"></a>
+ ** Mode **   <a name="SSS-Type-TracingConfigResponse-Mode"></a>
 The tracing mode\.  
 Type: String  
 Valid Values:` Active | PassThrough`   

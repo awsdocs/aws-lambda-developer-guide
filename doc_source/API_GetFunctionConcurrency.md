@@ -1,6 +1,6 @@
 # GetFunctionConcurrency<a name="API_GetFunctionConcurrency"></a>
 
-Returns details about the reserved concurrency configuration for a function\. To set a concurrency limit for a function, use [PutFunctionConcurrency](API_PutFunctionConcurrency.md)\.
+Returns details about the reserved concurrency configuration for a function\. To set a concurrency limit for a function, use [ PutFunctionConcurrency ](API_PutFunctionConcurrency.md)\.
 
 ## Request Syntax<a name="API_GetFunctionConcurrency_RequestSyntax"></a>
 
@@ -12,7 +12,7 @@ GET /2019-09-30/functions/FunctionName/concurrency HTTP/1.1
 
 The request uses the following URI parameters\.
 
- ** [FunctionName](#API_GetFunctionConcurrency_RequestSyntax) **   <a name="SSS-GetFunctionConcurrency-request-FunctionName"></a>
+ ** [ FunctionName ](#API_GetFunctionConcurrency_RequestSyntax) **   <a name="SSS-GetFunctionConcurrency-request-FunctionName"></a>
 The name of the Lambda function\.  
 
 **Name formats**
@@ -45,26 +45,26 @@ If the action is successful, the service sends back an HTTP 200 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** [ReservedConcurrentExecutions](#API_GetFunctionConcurrency_ResponseSyntax) **   <a name="SSS-GetFunctionConcurrency-response-ReservedConcurrentExecutions"></a>
+ ** [ ReservedConcurrentExecutions ](#API_GetFunctionConcurrency_ResponseSyntax) **   <a name="SSS-GetFunctionConcurrency-response-ReservedConcurrentExecutions"></a>
 The number of simultaneous executions that are reserved for the function\.  
 Type: Integer  
 Valid Range: Minimum value of 0\.
 
 ## Errors<a name="API_GetFunctionConcurrency_Errors"></a>
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **ResourceNotFoundException**   
+ ** ResourceNotFoundException **   
 The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 
- **TooManyRequestsException**   
+ ** TooManyRequestsException **   
 The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 

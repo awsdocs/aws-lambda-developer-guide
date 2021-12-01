@@ -12,7 +12,7 @@ GET /2015-03-31/event-source-mappings/?EventSourceArn=EventSourceArn&FunctionNam
 
 The request uses the following URI parameters\.
 
- ** [EventSourceArn](#API_ListEventSourceMappings_RequestSyntax) **   <a name="SSS-ListEventSourceMappings-request-EventSourceArn"></a>
+ ** [ EventSourceArn ](#API_ListEventSourceMappings_RequestSyntax) **   <a name="SSS-ListEventSourceMappings-request-EventSourceArn"></a>
 The Amazon Resource Name \(ARN\) of the event source\.  
 +  **Amazon Kinesis** \- The ARN of the data stream or a stream consumer\.
 +  **Amazon DynamoDB Streams** \- The ARN of the stream\.
@@ -20,7 +20,7 @@ The Amazon Resource Name \(ARN\) of the event source\.
 +  **Amazon Managed Streaming for Apache Kafka** \- The ARN of the cluster\.
 Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)` 
 
- ** [FunctionName](#API_ListEventSourceMappings_RequestSyntax) **   <a name="SSS-ListEventSourceMappings-request-FunctionName"></a>
+ ** [ FunctionName ](#API_ListEventSourceMappings_RequestSyntax) **   <a name="SSS-ListEventSourceMappings-request-FunctionName"></a>
 The name of the Lambda function\.  
 
 **Name formats**
@@ -32,10 +32,10 @@ The length constraint applies only to the full ARN\. If you specify only the fun
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
- ** [Marker](#API_ListEventSourceMappings_RequestSyntax) **   <a name="SSS-ListEventSourceMappings-request-Marker"></a>
+ ** [ Marker ](#API_ListEventSourceMappings_RequestSyntax) **   <a name="SSS-ListEventSourceMappings-request-Marker"></a>
 A pagination token returned by a previous call\.
 
- ** [MaxItems](#API_ListEventSourceMappings_RequestSyntax) **   <a name="SSS-ListEventSourceMappings-request-MaxItems"></a>
+ ** [ MaxItems ](#API_ListEventSourceMappings_RequestSyntax) **   <a name="SSS-ListEventSourceMappings-request-MaxItems"></a>
 The maximum number of event source mappings to return\. Note that ListEventSourceMappings returns a maximum of 100 items in each response, even if you set the number higher\.  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.
 
@@ -102,29 +102,29 @@ If the action is successful, the service sends back an HTTP 200 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** [EventSourceMappings](#API_ListEventSourceMappings_ResponseSyntax) **   <a name="SSS-ListEventSourceMappings-response-EventSourceMappings"></a>
+ ** [ EventSourceMappings ](#API_ListEventSourceMappings_ResponseSyntax) **   <a name="SSS-ListEventSourceMappings-response-EventSourceMappings"></a>
 A list of event source mappings\.  
-Type: Array of [EventSourceMappingConfiguration](API_EventSourceMappingConfiguration.md) objects
+Type: Array of [ EventSourceMappingConfiguration ](API_EventSourceMappingConfiguration.md) objects
 
- ** [NextMarker](#API_ListEventSourceMappings_ResponseSyntax) **   <a name="SSS-ListEventSourceMappings-response-NextMarker"></a>
+ ** [ NextMarker ](#API_ListEventSourceMappings_ResponseSyntax) **   <a name="SSS-ListEventSourceMappings-response-NextMarker"></a>
 A pagination token that's returned when the response doesn't contain all event source mappings\.  
 Type: String
 
 ## Errors<a name="API_ListEventSourceMappings_Errors"></a>
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **ResourceNotFoundException**   
+ ** ResourceNotFoundException **   
 The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 
- **TooManyRequestsException**   
+ ** TooManyRequestsException **   
 The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 

@@ -2,7 +2,7 @@
 
 Retrieves the configuration for asynchronous invocation for a function, version, or alias\.
 
-To configure options for asynchronous invocation, use [PutFunctionEventInvokeConfig](API_PutFunctionEventInvokeConfig.md)\.
+To configure options for asynchronous invocation, use [ PutFunctionEventInvokeConfig ](API_PutFunctionEventInvokeConfig.md)\.
 
 ## Request Syntax<a name="API_GetFunctionEventInvokeConfig_RequestSyntax"></a>
 
@@ -14,7 +14,7 @@ GET /2019-09-25/functions/FunctionName/event-invoke-config?Qualifier=Qualifier H
 
 The request uses the following URI parameters\.
 
- ** [FunctionName](#API_GetFunctionEventInvokeConfig_RequestSyntax) **   <a name="SSS-GetFunctionEventInvokeConfig-request-FunctionName"></a>
+ ** [ FunctionName ](#API_GetFunctionEventInvokeConfig_RequestSyntax) **   <a name="SSS-GetFunctionEventInvokeConfig-request-FunctionName"></a>
 The name of the Lambda function, version, or alias\.  
 
 **Name formats**
@@ -26,7 +26,7 @@ Length Constraints: Minimum length of 1\. Maximum length of 140\.
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
 Required: Yes
 
- ** [Qualifier](#API_GetFunctionEventInvokeConfig_RequestSyntax) **   <a name="SSS-GetFunctionEventInvokeConfig-request-Qualifier"></a>
+ ** [ Qualifier ](#API_GetFunctionEventInvokeConfig_RequestSyntax) **   <a name="SSS-GetFunctionEventInvokeConfig-request-Qualifier"></a>
 A version number or alias name\.  
 Length Constraints: Minimum length of 1\. Maximum length of 128\.  
 Pattern: `(|[a-zA-Z0-9$_-]+)` 
@@ -63,7 +63,7 @@ If the action is successful, the service sends back an HTTP 200 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** [DestinationConfig](#API_GetFunctionEventInvokeConfig_ResponseSyntax) **   <a name="SSS-GetFunctionEventInvokeConfig-response-DestinationConfig"></a>
+ ** [ DestinationConfig ](#API_GetFunctionEventInvokeConfig_ResponseSyntax) **   <a name="SSS-GetFunctionEventInvokeConfig-response-DestinationConfig"></a>
 A destination for events after they have been sent to a function for processing\.  
 
 **Destinations**
@@ -71,42 +71,42 @@ A destination for events after they have been sent to a function for processing\
 +  **Queue** \- The ARN of an SQS queue\.
 +  **Topic** \- The ARN of an SNS topic\.
 +  **Event Bus** \- The ARN of an Amazon EventBridge event bus\.
-Type: [DestinationConfig](API_DestinationConfig.md) object
+Type: [ DestinationConfig ](API_DestinationConfig.md) object
 
- ** [FunctionArn](#API_GetFunctionEventInvokeConfig_ResponseSyntax) **   <a name="SSS-GetFunctionEventInvokeConfig-response-FunctionArn"></a>
+ ** [ FunctionArn ](#API_GetFunctionEventInvokeConfig_ResponseSyntax) **   <a name="SSS-GetFunctionEventInvokeConfig-response-FunctionArn"></a>
 The Amazon Resource Name \(ARN\) of the function\.  
 Type: String  
 Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
- ** [LastModified](#API_GetFunctionEventInvokeConfig_ResponseSyntax) **   <a name="SSS-GetFunctionEventInvokeConfig-response-LastModified"></a>
+ ** [ LastModified ](#API_GetFunctionEventInvokeConfig_ResponseSyntax) **   <a name="SSS-GetFunctionEventInvokeConfig-response-LastModified"></a>
 The date and time that the configuration was last updated, in Unix time seconds\.  
 Type: Timestamp
 
- ** [MaximumEventAgeInSeconds](#API_GetFunctionEventInvokeConfig_ResponseSyntax) **   <a name="SSS-GetFunctionEventInvokeConfig-response-MaximumEventAgeInSeconds"></a>
+ ** [ MaximumEventAgeInSeconds ](#API_GetFunctionEventInvokeConfig_ResponseSyntax) **   <a name="SSS-GetFunctionEventInvokeConfig-response-MaximumEventAgeInSeconds"></a>
 The maximum age of a request that Lambda sends to a function for processing\.  
 Type: Integer  
 Valid Range: Minimum value of 60\. Maximum value of 21600\.
 
- ** [MaximumRetryAttempts](#API_GetFunctionEventInvokeConfig_ResponseSyntax) **   <a name="SSS-GetFunctionEventInvokeConfig-response-MaximumRetryAttempts"></a>
+ ** [ MaximumRetryAttempts ](#API_GetFunctionEventInvokeConfig_ResponseSyntax) **   <a name="SSS-GetFunctionEventInvokeConfig-response-MaximumRetryAttempts"></a>
 The maximum number of times to retry when the function returns an error\.  
 Type: Integer  
 Valid Range: Minimum value of 0\. Maximum value of 2\.
 
 ## Errors<a name="API_GetFunctionEventInvokeConfig_Errors"></a>
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **ResourceNotFoundException**   
+ ** ResourceNotFoundException **   
 The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 
- **TooManyRequestsException**   
+ ** TooManyRequestsException **   
 The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 

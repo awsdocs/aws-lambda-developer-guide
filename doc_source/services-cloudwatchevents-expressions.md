@@ -1,6 +1,6 @@
 # Schedule expressions using rate or cron<a name="services-cloudwatchevents-expressions"></a>
 
-AWS Lambda supports standard rate and cron expressions for frequencies of up to once per minute\. CloudWatch Events rate expressions have the following format\.
+AWS Lambda supports standard rate and cron expressions for frequencies of up to once per minute\. EventBridge \(CloudWatch Events\) rate expressions have the following format\.
 
 ```
 rate(Value Unit)

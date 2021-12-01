@@ -4,13 +4,13 @@ The VPC security groups and subnets that are attached to a Lambda function\. For
 
 ## Contents<a name="API_VpcConfig_Contents"></a>
 
- **SecurityGroupIds**   <a name="SSS-Type-VpcConfig-SecurityGroupIds"></a>
+ ** SecurityGroupIds **   <a name="SSS-Type-VpcConfig-SecurityGroupIds"></a>
 A list of VPC security groups IDs\.  
 Type: Array of strings  
 Array Members: Maximum number of 5 items\.  
 Required: No
 
- **SubnetIds**   <a name="SSS-Type-VpcConfig-SubnetIds"></a>
+ ** SubnetIds **   <a name="SSS-Type-VpcConfig-SubnetIds"></a>
 A list of VPC subnet IDs\.  
 Type: Array of strings  
 Array Members: Maximum number of 16 items\.  

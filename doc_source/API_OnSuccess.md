@@ -4,7 +4,7 @@ A destination for events that were processed successfully\.
 
 ## Contents<a name="API_OnSuccess_Contents"></a>
 
- **Destination**   <a name="SSS-Type-OnSuccess-Destination"></a>
+ ** Destination **   <a name="SSS-Type-OnSuccess-Destination"></a>
 The Amazon Resource Name \(ARN\) of the destination resource\.  
 Type: String  
 Length Constraints: Minimum length of 0\. Maximum length of 350\.  

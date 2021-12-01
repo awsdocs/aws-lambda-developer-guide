@@ -12,13 +12,13 @@ DELETE /2018-10-31/layers/LayerName/versions/VersionNumber HTTP/1.1
 
 The request uses the following URI parameters\.
 
- ** [LayerName](#API_DeleteLayerVersion_RequestSyntax) **   <a name="SSS-DeleteLayerVersion-request-LayerName"></a>
+ ** [ LayerName ](#API_DeleteLayerVersion_RequestSyntax) **   <a name="SSS-DeleteLayerVersion-request-LayerName"></a>
 The name or Amazon Resource Name \(ARN\) of the layer\.  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
 Pattern: `(arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+)|[a-zA-Z0-9-_]+`   
 Required: Yes
 
- ** [VersionNumber](#API_DeleteLayerVersion_RequestSyntax) **   <a name="SSS-DeleteLayerVersion-request-VersionNumber"></a>
+ ** [ VersionNumber ](#API_DeleteLayerVersion_RequestSyntax) **   <a name="SSS-DeleteLayerVersion-request-VersionNumber"></a>
 The version number\.  
 Required: Yes
 
@@ -38,11 +38,11 @@ If the action is successful, the service sends back an HTTP 204 response with an
 
 ## Errors<a name="API_DeleteLayerVersion_Errors"></a>
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 
- **TooManyRequestsException**   
+ ** TooManyRequestsException **   
 The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 

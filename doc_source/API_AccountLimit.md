@@ -4,28 +4,28 @@ Limits that are related to concurrency and storage\. All file and storage sizes 
 
 ## Contents<a name="API_AccountLimit_Contents"></a>
 
- **CodeSizeUnzipped**   <a name="SSS-Type-AccountLimit-CodeSizeUnzipped"></a>
+ ** CodeSizeUnzipped **   <a name="SSS-Type-AccountLimit-CodeSizeUnzipped"></a>
 The maximum size of a function's deployment package and layers when they're extracted\.  
 Type: Long  
 Required: No
 
- **CodeSizeZipped**   <a name="SSS-Type-AccountLimit-CodeSizeZipped"></a>
+ ** CodeSizeZipped **   <a name="SSS-Type-AccountLimit-CodeSizeZipped"></a>
 The maximum size of a deployment package when it's uploaded directly to Lambda\. Use Amazon S3 for larger files\.  
 Type: Long  
 Required: No
 
- **ConcurrentExecutions**   <a name="SSS-Type-AccountLimit-ConcurrentExecutions"></a>
+ ** ConcurrentExecutions **   <a name="SSS-Type-AccountLimit-ConcurrentExecutions"></a>
 The maximum number of simultaneous function executions\.  
 Type: Integer  
 Required: No
 
- **TotalCodeSize**   <a name="SSS-Type-AccountLimit-TotalCodeSize"></a>
+ ** TotalCodeSize **   <a name="SSS-Type-AccountLimit-TotalCodeSize"></a>
 The amount of storage space that you can use for all deployment packages and layer archives\.  
 Type: Long  
 Required: No
 
- **UnreservedConcurrentExecutions**   <a name="SSS-Type-AccountLimit-UnreservedConcurrentExecutions"></a>
-The maximum number of simultaneous function executions, minus the capacity that's reserved for individual functions with [PutFunctionConcurrency](API_PutFunctionConcurrency.md)\.  
+ ** UnreservedConcurrentExecutions **   <a name="SSS-Type-AccountLimit-UnreservedConcurrentExecutions"></a>
+The maximum number of simultaneous function executions, minus the capacity that's reserved for individual functions with [ PutFunctionConcurrency ](API_PutFunctionConcurrency.md)\.  
 Type: Integer  
 Valid Range: Minimum value of 0\.  
 Required: No

@@ -45,13 +45,43 @@ The following steps demonstrate how to upload a \.zip file as your deployment pa
 ### Using the AWS CLI<a name="gettingstarted-package-zip-cli"></a>
 
 You can upload a \.zip file as your deployment package using the AWS Command Line Interface \(AWS CLI\)\. For language\-specific instructions, see the following topics\.
-+  [Deploy Node\.js Lambda functions with \.zip file archives](nodejs-package.md) 
-+  [Deploy Python Lambda functions with \.zip file archives](python-package.md) 
-+  [Deploy Ruby Lambda functions with \.zip file archives](ruby-package.md) 
-+  [Deploy Java Lambda functions with \.zip or JAR file archives](java-package.md) 
-+  [Deploy Go Lambda functions with \.zip file archives](golang-package.md) 
-+  [Deploy C\# Lambda functions with \.zip file archives](csharp-package.md) 
-+  [Deploy PowerShell Lambda functions with \.zip file archives](powershell-package.md) 
+
+------
+#### [ Node\.js ]
+
+[Deploy Node\.js Lambda functions with \.zip file archives](nodejs-package.md) 
+
+------
+#### [ Python ]
+
+ [Deploy Python Lambda functions with \.zip file archives](python-package.md) 
+
+------
+#### [ Ruby ]
+
+ [Deploy Ruby Lambda functions with \.zip file archives](ruby-package.md) 
+
+------
+#### [ Java ]
+
+ [Deploy Java Lambda functions with \.zip or JAR file archives](java-package.md) 
+
+------
+#### [ Go ]
+
+ [Deploy Go Lambda functions with \.zip file archives](golang-package.md) 
+
+------
+#### [ C\# ]
+
+ [Deploy C\# Lambda functions with \.zip file archives](csharp-package.md) 
+
+------
+#### [ PowerShell ]
+
+ [Deploy PowerShell Lambda functions with \.zip file archives](powershell-package.md) 
+
+------
 
 ### Using Amazon S3<a name="gettingstarted-package-zip-cli"></a>
 

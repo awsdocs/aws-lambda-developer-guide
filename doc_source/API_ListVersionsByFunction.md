@@ -12,7 +12,7 @@ GET /2015-03-31/functions/FunctionName/versions?Marker=Marker&MaxItems=MaxItems 
 
 The request uses the following URI parameters\.
 
- ** [FunctionName](#API_ListVersionsByFunction_RequestSyntax) **   <a name="SSS-ListVersionsByFunction-request-FunctionName"></a>
+ ** [ FunctionName ](#API_ListVersionsByFunction_RequestSyntax) **   <a name="SSS-ListVersionsByFunction-request-FunctionName"></a>
 The name of the Lambda function\.  
 
 **Name formats**
@@ -24,10 +24,10 @@ Length Constraints: Minimum length of 1\. Maximum length of 170\.
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_\.]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
 Required: Yes
 
- ** [Marker](#API_ListVersionsByFunction_RequestSyntax) **   <a name="SSS-ListVersionsByFunction-request-Marker"></a>
+ ** [ Marker ](#API_ListVersionsByFunction_RequestSyntax) **   <a name="SSS-ListVersionsByFunction-request-Marker"></a>
 Specify the pagination token that's returned by a previous request to retrieve the next page of results\.
 
- ** [MaxItems](#API_ListVersionsByFunction_RequestSyntax) **   <a name="SSS-ListVersionsByFunction-request-MaxItems"></a>
+ ** [ MaxItems ](#API_ListVersionsByFunction_RequestSyntax) **   <a name="SSS-ListVersionsByFunction-request-MaxItems"></a>
 The maximum number of versions to return\. Note that `ListVersionsByFunction` returns a maximum of 50 items in each response, even if you set the number higher\.  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.
 
@@ -45,6 +45,7 @@ Content-type: application/json
    "NextMarker": "string",
    "Versions": [ 
       { 
+         "Architectures": [ "string" ],
          "CodeSha256": "string",
          "CodeSize": number,
          "DeadLetterConfig": { 
@@ -125,29 +126,29 @@ If the action is successful, the service sends back an HTTP 200 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** [NextMarker](#API_ListVersionsByFunction_ResponseSyntax) **   <a name="SSS-ListVersionsByFunction-response-NextMarker"></a>
+ ** [ NextMarker ](#API_ListVersionsByFunction_ResponseSyntax) **   <a name="SSS-ListVersionsByFunction-response-NextMarker"></a>
 The pagination token that's included if more results are available\.  
 Type: String
 
- ** [Versions](#API_ListVersionsByFunction_ResponseSyntax) **   <a name="SSS-ListVersionsByFunction-response-Versions"></a>
+ ** [ Versions ](#API_ListVersionsByFunction_ResponseSyntax) **   <a name="SSS-ListVersionsByFunction-response-Versions"></a>
 A list of Lambda function versions\.  
-Type: Array of [FunctionConfiguration](API_FunctionConfiguration.md) objects
+Type: Array of [ FunctionConfiguration ](API_FunctionConfiguration.md) objects
 
 ## Errors<a name="API_ListVersionsByFunction_Errors"></a>
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **ResourceNotFoundException**   
+ ** ResourceNotFoundException **   
 The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 
- **TooManyRequestsException**   
+ ** TooManyRequestsException **   
 The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 

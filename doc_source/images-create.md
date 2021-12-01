@@ -1,6 +1,6 @@
 # Creating Lambda container images<a name="images-create"></a>
 
-You can package your Lambda function code and dependencies as a container image, using tools such as the Docker CLI\. You can then upload the image to your container registry hosted on Amazon Elastic Container Registry \(Amazon ECR\)\. Note that you must create the Lambda function from the same account as the container registry in Amazon ECR\.
+You can package your Lambda function code and dependencies as a container image, using tools such as the Docker CLI\. You can then upload the image to your container registry hosted on Amazon Elastic Container Registry \(Amazon ECR\)\.
 
 AWS provides a set of open\-source [base images](runtimes-images.md#runtimes-images-lp) that you can use to create your container image\. These base images include a [runtime interface client](runtimes-images.md#runtimes-api-client) to manage the interaction between Lambda and your function code\.
 
@@ -47,6 +47,8 @@ To deploy a container image to Lambda, note the following requirements:
 
 1. Lambda supports only Linux\-based container images\.
 
+1. Lambda provides multi\-architecture base images\. However, the image you build for your function must target only one of the architectures\. Lambda does not support functions that use multi\-architecture container images\.
+
 ## Container image settings<a name="images-parms"></a>
 
 Lambda supports the following container image settings in the Dockerfile:
@@ -67,7 +69,13 @@ When you specify ENTRYPOINT or CMD in the Dockerfile or as an override, make sur
 
 ## Create an image from an AWS base image for Lambda<a name="images-create-from-base"></a>
 
-To build a container image for a new Lambda function, you can start with an AWS base image for Lambda\.
+To build a container image for a new Lambda function, you can start with an AWS base image for Lambda\. Lambda provides two types of base images:
++ Multi\-architecture base image
+
+  Specify one of the main image tags \(such as `python:3.9` or `java:11`\) to choose this type of image\.
++ Architecture\-specific base image
+
+  Specify an image tag with an architecture suffix\. For example, specify `3.9-arm64` to choose the arm64 base image for Python 3\.9\.
 
 **Note**  
 AWS periodically provides updates to the AWS base images for Lambda\. If your Dockerfile includes the image name in the FROM property, your Docker client pulls the latest version of the image from Docker Hub\. To use the updated base image, you must rebuild your container image and [update the function code](configuration-images.md#configuration-images-update)\.
@@ -104,7 +112,7 @@ AWS periodically provides updates to the AWS base images for Lambda\. If your Do
    FROM public.ecr.aws/lambda/nodejs:14
    # Alternatively, you can pull the base image from Docker Hub: amazon/aws-lambda-nodejs:12
    
-   # Assumes your function is named "app.js", and there is a package.json file in the app directory
+   # Assumes your function is named "app.js", and there is a package.json file in the app directory 
    COPY app.js package.json  ${LAMBDA_TASK_ROOT}
    
    # Install NPM dependencies for function

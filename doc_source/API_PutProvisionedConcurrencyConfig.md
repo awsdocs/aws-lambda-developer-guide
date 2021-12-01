@@ -17,7 +17,7 @@ Content-type: application/json
 
 The request uses the following URI parameters\.
 
- ** [FunctionName](#API_PutProvisionedConcurrencyConfig_RequestSyntax) **   <a name="SSS-PutProvisionedConcurrencyConfig-request-FunctionName"></a>
+ ** [ FunctionName ](#API_PutProvisionedConcurrencyConfig_RequestSyntax) **   <a name="SSS-PutProvisionedConcurrencyConfig-request-FunctionName"></a>
 The name of the Lambda function\.  
 
 **Name formats**
@@ -29,7 +29,7 @@ Length Constraints: Minimum length of 1\. Maximum length of 140\.
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
 Required: Yes
 
- ** [Qualifier](#API_PutProvisionedConcurrencyConfig_RequestSyntax) **   <a name="SSS-PutProvisionedConcurrencyConfig-request-Qualifier"></a>
+ ** [ Qualifier ](#API_PutProvisionedConcurrencyConfig_RequestSyntax) **   <a name="SSS-PutProvisionedConcurrencyConfig-request-Qualifier"></a>
 The version number or alias name\.  
 Length Constraints: Minimum length of 1\. Maximum length of 128\.  
 Pattern: `(|[a-zA-Z0-9$_-]+)`   
@@ -39,7 +39,7 @@ Required: Yes
 
 The request accepts the following data in JSON format\.
 
- ** [ProvisionedConcurrentExecutions](#API_PutProvisionedConcurrencyConfig_RequestSyntax) **   <a name="SSS-PutProvisionedConcurrencyConfig-request-ProvisionedConcurrentExecutions"></a>
+ ** [ ProvisionedConcurrentExecutions ](#API_PutProvisionedConcurrencyConfig_RequestSyntax) **   <a name="SSS-PutProvisionedConcurrencyConfig-request-ProvisionedConcurrentExecutions"></a>
 The amount of provisioned concurrency to allocate for the version or alias\.  
 Type: Integer  
 Valid Range: Minimum value of 1\.  
@@ -67,53 +67,53 @@ If the action is successful, the service sends back an HTTP 202 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** [AllocatedProvisionedConcurrentExecutions](#API_PutProvisionedConcurrencyConfig_ResponseSyntax) **   <a name="SSS-PutProvisionedConcurrencyConfig-response-AllocatedProvisionedConcurrentExecutions"></a>
+ ** [ AllocatedProvisionedConcurrentExecutions ](#API_PutProvisionedConcurrencyConfig_ResponseSyntax) **   <a name="SSS-PutProvisionedConcurrencyConfig-response-AllocatedProvisionedConcurrentExecutions"></a>
 The amount of provisioned concurrency allocated\.  
 Type: Integer  
 Valid Range: Minimum value of 0\.
 
- ** [AvailableProvisionedConcurrentExecutions](#API_PutProvisionedConcurrencyConfig_ResponseSyntax) **   <a name="SSS-PutProvisionedConcurrencyConfig-response-AvailableProvisionedConcurrentExecutions"></a>
+ ** [ AvailableProvisionedConcurrentExecutions ](#API_PutProvisionedConcurrencyConfig_ResponseSyntax) **   <a name="SSS-PutProvisionedConcurrencyConfig-response-AvailableProvisionedConcurrentExecutions"></a>
 The amount of provisioned concurrency available\.  
 Type: Integer  
 Valid Range: Minimum value of 0\.
 
- ** [LastModified](#API_PutProvisionedConcurrencyConfig_ResponseSyntax) **   <a name="SSS-PutProvisionedConcurrencyConfig-response-LastModified"></a>
+ ** [ LastModified ](#API_PutProvisionedConcurrencyConfig_ResponseSyntax) **   <a name="SSS-PutProvisionedConcurrencyConfig-response-LastModified"></a>
 The date and time that a user last updated the configuration, in [ISO 8601 format](https://www.iso.org/iso-8601-date-and-time-format.html)\.  
 Type: String
 
- ** [RequestedProvisionedConcurrentExecutions](#API_PutProvisionedConcurrencyConfig_ResponseSyntax) **   <a name="SSS-PutProvisionedConcurrencyConfig-response-RequestedProvisionedConcurrentExecutions"></a>
+ ** [ RequestedProvisionedConcurrentExecutions ](#API_PutProvisionedConcurrencyConfig_ResponseSyntax) **   <a name="SSS-PutProvisionedConcurrencyConfig-response-RequestedProvisionedConcurrentExecutions"></a>
 The amount of provisioned concurrency requested\.  
 Type: Integer  
 Valid Range: Minimum value of 1\.
 
- ** [Status](#API_PutProvisionedConcurrencyConfig_ResponseSyntax) **   <a name="SSS-PutProvisionedConcurrencyConfig-response-Status"></a>
+ ** [ Status ](#API_PutProvisionedConcurrencyConfig_ResponseSyntax) **   <a name="SSS-PutProvisionedConcurrencyConfig-response-Status"></a>
 The status of the allocation process\.  
 Type: String  
 Valid Values:` IN_PROGRESS | READY | FAILED` 
 
- ** [StatusReason](#API_PutProvisionedConcurrencyConfig_ResponseSyntax) **   <a name="SSS-PutProvisionedConcurrencyConfig-response-StatusReason"></a>
+ ** [ StatusReason ](#API_PutProvisionedConcurrencyConfig_ResponseSyntax) **   <a name="SSS-PutProvisionedConcurrencyConfig-response-StatusReason"></a>
 For failed allocations, the reason that provisioned concurrency could not be allocated\.  
 Type: String
 
 ## Errors<a name="API_PutProvisionedConcurrencyConfig_Errors"></a>
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **ResourceConflictException**   
+ ** ResourceConflictException **   
 The resource already exists, or another operation is in progress\.  
 HTTP Status Code: 409
 
- **ResourceNotFoundException**   
+ ** ResourceNotFoundException **   
 The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 
- **TooManyRequestsException**   
+ ** TooManyRequestsException **   
 The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 

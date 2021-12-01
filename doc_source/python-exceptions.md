@@ -1,7 +1,7 @@
 # AWS Lambda function errors in Python<a name="python-exceptions"></a>
 
 **Note**  
-End of support for the Python 2\.7 runtime starts on July 15, 2021\. For more information, see [Runtime support policy](runtime-support-policy.md)\.
+End of support for the Python 2\.7 runtime started on July 15, 2021\. For more information, see [Runtime support policy](runtime-support-policy.md)\.
 
 When your code raises an error, Lambda generates a JSON representation of the error\. This error document appears in the invocation log and, for synchronous invocations, in the output\.
 
@@ -35,7 +35,7 @@ A `4xx` series error indicates an error that the invoking client or service can 
 **`5xx`**  
 A `5xx` series error indicates an issue with Lambda, or an issue with the function's configuration or resources\. `5xx` series errors can indicate a temporary condition that can be resolved without any action by the user\. These issues can't be addressed by the invoking client or service, but a Lambda function's owner may be able to fix the issue\.
 
-For a complete list of invocation errors, see [Invoke API Errors](API_Invoke.md#API_Invoke_Errors)\.
+For a complete list of invocation errors, see [InvokeFunction errors](API_Invoke.md#API_Invoke_Errors)\.
 
 ## Using the Lambda console<a name="python-exceptions-console"></a>
 
@@ -45,19 +45,17 @@ You can invoke your function on the Lambda console by configuring a test event a
 
 1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
-1. Choose a function\.
+1. Choose the function to test, and choose **Test**\.
+
+1. Under **Test event**, select **New event**\.
+
+1. Select a **Template**\.
+
+1. For **Name**, enter a name for the test\. In the text entry box, enter the JSON test event\.
+
+1. Choose **Save changes**\.
 
 1. Choose **Test**\.
-
-1. Select **New event** and then choose an **Event template** from the dropdown list\.
-
-1. Enter a name for the test event\.
-
-1. Enter the JSON for the test event\.
-
-1. Choose **Create event**\.
-
-1. Choose **Invoke**\.
 
 The Lambda console invokes your function [synchronously](invocation-sync.md) and displays the result\. To see the response, logs, and other information, expand the **Details** section\.
 

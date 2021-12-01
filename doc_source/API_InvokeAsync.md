@@ -3,7 +3,7 @@
  *This action has been deprecated\.* 
 
 **Important**  
-For asynchronous function invocation, use [Invoke](API_Invoke.md)\.
+For asynchronous function invocation, use [ Invoke ](API_Invoke.md)\.
 
 Invokes a function asynchronously\.
 
@@ -19,7 +19,7 @@ InvokeArgs
 
 The request uses the following URI parameters\.
 
- ** [FunctionName](#API_InvokeAsync_RequestSyntax) **   <a name="SSS-InvokeAsync-request-FunctionName"></a>
+ ** [ FunctionName ](#API_InvokeAsync_RequestSyntax) **   <a name="SSS-InvokeAsync-request-FunctionName"></a>
 The name of the Lambda function\.  
 
 **Name formats**
@@ -35,7 +35,7 @@ Required: Yes
 
 The request accepts the following binary data\.
 
- ** [InvokeArgs](#API_InvokeAsync_RequestSyntax) **   <a name="SSS-InvokeAsync-request-InvokeArgs"></a>
+ ** [ InvokeArgs ](#API_InvokeAsync_RequestSyntax) **   <a name="SSS-InvokeAsync-request-InvokeArgs"></a>
 The JSON that you want to provide to your Lambda function as input\.  
 Required: Yes
 
@@ -49,28 +49,28 @@ HTTP/1.1 Status
 
 If the action is successful, the service sends back the following HTTP response\.
 
- ** [Status](#API_InvokeAsync_ResponseSyntax) **   <a name="SSS-InvokeAsync-response-Status"></a>
+ ** [ Status ](#API_InvokeAsync_ResponseSyntax) **   <a name="SSS-InvokeAsync-response-Status"></a>
 The status code\.
 
 ## Errors<a name="API_InvokeAsync_Errors"></a>
 
- **InvalidRequestContentException**   
+ ** InvalidRequestContentException **   
 The request body could not be parsed as JSON\.  
 HTTP Status Code: 400
 
- **InvalidRuntimeException**   
+ ** InvalidRuntimeException **   
 The runtime or runtime version specified is not supported\.  
 HTTP Status Code: 502
 
- **ResourceConflictException**   
+ ** ResourceConflictException **   
 The resource already exists, or another operation is in progress\.  
 HTTP Status Code: 409
 
- **ResourceNotFoundException**   
+ ** ResourceNotFoundException **   
 The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 

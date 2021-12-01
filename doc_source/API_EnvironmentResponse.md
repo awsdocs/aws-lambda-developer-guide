@@ -4,12 +4,12 @@ The results of an operation to update or read environment variables\. If the ope
 
 ## Contents<a name="API_EnvironmentResponse_Contents"></a>
 
- **Error**   <a name="SSS-Type-EnvironmentResponse-Error"></a>
+ ** Error **   <a name="SSS-Type-EnvironmentResponse-Error"></a>
 Error messages for environment variables that couldn't be applied\.  
-Type: [EnvironmentError](API_EnvironmentError.md) object  
+Type: [ EnvironmentError ](API_EnvironmentError.md) object  
 Required: No
 
- **Variables**   <a name="SSS-Type-EnvironmentResponse-Variables"></a>
+ ** Variables **   <a name="SSS-Type-EnvironmentResponse-Variables"></a>
 Environment variable key\-value pairs\.  
 Type: String to string map  
 Key Pattern: `[a-zA-Z]([a-zA-Z0-9_])+`   

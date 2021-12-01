@@ -4,19 +4,19 @@ Configuration values that override the container image Dockerfile settings\. See
 
 ## Contents<a name="API_ImageConfig_Contents"></a>
 
- **Command**   <a name="SSS-Type-ImageConfig-Command"></a>
+ ** Command **   <a name="SSS-Type-ImageConfig-Command"></a>
 Specifies parameters that you want to pass in with ENTRYPOINT\.   
 Type: Array of strings  
 Array Members: Maximum number of 1500 items\.  
 Required: No
 
- **EntryPoint**   <a name="SSS-Type-ImageConfig-EntryPoint"></a>
+ ** EntryPoint **   <a name="SSS-Type-ImageConfig-EntryPoint"></a>
 Specifies the entry point to their application, which is typically the location of the runtime executable\.  
 Type: Array of strings  
 Array Members: Maximum number of 1500 items\.  
 Required: No
 
- **WorkingDirectory**   <a name="SSS-Type-ImageConfig-WorkingDirectory"></a>
+ ** WorkingDirectory **   <a name="SSS-Type-ImageConfig-WorkingDirectory"></a>
 Specifies the working directory\.  
 Type: String  
 Length Constraints: Maximum length of 1000\.  

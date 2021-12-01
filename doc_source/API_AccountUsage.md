@@ -4,12 +4,12 @@ The number of functions and amount of storage in use\.
 
 ## Contents<a name="API_AccountUsage_Contents"></a>
 
- **FunctionCount**   <a name="SSS-Type-AccountUsage-FunctionCount"></a>
+ ** FunctionCount **   <a name="SSS-Type-AccountUsage-FunctionCount"></a>
 The number of Lambda functions\.  
 Type: Long  
 Required: No
 
- **TotalCodeSize**   <a name="SSS-Type-AccountUsage-TotalCodeSize"></a>
+ ** TotalCodeSize **   <a name="SSS-Type-AccountUsage-TotalCodeSize"></a>
 The amount of storage space, in bytes, that's being used by deployment packages and layer archives\.  
 Type: Long  
 Required: No

@@ -81,6 +81,9 @@ For more information, see [Controlling access to services with VPC endpoints](ht
 **Example: Interface endpoint policy for Lambda actions**  
 The following is an example of an endpoint policy for Lambda\. When attached to an endpoint, this policy allows user `MyUser` to invoke the function `my-function`\.
 
+**Note**  
+You need to include both the qualified and the unqualified function ARN in the resource\.
+
 ```
 {
    "Statement":[
@@ -94,7 +97,8 @@ The following is an example of an endpoint policy for Lambda\. When attached to 
             "lambda:InvokeFunction"
          ],
          "Resource": [
-               "arn:aws:lambda:us-east-2:123456789012:function:my-function”
+               "arn:aws:lambda:us-east-2:123456789012:function:my-function”,
+               "arn:aws:lambda:us-east-2:123456789012:function:my-function:*”
             ]
       }
    ]

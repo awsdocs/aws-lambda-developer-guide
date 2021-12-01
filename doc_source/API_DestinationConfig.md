@@ -4,14 +4,14 @@ A configuration object that specifies the destination of an event after Lambda p
 
 ## Contents<a name="API_DestinationConfig_Contents"></a>
 
- **OnFailure**   <a name="SSS-Type-DestinationConfig-OnFailure"></a>
+ ** OnFailure **   <a name="SSS-Type-DestinationConfig-OnFailure"></a>
 The destination configuration for failed invocations\.  
-Type: [OnFailure](API_OnFailure.md) object  
+Type: [ OnFailure ](API_OnFailure.md) object  
 Required: No
 
- **OnSuccess**   <a name="SSS-Type-DestinationConfig-OnSuccess"></a>
+ ** OnSuccess **   <a name="SSS-Type-DestinationConfig-OnSuccess"></a>
 The destination configuration for successful invocations\.  
-Type: [OnSuccess](API_OnSuccess.md) object  
+Type: [ OnSuccess ](API_OnSuccess.md) object  
 Required: No
 
 ## See Also<a name="API_DestinationConfig_SeeAlso"></a>

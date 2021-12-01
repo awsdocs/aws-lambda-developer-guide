@@ -1,13 +1,13 @@
 # Instrumenting Python code in AWS Lambda<a name="python-tracing"></a>
 
 **Note**  
-End of support for the Python 2\.7 runtime starts on July 15, 2021\. For more information, see [Runtime support policy](runtime-support-policy.md)\.
+End of support for the Python 2\.7 runtime started on July 15, 2021\. For more information, see [Runtime support policy](runtime-support-policy.md)\.
 
 Lambda integrates with AWS X\-Ray to enable you to trace, debug, and optimize Lambda applications\. You can use X\-Ray to trace a request as it traverses resources in your application, from the frontend API to storage and database on the backend\. By simply adding the X\-Ray SDK library to your build configuration, you can record errors and latency for any call that your function makes to an AWS service\.
 
 The X\-Ray *service map* shows the flow of requests through your application\. The following example from the [error processor](samples-errorprocessor.md) sample application shows an application with two functions\. The primary function processes events and sometimes returns errors\. The second function processes errors that appear in the first's log group and uses the AWS SDK to call X\-Ray, Amazon S3 and Amazon CloudWatch Logs\.
 
-[images/sample-errorprocessor-servicemap-l.png](images/sample-errorprocessor-servicemap-l.png)
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-errorprocessor-servicemap.png)
 
 To trace requests that don't have a tracing header, enable active tracing in your function's configuration\.
 

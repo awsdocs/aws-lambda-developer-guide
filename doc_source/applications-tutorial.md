@@ -6,7 +6,7 @@ In this tutorial, you create the following resources\.
 + **Application** – A Node\.js Lambda function, build specification, and AWS Serverless Application Model \(AWS SAM\) template\.
 + **Pipeline** – An AWS CodePipeline pipeline that connects the other resources to enable continuous delivery\.
 + **Repository** – A Git repository in AWS CodeCommit\. When you push a change, the pipeline copies the source code into an Amazon S3 bucket and passes it to the build project\.
-+ **Trigger** – An Amazon CloudWatch Events rule that watches the main branch of the repository and triggers the pipeline\.
++ **Trigger** – An Amazon EventBridge \(CloudWatch Events\) rule that watches the main branch of the repository and triggers the pipeline\.
 + **Build project** – An AWS CodeBuild build that gets the source code from the pipeline and packages the application\. The source includes a build specification with commands that install dependencies and prepare the application template for deployment\.
 + **Deployment configuration** – The pipeline's deployment stage defines a set of actions that take the processed AWS SAM template from the build output, and deploy the new version with AWS CloudFormation\.
 + **Bucket** – An Amazon Simple Storage Service \(Amazon S3\) bucket for deployment artifact storage\.

@@ -1,6 +1,6 @@
 # RemoveLayerVersionPermission<a name="API_RemoveLayerVersionPermission"></a>
 
-Removes a statement from the permissions policy for a version of an [ AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\. For more information, see [AddLayerVersionPermission](API_AddLayerVersionPermission.md)\.
+Removes a statement from the permissions policy for a version of an [ AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\. For more information, see [ AddLayerVersionPermission ](API_AddLayerVersionPermission.md)\.
 
 ## Request Syntax<a name="API_RemoveLayerVersionPermission_RequestSyntax"></a>
 
@@ -12,22 +12,22 @@ DELETE /2018-10-31/layers/LayerName/versions/VersionNumber/policy/StatementId?Re
 
 The request uses the following URI parameters\.
 
- ** [LayerName](#API_RemoveLayerVersionPermission_RequestSyntax) **   <a name="SSS-RemoveLayerVersionPermission-request-LayerName"></a>
+ ** [ LayerName ](#API_RemoveLayerVersionPermission_RequestSyntax) **   <a name="SSS-RemoveLayerVersionPermission-request-LayerName"></a>
 The name or Amazon Resource Name \(ARN\) of the layer\.  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
 Pattern: `(arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+)|[a-zA-Z0-9-_]+`   
 Required: Yes
 
- ** [RevisionId](#API_RemoveLayerVersionPermission_RequestSyntax) **   <a name="SSS-RemoveLayerVersionPermission-request-RevisionId"></a>
+ ** [ RevisionId ](#API_RemoveLayerVersionPermission_RequestSyntax) **   <a name="SSS-RemoveLayerVersionPermission-request-RevisionId"></a>
 Only update the policy if the revision ID matches the ID specified\. Use this option to avoid modifying a policy that has changed since you last read it\.
 
- ** [StatementId](#API_RemoveLayerVersionPermission_RequestSyntax) **   <a name="SSS-RemoveLayerVersionPermission-request-StatementId"></a>
+ ** [ StatementId ](#API_RemoveLayerVersionPermission_RequestSyntax) **   <a name="SSS-RemoveLayerVersionPermission-request-StatementId"></a>
 The identifier that was specified when the statement was added\.  
 Length Constraints: Minimum length of 1\. Maximum length of 100\.  
 Pattern: `([a-zA-Z0-9-_]+)`   
 Required: Yes
 
- ** [VersionNumber](#API_RemoveLayerVersionPermission_RequestSyntax) **   <a name="SSS-RemoveLayerVersionPermission-request-VersionNumber"></a>
+ ** [ VersionNumber ](#API_RemoveLayerVersionPermission_RequestSyntax) **   <a name="SSS-RemoveLayerVersionPermission-request-VersionNumber"></a>
 The version number\.  
 Required: Yes
 
@@ -47,23 +47,23 @@ If the action is successful, the service sends back an HTTP 204 response with an
 
 ## Errors<a name="API_RemoveLayerVersionPermission_Errors"></a>
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **PreconditionFailedException**   
+ ** PreconditionFailedException **   
 The RevisionId provided does not match the latest RevisionId for the Lambda function or alias\. Call the `GetFunction` or the `GetAlias` API to retrieve the latest RevisionId for your resource\.  
 HTTP Status Code: 412
 
- **ResourceNotFoundException**   
+ ** ResourceNotFoundException **   
 The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 
- **TooManyRequestsException**   
+ ** TooManyRequestsException **   
 The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 

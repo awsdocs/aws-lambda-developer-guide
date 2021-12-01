@@ -4,7 +4,7 @@ A destination for events that failed processing\.
 
 ## Contents<a name="API_OnFailure_Contents"></a>
 
- **Destination**   <a name="SSS-Type-OnFailure-Destination"></a>
+ ** Destination **   <a name="SSS-Type-OnFailure-Destination"></a>
 The Amazon Resource Name \(ARN\) of the destination resource\.  
 Type: String  
 Length Constraints: Minimum length of 0\. Maximum length of 350\.  

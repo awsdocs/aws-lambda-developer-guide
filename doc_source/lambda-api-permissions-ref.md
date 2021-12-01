@@ -78,7 +78,7 @@ For more information on resources and conditions for Lambda and other AWS servic
 
 You reference a Lambda function in a policy statement using an Amazon Resource Names \(ARN\)\. The format of a function ARN depends on whether you are referencing the whole function, a function [version](configuration-versions.md), or an [alias](configuration-aliases.md)\. 
 
-When making Lambda API calls, users can specify a version or alias by passing a version ARN or alias ARN in the [https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunction.html#API_GetFunction_RequestSyntax](https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunction.html#API_GetFunction_RequestSyntax) parameter, or by setting a value in the [https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunction.html#API_GetFunction_RequestSyntax](https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunction.html#API_GetFunction_RequestSyntax) parameter\. Lambda makes authorization decisions by comparing the resource element in the IAM policy with the `FunctionName` passed in the API calls\.
+When making Lambda API calls, users can specify a version or alias by passing a version ARN or alias ARN in the [GetFunction](API_GetFunction.md) `FunctionName` parameter, or by setting a value in the [GetFunction](API_GetFunction.md) `Qualifier` parameter\. Lambda makes authorization decisions by comparing the resource element in the IAM policy with the `FunctionName` passed in the API calls\.
 
 You must use the correct function ARN types in your policies to achieve the results that you expect, especially in policies that deny access\. We recommend that you follow the best practices for using Deny statements with functions\.
 
@@ -112,7 +112,7 @@ The following identity\-based policy statement denies access to the `lambda:GetF
 
 ```
 {
-    "Version": "2020-07-20",
+    "Version": "2012-10-17",
     "Statement": [
         {
             "Effect": "Deny",

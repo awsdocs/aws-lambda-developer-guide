@@ -10,6 +10,7 @@ This page describes how to create a \.zip file as your deployment package for th
 + [Sample applications](#golang-package-sample)
 + [Creating a \.zip file on macOS and Linux](#golang-package-mac-linux)
 + [Creating a \.zip file on Windows](#golang-package-windows)
++ [Build Go with the provided\.al2 runtime](#golang-package-al2)
 
 ## Prerequisites<a name="golang-package-prereqs"></a>
 
@@ -117,3 +118,35 @@ If you have not already done so, you must install [git](https://git-scm.com/) an
    ```
 
 ------
+
+## Build Go with the provided\.al2 runtime<a name="golang-package-al2"></a>
+
+Go is implemented differently than other native runtimes\. Lambda treats Go as a custom runtime, so you can create a Go function on the provided\.al2 runtime\. You can use the AWS SAM build command to build the \.zip file package\.
+
+**Using AWS SAM to build Go for AL2 function**
+
+1. Update the AWS SAM template to use the provided\.al2 runtime\. Also set the BuildMethod to makefile\.
+
+   ```
+   Resources:
+     HelloWorldFunction:
+       Type: AWS::Serverless::Function
+       Properties:
+         CodeUri: hello-world/
+         Handler: my.bootstrap.file
+         Runtime: provided.al2
+         Architectures: [arm64]  
+       Metadata:
+         BuildMethod: makefile
+   ```
+
+   Remove the `Architectures` property to build the package for the x86\_64 instruction set architecture\.
+
+1. Add file makefile to the project folder, with the following contents:
+
+   ```
+   GOOS=linux go build -o bootstrap
+   	cp ./bootstrap $(ARTIFACTS_DIR)/.
+   ```
+
+For an example application, download [ Go on AL2](https://github.com/aws-samples/sessions-with-aws-sam/tree/master/go-al2)\. The readme file contains the instructions to build and run the application\. You can also view the blog post [ Migrating AWS Lambda functions to Amazon Linux 2](https://github.com/aws-samples/sessions-with-aws-sam/tree/master/go-al2)\.

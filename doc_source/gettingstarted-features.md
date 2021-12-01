@@ -30,7 +30,7 @@ To enable functions to scale without fluctuations in latency, use *provisioned c
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/features-scaling-provisioned-auto.png)
 
-For more information, see [Managing concurrency for a Lambda function](configuration-concurrency.md)\.
+For more information, see [Managing Lambda reserved concurrency](configuration-concurrency.md)\.
 
 ## Asynchronous invocation<a name="gettingstarted-features-async"></a>
 

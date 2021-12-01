@@ -7,11 +7,17 @@ Lambda supports the following Java runtimes\.
 
 **Java runtimes**  
 
-| Name | Identifier | JDK | Operating system | 
-| --- | --- | --- | --- | 
-|  Java 11  |  `java11`  |  amazon\-corretto\-11  |  Amazon Linux 2  | 
-|  Java 8  |  `java8.al2`  |  amazon\-corretto\-8  |  Amazon Linux 2  | 
-|  Java 8  |  `java8`  |  java\-1\.8\.0\-openjdk  |  Amazon Linux  | 
+| Name | Identifier | JDK | Operating system | Architectures | 
+| --- | --- | --- | --- | --- | 
+|  Java 11  |  `java11`  |  amazon\-corretto\-11  |  Amazon Linux 2  |  x86\_64, arm64  | 
+|  Java 8  |  `java8.al2`  |  amazon\-corretto\-8  |  Amazon Linux 2  |  x86\_64, arm64  | 
+|  Java 8  |  `java8`  |  amazon\-corretto\-8  |  Amazon Linux  |  x86\_64  | 
+
+Lambda provides the following libraries for Java functions:
++ [com\.amazonaws:aws\-lambda\-java\-core](https://github.com/aws/aws-lambda-java-libs/tree/master/aws-lambda-java-core) \(required\) – Defines handler method interfaces and the context object that the runtime passes to the handler\. If you define your own input types, this is the only library that you need\.
++ [com\.amazonaws:aws\-lambda\-java\-events](https://github.com/aws/aws-lambda-java-libs/tree/master/aws-lambda-java-events) – Input types for events from services that invoke Lambda functions\.
++ [com\.amazonaws:aws\-lambda\-java\-log4j2](https://github.com/aws/aws-lambda-java-libs/tree/master/aws-lambda-java-log4j2) – An appender library for Apache Log4j 2 that you can use to add the request ID for the current invocation to your [function logs](java-logging.md)\.
++ [AWS SDK for Java 2\.0](https://github.com/aws/aws-sdk-java-v2) – The official AWS SDK for the Java programming language\.
 
 Lambda functions use an [execution role](lambda-intro-execution-role.md) to get permission to write logs to Amazon CloudWatch Logs, and to access other services and resources\. If you don't already have an execution role for function development, create one\.
 
@@ -66,7 +72,6 @@ The function runtime passes a context object to the handler, in addition to the 
 Your Lambda function comes with a CloudWatch Logs log group\. The function runtime sends details about each invocation to CloudWatch Logs\. It relays any [logs that your function outputs](java-logging.md) during invocation\. If your function [returns an error](java-exceptions.md), Lambda formats the error and returns it to the invoker\.
 
 **Topics**
-+ [Java sample applications for AWS Lambda](java-samples.md)
 + [AWS Lambda function handler in Java](java-handler.md)
 + [Deploy Java Lambda functions with \.zip or JAR file archives](java-package.md)
 + [Deploy Java Lambda functions with container images](java-image.md)
@@ -75,3 +80,4 @@ Your Lambda function comes with a CloudWatch Logs log group\. The function runti
 + [AWS Lambda function errors in Java](java-exceptions.md)
 + [Instrumenting Java code in AWS Lambda](java-tracing.md)
 + [Creating a deployment package using Eclipse](java-package-eclipse.md)
++ [Java sample applications for AWS Lambda](java-samples.md)

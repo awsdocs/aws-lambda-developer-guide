@@ -4,27 +4,27 @@ Details about a version of an [ AWS Lambda layer](https://docs.aws.amazon.com/la
 
 ## Contents<a name="API_LayerVersionContentOutput_Contents"></a>
 
- **CodeSha256**   <a name="SSS-Type-LayerVersionContentOutput-CodeSha256"></a>
+ ** CodeSha256 **   <a name="SSS-Type-LayerVersionContentOutput-CodeSha256"></a>
 The SHA\-256 hash of the layer archive\.  
 Type: String  
 Required: No
 
- **CodeSize**   <a name="SSS-Type-LayerVersionContentOutput-CodeSize"></a>
+ ** CodeSize **   <a name="SSS-Type-LayerVersionContentOutput-CodeSize"></a>
 The size of the layer archive in bytes\.  
 Type: Long  
 Required: No
 
- **Location**   <a name="SSS-Type-LayerVersionContentOutput-Location"></a>
+ ** Location **   <a name="SSS-Type-LayerVersionContentOutput-Location"></a>
 A link to the layer archive in Amazon S3 that is valid for 10 minutes\.  
 Type: String  
 Required: No
 
- **SigningJobArn**   <a name="SSS-Type-LayerVersionContentOutput-SigningJobArn"></a>
+ ** SigningJobArn **   <a name="SSS-Type-LayerVersionContentOutput-SigningJobArn"></a>
 The Amazon Resource Name \(ARN\) of a signing job\.  
 Type: String  
 Required: No
 
- **SigningProfileVersionArn**   <a name="SSS-Type-LayerVersionContentOutput-SigningProfileVersionArn"></a>
+ ** SigningProfileVersionArn **   <a name="SSS-Type-LayerVersionContentOutput-SigningProfileVersionArn"></a>
 The Amazon Resource Name \(ARN\) for a signing profile version\.  
 Type: String  
 Required: No

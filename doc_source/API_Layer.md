@@ -4,25 +4,25 @@ An [ AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuratio
 
 ## Contents<a name="API_Layer_Contents"></a>
 
- **Arn**   <a name="SSS-Type-Layer-Arn"></a>
+ ** Arn **   <a name="SSS-Type-Layer-Arn"></a>
 The Amazon Resource Name \(ARN\) of the function layer\.  
 Type: String  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
 Pattern: `arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+:[0-9]+`   
 Required: No
 
- **CodeSize**   <a name="SSS-Type-Layer-CodeSize"></a>
+ ** CodeSize **   <a name="SSS-Type-Layer-CodeSize"></a>
 The size of the layer archive in bytes\.  
 Type: Long  
 Required: No
 
- **SigningJobArn**   <a name="SSS-Type-Layer-SigningJobArn"></a>
+ ** SigningJobArn **   <a name="SSS-Type-Layer-SigningJobArn"></a>
 The Amazon Resource Name \(ARN\) of a signing job\.  
 Type: String  
 Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)`   
 Required: No
 
- **SigningProfileVersionArn**   <a name="SSS-Type-Layer-SigningProfileVersionArn"></a>
+ ** SigningProfileVersionArn **   <a name="SSS-Type-Layer-SigningProfileVersionArn"></a>
 The Amazon Resource Name \(ARN\) for a signing profile version\.  
 Type: String  
 Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)`   

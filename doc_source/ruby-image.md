@@ -4,9 +4,14 @@ You can deploy your Lambda function code as a [container image](images-create.md
 + AWS base images for Lambda
 
   These base images are preloaded with a language runtime and other components that are required to run the image on Lambda\. AWS provides a Dockerfile for each of the base images to help with building your container image\.
-+ Open\-source runtime interface clients
 
-  If you use a community or private enterprise base image, add a runtime interface client to the base image to make it compatible with Lambda\.
+  For runtimes that use the Amazon Linux 2 operating system, AWS provides base images for x86\_64 architecture and arm64 architecture\.
++ Open\-source runtime interface clients \(RIC\)
+
+  If you use a community or private enterprise base image, you must add a [Runtime interface client](runtimes-images.md#runtimes-api-client) to the base image to make it compatible with Lambda\.
++ Open\-source runtime interface emulator \(RIE\)
+
+   Lambda provides a runtime interface emulator for you to test your function locally\. The base images for Lambda and base images for custom runtimes include the RIE\. For other base images, you can download the RIE for [testing your image](images-test.md) locally\.
 
 The workflow for a function defined as a container image includes these steps:
 
@@ -14,7 +19,14 @@ The workflow for a function defined as a container image includes these steps:
 
 1. Upload the image to your Amazon ECR container registry\. See steps 7\-9 in [Create image](images-create.md#images-create-from-base)\.
 
-1. [Create](configuration-images.md) the Lambda function and deploy the image\.
+1. [Create](configuration-images.md#configuration-images-create) the Lambda function or [update the function code](configuration-images.md#configuration-images-update) to deploy the image to an existing function\.
+
+**Topics**
++ [AWS base images for Ruby](#ruby-image-base)
++ [Using a Ruby base image](#ruby-image-instructions)
++ [Ruby runtime interface clients](#ruby-image-clients)
++ [Create a Ruby image from an AWS base image](#ruby-image-create)
++ [Deploy the container image](#ruby-image-deploy)
 
 ## AWS base images for Ruby<a name="ruby-image-base"></a>
 
@@ -48,7 +60,7 @@ For package details, see [Lambda RIC](https://rubygems.org/gems/aws_lambda_ric) 
 
 You can also download the [Ruby runtime interface client](https://github.com/aws/aws-lambda-ruby-runtime-interface-client) from GitHub\.
 
-## Deploying Ruby with an AWS base image<a name="ruby-image-create"></a>
+## Create a Ruby image from an AWS base image<a name="ruby-image-create"></a>
 
 When you build a container image for Ruby using an AWS base image, you only need to copy the ruby app to the container and install any dependencies\. 
 
@@ -88,3 +100,7 @@ When you build a container image for Ruby using an AWS base image, you only need
    ```
 
 1. To create the container image, follow steps 4 through 7 in [Create an image from an AWS base image for Lambda](images-create.md#images-create-from-base)\.
+
+## Deploy the container image<a name="ruby-image-deploy"></a>
+
+For a new function, you deploy the Ruby image when you [create the function](configuration-images.md#configuration-images-create)\. For an existing function, if you rebuild the container image, you need to redeploy the image by [updating the function code](configuration-images.md#configuration-images-update)\.

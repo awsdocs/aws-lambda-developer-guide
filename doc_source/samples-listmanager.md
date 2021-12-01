@@ -2,8 +2,6 @@
 
 The list manager sample application demonstrates the use of AWS Lambda to process records in an Amazon Kinesis data stream\. A Lambda event source mapping reads records from the stream in batches and invokes a Lambda function\. The function uses information from the records to update documents in Amazon DynamoDB and stores the records it processes in Amazon Relational Database Service \(Amazon RDS\)\.
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-listmanager.png)
-
 Clients send records to a Kinesis stream, which stores them and makes them available for processing\. The Kinesis stream is used like a queue to buffer records until they can be processed\. Unlike an Amazon SQS queue, records in a Kinesis stream are not deleted after they are processed, so multiple consumers can process the same data\. Records in Kinesis are also processed in order, where queue items can be delivered out of order\. Records are deleted from the stream after 7 days\.
 
 In addition to the function that processes events, the application includes a second function for performing administrative tasks on the database\. Function code is available in the following files:
@@ -94,13 +92,9 @@ When it's decoded, the data contains a record\. The function uses the record to 
 
 ## Instrumentation with AWS X\-Ray<a name="samples-listmanager-instrumentation"></a>
 
-The application uses [AWS X\-Ray](services-xray.md) to trace function invocations and the calls that functions make to AWS services\. X\-Ray uses the trace data that it receives from functions to create a service map that helps you identify errors\. The following service map shows the function communicating with two DynamoDB tables and a MySQL database\.
-
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/listmanager-servicemap.png)
+The application uses [AWS X\-Ray](services-xray.md) to trace function invocations and the calls that functions make to AWS services\. X\-Ray uses the trace data that it receives from functions to create a service map that helps you identify errors\. 
 
 The Node\.js function is configured for active tracing in the template, and is instrumented with the AWS X\-Ray SDK for Node\.js in code\. The X\-Ray SDK records a subsegment for each call made with an AWS SDK or MySQL client\.
-
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/listmanager-trace.png)
 
 The function uses the AWS SDK for JavaScript in Node\.js to read and write to two tables for each record\. The primary table stores the current state of each combination of list name and user\. The aggregate table stores lists that combine data from multiple users\.
 

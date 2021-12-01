@@ -4,7 +4,7 @@ Lambda integrates with AWS X\-Ray to enable you to trace, debug, and optimize La
 
 The X\-Ray *service map* shows the flow of requests through your application\. The following example from the [error processor](samples-errorprocessor.md) sample application shows an application with two functions\. The primary function processes events and sometimes returns errors\. The second function processes errors that appear in the first's log group and uses the AWS SDK to call X\-Ray, Amazon S3 and Amazon CloudWatch Logs\.
 
-[images/sample-errorprocessor-servicemap-l.png](images/sample-errorprocessor-servicemap-l.png)
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-errorprocessor-servicemap.png)
 
 To trace requests that don't have a tracing header, enable active tracing in your function's configuration\.
 
@@ -152,7 +152,6 @@ The GitHub repository for this guide includes sample applications that demonstra
 + [blank\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-java) – A Java function that shows the use of Lambda's Java libraries, logging, environment variables, layers, AWS X\-Ray tracing, unit tests, and the AWS SDK\.
 + [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-basic) – A minimal Java function with unit tests and variable logging configuration\.
 + [java\-events](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-events) – A minimal Java function that uses the latest version \(3\.0\.0 and newer\) of the [aws\-lambda\-java\-events](java-package.md) library\. These examples do not require the AWS SDK as a dependency\.
-+ [java\-events\-v1sdk](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-events-v1sdk) – A Java function that uses an older version \(2\.2\.9\) of the [aws\-lambda\-java\-events](java-package.md) library\. These examples require the AWS SDK as a dependency\. **These examples are deprecated\. We recommend following the `java-events` examples and using version 3\.0\.0 or above of the `aws-lambda-java-events` library\.**
 + [s3\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/s3-java) – A Java function that processes notification events from Amazon S3 and uses the Java Class Library \(JCL\) to create thumbnails from uploaded image files\.
 
 All of the sample applications have active tracing enabled for Lambda functions\. The `blank-java` application shows automatic instrumentation of AWS SDK for Java 2\.x clients, segment management for tests, custom subsegments, and the use of Lambda layers to store runtime dependencies\.

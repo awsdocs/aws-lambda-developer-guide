@@ -12,7 +12,7 @@ GET /2015-03-31/functions/FunctionName/policy?Qualifier=Qualifier HTTP/1.1
 
 The request uses the following URI parameters\.
 
- ** [FunctionName](#API_GetPolicy_RequestSyntax) **   <a name="SSS-GetPolicy-request-FunctionName"></a>
+ ** [ FunctionName ](#API_GetPolicy_RequestSyntax) **   <a name="SSS-GetPolicy-request-FunctionName"></a>
 The name of the Lambda function, version, or alias\.  
 
 **Name formats**
@@ -24,7 +24,7 @@ Length Constraints: Minimum length of 1\. Maximum length of 170\.
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_\.]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
 Required: Yes
 
- ** [Qualifier](#API_GetPolicy_RequestSyntax) **   <a name="SSS-GetPolicy-request-Qualifier"></a>
+ ** [ Qualifier ](#API_GetPolicy_RequestSyntax) **   <a name="SSS-GetPolicy-request-Qualifier"></a>
 Specify a version or alias to get the policy for that resource\.  
 Length Constraints: Minimum length of 1\. Maximum length of 128\.  
 Pattern: `(|[a-zA-Z0-9$_-]+)` 
@@ -51,29 +51,29 @@ If the action is successful, the service sends back an HTTP 200 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** [Policy](#API_GetPolicy_ResponseSyntax) **   <a name="SSS-GetPolicy-response-Policy"></a>
+ ** [ Policy ](#API_GetPolicy_ResponseSyntax) **   <a name="SSS-GetPolicy-response-Policy"></a>
 The resource\-based policy\.  
 Type: String
 
- ** [RevisionId](#API_GetPolicy_ResponseSyntax) **   <a name="SSS-GetPolicy-response-RevisionId"></a>
+ ** [ RevisionId ](#API_GetPolicy_ResponseSyntax) **   <a name="SSS-GetPolicy-response-RevisionId"></a>
 A unique identifier for the current revision of the policy\.  
 Type: String
 
 ## Errors<a name="API_GetPolicy_Errors"></a>
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **ResourceNotFoundException**   
+ ** ResourceNotFoundException **   
 The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 
- **TooManyRequestsException**   
+ ** TooManyRequestsException **   
 The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 

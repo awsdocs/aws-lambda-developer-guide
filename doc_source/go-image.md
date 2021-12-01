@@ -4,9 +4,14 @@ You can deploy your Lambda function code as a [container image](images-create.md
 + AWS base images for Lambda
 
   These base images are preloaded with a language runtime and other components that are required to run the image on Lambda\. AWS provides a Dockerfile for each of the base images to help with building your container image\.
-+ Open\-source runtime interface clients
 
-  If you use a community or private enterprise base image, add a runtime interface client to the base image to make it compatible with Lambda\.
+  For runtimes that use the Amazon Linux 2 operating system, AWS provides base images for x86\_64 architecture and arm64 architecture\.
++ Open\-source runtime interface clients \(RIC\)
+
+  If you use a community or private enterprise base image, you must add a [Runtime interface client](runtimes-images.md#runtimes-api-client) to the base image to make it compatible with Lambda\.
++ Open\-source runtime interface emulator \(RIE\)
+
+   Lambda provides a runtime interface emulator for you to test your function locally\. The base images for Lambda and base images for custom runtimes include the RIE\. For other base images, you can download the RIE for [testing your image](images-test.md) locally\.
 
 The workflow for a function defined as a container image includes these steps:
 
@@ -14,14 +19,15 @@ The workflow for a function defined as a container image includes these steps:
 
 1. Upload the image to your Amazon ECR container registry\. See steps 7\-9 in [Create image](images-create.md#images-create-from-base)\.
 
-1. [Create](configuration-images.md) the Lambda function and deploy the image\.
+1. [Create](configuration-images.md#configuration-images-create) the Lambda function or [update the function code](configuration-images.md#configuration-images-update) to deploy the image to an existing function\.
 
 **Topics**
 + [AWS base images for Go](#go-image-base)
 + [Go runtime interface clients](#go-image-clients)
 + [Using the Go:1\.x base image](#go-image-v1)
-+ [Deploying Go with the `provided.al2` base image](#go-image-al2)
-+ [Deploying Go with an alternative base image](#go-image-other)
++ [Create a Go image from the `provided.al2` base image](#go-image-al2)
++ [Create a Go image from an alternative base image](#go-image-other)
++ [Deploy the container image](#go-image-deploy)
 
 ## AWS base images for Go<a name="go-image-base"></a>
 
@@ -46,7 +52,7 @@ For instructions on how to use the base image for Go:1\.x, choose the **usage** 
 
 The instructions are also available on [Lambda base images for Go](https://hub.docker.com/r/amazon/aws-lambda-go) in the *Docker Hub repository*\.
 
-## Deploying Go with the `provided.al2` base image<a name="go-image-al2"></a>
+## Create a Go image from the `provided.al2` base image<a name="go-image-al2"></a>
 
 To build a container image for Go that runs on Amazon Linux 2, use the `provided.al2` base image\. For more information about this base image, see [provided](https://gallery.ecr.aws/lambda/provided) in the Amazon ECR public gallery\. 
 
@@ -108,7 +114,7 @@ Note that the first three steps are identical whether you deploy your function a
 
 Now that your container image resides in the Amazon ECR container registry, you can [create](configuration-images.md) the Lambda function and deploy the image\.
 
-## Deploying Go with an alternative base image<a name="go-image-other"></a>
+## Create a Go image from an alternative base image<a name="go-image-other"></a>
 
 You can build a container image for Go from an alternative base image\. The following example Dockerfile uses [alpine](https://gallery.ecr.aws/h1a5s9h8/alpine) as the base image\. 
 
@@ -184,3 +190,7 @@ If you do not want to add the RIE to your image, you can test your image locally
    This command invokes the function running in the container image and returns a response\.
 
 Now that your container image resides in the Amazon ECR container registry, you can you can [create](configuration-images.md) the Lambda function and deploy the image\.
+
+## Deploy the container image<a name="go-image-deploy"></a>
+
+For a new function, you deploy the Go image when you [create the function](configuration-images.md#configuration-images-create)\. For an existing function, if you rebuild the container image, you need to redeploy the image by [updating the function code](configuration-images.md#configuration-images-update)\.

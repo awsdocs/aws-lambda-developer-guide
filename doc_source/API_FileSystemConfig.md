@@ -4,14 +4,14 @@ Details about the connection between a Lambda function and an [Amazon EFS file s
 
 ## Contents<a name="API_FileSystemConfig_Contents"></a>
 
- **Arn**   <a name="SSS-Type-FileSystemConfig-Arn"></a>
+ ** Arn **   <a name="SSS-Type-FileSystemConfig-Arn"></a>
 The Amazon Resource Name \(ARN\) of the Amazon EFS access point that provides access to the file system\.  
 Type: String  
 Length Constraints: Maximum length of 200\.  
 Pattern: `arn:aws[a-zA-Z-]*:elasticfilesystem:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:access-point/fsap-[a-f0-9]{17}`   
 Required: Yes
 
- **LocalMountPath**   <a name="SSS-Type-FileSystemConfig-LocalMountPath"></a>
+ ** LocalMountPath **   <a name="SSS-Type-FileSystemConfig-LocalMountPath"></a>
 The path where the function can access the file system, starting with `/mnt/`\.  
 Type: String  
 Length Constraints: Maximum length of 160\.  

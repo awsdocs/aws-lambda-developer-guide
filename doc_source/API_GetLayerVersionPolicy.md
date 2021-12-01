@@ -1,6 +1,6 @@
 # GetLayerVersionPolicy<a name="API_GetLayerVersionPolicy"></a>
 
-Returns the permission policy for a version of an [ AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\. For more information, see [AddLayerVersionPermission](API_AddLayerVersionPermission.md)\.
+Returns the permission policy for a version of an [ AWS Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\. For more information, see [ AddLayerVersionPermission ](API_AddLayerVersionPermission.md)\.
 
 ## Request Syntax<a name="API_GetLayerVersionPolicy_RequestSyntax"></a>
 
@@ -12,13 +12,13 @@ GET /2018-10-31/layers/LayerName/versions/VersionNumber/policy HTTP/1.1
 
 The request uses the following URI parameters\.
 
- ** [LayerName](#API_GetLayerVersionPolicy_RequestSyntax) **   <a name="SSS-GetLayerVersionPolicy-request-LayerName"></a>
+ ** [ LayerName ](#API_GetLayerVersionPolicy_RequestSyntax) **   <a name="SSS-GetLayerVersionPolicy-request-LayerName"></a>
 The name or Amazon Resource Name \(ARN\) of the layer\.  
 Length Constraints: Minimum length of 1\. Maximum length of 140\.  
 Pattern: `(arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+)|[a-zA-Z0-9-_]+`   
 Required: Yes
 
- ** [VersionNumber](#API_GetLayerVersionPolicy_RequestSyntax) **   <a name="SSS-GetLayerVersionPolicy-request-VersionNumber"></a>
+ ** [ VersionNumber ](#API_GetLayerVersionPolicy_RequestSyntax) **   <a name="SSS-GetLayerVersionPolicy-request-VersionNumber"></a>
 The version number\.  
 Required: Yes
 
@@ -44,29 +44,29 @@ If the action is successful, the service sends back an HTTP 200 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** [Policy](#API_GetLayerVersionPolicy_ResponseSyntax) **   <a name="SSS-GetLayerVersionPolicy-response-Policy"></a>
+ ** [ Policy ](#API_GetLayerVersionPolicy_ResponseSyntax) **   <a name="SSS-GetLayerVersionPolicy-response-Policy"></a>
 The policy document\.  
 Type: String
 
- ** [RevisionId](#API_GetLayerVersionPolicy_ResponseSyntax) **   <a name="SSS-GetLayerVersionPolicy-response-RevisionId"></a>
+ ** [ RevisionId ](#API_GetLayerVersionPolicy_ResponseSyntax) **   <a name="SSS-GetLayerVersionPolicy-response-RevisionId"></a>
 A unique identifier for the current revision of the policy\.  
 Type: String
 
 ## Errors<a name="API_GetLayerVersionPolicy_Errors"></a>
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **ResourceNotFoundException**   
+ ** ResourceNotFoundException **   
 The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 
- **TooManyRequestsException**   
+ ** TooManyRequestsException **   
 The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 

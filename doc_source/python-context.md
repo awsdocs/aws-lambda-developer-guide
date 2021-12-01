@@ -1,7 +1,7 @@
 # AWS Lambda context object in Python<a name="python-context"></a>
 
 **Note**  
-End of support for the Python 2\.7 runtime starts on July 15, 2021\. For more information, see [Runtime support policy](runtime-support-policy.md)\.
+End of support for the Python 2\.7 runtime started on July 15, 2021\. For more information, see [Runtime support policy](runtime-support-policy.md)\.
 
 When Lambda runs your function, it passes a context object to the [handler](python-handler.md)\. This object provides methods and properties that provide information about the invocation, function, and execution environment\. For more information on how the context object is passed to the function handler, see [Lambda function handler in Python](python-handler.md)\.
 

@@ -4,12 +4,12 @@ Error messages for environment variables that couldn't be applied\.
 
 ## Contents<a name="API_EnvironmentError_Contents"></a>
 
- **ErrorCode**   <a name="SSS-Type-EnvironmentError-ErrorCode"></a>
+ ** ErrorCode **   <a name="SSS-Type-EnvironmentError-ErrorCode"></a>
 The error code\.  
 Type: String  
 Required: No
 
- **Message**   <a name="SSS-Type-EnvironmentError-Message"></a>
+ ** Message **   <a name="SSS-Type-EnvironmentError-Message"></a>
 The error message\.  
 Type: String  
 Required: No

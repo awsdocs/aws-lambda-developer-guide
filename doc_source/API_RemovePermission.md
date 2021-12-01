@@ -1,6 +1,6 @@
 # RemovePermission<a name="API_RemovePermission"></a>
 
-Revokes function\-use permission from an AWS service or another account\. You can get the ID of the statement from the output of [GetPolicy](API_GetPolicy.md)\.
+Revokes function\-use permission from an AWS service or another account\. You can get the ID of the statement from the output of [ GetPolicy ](API_GetPolicy.md)\.
 
 ## Request Syntax<a name="API_RemovePermission_RequestSyntax"></a>
 
@@ -12,7 +12,7 @@ DELETE /2015-03-31/functions/FunctionName/policy/StatementId?Qualifier=Qualifier
 
 The request uses the following URI parameters\.
 
- ** [FunctionName](#API_RemovePermission_RequestSyntax) **   <a name="SSS-RemovePermission-request-FunctionName"></a>
+ ** [ FunctionName ](#API_RemovePermission_RequestSyntax) **   <a name="SSS-RemovePermission-request-FunctionName"></a>
 The name of the Lambda function, version, or alias\.  
 
 **Name formats**
@@ -24,15 +24,15 @@ Length Constraints: Minimum length of 1\. Maximum length of 140\.
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
 Required: Yes
 
- ** [Qualifier](#API_RemovePermission_RequestSyntax) **   <a name="SSS-RemovePermission-request-Qualifier"></a>
+ ** [ Qualifier ](#API_RemovePermission_RequestSyntax) **   <a name="SSS-RemovePermission-request-Qualifier"></a>
 Specify a version or alias to remove permissions from a published version of the function\.  
 Length Constraints: Minimum length of 1\. Maximum length of 128\.  
 Pattern: `(|[a-zA-Z0-9$_-]+)` 
 
- ** [RevisionId](#API_RemovePermission_RequestSyntax) **   <a name="SSS-RemovePermission-request-RevisionId"></a>
+ ** [ RevisionId ](#API_RemovePermission_RequestSyntax) **   <a name="SSS-RemovePermission-request-RevisionId"></a>
 Only update the policy if the revision ID matches the ID that's specified\. Use this option to avoid modifying a policy that has changed since you last read it\.
 
- ** [StatementId](#API_RemovePermission_RequestSyntax) **   <a name="SSS-RemovePermission-request-StatementId"></a>
+ ** [ StatementId ](#API_RemovePermission_RequestSyntax) **   <a name="SSS-RemovePermission-request-StatementId"></a>
 Statement ID of the permission to remove\.  
 Length Constraints: Minimum length of 1\. Maximum length of 100\.  
 Pattern: `([a-zA-Z0-9-_.]+)`   
@@ -54,23 +54,23 @@ If the action is successful, the service sends back an HTTP 204 response with an
 
 ## Errors<a name="API_RemovePermission_Errors"></a>
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **PreconditionFailedException**   
+ ** PreconditionFailedException **   
 The RevisionId provided does not match the latest RevisionId for the Lambda function or alias\. Call the `GetFunction` or the `GetAlias` API to retrieve the latest RevisionId for your resource\.  
 HTTP Status Code: 412
 
- **ResourceNotFoundException**   
+ ** ResourceNotFoundException **   
 The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 
- **TooManyRequestsException**   
+ ** TooManyRequestsException **   
 The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 

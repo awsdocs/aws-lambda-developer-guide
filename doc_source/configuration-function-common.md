@@ -1,6 +1,6 @@
 # Configuring Lambda function options<a name="configuration-function-common"></a>
 
-After you create a function, you can configure additional capabilities for the function, such as triggers, network acccess, and file system access\. You can also adjust resources associated with the function, such as memory and concurrency\. These configurations apply to functions defined as \.zip file archives and to functions defined as container images\.
+After you create a function, you can configure additional capabilities for the function, such as triggers, network access, and file system access\. You can also adjust resources associated with the function, such as memory and concurrency\. These configurations apply to functions defined as \.zip file archives and to functions defined as container images\.
 
 You can also create and edit test events to test your function using the console\.
 
@@ -30,26 +30,25 @@ The **Function overview** shows a visualization of your function and its upstrea
 
 ## Configuring functions \(console\)<a name="configuration-common-summary"></a>
 
-For most function configurations, you can change the settings only for the unpublished version of a function\. In the console, the function **configuration** tab provides the following sections:
+For the following function configurations, you can change the settings only for the unpublished version of a function\. In the console, the function **configuration** tab provides the following sections:
 + **General configuration** – Configure [memory](#configuration-memory-console) or opt in to the [AWS Compute Optimizer](#configuration-memory-optimization-accept)\. You can also configure function timeout and the execution role\.
-+ **Triggers** – Configure [triggers](#configuration-common-triggers)\.
 + **Permissions** – Configure the execution role and other [permissions](lambda-permissions.md)\.
-+ **Destinations** – Configure [destinations](invocation-async.md#invocation-async-destinations) for asynchronous invocations \.
 + **Environment variables** – Key\-value pairs that Lambda sets in the execution environment\. To extend your function's configuration outside of code, [use environment variables](configuration-envvars.md)\. 
 + **Tags** – Key\-value pairs that Lambda attaches to your function resource\. [Use tags](configuration-tags.md) to organize Lambda functions into groups for cost reporting and filtering in the Lambda console\.
 
   Tags apply to the entire function, including all versions and aliases\.
 + **Virtual private cloud \(VPC\)** – If your function needs network access to resources that are not available over the internet, [configure it to connect to a virtual private cloud \(VPC\)](configuration-vpc.md)\.
 + **Monitoring and operations tools** – configure CloudWatch and other monitoring tools\.
-+ **Concurrency** – [Reserve concurrency for a function](configuration-concurrency.md) to set the maximum number of simultaneous executions for a function\. Provision concurrency to ensure that a function can scale without fluctuations in latency\. 
++ **Concurrency** – [Reserve concurrency for a function](configuration-concurrency.md) to set the maximum number of simultaneous executions for a function\. Provision concurrency to ensure that a function can scale without fluctuations in latency\. Reserved concurrency applies to the entire function, including all versions and aliases\.
 
-  Reserved concurrency applies to the entire function, including all versions and aliases\.
-+ **Asynchronous invocation** – [Configure error handling behavior](invocation-async.md) to reduce the number of retries that Lambda attempts, or the amount of time that unprocessed events stay queued before Lambda discards them\. [Configure a dead\-letter queue](invocation-async.md#dlq) to retain discarded events\.
-
-  You can configure on a function, version, or alias\.
-+ **Code signing** – If your function needs network access to resources that are not available over the internet, [configure it to connect to a virtual private cloud \(VPC\)](configuration-vpc.md)\.
+You can configure the following options on a function, a function version, or an alias\.
++ **Triggers** – Configure [triggers](#configuration-common-triggers)\.
++ **Destinations** – Configure [destinations](invocation-async.md#invocation-async-destinations) for asynchronous invocations \.
++ **Asynchronous invocation** – [Configure error handling behavior](invocation-async.md) to reduce the number of retries that Lambda attempts, or the amount of time that unprocessed events stay queued before Lambda discards them\. [Configure a dead\-letter queue](invocation-async.md#invocation-dlq) to retain discarded events\.
++ **Code signing** – To use [Code signing](configuration-codesigning.md) with your function, configure the function to include a code\-signing configuration\. 
 + **Database proxies** – [Create a database proxy](configuration-database.md) for functions that use an Amazon RDS DB instance or cluster\.
 + **File systems** – Connect your function to a [file system](configuration-filesystem.md)\.
++ **State machines** – Use a state machine to orchestrate and apply error handling to your function\.
 
 The console provides separate tabs to configure aliases and versions: 
 + **Aliases** – An alias is a named resource that maps to a function version\. You can change an alias to map to a different function version\.
@@ -95,6 +94,9 @@ You can configure the memory of your function in the Lambda console\.
 ## Accepting function memory recommendations \(console\)<a name="configuration-memory-optimization-accept"></a>
 
 If you have administrator permissions in AWS Identity and Access Management \(IAM\), you can opt in to receive Lambda function memory setting recommendations from AWS Compute Optimizer\. For instructions on opting in to memory recommendations for your account or organization, see [Opting in your account](https://docs.aws.amazon.com/compute-optimizer/latest/ug/getting-started.html#account-opt-in) in the *AWS Compute Optimizer User Guide*\.
+
+**Note**  
+Compute Optimizer supports only functions that use x86\_64 architecture\.
 
 When you've opted in and your [Lambda function meets Compute Optimizer requirements](https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html#requirements-lambda-functions), you can view and accept function memory recommendations from Compute Optimizer in the Lambda console\.
 
@@ -159,3 +161,5 @@ Saved test events are also available from the **Code** tab, under the **Test** m
 1. Choose **Test**\.
 
 1. Expand the **Execution result** panel to display details about the test\.
+
+You can also invoke your function without saving your test event by choosing **Test** before saving\. This creates an unsaved test event that Lambda will preserve for the duration of the session\. You can access your unsaved test events from either the **Test** or **Code** tab\. 

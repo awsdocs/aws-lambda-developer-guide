@@ -1,4 +1,4 @@
-# AWS SAM template for a CloudWatch Events application<a name="with-scheduledevents-example-use-app-spec"></a>
+# AWS SAM template for a EventBridge \(CloudWatch Events\) application<a name="with-scheduledevents-example-use-app-spec"></a>
 
 You can build this application using [AWS SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/)\. To learn more about creating AWS SAM templates, see [ AWS SAM template basics](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-template-basics.html) in the *AWS Serverless Application Model Developer Guide*\.
 

@@ -4,26 +4,26 @@ A ZIP archive that contains the contents of an [ AWS Lambda layer](https://docs.
 
 ## Contents<a name="API_LayerVersionContentInput_Contents"></a>
 
- **S3Bucket**   <a name="SSS-Type-LayerVersionContentInput-S3Bucket"></a>
+ ** S3Bucket **   <a name="SSS-Type-LayerVersionContentInput-S3Bucket"></a>
 The Amazon S3 bucket of the layer archive\.  
 Type: String  
 Length Constraints: Minimum length of 3\. Maximum length of 63\.  
 Pattern: `^[0-9A-Za-z\.\-_]*(?<!\.)$`   
 Required: No
 
- **S3Key**   <a name="SSS-Type-LayerVersionContentInput-S3Key"></a>
+ ** S3Key **   <a name="SSS-Type-LayerVersionContentInput-S3Key"></a>
 The Amazon S3 key of the layer archive\.  
 Type: String  
 Length Constraints: Minimum length of 1\. Maximum length of 1024\.  
 Required: No
 
- **S3ObjectVersion**   <a name="SSS-Type-LayerVersionContentInput-S3ObjectVersion"></a>
+ ** S3ObjectVersion **   <a name="SSS-Type-LayerVersionContentInput-S3ObjectVersion"></a>
 For versioned objects, the version of the layer archive object to use\.  
 Type: String  
 Length Constraints: Minimum length of 1\. Maximum length of 1024\.  
 Required: No
 
- **ZipFile**   <a name="SSS-Type-LayerVersionContentInput-ZipFile"></a>
+ ** ZipFile **   <a name="SSS-Type-LayerVersionContentInput-ZipFile"></a>
 The base64\-encoded contents of the layer archive\. AWS SDK and AWS CLI clients handle the encoding for you\.  
 Type: Base64\-encoded binary data object  
 Required: No

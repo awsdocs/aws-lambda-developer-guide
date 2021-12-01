@@ -4,7 +4,7 @@ Lambda integrates with AWS X\-Ray to enable you to trace, debug, and optimize La
 
 The X\-Ray *service map* shows the flow of requests through your application\. The following example from the [error processor](samples-errorprocessor.md) sample application shows an application with two functions\. The primary function processes events and sometimes returns errors\. The second function processes errors that appear in the first's log group and uses the AWS SDK to call X\-Ray, Amazon S3 and Amazon CloudWatch Logs\.
 
-[images/sample-errorprocessor-servicemap-l.png](images/sample-errorprocessor-servicemap-l.png)
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-errorprocessor-servicemap.png)
 
 To trace requests that don't have a tracing header, enable active tracing in your function's configuration\.
 

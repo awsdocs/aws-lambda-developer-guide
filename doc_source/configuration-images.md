@@ -1,11 +1,11 @@
 # Creating Lambda functions defined as container images<a name="configuration-images"></a>
 
-When you create a Lambda function, you use a [deployment package](gettingstarted-package.md) to deploy your function code\. Lambda supports two types of deployment packages: [\.zip file archives](configuration-function-zip.md) and container images\. 
+When you create a Lambda function, you package your function code into a deployment package\. Lambda supports two types of deployment packages: [container images](gettingstarted-package.md#gettingstarted-package-images) and [\.zip file archives](gettingstarted-package.md#gettingstarted-package-zip)\. The workflow to create a function is different depending on the deployment package type\. To configure a function defined as a \.zip file archive, see [Creating Lambda functions defined as \.zip file archives](configuration-function-zip.md)\.
 
 You can use the Lambda console and the Lambda API to create a function defined as a container image, update and test the image code, and configure other function settings\.
 
 **Note**  
-You cannot convert an existing \.zip file archive function to use a container image\. You must create a new function\.
+You cannot convert an existing container image function to use a \.zip file archive\. You must create a new function\.
 
 When you select an image using an image tag, Lambda translates the tag to the underlying image digest\. To retrieve the digest for your image, use the [GetFunctionConfiguration](API_GetFunctionConfiguration.md) API operation\. To update the function to a newer image version, you must use the Lambda console to [update the function code](#configuration-images-update), or use the [UpdateFunctionCode](API_UpdateFunctionCode.md) API operation\. Configuration operations such as [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md) do not update the function's container image\.
 
@@ -37,7 +37,7 @@ When you deploy code as a container image to a Lambda function, the image underg
 
 ## Amazon ECR permissions<a name="configuration-images-permissions"></a>
 
-For your function to access the container image in Amazon ECR, you can add `ecr:BatchGetImage` and `ecr:GetDownloadUrlForLayer` permissions to your Amazon ECR repository\. The following example shows the minimum policy:
+For a function in the same account as the container image in Amazon ECR, you can add `ecr:BatchGetImage` and `ecr:GetDownloadUrlForLayer` permissions to your Amazon ECR repository\. The following example shows the minimum policy:
 
 ```
 {
@@ -58,6 +58,53 @@ For more information about Amazon ECR repository permissions, see [Repository po
 If the Amazon ECR repository does not include these permissions, Lambda adds `ecr:BatchGetImage` and `ecr:GetDownloadUrlForLayer` to the container image repository permissions\. Lambda can add these permissions only if the Principal calling Lambda has `ecr:getRepositoryPolicy` and `ecr:setRepositoryPolicy` permissions\. 
 
 To view or edit your Amazon ECR repository permissions, follow the directions in [Setting a repository policy statement](https://docs.aws.amazon.com/AmazonECR/latest/userguide/set-repository-policy.html) in the *Amazon Elastic Container Registry User Guide*\.
+
+### Amazon ECR cross\-account permissions<a name="configuration-images-xaccount-permissions"></a>
+
+A different account in the same region can create a function that uses a container image owned by your account\. In the following example, your Amazon ECR repository permissions policy needs the following statements to grant access to account number 123456789012\.
++ **CrossAccountPermission** – Allows account 123456789012 to create and update Lambda functions that use images from this ECR repository\.
++ **LambdaECRImageCrossAccountRetrievalPolicy** – Lambda will eventually set a function's state to inactive if it is not invoked for an extended period\. This statement is required so that Lambda can retrieve the container image for optimization and caching on behalf of the function owned by 123456789012\. 
+
+**Example Add cross\-account permission to your repository**  
+
+```
+{"Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "CrossAccountPermission",
+      "Effect": "Allow",
+      "Action": [
+        "ecr:BatchGetImage",
+        "ecr:GetDownloadUrlForLayer"
+      ],
+      "Principal": {
+        "AWS": "arn:aws:iam::123456789012:root"
+      } 
+    },
+    {
+      "Sid": "LambdaECRImageCrossAccountRetrievalPolicy",
+      "Effect": "Allow",
+      "Action": [
+        "ecr:BatchGetImage",
+        "ecr:GetDownloadUrlForLayer"
+      ],
+      "Principal": {
+          "Service": "lambda.amazonaws.com"
+      },
+      "Condition": {
+        "StringLike": {
+          "aws:sourceARN":
+            "arn:aws:lambda:us-east-1:123456789012:function:*"
+        } 
+      }
+    }
+  ]
+}
+```
+
+To give access to multiple accounts, you add the account IDs to the Principal list in the `CrossAccountPermission` policy and to the Condition evaluation list in the `LambdaECRImageCrossAccountRetrievalPolicy`\. 
+
+If you are working with multiple accounts in an AWS Organization, we recommend that you enumerate each account ID in the ECR permissions policy\. This approach aligns with the AWS security best practice of setting narrow permissions in IAM policies\.
 
 ## Override the container settings<a name="configuration-images-settings"></a>
 
@@ -85,27 +132,32 @@ To create a function defined as a container image, you must first [create the im
 
    1. For **Function name**, enter the function name\.
 
-   1. For **Container image URI**, enter the Amazon ECR image URI\.
+   1. For **Container image URI**, provide a container image that is compatible with the instruction set architecture that you want for your function code\. 
+
+      You can enter the Amazon ECR image URI or browse for the Amazon ECR image\.
+      + Enter the Amazon ECR image URI\.
       + Or, to browse an Amazon ECR repository for the image, choose **Browse images**\. Select the Amazon ECR repository from the dropdown list, and then select the image\.
 
-   1. \(Optional\) To override configuration settings that are included in the Dockerfile, expand **Container image overrides**\. You can override any of the following settings:
-      + For **Entrypoint**, enter the full path of the runtime executable\. The following example shows an entrypoint for a Node\.js function:
+1. \(Optional\) To override configuration settings that are included in the Dockerfile, expand **Container image overrides**\. You can override any of the following settings:
+   + For **Entrypoint**, enter the full path of the runtime executable\. The following example shows an entrypoint for a Node\.js function:
 
-        ```
-        "/usr/bin/npx", "aws-lambda-ric"
-        ```
-      + For **Command**, enter additional parameters to pass in to the image with **Entrypoint**\. The following example shows a command for a Node\.js function:
+     ```
+     "/usr/bin/npx", "aws-lambda-ric"
+     ```
+   + For **Command**, enter additional parameters to pass in to the image with **Entrypoint**\. The following example shows a command for a Node\.js function:
 
-        ```
-        "app.handler"
-        ```
-      + For **Working directory**, enter the full path of the working directory for the function\. The following example shows the working directory for an AWS base image for Lambda:
+     ```
+     "app.handler"
+     ```
+   + For **Working directory**, enter the full path of the working directory for the function\. The following example shows the working directory for an AWS base image for Lambda:
 
-        ```
-        "/var/task"
-        ```
+     ```
+     "/var/task"
+     ```
 **Note**  
 For the override settings, make sure that you enclose each string in quotation marks \(" "\)\.
+
+1. \(Optional\) For **Architecture**, choose the instruction set architecture for the function\. The default architecture is x86\_64\. Note: when you build the container image for your function, make sure that it is compatible with this [instruction set architecture](foundation-arch.md)\.
 
 1. \(Optional\) Under **Permissions**, expand **Change default execution role**\. Then, choose to create a new **Execution role**, or to use an existing role\.
 
@@ -154,7 +206,11 @@ To manage functions defined as container images, use the following API operation
 + [UpdateFunctionCode](API_UpdateFunctionCode.md)
 + [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)
 
-To create a function defined as container image, use the `create-function` command\. Set the `package-type` to `Image` and specify your container image URI using the `code` parameter\. Note that you must create the function from the same account as the container registry in Amazon EFS\.
+To create a function defined as container image, use the `create-function` command\. Set the `package-type` to `Image` and specify your container image URI using the `code` parameter\.
+
+When you create the function, you can specify the instruction set architecture\. The default architecture is `x86-64`\. Make sure that the code in your container image is compatible with the architecture\.
+
+ You can create the function from the same account as the container registry or from a different account in the same region as the container registry in Amazon ECR\. For cross\-account access, adjust the [Amazon ECR permissions](#configuration-images-xaccount-permissions) for the image\.
 
 ```
 aws lambda create-function --region sa-east-1 --function-name my-function \

@@ -90,7 +90,7 @@ Note that Lambda uses a simple probabilistic model to distribute the traffic bet
 
 You can point an alias to a maximum of two Lambda function versions\. The versions must meet the following criteria:
 + Both versions must have the same [execution role](lambda-intro-execution-role.md)\.
-+ Both versions must have the same [dead\-letter queue](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq) configuration, or no dead\-letter queue configuration\.
++ Both versions must have the same [dead\-letter queue](invocation-async.md#invocation-dlq) configuration, or no dead\-letter queue configuration\.
 + Both versions must be published\. The alias cannot point to `$LATEST`\.
 
 **To configure routing on an alias**

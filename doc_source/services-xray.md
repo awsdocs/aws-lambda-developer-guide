@@ -2,8 +2,6 @@
 
 You can use AWS X\-Ray to visualize the components of your application, identify performance bottlenecks, and troubleshoot requests that resulted in an error\. Your Lambda functions send trace data to X\-Ray, and X\-Ray processes the data to generate a service map and searchable trace summaries\.
 
-![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-errorprocessor-servicemap.png)
-
 If you've enabled X\-Ray tracing in a service that invokes your function, Lambda sends traces to X\-Ray automatically\. The upstream service, such as Amazon API Gateway, or an application hosted on Amazon EC2 that is instrumented with the X\-Ray SDK, samples incoming requests and adds a tracing header that tells Lambda to send traces or not\.
 
 To trace requests that don't have a tracing header, enable active tracing in your function's configuration\.
@@ -40,12 +38,8 @@ The `Overhead` subsegment represents the phase that occurs between the time when
 
 
 **Note**  
-If your Lambda function uses [provisioned concurrency](configuration-concurrency.md#configuration-concurrency-provisioned), your X\-Ray trace might display a function initialization with a very long duration\.   
+If your Lambda function uses [provisioned concurrency](provisioned-concurrency.md), your X\-Ray trace might display a function initialization with a very long duration\.   
 Provisioned concurrency initializes function instances in advance, to reduce lag at the time of invocation\. Over time, provisioned concurrency refreshes these instances by creating new instances to replace the old ones\. For workloads with steady traffic, the new instances are initialized well in advance of their first invocation\. The time gap gets recorded in the X\-Ray trace as the initialization duration\. 
-
-The following example shows a trace with 2 segments\. Both are named **my\-function**, but one is type `AWS::Lambda` and the other is `AWS::Lambda::Function`\. The function segment is expanded to show its subsegments\.
-
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/nodejs-xray-timeline.png)
 
 **Important**  
 In Lambda, you can use the X\-Ray SDK to extend the `Invocation` subsegment with additional subsegments for downstream calls, annotations, and metadata\. You can't access the function segment directly or record work done outside of the handler invocation scope\.

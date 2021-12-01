@@ -12,7 +12,7 @@ GET /2019-09-30/functions/FunctionName/provisioned-concurrency?List=ALL&Marker=M
 
 The request uses the following URI parameters\.
 
- ** [FunctionName](#API_ListProvisionedConcurrencyConfigs_RequestSyntax) **   <a name="SSS-ListProvisionedConcurrencyConfigs-request-FunctionName"></a>
+ ** [ FunctionName ](#API_ListProvisionedConcurrencyConfigs_RequestSyntax) **   <a name="SSS-ListProvisionedConcurrencyConfigs-request-FunctionName"></a>
 The name of the Lambda function\.  
 
 **Name formats**
@@ -24,10 +24,10 @@ Length Constraints: Minimum length of 1\. Maximum length of 140\.
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
 Required: Yes
 
- ** [Marker](#API_ListProvisionedConcurrencyConfigs_RequestSyntax) **   <a name="SSS-ListProvisionedConcurrencyConfigs-request-Marker"></a>
+ ** [ Marker ](#API_ListProvisionedConcurrencyConfigs_RequestSyntax) **   <a name="SSS-ListProvisionedConcurrencyConfigs-request-Marker"></a>
 Specify the pagination token that's returned by a previous request to retrieve the next page of results\.
 
- ** [MaxItems](#API_ListProvisionedConcurrencyConfigs_RequestSyntax) **   <a name="SSS-ListProvisionedConcurrencyConfigs-request-MaxItems"></a>
+ ** [ MaxItems ](#API_ListProvisionedConcurrencyConfigs_RequestSyntax) **   <a name="SSS-ListProvisionedConcurrencyConfigs-request-MaxItems"></a>
 Specify a number to limit the number of configurations returned\.  
 Valid Range: Minimum value of 1\. Maximum value of 50\.
 
@@ -63,29 +63,29 @@ If the action is successful, the service sends back an HTTP 200 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** [NextMarker](#API_ListProvisionedConcurrencyConfigs_ResponseSyntax) **   <a name="SSS-ListProvisionedConcurrencyConfigs-response-NextMarker"></a>
+ ** [ NextMarker ](#API_ListProvisionedConcurrencyConfigs_ResponseSyntax) **   <a name="SSS-ListProvisionedConcurrencyConfigs-response-NextMarker"></a>
 The pagination token that's included if more results are available\.  
 Type: String
 
- ** [ProvisionedConcurrencyConfigs](#API_ListProvisionedConcurrencyConfigs_ResponseSyntax) **   <a name="SSS-ListProvisionedConcurrencyConfigs-response-ProvisionedConcurrencyConfigs"></a>
+ ** [ ProvisionedConcurrencyConfigs ](#API_ListProvisionedConcurrencyConfigs_ResponseSyntax) **   <a name="SSS-ListProvisionedConcurrencyConfigs-response-ProvisionedConcurrencyConfigs"></a>
 A list of provisioned concurrency configurations\.  
-Type: Array of [ProvisionedConcurrencyConfigListItem](API_ProvisionedConcurrencyConfigListItem.md) objects
+Type: Array of [ ProvisionedConcurrencyConfigListItem ](API_ProvisionedConcurrencyConfigListItem.md) objects
 
 ## Errors<a name="API_ListProvisionedConcurrencyConfigs_Errors"></a>
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **ResourceNotFoundException**   
+ ** ResourceNotFoundException **   
 The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 
- **TooManyRequestsException**   
+ ** TooManyRequestsException **   
 The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 

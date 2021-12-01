@@ -15,7 +15,7 @@ The function's runtime and each external extension are processes that run within
 ## Lambda execution environment lifecycle<a name="runtimes-lifecycle"></a>
 
 The lifecycle of the execution environment includes the following phases:
-+ `Init`: In this phase, Lambda creates or unfreezes an execution environment with the configured resources, downloads the code for the function and all layers, initializes any extensions, initializes the runtime, and then runs the function’s initialization code \(the code outside the main handler\)\. The `Init` phase happens either during the first invocation, or in advance of function invocations if you have enabled [provisioned concurrency](configuration-concurrency.md#configuration-concurrency-provisioned)\.
++ `Init`: In this phase, Lambda creates or unfreezes an execution environment with the configured resources, downloads the code for the function and all layers, initializes any extensions, initializes the runtime, and then runs the function’s initialization code \(the code outside the main handler\)\. The `Init` phase happens either during the first invocation, or in advance of function invocations if you have enabled [provisioned concurrency](provisioned-concurrency.md)\.
 
   The `Init` phase is split into three sub\-phases: `Extension init`, `Runtime init`, and `Function init`\. These sub\-phases ensure that all extensions and the runtime complete their setup tasks before the function code runs\.
 + `Invoke`: In this phase, Lambda invokes the function handler\. After the function runs to completion, Lambda prepares to handle another function invocation\.
@@ -48,6 +48,9 @@ The function's timeout setting limits the duration of the entire `Invoke` phase\
 The invoke phase ends after the runtime and all extensions signal that they are done by sending a `Next` API request\.
 
 If the Lambda function crashes or times out during the `Invoke` phase, Lambda resets the execution environment\. The reset behaves like a `Shutdown` event\. First, Lambda shuts down the runtime\. Then Lambda sends a `Shutdown` event to each registered external extension\. The event includes the reason for the shutdown\. If another `Invoke` event results in this execution environment being reused, Lambda initializes the runtime and extensions as part of the next invocation\.
+
+**Note**  
+The Lambda reset does not clear the `/tmp` directory content prior to the next init phase\. This behavior is consistent with the regular shutdown phase\.
 
 ![\[This is my image.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/Overview-Invoke-with-Error.png)
 

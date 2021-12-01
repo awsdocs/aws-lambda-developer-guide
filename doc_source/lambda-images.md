@@ -6,6 +6,10 @@ AWS provides a set of open\-source base images that you can use to build the con
 
 Additionally, AWS provides a runtime interface emulator for you to test your functions locally using tools such as the Docker CLI\.
 
+**Note**  
+You create each container image to be compatible with one of the instruction set architectures that Lambda supports\. Lambda provides base images for each of the instruction set architectures and Lambda also provides base images that support both architectures\.   
+The image that you build for your function must target only one of the architectures\.
+
 There is no additional charge for packaging and deploying functions as container images\. When a function deployed as a container image is invoked, you pay for invocation requests and execution duration\. You do incur charges related to storing your container images in Amazon ECR\. For more information, see [Amazon ECR pricing](http://aws.amazon.com/ecr/pricing/)\. 
 
 **Topics**

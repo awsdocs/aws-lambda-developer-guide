@@ -28,6 +28,7 @@ By default, Amazon MQ has a weekly maintenance window for brokers\. During that 
 + [Configuring a broker as an event source](#services-mq-eventsourcemapping)
 + [Event source mapping API](#services-mq-api)
 + [Event source mapping errors](#services-mq-errors)
++ [Amazon MQ and RabbitMQ configuration parameters](#services-mq-params)
 
 ## Lambda consumer group<a name="services-mq-configure"></a>
 
@@ -38,53 +39,51 @@ Lambda will pull messages until it has processed a maximum of 6 MB, until timeou
 **Note**  
 The maximum function invocation time is 14 minutes\. 
 
-You can monitor a given function's concurrency usage using the `ConcurrentExecutions` metric in Amazon CloudWatch\. For more information about concurrency, see [Managing concurrency for a Lambda function](configuration-concurrency.md)\.
+You can monitor a given function's concurrency usage using the `ConcurrentExecutions` metric in Amazon CloudWatch\. For more information about concurrency, see [Managing Lambda reserved concurrency](configuration-concurrency.md)\.
 
 **Example Amazon MQ record events**  
 
 ```
 {
-  "eventSource": "aws:amq",
-  "eventSourceArn": "arn:aws:mq:us-west-2:112556298976:broker:test:b-9bcfa592-423a-4942-879d-eb284b418fc8",
-  "messages": {
-    [
+   "eventSource": "aws:amq",
+   "eventSourceArn": "arn:aws:mq:us-west-2:112556298976:broker:test:b-9bcfa592-423a-4942-879d-eb284b418fc8",
+   "messages": [
       {
-        "messageID": "ID:b-9bcfa592-423a-4942-879d-eb284b418fc8-1.mq.us-west-2.amazonaws.com-37557-1234520418293-4:1:1:1:1",
-        "messageType": "jms/text-message",
-        "data": "QUJDOkFBQUE=",
-        "connectionId": "myJMSCoID",
-        "redelivered": false,
-        "destination": {
-          "physicalname": "testQueue" 
-        }, 
-        "timestamp": 1598827811958,
-        "brokerInTime": 1598827811958,
-        "brokerOutTime": 1598827811959
+         "messageID": "ID:b-9bcfa592-423a-4942-879d-eb284b418fc8-1.mq.us-west-2.amazonaws.com-37557-1234520418293-4:1:1:1:1",
+         "messageType": "jms/text-message",
+         "data": "QUJDOkFBQUE=",
+         "connectionId": "myJMSCoID",
+         "redelivered": false,
+         "destination": {
+            "physicalname": "testQueue"
+         },
+         "timestamp": 1598827811958,
+         "brokerInTime": 1598827811958,
+         "brokerOutTime": 1598827811959
       },
       {
-        "messageID": "ID:b-9bcfa592-423a-4942-879d-eb284b418fc8-1.mq.us-west-2.amazonaws.com-37557-1234520418293-4:1:1:1:1",
-        "messageType":"jms/bytes-message",
-        "data": "3DTOOW7crj51prgVLQaGQ82S48k=",
-        "connectionId": "myJMSCoID1",
-        "persistent": false,
-        "destination": {
-          "physicalname": "testQueue" 
-        }, 
-        "timestamp": 1598827811958,
-        "brokerInTime": 1598827811958,
-        "brokerOutTime": 1598827811959
+         "messageID": "ID:b-9bcfa592-423a-4942-879d-eb284b418fc8-1.mq.us-west-2.amazonaws.com-37557-1234520418293-4:1:1:1:1",
+         "messageType": "jms/bytes-message",
+         "data": "3DTOOW7crj51prgVLQaGQ82S48k=",
+         "connectionId": "myJMSCoID1",
+         "persistent": false,
+         "destination": {
+            "physicalname": "testQueue"
+         },
+         "timestamp": 1598827811958,
+         "brokerInTime": 1598827811958,
+         "brokerOutTime": 1598827811959
       }
-    ]
-  }
+   ]
 }
 ```
 
 ```
 {
   "eventSource": "aws:rmq",
-  "eventSourceArn": "arn:aws:mq:us-west-2:112556298976:broker:test:b-9bcfa592-423a-4942-879d-eb284b418fc8",
+  "eventSourceArn": "arn:aws:mq:us-west-2:112556298976:broker:pizzaBroker:b-9bcfa592-423a-4942-879d-eb284b418fc8",
   "rmqMessagesByQueue": {
-    "test::/": [
+    "pizzaQueue::/": [
       {
         "basicProperties": {
           "contentType": "text/plain",
@@ -132,7 +131,7 @@ You can monitor a given function's concurrency usage using the `ConcurrentExecut
   }
 }
 ```
-In the RabbitMQ example, `test` is the name of the RabbitMQ queue, and `/` is the name of the virtual host\. When receiving messages, the event source lists messages under `test::/`\.
+In the RabbitMQ example, `pizzaQueue` is the name of the RabbitMQ queue, and `/` is the name of the virtual host\. When receiving messages, the event source lists messages under `pizzaQueue::/`\.
 
 ## Execution role permissions<a name="events-mq-permissions"></a>
 
@@ -182,11 +181,11 @@ To enable or disable the trigger \(or delete it\), choose the **MQ** trigger in 
 ## Event source mapping API<a name="services-mq-api"></a>
 
 To manage an event source with the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) or [AWS SDK](http://aws.amazon.com/getting-started/tools-sdks/), you can use the following API operations:
-+ [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
-+ [ListEventSourceMappings](API_ListEventSourceMappings.md)
-+ [GetEventSourceMapping](API_GetEventSourceMapping.md)
-+ [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md)
-+ [DeleteEventSourceMapping](API_DeleteEventSourceMapping.md)
++  [CreateEventSourceMapping](API_CreateEventSourceMapping.md) 
++  [ListEventSourceMappings](API_ListEventSourceMappings.md) 
++  [GetEventSourceMapping](API_GetEventSourceMapping.md) 
++ [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md) 
++ [DeleteEventSourceMapping](API_DeleteEventSourceMapping.md) 
 
 To create the event source mapping with the AWS Command Line Interface \(AWS CLI\), use the [https://docs.aws.amazon.com/cli/latest/reference/lambda/create-event-source-mapping.html](https://docs.aws.amazon.com/cli/latest/reference/lambda/create-event-source-mapping.html) command\.
 
@@ -301,3 +300,18 @@ Records also go unprocessed if Lambda drops them due to their size\. The size li
 
 **Note**  
 Lambda does not support custom redelivery policies\. Instead, Lambda uses a policy with the default values from the [Redelivery Policy](https://activemq.apache.org/redelivery-policy) page on the Apache ActiveMQ website, with `maximumRedeliveries` set to 5\.
+
+## Amazon MQ and RabbitMQ configuration parameters<a name="services-mq-params"></a>
+
+All Lambda event source types share the same [CreateEventSourceMapping](API_CreateEventSourceMapping.md) and [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md) API operations\. However, only some of the parameters apply to Amazon MQ and RabbitMQ\.
+
+
+**Event source parameters that apply to Amazon MQ and RabbitMQ**  
+
+| Parameter | Required | Default | Notes | 
+| --- | --- | --- | --- | 
+|  BatchSize  |  N  |  100  |  Maximum: 10000  | 
+|  Enabled  |  N  |  true  |   | 
+|  FunctionName  |  Y  |   |   | 
+|  Queues  |  N  |   |  The name of the Amazon MQ broker destination queue to consume\.  | 
+|  SourceAccessConfigurations  |  N  |   |  An array of the authentication protocol, VPC components, or virtual host to secure and define your Amazon MQ event source\.  | 

@@ -61,7 +61,7 @@ A `4xx` series error indicates an error that the invoking client or service can 
 **`5xx`**  
 A `5xx` series error indicates an issue with Lambda, or an issue with the function's configuration or resources\. `5xx` series errors can indicate a temporary condition that can be resolved without any action by the user\. These issues can't be addressed by the invoking client or service, but a Lambda function's owner may be able to fix the issue\.
 
-For a complete list of invocation errors, see [Invoke API Errors](API_Invoke.md#API_Invoke_Errors)\.
+For a complete list of invocation errors, see [InvokeFunction errors](API_Invoke.md#API_Invoke_Errors)\.
 
 ## Creating a function that returns exceptions<a name="java-exceptions-createfunction"></a>
 
@@ -133,19 +133,17 @@ You can invoke your function on the Lambda console by configuring a test event a
 
 1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
 
-1. Choose a function\.
+1. Choose the function to test, and choose **Test**\.
+
+1. Under **Test event**, select **New event**\.
+
+1. Select a **Template**\.
+
+1. For **Name**, enter a name for the test\. In the text entry box, enter the JSON test event\.
+
+1. Choose **Save changes**\.
 
 1. Choose **Test**\.
-
-1. Select **New event** and then choose an **Event template** from the dropdown list\.
-
-1. Enter a name for the test event\.
-
-1. Enter the JSON for the test event\.
-
-1. Choose **Create event**\.
-
-1. Choose **Invoke**\.
 
 The Lambda console invokes your function [synchronously](invocation-sync.md) and displays the result\. To see the response, logs, and other information, expand the **Details** section\.
 
@@ -212,7 +210,6 @@ The GitHub repository for this guide includes sample applications that demonstra
 + [blank\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-java) – A Java function that shows the use of Lambda's Java libraries, logging, environment variables, layers, AWS X\-Ray tracing, unit tests, and the AWS SDK\.
 + [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-basic) – A minimal Java function with unit tests and variable logging configuration\.
 + [java\-events](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-events) – A minimal Java function that uses the latest version \(3\.0\.0 and newer\) of the [aws\-lambda\-java\-events](java-package.md) library\. These examples do not require the AWS SDK as a dependency\.
-+ [java\-events\-v1sdk](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-events-v1sdk) – A Java function that uses an older version \(2\.2\.9\) of the [aws\-lambda\-java\-events](java-package.md) library\. These examples require the AWS SDK as a dependency\. **These examples are deprecated\. We recommend following the `java-events` examples and using version 3\.0\.0 or above of the `aws-lambda-java-events` library\.**
 + [s3\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/s3-java) – A Java function that processes notification events from Amazon S3 and uses the Java Class Library \(JCL\) to create thumbnails from uploaded image files\.
 
 The `java-basic` function includes a handler \(`HandlerDivide`\) that returns a custom runtime exception\. The `HandlerStream` handler implements the `RequestStreamHandler` and can throw an `IOException` checked exception\.

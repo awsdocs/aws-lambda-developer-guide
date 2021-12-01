@@ -4,7 +4,7 @@ A function's environment variable settings\. You can use environment variables t
 
 ## Contents<a name="API_Environment_Contents"></a>
 
- **Variables**   <a name="SSS-Type-Environment-Variables"></a>
+ ** Variables **   <a name="SSS-Type-Environment-Variables"></a>
 Environment variable key\-value pairs\. For more information, see [Using Lambda environment variables](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html)\.  
 Type: String to string map  
 Key Pattern: `[a-zA-Z]([a-zA-Z0-9_])+`   

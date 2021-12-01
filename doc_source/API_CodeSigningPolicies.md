@@ -4,7 +4,7 @@ Code signing configuration [policies](https://docs.aws.amazon.com/lambda/latest/
 
 ## Contents<a name="API_CodeSigningPolicies_Contents"></a>
 
- **UntrustedArtifactOnDeployment**   <a name="SSS-Type-CodeSigningPolicies-UntrustedArtifactOnDeployment"></a>
+ ** UntrustedArtifactOnDeployment **   <a name="SSS-Type-CodeSigningPolicies-UntrustedArtifactOnDeployment"></a>
 Code signing configuration policy for deployment validation failure\. If you set the policy to `Enforce`, Lambda blocks the deployment request if signature validation checks fail\. If you set the policy to `Warn`, Lambda allows the deployment and creates a CloudWatch log\.   
 Default value: `Warn`   
 Type: String  

@@ -19,11 +19,11 @@ A runtime can support a single version of a language, multiple versions of a lan
 
 **Node\.js runtimes**  
 
-| Name | Identifier | SDK for JavaScript | Operating system | 
-| --- | --- | --- | --- | 
-|  Node\.js 14  |  `nodejs14.x`  |  2\.880\.0  |  Amazon Linux 2  | 
-|  Node\.js 12  |  `nodejs12.x`  |  2\.880\.0  |  Amazon Linux 2  | 
-|  Node\.js 10  |  `nodejs10.x`  |  2\.880\.0  |  Amazon Linux 2  | 
+| Name | Identifier | SDK for JavaScript | Operating system | Architectures | 
+| --- | --- | --- | --- | --- | 
+|  Node\.js 14  |  `nodejs14.x`  |  2\.1001\.0  |  Amazon Linux 2  |  x86\_64, arm64  | 
+|  Node\.js 12  |  `nodejs12.x`  |  2\.1001\.0  |  Amazon Linux 2  |  x86\_64, arm64  | 
+|  Node\.js 10  |  `nodejs10.x`  |  2\.1001\.0  |  Amazon Linux 2  |  x86\_64  | 
 
 **Note**  
 For end of support information about Node\.js 10, see [Runtime support policy](runtime-support-policy.md)\.
@@ -31,23 +31,24 @@ For end of support information about Node\.js 10, see [Runtime support policy](r
 
 **Python runtimes**  
 
-| Name | Identifier | AWS SDK for Python | Operating system | 
-| --- | --- | --- | --- | 
-|  Python 3\.8  |  `python3.8`  |  boto3\-1\.17\.100 botocore\-1\.20\.100  |  Amazon Linux 2  | 
-|  Python 3\.7  |  `python3.7`  |  boto3\-1\.17\.100 botocore\-1\.20\.100  |  Amazon Linux  | 
-|  Python 3\.6  |  `python3.6`  |  boto3\-1\.17\.100 botocore\-1\.20\.100  |  Amazon Linux  | 
-|  Python 2\.7  |  `python2.7`  |  boto3\-1\.17\.100 botocore\-1\.20\.100  |  Amazon Linux  | 
+| Name | Identifier | AWS SDK for Python | Operating system | Architectures | 
+| --- | --- | --- | --- | --- | 
+|  Python 3\.9  |  `python3.9`  |  boto3\-1\.18\.55 botocore\-1\.21\.55  |  Amazon Linux 2  |  x86\_64, arm64  | 
+|  Python 3\.8  |  `python3.8`  |  boto3\-1\.18\.55 botocore\-1\.21\.55  |  Amazon Linux 2  |  x86\_64, arm64  | 
+|  Python 3\.7  |  `python3.7`  |  boto3\-1\.18\.55 botocore\-1\.21\.55  |  Amazon Linux  |  x86\_64  | 
+|  Python 3\.6  |  `python3.6`  |  boto3\-1\.18\.55 botocore\-1\.21\.55  |  Amazon Linux  |  x86\_64  | 
+|  Python 2\.7  |  `python2.7`  |  boto3\-1\.17\.100 botocore\-1\.20\.100  |  Amazon Linux  |  x86\_64  | 
 
 **Important**  
-Python 2\.7 reached end of life on January 1, 2020\. End of support \(phase 1\) for the Python 2\.7 runtime starts on July 15, 2021\. For more information, see [Announcing end of support for Python 2\.7 in AWS Lambda](http://aws.amazon.com/blogs/compute/announcing-end-of-support-for-python-2-7-in-aws-lambda/) on the AWS Compute Blog\.
+Python 2\.7 reached end of life on January 1, 2020\. End of support \(phase 1\) for the Python 2\.7 runtime started on July 15, 2021\. For more information, see [Announcing end of support for Python 2\.7 in AWS Lambda](http://aws.amazon.com/blogs/compute/announcing-end-of-support-for-python-2-7-in-aws-lambda/) on the AWS Compute Blog\.
 
 
 **Ruby runtimes**  
 
-| Name | Identifier | SDK for Ruby | Operating system | 
-| --- | --- | --- | --- | 
-|  Ruby 2\.7  |  `ruby2.7`  |  3\.0\.1  |  Amazon Linux 2  | 
-|  Ruby 2\.5  |  `ruby2.5`  |  3\.0\.1  |  Amazon Linux  | 
+| Name | Identifier | SDK for Ruby | Operating system | Architectures | 
+| --- | --- | --- | --- | --- | 
+|  Ruby 2\.7  |  `ruby2.7`  |  3\.0\.1  |  Amazon Linux 2  |  x86\_64, arm64  | 
+|  Ruby 2\.5  |  `ruby2.5`  |  3\.0\.1  |  Amazon Linux  |  x86\_64  | 
 
 **Note**  
 For end of support information about Ruby 2\.5, see [Runtime support policy](runtime-support-policy.md)\.
@@ -55,26 +56,29 @@ For end of support information about Ruby 2\.5, see [Runtime support policy](run
 
 **Java runtimes**  
 
-| Name | Identifier | JDK | Operating system | 
-| --- | --- | --- | --- | 
-|  Java 11  |  `java11`  |  amazon\-corretto\-11  |  Amazon Linux 2  | 
-|  Java 8  |  `java8.al2`  |  amazon\-corretto\-8  |  Amazon Linux 2  | 
-|  Java 8  |  `java8`  |  java\-1\.8\.0\-openjdk  |  Amazon Linux  | 
+| Name | Identifier | JDK | Operating system | Architectures | 
+| --- | --- | --- | --- | --- | 
+|  Java 11  |  `java11`  |  amazon\-corretto\-11  |  Amazon Linux 2  |  x86\_64, arm64  | 
+|  Java 8  |  `java8.al2`  |  amazon\-corretto\-8  |  Amazon Linux 2  |  x86\_64, arm64  | 
+|  Java 8  |  `java8`  |  amazon\-corretto\-8  |  Amazon Linux  |  x86\_64  | 
 
 
 **Go runtimes**  
 
-| Name | Identifier | Operating system | 
-| --- | --- | --- | 
-|  Go 1\.x  |  `go1.x`  |  Amazon Linux  | 
+| Name | Identifier | Operating system | Architectures | 
+| --- | --- | --- | --- | 
+|  Go 1\.x  |  `go1.x`  |  Amazon Linux  |  x86\_64  | 
+
+**Note**  
+Runtimes that use the Amazon Linux operating system, such as Go 1\.x, do not support the arm64 architecture\. To use arm64 architecture, you can run Go with the provided\.al2 runtime\.
 
 
 **\.NET runtimes**  
 
-| Name | Identifier | Operating system | 
-| --- | --- | --- | 
-|  \.NET Core 3\.1  |  `dotnetcore3.1`  |  Amazon Linux 2  | 
-|  \.NET Core 2\.1  |  `dotnetcore2.1`  |  Amazon Linux  | 
+| Name | Identifier | Operating system | Architectures | 
+| --- | --- | --- | --- | 
+|  \.NET Core 3\.1  |  `dotnetcore3.1`  |  Amazon Linux 2  |  x86\_64, arm64  | 
+|  \.NET Core 2\.1  |  `dotnetcore2.1`  |  Amazon Linux  |  x86\_64  | 
 
 **Note**  
 For end of support information about \.NET Core 2\.1, see [Runtime support policy](runtime-support-policy.md)\.
@@ -84,10 +88,10 @@ To use other languages in Lambda, you can implement a [custom runtime](runtimes-
 
 **Custom runtime**  
 
-| Name | Identifier | Operating system | 
-| --- | --- | --- | 
-|  Custom Runtime  |  `provided.al2`  |  Amazon Linux 2  | 
-|  Custom Runtime  |  `provided`  |  Amazon Linux  | 
+| Name | Identifier | Operating system | Architectures | 
+| --- | --- | --- | --- | 
+|  Custom Runtime  |  `provided.al2`  |  Amazon Linux 2  |  x86\_64, arm64  | 
+|  Custom Runtime  |  `provided`  |  Amazon Linux  |  x86\_64  | 
 
 **Topics**
 + [Runtime support policy](runtime-support-policy.md)

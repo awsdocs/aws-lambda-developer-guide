@@ -1,6 +1,6 @@
 # Configuring AWS Lambda functions<a name="lambda-functions"></a>
 
-You can use the AWS Lambda API or console to create functions and configure function settings\. The workflow to create a function is different for a function deployed as a [container image](configuration-images.md) and for a function deployed as a [\.zip file archive](configuration-function-zip.md)\. 
+You can use the AWS Lambda API or console to create functions and configure function settings\. When you create the function, you chose the type of deployment package for the function\. The deployment package type cannot be changed later\. The workflow to create a function is different for a function deployed as a [container image](configuration-images.md) and for a function deployed as a [\.zip file archive](configuration-function-zip.md)\. 
 
 After you create the function, you can configure settings for many [function capabilities and options ](configuration-function-common.md) such as permissions, environment variables, tags, and layers\.
 

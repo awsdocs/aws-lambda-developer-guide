@@ -29,10 +29,10 @@ Payload
 
 The request uses the following URI parameters\.
 
- ** [ClientContext](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-ClientContext"></a>
+ ** [ ClientContext ](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-ClientContext"></a>
 Up to 3583 bytes of base64\-encoded data about the invoking client to pass to the function in the context object\.
 
- ** [FunctionName](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-FunctionName"></a>
+ ** [ FunctionName ](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-FunctionName"></a>
 The name of the Lambda function, version, or alias\.  
 
 **Name formats**
@@ -44,18 +44,18 @@ Length Constraints: Minimum length of 1\. Maximum length of 170\.
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_\.]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
 Required: Yes
 
- ** [InvocationType](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-InvocationType"></a>
+ ** [ InvocationType ](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-InvocationType"></a>
 Choose from the following options\.  
 +  `RequestResponse` \(default\) \- Invoke the function synchronously\. Keep the connection open until the function returns a response or times out\. The API response includes the function response and additional data\.
 +  `Event` \- Invoke the function asynchronously\. Send events that fail multiple times to the function's dead\-letter queue \(if it's configured\)\. The API response only includes a status code\.
 +  `DryRun` \- Validate parameter values and verify that the user or role has permission to invoke the function\.
 Valid Values:` Event | RequestResponse | DryRun` 
 
- ** [LogType](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-LogType"></a>
-Set to `Tail` to include the execution log in the response\.  
+ ** [ LogType ](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-LogType"></a>
+Set to `Tail` to include the execution log in the response\. Applies to synchronously invoked functions only\.  
 Valid Values:` None | Tail` 
 
- ** [Qualifier](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-Qualifier"></a>
+ ** [ Qualifier ](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-Qualifier"></a>
 Specify a version or alias to invoke a published version of the function\.  
 Length Constraints: Minimum length of 1\. Maximum length of 128\.  
 Pattern: `(|[a-zA-Z0-9$_-]+)` 
@@ -64,8 +64,9 @@ Pattern: `(|[a-zA-Z0-9$_-]+)`
 
 The request accepts the following binary data\.
 
- ** [Payload](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-Payload"></a>
-The JSON that you want to provide to your Lambda function as input\.
+ ** [ Payload ](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-Payload"></a>
+The JSON that you want to provide to your Lambda function as input\.  
+You can enter the JSON directly\. For example, `--payload '{ "key": "value" }'`\. You can also specify a file path\. For example, `--payload file://payload.json`\. 
 
 ## Response Syntax<a name="API_Invoke_ResponseSyntax"></a>
 
@@ -82,130 +83,130 @@ Payload
 
 If the action is successful, the service sends back the following HTTP response\.
 
- ** [StatusCode](#API_Invoke_ResponseSyntax) **   <a name="SSS-Invoke-response-StatusCode"></a>
+ ** [ StatusCode ](#API_Invoke_ResponseSyntax) **   <a name="SSS-Invoke-response-StatusCode"></a>
 The HTTP status code is in the 200 range for a successful request\. For the `RequestResponse` invocation type, this status code is 200\. For the `Event` invocation type, this status code is 202\. For the `DryRun` invocation type, the status code is 204\.
 
 The response returns the following HTTP headers\.
 
- ** [ExecutedVersion](#API_Invoke_ResponseSyntax) **   <a name="SSS-Invoke-response-ExecutedVersion"></a>
+ ** [ ExecutedVersion ](#API_Invoke_ResponseSyntax) **   <a name="SSS-Invoke-response-ExecutedVersion"></a>
 The version of the function that executed\. When you invoke a function with an alias, this indicates which version the alias resolved to\.  
 Length Constraints: Minimum length of 1\. Maximum length of 1024\.  
 Pattern: `(\$LATEST|[0-9]+)` 
 
- ** [FunctionError](#API_Invoke_ResponseSyntax) **   <a name="SSS-Invoke-response-FunctionError"></a>
+ ** [ FunctionError ](#API_Invoke_ResponseSyntax) **   <a name="SSS-Invoke-response-FunctionError"></a>
 If present, indicates that an error occurred during function execution\. Details about the error are included in the response payload\.
 
- ** [LogResult](#API_Invoke_ResponseSyntax) **   <a name="SSS-Invoke-response-LogResult"></a>
+ ** [ LogResult ](#API_Invoke_ResponseSyntax) **   <a name="SSS-Invoke-response-LogResult"></a>
 The last 4 KB of the execution log, which is base64 encoded\.
 
 The response returns the following as the HTTP body\.
 
- ** [Payload](#API_Invoke_ResponseSyntax) **   <a name="SSS-Invoke-response-Payload"></a>
+ ** [ Payload ](#API_Invoke_ResponseSyntax) **   <a name="SSS-Invoke-response-Payload"></a>
 The response from the function, or an error object\.
 
 ## Errors<a name="API_Invoke_Errors"></a>
 
- **EC2AccessDeniedException**   
+ ** EC2AccessDeniedException **   
 Need additional permissions to configure VPC settings\.  
 HTTP Status Code: 502
 
- **EC2ThrottledException**   
+ ** EC2ThrottledException **   
  AWS Lambda was throttled by Amazon EC2 during Lambda function initialization using the execution role provided for the Lambda function\.  
 HTTP Status Code: 502
 
- **EC2UnexpectedException**   
+ ** EC2UnexpectedException **   
  AWS Lambda received an unexpected EC2 client exception while setting up for the Lambda function\.  
 HTTP Status Code: 502
 
- **EFSIOException**   
+ ** EFSIOException **   
 An error occurred when reading from or writing to a connected file system\.  
 HTTP Status Code: 410
 
- **EFSMountConnectivityException**   
+ ** EFSMountConnectivityException **   
 The function couldn't make a network connection to the configured file system\.  
 HTTP Status Code: 408
 
- **EFSMountFailureException**   
+ ** EFSMountFailureException **   
 The function couldn't mount the configured file system due to a permission or configuration issue\.  
 HTTP Status Code: 403
 
- **EFSMountTimeoutException**   
+ ** EFSMountTimeoutException **   
 The function was able to make a network connection to the configured file system, but the mount operation timed out\.  
 HTTP Status Code: 408
 
- **ENILimitReachedException**   
+ ** ENILimitReachedException **   
  AWS Lambda was not able to create an elastic network interface in the VPC, specified as part of Lambda function configuration, because the limit for network interfaces has been reached\.  
 HTTP Status Code: 502
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **InvalidRequestContentException**   
+ ** InvalidRequestContentException **   
 The request body could not be parsed as JSON\.  
 HTTP Status Code: 400
 
- **InvalidRuntimeException**   
+ ** InvalidRuntimeException **   
 The runtime or runtime version specified is not supported\.  
 HTTP Status Code: 502
 
- **InvalidSecurityGroupIDException**   
+ ** InvalidSecurityGroupIDException **   
 The Security Group ID provided in the Lambda function VPC configuration is invalid\.  
 HTTP Status Code: 502
 
- **InvalidSubnetIDException**   
+ ** InvalidSubnetIDException **   
 The Subnet ID provided in the Lambda function VPC configuration is invalid\.  
 HTTP Status Code: 502
 
- **InvalidZipFileException**   
+ ** InvalidZipFileException **   
  AWS Lambda could not unzip the deployment package\.  
 HTTP Status Code: 502
 
- **KMSAccessDeniedException**   
+ ** KMSAccessDeniedException **   
 Lambda was unable to decrypt the environment variables because KMS access was denied\. Check the Lambda function's KMS permissions\.  
 HTTP Status Code: 502
 
- **KMSDisabledException**   
+ ** KMSDisabledException **   
 Lambda was unable to decrypt the environment variables because the KMS key used is disabled\. Check the Lambda function's KMS key settings\.  
 HTTP Status Code: 502
 
- **KMSInvalidStateException**   
+ ** KMSInvalidStateException **   
 Lambda was unable to decrypt the environment variables because the KMS key used is in an invalid state for Decrypt\. Check the function's KMS key settings\.  
 HTTP Status Code: 502
 
- **KMSNotFoundException**   
+ ** KMSNotFoundException **   
 Lambda was unable to decrypt the environment variables because the KMS key was not found\. Check the function's KMS key settings\.   
 HTTP Status Code: 502
 
- **RequestTooLargeException**   
+ ** RequestTooLargeException **   
 The request payload exceeded the `Invoke` request body JSON input limit\. For more information, see [Limits](https://docs.aws.amazon.com/lambda/latest/dg/limits.html)\.   
 HTTP Status Code: 413
 
- **ResourceConflictException**   
+ ** ResourceConflictException **   
 The resource already exists, or another operation is in progress\.  
 HTTP Status Code: 409
 
- **ResourceNotFoundException**   
+ ** ResourceNotFoundException **   
 The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
- **ResourceNotReadyException**   
+ ** ResourceNotReadyException **   
 The function is inactive and its VPC connection is no longer available\. Wait for the VPC connection to reestablish and try again\.  
 HTTP Status Code: 502
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 
- **SubnetIPAddressLimitReachedException**   
+ ** SubnetIPAddressLimitReachedException **   
  AWS Lambda was not able to set up VPC access for the Lambda function because one or more configured subnets has no available IP addresses\.  
 HTTP Status Code: 502
 
- **TooManyRequestsException**   
+ ** TooManyRequestsException **   
 The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 
- **UnsupportedMediaTypeException**   
+ ** UnsupportedMediaTypeException **   
 The content type of the `Invoke` request body is not JSON\.  
 HTTP Status Code: 415
 
