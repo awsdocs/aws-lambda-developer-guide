@@ -50,47 +50,9 @@ All other types, as listed below, require you to specify a serializer\.
 + For asynchronous invocations the return\-type will be ignored by Lambda\. The return type may be set to void in such cases\.
 + If you are using \.NET asynchronous programming, the return type can be Task and Task<T> types and use `async` and `await` keywords\. For more information, see [Using async in C\# functions with AWS Lambda](#csharp-handler-async)\.
 
-Unless your function input and output parameters are of type `System.IO.Stream`, you will need to serialize them\. AWS Lambda provides a default serializer that can be applied at the assembly or method level of your application, or you can define your own by implementing the `ILambdaSerializer` interface provided by the `Amazon.Lambda.Core` library\. For more information, see [Deploy C\# Lambda functions with \.zip file archives](csharp-package.md)\.
+Unless your function input and output parameters are of type `System.IO.Stream`, you will need to serialize them\. AWS Lambda provides a default serializers that can be applied at the assembly or method level of your application, or you can define your own by implementing the `ILambdaSerializer` interface provided by the `Amazon.Lambda.Core` library\. For more information, see [Deploy C\# Lambda functions with \.zip file archives](csharp-package.md)\.
 
- To add the default serializer attribute to a method, first add a dependency on `Amazon.Lambda.Serialization.Json` in your `.csproj` file\. 
-
-```
-<Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
-    <AssemblyName>AssemblyName</AssemblyName>
-    </PropertyGroup>
-      
-    <ItemGroup>
-    <PackageReference Include="Amazon.Lambda.Core" Version="1.2.0" />
-    <PackageReference Include="Amazon.Lambda.APIGatewayEvents" Version="2.3.0" />
-    <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="1.8.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
-    </ItemGroup>
-</Project>
-```
-
- The example below illustrates the flexibility you can leverage by specifying the default Json\.NET serializer on one method and another of your choosing on a different method:
-
-```
-public class ProductService{
-    [LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
-    public Product DescribeProduct(DescribeProductRequest request)
-    {
-      return catalogService.DescribeProduct(request.Id);
-    }
-   
-   [LambdaSerializer(typeof(MyJsonSerializer))]
-   public Customer DescribeCustomer(DescribeCustomerRequest request)
-   {
-      return customerService.DescribeCustomer(request.Id);
-   }
-}
-```
-
-**Note**  
-If you are using \.NET Core 3\.1, we recommend that you use the [ Amazon\.Lambda\.Serialization\.SystemTextJson](https://github.com/aws/aws-lambda-dotnet/tree/master/Libraries/src/Amazon.Lambda.Serialization.SystemTextJson) serializer\. This package provides a performance improvement over `Amazon.Lambda.Serialization.Json`\. 
+Instruction how to define serialize you can find in [Serializing Lambda functions](#csharp-handler-serializer)\.
 
 ## Handler signatures<a name="csharp-handler-signatures"></a>
 
@@ -128,9 +90,8 @@ If the method specified in your handler string is overloaded, you must provide t
 ## Serializing Lambda functions<a name="csharp-handler-serializer"></a>
 
 For any Lambda functions that use input or output types other than a `Stream` object, you will need to add a serialization library to your application\. You can do this in the following ways:
-+ Use the `Amazon.Lambda.Serialization.Json` NuGet package\. This library uses JSON\.NET to handle serialization\.
-**Note**  
-If you are using \.NET Core 3\.1, we recommend that you use the [ Amazon\.Lambda\.Serialization\.SystemTextJson](https://github.com/aws/aws-lambda-dotnet/tree/master/Libraries/src/Amazon.Lambda.Serialization.SystemTextJson) serializer\. This package provides a performance improvement over `Amazon.Lambda.Serialization.Json`\. 
++ Use the `Amazon.Lambda.Serialization.SystemTextJson` NuGet package\. This library uses native .net core JSON serializer to handle serialization\. This package provides a performance improvement over `Amazon.Lambda.Serialization.Json`, but please note that there are some limitation documented in the [Microsoft's documentation](https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-how-to?pivots=dotnet-core-3-1)\. It is only available for \.net core 3\.1 runtimes or higher\.
++ Use the `Amazon.Lambda.Serialization.Json` NuGet package\. This library uses `Newtonsoft.Json` NuGet package to handle serialization\.
 + Create your own serialization library by implementing the `ILambdaSerializer` interface, which is available as part of the `Amazon.Lambda.Core` library\. The interface defines two methods:
   + `T Deserialize<T>(Stream requestStream);`
 
@@ -139,24 +100,47 @@ If you are using \.NET Core 3\.1, we recommend that you use the [ Amazon\.Lambda
 
      You implement this method to serialize the result returned from the Lambda function handler into the response payload that is returned by the `Invoke` API\.
 
-You use whichever serializer you wish by adding it as a dependency to your `MyProject.csproj` file\. 
+
+To use serializer you need to add a dependency to your `csproj` file\.
 
 ```
-...
  <ItemGroup>
-    <PackageReference Include="Amazon.Lambda.Core" Version="1.0.0" />
-    <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="1.3.0" />
+    <PackageReference Include="Amazon.Lambda.Serialization.SystemTextJson" Version="2.1.0" />
+    <!-- or -->
+    <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="2.0.0" />
   </ItemGroup>
 ```
 
-You then add it to your AssemblyInfo\.cs file\. For example, if you are using the default Json\.NET serializer, this is what you would add:
+Next you need to define the serializer. For example you can define it in the AssemblyInfo\.cs file\. If you are using `Amazon.Lambda.Serialization.SystemTextJson`, the serializercan be defined that way:
 
 ```
-[assembly:LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
+[assembly: LambdaSerializer(typeof(DefaultLambdaJsonSerializer))]
+```
+   
+Using `Amazon.Lambda.Serialization.Json`, it will be:
+
+```
+[assembly: LambdaSerializer(typeof(JsonSerializer))]
 ```
 
-**Note**  
-You can define a custom serialization attribute at the method level, which will override the default serializer specified at the assembly level\. For more information, see [Handling standard data types](#csharp-handler-types)\.
+You can also define a custom serialization attribute at the method level, which will override the default serializer specified at the assembly level\.
+
+```
+public class ProductService{
+
+    [LambdaSerializer(typeof(JsonSerializer))]
+    public Product DescribeProduct(DescribeProductRequest request)
+    {
+      return catalogService.DescribeProduct(request.Id);
+    }
+   
+   [LambdaSerializer(typeof(MyJsonSerializer))]
+   public Customer DescribeCustomer(DescribeCustomerRequest request)
+   {
+      return customerService.DescribeCustomer(request.Id);
+   }
+}
+```
 
 ## Lambda function handler restrictions<a name="csharp-handler-restrictions"></a>
 
