@@ -26,7 +26,7 @@ Resources in your API define one or more methods, such as GET or POST\. Methods 
 
 1. Choose a function\.
 
-1. Under **Functional overview**, choose **Add trigger**\.
+1. Under **Function overview**, choose **Add trigger**\.
 
 1. Select **API Gateway**\.
 
