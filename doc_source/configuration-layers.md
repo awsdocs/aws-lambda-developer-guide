@@ -1,6 +1,6 @@
 # Creating and sharing Lambda layers<a name="configuration-layers"></a>
 
-Lambda [layers](gettingstarted-concepts.md#gettingstarted-concepts-layer) provide a convenient way to package libraries and other dependencies that you can use with your Lambda functions. Using layers reduces the size of uploaded deployment archives and makes it faster to deploy your code. Layers also promote code sharing and separation of responsibilities so that you can iterate faster on writing business logic. 
+Lambda [layers](gettingstarted-concepts.md#gettingstarted-concepts-layer) provide a convenient way to package libraries and other dependencies that you can use with your Lambda functions\. Using layers reduces the size of uploaded deployment archives and makes it faster to deploy your code\. Layers also promote code sharing and separation of responsibilities so that you can iterate faster on writing business logic\. 
 
 A layer is a \.zip file archive that can contain additional code or data\. A layer can contain libraries, a [custom runtime](runtimes-custom.md), data, or configuration files\.
 
