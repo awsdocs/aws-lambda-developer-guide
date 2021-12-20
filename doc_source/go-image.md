@@ -189,7 +189,7 @@ If you do not want to add the RIE to your image, you can test your image locally
 
    This command invokes the function running in the container image and returns a response\.
 
-Now that your container image resides in the Amazon ECR container registry, you can you can [create](configuration-images.md) the Lambda function and deploy the image\.
+Now that your container image resides in the Amazon ECR container registry, you can [create](configuration-images.md) the Lambda function and deploy the image\.
 
 ## Deploy the container image<a name="go-image-deploy"></a>
 
