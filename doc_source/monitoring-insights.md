@@ -23,7 +23,7 @@ The Lambda Insights layer extends the `CreateLogStream` and `PutLogEvents` for t
 
 ## Pricing<a name="monitoring-insights-pricing"></a>
 
-When you enable Lambda Insights for your Lambda function, Lambda Insights reports 8 metrics per function and every function invocation sends about 1KB of log data to CloudWatch\. You only pay for the metrics and logs reported for your function by Lambda Insights\. There are no minimum fees or mandatory service usage polices\. You do not pay for Lambda Insights if the function is not invoked\. For a pricing example, see [Amazon CloudWatch pricing](http://aws.amazon.com/cloudwatch/pricing/)\. 
+When you enable Lambda Insights for your Lambda function, Lambda Insights reports 8 metrics per function and every function invocation sends about 1KB of log data to CloudWatch\. You only pay for the metrics and logs reported for your function by Lambda Insights\. There are no minimum fees or mandatory service usage policies\. You do not pay for Lambda Insights if the function is not invoked\. For a pricing example, see [Amazon CloudWatch pricing](http://aws.amazon.com/cloudwatch/pricing/)\. 
 
 ## Supported runtimes<a name="monitoring-insights-runtimes"></a>
 
