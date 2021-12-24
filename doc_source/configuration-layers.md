@@ -148,7 +148,7 @@ For more information about path settings in the Lambda execution environment, se
 
 You can create new layers using the Lambda console or the Lambda API\.
 
-Layers can have one or more version\. When you create a layer, Lambda sets the layer version to version 1\. You can configure permissions on an existing layer version, but to update the code or make other configuration changes, you must create a new version of the layer\.
+Layers can have one or more versions\. When you create a layer, Lambda sets the layer version to version 1\. You can configure permissions on an existing layer version, but to update the code or make other configuration changes, you must create a new version of the layer\.
 
 **To create a layer \(console\)**
 
