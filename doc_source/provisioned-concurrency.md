@@ -139,7 +139,7 @@ Application Auto Scaling allows you to manage provisioned concurrency on a sched
 
 To increase provisioned concurrency automatically as needed, use the `RegisterScalableTarget` and `PutScalingPolicy` Application Auto Scaling API operations to register a target and create a scaling policy:
 
-1. Register a function's alias as a scaling target\. The following example registers the BLUE alias of a function named `function`my\-:
+1. Register a function's alias as a scaling target\. The following example registers the BLUE alias of a function named `my-function`:
 
    ```
    aws application-autoscaling register-scalable-target --service-namespace lambda \
