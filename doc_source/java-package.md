@@ -112,9 +112,9 @@ dependencies {
     implementation 'com.amazonaws:aws-lambda-java-core:1.2.1'
     implementation 'com.amazonaws:aws-lambda-java-events:3.1.0'
     implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'org.apache.logging.log4j:log4j-api:2.17.0'
-    implementation 'org.apache.logging.log4j:log4j-core:2.17.0'
-    runtimeOnly 'org.apache.logging.log4j:log4j-slf4j18-impl:2.17.0'
+    implementation 'org.apache.logging.log4j:log4j-api:[2.17.1,)'
+    implementation 'org.apache.logging.log4j:log4j-core:[2.17.1,)'
+    runtimeOnly 'org.apache.logging.log4j:log4j-slf4j18-impl:[2.17.1,)'
     runtimeOnly 'com.amazonaws:aws-lambda-java-log4j2:1.5.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.0'
@@ -214,7 +214,7 @@ If you use the appender library \(`aws-lambda-java-log4j2`\), you must also conf
           <dependency>
             <groupId>com.github.edwgiz</groupId>
             <artifactId>maven-shade-plugin.log4j2-cachefile-transformer</artifactId>
-            <version>2.17.0</version>
+            <version>[2.17.1,)</version>
           </dependency>
         </dependencies>
       </plugin>
