@@ -97,8 +97,8 @@ You need to include both the qualified and the unqualified function ARN in the r
             "lambda:InvokeFunction"
          ],
          "Resource": [
-               "arn:aws:lambda:us-east-2:123456789012:function:my-function”,
-               "arn:aws:lambda:us-east-2:123456789012:function:my-function:*”
+               "arn:aws:lambda:us-east-2:123456789012:function:my-function",
+               "arn:aws:lambda:us-east-2:123456789012:function:my-function:*"
             ]
       }
    ]
