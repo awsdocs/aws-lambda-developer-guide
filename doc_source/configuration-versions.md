@@ -25,7 +25,7 @@ You can create a function version using the Lambda console\.
 
 **To create a new function version**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function and then choose **Versions**\.
 

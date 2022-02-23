@@ -114,7 +114,7 @@ The function in this example depends on a successful response \(in `200`\) from 
 
 ### Returning a calculation<a name="python-example-userinputcalc"></a>
 
-The following example [Lambda Python function code on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/python/example_code/lambda/boto_client_examples/lambda_handler_basic.py) shows a function called `lambda_handler` that uses the `python3.6` [Lambda runtime](lambda-runtimes.md)\. The function accepts user input and returns a calculation to the user\.
+The following example [Lambda Python function code on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/python/example_code/lambda/lambda_handler_basic.py) shows a function called `lambda_handler` that uses the `python3.6` [Lambda runtime](lambda-runtimes.md)\. The function accepts user input and returns a calculation to the user\.
 
 You can use the following event data to [invoke the function](https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html#get-started-invoke-manually):
 

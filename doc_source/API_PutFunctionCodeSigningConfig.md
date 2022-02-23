@@ -17,7 +17,7 @@ Content-type: application/json
 
 The request uses the following URI parameters\.
 
- ** [ FunctionName ](#API_PutFunctionCodeSigningConfig_RequestSyntax) **   <a name="SSS-PutFunctionCodeSigningConfig-request-FunctionName"></a>
+ ** [FunctionName](#API_PutFunctionCodeSigningConfig_RequestSyntax) **   <a name="SSS-PutFunctionCodeSigningConfig-request-FunctionName"></a>
 The name of the Lambda function\.  
 
 **Name formats**
@@ -33,7 +33,7 @@ Required: Yes
 
 The request accepts the following data in JSON format\.
 
- ** [ CodeSigningConfigArn ](#API_PutFunctionCodeSigningConfig_RequestSyntax) **   <a name="SSS-PutFunctionCodeSigningConfig-request-CodeSigningConfigArn"></a>
+ ** [CodeSigningConfigArn](#API_PutFunctionCodeSigningConfig_RequestSyntax) **   <a name="SSS-PutFunctionCodeSigningConfig-request-CodeSigningConfigArn"></a>
 The The Amazon Resource Name \(ARN\) of the code signing configuration\.  
 Type: String  
 Length Constraints: Maximum length of 200\.  
@@ -58,13 +58,13 @@ If the action is successful, the service sends back an HTTP 200 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** [ CodeSigningConfigArn ](#API_PutFunctionCodeSigningConfig_ResponseSyntax) **   <a name="SSS-PutFunctionCodeSigningConfig-response-CodeSigningConfigArn"></a>
+ ** [CodeSigningConfigArn](#API_PutFunctionCodeSigningConfig_ResponseSyntax) **   <a name="SSS-PutFunctionCodeSigningConfig-response-CodeSigningConfigArn"></a>
 The The Amazon Resource Name \(ARN\) of the code signing configuration\.  
 Type: String  
 Length Constraints: Maximum length of 200\.  
 Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:code-signing-config:csc-[a-z0-9]{17}` 
 
- ** [ FunctionName ](#API_PutFunctionCodeSigningConfig_ResponseSyntax) **   <a name="SSS-PutFunctionCodeSigningConfig-response-FunctionName"></a>
+ ** [FunctionName](#API_PutFunctionCodeSigningConfig_ResponseSyntax) **   <a name="SSS-PutFunctionCodeSigningConfig-response-FunctionName"></a>
 The name of the Lambda function\.  
 
 **Name formats**
@@ -105,12 +105,12 @@ HTTP Status Code: 429
 ## See Also<a name="API_PutFunctionCodeSigningConfig_SeeAlso"></a>
 
 For more information about using this API in one of the language\-specific AWS SDKs, see the following:
-+  [ AWS Command Line Interface](https://docs.aws.amazon.com/goto/aws-cli/lambda-2015-03-31/PutFunctionCodeSigningConfig) 
-+  [ AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/PutFunctionCodeSigningConfig) 
-+  [ AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/PutFunctionCodeSigningConfig) 
-+  [ AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/PutFunctionCodeSigningConfig) 
-+  [ AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/PutFunctionCodeSigningConfig) 
-+  [ AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/PutFunctionCodeSigningConfig) 
-+  [ AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/PutFunctionCodeSigningConfig) 
-+  [ AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/PutFunctionCodeSigningConfig) 
-+  [ AWS SDK for Ruby V3](https://docs.aws.amazon.com/goto/SdkForRubyV3/lambda-2015-03-31/PutFunctionCodeSigningConfig) 
++  [AWS Command Line Interface](https://docs.aws.amazon.com/goto/aws-cli/lambda-2015-03-31/PutFunctionCodeSigningConfig) 
++  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/PutFunctionCodeSigningConfig) 
++  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/PutFunctionCodeSigningConfig) 
++  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/PutFunctionCodeSigningConfig) 
++  [AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/PutFunctionCodeSigningConfig) 
++  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/PutFunctionCodeSigningConfig) 
++  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/PutFunctionCodeSigningConfig) 
++  [AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/PutFunctionCodeSigningConfig) 
++  [AWS SDK for Ruby V3](https://docs.aws.amazon.com/goto/SdkForRubyV3/lambda-2015-03-31/PutFunctionCodeSigningConfig) 

@@ -30,7 +30,7 @@ The **Function overview** shows a visualization of your function and its upstrea
 
 ## Configuring functions \(console\)<a name="configuration-common-summary"></a>
 
-For the following function configurations, you can change the settings only for the unpublished version of a function\. In the console, the function **configuration** tab provides the following sections:
+For the following function configurations, you can change the settings only for the unpublished version of a function\. In the console, the function **Configuration** tab provides the following sections:
 + **General configuration** – Configure [memory](#configuration-memory-console) or opt in to the [AWS Compute Optimizer](#configuration-memory-optimization-accept)\. You can also configure function timeout and the execution role\.
 + **Permissions** – Configure the execution role and other [permissions](lambda-permissions.md)\.
 + **Environment variables** – Key\-value pairs that Lambda sets in the execution environment\. To extend your function's configuration outside of code, [use environment variables](configuration-envvars.md)\. 
@@ -81,7 +81,7 @@ You can configure the memory of your function in the Lambda console\.
 
 **To update the memory of a function**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function\.
 
@@ -102,7 +102,7 @@ When you've opted in and your [Lambda function meets Compute Optimizer requireme
 
 **To accept a function memory recommendation**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function\.
 
@@ -120,7 +120,7 @@ For details about how services trigger Lambda functions, see [Using AWS Lambda w
 
 **To add a trigger to your function\.**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose the function to update\.
 
@@ -136,7 +136,7 @@ You can create test events for your function from the **Test** tab\.
 
 **To create a test event**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose the function to test, and choose **Test**\.
 
@@ -152,7 +152,7 @@ Saved test events are also available from the **Code** tab, under the **Test** m
 
 **To test the function**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose the function to test, and choose **Test**\.
 

@@ -6,7 +6,7 @@ Details about a [Code signing configuration](https://docs.aws.amazon.com/lambda/
 
  ** AllowedPublishers **   <a name="SSS-Type-CodeSigningConfig-AllowedPublishers"></a>
 List of allowed publishers\.  
-Type: [ AllowedPublishers ](API_AllowedPublishers.md) object  
+Type: [AllowedPublishers](API_AllowedPublishers.md) object  
 Required: Yes
 
  ** CodeSigningConfigArn **   <a name="SSS-Type-CodeSigningConfig-CodeSigningConfigArn"></a>
@@ -24,7 +24,7 @@ Required: Yes
 
  ** CodeSigningPolicies **   <a name="SSS-Type-CodeSigningConfig-CodeSigningPolicies"></a>
 The code signing policy controls the validation failure action for signature mismatch or expiry\.  
-Type: [ CodeSigningPolicies ](API_CodeSigningPolicies.md) object  
+Type: [CodeSigningPolicies](API_CodeSigningPolicies.md) object  
 Required: Yes
 
  ** Description **   <a name="SSS-Type-CodeSigningConfig-Description"></a>
@@ -41,7 +41,7 @@ Required: Yes
 ## See Also<a name="API_CodeSigningConfig_SeeAlso"></a>
 
 For more information about using this API in one of the language\-specific AWS SDKs, see the following:
-+  [ AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/CodeSigningConfig) 
-+  [ AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/CodeSigningConfig) 
-+  [ AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/CodeSigningConfig) 
-+  [ AWS SDK for Ruby V3](https://docs.aws.amazon.com/goto/SdkForRubyV3/lambda-2015-03-31/CodeSigningConfig) 
++  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/CodeSigningConfig) 
++  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/CodeSigningConfig) 
++  [AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/CodeSigningConfig) 
++  [AWS SDK for Ruby V3](https://docs.aws.amazon.com/goto/SdkForRubyV3/lambda-2015-03-31/CodeSigningConfig) 

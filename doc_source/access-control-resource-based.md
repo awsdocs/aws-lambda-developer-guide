@@ -6,7 +6,7 @@ For Lambda functions, you can [grant an account permission](#permissions-resourc
 
 **To view a function's resource\-based policy**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function\.
 
@@ -27,7 +27,7 @@ For Lambda functions, you can [grant an account permission](#permissions-resourc
                  "Service": "s3.amazonaws.com"
                },
                "Action": "lambda:InvokeFunction",
-               "Resource":  "arn:aws:lambda:us-east-2:123456789012:function:my-function:*",
+               "Resource":  "arn:aws:lambda:us-east-2:123456789012:function:my-function",
                "Condition": {
                  "StringEquals": {
                    "AWS:SourceAccount": "123456789012"

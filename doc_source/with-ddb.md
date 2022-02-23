@@ -32,7 +32,7 @@ Lambda reads records from the stream and invokes your function [synchronously](i
       },
       "awsRegion": "us-west-2",
       "eventName": "INSERT",
-      "eventSourceARN": eventsourcearn,
+      "eventSourceARN": "arn:aws:dynamodb:us-east-1:111122223333:table/EventSourceTable",
       "eventSource": "aws:dynamodb"
     },
     {
@@ -66,20 +66,21 @@ Lambda reads records from the stream and invokes your function [synchronously](i
       },
       "awsRegion": "us-west-2",
       "eventName": "MODIFY",
-      "eventSourceARN": sourcearn,
+      "eventSourceARN": "arn:aws:dynamodb:us-east-1:111122223333:table/EventSourceTable",
       "eventSource": "aws:dynamodb"
     }
+  ]}
 ```
 
 Lambda polls shards in your DynamoDB stream for records at a base rate of 4 times per second\. When records are available, Lambda invokes your function and waits for the result\. If processing succeeds, Lambda resumes polling until it receives more records\.
 
-By default, Lambda invokes your function as soon as records are available in the stream\. If the batch that Lambda reads from the stream only has one record in it, Lambda sends only one record to the function\. To avoid invoking the function with a small number of records, you can tell the event source to buffer records for up to five minutes by configuring a *batch window*\. Before invoking the function, Lambda continues to read records from the stream until it has gathered a full batch, or until the batch window expires\.
+By default, Lambda invokes your function as soon as records are available\. If the batch that Lambda reads from the event source has only one record in it, Lambda sends only one record to the function\. To avoid invoking the function with a small number of records, you can tell the event source to buffer records for up to 5 minutes by configuring a *batching window*\. Before invoking the function, Lambda continues to read records from the event source until it has gathered a full batch, the batching window expires, or the batch reaches the payload limit of 6 MB\. For more information, see [Batching behavior](invocation-eventsourcemapping.md#invocation-eventsourcemapping-batching)\.
 
 If your function returns an error, Lambda retries the batch until processing succeeds or the data expires\. To avoid stalled shards, you can configure the event source mapping to retry with a smaller batch size, limit the number of retries, or discard records that are too old\. To retain discarded events, you can configure the event source mapping to send details about failed batches to an SQS queue or SNS topic\.
 
 You can also increase concurrency by processing multiple batches from each shard in parallel\. Lambda can process up to 10 batches in each shard simultaneously\. If you increase the number of concurrent batches per shard, Lambda still ensures in\-order processing at the partition\-key level\.
 
-Configure the `ParallelizationFactor` setting to process one shard of a Kinesis or DynamoDB data stream with more than one Lambda invocation simultaneously\. You can specify the number of concurrent batches that Lambda polls from a shard via a parallelization factor from 1 \(default\) to 10\. For example, when `ParallelizationFactor` is set to 2, you can have 200 concurrent Lambda invocations at maximum to process 100 Kinesis data shards\. This helps scale up the processing throughput when the data volume is volatile and the `IteratorAge` is high\. Note that parallelization factor will not work if you are using Kinesis aggregation\. For more information, see [New AWS Lambda scaling controls for Kinesis and DynamoDB event sources](http://aws.amazon.com/blogs/compute/new-aws-lambda-scaling-controls-for-kinesis-and-dynamodb-event-sources/)\. Also, see the [Serverless Data Processing on AWS](https://data-processing.serverlessworkshops.io/) workshop for complete tutorials\.
+Configure the `ParallelizationFactor` setting to process one shard of a Kinesis or DynamoDB data stream with more than one Lambda invocation simultaneously\. You can specify the number of concurrent batches that Lambda polls from a shard via a parallelization factor from 1 \(default\) to 10\. For example, when you set `ParallelizationFactor` to 2, you can have 200 concurrent Lambda invocations at maximum to process 100 Kinesis data shards\. This helps scale up the processing throughput when the data volume is volatile and the `IteratorAge` is high\. Note that parallelization factor will not work if you are using Kinesis aggregation\. For more information, see [New AWS Lambda scaling controls for Kinesis and DynamoDB event sources](http://aws.amazon.com/blogs/compute/new-aws-lambda-scaling-controls-for-kinesis-and-dynamodb-event-sources/)\. Also, see the [Serverless Data Processing on AWS](https://data-processing.serverlessworkshops.io/) workshop for complete tutorials\.
 
 **Topics**
 + [Execution role permissions](#events-dynamodb-permissions)
@@ -101,11 +102,10 @@ Lambda needs the following permissions to manage resources related to your Dynam
 + [dynamodb:GetRecords](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_streams_GetRecords.html)
 + [dynamodb:GetShardIterator](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_streams_GetShardIterator.html)
 + [dynamodb:ListStreams](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_streams_ListStreams.html)
-+ [dynamodb:ListShards](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_streams_ListShards.html)
 
 The `AWSLambdaDynamoDBExecutionRole` managed policy includes these permissions\. For more information, see [AWS Lambda execution role](lambda-intro-execution-role.md)\.
 
-To send records of failed batches to a queue or topic, your function needs additional permissions\. Each destination service requires a different permission, as follows:
+To send records of failed batches to an SQS queue or SNS topic, your function needs additional permissions\. Each destination service requires a different permission, as follows:
 + **Amazon SQS** – [sqs:SendMessage](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html)
 + **Amazon SNS** – [sns:Publish](https://docs.aws.amazon.com/sns/latest/api/API_Publish.html)
 
@@ -117,15 +117,15 @@ To configure your function to read from DynamoDB Streams in the Lambda console, 
 
 **To create a trigger**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
-1. Choose a function\.
+1. Choose the name of a function\.
 
 1. Under **Function overview**, choose **Add trigger**\.
 
 1. Choose a trigger type\.
 
-1. Configure the required options and then choose **Add**\.
+1. Configure the required options, and then choose **Add**\.
 
 Lambda supports the following options for DynamoDB event sources\.
 
@@ -138,11 +138,11 @@ Lambda supports the following options for DynamoDB event sources\.
   + **Trim horizon** – Process all records in the stream\.
 
   After processing any existing records, the function is caught up and continues to process new records\.
-+ **On\-failure destination** – An SQS queue or SNS topic for records that can't be processed\. When Lambda discards a batch of records because it's too old or has exhausted all retries, it sends details about the batch to the queue or topic\.
++ **On\-failure destination** – An SQS queue or SNS topic for records that can't be processed\. When Lambda discards a batch of records that's too old or has exhausted all retries, Lambda sends details about the batch to the queue or topic\.
 + **Retry attempts** – The maximum number of times that Lambda retries when the function returns an error\. This doesn't apply to service errors or throttles where the batch didn't reach the function\.
 + **Maximum age of record** – The maximum age of a record that Lambda sends to your function\.
 + **Split batch on error** – When the function returns an error, split the batch into two before retrying\.
-+ **Concurrent batches per shard** – Process multiple batches from the same shard concurrently\.
++ **Concurrent batches per shard** – Concurrently process multiple batches from the same shard\.
 + **Enabled** – Set to true to enable the event source mapping\. Set to false to stop processing records\. Lambda keeps track of the last record processed and resumes processing from that point when the mapping is reenabled\.
 
 **Note**  
@@ -152,14 +152,14 @@ To manage the event source configuration later, choose the trigger in the design
 
 ## Event source mapping APIs<a name="services-dynamodb-api"></a>
 
-To manage an event source with the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) or [AWS SDK](http://aws.amazon.com/getting-started/tools-sdks/), you can use the following API operations:
+To manage an event source with the [AWS Command Line Interface \(AWS CLI\)](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) or an [AWS SDK](http://aws.amazon.com/getting-started/tools-sdks/), you can use the following API operations:
 +  [CreateEventSourceMapping](API_CreateEventSourceMapping.md) 
 +  [ListEventSourceMappings](API_ListEventSourceMappings.md) 
 +  [GetEventSourceMapping](API_GetEventSourceMapping.md) 
 + [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md) 
 + [DeleteEventSourceMapping](API_DeleteEventSourceMapping.md) 
 
-The following example uses the AWS CLI to map a function named `my-function` to a DynamoDB stream that is specified by its Amazon Resource Name \(ARN\), with a batch size of 500\.
+The following example uses the AWS CLI to map a function named `my-function` to a DynamoDB stream that its Amazon Resource Name \(ARN\) specifies, with a batch size of 500\.
 
 ```
 aws lambda create-event-source-mapping --function-name my-function --batch-size 500 --starting-position LATEST \
@@ -256,7 +256,7 @@ aws lambda update-event-source-mapping --uuid 2b733gdc-8ac3-cdf5-af3a-1827b3b112
 
 ## Error handling<a name="services-dynamodb-errors"></a>
 
-The event source mapping that reads records from your DynamoDB stream invokes your function synchronously and retries on errors\. If the function is throttled or the Lambda service returns an error without invoking the function, Lambda retries until the records expire or exceed the maximum age that you configure on the event source mapping\.
+The event source mapping that reads records from your DynamoDB stream, invokes your function synchronously, and retries on errors\. If Lambda throttles the function or returns an error without invoking the function, Lambda retries until the records expire or exceed the maximum age that you configure on the event source mapping\.
 
 If the function receives the records but returns an error, Lambda retries until the records in the batch expire, exceed the maximum age, or reach the configured retry quota\. For function errors, you can also configure the event source mapping to split a failed batch into two batches\. Retrying with smaller batches isolates bad records and works around timeout issues\. Splitting a batch does not count towards the retry quota\.
 
@@ -266,7 +266,7 @@ To retain a record of discarded batches, configure a failed\-event destination\.
 
 **To configure a destination for failed\-event records**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function\.
 
@@ -319,7 +319,7 @@ You can use this information to retrieve the affected records from the stream fo
 
 Lambda emits the `IteratorAge` metric when your function finishes processing a batch of records\. The metric indicates how old the last record in the batch was when processing finished\. If your function is processing new events, you can use the iterator age to estimate the latency between when a record is added and when the function processes it\.
 
-An increasing trend in iterator age can indicate issues with your function\. For more information, see [Working with AWS Lambda function metrics](monitoring-metrics.md)\.
+An increasing trend in iterator age can indicate issues with your function\. For more information, see [Working with Lambda function metrics](monitoring-metrics.md)\.
 
 ## Time windows<a name="services-ddb-windows"></a>
 
@@ -613,7 +613,7 @@ All Lambda event source types share the same [CreateEventSourceMapping](API_Crea
 
 | Parameter | Required | Default | Notes | 
 | --- | --- | --- | --- | 
-|  BatchSize  |  N  |  100  |  Maximum: 10000  | 
+|  BatchSize  |  N  |  100  |  Maximum: 1,000  | 
 |  BisectBatchOnFunctionError  |  N  |  false  |   | 
 |  DestinationConfig  |  N  |   |  Amazon SQS queue or Amazon SNS topic destination for discarded records  | 
 |  Enabled  |  N  |  true  |   | 

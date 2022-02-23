@@ -20,7 +20,7 @@ AWS X\-Ray needs to be enabled on the Lambda console to complete the AWS X\-Ray 
 
 **To enable AWS X\-Ray on the Lambda console**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose your function\.
 
@@ -52,7 +52,7 @@ You can choose a node to see detailed insights about the correlated metrics, log
 
 **To view service map and traces using the CloudWatch console**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function\.
 

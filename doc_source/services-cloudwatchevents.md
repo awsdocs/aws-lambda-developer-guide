@@ -58,7 +58,7 @@ You can also create a Lambda function and direct AWS Lambda to invoke it on a re
 
 **To configure EventBridge \(CloudWatch Events\) to invoke your function**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function
 
@@ -76,5 +76,4 @@ Each AWS account can have up to 100 unique event sources of the **EventBridge \(
 
 **Topics**
 + [Tutorial: Using AWS Lambda with scheduled events](services-cloudwatchevents-tutorial.md)
-+ [AWS SAM template for a EventBridge \(CloudWatch Events\) application](with-scheduledevents-example-use-app-spec.md)
 + [Schedule expressions using rate or cron](services-cloudwatchevents-expressions.md)

@@ -32,7 +32,7 @@ Amazon S3 invokes your function [asynchronously](invocation-async.md) with an ev
         "s3SchemaVersion": "1.0",
         "configurationId": "828aa6fc-f7b5-4305-8584-487c791949c1",
         "bucket": {
-          "name": "lambda-artifacts-deafc19498e3f2df",
+          "name": "DOC-EXAMPLE-BUCKET",
           "ownerIdentity": {
             "principalId": "A3I5XTEXAMAI3E"
           },

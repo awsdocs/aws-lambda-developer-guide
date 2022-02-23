@@ -62,6 +62,14 @@ exports.handler = async function(event) {
 }
 ```
 
+### Using Node\.js modules and top\-level await<a name="top-level-await"></a>
+
+You can designate your function code as an ES module, allowing you to use `await` at the top level of the file, outside the scope of your function handler\. This guarantees completion of asynchronous initialization code prior to handler invocations, maximizing the effectiveness of [provisioned concurrency](provisioned-concurrency.md) in reducing cold start latency\. You can do this in two ways: specifying the `type` as `module` in the function's `package.json` file, or by using the \.mjs file name extension\.
+
+In the first scenario, your function code treats all \.js files as ES modules, while in the second scenario, only the file you specify with \.mjs is an ES module\. You can mix ES modules and CommonJS modules by naming them \.mjs and \.cjs respectively, as \.mjs files are always ES modules and \.cjs files are always CommonJS modules\.
+
+For more information and an example, see [Using Node\.js ES Modules and Top\-Level Await in AWS Lambda](https://aws.amazon.com/blogs/compute/using-node-js-es-modules-and-top-level-await-in-aws-lambda)\.
+
 ## Non\-async handlers<a name="nodejs-handler-sync"></a>
 
 The following example function checks a URL and returns the status code to the invoker\.

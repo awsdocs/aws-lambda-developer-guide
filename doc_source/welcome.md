@@ -24,7 +24,7 @@ Lambda is a highly available service\. For more information, see the [AWS Lambda
 
 ## When should I use Lambda?<a name="when-to-use-cloud-functions"></a>
 
-Lambda is an ideal compute service for many application scenarios, as long as you can run your application code using the Lambda [standard runtime environment](runtimes-context.md) and within the resources that Lambda provides\.
+Lambda is an ideal compute service for many application scenarios, as long as you can run your application code using the Lambda [standard runtime environment](runtimes-context.md) and within the resources that Lambda provides\. Lambda is best suited for shorter, event\-driven workloads, since Lambda functions run for up to 15 minutes per invocation\.
 
 When using Lambda, you are responsible only for your code\. Lambda manages the compute fleet that offers a balance of memory, CPU, network, and other resources to run your code\. Because Lambda manages these resources, you cannot log in to compute instances or customize the operating system on [provided runtimes](lambda-runtimes.md)\. Lambda performs operational and administrative activities on your behalf, including managing capacity, monitoring, and logging your Lambda functions\.
 

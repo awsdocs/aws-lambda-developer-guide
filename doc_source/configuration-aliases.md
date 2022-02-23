@@ -15,7 +15,7 @@ You can create a function alias using the Lambda console\.
 
 **To create an alias**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function\.
 
@@ -62,7 +62,7 @@ aws lambda delete-alias --function-name my-function --name alias-name
 
 Each alias has a unique ARN\. An alias can point only to a function version, not to another alias\. You can update an alias to point to a new version of the function\.
 
-Event sources such as Amazon Simple Storage Service \(Amazon S3\) invoke your Lambda function\. These event sources maintain a mapping that identifies the function to invoke when events occur\. If you specify a Lambda function alias in the mapping configuration, you don't need to update the mapping when the function version changes\. For more information, see [AWS Lambda event source mappings](invocation-eventsourcemapping.md)\.
+Event sources such as Amazon Simple Storage Service \(Amazon S3\) invoke your Lambda function\. These event sources maintain a mapping that identifies the function to invoke when events occur\. If you specify a Lambda function alias in the mapping configuration, you don't need to update the mapping when the function version changes\. For more information, see [Lambda event source mappings](invocation-eventsourcemapping.md)\.
 
 In a resource policy, you can grant permissions for event sources to use your Lambda function\. If you specify an alias ARN in the policy, you don't need to update the policy when the function version changes\.
 
@@ -97,7 +97,7 @@ You can point an alias to a maximum of two Lambda function versions\. The versio
 **Note**  
 Verify that the function has at least two published versions\. To create additional versions, follow the instructions in [Lambda function versions](configuration-versions.md)\.
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function\.
 
@@ -155,7 +155,7 @@ When you configure traffic weights between two function versions, there are two 
 
   `19:44:37 START RequestId: request id Version: $version ` 
 
-  For alias invocations, Lambda uses the `Executed Version` dimension to filter the metric data by the invoked version\. For more information, see [Working with AWS Lambda function metrics](monitoring-metrics.md)\.
+  For alias invocations, Lambda uses the `Executed Version` dimension to filter the metric data by the invoked version\. For more information, see [Working with Lambda function metrics](monitoring-metrics.md)\.
 + **Response payload \(synchronous invocations\)** – Responses to synchronous function invocations include an `x-amz-executed-version` header to indicate which function version has been invoked\.
 
  

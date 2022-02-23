@@ -110,7 +110,7 @@ Here is an example payload:
 **Note**  
 Lambda allocates CPU power in proportion to the function's memory setting\. You might see increased execution and initialization duration at lower memory settings because the function and extension processes are competing for the same CPU resources\. To reduce the execution and initialization duration, try increasing the memory setting\.
 
-To help identify the performance impact introduced by extensions on the `Invoke` phase, Lambda outputs the `PostRuntimeExtensionsDuration` metric\. This metric measures the cumulative time spent between the runtime `Next` API request and the last extension `Next` API request\. To measure the increase in memory used, use the `MaxMemoryUsed` metric\. For more information about function metrics, see [Working with AWS Lambda function metrics](monitoring-metrics.md)\.
+To help identify the performance impact introduced by extensions on the `Invoke` phase, Lambda outputs the `PostRuntimeExtensionsDuration` metric\. This metric measures the cumulative time spent between the runtime `Next` API request and the last extension `Next` API request\. To measure the increase in memory used, use the `MaxMemoryUsed` metric\. For more information about function metrics, see [Working with Lambda function metrics](monitoring-metrics.md)\.
 
 Function developers can run different versions of their functions side by side to understand the impact of a specific extension\. We recommend that extension authors publish expected resource consumption to make it easier for function developers to choose a suitable extension\.
 

@@ -10,7 +10,7 @@ A destination for events after they have been sent to a function for processing\
 +  **Queue** \- The ARN of an SQS queue\.
 +  **Topic** \- The ARN of an SNS topic\.
 +  **Event Bus** \- The ARN of an Amazon EventBridge event bus\.
-Type: [ DestinationConfig ](API_DestinationConfig.md) object  
+Type: [DestinationConfig](API_DestinationConfig.md) object  
 Required: No
 
  ** FunctionArn **   <a name="SSS-Type-FunctionEventInvokeConfig-FunctionArn"></a>
@@ -39,7 +39,7 @@ Required: No
 ## See Also<a name="API_FunctionEventInvokeConfig_SeeAlso"></a>
 
 For more information about using this API in one of the language\-specific AWS SDKs, see the following:
-+  [ AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/FunctionEventInvokeConfig) 
-+  [ AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/FunctionEventInvokeConfig) 
-+  [ AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/FunctionEventInvokeConfig) 
-+  [ AWS SDK for Ruby V3](https://docs.aws.amazon.com/goto/SdkForRubyV3/lambda-2015-03-31/FunctionEventInvokeConfig) 
++  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/FunctionEventInvokeConfig) 
++  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/FunctionEventInvokeConfig) 
++  [AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/FunctionEventInvokeConfig) 
++  [AWS SDK for Ruby V3](https://docs.aws.amazon.com/goto/SdkForRubyV3/lambda-2015-03-31/FunctionEventInvokeConfig) 

@@ -8,9 +8,9 @@ This topic describes how to use Lambda with a self\-managed Kafka cluster\. In A
 
 Apache Kafka as an event source operates similarly to using Amazon Simple Queue Service \(Amazon SQS\) or Amazon Kinesis\. Lambda internally polls for new messages from the event source and then synchronously invokes the target Lambda function\. Lambda reads the messages in batches and provides these to your function as an event payload\. The maximum batch size is configurable\. \(The default is 100 messages\.\)
 
+For Kafka\-based event sources, Lambda supports processing control parameters, such as batching windows and batch size\. For more information, see [Batching behavior](invocation-eventsourcemapping.md#invocation-eventsourcemapping-batching)\.
+
 For an example of how to use self\-managed Kafka as an event source, see [Using self\-hosted Apache Kafka as an event source for AWS Lambda](http://aws.amazon.com/blogs/compute/using-self-hosted-apache-kafka-as-an-event-source-for-aws-lambda/) on the AWS Compute Blog\.
-
-
 
 Lambda sends the batch of messages in the event parameter when it invokes your Lambda function\. The event payload contains an array of messages\. Each array item contains details of the Kafka topic and Kafka partition identifier, together with a timestamp and a base64\-encoded message\.
 
@@ -51,43 +51,146 @@ Lambda sends the batch of messages in the event parameter when it invokes your L
 ```
 
 **Topics**
-+ [Managing access and permissions](#smaa-permissions)
-+ [Kafka authentication](#smaa-authentication)
-+ [Network configuration](#services-msk-vpc-config)
++ [Kafka cluster authentication](#smaa-authentication)
++ [Managing API access and permissions](#smaa-permissions)
++ [Authentication and authorization errors](#kafka-permissions-errors)
++ [Network configuration](#services-kafka-vpc-config)
 + [Adding a Kafka cluster as an event source](#services-smaa-topic-add)
 + [Using a Kafka cluster as an event source](#kafka-using-cluster)
 + [Auto scaling of the Kafka event source](#services-kafka-scaling)
 + [Event source API operations](#kafka-hosting-api-operations)
 + [Event source mapping errors](#services-event-errors)
++ [Amazon CloudWatch metrics](#services-kafka-metrics)
 + [Self\-managed Apache Kafka configuration parameters](#services-kafka-parms)
 
-## Managing access and permissions<a name="smaa-permissions"></a>
+## Kafka cluster authentication<a name="smaa-authentication"></a>
 
-For Lambda to poll your Apache Kafka topic and update other cluster resources, your Lambda function—as well as your AWS Identity and Access Management \(IAM\) users and roles—must have the following permissions\.
+Lambda supports several methods to authenticate with your self\-managed Apache Kafka cluster\. Make sure that you configure the Kafka cluster to use one of these supported authentication methods\. For more information about Kafka security, see the [Security](http://kafka.apache.org/documentation.html#security) section of the Kafka documentation\.
+
+### VPC access<a name="smaa-auth-vpc"></a>
+
+If only Kafka users within your VPC access your Kafka brokers, you must configure the Kafka event source for Amazon Virtual Private Cloud \(Amazon VPC\) access\.
+
+### SASL/SCRAM authentication<a name="smaa-auth-sasl"></a>
+
+Lambda supports Simple Authentication and Security Layer/Salted Challenge Response Authentication Mechanism \(SASL/SCRAM\) authentication with Transport Layer Security \(TLS\) encryption\. Lambda sends the encrypted credentials to authenticate with the cluster\. For more information about SASL/SCRAM authentication, see [RFC 5802](https://tools.ietf.org/html/rfc5802)\.
+
+Lambda supports SASL/PLAIN authentication with TLS encryption\. With SASL/PLAIN authentication, Lambda sends credentials as clear text \(unencrypted\) to the server\.
+
+For SASL authentication, you store the user name and password as a secret in AWS Secrets Manager\. For more information about using Secrets Manager, see [Tutorial: Create and retrieve a secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/tutorials_basic.html) in the *AWS Secrets Manager User Guide*\.
+
+### Mutual TLS authentication<a name="smaa-auth-mtls"></a>
+
+Mutual TLS \(mTLS\) provides two\-way authentication between the client and server\. The client sends a certificate to the server for the server to verify the client, and the server sends a certificate to the client for the client to verify the server\. 
+
+In self\-managed Apache Kafka, Lambda acts as the client\. You configure a client certificate \(as a secret in Secrets Manager\) to authenticate Lambda with your Kafka brokers\. The client certificate must be signed by a CA in the server's trust store\.
+
+The Kafka cluster sends a server certificate to Lambda to authenticate the Kafka brokers with Lambda\. The server certificate can be a public CA certificate or a private CA/self\-signed certificate\. The public CA certificate must be signed by a certificate authority \(CA\) that's in the Lambda trust store\. For a private CA/self\-signed certificate, you configure the server root CA certificate \(as a secret in Secrets Manager\)\. Lambda uses the root certificate to verify the Kafka brokers\.
+
+For more information about mTLS, see [ Introducing mutual TLS authentication for Amazon MSK as an event source](http://aws.amazon.com/blogs/compute/introducing-mutual-tls-authentication-for-amazon-msk-as-an-event-source)\.
+
+### Configuring the client certificate secret<a name="smaa-auth-secret"></a>
+
+The CLIENT\_CERTIFICATE\_TLS\_AUTH secret requires a certificate field and a private key field\. For an encrypted private key, the secret requires a private key password\. Both the certificate and private key must be in PEM format\.
+
+**Note**  
+Lambda supports the [PBES1](https://datatracker.ietf.org/doc/html/rfc2898/#section-6.1) \(but not PBES2\) private key encryption algorithms\.
+
+The certificate field must contain a list of certificates, beginning with the client certificate, followed by any intermediate certificates, and ending with the root certificate\. Each certificate must start on a new line with the following structure:
+
+```
+-----BEGIN CERTIFICATE-----  
+        <certificate contents>
+-----END CERTIFICATE-----
+```
+
+Secrets Manager supports secrets up to 65,536 bytes, which is enough space for long certificate chains\.
+
+The private key must be in [PKCS \#8](https://datatracker.ietf.org/doc/html/rfc5208) format, with the following structure:
+
+```
+-----BEGIN PRIVATE KEY-----  
+         <private key contents>
+-----END PRIVATE KEY-----
+```
+
+For an encrypted private key, use the following structure:
+
+```
+-----BEGIN ENCRYPTED PRIVATE KEY-----  
+          <private key contents>
+-----END ENCRYPTED PRIVATE KEY-----
+```
+
+The following example shows the contents of a secret for mTLS authentication using an encrypted private key\. For an encrypted private key, include the private key password in the secret\.
+
+```
+{
+ "privateKeyPassword": "testpassword",
+ "certificate": "-----BEGIN CERTIFICATE-----
+MIIE5DCCAsygAwIBAgIRAPJdwaFaNRrytHBto0j5BA0wDQYJKoZIhvcNAQELBQAw
+...
+j0Lh4/+1HfgyE2KlmII36dg4IMzNjAFEBZiCRoPimO40s1cRqtFHXoal0QQbIlxk
+cmUuiAii9R0=
+-----END CERTIFICATE-----
+-----BEGIN CERTIFICATE-----
+MIIFgjCCA2qgAwIBAgIQdjNZd6uFf9hbNC5RdfmHrzANBgkqhkiG9w0BAQsFADBb
+...
+rQoiowbbk5wXCheYSANQIfTZ6weQTgiCHCCbuuMKNVS95FkXm0vqVD/YpXKwA/no
+c8PH3PSoAaRwMMgOSA2ALJvbRz8mpg==
+-----END CERTIFICATE-----",
+ "privateKey": "-----BEGIN ENCRYPTED PRIVATE KEY-----
+MIIFKzBVBgkqhkiG9w0BBQ0wSDAnBgkqhkiG9w0BBQwwGgQUiAFcK5hT/X7Kjmgp
+...
+QrSekqF+kWzmB6nAfSzgO9IaoAaytLvNgGTckWeUkWn/V0Ck+LdGUXzAC4RxZnoQ
+zp2mwJn2NYB7AZ7+imp0azDZb+8YG2aUCiyqb6PnnA==
+-----END ENCRYPTED PRIVATE KEY-----"
+}
+```
+
+### Configuring the server root CA certificate secret<a name="smaa-auth-ca-cert"></a>
+
+You create this secret if your Kafka brokers use TLS encryption with certificates signed by a private CA\. You can use TLS encryption for VPC, SASL/SCRAM, SASL/PLAIN, or mTLS authentication\.
+
+The server root CA certificate secret requires a field that contains the Kafka broker's root CA certificate in PEM format\. The following example shows the structure of the secret\.
+
+```
+{
+     "certificate": "-----BEGIN CERTIFICATE-----       
+  MIID7zCCAtegAwIBAgIBADANBgkqhkiG9w0BAQsFADCBmDELMAkGA1UEBhMCVVMx
+  EDAOBgNVBAgTB0FyaXpvbmExEzARBgNVBAcTClNjb3R0c2RhbGUxJTAjBgNVBAoT
+  HFN0YXJmaWVsZCBUZWNobm9sb2dpZXMsIEluYy4xOzA5BgNVBAMTMlN0YXJmaWVs
+  ZCBTZXJ2aWNlcyBSb290IENlcnRpZmljYXRlIEF1dG...
+  -----END CERTIFICATE-----"
+```
+
+## Managing API access and permissions<a name="smaa-permissions"></a>
+
+In addition to accessing your self\-managed Kafka cluster, your Lambda function needs permissions to perform various API actions\. You add these permissions to the function's [execution role](lambda-intro-execution-role.md)\. If your users need access to any API actions, add the required permissions to the identity policy for the AWS Identity and Access Management \(IAM\) user or role\.
 
 ### Required Lambda function permissions<a name="smaa-api-actions-required"></a>
 
-To create and store logs to a log group in Amazon CloudWatch Logs, your Lambda function must have the following permissions in its [execution role](lambda-intro-execution-role.md):
+To create and store logs in a log group in Amazon CloudWatch Logs, your Lambda function must have the following permissions in its execution role:
 + [logs:CreateLogGroup](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogGroup.html)
 + [logs:CreateLogStream](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogStream.html)
 + [logs:PutLogEvents](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html)
 
 ### Optional Lambda function permissions<a name="smaa-api-actions-optional"></a>
 
-Your Lambda function might need these permissions:
-+ Describe your AWS Secrets Manager secret
-+ Access your AWS Key Management Service \(AWS KMS\) customer managed key
-+ Access your Amazon Virtual Private Cloud \(Amazon VPC\)
+Your Lambda function might also need permissions to:
++ Describe your Secrets Manager secret\.
++ Access your AWS Key Management Service \(AWS KMS\) customer managed key\.
++ Access your Amazon VPC\.
 
-#### Secrets Manager and AWS KMS permissions<a name="smaa-api-actions-secret"></a>
+#### Secrets Manager and AWS KMS permissions<a name="smaa-api-actions-vpc"></a>
 
-If your Apache Kafka users access your Kafka brokers over the internet, you must specify a Secrets Manager secret\. Your Lambda function might need permission to describe your Secrets Manager secret or to decrypt your AWS KMS customer managed key\. To access these resources, your function's [execution role](lambda-intro-execution-role.md) must have the following permissions:
+Depending on the type of access control that you're configuring for your Kafka brokers, your Lambda function might need permission to access your Secrets Manager secret or to decrypt your AWS KMS customer managed key\. To access these resources, your function's execution role must have the following permissions:
 + [secretsmanager:GetSecretValue](https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html)
 + [kms:Decrypt](https://docs.aws.amazon.com/kms/latest/APIReference/API_Decrypt.html)
 
 #### VPC permissions<a name="smaa-api-actions-vpc"></a>
 
-If only users within a VPC can access your self\-managed Apache Kafka cluster, your Lambda function must have permission to access your Amazon Virtual Private Cloud \(Amazon VPC\) resources\. These resources include your VPC, subnets, security groups, and network interfaces\. To access these resources, your function's [execution role](lambda-intro-execution-role.md) must have the following permissions:
+If only users within a VPC can access your self\-managed Apache Kafka cluster, your Lambda function must have permission to access your Amazon VPC resources\. These resources include your VPC, subnets, security groups, and network interfaces\. To access these resources, your function's execution role must have the following permissions:
 + [ec2:CreateNetworkInterface](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html)
 + [ec2:DescribeNetworkInterfaces](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeNetworkInterfaces.html)
 + [ec2:DescribeVpcs](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpcs.html)
@@ -97,40 +200,92 @@ If only users within a VPC can access your self\-managed Apache Kafka cluster, y
 
 ### Adding permissions to your execution role<a name="smaa-permissions-add-policy"></a>
 
-To access other AWS services that your self\-managed Apache Kafka cluster uses, Lambda uses the permissions policies that you define in your Lambda function's execution role\.
+To access other AWS services that your self\-managed Apache Kafka cluster uses, Lambda uses the permissions policies that you define in your Lambda function's [execution role](lambda-intro-execution-role.md)\.
 
-By default, Lambda is not permitted to perform the required or optional actions for a self\-managed Apache Kafka cluster\. You must create and define these actions in an IAM trust policy, and then attach the policy to your execution role\. For more information, see [AWS Lambda execution role](lambda-intro-execution-role.md)
+By default, Lambda is not permitted to perform the required or optional actions for a self\-managed Apache Kafka cluster\. You must create and define these actions in an [IAM trust policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#term_trust-policy), and then attach the policy to your execution role\. This example shows how you might create a policy that allows Lambda to access your Amazon VPC resources\.
 
-### Adding users to an IAM policy<a name="smaa-permissions-add-users"></a>
+```
+{
+        "Version":"2012-10-17",
+        "Statement":[
+           {
+              "Effect":"Allow",
+              "Action":[
+                 "ec2:CreateNetworkInterface",
+                 "ec2:DescribeNetworkInterfaces",
+                 "ec2:DescribeVpcs",
+                 "ec2:DeleteNetworkInterface",
+                 "ec2:DescribeSubnets",
+                 "ec2:DescribeSecurityGroups"
+              ],
+              "Resource":"*"
+           }
+        ]
+     }
+```
 
-By default, IAM users and roles do not have permission to perform [event source API operations](#kafka-hosting-api-operations)\. To grant access to users in your organization or account, you might need to create an identity\-based policy\. For more information, see [Controlling access to AWS resources using policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_controlling.html) in the *IAM User Guide*\.
+For information about creating a JSON policy document in the IAM console, see [Creating policies on the JSON tab](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html#access_policies_create-json-editor) in the *IAM User Guide*\.
 
-## Kafka authentication<a name="smaa-authentication"></a>
+### Granting users access with an IAM policy<a name="smaa-permissions-add-users"></a>
 
-Lambda supports several methods to authenticate with your self\-managed Apache Kafka cluster\. Make sure that you configure the Kafka cluster to use one of the following authentication methods that Lambda supports:
-+ VPC
+By default, IAM users and roles don't have permission to perform [event source API operations](#kafka-hosting-api-operations)\. To grant access to users in your organization or account, you create or update an identity\-based policy\. For more information, see [Controlling access to AWS resources using policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_controlling.html) in the *IAM User Guide*\.
 
-  If only Kafka users within your VPC access your Kafka brokers, you must configure the event source with VPC access\.
-+ SASL/SCRAM
+## Authentication and authorization errors<a name="kafka-permissions-errors"></a>
 
-  Lambda supports Simple Authentication and Security Layer/Salted Challenge Response Authentication Mechanism \(SASL/SCRAM\) authentication with TLS encryption\. Lambda sends the encrypted credentials to authenticate with the cluster\. Because the credentials are encrypted, the connection to the cluster does not need to be encrypted\. For more information about SASL/SCRAM authentication, see [RFC 5802](https://tools.ietf.org/html/rfc5802)\.
-+ SASL/PLAIN
+If any of the permissions required to consume data from the Kafka cluster are missing, Lambda displays one of the following error messages in the event source mapping under **LastProcessingResult**\.
 
-  Lambda supports SASL/PLAIN authentication with TLS encryption\. With SASL/PLAIN authentication, credentials are sent as clear text \(unencrypted\) to the server\. Because the credentials are clear text, the connection to the server must use TLS encryption\.
+**Topics**
++ [Cluster failed to authorize Lambda](#kafka-authorize-errors)
++ [SASL authentication failed](#kafka-sasl-errors)
++ [Server failed to authenticate Lambda](#kafka-mtls-errors-server)
++ [Lambda failed to authenticate server](#kafka-mtls-errors-lambda)
++ [Provided certificate or private key is invalid](#kafka-key-errors)
 
-For SASL authentication, you must store the user name and password as a secret in Secrets Manager\. For more information, see [Tutorial: Creating and retrieving a secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/tutorials_basic.html) in the *AWS Secrets Manager User Guide*\.
+### Cluster failed to authorize Lambda<a name="kafka-authorize-errors"></a>
 
-## Network configuration<a name="services-msk-vpc-config"></a>
+For SASL/SCRAM or mTLS, this error indicates that the provided user doesn't have all of the following required Kafka access control list \(ACL\) permissions:
++ DescribeConfigs Cluster
++ Describe Group
++ Read Group
++ Describe Topic
++ Read Topic
 
-If you configure Amazon VPC access to your Kafka brokers, Lambda must have access to the Amazon VPC resources\. 
+When you create Kafka ACLs with the required `kafka-cluster` permissions, specify the topic and group as resources\. The topic name must match the topic in the event source mapping\. The group name must match the event source mapping's UUID\.
 
-Lambda must have access to the Amazon Virtual Private Cloud \(Amazon VPC\) resources associated with your Kafka cluster\. We recommend that you deploy AWS PrivateLink [VPC endpoints](https://docs.aws.amazon.com/vpc/latest/privatelink/endpoint-services-overview.html) for Lambda and AWS Security Token Service \(AWS STS\)\. If authentication is required, also deploy a VPC endpoint for Secrets Manager\.
+After you add the required permissions to the execution role, it might take several minutes for the changes to take effect\.
+
+### SASL authentication failed<a name="kafka-sasl-errors"></a>
+
+For SASL/SCRAM or SASL/PLAIN, this error indicates that the provided user name and password aren't valid\.
+
+### Server failed to authenticate Lambda<a name="kafka-mtls-errors-server"></a>
+
+This error indicates that the Kafka broker failed to authenticate Lambda\. This can occur for any of the following reasons:
++ You didn't provide a client certificate for mTLS authentication\.
++ You provided a client certificate, but the Kafka brokers aren't configured to use mTLS authentication\.
++ A client certificate isn't trusted by the Kafka brokers\.
+
+### Lambda failed to authenticate server<a name="kafka-mtls-errors-lambda"></a>
+
+This error indicates that Lambda failed to authenticate the Kafka broker\. This can occur for any of the following reasons:
++ The Kafka brokers use self\-signed certificates or a private CA, but didn't provide the server root CA certificate\.
++ The server root CA certificate doesn't match the root CA that signed the broker's certificate\.
++ Hostname validation failed because the broker's certificate doesn't contain the broker's DNS name or IP address as a subject alternative name\.
+
+### Provided certificate or private key is invalid<a name="kafka-key-errors"></a>
+
+This error indicates that the Kafka consumer couldn't use the provided certificate or private key\. Make sure that the certificate and key use PEM format, and that the private key encryption uses a PBES1 algorithm\.
+
+## Network configuration<a name="services-kafka-vpc-config"></a>
+
+If you configure Amazon VPC access to your Kafka brokers, Lambda must have access to the Amazon VPC resources associated with your Kafka cluster\. We recommend that you deploy AWS PrivateLink [VPC endpoints](https://docs.aws.amazon.com/vpc/latest/privatelink/endpoint-services-overview.html) for Lambda and AWS Security Token Service \(AWS STS\)\. If the broker uses authentication, also deploy a VPC endpoint for Secrets Manager\.
 
 Alternatively, ensure that the VPC associated with your Kafka cluster includes one NAT gateway per public subnet\. For more information, see [Internet and service access for VPC\-connected functions](configuration-vpc.md#vpc-internet)\.
 
-You must configure your Amazon VPC security groups with the following rules \(at minimum\):
-+ Inbound rules – Allow all traffic on all ports for the security group specified as your event source\.
-+ Outbound rules – Allow all traffic on all ports for all destinations\.
+Configure your Amazon VPC security groups with the following rules \(at minimum\):
++ Inbound rules – Allow all traffic on the Kafka broker port for the security groups specified for your event source\. Kafka uses port 9092 by default\.
++ Outbound rules – Allow all traffic on port 443 for all destinations\. Allow all traffic on the Kafka broker port for the security groups specified for your event source\. Kafka uses port 9092 by default\.
++ If you are using VPC endpoints instead of a NAT gateway, the security groups associated with the VPC endpoints must allow all inbound traffic on port 443 from the event source's security groups\.
 
 For more information about configuring the network, see [Setting up AWS Lambda with an Apache Kafka cluster within a VPC](http://aws.amazon.com/blogs/compute/setting-up-aws-lambda-with-an-apache-kafka-cluster-within-a-vpc/) on the AWS Compute Blog\.
 
@@ -142,7 +297,7 @@ This section describes how to create an event source mapping using the Lambda co
 
 ### Prerequisites<a name="services-smaa-prereqs"></a>
 + A self\-managed Apache Kafka cluster\. Lambda supports Apache Kafka version 0\.10\.0\.0 and later\.
-+ A Lambda execution role with permission to access the AWS resources that your self\-managed Kafka cluster uses\.
++ An [execution role](lambda-intro-execution-role.md) with permission to access the AWS resources that your self\-managed Kafka cluster uses\.
 
 ### Adding a self\-managed Kafka cluster \(console\)<a name="services-smaa-trigger"></a>
 
@@ -168,23 +323,36 @@ Follow these steps to add your self\-managed Apache Kafka cluster and a Kafka to
 
    1. \(Optional\) For **Starting position**, choose **Latest** to start reading the stream from the latest record\. Or, choose **Trim horizon** to start at the earliest available record\.
 
-1. Under **Authentication method**, choose the access or authentication protocol of the Kafka brokers in your cluster\. If only users within your VPC access your Kafka brokers, you must configure VPC access\. If users access your Kafka brokers over the internet, you must configure SASL authentication\.
-   + To configure VPC access, choose the **VPC** for your Kafka cluster, then choose **VPC subnets** and **VPC security groups**\.
-   + To configure SASL authentication, under **Secret key**, choose **Add**, then do the following:
+   1. \(Optional\) For **VPC**, choose the Amazon VPC for your Kafka cluster\. Then, choose the **VPC subnets** and **VPC security groups**\.
 
-     1. Choose the key type\. If your Kafka broker uses SASL plaintext, choose **BASIC\_AUTH**\. Otherwise, choose one of the **SASL\_SCRAM** options\.
+      This setting is required if only users within your VPC access your brokers\.
 
-     1. Choose the name of the Secrets Manager secret key that contains the credentials for your Kafka cluster\.
+      
+
+   1. \(Optional\) For **Authentication**, choose **Add**, and then do the following:
+
+      1. Choose the access or authentication protocol of the Kafka brokers in your cluster\.
+         + If your Kafka broker uses SASL plaintext authentication, choose **BASIC\_AUTH**\.
+         + If your broker uses SASL/SCRAM authentication, choose one of the **SASL\_SCRAM** protocols\.
+         + If you're configuring mTLS authentication, choose the **CLIENT\_CERTIFICATE\_TLS\_AUTH** protocol\.
+
+      1. For SASL/SCRAM or mTLS authentication, choose the Secrets Manager secret key that contains the credentials for your Kafka cluster\.
+
+   1. \(Optional\) For **Encryption**, choose the Secrets Manager secret containing the root CA certificate that your Kafka brokers use for TLS encryption, if your Kafka brokers use certificates signed by a private CA\.
+
+      This setting applies to TLS encryption for SASL/SCRAM or SASL/PLAIN, and to mTLS authentication\.
+
+   1. To create the trigger in a disabled state for testing \(recommended\), clear **Enable trigger**\. Or, to enable the trigger immediately, select **Enable trigger**\.
 
 1. To create the trigger, choose **Add**\.
 
-### Adding a self\-managed Kafka cluster \(AWS CLI\)<a name="services-smak-aws-cli"></a>
+### Adding a self\-managed Kafka cluster \(AWS CLI\)<a name="services-kafka-aws-cli"></a>
 
 Use the following example AWS CLI commands to create and view a self\-managed Apache Kafka trigger for your Lambda function\.
 
-#### Using SASL/SCRAM<a name="services-smak-aws-cli-create"></a>
+#### Using SASL/SCRAM<a name="services-kafka-aws-cli-create"></a>
 
-If Kafka users access your Kafka brokers over the internet, you must specify the Secrets Manager secret that you created for SASL/SCRAM authentication\. The following example uses the [https://docs.aws.amazon.com/cli/latest/reference/lambda/create-event-source-mapping.html](https://docs.aws.amazon.com/cli/latest/reference/lambda/create-event-source-mapping.html) AWS CLI command to map a Lambda function named `my-kafka-function` to a Kafka topic named `AWSKafkaTopic`\.
+If Kafka users access your Kafka brokers over the internet, specify the Secrets Manager secret that you created for SASL/SCRAM authentication\. The following example uses the [https://docs.aws.amazon.com/cli/latest/reference/lambda/create-event-source-mapping.html](https://docs.aws.amazon.com/cli/latest/reference/lambda/create-event-source-mapping.html) AWS CLI command to map a Lambda function named `my-kafka-function` to a Kafka topic named `AWSKafkaTopic`\.
 
 ```
 aws lambda create-event-source-mapping --topics AWSKafkaTopic
@@ -195,7 +363,7 @@ aws lambda create-event-source-mapping --topics AWSKafkaTopic
 
 For more information, see the [CreateEventSourceMapping](API_CreateEventSourceMapping.md) API reference documentation\.
 
-#### Using a VPC<a name="services-smak-aws-cli-create-vpc"></a>
+#### Using a VPC<a name="services-kafka-aws-cli-create-vpc"></a>
 
 If only Kafka users within your VPC access your Kafka brokers, you must specify your VPC, subnets, and VPC security group\. The following example uses the [https://docs.aws.amazon.com/cli/latest/reference/lambda/create-event-source-mapping.html](https://docs.aws.amazon.com/cli/latest/reference/lambda/create-event-source-mapping.html) AWS CLI command to map a Lambda function named `my-kafka-function` to a Kafka topic named `AWSKafkaTopic`\.
 
@@ -212,7 +380,7 @@ aws lambda create-event-source-mapping
 
 For more information, see the [CreateEventSourceMapping](API_CreateEventSourceMapping.md) API reference documentation\.
 
-#### Viewing the status using the AWS CLI<a name="services-smak-aws-cli-view"></a>
+#### Viewing the status using the AWS CLI<a name="services-kafka-aws-cli-view"></a>
 
 The following example uses the [https://docs.aws.amazon.com/cli/latest/reference/lambda/get-event-source-mapping.html](https://docs.aws.amazon.com/cli/latest/reference/lambda/get-event-source-mapping.html) AWS CLI command to describe the status of the event source mapping that you created\.
 
@@ -225,21 +393,21 @@ aws lambda get-event-source-mapping
 
 When you add your Apache Kafka cluster as a trigger for your Lambda function, the cluster is used as an [event source](invocation-eventsourcemapping.md)\.
 
-Lambda reads event data from the Kafka topics that you specify in [CreateEventSourceMapping](API_CreateEventSourceMapping.md) `Topics` based on the starting position that you specify in [CreateEventSourceMapping](API_CreateEventSourceMapping.md) `StartingPosition`\. After successful processing, your Kafka topic is committed to your Kafka cluster\.
+Lambda reads event data from the Kafka topics that you specify as `Topics` in a [CreateEventSourceMapping](API_CreateEventSourceMapping.md) request, based on the `StartingPosition` that you specify\. After successful processing, your Kafka topic is committed to your Kafka cluster\.
 
-If you specify `LATEST` as the starting position, Lambda starts reading from the latest message in each partition belonging to the topic\. Because there can be some delay after trigger configuration before Lambda starts reading the messages, Lambda does not read any messages produced during this window\.
+If you specify the `StartingPosition` as `LATEST`, Lambda starts reading from the latest message in each partition belonging to the topic\. Because there can be some delay after trigger configuration before Lambda starts reading the messages, Lambda doesn't read any messages produced during this window\.
 
-Lambda processes records from one or more Kafka topic partitions that you specify and sends a JSON payload to your Lambda function\. When more records are available, Lambda continues processing records in batches, based on the value that you specify in [CreateEventSourceMapping](API_CreateEventSourceMapping.md) >`BatchSize`, until the function catches up with the topic\.
+Lambda processes records from one or more Kafka topic partitions that you specify and sends a JSON payload to your function\. When more records are available, Lambda continues processing records in batches, based on the `BatchSize` value that you specify in a [CreateEventSourceMapping](API_CreateEventSourceMapping.md) request, until your function catches up with the topic\.
 
-If your Lambda function returns an error for any of the messages in a batch, Lambda retries the whole batch of messages until processing succeeds or the messages expire\.
+If your function returns an error for any of the messages in a batch, Lambda retries the whole batch of messages until processing succeeds or the messages expire\.
 
-The maximum amount of time that Lambda lets a function run before stopping it is 14 minutes\.
+Lambda can run your function for up to 14 minutes\. Configure your function timeout to be 14 minutes or less \(the default timeout value is 3 seconds\)\. Lambda may retry invocations that exceed 14 minutes\.
 
 ## Auto scaling of the Kafka event source<a name="services-kafka-scaling"></a>
 
-When you initially create an Apache Kafka [event source](invocation-eventsourcemapping.md), Lambda allocates one consumer to process all of the partitions in the Kafka topic\. Lambda automatically scales up or down the number of consumers, based on workload\. To preserve message ordering in each partition, the maximum number of consumers is one consumer per partition in the topic\.
+When you initially create an an Apache Kafka [event source](invocation-eventsourcemapping.md), Lambda allocates one consumer to process all partitions in the Kafka topic\. Each consumer has multiple processors running in parallel to handle increased workloads\. Additionally, Lambda automatically scales up or down the number of consumers, based on workload\. To preserve message ordering in each partition, the maximum number of consumers is one consumer per partition in the topic\.
 
-Every 15 minutes, Lambda evaluates the consumer offset lag of all the partitions in the topic\. If the lag is too high, the partition is receiving messages faster than Lambda can process them\. If necessary, Lambda adds or removes consumers from the topic\.
+In one\-minute intervals, Lambda evaluates the consumer offset lag of all the partitions in the topic\. If the lag is too high, the partition is receiving messages faster than Lambda can process them\. If necessary, Lambda adds or removes consumers from the topic\. The scaling process of adding or removing consumers occurs within three minutes of evaluation\.
 
 If your target Lambda function is overloaded, Lambda reduces the number of consumers\. This action reduces the workload on the function by reducing the number of messages that consumers can retrieve and send to the function\.
 
@@ -249,7 +417,7 @@ To monitor the throughput of your Kafka topic, you can view the Apache Kafka con
 
 When you add your Kafka cluster as an [event source](invocation-eventsourcemapping.md) for your Lambda function using the Lambda console, an AWS SDK, or the AWS CLI, Lambda uses APIs to process your request\.
 
-To manage an event source with the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) or [AWS SDK](http://aws.amazon.com/getting-started/tools-sdks/), you can use the following API operations:
+To manage an event source with the [AWS Command Line Interface \(AWS CLI\)](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) or an [AWS SDK](http://aws.amazon.com/getting-started/tools-sdks/), you can use the following API operations:
 +  [CreateEventSourceMapping](API_CreateEventSourceMapping.md) 
 +  [ListEventSourceMappings](API_ListEventSourceMappings.md) 
 +  [GetEventSourceMapping](API_GetEventSourceMapping.md) 
@@ -263,19 +431,25 @@ When you add your Apache Kafka cluster as an [event source](invocation-eventsour
 To determine the cause of a stopped consumer, check the `StateTransitionReason` field in the response of `EventSourceMapping`\. The following list describes the event source errors that you can receive:
 
 **`ESM_CONFIG_NOT_VALID`**  
-The event source mapping configuration is not valid\.
+The event source mapping configuration isn't valid\.
 
 **`EVENT_SOURCE_AUTHN_ERROR`**  
-Lambda could not authenticate the event source\.
+Lambda couldn't authenticate the event source\.
 
 **`EVENT_SOURCE_AUTHZ_ERROR`**  
-Lambda does not have the required permissions to access the event source\.
+Lambda doesn't have the required permissions to access the event source\.
 
 **`FUNCTION_CONFIG_NOT_VALID`**  
-The function configuration is not valid\.
+The function configuration isn't valid\.
 
 **Note**  
 If your Lambda event records exceed the allowed size limit of 6 MB, they can go unprocessed\.
+
+## Amazon CloudWatch metrics<a name="services-kafka-metrics"></a>
+
+Lambda emits the `OffsetLag` metric while your function processes records\. The value of this metric is the difference in offset between the last record written to the Kafka event source topic, and the last record that Lambda processed\. You can use `OffsetLag` to estimate the latency between when a record is added and when your function processes it\.
+
+An increasing trend in `OffsetLag` can indicate issues with your function\. For more information, see [Working with Lambda function metrics](monitoring-metrics.md)\.
 
 ## Self\-managed Apache Kafka configuration parameters<a name="services-kafka-parms"></a>
 

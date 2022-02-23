@@ -14,7 +14,7 @@ This page describes how to view Lambda function invocation errors for the C\# ru
 
 ## Syntax<a name="csharp-exceptions-syntax"></a>
 
-In the initialization phase, exceptions can be thrown for invalid handler strings, a rule\-breaking type or method \(see [Lambda function handler restrictions ](csharp-handler.md#csharp-handler-restrictions)\), or any other validation method \(such as forgetting the serializer attribute and having a POCO as your input or output type\)\. These exceptions are of type `LambdaException`\. For example: 
+In the initialization phase, exceptions can be thrown for invalid handler strings, a rule\-breaking type or method \(see [Lambda function handler restrictions](csharp-handler.md#csharp-handler-restrictions)\), or any other validation method \(such as forgetting the serializer attribute and having a POCO as your input or output type\)\. These exceptions are of type `LambdaException`\. For example: 
 
 ```
 {
@@ -151,7 +151,7 @@ You can invoke your function on the Lambda console by configuring a test event a
 
 **To invoke a function on the Lambda console**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose the function to test, and choose **Test**\.
 
@@ -184,7 +184,7 @@ aws lambda invoke   \
           --payload '{"key1": "value1", "key2": "value2", "key3": "value3"}' output.txt
 ```
 
-The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [ AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.
+The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.
 
 You should see the AWS CLI response in your command prompt:
 
@@ -204,7 +204,7 @@ cat output.txt
 
 You should see the invocation response in your command prompt\.
 
-Lambda also records up to 256 KB of the error object in the function's logs\. For more information, see [AWS Lambda function logging in C\#](csharp-logging.md)\.
+Lambda also records up to 256 KB of the error object in the function's logs\. For more information, see [Lambda function logging in C\#](csharp-logging.md)\.
 
 ## Error handling in other AWS services<a name="csharp-exceptions-other-services"></a>
 
@@ -219,4 +219,4 @@ We recommend using AWS X\-Ray to determine the source of an error and its cause\
 For more information, see [Instrumenting C\# code in AWS Lambda](csharp-tracing.md)\.
 
 ## What's next?<a name="csharp-exceptions-next-up"></a>
-+ Learn how to show logging events for your Lambda function on the [AWS Lambda function logging in C\#](csharp-logging.md) page\.
++ Learn how to show logging events for your Lambda function on the [Lambda function logging in C\#](csharp-logging.md) page\.

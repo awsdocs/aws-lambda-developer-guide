@@ -20,7 +20,7 @@ To manage reserved concurrency settings for a function, use the Lambda console\.
 
 **To reserve concurrency for a function**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function\.
 

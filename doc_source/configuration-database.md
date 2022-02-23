@@ -13,7 +13,7 @@ You can use the Lambda console to create an Amazon RDS Proxy database proxy\.
 
 **To create a database proxy**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function\.
 
@@ -85,9 +85,9 @@ For more information, see [IAM database authentication](https://docs.aws.amazon.
 Sample applications that demonstrate the use of Lambda with an Amazon RDS database are available in this guide's GitHub repository\. There are two applications:
 + [RDS MySQL](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/rds-mysql) – The AWS CloudFormation template `template-vpcrds.yml` creates a MySQL 5\.7 database in a private VPC\. In the sample application, a Lambda function proxies queries to the database\. The function and database templates both use Secrets Manager to access database credentials\.
 
-  [ ![\[The dbadmin function relays queries to a database.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-rdsmysql.png)](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/rds-mysql)
+  [https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/rds-mysql](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/rds-mysql)
 + [List Manager](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/list-manager) – A processor function reads events from a Kinesis stream\. It uses the data from the events to update DynamoDB tables, and stores a copy of the event in a MySQL database\.
 
-  [ ![\[The processor function processes Kinesis events and stores the events in a MySQL database.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-listmanager.png)](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/list-manager)
+  [https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/list-manager](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/list-manager)
 
 To use the sample applications, follow the instructions in the GitHub repository: [RDS MySQL](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/rds-mysql/README.md), [List Manager](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/list-manager/README.md)\.

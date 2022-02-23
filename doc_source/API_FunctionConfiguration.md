@@ -23,7 +23,7 @@ Required: No
 
  ** DeadLetterConfig **   <a name="SSS-Type-FunctionConfiguration-DeadLetterConfig"></a>
 The function's dead letter queue\.  
-Type: [ DeadLetterConfig ](API_DeadLetterConfig.md) object  
+Type: [DeadLetterConfig](API_DeadLetterConfig.md) object  
 Required: No
 
  ** Description **   <a name="SSS-Type-FunctionConfiguration-Description"></a>
@@ -34,12 +34,12 @@ Required: No
 
  ** Environment **   <a name="SSS-Type-FunctionConfiguration-Environment"></a>
 The function's [environment variables](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html)\.  
-Type: [ EnvironmentResponse ](API_EnvironmentResponse.md) object  
+Type: [EnvironmentResponse](API_EnvironmentResponse.md) object  
 Required: No
 
  ** FileSystemConfigs **   <a name="SSS-Type-FunctionConfiguration-FileSystemConfigs"></a>
 Connection settings for an [Amazon EFS file system](https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html)\.  
-Type: Array of [ FileSystemConfig ](API_FileSystemConfig.md) objects  
+Type: Array of [FileSystemConfig](API_FileSystemConfig.md) objects  
 Array Members: Maximum number of 1 item\.  
 Required: No
 
@@ -65,7 +65,7 @@ Required: No
 
  ** ImageConfigResponse **   <a name="SSS-Type-FunctionConfiguration-ImageConfigResponse"></a>
 The function's image configuration values\.  
-Type: [ ImageConfigResponse ](API_ImageConfigResponse.md) object  
+Type: [ImageConfigResponse](API_ImageConfigResponse.md) object  
 Required: No
 
  ** KMSKeyArn **   <a name="SSS-Type-FunctionConfiguration-KMSKeyArn"></a>
@@ -98,7 +98,7 @@ Required: No
 
  ** Layers **   <a name="SSS-Type-FunctionConfiguration-Layers"></a>
 The function's [ layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\.  
-Type: Array of [ Layer ](API_Layer.md) objects  
+Type: Array of [Layer](API_Layer.md) objects  
 Required: No
 
  ** MasterArn **   <a name="SSS-Type-FunctionConfiguration-MasterArn"></a>
@@ -173,7 +173,7 @@ Required: No
 
  ** TracingConfig **   <a name="SSS-Type-FunctionConfiguration-TracingConfig"></a>
 The function's AWS X\-Ray tracing configuration\.  
-Type: [ TracingConfigResponse ](API_TracingConfigResponse.md) object  
+Type: [TracingConfigResponse](API_TracingConfigResponse.md) object  
 Required: No
 
  ** Version **   <a name="SSS-Type-FunctionConfiguration-Version"></a>
@@ -185,13 +185,13 @@ Required: No
 
  ** VpcConfig **   <a name="SSS-Type-FunctionConfiguration-VpcConfig"></a>
 The function's networking configuration\.  
-Type: [ VpcConfigResponse ](API_VpcConfigResponse.md) object  
+Type: [VpcConfigResponse](API_VpcConfigResponse.md) object  
 Required: No
 
 ## See Also<a name="API_FunctionConfiguration_SeeAlso"></a>
 
 For more information about using this API in one of the language\-specific AWS SDKs, see the following:
-+  [ AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/FunctionConfiguration) 
-+  [ AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/FunctionConfiguration) 
-+  [ AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/FunctionConfiguration) 
-+  [ AWS SDK for Ruby V3](https://docs.aws.amazon.com/goto/SdkForRubyV3/lambda-2015-03-31/FunctionConfiguration) 
++  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/FunctionConfiguration) 
++  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/FunctionConfiguration) 
++  [AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/FunctionConfiguration) 
++  [AWS SDK for Ruby V3](https://docs.aws.amazon.com/goto/SdkForRubyV3/lambda-2015-03-31/FunctionConfiguration) 

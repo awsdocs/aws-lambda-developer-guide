@@ -1,6 +1,6 @@
-# Using AWS Lambda with Amazon SQS<a name="with-sqs"></a>
+# Using Lambda with Amazon SQS<a name="with-sqs"></a>
 
-You can use an AWS Lambda function to process messages in an Amazon Simple Queue Service \(Amazon SQS\) queue\. Lambda [event source mappings](invocation-eventsourcemapping.md) support [standard queues](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/standard-queues.html) and [first\-in, first\-out \(FIFO\) queues](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html)\. With Amazon SQS, you can offload tasks from one component of your application by sending them to a queue and processing them asynchronously\.
+You can use a Lambda function to process messages in an Amazon Simple Queue Service \(Amazon SQS\) queue\. Lambda [event source mappings](invocation-eventsourcemapping.md) support [standard queues](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/standard-queues.html) and [first\-in, first\-out \(FIFO\) queues](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html)\. With Amazon SQS, you can offload tasks from one component of your application by sending them to a queue and processing them asynchronously\.
 
 Lambda polls the queue and invokes your Lambda function [synchronously](invocation-sync.md) with an event that contains queue messages\. Lambda reads messages in batches and invokes your function once for each batch\. When your function successfully processes a batch, Lambda deletes its messages from the queue\. The following example shows an event for a batch of two messages\.
 
@@ -45,7 +45,7 @@ Lambda polls the queue and invokes your Lambda function [synchronously](invocati
 }
 ```
 
-By default, Lambda polls up to 10 messages in your queue at once and sends that batch to your function\. To avoid invoking the function with a small number of records, you can tell the event source to buffer records for up to five minutes by configuring a batch window\. Before invoking the function, Lambda continues to poll messages from the SQS standard queue until batch window expires, the [payload limit](gettingstarted-limits.md) is reached or full batch size is reached\.
+By default, Lambda polls up to 10 messages in your queue at once and sends that batch to your function\. To avoid invoking the function with a small number of records, you can tell the event source to buffer records for up to 5 minutes by configuring a batch window\. Before invoking the function, Lambda continues to poll messages from the SQS standard queue until the batch window expires, the [invocation payload size quota](gettingstarted-limits.md) is reached, or the configured maximum batch size is reached\.
 
 **Note**  
 If you're using a batch window and your SQS queue contains very low traffic, Lambda might wait for up to 20 seconds before invoking your function\. This is true even if you set a batch window lower than 20 seconds\.
@@ -80,7 +80,7 @@ For FIFO queues, records contain additional attributes that are related to dedup
 }
 ```
 
-When Lambda reads a batch, the messages stay in the queue but become hidden for the length of the queue's [visibility timeout](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html)\. If your function successfully processes the batch, Lambda deletes the messages from the queue\. If your function is [throttled](invocation-scaling.md), returns an error, or doesn't respond, the message becomes visible again\. All messages in a failed batch return to the queue, so your function code must be able to process the same message multiple times without side effects\.
+When Lambda reads a batch, the messages stay in the queue but are hidden for the length of the queue's [visibility timeout](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html)\. If your function successfully processes the batch, Lambda deletes the messages from the queue\. By default, if your function encounters an error while processing a batch, all messages in that batch become visible in the queue again\. For this reason, your function code must be able to process the same message multiple times without unintended side effects\. You can modify this reprocessing behavior by including batch item failures in your function response\.
 
 **Topics**
 + [Scaling and processing](#events-sqs-scaling)
@@ -88,6 +88,7 @@ When Lambda reads a batch, the messages stay in the queue but become hidden for 
 + [Execution role permissions](#events-sqs-permissions)
 + [Configuring a queue as an event source](#events-sqs-eventsource)
 + [Event source mapping APIs](#services-dynamodb-api)
++ [Reporting batch item failures](#services-sqs-batchfailurereporting)
 + [Amazon SQS configuration parameters](#services-sqs-params)
 + [Tutorial: Using Lambda with Amazon SQS](with-sqs-example.md)
 + [Tutorial: Using a cross\-account Amazon SQS queue as an event source](with-sqs-cross-account-example.md)
@@ -96,19 +97,19 @@ When Lambda reads a batch, the messages stay in the queue but become hidden for 
 
 ## Scaling and processing<a name="events-sqs-scaling"></a>
 
-For standard queues, Lambda uses [long polling](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-long-polling.html) to poll a queue until it becomes active\. When messages are available, Lambda reads up to 5 batches and sends them to your function\. If messages are still available, Lambda increases the number of processes that are reading batches by up to 60 more instances per minute\. The maximum number of batches that can be processed simultaneously by an event source mapping is 1000\.
+For standard queues, Lambda uses [long polling](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-short-and-long-polling.html) to poll a queue until it becomes active\. When messages are available, Lambda reads up to five batches and sends them to your function\. If messages are still available, Lambda increases the number of processes that are reading batches by up to 60 more instances per minute\. The maximum number of batches that an event source mapping can process simultaneously is 1,000\.
 
-For FIFO queues, Lambda sends messages to your function in the order that it receives them\. When you send a message to a FIFO queue, you specify a [message group ID](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagegroupid-property.html)\. Amazon SQS ensures that messages in the same group are delivered to Lambda in order\. Lambda sorts the messages into groups and sends only one batch at a time for a group\. If the function returns an error, all retries are attempted on the affected messages before Lambda receives additional messages from the same group\.
+For FIFO queues, Lambda sends messages to your function in the order that it receives them\. When you send a message to a FIFO queue, you specify a [message group ID](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagegroupid-property.html)\. Amazon SQS ensures that messages in the same group are delivered to Lambda in order\. Lambda sorts the messages into groups and sends only one batch at a time for a group\. If your function returns an error, the function attempts all retries on the affected messages before Lambda receives additional messages from the same group\.
 
-Your function can scale in concurrency to the number of active message groups\. For more information, see [SQS FIFO as an event source](https://aws.amazon.com/blogs/compute/new-for-aws-lambda-sqs-fifo-as-an-event-source/) on the AWS Compute Blog\.
+Your function can scale in concurrency to the number of active message groups\. For more information, see [SQS FIFO as an event source](http://aws.amazon.com/blogs/compute/new-for-aws-lambda-sqs-fifo-as-an-event-source/) on the AWS Compute Blog\.
 
 ## Configuring a queue to use with Lambda<a name="events-sqs-queueconfig"></a>
 
-[Create an SQS queue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/) to serve as an event source for your Lambda function\. Then configure the queue to allow time for your Lambda function to process each batch of events—and for Lambda to retry in response to throttling errors as it scales up\.
+[Create an SQS queue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-create-queue.html) to serve as an event source for your Lambda function\. Then configure the queue to allow time for your Lambda function to process each batch of events—and for Lambda to retry in response to throttling errors as it scales up\.
 
-To allow your function time to process each batch of records, set the source queue's visibility timeout to at least 6 times the [ timeout](https://docs.aws.amazon.com/whitepapers/latest/serverless-architectures-lambda/timeout.html) that you configure on your function\. The extra time allows for Lambda to retry if your function execution is throttled while your function is processing a previous batch\.
+To allow your function time to process each batch of records, set the source queue's visibility timeout to at least six times the [timeout that you configure](configuration-function-common.md#configuration-common-summary) on your function\. The extra time allows for Lambda to retry if your function is throttled while processing a previous batch\.
 
-If a message fails to be processed multiple times, Amazon SQS can send it to a [dead\-letter queue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html)\. When your function returns an error, Lambda leaves it in the queue\. After the visibility timeout occurs, Lambda receives the message again\. To send messages to a second queue after a number of receives, configure a dead\-letter queue on your source queue\.
+If your function fails to process a message multiple times, Amazon SQS can send it to a [dead\-letter queue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html)\. When your function returns an error, Lambda leaves it in the queue\. After the visibility timeout occurs, Lambda receives the message again\. To send messages to a second queue after a number of receives, configure a dead\-letter queue on your source queue\.
 
 **Note**  
 Make sure that you configure the dead\-letter queue on the source queue, not on the Lambda function\. The dead\-letter queue that you configure on a function is used for the function's [asynchronous invocation queue](invocation-async.md), not for event source queues\.
@@ -117,12 +118,10 @@ If your function returns an error, or can't be invoked because it's at maximum c
 
 ## Execution role permissions<a name="events-sqs-permissions"></a>
 
-Lambda needs the following permissions to manage messages in your Amazon SQS queue\. Add them to your function's execution role\.
+Lambda needs the following permissions to manage messages in your Amazon SQS queue\. Add them to your function's [execution role](lambda-intro-execution-role.md)\.
 + [sqs:ReceiveMessage](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_ReceiveMessage.html)
 + [sqs:DeleteMessage](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_DeleteMessage.html)
 + [sqs:GetQueueAttributes](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_GetQueueAttributes.html)
-
-For more information, see [AWS Lambda execution role](lambda-intro-execution-role.md)\.
 
 ## Configuring a queue as an event source<a name="events-sqs-eventsource"></a>
 
@@ -132,42 +131,42 @@ To configure your function to read from Amazon SQS in the Lambda console, create
 
 **To create a trigger**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
-1. Choose a function\.
+1. Choose the name of a function\.
 
 1. Under **Function overview**, choose **Add trigger**\.
 
-1. Choose a trigger type\.
+1. Choose the **SQS** trigger type\.
 
-1. Configure the required options and then choose **Add**\.
+1. Configure the required options, and then choose **Add**\.
 
 Lambda supports the following options for Amazon SQS event sources\.
 
 **Event source options**
 + **SQS queue** – The Amazon SQS queue to read records from\.
-+ **Batch size** – The number of records to send to the function in each batch\. For a standard queue this can be up to 10,000 records\. For a FIFO queue the maximum is 10\. For a batch size over 10, you must also set the `MaximumBatchingWindowInSeconds` parameter to at least 1 second\. Lambda passes all of the records in the batch to the function in a single call, as long as the total size of the events doesn't exceed the [payload limit](gettingstarted-limits.md) for synchronous invocation \(6 MB\)\.
++ **Batch size** – The number of records to send to the function in each batch\. For a standard queue, this can be up to 10,000 records\. For a FIFO queue, the maximum is 10\. For a batch size over 10, you must also set the `MaximumBatchingWindowInSeconds` parameter to at least 1 second\. Lambda passes all of the records in the batch to the function in a single call, as long as the total size of the events doesn't exceed the [invocation payload size quota](gettingstarted-limits.md) for synchronous invocation \(6 MB\)\.
 
-  Metadata is generated by both Lambda and Amazon SQS for each record\. This additional metadata is counted towards the total payload size and may cause the total number of records sent in a batch to be lower than your configured batch size\. The metadata fields sent by Amazon SQS can be variable in length\. For more information about the Amazon SQS metadata fields, see the [ReceiveMessage](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_ReceiveMessage.html) documentation in the *Amazon Simple Queue Service API Reference*\.
-+ **Batch window ** – Specify the maximum amount of time to gather records before invoking the function, in seconds\. Only applicable to standard queues\.
+  Both Lambda and Amazon SQS generate metadata for each record\. This additional metadata is counted towards the total payload size and can cause the total number of records sent in a batch to be lower than your configured batch size\. The metadata fields that Amazon SQS sends can be variable in length\. For more information about the Amazon SQS metadata fields, see the [ReceiveMessage](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_ReceiveMessage.html) API operation documentation in the *Amazon Simple Queue Service API Reference*\.
++ **Batch window ** – The maximum amount of time to gather records before invoking the function, in seconds\. This applies only to standard queues\.
 
-  If you are using a batch window greater than 0 seconds, you must account for the increased processing time in your queue visibility timeout\. We recommend setting your queue visibility timeout to 6 times your function timeout, plus the value of `MaximumBatchingWindowInSeconds`\. This allows time for your Lambda function to process each batch of events and to retry in the event of a throttling error\.
+  If you're using a batch window greater than 0 seconds, you must account for the increased processing time in your queue visibility timeout\. We recommend setting your queue visibility timeout to six times your function timeout, plus the value of `MaximumBatchingWindowInSeconds`\. This allows time for your Lambda function to process each batch of events and to retry in the event of a throttling error\.
 **Note**  
-If your batch window is greater than 0, and `(batch window) + (function timeout) > (queue visibility timeout)`, your effective queue visibility timeout will be `(batch window) + (function timeout) + 30s`\.
+If your batch window is greater than 0, and `(batch window) + (function timeout) > (queue visibility timeout)`, then your effective queue visibility timeout is `(batch window) + (function timeout) + 30s`\.
 
-  Lambda processes up to 5 batches at a time\. This means there are a maximum of 5 workers available to batch and process messages in parallel at any one time\. Each worker will show a distinct Lambda invocation for its current batch of messages\. 
-+ **Enabled** – Set to true to enable the event source mapping\. Set to false to stop processing records\.
+  Lambda processes up to five batches at a time\. This means that there are a maximum of five workers available to batch and process messages in parallel at any one time\. Each worker shows a distinct Lambda invocation for its current batch of messages\.
++ **Enabled** – The status of the event source mapping\. Set to true to enable the event source mapping\. Set to false to stop processing records\.
 
 **Note**  
-Amazon SQS has a perpetual free tier for requests\. Beyond the free tier, Amazon SQS charges per million requests\. While your event source mapping is active, Lambda makes requests to the queue to get items\. For pricing details, see [Amazon Simple Queue Service pricing](https://aws.amazon.com/sqs/pricing)\.
+Amazon SQS has a perpetual free tier for requests\. Beyond the free tier, Amazon SQS charges per million requests\. While your event source mapping is active, Lambda makes requests to the queue to get items\. For pricing details, see [Amazon SQS pricing](http://aws.amazon.com/sqs/pricing)\.
 
-To manage the event source configuration later, choose the trigger in the designer\.
+To manage the event source configuration later, in the Lambda console, choose the **SQS** trigger in the designer\.
 
-Configure your function timeout to allow enough time to process an entire batch of items\. If items take a long time to process, choose a smaller batch size\. A large batch size can improve efficiency for workloads that are very fast or have a lot of overhead\. However, if your function returns an error, all items in the batch return to the queue\. If you configure [reserved concurrency](configuration-concurrency.md) on your function, set a minimum of 5 concurrent executions to reduce the chance of throttling errors when Lambda invokes your function\. To eliminate the chance of throttling errors, set the [reserved concurrency](configuration-concurrency.md) value to 1000, which is the maximum number of concurrent executions for an Amazon SQS event source\. 
+Configure your function timeout to allow enough time to process an entire batch of items\. If items take a long time to process, choose a smaller batch size\. A large batch size can improve efficiency for workloads that are very fast or have a lot of overhead\. However, if your function returns an error, all items in the batch return to the queue\. If you configure [reserved concurrency](configuration-concurrency.md) on your function, set a minimum of five concurrent executions to reduce the chance of throttling errors when Lambda invokes your function\. To eliminate the chance of throttling errors, set the reserved concurrency value to 1,000, which is the maximum number of concurrent executions for an Amazon SQS event source\.
 
 ## Event source mapping APIs<a name="services-dynamodb-api"></a>
 
-To manage an event source with the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) or [AWS SDK](http://aws.amazon.com/getting-started/tools-sdks/), you can use the following API operations:
+To manage an event source with the [AWS Command Line Interface \(AWS CLI\)](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) or an [AWS SDK](http://aws.amazon.com/getting-started/tools-sdks/), you can use the following API operations:
 +  [CreateEventSourceMapping](API_CreateEventSourceMapping.md) 
 +  [ListEventSourceMappings](API_ListEventSourceMappings.md) 
 +  [GetEventSourceMapping](API_GetEventSourceMapping.md) 
@@ -197,6 +196,86 @@ You should see the following output:
 }
 ```
 
+## Reporting batch item failures<a name="services-sqs-batchfailurereporting"></a>
+
+When your Lambda function encounters an error while processing a batch, all messages in that batch become visible in the queue again by default, including messages that Lambda processed successfully\. As a result, your function can end up processing the same message several times\.
+
+To avoid reprocessing all messages in a failed batch, you can configure your event source mapping to make only the failed messages visible again\. To do this, when configuring your event source mapping, include the value `ReportBatchItemFailures` in the `FunctionResponseTypes` list\. This lets your function return a partial success, which can help reduce the number of unnecessary retries on records\.
+
+### Report syntax<a name="sqs-batchfailurereporting-syntax"></a>
+
+After you include `ReportBatchItemFailures` in your event source mapping configuration, you can return a list of the failed message IDs in your function response\. For example, suppose you have a batch of five messages, with message IDs `id1`, `id2`, `id3`, `id4`, and `id5`\. Your function successfully processes `id1`, `id3`, and `id5`\. To make messages `id2` and `id4` visible again in your queue, your response syntax should look like the following:
+
+```
+{ 
+  "batchItemFailures": [ 
+        {
+            "itemIdentifier": "id2"
+        },
+        {
+            "itemIdentifier": "id4"
+        }
+    ]
+}
+```
+
+To return the list of failed message IDs in the batch, you can use a `SQSBatchResponse` class object or create your own custom class\. Here is an example of a response that uses the `SQSBatchResponse` object\.
+
+```
+import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.amazonaws.services.lambda.runtime.events.SQSEvent;
+import com.amazonaws.services.lambda.runtime.events.SQSBatchResponse;
+ 
+import java.util.ArrayList;
+import java.util.List;
+ 
+public class ProcessSQSMessageBatch implements RequestHandler<SQSEvent, SQSBatchResponse> {
+    @Override
+    public SQSBatchResponse handleRequest(SQSEvent sqsEvent, Context context) {
+ 
+         List<SQSBatchResponse.BatchItemFailure> batchItemFailures = new ArrayList<SQSBatchResponse.BatchItemFailure>();
+         String messageId = "";
+         for (SQSEvent.SQSMessage message : sqsEvent.getRecords()) {
+             try {
+                 //process your message
+                 messageId = message.getMessageId();
+             } catch (Exception e) {
+                 //Add failed message identifier to the batchItemFailures list
+                 batchItemFailures.add(new SQSBatchResponse.BatchItemFailure(messageId));
+             }
+         }
+         return new SQSBatchResponse(batchItemFailures);
+     }
+}
+```
+
+To use this feature, your function must gracefully handle errors\. Have your function logic catch all exceptions and report the messages that result in failure in `batchItemFailures` in your function response\. If your function throws an exception, the entire batch is considered a complete failure\.
+
+**Note**  
+If you're using this feature with a FIFO queue, your function should stop processing messages after the first failure and return all failed and unprocessed messages in `batchItemFailures`\. This helps preserve the ordering of messages in your queue\.
+
+### Success and failure conditions<a name="sqs-batchfailurereporting-conditions"></a>
+
+Lambda treats a batch as a complete success if your function returns any of the following:
++ An empty `batchItemFailures` list
++ A null `batchItemFailures` list
++ An empty `EventResponse`
++ A null `EventResponse`
+
+Lambda treats a batch as a complete failure if your function returns any of the following:
++ An invalid JSON response
++ An empty string `itemIdentifier`
++ A null `itemIdentifier`
++ An `itemIdentifier` with a bad key name
++ An `itemIdentifier` value with a message ID that doesn't exist
+
+### CloudWatch metrics<a name="sqs-batchfailurereporting-metrics"></a>
+
+To determine whether your function is correctly reporting batch item failures, you can monitor the `NumberOfMessagesDeleted` and `ApproximateAgeOfOldestMessage` Amazon SQS metrics in Amazon CloudWatch\.
++ `NumberOfMessagesDeleted` tracks the number of messages removed from your queue\. If this drops to 0, this is a sign that your function response is not correctly returning failed messages\.
++ `ApproximateAgeOfOldestMessage` tracks how long the oldest message has stayed in your queue\. A sharp increase in this metric can indicate that your function is not correctly returning failed messages\.
+
 ## Amazon SQS configuration parameters<a name="services-sqs-params"></a>
 
 All Lambda event source types share the same [CreateEventSourceMapping](API_CreateEventSourceMapping.md) and [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md) API operations\. However, only some of the parameters apply to Amazon SQS\.
@@ -206,8 +285,9 @@ All Lambda event source types share the same [CreateEventSourceMapping](API_Crea
 
 | Parameter | Required | Default | Notes | 
 | --- | --- | --- | --- | 
-|  BatchSize  |  N  |  100  |  Maximum: 10000  | 
+|  BatchSize  |  N  |  10  |  For standard queues, the maximum is 10,000\. For FIFO queues, the maximum is 10\.  | 
 |  Enabled  |  N  |  true  |   | 
-|  EventSourceArn  |  Y  |  |  ARN of the data stream or a stream consumer  | 
+|  EventSourceArn  |  Y  |  |  The ARN of the data stream or a stream consumer  | 
 |  FunctionName  |  Y  |   |   | 
+|  FunctionResponseTypes  |  N  |   |  To let your function report specific failures in a batch, include the value `ReportBatchItemFailures` in `FunctionResponseTypes`\. For more information, see [Reporting batch item failures](#services-sqs-batchfailurereporting)\.  | 
 |  MaximumBatchingWindowInSeconds  |  N  |  0  |   | 

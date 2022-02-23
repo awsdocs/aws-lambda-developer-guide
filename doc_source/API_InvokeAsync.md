@@ -3,7 +3,7 @@
  *This action has been deprecated\.* 
 
 **Important**  
-For asynchronous function invocation, use [ Invoke ](API_Invoke.md)\.
+For asynchronous function invocation, use [Invoke](API_Invoke.md)\.
 
 Invokes a function asynchronously\.
 
@@ -19,7 +19,7 @@ InvokeArgs
 
 The request uses the following URI parameters\.
 
- ** [ FunctionName ](#API_InvokeAsync_RequestSyntax) **   <a name="SSS-InvokeAsync-request-FunctionName"></a>
+ ** [FunctionName](#API_InvokeAsync_RequestSyntax) **   <a name="SSS-InvokeAsync-request-FunctionName"></a>
 The name of the Lambda function\.  
 
 **Name formats**
@@ -35,7 +35,7 @@ Required: Yes
 
 The request accepts the following binary data\.
 
- ** [ InvokeArgs ](#API_InvokeAsync_RequestSyntax) **   <a name="SSS-InvokeAsync-request-InvokeArgs"></a>
+ ** [InvokeArgs](#API_InvokeAsync_RequestSyntax) **   <a name="SSS-InvokeAsync-request-InvokeArgs"></a>
 The JSON that you want to provide to your Lambda function as input\.  
 Required: Yes
 
@@ -49,7 +49,7 @@ HTTP/1.1 Status
 
 If the action is successful, the service sends back the following HTTP response\.
 
- ** [ Status ](#API_InvokeAsync_ResponseSyntax) **   <a name="SSS-InvokeAsync-response-Status"></a>
+ ** [Status](#API_InvokeAsync_ResponseSyntax) **   <a name="SSS-InvokeAsync-response-Status"></a>
 The status code\.
 
 ## Errors<a name="API_InvokeAsync_Errors"></a>
@@ -77,12 +77,12 @@ HTTP Status Code: 500
 ## See Also<a name="API_InvokeAsync_SeeAlso"></a>
 
 For more information about using this API in one of the language\-specific AWS SDKs, see the following:
-+  [ AWS Command Line Interface](https://docs.aws.amazon.com/goto/aws-cli/lambda-2015-03-31/InvokeAsync) 
-+  [ AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/InvokeAsync) 
-+  [ AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/InvokeAsync) 
-+  [ AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/InvokeAsync) 
-+  [ AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/InvokeAsync) 
-+  [ AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/InvokeAsync) 
-+  [ AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/InvokeAsync) 
-+  [ AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/InvokeAsync) 
-+  [ AWS SDK for Ruby V3](https://docs.aws.amazon.com/goto/SdkForRubyV3/lambda-2015-03-31/InvokeAsync) 
++  [AWS Command Line Interface](https://docs.aws.amazon.com/goto/aws-cli/lambda-2015-03-31/InvokeAsync) 
++  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/InvokeAsync) 
++  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/InvokeAsync) 
++  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/InvokeAsync) 
++  [AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/InvokeAsync) 
++  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/InvokeAsync) 
++  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/InvokeAsync) 
++  [AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/InvokeAsync) 
++  [AWS SDK for Ruby V3](https://docs.aws.amazon.com/goto/SdkForRubyV3/lambda-2015-03-31/InvokeAsync) 

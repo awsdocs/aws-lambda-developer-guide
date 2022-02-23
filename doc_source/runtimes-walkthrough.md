@@ -218,7 +218,7 @@ runtime-tutorial$ aws lambda update-function-code --function-name bash-runtime -
 Invoke the function to verify that it works with the runtime layer\.
 
 ```
-runtime-tutorial$ aws lambda invoke --function-name bash-runtime --payload '{"text":"Hello"}' response.txt
+runtime-tutorial$ aws lambda invoke --function-name bash-runtime --payload '{"text":"Hello"}' response.txt --cli-binary-format raw-in-base64-out
 {
     "StatusCode": 200,
     "ExecutedVersion": "$LATEST"

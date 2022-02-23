@@ -7,6 +7,7 @@ The following sections explain how common programming patterns and core concepts
 
 | Name | Identifier | Operating system | Architectures | 
 | --- | --- | --- | --- | 
+|  \.NET 6  |  `dotnet6`  |  Amazon Linux 2  |  x86\_64, arm64  | 
 |  \.NET Core 3\.1  |  `dotnetcore3.1`  |  Amazon Linux 2  |  x86\_64, arm64  | 
 |  \.NET Core 2\.1  |  `dotnetcore2.1`  |  Amazon Linux  |  x86\_64  | 
 

@@ -18,10 +18,10 @@ In the table below, each of the phases starts at midnight \(Pacific time zone\) 
 
 | Name | Identifier | Operating system | End of support phase 1 start | End of support phase 2 start | 
 | --- | --- | --- | --- | --- | 
-|  \.NET Core 2\.1  |  `dotnetcore2.1`  |  Amazon Linux  |  Oct 26, 2021  |  Nov 30, 2021  | 
-|  Python 2\.7  |  `python2.7`  |  Amazon Linux  |  July 15, 2021  |  Nov 22, 2021  | 
-|  Ruby 2\.5  |  `ruby2.5`  |  Amazon Linux  |  July 30, 2021  |  Nov 30, 2021  | 
-|  Node\.js 10\.x  |  `nodejs10.x`  |  Amazon Linux 2  |  July 30, 2021  |  Nov 30, 2021  | 
+|  \.NET Core 2\.1  |  `dotnetcore2.1`  |  Amazon Linux  |  Jan 5, 2022  |  Feb 14, 2022  | 
+|  Python 2\.7  |  `python2.7`  |  Amazon Linux  |  July 15, 2021  |  Feb 14, 2022  | 
+|  Ruby 2\.5  |  `ruby2.5`  |  Amazon Linux  |  July 30, 2021  |  Feb 14, 2022  | 
+|  Node\.js 10\.x  |  `nodejs10.x`  |  Amazon Linux 2  |  July 30, 2021  |  Feb 14, 2022  | 
 |  Node\.js 8\.10  |  `nodejs8.10`  |  Amazon Linux  |     |  March 6, 2020  | 
 |  Node\.js 6\.10  |  `nodejs6.10`  |  Amazon Linux  |     |  August 12, 2019  | 
 |  Node\.js 4\.3 edge  |  `nodejs4.3-edge`  |  Amazon Linux  |     |  April 30, 2019  | 

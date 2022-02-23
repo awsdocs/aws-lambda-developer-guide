@@ -54,7 +54,7 @@ If your [IAM permissions](#vpc-conditions) allow you only to create Lambda funct
 
 **To configure a VPC when you create a function**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose **Create function**\.
 
@@ -72,7 +72,7 @@ To access private resources, connect your function to private subnets\. If your 
 
 **To configure a VPC for an existing function**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function\.
 

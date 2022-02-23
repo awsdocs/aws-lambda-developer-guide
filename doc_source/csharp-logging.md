@@ -1,4 +1,4 @@
-# AWS Lambda function logging in C\#<a name="csharp-logging"></a>
+# Lambda function logging in C\#<a name="csharp-logging"></a>
 
 AWS Lambda automatically monitors Lambda functions on your behalf and sends function metrics to Amazon CloudWatch\. Your Lambda function comes with a CloudWatch Logs log group and a log stream for each instance of your function\. The Lambda runtime environment sends details about each invocation to the log stream, and relays logs and other output from your function's code\. 
 
@@ -6,6 +6,7 @@ This page describes how to produce log output from your Lambda function's code, 
 
 **Topics**
 + [Creating a function that returns logs](#csharp-logging-output)
++ [Using log levels](#log-levels)
 + [Using the Lambda console](#csharp-logging-console)
 + [Using the CloudWatch console](#csharp-logging-cwconsole)
 + [Using the AWS Command Line Interface \(AWS CLI\)](#csharp-logging-cli)
@@ -13,7 +14,7 @@ This page describes how to produce log output from your Lambda function's code, 
 
 ## Creating a function that returns logs<a name="csharp-logging-output"></a>
 
- To output logs from your function code, you can use methods on [the Console class](https://docs.microsoft.com/en-us/dotnet/api/system.console), or any logging library that writes to `stdout` or `stderr`\. The following example uses the `LambdaLogger` class from the [Amazon\.Lambda\.Core](lambda-csharp.md) library\.
+To output logs from your function code, you can use methods on the [Console class](https://docs.microsoft.com/en-us/dotnet/api/system.console), or any logging library that writes to `stdout` or `stderr`\. The following example uses the `LambdaLogger` class from the [Amazon\.Lambda\.Core](lambda-csharp.md) library\.
 
 **Example [src/blank\-csharp/Function\.cs](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-csharp/src/blank-csharp/Function.cs) – Logging**  
 
@@ -37,7 +38,7 @@ public async Task<AccountUsage> FunctionHandler(SQSEvent invocationEvent, ILambd
   }
 ```
 
-**Example Log format**  
+**Example log format**  
 
 ```
 START RequestId: d1cf0ccb-xmpl-46e6-950d-04c96c9b1c5d Version: $LATEST
@@ -86,6 +87,24 @@ The \.NET runtime logs the `START`, `END`, and `REPORT` lines for each invocatio
 + **XRAY TraceId** – For traced requests, the [AWS X\-Ray trace ID](services-xray.md)\.
 + **SegmentId** – For traced requests, the X\-Ray segment ID\.
 + **Sampled** – For traced requests, the sampling result\.
+
+## Using log levels<a name="log-levels"></a>
+
+Starting with \.NET 6, you can use log levels for additional logging from Lambda functions\. Log levels provide filtering and categorization for the logs that your function writes to Amazon EventBridge \(CloudWatch Events\)\.
+
+The log levels available are:
++ `LogCritical`
++ `LogError`
++ `LogWarning`
++ `LogInformation`
++ `LogDebug`
++ `LogTrace`
+
+ By default, Lambda writes `LogInformation` level logs and above to CloudWatch\. You can adjust the level of logs that Lambda writes using the `AWS_LAMBDA_HANDLER_LOG_LEVEL` environment variable\. Set the value of the environment variable to the string enum value for the level desired, as outlined in the [LogLevel enum](https://github.com/aws/aws-lambda-dotnet/blob/master/Libraries/src/Amazon.Lambda.Core/ILambdaLogger.cs#L7)\. For example, if you set `AWS_LAMBDA_HANDLER_LOG_LEVEL` to `Error`, Lambda writes `LogError` and `LogCritical` messages to CloudWatch\. 
+
+ Lambda writes `Console.WriteLine` calls as info level messages, and `Console.Error.WriteLine` calls as error level messages\. 
+
+ If you prefer the previous style of logging in \.NET, set `AWS_LAMBDA_HANDLER_LOG_FORMAT` to `Unformatted`\. 
 
 ## Using the Lambda console<a name="csharp-logging-console"></a>
 
@@ -151,7 +170,7 @@ The `base64` utility is available on Linux, macOS, and [Ubuntu on Windows](https
 **Example get\-logs\.sh script**  
 In the same command prompt, use the following script to download the last five log events\. The script uses `sed` to remove quotes from the output file, and sleeps for 15 seconds to allow time for the logs to become available\. The output includes the response from Lambda and the output from the `get-log-events` command\.   
 Copy the contents of the following code sample and save in your Lambda project directory as `get-logs.sh`\.  
-The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [ AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.  
+The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.  
 
 ```
 #!/bin/bash

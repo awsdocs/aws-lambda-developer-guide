@@ -24,19 +24,19 @@ On Linux and macOS, use your preferred shell and package manager\. On Windows 10
 
 In the tutorial, you use two accounts\. The AWS CLI commands illustrate this by using two [named profiles](https://docs.aws.amazon.com/cli/latest/userguide/cli-multiple-profiles.html), each configured for use with a different account\. If you use profiles with different names, or the default profile and one named profile, modify the commands as needed\.
 
-## Create an Amazon SNS topic<a name="with-sns-create-topic"></a>
+## Create an Amazon SNS topic \(account A\)<a name="with-sns-create-topic"></a>
 
-From account A \(01234567891A\), create the source Amazon SNS topic\.
+In **Account A**, create the source Amazon SNS topic\.
 
 ```
 aws sns create-topic --name sns-topic-for-lambda --profile accountA
 ```
 
-Note the topic ARN that is returned by the command\. You will need it when you add permissions to the Lambda function to subscribe to the topic\.
+After creating the topic, record its Amazon Resource Name \(ARN\)\. You need it later when you add permissions to the Lambda function to subscribe to the topic\.
 
-## Create the execution role<a name="with-sns-example-create-iam-role"></a>
+## Create the execution role \(account B\)<a name="with-sns-example-create-iam-role"></a>
 
-From account B \(01234567891B\), create the [execution role](lambda-intro-execution-role.md) that gives your function permission to access AWS resources\.
+In **Account B**, create the [execution role](lambda-intro-execution-role.md) that gives your function permission to access AWS resources\.
 
 **To create an execution role**
 
@@ -51,9 +51,9 @@ From account B \(01234567891B\), create the [execution role](lambda-intro-execut
 
 The **AWSLambdaBasicExecutionRole** policy has the permissions that the function needs to write logs to CloudWatch Logs\.
 
-## Create a Lambda function<a name="with-sns-example-create-test-function"></a>
+## Create a Lambda function \(account B\)<a name="with-sns-example-create-test-function"></a>
 
-From account B \(01234567891B\), create the function that processes events from Amazon SNS\. The following example code receives an Amazon SNS event input and processes the messages that it contains\. For illustration, the code writes some of the incoming event data to CloudWatch Logs\.
+In **Account B**, create the function that processes events from Amazon SNS\. The following example code receives an Amazon SNS event input and processes the messages that it contains\. For illustration, the code writes some of the incoming event data to CloudWatch Logs\.
 
 **Note**  
 For sample code in other languages, see [Sample function code](with-sns-create-package.md)\.
@@ -87,27 +87,27 @@ exports.handler = function(event, context, callback) {
    ```
    aws lambda create-function --function-name Function-With-SNS \
    --zip-file fileb://function.zip --handler index.handler --runtime nodejs12.x \
-   --role arn:aws:iam::01234567891B:role/service-role/lambda-sns-execution-role  \
+   --role arn:aws:iam::<AccountB_ID>:role/service-role/lambda-sns-execution-role  \
    --timeout 60 --profile accountB
    ```
 
-Note the function ARN that is returned by the command\. You will need it when you add permissions to allow Amazon SNS to invoke your function\.
+After creating the function, record its function ARN\. You need it later when you add permissions to allow Amazon SNS to invoke your function\.
 
-## Set up cross\-account permissions<a name="with-sns-create-x-account-permissions"></a>
+## Set up cross\-account permissions \(account A and B\)<a name="with-sns-create-x-account-permissions"></a>
 
-From account A \(01234567891A\), grant permission to account B \(01234567891B\) to subscribe to the topic:
+In **Account A**, grant permission to **Account B** to subscribe to the topic:
 
 ```
-aws sns add-permission --label lambda-access --aws-account-id 12345678901B \
---topic-arn arn:aws:sns:us-east-2:12345678901A:sns-topic-for-lambda \
+aws sns add-permission --label lambda-access --aws-account-id <AccountB_ID> \
+--topic-arn arn:aws:sns:us-east-2:<AccountA_ID>:sns-topic-for-lambda \
 --action-name Subscribe ListSubscriptionsByTopic --profile accountA
 ```
 
-From account B \(01234567891B\), add the Lambda permission to allow invocation from Amazon SNS\.
+In **Account B**, add the Lambda permission to allow invocation from Amazon SNS\.
 
 ```
 aws lambda add-permission --function-name Function-With-SNS \
---source-arn arn:aws:sns:us-east-2:12345678901A:sns-topic-for-lambda \
+--source-arn arn:aws:sns:us-east-2:<AccountA_ID>:sns-topic-for-lambda \
 --statement-id function-with-sns --action "lambda:InvokeFunction" \
 --principal sns.amazonaws.com --profile accountB
 ```
@@ -117,9 +117,9 @@ You should see the following output:
 ```
 {
     "Statement": "{\"Condition\":{\"ArnLike\":{\"AWS:SourceArn\":
-      \"arn:aws:sns:us-east-2:12345678901A:sns-topic-for-lambda\"}},
+      \"arn:aws:sns:us-east-2:<AccountA_ID>:sns-topic-for-lambda\"}},
       \"Action\":[\"lambda:InvokeFunction\"],
-      \"Resource\":\"arn:aws:lambda:us-east-2:01234567891B:function:Function-With-SNS\",
+      \"Resource\":\"arn:aws:lambda:us-east-2:<AccountB_ID>:function:Function-With-SNS\",
       \"Effect\":\"Allow\",\"Principal\":{\"Service\":\"sns.amazonaws.com\"},
       \"Sid\":\"function-with-sns1\"}"
 }
@@ -130,14 +130,14 @@ Do not use the `--source-account` parameter to add a source account to the Lambd
 **Note**  
 If the account with the SNS topic is hosted in an opt\-in region, you need to specify the region in the principal\. For an example, see [Invoking Lambda functions using Amazon SNS notifications](https://docs.aws.amazon.com/sns/latest/dg/sns-lambda.html) in the *Amazon Simple Notification Service Developer Guide*\. 
 
-## Create a subscription<a name="with-sns-create-subscription"></a>
+## Create a subscription \(account B\)<a name="with-sns-create-subscription"></a>
 
-From account B, subscribe the Lambda function to the topic\. When a message is sent to the `sns-topic-for-lambda` topic in account A \(01234567891A\), Amazon SNS invokes the `Function-With-SNS` function in account B \(01234567891B\)\.
+In **Account B**, subscribe the Lambda function to the topic\. When a message is sent to the `sns-topic-for-lambda` topic in **Account A**, Amazon SNS invokes the `Function-With-SNS` function in **Account B**\.
 
 ```
 aws sns subscribe --protocol lambda \
---topic-arn arn:aws:sns:us-east-2:12345678901A:sns-topic-for-lambda \
---notification-endpoint arn:aws:lambda:us-east-2:12345678901B:function:Function-With-SNS \
+--topic-arn arn:aws:sns:us-east-2:<AccountA_ID>:sns-topic-for-lambda \
+--notification-endpoint arn:aws:lambda:us-east-2:<AccountB_ID>:function:Function-With-SNS \
 --profile accountB
 ```
 
@@ -145,19 +145,19 @@ You should see the following output:
 
 ```
 {
-    "SubscriptionArn": "arn:aws:sns:us-east-2:12345678901A:sns-topic-for-lambda:5d906xxxx-7c8x-45dx-a9dx-0484e31c98xx"
+    "SubscriptionArn": "arn:aws:sns:us-east-2:<AccountA_ID>:sns-topic-for-lambda:5d906xxxx-7c8x-45dx-a9dx-0484e31c98xx"
 }
 ```
 
 The output contains the ARN of the topic subscription\.
 
-## Test subscription<a name="with-sns-create-test"></a>
+## Test subscription \(account A\)<a name="with-sns-create-test"></a>
 
-From account A \(01234567891A\), test the subscription\. Type `Hello World` into a text file and save it as `message.txt`\. Then run the following command: 
+In **Account A**, test the subscription\. Type `Hello World` into a text file and save it as `message.txt`\. Then run the following command: 
 
 ```
 aws sns publish --message file://message.txt --subject Test \
---topic-arn arn:aws:sns:us-east-2:12345678901A:sns-topic-for-lambda \
+--topic-arn arn:aws:sns:us-east-2:<AccountA_ID>:sns-topic-for-lambda \
 --profile accountA
 ```
 
@@ -168,6 +168,8 @@ To learn more about Amazon SNS, see [What is Amazon Simple Notification Service]
 ## Clean up your resources<a name="cleanup"></a>
 
 You can now delete the resources that you created for this tutorial, unless you want to retain them\. By deleting AWS resources that you're no longer using, you prevent unnecessary charges to your AWS account\.
+
+In **Account A**, clean up your Amazon SNS topic\.
 
 **To delete the Amazon SNS topic**
 
@@ -180,6 +182,8 @@ You can now delete the resources that you created for this tutorial, unless you 
 1. Enter **delete me** in the text box\.
 
 1. Choose **Delete**\.
+
+In **Account B**, clean up your execution role, Lambda function, and Amazon SNS subscription\.
 
 **To delete the execution role**
 

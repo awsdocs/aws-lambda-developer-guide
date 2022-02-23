@@ -22,7 +22,7 @@ Resources in your API define one or more methods, such as GET or POST\. Methods 
 
 **To add a public endpoint to your Lambda function**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function\.
 

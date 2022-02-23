@@ -4,7 +4,7 @@ A Lambda function's execution role is an AWS Identity and Access Management \(IA
 
 **To view a function's execution role**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function\.
 
@@ -125,17 +125,20 @@ aws iam attach-role-policy --role-name lambda-ex --policy-arn arn:aws:iam::aws:p
 
 ## AWS managed policies for Lambda features<a name="permissions-executionrole-features"></a>
 
-The following AWS managed policies provide permissions that are required to use Lambda features:
-+ **AWSLambdaBasicExecutionRole** – Permission to upload logs to CloudWatch\.
-+ **AWSLambdaDynamoDBExecutionRole** – Permission to read records from an Amazon DynamoDB stream\.
-+ **AWSLambdaKinesisExecutionRole** – Permission to read events from an Amazon Kinesis data stream or consumer\.
-+ **AWSLambdaMQExecutionRole** – Permission to read records from an Amazon MQ broker\.
-+ **AWSLambdaMSKExecutionRole** – Permission to read records from an Amazon Managed Streaming for Apache Kafka \(Amazon MSK\) cluster\.
-+ **AWSLambdaSQSQueueExecutionRole** – Permission to read a message from an Amazon Simple Queue Service \(Amazon SQS\) queue\.
-+ **AWSLambdaVPCAccessExecutionRole** – Permission to manage elastic network interfaces to connect your function to a virtual private cloud \(VPC\)\.
-+ **AWSXRayDaemonWriteAccess** – Permission to upload trace data to X\-Ray\.
-+ **CloudWatchLambdaInsightsExecutionRolePolicy** – Permission to write runtime metrics to CloudWatch Lambda Insights\.
-+ **AmazonS3ObjectLambdaExecutionRolePolicy** – Permission to interact with Amazon S3 Object Lambda\.
+The following AWS managed policies provide permissions that are required to use Lambda features\.
+
+
+| Change | Description | Date | 
+| --- | --- | --- | 
+|  **[ AWSLambdaBasicExecutionRole](https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole)** – Lambda started tracking changes to this policy\.  |  `AWSLambdaBasicExecutionRole` grants permissions to upload logs to CloudWatch\.  |  February 14, 2022  | 
+|  **[ AWSLambdaDynamoDBExecutionRole](https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/service-role/AWSLambdaDynamoDBExecutionRole)** – Lambda started tracking changes to this policy\.  |  `AWSLambdaDynamoDBExecutionRole` grants permissions to read records from an Amazon DynamoDB stream and write to CloudWatch Logs\.  |  February 14, 2022  | 
+|  **[ AWSLambdaKinesisExecutionRole](https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/service-role/AWSLambdaKinesisExecutionRole)** – Lambda started tracking changes to this policy\.  |  `AWSLambdaKinesisExecutionRole` grants permissions to read events from an Amazon Kinesis data stream and write to CloudWatch Logs\.  |  February 14, 2022  | 
+|  **[ AWSLambdaMSKExecutionRole](https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/service-role/AWSLambdaMSKExecutionRole)** – Lambda started tracking changes to this policy\.  |  `AWSLambdaMSKExecutionRole` grants permissions to read and access records from an Amazon Managed Streaming for Apache Kafka \(Amazon MSK\) cluster, manage elastic network interfaces \(ENIs\), and write to CloudWatch Logs\.  |  February 14, 2022  | 
+|  **[ AWSLambdaSQSQueueExecutionRole](https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/service-role/AWSLambdaSQSQueueExecutionRole)** – Lambda started tracking changes to this policy\.  |  `AWSLambdaSQSQueueExecutionRole` grants permissions to read a message from an Amazon Simple Queue Service \(Amazon SQS\) queue and write to CloudWatch Logs\.  |  February 14, 2022  | 
+|  **[ AWSLambdaVPCAccessExecutionRole](https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole)** – Lambda started tracking changes to this policy\.  |  `AWSLambdaVPCAccessExecutionRole` grants permissions to manage ENIs within an Amazon VPC and write to CloudWatch Logs\.  |  February 14, 2022  | 
+|  **[ AWSXRayDaemonWriteAccess](https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/AWSXRayDaemonWriteAccess)** – Lambda started tracking changes to this policy\.  |  `AWSXRayDaemonWriteAccess` grants permissions to upload trace data to X\-Ray\.  |  February 14, 2022  | 
+|  **[ CloudWatchLambdaInsightsExecutionRolePolicy](https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/CloudWatchLambdaInsightsExecutionRolePolicy)** – Lambda started tracking changes to this policy\.  |  `CloudWatchLambdaInsightsExecutionRolePolicy` grants permissions to write runtime metrics to CloudWatch Lambda Insights\.  |  February 14, 2022  | 
+|  **[ AmazonS3ObjectLambdaExecutionRolePolicy](https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/service-role/AmazonS3ObjectLambdaExecutionRolePolicy)** – Lambda started tracking changes to this policy\.  |  `AmazonS3ObjectLambdaExecutionRolePolicy` grants permissions to interact with Amazon S3 Object Lambda and write to CloudWatch Logs\.  |  February 14, 2022  | 
 
 For some features, the Lambda console attempts to add missing permissions to your execution role in a customer managed policy\. These policies can become numerous\. To avoid creating extra policies, add the relevant AWS managed policies to your execution role before enabling features\.
 
@@ -145,8 +148,8 @@ When you use an [event source mapping](invocation-eventsourcemapping.md) to invo
 + [Amazon DynamoDB](with-ddb.md)
 + [Amazon Kinesis](with-kinesis.md)
 + [Amazon MQ](with-mq.md)
-+ [Amazon Managed Streaming for Apache Kafka](with-msk.md)
-+ [self\-managed Apache Kafka](with-kafka.md)
-+ [Amazon Simple Queue Service](with-sqs.md)
++ [Amazon Managed Streaming for Apache Kafka \(Amazon MSK\)](with-msk.md)
++ [Self\-managed Apache Kafka](with-kafka.md)
++ [Amazon Simple Queue Service \(Amazon SQS\)](with-sqs.md)
 
 In addition to the AWS managed policies, the Lambda console provides templates for creating a custom policy with permissions for additional use cases\. When you create a function in the Lambda console, you can choose to create a new execution role with permissions from one or more templates\. These templates are also applied automatically when you create a function from a blueprint, or when you configure options that require access to other services\. Example templates are available in this guide's [GitHub repository](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/iam-policies)\.
