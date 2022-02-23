@@ -12,7 +12,7 @@ GET /2019-09-30/functions/FunctionName/provisioned-concurrency?Qualifier=Qualifi
 
 The request uses the following URI parameters\.
 
- ** [ FunctionName ](#API_GetProvisionedConcurrencyConfig_RequestSyntax) **   <a name="SSS-GetProvisionedConcurrencyConfig-request-FunctionName"></a>
+ ** [FunctionName](#API_GetProvisionedConcurrencyConfig_RequestSyntax) **   <a name="SSS-GetProvisionedConcurrencyConfig-request-FunctionName"></a>
 The name of the Lambda function\.  
 
 **Name formats**
@@ -24,7 +24,7 @@ Length Constraints: Minimum length of 1\. Maximum length of 140\.
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
 Required: Yes
 
- ** [ Qualifier ](#API_GetProvisionedConcurrencyConfig_RequestSyntax) **   <a name="SSS-GetProvisionedConcurrencyConfig-request-Qualifier"></a>
+ ** [Qualifier](#API_GetProvisionedConcurrencyConfig_RequestSyntax) **   <a name="SSS-GetProvisionedConcurrencyConfig-request-Qualifier"></a>
 The version number or alias name\.  
 Length Constraints: Minimum length of 1\. Maximum length of 128\.  
 Pattern: `(|[a-zA-Z0-9$_-]+)`   
@@ -56,31 +56,31 @@ If the action is successful, the service sends back an HTTP 200 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** [ AllocatedProvisionedConcurrentExecutions ](#API_GetProvisionedConcurrencyConfig_ResponseSyntax) **   <a name="SSS-GetProvisionedConcurrencyConfig-response-AllocatedProvisionedConcurrentExecutions"></a>
+ ** [AllocatedProvisionedConcurrentExecutions](#API_GetProvisionedConcurrencyConfig_ResponseSyntax) **   <a name="SSS-GetProvisionedConcurrencyConfig-response-AllocatedProvisionedConcurrentExecutions"></a>
 The amount of provisioned concurrency allocated\.  
 Type: Integer  
 Valid Range: Minimum value of 0\.
 
- ** [ AvailableProvisionedConcurrentExecutions ](#API_GetProvisionedConcurrencyConfig_ResponseSyntax) **   <a name="SSS-GetProvisionedConcurrencyConfig-response-AvailableProvisionedConcurrentExecutions"></a>
+ ** [AvailableProvisionedConcurrentExecutions](#API_GetProvisionedConcurrencyConfig_ResponseSyntax) **   <a name="SSS-GetProvisionedConcurrencyConfig-response-AvailableProvisionedConcurrentExecutions"></a>
 The amount of provisioned concurrency available\.  
 Type: Integer  
 Valid Range: Minimum value of 0\.
 
- ** [ LastModified ](#API_GetProvisionedConcurrencyConfig_ResponseSyntax) **   <a name="SSS-GetProvisionedConcurrencyConfig-response-LastModified"></a>
+ ** [LastModified](#API_GetProvisionedConcurrencyConfig_ResponseSyntax) **   <a name="SSS-GetProvisionedConcurrencyConfig-response-LastModified"></a>
 The date and time that a user last updated the configuration, in [ISO 8601 format](https://www.iso.org/iso-8601-date-and-time-format.html)\.  
 Type: String
 
- ** [ RequestedProvisionedConcurrentExecutions ](#API_GetProvisionedConcurrencyConfig_ResponseSyntax) **   <a name="SSS-GetProvisionedConcurrencyConfig-response-RequestedProvisionedConcurrentExecutions"></a>
+ ** [RequestedProvisionedConcurrentExecutions](#API_GetProvisionedConcurrencyConfig_ResponseSyntax) **   <a name="SSS-GetProvisionedConcurrencyConfig-response-RequestedProvisionedConcurrentExecutions"></a>
 The amount of provisioned concurrency requested\.  
 Type: Integer  
 Valid Range: Minimum value of 1\.
 
- ** [ Status ](#API_GetProvisionedConcurrencyConfig_ResponseSyntax) **   <a name="SSS-GetProvisionedConcurrencyConfig-response-Status"></a>
+ ** [Status](#API_GetProvisionedConcurrencyConfig_ResponseSyntax) **   <a name="SSS-GetProvisionedConcurrencyConfig-response-Status"></a>
 The status of the allocation process\.  
 Type: String  
 Valid Values:` IN_PROGRESS | READY | FAILED` 
 
- ** [ StatusReason ](#API_GetProvisionedConcurrencyConfig_ResponseSyntax) **   <a name="SSS-GetProvisionedConcurrencyConfig-response-StatusReason"></a>
+ ** [StatusReason](#API_GetProvisionedConcurrencyConfig_ResponseSyntax) **   <a name="SSS-GetProvisionedConcurrencyConfig-response-StatusReason"></a>
 For failed allocations, the reason that provisioned concurrency could not be allocated\.  
 Type: String
 
@@ -109,12 +109,12 @@ HTTP Status Code: 429
 ## See Also<a name="API_GetProvisionedConcurrencyConfig_SeeAlso"></a>
 
 For more information about using this API in one of the language\-specific AWS SDKs, see the following:
-+  [ AWS Command Line Interface](https://docs.aws.amazon.com/goto/aws-cli/lambda-2015-03-31/GetProvisionedConcurrencyConfig) 
-+  [ AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/GetProvisionedConcurrencyConfig) 
-+  [ AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/GetProvisionedConcurrencyConfig) 
-+  [ AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/GetProvisionedConcurrencyConfig) 
-+  [ AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/GetProvisionedConcurrencyConfig) 
-+  [ AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/GetProvisionedConcurrencyConfig) 
-+  [ AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/GetProvisionedConcurrencyConfig) 
-+  [ AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/GetProvisionedConcurrencyConfig) 
-+  [ AWS SDK for Ruby V3](https://docs.aws.amazon.com/goto/SdkForRubyV3/lambda-2015-03-31/GetProvisionedConcurrencyConfig) 
++  [AWS Command Line Interface](https://docs.aws.amazon.com/goto/aws-cli/lambda-2015-03-31/GetProvisionedConcurrencyConfig) 
++  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/GetProvisionedConcurrencyConfig) 
++  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/GetProvisionedConcurrencyConfig) 
++  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/GetProvisionedConcurrencyConfig) 
++  [AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/GetProvisionedConcurrencyConfig) 
++  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/GetProvisionedConcurrencyConfig) 
++  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/GetProvisionedConcurrencyConfig) 
++  [AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/GetProvisionedConcurrencyConfig) 
++  [AWS SDK for Ruby V3](https://docs.aws.amazon.com/goto/SdkForRubyV3/lambda-2015-03-31/GetProvisionedConcurrencyConfig) 

@@ -1,6 +1,6 @@
 # AWS Toolkit for Visual Studio<a name="csharp-package-toolkit"></a>
 
-You can build \.NET\-based Lambda applications using the Lambda plugin to the [AWS Toolkit for Visual Studio](http://aws.amazon.com/visualstudio/)\. The toolkit is available as a [Visual Studio extension](https://marketplace.visualstudio.com/items?itemName=AmazonWebServices.AWSToolkitforVisualStudio2017)\.
+You can build \.NET\-based Lambda applications using the Lambda plugin for the [AWS Toolkit for Visual Studio](http://aws.amazon.com/visualstudio/)\. The toolkit is available as a [Visual Studio extension](https://marketplace.visualstudio.com/items?itemName=AmazonWebServices.AWSToolkitforVisualStudio2017)\.
 
 1. Launch Microsoft Visual Studio and choose **New project**\.
 
@@ -8,21 +8,20 @@ You can build \.NET\-based Lambda applications using the Lambda plugin to the [A
 
    1. In the **New Project** window, choose **Lambda Project \(\.NET Core\)**, and then choose **OK**\.
 
-   1. In the **Select Blueprint** window, you can select from a list of sample applications that provide you with sample code to get started with creating a \.NET\-based Lambda application\.
+   1. In the **Select Blueprint** window, select from the list of sample applications with sample code to help you get started with creating a \.NET\-based Lambda application\.
 
    1. To create a Lambda application from scratch, choose **Empty Function**, and then choose **Finish**\.
 
 1. Review the `aws-lambda-tools-defaults.json` file, which is created as part of your project\. You can set the options in this file, which the Lambda tooling reads by default\. The project templates created in Visual Studio set many of these fields with default values\. Note the following fields:
    + **profile** – The name of a profile in your [AWS SDK for \.NET credentials file](https://docs.aws.amazon.com/sdk-for-net/v3/developer-guide/net-dg-config-creds.html)
-   + **function\-handler** – This is where the `function handler` is specified, which is why you don't have to set it in the wizard\. However, whenever you rename the *Assembly*, *Namespace*, *Class*, or *Function* in your function code, you must update the corresponding fields in the `aws-lambda-tools-defaults.json` file\.
+   + **function\-handler** – The field where you specify the `function handler`\. \(This is why you don't have to set it in the wizard\.\) However, whenever you rename the *Assembly*, *Namespace*, *Class*, or *Function* in your function code, you must update the corresponding fields in the `aws-lambda-tools-defaults.json` file\.
 
      ```
      {
        "profile":"default",
        "region" : "us-east-2",
        "configuration" : "Release",
-       "framework" : "netcoreapp2.1",
-       "function-runtime":"dotnetcore3.1",
+       "function-runtime":"dotnet6",
        "function-memory-size" : 256,
        "function-timeout" : 30,
        "function-handler" : "Assembly::Namespace.Class::Function" 
@@ -31,7 +30,7 @@ You can build \.NET\-based Lambda applications using the Lambda plugin to the [A
 
 1. Open the **Function\.cs** file\. You are provided with a template to implement your Lambda function handler code\.
 
-1. Once you have written the code that represents your Lambda function, upload it by opening the context \(right\-click\) menu for the **Project** node in your application and then choosing **Publish to AWS Lambda**\.
+1. After writing the code that represents your Lambda function, upload it by opening the context \(right\-click\) menu for the **Project** node in your application and then choosing **Publish to AWS Lambda**\.
 
 1. In the **Upload Lambda Function** window, enter a name for the function, or select a previously published function to republish\. Then choose **Next**\.
 

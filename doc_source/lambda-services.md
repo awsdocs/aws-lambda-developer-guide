@@ -3,7 +3,7 @@
 AWS Lambda integrates with other AWS services to invoke functions or take other actions\. These are some common use cases:
 + Invoke a function in response to resource lifecycle events, such as with Amazon Simple Storage Service \(Amazon S3\)\. For more information, see [Using AWS Lambda with Amazon S3](with-s3.md)\.
 + Respond to incoming HTTP requests\. For more information, see [Tutorial: Using Lambda with API Gateway](services-apigateway-tutorial.md)\.
-+ Consume events from a queue\. For more information, see [Using AWS Lambda with Amazon SQS](with-sqs.md)\.
++ Consume events from a queue\. For more information, see [Using Lambda with Amazon SQS](with-sqs.md)\.
 + Run a function on a schedule\. For more information, see [Using AWS Lambda with Amazon EventBridge \(CloudWatch Events\)](services-cloudwatchevents.md)\.
 
 Depending on which service you're using with Lambda, the invocation generally works in one of two ways\. An event drives the invocation or Lambda polls a queue or data stream and invokes the function in response to activity in the queue or data stream\. Lambda integrates with Amazon Elastic File System and AWS X\-Ray in a way that doesn't involve invoking functions\. 

@@ -348,7 +348,7 @@ Test the Lambda function manually using the following sample event data\. You ca
    --payload file://input.txt outputfile.txt
    ```
 
-   The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [ AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.
+   The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.
 
 1. Verify the output in the file `outputfile.txt`\.
 

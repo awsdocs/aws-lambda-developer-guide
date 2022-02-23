@@ -76,108 +76,72 @@ For more information on resources and conditions for Lambda and other AWS servic
 
 ## Function resource names<a name="function-resources"></a>
 
-You reference a Lambda function in a policy statement using an Amazon Resource Names \(ARN\)\. The format of a function ARN depends on whether you are referencing the whole function, a function [version](configuration-versions.md), or an [alias](configuration-aliases.md)\. 
+You reference a Lambda function in a policy statement using an Amazon Resource Name \(ARN\)\. The format of a function ARN depends on whether you are referencing the whole function \(unqualified\) or a function [version](configuration-versions.md) or [alias](configuration-aliases.md) \(qualified\)\. 
 
-When making Lambda API calls, users can specify a version or alias by passing a version ARN or alias ARN in the [GetFunction](API_GetFunction.md) `FunctionName` parameter, or by setting a value in the [GetFunction](API_GetFunction.md) `Qualifier` parameter\. Lambda makes authorization decisions by comparing the resource element in the IAM policy with the `FunctionName` passed in the API calls\.
+When making Lambda API calls, users can specify a version or alias by passing a version ARN or alias ARN in the [GetFunction](API_GetFunction.md) `FunctionName` parameter, or by setting a value in the [GetFunction](API_GetFunction.md) `Qualifier` parameter\. Lambda makes authorization decisions by comparing the resource element in the IAM policy with both the `FunctionName` and `Qualifier` passed in API calls\. If there is a misamtch, Lambda denies the request\.
 
-You must use the correct function ARN types in your policies to achieve the results that you expect, especially in policies that deny access\. We recommend that you follow the best practices for using Deny statements with functions\.
+Whether you are allowing or denying an action on your function, you must use the correct function ARN types in your policy statement to achieve the results that you expect\. For example, if your policy references the unqualified ARN, Lambda accepts requests that reference the unqualified ARN but denies requests that reference a qualified ARN\.
 
-
-
-### Best practices for using Deny statements with functions<a name="authorization-bp"></a>
-
-The following table summarizes the resources to use in Deny effects\. In the **Resource** column, `MyFunction` is the name of the function, `:1` refers to version 1 of the function, and `MyAlias` is the name of a function alias\.
-
-
-**Resource best practices**  
-
-| Policy objective | Resource | 
-| --- | --- | 
-|  Deny access to all versions of a function  |  `MyFunction*`  | 
-|  Deny access to a specific alias  |  `MyFunction:MyAlias` and `MyFunction`  | 
-|  Deny access to a specific version of a function  |  `MyFunction:1` and `MyFunction`  | 
-
-The following sections provide example policy statements for each of the policy objectives\.
-
-**Note**  
-You can use only identity\-based policies to deny specific function resources\. Currently, Lambda does not support the `Deny` effect in resource\-based policies\.
-
-For the action list in a policy statement, you can add any of the [ actions defined by Lambda](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awslambda.html) that act on a function resource\.
-
-#### Deny access to all function versions<a name="authorization-deny-all"></a>
-
-The following identity\-based policy statement denies access to the `lambda:GetFunctionConfiguration` action for all versions of the `my-function` function\. The wildcard character at the end of the function ARN ensures that this policy applies to all version and alias ARNs\. 
-
-**Example identity\-based policy**  
+**Example allowing invocation of an unqualified arn**  
 
 ```
 {
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Effect": "Deny",
-            "Action": [
-                "lambda:GetFunctionConfiguration" 
-            ],
-            "Resource": "arn:aws:lambda:us-west-2:123456789012:function:my-function*"
-        }        
+            "Effect": "Allow",
+            "Action": "lambda:InvokeFunction",
+            "Resource": "arn:aws:lambda:us-west-2:123456789012:myFunction"
     ]
 }
 ```
 
-#### Deny access to a specific function alias<a name="authorization-deny-alias"></a>
+If your policy references a specific qualified ARN, Lambda accepts requests that reference that ARN but denies requests that reference the unqualified ARN or a different qualified ARN, for example, `myFunction:2`\.
 
-To deny access to a specific alias, you must specify both the alias ARN and the unqualified function ARN in the policy\. This prevents users from accessing the specific alias by passing the unqualified ARN as the `FunctionName` and the alias as the `Qualifier`\.
-
-**Note**  
-If you create this type of policy, API calls need to refer to the unpublished version of the function by specifying a qualified ARN with the $LATEST suffix in the `FunctionName` parameter\. 
-
-The following identity\-based policy statement denies access to the `lambda:InvokeFunction` action in the `my-alias` alias of the `my-function` function\.
-
-**Example identity\-based policy**  
+**Example allowing invocation of a specific qualified arn**  
 
 ```
 {
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "DenySpecificAlias",
-            "Effect": "Deny",
+            "Effect": "Allow",
             "Action": "lambda:InvokeFunction",
-            "Resource": [
-                "arn:aws:lambda:us-west-2:123456789012:function:my-function:my-alias",
-                "arn:aws:lambda:us-west-2:123456789012:function:my-function"
-                ]
+            "Resource": "arn:aws:lambda:us-west-2:123456789012:myFunction:1"
         }
     ]
 }
 ```
 
-#### Deny access to a specific function version<a name="authorization-deny-specific"></a>
+If your policy references any qualified ARN using `:*`, Lambda accepts any qualified ARN but denies requests that reference the unqualified ARN\.
 
-To deny access to a specific version, you must specify both the qualified ARN and the unqualified ARN in the policy\. This prevents users from accessing the specific version by passing the unqualified ARN as the `FunctionName` and the version as the `Qualifier`\.
-
-**Note**  
-If you create this type of policy, API calls need to refer to the unpublished version of the function by specifying a qualified ARN with the $LATEST suffix in the `FunctionName` parameter\. 
-
-The following identity\-based policy statement denies access to the invoke action in version 1 of the `my-function` function\.
-
-**Example identity\-based policy**  
+**Example allowing invocation of any qualified arn**  
 
 ```
 {
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "DenySpecificFunctionVersion",
-            "Effect": "Deny",
-            "Action": [
-                "lambda:InvokeFunction"
-            ],
-            "Resource": [
-                "arn:aws:lambda:us-west-2:123456789012:function:my-function:1",
-                "arn:aws:lambda:us-west-2:123456789012:function:my-function"
-                ]
+            "Effect": "Allow",
+            "Action": "lambda:InvokeFunction",
+            "Resource": "arn:aws:lambda:us-west-2:123456789012:myFunction:*"
+        }
+    ]
+}
+```
+
+If your policy references any ARN using `*`, Lambda accepts any qualified or unqualified ARN\.
+
+**Example allowing invocation of any qualified or unqualified arn**  
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "lambda:InvokeFunction",
+            "Resource": "arn:aws:lambda:us-west-2:123456789012:myFunction*"
         }
     ]
 }

@@ -77,7 +77,22 @@ The function runtime passes a context object to the handler, in addition to the 
 
 Your Lambda function comes with a CloudWatch Logs log group\. The function runtime sends details about each invocation to CloudWatch Logs\. It relays any [logs that your function outputs](nodejs-logging.md) during invocation\. If your function [returns an error](nodejs-exceptions.md), Lambda formats the error and returns it to the invoker\.
 
+## Node\.js initialization<a name="nodejs-initialization"></a>
+
+Node\.js has a unique event loop model that causes its initialization behavior to be different from other runtimes\. Specifically, Node\.js uses a non\-blocking I/O model that supports asynchronous operations\. This model allows Node\.js to perform efficiently for most workloads\. For example, if a Node\.js function makes a network call, that request may be designated as an asynchronous operation and placed into a callback queue\. The function may continue to process other operations within the main call stack without getting blocked by waiting for the network call to return\. Once the network call is returned, its callback is executed and then removed from the callback queue\. 
+
+ Some initialization tasks may run asynchronously\. These asynchronous tasks are not guaranteed to complete execution prior to an invocation\. For example, code that makes a network call to fetch a parameter from AWS Parameter Store may not be complete by the time Lambda executes the handler function\. As a result, the variable may be null during an invocation\. To avoid this, ensure that variables and other asynchronous code are fully initialized before continuing with the rest of the function’s core business logic\. 
+
+### Designating a function handler as an ES module<a name="designate-es-module"></a>
+
+Starting with Node 14, you can guarantee completion of asynchronous initialization code prior to handler invocations by designating your code as an ES module, and using top\-level await\. Packages are designated as CommonJS modules by default, meaning you must first designate your function code as an ES module to use top\-level await\. You can do this in two ways: specifying the `type` as `module` in the function's `package.json` file, or by using the \.mjs file name extension\.
+
+In the first scenario, your function code treats all \.js files as ES modules, while in the second scenario, only the file you specify with \.mjs is an ES module\. You can mix ES modules and CommonJS modules by naming them \.mjs and \.cjs respectively, as \.mjs files are always ES modules and \.cjs files are always CommonJS modules\.
+
+For more information and an example, see [Using Node\.js ES Modules and Top\-Level Await in AWS Lambda](https://aws.amazon.com/blogs/compute/using-node-js-es-modules-and-top-level-await-in-aws-lambda)\.
+
 **Topics**
++ [Node\.js initialization](#nodejs-initialization)
 + [AWS Lambda function handler in Node\.js](nodejs-handler.md)
 + [Deploy Node\.js Lambda functions with \.zip file archives](nodejs-package.md)
 + [Deploy Node\.js Lambda functions with container images](nodejs-image.md)

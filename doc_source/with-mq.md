@@ -34,10 +34,12 @@ By default, Amazon MQ has a weekly maintenance window for brokers\. During that 
 
 To interact with Amazon MQ, Lambda creates a consumer group which can read from your Amazon MQ brokers\. The consumer group is created with the same ID as the event source mapping UUID\.
 
-Lambda will pull messages until it has processed a maximum of 6 MB, until timeout, or until the batch size is fulfilled\. When configured, batch size determines the maximum number of items to retrieve in a single batch\. Your batch is converted into a Lambda payload, and your target function is invoked\. Messages are neither persisted nor deserialized\. Instead, they are retrieved by the consumer group as a BLOB of bytes and are base64\-encoded for a JSON payload\.
+For Amazon MQ event sources, Lambda batches records together and sends them to your function in a single payload\. To control behavior, you can configure the batching window and batch size\. Lambda pulls messages until it processes the payload size maximum of 6 MB, the batching window expires, or the number of records reaches the full batch size\. For more information, see [Batching behavior](invocation-eventsourcemapping.md#invocation-eventsourcemapping-batching)\.
+
+Lambda converts your batch into a single payload, and then invokes your function\. Messages are neither persisted nor deserialized\. Instead, the consumer group retrieves them as a BLOB of bytes, and then base64\-encodes them into a JSON payload\. If your function returns an error for any of the messages in a batch, Lambda retries the whole batch of messages until processing succeeds or the messages expire\.
 
 **Note**  
-The maximum function invocation time is 14 minutes\. 
+Lambda can run your function for up to 14 minutes\. Configure your function timeout to be 14 minutes or less \(the default timeout value is 3 seconds\)\. Lambda may retry invocations that exceed 14 minutes\.
 
 You can monitor a given function's concurrency usage using the `ConcurrentExecutions` metric in Amazon CloudWatch\. For more information about concurrency, see [Managing Lambda reserved concurrency](configuration-concurrency.md)\.
 
@@ -159,15 +161,15 @@ To configure your function to read from Amazon MQ, create an **MQ** trigger in t
 
 **To create a trigger**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
-1. Choose a function\.
+1. Choose the name of a function\.
 
 1. Under **Function overview**, choose **Add trigger**\.
 
 1. Choose a trigger type\.
 
-1. Configure the required options and then choose **Add**\.
+1. Configure the required options, and then choose **Add**\.
 
 Lambda supports the following options for Amazon MQ event sources:
 + **MQ broker** – Select an Amazon MQ broker\.
@@ -180,7 +182,7 @@ To enable or disable the trigger \(or delete it\), choose the **MQ** trigger in 
 
 ## Event source mapping API<a name="services-mq-api"></a>
 
-To manage an event source with the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) or [AWS SDK](http://aws.amazon.com/getting-started/tools-sdks/), you can use the following API operations:
+To manage an event source with the [AWS Command Line Interface \(AWS CLI\)](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) or an [AWS SDK](http://aws.amazon.com/getting-started/tools-sdks/), you can use the following API operations:
 +  [CreateEventSourceMapping](API_CreateEventSourceMapping.md) 
 +  [ListEventSourceMappings](API_ListEventSourceMappings.md) 
 +  [GetEventSourceMapping](API_GetEventSourceMapping.md) 
@@ -310,7 +312,7 @@ All Lambda event source types share the same [CreateEventSourceMapping](API_Crea
 
 | Parameter | Required | Default | Notes | 
 | --- | --- | --- | --- | 
-|  BatchSize  |  N  |  100  |  Maximum: 10000  | 
+|  BatchSize  |  N  |  100  |  Maximum: 10,000  | 
 |  Enabled  |  N  |  true  |   | 
 |  FunctionName  |  Y  |   |   | 
 |  Queues  |  N  |   |  The name of the Amazon MQ broker destination queue to consume\.  | 

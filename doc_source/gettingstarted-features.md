@@ -14,7 +14,7 @@ Lambda provides a management console and API for managing and invoking functions
 
 ## Scaling<a name="gettingstarted-features-scaling"></a>
 
-Lambda manages the infrastructure that runs your code, and scales automatically in response to incoming requests\. When your function is invoked more quickly than a single instance of your function can process events, Lambda scales up by running additional instances\. When traffic subsides, inactive instances are frozen or stopped\. You only pay for the time that your function is initializing or processing events\.
+Lambda manages the infrastructure that runs your code, and scales automatically in response to incoming requests\. When your function is invoked more quickly than a single instance of your function can process events, Lambda scales up by running additional instances\. When traffic subsides, inactive instances are frozen or stopped\. You pay only for the time that your function is initializing or processing events\.
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/features-scaling.png)
 
@@ -50,7 +50,7 @@ To process items from a stream or queue, you can create an *event source mapping
 
 Event source mappings maintain a local queue of unprocessed items and handle retries if the function returns an error or is throttled\. You can configure an event source mapping to customize batching behavior and error handling, or to send a record of items that fail processing to a destination\.
 
-For more information, see [AWS Lambda event source mappings](invocation-eventsourcemapping.md)\.
+For more information, see [Lambda event source mappings](invocation-eventsourcemapping.md)\.
 
 ## Destinations<a name="gettingstarted-features-destinations"></a>
 

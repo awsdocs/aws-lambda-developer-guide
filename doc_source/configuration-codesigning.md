@@ -119,7 +119,7 @@ To enable code signing for a function, you associate a code signing configuratio
 
 **To associate a code signing configuration with a function \(console\)**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose the function for which you want to enable code signing\.
 

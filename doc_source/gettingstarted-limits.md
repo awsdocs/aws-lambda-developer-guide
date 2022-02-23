@@ -5,7 +5,7 @@
 Lambda sets quotas for the amount of compute and storage resources that you can use to run and store functions\. The following quotas apply per AWS Region and can be increased\. For more information, see [Requesting a quota increase](https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html) in the *Service Quotas User Guide*\.
 
 **Note**  
-New AWS accounts might start out with limits that are lower than these defaults\. Lambda monitors usage and raises your limits automatically based on your usage\.
+A few new AWS accounts might start out with limits that are lower than these defaults\. AWS monitors usage and raises your limits automatically based on your usage\.
 
 
 | Resource | Default quota | Can be increased up to | 
@@ -28,7 +28,7 @@ The Lambda documentation, log messages, and console use the abbreviation MB \(ra
 | Resource | Quota | 
 | --- | --- | 
 |  Function [memory allocation](configuration-function-common.md)  |  128 MB to 10,240 MB, in 1\-MB increments\.  | 
-|  Function [ timeout](https://docs.aws.amazon.com/whitepapers/latest/serverless-architectures-lambda/timeout.html)  |  900 seconds \(15 minutes\)  | 
+|  Function timeout  |  900 seconds \(15 minutes\)  | 
 |  Function [environment variables](configuration-envvars.md)  |  4 KB, for all environment variables associated with the function, in aggregate  | 
 |  Function [resource\-based policy](access-control-resource-based.md)  |  20 KB  | 
 |  Function [layers](configuration-layers.md)  |  five layers  | 

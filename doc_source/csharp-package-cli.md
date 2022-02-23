@@ -2,7 +2,7 @@
 
 The \.NET Core CLI offers a cross\-platform way for you to create \.NET\-based Lambda applications\. This section assumes that you have installed the \.NET Core CLI\. If you haven't, see [Download \.NET](https://dotnet.microsoft.com/download) on the Microsoft website\.
 
-In the \.NET CLI, you use the `new` command to create \.NET projects from a command line\. This is useful if you want to create a project outside of Visual Studio\. To view a list of the available project types, open a command line and navigate to where you installed the \.NET Core runtime and run the following command:
+In the \.NET CLI, you use the `new` command to create \.NET projects from a command line\. This is useful if you want to create a project outside of Visual Studio\. To view a list of the available project types, open a command line, navigate to where you installed the \.NET Core runtime, and then run the following command:
 
 ```
 dotnet new -all
@@ -21,7 +21,7 @@ Examples:
     dotnet new --help
 ```
 
-Lambda offers additional templates via the [Amazon\.Lambda\.Templates](https://www.nuget.org/packages/Amazon.Lambda.Templates) nuget package\. To install this package, run the following command:
+Lambda offers additional templates via the [Amazon\.Lambda\.Templates](https://www.nuget.org/packages/Amazon.Lambda.Templates) NuGet package\. To install this package, run the following command:
 
 ```
 dotnet new -i Amazon.Lambda.Templates
@@ -53,8 +53,7 @@ Under the `src/myfunction` directory, examine the following files:
     "profile" : "default",
     "region" : "us-east-2",
     "configuration" : "Release",
-    "framework" : "netcoreapp2.1",
-    "function-runtime":"dotnetcore3.1",
+    "function-runtime":"dotnet6",
     "function-memory-size" : 256,
     "function-timeout" : 30,
     "function-handler" : "MyFunction::MyFunction.Function::FunctionHandler"
@@ -70,16 +69,16 @@ Under the `src/myfunction` directory, examine the following files:
   using Amazon.Lambda.Core;
   
   // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
-  [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
+  [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.SystemTextJson.DefaultLambdaJsonSerializer))]
   
   namespace MyFunction
   {
       public class Function
       {      
         
-          public string FunctionHandler1(string input, ILambdaContext context)
+          public string FunctionHandler(string input, ILambdaContext context)
           {
-              return input?.ToUpper();
+              return input.ToUpper();
           }
       }
   }
@@ -90,12 +89,20 @@ Under the `src/myfunction` directory, examine the following files:
   <Project Sdk="Microsoft.NET.Sdk">
   
     <PropertyGroup>
-      <TargetFramework>netcoreapp2.1</TargetFramework>
+      <TargetFramework>net6.0</TargetFramework>
+      <ImplicitUsings>enable</ImplicitUsings>
+      <Nullable>enable</Nullable>
+      <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+      <AWSProjectType>Lambda</AWSProjectType>
+      <!-- Makes the build directory similar to a publish directory and helps the AWS .NET Lambda Mock Test Tool find project dependencies. -->
+      <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+      <!-- Generate ready to run images during publishing to improve cold start time. -->
+      <PublishReadyToRun>true</PublishReadyToRun>
     </PropertyGroup>
   
     <ItemGroup>
-      <PackageReference Include="Amazon.Lambda.Core" Version="1.0.0 " />
-      <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="1.3.0" />
+      <PackageReference Include="Amazon.Lambda.Core" Version="2.1.0 " />
+      <PackageReference Include="Amazon.Lambda.Serialization.SystemTextJson" Version="2.2.0" />
     </ItemGroup>
   
   </Project>
@@ -103,13 +110,13 @@ Under the `src/myfunction` directory, examine the following files:
 + **Readme**: Use this file to document your Lambda function\.
 
 Under the `myfunction/test` directory, examine the following files:
-+ **myFunction\.Tests\.csproj**: As noted previously, this is an [MSBuild](https://msdn.microsoft.com/en-us/library/dd393574.aspx) file that lists the files and assemblies that comprise your test project\. Note also that it includes the `Amazon.Lambda.Core` library, allowing you to seamlessly integrate any Lambda templates required to test your function\.
++ **myFunction\.Tests\.csproj**: As noted previously, this is an [MSBuild](https://msdn.microsoft.com/en-us/library/dd393574.aspx) file that lists the files and assemblies that comprise your test project\. Note also that it includes the `Amazon.Lambda.Core` library, so you can seamlessly integrate any Lambda templates required to test your function\.
 
   ```
   <Project Sdk="Microsoft.NET.Sdk">
      ... 
   
-      <PackageReference Include="Amazon.Lambda.Core" Version="1.0.0 " />
+      <PackageReference Include="Amazon.Lambda.Core" Version="2.1.0 " />
      ...
   ```
 + **FunctionTest\.cs**: The same C\# code template file that it is included in the `src` directory\. Edit this file to mirror your function's production code and test it before uploading your Lambda function to a production environment\.
@@ -167,16 +174,14 @@ dotnet lambda deploy-function MyFunction --function-role role
 
 After deployment, you can re\-test it in a production environment using the following command, and pass in a different value to your Lambda function handler:
 
-The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [ AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.
-
 ```
-dotnet lambda invoke-function MyFunction --cli-binary-format raw-in-base64-out --payload "Just Checking If Everything is OK"
+dotnet lambda invoke-function MyFunction --payload "Just Checking If Everything is OK"
 ```
 
 If everything is successful, you see the following:
 
 ```
-dotnet lambda invoke-function MyFunction --cli-binary-format raw-in-base64-out --payload "Just Checking If Everything is OK"
+dotnet lambda invoke-function MyFunction --payload "Just Checking If Everything is OK"
 Payload:
 "JUST CHECKING IF EVERYTHING IS OK"
 

@@ -185,7 +185,7 @@ Run the following `invoke` command\.
 aws lambda invoke --function-name ProcessDynamoDBRecords --payload file://input.txt outputfile.txt
 ```
 
-The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [ AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.
+The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.
 
 The function returns the string `message` in the response body\. 
 
@@ -215,9 +215,11 @@ Create an Amazon DynamoDB table with a stream enabled\.
 
 1. Choose the **lambda\-dynamodb\-stream** table\.
 
-1. Under **Overview**, choose **Manage stream**\.
+1. Under **Exports and streams**, choose **DynamoDB stream details**\.
 
 1. Choose **Enable**\.
+
+1. Choose **Enable stream**\.
 
 Write down the stream ARN\. You need this in the next step when you associate the stream with your Lambda function\. For more information on enabling streams, see [Capturing table activity with DynamoDB Streams](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html)\.
 

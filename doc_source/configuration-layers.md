@@ -1,6 +1,8 @@
 # Creating and sharing Lambda layers<a name="configuration-layers"></a>
 
-A Lambda layer is a \.zip file archive that can contain additional code or data\. A layer can contain libraries, a [custom runtime](runtimes-custom.md), data, or configuration files\. Layers promote code sharing and separation of responsibilities so that you can iterate faster on writing business logic\.
+Lambda [layers](gettingstarted-concepts.md#gettingstarted-concepts-layer) provide a convenient way to package libraries and other dependencies that you can use with your Lambda functions\. Using layers reduces the size of uploaded deployment archives and makes it faster to deploy your code\.
+
+A layer is a \.zip file archive that can contain additional code or data\. A layer can contain libraries, a [custom runtime](runtimes-custom.md), data, or configuration files\. Layers promote code sharing and separation of responsibilities so that you can iterate faster on writing business logic\.
 
 You can use layers only with Lambda functions [deployed as a \.zip file archive](gettingstarted-package.md#gettingstarted-package-zip)\. For functions [defined as a container image](lambda-images.md), you package your preferred runtime and all code dependencies when you create the container image\. For more information, see [Working with Lambda layers and extensions in container images](http://aws.amazon.com/blogs/compute/working-with-lambda-layers-and-extensions-in-container-images/) on the AWS Compute Blog\.
 

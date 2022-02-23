@@ -60,7 +60,7 @@ Create the \.zip file for your deployment package\.
    cd my-math-function
    ```
 
-1. Copy the contents of the [sample Python code from GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/python/example_code/lambda/boto_client_examples/lambda_handler_basic.py) and save it in a new file named `lambda_function.py`\. Your directory structure should look like this:
+1. Copy the contents of the [sample Python code from GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/python/example_code/lambda/lambda_handler_basic.py) and save it in a new file named `lambda_function.py`\. Your directory structure should look like this:
 
    ```
    my-math-function$
@@ -101,12 +101,10 @@ Create the \.zip file for your deployment package\.
 
    ```
    import requests
-   def main(event, context):   
+   def lambda_handler(event, context):   
        response = requests.get("https://www.test.com/")
        print(response.text)
        return response.text
-   if __name__ == "__main__":   
-       main('', '')
    ```
 
    Your directory structure should look like this:

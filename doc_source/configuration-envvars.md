@@ -24,7 +24,7 @@ You create an environment variable for your function by defining a key and a val
 
 **To set environment variables in the Lambda console**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function\.
 
@@ -228,7 +228,7 @@ For additional security, you can enable helpers for encryption in transit, which
 
 1. Using the Lambda console, navigate to the **Edit environment variables** page\.
 
-   1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+   1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
    1. Choose a function\.
 
@@ -242,7 +242,7 @@ For additional security, you can enable helpers for encryption in transit, which
 
    1. Under **Encryption in transit**, choose **Enable helpers for encryption in transit**\.
 
-   1. For each environment variable that you want to enable console encryption helpers for, choose **Encrypt** next ot the environment variable\.
+   1. For each environment variable that you want to enable console encryption helpers for, choose **Encrypt** next to the environment variable\.
 
    1.  Under AWS KMS key to encrypt in transit, choose a customer managed key that you created at the beginning of this procedure\.
 

@@ -2,7 +2,7 @@
 
 Updates the configuration for asynchronous invocation for a function, version, or alias\.
 
-To configure options for asynchronous invocation, use [ PutFunctionEventInvokeConfig ](API_PutFunctionEventInvokeConfig.md)\.
+To configure options for asynchronous invocation, use [PutFunctionEventInvokeConfig](API_PutFunctionEventInvokeConfig.md)\.
 
 ## Request Syntax<a name="API_UpdateFunctionEventInvokeConfig_RequestSyntax"></a>
 
@@ -28,7 +28,7 @@ Content-type: application/json
 
 The request uses the following URI parameters\.
 
- ** [ FunctionName ](#API_UpdateFunctionEventInvokeConfig_RequestSyntax) **   <a name="SSS-UpdateFunctionEventInvokeConfig-request-FunctionName"></a>
+ ** [FunctionName](#API_UpdateFunctionEventInvokeConfig_RequestSyntax) **   <a name="SSS-UpdateFunctionEventInvokeConfig-request-FunctionName"></a>
 The name of the Lambda function, version, or alias\.  
 
 **Name formats**
@@ -40,7 +40,7 @@ Length Constraints: Minimum length of 1\. Maximum length of 140\.
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
 Required: Yes
 
- ** [ Qualifier ](#API_UpdateFunctionEventInvokeConfig_RequestSyntax) **   <a name="SSS-UpdateFunctionEventInvokeConfig-request-Qualifier"></a>
+ ** [Qualifier](#API_UpdateFunctionEventInvokeConfig_RequestSyntax) **   <a name="SSS-UpdateFunctionEventInvokeConfig-request-Qualifier"></a>
 A version number or alias name\.  
 Length Constraints: Minimum length of 1\. Maximum length of 128\.  
 Pattern: `(|[a-zA-Z0-9$_-]+)` 
@@ -49,7 +49,7 @@ Pattern: `(|[a-zA-Z0-9$_-]+)`
 
 The request accepts the following data in JSON format\.
 
- ** [ DestinationConfig ](#API_UpdateFunctionEventInvokeConfig_RequestSyntax) **   <a name="SSS-UpdateFunctionEventInvokeConfig-request-DestinationConfig"></a>
+ ** [DestinationConfig](#API_UpdateFunctionEventInvokeConfig_RequestSyntax) **   <a name="SSS-UpdateFunctionEventInvokeConfig-request-DestinationConfig"></a>
 A destination for events after they have been sent to a function for processing\.  
 
 **Destinations**
@@ -57,16 +57,16 @@ A destination for events after they have been sent to a function for processing\
 +  **Queue** \- The ARN of an SQS queue\.
 +  **Topic** \- The ARN of an SNS topic\.
 +  **Event Bus** \- The ARN of an Amazon EventBridge event bus\.
-Type: [ DestinationConfig ](API_DestinationConfig.md) object  
+Type: [DestinationConfig](API_DestinationConfig.md) object  
 Required: No
 
- ** [ MaximumEventAgeInSeconds ](#API_UpdateFunctionEventInvokeConfig_RequestSyntax) **   <a name="SSS-UpdateFunctionEventInvokeConfig-request-MaximumEventAgeInSeconds"></a>
+ ** [MaximumEventAgeInSeconds](#API_UpdateFunctionEventInvokeConfig_RequestSyntax) **   <a name="SSS-UpdateFunctionEventInvokeConfig-request-MaximumEventAgeInSeconds"></a>
 The maximum age of a request that Lambda sends to a function for processing\.  
 Type: Integer  
 Valid Range: Minimum value of 60\. Maximum value of 21600\.  
 Required: No
 
- ** [ MaximumRetryAttempts ](#API_UpdateFunctionEventInvokeConfig_RequestSyntax) **   <a name="SSS-UpdateFunctionEventInvokeConfig-request-MaximumRetryAttempts"></a>
+ ** [MaximumRetryAttempts](#API_UpdateFunctionEventInvokeConfig_RequestSyntax) **   <a name="SSS-UpdateFunctionEventInvokeConfig-request-MaximumRetryAttempts"></a>
 The maximum number of times to retry when the function returns an error\.  
 Type: Integer  
 Valid Range: Minimum value of 0\. Maximum value of 2\.  
@@ -100,7 +100,7 @@ If the action is successful, the service sends back an HTTP 200 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** [ DestinationConfig ](#API_UpdateFunctionEventInvokeConfig_ResponseSyntax) **   <a name="SSS-UpdateFunctionEventInvokeConfig-response-DestinationConfig"></a>
+ ** [DestinationConfig](#API_UpdateFunctionEventInvokeConfig_ResponseSyntax) **   <a name="SSS-UpdateFunctionEventInvokeConfig-response-DestinationConfig"></a>
 A destination for events after they have been sent to a function for processing\.  
 
 **Destinations**
@@ -108,23 +108,23 @@ A destination for events after they have been sent to a function for processing\
 +  **Queue** \- The ARN of an SQS queue\.
 +  **Topic** \- The ARN of an SNS topic\.
 +  **Event Bus** \- The ARN of an Amazon EventBridge event bus\.
-Type: [ DestinationConfig ](API_DestinationConfig.md) object
+Type: [DestinationConfig](API_DestinationConfig.md) object
 
- ** [ FunctionArn ](#API_UpdateFunctionEventInvokeConfig_ResponseSyntax) **   <a name="SSS-UpdateFunctionEventInvokeConfig-response-FunctionArn"></a>
+ ** [FunctionArn](#API_UpdateFunctionEventInvokeConfig_ResponseSyntax) **   <a name="SSS-UpdateFunctionEventInvokeConfig-response-FunctionArn"></a>
 The Amazon Resource Name \(ARN\) of the function\.  
 Type: String  
 Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
- ** [ LastModified ](#API_UpdateFunctionEventInvokeConfig_ResponseSyntax) **   <a name="SSS-UpdateFunctionEventInvokeConfig-response-LastModified"></a>
+ ** [LastModified](#API_UpdateFunctionEventInvokeConfig_ResponseSyntax) **   <a name="SSS-UpdateFunctionEventInvokeConfig-response-LastModified"></a>
 The date and time that the configuration was last updated, in Unix time seconds\.  
 Type: Timestamp
 
- ** [ MaximumEventAgeInSeconds ](#API_UpdateFunctionEventInvokeConfig_ResponseSyntax) **   <a name="SSS-UpdateFunctionEventInvokeConfig-response-MaximumEventAgeInSeconds"></a>
+ ** [MaximumEventAgeInSeconds](#API_UpdateFunctionEventInvokeConfig_ResponseSyntax) **   <a name="SSS-UpdateFunctionEventInvokeConfig-response-MaximumEventAgeInSeconds"></a>
 The maximum age of a request that Lambda sends to a function for processing\.  
 Type: Integer  
 Valid Range: Minimum value of 60\. Maximum value of 21600\.
 
- ** [ MaximumRetryAttempts ](#API_UpdateFunctionEventInvokeConfig_ResponseSyntax) **   <a name="SSS-UpdateFunctionEventInvokeConfig-response-MaximumRetryAttempts"></a>
+ ** [MaximumRetryAttempts](#API_UpdateFunctionEventInvokeConfig_ResponseSyntax) **   <a name="SSS-UpdateFunctionEventInvokeConfig-response-MaximumRetryAttempts"></a>
 The maximum number of times to retry when the function returns an error\.  
 Type: Integer  
 Valid Range: Minimum value of 0\. Maximum value of 2\.
@@ -154,12 +154,12 @@ HTTP Status Code: 429
 ## See Also<a name="API_UpdateFunctionEventInvokeConfig_SeeAlso"></a>
 
 For more information about using this API in one of the language\-specific AWS SDKs, see the following:
-+  [ AWS Command Line Interface](https://docs.aws.amazon.com/goto/aws-cli/lambda-2015-03-31/UpdateFunctionEventInvokeConfig) 
-+  [ AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/UpdateFunctionEventInvokeConfig) 
-+  [ AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/UpdateFunctionEventInvokeConfig) 
-+  [ AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/UpdateFunctionEventInvokeConfig) 
-+  [ AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/UpdateFunctionEventInvokeConfig) 
-+  [ AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/UpdateFunctionEventInvokeConfig) 
-+  [ AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/UpdateFunctionEventInvokeConfig) 
-+  [ AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/UpdateFunctionEventInvokeConfig) 
-+  [ AWS SDK for Ruby V3](https://docs.aws.amazon.com/goto/SdkForRubyV3/lambda-2015-03-31/UpdateFunctionEventInvokeConfig) 
++  [AWS Command Line Interface](https://docs.aws.amazon.com/goto/aws-cli/lambda-2015-03-31/UpdateFunctionEventInvokeConfig) 
++  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/UpdateFunctionEventInvokeConfig) 
++  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/UpdateFunctionEventInvokeConfig) 
++  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/UpdateFunctionEventInvokeConfig) 
++  [AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/UpdateFunctionEventInvokeConfig) 
++  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/UpdateFunctionEventInvokeConfig) 
++  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/UpdateFunctionEventInvokeConfig) 
++  [AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/UpdateFunctionEventInvokeConfig) 
++  [AWS SDK for Ruby V3](https://docs.aws.amazon.com/goto/SdkForRubyV3/lambda-2015-03-31/UpdateFunctionEventInvokeConfig) 

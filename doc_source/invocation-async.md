@@ -25,7 +25,7 @@ aws lambda invoke \
               --payload '{ "key": "value" }' response.json
 ```
 
-The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [ AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.
+The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.
 
 ```
 {
@@ -52,7 +52,7 @@ You can also configure Lambda to send an invocation record to another service\. 
 The invocation record contains details about the request and response in JSON format\. You can configure separate destinations for events that are processed successfully, and events that fail all processing attempts\. Alternatively, you can configure an Amazon SQS queue or Amazon SNS topic as a [dead\-letter queue](#invocation-dlq) for discarded events\. For dead\-letter queues, Lambda only sends the content of the event, without details about the response\.
 
 **Note**  
-To prevent a function from triggering, you can set the function's reserved concurrency to zero\. When you set reserved concurrency to zero for an asynchronously\-invoked function, Lambda immediately sends all events to the configured [dead\-letter queue](#invocation-dlq) or the on\-failure [event destination](#invocation-async-destinations), without any retries\. To process events that were sent while reserved concurrency was set to zero, you need to consume the events from the dead\-letter queue or the on\-failure event destination\.
+To prevent a function from triggering, you can set the function's reserved concurrency to zero\. When you set reserved concurrency to zero for an asynchronously\-invoked function, Lambda begins sending new events to the configured [dead\-letter queue](#invocation-dlq) or the on\-failure [event destination](#invocation-async-destinations), without any retries\. To process events that were sent while reserved concurrency was set to zero, you need to consume the events from the dead\-letter queue or the on\-failure event destination\.
 
 ## Configuring error handling for asynchronous invocation<a name="invocation-async-errors"></a>
 
@@ -60,7 +60,7 @@ Use the Lambda console to configure error handling settings on a function, a ver
 
 **To configure error handling**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function\.
 
@@ -94,7 +94,7 @@ Add destinations to your function in the Lambda console's function visualization
 
 **To configure a destination for asynchronous invocation records**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function\.
 
@@ -208,7 +208,7 @@ As an alternative to an [on\-failure destination](#invocation-async-destinations
 To reprocess events in a dead\-letter queue, you can set it as an event source for your Lambda function\. Alternatively, you can manually retrieve the events\.
 
 You can choose an Amazon SQS queue or Amazon SNS topic for your dead\-letter queue\. If you don't have a queue or topic, create one\. Choose the target type that matches your use case\.
-+ [Amazon SQS queue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-create-queue.html) – A queue holds failed events until they're retrieved\. Choose an Amazon SQS queue if you expect a single entity, such as a Lambda function or CloudWatch alarm, to process the failed event\. For more information, see [Using AWS Lambda with Amazon SQS](with-sqs.md)\.
++ [Amazon SQS queue](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-create-queue.html) – A queue holds failed events until they're retrieved\. Choose an Amazon SQS queue if you expect a single entity, such as a Lambda function or CloudWatch alarm, to process the failed event\. For more information, see [Using Lambda with Amazon SQS](with-sqs.md)\.
 
   Create a queue in the [Amazon SQS console](https://console.aws.amazon.com/sqs)\.
 + [Amazon SNS topic](https://docs.aws.amazon.com/sns/latest/gsg/CreateTopic.html) – A topic relays failed events to one or more destinations\. Choose an Amazon SNS topic if you expect multiple entities to act on a failed event\. For example, you can configure a topic to send events to an email address, a Lambda function, and/or an HTTP endpoint\. For more information, see [Using AWS Lambda with Amazon SNS](with-sns.md)\.
@@ -225,7 +225,7 @@ After creating the target and updating your function's execution role, add the d
 
 **To configure a dead\-letter queue**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function\.
 
@@ -257,4 +257,4 @@ Lambda sends the event to the dead\-letter queue as\-is, with additional informa
 
 If Lambda can't send a message to the dead\-letter queue, it deletes the event and emits the [DeadLetterErrors](monitoring-metrics.md) metric\. This can happen because of lack of permissions, or if the total size of the message exceeds the limit for the target queue or topic\. For example, if an Amazon SNS notification with a body close to 256 KB triggers a function that results in an error, the additional event data added by Amazon SNS, combined with the attributes added by Lambda, can cause the message to exceed the maximum size allowed in the dead\-letter queue\. 
 
-If you're using Amazon SQS as an event source, configure a dead\-letter queue on the Amazon SQS queue itself and not on the Lambda function\. For more information, see [Using AWS Lambda with Amazon SQS](with-sqs.md)\.
+If you're using Amazon SQS as an event source, configure a dead\-letter queue on the Amazon SQS queue itself and not on the Lambda function\. For more information, see [Using Lambda with Amazon SQS](with-sqs.md)\.

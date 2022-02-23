@@ -122,7 +122,7 @@ To create a function defined as a container image, you must first [create the im
 
 **To create the function**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose **Create function**\.
 
@@ -130,7 +130,7 @@ To create a function defined as a container image, you must first [create the im
 
 1. Under **Basic information**, do the following:
 
-   1. For **Function name**, enter the function name\.
+   1. For **Function name**, enter the function name\. Function names are limited to 64 characters in length\.
 
    1. For **Container image URI**, provide a container image that is compatible with the instruction set architecture that you want for your function code\. 
 
@@ -169,7 +169,7 @@ After you deploy a container image to a function, the image is read\-only\. To u
 
 **To configure the function to use an updated container image**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose the function to update\.
 
@@ -187,7 +187,7 @@ You can use the Lambda console to override the configuration values in the conta
 
 **To override the configuration values in the container image**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose the function to update\.
 

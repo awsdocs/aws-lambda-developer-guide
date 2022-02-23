@@ -3,7 +3,7 @@
 In this tutorial, you create a Lambda function and configure a trigger for Amazon Simple Storage Service \(Amazon S3\)\. Amazon S3 invokes the `CreateThumbnail` function for each image file that is uploaded to an S3 bucket\. The function reads the image object from the source S3 bucket and creates a thumbnail image to save in a target S3 bucket\.
 
 **Note**  
-This tutorial requires a moderate level of AWS and Lambda domain knowledge\. We recommend that you first try [Tutorial: Using an Amazon S3 trigger to invoke a Lambda function](with-s3-example.md)\.
+This tutorial requires a moderate level of AWS and Lambda domain knowledge, Docker operations, and [AWS SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/)\. We recommend that you first try [Tutorial: Using an Amazon S3 trigger to invoke a Lambda function](with-s3-example.md)\.
 
  In this tutorial, you use the AWS Command Line Interface \(AWS CLI\) to create the following AWS resources:
 
@@ -488,7 +488,7 @@ The sample function must include the sharp module in the deployment package\.
   --role arn:aws:iam::123456789012:role/lambda-s3-role
   ```
 
-  The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [ AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.
+  The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.
 
   The create\-function command specifies the function handler as `index.handler`\. This handler name reflects the function name as `handler`, and the name of the file where the handler code is stored as `index.js`\. For more information, see [AWS Lambda function handler in Node\.js](nodejs-handler.md)\. The command specifies a runtime of `nodejs12.x`\. For more information, see [Lambda runtimes](lambda-runtimes.md)\.
 
@@ -502,7 +502,7 @@ The sample function must include the sharp module in the deployment package\.
   --role arn:aws:iam::123456789012:role/lambda-s3-role
   ```
 
-  The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [ AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.
+  The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.
 
   The create\-function command specifies the function handler as `lambda_function.lambda_handler`\. This handler name reflects the function name as `lambda_handler`, and the name of the file where the handler code is stored as `lambda_function.py`\. For more information, see [Lambda function handler in Python](python-handler.md)\. The command specifies a runtime of `python3.8`\. For more information, see [Lambda runtimes](lambda-runtimes.md)\.
 
@@ -516,7 +516,7 @@ The sample function must include the sharp module in the deployment package\.
   --role arn:aws:iam::123456789012:role/lambda-s3-role
   ```
 
-  The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [ AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.
+  The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.
 
   The create\-function command specifies the function handler as `example.handler`\. The function can use the abbreviated handler format of `package.Class` because the function implements a handler interface\. For more information, see [AWS Lambda function handler in Java](java-handler.md)\. The command specifies a runtime of `java11`\. For more information, see [Lambda runtimes](lambda-runtimes.md)\.
 
@@ -586,7 +586,7 @@ Invoke the Lambda function manually using sample Amazon S3 event data\.
          --payload file://inputFile.txt outputfile.txt
    ```
 
-   The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [ AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.
+   The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.
 
 1. Verify that the thumbnail is created in the target S3 bucket\.
 

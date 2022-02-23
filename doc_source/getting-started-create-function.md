@@ -1,6 +1,6 @@
 # Create a Lambda function with the console<a name="getting-started-create-function"></a>
 
-In this getting started exercise, you create a Lambda function using the console\.The function uses the default code that Lambda creates\. The Lambda console provides a [code editor](foundation-console.md#code-editor) for non\-compiled languages that lets you modify and test code quickly\.
+In this getting started exercise, you create a Lambda function using the console\. The function uses the default code that Lambda creates\. The Lambda console provides a [code editor](foundation-console.md#code-editor) for non\-compiled languages that lets you modify and test code quickly\. For compiled languages, you must create a [\.zip archive deployment package](gettingstarted-package.md#gettingstarted-package-zip) to upload your Lambda function code\.
 
 **Topics**
 + [Create the function](#gettingstarted-zip-function)
@@ -13,7 +13,7 @@ You create a Node\.js Lambda function using the Lambda console\. Lambda automati
 
 **To create a Lambda function with the console**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose **Create function**\.
 
@@ -59,7 +59,7 @@ Invoke your Lambda function using the sample event data provided in the console\
 1. Choose the **Monitor** tab\. This page shows graphs for the metrics that Lambda sends to CloudWatch\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/metrics-functions-list.png)
 
-   For more information on these graphs, see [Monitoring functions in the AWS Lambda console](monitoring-functions-access-metrics.md)\.
+   For more information on these graphs, see [Monitoring functions on the Lambda console](monitoring-functions-access-metrics.md)\.
 
 ## Clean up<a name="gettingstarted-cleanup"></a>
 
@@ -67,7 +67,7 @@ If you are done working with the example function, delete it\. You can also dele
 
 **To delete a Lambda function**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function\.
 

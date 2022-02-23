@@ -22,7 +22,7 @@ When you create a function defined with a \.zip file archive, you choose a code 
 
 **To create the function**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose **Create function**\.
 
@@ -30,7 +30,7 @@ When you create a function defined with a \.zip file archive, you choose a code 
 
 1. Under **Basic information**, do the following:
 
-   1. For **Function name**, enter the function name\.
+   1. For **Function name**, enter the function name\. Function names are limited to 64 characters in length\.
 
    1. For **Runtime**, choose the language version to use for your function\.
 
@@ -59,7 +59,7 @@ For scripting languages \(Node\.js, Python, and Ruby\), you can edit your functi
 
 **To upload function code as a \.zip archive**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose the function to update and choose the **Code** tab\.
 
@@ -116,7 +116,7 @@ If you update the function configuration to use a new runtime version, you may n
 
 **To change the runtime or runtime version**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose the function to update and choose the **Code** tab\.
 
@@ -177,7 +177,7 @@ However, if you provide your function code using a \.zip file archive deployment
 
 **To change the instruction set architecture**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose the function to update and choose the **Code** tab\.
 

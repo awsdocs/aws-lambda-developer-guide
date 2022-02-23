@@ -27,7 +27,7 @@ Content-type: application/json
 
 The request uses the following URI parameters\.
 
- ** [ FunctionName ](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-FunctionName"></a>
+ ** [FunctionName](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-FunctionName"></a>
 The name of the Lambda function, version, or alias\.  
 
 **Name formats**
@@ -39,7 +39,7 @@ Length Constraints: Minimum length of 1\. Maximum length of 140\.
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
 Required: Yes
 
- ** [ Qualifier ](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-Qualifier"></a>
+ ** [Qualifier](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-Qualifier"></a>
 Specify a version or alias to add permissions to a published version of the function\.  
 Length Constraints: Minimum length of 1\. Maximum length of 128\.  
 Pattern: `(|[a-zA-Z0-9$_-]+)` 
@@ -48,45 +48,45 @@ Pattern: `(|[a-zA-Z0-9$_-]+)`
 
 The request accepts the following data in JSON format\.
 
- ** [ Action ](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-Action"></a>
+ ** [Action](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-Action"></a>
 The action that the principal can use on the function\. For example, `lambda:InvokeFunction` or `lambda:GetFunction`\.  
 Type: String  
 Pattern: `(lambda:[*]|lambda:[a-zA-Z]+|[*])`   
 Required: Yes
 
- ** [ EventSourceToken ](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-EventSourceToken"></a>
+ ** [EventSourceToken](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-EventSourceToken"></a>
 For Alexa Smart Home functions, a token that must be supplied by the invoker\.  
 Type: String  
 Length Constraints: Minimum length of 0\. Maximum length of 256\.  
 Pattern: `[a-zA-Z0-9._\-]+`   
 Required: No
 
- ** [ Principal ](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-Principal"></a>
+ ** [Principal](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-Principal"></a>
 The AWS service or account that invokes the function\. If you specify a service, use `SourceArn` or `SourceAccount` to limit who can invoke the function through that service\.  
 Type: String  
 Pattern: `[^\s]+`   
 Required: Yes
 
- ** [ RevisionId ](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-RevisionId"></a>
+ ** [RevisionId](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-RevisionId"></a>
 Only update the policy if the revision ID matches the ID that's specified\. Use this option to avoid modifying a policy that has changed since you last read it\.  
 Type: String  
 Required: No
 
- ** [ SourceAccount ](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-SourceAccount"></a>
+ ** [SourceAccount](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-SourceAccount"></a>
 For Amazon S3, the ID of the account that owns the resource\. Use this together with `SourceArn` to ensure that the resource is owned by the specified account\. It is possible for an Amazon S3 bucket to be deleted by its owner and recreated by another account\.  
 Type: String  
 Length Constraints: Maximum length of 12\.  
 Pattern: `\d{12}`   
 Required: No
 
- ** [ SourceArn ](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-SourceArn"></a>
+ ** [SourceArn](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-SourceArn"></a>
 For AWS services, the ARN of the AWS resource that invokes the function\. For example, an Amazon S3 bucket or Amazon SNS topic\.  
 Note that Lambda configures the comparison using the `StringLike` operator\.  
 Type: String  
 Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)`   
 Required: No
 
- ** [ StatementId ](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-StatementId"></a>
+ ** [StatementId](#API_AddPermission_RequestSyntax) **   <a name="SSS-AddPermission-request-StatementId"></a>
 A statement identifier that differentiates the statement from others in the same policy\.  
 Type: String  
 Length Constraints: Minimum length of 1\. Maximum length of 100\.  
@@ -110,7 +110,7 @@ If the action is successful, the service sends back an HTTP 201 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** [ Statement ](#API_AddPermission_ResponseSyntax) **   <a name="SSS-AddPermission-response-Statement"></a>
+ ** [Statement](#API_AddPermission_ResponseSyntax) **   <a name="SSS-AddPermission-response-Statement"></a>
 The permission statement that's added to the function policy\.  
 Type: String
 
@@ -147,12 +147,12 @@ HTTP Status Code: 429
 ## See Also<a name="API_AddPermission_SeeAlso"></a>
 
 For more information about using this API in one of the language\-specific AWS SDKs, see the following:
-+  [ AWS Command Line Interface](https://docs.aws.amazon.com/goto/aws-cli/lambda-2015-03-31/AddPermission) 
-+  [ AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/AddPermission) 
-+  [ AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/AddPermission) 
-+  [ AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/AddPermission) 
-+  [ AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/AddPermission) 
-+  [ AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/AddPermission) 
-+  [ AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/AddPermission) 
-+  [ AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/AddPermission) 
-+  [ AWS SDK for Ruby V3](https://docs.aws.amazon.com/goto/SdkForRubyV3/lambda-2015-03-31/AddPermission) 
++  [AWS Command Line Interface](https://docs.aws.amazon.com/goto/aws-cli/lambda-2015-03-31/AddPermission) 
++  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/AddPermission) 
++  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/AddPermission) 
++  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/AddPermission) 
++  [AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/AddPermission) 
++  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/AddPermission) 
++  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/AddPermission) 
++  [AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/AddPermission) 
++  [AWS SDK for Ruby V3](https://docs.aws.amazon.com/goto/SdkForRubyV3/lambda-2015-03-31/AddPermission) 

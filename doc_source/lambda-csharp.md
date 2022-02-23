@@ -23,6 +23,7 @@ These packages are available at [Nuget packages](https://www.nuget.org/packages/
 
 | Name | Identifier | Operating system | Architectures | 
 | --- | --- | --- | --- | 
+|  \.NET 6  |  `dotnet6`  |  Amazon Linux 2  |  x86\_64, arm64  | 
 |  \.NET Core 3\.1  |  `dotnetcore3.1`  |  Amazon Linux 2  |  x86\_64, arm64  | 
 |  \.NET Core 2\.1  |  `dotnetcore2.1`  |  Amazon Linux  |  x86\_64  | 
 
@@ -36,10 +37,10 @@ To get started with application development in your local environment, deploy on
 + [ec2\-spot](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/ec2-spot) – A function that manages spot instance requests in Amazon EC2\.
 
 **Topics**
-+ [AWS Lambda function handler in C\#](csharp-handler.md)
++ [Lambda function handler in C\#](csharp-handler.md)
 + [Deploy C\# Lambda functions with \.zip file archives](csharp-package.md)
 + [Deploy \.NET Lambda functions with container images](csharp-image.md)
 + [AWS Lambda context object in C\#](csharp-context.md)
-+ [AWS Lambda function logging in C\#](csharp-logging.md)
++ [Lambda function logging in C\#](csharp-logging.md)
 + [AWS Lambda function errors in C\#](csharp-exceptions.md)
 + [Instrumenting C\# code in AWS Lambda](csharp-tracing.md)

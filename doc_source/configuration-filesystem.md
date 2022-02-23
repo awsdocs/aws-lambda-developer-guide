@@ -12,13 +12,13 @@ You can configure a function to mount an Amazon Elastic File System \(Amazon EFS
 
 ## Execution role and user permissions<a name="configuration-filesystem-permissions"></a>
 
-Lambda uses your function's permissions to mount file systems\. To connect to a file system, your function's execution role must have the following permissions in addition to the [permissions required to connect to the file system's VPC](configuration-vpc.md#vpc-permissions):
+If the file system doesn't have a user\-configured IAM policy, EFS uses a default policy that grants full access to any client that can connect to the file system using a file system mount target\. If the file system has a user\-configured IAM policy, your function's execution role must have the correct `elasticfilesystem` permissions\.
 
 **Execution role permissions**
 + **elasticfilesystem:ClientMount**
 + **elasticfilesystem:ClientWrite \(not required for read\-only connections\)**
 
-These permissions are included in the **AmazonElasticFileSystemClientReadWriteAccess** managed policy\.
+These permissions are included in the **AmazonElasticFileSystemClientReadWriteAccess** managed policy\. Additionally, your execution role must have the [permissions required to connect to the file system's VPC](configuration-vpc.md#vpc-permissions)\.
 
 When you configure a file system, Lambda uses your permissions to verify mount targets\. To configure a function to connect to a file system, your IAM user needs the following permissions:
 
@@ -58,7 +58,7 @@ If your function is not already connected to a VPC, see [Configuring a Lambda fu
 
 **To configure file system access**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function\.
 

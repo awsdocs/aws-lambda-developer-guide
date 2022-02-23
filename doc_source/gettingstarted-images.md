@@ -33,7 +33,7 @@ This exercise uses Docker CLI commands to create the container image\. To instal
 
 ## Create the container image<a name="gettingstarted-images-package"></a>
 
-AWS provides a set of base images in the Amazon Elastic Container Registry \(Amazon ECR\)\. In this getting started exercise, we use the Node\.js base image to create a container image\. For more information about base images, see [ AWS base images for Lambda](runtimes-images.md#runtimes-images-lp)\.
+AWS provides a set of base images in the Amazon Elastic Container Registry \(Amazon ECR\)\. In this getting started exercise, we use the Node\.js base image to create a container image\. For more information about base images, see [AWS base images for Lambda](runtimes-images.md#runtimes-images-lp)\.
 
 In the following commands, replace `123456789012` with your AWS account ID\.
 
@@ -88,7 +88,7 @@ In the following commands, replace `123456789012` with your AWS account ID\.
 
 ## Upload the image to the Amazon ECR repository<a name="gettingstarted-create-upload"></a>
 
-In the following commands, replace `123456789012` with your AWS account ID\.
+In the following commands, replace `123456789012` with your AWS account ID and set the region value to the region where you want to create the ECR repository\.
 
 1. Authenticate the Docker CLI to your Amazon ECR registry\.
 
@@ -99,7 +99,7 @@ In the following commands, replace `123456789012` with your AWS account ID\.
 1. Create a repository in Amazon ECR using the `create-repository` command\.
 
    ```
-   aws ecr create-repository --repository-name hello-world --image-scanning-configuration scanOnPush=true --image-tag-mutability MUTABLE
+   aws ecr create-repository --region us-east-1 --repository-name hello-world --image-scanning-configuration scanOnPush=true --image-tag-mutability MUTABLE
    ```
 
 1. Tag your image to match your repository name using the `docker tag` command\. 
@@ -140,7 +140,7 @@ Use the Lambda console to create a function defined as a container image\.
 
 **To create the function with the console**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose **Create function**\.
 
@@ -188,7 +188,7 @@ Invoke your Lambda function using the sample event data provided in the console\
 1. Choose the **Monitor** tab\. This page shows graphs for the metrics that Lambda sends to CloudWatch\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/metrics-functions-list.png)
 
-   For more information on these graphs, see [Monitoring functions in the AWS Lambda console](monitoring-functions-access-metrics.md)\.
+   For more information on these graphs, see [Monitoring functions on the Lambda console](monitoring-functions-access-metrics.md)\.
 
 ## Clean up<a name="gettingstarted-image-cleanup"></a>
 
@@ -198,7 +198,7 @@ If you are done working with your function, delete it\. You can also delete the 
 
 **To delete a Lambda function**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function\.
 

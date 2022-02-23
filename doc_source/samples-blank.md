@@ -64,7 +64,7 @@ var serialize = function(object) {
 
 The input/output types for the handler and support for asynchronous programming vary per runtime\. In this example, the handler method is `async`, so in Node\.js this means that it must return a promise back to the runtime\. The Lambda runtime waits for the promise to be resolved and returns the response to the invoker\. If the function code or AWS SDK client return an error, the runtime formats the error into a JSON document and returns that\.
 
-The sample application doesn't include an Amazon SQS queue to send events, but uses an event from Amazon SQS \([event\.json](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-nodejs/event.json)\) to illustrate how events are processed\. To add an Amazon SQS queue to your application, see [Using AWS Lambda with Amazon SQS](with-sqs.md)\.
+The sample application doesn't include an Amazon SQS queue to send events, but uses an event from Amazon SQS \([event\.json](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-nodejs/event.json)\) to illustrate how events are processed\. To add an Amazon SQS queue to your application, see [Using Lambda with Amazon SQS](with-sqs.md)\.
 
 ## Deployment automation with AWS CloudFormation and the AWS CLI<a name="samples-blank-automation"></a>
 

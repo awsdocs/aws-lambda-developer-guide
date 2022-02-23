@@ -1,6 +1,6 @@
 # EventSourceMappingConfiguration<a name="API_EventSourceMappingConfiguration"></a>
 
-A mapping between an AWS resource and a Lambda function\. For details, see [ CreateEventSourceMapping ](API_CreateEventSourceMapping.md)\.
+A mapping between an AWS resource and a Lambda function\. For details, see [CreateEventSourceMapping](API_CreateEventSourceMapping.md)\.
 
 ## Contents<a name="API_EventSourceMappingConfiguration_Contents"></a>
 
@@ -19,13 +19,18 @@ Required: No
 
  ** DestinationConfig **   <a name="SSS-Type-EventSourceMappingConfiguration-DestinationConfig"></a>
 \(Streams only\) An Amazon SQS queue or Amazon SNS topic destination for discarded records\.  
-Type: [ DestinationConfig ](API_DestinationConfig.md) object  
+Type: [DestinationConfig](API_DestinationConfig.md) object  
 Required: No
 
  ** EventSourceArn **   <a name="SSS-Type-EventSourceMappingConfiguration-EventSourceArn"></a>
 The Amazon Resource Name \(ARN\) of the event source\.  
 Type: String  
 Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)`   
+Required: No
+
+ ** FilterCriteria **   <a name="SSS-Type-EventSourceMappingConfiguration-FilterCriteria"></a>
+\(Streams and Amazon SQS\) An object that defines the filter criteria that determine whether Lambda should process an event\. For more information, see [Lambda event filtering](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html)\.  
+Type: [FilterCriteria](API_FilterCriteria.md) object  
 Required: No
 
  ** FunctionArn **   <a name="SSS-Type-EventSourceMappingConfiguration-FunctionArn"></a>
@@ -87,12 +92,12 @@ Required: No
 
  ** SelfManagedEventSource **   <a name="SSS-Type-EventSourceMappingConfiguration-SelfManagedEventSource"></a>
 The self\-managed Apache Kafka cluster for your event source\.  
-Type: [ SelfManagedEventSource ](API_SelfManagedEventSource.md) object  
+Type: [SelfManagedEventSource](API_SelfManagedEventSource.md) object  
 Required: No
 
  ** SourceAccessConfigurations **   <a name="SSS-Type-EventSourceMappingConfiguration-SourceAccessConfigurations"></a>
 An array of the authentication protocol, VPC components, or virtual host to secure and define your event source\.  
-Type: Array of [ SourceAccessConfiguration ](API_SourceAccessConfiguration.md) objects  
+Type: Array of [SourceAccessConfiguration](API_SourceAccessConfiguration.md) objects  
 Array Members: Minimum number of 0 items\. Maximum number of 22 items\.  
 Required: No
 
@@ -139,7 +144,7 @@ Required: No
 ## See Also<a name="API_EventSourceMappingConfiguration_SeeAlso"></a>
 
 For more information about using this API in one of the language\-specific AWS SDKs, see the following:
-+  [ AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/EventSourceMappingConfiguration) 
-+  [ AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/EventSourceMappingConfiguration) 
-+  [ AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/EventSourceMappingConfiguration) 
-+  [ AWS SDK for Ruby V3](https://docs.aws.amazon.com/goto/SdkForRubyV3/lambda-2015-03-31/EventSourceMappingConfiguration) 
++  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/EventSourceMappingConfiguration) 
++  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/EventSourceMappingConfiguration) 
++  [AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/EventSourceMappingConfiguration) 
++  [AWS SDK for Ruby V3](https://docs.aws.amazon.com/goto/SdkForRubyV3/lambda-2015-03-31/EventSourceMappingConfiguration) 

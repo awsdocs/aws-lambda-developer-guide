@@ -150,7 +150,7 @@ The `base64` utility is available on Linux, macOS, and [Ubuntu on Windows](https
 **Example get\-logs\.sh script**  
 In the same command prompt, use the following script to download the last five log events\. The script uses `sed` to remove quotes from the output file, and sleeps for 15 seconds to allow time for the logs to become available\. The output includes the response from Lambda and the output from the `get-log-events` command\.   
 Copy the contents of the following code sample and save in your Lambda project directory as `get-logs.sh`\.  
-The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [ AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.  
+The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.  
 
 ```
 #!/bin/bash
@@ -218,6 +218,11 @@ You should see the following output:
 Log groups aren't deleted automatically when you delete a function\. To avoid storing logs indefinitely, delete the log group, or [configure a retention period](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#SettingLogRetention) after which logs are deleted automatically\.
 
 ## Advanced logging with Log4j 2 and SLF4J<a name="java-logging-log4j2"></a>
+
+**Note**  
+ AWS Lambda does not include Log4j2 in its managed runtimes or base container images\. These are therefore not affected by the issues described in CVE\-2021\-44228, CVE\-2021\-45046, and CVE\-2021\-45105\.   
+ For cases where a customer function includes an impacted Log4j2 version, we have applied a change to the Lambda Java [managed runtimes](lambda-runtimes.md) and [base container images](java-image.md) that helps to mitigate the issues in CVE\-2021\-44228, CVE\-2021\-45046, and CVE\-2021\-45105\. As a result of this change, customers using Log4J2 may see an additional log entry, similar to "`Transforming org/apache/logging/log4j/core/lookup/JndiLookup (java.net.URLClassLoader@...)`"\. Any log strings that reference the jndi mapper in the Log4J2 output will be replaced with "`Patched JndiLookup::lookup()`"\.   
+ Independent of this change, we strongly encourage all customers whose functions include Log4j2 to update to the latest version\. Specifically, customers using the aws\-lambda\-java\-log4j2 library in their functions should update to version 1\.5\.0 \(or later\), and redeploy their functions\. This version updates the underlying Log4j2 utility dependencies to version 2\.17\.0 \(or later\)\. The updated aws\-lambda\-java\-log4j2 binary is available at the [Maven repository](https://repo1.maven.org/maven2/com/amazonaws/aws-lambda-java-log4j2/) and its source code is available in [Github](https://github.com/aws/aws-lambda-java-libs/tree/master/aws-lambda-java-log4j2)\. 
 
 To customize log output, support logging during unit tests, and log AWS SDK calls, use Apache Log4j 2 with SLF4J\. Log4j is a logging library for Java programs that enables you to configure log levels and use appender libraries\. SLF4J is a facade library that lets you change which library you use without changing your function code\.
 
@@ -308,12 +313,12 @@ dependencies {
     implementation 'com.amazonaws:aws-xray-recorder-sdk-aws-sdk-v2'
     implementation 'com.amazonaws:aws-xray-recorder-sdk-aws-sdk-v2-instrumentor'
     implementation 'com.amazonaws:aws-lambda-java-core:1.2.1'
-    implementation 'com.amazonaws:aws-lambda-java-events:3.1.0'
+    implementation 'com.amazonaws:aws-lambda-java-events:3.11.0'
     implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'org.apache.logging.log4j:log4j-api:[2.17.1,)'
-    implementation 'org.apache.logging.log4j:log4j-core:[2.17.1,)'
-    runtimeOnly 'org.apache.logging.log4j:log4j-slf4j18-impl:[2.17.1,)'
-    runtimeOnly 'com.amazonaws:aws-lambda-java-log4j2:1.5.0'
+    implementation 'org.apache.logging.log4j:log4j-api:2.17.0'
+    implementation 'org.apache.logging.log4j:log4j-core:2.17.0'
+    runtimeOnly 'org.apache.logging.log4j:log4j-slf4j18-impl:2.17.0'
+    runtimeOnly 'com.amazonaws:aws-lambda-java-log4j2:1.5.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.0'
 }

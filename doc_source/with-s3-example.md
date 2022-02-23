@@ -46,7 +46,7 @@ Use a [function blueprint](gettingstarted-features.md#gettingstarted-features-bl
 
 **To create a Lambda function from a blueprint in the console**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose **Create function**\.
 
@@ -238,14 +238,14 @@ Invoke your function when you upload a file to the Amazon S3 source bucket\.
 
 1. On the **Upload** page, upload a few \.jpg or \.png image files to the bucket\.
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose the name of your function \(**my\-s3\-function**\)\.
 
 1. To verify that the function ran once for each file that you uploaded, choose the **Monitor** tab\. This page shows graphs for the metrics that Lambda sends to CloudWatch\. The count in the **Invocations** graph should match the number of files that you uploaded to the Amazon S3 bucket\.   
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/metrics-functions-list.png)
 
-   For more information on these graphs, see [Monitoring functions in the AWS Lambda console](monitoring-functions-access-metrics.md)\.
+   For more information on these graphs, see [Monitoring functions on the Lambda console](monitoring-functions-access-metrics.md)\.
 
 1. \(Optional\) To view the logs in the CloudWatch console, choose **View logs in CloudWatch**\. Choose a log stream to view the logs output for one of the function invocations\.
 

@@ -25,7 +25,7 @@ Type: Long
 Required: No
 
  ** UnreservedConcurrentExecutions **   <a name="SSS-Type-AccountLimit-UnreservedConcurrentExecutions"></a>
-The maximum number of simultaneous function executions, minus the capacity that's reserved for individual functions with [ PutFunctionConcurrency ](API_PutFunctionConcurrency.md)\.  
+The maximum number of simultaneous function executions, minus the capacity that's reserved for individual functions with [PutFunctionConcurrency](API_PutFunctionConcurrency.md)\.  
 Type: Integer  
 Valid Range: Minimum value of 0\.  
 Required: No
@@ -33,7 +33,7 @@ Required: No
 ## See Also<a name="API_AccountLimit_SeeAlso"></a>
 
 For more information about using this API in one of the language\-specific AWS SDKs, see the following:
-+  [ AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/AccountLimit) 
-+  [ AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/AccountLimit) 
-+  [ AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/AccountLimit) 
-+  [ AWS SDK for Ruby V3](https://docs.aws.amazon.com/goto/SdkForRubyV3/lambda-2015-03-31/AccountLimit) 
++  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/AccountLimit) 
++  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/AccountLimit) 
++  [AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/AccountLimit) 
++  [AWS SDK for Ruby V3](https://docs.aws.amazon.com/goto/SdkForRubyV3/lambda-2015-03-31/AccountLimit) 

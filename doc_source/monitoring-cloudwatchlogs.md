@@ -32,18 +32,13 @@ There is no additional charge for using Lambda logs; however, standard CloudWatc
 
 ## Using the Lambda console<a name="monitoring-cloudwatchlogs-console"></a>
 
-The following section describes how to view logs for your function on the Lambda console\. 
-
 **To view logs using the Lambda console**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function\.
 
-1. Choose **Monitor**\.  
-![\[Events\]](http://docs.aws.amazon.com/lambda/latest/dg/images/metrics-functions-list.png)![\[Events\]](http://docs.aws.amazon.com/lambda/latest/dg/)![\[Events\]](http://docs.aws.amazon.com/lambda/latest/dg/)
-
-   A graphical representation of the metrics for the Lambda function are shown\.
+1. Choose **Monitor**\.
 
 1. Choose **View logs in CloudWatch**\.
 
@@ -55,7 +50,7 @@ To debug and validate that your code is working as expected, you can output logs
 +  [AWS Lambda function logging in Ruby](ruby-logging.md) 
 +  [AWS Lambda function logging in Java](java-logging.md) 
 +  [AWS Lambda function logging in Go](golang-logging.md) 
-+  [AWS Lambda function logging in C\#](csharp-logging.md) 
++  [Lambda function logging in C\#](csharp-logging.md) 
 +  [AWS Lambda function logging in PowerShell](powershell-logging.md) 
 
 ## What's next?<a name="monitoring-cloudwatchlogs-next-up"></a>

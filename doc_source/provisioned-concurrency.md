@@ -33,7 +33,7 @@ To manage provisioned concurrency settings for a version or alias, use the Lambd
 
 **To allocate provisioned concurrency for an alias or version**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function\.
 
@@ -105,7 +105,7 @@ Lambda emits the following metrics for provisioned concurrency:
 + `ProvisionedConcurrencySpilloverInvocations` – The number of times your function code is executed on standard concurrency when all provisioned concurrency is in use\.
 + `ProvisionedConcurrencyUtilization` – For a version or alias, the value of `ProvisionedConcurrentExecutions` divided by the total amount of provisioned concurrency allocated\. For example, \.5 indicates that 50 percent of allocated provisioned concurrency is in use\.
 
-For more details, see [Working with AWS Lambda function metrics](monitoring-metrics.md)\.
+For more details, see [Working with Lambda function metrics](monitoring-metrics.md)\.
 
 ## Optimizing latency with provisioned concurrency<a name="optimizing-latency"></a>
 

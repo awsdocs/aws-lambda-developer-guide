@@ -24,7 +24,7 @@ For more information, see [Configuring AWS Lambda functions](lambda-functions.md
 
 ## Trigger<a name="gettingstarted-concepts-trigger"></a>
 
-A *trigger* is a resource or configuration that invokes a Lambda function\. Triggers include AWS services that you can configure to invoke a function and [event source mappings](invocation-eventsourcemapping.md)\. An event source mapping is a resource in Lambda that reads items from a stream or queue and invokes a function\. For more information, see [Invoking AWS Lambda functions](lambda-invocation.md) and [Using AWS Lambda with other services](lambda-services.md)\.
+A *trigger* is a resource or configuration that invokes a Lambda function\. Triggers include AWS services that you can configure to invoke a function and [event source mappings](invocation-eventsourcemapping.md)\. An event source mapping is a resource in Lambda that reads items from a stream or queue and invokes a function\. For more information, see [Invoking Lambda functions](lambda-invocation.md) and [Using AWS Lambda with other services](lambda-services.md)\.
 
 ## Event<a name="gettingstarted-concepts-event"></a>
 

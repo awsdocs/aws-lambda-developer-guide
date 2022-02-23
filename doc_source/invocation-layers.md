@@ -25,7 +25,7 @@ Make sure that the layers that you add to a function are compatible with the run
 
 **Adding a layer to a function**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose the function to configure\.
 
@@ -51,7 +51,7 @@ The order in which you add the layers is the order in which Lambda later merges 
 
 **Update layer order for your function**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose the function to configure\.
 
@@ -67,7 +67,7 @@ Layers are versioned, and the content of each layer version is immutable\. The l
 
 **Update layer versions for your function**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose the function to configure\.
 

@@ -29,10 +29,10 @@ Payload
 
 The request uses the following URI parameters\.
 
- ** [ ClientContext ](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-ClientContext"></a>
+ ** [ClientContext](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-ClientContext"></a>
 Up to 3583 bytes of base64\-encoded data about the invoking client to pass to the function in the context object\.
 
- ** [ FunctionName ](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-FunctionName"></a>
+ ** [FunctionName](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-FunctionName"></a>
 The name of the Lambda function, version, or alias\.  
 
 **Name formats**
@@ -44,18 +44,18 @@ Length Constraints: Minimum length of 1\. Maximum length of 170\.
 Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_\.]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
 Required: Yes
 
- ** [ InvocationType ](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-InvocationType"></a>
+ ** [InvocationType](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-InvocationType"></a>
 Choose from the following options\.  
 +  `RequestResponse` \(default\) \- Invoke the function synchronously\. Keep the connection open until the function returns a response or times out\. The API response includes the function response and additional data\.
 +  `Event` \- Invoke the function asynchronously\. Send events that fail multiple times to the function's dead\-letter queue \(if it's configured\)\. The API response only includes a status code\.
 +  `DryRun` \- Validate parameter values and verify that the user or role has permission to invoke the function\.
 Valid Values:` Event | RequestResponse | DryRun` 
 
- ** [ LogType ](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-LogType"></a>
+ ** [LogType](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-LogType"></a>
 Set to `Tail` to include the execution log in the response\. Applies to synchronously invoked functions only\.  
 Valid Values:` None | Tail` 
 
- ** [ Qualifier ](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-Qualifier"></a>
+ ** [Qualifier](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-Qualifier"></a>
 Specify a version or alias to invoke a published version of the function\.  
 Length Constraints: Minimum length of 1\. Maximum length of 128\.  
 Pattern: `(|[a-zA-Z0-9$_-]+)` 
@@ -64,7 +64,7 @@ Pattern: `(|[a-zA-Z0-9$_-]+)`
 
 The request accepts the following binary data\.
 
- ** [ Payload ](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-Payload"></a>
+ ** [Payload](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-Payload"></a>
 The JSON that you want to provide to your Lambda function as input\.  
 You can enter the JSON directly\. For example, `--payload '{ "key": "value" }'`\. You can also specify a file path\. For example, `--payload file://payload.json`\. 
 
@@ -83,25 +83,25 @@ Payload
 
 If the action is successful, the service sends back the following HTTP response\.
 
- ** [ StatusCode ](#API_Invoke_ResponseSyntax) **   <a name="SSS-Invoke-response-StatusCode"></a>
+ ** [StatusCode](#API_Invoke_ResponseSyntax) **   <a name="SSS-Invoke-response-StatusCode"></a>
 The HTTP status code is in the 200 range for a successful request\. For the `RequestResponse` invocation type, this status code is 200\. For the `Event` invocation type, this status code is 202\. For the `DryRun` invocation type, the status code is 204\.
 
 The response returns the following HTTP headers\.
 
- ** [ ExecutedVersion ](#API_Invoke_ResponseSyntax) **   <a name="SSS-Invoke-response-ExecutedVersion"></a>
+ ** [ExecutedVersion](#API_Invoke_ResponseSyntax) **   <a name="SSS-Invoke-response-ExecutedVersion"></a>
 The version of the function that executed\. When you invoke a function with an alias, this indicates which version the alias resolved to\.  
 Length Constraints: Minimum length of 1\. Maximum length of 1024\.  
 Pattern: `(\$LATEST|[0-9]+)` 
 
- ** [ FunctionError ](#API_Invoke_ResponseSyntax) **   <a name="SSS-Invoke-response-FunctionError"></a>
+ ** [FunctionError](#API_Invoke_ResponseSyntax) **   <a name="SSS-Invoke-response-FunctionError"></a>
 If present, indicates that an error occurred during function execution\. Details about the error are included in the response payload\.
 
- ** [ LogResult ](#API_Invoke_ResponseSyntax) **   <a name="SSS-Invoke-response-LogResult"></a>
+ ** [LogResult](#API_Invoke_ResponseSyntax) **   <a name="SSS-Invoke-response-LogResult"></a>
 The last 4 KB of the execution log, which is base64 encoded\.
 
 The response returns the following as the HTTP body\.
 
- ** [ Payload ](#API_Invoke_ResponseSyntax) **   <a name="SSS-Invoke-response-Payload"></a>
+ ** [Payload](#API_Invoke_ResponseSyntax) **   <a name="SSS-Invoke-response-Payload"></a>
 The response from the function, or an error object\.
 
 ## Errors<a name="API_Invoke_Errors"></a>
@@ -213,12 +213,12 @@ HTTP Status Code: 415
 ## See Also<a name="API_Invoke_SeeAlso"></a>
 
 For more information about using this API in one of the language\-specific AWS SDKs, see the following:
-+  [ AWS Command Line Interface](https://docs.aws.amazon.com/goto/aws-cli/lambda-2015-03-31/Invoke) 
-+  [ AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/Invoke) 
-+  [ AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/Invoke) 
-+  [ AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/Invoke) 
-+  [ AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/Invoke) 
-+  [ AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/Invoke) 
-+  [ AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/Invoke) 
-+  [ AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/Invoke) 
-+  [ AWS SDK for Ruby V3](https://docs.aws.amazon.com/goto/SdkForRubyV3/lambda-2015-03-31/Invoke) 
++  [AWS Command Line Interface](https://docs.aws.amazon.com/goto/aws-cli/lambda-2015-03-31/Invoke) 
++  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/Invoke) 
++  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/Invoke) 
++  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/Invoke) 
++  [AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/Invoke) 
++  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/Invoke) 
++  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/Invoke) 
++  [AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/Invoke) 
++  [AWS SDK for Ruby V3](https://docs.aws.amazon.com/goto/SdkForRubyV3/lambda-2015-03-31/Invoke) 

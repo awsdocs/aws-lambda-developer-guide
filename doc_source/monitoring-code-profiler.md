@@ -10,7 +10,7 @@ You can use Amazon CodeGuru Profiler to gain insights into runtime performance o
 
 ## Supported runtimes<a name="monitoring-code-profiler-runtimes"></a>
 
-You can activate CodeGuru Profiler from the Lambda console if your function's runtime is Python 3\.8, Java 8 with Amazon Linux 2, or Java 11\. For additional runtime versions, you can activate CodeGuru Profiler manually\.
+You can activate CodeGuru Profiler from the Lambda console if your function's runtime is Python3\.8, Python3\.9, Java 8 with Amazon Linux 2, or Java 11\. For additional runtime versions, you can activate CodeGuru Profiler manually\.
 + For Java runtimes, see [ Profiling your Java applications that run on AWS Lambda](https://docs.aws.amazon.com/codeguru/latest/profiler-ug/setting-up-lambda.html)\.
 + For Python runtimes, see [ Profiling your Python applications that run on AWS Lambda](https://docs.aws.amazon.com/codeguru/latest/profiler-ug/python-lambda.html)\.
 
@@ -20,7 +20,7 @@ This section describes how to activate CodeGuru Profiler from the Lambda console
 
 **To activate CodeGuru Profiler from the Lambda console**
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) on the Lambda console\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose your function\.
 

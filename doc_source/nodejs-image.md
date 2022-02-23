@@ -5,7 +5,7 @@ You can deploy your Lambda function code as a [container image](images-create.md
 
   These base images are preloaded with a language runtime and other components that are required to run the image on Lambda\. AWS provides a Dockerfile for each of the base images to help with building your container image\.
 
-  For runtimes that use the Amazon Linux 2 operating system, AWS provides base images for x86\_64 architecture and arm64 architecture\.
+  AWS provides base images for the x86\_64 architecture for all supported \.NET runtimes, and for the arm64 architecture for the \.NET Core 3\.1 and \.NET 6\.0 runtimes\.
 + Open\-source runtime interface clients \(RIC\)
 
   If you use a community or private enterprise base image, you must add a [Runtime interface client](runtimes-images.md#runtimes-api-client) to the base image to make it compatible with Lambda\.
@@ -36,6 +36,7 @@ AWS provides the following base images for Node\.js:
 | --- | --- | --- | --- | 
 | 14 | NodeJS 14\.x | Amazon Linux 2 | [Dockerfile for Node\.js 14\.x on GitHub](https://github.com/aws/aws-lambda-base-images/blob/nodejs14.x/Dockerfile.nodejs14.x) | 
 | 12 | NodeJS 12\.x | Amazon Linux 2 | [Dockerfile for Node\.js 12\.x on GitHub](https://github.com/aws/aws-lambda-base-images/blob/nodejs12.x/Dockerfile.nodejs12.x) | 
+| 10 | NodeJS 10\.x | Amazon Linux 2 | [Dockerfile for Node\.js 10\.x on GitHub](https://github.com/aws/aws-lambda-base-images/blob/nodejs10.x/Dockerfile.nodejs10.x) | 
 
 Docker Hub repository: amazon/aws\-lambda\-nodejs
 

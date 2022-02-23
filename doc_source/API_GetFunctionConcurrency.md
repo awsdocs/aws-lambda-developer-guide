@@ -1,6 +1,6 @@
 # GetFunctionConcurrency<a name="API_GetFunctionConcurrency"></a>
 
-Returns details about the reserved concurrency configuration for a function\. To set a concurrency limit for a function, use [ PutFunctionConcurrency ](API_PutFunctionConcurrency.md)\.
+Returns details about the reserved concurrency configuration for a function\. To set a concurrency limit for a function, use [PutFunctionConcurrency](API_PutFunctionConcurrency.md)\.
 
 ## Request Syntax<a name="API_GetFunctionConcurrency_RequestSyntax"></a>
 
@@ -12,7 +12,7 @@ GET /2019-09-30/functions/FunctionName/concurrency HTTP/1.1
 
 The request uses the following URI parameters\.
 
- ** [ FunctionName ](#API_GetFunctionConcurrency_RequestSyntax) **   <a name="SSS-GetFunctionConcurrency-request-FunctionName"></a>
+ ** [FunctionName](#API_GetFunctionConcurrency_RequestSyntax) **   <a name="SSS-GetFunctionConcurrency-request-FunctionName"></a>
 The name of the Lambda function\.  
 
 **Name formats**
@@ -45,7 +45,7 @@ If the action is successful, the service sends back an HTTP 200 response\.
 
 The following data is returned in JSON format by the service\.
 
- ** [ ReservedConcurrentExecutions ](#API_GetFunctionConcurrency_ResponseSyntax) **   <a name="SSS-GetFunctionConcurrency-response-ReservedConcurrentExecutions"></a>
+ ** [ReservedConcurrentExecutions](#API_GetFunctionConcurrency_ResponseSyntax) **   <a name="SSS-GetFunctionConcurrency-response-ReservedConcurrentExecutions"></a>
 The number of simultaneous executions that are reserved for the function\.  
 Type: Integer  
 Valid Range: Minimum value of 0\.
@@ -71,12 +71,12 @@ HTTP Status Code: 429
 ## See Also<a name="API_GetFunctionConcurrency_SeeAlso"></a>
 
 For more information about using this API in one of the language\-specific AWS SDKs, see the following:
-+  [ AWS Command Line Interface](https://docs.aws.amazon.com/goto/aws-cli/lambda-2015-03-31/GetFunctionConcurrency) 
-+  [ AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/GetFunctionConcurrency) 
-+  [ AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/GetFunctionConcurrency) 
-+  [ AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/GetFunctionConcurrency) 
-+  [ AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/GetFunctionConcurrency) 
-+  [ AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/GetFunctionConcurrency) 
-+  [ AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/GetFunctionConcurrency) 
-+  [ AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/GetFunctionConcurrency) 
-+  [ AWS SDK for Ruby V3](https://docs.aws.amazon.com/goto/SdkForRubyV3/lambda-2015-03-31/GetFunctionConcurrency) 
++  [AWS Command Line Interface](https://docs.aws.amazon.com/goto/aws-cli/lambda-2015-03-31/GetFunctionConcurrency) 
++  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/GetFunctionConcurrency) 
++  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/GetFunctionConcurrency) 
++  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/GetFunctionConcurrency) 
++  [AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/GetFunctionConcurrency) 
++  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/GetFunctionConcurrency) 
++  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/GetFunctionConcurrency) 
++  [AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/GetFunctionConcurrency) 
++  [AWS SDK for Ruby V3](https://docs.aws.amazon.com/goto/SdkForRubyV3/lambda-2015-03-31/GetFunctionConcurrency) 
