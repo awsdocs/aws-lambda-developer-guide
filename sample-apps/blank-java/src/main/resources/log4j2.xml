@@ -1,4 +1,4 @@
-<Configuration status="WARN">
+<Configuration status="WARN" packages="com.amazonaws.services.lambda.runtime.log4j2">
   <Appenders>
     <Lambda name="Lambda">
       <PatternLayout>
