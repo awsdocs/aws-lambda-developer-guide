@@ -164,7 +164,7 @@ Invoke the Lambda function manually using sample Amazon S3 event data\.
 
    1. For **Event name**, enter a name for the test event\. For example, **mys3testevent**\.
 
-   1. In the test event JSON, replace the S3 bucket name \(`example-bucket`\) and object key \(`test/key`\) with your bucket name and test file name\. Your test event should look similar to the following:
+   1. In the test event JSON, replace the S3 bucket name \(`example-bucket`\) and object key \(`test%2Fkey`\) with your bucket name and test file name (that you uploaded in your bucket)\. Your test event should look similar to the following:
 
       ```
       {
@@ -193,7 +193,7 @@ Invoke the Lambda function manually using sample Amazon S3 event data\.
                 "ownerIdentity": {
                   "principalId": "EXAMPLE"
                 },
-                "arn": "arn:aws:s3:::example-bucket"
+                "arn": "arn:aws:s3:::my-s3-bucket"
               },
               "object": {
                 "key": "HappyFace.jpg",
