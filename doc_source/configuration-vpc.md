@@ -38,6 +38,8 @@ Lambda uses your function's permissions to create and manage network interfaces\
 + **ec2:CreateNetworkInterface**
 + **ec2:DescribeNetworkInterfaces**
 + **ec2:DeleteNetworkInterface**
++ **ec2:AssignPrivateIpAddresses**
++ **ec2:UnassignPrivateIpAddresses**
 
 These permissions are included in the AWS managed policy **AWSLambdaVPCAccessExecutionRole**\.
 
