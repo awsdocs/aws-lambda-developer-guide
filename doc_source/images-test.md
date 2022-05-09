@@ -62,7 +62,7 @@ The AWS base images for Lambda include the runtime interface emulator\. You can 
 1. From a new terminal window, post an event to the following endpoint using a `curl` command:
 
    ```
-   curl -XPOST "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{}'
+   curl -X POST "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{}'
    ```
 
    This command invokes the Lambda function running in the container image and returns a response\.
@@ -160,7 +160,7 @@ You install the runtime interface emulator to your local machine\. When you run 
 1. Post an event to the following endpoint using a `curl` command:
 
    ```
-   curl -XPOST "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{}'
+   curl -X POST "http://localhost:9000/2015-03-31/functions/function/invocations" -d '{}'
    ```
 
    This command invokes the function running in the container image and returns a response\.
