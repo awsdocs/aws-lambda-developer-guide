@@ -108,16 +108,15 @@
             </goals>
             <configuration>
               <transformers>
-                <transformer implementation="com.github.edwgiz.maven_shade_plugin.log4j2_cache_transformer.PluginsCacheFileTransformer">
-                </transformer>
+                <transformer implementation="io.github.edwgiz.log4j.maven.plugins.shade.transformer.Log4j2PluginCacheFileTransformer"/>
               </transformers>
             </configuration>
           </execution>
         </executions>
         <dependencies>
           <dependency>
-            <groupId>com.github.edwgiz</groupId>
-            <artifactId>maven-shade-plugin.log4j2-cachefile-transformer</artifactId>
+            <groupId>io.github.edwgiz</groupId>
+            <artifactId>log4j-maven-shade-plugin-extensions</artifactId>
             <version>[2.17.1,)</version>
           </dependency>
         </dependencies>
