@@ -10,11 +10,11 @@ You can use AWS Lambda functions to evaluate whether your AWS resource configura
     "ruleParameters": "{\"myParameterKey\":\"myParameterValue\"}",
     "resultToken": "myResultToken",
     "eventLeftScope": false,
-    "executionRoleArn": "arn:aws:iam::012345678912:role/config-role",
-    "configRuleArn": "arn:aws:config:us-east-1:012345678912:config-rule/config-rule-0123456",
+    "executionRoleArn": "arn:aws:iam::111122223333:role/config-role",
+    "configRuleArn": "arn:aws:config:us-east-1:111122223333:config-rule/config-rule-0123456",
     "configRuleName": "change-triggered-config-rule",
     "configRuleId": "config-rule-0123456",
-    "accountId": "012345678912",
+    "accountId": "111122223333",
     "version": "1.0"
 }
 ```

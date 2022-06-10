@@ -2,7 +2,7 @@
 
 A Lambda layer is a \.zip file archive that can contain additional code or other content\. A layer can contain libraries, a custom runtime, data, or configuration files\. Use layers to reduce deployment package size and to promote code sharing and separation of responsibilities so that you can iterate faster on writing business logic\.
 
-You can use layers only with Lambda functions [deployed as a \.zip file archive](gettingstarted-package.md#gettingstarted-package-zip)\. For a function [defined as a container image](lambda-images.md), you can package your preferred runtime and all code dependencies when you create the container image\. For more information, see [ Working with Lambda layers and extensions in container images](http://aws.amazon.com/blogs/compute/working-with-lambda-layers-and-extensions-in-container-images/) on the AWS Compute Blog\.
+You can use layers only with Lambda functions [deployed as a \.zip file archive](gettingstarted-package.md#gettingstarted-package-zip)\. For a function [defined as a container image](images-create.md), you can package your preferred runtime and all code dependencies when you create the container image\. For more information, see [ Working with Lambda layers and extensions in container images](http://aws.amazon.com/blogs/compute/working-with-lambda-layers-and-extensions-in-container-images/) on the AWS Compute Blog\.
 
 **Topics**
 + [Configuring functions to use layers](#invocation-layers-using)
@@ -63,19 +63,23 @@ The order in which you add the layers is the order in which Lambda later merges 
 
 1. Choose **Save**\.
 
-Layers are versioned, and the content of each layer version is immutable\. The layer owner can release a new layer version to provide updated content\. You can use the console to update your function's layer versions\. 
+Layers are versioned, and the content of each layer version is immutable\. The layer owner can release a new layer version to provide updated content\. You can use the console to update your functions' layer versions\.
 
 **Update layer versions for your function**
 
 1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
-1. Choose the function to configure\.
+1. Under **Additional resources**, choose **Layers**\.
 
-1. Under **Layers**, choose **Edit**
+1. Choose the layer to modify\.
 
-1. Under **Layer version**, enter the new layer version\. You can change the version for one or more of the listed layers\.
+1. Under **Functions using this version**, select the functions you want to modify, then choose **Edit**\.
 
-1. Choose **Save**\.
+1. From **Layer version**, select the layer version to change to\.
+
+1. Choose **Update functions**\.
+
+You cannot update functions' layer versions across AWS accounts\.
 
 ### Configuring layers with the API<a name="invocation-layers-api"></a>
 
@@ -84,7 +88,7 @@ To add layers to your function, use the update\-function\-configuration command\
 ```
 aws lambda update-function-configuration --function-name my-function \
 --layers arn:aws:lambda:us-east-2:123456789012:layer:my-layer:3 \
-arn:aws:lambda:us-east-2:210987654321:layer:their-layer:2
+arn:aws:lambda:us-east-2:111122223333:layer:their-layer:2
 ```
 
 You should see output similar to the following:
@@ -101,7 +105,7 @@ You should see output similar to the following:
             "CodeSize": 169
         },
         {
-            "Arn": "arn:aws:lambda:us-east-2:210987654321:layer:their-layer:2",
+            "Arn": "arn:aws:lambda:us-east-2:111122223333:layer:their-layer:2",
             "CodeSize": 169
         }
     ],

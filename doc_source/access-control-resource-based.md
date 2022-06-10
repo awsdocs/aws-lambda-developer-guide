@@ -1,8 +1,8 @@
 # Using resource\-based policies for AWS Lambda<a name="access-control-resource-based"></a>
 
-AWS Lambda supports resource\-based permissions policies for Lambda functions and layers\. Resource\-based policies let you grant usage permission to other AWS accounts on a per\-resource basis\. You also use a resource\-based policy to allow an AWS service to invoke your function on your behalf\.
+AWS Lambda supports resource\-based permissions policies for Lambda functions and layers\. Resource\-based policies let you grant usage permission to other AWS accounts or organizations on a per\-resource basis\. You also use a resource\-based policy to allow an AWS service to invoke your function on your behalf\.
 
-For Lambda functions, you can [grant an account permission](#permissions-resource-xaccountinvoke) to invoke or manage a function\. You can add multiple statements to grant access to several accounts, or let any account invoke your function\. You can also use the policy to [grant invoke permission to an AWS service](#permissions-resource-serviceinvoke) that invokes a function in response to activity in your account\. 
+For Lambda functions, you can [grant an account permission](#permissions-resource-xaccountinvoke) to invoke or manage a function\. You can also use a single resource\-based policy to grant permissions to an entire organization in AWS Organizations\. You can also use resource\-based policies to [grant invoke permission to an AWS service](#permissions-resource-serviceinvoke) that invokes a function in response to activity in your account\. 
 
 **To view a function's resource\-based policy**
 
@@ -50,6 +50,7 @@ Resource\-based policies apply to a single function, version, alias, or layer ve
 
 **Topics**
 + [Granting function access to AWS services](#permissions-resource-serviceinvoke)
++ [Granting function access to an organization](#permissions-resource-xorginvoke)
 + [Granting function access to other accounts](#permissions-resource-xaccountinvoke)
 + [Granting layer access to other accounts](#permissions-resource-xaccountlayer)
 + [Cleaning up resource\-based policies](#permissions-resource-cleanup)
@@ -88,19 +89,56 @@ aws lambda add-permission --function-name my-function --action lambda:InvokeFunc
 --principal s3.amazonaws.com --source-arn arn:aws:s3:::my-bucket-123456 --source-account 123456789012
 ```
 
+## Granting function access to an organization<a name="permissions-resource-xorginvoke"></a>
+
+To grant permissions to an organization in AWS Organizations, specify the organization ID as the `principal-org-id`\. The following [AddPermission](API_AddPermission.md) AWS CLI command grants invocation access to all users in organization `o-a1b2c3d4e5f`\.
+
+```
+aws lambda add-permission --function-name example \
+--statement-id PrincipalOrgIDExample --action lambda:InvokeFunction \
+--principal * --principal-org-id o-a1b2c3d4e5f
+```
+
+**Note**  
+In this command, `Principal` is `*`\. This means that all users in the organization `o-a1b2c3d4e5f` get function invocation permissions\. If you specify an AWS account or role as the `Principal`, then only that principal gets function invocation permissions, but only if they are also part of the `o-a1b2c3d4e5f` organization\.
+
+This command creates a resource\-based policy that looks like the following:
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PrincipalOrgIDExample",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "lambda:InvokeFunction",
+            "Resource": "arn:aws:lambda:us-west-2:123456789012:function:example",
+            "Condition": {
+                "StringEquals": {
+                    "aws:PrincipalOrgID": "o-a1b2c3d4e5f"
+                }
+            }
+        }
+    ]
+}
+```
+
+For more information, see [ aws:PrincipalOrgID](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-principalorgid) in the AWS Identity and Access Management user guide\.
+
 ## Granting function access to other accounts<a name="permissions-resource-xaccountinvoke"></a>
 
-To grant permissions to another AWS account, specify the account ID as the `principal`\. The following example grants account `210987654321` permission to invoke `my-function` with the `prod` alias\.
+To grant permissions to another AWS account, specify the account ID as the `principal`\. The following example grants account `111122223333` permission to invoke `my-function` with the `prod` alias\.
 
 ```
 aws lambda add-permission --function-name my-function:prod --statement-id xaccount --action lambda:InvokeFunction \
---principal 210987654321 --output text
+--principal 111122223333 --output text
 ```
 
 You should see the following output:
 
 ```
-{"Sid":"xaccount","Effect":"Allow","Principal":{"AWS":"arn:aws:iam::210987654321:root"},"Action":"lambda:InvokeFunction","Resource":"arn:aws:lambda:us-east-2:123456789012:function:my-function"}
+{"Sid":"xaccount","Effect":"Allow","Principal":{"AWS":"arn:aws:iam::111122223333:root"},"Action":"lambda:InvokeFunction","Resource":"arn:aws:lambda:us-east-2:123456789012:function:my-function"}
 ```
 
 The resource\-based policy grants permission for the other account to access the function, but doesn't allow users in that account to exceed their permissions\. Users in the other account must have the corresponding [user permissions](access-control-identity-based.md) to use the Lambda API\.
@@ -128,7 +166,7 @@ You can grant cross\-account access for most API actions that [operate on an exi
 
 **Cross\-account APIs**
 
-Currently, Lambda doesn’t currently support cross\-account actions for all of its APIs via resource\-based policies\. The following APIs are supported:
+Currently, Lambda doesn’t support cross\-account actions for all of its APIs via resource\-based policies\. The following APIs are supported:
 + [Invoke](API_Invoke.md)
 + [GetFunction](API_GetFunction.md)
 + [GetFunctionConfiguration](API_GetFunctionConfiguration.md)
@@ -156,13 +194,13 @@ To grant layer\-usage permission to another account, add a statement to the laye
 
 ```
 aws lambda add-layer-version-permission --layer-name xray-sdk-nodejs --statement-id xaccount \
---action lambda:GetLayerVersion  --principal 210987654321 --version-number 1 --output text
+--action lambda:GetLayerVersion  --principal 111122223333 --version-number 1 --output text
 ```
 
 You should see output similar to the following:
 
 ```
-e210ffdc-e901-43b0-824b-5fcd0dd26d16    {"Sid":"xaccount","Effect":"Allow","Principal":{"AWS":"arn:aws:iam::210987654321:root"},"Action":"lambda:GetLayerVersion","Resource":"arn:aws:lambda:us-east-2:123456789012:layer:xray-sdk-nodejs:1"}
+e210ffdc-e901-43b0-824b-5fcd0dd26d16    {"Sid":"xaccount","Effect":"Allow","Principal":{"AWS":"arn:aws:iam::111122223333:root"},"Action":"lambda:GetLayerVersion","Resource":"arn:aws:lambda:us-east-2:123456789012:layer:xray-sdk-nodejs:1"}
 ```
 
 Permissions apply only to a single layer version\. Repeat the process each time that you create a new layer version\.

@@ -1,8 +1,8 @@
-# AWS Lambda execution environment<a name="runtimes-context"></a>
+# AWS Lambda execution environment<a name="lambda-runtime-environment"></a>
 
-Lambda invokes your function in an execution environment, which provides a secure and isolated runtime environment\. The execution environment manages the resources required to run your function\. The execution environment also provides lifecycle support for the function's runtime and any [external extensions](using-extensions.md) associated with your function\.
+ Lambda invokes your function in an execution environment, which provides a secure and isolated runtime environment\. The execution environment manages the resources required to run your function\. The execution environment also provides lifecycle support for the function's runtime and any [external extensions](using-extensions.md) associated with your function\. 
 
-The function's runtime communicates with Lambda using the [Runtime API](runtimes-api.md)\. Extensions communicate with Lambda using the [Extensions API](runtimes-extensions-api.md)\. Extensions can also receive log messages from the function by subscribing to logs using the [Logs API](runtimes-logs-api.md)\.
+The function's runtime communicates with Lambda using the [Runtime API](runtimes-api.md)\. Extensions communicate with Lambda using the [Extensions API](runtimes-extensions-api.md)\. Extensions can also receive log messages from the function by subscribing to logs using the [Logs API](runtimes-logs-api.md)\. 
 
 
 
@@ -11,6 +11,13 @@ The function's runtime communicates with Lambda using the [Runtime API](runtimes
 When you create your Lambda function, you specify configuration information, such as the amount of memory available and the maximum execution time allowed for your function\. Lambda uses this information to set up the execution environment\.
 
 The function's runtime and each external extension are processes that run within the execution environment\. Permissions, resources, credentials, and environment variables are shared between the function and the extensions\.
+
+**Topics**
++ [Lambda Extensions API](runtimes-extensions-api.md)
++ [AWS Lambda runtime API](runtimes-api.md)
++ [Lambda Logs API](runtimes-logs-api.md)
++ [AWS Lambda extensions partners](extensions-api-partners.md)
++ [Lambda execution environment lifecycle](#runtimes-lifecycle)
 
 ## Lambda execution environment lifecycle<a name="runtimes-lifecycle"></a>
 
@@ -56,13 +63,13 @@ The Lambda reset does not clear the `/tmp` directory content prior to the next i
 
 ### Shutdown phase<a name="runtimes-lifecycle-shutdown"></a>
 
-When Lambda is about to shut down the runtime, it sends a `Shutdown` event to the runtime and to each external extension\. Extensions can use this time for final cleanup tasks\. The `Shutdown` event is a response to a `Next` API request\.
+When Lambda is about to shut down the runtime, it sends a `Shutdown` event to each registered external extension\. Extensions can use this time for final cleanup tasks\. The `Shutdown` event is a response to a `Next` API request\.
 
 **Duration**: The entire `Shutdown` phase is capped at 2 seconds\. If the runtime or any extension does not respond, Lambda terminates it via a signal \(`SIGKILL`\)\. 
 
 After the function and all extensions have completed, Lambda maintains the execution environment for some time in anticipation of another function invocation\. In effect, Lambda freezes the execution environment\. When the function is invoked again, Lambda thaws the environment for reuse\. Reusing the execution environment has the following implications: 
 + Objects declared outside of the function's handler method remain initialized, providing additional optimization when the function is invoked again\. For example, if your Lambda function establishes a database connection, instead of reestablishing the connection, the original connection is used in subsequent invocations\. We recommend adding logic in your code to check if a connection exists before creating a new one\.
-+ Each execution environment provides 512 MB of disk space in the `/tmp` directory\. The directory content remains when the execution environment is frozen, providing a transient cache that can be used for multiple invocations\. You can add extra code to check if the cache has the data that you stored\. For more information on deployment size limits, see [Lambda quotas](gettingstarted-limits.md)\.
++ Each execution environment provides 512 MB to 10,240 MB, in 1\-MB increments\. of disk space in the `/tmp` directory\. The directory content remains when the execution environment is frozen, providing a transient cache that can be used for multiple invocations\. You can add extra code to check if the cache has the data that you stored\. For more information on deployment size limits, see [Lambda quotas](gettingstarted-limits.md)\.
 + Background processes or callbacks that were initiated by your Lambda function and did not complete when the function ended resume if Lambda reuses the execution environment\. Make sure that any background processes or callbacks in your code are complete before the code exits\.
 
 When you write your function code, do not assume that Lambda automatically reuses the execution environment for subsequent function invocations\. Other factors may dictate a need for Lambda to create a new execution environment, which can lead to unexpected results, such as database connection failures\.

@@ -87,7 +87,7 @@ The request accepts the following data in JSON format\.
  ** [BatchSize](#API_CreateEventSourceMapping_RequestSyntax) **   <a name="SSS-CreateEventSourceMapping-request-BatchSize"></a>
 The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function\. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation \(6 MB\)\.  
 +  **Amazon Kinesis** \- Default 100\. Max 10,000\.
-+  **Amazon DynamoDB Streams** \- Default 100\. Max 1,000\.
++  **Amazon DynamoDB Streams** \- Default 100\. Max 10,000\.
 +  **Amazon Simple Queue Service** \- Default 10\. For standard queues the max is 10,000\. For FIFO queues the max is 10\.
 +  **Amazon Managed Streaming for Apache Kafka** \- Default 100\. Max 10,000\.
 +  **Self\-Managed Apache Kafka** \- Default 100\. Max 10,000\.
@@ -309,7 +309,7 @@ Type: String
 Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [FunctionResponseTypes](#API_CreateEventSourceMapping_ResponseSyntax) **   <a name="SSS-CreateEventSourceMapping-response-FunctionResponseTypes"></a>
-\(Streams only\) A list of current response type enums applied to the event source mapping\.  
+\(Streams and Amazon SQS\) A list of current response type enums applied to the event source mapping\.  
 Type: Array of strings  
 Array Members: Minimum number of 0 items\. Maximum number of 1 item\.  
 Valid Values:` ReportBatchItemFailures` 

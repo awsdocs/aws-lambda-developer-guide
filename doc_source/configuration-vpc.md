@@ -26,7 +26,7 @@ Multiple functions can share a network interface, if the functions share the sam
 
 If your functions aren't active for a long period of time, Lambda reclaims its network interfaces, and the functions become `Idle`\. To reactivate an idle function, invoke it\. This invocation fails, and the function enters a `Pending` state again until a network interface is available\.
 
-If you update your function to access a different VPC, it terminates connectivity from the Hyperplane ENI to the previous VPC\. The process to update the connectivity to a new VPC can take several minutes\. During this time, Lambda connects funtion invocations to the previous VPC\. After the update is complete, new invocations start using the the new VPC and the Lambda function is no longer connected to the older VPC\.
+If you update your function to access a different VPC, it terminates connectivity from the Hyperplane ENI to the previous VPC\. The process to update the connectivity to a new VPC can take several minutes\. During this time, Lambda connects function invocations to the previous VPC\. After the update is complete, new invocations start using the the new VPC and the Lambda function is no longer connected to the older VPC\.
 
 For short\-lived operations, such as DynamoDB queries, the latency overhead of setting up a TCP connection might be greater than the operation itself\. To ensure connection reuse for short\-lived/infrequently invoked functions, we recommend that you use *TCP keep\-alive* for connections that were created during your function initialization, to avoid creating new connections for subsequent invokes\. For more information on reusing connections using keep\-alive, refer to [Lambda documentation on reusing connections](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/node-reusing-connections.html)[\.](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/node-reusing-connections.html)
 
@@ -39,7 +39,10 @@ Lambda uses your function's permissions to create and manage network interfaces\
 + **ec2:DescribeNetworkInterfaces**
 + **ec2:DeleteNetworkInterface**
 
-These permissions are included in the AWS managed policy **AWSLambdaVPCAccessExecutionRole**\.
+These permissions are included in the AWS managed policy **AWSLambdaVPCAccessExecutionRole**\. Note that these permissions are required only to create ENIs, not to invoke your VPC function\. In other words, you are still able to invoke your VPC function successfully even if you remove these permissions from your execution role\. To completely disassociate your Lambda function from the VPC, update the function's VPC configuration settings using the console or the [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md) API\.
+
+**Note**  
+If you don't specify a resource ID for **DeleteNetworkInterface** in the execution role, your function may not be able to access the VPC\. Either specify a unique resource ID, or include all resource IDs, for example, `"Resource": "arn:aws:ec2:us-west-2:123456789012:*/*"`\.
 
 When you configure VPC connectivity, Lambda uses your permissions to verify network resources\. To configure a function to connect to a VPC, your AWS Identity and Access Management \(IAM\) user needs the following permissions:
 

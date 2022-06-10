@@ -15,7 +15,7 @@ The [Applications](deploying-lambda-apps.md) page shows you a list of applicatio
 
 ## Functions<a name="foundation-functions"></a>
 
-The functions page shows you a list of functions defined for your account in this region\. The initial console flow to create a function depends on whether the function uses a [container image](configuration-images.md) or [\.zip file archive](configuration-function-zip.md) for the deployment package\. Many of the optional [configuration tasks](configuration-function-common.md) are common to both types of function\.
+The functions page shows you a list of functions defined for your account in this region\. The initial console flow to create a function depends on whether the function uses a [container image](gettingstarted-images.md) or [\.zip file archive](configuration-function-zip.md) for the deployment package\. Many of the optional [configuration tasks](configuration-function-common.md) are common to both types of function\.
 
 The console provides a [code editor](#code-editor) for your convenience\. 
 

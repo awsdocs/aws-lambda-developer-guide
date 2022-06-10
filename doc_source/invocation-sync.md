@@ -3,8 +3,10 @@
 When you invoke a function synchronously, Lambda runs the function and waits for a response\. When the function completes, Lambda returns the response from the function's code with additional data, such as the version of the function that was invoked\. To invoke a function synchronously with the AWS CLI, use the `invoke` command\.
 
 ```
-aws lambda invoke --function-name my-function --payload '{ "key": "value" }' response.json
+aws lambda invoke --function-name my-function --cli-binary-format raw-in-base64-out --payload '{ "key": "value" }' response.json
 ```
+
+The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.
 
 You should see the following output:
 
@@ -29,7 +31,7 @@ For functions with a long timeout, your client might be disconnected during sync
 If Lambda isn't able to run the function, the error is displayed in the output\.
 
 ```
-aws lambda invoke --function-name my-function --payload value response.json
+aws lambda invoke --function-name my-function --cli-binary-format raw-in-base64-out --payload value response.json
 ```
 
 You should see the following output:

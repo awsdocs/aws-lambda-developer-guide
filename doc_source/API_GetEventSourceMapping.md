@@ -111,7 +111,7 @@ Type: String
 Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [FunctionResponseTypes](#API_GetEventSourceMapping_ResponseSyntax) **   <a name="SSS-GetEventSourceMapping-response-FunctionResponseTypes"></a>
-\(Streams only\) A list of current response type enums applied to the event source mapping\.  
+\(Streams and Amazon SQS\) A list of current response type enums applied to the event source mapping\.  
 Type: Array of strings  
 Array Members: Minimum number of 0 items\. Maximum number of 1 item\.  
 Valid Values:` ReportBatchItemFailures` 

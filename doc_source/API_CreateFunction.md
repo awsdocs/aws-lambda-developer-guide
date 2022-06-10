@@ -43,6 +43,9 @@ Content-type: application/json
          "string" : "string" 
       }
    },
+   "EphemeralStorage": { 
+      "Size": number
+   },
    "FileSystemConfigs": [ 
       { 
          "Arn": "string",
@@ -120,6 +123,11 @@ Environment variables that are accessible from function code during execution\.
 Type: [Environment](API_Environment.md) object  
 Required: No
 
+ ** [EphemeralStorage](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-EphemeralStorage"></a>
+The size of the function’s /tmp directory in MB\. The default value is 512, but can be any whole number between 512 and 10240 MB\.  
+Type: [EphemeralStorage](API_EphemeralStorage.md) object  
+Required: No
+
  ** [FileSystemConfigs](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-FileSystemConfigs"></a>
 Connection settings for an Amazon EFS file system\.  
 Type: Array of [FileSystemConfig](API_FileSystemConfig.md) objects  
@@ -190,7 +198,7 @@ Required: Yes
  ** [Runtime](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-Runtime"></a>
 The identifier of the function's [runtime](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)\. Runtime is required if the deployment package is a \.zip file archive\.   
 Type: String  
-Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | nodejs10.x | nodejs12.x | nodejs14.x | java8 | java8.al2 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | python3.9 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | dotnetcore3.1 | nodejs4.3-edge | go1.x | ruby2.5 | ruby2.7 | provided | provided.al2`   
+Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | nodejs10.x | nodejs12.x | nodejs14.x | nodejs16.x | java8 | java8.al2 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | python3.9 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | dotnetcore3.1 | dotnet6 | nodejs4.3-edge | go1.x | ruby2.5 | ruby2.7 | provided | provided.al2`   
 Required: No
 
  ** [Tags](#API_CreateFunction_RequestSyntax) **   <a name="SSS-CreateFunction-request-Tags"></a>
@@ -236,6 +244,9 @@ Content-type: application/json
       "Variables": { 
          "string" : "string" 
       }
+   },
+   "EphemeralStorage": { 
+      "Size": number
    },
    "FileSystemConfigs": [ 
       { 
@@ -327,6 +338,10 @@ Length Constraints: Minimum length of 0\. Maximum length of 256\.
 The function's [environment variables](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html)\.  
 Type: [EnvironmentResponse](API_EnvironmentResponse.md) object
 
+ ** [EphemeralStorage](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-EphemeralStorage"></a>
+The size of the function’s /tmp directory in MB\. The default value is 512, but can be any whole number between 512 and 10240 MB\.  
+Type: [EphemeralStorage](API_EphemeralStorage.md) object
+
  ** [FileSystemConfigs](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-FileSystemConfigs"></a>
 Connection settings for an [Amazon EFS file system](https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html)\.  
 Type: Array of [FileSystemConfig](API_FileSystemConfig.md) objects  
@@ -407,7 +422,7 @@ Pattern: `arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+`
  ** [Runtime](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-Runtime"></a>
 The runtime environment for the Lambda function\.  
 Type: String  
-Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | nodejs10.x | nodejs12.x | nodejs14.x | java8 | java8.al2 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | python3.9 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | dotnetcore3.1 | nodejs4.3-edge | go1.x | ruby2.5 | ruby2.7 | provided | provided.al2` 
+Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | nodejs10.x | nodejs12.x | nodejs14.x | nodejs16.x | java8 | java8.al2 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | python3.9 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | dotnetcore3.1 | dotnet6 | nodejs4.3-edge | go1.x | ruby2.5 | ruby2.7 | provided | provided.al2` 
 
  ** [SigningJobArn](#API_CreateFunction_ResponseSyntax) **   <a name="SSS-CreateFunction-response-SigningJobArn"></a>
 The ARN of the signing job\.  

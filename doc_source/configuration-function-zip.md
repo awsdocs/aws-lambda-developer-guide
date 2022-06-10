@@ -1,6 +1,6 @@
-# Creating Lambda functions defined as \.zip file archives<a name="configuration-function-zip"></a>
+# Deploying Lambda functions as \.zip file archives<a name="configuration-function-zip"></a>
 
-When you create a Lambda function, you package your function code into a deployment package\. Lambda supports two types of deployment packages: [container images](gettingstarted-package.md#gettingstarted-package-images) and [\.zip file archives](gettingstarted-package.md#gettingstarted-package-zip)\. The workflow to create a function depends on the deployment package type\. To configure a function defined as a container image, see [Creating Lambda functions defined as container images](configuration-images.md)\.
+When you create a Lambda function, you package your function code into a deployment package\. Lambda supports two types of deployment packages: [container images](gettingstarted-package.md#gettingstarted-package-images) and [\.zip file archives](gettingstarted-package.md#gettingstarted-package-zip)\. The workflow to create a function depends on the deployment package type\. To configure a function defined as a container image, see [Deploying Lambda functions as container images](gettingstarted-images.md)\.
 
 You can use the Lambda console and the Lambda API to create a function defined with a \.zip file archive\. You can also upload an updated \.zip file to change the function code\. 
 
@@ -8,15 +8,15 @@ You can use the Lambda console and the Lambda API to create a function defined w
 You cannot convert an existing container image function to use a \.zip file archive\. You must create a new function\.
 
 **Topics**
-+ [Creating a function \(console\)](#configuration-function-create)
++ [Creating the function](#configuration-function-create)
 + [Using the console code editor](#configuration-functions-console-update)
-+ [Updating function code \(console\)](#configuration-function-update)
-+ [Change the runtime or runtime version \(console\)](#configuration-function-runtime)
-+ [Change the architecture \(console\)](#configuration-function-arch)
++ [Updating function code](#configuration-function-update)
++ [Changing the runtime or runtime version](#configuration-function-runtime)
++ [Changing the architecture](#configuration-function-arch)
 + [Using the Lambda API](#configuration-function-api)
 + [AWS CloudFormation](#configuration-function-cloudformation)
 
-## Creating a function \(console\)<a name="configuration-function-create"></a>
+## Creating the function<a name="configuration-function-create"></a>
 
 When you create a function defined with a \.zip file archive, you choose a code template, the language version, and the execution role for the function\. You add your function code after Lambda creates the function\.
 
@@ -42,7 +42,44 @@ When you create a function defined with a \.zip file archive, you choose a code 
 
 1. Choose **Create function**\.
 
-Lambda creates the new function\. You can now use the console to add the function code and configure other function parameters and features\.
+Lambda creates the new function\. You can now use the console to add the function code and configure other function parameters and features\. For code deployment instructions, see the handler page for the runtime your function uses\. 
+
+------
+#### [ Node\.js ]
+
+[Deploy Node\.js Lambda functions with \.zip file archives](nodejs-package.md) 
+
+------
+#### [ Python ]
+
+ [Deploy Python Lambda functions with \.zip file archives](python-package.md) 
+
+------
+#### [ Ruby ]
+
+ [Deploy Ruby Lambda functions with \.zip file archives](ruby-package.md) 
+
+------
+#### [ Java ]
+
+ [Deploy Java Lambda functions with \.zip or JAR file archives](java-package.md) 
+
+------
+#### [ Go ]
+
+ [Deploy Go Lambda functions with \.zip file archives](golang-package.md) 
+
+------
+#### [ C\# ]
+
+ [Deploy C\# Lambda functions with \.zip file archives](csharp-package.md) 
+
+------
+#### [ PowerShell ]
+
+ [Deploy PowerShell Lambda functions with \.zip file archives](powershell-package.md) 
+
+------
 
 ## Using the console code editor<a name="configuration-functions-console-update"></a>
 
@@ -53,7 +90,7 @@ The Lambda console uses AWS Cloud9 to provide an integrated development environm
 
 When you save your function code, the Lambda console creates a \.zip file archive deployment package\. When you develop your function code outside of the console \(using an SDE\) you need to [create a deployment package](nodejs-package.md) to upload your code to the Lambda function\.
 
-## Updating function code \(console\)<a name="configuration-function-update"></a>
+## Updating function code<a name="configuration-function-update"></a>
 
 For scripting languages \(Node\.js, Python, and Ruby\), you can edit your function code in the embedded code [editor](foundation-console.md#code-editor)\. If the code is larger than 3MB, or if you need to add libraries, or for languages that the editor doesn't support \(Java, Go, C\#\), you must upload your function code as a \.zip archive\. If the \.zip file archive is smaller than 50 MB, you can upload the \.zip file archive from your local machine\. If the file is larger than 50 MB, upload the file to the function from an Amazon S3 bucket\.
 
@@ -73,46 +110,9 @@ For scripting languages \(Node\.js, Python, and Ruby\), you can edit your functi
 
    1. In the text box, enter the S3 link URL of the \.zip file archive, then choose **Save**\.
 
-## Change the runtime or runtime version \(console\)<a name="configuration-function-runtime"></a>
+## Changing the runtime or runtime version<a name="configuration-function-runtime"></a>
 
 If you update the function configuration to use a new runtime version, you may need to update the function code to be compatible with the new version\. If you update the function configuration to use a different runtime, you **must** provide new function code that is compatible with the runtime and architecture\. For instructions on how to create a deployment package for the function code, see the handler page for the runtime that the function uses\.
-
-------
-#### [ Node\.js ]
-
-[Deploy Node\.js Lambda functions with \.zip file archives](nodejs-package.md) 
-
-------
-#### [ Python ]
-
- [Deploy Python Lambda functions with \.zip file archives](python-package.md) 
-
-------
-#### [ Ruby ]
-
- [Deploy Ruby Lambda functions with \.zip file archives](ruby-package.md) 
-
-------
-#### [ Java ]
-
- [Deploy Java Lambda functions with \.zip or JAR file archives](java-package.md) 
-
-------
-#### [ Go ]
-
- [Deploy Go Lambda functions with \.zip file archives](golang-package.md) 
-
-------
-#### [ C\# ]
-
- [Deploy C\# Lambda functions with \.zip file archives](csharp-package.md) 
-
-------
-#### [ PowerShell ]
-
- [Deploy PowerShell Lambda functions with \.zip file archives](powershell-package.md) 
-
-------
 
 **To change the runtime or runtime version**
 
@@ -120,7 +120,9 @@ If you update the function configuration to use a new runtime version, you may n
 
 1. Choose the function to update and choose the **Code** tab\.
 
-1. Under **Runtime settings**, choose **Edit**\.
+1. Scroll down to the **Runtime settings** section, which is under the code editor\.
+
+1. Choose **Edit**\.
 
    1. For **Runtime**, select the runtime version\.
 
@@ -130,50 +132,13 @@ If you update the function configuration to use a new runtime version, you may n
 
 1. Choose **Save**\.
 
-## Change the architecture \(console\)<a name="configuration-function-arch"></a>
+## Changing the architecture<a name="configuration-function-arch"></a>
 
 Before you can change the instruction set architecture, you need to ensure that your function's code is compatible with the target architecture\. 
 
 If you use Node\.js, Python, or Ruby and you edit your function code in the embedded [editor](foundation-console.md#code-editor), the existing code may run without modification\.
 
 However, if you provide your function code using a \.zip file archive deployment package, you must prepare a new \.zip file archive that is compiled and built correctly for the target runtime and instruction\-set architecture\. For instructions, see the handler page for your function runtime\.
-
-------
-#### [ Node\.js ]
-
-[Deploy Node\.js Lambda functions with \.zip file archives](nodejs-package.md) 
-
-------
-#### [ Python ]
-
- [Deploy Python Lambda functions with \.zip file archives](python-package.md) 
-
-------
-#### [ Ruby ]
-
- [Deploy Ruby Lambda functions with \.zip file archives](ruby-package.md) 
-
-------
-#### [ Java ]
-
- [Deploy Java Lambda functions with \.zip or JAR file archives](java-package.md) 
-
-------
-#### [ Go ]
-
- [Deploy Go Lambda functions with \.zip file archives](golang-package.md) 
-
-------
-#### [ C\# ]
-
- [Deploy C\# Lambda functions with \.zip file archives](csharp-package.md) 
-
-------
-#### [ PowerShell ]
-
- [Deploy PowerShell Lambda functions with \.zip file archives](powershell-package.md) 
-
-------
 
 **To change the instruction set architecture**
 

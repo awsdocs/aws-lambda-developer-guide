@@ -21,13 +21,13 @@ To trace requests that don't have a tracing header, enable active tracing in you
 1. Choose **Save**\.
 
 **Pricing**  
-X\-Ray has a perpetual free tier\. Beyond the free tier threshold, X\-Ray charges for trace storage and retrieval\. For details, see [AWS X\-Ray pricing](https://aws.amazon.com/xray/pricing/)\.
+You can use X\-Ray tracing for free each month up to a certain limit as part of the AWS Free Tier\. Beyond that threshold, X\-Ray charges for trace storage and retrieval\. For more information, see [AWS X\-Ray pricing](http://aws.amazon.com/xray/pricing/)\.
 
 Your function needs permission to upload trace data to X\-Ray\. When you enable active tracing in the Lambda console, Lambda adds the required permissions to your function's [execution role](lambda-intro-execution-role.md)\. Otherwise, add the [AWSXRayDaemonWriteAccess](https://console.aws.amazon.com/iam/home#/policies/arn:aws:iam::aws:policy/AWSXRayDaemonWriteAccess) policy to the execution role\.
 
-X\-Ray applies a sampling algorithm to ensure that tracing is efficient, while still providing a representative sample of the requests that your application serves\. The default sampling rule is 1 request per second and 5 percent of additional requests\. This sampling rate cannot be configured for Lambda functions\.
+X\-Ray applies a sampling algorithm to ensure that tracing is efficient, while still providing a representative sample of the requests that your application serves\. The default sampling rate is 1 request per second and 5 percent of additional requests\. This sampling rate cannot be configured for Lambda functions\.
 
-In X\-Ray, a *trace* records information about a request that is processed by one or more *services*\. Services record *segments* that contain layers of *subsegments*\. Lambda records a segment for the Lambda service that handles the invocation request, and one for the work done by the function\. The function segment comes with subsegments for `Initialization`, `Invocation` and `Overhead`\. For more information see [ Lambda execution environment lifecycle](runtimes-context.md)\.
+In X\-Ray, a *trace* records information about a request that is processed by one or more *services*\. Services record *segments* that contain layers of *subsegments*\. Lambda records a segment for the Lambda service that handles the invocation request, and one for the work done by the function\. The function segment comes with subsegments for `Initialization`, `Invocation` and `Overhead`\. For more information see [ Lambda execution environment lifecycle](lambda-runtime-environment.md)\.
 
 The `Initialization` subsegment represents the init phase of the Lambda execution environment lifecycle\. During this phase, Lambda creates or unfreezes an execution environment with the resources you have configured, downloads the function code and all layers, initializes extensions, initializes the runtime, and runs the function's initialization code\.
 
@@ -48,7 +48,7 @@ See the following topics for a language\-specific introduction to tracing in Lam
 + [Instrumenting Node\.js code in AWS Lambda](nodejs-tracing.md)
 + [Instrumenting Python code in AWS Lambda](python-tracing.md)
 + [Instrumenting Ruby code in AWS Lambda](ruby-tracing.md)
-+ [Instrumenting Java code in AWS Lambda](java-tracing.md)
++ [Instrumenting Java code in Lambda](java-tracing.md)
 + [Instrumenting Go code in AWS Lambda](golang-tracing.md)
 + [Instrumenting C\# code in AWS Lambda](csharp-tracing.md)
 
@@ -85,7 +85,7 @@ To manage tracing configuration with the AWS CLI or AWS SDK, use the following A
 + [GetFunctionConfiguration](API_GetFunctionConfiguration.md)
 + [CreateFunction](API_CreateFunction.md)
 
-The following example AWS CLI command enables active tracing on a function named my\-function\.
+The following example AWS CLI command enables active tracing on a function named **my\-function**\.
 
 ```
 aws lambda update-function-configuration --function-name my-function \
@@ -96,7 +96,7 @@ Tracing mode is part of the version\-specific configuration that is locked when 
 
 ## Enabling active tracing with AWS CloudFormation<a name="services-xray-cloudformation"></a>
 
-To enable active tracing on an `AWS::Lambda::Function` resource in an AWS CloudFormation template, use the `TracingConfig` property\.
+To activate tracing on an `AWS::Lambda::Function` resource in an AWS CloudFormation template, use the `TracingConfig` property\.
 
 **Example [function\-inline\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/templates/function-inline.yml) – Tracing configuration**  
 

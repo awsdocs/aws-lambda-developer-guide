@@ -26,13 +26,15 @@ Resources in your API define one or more methods, such as GET or POST\. Methods 
 
 1. Choose a function\.
 
-1. Under **Functional overview**, choose **Add trigger**\.
+1. Under **Function overview**, choose **Add trigger**\.
 
 1. Select **API Gateway**\.
 
-1. For **API**, choose **Create an API**\.
+1. Choose **Create an API** or **Use an existing API**\.
 
-1. For **API type**, choose **HTTP API**\. For more information, see [API types](#services-apigateway-apitypes)
+   1. **New API:** For **API type**, choose **HTTP API**\. For more information, see [API types](#services-apigateway-apitypes)\.
+
+   1. **Existing API:** Select the API from the dropdown menu or enter the API ID \(for example, r3pmxmplak\)\.
 
 1. For **Security**, choose **Open**\.
 
@@ -139,7 +141,7 @@ The Lambda runtime serializes the response object into JSON and sends it to the 
 
 Amazon API Gateway gets permission to invoke your function from the function's [resource\-based policy](access-control-resource-based.md)\. You can grant invoke permission to an entire API, or grant limited access to a stage, resource, or method\.
 
-When you add an API to your function by using the Lambda console, using the API Gateway console, or in an AWS SAM template, the function's resource\-based policy is updated automatically\. The following example shows a function policy with a statement that was added by an AWS SAM template\.
+When you add an API to your function by using the Lambda console, using the API Gateway console, or in an AWS SAM template, the function's resource\-based policy is updated automatically\. The following is an example function policy\.
 
 **Example function policy**  
 
@@ -168,8 +170,6 @@ When you add an API to your function by using the Lambda console, using the API 
   ]
 }
 ```
-
-[Confirm the function policy](access-control-resource-based.md) in the **Permissions** tab of the Lambda console\.
 
 You can manage function policy permissions manually with the following API operations:
 + [AddPermission](API_AddPermission.md)

@@ -5,6 +5,7 @@ Lambda provides a management console and API for managing and invoking functions
 **Topics**
 + [Scaling](#gettingstarted-features-scaling)
 + [Concurrency controls](#gettingstarted-features-concurrency)
++ [Function URLs](#gettingstarted-features-urls)
 + [Asynchronous invocation](#gettingstarted-features-async)
 + [Event source mappings](#gettingstarted-features-eventsourcemapping)
 + [Destinations](#gettingstarted-features-destinations)
@@ -31,6 +32,12 @@ To enable functions to scale without fluctuations in latency, use *provisioned c
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/features-scaling-provisioned-auto.png)
 
 For more information, see [Managing Lambda reserved concurrency](configuration-concurrency.md)\.
+
+## Function URLs<a name="gettingstarted-features-urls"></a>
+
+Lambda offers built\-in HTTP\(S\) endpoint support through *function URLs*\. With function URLs, you can assign a dedicated HTTP endpoint to your Lambda function\. When your function URL is configured, you can use it to invoke your function through a web browser, curl, Postman, or any HTTP client\.
+
+You can add a function URL to an existing function, or create a new function with a function URL\. For more information, see [Invoking Lambda function URLs](urls-invocation.md)\.
 
 ## Asynchronous invocation<a name="gettingstarted-features-async"></a>
 

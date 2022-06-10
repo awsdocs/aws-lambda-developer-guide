@@ -1,4 +1,4 @@
-# Setting up with Lambda<a name="lambda-settingup"></a>
+# Prerequisites<a name="lambda-settingup"></a>
 
 To use AWS Lambda, you need an AWS account\. If you plan to configure and use Lambda functions from the command line, set up the AWS CLI\. You can set up other development and build tools as required for the environment and language that you are planning to use\. 
 

@@ -7,7 +7,7 @@ Lambda provides language\-specific [environment variables](configuration-envvars
 ## Language\-specific environment variables<a name="runtimes-envvars"></a>
 
 Lambda supports configuration\-only ways to enable code to be pre\-loaded during function initialization through the following language\-specific environment variables:
-+ `JAVA_TOOL_OPTIONS` – On Java 11 and Java 8 \(`java8.al2`\), Lambda supports this environment variable to set additional command\-line variables in Lambda\. This environment variable allows you to specify the initialization of tools, specifically the launching of native or Java programming language agents using the `agentlib` or `javaagent` options\.
++ `JAVA_TOOL_OPTIONS` – On Java, Lambda supports this environment variable to set additional command\-line variables in Lambda\. This environment variable allows you to specify the initialization of tools, specifically the launching of native or Java programming language agents using the `agentlib` or `javaagent` options\.
 + `NODE_OPTIONS` – On Node\.js 10x and above, Lambda supports this environment variable\.
 + `DOTNET_STARTUP_HOOKS` – On \.NET Core 3\.1 and above, this environment variable specifies a path to an assembly \(dll\) that Lambda can use\.
 

@@ -88,7 +88,7 @@ When you use Amazon SES to receive messages, you can configure Amazon SES to cal
           "action": {
             "type": "Lambda",
             "invocationType": "Event",
-            "functionArn": "arn:aws:lambda:us-west-2:012345678912:function:Example"
+            "functionArn": "arn:aws:lambda:us-west-2:111122223333:function:Example"
           },
           "spfVerdict": {
             "status": "PASS"

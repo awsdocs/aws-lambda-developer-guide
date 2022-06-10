@@ -1,7 +1,7 @@
 # Deploy Python Lambda functions with \.zip file archives<a name="python-package"></a>
 
 **Note**  
-End of support for the Python 2\.7 runtime started on July 15, 2021\. For more information, see [Runtime support policy](runtime-support-policy.md)\.
+End of support for the Python 2\.7 runtime started on July 15, 2021\. For more information, see [Runtime deprecation policy](lambda-runtimes.md#runtime-support-policy)\.
 
 Your AWS Lambda function's code consists of scripts or compiled programs and their dependencies\. You use a *deployment package* to deploy your function code to Lambda\. Lambda supports two types of deployment packages: container images and \.zip file archives\.
 
@@ -16,7 +16,7 @@ To create the deployment package for a \.zip file archive, you can use a built\-
 
 **Note**  
 A python package may contain initialization code in the \_\_init\_\_\.py file\. Prior to Python 3\.9, Lambda did not run the \_\_init\_\_\.py code for packages in the function handler’s directory or parent directories\. In Python 3\.9 and later releases, Lambda runs the init code for packages in these directories during initialization\.   
-Note that Lambda runs the init code only when the execution environment is first initialized, not for each function invocation in that intialized environment\. 
+Note that Lambda runs the init code only when the execution environment is first initialized, not for each function invocation in that initialized environment\.
 
 **Topics**
 + [Prerequisites](#python-package-prereqs)

@@ -63,7 +63,7 @@ For more information about events from AWS services, see [Using AWS Lambda with 
 
 An *execution environment* provides a secure and isolated runtime environment for your Lambda function\. An execution environment manages the processes and resources that are required to run the function\. The execution environment provides lifecycle support for the function and for any [extensions](#gettingstarted-concepts-extensions) associated with your function\.
 
-For more information, see [AWS Lambda execution environment](runtimes-context.md)\.
+For more information, see [AWS Lambda execution environment](lambda-runtime-environment.md)\.
 
 ## Instruction set architecture<a name="gettingstarted-concepts-arch"></a>
 

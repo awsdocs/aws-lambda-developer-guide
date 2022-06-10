@@ -1,6 +1,6 @@
 # Invoking Lambda functions<a name="lambda-invocation"></a>
 
-You can invoke Lambda functions directly [using the Lambda console](getting-started-create-function.md#get-started-invoke-manually), the Lambda API, an AWS SDK, the AWS Command Line Interface \(AWS CLI\), and AWS toolkits\. You can also configure other AWS services to invoke your function, or you can configure Lambda to read from a stream or queue and invoke your function\.
+You can invoke Lambda functions directly using [the Lambda console](getting-started.md#get-started-invoke-manually), a [function URL](lambda-urls.md) HTTP\(S\) endpoint, the Lambda API, an AWS SDK, the AWS Command Line Interface \(AWS CLI\), and AWS toolkits\. You can also configure other AWS services to invoke your function, or you can configure Lambda to read from a stream or queue and invoke your function\.
 
 When you invoke a function, you can choose to invoke it synchronously or asynchronously\. With [synchronous invocation](invocation-sync.md), you wait for the function to process the event and return a response\. With [asynchronous](invocation-async.md) invocation, Lambda queues the event for processing and returns a response immediately\. For asynchronous invocation, Lambda handles retries and can send invocation records to a [destination](invocation-async.md#invocation-async-destinations)\.
 
@@ -19,5 +19,6 @@ Depending on who invokes your function and how it's invoked, scaling behavior an
 + [Lambda event filtering](invocation-eventfiltering.md)
 + [Lambda function states](functions-states.md)
 + [Error handling and automatic retries in AWS Lambda](invocation-retries.md)
++ [Testing Lambda functions in the console](testing-functions.md)
 + [Using Lambda extensions](using-extensions.md)
 + [Invoking functions defined as container images](invocation-images.md)

@@ -16,7 +16,7 @@ Lambda provides a set of open\-source base images that you can use to build your
 
 You upload your container images to Amazon Elastic Container Registry \(Amazon ECR\), a managed AWS container image registry service\. To deploy the image to your function, you specify the Amazon ECR image URL using the Lambda console, the Lambda API, command line tools, or the AWS SDKs\.
 
-For more information about Lambda container images, see [Using container images with Lambda](lambda-images.md)\.
+For more information about Lambda container images, see [Creating Lambda container images](images-create.md)\.
 
 ## \.zip file archives<a name="gettingstarted-package-zip"></a>
 

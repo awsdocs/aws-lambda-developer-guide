@@ -10,7 +10,7 @@ Use the following instructions to create a Lambda function that notifies you whe
 
 ## Requirements<a name="with-cloudtrail-tutorial-requirements"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with Lambda](getting-started-create-function.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Create a Lambda function with the console](getting-started.md#getting-started-create-function) to create your first Lambda function\.
 
 Before you begin, make sure that you have the following tools:
 + [Node\.js 12\.x with `npm`](https://nodejs.org/en/download/releases/)\.

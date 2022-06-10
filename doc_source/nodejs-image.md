@@ -4,8 +4,6 @@ You can deploy your Lambda function code as a [container image](images-create.md
 + AWS base images for Lambda
 
   These base images are preloaded with a language runtime and other components that are required to run the image on Lambda\. AWS provides a Dockerfile for each of the base images to help with building your container image\.
-
-  AWS provides base images for the x86\_64 architecture for all supported \.NET runtimes, and for the arm64 architecture for the \.NET Core 3\.1 and \.NET 6\.0 runtimes\.
 + Open\-source runtime interface clients \(RIC\)
 
   If you use a community or private enterprise base image, you must add a [Runtime interface client](runtimes-images.md#runtimes-api-client) to the base image to make it compatible with Lambda\.
@@ -17,9 +15,9 @@ The workflow for a function defined as a container image includes these steps:
 
 1. Build your container image using the resources listed in this topic\.
 
-1. Upload the image to your Amazon ECR container registry\. See steps 7\-9 in [Create image](images-create.md#images-create-from-base)\.
+1. Upload the image to your [Amazon ECR container registry](images-create.md#images-upload)\.
 
-1. [Create](configuration-images.md#configuration-images-create) the Lambda function or [update the function code](configuration-images.md#configuration-images-update) to deploy the image to an existing function\.
+1. [Create](gettingstarted-images.md#configuration-images-create) the Lambda function or [update the function code](gettingstarted-images.md#configuration-images-update) to deploy the image to an existing function\.
 
 **Topics**
 + [AWS base images for Node\.js](#nodejs-image-base)
@@ -34,19 +32,15 @@ AWS provides the following base images for Node\.js:
 
 | Tags | Runtime | Operating system | Dockerfile | 
 | --- | --- | --- | --- | 
+| 16 | NodeJS 16\.x | Amazon Linux 2 | [Dockerfile for Node\.js 16\.x on GitHub](https://github.com/aws/aws-lambda-base-images/blob/nodejs16.x/Dockerfile.nodejs16.x) | 
 | 14 | NodeJS 14\.x | Amazon Linux 2 | [Dockerfile for Node\.js 14\.x on GitHub](https://github.com/aws/aws-lambda-base-images/blob/nodejs14.x/Dockerfile.nodejs14.x) | 
 | 12 | NodeJS 12\.x | Amazon Linux 2 | [Dockerfile for Node\.js 12\.x on GitHub](https://github.com/aws/aws-lambda-base-images/blob/nodejs12.x/Dockerfile.nodejs12.x) | 
-| 10 | NodeJS 10\.x | Amazon Linux 2 | [Dockerfile for Node\.js 10\.x on GitHub](https://github.com/aws/aws-lambda-base-images/blob/nodejs10.x/Dockerfile.nodejs10.x) | 
 
-Docker Hub repository: amazon/aws\-lambda\-nodejs
-
-Amazon ECR repository: gallery\.ecr\.aws/lambda/nodejs
+Amazon ECR repository: [gallery\.ecr\.aws/lambda/nodejs](https://gallery.ecr.aws/lambda/nodejs)
 
 ## Using a Node\.js base image<a name="nodejs-image-instructions"></a>
 
 For instructions on how to use a Node\.js base image, choose the **usage** tab on [AWS Lambda base images for Node\.js](https://gallery.ecr.aws/lambda/nodejs) in the *Amazon ECR repository*\. 
-
-The instructions are also available on [AWS Lambda base images for Node\.js](https://hub.docker.com/r/amazon/aws-lambda-nodejs) in the *Docker Hub repository*\.
 
 ## Node\.js runtime interface clients<a name="nodejs-image-clients"></a>
 
@@ -62,4 +56,4 @@ You can also download the [Node\.js runtime interface client](https://github.com
 
 ## Deploy the container image<a name="nodejs-image-deploy"></a>
 
-For a new function, you deploy the Node\.js image when you [create the function](configuration-images.md#configuration-images-create)\. For an existing function, if you rebuild the container image, you need to redeploy the image by [updating the function code](configuration-images.md#configuration-images-update)\.
+For a new function, you deploy the Node\.js image when you [create the function](gettingstarted-images.md#configuration-images-create)\. For an existing function, if you rebuild the container image, you need to redeploy the image by [updating the function code](gettingstarted-images.md#configuration-images-update)\.

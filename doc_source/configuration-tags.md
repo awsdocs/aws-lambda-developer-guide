@@ -1,6 +1,6 @@
 # Using tags on AWS Lambda functions<a name="configuration-tags"></a>
 
-You can tag Lambda functions to organize them by owner, project or department\. Tags are freeform key\-value pairs that are supported across AWS services for use in filtering resources and adding detail to billing reports\.
+You can tag Lambda functions to organize them by owner, project, or department\. Tags are freeform key\-value pairs that are supported across AWS services for use in filtering resources, and adding detail to billing reports\.
 
 **Topics**
 + [Using tags with the Lambda console](#using-tags-with-the-console)
@@ -9,11 +9,33 @@ You can tag Lambda functions to organize them by owner, project or department\. 
 
 ## Using tags with the Lambda console<a name="using-tags-with-the-console"></a>
 
-You can use the console to add tags to existing functions and to filter functions by the tags that you add\.
+You can use the console to create functions that have tags, add tags to existing functions, and filter functions by the tags that you add\.
 
 ### Adding tags to a function<a name="configuration-tags-config"></a>
 
-**To add tags to a function \(console\)**
+**To add tags when you create a function**
+
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
+
+1. Choose **Create function**\.
+
+1. Choose **Author from scratch** or **Container image**\. 
+
+1. Under **Basic information**, do the following:
+
+   1. For **Function name**, enter the function name\. Function names are limited to 64 characters in length\.
+
+   1. For **Runtime**, choose the language version to use for your function\.
+
+   1. \(Optional\) For **Architecture**, choose the instruction set architecture to use for your function\. The default architecture is x86\_64\. When you build the deployment package for your function, make sure that it is compatible with this [instruction set architecture](foundation-arch.md)\.
+
+1. Expand **Advanced settings** and then select **Enable tags**\.
+
+1. Enter a **Key** and an optional **Value**\. To add more tags, choose **Add new tag**, then repeat this step\.
+
+1. Choose **Create function**\.
+
+**To add tags to an existing function**
 
 1. Grant appropriate permissions to the IAM identity \(user, group, or role\) for the person working with the function:
    + **lambda:ListTags**—When a function has tags, grant this permission to anyone who needs to view the function\.
@@ -42,7 +64,7 @@ You can filter functions based on the presence or value of a tag with the Lambda
 
 Tags apply at the function level, not to versions or aliases\. Tags are not part of the version\-specific configuration that is snapshotted when you publish a version\.
 
-**To filter functions with tags \(console\)**
+**To filter functions with tags**
 
 1. Make sure that you have the permissions you need:
    + lambda:ListTags grants permission to view functions that have tags\.
@@ -64,7 +86,7 @@ With AWS Billing and Cost Management, you can use tags to customize billing repo
 
 ## Using tags with the AWS Command Line Interface<a name="configuration-tags-cli"></a>
 
-You can use the console to create functions that have tags, add tags to existing functions, and to filter functions by the tags that you add\.
+You can use the AWS CLI to create functions that have tags, add tags to existing functions, and to filter functions by the tags that you add\.
 
 ### Permissions required for working with tags<a name="permissions-required-for-working-with-tags-cli"></a>
 

@@ -9,12 +9,9 @@ Lambda supports the following Node\.js runtimes\.
 
 | Name | Identifier | SDK for JavaScript | Operating system | Architectures | 
 | --- | --- | --- | --- | --- | 
-|  Node\.js 14  |  `nodejs14.x`  |  2\.1001\.0  |  Amazon Linux 2  |  x86\_64, arm64  | 
-|  Node\.js 12  |  `nodejs12.x`  |  2\.1001\.0  |  Amazon Linux 2  |  x86\_64, arm64  | 
-|  Node\.js 10  |  `nodejs10.x`  |  2\.1001\.0  |  Amazon Linux 2  |  x86\_64  | 
-
-**Note**  
-For end of support information about Node\.js 10, see [Runtime support policy](runtime-support-policy.md)\.
+|  Node\.js 16  |  `nodejs16.x`  |  2\.1055\.0  |  Amazon Linux 2  |  x86\_64, arm64  | 
+|  Node\.js 14  |  `nodejs14.x`  |  2\.1055\.0  |  Amazon Linux 2  |  x86\_64, arm64  | 
+|  Node\.js 12  |  `nodejs12.x`  |  2\.1055\.0  |  Amazon Linux 2  |  x86\_64, arm64  | 
 
 Lambda functions use an [execution role](lambda-intro-execution-role.md) to get permission to write logs to Amazon CloudWatch Logs, and to access other services and resources\. If you don't already have an execution role for function development, create one\.
 
@@ -41,7 +38,7 @@ You can add permissions to the role later, or swap it out for a different role t
 
 1. Configure the following settings:
    + **Name** – **my\-function**\.
-   + **Runtime** – **Node\.js 14\.x**\.
+   + **Runtime** – **Node\.js 16\.x**\.
    + **Role** – **Choose an existing role**\.
    + **Existing role** – **lambda\-role**\.
 

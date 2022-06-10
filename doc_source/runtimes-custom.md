@@ -38,7 +38,7 @@ cd $LAMBDA_TASK_ROOT
 ./node-v11.1.0-linux-x64/bin/node runtime.js
 ```
 
-Your runtime code is responsible for completing some initialization tasks\. Then it processes invocation events in a loop until it's terminated\. The initialization tasks run once [per instance of the function](runtimes-context.md) to prepare the environment to handle invocations\.
+Your runtime code is responsible for completing some initialization tasks\. Then it processes invocation events in a loop until it's terminated\. The initialization tasks run once [per instance of the function](lambda-runtime-environment.md) to prepare the environment to handle invocations\.
 
 **Initialization tasks**
 + **Retrieve settings** – Read environment variables to get details about the function and environment\.

@@ -48,7 +48,7 @@ You can monitor a given function's concurrency usage using the `ConcurrentExecut
 ```
 {
    "eventSource": "aws:amq",
-   "eventSourceArn": "arn:aws:mq:us-west-2:112556298976:broker:test:b-9bcfa592-423a-4942-879d-eb284b418fc8",
+   "eventSourceArn": "arn:aws:mq:us-west-2:111122223333:broker:test:b-9bcfa592-423a-4942-879d-eb284b418fc8",
    "messages": [
       {
          "messageID": "ID:b-9bcfa592-423a-4942-879d-eb284b418fc8-1.mq.us-west-2.amazonaws.com-37557-1234520418293-4:1:1:1:1",
@@ -83,7 +83,7 @@ You can monitor a given function's concurrency usage using the `ConcurrentExecut
 ```
 {
   "eventSource": "aws:rmq",
-  "eventSourceArn": "arn:aws:mq:us-west-2:112556298976:broker:pizzaBroker:b-9bcfa592-423a-4942-879d-eb284b418fc8",
+  "eventSourceArn": "arn:aws:mq:us-west-2:111122223333:broker:pizzaBroker:b-9bcfa592-423a-4942-879d-eb284b418fc8",
   "rmqMessagesByQueue": {
     "pizzaQueue::/": [
       {
@@ -112,7 +112,7 @@ You can monitor a given function's concurrency usage using the `ConcurrentExecut
               ]
             },
             "numberInHeader": 10
-          }
+          },
           "deliveryMode": 1,
           "priority": 34,
           "correlationId": null,

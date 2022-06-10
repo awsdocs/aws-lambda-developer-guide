@@ -21,7 +21,7 @@ The second argument is the [context object](nodejs-context.md), which contains i
 
 The third argument, `callback`, is a function that you can call in [non\-async handlers](#nodejs-handler-sync) to send a response\. The callback function takes two arguments: an `Error` and a response\. When you call it, Lambda waits for the event loop to be empty and then returns the response or error to the invoker\. The response object must be compatible with `JSON.stringify`\.
 
-For async handlers, you return a response, error, or promise to the runtime instead of using `callback`\.
+For asynchronous function handlers, you return a response, error, or promise to the runtime instead of using `callback`\.
 
 If your function has additional dependencies, [use npm to include them in your deployment package](nodejs-package.md#nodejs-package-dependencies)\.
 

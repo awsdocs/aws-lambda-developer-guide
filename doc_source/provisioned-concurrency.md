@@ -29,7 +29,7 @@ To manage provisioned concurrency settings for a version or alias, use the Lambd
  If you change the version that an alias points to, Lambda deallocates the provisioned concurrency from the old version and allocates it to the new version\. You can add a routing configuration to an alias that has provisioned concurrency\. For more information, see [Lambda function aliases](configuration-aliases.md)\. Note that you can't manage provisioned concurrency settings on the alias while the routing configuration is in place\. 
 
 **Note**  
- Provisioned Concurrency is not supported on $LATEST\. Ensure your client application is not pointing to $LATEST before configuring provisioned concurrency\. 
+ Provisioned Concurrency is not supported on the unpublished version of the function \($LATEST\)\. Ensure your client application is not pointing to $LATEST before configuring provisioned concurrency\. 
 
 **To allocate provisioned concurrency for an alias or version**
 
@@ -139,7 +139,7 @@ Application Auto Scaling allows you to manage provisioned concurrency on a sched
 
 To increase provisioned concurrency automatically as needed, use the `RegisterScalableTarget` and `PutScalingPolicy` Application Auto Scaling API operations to register a target and create a scaling policy:
 
-1. Register a function's alias as a scaling target\. The following example registers the BLUE alias of a function named `function`my\-:
+1. Register a function's alias as a scaling target\. The following example registers the BLUE alias of a function named `my-function`:
 
    ```
    aws application-autoscaling register-scalable-target --service-namespace lambda \

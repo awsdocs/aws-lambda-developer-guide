@@ -12,11 +12,11 @@ EventBridge \(CloudWatch Events\) invokes your Lambda function asynchronously wi
     "id": "b6ba298a-7732-2226-xmpl-976312c1a050",
     "detail-type": "EC2 Instance State-change Notification",
     "source": "aws.ec2",
-    "account": "123456798012",
+    "account": "111122223333",
     "time": "2019-10-02T17:59:30Z",
     "region": "us-east-2",
     "resources": [
-        "arn:aws:ec2:us-east-2:123456798012:instance/i-0c314xmplcd5b8173"
+        "arn:aws:ec2:us-east-2:111122223333:instance/i-0c314xmplcd5b8173"
     ],
     "detail": {
         "instance-id": "i-0c314xmplcd5b8173",

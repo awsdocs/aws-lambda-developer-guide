@@ -24,7 +24,7 @@ Lambda is a highly available service\. For more information, see the [AWS Lambda
 
 ## When should I use Lambda?<a name="when-to-use-cloud-functions"></a>
 
-Lambda is an ideal compute service for many application scenarios, as long as you can run your application code using the Lambda [standard runtime environment](runtimes-context.md) and within the resources that Lambda provides\. Lambda is best suited for shorter, event\-driven workloads, since Lambda functions run for up to 15 minutes per invocation\.
+Lambda is an ideal compute service for many application scenarios, as long as you can run your application code using the Lambda [standard runtime environment](lambda-runtime-environment.md) and within the resources that Lambda provides\.
 
 When using Lambda, you are responsible only for your code\. Lambda manages the compute fleet that offers a balance of memory, CPU, network, and other resources to run your code\. Because Lambda manages these resources, you cannot log in to compute instances or customize the operating system on [provided runtimes](lambda-runtimes.md)\. Lambda performs operational and administrative activities on your behalf, including managing capacity, monitoring, and logging your Lambda functions\.
 
@@ -40,7 +40,7 @@ The following key features help you develop Lambda applications that are scalabl
 [Concurrency and scaling controls](invocation-scaling.md) such as concurrency limits and provisioned concurrency give you fine\-grained control over the scaling and responsiveness of your production applications\.
 
 **Functions defined as container images**  
-Use your preferred [container image](lambda-images.md) tooling, workflows, and dependencies to build, test, and deploy your Lambda functions\.
+Use your preferred [container image](images-create.md) tooling, workflows, and dependencies to build, test, and deploy your Lambda functions\.
 
 **Code signing **  
 [Code signing](configuration-codesigning.md) for Lambda provides trust and integrity controls that let you verify that only unaltered code that approved developers have published is deployed in your Lambda functions\.
@@ -96,7 +96,7 @@ You can create, invoke, and manage your Lambda functions using any of the follow
 +  **AWS Command Line Interface \(AWS CLI\)** – Provides commands for a broad set of AWS services, including Lambda, and is supported on Windows, macOS, and Linux\. For more information, see [Using Lambda with the AWS CLI](gettingstarted-awscli.md)\.
 + **AWS SDKs** – Provide language\-specific APIs and manage many of the connection details, such as signature calculation, request retry handling, and error handling\. For more information, see [AWS SDKs](http://aws.amazon.com/tools/#SDKs)\.
 +  **AWS CloudFormation** – Enables you to create templates that define your Lambda applications\. For more information, see [AWS Lambda applications](deploying-lambda-apps.md)\. AWS CloudFormation also supports the [AWS Cloud Development Kit \(CDK\)](http://aws.amazon.com/cdk)\.
-+  **AWS Serverless Application Model \(AWS SAM\)** – Provides templates and a CLI to configure and manage AWS serverless applications\. For more information, see [AWS SAM](lambda-settingup.md#lambda-settingup-awssam)\.
++  **AWS Serverless Application Model \(AWS SAM\)** – Provides templates and a CLI to configure and manage AWS serverless applications\. For more information, see [SAM CLI](lambda-settingup.md#lambda-settingup-samcli)\.
 
 
 

@@ -1,39 +1,35 @@
-# Instrumenting Java code in AWS Lambda<a name="java-tracing"></a>
+# Instrumenting Java code in Lambda<a name="java-tracing"></a>
 
-Lambda integrates with AWS X\-Ray to enable you to trace, debug, and optimize Lambda applications\. You can use X\-Ray to trace a request as it traverses resources in your application, from the frontend API to storage and database on the backend\. By simply adding the X\-Ray SDK library to your build configuration, you can record errors and latency for any call that your function makes to an AWS service\.
+Lambda integrates with AWS X\-Ray to help you trace, debug, and optimize Lambda applications\. You can use X\-Ray to trace a request as it traverses resources in your application, which may include Lambda functions and other AWS services\.
 
-The X\-Ray *service map* shows the flow of requests through your application\. The following example from the [error processor](samples-errorprocessor.md) sample application shows an application with two functions\. The primary function processes events and sometimes returns errors\. The second function processes errors that appear in the first's log group and uses the AWS SDK to call X\-Ray, Amazon S3 and Amazon CloudWatch Logs\.
+To send tracing data to X\-Ray, you can use one of two SDK libraries:
++ [AWS Distro for OpenTelemetry \(ADOT\)](http://aws.amazon.com/otel) – A secure, production\-ready, AWS\-supported distribution of the OpenTelemetry \(OTel\) SDK\.
++ [AWS X\-Ray SDK for Java](https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-java.html) – A collection of libraries for generating and sending trace data to X\-Ray\.
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-errorprocessor-servicemap.png)
+Both ADOT and the X\-Ray SDK offer ways to send your telemetry data to the X\-Ray service\. You can then use X\-Ray to view, filter, and gain insights into your application's performance metrics to identify issues and opportunities for optimization\.
 
-To trace requests that don't have a tracing header, enable active tracing in your function's configuration\.
+**Important**  
+**ADOT is the preferred method for instrumenting your Lambda functions**\. We recommend using ADOT for all new applications\.
 
-**To enable active tracing**
+**Topics**
++ [Using ADOT to instrument your Java functions](#java-adot)
++ [Using the X\-Ray SDK to instrument your Java functions](#java-xray-sdk)
++ [Activating tracing with the Lambda API](#java-tracing-api)
++ [Activating tracing with AWS CloudFormation](#java-tracing-cloudformation)
++ [Storing runtime dependencies in a layer \(X\-Ray SDK\)](#java-tracing-layers)
++ [X\-Ray tracing in sample applications \(X\-Ray SDK\)](#java-tracing-samples)
 
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
+## Using ADOT to instrument your Java functions<a name="java-adot"></a>
 
-1. Choose a function\.
+ADOT provides fully managed Lambda [layers](gettingstarted-concepts.md#gettingstarted-concepts-layer) that package everything you need to collect telemetry data using the OTel SDK\. By consuming this layer, you can instrument your Lambda functions without having to modify any function code\. You can also configure your layer to do custom initialization of OTel\. For more information, see [Custom configuration for the ADOT Collector on Lambda](https://aws-otel.github.io/docs/getting-started/lambda#custom-configuration-for-the-adot-collector-on-lambda) in the ADOT documentation\.
 
-1. Choose **Configuration** and then choose **Monitoring tools**\.
+For Java runtimes, you can choose between two layers to consume:
++ **AWS managed Lambda layer for ADOT Java \(Auto\-instrumentation Agent\)** – This layer automatically transforms your function code at startup to collect tracing data\. For detailed instructions on how to consume this layer together with the ADOT Java agent, see [AWS Distro for OpenTelemetry Lambda Support for Java \(Auto\-instrumentation Agent\)](https://aws-otel.github.io/docs/getting-started/lambda/lambda-java-auto-instr) in the ADOT documentation\.
++ **AWS managed Lambda layer for ADOT Java** – This layer also provides built\-in instrumentation for Lambda functions, but it requires a few manual code changes to initialize the OTel SDK\. For detailed instructions on how to consume this layer, see [AWS Distro for OpenTelemetry Lambda Support for Java](https://aws-otel.github.io/docs/getting-started/lambda/lambda-java) in the ADOT documentation\.
 
-1. Choose **Edit**\.
+## Using the X\-Ray SDK to instrument your Java functions<a name="java-xray-sdk"></a>
 
-1. Under **X\-Ray**, enable **Active tracing**\.
-
-1. Choose **Save**\.
-
-**Pricing**  
-X\-Ray has a perpetual free tier\. Beyond the free tier threshold, X\-Ray charges for trace storage and retrieval\. For details, see [AWS X\-Ray pricing](https://aws.amazon.com/xray/pricing/)\.
-
-Your function needs permission to upload trace data to X\-Ray\. When you enable active tracing in the Lambda console, Lambda adds the required permissions to your function's [execution role](lambda-intro-execution-role.md)\. Otherwise, add the [AWSXRayDaemonWriteAccess](https://console.aws.amazon.com/iam/home#/policies/arn:aws:iam::aws:policy/AWSXRayDaemonWriteAccess) policy to the execution role\.
-
-X\-Ray applies a sampling algorithm to ensure that tracing is efficient, while still providing a representative sample of the requests that your application serves\. The default sampling rule is 1 request per second and 5 percent of additional requests\. This sampling rate cannot be configured for Lambda functions\.
-
-When active tracing is enabled, Lambda records a trace for a subset of invocations\. Lambda records two *segments*, which creates two nodes on the service map\. The first node represents the Lambda service that receives the invocation request\. The second node is recorded by the function's [runtime](gettingstarted-concepts.md#gettingstarted-concepts-runtime)\.
-
-![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/xray-servicemap-function.png)
-
-To record detail about calls that your function makes to other resources and services, add the X\-Ray SDK for Java to your build configuration\. The following example shows a Gradle build configuration that includes the libraries that enable automatic instrumentation of AWS SDK for Java 2\.x clients\.
+To record data about calls that your function makes to other resources and services in your application, you can add the X\-Ray SDK for Java to your build configuration\. The following example shows a Gradle build configuration that includes the libraries that activate automatic instrumentation of AWS SDK for Java 2\.x clients\.
 
 **Example [build\.gradle](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-java/build.gradle) – Tracing dependencies**  
 
@@ -50,31 +46,56 @@ dependencies {
 }
 ```
 
-The following example shows a trace with 2 segments\. Both are named **my\-function**, but one is type `AWS::Lambda` and the other is `AWS::Lambda::Function`\. The function segment is expanded to show its subsegments\.
+After you add the correct dependencies, activate tracing in your function's configuration:
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/nodejs-xray-timeline.png)
+**To turn on active tracing**
 
-The first segment represents the invocation request processed by the Lambda service\. The second segment records the work done by your function\. The function segment has 3 subsegments\.
-+ **Initialization** – Represents time spent loading your function and running [initialization code](foundation-progmodel.md)\. This subsegment only appears for the first event processed by each instance of your function\.
-+ **Invocation** – Represents the work done by your handler code\. By instrumenting your code, you can extend this subsegment with additional subsegments\.
-+ **Overhead** – Represents the work done by the Lambda runtime to prepare to handle the next event\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
-You can also instrument HTTP clients, record SQL queries, and create custom subsegments with annotations and metadata\. For more information, see [AWS X\-Ray SDK for Java ](https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-java.html) in the AWS X\-Ray Developer Guide\.
+1. Choose a function\.
 
-**Topics**
-+ [Enabling active tracing with the Lambda API](#java-tracing-api)
-+ [Enabling active tracing with AWS CloudFormation](#java-tracing-cloudformation)
-+ [Storing runtime dependencies in a layer](#java-tracing-layers)
-+ [Tracing in sample applications](#java-tracing-samples)
+1. Choose **Configuration**, and then choose **Monitoring and operations tools**\.
 
-## Enabling active tracing with the Lambda API<a name="java-tracing-api"></a>
+1. Choose **Edit**\.
+
+1. Under **AWS X\-Ray**, turn on **Active tracing**\.
+
+1. Choose **Save**\.
+
+**Pricing**  
+You can use X\-Ray tracing for free each month up to a certain limit as part of the AWS Free Tier\. Beyond that threshold, X\-Ray charges for trace storage and retrieval\. For more information, see [AWS X\-Ray pricing](http://aws.amazon.com/xray/pricing/)\.
+
+Your function needs permissions to upload trace data to X\-Ray\. When you turn on active tracing in the Lambda console, Lambda adds the required permissions to your function's [execution role](lambda-intro-execution-role.md)\. You can also manually add the AWS Identity and Access Management \(IAM\) policy [AWSXRayDaemonWriteAccess](https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/AWSXRayDaemonWriteAccess) to your execution role\.
+
+After you've configured active tracing, you can observe specific requests through your application\. The [X\-Ray service graph](https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html#xray-concepts-servicegraph) shows information about your application and all its components\. The following example from the [error processor sample application](samples-errorprocessor.md) shows an application with two Lambda functions\. The primary function processes events and sometimes returns errors\. The second function at the top processes errors that appear in the first function's log group and uses the AWS SDK to call X\-Ray, Amazon Simple Storage Service \(Amazon S3\), and Amazon CloudWatch Logs\.
+
+![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-errorprocessor-servicemap.png)
+
+X\-Ray may not trace all requests to your application\. X\-Ray applies a sampling algorithm to ensure that tracing is efficient, while still providing a representative sample of all requests\. The default sample rule is one request per second and five percent of additional requests\. You cannot configure this sampling rate for your functions\.
+
+For each trace, Lambda records two segments, which creates two nodes on the service graph\. The following image highlights the primary function from the error processor example\.
+
+![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/xray-servicemap-function.png)
+
+The first node on the left represents the Lambda service, which receives the invocation request\. The second node on the right records the work of your function\. The following example shows a trace with these two segments\. Both are named **my\-function**, but one is type `AWS::Lambda` and the other is `AWS::Lambda::Function`\.
+
+![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/nodejs-xray-timeline.png)
+
+This example expands the function segment to show its three subsegments:
++ **Initialization** – Represents time spent loading your function and running [initialization code](foundation-progmodel.md)\. This subsegment appears only for the first event that each instance of your function processes\.
++ **Invocation** – Represents the work that your handler code does\.
++ **Overhead** – Represents the work that the Lambda runtime does to prepare to handle the next event\.
+
+You can also instrument HTTP clients, record SQL queries, and create custom subsegments with annotations and metadata\. For more information, see [AWS X\-Ray SDK for Java](https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-java.html) in the *AWS X\-Ray Developer Guide*\.
+
+## Activating tracing with the Lambda API<a name="java-tracing-api"></a>
 
 To manage tracing configuration with the AWS CLI or AWS SDK, use the following API operations:
 + [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)
 + [GetFunctionConfiguration](API_GetFunctionConfiguration.md)
 + [CreateFunction](API_CreateFunction.md)
 
-The following example AWS CLI command enables active tracing on a function named my\-function\.
+The following example AWS CLI command enables active tracing on a function named **my\-function**\.
 
 ```
 aws lambda update-function-configuration --function-name my-function \
@@ -83,9 +104,9 @@ aws lambda update-function-configuration --function-name my-function \
 
 Tracing mode is part of the version\-specific configuration that is locked when you publish a version of your function\. You can't change the tracing mode on a published version\.
 
-## Enabling active tracing with AWS CloudFormation<a name="java-tracing-cloudformation"></a>
+## Activating tracing with AWS CloudFormation<a name="java-tracing-cloudformation"></a>
 
-To enable active tracing on an `AWS::Lambda::Function` resource in an AWS CloudFormation template, use the `TracingConfig` property\.
+To activate tracing on an `AWS::Lambda::Function` resource in an AWS CloudFormation template, use the `TracingConfig` property\.
 
 **Example [function\-inline\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/templates/function-inline.yml) – Tracing configuration**  
 
@@ -112,11 +133,11 @@ Resources:
       ...
 ```
 
-## Storing runtime dependencies in a layer<a name="java-tracing-layers"></a>
+## Storing runtime dependencies in a layer \(X\-Ray SDK\)<a name="java-tracing-layers"></a>
 
-If you use the X\-Ray SDK to instrument AWS SDK clients your function code, your deployment package can become quite large\. To avoid uploading runtime dependencies every time you update your functions code, package them in a [Lambda layer](configuration-layers.md)\.
+If you use the X\-Ray SDK to instrument AWS SDK clients in your function code, your deployment package can become quite large\. To avoid uploading runtime dependencies every time that you update your function code, package them in a Lambda layer\.
 
-The following example shows an `AWS::Serverless::LayerVersion` resource that stores the SDK for Java and X\-Ray SDK for Java\.
+The following example shows an `AWS::Serverless::LayerVersion` resource that stores the AWS SDK for Java and X\-Ray SDK for Java\.
 
 **Example [template\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-java/template.yml) – Dependencies layer**  
 
@@ -140,13 +161,13 @@ Resources:
         - java8
 ```
 
-With this configuration, you only update library layer if you change your runtime dependencies\. The function deployment package only contains your code\. When you update your function code, upload time is much faster than if you include dependencies in the deployment package\.
+With this configuration, you update the library layer only if you change your runtime dependencies\. The function deployment package contains only your code\. When you update your function code, upload time is much faster than if you include dependencies in the deployment package\.
 
-Creating a layer for dependencies requires build configuration changes to generate the layer archive prior to deployment\. For a working example, see the [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-basic) sample application\.
+Creating a layer for dependencies requires build configuration changes to generate the layer archive prior to deployment\. For a working example, see the [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-basic) sample application on GitHub\.
 
-## Tracing in sample applications<a name="java-tracing-samples"></a>
+## X\-Ray tracing in sample applications \(X\-Ray SDK\)<a name="java-tracing-samples"></a>
 
-The GitHub repository for this guide includes sample applications that demonstrate the use of tracing\. Each sample application includes scripts for easy deployment and cleanup, an AWS SAM template, and supporting resources\.
+The GitHub repository for this guide includes sample applications that demonstrate the use of X\-Ray tracing\. Each sample application includes scripts for easy deployment and cleanup, an AWS SAM template, and supporting resources\.
 
 **Sample Lambda applications in Java**
 + [blank\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-java) – A Java function that shows the use of Lambda's Java libraries, logging, environment variables, layers, AWS X\-Ray tracing, unit tests, and the AWS SDK\.
@@ -158,4 +179,4 @@ All of the sample applications have active tracing enabled for Lambda functions\
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/blank-java-servicemap.png)
 
-This example from the `blank-java` sample application shows nodes for the Lambda service, a function, and the Lambda API\. The function calls the Lambda API to monitor storage use in Lambda\.
+This example from the `blank-java` sample application shows nodes for the Lambda service, a function, and the Lambda API\. The function calls the Lambda API to monitor storage usage in Lambda\.

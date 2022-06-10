@@ -4,7 +4,7 @@ Lambda [layers](gettingstarted-concepts.md#gettingstarted-concepts-layer) provid
 
 A layer is a \.zip file archive that can contain additional code or data\. A layer can contain libraries, a [custom runtime](runtimes-custom.md), data, or configuration files\. Layers promote code sharing and separation of responsibilities so that you can iterate faster on writing business logic\.
 
-You can use layers only with Lambda functions [deployed as a \.zip file archive](gettingstarted-package.md#gettingstarted-package-zip)\. For functions [defined as a container image](lambda-images.md), you package your preferred runtime and all code dependencies when you create the container image\. For more information, see [Working with Lambda layers and extensions in container images](http://aws.amazon.com/blogs/compute/working-with-lambda-layers-and-extensions-in-container-images/) on the AWS Compute Blog\.
+You can use layers only with Lambda functions [deployed as a \.zip file archive](gettingstarted-package.md#gettingstarted-package-zip)\. For functions [defined as a container image](images-create.md), you package your preferred runtime and all code dependencies when you create the container image\. For more information, see [Working with Lambda layers and extensions in container images](http://aws.amazon.com/blogs/compute/working-with-lambda-layers-and-extensions-in-container-images/) on the AWS Compute Blog\.
 
 You can create layers using the Lambda console, the Lambda API, AWS CloudFormation, or the AWS Serverless Application Model \(AWS SAM\)\. For more information about creating layers with AWS SAM, see [Working with layers](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-layers.html) in the *AWS Serverless Application Model Developer Guide*\.
 
@@ -233,13 +233,13 @@ To grant layer\-usage permission to another account, add a statement to the laye
 
 ```
 aws lambda add-layer-version-permission --layer-name xray-sdk-nodejs --statement-id xaccount \
---action lambda:GetLayerVersion  --principal 210987654321 --version-number 1 --output text
+--action lambda:GetLayerVersion  --principal 111122223333 --version-number 1 --output text
 ```
 
 You should see output similar to the following:
 
 ```
-e210ffdc-e901-43b0-824b-5fcd0dd26d16    {"Sid":"xaccount","Effect":"Allow","Principal":{"AWS":"arn:aws:iam::210987654321:root"},"Action":"lambda:GetLayerVersion","Resource":"arn:aws:lambda:us-east-2:123456789012:layer:xray-sdk-nodejs:1"}
+e210ffdc-e901-43b0-824b-5fcd0dd26d16    {"Sid":"xaccount","Effect":"Allow","Principal":{"AWS":"arn:aws:iam::111122223333:root"},"Action":"lambda:GetLayerVersion","Resource":"arn:aws:lambda:us-east-2:123456789012:layer:xray-sdk-nodejs:1"}
 ```
 
 Permissions apply only to a single layer version\. Repeat the process each time that you create a new layer version\.
@@ -272,7 +272,7 @@ Resources:
       Layers:
         - !Ref libs
   libs:
-    Type: AWS::Serverless::LayerVersion
+    Type: AWS::Lambda::LayerVersion
     Properties:
       LayerName: blank-nodejs-lib
       Description: Dependencies for the blank sample app.

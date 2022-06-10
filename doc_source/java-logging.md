@@ -102,7 +102,7 @@ You can use the Amazon CloudWatch console to view logs for all Lambda function i
 
 1. Choose a log stream\.
 
-Each log stream corresponds to an [instance of your function](runtimes-context.md)\. A log stream appears when you update your Lambda function, and when additional instances are created to handle multiple concurrent invocations\. To find logs for a specific invocation, we recommend instrumenting your function with AWS X\-Ray\. X\-Ray records details about the request and the log stream in the trace\.
+Each log stream corresponds to an [instance of your function](lambda-runtime-environment.md)\. A log stream appears when you update your Lambda function, and when additional instances are created to handle multiple concurrent invocations\. To find logs for a specific invocation, we recommend instrumenting your function with AWS X\-Ray\. X\-Ray records details about the request and the log stream in the trace\.
 
 To use a sample application that correlates logs and traces with X\-Ray, see [Error processor sample application for AWS Lambda](samples-errorprocessor.md)\.
 
@@ -157,7 +157,7 @@ The cli\-binary\-format option is required if you are using AWS CLI version 2\. 
 aws lambda invoke --function-name my-function --cli-binary-format raw-in-base64-out --payload '{"key": "value"}' out
 sed -i'' -e 's/"//g' out
 sleep 15
-aws logs get-log-events --log-group-name /aws/lambda/my-function --log-stream-name $(cat out) --limit 5
+aws logs get-log-events --log-group-name /aws/lambda/my-function --log-stream-name stream1 --limit 5
 ```
 
 **Example macOS and Linux \(only\)**  
@@ -315,9 +315,9 @@ dependencies {
     implementation 'com.amazonaws:aws-lambda-java-core:1.2.1'
     implementation 'com.amazonaws:aws-lambda-java-events:3.11.0'
     implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'org.apache.logging.log4j:log4j-api:2.17.0'
-    implementation 'org.apache.logging.log4j:log4j-core:2.17.0'
-    runtimeOnly 'org.apache.logging.log4j:log4j-slf4j18-impl:2.17.0'
+    implementation 'org.apache.logging.log4j:log4j-api:2.17.1'
+    implementation 'org.apache.logging.log4j:log4j-core:2.17.1'
+    runtimeOnly 'org.apache.logging.log4j:log4j-slf4j18-impl:2.17.1'
     runtimeOnly 'com.amazonaws:aws-lambda-java-log4j2:1.5.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.0'

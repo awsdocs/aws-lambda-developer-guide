@@ -2,7 +2,7 @@
 
 Lambda automatically captures runtime logs and streams them to Amazon CloudWatch\. This log stream contains the logs that your function code and extensions generate, and also the logs that Lambda generates as part of the function invocation\.
 
-[Lambda extensions](runtimes-extensions-api.md) can use the Lambda Runtime Logs API to subscribe to log streams directly from within the Lambda [execution environment](runtimes-context.md)\. Lambda streams the logs to the extension, and the extension can then process, filter, and send the logs to any preferred destination\.
+[Lambda extensions](runtimes-extensions-api.md) can use the Lambda Runtime Logs API to subscribe to log streams directly from within the Lambda [execution environment](lambda-runtime-environment.md)\. Lambda streams the logs to the extension, and the extension can then process, filter, and send the logs to any preferred destination\.
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/logs-api-concept-diagram.png)
 
@@ -28,7 +28,7 @@ Lambda sends all logs to CloudWatch, even when an extension subscribes to one or
 
 A Lambda extension can subscribe to receive logs by sending a subscription request to the Logs API\.
 
-To subscribe to receive logs, you need the extension identifier \(`Lambda-Extension-Identifier`\)\. First [register the extension](runtimes-extensions-api.md#extensions-registration-api-a) to receive the extension identifier\. Then subscribe to the Logs API during [initialization](runtimes-context.md#runtimes-lifecycle-ib)\. After the initialization phase completes, Lambda does not process subscription requests\.
+To subscribe to receive logs, you need the extension identifier \(`Lambda-Extension-Identifier`\)\. First [register the extension](runtimes-extensions-api.md#extensions-registration-api-a) to receive the extension identifier\. Then subscribe to the Logs API during [initialization](lambda-runtime-environment.md#runtimes-lifecycle-ib)\. After the initialization phase completes, Lambda does not process subscription requests\.
 
 **Note**  
 Logs API subscription is idempotent\. Duplicate subscribe requests do not result in duplicate subscriptions\.

@@ -39,7 +39,7 @@ Importing module ./Modules/AWSPowerShell.NetCore/3.3.618.0/AWSPowerShell.NetCore
 [Information] - AWS_LAMBDA_FUNCTION_VERSION=$LATEST
 [Information] - AWS_LAMBDA_LOG_GROUP_NAME=/aws/lambda/blank-powershell-function-18CIXMPLHFAJJ
 [Information] - AWS_LAMBDA_LOG_STREAM_NAME=2020/04/01/[$LATEST]53c5xmpl52d64ed3a744724d9c201089
-[Information] - AWS_EXECUTION_ENV=AWS_Lambda_dotnetcore2.1_powershell_1.0.0
+[Information] - AWS_EXECUTION_ENV=AWS_Lambda_dotnet6_powershell_1.0.0
 [Information] - AWS_LAMBDA_FUNCTION_NAME=blank-powershell-function-18CIXMPLHFAJJ
 [Information] - PATH=/var/lang/bin:/usr/local/bin:/usr/bin/:/bin:/opt/bin
 [Information] - ## Event
@@ -91,7 +91,7 @@ You can use the Amazon CloudWatch console to view logs for all Lambda function i
 
 1. Choose a log stream\.
 
-Each log stream corresponds to an [instance of your function](runtimes-context.md)\. A log stream appears when you update your Lambda function, and when additional instances are created to handle multiple concurrent invocations\. To find logs for a specific invocation, we recommend instrumenting your function with AWS X\-Ray\. X\-Ray records details about the request and the log stream in the trace\.
+Each log stream corresponds to an [instance of your function](lambda-runtime-environment.md)\. A log stream appears when you update your Lambda function, and when additional instances are created to handle multiple concurrent invocations\. To find logs for a specific invocation, we recommend instrumenting your function with AWS X\-Ray\. X\-Ray records details about the request and the log stream in the trace\.
 
 To use a sample application that correlates logs and traces with X\-Ray, see [Error processor sample application for AWS Lambda](samples-errorprocessor.md)\.
 
@@ -146,7 +146,7 @@ The cli\-binary\-format option is required if you are using AWS CLI version 2\. 
 aws lambda invoke --function-name my-function --cli-binary-format raw-in-base64-out --payload '{"key": "value"}' out
 sed -i'' -e 's/"//g' out
 sleep 15
-aws logs get-log-events --log-group-name /aws/lambda/my-function --log-stream-name $(cat out) --limit 5
+aws logs get-log-events --log-group-name /aws/lambda/my-function --log-stream-name stream1 --limit 5
 ```
 
 **Example macOS and Linux \(only\)**  

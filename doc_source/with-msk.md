@@ -22,7 +22,7 @@ Lambda sends the batch of messages in the event parameter when it invokes your f
       "mytopic-0":[
          {
             "topic":"mytopic",
-            "partition":"0",
+            "partition":0,
             "offset":15,
             "timestamp":1545084650987,
             "timestampType":"CREATE_TIME",
@@ -49,8 +49,6 @@ Lambda sends the batch of messages in the event parameter when it invokes your f
    }
 }
 ```
-
-For an example of how to use Amazon MSK as an event source, see [Using Amazon MSK as an event source for AWS Lambda](http://aws.amazon.com/blogs/compute/using-amazon-msk-as-an-event-source-for-aws-lambda/) on the AWS Compute Blog\. For a complete tutorial, see [Amazon MSK Lambda Integration](https://amazonmsk-labs.workshop.aws/en/msklambda.html) in the Amazon MSK Labs\.
 
 **Topics**
 + [MSK cluster authentication](#msk-cluster-permissions)
@@ -197,7 +195,7 @@ In addition to accessing the Amazon MSK cluster, your function needs permissions
 ### Required Lambda function execution role permissions<a name="msk-api-actions"></a>
 
 Your Lambda function's [execution role](lambda-intro-execution-role.md) must have the following permissions to access the MSK cluster on your behalf\. You can either add the AWS managed policy `AWSLambdaMSKExecutionRole` to your execution role, or create a custom policy with permission to perform the following actions:
-+ [kafka:DescribeCluster](https://docs.aws.amazon.com/msk/1.0/apireference/clusters-clusterarn.html#clusters-clusterarnget)
++ [kafka:DescribeClusterV2](https://docs.aws.amazon.com/MSK/2.0/APIReference/v2-clusters-clusterarn.html#v2-clusters-clusterarnget)
 + [kafka:GetBootstrapBrokers](https://docs.aws.amazon.com/msk/1.0/apireference/clusters-clusterarn-bootstrap-brokers.html#clusters-clusterarn-bootstrap-brokersget)
 + [ec2:CreateNetworkInterface](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html)
 + [ec2:DescribeNetworkInterfaces](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeNetworkInterfaces.html)

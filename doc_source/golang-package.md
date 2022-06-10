@@ -149,4 +149,4 @@ Go is implemented differently than other native runtimes\. Lambda treats Go as a
    	cp ./bootstrap $(ARTIFACTS_DIR)/.
    ```
 
-For an example application, download [ Go on AL2](https://github.com/aws-samples/sessions-with-aws-sam/tree/master/go-al2)\. The readme file contains the instructions to build and run the application\. You can also view the blog post [ Migrating AWS Lambda functions to Amazon Linux 2](https://github.com/aws-samples/sessions-with-aws-sam/tree/master/go-al2)\.
+For an example application, download [ Go on AL2](https://github.com/aws-samples/sessions-with-aws-sam/tree/master/go-al2)\. The readme file contains the instructions to build and run the application\. You can also view the blog post [ Migrating AWS Lambda functions to Amazon Linux 2](https://aws.amazon.com/blogs/compute/migrating-aws-lambda-functions-to-al2/)\.

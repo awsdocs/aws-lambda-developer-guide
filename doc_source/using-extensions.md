@@ -2,28 +2,11 @@
 
 You can use Lambda extensions to augment your Lambda functions\. For example, use Lambda extensions to integrate functions with your preferred monitoring, observability, security, and governance tools\. You can choose from a broad set of tools that [AWS Lambda Partners](http://aws.amazon.com/lambda/partners/) provides, or you can [create your own Lambda extensions](runtimes-extensions-api.md)\.
 
-Lambda supports external and internal extensions\. An external extension runs as an independent process in the execution environment and continues to run after the function invocation is fully processed\. Because extensions run as separate processes, you can write them in a different language than the function\.
+Lambda supports external and internal extensions\. An external extension runs as an independent process in the execution environment and continues to run after the function invocation is fully processed\. Because extensions run as separate processes, you can write them in a different language than the function\. All [Lambda runtimes](lambda-runtimes.md) support extensions\.
 
 An internal extension runs as part of the runtime process\. Your function accesses internal extensions by using wrapper scripts or in\-process mechanisms such as `JAVA_TOOL_OPTIONS`\. For more information, see [Modifying the runtime environment](runtimes-modify.md)\.
 
 You can add extensions to a function using the Lambda console, the AWS Command Line Interface \(AWS CLI\), or infrastructure as code \(IaC\) services and tools such as AWS CloudFormation, AWS Serverless Application Model \(AWS SAM\), and Terraform\.
-
-The following [Lambda runtimes](lambda-runtimes.md) support extensions:
-+ \.NET Core 3\.1 \(C\#/PowerShell\) \(`dotnetcore3.1`\)
-+ Custom runtime \(`provided`\)
-+ Custom runtime on Amazon Linux 2 \(`provided.al2`\)
-+ Java 11 \(Corretto\) \(`java11`\)
-+ Java 8 \(Corretto\) \(`java8.al2`\)
-+ Node\.js 14\.x \(`nodejs14.x`\)
-+ Node\.js 12\.x \(`nodejs12.x`\)
-+ Node\.js 10\.x \(`nodejs10.x`\)
-+ Python 3\.9 \(`python3.9`\)
-+ Python 3\.8 \(`python3.8`\)
-+ Python 3\.7 \(`python3.7`\)
-+ Ruby 2\.7 \(`ruby2.7`\)
-+ Ruby 2\.5 \(`ruby2.5`\)
-
-Note that the Go 1\.x runtime does not support extensions\. To support extensions, you can create Go functions on the `provided.al2` runtime\. For more information, see [ Migrating Lambda functions to Amazon Linux 2](http://aws.amazon.com/blogs/compute/migrating-aws-lambda-functions-to-al2/)\.
 
 You are charged for the execution time that the extension consumes \(in 1 ms increments\)\. For more pricing information for extensions, see [AWS Lambda Pricing](http://aws.amazon.com/lambda/pricing/)\. For pricing information for partner extensions, see those partners' websites\. There is no cost to install your own extensions\.
 
@@ -37,7 +20,7 @@ You are charged for the execution time that the extension consumes \(in 1 ms inc
 
 ## Execution environment<a name="using-extensions-env"></a>
 
-Lambda invokes your function in an [execution environment](runtimes-context.md), which provides a secure and isolated runtime environment\. The execution environment manages the resources required to run your function and provides lifecycle support for the function's runtime and extensions\.
+Lambda invokes your function in an [execution environment](lambda-runtime-environment.md), which provides a secure and isolated runtime environment\. The execution environment manages the resources required to run your function and provides lifecycle support for the function's runtime and extensions\.
 
 The lifecycle of the execution environment includes the following phases:
 + `Init`: In this phase, Lambda creates or unfreezes an execution environment with the configured resources, downloads the code for the function and all layers, initializes any extensions, initializes the runtime, and then runs the function’s initialization code \(the code outside the main handler\)\. The `Init` phase happens either during the first invocation, or in advance of function invocations if you have enabled [provisioned concurrency](provisioned-concurrency.md)\.
@@ -88,7 +71,7 @@ You add the extension to your function using the same method as you would for an
 
 ## Using extensions in container images<a name="invocation-extensions-images"></a>
 
-You can add extensions to your [container image](lambda-images.md)\. The ENTRYPOINT container image setting specifies the main process for the function\. Configure the ENTRYPOINT setting in the Dockerfile, or as an override in the function configuration\. 
+You can add extensions to your [container image](images-create.md)\. The ENTRYPOINT container image setting specifies the main process for the function\. Configure the ENTRYPOINT setting in the Dockerfile, or as an override in the function configuration\. 
 
 You can run multiple processes within a container\. Lambda manages the lifecycle of the main process and any additional processes\. Lambda uses the [Extensions API](runtimes-extensions-api.md) to manage the extension lifecycle\. 
 

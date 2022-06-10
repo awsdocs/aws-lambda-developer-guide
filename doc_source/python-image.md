@@ -1,14 +1,12 @@
 # Deploy Python Lambda functions with container images<a name="python-image"></a>
 
 **Note**  
-End of support for the Python 2\.7 runtime started on July 15, 2021\. For more information, see [Runtime support policy](runtime-support-policy.md)\.
+End of support for the Python 2\.7 runtime started on July 15, 2021\. For more information, see [Runtime deprecation policy](lambda-runtimes.md#runtime-support-policy)\.
 
 You can deploy your Lambda function code as a [container image](images-create.md)\. AWS provides the following resources to help you build a container image for your Python function:
 + AWS base images for Lambda
 
   These base images are preloaded with a language runtime and other components that are required to run the image on Lambda\. AWS provides a Dockerfile for each of the base images to help with building your container image\.
-
-  AWS provides base images for the x86\_64 architecture for all supported \.NET runtimes, and for the arm64 architecture for the \.NET Core 3\.1 and \.NET 6\.0 runtimes\.
 + Open\-source runtime interface clients \(RIC\)
 
   If you use a community or private enterprise base image, you must add a [Runtime interface client](runtimes-images.md#runtimes-api-client) to the base image to make it compatible with Lambda\.
@@ -20,9 +18,9 @@ The workflow for a function defined as a container image includes these steps:
 
 1. Build your container image using the resources listed in this topic\.
 
-1. Upload the image to your Amazon ECR container registry\. See steps 7\-9 in [Create image](images-create.md#images-create-from-base)\.
+1. Upload the image to your [Amazon ECR container registry](images-create.md#images-upload)\.
 
-1. [Create](configuration-images.md#configuration-images-create) the Lambda function or [update the function code](configuration-images.md#configuration-images-update) to deploy the image to an existing function\.
+1. [Create](gettingstarted-images.md#configuration-images-create) the Lambda function or [update the function code](gettingstarted-images.md#configuration-images-update) to deploy the image to an existing function\.
 
 **Topics**
 + [AWS base images for Python](#python-image-base)
@@ -44,9 +42,7 @@ AWS provides the following base images for Python:
 | 3\.6 | Python 3\.6 | Amazon Linux 2018\.03 | [Dockerfile for Python 3\.6 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/python3.6/Dockerfile.python3.6) | 
 | 2, 2\.7 | Python 2\.7 | Amazon Linux 2018\.03 | [Dockerfile for Python 2\.7 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/python2.7/Dockerfile.python2.7) | 
 
-Docker Hub repository: amazon/aws\-lambda\-python
-
-Amazon ECR repository: gallery\.ecr\.aws/lambda/python
+Amazon ECR repository: [gallery\.ecr\.aws/lambda/python](https://gallery.ecr.aws/lambda/python)
 
 ## Create a Python image from an AWS base image<a name="python-image-create"></a>
 
@@ -108,4 +104,4 @@ You can also download the [Python runtime interface client](https://github.com/a
 
 ## Deploy the container image<a name="python-image-deploy"></a>
 
-For a new function, you deploy the Python image when you [create the function](configuration-images.md#configuration-images-create)\. For an existing function, if you rebuild the container image, you need to redeploy the image by [updating the function code](configuration-images.md#configuration-images-update)\.
+For a new function, you deploy the Python image when you [create the function](gettingstarted-images.md#configuration-images-create)\. For an existing function, if you rebuild the container image, you need to redeploy the image by [updating the function code](gettingstarted-images.md#configuration-images-update)\.

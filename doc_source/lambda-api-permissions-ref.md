@@ -36,6 +36,15 @@ For example, the following policy allows a user in account `123456789012` to inv
 
 This is a special case where the action identifier \(`lambda:InvokeFunction`\) differs from the API operation \([Invoke](API_Invoke.md)\)\. For other actions, the action identifier is the operation name prefixed by `lambda:`\.
 
+**Topics**
++ [Policy conditions](#authorization-conditions)
++ [Function resource names](#function-resources)
++ [Function actions](#permissions-resources-function)
++ [Event source mapping actions](#permissions-resources-eventsource)
++ [Layer actions](#permissions-resources-layers)
+
+## Policy conditions<a name="authorization-conditions"></a>
+
 Conditions are an optional policy element that applies additional logic to determine if an action is allowed\. In addition to [common conditions](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html) supported by all actions, Lambda defines condition types that you can use to restrict the values of additional parameters on some actions\.
 
 For example, the `lambda:Principal` condition lets you restrict the service or account that a user can grant invocation access to on a function's resource\-based policy\. The following policy lets a user grant permission to SNS topics to invoke a function named `test`\.
@@ -68,12 +77,6 @@ The condition requires that the principal is Amazon SNS and not another service 
 
 For more information on resources and conditions for Lambda and other AWS services, see [Actions, resources, and condition keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html) in the *IAM User Guide*\.
 
-**Topics**
-+ [Function resource names](#function-resources)
-+ [Function actions](#permissions-resources-function)
-+ [Event source mapping actions](#permissions-resources-eventsource)
-+ [Layer actions](#permissions-resources-layers)
-
 ## Function resource names<a name="function-resources"></a>
 
 You reference a Lambda function in a policy statement using an Amazon Resource Name \(ARN\)\. The format of a function ARN depends on whether you are referencing the whole function \(unqualified\) or a function [version](configuration-versions.md) or [alias](configuration-aliases.md) \(qualified\)\. 
@@ -81,6 +84,9 @@ You reference a Lambda function in a policy statement using an Amazon Resource N
 When making Lambda API calls, users can specify a version or alias by passing a version ARN or alias ARN in the [GetFunction](API_GetFunction.md) `FunctionName` parameter, or by setting a value in the [GetFunction](API_GetFunction.md) `Qualifier` parameter\. Lambda makes authorization decisions by comparing the resource element in the IAM policy with both the `FunctionName` and `Qualifier` passed in API calls\. If there is a misamtch, Lambda denies the request\.
 
 Whether you are allowing or denying an action on your function, you must use the correct function ARN types in your policy statement to achieve the results that you expect\. For example, if your policy references the unqualified ARN, Lambda accepts requests that reference the unqualified ARN but denies requests that reference a qualified ARN\.
+
+**Note**  
+You can't use a wildcard character to match the Account ID\. For more information on accepted syntax, see [IAM JSON policy reference](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html)\. 
 
 **Example allowing invocation of an unqualified arn**  
 
@@ -91,7 +97,8 @@ Whether you are allowing or denying an action on your function, you must use the
         {
             "Effect": "Allow",
             "Action": "lambda:InvokeFunction",
-            "Resource": "arn:aws:lambda:us-west-2:123456789012:myFunction"
+            "Resource": "arn:aws:lambda:us-west-2:123456789012:function:myFunction"
+        }
     ]
 }
 ```
@@ -107,7 +114,7 @@ If your policy references a specific qualified ARN, Lambda accepts requests that
         {
             "Effect": "Allow",
             "Action": "lambda:InvokeFunction",
-            "Resource": "arn:aws:lambda:us-west-2:123456789012:myFunction:1"
+            "Resource": "arn:aws:lambda:us-west-2:123456789012:function:myFunction:1"
         }
     ]
 }
@@ -124,7 +131,7 @@ If your policy references any qualified ARN using `:*`, Lambda accepts any quali
         {
             "Effect": "Allow",
             "Action": "lambda:InvokeFunction",
-            "Resource": "arn:aws:lambda:us-west-2:123456789012:myFunction:*"
+            "Resource": "arn:aws:lambda:us-west-2:123456789012:function:myFunction:*"
         }
     ]
 }
@@ -141,7 +148,7 @@ If your policy references any ARN using `*`, Lambda accepts any qualified or unq
         {
             "Effect": "Allow",
             "Action": "lambda:InvokeFunction",
-            "Resource": "arn:aws:lambda:us-west-2:123456789012:myFunction*"
+            "Resource": "arn:aws:lambda:us-west-2:123456789012:function:myFunction*"
         }
     ]
 }

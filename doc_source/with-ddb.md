@@ -162,7 +162,7 @@ To manage an event source with the [AWS Command Line Interface \(AWS CLI\)](http
 The following example uses the AWS CLI to map a function named `my-function` to a DynamoDB stream that its Amazon Resource Name \(ARN\) specifies, with a batch size of 500\.
 
 ```
-aws lambda create-event-source-mapping --function-name my-function --batch-size 500 --starting-position LATEST \
+aws lambda create-event-source-mapping --function-name my-function --batch-size 500 --maximum-batching-window-in-seconds 5 --starting-position LATEST \
 --event-source-arn arn:aws:dynamodb:us-east-2:123456789012:table/my-table/stream/2019-06-10T19:26:16.525
 ```
 
@@ -172,7 +172,7 @@ You should see the following output:
 {
     "UUID": "14e0db71-5d35-4eb5-b481-8945cf9d10c2",
     "BatchSize": 500,
-    "MaximumBatchingWindowInSeconds": 0,
+    "MaximumBatchingWindowInSeconds": 5,
     "ParallelizationFactor": 1,
     "EventSourceArn": "arn:aws:dynamodb:us-east-2:123456789012:table/my-table/stream/2019-06-10T19:26:16.525",
     "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
@@ -550,6 +550,8 @@ When a partial batch success response is received and both `BisectBatchOnFunctio
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.DynamodbEvent;
+import com.amazonaws.services.lambda.runtime.events.StreamsEventResponse;
+import com.amazonaws.services.lambda.runtime.events.models.dynamodb.StreamRecord;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -558,17 +560,17 @@ import java.util.List;
 public class ProcessDynamodbRecords implements RequestHandler<DynamodbEvent, Serializable> {
 
     @Override
-    public Serializable handleRequest(DynamodbEvent input, Context context) {
+    public StreamsEventResponse handleRequest(DynamodbEvent input, Context context) {
 
-        List<StreamsEventResponse.BatchItemFailure> batchItemFailures = new ArrayList<*>();
+        List<StreamsEventResponse.BatchItemFailure> batchItemFailures = new ArrayList<>();
         String curRecordSequenceNumber = "";
 
-        for (DynamodbEvent.DynamodbEventRecord dynamodbEventRecord : input.getRecords()) {
-            try {
+        for (DynamodbEvent.DynamodbStreamRecord dynamodbStreamRecord : input.getRecords()) {
+          try {
                 //Process your record
-                DynamodbEvent.Record dynamodbRecord = dynamodbEventRecord.getDynamodb();
+                StreamRecord dynamodbRecord = dynamodbStreamRecord.getDynamodb();
                 curRecordSequenceNumber = dynamodbRecord.getSequenceNumber();
-
+                
             } catch (Exception e) {
                 //Return failed record's sequence number
                 batchItemFailures.add(new StreamsEventResponse.BatchItemFailure(curRecordSequenceNumber));
@@ -576,7 +578,7 @@ public class ProcessDynamodbRecords implements RequestHandler<DynamodbEvent, Ser
             }
         }
        
-       return new StreamsEventResponse(batchItemFailures);   
+       return new StreamsEventResponse();   
     }
 }
 ```
@@ -613,7 +615,7 @@ All Lambda event source types share the same [CreateEventSourceMapping](API_Crea
 
 | Parameter | Required | Default | Notes | 
 | --- | --- | --- | --- | 
-|  BatchSize  |  N  |  100  |  Maximum: 1,000  | 
+|  BatchSize  |  N  |  100  |  Maximum: 10,000  | 
 |  BisectBatchOnFunctionError  |  N  |  false  |   | 
 |  DestinationConfig  |  N  |   |  Amazon SQS queue or Amazon SNS topic destination for discarded records  | 
 |  Enabled  |  N  |  true  |   | 

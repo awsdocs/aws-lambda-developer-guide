@@ -90,15 +90,15 @@ You need to include both the qualified and the unqualified function ARN in the r
       {
          "Principal":
          { 
-             "AWS": "arn:aws:iam::123412341234:user/MyUser" 
+             "AWS": "arn:aws:iam::111122223333:user/MyUser" 
          },
          "Effect":"Allow",
          "Action":[
             "lambda:InvokeFunction"
          ],
          "Resource": [
-               "arn:aws:lambda:us-east-2:123456789012:function:my-function”,
-               "arn:aws:lambda:us-east-2:123456789012:function:my-function:*”
+               "arn:aws:lambda:us-east-2:123456789012:function:my-function",
+               "arn:aws:lambda:us-east-2:123456789012:function:my-function:*"
             ]
       }
    ]

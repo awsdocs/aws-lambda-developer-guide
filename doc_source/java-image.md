@@ -4,8 +4,6 @@ You can deploy your Lambda function code as a [container image](images-create.md
 + AWS base images for Lambda
 
   These base images are preloaded with a language runtime and other components that are required to run the image on Lambda\. AWS provides a Dockerfile for each of the base images to help with building your container image\.
-
-  AWS provides base images for the x86\_64 architecture for all supported \.NET runtimes, and for the arm64 architecture for the \.NET Core 3\.1 and \.NET 6\.0 runtimes\.
 + Open\-source runtime interface clients \(RIC\)
 
   If you use a community or private enterprise base image, you must add a [Runtime interface client](runtimes-images.md#runtimes-api-client) to the base image to make it compatible with Lambda\.
@@ -17,9 +15,9 @@ The workflow for a function defined as a container image includes these steps:
 
 1. Build your container image using the resources listed in this topic\.
 
-1. Upload the image to your Amazon ECR container registry\. See steps 7\-9 in [Create image](images-create.md#images-create-from-base)\.
+1. Upload the image to your [Amazon ECR container registry](images-create.md#images-upload)\.
 
-1. [Create](configuration-images.md#configuration-images-create) the Lambda function or [update the function code](configuration-images.md#configuration-images-update) to deploy the image to an existing function\.
+1. [Create](gettingstarted-images.md#configuration-images-create) the Lambda function or [update the function code](gettingstarted-images.md#configuration-images-update) to deploy the image to an existing function\.
 
 **Topics**
 + [AWS base images for Java](#java-image-base)
@@ -38,15 +36,11 @@ AWS provides the following base images for Java:
 |  8\.al2  | Java 8 \(Corretto\) | Amazon Linux 2 | [Dockerfile for Java 8\.al2 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/java8.al2/Dockerfile.java8.al2) | 
 |  8  | Java 8 \(OpenJDK\) | Amazon Linux 2018\.03 | [Dockerfile for Java 8 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/java8/Dockerfile.java8) | 
 
-Docker Hub repository: amazon/aws\-lambda\-java
-
-Amazon ECR repository: gallery\.ecr\.aws/lambda/java
+Amazon ECR repository: [gallery\.ecr\.aws/lambda/java](https://gallery.ecr.aws/lambda/java)
 
 ## Using a Java base image<a name="java-image-instructions"></a>
 
 For instructions on how to use a Java base image, choose the **usage** tab on [Lambda base images for Java](https://gallery.ecr.aws/lambda/java) in the *Amazon ECR repository*\. 
-
-The instructions are also available on [Lambda base images for Java](https://hub.docker.com/r/amazon/aws-lambda-java) in the *Docker Hub repository*\.
 
 ## Java runtime interface clients<a name="java-image-clients"></a>
 
@@ -64,8 +58,8 @@ For package details, see [Lambda RIC](https://search.maven.org/artifact/com.amaz
 
 You can also view the Java client source code in the [AWS Lambda Java Support Libraries](https://github.com/aws/aws-lambda-java-libs) repository on GitHub\.
 
-After your container image resides in the Amazon ECR container registry, you can [create and run](configuration-images.md) the Lambda function\.
+After your container image resides in the Amazon ECR container registry, you can [create and run](gettingstarted-images.md) the Lambda function\.
 
 ## Deploy the container image<a name="java-image-deploy"></a>
 
-For a new function, you deploy the Java image when you [create the function](configuration-images.md#configuration-images-create)\. For an existing function, if you rebuild the container image, you need to redeploy the image by [updating the function code](configuration-images.md#configuration-images-update)\.
+For a new function, you deploy the Java image when you [create the function](gettingstarted-images.md#configuration-images-create)\. For an existing function, if you rebuild the container image, you need to redeploy the image by [updating the function code](gettingstarted-images.md#configuration-images-update)\.

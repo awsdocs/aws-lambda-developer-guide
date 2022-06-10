@@ -22,7 +22,7 @@ To manage an event source with the [AWS Command Line Interface \(AWS CLI\)](http
 The following example uses the AWS CLI to map a function named `my-function` to a DynamoDB stream that its Amazon Resource Name \(ARN\) specifies, with a batch size of 500\.
 
 ```
-aws lambda create-event-source-mapping --function-name my-function --batch-size 500 --starting-position LATEST \
+aws lambda create-event-source-mapping --function-name my-function --batch-size 500 --maximum-batching-window-in-seconds 5 --starting-position LATEST \
 --event-source-arn arn:aws:dynamodb:us-east-2:123456789012:table/my-table/stream/2019-06-10T19:26:16.525
 ```
 
@@ -32,7 +32,7 @@ You should see the following output:
 {
     "UUID": "14e0db71-5d35-4eb5-b481-8945cf9d10c2",
     "BatchSize": 500,
-    "MaximumBatchingWindowInSeconds": 0,
+    "MaximumBatchingWindowInSeconds": 5,
     "ParallelizationFactor": 1,
     "EventSourceArn": "arn:aws:dynamodb:us-east-2:123456789012:table/my-table/stream/2019-06-10T19:26:16.525",
     "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",

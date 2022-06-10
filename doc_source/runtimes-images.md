@@ -1,4 +1,4 @@
-# Runtime support for Lambda container images<a name="runtimes-images"></a>
+# Base images for Lambda<a name="runtimes-images"></a>
 
 AWS provides a set of open\-source base images that you can use\. You can also use a preferred community or private base image\. Lambda provides client software that you add to your preferred base image to make it compatible with the Lambda service\. 
 
@@ -35,9 +35,7 @@ AWS provides base images that contain the required Lambda components and the Ama
 | al2 | provided\.al2 | Amazon Linux 2 | 
 | alami | provided | Amazon Linux  | 
 
-DockerHub: amazon/aws\-lambda\-provided
-
-ECR Public: public\.ecr\.aws/lambda/provided
+Amazon ECR Public Gallery: [gallery\.ecr\.aws/lambda/provided](https://gallery.ecr.aws/lambda/provided)
 
 ## Runtime interface clients<a name="runtimes-api-client"></a>
 

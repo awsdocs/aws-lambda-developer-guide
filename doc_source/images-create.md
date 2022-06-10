@@ -1,23 +1,29 @@
 # Creating Lambda container images<a name="images-create"></a>
 
-You can package your Lambda function code and dependencies as a container image, using tools such as the Docker CLI\. You can then upload the image to your container registry hosted on Amazon Elastic Container Registry \(Amazon ECR\)\.
-
 AWS provides a set of open\-source [base images](runtimes-images.md#runtimes-images-lp) that you can use to create your container image\. These base images include a [runtime interface client](runtimes-images.md#runtimes-api-client) to manage the interaction between Lambda and your function code\.
-
-You can also use an alternative base image from another container registry\. Lambda provides open\-source runtime interface clients that you add to an alternative base image to make it compatible with Lambda\.
 
 For example applications, including a Node\.js example and a Python example, see [Container image support for Lambda](http://aws.amazon.com/blogs/aws/new-for-aws-lambda-container-image-support/) on the AWS Blog\.
 
-After you create a container image in the Amazon ECR container registry, you can [create and run](configuration-images.md) the Lambda function\.
-
 **Topics**
++ [Base images for Lambda](runtimes-images.md)
++ [Testing Lambda container images locally](images-test.md)
++ [Prerequisites](#images-reqs)
 + [Image types](#images-types)
 + [Container tools](#images-tools)
-+ [Lambda requirements for container images](#images-reqs)
 + [Container image settings](#images-parms)
-+ [Create an image from an AWS base image for Lambda](#images-create-from-base)
-+ [Create an image from an alternative base image](#images-create-from-alt)
++ [Creating images from AWS base images](#images-create-from-base)
++ [Creating images from alternative base images](#images-create-from-alt)
++ [Upload the image to the Amazon ECR repository](#images-upload)
 + [Create an image using the AWS SAM toolkit](#images-create-sam)
+
+## Prerequisites<a name="images-reqs"></a>
+
+To deploy a container image to Lambda, you need the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) and [Docker CLI](https://docs.docker.com/get-docker)\. Additionally, note the following requirements:
++ The container image must implement the Lambda [Runtime API](runtimes-api.md)\. The AWS open\-source [runtime interface clients](runtimes-images.md#runtimes-api-client) implement the API\. You can add a runtime interface client to your preferred base image to make it compatible with Lambda\.
++ The container image must be able to run on a read\-only file system\. Your function code can access a writable `/tmp` directory with 512 MB of storage\. 
++ The default Lambda user must be able to read all the files required to run your function code\. Lambda follows security best practices by defining a default Linux user with least\-privileged permissions\. Verify that your application code does not rely on files that other Linux users are restricted from running\.
++ Lambda supports only Linux\-based container images\.
++ Lambda provides multi\-architecture base images\. However, the image you build for your function must target only one of the architectures\. Lambda does not support functions that use multi\-architecture container images\.
 
 ## Image types<a name="images-types"></a>
 
@@ -34,20 +40,6 @@ To create your container image, you can use any development tool that supports o
 + OCI Specifications \(v1\.0\.0 and up\)
 
 For example, you can use the Docker CLI to build, test, and deploy your container images\.
-
-## Lambda requirements for container images<a name="images-reqs"></a>
-
-To deploy a container image to Lambda, note the following requirements:
-
-1. The container image must implement the Lambda [Runtime API](runtimes-api.md)\. The AWS open\-source [runtime interface clients](runtimes-images.md#runtimes-api-client) implement the API\. You can add a runtime interface client to your preferred base image to make it compatible with Lambda\.
-
-1. The container image must be able to run on a read\-only file system\. Your function code can access a writable `/tmp` directory with 512 MB of storage\. 
-
-1. The default Lambda user must be able to read all the files required to run your function code\. Lambda follows security best practices by defining a default Linux user with least\-privileged permissions\. Verify that your application code does not rely on files that other Linux users are restricted from running\.
-
-1. Lambda supports only Linux\-based container images\.
-
-1. Lambda provides multi\-architecture base images\. However, the image you build for your function must target only one of the architectures\. Lambda does not support functions that use multi\-architecture container images\.
 
 ## Container image settings<a name="images-parms"></a>
 
@@ -67,7 +59,7 @@ You can specify the container image settings in the Dockerfile when you build yo
 **Warning**  
 When you specify ENTRYPOINT or CMD in the Dockerfile or as an override, make sure that you enter the absolute path\. Also, do not use symlinks as the entry point to the container\.
 
-## Create an image from an AWS base image for Lambda<a name="images-create-from-base"></a>
+## Creating images from AWS base images<a name="images-create-from-base"></a>
 
 To build a container image for a new Lambda function, you can start with an AWS base image for Lambda\. Lambda provides two types of base images:
 + Multi\-architecture base image
@@ -77,23 +69,16 @@ To build a container image for a new Lambda function, you can start with an AWS 
 
   Specify an image tag with an architecture suffix\. For example, specify `3.9-arm64` to choose the arm64 base image for Python 3\.9\.
 
+You can also use an [alternative base image from another container registry](#images-create-from-alt)\. Lambda provides open\-source runtime interface clients that you add to an alternative base image to make it compatible with Lambda\.
+
 **Note**  
-AWS periodically provides updates to the AWS base images for Lambda\. If your Dockerfile includes the image name in the FROM property, your Docker client pulls the latest version of the image from Docker Hub\. To use the updated base image, you must rebuild your container image and [update the function code](configuration-images.md#configuration-images-update)\.
-
-**Prerequisites**
-+ The AWS Command Line Interface \(AWS CLI\)
-
-  The following instructions use the AWS CLI to call AWS service API operations\. To install the AWS CLI, see [Installing, updating, and uninstalling the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) in the *AWS Command Line Interface User Guide*\.
-+ Docker Desktop
-
-  The following instructions use Docker CLI commands to create the container image\. To install the Docker CLI, see [Get Docker](https://docs.docker.com/get-docker) on the Docker Docs website\.
-+ Your function code
+AWS periodically provides updates to the AWS base images for Lambda\. If your Dockerfile includes the image name in the FROM property, your Docker client pulls the latest version of the image from the Amazon ECR repository\. To use the updated base image, you must rebuild your container image and [update the function code](gettingstarted-images.md#configuration-images-update)\.
 
 **To create an image from an AWS base image for Lambda**
 
 1. On your local machine, create a project directory for your new function\.
 
-1. Create a directory named **app** in in the project directory, and then add your function handler code to the app directory\.
+1. Create a directory named **app** in the project directory, and then add your function handler code to the app directory\.
 
 1. Use a text editor to create a new Dockerfile\.
 
@@ -110,7 +95,6 @@ AWS periodically provides updates to the AWS base images for Lambda\. If your Do
 
    ```
    FROM public.ecr.aws/lambda/nodejs:14
-   # Alternatively, you can pull the base image from Docker Hub: amazon/aws-lambda-nodejs:12
    
    # Assumes your function is named "app.js", and there is a package.json file in the app directory 
    COPY app.js package.json  ${LAMBDA_TASK_ROOT}
@@ -183,28 +167,7 @@ AWS periodically provides updates to the AWS base images for Lambda\. If your Do
 
    This command invokes the function running in the container image and returns a response\.
 
-1. Authenticate the Docker CLI to your Amazon ECR registry\.
-
-   ```
-   aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 123456789012.dkr.ecr.us-east-1.amazonaws.com    
-   ```
-
-1. Create a repository in Amazon ECR using the `create-repository` command\.
-
-   ```
-   aws ecr create-repository --repository-name hello-world --image-scanning-configuration scanOnPush=true --image-tag-mutability MUTABLE
-   ```
-
-1. Tag your image to match your repository name, and deploy the image to Amazon ECR using the `docker push` command\. 
-
-   ```
-   docker tag  hello-world:latest 123456789012.dkr.ecr.us-east-1.amazonaws.com/hello-world:latest
-   docker push 123456789012.dkr.ecr.us-east-1.amazonaws.com/hello-world:latest
-   ```
-
-Now that your container image resides in the Amazon ECR container registry, you can [create and run](configuration-images.md) the Lambda function\.
-
-## Create an image from an alternative base image<a name="images-create-from-alt"></a>
+## Creating images from alternative base images<a name="images-create-from-alt"></a>
 
 **Prerequisites**
 + The AWS CLI
@@ -278,6 +241,13 @@ Now that your container image resides in the Amazon ECR container registry, you 
 
 1. \(Optional\) Test your application locally using the [Runtime interface emulator](images-test.md)\.
 
+## Upload the image to the Amazon ECR repository<a name="images-upload"></a>
+
+In the following commands, replace `123456789012` with your AWS account ID and set the region value to the region where you want to create the Amazon ECR repository\.
+
+**Note**  
+In Amazon ECR, if you reassign the image tag to another image, Lambda does not update the image version\.
+
 1. Authenticate the Docker CLI to your Amazon ECR registry\.
 
    ```
@@ -297,7 +267,7 @@ Now that your container image resides in the Amazon ECR container registry, you 
    docker push 123456789012.dkr.ecr.us-east-1.amazonaws.com/hello-world:latest
    ```
 
-Now that your container image resides in the Amazon ECR container registry, you can [create and run](configuration-images.md) the Lambda function\.
+Now that your container image resides in the Amazon ECR container registry, you can [create and run](gettingstarted-images.md) the Lambda function\.
 
 ## Create an image using the AWS SAM toolkit<a name="images-create-sam"></a>
 

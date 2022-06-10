@@ -26,7 +26,7 @@ When you add permissions to your function, make an update to its code or configu
 
 ## Creating an execution role in the IAM console<a name="permissions-executionrole-console"></a>
 
-By default, Lambda creates an execution role with minimal permissions when you [create a function in the Lambda console](getting-started-create-function.md)\. You can also create an execution role in the IAM console\.
+By default, Lambda creates an execution role with minimal permissions when you [create a function in the Lambda console](getting-started.md#getting-started-create-function)\. You can also create an execution role in the IAM console\.
 
 **To create an execution role in the IAM console**
 

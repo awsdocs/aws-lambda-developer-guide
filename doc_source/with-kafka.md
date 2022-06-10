@@ -22,7 +22,7 @@ Lambda sends the batch of messages in the event parameter when it invokes your L
       "mytopic-0":[
          {
             "topic":"mytopic",
-            "partition":"0",
+            "partition":0,
             "offset":15,
             "timestamp":1545084650987,
             "timestampType":"CREATE_TIME",

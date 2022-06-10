@@ -9,7 +9,6 @@ The following sections explain how common programming patterns and core concepts
 | --- | --- | --- | --- | 
 |  \.NET 6  |  `dotnet6`  |  Amazon Linux 2  |  x86\_64, arm64  | 
 |  \.NET Core 3\.1  |  `dotnetcore3.1`  |  Amazon Linux 2  |  x86\_64, arm64  | 
-|  \.NET Core 2\.1  |  `dotnetcore2.1`  |  Amazon Linux  |  x86\_64  | 
 
 Lambda provides the following sample applications for the PowerShell runtime:
 + [blank\-powershell](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-powershell) – A PowerShell function that shows the use of logging, environment variables, and the AWS SDK\.

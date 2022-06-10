@@ -200,7 +200,7 @@ We recommend using AWS X\-Ray to determine the source of an error and its cause\
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/tracemap-apig-502.png)
 
-For more information, see [Instrumenting Java code in AWS Lambda](java-tracing.md)\.
+For more information, see [Instrumenting Java code in Lambda](java-tracing.md)\.
 
 ## Sample applications<a name="java-exceptions-samples"></a>
 

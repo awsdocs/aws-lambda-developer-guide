@@ -1,11 +1,11 @@
 # Lambda quotas<a name="gettingstarted-limits"></a>
 
+**Important**  
+New AWS accounts have reduced concurrency and memory quotas\. AWS raises these quotas automatically based on your usage\. You can also [request a quota increase](https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html)\.
+
 ## Compute and storage<a name="compute-and-storage"></a>
 
 Lambda sets quotas for the amount of compute and storage resources that you can use to run and store functions\. The following quotas apply per AWS Region and can be increased\. For more information, see [Requesting a quota increase](https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html) in the *Service Quotas User Guide*\.
-
-**Note**  
-A few new AWS accounts might start out with limits that are lower than these defaults\. AWS monitors usage and raises your limits automatically based on your usage\.
 
 
 | Resource | Default quota | Can be increased up to | 
@@ -35,9 +35,9 @@ The Lambda documentation, log messages, and console use the abbreviation MB \(ra
 |  Function [burst concurrency](invocation-scaling.md)  |  500 \- 3000 \(varies per Region\)  | 
 |  [Invocation payload](lambda-invocation.md) \(request and response\)  |  6 MB \(synchronous\) 256 KB \(asynchronous\)  | 
 |  [Deployment package \(\.zip file archive\)](gettingstarted-package.md) size  |  50 MB \(zipped, for direct upload\) 250 MB \(unzipped\) This quota applies to all the files you upload, including layers and custom runtimes\. 3 MB \(console editor\)  | 
-|  [Container image](lambda-images.md) code package size  |  10 GB  | 
+|  [Container image](images-create.md) code package size  |  10 GB  | 
 |  Test events \(console editor\)  |  10  | 
-|  `/tmp` directory storage  |  512 MB  | 
+|  `/tmp` directory storage  |  512 MB to 10,240 MB, in 1\-MB increments\.  | 
 |  File descriptors  |  1,024  | 
 |  Execution processes/threads  |  1,024  | 
 

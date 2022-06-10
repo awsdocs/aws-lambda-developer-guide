@@ -66,6 +66,9 @@ Content-type: application/json
             "string" : "string" 
          }
       },
+      "EphemeralStorage": { 
+         "Size": number
+      },
       "FileSystemConfigs": [ 
          { 
             "Arn": "string",

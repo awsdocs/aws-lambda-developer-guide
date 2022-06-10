@@ -2,6 +2,8 @@
 
 AWS Lambda provides an HTTP API for [custom runtimes](runtimes-custom.md) to receive invocation events from Lambda and send response data back within the Lambda [execution environment](lambda-runtimes.md)\.
 
+![\[Architecture diagram of the execution environment.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/logs-api-concept-diagram.png)
+
 The OpenAPI specification for the runtime API version **2018\-06\-01** is available in [runtime\-api\.zip](samples/runtime-api.zip)
 
 To create an API request URL, runtimes get the API endpoint from the `AWS_LAMBDA_RUNTIME_API` environment variable, add the API version, and add the desired resource path\.
@@ -73,13 +75,13 @@ If the function returns an error or the runtime encounters an error during initi
 
 **Headers**
 
-`Lambda-Runtime-Function-Error-Type` – Error type that the extension encountered\. Required: no\. 
+`Lambda-Runtime-Function-Error-Type` – Error type that the runtime encountered\. Required: no\. 
 
 This header consists of a string value\. Lambda accepts any string, but we recommend a format of <category\.reason>\. For example:
 + Runtime\.NoSuchHandler
-+ Extension\.APIKeyNotFound
-+ Extension\.ConfigInvalid
-+ Extension\.UnknownReason
++ Runtime\.APIKeyNotFound
++ Runtime\.ConfigInvalid
++ Runtime\.UnknownReason
 
 **Body parameters**
 
@@ -116,7 +118,7 @@ The following example shows a Lambda function error message in which the functio
 **Response codes**
 + 202 – Accepted
 + 403 – Forbidden
-+ 500 – Container error\. Non\-recoverable state\. Extension should exit promptly\.
++ 500 – Container error\. Non\-recoverable state\. Runtime should exit promptly\.
 
 **Example initialization error request**  
 
@@ -135,13 +137,13 @@ If the function returns an error or the runtime encounters an error, the runtime
 
 **Headers**
 
-`Lambda-Runtime-Function-Error-Type` – Error type that the extension encountered\. Required: no\. 
+`Lambda-Runtime-Function-Error-Type` – Error type that the runtime encountered\. Required: no\. 
 
 This header consists of a string value\. Lambda accepts any string, but we recommend a format of <category\.reason>\. For example:
 + Runtime\.NoSuchHandler
-+ Extension\.APIKeyNotFound
-+ Extension\.ConfigInvalid
-+ Extension\.UnknownReason
++ Runtime\.APIKeyNotFound
++ Runtime\.ConfigInvalid
++ Runtime\.UnknownReason
 
 **Body parameters**
 
@@ -179,7 +181,7 @@ The following example shows a Lambda function error message in which the functio
 + 202 – Accepted
 + 400 – Bad Request
 + 403 – Forbidden
-+ 500 – Container error\. Non\-recoverable state\. Extension should exit promptly\.
++ 500 – Container error\. Non\-recoverable state\. Runtime should exit promptly\.
 
 **Example error request**  
 
