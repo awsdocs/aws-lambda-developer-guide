@@ -175,7 +175,7 @@ The following examples show how the output of your Lambda function maps to the r
 
 | Lambda function output | Interpreted response output | HTTP response \(what the client sees\) | 
 | --- | --- | --- | 
-|  <pre>"Hello, world!"</pre>  |  <pre>{<br />  "statusCode": 200,<br />  "body": "Hello, world!",<br />  "headers": {<br />    "content-type": "application/json"<br />  }<br />  "isBase64Encoded": false,<br />}</pre>  |  <pre>HTTP/2 200<br />date: Wed, 08 Sep 2021 18:02:24 GMT<br />content-type: application/json<br />content-length: 15<br /><br />"Hello, world!"</pre>  | 
+|  <pre>"Hello, world!"</pre>  |  <pre>{<br />  "statusCode": 200,<br />  "body": "Hello, world!",<br />  "headers": {<br />    "content-type": "application/json"<br />  },<br />  "isBase64Encoded": false,<br />}</pre>  |  <pre>HTTP/2 200<br />date: Wed, 08 Sep 2021 18:02:24 GMT<br />content-type: application/json<br />content-length: 15<br /><br />"Hello, world!"</pre>  | 
 
 
 **Example output for a JSON response**  
