@@ -119,7 +119,7 @@ Provisioned concurrency does not come online immediately after you configure it\
 + ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/features-scaling-provisioned.provisioned.png) Provisioned concurrency
 + ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/features-scaling-provisioned.standard.png) Standard concurrency
 
-To optimize latency, you can customize the initialization behavior for functions that use provisioned concurrency \. You can run initialization code for provisioned concurrency instances without impacting latency, because the initialization code runs at allocation time\. However, the initialization code for an on\-demand instance directly impacts the latency of the first invocation\. For an on\-demand instance, you may choose to defer initialization for a specific capability until the function needs that capability\. 
+To optimize latency, you can customize the initialization behavior for functions that use provisioned concurrency\. You can run initialization code for provisioned concurrency instances without impacting latency, because the initialization code runs at allocation time\. However, the initialization code for an on\-demand instance directly impacts the latency of the first invocation\. For an on\-demand instance, you may choose to defer initialization for a specific capability until the function needs that capability\.
 
 To determine the type of initialization, check the value of AWS\_LAMBDA\_INITIALIZATION\_TYPE\. Lambda sets this environment variable to `provisioned-concurrency` or `on-demand`\. The value of AWS\_LAMBDA\_INITIALIZATION\_TYPE is immutable and does not change over the lifetime of the execution environment\.
 
