@@ -50,17 +50,12 @@
     <dependency>
       <groupId>software.amazon.awssdk</groupId>
       <artifactId>lambda</artifactId>
-      <version>2.10.72</version>
+      <version>2.17.139</version>
     </dependency>
     <dependency>
       <groupId>com.amazonaws</groupId>
       <artifactId>aws-xray-recorder-sdk-core</artifactId>
-      <version>2.4.0</version>
-    </dependency>
-    <dependency>
-      <groupId>com.amazonaws</groupId>
-      <artifactId>aws-xray-recorder-sdk-aws-sdk-core</artifactId>
-      <version>2.4.0</version>
+      <version>2.11.0</version>
     </dependency>
     <dependency>
       <groupId>com.amazonaws</groupId>
@@ -84,19 +79,24 @@
       <version>5.6.0</version>
       <scope>test</scope>
     </dependency>
-
   </dependencies>
-
+  
   <build>
     <plugins>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>2.22.2</version>
+        <configuration>
+          <argLine>
+            --add-opens java.base/java.nio=ALL-UNNAMED
+            --add-exports java.base/jdk.internal.access.foreign=ALL-UNNAMED
+          </argLine>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
-        <version>3.2.2</version>
+        <version>3.2.4</version>
         <configuration>
           <createDependencyReducedPom>false</createDependencyReducedPom>
         </configuration>
@@ -108,17 +108,16 @@
             </goals>
             <configuration>
               <transformers>
-                <transformer implementation="com.github.edwgiz.maven_shade_plugin.log4j2_cache_transformer.PluginsCacheFileTransformer">
-                </transformer>
+                <transformer implementation="io.github.edwgiz.log4j.maven.plugins.shade.transformer.Log4j2PluginCacheFileTransformer"></transformer>
               </transformers>
             </configuration>
           </execution>
         </executions>
         <dependencies>
           <dependency>
-            <groupId>com.github.edwgiz</groupId>
-            <artifactId>maven-shade-plugin.log4j2-cachefile-transformer</artifactId>
-            <version>[2.17.1,)</version>
+            <groupId>io.github.edwgiz</groupId>
+            <artifactId>log4j-maven-shade-plugin-extensions</artifactId>
+            <version>2.17.1</version>
           </dependency>
         </dependencies>
       </plugin>
@@ -126,10 +125,7 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
-        <configuration>
-           <source>1.8</source>
-           <target>1.8</target>
-        </configuration>
+        
       </plugin>
     </plugins>
   </build>
