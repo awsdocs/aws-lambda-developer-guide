@@ -65,7 +65,7 @@ Build the code with the Lambda library dependencies to create a deployment packa
 
 The following is example C\# code that receives an Amazon SQS event message as input and processes it\. For illustration, the code writes some of the incoming event data to the console\. 
 
- In the code, `handleRequest` is the handler\. The handler uses the predefined `SQSEvent` class that is defined in the `AWS.Lambda.SQSEvents` library\. 
+In the code, `HandleSQSEvent` is the handler\. The handler uses the predefined `SQSEvent` class that is defined in the `AWS.Lambda.SQSEvents` library\. 
 
 **Example ProcessingSQSRecords\.cs**  
 
