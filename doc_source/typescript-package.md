@@ -97,7 +97,7 @@ To complete the steps in this section, you must have the following:
    npm install -D @types/aws-lambda
    ```
 
-1. Open the **lib** directory\. You should see a file called **hello\-world\-stack\.ts**\. Create new two new files in this directory: **hello\-world\.function\.ts** and **hello\-world\.ts**\.
+1. Open the **lib** directory\. You should see a file called **hello\-world\-stack\.ts**\. Create two new files in this directory: **hello\-world\.function\.ts** and **hello\-world\.ts**\.
 
 1. Open **hello\-world\.function\.ts** and add the following code to the file\. This is the code for the Lambda function\.
 
