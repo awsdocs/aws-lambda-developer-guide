@@ -22,7 +22,7 @@ For details on concurrency and how Lambda scales your function concurrency in re
 The following quotas apply to function configuration, deployment, and execution\. They cannot be changed\.
 
 **Note**  
-The Lambda documentation, log messages, and console use the abbreviation MB \(rather than MiB\) to refer to 1024 KB\.
+The Lambda documentation, log messages, and console use the abbreviation KB/MB/GB \(rather than KiB/MiB/GiB\) to mean 1024/1024<sup>2</sup>/1024<sup>3</sup> bytes.
 
 
 | Resource | Quota | 
