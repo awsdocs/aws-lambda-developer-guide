@@ -2,23 +2,19 @@
 
 The \.NET Core CLI offers a cross\-platform way for you to create \.NET\-based Lambda applications\. This section assumes that you have installed the \.NET Core CLI\. If you haven't, see [Download \.NET](https://dotnet.microsoft.com/download) on the Microsoft website\.
 
-In the \.NET CLI, you use the `new` command to create \.NET projects from a command line\. This is useful if you want to create a project outside of Visual Studio\. To view a list of the available project types, open a command line, navigate to where you installed the \.NET Core runtime, and then run the following command:
+In the \.NET CLI, you use the `new` command to create \.NET projects from a command line\. This is useful if you want to create a project outside of Visual Studio\. To view a list of the available templates, open a command line, navigate to where you installed the \.NET Core runtime, and then run the following command:
 
 ```
-dotnet new -all
-Usage: new [options]
-...
-Templates                                         Short Name         Language          Tags                             
+dotnet new -l
+These templates matched your input:
+
+Template Name                                     Short Name         Language          Tags                             
 ----------------------------------------------------------------------------------------------------------------------------
 Console Application                               console            [C#], F#, VB      Common/Console                   
 Class library                                     classlib           [C#], F#, VB      Common/Library                   
 Unit Test Project                                 mstest             [C#], F#, VB      Test/MSTest                      
 xUnit Test Project                                xunit              [C#], F#, VB      Test/xUnit                       
 ...
-Examples:
-    dotnet new mvc --auth Individual
-    dotnet new viewstart
-    dotnet new --help
 ```
 
 Lambda offers additional templates via the [Amazon\.Lambda\.Templates](https://www.nuget.org/packages/Amazon.Lambda.Templates) NuGet package\. To install this package, run the following command:
