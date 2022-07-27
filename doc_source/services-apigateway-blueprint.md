@@ -26,7 +26,7 @@ Follow the steps in this section to create a new Lambda function and an API Gate
    + **Role name** – **lambda\-apigateway\-role**\.
    + **Policy templates** – **Simple microservice permissions**\.
    + **API** – **Create an API**\.
-   + **API Type** – **HTTP API**\.
+   + **API Type** – **REST API**\.
    + **Security** – **Open**\.
 
    Choose **Create function**\.
