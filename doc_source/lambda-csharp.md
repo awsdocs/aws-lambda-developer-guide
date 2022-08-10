@@ -4,17 +4,17 @@ The following sections explain how common programming patterns and core concepts
 
 AWS Lambda provides the following libraries for C\# functions:
 + **Amazon\.Lambda\.Core** – This library provides a static Lambda logger, serialization interfaces and a context object\. The `Context` object \([AWS Lambda context object in C\#](csharp-context.md)\) provides runtime information about your Lambda function\.
-+ **Amazon\.Lambda\.Serialization\.Json ** – This is an implementation of the serialization interface in **Amazon\.Lambda\.Core**\. 
-+ **Amazon\.Lambda\.Logging\.AspNetCore ** – This provides a library for logging from ASP\.NET\. 
++ **Amazon\.Lambda\.Serialization\.Json** – This is an implementation of the serialization interface in **Amazon\.Lambda\.Core**\. 
++ **Amazon\.Lambda\.Logging\.AspNetCore** – This provides a library for logging from ASP\.NET\. 
 + Event objects \(POCOs\) for several AWS services, including: 
-  + **Amazon\.Lambda\.APIGatewayEvents **
-  + **Amazon\.Lambda\.CognitoEvents **
-  + **Amazon\.Lambda\.ConfigEvents **
-  + **Amazon\.Lambda\.DynamoDBEvents **
-  + **Amazon\.Lambda\.KinesisEvents **
-  + **Amazon\.Lambda\.S3Events **
-  + **Amazon\.Lambda\.SQSEvents **
-  + **Amazon\.Lambda\.SNSEvents **
+  + **Amazon\.Lambda\.APIGatewayEvents**
+  + **Amazon\.Lambda\.CognitoEvents**
+  + **Amazon\.Lambda\.ConfigEvents**
+  + **Amazon\.Lambda\.DynamoDBEvents**
+  + **Amazon\.Lambda\.KinesisEvents**
+  + **Amazon\.Lambda\.S3Events**
+  + **Amazon\.Lambda\.SQSEvents**
+  + **Amazon\.Lambda\.SNSEvents**
 
 These packages are available at [Nuget packages](https://www.nuget.org/packages/)\.
 
