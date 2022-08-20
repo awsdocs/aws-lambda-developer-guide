@@ -88,7 +88,7 @@ If you have not already done so, you must install [git](https://git-scm.com/) an
 1. Download the **build\-lambda\-zip** tool from GitHub:
 
    ```
-   go.exe get -u github.com/aws/aws-lambda-go/cmd/build-lambda-zip
+   go.exe install github.com/aws/aws-lambda-go/cmd/build-lambda-zip@latest
    ```
 
 1. Use the tool from your `GOPATH` to create a \.zip file\. If you have a default installation of Go, the tool is typically in `%USERPROFILE%\Go\bin`\. Otherwise, navigate to where you installed the Go runtime and do one of the following:
