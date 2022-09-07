@@ -8,21 +8,24 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
 
-import com.amazonaws.AmazonServiceException;
+import software.amazon.awssdk.awscore.exception.AwsServiceException;
+import software.amazon.awssdk.core.sync.RequestBody;
+import software.amazon.awssdk.services.s3.model.GetObjectRequest;
+import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+import software.amazon.awssdk.services.s3.model.S3Object;
+import software.amazon.awssdk.services.s3.S3Client;
+
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.S3Event;
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.event.S3EventNotification.S3EventNotificationRecord;
-import com.amazonaws.services.s3.model.GetObjectRequest;
-import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.amazonaws.services.s3.model.S3Object;
-import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.lambda.runtime.events.models.s3.S3EventNotification.S3EventNotificationRecord;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -67,19 +70,20 @@ public class Handler implements RequestHandler<S3Event, String> {
       }
 
       // Download the image from S3 into a stream
-      AmazonS3 s3Client = AmazonS3ClientBuilder.defaultClient();
-      S3Object s3Object = s3Client.getObject(new GetObjectRequest(
-              srcBucket, srcKey));
-      InputStream objectData = s3Object.getObjectContent();
+      S3Client s3Client = S3Client.builder().build();
+      GetObjectRequest getObjectRequest = GetObjectRequest.builder()
+        .bucket(srcBucket)
+        .key(srcKey)
+        .build();
+      InputStream s3Object = s3Client.getObject(getObjectRequest);
 
       // Read the source image
-      BufferedImage srcImage = ImageIO.read(objectData);
+      BufferedImage srcImage = ImageIO.read(s3Object);
       int srcHeight = srcImage.getHeight();
       int srcWidth = srcImage.getWidth();
-      // Infer the scaling factor to avoid stretching the image
-      // unnaturally
-      float scalingFactor = Math.min(MAX_WIDTH / srcWidth, MAX_HEIGHT
-              / srcHeight);
+      // Infer scaling factor to avoid stretching image unnaturally
+      float scalingFactor = Math.min(
+        MAX_WIDTH / srcWidth, MAX_HEIGHT / srcHeight);
       int width = (int) (scalingFactor * srcWidth);
       int height = (int) (scalingFactor * srcHeight);
 
@@ -98,25 +102,29 @@ public class Handler implements RequestHandler<S3Event, String> {
       // Re-encode image to target format
       ByteArrayOutputStream os = new ByteArrayOutputStream();
       ImageIO.write(resizedImage, imageType, os);
-      InputStream is = new ByteArrayInputStream(os.toByteArray());
-      // Set Content-Length and Content-Type
-      ObjectMetadata meta = new ObjectMetadata();
-      meta.setContentLength(os.size());
+      // InputStream is = new ByteArrayInputStream(os.toByteArray());
+
+      Map<String, String> metadata = new HashMap<>();
+      metadata.put("Content-Length", Integer.toString(os.size()));
       if (JPG_TYPE.equals(imageType)) {
-          meta.setContentType(JPG_MIME);
+        metadata.put("Content-Type", JPG_MIME);
+      } else if (PNG_TYPE.equals(imageType)) {
+        metadata.put("Content-Type", PNG_MIME);
       }
-      if (PNG_TYPE.equals(imageType)) {
-          meta.setContentType(PNG_MIME);
-      }
+      PutObjectRequest putObjectRequest = PutObjectRequest.builder()
+        .bucket(dstBucket)
+        .key(dstKey)
+        .metadata(metadata)
+        .build();
 
       // Uploading to S3 destination bucket
       logger.info("Writing to: " + dstBucket + "/" + dstKey);
       try {
-        s3Client.putObject(dstBucket, dstKey, is, meta);
+        s3Client.putObject(putObjectRequest, RequestBody.fromBytes(os.toByteArray()));
       }
-      catch(AmazonServiceException e)
+      catch(AwsServiceException e)
       {
-        logger.error(e.getErrorMessage());
+        logger.error(e.awsErrorDetails().errorMessage());
         System.exit(1);
       }
       logger.info("Successfully resized " + srcBucket + "/"

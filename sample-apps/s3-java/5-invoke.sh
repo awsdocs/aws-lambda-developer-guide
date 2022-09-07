@@ -9,7 +9,7 @@ if [ ! -f event.json ]; then
 
 fi
 while true; do
-  aws lambda invoke --function-name $FUNCTION --payload file://event.json out.json
+  aws lambda invoke --function-name $FUNCTION --payload file://event.json out.json --cli-binary-format raw-in-base64-out
   cat out.json
   echo ""
   sleep 2
