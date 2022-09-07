@@ -4,7 +4,7 @@
 
 The project source includes function code and supporting resources:
 
-- `src/main` - A Java function.
+- `src/main` - A Java Lambda function that scales down an image stored in S3.
 - `src/test` - A unit test and helper classes.
 - `template.yml` - An AWS CloudFormation template that creates an application.
 - `build.gradle` - A Gradle build file.
@@ -63,9 +63,13 @@ You can also build the application with Maven. To use maven, add `mvn` to the co
     ...
 
 # Test
-To upload an image file to the application bucket and trigger the function, run `4-upload.sh`.
+This Lambda function takes an image that's currently stored in S3, and scales it down into
+a thumbnail-sized image. To upload an image file to the application bucket, run `4-upload.sh`.
 
     s3-java$ ./4-upload.sh
+
+In your `s3-java-bucket-<random_uuid>` bucket that was created in step 3, you should now see a
+key `inbound/sample-s3-java.png` file, which represents the original image.
 
 To invoke the function directly, run `5-invoke.sh`.
 
@@ -75,7 +79,12 @@ To invoke the function directly, run `5-invoke.sh`.
         "ExecutedVersion": "$LATEST"
     }
 
-Let the script invoke the function a few times and then press `CRTL+C` to exit.
+Let the script invoke the function a few times and then press `CRTL+C` to exit. Note that you
+may see function timeouts in the first few iterations due to cold starts; after a while, they
+should begin to succeed.
+
+If you look at the `s3-java-bucket-<random_uuid>` bucket in your account, you should now see a
+key `resized-inbound/sample-s3-java.png` file, which represents the new, shrunken image.
 
 The application uses AWS X-Ray to trace requests. Open the [X-Ray console](https://console.aws.amazon.com/xray/home#/service-map) to view the service map.
 

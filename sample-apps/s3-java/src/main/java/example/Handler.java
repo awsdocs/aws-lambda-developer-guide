@@ -37,12 +37,12 @@ import org.slf4j.LoggerFactory;
 public class Handler implements RequestHandler<S3Event, String> {
   Gson gson = new GsonBuilder().setPrettyPrinting().create();
   private static final Logger logger = LoggerFactory.getLogger(Handler.class);
-  private static final float MAX_WIDTH = 100;
-  private static final float MAX_HEIGHT = 100;
-  private final String JPG_TYPE = (String) "jpg";
-  private final String JPG_MIME = (String) "image/jpeg";
-  private final String PNG_TYPE = (String) "png";
-  private final String PNG_MIME = (String) "image/png";
+  private static final float MAX_DIMENSION = 100;
+  private final String REGEX = ".*\\.([^\\.]*)";
+  private final String JPG_TYPE = "jpg";
+  private final String JPG_MIME = "image/jpeg";
+  private final String PNG_TYPE = "png";
+  private final String PNG_MIME = "image/png";
   @Override
   public String handleRequest(S3Event s3event, Context context) {
     try {
@@ -58,7 +58,7 @@ public class Handler implements RequestHandler<S3Event, String> {
       String dstKey = "resized-" + srcKey;
 
       // Infer the image type.
-      Matcher matcher = Pattern.compile(".*\\.([^\\.]*)").matcher(srcKey);
+      Matcher matcher = Pattern.compile(REGEX).matcher(srcKey);
       if (!matcher.matches()) {
           logger.info("Unable to infer image type for key " + srcKey);
           return "";
@@ -71,67 +71,95 @@ public class Handler implements RequestHandler<S3Event, String> {
 
       // Download the image from S3 into a stream
       S3Client s3Client = S3Client.builder().build();
-      GetObjectRequest getObjectRequest = GetObjectRequest.builder()
-        .bucket(srcBucket)
-        .key(srcKey)
-        .build();
-      InputStream s3Object = s3Client.getObject(getObjectRequest);
+      InputStream s3Object = getObject(s3Client, srcBucket, srcKey);
 
-      // Read the source image
+      // Read the source image and resize it
       BufferedImage srcImage = ImageIO.read(s3Object);
-      int srcHeight = srcImage.getHeight();
-      int srcWidth = srcImage.getWidth();
-      // Infer scaling factor to avoid stretching image unnaturally
-      float scalingFactor = Math.min(
-        MAX_WIDTH / srcWidth, MAX_HEIGHT / srcHeight);
-      int width = (int) (scalingFactor * srcWidth);
-      int height = (int) (scalingFactor * srcHeight);
-
-      BufferedImage resizedImage = new BufferedImage(width, height,
-              BufferedImage.TYPE_INT_RGB);
-      Graphics2D g = resizedImage.createGraphics();
-      // Fill with white before applying semi-transparent (alpha) images
-      g.setPaint(Color.white);
-      g.fillRect(0, 0, width, height);
-      // Simple bilinear resize
-      g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
-              RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-      g.drawImage(srcImage, 0, 0, width, height, null);
-      g.dispose();
+      BufferedImage newImage = resizeImage(srcImage);
 
       // Re-encode image to target format
-      ByteArrayOutputStream os = new ByteArrayOutputStream();
-      ImageIO.write(resizedImage, imageType, os);
-      // InputStream is = new ByteArrayInputStream(os.toByteArray());
+      ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+      ImageIO.write(newImage, imageType, outputStream);
 
-      Map<String, String> metadata = new HashMap<>();
-      metadata.put("Content-Length", Integer.toString(os.size()));
-      if (JPG_TYPE.equals(imageType)) {
-        metadata.put("Content-Type", JPG_MIME);
-      } else if (PNG_TYPE.equals(imageType)) {
-        metadata.put("Content-Type", PNG_MIME);
-      }
-      PutObjectRequest putObjectRequest = PutObjectRequest.builder()
-        .bucket(dstBucket)
-        .key(dstKey)
-        .metadata(metadata)
-        .build();
+      // Upload new image to S3
+      putObject(s3Client, outputStream, dstBucket, dstKey, imageType);
 
-      // Uploading to S3 destination bucket
-      logger.info("Writing to: " + dstBucket + "/" + dstKey);
-      try {
-        s3Client.putObject(putObjectRequest, RequestBody.fromBytes(os.toByteArray()));
-      }
-      catch(AwsServiceException e)
-      {
-        logger.error(e.awsErrorDetails().errorMessage());
-        System.exit(1);
-      }
       logger.info("Successfully resized " + srcBucket + "/"
               + srcKey + " and uploaded to " + dstBucket + "/" + dstKey);
       return "Ok";
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
+  }
+
+  private InputStream getObject(S3Client s3Client, String bucket, String key) {
+    GetObjectRequest getObjectRequest = GetObjectRequest.builder()
+      .bucket(bucket)
+      .key(key)
+      .build();
+    return s3Client.getObject(getObjectRequest);
+  }
+
+  private void putObject(S3Client s3Client, ByteArrayOutputStream outputStream,
+    String bucket, String key, String imageType) {
+      Map<String, String> metadata = new HashMap<>();
+      metadata.put("Content-Length", Integer.toString(outputStream.size()));
+      if (JPG_TYPE.equals(imageType)) {
+        metadata.put("Content-Type", JPG_MIME);
+      } else if (PNG_TYPE.equals(imageType)) {
+        metadata.put("Content-Type", PNG_MIME);
+      }
+
+      PutObjectRequest putObjectRequest = PutObjectRequest.builder()
+        .bucket(bucket)
+        .key(key)
+        .metadata(metadata)
+        .build();
+
+      // Uploading to S3 destination bucket
+      logger.info("Writing to: " + bucket + "/" + key);
+      try {
+        s3Client.putObject(putObjectRequest,
+          RequestBody.fromBytes(outputStream.toByteArray()));
+      }
+      catch(AwsServiceException e)
+      {
+        logger.error(e.awsErrorDetails().errorMessage());
+        System.exit(1);
+      }
+  }
+
+  /**
+   * Resizes (shrinks) an image into a small, thumbnail-sized image.
+   * 
+   * The new image is scaled down proportionally based on the source
+   * image. The scaling factor is determined based on the value of
+   * MAX_DIMENSION. The resulting new image has max(height, width)
+   * = MAX_DIMENSION.
+   * 
+   * @param srcImage BufferedImage to resize.
+   * @return New BufferedImage that is scaled down to thumbnail size.
+   */
+  private BufferedImage resizeImage(BufferedImage srcImage) {
+    int srcHeight = srcImage.getHeight();
+    int srcWidth = srcImage.getWidth();
+    // Infer scaling factor to avoid stretching image unnaturally
+    float scalingFactor = Math.min(
+      MAX_DIMENSION / srcWidth, MAX_DIMENSION / srcHeight);
+    int width = (int) (scalingFactor * srcWidth);
+    int height = (int) (scalingFactor * srcHeight);
+
+    BufferedImage resizedImage = new BufferedImage(width, height,
+            BufferedImage.TYPE_INT_RGB);
+    Graphics2D graphics = resizedImage.createGraphics();
+    // Fill with white before applying semi-transparent (alpha) images
+    graphics.setPaint(Color.white);
+    graphics.fillRect(0, 0, width, height);
+    // Simple bilinear resize
+    graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
+            RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+    graphics.drawImage(srcImage, 0, 0, width, height, null);
+    graphics.dispose();
+    return resizedImage;
   }
 }
