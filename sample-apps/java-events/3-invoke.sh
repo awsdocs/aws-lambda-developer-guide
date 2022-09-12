@@ -40,6 +40,9 @@ then
     s3)
       PAYLOAD='file://events/s3-notification.json'
       ;;
+    sqs)
+      PAYLOAD='file://events/sqs-record.json'
+      ;;
     *)
       echo -n "Unknown event type"
       ;;
