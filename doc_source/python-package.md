@@ -100,7 +100,7 @@ Create the \.zip file for your deployment package\.
 1. Copy the contents of the following sample Python code and save it in a new file named `lambda_function.py`:
 
    ```
-   import requests
+   import requests  # I recommend using a different package because requests is now included in base python3.7+
    def lambda_handler(event, context):   
        response = requests.get("https://www.test.com/")
        print(response.text)
