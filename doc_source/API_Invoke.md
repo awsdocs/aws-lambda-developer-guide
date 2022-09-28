@@ -6,6 +6,14 @@ For [synchronous invocation](https://docs.aws.amazon.com/lambda/latest/dg/invoca
 
 When an error occurs, your function may be invoked multiple times\. Retry behavior varies by error type, client, event source, and invocation type\. For example, if you invoke a function asynchronously and it returns an error, Lambda executes the function up to two more times\. For more information, see [Retry Behavior](https://docs.aws.amazon.com/lambda/latest/dg/retries-on-errors.html)\.
 
+Invoking long-running Lambda functions synchonously under default CLI parameters will lead to the functions being retried after the default timeout of 60 seconds is reached regardless of their actual timeout. To prevent this from happening, you could specify the `--cli-read-timeout` option to the number of seconds to wait before timing out or you could query the timeout before invokation issuing, `aws lambda invoke --function-name LAMBDA_NAME --payload PAYLOAD --cli-read-timeout $(aws lambda-timeout LAMBDA_NAME) output.temp`. This query can be done with an alias such as the following,
+```
+lambda-timeout =
+  !f() {
+    aws lambda get-function-configuration --function-name "$1" --query Timeout --output text
+  }; f
+```
+
 For [asynchronous invocation](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html), Lambda adds events to a queue before sending them to your function\. If your function does not have enough capacity to keep up with the queue, events may be lost\. Occasionally, your function may receive the same event multiple times, even if no error occurs\. To retain events that were not processed, configure your function with a [dead\-letter queue](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq)\.
 
 The status code in the API response doesn't reflect function errors\. Error codes are reserved for errors that prevent your function from executing, such as permissions errors, [limit errors](https://docs.aws.amazon.com/lambda/latest/dg/limits.html), or issues with your function's code and configuration\. For example, Lambda returns `TooManyRequestsException` if executing the function would cause you to exceed a concurrency limit at either the account level \(`ConcurrentInvocationLimitExceeded`\) or function level \(`ReservedFunctionConcurrentInvocationLimitExceeded`\)\.

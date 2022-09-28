@@ -6,6 +6,14 @@ When you invoke a function synchronously, Lambda runs the function and waits for
 aws lambda invoke --function-name my-function --cli-binary-format raw-in-base64-out --payload '{ "key": "value" }' response.json
 ```
 
+Lambda functions invoked synchronoysly using the AWS CLI under default conditions are subject to the default time out of 60 seconds. For long-running Lambda functions this will lead to them being retried regardless of their actual timeout. To prevent this from happening, you could specify the `--cli-read-timeout` option to the number of seconds to wait before timing out or you could query the timeout before invokation issuing `aws lambda invoke --function-name LAMBDA_NAME --payload PAYLOAD --cli-read-timeout $(aws lambda-timeout LAMBDA_NAME) output.temp`. This query can be done with an alias such as the following,
+```
+lambda-timeout =
+  !f() {
+    aws lambda get-function-configuration --function-name "$1" --query Timeout --output text
+  }; f
+```
+
 The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.
 
 You should see the following output:
