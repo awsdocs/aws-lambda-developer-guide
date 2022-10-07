@@ -15,7 +15,7 @@ Install the **Maven** Plugin for Eclipse\.
 
 1. Start Eclipse\. From the **Help** menu in Eclipse, choose **Install New Software**\.
 
-1. In the **Install** window, type **http://download\.eclipse\.org/technology/m2e/releases** in the **Work with:** box, and choose **Add**\.
+1. In the **Install** window, type **http://download\.eclipse\.org/technology/m2e/releases/latest** in the **Work with:** box, and choose **Add**\.
 
 1. Follow the steps to complete the setup\.
 
