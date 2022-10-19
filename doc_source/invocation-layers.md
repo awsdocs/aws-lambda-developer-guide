@@ -198,7 +198,7 @@ To list all layers in your account, you can omit the `--compatible-runtime` opti
 You can also get the latest version of a layer using the list\-layer\-versions command\.
 
 ```
-aws lambda list-layer-versions --layer-name my-layer --query 'LayerVersions[0].LayerVersionArn
+aws lambda list-layer-versions --layer-name my-layer --query 'LayerVersions[0].LayerVersionArn'
 ```
 
 ## Adding layer permissions<a name="invocation-layers-permissions"></a>
