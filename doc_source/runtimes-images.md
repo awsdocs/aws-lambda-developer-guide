@@ -3,7 +3,7 @@
 AWS provides a set of open\-source base images that you can use\. You can also use a preferred community or private base image\. Lambda provides client software that you add to your preferred base image to make it compatible with the Lambda service\. 
 
 **Note**  
-Each base image is compatible with one or more of the instruction set architectures that Lambda supports\. You need to build the function image for only one architcture\. Lambda does not support multi\-architecture images\.
+Each base image is compatible with one or more of the instruction set architectures that Lambda supports\. You need to build the function image for only one architecture\. Lambda does not support multi\-architecture images\.
 
 **Topics**
 + [AWS base images for Lambda](#runtimes-images-lp)
