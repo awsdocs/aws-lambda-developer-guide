@@ -33,7 +33,7 @@ Length Constraints: Minimum length of 0\. Maximum length of 256\.
 Required: No
 
  ** Environment **   <a name="SSS-Type-FunctionConfiguration-Environment"></a>
-The function's [environment variables](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html)\.  
+The function's [environment variables](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html)\. Omitted from AWS CloudTrail logs\.  
 Type: [EnvironmentResponse](API_EnvironmentResponse.md) object  
 Required: No
 

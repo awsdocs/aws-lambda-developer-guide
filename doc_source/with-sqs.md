@@ -80,14 +80,14 @@ For FIFO queues, records contain additional attributes that are related to dedup
 }
 ```
 
-When Lambda reads a batch, the messages stay in the queue but are hidden for the length of the queue's [visibility timeout](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html)\. If your function successfully processes the batch, Lambda deletes the messages from the queue\. By default, if your function encounters an error while processing a batch, all messages in that batch become visible in the queue again\. For this reason, your function code must be able to process the same message multiple times without unintended side effects\. You can modify this reprocessing behavior by including batch item failures in your function response\.
+When Lambda reads a batch, the messages stay in the queue but are hidden for the length of the queue's [visibility timeout](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html)\. If your function successfully processes the batch, Lambda deletes the messages from the queue\. By default, if your function encounters an error while processing a batch, all messages in that batch become visible in the queue again\. For this reason, your function code must be able to process the same message multiple times without unintended side effects\. You can modify this reprocessing behavior by configuring your event source mapping to include [batch item failures](#services-sqs-batchfailurereporting) in your function response\.
 
 **Topics**
 + [Scaling and processing](#events-sqs-scaling)
 + [Configuring a queue to use with Lambda](#events-sqs-queueconfig)
 + [Execution role permissions](#events-sqs-permissions)
 + [Configuring a queue as an event source](#events-sqs-eventsource)
-+ [Event source mapping APIs](#services-dynamodb-api)
++ [Event source mapping APIs](#events-sqs-api)
 + [Reporting batch item failures](#services-sqs-batchfailurereporting)
 + [Amazon SQS configuration parameters](#services-sqs-params)
 + [Tutorial: Using Lambda with Amazon SQS](with-sqs-example.md)
@@ -154,7 +154,7 @@ Lambda supports the following options for Amazon SQS event sources\.
 **Note**  
 If your batch window is greater than 0, and `(batch window) + (function timeout) > (queue visibility timeout)`, then your effective queue visibility timeout is `(batch window) + (function timeout) + 30s`\.
 
-  Lambda processes up to five batches at a time\. This means that there are a maximum of five workers available to batch and process messages in parallel at any one time\. Each worker shows a distinct Lambda invocation for its current batch of messages\.
+  Lambda processes up to five batches at a time\. This means that there are a maximum of five workers available to batch and process messages in parallel at any one time\. If messages are still available, Lambda increases the number of processes that are reading batches by up to 60 more instances per minute\. The maximum number of batches that an event source mapping can process simultaneously is 1,000\. For more information, see [Scaling and processing](#events-sqs-scaling)\.
 + **Enabled** – The status of the event source mapping\. Set to true to enable the event source mapping\. Set to false to stop processing records\.
 
 **Note**  
@@ -164,7 +164,7 @@ To manage the event source configuration later, in the Lambda console, choose th
 
 Configure your function timeout to allow enough time to process an entire batch of items\. If items take a long time to process, choose a smaller batch size\. A large batch size can improve efficiency for workloads that are very fast or have a lot of overhead\. However, if your function returns an error, all items in the batch return to the queue\. If you configure [reserved concurrency](configuration-concurrency.md) on your function, set a minimum of five concurrent executions to reduce the chance of throttling errors when Lambda invokes your function\. To eliminate the chance of throttling errors, set the reserved concurrency value to 1,000, which is the maximum number of concurrent executions for an Amazon SQS event source\.
 
-## Event source mapping APIs<a name="services-dynamodb-api"></a>
+## Event source mapping APIs<a name="events-sqs-api"></a>
 
 To manage an event source with the [AWS Command Line Interface \(AWS CLI\)](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) or an [AWS SDK](http://aws.amazon.com/getting-started/tools-sdks/), you can use the following API operations:
 +  [CreateEventSourceMapping](API_CreateEventSourceMapping.md) 

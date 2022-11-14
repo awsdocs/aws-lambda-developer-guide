@@ -5,7 +5,7 @@ Details about the provisioned concurrency configuration for a function alias or 
 ## Contents<a name="API_ProvisionedConcurrencyConfigListItem_Contents"></a>
 
  ** AllocatedProvisionedConcurrentExecutions **   <a name="SSS-Type-ProvisionedConcurrencyConfigListItem-AllocatedProvisionedConcurrentExecutions"></a>
-The amount of provisioned concurrency allocated\.  
+The amount of provisioned concurrency allocated\. When a weighted alias is used during linear and canary deployments, this value fluctuates depending on the amount of concurrency that is provisioned for the function versions\.  
 Type: Integer  
 Valid Range: Minimum value of 0\.  
 Required: No

@@ -3,11 +3,11 @@
 The following sections explain how common programming patterns and core concepts apply when authoring Lambda function code in [Go](https://golang.org/)\.
 
 
-**Go runtimes**  
+**Go**  
 
-| Name | Identifier | Operating system | Architectures | 
-| --- | --- | --- | --- | 
-|  Go 1\.x  |  `go1.x`  |  Amazon Linux  |  x86\_64  | 
+| Name | Identifier | Operating system | Architectures | Deprecation | 
+| --- | --- | --- | --- | --- | 
+|  Go 1\.x  |  `go1.x`  |  Amazon Linux  |  x86\_64  |    | 
 
 **Note**  
 Runtimes that use the Amazon Linux operating system, such as Go 1\.x, do not support the arm64 architecture\. To use arm64 architecture, you can run Go with the provided\.al2 runtime\.

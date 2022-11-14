@@ -25,7 +25,7 @@ aws lambda invoke \
               --payload '{ "key": "value" }' response.json
 ```
 
-The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.
+The cli\-binary\-format option is required if you're using AWS CLI version 2\. To make this the default setting, run `aws configure set cli-binary-format raw-in-base64-out`\. For more information, see [AWS CLI supported global command line options](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-options.html#cli-configure-options-list)\.
 
 ```
 {
@@ -112,7 +112,14 @@ Add destinations to your function in the Lambda console's function visualization
 
 1. Choose **Save**\.
 
-When an invocation matches the condition, Lambda sends a JSON document with details about the invocation to the destination\. The following example shows an invocation record for an event that failed three processing attempts due to a function error\.
+When an invocation matches the condition, Lambda sends a JSON document with details about the invocation to the destination\.
+
+**Destination\-specific JSON format**
++ For Amazon SQS and Amazon SNS \(`SnsDestination` and `SqsDestination`\), the invocation record is passed as the `Message` to the destination\.
++ For Lambda \(`LambdaDestination`\), the invocation record is passed as the payload to the function\.
++ For EventBridge \(`EventBridgeDestination`\), the invocation record is passed as the `detail` in the [PutEvents](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html) call\. The value for the `source` event field is `lambda`\. The value for the `detail-type` event field is either *Lambda Function Invocation Result – Success* or *Lambda Function Invocation Result – Failure*\. The `resource` event field contains the function and destination Amazon Resource Names \(ARNs\)\. For other event fields, see [Amazon EventBridge events](https://docs.aws.amazon.com/eventbridge/latest/userguide/aws-events.html)\.
+
+The following example shows an invocation record for an event that failed three processing attempts due to a function error\.
 
 **Example invocation record**  
 

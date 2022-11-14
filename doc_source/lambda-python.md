@@ -5,14 +5,13 @@ You can run Python code in AWS Lambda\. Lambda provides [runtimes](lambda-runtim
 Lambda supports the following Python runtimes\.
 
 
-**Python runtimes**  
+**Python**  
 
-| Name | Identifier | AWS SDK for Python | Operating system | Architectures | 
-| --- | --- | --- | --- | --- | 
-|  Python 3\.9  |  `python3.9`  |  boto3\-1\.20\.32 botocore\-1\.23\.32  |  Amazon Linux 2  |  x86\_64, arm64  | 
-|  Python 3\.8  |  `python3.8`  |  boto3\-1\.20\.32 botocore\-1\.23\.32  |  Amazon Linux 2  |  x86\_64, arm64  | 
-|  Python 3\.7  |  `python3.7`  |  boto3\-1\.20\.32 botocore\-1\.23\.32  |  Amazon Linux  |  x86\_64  | 
-|  Python 3\.6  |  `python3.6`  |  boto3\-1\.20\.32 botocore\-1\.23\.32  |  Amazon Linux  |  x86\_64  | 
+| Name | Identifier | SDK | Operating system | Architectures | Deprecation | 
+| --- | --- | --- | --- | --- | --- | 
+|  Python 3\.9  |  `python3.9`  |  boto3\-1\.20\.32 botocore\-1\.23\.32  |  Amazon Linux 2  |  x86\_64, arm64  |    | 
+|  Python 3\.8  |  `python3.8`  |  boto3\-1\.20\.32 botocore\-1\.23\.32  |  Amazon Linux 2  |  x86\_64, arm64  |    | 
+|  Python 3\.7  |  `python3.7`  |  boto3\-1\.20\.32 botocore\-1\.23\.32  |  Amazon Linux  |  x86\_64  |    | 
 
 The runtime information in this table undergoes continuous updates\. For more information on using AWS SDKs in Lambda, see [Managing AWS SDKs in Lambda functions](https://docs.aws.amazon.com/lambda/latest/operatorguide/sdks-functions.html)\.
 

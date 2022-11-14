@@ -77,9 +77,12 @@ Blueprints are provided for use under the [Amazon Software License](http://aws.a
 
 ## Testing and deployment tools<a name="gettingstarted-features-tools"></a>
 
-Lambda supports deploying code as is or as [container images](gettingstarted-package.md#gettingstarted-package-images)\. You can use a rich tools ecosystem for authoring, building, and deploying your Lambda functions using AWS and popular community tools like the Docker command line interface \(CLI\)\.
+Lambda supports deploying code as is or as [container images](gettingstarted-package.md#gettingstarted-package-images)\. You can use AWS services and popular community tools like the Docker command line interface \(CLI\) to author, build, and deploy your Lambda functions\. To set up the Docker CLI, see [Get Docker](https://docs.docker.com/get-docker) on the Docker Docs website\. For an introduction to using Docker with AWS, see [Getting started with Amazon ECR using the AWS CLI](https://docs.aws.amazon.com/AmazonECR/latest/userguide/getting-started-cli.html) in the *Amazon Elastic Container Registry User Guide*\.
 
-To set up the Docker CLI, see [Get Docker](https://docs.docker.com/get-docker) on the Docker Docs website\. For an introduction to using Docker with AWS, see [Getting started with Amazon ECR using the AWS CLI](https://docs.aws.amazon.com/AmazonECR/latest/userguide/getting-started-cli.html) in the *Amazon Elastic Container Registry User Guide*\.
+The [AWS CLI](lambda-settingup.md#lambda-settingup-awscli) and [SAM CLI](lambda-settingup.md#lambda-settingup-samcli) are command line tools for managing Lambda application stacks\. In addition to commands for managing application stacks with the AWS CloudFormation API, the AWS CLI supports higher\-level commands that simplify tasks like uploading deployment packages and updating templates\. The AWS SAM CLI provides additional functionality, including validating templates, testing locally, and integrating with CI/CD systems\.
++ [Installing the AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html)
++ [Testing and debugging serverless applications with AWS SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-test-and-debug.html)
++ [Deploying serverless applications using CI/CD systems with AWS SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-deploying.html)
 
 ## Application templates<a name="gettingstarted-features-templates"></a>
 

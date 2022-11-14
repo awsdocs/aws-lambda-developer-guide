@@ -1,8 +1,5 @@
 # Deploy Python Lambda functions with container images<a name="python-image"></a>
 
-**Note**  
-End of support for the Python 2\.7 runtime started on July 15, 2021\. For more information, see [Runtime deprecation policy](lambda-runtimes.md#runtime-support-policy)\.
-
 You can deploy your Lambda function code as a [container image](images-create.md)\. AWS provides the following resources to help you build a container image for your Python function:
 + AWS base images for Lambda
 
@@ -34,13 +31,11 @@ The workflow for a function defined as a container image includes these steps:
 AWS provides the following base images for Python:
 
 
-| Tags | Runtime | Operating system | Dockerfile | 
-| --- | --- | --- | --- | 
-| 3, 3\.9 | Python 3\.9 | Amazon Linux 2 | [Dockerfile for Python 3\.9 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/python3.9/Dockerfile.python3.9) | 
-| 3\.8 | Python 3\.8 | Amazon Linux 2 | [Dockerfile for Python 3\.8 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/python3.8/Dockerfile.python3.8) | 
-| 3\.7 | Python 3\.7 | Amazon Linux 2018\.03 | [Dockerfile for Python 3\.7 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/python3.7/Dockerfile.python3.7) | 
-| 3\.6 | Python 3\.6 | Amazon Linux 2018\.03 | [Dockerfile for Python 3\.6 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/python3.6/Dockerfile.python3.6) | 
-| 2, 2\.7 | Python 2\.7 | Amazon Linux 2018\.03 | [Dockerfile for Python 2\.7 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/python2.7/Dockerfile.python2.7) | 
+| Tags | Runtime | Operating system | Dockerfile | Deprecation | 
+| --- | --- | --- | --- | --- | 
+| 3\.9 | Python 3\.9 | Amazon Linux 2 | [Dockerfile for Python 3\.9 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/python3.9/Dockerfile.python3.9) |    | 
+| 3\.8 | Python 3\.8 | Amazon Linux 2 | [Dockerfile for Python 3\.8 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/python3.8/Dockerfile.python3.8) |    | 
+| 3\.7 | Python 3\.7 | Amazon Linux | [Dockerfile for Python 3\.7 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/python3.7/Dockerfile.python3.7) |    | 
 
 Amazon ECR repository: [gallery\.ecr\.aws/lambda/python](https://gallery.ecr.aws/lambda/python)
 
@@ -69,14 +64,14 @@ If your function has dependencies, your local Python environment must match the 
    ```
    FROM public.ecr.aws/lambda/python:3.8
    
-   # Copy function code
-   COPY app.py ${LAMBDA_TASK_ROOT}
-   
    # Install the function's dependencies using file requirements.txt
    # from your project folder.
    
    COPY requirements.txt  .
    RUN  pip3 install -r requirements.txt --target "${LAMBDA_TASK_ROOT}"
+   
+   # Copy function code
+   COPY app.py ${LAMBDA_TASK_ROOT}
    
    # Set the CMD to your handler (could also be done as a parameter override outside of the Dockerfile)
    CMD [ "app.handler" ]

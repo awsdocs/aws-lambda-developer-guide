@@ -280,7 +280,7 @@ Type: String
 Length Constraints: Minimum length of 0\. Maximum length of 256\.
 
  ** [Environment](#API_UpdateFunctionConfiguration_ResponseSyntax) **   <a name="SSS-UpdateFunctionConfiguration-response-Environment"></a>
-The function's [environment variables](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html)\.  
+The function's [environment variables](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html)\. Omitted from AWS CloudTrail logs\.  
 Type: [EnvironmentResponse](API_EnvironmentResponse.md) object
 
  ** [EphemeralStorage](#API_UpdateFunctionConfiguration_ResponseSyntax) **   <a name="SSS-UpdateFunctionConfiguration-response-EphemeralStorage"></a>

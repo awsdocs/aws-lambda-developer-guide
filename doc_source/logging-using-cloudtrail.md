@@ -35,7 +35,7 @@ In the CloudTrail log file, the `eventName` might include date and version infor
 + [CreateEventSourceMapping](API_CreateEventSourceMapping.md)
 + [CreateFunction](API_CreateFunction.md)
 
-  \(The `ZipFile` parameter is omitted from the CloudTrail logs for `CreateFunction`\.\)
+  \(The `Environment` and `ZipFile` parameters are omitted from the CloudTrail logs for `CreateFunction`\.\)
 + [CreateFunctionUrlConfig](https://docs.aws.amazon.com/lambda/latest/dg/API_CreateFunctionUrlConfig.html)
 + [DeleteEventSourceMapping](API_DeleteEventSourceMapping.md)
 + [DeleteFunction](API_DeleteFunction.md)
@@ -49,12 +49,17 @@ In the CloudTrail log file, the `eventName` might include date and version infor
 + [ListEventSourceMappings](API_ListEventSourceMappings.md)
 + [ListFunctions](API_ListFunctions.md)
 + [ListFunctionUrlConfigs](https://docs.aws.amazon.com/lambda/latest/dg/API_ListFunctionUrlConfigs.html)
++ [PublishLayerVersion](API_PublishLayerVersion.md)
+
+  \(The `ZipFile` parameter is omitted from the CloudTrail logs for `PublishLayerVersion`\.\)
 + [RemovePermission](API_RemovePermission.md)
 + [UpdateEventSourceMapping](API_UpdateEventSourceMapping.md)
 + [UpdateFunctionCode](API_UpdateFunctionCode.md)
 
   \(The `ZipFile` parameter is omitted from the CloudTrail logs for `UpdateFunctionCode`\.\)
 + [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)
+
+  \(The `Environment` parameter is omitted from the CloudTrail logs for `UpdateFunctionConfiguration`\.\)
 + [UpdateFunctionUrlConfig](https://docs.aws.amazon.com/lambda/latest/dg/API_UpdateFunctionUrlConfig.html)
 
 ## Understanding Lambda log file entries<a name="understanding-service-name-entries"></a>

@@ -1,6 +1,6 @@
 # Tutorial: Creating a Lambda function with a function URL<a name="urls-tutorial"></a>
 
-In this tutorial, you create a Lambda function defined as a \.zip file archive with a function URL endpoint that returns the product of two numbers\. For more information about configuring function URLs, see [Creating and managing function URLs](urls-configuration.md)\.
+In this tutorial, you create a Lambda function defined as a \.zip file archive with a **public** function URL endpoint that returns the product of two numbers\. For more information about configuring function URLs, see [Creating and managing function URLs](urls-configuration.md)\.
 
 ## Prerequisites<a name="lambda-url-prepare"></a>
 
@@ -20,7 +20,10 @@ aws-cli/2.0.57 Python/3.7.4 Darwin/19.6.0 exe/x86_64
 
 For long commands, an escape character \(`\`\) is used to split a command over multiple lines\.
 
-On Linux and macOS, use your preferred shell and package manager\. On Windows 10, you can [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows\-integrated version of Ubuntu and Bash\.
+On Linux and macOS, use your preferred shell and package manager\.
+
+**Note**  
+On Windows, some Bash CLI commands that you commonly use with Lambda \(such as `zip`\) are not supported by the operating system's built\-in terminals\. To get a Windows\-integrated version of Ubuntu and Bash, [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10)\. 
 
 ## Create an execution role<a name="lambda-url-create-iam-role"></a>
 
@@ -75,6 +78,17 @@ Create a Lambda function with a function URL endpoint using a \.zip file archive
        --zip-file fileb://function.zip \
        --handler index.handler \
        --role arn:aws:iam::123456789012:role/lambda-url-role
+   ```
+
+1. Add a resource\-based policy to your function granting permissions to allow public access to your function URL\.
+
+   ```
+   aws lambda add-permission
+       --function-name my-url-function \
+       --action lambda:InvokeFunctionUrl \
+       --principal "*" \
+       --function-url-auth-type "NONE" \
+       --statement-id url
    ```
 
 1. Create a URL endpoint for the function with the `create-function-url-config` command\.

@@ -85,7 +85,7 @@ import java.util.List;
       // process event
       if ( event.size() != 2 )
       {
-        throw new InputLengthException("Input must be an array that contains 2 numbers.");
+        throw new InputLengthException("Input must be a list that contains 2 numbers.");
       }
       int numerator = event.get(0);
       int denominator = event.get(1);
@@ -102,7 +102,7 @@ When the function throws `InputLengthException`, the Java runtime serializes it 
 
 ```
 {
-    "errorMessage":"Input must contain 2 numbers.",
+    "errorMessage":"Input must be a list that contains 2 numbers.",
     "errorType":"java.lang.InputLengthException",
     "stackTrace": [
       "example.HandlerDivide.handleRequest(HandlerDivide.java:23)",
@@ -164,7 +164,7 @@ aws lambda invoke   \
           --payload '{"key1": "value1", "key2": "value2", "key3": "value3"}' output.txt
 ```
 
-The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.
+The cli\-binary\-format option is required if you're using AWS CLI version 2\. To make this the default setting, run `aws configure set cli-binary-format raw-in-base64-out`\. For more information, see [AWS CLI supported global command line options](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-options.html#cli-configure-options-list)\.
 
 You should see the AWS CLI response in your command prompt:
 
@@ -200,17 +200,17 @@ We recommend using AWS X\-Ray to determine the source of an error and its cause\
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/tracemap-apig-502.png)
 
-For more information, see [Instrumenting Java code in Lambda](java-tracing.md)\.
+For more information, see [Instrumenting Java code in AWS Lambda](java-tracing.md)\.
 
 ## Sample applications<a name="java-exceptions-samples"></a>
 
 The GitHub repository for this guide includes sample applications that demonstrate the use of the errors\. Each sample application includes scripts for easy deployment and cleanup, an AWS Serverless Application Model \(AWS SAM\) template, and supporting resources\.
 
 **Sample Lambda applications in Java**
-+ [blank\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-java) – A Java function that shows the use of Lambda's Java libraries, logging, environment variables, layers, AWS X\-Ray tracing, unit tests, and the AWS SDK\.
-+ [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-basic) – A minimal Java function with unit tests and variable logging configuration\.
-+ [java\-events](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-events) – A minimal Java function that uses the latest version \(3\.0\.0 and newer\) of the [aws\-lambda\-java\-events](java-package.md) library\. These examples do not require the AWS SDK as a dependency\.
++ [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-basic) – A collection of minimal Java functions with unit tests and variable logging configuration\.
++ [java\-events](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-events) – A collection of Java functions that contain skeleton code for how to handle events from various services such as Amazon API Gateway, Amazon SQS, and Amazon Kinesis\. These functions use the latest version of the [aws\-lambda\-java\-events](java-package.md) library \(3\.0\.0 and newer\)\. These examples do not require the AWS SDK as a dependency\.
 + [s3\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/s3-java) – A Java function that processes notification events from Amazon S3 and uses the Java Class Library \(JCL\) to create thumbnails from uploaded image files\.
++ [Use API Gateway to invoke a Lambda function](https://docs.aws.amazon.com/lambda/latest/dg/example_cross_LambdaAPIGateway_section.html) – A Java function that scans a Amazon DynamoDB table that contains employee information\. It then uses Amazon Simple Notification Service to send a text message to employees celebrating their work anniversaries\. This example uses API Gateway to invoke the function\.
 
 The `java-basic` function includes a handler \(`HandlerDivide`\) that returns a custom runtime exception\. The `HandlerStream` handler implements the `RequestStreamHandler` and can throw an `IOException` checked exception\.
 

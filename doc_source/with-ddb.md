@@ -32,7 +32,7 @@ Lambda reads records from the stream and invokes your function [synchronously](i
       },
       "awsRegion": "us-west-2",
       "eventName": "INSERT",
-      "eventSourceARN": "arn:aws:dynamodb:us-east-1:111122223333:table/EventSourceTable",
+      "eventSourceARN": "arn:aws:dynamodb:us-west-2:111122223333:table/TestTable/stream/2015-05-11T21:21:33.291",
       "eventSource": "aws:dynamodb"
     },
     {
@@ -66,7 +66,7 @@ Lambda reads records from the stream and invokes your function [synchronously](i
       },
       "awsRegion": "us-west-2",
       "eventName": "MODIFY",
-      "eventSourceARN": "arn:aws:dynamodb:us-east-1:111122223333:table/EventSourceTable",
+      "eventSourceARN": "arn:aws:dynamodb:us-west-2:111122223333:table/TestTable/stream/2015-05-11T21:21:33.291",
       "eventSource": "aws:dynamodb"
     }
   ]}
@@ -78,7 +78,7 @@ By default, Lambda invokes your function as soon as records are available\. If t
 
 If your function returns an error, Lambda retries the batch until processing succeeds or the data expires\. To avoid stalled shards, you can configure the event source mapping to retry with a smaller batch size, limit the number of retries, or discard records that are too old\. To retain discarded events, you can configure the event source mapping to send details about failed batches to an SQS queue or SNS topic\.
 
-You can also increase concurrency by processing multiple batches from each shard in parallel\. Lambda can process up to 10 batches in each shard simultaneously\. If you increase the number of concurrent batches per shard, Lambda still ensures in\-order processing at the partition\-key level\.
+You can also increase concurrency by processing multiple batches from each shard in parallel\. Lambda can process up to 10 batches in each shard simultaneously\. If you increase the number of concurrent batches per shard, Lambda still ensures in\-order processing at the shard level\.
 
 Configure the `ParallelizationFactor` setting to process one shard of a Kinesis or DynamoDB data stream with more than one Lambda invocation simultaneously\. You can specify the number of concurrent batches that Lambda polls from a shard via a parallelization factor from 1 \(default\) to 10\. For example, when you set `ParallelizationFactor` to 2, you can have 200 concurrent Lambda invocations at maximum to process 100 Kinesis data shards\. This helps scale up the processing throughput when the data volume is volatile and the `IteratorAge` is high\. Note that parallelization factor will not work if you are using Kinesis aggregation\. For more information, see [New AWS Lambda scaling controls for Kinesis and DynamoDB event sources](http://aws.amazon.com/blogs/compute/new-aws-lambda-scaling-controls-for-kinesis-and-dynamodb-event-sources/)\. Also, see the [Serverless Data Processing on AWS](https://data-processing.serverlessworkshops.io/) workshop for complete tutorials\.
 
@@ -103,7 +103,7 @@ Lambda needs the following permissions to manage resources related to your Dynam
 + [dynamodb:GetShardIterator](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_streams_GetShardIterator.html)
 + [dynamodb:ListStreams](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_streams_ListStreams.html)
 
-The `AWSLambdaDynamoDBExecutionRole` managed policy includes these permissions\. For more information, see [AWS Lambda execution role](lambda-intro-execution-role.md)\.
+The `AWSLambdaDynamoDBExecutionRole` managed policy includes these permissions\. For more information, see [Lambda execution role](lambda-intro-execution-role.md)\.
 
 To send records of failed batches to an SQS queue or SNS topic, your function needs additional permissions\. Each destination service requires a different permission, as follows:
 + **Amazon SQS** – [sqs:SendMessage](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html)
@@ -141,7 +141,7 @@ Lambda supports the following options for DynamoDB event sources\.
 + **On\-failure destination** – An SQS queue or SNS topic for records that can't be processed\. When Lambda discards a batch of records that's too old or has exhausted all retries, Lambda sends details about the batch to the queue or topic\.
 + **Retry attempts** – The maximum number of times that Lambda retries when the function returns an error\. This doesn't apply to service errors or throttles where the batch didn't reach the function\.
 + **Maximum age of record** – The maximum age of a record that Lambda sends to your function\.
-+ **Split batch on error** – When the function returns an error, split the batch into two before retrying\.
++ **Split batch on error** – When the function returns an error, split the batch into two before retrying\. Your original batch size setting remains unchanged\.
 + **Concurrent batches per shard** – Concurrently process multiple batches from the same shard\.
 + **Enabled** – Set to true to enable the event source mapping\. Set to false to stop processing records\. Lambda keeps track of the last record processed and resumes processing from that point when the mapping is reenabled\.
 
@@ -327,7 +327,7 @@ Lambda functions can run continuous stream processing applications\. A stream re
 
 Tumbling windows are distinct time windows that open and close at regular intervals\. By default, Lambda invocations are stateless—you cannot use them for processing data across multiple continuous invocations without an external database\. However, with tumbling windows, you can maintain your state across invocations\. This state contains the aggregate result of the messages previously processed for the current window\. Your state can be a maximum of 1 MB per shard\. If it exceeds that size, Lambda terminates the window early\.
 
-Each record of a stream belongs to a specific window\. A record is processed only once, when Lambda processes the window that the record belongs to\. In each window, you can perform calculations, such as a sum or average, at the [partition key](https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html#partition-key) level within a shard\.
+Each record in a stream belongs to a specific window\. Lambda will process each record at least once, but doesn't guarantee that each record will be processed only once\. In rare cases, such as error handling, some records might be processed more than once\. Records are always processed in order the first time\. If records are processed more than once, they might be processed out of order\.
 
 ### Aggregation and processing<a name="streams-tumbling-processing"></a>
 
@@ -520,6 +520,9 @@ When configuring reporting on batch item failures, the `StreamsEventResponse` cl
 }
 ```
 
+**Note**  
+If the `batchItemFailures` array contains multiple items, Lambda uses the record with the lowest sequence number as the checkpoint\. Lambda then retries all records starting from that checkpoint\.
+
 ### Success and failure conditions<a name="streams-batchfailurereporting-conditions"></a>
 
 Lambda treats a batch as a complete success if you return any of the following:
@@ -572,9 +575,10 @@ public class ProcessDynamodbRecords implements RequestHandler<DynamodbEvent, Ser
                 curRecordSequenceNumber = dynamodbRecord.getSequenceNumber();
                 
             } catch (Exception e) {
-                //Return failed record's sequence number
+                /* Since we are working with streams, we can return the failed item immediately.
+                   Lambda will immediately begin to retry processing from this failed item onwards. */
                 batchItemFailures.add(new StreamsEventResponse.BatchItemFailure(curRecordSequenceNumber));
-                    return new StreamsEventResponse(batchItemFailures);
+                return new StreamsEventResponse(batchItemFailures);
             }
         }
        
@@ -596,7 +600,7 @@ def handler(event, context):
     for record in records:
         try:
             # Process your record
-            curRecordSequenceNumber = record["dynamodb"]["sequenceNumber"]
+            curRecordSequenceNumber = record["dynamodb"]["SequenceNumber"]
         except Exception as e:
             # Return failed record's sequence number
             return {"batchItemFailures":[{"itemIdentifier": curRecordSequenceNumber}]}

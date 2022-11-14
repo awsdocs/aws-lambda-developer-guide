@@ -22,7 +22,7 @@ Your function needs permission to call CloudWatch Logs and X\-Ray\. Update its [
 + **AWSLambdaBasicExecutionRole**
 + **AWSXRayDaemonWriteAccess**
 
-When you add permissions to your function, make an update to its code or configuration as well\. This forces running instances of your function, which have out\-of\-date credentials, to stop and be replaced\.
+When you add permissions to your function, update its code or configuration as well\. This forces running instances of your function, which have outdated credentials, to stop and be replaced\.
 
 **Note**  
 It may take 5 to 10 minutes for logs to show up after a function invocation\.

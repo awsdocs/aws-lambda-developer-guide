@@ -16,7 +16,7 @@ Lambda sends the batch of messages in the event parameter when it invokes your L
 
 ```
 {
-   "eventSource":"aws:SelfManagedKafka",
+   "eventSource": "SelfManagedKafka",
    "bootstrapServers":"b-2.demo-cluster-1.a1bcde.c1.kafka.us-east-1.amazonaws.com:9092,b-1.demo-cluster-1.a1bcde.c1.kafka.us-east-1.amazonaws.com:9092",
    "records":{
       "mytopic-0":[
@@ -26,6 +26,7 @@ Lambda sends the batch of messages in the event parameter when it invokes your L
             "offset":15,
             "timestamp":1545084650987,
             "timestampType":"CREATE_TIME",
+            "key":"abcDEFghiJKLmnoPQRstuVWXyz1234==",
             "value":"SGVsbG8sIHRoaXMgaXMgYSB0ZXN0Lg==",
             "headers":[
                {
@@ -299,6 +300,16 @@ This section describes how to create an event source mapping using the Lambda co
 + A self\-managed Apache Kafka cluster\. Lambda supports Apache Kafka version 0\.10\.0\.0 and later\.
 + An [execution role](lambda-intro-execution-role.md) with permission to access the AWS resources that your self\-managed Kafka cluster uses\.
 
+### Customizable consumer group ID<a name="services-smaa-consumer-group-id"></a>
+
+When setting up Kafka as an event source, you can specify a consumer group ID\. This consumer group ID is an existing identifier for the Kafka consumer group that you want your Lambda function to join\. You can use this feature to seamlessly migrate any ongoing Kafka record processing setups from other consumers to Lambda\.
+
+If you specify a consumer group ID and there are other active pollers within that consumer group, Kafka distributes messages across all consumers\. In other words, Lambda doesn't receive all message for the Kafka topic\. If you want Lambda to handle all messages in the topic, turn off any other pollers in that consumer group\.
+
+Additionally, if you specify a consumer group ID, and Kafka finds a valid existing consumer group with the same ID, Lambda ignores the `StartingPosition` parameter for your event source mapping\. Instead, Lambda begins processing records according to the committed offset of the consumer group\. If you specify a consumer group ID, and Kafka cannot find an existing consumer group, then Lambda configures your event source with the specified `StartingPosition`\.
+
+The consumer group ID that you specify must be unique among all your Kafka event sources\. After creating a Kafka event source mapping with the consumer group ID specified, you cannot update this value\.
+
 ### Adding a self\-managed Kafka cluster \(console\)<a name="services-smaa-trigger"></a>
 
 Follow these steps to add your self\-managed Apache Kafka cluster and a Kafka topic as a trigger for your Lambda function\.
@@ -320,6 +331,10 @@ Follow these steps to add your self\-managed Apache Kafka cluster and a Kafka to
    1. For **Topic name**, enter the name of the Kafka topic used to store records in the cluster\.
 
    1. \(Optional\) For **Batch size**, enter the maximum number of records to receive in a single batch\.
+
+   1. For **Batch window**, enter the maximum amount of seconds that Lambda spends gathering records before invoking the function\.
+
+   1. \(Optional\) For **Consumer group ID**, enter the ID of a Kafka consumer group to join\.
 
    1. \(Optional\) For **Starting position**, choose **Latest** to start reading the stream from the latest record\. Or, choose **Trim horizon** to start at the earliest available record\.
 
@@ -401,7 +416,8 @@ Lambda processes records from one or more Kafka topic partitions that you specif
 
 If your function returns an error for any of the messages in a batch, Lambda retries the whole batch of messages until processing succeeds or the messages expire\.
 
-Lambda can run your function for up to 14 minutes\. Configure your function timeout to be 14 minutes or less \(the default timeout value is 3 seconds\)\. Lambda may retry invocations that exceed 14 minutes\.
+**Note**  
+While Lambda functions typically have a maximum timeout limit of 15 minutes, event source mappings for Amazon MSK, self\-managed Apache Kafka, and Amazon MQ for ActiveMQ and RabbitMQ only support functions with maximum timeout limits of 14 minutes\. This constraint ensures that the event source mapping can properly handle function errors and retries\.
 
 ## Auto scaling of the Kafka event source<a name="services-kafka-scaling"></a>
 
@@ -447,9 +463,9 @@ If your Lambda event records exceed the allowed size limit of 6 MB, they can go 
 
 ## Amazon CloudWatch metrics<a name="services-kafka-metrics"></a>
 
-Lambda emits the `OffsetLag` metric while your function processes records\. The value of this metric is the difference in offset between the last record written to the Kafka event source topic, and the last record that Lambda processed\. You can use `OffsetLag` to estimate the latency between when a record is added and when your function processes it\.
+Lambda emits the `OffsetLag` metric while your function processes records\. The value of this metric is the difference in offset between the last record written to the Kafka event source topic and the last record that your function's consumer group processed\. You can use `OffsetLag` to estimate the latency between when a record is added and when your consumer group processes it\.
 
-An increasing trend in `OffsetLag` can indicate issues with your function\. For more information, see [Working with Lambda function metrics](monitoring-metrics.md)\.
+An increasing trend in `OffsetLag` can indicate issues with pollers in your function's consumer group\. For more information, see [Working with Lambda function metrics](monitoring-metrics.md)\.
 
 ## Self\-managed Apache Kafka configuration parameters<a name="services-kafka-parms"></a>
 
@@ -463,7 +479,10 @@ All Lambda event source types share the same [CreateEventSourceMapping](API_Crea
 |  BatchSize  |  N  |  100  |  Maximum: 10,000  | 
 |  Enabled  |  N  |  Enabled  |     | 
 |  FunctionName  |  Y  |     |     | 
-|  SelfManagedEventSource   |  Y  |  |  List of Kafka Brokers\. Can set only on Create  | 
+|  FilterCriteria  |  N  |     |  [Lambda event filtering](invocation-eventfiltering.md)  | 
+|  MaximumBatchingWindowInSeconds  |  N  |  500 ms  |  [Batching behavior](invocation-eventsourcemapping.md#invocation-eventsourcemapping-batching)  | 
+|  SelfManagedEventSource  |  Y  |  |  List of Kafka Brokers\. Can set only on Create  | 
+|  SelfManagedKafkaEventSourceConfig  |  N  |  Contains the ConsumerGroupId field which defaults to a unique value\.  |  Can set only on Create  | 
 |  SourceAccessConfigurations  |  N  |  No credentials  |  VPC information or authentication credentials for the cluster   For SASL\_PLAIN, set to BASIC\_AUTH  | 
 |  StartingPosition  |  Y  |     |  TRIM\_HORIZON or LATEST Can set only on Create  | 
 |  Topics  |  Y  |     |  Topic name Can set only on Create  | 

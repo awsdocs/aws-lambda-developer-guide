@@ -24,7 +24,7 @@ Your [execution role](lambda-intro-execution-role.md) needs permission to upload
 aws iam attach-role-policy --role-name your-role --policy-arn arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
 ```
 
-For more information, see [AWS managed policies for Lambda features](lambda-intro-execution-role.md)\.
+For more information, see [AWS managed policies for Lambda features](lambda-intro-execution-role.md#permissions-executionrole-features)\.
 
 ## Pricing<a name="monitoring-cloudwatchlogs-pricing"></a>
 

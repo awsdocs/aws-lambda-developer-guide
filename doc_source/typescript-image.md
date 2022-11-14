@@ -4,7 +4,7 @@ You can deploy your TypeScript code to an AWS Lambda function as a Node\.js [con
 
 If you use a community or private enterprise base image, you must [add the Node\.js runtime interface client \(RIC\)](nodejs-image.md#nodejs-image-clients) to the base image to make it compatible with Lambda\. For more information, see [Creating images from alternative base images](images-create.md#images-create-from-alt)\.
 
-Lambda provides a runtime interface emulator \(RIE\) for you to test your function locally\. The base images for Lambda and base images for custom runtimes include the RIE\. For other base images, you can download the RIE for [testing your image](images-test.md)locally\.
+Lambda provides a runtime interface emulator \(RIE\) for you to test your function locally\. The base images for Lambda and base images for custom runtimes include the RIE\. For other base images, you can download the RIE for [testing your image locally](images-test.md)\.
 
 ## Using a Node\.js base image to build and package TypeScript function code<a name="base-image-typescript"></a>
 

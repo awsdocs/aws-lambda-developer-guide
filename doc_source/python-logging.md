@@ -1,8 +1,5 @@
 # AWS Lambda function logging in Python<a name="python-logging"></a>
 
-**Note**  
-End of support for the Python 2\.7 runtime started on July 15, 2021\. For more information, see [Runtime deprecation policy](lambda-runtimes.md#runtime-support-policy)\.
-
 AWS Lambda automatically monitors Lambda functions on your behalf and sends function metrics to Amazon CloudWatch\. Your Lambda function comes with a CloudWatch Logs log group and a log stream for each instance of your function\. The Lambda runtime environment sends details about each invocation to the log stream, and relays logs and other output from your function's code\. 
 
 This page describes how to produce log output from your Lambda function's code, or access logs using the AWS Command Line Interface, the Lambda console, or the CloudWatch console\.
@@ -121,7 +118,7 @@ The `base64` utility is available on Linux, macOS, and [Ubuntu on Windows](https
 **Example get\-logs\.sh script**  
 In the same command prompt, use the following script to download the last five log events\. The script uses `sed` to remove quotes from the output file, and sleeps for 15 seconds to allow time for the logs to become available\. The output includes the response from Lambda and the output from the `get-log-events` command\.   
 Copy the contents of the following code sample and save in your Lambda project directory as `get-logs.sh`\.  
-The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.  
+The cli\-binary\-format option is required if you're using AWS CLI version 2\. To make this the default setting, run `aws configure set cli-binary-format raw-in-base64-out`\. For more information, see [AWS CLI supported global command line options](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-options.html#cli-configure-options-list)\.  
 
 ```
 #!/bin/bash

@@ -41,6 +41,12 @@ Note the following:
 
   By adding `lambda.Start(HandleRequest)` between `func main(){}` code brackets, your Lambda function will be executed\. Per Go language standards, the opening bracket, `{` must be placed directly at end the of the `main` function signature\.
 
+## Naming<a name="golang-handler-naming"></a>
+
+When you configure a function in Go, the value of the handler setting is the executable file name\. For example, if you set the value of the handler to `Handler`, Lambda will call the `main()` function in the `Handler` executable file\.
+
+To change the function handler name in the Lambda console, on the **Runtime** settings pane, choose **edit**\.
+
 ## Lambda function handler using structured types<a name="golang-handler-structs"></a>
 
 In the example above, the input type was a simple string\. But you can also pass in structured events to your function handler:

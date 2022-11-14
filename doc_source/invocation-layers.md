@@ -97,7 +97,7 @@ You should see output similar to the following:
 {
     "FunctionName": "test-layers",
     "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
-    "Runtime": "nodejs12.x",
+    "Runtime": "nodejs16.x",
     "Role": "arn:aws:iam::123456789012:role/service-role/lambda-role",
     "Layers": [
         {

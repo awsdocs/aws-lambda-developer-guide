@@ -15,8 +15,7 @@ When you deploy updates to your function directly with the Lambda API or with a 
 The Lambda runtime needs permission to read the files in your deployment package\. You can use the `chmod` command to change the file mode\. The following example commands make all files and folders in the current directory readable by any user\.
 
 ```
-chmod 644 $(find . -type f)
-chmod 755 $(find . -type d)
+chmod -R o+rX .
 ```
 
 ## General: Error occurs when calling the UpdateFunctionCode<a name="troubleshooting-deployment-updatefunctioncode"></a>
@@ -85,7 +84,7 @@ The maximum size of the variables object that is stored in the function's config
 {
     "FunctionName": "my-function",
     "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
-    "Runtime": "nodejs12.x",
+    "Runtime": "nodejs16.x",
     "Role": "arn:aws:iam::123456789012:role/lambda-role",
     "Environment": {
         "Variables": {
@@ -104,3 +103,13 @@ In this example, the object is 39 characters and takes up 39 bytes when it's sto
 **Error:** *InvalidParameterValueException: Lambda was unable to configure your environment variables because the environment variables you have provided contains reserved keys that are currently not supported for modification\.*
 
 Lambda reserves some environment variable keys for internal use\. For example, `AWS_REGION` is used by the runtime to determine the current Region and cannot be overridden\. Other variables, like `PATH`, are used by the runtime but can be extended in your function configuration\. For a full list, see [Defined runtime environment variables](configuration-envvars.md#configuration-envvars-runtime)\.
+
+## Lambda: Concurrency and memory quotas<a name="troubleshooting-deployment-quotas"></a>
+
+**Error:*** Specified ConcurrentExecutions for function decreases account's UnreservedConcurrentExecution below its minimum value*
+
+**Error:*** 'MemorySize' value failed to satisfy constraint: Member must have value less than or equal to 3008*
+
+These errors occur when you exceed the concurrency or memory [quotas](gettingstarted-limits.md) for your account\. New AWS accounts have reduced concurrency and memory quotas\. AWS raises these quotas automatically based on your usage\. To resolve these errors, you can [request a quota increase](https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html)\.
++ **Concurrency:** You might get an error if you try to create a function using reserved or provisioned concurrency, or if your per\-function concurrency request \([PutFunctionConcurrency](API_PutFunctionConcurrency.md)\) exceeds your account's concurrency quota\.
++ **Memory:** Errors occur if the amount of memory allocated to the function exceeds your account's memory quota\.

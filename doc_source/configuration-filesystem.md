@@ -32,7 +32,7 @@ Create a file system in Amazon EFS with a mount target in every Availability Zon
 **Note**  
 When you create a file system, you choose a performance mode that can't be changed later\. **General purpose** mode has lower latency, and **Max I/O** mode supports a higher maximum throughput and IOPS\. For help choosing, see [Amazon EFS performance](https://docs.aws.amazon.com/efs/latest/ug/performance.html) in the *Amazon Elastic File System User Guide*\.
 
-An access point connects each instance of the function to the right mount target for the Availability Zone it connects to\. For best performance, create an access point with a non\-root path, and limit the number of files that you create in each directory\. User and owner IDs are required, but they don't need to have a specific value\. The following example creates a directory named `my-function` on the file system and sets the owner ID to 1001 with standard directory permissions \(755\)\.
+An access point connects each instance of the function to the right mount target for the Availability Zone it connects to\. For best performance, create an access point with a non\-root path, and limit the number of files that you create in each directory\. The following example creates a directory named `my-function` on the file system and sets the owner ID to 1001 with standard directory permissions \(755\)\.
 
 **Example access point configuration**  
 + **Name** – `files`

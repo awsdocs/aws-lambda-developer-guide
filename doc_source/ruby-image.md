@@ -31,10 +31,9 @@ The workflow for a function defined as a container image includes these steps:
 AWS provides the following base images for Ruby:
 
 
-| Tags | Runtime | Operating system | Dockerfile | 
-| --- | --- | --- | --- | 
-| 2, 2\.7 | Ruby 2\.7 | Amazon Linux 2 | [Dockerfile for Ruby 2\.7 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/ruby2.7/Dockerfile.ruby2.7) | 
-| 2\.5 | Ruby 2\.5 | Amazon Linux 2018\.03 | [Dockerfile for Ruby 2\.5 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/ruby2.5/Dockerfile.ruby2.5) | 
+| Tags | Runtime | Operating system | Dockerfile | Deprecation | 
+| --- | --- | --- | --- | --- | 
+| 2\.7 | Ruby 2\.7 | Amazon Linux 2 | [Dockerfile for Ruby 2\.7 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/ruby2.7/Dockerfile.ruby2.7) |    | 
 
 Amazon ECR repository: [gallery\.ecr\.aws/lambda/ruby](https://gallery.ecr.aws/lambda/ruby)
 

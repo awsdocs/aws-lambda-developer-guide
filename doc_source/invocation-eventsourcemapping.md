@@ -47,6 +47,8 @@ You should see the following output:
 }
 ```
 
+Lambda event source mappings process events at least once due to the distributed nature of its pollers\. As a result, your Lambda function may receive duplicate events in rare situations\. Follow [Best practices for working with AWS Lambda functions](best-practices.md) and build idempotent functions to avoid issues related to duplicate events\.
+
 ## Batching behavior<a name="invocation-eventsourcemapping-batching"></a>
 
 Event source mappings read items from a target event source\. By default, an event source mapping batches records together into a single payload that Lambda sends to your function\. To fine\-tune batching behavior, you can configure a batching window \(`MaximumBatchingWindowInSeconds`\) and a batch size \(`BatchSize`\)\. A batching window is the maximum amount of time to gather records into a single payload\. A batch size is the maximum number of records in a single batch\. Lambda invokes your function when one of the following three criteria is met:

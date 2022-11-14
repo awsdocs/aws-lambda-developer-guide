@@ -4,6 +4,11 @@ A mapping between an AWS resource and a Lambda function\. For details, see [Crea
 
 ## Contents<a name="API_EventSourceMappingConfiguration_Contents"></a>
 
+ ** AmazonManagedKafkaEventSourceConfig **   <a name="SSS-Type-EventSourceMappingConfiguration-AmazonManagedKafkaEventSourceConfig"></a>
+Specific configuration settings for an Amazon Managed Streaming for Apache Kafka \(Amazon MSK\) event source\.  
+Type: [AmazonManagedKafkaEventSourceConfig](API_AmazonManagedKafkaEventSourceConfig.md) object  
+Required: No
+
  ** BatchSize **   <a name="SSS-Type-EventSourceMappingConfiguration-BatchSize"></a>
 The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function\. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation \(6 MB\)\.  
 Default value: Varies by service\. For Amazon SQS, the default is 10\. For all other services, the default is 100\.  
@@ -29,7 +34,7 @@ Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})
 Required: No
 
  ** FilterCriteria **   <a name="SSS-Type-EventSourceMappingConfiguration-FilterCriteria"></a>
-\(Streams and Amazon SQS\) An object that defines the filter criteria that determine whether Lambda should process an event\. For more information, see [Lambda event filtering](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html)\.  
+An object that defines the filter criteria that determine whether Lambda should process an event\. For more information, see [Lambda event filtering](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html)\.  
 Type: [FilterCriteria](API_FilterCriteria.md) object  
 Required: No
 
@@ -57,9 +62,9 @@ Type: String
 Required: No
 
  ** MaximumBatchingWindowInSeconds **   <a name="SSS-Type-EventSourceMappingConfiguration-MaximumBatchingWindowInSeconds"></a>
-\(Streams and Amazon SQS standard queues\) The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function\.  
-Default: 0  
-Related setting: When you set `BatchSize` to a value greater than 10, you must set `MaximumBatchingWindowInSeconds` to at least 1\.  
+The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function\. You can configure `MaximumBatchingWindowInSeconds` to any value from 0 seconds to 300 seconds in increments of seconds\.  
+For streams and Amazon SQS event sources, the default batching window is 0 seconds\. For Amazon MSK, Self\-managed Apache Kafka, and Amazon MQ event sources, the default batching window is 500 ms\. Note that because you can only change `MaximumBatchingWindowInSeconds` in increments of seconds, you cannot revert back to the 500 ms default batching window after you have changed it\. To restore the default batching window, you must create a new event source mapping\.  
+Related setting: For streams and Amazon SQS event sources, when you set `BatchSize` to a value greater than 10, you must set `MaximumBatchingWindowInSeconds` to at least 1\.  
 Type: Integer  
 Valid Range: Minimum value of 0\. Maximum value of 300\.  
 Required: No
@@ -93,6 +98,11 @@ Required: No
  ** SelfManagedEventSource **   <a name="SSS-Type-EventSourceMappingConfiguration-SelfManagedEventSource"></a>
 The self\-managed Apache Kafka cluster for your event source\.  
 Type: [SelfManagedEventSource](API_SelfManagedEventSource.md) object  
+Required: No
+
+ ** SelfManagedKafkaEventSourceConfig **   <a name="SSS-Type-EventSourceMappingConfiguration-SelfManagedKafkaEventSourceConfig"></a>
+Specific configuration settings for a self\-managed Apache Kafka event source\.  
+Type: [SelfManagedKafkaEventSourceConfig](API_SelfManagedKafkaEventSourceConfig.md) object  
 Required: No
 
  ** SourceAccessConfigurations **   <a name="SSS-Type-EventSourceMappingConfiguration-SourceAccessConfigurations"></a>

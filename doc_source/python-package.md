@@ -1,8 +1,5 @@
 # Deploy Python Lambda functions with \.zip file archives<a name="python-package"></a>
 
-**Note**  
-End of support for the Python 2\.7 runtime started on July 15, 2021\. For more information, see [Runtime deprecation policy](lambda-runtimes.md#runtime-support-policy)\.
-
 Your AWS Lambda function's code consists of scripts or compiled programs and their dependencies\. You use a *deployment package* to deploy your function code to Lambda\. Lambda supports two types of deployment packages: container images and \.zip file archives\.
 
 To create the deployment package for a \.zip file archive, you can use a built\-in \.zip file archive utility or any other \.zip file utility \(such as [7zip](https://www.7-zip.org/download.html)\) for your command line tool\. Note the following requirements for using a \.zip file as your deployment package:
@@ -102,7 +99,7 @@ Create the \.zip file for your deployment package\.
    ```
    import requests
    def lambda_handler(event, context):   
-       response = requests.get("https://www.test.com/")
+       response = requests.get("https://www.example.com/")
        print(response.text)
        return response.text
    ```
@@ -139,7 +136,7 @@ Create the \.zip file for your deployment package\.
 
    ```
    cd ..
-   zip -g my-deployment-package.zip lambda_function.py
+   zip my-deployment-package.zip lambda_function.py
    ```
 
 ## Using a virtual environment<a name="python-package-update-venv"></a>
@@ -206,7 +203,7 @@ The following example uploads a file named my\-deployment\-package\.zip\. Use th
   {
   "FunctionName": "mylambdafunction",
   "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:mylambdafunction",
-  "Runtime": "python3.8",
+  "Runtime": "python3.9",
   "Role": "arn:aws:iam::123456789012:role/lambda-role",
   "Handler": "lambda_function.lambda_handler",
   "CodeSize": 5912988,

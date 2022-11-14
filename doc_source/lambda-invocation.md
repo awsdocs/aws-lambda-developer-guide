@@ -20,5 +20,4 @@ Depending on who invokes your function and how it's invoked, scaling behavior an
 + [Lambda function states](functions-states.md)
 + [Error handling and automatic retries in AWS Lambda](invocation-retries.md)
 + [Testing Lambda functions in the console](testing-functions.md)
-+ [Using Lambda extensions](using-extensions.md)
 + [Invoking functions defined as container images](invocation-images.md)

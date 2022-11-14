@@ -20,7 +20,10 @@ aws-cli/2.0.57 Python/3.7.4 Darwin/19.6.0 exe/x86_64
 
 For long commands, an escape character \(`\`\) is used to split a command over multiple lines\.
 
-On Linux and macOS, use your preferred shell and package manager\. On Windows 10, you can [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows\-integrated version of Ubuntu and Bash\.
+On Linux and macOS, use your preferred shell and package manager\.
+
+**Note**  
+On Windows, some Bash CLI commands that you commonly use with Lambda \(such as `zip`\) are not supported by the operating system's built\-in terminals\. To get a Windows\-integrated version of Ubuntu and Bash, [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10)\. 
 
 ## Create the execution role<a name="with-sqs-create-execution-role"></a>
 
@@ -118,7 +121,7 @@ If the handler returns normally without exceptions, Lambda considers the message
    --payload file://input.txt outputfile.txt
    ```
 
-   The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.
+   The cli\-binary\-format option is required if you're using AWS CLI version 2\. To make this the default setting, run `aws configure set cli-binary-format raw-in-base64-out`\. For more information, see [AWS CLI supported global command line options](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-options.html#cli-configure-options-list)\.
 
 1. Verify the output in the file `outputfile.txt`\.
 

@@ -57,7 +57,7 @@ If the action is successful, the service sends back an HTTP 200 response\.
 The following data is returned in JSON format by the service\.
 
  ** [AllocatedProvisionedConcurrentExecutions](#API_GetProvisionedConcurrencyConfig_ResponseSyntax) **   <a name="SSS-GetProvisionedConcurrencyConfig-response-AllocatedProvisionedConcurrentExecutions"></a>
-The amount of provisioned concurrency allocated\.  
+The amount of provisioned concurrency allocated\. When a weighted alias is used during linear and canary deployments, this value fluctuates depending on the amount of concurrency that is provisioned for the function versions\.  
 Type: Integer  
 Valid Range: Minimum value of 0\.
 

@@ -25,7 +25,10 @@ aws-cli/2.0.57 Python/3.7.4 Darwin/19.6.0 exe/x86_64
 
 For long commands, an escape character \(`\`\) is used to split a command over multiple lines\.
 
-On Linux and macOS, use your preferred shell and package manager\. On Windows 10, you can [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows\-integrated version of Ubuntu and Bash\.
+On Linux and macOS, use your preferred shell and package manager\.
+
+**Note**  
+On Windows, some Bash CLI commands that you commonly use with Lambda \(such as `zip`\) are not supported by the operating system's built\-in terminals\. To get a Windows\-integrated version of Ubuntu and Bash, [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10)\. 
 
 ## Create the execution role<a name="vpc-rds-create-iam-role"></a>
 

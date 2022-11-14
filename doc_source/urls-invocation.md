@@ -1,12 +1,10 @@
 # Invoking Lambda function URLs<a name="urls-invocation"></a>
 
-A function URL is a dedicated HTTP\(S\) endpoint for your Lambda function\. You can create and configure a function URL through the Lambda console or the Lambda API\. When you create a function URL, Lambda automatically generates a unique URL endpoint for you\. Function URL endpoints have the following format:
+A function URL is a dedicated HTTP\(S\) endpoint for your Lambda function\. You can create and configure a function URL through the Lambda console or the Lambda API\. When you create a function URL, Lambda automatically generates a unique URL endpoint for you\. Once you create a function URL, its URL endpoint never changes\. Function URL endpoints have the following format:
 
 ```
 https://<url-id>.lambda-url.<region>.on.aws
 ```
-
-Lambda generates the `<url-id>` portion of the endpoint based on a number of factors, including your AWS account ID\. Because this process is deterministic, it may be possible for anyone to retrieve your account ID from the `<url-id>`\.
 
 Function URLs are dual stack\-enabled, supporting IPv4 and IPv6\. After configuring your function URL, you can invoke your function through its HTTP\(S\) endpoint via a web browser, curl, Postman, or any HTTP client\. To invoke a function URL, you must have `lambda:InvokeFunctionUrl` permissions\. For more information, see [Security and auth model](urls-auth.md)\.
 
@@ -175,14 +173,14 @@ The following examples show how the output of your Lambda function maps to the r
 
 | Lambda function output | Interpreted response output | HTTP response \(what the client sees\) | 
 | --- | --- | --- | 
-|  <pre>"Hello, world!"</pre>  |  <pre>{<br />  "statusCode": 200,<br />  "body": "Hello, world!",<br />  "headers": {<br />    "content-type": "application/json"<br />  }<br />  "isBase64Encoded": false,<br />}</pre>  |  <pre>HTTP/2 200<br />date: Wed, 08 Sep 2021 18:02:24 GMT<br />content-type: application/json<br />content-length: 15<br /><br />"Hello, world!"</pre>  | 
+|  <pre>"Hello, world!"</pre>  |  <pre>{<br />  "statusCode": 200,<br />  "body": "Hello, world!",<br />  "headers": {<br />    "content-type": "application/json"<br />  },<br />  "isBase64Encoded": false<br />}</pre>  |  <pre>HTTP/2 200<br />date: Wed, 08 Sep 2021 18:02:24 GMT<br />content-type: application/json<br />content-length: 15<br /><br />"Hello, world!"</pre>  | 
 
 
 **Example output for a JSON response**  
 
 | Lambda function output | Interpreted response output | HTTP response \(what the client sees\) | 
 | --- | --- | --- | 
-|  <pre>{<br />  "message": "Hello, world!"<br />}</pre>  |  <pre>{<br />  "statusCode": 200,<br />  "body": {<br />    "message": "Hello, world!"<br />  },<br />  "headers": {<br />    "content-type": "application/json"<br />  }<br />  "isBase64Encoded": false,<br />}</pre>  |  <pre>HTTP/2 200<br />date: Wed, 08 Sep 2021 18:02:24 GMT<br />content-type: application/json<br />content-length: 34<br /><br />{<br />  "message": "Hello, world!"<br />}</pre>  | 
+|  <pre>{<br />  "message": "Hello, world!"<br />}</pre>  |  <pre>{<br />  "statusCode": 200,<br />  "body": {<br />    "message": "Hello, world!"<br />  },<br />  "headers": {<br />    "content-type": "application/json"<br />  },<br />  "isBase64Encoded": false<br />}</pre>  |  <pre>HTTP/2 200<br />date: Wed, 08 Sep 2021 18:02:24 GMT<br />content-type: application/json<br />content-length: 34<br /><br />{<br />  "message": "Hello, world!"<br />}</pre>  | 
 
 
 **Example output for a custom response**  

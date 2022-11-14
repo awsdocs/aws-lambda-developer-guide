@@ -4,7 +4,7 @@
 
 **Issue:** *CodeArtifactUserPendingException error message*
 
-The CodeArtifact is pending optimization\. The function transitions to active state when Lambda completes the optimization\. HTTP response code 500\. 
+The CodeArtifact is pending optimization\. The function transitions to active state when Lambda completes the optimization\. HTTP response code 409\. 
 
 **Issue:** *CodeArtifactUserDeletedException error message*
 

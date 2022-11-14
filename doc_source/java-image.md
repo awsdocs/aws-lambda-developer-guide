@@ -30,11 +30,11 @@ The workflow for a function defined as a container image includes these steps:
 AWS provides the following base images for Java:
 
 
-| Tags | Runtime | Operating system | Dockerfile | 
-| --- | --- | --- | --- | 
-|  11  | Java 11 \(Corretto\) | Amazon Linux 2 | [Dockerfile for Java 11 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/java11/Dockerfile.java11) | 
-|  8\.al2  | Java 8 \(Corretto\) | Amazon Linux 2 | [Dockerfile for Java 8\.al2 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/java8.al2/Dockerfile.java8.al2) | 
-|  8  | Java 8 \(OpenJDK\) | Amazon Linux 2018\.03 | [Dockerfile for Java 8 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/java8/Dockerfile.java8) | 
+| Tags | Runtime | Operating system | Dockerfile | Deprecation | 
+| --- | --- | --- | --- | --- | 
+| 11 | Java 11 | Amazon Linux 2 | [Dockerfile for Java 11 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/java11/Dockerfile.java11) |    | 
+| 8\.al2 | Java 8 | Amazon Linux 2 | [Dockerfile for Java 8 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/java8.al2/Dockerfile.java8.al2) |    | 
+| 8 | Java 8 | Amazon Linux | [Dockerfile for Java 8 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/java8/Dockerfile.java8) |    | 
 
 Amazon ECR repository: [gallery\.ecr\.aws/lambda/java](https://gallery.ecr.aws/lambda/java)
 

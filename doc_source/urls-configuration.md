@@ -1,12 +1,10 @@
 # Creating and managing Lambda function URLs<a name="urls-configuration"></a>
 
-A function URL is a dedicated HTTP\(S\) endpoint for your Lambda function\. You can create and configure a function URL through the Lambda console or the Lambda API\. When you create a function URL, Lambda automatically generates a unique URL endpoint for you\. Function URL endpoints have the following format:
+A function URL is a dedicated HTTP\(S\) endpoint for your Lambda function\. You can create and configure a function URL through the Lambda console or the Lambda API\. When you create a function URL, Lambda automatically generates a unique URL endpoint for you\. Once you create a function URL, its URL endpoint never changes\. Function URL endpoints have the following format:
 
 ```
 https://<url-id>.lambda-url.<region>.on.aws
 ```
-
-Lambda generates the `<url-id>` portion of the endpoint based on a number of factors, including your AWS account ID\. Because this process is deterministic, it may be possible for anyone to retrieve your account ID from the `<url-id>`\.
 
 **Topics**
 + [Creating a function URL \(console\)](#create-url-console)
@@ -15,7 +13,7 @@ Lambda generates the `<url-id>` portion of the endpoint based on a number of fac
 + [Cross\-origin resource sharing \(CORS\)](#urls-cors)
 + [Throttling function URLs](#urls-throttling)
 + [Deactivating function URLs](#urls-deactivating)
-+ [Deleting function URLs](#w723aac55c19c39)
++ [Deleting function URLs](#w831aac55c21c37)
 
 ## Creating a function URL \(console\)<a name="create-url-console"></a>
 
@@ -199,7 +197,7 @@ Whenever your function concurrency exceeds the reserved concurrency, your functi
 
 In an emergency, you might want to reject all traffic to your function URL\. To deactivate your function URL, set the reserved concurrency to zero\. This throttles all requests to your function URL, resulting in HTTP `429` status responses\. To reactivate your function URL, delete the reserved concurrency configuration, or set the configuration to an amount greater than zero\.
 
-## Deleting function URLs<a name="w723aac55c19c39"></a>
+## Deleting function URLs<a name="w831aac55c21c37"></a>
 
 When you delete a function URL, you can’t recover it\. Creating a new function URL will result in a different URL address\.
 
@@ -214,3 +212,6 @@ When you delete a function URL, you can’t recover it\. Creating a new function
 1. Enter the word *delete* into the field to confirm the deletion\.
 
 1. Choose **Delete**\.
+
+**Note**  
+If you delete a function URL with auth type `NONE`, Lambda doesn't automatically delete the associated resource\-based policy\. If you want to delete this policy, you must manually do so\.

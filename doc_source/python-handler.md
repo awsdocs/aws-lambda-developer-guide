@@ -1,8 +1,5 @@
 # Lambda function handler in Python<a name="python-handler"></a>
 
-**Note**  
-End of support for the Python 2\.7 runtime started on July 15, 2021\. For more information, see [Runtime deprecation policy](lambda-runtimes.md#runtime-support-policy)\.
-
 The Lambda function *handler* is the method in your function code that processes events\. When your function is invoked, Lambda runs the handler method\. When the handler exits or returns a response, it becomes available to handle another event\.
 
 You can use the following general syntax when creating a function handler in Python:
@@ -39,7 +36,7 @@ Optionally, a handler can return a value\. What happens to the returned value de
 + If you use the `RequestResponse` invocation type, such as [Synchronous invocation](invocation-sync.md), AWS Lambda returns the result of the Python function call to the client invoking the Lambda function \(in the HTTP response to the invocation request, serialized into JSON\)\. For example, AWS Lambda console uses the `RequestResponse` invocation type, so when you invoke the function on the console, the console will display the returned value\.
 + If the handler returns objects that can't be serialized by `json.dumps`, the runtime returns an error\.
 + If the handler returns `None`, as Python functions without a `return` statement implicitly do, the runtime returns `null`\.
-+ If you use an `Event` an [Asynchronous invocation](invocation-async.md) invocation type, the value is discarded\.
++ If you use the `Event` invocation type \(an [asynchronous invocation](invocation-async.md)\), the value is discarded\.
 
 **Note**  
 In Python 3\.9 and later releases, Lambda includes the requestId of the invocation in the error response\. 
@@ -114,7 +111,27 @@ The function in this example depends on a successful response \(in `200`\) from 
 
 ### Returning a calculation<a name="python-example-userinputcalc"></a>
 
-The following example [Lambda Python function code on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/python/example_code/lambda/lambda_handler_basic.py) shows a function called `lambda_handler` that uses the `python3.6` [Lambda runtime](lambda-runtimes.md)\. The function accepts user input and returns a calculation to the user\.
+The following example [ Lambda Python function code on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/python/example_code/lambda/lambda_handler_basic.py) shows a function called `lambda_handler` that uses the `python3.6` [Lambda runtime](lambda-runtimes.md)\. The function accepts user input and returns a calculation to the user\.
+
+```
+import logging
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+
+def lambda_handler(event, context):
+    ...
+    result = None
+    action = event.get('action')
+    if action == 'increment':
+        result = event.get('number', 0) + 1
+        logger.info('Calculated result of %s', result)
+    else:
+        logger.error("%s is not a valid action.", action)
+
+    response = {'result': result}
+    return response
+```
 
 You can use the following event data to [invoke the function](https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html#get-started-invoke-manually):
 

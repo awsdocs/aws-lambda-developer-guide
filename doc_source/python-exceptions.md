@@ -1,8 +1,5 @@
 # AWS Lambda function errors in Python<a name="python-exceptions"></a>
 
-**Note**  
-End of support for the Python 2\.7 runtime started on July 15, 2021\. For more information, see [Runtime deprecation policy](lambda-runtimes.md#runtime-support-policy)\.
-
 When your code raises an error, Lambda generates a JSON representation of the error\. This error document appears in the invocation log and, for synchronous invocations, in the output\.
 
 This page describes how to view Lambda function invocation errors for the Python runtime using the Lambda console and the AWS CLI\.
@@ -76,7 +73,7 @@ aws lambda invoke   \
           --payload '{"key1": "value1", "key2": "value2", "key3": "value3"}' output.txt
 ```
 
-The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.
+The cli\-binary\-format option is required if you're using AWS CLI version 2\. To make this the default setting, run `aws configure set cli-binary-format raw-in-base64-out`\. For more information, see [AWS CLI supported global command line options](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-options.html#cli-configure-options-list)\.
 
 You should see the AWS CLI response in your command prompt:
 

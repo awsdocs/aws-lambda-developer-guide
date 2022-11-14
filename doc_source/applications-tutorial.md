@@ -45,7 +45,10 @@ aws-cli/2.0.57 Python/3.7.4 Darwin/19.6.0 exe/x86_64
 
 For long commands, an escape character \(`\`\) is used to split a command over multiple lines\.
 
-On Linux and macOS, use your preferred shell and package manager\. On Windows 10, you can [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows\-integrated version of Ubuntu and Bash\.
+On Linux and macOS, use your preferred shell and package manager\.
+
+**Note**  
+On Windows, some Bash CLI commands that you commonly use with Lambda \(such as `zip`\) are not supported by the operating system's built\-in terminals\. To get a Windows\-integrated version of Ubuntu and Bash, [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10)\. 
 
 This tutorial uses CodeCommit for source control\. To set up your local machine to access and update application code, see [Setting up](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up.html) in the *AWS CodeCommit User Guide*\.
 
@@ -267,7 +270,8 @@ Lambda creates additional instances of your function to handle multiple concurre
 
 The AWS CloudFormation template that defines your application resources uses the AWS Serverless Application Model transform to simplify the syntax for resource definitions, and automate uploading the deployment package and other artifacts\. AWS SAM also provides a command line interface \(the AWS SAM CLI\), which has the same packaging and deployment functionality as the AWS CLI, with additional features specific to Lambda applications\. Use the AWS SAM CLI to test your application locally in a Docker container that emulates the Lambda execution environment\.
 + [Installing the AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html)
-+ [Testing and debugging serverless applications](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-test-and-debug.html)
++ [Testing and debugging serverless applications with AWS SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-test-and-debug.html)
++ [Deploying serverless applications using CI/CD systems with AWS SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-deploying.html)
 
 AWS Cloud9 provides an online development environment that includes Node\.js, the AWS SAM CLI, and Docker\. With AWS Cloud9, you can start developing quickly and access your development environment from any computer\. For instructions, see [Getting started](https://docs.aws.amazon.com/cloud9/latest/user-guide/get-started.html) in the *AWS Cloud9 User Guide*\.
 

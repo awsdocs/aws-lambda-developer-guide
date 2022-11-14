@@ -2,11 +2,22 @@
 
 You can use the Node\.js runtime to run TypeScript code in AWS Lambda\. Because Node\.js doesn't run TypeScript code natively, you must first transpile your TypeScript code into JavaScript\. Then, use the JavaScript files to deploy your function code to Lambda\. Your code runs in an environment that includes the AWS SDK for JavaScript, with credentials from an AWS Identity and Access Management \(IAM\) role that you manage\.
 
+Lambda supports the following Node\.js runtimes\.
+
+
+**Node\.js**  
+
+| Name | Identifier | SDK | Operating system | Architectures | Deprecation | 
+| --- | --- | --- | --- | --- | --- | 
+|  Node\.js 16  |  `nodejs16.x`  |  2\.1083\.0  |  Amazon Linux 2  |  x86\_64, arm64  |    | 
+|  Node\.js 14  |  `nodejs14.x`  |  2\.1055\.0  |  Amazon Linux 2  |  x86\_64, arm64  |    | 
+|  Node\.js 12  |  `nodejs12.x`  |  2\.1055\.0  |  Amazon Linux 2  |  x86\_64, arm64  |  Mar 31, 2023  | 
+
 ## Setting up a TypeScript development environment<a name="typescript-dev"></a>
 
 Use a local integrated development environment \(IDE\), text editor, or [AWS Cloud9](https://docs.aws.amazon.com/cloud9/latest/user-guide/sample-typescript.html) to write your TypeScript function code\. You can’t create TypeScript code on the Lambda console\.
 
-To transpile your TypeScript code, set up a compiler such as [esbuild](https://esbuild.github.io/) or Microsoft's TypeScript compiler \(`tsc`\) , which is bundled with the [TypeScript distribution](https://www.typescriptlang.org/download)\. You can use the [AWS Serverless Application Model \(AWS SAM\)](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-getting-started.html) or the [AWS Cloud Development Kit \(CDK\)](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html) to simplify building and deploying TypeScript code\. Both tools use esbuild to transpile TypeScript code into JavaScript\.
+To transpile your TypeScript code, set up a compiler such as [esbuild](https://esbuild.github.io/) or Microsoft's TypeScript compiler \(`tsc`\) , which is bundled with the [TypeScript distribution](https://www.typescriptlang.org/download)\. You can use the [AWS Serverless Application Model \(AWS SAM\)](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-getting-started.html) or the [AWS Cloud Development Kit \(AWS CDK\)](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html) to simplify building and deploying TypeScript code\. Both tools use esbuild to transpile TypeScript code into JavaScript\.
 
 When using esbuild, consider the following:
 + There are several [TypeScript caveats](https://esbuild.github.io/content-types/#typescript-caveats)\.

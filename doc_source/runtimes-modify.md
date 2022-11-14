@@ -1,6 +1,6 @@
 # Modifying the runtime environment<a name="runtimes-modify"></a>
 
-You can use [internal extensions](using-extensions.md) to modify the runtime process\. Internal extensions are not separate processes—they run as part of the runtime process\.
+You can use [internal extensions](lambda-extensions.md) to modify the runtime process\. Internal extensions are not separate processes—they run as part of the runtime process\.
 
 Lambda provides language\-specific [environment variables](configuration-envvars.md) that you can set to add options and tools to the runtime\. Lambda also provides [wrapper scripts](#runtime-wrapper), which allow Lambda to delegate the runtime startup to your script\. You can create a wrapper script to customize the runtime startup behavior\.
 
@@ -151,6 +151,8 @@ The following [Lambda runtimes](lambda-runtimes.md) support wrapper scripts:
 + Ruby 2\.7
 + Java 11
 + Java 8 \(`java8.al2`\)
++ \.NET 6
++ \.NET 5
 + \.NET Core 3\.1
 
 When you use a wrapper script for your function, Lambda starts the runtime using your script\. Lambda sends to your script the path to the interpreter and all of the original arguments for the standard runtime startup\. Your script can extend or transform the startup behavior of the program\. For example, the script can inject and alter arguments, set environment variables, or capture metrics, errors, and other diagnostic information\.

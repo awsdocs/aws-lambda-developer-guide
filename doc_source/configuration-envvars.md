@@ -72,7 +72,7 @@ You should see the following output:
 {
     "FunctionName": "my-function",
     "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
-    "Runtime": "nodejs12.x",
+    "Runtime": "nodejs16.x",
     "Role": "arn:aws:iam::123456789012:role/lambda-role",
     "Environment": {
         "Variables": {
@@ -175,7 +175,7 @@ Lambda [runtimes](lambda-runtimes.md) set several environment variables during i
 
 **Reserved environment variables**
 + `_HANDLER` – The handler location configured on the function\.
-+ `_X_AMZN_TRACE_ID` – The [X\-Ray tracing header](services-xray.md)\.
++ `_X_AMZN_TRACE_ID` – The [X\-Ray tracing header](services-xray.md)\. This environment variable is not defined for custom runtimes \(for example, runtimes that use the `provided` or `provided.al2` identifiers\)\. You can set `_X_AMZN_TRACE_ID` for custom runtimes using the `Lambda-Runtime-Trace-Id` response header from the [Next invocation](runtimes-api.md#runtimes-api-next)\.
 + `AWS_REGION` – The AWS Region where the Lambda function is executed\.
 + `AWS_EXECUTION_ENV` – The [runtime identifier](lambda-runtimes.md), prefixed by `AWS_Lambda_` \(for example, `AWS_Lambda_java8`\)\. This environment variable is not defined for custom runtimes \(for example, runtimes that use the `provided` or `provided.al2` identifiers\)\.
 + `AWS_LAMBDA_FUNCTION_NAME` – The name of the function\.
@@ -188,7 +188,6 @@ Lambda [runtimes](lambda-runtimes.md) set several environment variables during i
 + `AWS_LAMBDA_RUNTIME_API` – \([Custom runtime](runtimes-custom.md)\) The host and port of the [runtime API](runtimes-api.md)\.
 + `LAMBDA_TASK_ROOT` – The path to your Lambda function code\.
 + `LAMBDA_RUNTIME_DIR` – The path to runtime libraries\.
-+ `TZ` – The environment's time zone \(`UTC`\)\. The execution environment uses NTP to synchronize the system clock\.
 
 The following additional environment variables aren't reserved and can be extended in your function configuration\.
 
@@ -202,6 +201,7 @@ The following additional environment variables aren't reserved and can be extend
 + `AWS_XRAY_CONTEXT_MISSING` – For X\-Ray tracing, Lambda sets this to `LOG_ERROR` to avoid throwing runtime errors from the X\-Ray SDK\.
 + `AWS_XRAY_DAEMON_ADDRESS` – For X\-Ray tracing, the IP address and port of the X\-Ray daemon\.
 + `AWS_LAMBDA_DOTNET_PREJIT` – For the \.NET 3\.1 runtime, set this variable to enable or disable \.NET 3\.1 specific runtime optimizations\. Values include `always`, `never`, and `provisioned-concurrency`\. For information, see [ Configuring provisioned concurrency](provisioned-concurrency.md)\.
++ `TZ` – The environment's time zone \(`UTC`\)\. The execution environment uses NTP to synchronize the system clock\.
 
 The sample values shown reflect the latest runtimes\. The presence of specific variables or their values can vary on earlier runtimes\.
 
@@ -304,5 +304,5 @@ For details on managing key permissions, see [Using key policies in AWS KMS](htt
 Sample applications in this guide's GitHub repository demonstrate the use of environment variables in function code and AWS CloudFormation templates\.
 
 **Sample applications**
-+ [Blank function](samples-blank.md) – Create a function and an Amazon SNS topic in the same template\. Pass the name of the topic to the function in an environment variable\. Read environment variables in code \(multiple languages\)\.
++ [Blank function](samples-blank.md) – Create a basic function that shows the use of logging, environment variables, AWS X\-Ray tracing, layers, unit tests, and the AWS SDK\.
 + [RDS MySQL](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/rds-mysql) – Create a VPC and an Amazon RDS DB instance in one template, with a password stored in Secrets Manager\. In the application template, import database details from the VPC stack, read the password from Secrets Manager, and pass all connection configuration to the function in environment variables\.

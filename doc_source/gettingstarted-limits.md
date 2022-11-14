@@ -27,17 +27,17 @@ The Lambda documentation, log messages, and console use the abbreviation MB \(ra
 
 | Resource | Quota | 
 | --- | --- | 
-|  Function [memory allocation](configuration-function-common.md)  |  128 MB to 10,240 MB, in 1\-MB increments\.  | 
+|  Function [memory allocation](configuration-function-common.md)  |  128 MB to 10,240 MB, in 1\-MB increments\. **Note:** Lambda allocates CPU power in proportion to the amount of memory configured\. You can increase or decrease the memory and CPU power allocated to your function using the **Memory \(MB\)** setting\. At 1,769 MB, a function has the equivalent of one vCPU\.  | 
 |  Function timeout  |  900 seconds \(15 minutes\)  | 
 |  Function [environment variables](configuration-envvars.md)  |  4 KB, for all environment variables associated with the function, in aggregate  | 
 |  Function [resource\-based policy](access-control-resource-based.md)  |  20 KB  | 
 |  Function [layers](configuration-layers.md)  |  five layers  | 
 |  Function [burst concurrency](invocation-scaling.md)  |  500 \- 3000 \(varies per Region\)  | 
-|  [Invocation payload](lambda-invocation.md) \(request and response\)  |  6 MB \(synchronous\) 256 KB \(asynchronous\)  | 
+|  [Invocation payload](lambda-invocation.md) \(request and response\)  |  6 MB each for request and response \(synchronous\) 256 KB \(asynchronous\)  | 
 |  [Deployment package \(\.zip file archive\)](gettingstarted-package.md) size  |  50 MB \(zipped, for direct upload\) 250 MB \(unzipped\) This quota applies to all the files you upload, including layers and custom runtimes\. 3 MB \(console editor\)  | 
 |  [Container image](images-create.md) code package size  |  10 GB  | 
 |  Test events \(console editor\)  |  10  | 
-|  `/tmp` directory storage  |  512 MB to 10,240 MB, in 1\-MB increments\.  | 
+|  `/tmp` directory storage  |  Between 512 MB and 10,240 MB, in 1\-MB increments  | 
 |  File descriptors  |  1,024  | 
 |  Execution processes/threads  |  1,024  | 
 

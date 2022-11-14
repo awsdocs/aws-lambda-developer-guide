@@ -19,7 +19,7 @@ You can use the Lambda API to get information about a function's state\. For mor
 
 ## Invoking the function<a name="invocation-images-update"></a>
 
-When you invoke the function, Lambda deploys the container image to an execution environment\. Lambda initializes any [extensions](using-extensions.md#invocation-extensions-images) and then runs the function’s initialization code \(the code outside the main handler\)\. Note that function initialization duration is included in billed execution time\. 
+When you invoke the function, Lambda deploys the container image to an execution environment\. Lambda initializes any [extensions](extensions-configuration.md#invocation-extensions-images) and then runs the function’s initialization code \(the code outside the main handler\)\. Note that function initialization duration is included in billed execution time\. 
 
 Lambda then runs the function by calling the code entry point specified in the function configuration \(the ENTRYPOINT and CMD [container image settings](images-create.md#images-parms)\)\. 
 
