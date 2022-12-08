@@ -27,8 +27,8 @@ public class HandlerStream implements RequestStreamHandler {
   public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context) throws IOException
   {
     LambdaLogger logger = context.getLogger();
-    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("US-ASCII")));
-    PrintWriter writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(outputStream, Charset.forName("US-ASCII"))));
+    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
+    PrintWriter writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(outputStream, Charset.forName("UTF-8"))));
     try
     {
       HashMap event = gson.fromJson(reader, HashMap.class);
