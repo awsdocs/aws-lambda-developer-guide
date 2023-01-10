@@ -35,6 +35,9 @@ You cannot configure the X\-Ray sampling rate for your functions\.
 
 In X\-Ray, a *trace* records information about a request that is processed by one or more *services*\. Services record *segments* that contain layers of *subsegments*\. Lambda records a segment for the Lambda service that handles the invocation request, and one for the work done by the function\. The function segment comes with subsegments for `Initialization`, `Invocation` and `Overhead`\. For more information see [ Lambda execution environment lifecycle](lambda-runtime-environment.md)\.
 
+**Note**  
+Unhandled exceptions in the Lambda function segment are recorded as `Error` status. The `Fault` status is only recorded when AWS Lambda experiences degraded service. For more information, see [Errors, faults, and exceptions](https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html#xray-concepts-errors) in the X\-Ray Developer Guide\.
+
 The `Initialization` subsegment represents the init phase of the Lambda execution environment lifecycle\. During this phase, Lambda creates or unfreezes an execution environment with the resources you have configured, downloads the function code and all layers, initializes extensions, initializes the runtime, and runs the function's initialization code\.
 
 The `Invocation` subsegment represents the invoke phase where Lambda invokes the function handler\. This begins with runtime and extension registration and it ends when the runtime is ready to send the response\.
