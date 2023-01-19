@@ -27,7 +27,7 @@ If your function has additional dependencies, [use npm to include them in your d
 
 ## Async handlers<a name="nodejs-handler-async"></a>
 
-For async handlers, you can use `return` and `throw` to send a response or error, respectively\. Functions must use the `async` keyword to use these methods to return a response or error\.
+For async handlers, you can use `resolve` and `reject` to send a response or error, respectively\. Functions must use the `async` keyword to use these methods to return a response or error\.
 
 If your code performs an asynchronous task, return a promise to make sure that it finishes running\. When you resolve or reject the promise, Lambda sends the response or error to the invoker\.
 
