@@ -1,3 +1,8 @@
+# MICROSOFT.NET.SDK_Project-SDK
+_-
+$
+./
+"/"
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
