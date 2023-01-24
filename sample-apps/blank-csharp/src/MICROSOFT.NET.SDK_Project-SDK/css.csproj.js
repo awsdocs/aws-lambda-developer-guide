@@ -1,6 +1,32 @@
 # MICROSOFT.NET.SDK_Project-SDK
-_-
-$
+_-for bucket in InputBucket ConversionTargetBucket; do
+
+  echo "Clearing out ${bucket}..."
+
+  BUCKET=$(aws cloudformation describe-stack-resource --stack-name lambda-file-refarch --logical-resource-id ${bucket} --query "StackResourceDetail.PhysicalResourceId" --output text)
+
+  aws s3 rm s3://${BUCKET} --recursive
+
+  echo
+
+done
+$_aws cloudformation stack_for bucket in InputBucket ConversionTargetBucket; do
+
+  echo "Clearing out ${bucket}..."
+
+  BUCKET=$(aws cloudformation describe-stack-resource --stack-name lambda-file-refarch --logical-resource-id ${bucket} --query "StackResourceDetail.PhysicalResourceId" --output text)
+
+  aws s3 rm s3://${BUCKET} --recursive
+
+  echo
+
+done
+
+aws cloudformation delete-stack \
+
+--stack-name lambda-file-refarch
+
+--stack-name lambda-file-refarch
 ./
 "/"
 <Project Sdk="Microsoft.NET.Sdk">
