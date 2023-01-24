@@ -5,7 +5,9 @@ _-for bucket in InputBucket ConversionTargetBucket; do
 
   BUCKET=$(aws cloudformation describe-stack-resource --stack-name lambda-file-refarch --logical-resource-id ${bucket} --query "StackResourceDetail.PhysicalResourceId" --output text)
 
-  aws s3 rm s3://${BUCKET} --recursive
+  aws s3 rm s3://${BUCKET}aws cloudformation delete-stack \
+
+--stack-name lambda-file-refarcha-106058--recursive
 
   echo
 
