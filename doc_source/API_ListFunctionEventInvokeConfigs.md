@@ -44,23 +44,23 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "[FunctionEventInvokeConfigs](#SSS-ListFunctionEventInvokeConfigs-response-FunctionEventInvokeConfigs)": [ 
+   "FunctionEventInvokeConfigs": [ 
       { 
-         "[DestinationConfig](API_FunctionEventInvokeConfig.md#SSS-Type-FunctionEventInvokeConfig-DestinationConfig)": { 
-            "[OnFailure](API_DestinationConfig.md#SSS-Type-DestinationConfig-OnFailure)": { 
-               "[Destination](API_OnFailure.md#SSS-Type-OnFailure-Destination)": "string"
+         "DestinationConfig": { 
+            "OnFailure": { 
+               "Destination": "string"
             },
-            "[OnSuccess](API_DestinationConfig.md#SSS-Type-DestinationConfig-OnSuccess)": { 
-               "[Destination](API_OnSuccess.md#SSS-Type-OnSuccess-Destination)": "string"
+            "OnSuccess": { 
+               "Destination": "string"
             }
          },
-         "[FunctionArn](API_FunctionEventInvokeConfig.md#SSS-Type-FunctionEventInvokeConfig-FunctionArn)": "string",
-         "[LastModified](API_FunctionEventInvokeConfig.md#SSS-Type-FunctionEventInvokeConfig-LastModified)": number,
-         "[MaximumEventAgeInSeconds](API_FunctionEventInvokeConfig.md#SSS-Type-FunctionEventInvokeConfig-MaximumEventAgeInSeconds)": number,
-         "[MaximumRetryAttempts](API_FunctionEventInvokeConfig.md#SSS-Type-FunctionEventInvokeConfig-MaximumRetryAttempts)": number
+         "FunctionArn": "string",
+         "LastModified": number,
+         "MaximumEventAgeInSeconds": number,
+         "MaximumRetryAttempts": number
       }
    ],
-   "[NextMarker](#SSS-ListFunctionEventInvokeConfigs-response-NextMarker)": "string"
+   "NextMarker": "string"
 }
 ```
 
@@ -80,19 +80,19 @@ Type: String
 
 ## Errors<a name="API_ListFunctionEventInvokeConfigs_Errors"></a>
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **ResourceNotFoundException**   
+ ** ResourceNotFoundException **   
 The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 
- **TooManyRequestsException**   
+ ** TooManyRequestsException **   
 The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 
@@ -103,7 +103,7 @@ For more information about using this API in one of the language\-specific AWS S
 +  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/ListFunctionEventInvokeConfigs) 
 +  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/ListFunctionEventInvokeConfigs) 
 +  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/ListFunctionEventInvokeConfigs) 
-+  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/ListFunctionEventInvokeConfigs) 
++  [AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/ListFunctionEventInvokeConfigs) 
 +  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/ListFunctionEventInvokeConfigs) 
 +  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/ListFunctionEventInvokeConfigs) 
 +  [AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/ListFunctionEventInvokeConfigs) 

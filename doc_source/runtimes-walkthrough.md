@@ -4,18 +4,26 @@ In this tutorial, you create a Lambda function with a custom runtime\. You start
 
 ## Prerequisites<a name="runtimes-walkthrough-prereqs"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with AWS Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Create a Lambda function with the console](getting-started.md#getting-started-create-function) to create your first Lambda function\.
 
-To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
+To complete the following steps, you need a command line terminal or shell to run commands\. Commands and the expected output are listed in separate blocks:
 
 ```
-~/lambda-project$ this is a command
-this is output
+aws --version
+```
+
+You should see the following output:
+
+```
+aws-cli/2.0.57 Python/3.7.4 Darwin/19.6.0 exe/x86_64
 ```
 
 For long commands, an escape character \(`\`\) is used to split a command over multiple lines\.
 
-On Linux and macOS, use your preferred shell and package manager\. On Windows 10, you can [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows\-integrated version of Ubuntu and Bash\.
+On Linux and macOS, use your preferred shell and package manager\.
+
+**Note**  
+On Windows, some Bash CLI commands that you commonly use with Lambda \(such as `zip`\) are not supported by the operating system's built\-in terminals\. To get a Windows\-integrated version of Ubuntu and Bash, [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10)\. 
 
 You need an IAM role to create a Lambda function\. The role needs permission to send logs to CloudWatch Logs and access the AWS services that your function uses\. If you don't have a role for function development, create one now\.
 
@@ -58,7 +66,7 @@ do
   # Extract request ID by scraping response headers received above
   REQUEST_ID=$(grep -Fi Lambda-Runtime-Aws-Request-Id "$HEADERS" | tr -d '[:space:]' | cut -d: -f2)
 
-  # Execute the handler function from the script
+  # Run the handler function from the script
   RESPONSE=$($(echo "$_HANDLER" | cut -d. -f2) "$EVENT_DATA")
 
   # Send the response
@@ -93,7 +101,7 @@ runtime-tutorial
 └ function.sh
 ```
 
-Make the files executable and add them to a ZIP archive\.
+Make the files executable and add them to a \.zip file archive\.
 
 ```
 runtime-tutorial$ chmod 755 function.sh bootstrap
@@ -127,7 +135,7 @@ runtime-tutorial$ aws lambda create-function --function-name bash-runtime \
 Invoke the function and verify the response\.
 
 ```
-runtime-tutorial$ aws lambda invoke --function-name bash-runtime --payload '{"text":"Hello"}' response.txt
+runtime-tutorial$ aws lambda invoke --function-name bash-runtime --payload '{"text":"Hello"}' response.txt --cli-binary-format raw-in-base64-out
 {
     "StatusCode": 200,
     "ExecutedVersion": "$LATEST"
@@ -213,7 +221,7 @@ runtime-tutorial$ aws lambda update-function-code --function-name bash-runtime -
 Invoke the function to verify that it works with the runtime layer\.
 
 ```
-runtime-tutorial$ aws lambda invoke --function-name bash-runtime --payload '{"text":"Hello"}' response.txt
+runtime-tutorial$ aws lambda invoke --function-name bash-runtime --payload '{"text":"Hello"}' response.txt --cli-binary-format raw-in-base64-out
 {
     "StatusCode": 200,
     "ExecutedVersion": "$LATEST"

@@ -1,23 +1,23 @@
-# AWS Lambda permissions<a name="lambda-permissions"></a>
+# Lambda permissions<a name="lambda-permissions"></a>
 
-You can use AWS Identity and Access Management \(IAM\) to manage access to the Lambda API and resources like functions and layers\. For users and applications in your account that use Lambda, you manage permissions in a permissions policy that you can apply to IAM users, groups, or roles\. To grant permissions to other accounts or AWS services that use your Lambda resources, you use a policy that applies to the resource itself\.
+You can use AWS Identity and Access Management \(IAM\) to manage access to the Lambda API and resources such as functions and layers\. For users and applications in your account that use Lambda, you can create IAM policies that apply to IAM users, groups, or roles\.
 
-A Lambda function also has a policy, called an [execution role](lambda-intro-execution-role.md), that grants it permission to access AWS services and resources\. At a minimum, your function needs access to Amazon CloudWatch Logs for log streaming\. If you [use AWS X\-Ray to trace your function](services-xray.md), or your function accesses services with the AWS SDK, you grant it permission to call them in the execution role\. Lambda also uses the execution role to get permission to read from event sources when you use an [event source mapping](invocation-eventsourcemapping.md) to trigger your function\.
+Every Lambda function has an IAM role called an [execution role](lambda-intro-execution-role.md)\. In this role, you can attach a policy that defines the permissions that your function needs to access other AWS services and resources\. At a minimum, your function needs access to Amazon CloudWatch Logs for log streaming\. If your function calls other service APIs with the AWS SDK, you must include the necessary permissions in the execution role's policy\. Lambda also uses the execution role to get permission to read from event sources when you use an [event source mapping](invocation-eventsourcemapping.md) to invoke your function\.
 
-**Note**  
-If your function needs network access to a resource like a relational database that isn't accessible through AWS APIs or the internet, [configure it to connect to your VPC](configuration-vpc.md)\.
+To give other accounts and AWS services permission to use your Lambda resources, use a [resource\-based policy](access-control-resource-based.md)\. Lambda resources include functions, versions, aliases, and layer versions\. When a user tries to access a Lambda resource, Lambda considers both the user's [identity\-based policies](access-control-identity-based.md) and the resource's resource\-based policy\. When an AWS service such as Amazon Simple Storage Service \(Amazon S3\) calls your Lambda function, Lambda considers only the resource\-based policy\.
 
-Use [resource\-based policies](access-control-resource-based.md) to give other accounts and AWS services permission to use your Lambda resources\. Lambda resources include functions, versions, aliases, and layer versions\. Each of these resources has a permissions policy that applies when the resource is accessed, in addition to any policies that apply to the user\. When an AWS service like Amazon S3 calls your Lambda function, the resource\-based policy gives it access\.
+To manage permissions for users and applications in your account, we recommend using an [AWS managed policy](access-control-identity-based.md)\. You can use these managed policies as\-is, or as a starting point for writing your own more restrictive policies\. Policies can restrict user permissions by the resource that an action affects, and by additional optional conditions\. For more information, see [Resources and conditions for Lambda actions](lambda-api-permissions-ref.md)\.
 
-To manage permissions for users and applications in your accounts, [use the managed policies that Lambda provides](access-control-identity-based.md), or write your own\. The Lambda console uses multiple services to get information about your function's configuration and triggers\. You can use the managed policies as\-is, or as a starting point for more restrictive policies\.
+If your Lambda functions contain calls to other AWS resources, you might also want to restrict which functions can access those resources\. To do this, include the `lambda:SourceFunctionArn` condition key in a resource\-based policy for the target resource\. For more information, see [Working with Lambda execution environment credentials](lambda-intro-execution-role.md#permissions-executionrole-source-function-arn)\.
 
-You can restrict user permissions by the resource an action affects and, in some cases, by additional conditions\. For example, you can specify a pattern for the Amazon Resource Name \(ARN\) of a function that requires a user to include their user name in the name of functions that they create\. Additionally, you can add a condition that requires that the user configure functions to use a specific layer to, for example, pull in logging software\. For the resources and conditions that are supported by each action, see [Resources and Conditions](lambda-api-permissions-ref.md)\.
+For more information about IAM, see the *[IAM User Guide](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html)*\.
 
-For more information about IAM, see [What is IAM?](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) in the *IAM User Guide*\.
+For more information about applying security principles to Lambda applications, see [Security](https://docs.aws.amazon.com/lambda/latest/operatorguide/security-ops.html) in the *AWS Lambda Operator Guide*\.
 
 **Topics**
-+ [AWS Lambda execution role](lambda-intro-execution-role.md)
-+ [Using resource\-based policies for AWS Lambda](access-control-resource-based.md)
-+ [Identity\-based IAM policies for AWS Lambda](access-control-identity-based.md)
++ [Lambda execution role](lambda-intro-execution-role.md)
++ [Identity\-based IAM policies for Lambda](access-control-identity-based.md)
++ [Attribute\-based access control for Lambda](attribute-based-access-control.md)
++ [Using resource\-based policies for Lambda](access-control-resource-based.md)
 + [Resources and conditions for Lambda actions](lambda-api-permissions-ref.md)
 + [Using permissions boundaries for AWS Lambda applications](permissions-boundary.md)

@@ -4,7 +4,7 @@ Use rolling deployments to control the risks associated with introducing new ver
 
 You configure a rolling deployment by using AWS CodeDeploy and AWS SAM\. CodeDeploy is a service that automates application deployments to Amazon computing platforms such as Amazon EC2 and AWS Lambda\. For more information, see [What is CodeDeploy?](https://docs.aws.amazon.com/codedeploy/latest/userguide/welcome.html)\. By using CodeDeploy to deploy your Lambda function, you can easily monitor the status of the deployment and initiate a rollback if you detect any issues\.
 
-AWS SAM is an open\-source framework for building serverless applications\. You create an AWS SAM template \(in YAML format\) to specify the configuration of the components required for the rolling deployment\. AWS SAM uses the template to create and configure the components\. For more information, see [What is the AWS Serverless Application Model?](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html)\.
+AWS SAM is an open\-source framework for building serverless applications\. You create an AWS SAM template \(in YAML format\) to specify the configuration of the components required for the rolling deployment\. AWS SAM uses the template to create and configure the components\. For more information, see [What is the AWS SAM?](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html)\.
 
 In a rolling deployment, AWS SAM performs these tasks:
 + It configures your Lambda function and creates an alias\.
@@ -15,6 +15,8 @@ In a rolling deployment, AWS SAM performs these tasks:
   The deployment group manages the rolling deployment and the rollback \(if needed\)\.
 + It detects when you create a new version of your Lambda function\.
 + It triggers CodeDeploy to start the deployment of the new version\.
+
+ 
 
 ## Example AWS SAM Lambda template<a name="sam-template"></a>
 

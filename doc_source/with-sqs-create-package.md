@@ -13,7 +13,7 @@ Sample code is available for the following languages\.
 
 The following is example code that receives an Amazon SQS event message as input and processes it\. For illustration, the code writes some of the incoming event data to CloudWatch Logs\. 
 
-**Example index\.js \(Node\.js 8\)**  
+**Example index\.js \(Node\.js 12\)**  
 
 ```
 exports.handler = async function(event, context) {
@@ -25,18 +25,7 @@ exports.handler = async function(event, context) {
 }
 ```
 
-**Example index\.js \(Node\.js 6\)**  
-
-```
-event.Records.forEach(function(record) {
-    var body = record.body;
-    console.log(body);
-  });
-  callback(null, "message");
-};
-```
-
-Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda deployment package in Node\.js](nodejs-package.md)\.
+Zip up the sample code to create a deployment package\. For instructions, see [Deploy Node\.js Lambda functions with \.zip file archives](nodejs-package.md)\.
 
 ## Java<a name="with-sqs-example-deployment-pkg-java"></a>
 
@@ -70,7 +59,7 @@ public class Handler implements RequestHandler<SQSEvent, Void>{
 + `aws-lambda-java-core`
 + `aws-lambda-java-events`
 
-Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [AWS Lambda deployment package in Java](java-package.md)\.
+Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [Deploy Java Lambda functions with \.zip or JAR file archives](java-package.md)\.
 
 ## C\#<a name="with-sqs-example-deployment-pkg-dotnet"></a>
 
@@ -108,7 +97,7 @@ namespace SQSLambdaFunction
 }
 ```
 
-Replace the `Program.cs` in a \.NET Core project with the above sample\. For instructions, see [AWS Lambda Deployment Package in C\#](csharp-package.md)\.
+Replace the `Program.cs` in a \.NET Core project with the above sample\. For instructions, see [Deploy C\# Lambda functions with \.zip file archives](csharp-package.md)\.
 
 ## Go<a name="with-sqs-example-deployment-pkg-go"></a>
 
@@ -142,13 +131,11 @@ func main() {
 }
 ```
 
-Build the executable with `go build` and create a deployment package\. For instructions, see [AWS Lambda deployment package in Go](golang-package.md)\.
+Build the executable with `go build` and create a deployment package\. For instructions, see [Deploy Go Lambda functions with \.zip file archives](golang-package.md)\.
 
 ## Python<a name="with-sqs-example-deployment-pkg-python"></a>
 
 The following is example Python code that accepts an Amazon SQS record as input and processes it\. For illustration, the code writes to some of the incoming event data to CloudWatch Logs\. 
-
-Follow the instructions to create a AWS Lambda function deployment package\. 
 
 **Example ProcessSQSRecords\.py**  
 
@@ -157,9 +144,9 @@ from __future__ import print_function
 
 def lambda_handler(event, context):
     for record in event['Records']:
-       print ("test")
-       payload=record["body"]
-       print(str(payload))
+        print("test")
+        payload = record["body"]
+        print(str(payload))
 ```
 
-Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda deployment package in Python](python-package.md)\.
+Zip up the sample code to create a deployment package\. For instructions, see [Deploy Python Lambda functions with \.zip file archives](python-package.md)\.

@@ -1,10 +1,10 @@
-# Using AWS Lambda with Amazon CloudWatch Logs<a name="services-cloudwatchlogs"></a>
+# Using Lambda with CloudWatch Logs<a name="services-cloudwatchlogs"></a>
 
-You can use a Lambda function to monitor and analyze logs from an Amazon CloudWatch Logs log stream\. Create [subscriptions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/Subscriptions.html) for one or more log streams to invoke a function when logs are created or match an optional pattern\. Use the function to send a notification or persist the log to a database or storage\.
+You can use a Lambda function to monitor and analyze logs from an Amazon CloudWatch Logs log stream\. Create [subscriptions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Subscriptions.html) for one or more log streams to invoke a function when logs are created or match an optional pattern\. Use the function to send a notification or persist the log to a database or storage\.
 
-CloudWatch Logs invokes your function asynchronously with an event that contains log data\. The value of the data field is a Base64 encoded ZIP archive\.
+CloudWatch Logs invokes your function asynchronously with an event that contains log data\. The value of the data field is a Base64\-encoded \.gzip file archive\.
 
-**Example Amazon CloudWatch Logs message event**  
+**Example CloudWatch Logs message event**  
 
 ```
 {
@@ -14,9 +14,9 @@ CloudWatch Logs invokes your function asynchronously with an event that contains
 }
 ```
 
-When decoded and decompressed, the log data is a JSON document with the following structure\.
+When decoded and decompressed, the log data is a JSON document with the following structure:
 
-**Example Amazon CloudWatch Logs message data \(decoded\)**  
+**Example CloudWatch Logs message data \(decoded\)**  
 
 ```
 {
@@ -31,7 +31,7 @@ When decoded and decompressed, the log data is a JSON document with the followin
         {
             "id": "34622316099697884706540976068822859012661220141643892546",
             "timestamp": 1552518348220,
-            "message": "REPORT RequestId: 6234bffe-149a-b642-81ff-2e8e376d8aff\tDuration: 46.84 ms\tBilled Duration: 100 ms \tMemory Size: 192 MB\tMax Memory Used: 72 MB\t\n"
+            "message": "REPORT RequestId: 6234bffe-149a-b642-81ff-2e8e376d8aff\tDuration: 46.84 ms\tBilled Duration: 47 ms \tMemory Size: 192 MB\tMax Memory Used: 72 MB\t\n"
         }
     ]
 }

@@ -3,7 +3,7 @@
 This section shows how to package your Java code into a deployment package using Eclipse IDE and Maven plugin for Eclipse\. 
 
 **Note**  
-The AWS SDK Eclipse Toolkit provides an Eclipse plugin for you to both create a deployment package and also upload it to create a Lambda function\. If you can use Eclipse IDE as your development environment, this plugin enables you to author Java code, create and upload a deployment package, and create your Lambda function\. For more information, see the [AWS Toolkit for Eclipse Getting Started Guide](https://docs.aws.amazon.com/AWSToolkitEclipse/latest/GettingStartedGuide/)\. For an example of using the toolkit for authoring Lambda functions, see [Using AWS Lambda with the AWS toolkit for Eclipse](https://docs.aws.amazon.com/AWSToolkitEclipse/latest/GettingStartedGuide/lambda.html)\. 
+The AWS SDK Eclipse Toolkit provides an Eclipse plugin for you to both create a deployment package and also upload it to create a Lambda function\. If you can use Eclipse IDE as your development environment, this plugin enables you to author Java code, create and upload a deployment package, and create your Lambda function\. For more information, see the [AWS Toolkit for Eclipse Getting Started Guide](https://docs.aws.amazon.com/AWSToolkitEclipse/latest/GettingStartedGuide/)\. For an example of using the toolkit for authoring Lambda functions, see [Using Lambda with the AWS toolkit for Eclipse](https://docs.aws.amazon.com/AWSToolkitEclipse/latest/GettingStartedGuide/lambda.html)\. 
 
 **Topics**
 + [Prerequisites](#java-package-eclipse-prereqs)
@@ -59,8 +59,12 @@ If you are following other tutorial topics in this guide, the specific tutorials
    1. Open the context \(right\-click\) menu for the `src/main/java` subdirectory in the project, choose **New**, and then choose **Class**\.
 
    1. In the **New Java Class** window, type the following values:
+
+       
       + **Package**: **example** 
       + **Name**: **Hello**
+
+         
 **Note**  
 If you are following other tutorial topics in this guide, the specific tutorials might recommend different package name or class name\.
 
@@ -79,6 +83,8 @@ The resulting \.jar, `lambda-java-example-0.0.1-SNAPSHOT.jar`, is not the final 
    1. Open the context \(right\-click\) menu for the `pom.xml` file, choose **Maven**, and then choose **Add Plugin**\.
 
    1. In the **Add Plugin** window, type the following values:
+
+       
       + **Group Id:** org\.apache\.maven\.plugins
       + **Artifact Id:** maven\-shade\-plugin
       + **Version:** 3\.2\.2

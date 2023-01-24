@@ -2,6 +2,8 @@
 
 This sample application shows the use of the `aws-lambda-java-events` library with various event types. To keep the deployment size minimal, it includes only types that can be used without adding the AWS SDK as a dependency. A separate handler class is defined for each input type.
 
+**Note: To use these examples, you must be using version 3.0.0 or newer of the `aws-lambda-java-events` dependency.** If you are on an older version, see the [`java-events-v1sdk` package](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-events-v1sdk) for deprecated examples. If possible, update your `aws-lambda-java-events` dependency to version 3.0.0 or newer.
+
 ![Architecture](/sample-apps/java-events/images/sample-java-events.png)
 
 The project includes function code and supporting resources:
@@ -90,8 +92,11 @@ By default, the function uses a handler class named `Handler` that takes an API 
 - `HandlerCognito.java` - Takes `CognitoEvent` as input.
 - `HandlerCWEvents.java` - Takes `ScheduledEventEvent` as input.
 - `HandlerCWLogs.java` - Takes `CloudWatchLogsEvent` as input.
+- `HandlerDynamoDB.java` - Takes `DynamodbEvent` as input.
 - `HandlerFirehose.java` - Takes `KinesisFirehoseEvent` as input.
+- `HandlerKinesis.java` - Takes `KinesisEvent` as input.
 - `HandlerLex.java` - Takes `LexEvent` as input.
+- `HandlerS3.java` - Takes `S3Event` as input.
 - `HandlerSNS.java` - Takes `SNSEvent` as input.
 
 To use a different handler, change the value of the Handler setting in the application template (`template.yml` or `template-mvn.yaml`). For example, to use the Amazon Lex handler:
@@ -118,8 +123,11 @@ The following event type keys are supported:
 - `cfg` - Config rule (`events/config-rule.json`)
 - `cc` - CodeCommit push (`events/codecommit-push.json`)
 - `cog` - Cognito Sync (`events/cognito-sync.json`)
+- `kin` - Kinesis record (`events/kinesis-record.json`)
 - `fh` - Kinesis Firehose record (`events/firehose-record.json`)
 - `lex` - Lex dialog (`events/lex-flowers.json`)
+- `ddb` - DynamoDB record (`events/dynamodb-record.json`)
+- `s3` - S3Event record (`events/s3-notification.json`)
 
 # Cleanup
 To delete the application, run `4-cleanup.sh`.

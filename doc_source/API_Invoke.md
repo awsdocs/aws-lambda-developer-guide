@@ -12,7 +12,7 @@ The status code in the API response doesn't reflect function errors\. Error code
 
 For functions with a long timeout, your client might be disconnected during synchronous invocation while it waits for a response\. Configure your HTTP client, SDK, firewall, proxy, or operating system to allow for long connections with timeout or keep\-alive settings\.
 
-This operation requires permission for the [lambda:InvokeFunction](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awslambda.html) action\.
+This operation requires permission for the [lambda:InvokeFunction](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awslambda.html) action\. For details on how to set up permissions for cross\-account invocations, see [Granting function access to other accounts](https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html#permissions-resource-xaccountinvoke)\.
 
 ## Request Syntax<a name="API_Invoke_RequestSyntax"></a>
 
@@ -52,7 +52,7 @@ Choose from the following options\.
 Valid Values:` Event | RequestResponse | DryRun` 
 
  ** [LogType](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-LogType"></a>
-Set to `Tail` to include the execution log in the response\.  
+Set to `Tail` to include the execution log in the response\. Applies to synchronously invoked functions only\.  
 Valid Values:` None | Tail` 
 
  ** [Qualifier](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-Qualifier"></a>
@@ -65,7 +65,8 @@ Pattern: `(|[a-zA-Z0-9$_-]+)`
 The request accepts the following binary data\.
 
  ** [Payload](#API_Invoke_RequestSyntax) **   <a name="SSS-Invoke-request-Payload"></a>
-The JSON that you want to provide to your Lambda function as input\.
+The JSON that you want to provide to your Lambda function as input\.  
+You can enter the JSON directly\. For example, `--payload '{ "key": "value" }'`\. You can also specify a file path\. For example, `--payload file://payload.json`\. 
 
 ## Response Syntax<a name="API_Invoke_ResponseSyntax"></a>
 
@@ -105,107 +106,107 @@ The response from the function, or an error object\.
 
 ## Errors<a name="API_Invoke_Errors"></a>
 
- **EC2AccessDeniedException**   
+ ** EC2AccessDeniedException **   
 Need additional permissions to configure VPC settings\.  
 HTTP Status Code: 502
 
- **EC2ThrottledException**   
-AWS Lambda was throttled by Amazon EC2 during Lambda function initialization using the execution role provided for the Lambda function\.  
+ ** EC2ThrottledException **   
+ AWS Lambda was throttled by Amazon EC2 during Lambda function initialization using the execution role provided for the Lambda function\.  
 HTTP Status Code: 502
 
- **EC2UnexpectedException**   
-AWS Lambda received an unexpected EC2 client exception while setting up for the Lambda function\.  
+ ** EC2UnexpectedException **   
+ AWS Lambda received an unexpected EC2 client exception while setting up for the Lambda function\.  
 HTTP Status Code: 502
 
- **EFSIOException**   
-An error occured when reading from or writing to a connected file system\.  
+ ** EFSIOException **   
+An error occurred when reading from or writing to a connected file system\.  
 HTTP Status Code: 410
 
- **EFSMountConnectivityException**   
+ ** EFSMountConnectivityException **   
 The function couldn't make a network connection to the configured file system\.  
 HTTP Status Code: 408
 
- **EFSMountFailureException**   
+ ** EFSMountFailureException **   
 The function couldn't mount the configured file system due to a permission or configuration issue\.  
 HTTP Status Code: 403
 
- **EFSMountTimeoutException**   
+ ** EFSMountTimeoutException **   
 The function was able to make a network connection to the configured file system, but the mount operation timed out\.  
 HTTP Status Code: 408
 
- **ENILimitReachedException**   
-AWS Lambda was not able to create an elastic network interface in the VPC, specified as part of Lambda function configuration, because the limit for network interfaces has been reached\.  
+ ** ENILimitReachedException **   
+ AWS Lambda was not able to create an elastic network interface in the VPC, specified as part of Lambda function configuration, because the limit for network interfaces has been reached\.  
 HTTP Status Code: 502
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **InvalidRequestContentException**   
+ ** InvalidRequestContentException **   
 The request body could not be parsed as JSON\.  
 HTTP Status Code: 400
 
- **InvalidRuntimeException**   
+ ** InvalidRuntimeException **   
 The runtime or runtime version specified is not supported\.  
 HTTP Status Code: 502
 
- **InvalidSecurityGroupIDException**   
+ ** InvalidSecurityGroupIDException **   
 The Security Group ID provided in the Lambda function VPC configuration is invalid\.  
 HTTP Status Code: 502
 
- **InvalidSubnetIDException**   
+ ** InvalidSubnetIDException **   
 The Subnet ID provided in the Lambda function VPC configuration is invalid\.  
 HTTP Status Code: 502
 
- **InvalidZipFileException**   
-AWS Lambda could not unzip the deployment package\.  
+ ** InvalidZipFileException **   
+ AWS Lambda could not unzip the deployment package\.  
 HTTP Status Code: 502
 
- **KMSAccessDeniedException**   
+ ** KMSAccessDeniedException **   
 Lambda was unable to decrypt the environment variables because KMS access was denied\. Check the Lambda function's KMS permissions\.  
 HTTP Status Code: 502
 
- **KMSDisabledException**   
+ ** KMSDisabledException **   
 Lambda was unable to decrypt the environment variables because the KMS key used is disabled\. Check the Lambda function's KMS key settings\.  
 HTTP Status Code: 502
 
- **KMSInvalidStateException**   
+ ** KMSInvalidStateException **   
 Lambda was unable to decrypt the environment variables because the KMS key used is in an invalid state for Decrypt\. Check the function's KMS key settings\.  
 HTTP Status Code: 502
 
- **KMSNotFoundException**   
+ ** KMSNotFoundException **   
 Lambda was unable to decrypt the environment variables because the KMS key was not found\. Check the function's KMS key settings\.   
 HTTP Status Code: 502
 
- **RequestTooLargeException**   
+ ** RequestTooLargeException **   
 The request payload exceeded the `Invoke` request body JSON input limit\. For more information, see [Limits](https://docs.aws.amazon.com/lambda/latest/dg/limits.html)\.   
 HTTP Status Code: 413
 
- **ResourceConflictException**   
+ ** ResourceConflictException **   
 The resource already exists, or another operation is in progress\.  
 HTTP Status Code: 409
 
- **ResourceNotFoundException**   
+ ** ResourceNotFoundException **   
 The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
- **ResourceNotReadyException**   
+ ** ResourceNotReadyException **   
 The function is inactive and its VPC connection is no longer available\. Wait for the VPC connection to reestablish and try again\.  
 HTTP Status Code: 502
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 
- **SubnetIPAddressLimitReachedException**   
-AWS Lambda was not able to set up VPC access for the Lambda function because one or more configured subnets has no available IP addresses\.  
+ ** SubnetIPAddressLimitReachedException **   
+ AWS Lambda was not able to set up VPC access for the Lambda function because one or more configured subnets has no available IP addresses\.  
 HTTP Status Code: 502
 
- **TooManyRequestsException**   
+ ** TooManyRequestsException **   
 The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 
- **UnsupportedMediaTypeException**   
+ ** UnsupportedMediaTypeException **   
 The content type of the `Invoke` request body is not JSON\.  
 HTTP Status Code: 415
 
@@ -216,7 +217,7 @@ For more information about using this API in one of the language\-specific AWS S
 +  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/Invoke) 
 +  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/Invoke) 
 +  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/Invoke) 
-+  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/Invoke) 
++  [AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/Invoke) 
 +  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/Invoke) 
 +  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/Invoke) 
 +  [AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/Invoke) 

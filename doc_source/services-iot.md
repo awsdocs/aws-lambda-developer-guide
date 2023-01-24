@@ -23,8 +23,13 @@ For asynchronous invocation, Lambda queues the message and [retries](invocation-
 You need to grant permission for the AWS IoT service to invoke your Lambda function\. Use the `add-permission` command to add a permission statement to your function's resource\-based policy\.
 
 ```
-$ aws lambda add-permission --function-name my-function \
---statement-id iot-events --action "lambda:InvokeFunction" --principal iotevents.amazonaws.com
+aws lambda add-permission --function-name my-function \
+--statement-id iot-events --action "lambda:InvokeFunction" --principal iot.amazonaws.com
+```
+
+You should see the following output:
+
+```
 {
     "Statement": "{\"Sid\":\"iot-events\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"iot.amazonaws.com\"},\"Action\":\"lambda:InvokeFunction\",\"Resource\":\"arn:aws:lambda:us-west-2:123456789012:function:my-function\"}"
 }

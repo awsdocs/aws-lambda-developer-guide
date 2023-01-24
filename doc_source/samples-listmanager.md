@@ -2,15 +2,13 @@
 
 The list manager sample application demonstrates the use of AWS Lambda to process records in an Amazon Kinesis data stream\. A Lambda event source mapping reads records from the stream in batches and invokes a Lambda function\. The function uses information from the records to update documents in Amazon DynamoDB and stores the records it processes in Amazon Relational Database Service \(Amazon RDS\)\.
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/sample-listmanager.png)
-
 Clients send records to a Kinesis stream, which stores them and makes them available for processing\. The Kinesis stream is used like a queue to buffer records until they can be processed\. Unlike an Amazon SQS queue, records in a Kinesis stream are not deleted after they are processed, so multiple consumers can process the same data\. Records in Kinesis are also processed in order, where queue items can be delivered out of order\. Records are deleted from the stream after 7 days\.
 
 In addition to the function that processes events, the application includes a second function for performing administrative tasks on the database\. Function code is available in the following files:
-+ Processor – [processor/index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/list-manager/processor/index.js)
-+ Database admin – [dbadmin/index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/list-manager/dbadmin/index.js)
++ Processor – [processor/index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/list-manager/processor/index.js)
++ Database admin – [dbadmin/index\.js](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/list-manager/dbadmin/index.js)
 
-You can deploy the sample in a few minutes with the AWS CLI and AWS CloudFormation\. To download, configure, and deploy it in your account, follow the instructions in the [README](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/list-manager)\.
+You can deploy the sample in a few minutes with the AWS CLI and AWS CloudFormation\. To download, configure, and deploy it in your account, follow the instructions in the [README](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/list-manager)\.
 
 **Topics**
 + [Architecture and event structure](#samples-listmanager-architecture)
@@ -66,7 +64,7 @@ A *ranking* contains a list of entries where the value is the order in which the
 
 A Lambda [event source mapping](invocation-eventsourcemapping.md) read records from the stream in batches and invokes the processor function\. The event that the function handler received contains an array of objects that each contain details about a record, such as when it was received, details about the stream, and an encoded representation of the original record document\.
 
-**Example [events/kinesis\.json](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/list-manager/events/kinesis.json) – Record**  
+**Example [events/kinesis\.json](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/list-manager/events/kinesis.json) – Record**  
 
 ```
 {
@@ -94,13 +92,9 @@ When it's decoded, the data contains a record\. The function uses the record to 
 
 ## Instrumentation with AWS X\-Ray<a name="samples-listmanager-instrumentation"></a>
 
-The application uses [AWS X\-Ray](services-xray.md) to trace function invocations and the calls that functions make to AWS services\. X\-Ray uses the trace data that it receives from functions to create a service map that helps you identify errors\. The following service map shows the function communicating with two DynamoDB tables and a MySQL database\.
-
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/listmanager-servicemap.png)
+The application uses [AWS X\-Ray](services-xray.md) to trace function invocations and the calls that functions make to AWS services\. X\-Ray uses the trace data that it receives from functions to create a service map that helps you identify errors\. 
 
 The Node\.js function is configured for active tracing in the template, and is instrumented with the AWS X\-Ray SDK for Node\.js in code\. The X\-Ray SDK records a subsegment for each call made with an AWS SDK or MySQL client\.
-
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/listmanager-trace.png)
 
 The function uses the AWS SDK for JavaScript in Node\.js to read and write to two tables for each record\. The primary table stores the current state of each combination of list name and user\. The aggregate table stores lists that combine data from multiple users\.
 
@@ -112,9 +106,9 @@ The application is implemented in Node\.js modules and deployed with an AWS Clou
 + Execution role – An IAM role that grants the functions permission to access other AWS services\.
 + Lambda event source mapping – Reads records from the data stream and invokes the function\.
 
-View the [application template](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/list-manager/template.yml) on GitHub\.
+View the [application template](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/list-manager/template.yml) on GitHub\.
 
-A second template, [template\-vpcrds\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/list-manager/template.yml), creates the Amazon VPC and database resources\. While it is possible to create all of the resources in one template, separating them makes it easier to clean up the application and allows the database to be reused with multiple applications\.
+A second template, [template\-vpcrds\.yml](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/list-manager/template.yml), creates the Amazon VPC and database resources\. While it is possible to create all of the resources in one template, separating them makes it easier to clean up the application and allows the database to be reused with multiple applications\.
 
 **Infrastructure resources**
 + VPC – A virtual private cloud network with private subnets, a route table, and a VPC endpoint that allows the function to communicate with DynamoDB without an internet connection\.

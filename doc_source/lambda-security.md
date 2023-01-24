@@ -8,9 +8,11 @@ Security is a shared responsibility between AWS and you\. The [shared responsibi
 
 This documentation helps you understand how to apply the shared responsibility model when using Lambda\. The following topics show you how to configure Lambda to meet your security and compliance objectives\. You also learn how to use other AWS services that help you to monitor and secure your Lambda resources\.
 
+For more information about applying security principles to Lambda applications, see [Security](https://docs.aws.amazon.com/lambda/latest/operatorguide/security-ops.html) in the *Lambda operator guide*\.
+
 **Topics**
 + [Data protection in AWS Lambda](security-dataprotection.md)
-+ [Identity and access management for AWS Lambda](security-iam.md)
++ [Identity and access management for Lambda](security-iam.md)
 + [Compliance validation for AWS Lambda](security-compliance.md)
 + [Resilience in AWS Lambda](security-resilience.md)
 + [Infrastructure security in AWS Lambda](security-infrastructure.md)

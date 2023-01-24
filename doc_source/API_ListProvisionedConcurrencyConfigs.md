@@ -42,16 +42,16 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "[NextMarker](#SSS-ListProvisionedConcurrencyConfigs-response-NextMarker)": "string",
-   "[ProvisionedConcurrencyConfigs](#SSS-ListProvisionedConcurrencyConfigs-response-ProvisionedConcurrencyConfigs)": [ 
+   "NextMarker": "string",
+   "ProvisionedConcurrencyConfigs": [ 
       { 
-         "[AllocatedProvisionedConcurrentExecutions](API_ProvisionedConcurrencyConfigListItem.md#SSS-Type-ProvisionedConcurrencyConfigListItem-AllocatedProvisionedConcurrentExecutions)": number,
-         "[AvailableProvisionedConcurrentExecutions](API_ProvisionedConcurrencyConfigListItem.md#SSS-Type-ProvisionedConcurrencyConfigListItem-AvailableProvisionedConcurrentExecutions)": number,
-         "[FunctionArn](API_ProvisionedConcurrencyConfigListItem.md#SSS-Type-ProvisionedConcurrencyConfigListItem-FunctionArn)": "string",
-         "[LastModified](API_ProvisionedConcurrencyConfigListItem.md#SSS-Type-ProvisionedConcurrencyConfigListItem-LastModified)": "string",
-         "[RequestedProvisionedConcurrentExecutions](API_ProvisionedConcurrencyConfigListItem.md#SSS-Type-ProvisionedConcurrencyConfigListItem-RequestedProvisionedConcurrentExecutions)": number,
-         "[Status](API_ProvisionedConcurrencyConfigListItem.md#SSS-Type-ProvisionedConcurrencyConfigListItem-Status)": "string",
-         "[StatusReason](API_ProvisionedConcurrencyConfigListItem.md#SSS-Type-ProvisionedConcurrencyConfigListItem-StatusReason)": "string"
+         "AllocatedProvisionedConcurrentExecutions": number,
+         "AvailableProvisionedConcurrentExecutions": number,
+         "FunctionArn": "string",
+         "LastModified": "string",
+         "RequestedProvisionedConcurrentExecutions": number,
+         "Status": "string",
+         "StatusReason": "string"
       }
    ]
 }
@@ -73,19 +73,19 @@ Type: Array of [ProvisionedConcurrencyConfigListItem](API_ProvisionedConcurrency
 
 ## Errors<a name="API_ListProvisionedConcurrencyConfigs_Errors"></a>
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **ResourceNotFoundException**   
+ ** ResourceNotFoundException **   
 The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 
- **TooManyRequestsException**   
+ ** TooManyRequestsException **   
 The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 
@@ -96,7 +96,7 @@ For more information about using this API in one of the language\-specific AWS S
 +  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/ListProvisionedConcurrencyConfigs) 
 +  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/ListProvisionedConcurrencyConfigs) 
 +  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/ListProvisionedConcurrencyConfigs) 
-+  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/ListProvisionedConcurrencyConfigs) 
++  [AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/ListProvisionedConcurrencyConfigs) 
 +  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/ListProvisionedConcurrencyConfigs) 
 +  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/ListProvisionedConcurrencyConfigs) 
 +  [AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/ListProvisionedConcurrencyConfigs) 

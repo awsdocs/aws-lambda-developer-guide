@@ -11,8 +11,8 @@ Amazon EFS supports [file locking](https://docs.aws.amazon.com/efs/latest/ug/how
 
 Amazon EFS provides options to customize your file system based on your application's need to maintain high performance at scale\. There are three primary factors to consider: the number of connections, throughput \(in MiB per second\), and IOPS\.
 
-**Limits**  
-For detail on file system limits, see [Quotas for Amazon EFS file systems](https://docs.aws.amazon.com/efs/latest/ug/limits.html#limits-fs-specific) in the *Amazon Elastic File System User Guide*\.
+**Quotas**  
+For detail on file system quotas and limits, see [Quotas for Amazon EFS file systems](https://docs.aws.amazon.com/efs/latest/ug/limits.html#limits-fs-specific) in the *Amazon Elastic File System User Guide*\.
 
 To avoid issues with scaling, throughput, and IOPS, monitor the [metrics](https://docs.aws.amazon.com/efs/latest/ug/monitoring-cloudwatch.html) that Amazon EFS sends to Amazon CloudWatch\. For an overview of monitoring in Amazon EFS, see [Monitoring Amazon EFS](https://docs.aws.amazon.com/efs/latest/ug/monitoring_overview.html) in the *Amazon Elastic File System User Guide*\.
 

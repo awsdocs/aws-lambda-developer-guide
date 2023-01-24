@@ -1,45 +1,49 @@
-# Monitoring the state of a function with the Lambda API<a name="functions-states"></a>
+# Lambda function states<a name="functions-states"></a>
 
-When you create or update a function, Lambda provisions the compute and networking resources that enable it to run\. In most cases, this process is very fast, and your function is ready to be invoked or modified right away\.
+Lambda includes a state field in the function configuration for all functions to indicate when your function is ready to invoke\. `State` provides information about the current status of the function, including whether you can successfully invoke the function\. Function states do not change the behavior of function invocations or how your function runs the code\. Function states include:
++ `Pending` – After Lambda creates the function, it sets the state to pending\. While in pending state, Lambda attempts to create or configure resources for the function, such as VPC or EFS resources\. Lambda does not invoke a function during pending state\. Any invocations or other API actions that operate on the function will fail\.
++ `Active` – Your function transitions to active state after Lambda completes resource configuration and provisioning\. Functions can only be successfully invoked while active\.
++ `Failed` – Indicates that resource configuration or provisioning encountered an error\.
++ `Inactive` – A function becomes inactive when it has been idle long enough for Lambda to reclaim the external resources that were configured for it\. When you try to invoke a function that is inactive, the invocation fails and Lambda sets the function to pending state until the function resources are recreated\. If Lambda fails to recreate the resources, the function is set to the inactive state\.
 
-If you configure your function to connect to a virtual private cloud \(VPC\), the process can take longer\. When you first connect a function to a VPC, Lambda provisions network interfaces, which takes about a minute\. To communicate the current state of your function, Lambda includes additional fields in the [function configuration](API_FunctionConfiguration.md) document that is returned by several Lambda API actions\.
-
-When you create a function, the function is initially in the `Pending` state\. When the function is ready to be invoked, the state changes from `Pending` to `Active`\. While the state is `Pending`, invocations and other API actions that operate on the function return an error\. If you build automation around creating and updating functions, wait for the function to become active before performing additional actions that operate on the function\.
-
-You can use the Lambda API to get information about a function's state\. State information is included in the [FunctionConfiguration](API_FunctionConfiguration.md) document returned by several API actions\. To view the function's state with the AWS CLI, use the `get-function-configuration` command\.
+If you are using SDK\-based automation workflows or calling Lambda’s service APIs directly, ensure that you check a function's state before invocation to verify that it is active\. You can do this with the Lambda API action [GetFunction](API_GetFunction.md), or by configuring a waiter using the [AWS SDK for Java 2\.0](https://github.com/aws/aws-sdk-java-v2)\.
 
 ```
-$ aws lambda get-function-configuration --function-name my-function
-{
-    "FunctionName": "my-function",
-    "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
-    "Runtime": "nodejs12.x",
-    "Role": "arn:aws:iam::123456789012:role/lambda-role",
-    "TracingConfig": {
-        "Mode": "Active"
-    },
-    "State": "Pending",
-    "StateReason": "The function is being created.",
-    "StateReasonCode": "Creating",
-    ...
-}
+aws lambda get-function --function-name my-function --query 'Configuration.[State, LastUpdateStatus]'
 ```
 
-The `StateReason` and `StateReasonCode` contain additional information about the state when it is not `Active`\. The following operations fail while function creation is pending:
+You should see the following output:
+
+```
+[
+ "Active",
+ "Successful" 
+]
+```
+
+Functions have two other attributes, `StateReason` and `StateReasonCode`\. These provide information and context about the function’s state when it is not active for troubleshooting issues\.
+
+The following operations fail while function creation is pending:
 + [Invoke](API_Invoke.md)
 + [UpdateFunctionCode](API_UpdateFunctionCode.md)
 + [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)
 + [PublishVersion](API_PublishVersion.md)
 
-When you update a function's configuration, the update can trigger an asynchronous operation to provision resources\. While this is in progress, you can invoke the function, but other operations on the function fail\. Invocations that occur while the update is in progress run against the previous configuration\. The function's state is `Active`, but its `LastUpdateStatus` is `InProgress`\.
+## Function states while updating<a name="functions-states-updating"></a>
 
-**Example Function configuration – Connecting to a VPC**  
+Lambda provides additional context for functions undergoing updates with the `LastUpdateStatus` attribute, which can have the following statuses:
++ `InProgress` – An update is happening on an existing function\. While a function update is in progress, invocations go to the function’s previous code and configuration\.
++ `Successful` – The update has completed\. Once Lambda finishes the update, this stays set until a further update\.
++ `Failed` – The function update has failed\. Lambda aborts the update and the function’s previous code and configuration remain available\.
+
+**Example**  
+The following is the result of `get-function-configuration` on a function undergoing an update\.  
 
 ```
 {
     "FunctionName": "my-function",
     "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
-    "Runtime": "nodejs12.x",
+    "Runtime": "nodejs16.x",
     "VpcConfig": {
         "SubnetIds": [
             "subnet-071f712345678e7c8",
@@ -57,17 +61,9 @@ When you update a function's configuration, the update can trigger an asynchrono
 }
 ```
 
+[FunctionConfiguration](API_FunctionConfiguration.md) has two other attributes, `LastUpdateStatusReason` and `LastUpdateStatusReasonCode`, to help troubleshoot issues with updating\.
+
 The following operations fail while an asynchronous update is in progress:
 + [UpdateFunctionCode](API_UpdateFunctionCode.md)
 + [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md)
 + [PublishVersion](API_PublishVersion.md)
-
-Other operations, including invocation, work while updates are in progress\.
-
-For example, when you connect your function to a virtual private cloud \(VPC\), Lambda provisions an elastic network interface for each subnet\. This process can leave your function in a pending state for a minute or so\. Lambda also reclaims network interfaces that are not in use, placing your function in an `Inactive` state\. When the function is inactive, an invocation causes it to enter the `Pending` state while network access is restored\. The invocation that triggers restoration, and further invocations while the operation is pending, fail with `ResourceNotReadyException`\.
-
-If Lambda encounters an error when restoring a function's network interface, the function goes back to the `Inactive` state\. The next invocation can trigger another attempt\. For some configuration errors, Lambda waits at least 5 minutes before attempting to create another network interface\. These errors have the following `LastUpdateStatusReasonCode` values:
-+ `InsufficientRolePermission` – Role doesn't exist or is missing permissions\.
-+ `SubnetOutOfIPAddresses` – All IP addresses in a subnet are in use\.
-
-For more information on how states work with VPC connectivity, see [Configuring a Lambda function to access resources in a VPC](configuration-vpc.md)\.

@@ -1,6 +1,6 @@
 # AWS Lambda function handler in Node\.js<a name="nodejs-handler"></a>
 
-The handler is the method in your Lambda function that processes events\. When you invoke a function, the [runtime](lambda-runtimes.md) runs the handler method\. When the handler exits or returns a response, it becomes available to handle another event\.
+The Lambda function *handler* is the method in your function code that processes events\. When your function is invoked, Lambda runs the handler method\. When the handler exits or returns a response, it becomes available to handle another event\.
 
 The following example function logs the contents of the event object and returns the location of the logs\.
 
@@ -13,7 +13,7 @@ exports.handler =  async function(event, context) {
 }
 ```
 
-When you [configure a function](configuration-console.md), the value of the handler setting is the file name and the name of the exported handler module, separated by a dot\. The default in the console and for examples in this guide is `index.handler`\. This indicates the `handler` module that's exported by `index.js`\.
+When you configure a function, the value of the handler setting is the file name and the name of the exported handler method, separated by a dot\. The default in the console and for examples in this guide is `index.handler`\. This indicates the `handler` method that's exported from the `index.js` file\.
 
 The runtime passes three arguments to the handler method\. The first argument is the `event` object, which contains information from the invoker\. The invoker passes this information as a JSON\-formatted string when it calls [Invoke](API_Invoke.md), and the runtime converts it to an object\. When an AWS service invokes your function, the event structure [varies by service](lambda-services.md)\.
 
@@ -21,7 +21,9 @@ The second argument is the [context object](nodejs-context.md), which contains i
 
 The third argument, `callback`, is a function that you can call in [non\-async handlers](#nodejs-handler-sync) to send a response\. The callback function takes two arguments: an `Error` and a response\. When you call it, Lambda waits for the event loop to be empty and then returns the response or error to the invoker\. The response object must be compatible with `JSON.stringify`\.
 
-For async handlers, you return a response, error, or promise to the runtime instead of using `callback`\.
+For asynchronous function handlers, you return a response, error, or promise to the runtime instead of using `callback`\.
+
+If your function has additional dependencies, [use npm to include them in your deployment package](nodejs-package.md#nodejs-package-dependencies)\.
 
 ## Async handlers<a name="nodejs-handler-async"></a>
 
@@ -33,7 +35,7 @@ If your code performs an asynchronous task, return a promise to make sure that i
 
 ```
 const https = require('https')
-let url = "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html"
+let url = "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html"   
 
 exports.handler = async function(event) {
   const promise = new Promise(function(resolve, reject) {
@@ -59,6 +61,14 @@ exports.handler = async function(event) {
   return s3.listBuckets().promise()
 }
 ```
+
+### Using Node\.js modules and top\-level await<a name="top-level-await"></a>
+
+You can designate your function code as an ES module, allowing you to use `await` at the top level of the file, outside the scope of your function handler\. This guarantees completion of asynchronous initialization code prior to handler invocations, maximizing the effectiveness of [provisioned concurrency](provisioned-concurrency.md) in reducing cold start latency\. You can do this in two ways: specifying the `type` as `module` in the function's `package.json` file, or by using the \.mjs file name extension\.
+
+In the first scenario, your function code treats all \.js files as ES modules, while in the second scenario, only the file you specify with \.mjs is an ES module\. You can mix ES modules and CommonJS modules by naming them \.mjs and \.cjs respectively, as \.mjs files are always ES modules and \.cjs files are always CommonJS modules\.
+
+For more information and an example, see [Using Node\.js ES Modules and Top\-Level Await in AWS Lambda](https://aws.amazon.com/blogs/compute/using-node-js-es-modules-and-top-level-await-in-aws-lambda)\.
 
 ## Non\-async handlers<a name="nodejs-handler-sync"></a>
 

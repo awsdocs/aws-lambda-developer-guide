@@ -3,7 +3,7 @@
 You can use Lambda to process [event notifications](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) from Amazon Simple Storage Service\. Amazon S3 can send an event to a Lambda function when an object is created or deleted\. You configure notification settings on a bucket, and grant Amazon S3 permission to invoke a function on the function's resource\-based permissions policy\.
 
 **Warning**  
-If your Lambda function uses the same bucket that triggers it, it could cause the function to execute in a loop\. For example, if the bucket triggers a function each time an object is uploaded, and the function uploads an object to the bucket, then the function indirectly triggers itself\. To avoid this, use two buckets, or configure the trigger to only apply to a prefix used for incoming objects\.
+If your Lambda function uses the same bucket that triggers it, it could cause the function to run in a loop\. For example, if the bucket triggers a function each time an object is uploaded, and the function uploads an object to the bucket, then the function indirectly triggers itself\. To avoid this, use two buckets, or configure the trigger to only apply to a prefix used for incoming objects\.
 
 Amazon S3 invokes your function [asynchronously](invocation-async.md) with an event that contains details about the object\. The following example shows an event that Amazon S3 sent when a deployment package was uploaded to Amazon S3\.
 
@@ -32,7 +32,7 @@ Amazon S3 invokes your function [asynchronously](invocation-async.md) with an ev
         "s3SchemaVersion": "1.0",
         "configurationId": "828aa6fc-f7b5-4305-8584-487c791949c1",
         "bucket": {
-          "name": "lambda-artifacts-deafc19498e3f2df",
+          "name": "DOC-EXAMPLE-BUCKET",
           "ownerIdentity": {
             "principalId": "A3I5XTEXAMAI3E"
           },
@@ -55,6 +55,6 @@ To invoke your function, Amazon S3 needs permission from the function's [resourc
 If your function uses the AWS SDK to manage Amazon S3 resources, it also needs Amazon S3 permissions in its [execution role](lambda-intro-execution-role.md)\. 
 
 **Topics**
-+ [Tutorial: Using AWS Lambda with Amazon S3](with-s3-example.md)
-+ [Sample Amazon S3 function code](with-s3-example-deployment-pkg.md)
++ [Tutorial: Using an Amazon S3 trigger to invoke a Lambda function](with-s3-example.md)
++ [Tutorial: Using an Amazon S3 trigger to create thumbnail images](with-s3-tutorial.md)
 + [AWS SAM template for an Amazon S3 application](with-s3-example-use-app-spec.md)

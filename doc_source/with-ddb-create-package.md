@@ -29,7 +29,7 @@ exports.lambda_handler = function(event, context, callback) {
 };
 ```
 
-Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda deployment package in Node\.js](nodejs-package.md)\.
+Zip up the sample code to create a deployment package\. For instructions, see [Deploy Node\.js Lambda functions with \.zip file archives](nodejs-package.md)\.
 
 ## Java 11<a name="with-ddb-example-deployment-pkg-java"></a>
 
@@ -67,7 +67,7 @@ If the handler returns normally without exceptions, Lambda considers the input b
 + `aws-lambda-java-core`
 + `aws-lambda-java-events`
 
-Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [AWS Lambda deployment package in Java](java-package.md)\.
+Build the code with the Lambda library dependencies to create a deployment package\. For instructions, see [Deploy Java Lambda functions with \.zip or JAR file archives](java-package.md)\.
 
 ## C\#<a name="with-ddb-example-deployment-pkg-dotnet"></a>
 
@@ -119,7 +119,7 @@ namespace DynamoDBStreams
 }
 ```
 
-Replace the `Program.cs` in a \.NET Core project with the above sample\. For instructions, see [AWS Lambda Deployment Package in C\#](csharp-package.md)\.
+Replace the `Program.cs` in a \.NET Core project with the above sample\. For instructions, see [Deploy C\# Lambda functions with \.zip file archives](csharp-package.md)\.
 
 ## Python 3<a name="with-ddb-example-deployment-pkg-python"></a>
 
@@ -137,7 +137,7 @@ def lambda_handler(event, context):
     print('Successfully processed %s records.' % str(len(event['Records'])))
 ```
 
-Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda deployment package in Python](python-package.md)\.
+Zip up the sample code to create a deployment package\. For instructions, see [Deploy Python Lambda functions with \.zip file archives](python-package.md)\.
 
 ## Go<a name="with-ddb-example-deployment-pkg-go"></a>
 
@@ -167,4 +167,4 @@ func handleRequest(ctx context.Context, e events.DynamoDBEvent) {
 }
 ```
 
-Build the executable with `go build` and create a deployment package\. For instructions, see [AWS Lambda deployment package in Go](golang-package.md)\.
+Build the executable with `go build` and create a deployment package\. For instructions, see [Deploy Go Lambda functions with \.zip file archives](golang-package.md)\.

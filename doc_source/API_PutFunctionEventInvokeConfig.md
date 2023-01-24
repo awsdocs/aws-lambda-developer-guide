@@ -13,16 +13,16 @@ PUT /2019-09-25/functions/FunctionName/event-invoke-config?Qualifier=Qualifier H
 Content-type: application/json
 
 {
-   "[DestinationConfig](#SSS-PutFunctionEventInvokeConfig-request-DestinationConfig)": { 
-      "[OnFailure](API_DestinationConfig.md#SSS-Type-DestinationConfig-OnFailure)": { 
-         "[Destination](API_OnFailure.md#SSS-Type-OnFailure-Destination)": "string"
+   "DestinationConfig": { 
+      "OnFailure": { 
+         "Destination": "string"
       },
-      "[OnSuccess](API_DestinationConfig.md#SSS-Type-DestinationConfig-OnSuccess)": { 
-         "[Destination](API_OnSuccess.md#SSS-Type-OnSuccess-Destination)": "string"
+      "OnSuccess": { 
+         "Destination": "string"
       }
    },
-   "[MaximumEventAgeInSeconds](#SSS-PutFunctionEventInvokeConfig-request-MaximumEventAgeInSeconds)": number,
-   "[MaximumRetryAttempts](#SSS-PutFunctionEventInvokeConfig-request-MaximumRetryAttempts)": number
+   "MaximumEventAgeInSeconds": number,
+   "MaximumRetryAttempts": number
 }
 ```
 
@@ -81,18 +81,18 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "[DestinationConfig](#SSS-PutFunctionEventInvokeConfig-response-DestinationConfig)": { 
-      "[OnFailure](API_DestinationConfig.md#SSS-Type-DestinationConfig-OnFailure)": { 
-         "[Destination](API_OnFailure.md#SSS-Type-OnFailure-Destination)": "string"
+   "DestinationConfig": { 
+      "OnFailure": { 
+         "Destination": "string"
       },
-      "[OnSuccess](API_DestinationConfig.md#SSS-Type-DestinationConfig-OnSuccess)": { 
-         "[Destination](API_OnSuccess.md#SSS-Type-OnSuccess-Destination)": "string"
+      "OnSuccess": { 
+         "Destination": "string"
       }
    },
-   "[FunctionArn](#SSS-PutFunctionEventInvokeConfig-response-FunctionArn)": "string",
-   "[LastModified](#SSS-PutFunctionEventInvokeConfig-response-LastModified)": number,
-   "[MaximumEventAgeInSeconds](#SSS-PutFunctionEventInvokeConfig-response-MaximumEventAgeInSeconds)": number,
-   "[MaximumRetryAttempts](#SSS-PutFunctionEventInvokeConfig-response-MaximumRetryAttempts)": number
+   "FunctionArn": "string",
+   "LastModified": number,
+   "MaximumEventAgeInSeconds": number,
+   "MaximumRetryAttempts": number
 }
 ```
 
@@ -133,19 +133,23 @@ Valid Range: Minimum value of 0\. Maximum value of 2\.
 
 ## Errors<a name="API_PutFunctionEventInvokeConfig_Errors"></a>
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **ResourceNotFoundException**   
+ ** ResourceConflictException **   
+The resource already exists, or another operation is in progress\.  
+HTTP Status Code: 409
+
+ ** ResourceNotFoundException **   
 The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 
- **TooManyRequestsException**   
+ ** TooManyRequestsException **   
 The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 
@@ -156,7 +160,7 @@ For more information about using this API in one of the language\-specific AWS S
 +  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/PutFunctionEventInvokeConfig) 
 +  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/PutFunctionEventInvokeConfig) 
 +  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/PutFunctionEventInvokeConfig) 
-+  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/PutFunctionEventInvokeConfig) 
++  [AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/PutFunctionEventInvokeConfig) 
 +  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/PutFunctionEventInvokeConfig) 
 +  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/PutFunctionEventInvokeConfig) 
 +  [AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/PutFunctionEventInvokeConfig) 

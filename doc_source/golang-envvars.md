@@ -19,4 +19,4 @@ func main() {
 }
 ```
 
-For a list of environment variables that are set by the Lambda runtime, see [Runtime environment variables](configuration-envvars.md#configuration-envvars-runtime)\.
+For a list of environment variables that are set by the Lambda runtime, see [Defined runtime environment variables](configuration-envvars.md#configuration-envvars-runtime)\.

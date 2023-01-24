@@ -13,7 +13,7 @@ GET /2017-03-31/tags/ARN HTTP/1.1
 The request uses the following URI parameters\.
 
  ** [ARN](#API_ListTags_RequestSyntax) **   <a name="SSS-ListTags-request-Resource"></a>
-The function's Amazon Resource Name \(ARN\)\.  
+The function's Amazon Resource Name \(ARN\)\. Note: Lambda does not support adding tags to aliases or versions\.  
 Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?`   
 Required: Yes
 
@@ -28,7 +28,7 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "[Tags](#SSS-ListTags-response-Tags)": { 
+   "Tags": { 
       "string" : "string" 
    }
 }
@@ -46,19 +46,19 @@ Type: String to string map
 
 ## Errors<a name="API_ListTags_Errors"></a>
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **ResourceNotFoundException**   
+ ** ResourceNotFoundException **   
 The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 
- **TooManyRequestsException**   
+ ** TooManyRequestsException **   
 The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 
@@ -69,7 +69,7 @@ For more information about using this API in one of the language\-specific AWS S
 +  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/ListTags) 
 +  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/ListTags) 
 +  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/ListTags) 
-+  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/ListTags) 
++  [AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/ListTags) 
 +  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/ListTags) 
 +  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/ListTags) 
 +  [AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/ListTags) 

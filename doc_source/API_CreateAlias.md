@@ -11,11 +11,11 @@ POST /2015-03-31/functions/FunctionName/aliases HTTP/1.1
 Content-type: application/json
 
 {
-   "[Description](#SSS-CreateAlias-request-Description)": "string",
-   "[FunctionVersion](#SSS-CreateAlias-request-FunctionVersion)": "string",
-   "[Name](#SSS-CreateAlias-request-Name)": "string",
-   "[RoutingConfig](#SSS-CreateAlias-request-RoutingConfig)": { 
-      "[AdditionalVersionWeights](API_AliasRoutingConfiguration.md#SSS-Type-AliasRoutingConfiguration-AdditionalVersionWeights)": { 
+   "Description": "string",
+   "FunctionVersion": "string",
+   "Name": "string",
+   "RoutingConfig": { 
+      "AdditionalVersionWeights": { 
          "string" : number 
       }
    }
@@ -74,13 +74,13 @@ HTTP/1.1 201
 Content-type: application/json
 
 {
-   "[AliasArn](#SSS-CreateAlias-response-AliasArn)": "string",
-   "[Description](#SSS-CreateAlias-response-Description)": "string",
-   "[FunctionVersion](#SSS-CreateAlias-response-FunctionVersion)": "string",
-   "[Name](#SSS-CreateAlias-response-Name)": "string",
-   "[RevisionId](#SSS-CreateAlias-response-RevisionId)": "string",
-   "[RoutingConfig](#SSS-CreateAlias-response-RoutingConfig)": { 
-      "[AdditionalVersionWeights](API_AliasRoutingConfiguration.md#SSS-Type-AliasRoutingConfiguration-AdditionalVersionWeights)": { 
+   "AliasArn": "string",
+   "Description": "string",
+   "FunctionVersion": "string",
+   "Name": "string",
+   "RevisionId": "string",
+   "RoutingConfig": { 
+      "AdditionalVersionWeights": { 
          "string" : number 
       }
    }
@@ -125,23 +125,23 @@ Type: [AliasRoutingConfiguration](API_AliasRoutingConfiguration.md) object
 
 ## Errors<a name="API_CreateAlias_Errors"></a>
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **ResourceConflictException**   
+ ** ResourceConflictException **   
 The resource already exists, or another operation is in progress\.  
 HTTP Status Code: 409
 
- **ResourceNotFoundException**   
+ ** ResourceNotFoundException **   
 The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 
- **TooManyRequestsException**   
+ ** TooManyRequestsException **   
 The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 
@@ -152,7 +152,7 @@ For more information about using this API in one of the language\-specific AWS S
 +  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/CreateAlias) 
 +  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/CreateAlias) 
 +  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/CreateAlias) 
-+  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/CreateAlias) 
++  [AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/CreateAlias) 
 +  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/CreateAlias) 
 +  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/CreateAlias) 
 +  [AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/CreateAlias) 

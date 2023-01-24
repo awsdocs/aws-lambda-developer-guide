@@ -1,29 +1,35 @@
 # Tutorial: Using AWS Lambda with Amazon Kinesis<a name="with-kinesis-example"></a>
 
-In this tutorial, you create a Lambda function to consume events from a Kinesis stream\. The following diagram illustrates the application flow:
-
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/kinesis-pull-10.png)
+In this tutorial, you create a Lambda function to consume events from a Kinesis stream\. 
 
 1. Custom app writes records to the stream\.
 
 1. AWS Lambda polls the stream and, when it detects new records in the stream, invokes your Lambda function\.
 
-1. AWS Lambda executes the Lambda function by assuming the execution role you specified at the time you created the Lambda function\.
+1. AWS Lambda runs the Lambda function by assuming the execution role you specified at the time you created the Lambda function\.
 
 ## Prerequisites<a name="with-kinesis-prepare"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with AWS Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Create a Lambda function with the console](getting-started.md#getting-started-create-function) to create your first Lambda function\.
 
-To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
+To complete the following steps, you need a command line terminal or shell to run commands\. Commands and the expected output are listed in separate blocks:
 
 ```
-~/lambda-project$ this is a command
-this is output
+aws --version
+```
+
+You should see the following output:
+
+```
+aws-cli/2.0.57 Python/3.7.4 Darwin/19.6.0 exe/x86_64
 ```
 
 For long commands, an escape character \(`\`\) is used to split a command over multiple lines\.
 
-On Linux and macOS, use your preferred shell and package manager\. On Windows 10, you can [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows\-integrated version of Ubuntu and Bash\.
+On Linux and macOS, use your preferred shell and package manager\.
+
+**Note**  
+On Windows, some Bash CLI commands that you commonly use with Lambda \(such as `zip`\) are not supported by the operating system's built\-in terminals\. To get a Windows\-integrated version of Ubuntu and Bash, [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10)\. 
 
 ## Create the execution role<a name="with-kinesis-example-create-iam-role"></a>
 
@@ -71,13 +77,13 @@ exports.handler = function(event, context) {
 1. Create a deployment package\.
 
    ```
-   $ zip function.zip index.js
+   zip function.zip index.js
    ```
 
 1. Create a Lambda function with the `create-function` command\.
 
    ```
-   $ aws lambda create-function --function-name ProcessKinesisRecords \
+   aws lambda create-function --function-name ProcessKinesisRecords \
    --zip-file fileb://function.zip --handler index.handler --runtime nodejs12.x \
    --role arn:aws:iam::123456789012:role/lambda-kinesis-role
    ```
@@ -116,8 +122,10 @@ Invoke your Lambda function manually using the `invoke` AWS Lambda CLI command a
 1. Use the `invoke` command to send the event to the function\.
 
    ```
-   $ aws lambda invoke --function-name ProcessKinesisRecords --payload file://input.txt out.txt
+   aws lambda invoke --function-name ProcessKinesisRecords --payload file://input.txt out.txt
    ```
+
+   The cli\-binary\-format option is required if you're using AWS CLI version 2\. To make this the default setting, run `aws configure set cli-binary-format raw-in-base64-out`\. For more information, see [AWS CLI supported global command line options](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-options.html#cli-configure-options-list)\.
 
    The response is saved to `out.txt`\.
 
@@ -126,13 +134,18 @@ Invoke your Lambda function manually using the `invoke` AWS Lambda CLI command a
 Use the `create-stream ` command to create a stream\.
 
 ```
-$ aws kinesis create-stream --stream-name lambda-stream --shard-count 1
+aws kinesis create-stream --stream-name lambda-stream --shard-count 1
 ```
 
 Run the following `describe-stream` command to get the stream ARN\.
 
 ```
-$ aws kinesis describe-stream --stream-name lambda-stream
+aws kinesis describe-stream --stream-name lambda-stream
+```
+
+You should see the following output:
+
+```
 {
     "StreamDescription": {
         "Shards": [
@@ -170,7 +183,7 @@ You use the stream ARN in the next step to associate the stream with your Lambda
 Run the following AWS CLI `add-event-source` command\.
 
 ```
-$ aws lambda create-event-source-mapping --function-name ProcessKinesisRecords \
+aws lambda create-event-source-mapping --function-name ProcessKinesisRecords \
 --event-source  arn:aws:kinesis:us-west-2:123456789012:stream/lambda-stream \
 --batch-size 100 --starting-position LATEST
 ```
@@ -178,7 +191,7 @@ $ aws lambda create-event-source-mapping --function-name ProcessKinesisRecords \
 Note the mapping ID for later use\. You can get a list of event source mappings by running the `list-event-source-mappings` command\.
 
 ```
-$ aws lambda list-event-source-mappings --function-name ProcessKinesisRecords \
+aws lambda list-event-source-mappings --function-name ProcessKinesisRecords \
 --event-source arn:aws:kinesis:us-west-2:123456789012:stream/lambda-stream
 ```
 
@@ -189,8 +202,44 @@ In the response, you can verify the status value is `enabled`\. Event source map
 To test the event source mapping, add event records to your Kinesis stream\. The `--data` value is a string that the CLI encodes to base64 prior to sending it to Kinesis\. You can run the same command more than once to add multiple records to the stream\.
 
 ```
-$ aws kinesis put-record --stream-name lambda-stream --partition-key 1 \
+aws kinesis put-record --stream-name lambda-stream --partition-key 1 \
 --data "Hello, this is a test."
 ```
 
 Lambda uses the execution role to read records from the stream\. Then it invokes your Lambda function, passing in batches of records\. The function decodes data from each record and logs it, sending the output to CloudWatch Logs\. View the logs in the [CloudWatch console](https://console.aws.amazon.com/cloudwatch)\.
+
+## Clean up your resources<a name="cleanup"></a>
+
+You can now delete the resources that you created for this tutorial, unless you want to retain them\. By deleting AWS resources that you're no longer using, you prevent unnecessary charges to your AWS account\.
+
+**To delete the execution role**
+
+1. Open the [Roles page](https://console.aws.amazon.com/iam/home#/roles) of the IAM console\.
+
+1. Select the execution role that you created\.
+
+1. Choose **Delete role**\.
+
+1. Choose **Yes, delete**\.
+
+**To delete the Lambda function**
+
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
+
+1. Select the function that you created\.
+
+1. Choose **Actions**, then choose **Delete**\.
+
+1. Choose **Delete**\.
+
+**To delete the Kinesis stream**
+
+1. Sign in to the AWS Management Console and open the Kinesis console at [https://console\.aws\.amazon\.com/kinesis](https://console.aws.amazon.com/kinesis)\.
+
+1. Select the stream you created\.
+
+1. Choose **Actions**, **Delete**\.
+
+1. Enter **delete** in the text box\.
+
+1. Choose **Delete**\.

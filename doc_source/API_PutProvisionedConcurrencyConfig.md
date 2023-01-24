@@ -9,7 +9,7 @@ PUT /2019-09-30/functions/FunctionName/provisioned-concurrency?Qualifier=Qualifi
 Content-type: application/json
 
 {
-   "[ProvisionedConcurrentExecutions](#SSS-PutProvisionedConcurrencyConfig-request-ProvisionedConcurrentExecutions)": number
+   "ProvisionedConcurrentExecutions": number
 }
 ```
 
@@ -52,12 +52,12 @@ HTTP/1.1 202
 Content-type: application/json
 
 {
-   "[AllocatedProvisionedConcurrentExecutions](#SSS-PutProvisionedConcurrencyConfig-response-AllocatedProvisionedConcurrentExecutions)": number,
-   "[AvailableProvisionedConcurrentExecutions](#SSS-PutProvisionedConcurrencyConfig-response-AvailableProvisionedConcurrentExecutions)": number,
-   "[LastModified](#SSS-PutProvisionedConcurrencyConfig-response-LastModified)": "string",
-   "[RequestedProvisionedConcurrentExecutions](#SSS-PutProvisionedConcurrencyConfig-response-RequestedProvisionedConcurrentExecutions)": number,
-   "[Status](#SSS-PutProvisionedConcurrencyConfig-response-Status)": "string",
-   "[StatusReason](#SSS-PutProvisionedConcurrencyConfig-response-StatusReason)": "string"
+   "AllocatedProvisionedConcurrentExecutions": number,
+   "AvailableProvisionedConcurrentExecutions": number,
+   "LastModified": "string",
+   "RequestedProvisionedConcurrentExecutions": number,
+   "Status": "string",
+   "StatusReason": "string"
 }
 ```
 
@@ -68,7 +68,7 @@ If the action is successful, the service sends back an HTTP 202 response\.
 The following data is returned in JSON format by the service\.
 
  ** [AllocatedProvisionedConcurrentExecutions](#API_PutProvisionedConcurrencyConfig_ResponseSyntax) **   <a name="SSS-PutProvisionedConcurrencyConfig-response-AllocatedProvisionedConcurrentExecutions"></a>
-The amount of provisioned concurrency allocated\.  
+The amount of provisioned concurrency allocated\. When a weighted alias is used during linear and canary deployments, this value fluctuates depending on the amount of concurrency that is provisioned for the function versions\.  
 Type: Integer  
 Valid Range: Minimum value of 0\.
 
@@ -97,23 +97,23 @@ Type: String
 
 ## Errors<a name="API_PutProvisionedConcurrencyConfig_Errors"></a>
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **ResourceConflictException**   
+ ** ResourceConflictException **   
 The resource already exists, or another operation is in progress\.  
 HTTP Status Code: 409
 
- **ResourceNotFoundException**   
+ ** ResourceNotFoundException **   
 The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 
- **TooManyRequestsException**   
+ ** TooManyRequestsException **   
 The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 
@@ -124,7 +124,7 @@ For more information about using this API in one of the language\-specific AWS S
 +  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/PutProvisionedConcurrencyConfig) 
 +  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/PutProvisionedConcurrencyConfig) 
 +  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/PutProvisionedConcurrencyConfig) 
-+  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/PutProvisionedConcurrencyConfig) 
++  [AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/PutProvisionedConcurrencyConfig) 
 +  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/PutProvisionedConcurrencyConfig) 
 +  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/PutProvisionedConcurrencyConfig) 
 +  [AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/PutProvisionedConcurrencyConfig) 

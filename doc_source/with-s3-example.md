@@ -1,325 +1,300 @@
-# Tutorial: Using AWS Lambda with Amazon S3<a name="with-s3-example"></a>
+# Tutorial: Using an Amazon S3 trigger to invoke a Lambda function<a name="with-s3-example"></a>
 
-Suppose you want to create a thumbnail for each image file that is uploaded to a bucket\. You can create a Lambda function \(`CreateThumbnail`\) that Amazon S3 can invoke when objects are created\. Then, the Lambda function can read the image object from the source bucket and create a thumbnail image target bucket\.
+In this tutorial, you use the console to create a Lambda function and configure a trigger for Amazon Simple Storage Service \(Amazon S3\)\. The trigger invokes your function every time that you add an object to your Amazon S3 bucket\.
 
-Upon completing this tutorial, you will have the following Amazon S3, Lambda, and IAM resources in your account: 
+We recommend that you complete this console\-based tutorial before you try the [tutorial to create thumbnail images](with-s3-tutorial.md)\.
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/s3-admin-iser-walkthrough-10.png)
+## Prerequisites<a name="with-s3-example-prepare"></a>
 
-**Lambda resources**
-+ A Lambda function\.
-+ An access policy associated with your Lambda function that grants Amazon S3 permission to invoke the Lambda function\.
+To use Lambda and other AWS services, you need an AWS account\. If you do not have an account, visit [aws\.amazon\.com](https://aws.amazon.com/) and choose **Create an AWS Account**\. For instructions, see [How do I create and activate a new AWS account?](http://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/)
 
-**IAM resources**
-+ An execution role that grants permissions that your Lambda function needs through the permissions policy associated with this role\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Create a Lambda function with the console](getting-started.md#getting-started-create-function) to create your first Lambda function\.
 
-**Amazon S3 resources**
-+ A source bucket with a notification configuration that invokes the Lambda function\.
-+ A target bucket where the function saves resized images\.
+## Create a bucket and upload a sample object<a name="with-s3-example-prepare-create-buckets"></a>
 
-## Prerequisites<a name="with-s3-prepare"></a>
+Create an Amazon S3 bucket and upload a test file to your new bucket\. Your Lambda function retrieves information about this file when you test the function from the console\.
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with AWS Lambda](getting-started.md) to create your first Lambda function\.
-
-To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
-
-```
-~/lambda-project$ this is a command
-this is output
-```
-
-For long commands, an escape character \(`\`\) is used to split a command over multiple lines\.
-
-On Linux and macOS, use your preferred shell and package manager\. On Windows 10, you can [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows\-integrated version of Ubuntu and Bash\.
-
-Install npm to manage the function's dependencies\.
-
-The tutorial uses AWS CLI commands to create and invoke the Lambda function\. Install the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) and [configure it with your AWS credentials](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) 
-
-## Create the execution role<a name="with-s3-create-execution-role"></a>
-
-Create the [execution role](lambda-intro-execution-role.md) that gives your function permission to access AWS resources\.
-
-**To create an execution role**
-
-1. Open the [roles page](https://console.aws.amazon.com/iam/home#/roles) in the IAM console\.
-
-1. Choose **Create role**\.
-
-1. Create a role with the following properties\.
-   + **Trusted entity** – **AWS Lambda**\.
-   + **Permissions** – **AWSLambdaExecute**\.
-   + **Role name** – **lambda\-s3\-role**\.
-
-The **AWSLambdaExecute** policy has the permissions that the function needs to manage objects in Amazon S3 and write logs to CloudWatch Logs\.
-
-## Create buckets and upload a sample object<a name="with-s3-example-prepare-create-buckets"></a>
-
-Follow the steps to create buckets and upload an object\.
+**To create an Amazon S3 bucket using the console**
 
 1. Open the [Amazon S3 console](https://console.aws.amazon.com/s3)\.
 
-1. Create two buckets\. The target bucket name must be *source* followed by **\-resized**, where *source* is the name of the bucket you want to use for the source\. For example, `mybucket` and `mybucket-resized`\.
+1. Choose **Create bucket**\.
 
-1. In the source bucket, upload a \.jpg object, `HappyFace.jpg`\. 
+1. Under **General configuration**, do the following:
 
-   When you invoke the Lambda function manually before you connect to Amazon S3, you pass sample event data to the function that specifies the source bucket and `HappyFace.jpg` as the newly created object so you need to create this sample object first\.
+   1. For **Bucket name**, enter a unique name\.
 
-## Create the function<a name="with-s3-example-create-function"></a>
+   1. For **AWS Region**, choose a Region\. Note that you must create your Lambda function in the same Region\.
 
-The following example code receives an Amazon S3 event input and processes the message that it contains\. It resizes an image in the source bucket and saves the output to the target bucket\.
+1. Choose **Create bucket**\.
 
-**Note**  
-For sample code in other languages, see [Sample Amazon S3 function code](with-s3-example-deployment-pkg.md)\.
+After creating the bucket, Amazon S3 opens the **Buckets** page, which displays a list of all buckets in your account in the current Region\.
+
+**To upload a test object using the Amazon S3 console**
+
+1. On the [Buckets page](https://console.aws.amazon.com/s3/home) of the Amazon S3 console, choose the name of the bucket that you created\.
+
+1. On the **Objects** tab, choose **Upload**\.
+
+1. Drag a test file from your local machine to the **Upload **page\.
+
+1. Choose **Upload**\.
+
+## Create the Lambda function<a name="with-s3-example-create-function"></a>
+
+Use a [function blueprint](gettingstarted-features.md#gettingstarted-features-blueprints) to create the Lambda function\. A blueprint provides a sample function that demonstrates how to use Lambda with other AWS services\. Also, a blueprint includes sample code and function configuration presets for a certain runtime\. For this tutorial, you can choose the blueprint for the Node\.js or Python runtime\.
+
+**To create a Lambda function from a blueprint in the console**
+
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
+
+1. Choose **Create function**\.
+
+1. On the **Create function** page, choose **Use a blueprint**\.
+
+1. Under **Blueprints**, enter **s3** in the search box\.
+
+1. In the search results, do one of the following:
+   + For a Node\.js function, choose **s3\-get\-object**\.
+   + For a Python function, choose **s3\-get\-object\-python**\.
+
+1. Choose **Configure**\.
+
+1. Under **Basic information**, do the following:
+
+   1. For **Function name**, enter **my\-s3\-function**\.
+
+   1. For **Execution role**, choose **Create a new role from AWS policy templates**\.
+
+   1. For **Role name**, enter **my\-s3\-function\-role**\.
+
+1. Under **S3 trigger**, choose the S3 bucket that you created previously\.
+
+   When you configure an S3 trigger using the Lambda console, the console modifies your function's [resource\-based policy](access-control-resource-based.md) to allow Amazon S3 to invoke the function\.
+
+1. Choose **Create function**\.
+
+## Review the function code<a name="with-s3-example-create-function-code"></a>
+
+The Lambda function retrieves the source S3 bucket name and the key name of the uploaded object from the event parameter that it receives\. The function uses the Amazon S3 `getObject` API to retrieve the content type of the object\.
+
+While viewing your function in the [Lambda console](https://console.aws.amazon.com/lambda), you can review the function code on the **Code** tab, under **Code source**\. The code looks like the following:
+
+------
+#### [ Node\.js ]
 
 **Example index\.js**  
 
 ```
-// dependencies
-const AWS = require('aws-sdk');
-const util = require('util');
-const sharp = require('sharp');
-
-// get reference to S3 client
-const s3 = new AWS.S3();
-
-exports.handler = async (event, context, callback) => {
-
-    // Read options from the event parameter.
-    console.log("Reading options from event:\n", util.inspect(event, {depth: 5}));
-    const srcBucket = event.Records[0].s3.bucket.name;
-    // Object key may have spaces or unicode non-ASCII characters.
-    const srcKey    = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, " "));
-    const dstBucket = srcBucket + "-resized";
-    const dstKey    = "resized-" + srcKey;
-
-    // Infer the image type from the file suffix.
-    const typeMatch = srcKey.match(/\.([^.]*)$/);
-    if (!typeMatch) {
-        console.log("Could not determine the image type.");
-        return;
-    }
-
-    // Check that the image type is supported  
-    const imageType = typeMatch[1].toLowerCase();
-    if (imageType != "jpg" && imageType != "png") {
-        console.log(`Unsupported image type: ${imageType}`);
-        return;
-    }
-
-    // Download the image from the S3 source bucket. 
-
-    try {
-        const params = {
-            Bucket: srcBucket,
-            Key: srcKey
-        };
-        var origimage = await s3.getObject(params).promise();
-
-    } catch (error) {
-        console.log(error);
-        return;
-    }  
-
-    // set thumbnail width. Resize will set the height automatically to maintain aspect ratio.
-    const width  = 200;
-
-    // Use the Sharp module to resize the image and save in a buffer.
-    try { 
-        var buffer = await sharp(origimage.Body).resize(width).toBuffer();
-            
-    } catch (error) {
-        console.log(error);
-        return;
-    } 
-
-    // Upload the thumbnail image to the destination bucket
-    try {
-        const destparams = {
-            Bucket: dstBucket,
-            Key: dstKey,
-            Body: buffer,
-            ContentType: "image"
-        };
-
-        const putResult = await s3.putObject(destparams).promise(); 
+console.log('Loading function');
         
-    } catch (error) {
-        console.log(error);
-        return;
-    } 
-        
-    console.log('Successfully resized ' + srcBucket + '/' + srcKey +
-        ' and uploaded to ' + dstBucket + '/' + dstKey); 
+const aws = require('aws-sdk');
+
+const s3 = new aws.S3({ apiVersion: '2006-03-01' });
+
+exports.handler = async (event, context) => {
+    //console.log('Received event:', JSON.stringify(event, null, 2));
+
+    // Get the object from the event and show its content type
+    const bucket = event.Records[0].s3.bucket.name;
+    const key = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, ' '));
+    const params = {
+        Bucket: bucket,
+        Key: key,
+    }; 
+    try {
+        const { ContentType } = await s3.getObject(params).promise();
+        console.log('CONTENT TYPE:', ContentType);
+        return ContentType;
+    } catch (err) {
+        console.log(err);
+        const message = `Error getting object ${key} from bucket ${bucket}. Make sure they exist and your bucket is in the same region as this function.`;
+        console.log(message);
+        throw new Error(message);
+    }
 };
 ```
 
-Review the preceding code and note the following:
-+ The function knows the source bucket name and the key name of the object from the event data it receives as parameters\. If the object is a \.jpg or a \.png, the code creates a thumbnail and saves it to the target bucket\. 
-+ The code assumes that the destination bucket exists and its name is a concatenation of the source bucket name followed by the string `-resized`\. For example, if the source bucket identified in the event data is `examplebucket`, the code assumes you have an `examplebucket-resized` destination bucket\.
-+ For the thumbnail it creates, the code derives its key name as the concatenation of the string `resized-` followed by the source object key name\. For example, if the source object key is `sample.jpg`, the code creates a thumbnail object that has the key `resized-sample.jpg`\.
+------
+#### [ Python ]
 
-The deployment package is a \.zip file containing your Lambda function code and dependencies\. 
-
-**To create a deployment package**
-
-1. Save the function code as `index.js` in a folder named `lambda-s3`\.
-
-1. Install the Sharp library with npm\. For Linux, use the following command\.
-
-   ```
-   lambda-s3$ npm install sharp
-   ```
-
-   For macOS, use the following command\.
-
-   ```
-   lambda-s3$ npm install --arch=x64 --platform=linux --target=12.13.0  sharp
-   ```
-
-   After you complete this step, you will have the following folder structure:
-
-   ```
-   lambda-s3
-   |- index.js
-   |- /node_modules/sharp
-   └ /node_modules/...
-   ```
-
-1. Create a deployment package with the function code and dependencies\.
-
-   ```
-   lambda-s3$ zip -r function.zip .
-   ```
-
-**To create the function**
-+ Create a Lambda function with the `create-function` command\.
-
-  ```
-  $ aws lambda create-function --function-name CreateThumbnail \
-  --zip-file fileb://function.zip --handler index.handler --runtime nodejs12.x \
-  --timeout 10 --memory-size 1024 \
-  --role arn:aws:iam::123456789012:role/lambda-s3-role
-  ```
-
-For the role parameter, replace the number sequence with your AWS account ID\. The preceding example command specifies a 10\-second timeout value as the function configuration\. Depending on the size of objects you upload, you might need to increase the timeout value using the following AWS CLI command\.
+**Example lambda\-function\.py**  
 
 ```
-$ aws lambda update-function-configuration --function-name CreateThumbnail --timeout 30
+import json
+import urllib.parse
+import boto3
+
+print('Loading function')
+
+s3 = boto3.client('s3')
+
+
+def lambda_handler(event, context):
+    #print("Received event: " + json.dumps(event, indent=2))
+
+    # Get the object from the event and show its content type
+    bucket = event['Records'][0]['s3']['bucket']['name']
+    key = urllib.parse.unquote_plus(event['Records'][0]['s3']['object']['key'], encoding='utf-8')
+    try:
+        response = s3.get_object(Bucket=bucket, Key=key)
+        print("CONTENT TYPE: " + response['ContentType'])
+        return response['ContentType']
+    except Exception as e:
+        print(e)
+        print('Error getting object {} from bucket {}. Make sure they exist and your bucket is in the same region as this function.'.format(key, bucket))
+        raise e
 ```
 
-## Test the Lambda function<a name="walkthrough-s3-events-adminuser-create-test-function-upload-zip-test-manual-invoke"></a>
+------
 
-In this step, you invoke the Lambda function manually using sample Amazon S3 event data\.
+## Test in the console<a name="test-manual-invoke"></a>
 
-**To test the Lambda function**
+Invoke the Lambda function manually using sample Amazon S3 event data\.
 
-1. Save the following Amazon S3 sample event data in a file and save it as `inputFile.txt`\. You need to update the JSON by providing your *sourcebucket* name and a \.jpg object key\.
+**To test the Lambda function using the console**
 
-   ```
-   {
-     "Records":[
-       {
-         "eventVersion":"2.0",
-         "eventSource":"aws:s3",
-         "awsRegion":"us-west-2",
-         "eventTime":"1970-01-01T00:00:00.000Z",
-         "eventName":"ObjectCreated:Put",
-         "userIdentity":{
-           "principalId":"AIDAJDPLRKLG7UEXAMPLE"
-         },
-         "requestParameters":{
-           "sourceIPAddress":"127.0.0.1"
-         },
-         "responseElements":{
-           "x-amz-request-id":"C3D13FE58DE4C810",
-           "x-amz-id-2":"FMyUVURIY8/IgAtTv8xRjskZQpcIZ9KG4V5Wp6S7S/JRWeUWerMUE5JgHvANOjpD"
-         },
-         "s3":{
-           "s3SchemaVersion":"1.0",
-           "configurationId":"testConfigRule",
-           "bucket":{
-             "name":"sourcebucket",
-             "ownerIdentity":{
-               "principalId":"A3NL1KOZZKExample"
-             },
-             "arn":"arn:aws:s3:::sourcebucket"
-           },
-           "object":{
-             "key":"HappyFace.jpg",
-             "size":1024,
-             "eTag":"d41d8cd98f00b204e9800998ecf8427e",
-             "versionId":"096fKKXTRTtl3on89fVO.nfljtsv6qko"
-           }
-         }
-       }
-     ]
-   }
-   ```
+1. On the **Code** tab, under **Code source**, choose the arrow next to **Test**, and then choose **Configure test events** from the dropdown list\.
 
-1. Run the following Lambda CLI `invoke` command to invoke the function\. Note that the command requests asynchronous execution\. You can optionally invoke it synchronously by specifying `RequestResponse` as the `invocation-type` parameter value\.
+1. In the **Configure test event** window, do the following:
 
-   ```
-   $ aws lambda invoke --function-name CreateThumbnail --invocation-type Event \
-   --payload file://inputFile.txt outputfile.txt
-   ```
+   1. Choose **Create new test event**\.
 
-1. Verify that the thumbnail was created in the target bucket\.
+   1. For **Event template**, choose **Amazon S3 Put** \(**s3\-put**\)\.
 
-## Configure Amazon S3 to publish events<a name="with-s3-example-configure-event-source"></a>
+   1. For **Event name**, enter a name for the test event\. For example, **mys3testevent**\.
 
-In this step, you add the remaining configuration so that Amazon S3 can publish object\-created events to AWS Lambda and invoke your Lambda function\. You do the following in this step:
-+ Add permissions to the Lambda function access policy to allow Amazon S3 to invoke the function\.
-+ Add notification configuration to your source bucket\. In the notification configuration, you provide the following:
-  + Event type for which you want Amazon S3 to publish events\. For this tutorial, you specify the `s3:ObjectCreated:*` event type so that Amazon S3 publishes events when objects are created\.
-  + Lambda function to invoke\.
+   1. In the test event JSON, replace the S3 bucket name \(`example-bucket`\) and object key \(`test/key`\) with your bucket name and test file name\. Your test event should look similar to the following:
 
-**To add permissions to the function policy**
+      ```
+      {
+        "Records": [
+          {
+            "eventVersion": "2.0",
+            "eventSource": "aws:s3",
+            "awsRegion": "us-west-2",
+            "eventTime": "1970-01-01T00:00:00.000Z",
+            "eventName": "ObjectCreated:Put",
+            "userIdentity": {
+              "principalId": "EXAMPLE"
+            },
+            "requestParameters": {
+              "sourceIPAddress": "127.0.0.1"
+            },
+            "responseElements": {
+              "x-amz-request-id": "EXAMPLE123456789",
+              "x-amz-id-2": "EXAMPLE123/5678abcdefghijklambdaisawesome/mnopqrstuvwxyzABCDEFGH"
+            },
+            "s3": {
+              "s3SchemaVersion": "1.0",
+              "configurationId": "testConfigRule",
+              "bucket": {
+                "name": "my-s3-bucket",
+                "ownerIdentity": {
+                  "principalId": "EXAMPLE"
+                },
+                "arn": "arn:aws:s3:::example-bucket"
+              },
+              "object": {
+                "key": "HappyFace.jpg",
+                "size": 1024,
+                "eTag": "0123456789abcdef0123456789abcdef",
+                "sequencer": "0A1B2C3D4E5F678901"
+              }
+            }
+          }
+        ]
+      }
+      ```
 
-1. Run the following Lambda CLI `add-permission` command to grant Amazon S3 service principal \(`s3.amazonaws.com`\) permissions to perform the `lambda:InvokeFunction` action\. Note that permission is granted to Amazon S3 to invoke the function only if the following conditions are met:
-   + An object\-created event is detected on a specific bucket\.
-   + The bucket is owned by your account\. If you delete a bucket, it is possible for another account to create a bucket with the same ARN\.
+   1. Choose **Create**\.
+
+1. To invoke the function with your test event, under **Code source**, choose **Test**\.
+
+   The **Execution results** tab displays the response, function logs, and request ID, similar to the following:
 
    ```
-   $ aws lambda add-permission --function-name CreateThumbnail --principal s3.amazonaws.com \
-   --statement-id s3invoke --action "lambda:InvokeFunction" \
-   --source-arn arn:aws:s3:::sourcebucket \
-   --source-account account-id
+   Response
+   "image/jpeg"
+   
+   Function Logs
+   START RequestId: 12b3cae7-5f4e-415e-93e6-416b8f8b66e6 Version: $LATEST
+   2021-02-18T21:40:59.280Z	12b3cae7-5f4e-415e-93e6-416b8f8b66e6	INFO	INPUT BUCKET AND KEY:  { Bucket: 'my-s3-bucket', Key: 'HappyFace.jpg' }
+   2021-02-18T21:41:00.215Z	12b3cae7-5f4e-415e-93e6-416b8f8b66e6	INFO	CONTENT TYPE: image/jpeg
+   END RequestId: 12b3cae7-5f4e-415e-93e6-416b8f8b66e6
+   REPORT RequestId: 12b3cae7-5f4e-415e-93e6-416b8f8b66e6	Duration: 976.25 ms	Billed Duration: 977 ms	Memory Size: 128 MB	Max Memory Used: 90 MB	Init Duration: 430.47 ms        
+   
+   Request ID
+   12b3cae7-5f4e-415e-93e6-416b8f8b66e6
    ```
 
-1. Verify the function's access policy by running the AWS CLI `get-policy` command\.
+## Test with the S3 trigger<a name="with-s3-example-configure-event-source-test-end-to-end"></a>
 
-   ```
-   $ aws lambda get-policy --function-name CreateThumbnail
-   ```
+Invoke your function when you upload a file to the Amazon S3 source bucket\.
 
-Add notification configuration on the source bucket to request Amazon S3 to publish object\-created events to Lambda\.
+**To test the Lambda function using the S3 trigger**
 
-**Important**  
-This procedure configures the bucket to invoke your function every time an object is created in it\. Ensure that you configure this option only on the source bucket and do not create objects in the source bucket from the function that is triggered\. Otherwise, your function could cause itself to be [invoked continuously in a loop](with-s3.md#services-s3-runaway)\.
+1. On the [Buckets page](https://console.aws.amazon.com/s3/home) of the Amazon S3 console, choose the name of the source bucket that you created earlier\.
 
-**To configure notifications**
+1. On the **Upload** page, upload a few \.jpg or \.png image files to the bucket\.
 
-1. Open the [Amazon S3 console](https://console.aws.amazon.com/s3)\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
-1. Choose the source bucket\.
+1. Choose the name of your function \(**my\-s3\-function**\)\.
 
-1. Choose **Properties**\.
+1. To verify that the function ran once for each file that you uploaded, choose the **Monitor** tab\. This page shows graphs for the metrics that Lambda sends to CloudWatch\. The count in the **Invocations** graph should match the number of files that you uploaded to the Amazon S3 bucket\.   
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/metrics-functions-list.png)
 
-1. Under **Events**, configure a notification with the following settings\.
-   + **Name** – **lambda\-trigger**\.
-   + **Events** – **ObjectCreate \(All\)**\.
-   + **Send to** – **Lambda function**\.
-   + **Lambda** – **CreateThumbnail**\.
+   For more information on these graphs, see [Monitoring functions on the Lambda console](monitoring-functions-access-metrics.md)\.
 
-For more information on event configuration, see [Enabling event notifications](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/enable-event-notifications.html) in the *Amazon Simple Storage Service Console User Guide*\.
+1. \(Optional\) To view the logs in the CloudWatch console, choose **View logs in CloudWatch**\. Choose a log stream to view the logs output for one of the function invocations\.
 
-## Test the setup<a name="with-s3-example-configure-event-source-test-end-to-end"></a>
+## Clean up your resources<a name="cleanup"></a>
 
-Now you can test the setup as follows:
+You can now delete the resources that you created for this tutorial, unless you want to retain them\. By deleting AWS resources that you're no longer using, you prevent unnecessary charges to your AWS account\.
 
-1. Upload \.jpg or \.png objects to the source bucket using the Amazon S3 console\.
+**To delete the Lambda function**
 
-1. Verify that the thumbnail was created in the target bucket using the `CreateThumbnail` function\.
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
-1. View logs in the CloudWatch console\. 
+1. Select the function that you created\.
+
+1. Choose **Actions**, then choose **Delete**\.
+
+1. Choose **Delete**\.
+
+**To delete the IAM policy**
+
+1. Open the [Policies page](https://console.aws.amazon.com/iam/home#/policies) of the AWS Identity and Access Management \(IAM\) console\.
+
+1. Select the policy that Lambda created for you\. The policy name begins with **AWSLambdaS3ExecutionRole\-**\.
+
+1. Choose **Policy actions**, **Delete**\.
+
+1. Choose **Delete**\.
+
+**To delete the execution role**
+
+1. Open the [Roles page](https://console.aws.amazon.com/iam/home#/roles) of the IAM console\.
+
+1. Select the execution role that you created\.
+
+1. Choose **Delete role**\.
+
+1. Choose **Yes, delete**\.
+
+**To delete the S3 bucket**
+
+1. Open the [Amazon S3 console\.](https://console.aws.amazon.com/s3/home#)
+
+1. Select the bucket you created\.
+
+1. Choose **Delete**\.
+
+1. Enter the name of the bucket in the text box\.
+
+1. Choose **Confirm**\.
+
+## Next steps<a name="next-steps"></a>
+
+Try the more advanced tutorial\. In this tutorial, the S3 trigger invokes a function to [create a thumbnail image](with-s3-tutorial.md) for each image file that is uploaded to your S3 bucket\. This tutorial requires a moderate level of AWS and Lambda domain knowledge\. You use the AWS Command Line Interface \(AWS CLI\) to create resources, and you create a \.zip file archive deployment package for your function and its dependencies\.

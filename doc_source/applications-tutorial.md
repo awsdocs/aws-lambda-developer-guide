@@ -6,7 +6,7 @@ In this tutorial, you create the following resources\.
 + **Application** – A Node\.js Lambda function, build specification, and AWS Serverless Application Model \(AWS SAM\) template\.
 + **Pipeline** – An AWS CodePipeline pipeline that connects the other resources to enable continuous delivery\.
 + **Repository** – A Git repository in AWS CodeCommit\. When you push a change, the pipeline copies the source code into an Amazon S3 bucket and passes it to the build project\.
-+ **Trigger** – An Amazon CloudWatch Events rule that watches the master branch of the repository and triggers the pipeline\.
++ **Trigger** – An Amazon EventBridge \(CloudWatch Events\) rule that watches the main branch of the repository and triggers the pipeline\.
 + **Build project** – An AWS CodeBuild build that gets the source code from the pipeline and packages the application\. The source includes a build specification with commands that install dependencies and prepare the application template for deployment\.
 + **Deployment configuration** – The pipeline's deployment stage defines a set of actions that take the processed AWS SAM template from the build output, and deploy the new version with AWS CloudFormation\.
 + **Bucket** – An Amazon Simple Storage Service \(Amazon S3\) bucket for deployment artifact storage\.
@@ -29,18 +29,26 @@ The pipeline maps a single branch in a repository to a single application stack\
 
 ## Prerequisites<a name="applications-tutorial-prepare"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with AWS Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Create a Lambda function with the console](getting-started.md#getting-started-create-function) to create your first Lambda function\.
 
-To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
+To complete the following steps, you need a command line terminal or shell to run commands\. Commands and the expected output are listed in separate blocks:
 
 ```
-~/lambda-project$ this is a command
-this is output
+aws --version
+```
+
+You should see the following output:
+
+```
+aws-cli/2.0.57 Python/3.7.4 Darwin/19.6.0 exe/x86_64
 ```
 
 For long commands, an escape character \(`\`\) is used to split a command over multiple lines\.
 
-On Linux and macOS, use your preferred shell and package manager\. On Windows 10, you can [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows\-integrated version of Ubuntu and Bash\.
+On Linux and macOS, use your preferred shell and package manager\.
+
+**Note**  
+On Windows, some Bash CLI commands that you commonly use with Lambda \(such as `zip`\) are not supported by the operating system's built\-in terminals\. To get a Windows\-integrated version of Ubuntu and Bash, [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10)\. 
 
 This tutorial uses CodeCommit for source control\. To set up your local machine to access and update application code, see [Setting up](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up.html) in the *AWS CodeCommit User Guide*\.
 
@@ -58,8 +66,7 @@ Create an application in the Lambda console\. In Lambda, an application is an AW
 
 1. Configure application settings\.
    + **Application name** – **my\-app**\.
-   + **Application description** – **my application**\.
-   + **Runtime** – **Node\.js 10\.x**\.
+   + **Runtime** – **Node\.js 14\.x**\.
    + **Source control service** – **CodeCommit**\.
    + **Repository name** – **my\-app\-repo**\.
    + **Permissions** – **Create roles and permissions boundary**\.
@@ -94,7 +101,7 @@ When the deployment process completes, invoke the function from the Lambda conso
 
 1. Choose **Test**\.
 
-The Lambda console executes your function and displays the result\. Expand the **Details** section under the result to see the output and execution details\.
+The Lambda console runs your function and displays the result\. Expand the **Details** section under the result to see the output and execution details\.
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/application-create-result.png)
 
@@ -115,7 +122,7 @@ In the previous step, Lambda console created a Git repository that contains func
 1. To clone the repository, use the `git clone` command\.
 
    ```
-   ~$ git clone ssh://git-codecommit.us-east-2.amazonaws.com/v1/repos/my-app-repo
+   git clone ssh://git-codecommit.us-east-2.amazonaws.com/v1/repos/my-app-repo
    ```
 
 To add a DynamoDB table to the application, define an `AWS::Serverless::SimpleTable` resource in the template\.
@@ -144,7 +151,7 @@ To add a DynamoDB table to the application, define an `AWS::Serverless::SimpleTa
        Properties:
          CodeUri: ./
          Handler: src/handlers/hello-from-lambda.helloFromLambdaHandler
-         Runtime: nodejs10.x
+         Runtime: nodejs14.x
          MemorySize: 128
          Timeout: 60
          Description: A Lambda function that returns a static string.
@@ -160,8 +167,8 @@ To add a DynamoDB table to the application, define an `AWS::Serverless::SimpleTa
 1. Commit and push the change\.
 
    ```
-   ~/my-app-repo$ git commit -am "Add DynamoDB table"
-   ~/my-app-repo$ git push
+   git commit -am "Add DynamoDB table"
+   git push
    ```
 
 When you push a change, it triggers the application's pipeline\. Use the **Deployments** tab of the application screen to track the change as it flows through the pipeline\. When the deployment is complete, proceed to the next step\.
@@ -233,14 +240,14 @@ Next, update the function code to use the table\. The following code uses the Dy
        Properties:
          CodeUri: ./
          Handler: src/handlers/index.handler
-         Runtime: nodejs10.x
+         Runtime: nodejs14.x
    ```
 
 1. Commit and push the change\.
 
    ```
-   ~/my-app-repo$ git add . && git commit -m "Use DynamoDB table"
-   ~/my-app-repo$ git push
+   git add . && git commit -m "Use DynamoDB table"
+   git push
    ```
 
 After the code change is deployed, invoke the function a few times to update the DynamoDB table\.
@@ -257,13 +264,14 @@ After the code change is deployed, invoke the function a few times to update the
 
 ![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/application-create-ddbtable.png)
 
-Lambda creates additional instances of your function to handle multiple concurrent invocations\. Each log stream in the CloudWatch Logs log group corresponds to a function instance\. A new function instance is also created when you change your function's code or configuration\. For more information on scaling, see [AWS Lambda function scaling](invocation-scaling.md)\.
+Lambda creates additional instances of your function to handle multiple concurrent invocations\. Each log stream in the CloudWatch Logs log group corresponds to a function instance\. A new function instance is also created when you change your function's code or configuration\. For more information on scaling, see [Lambda function scaling](invocation-scaling.md)\.
 
 ## Next steps<a name="applications-tutorial-nextsteps"></a>
 
 The AWS CloudFormation template that defines your application resources uses the AWS Serverless Application Model transform to simplify the syntax for resource definitions, and automate uploading the deployment package and other artifacts\. AWS SAM also provides a command line interface \(the AWS SAM CLI\), which has the same packaging and deployment functionality as the AWS CLI, with additional features specific to Lambda applications\. Use the AWS SAM CLI to test your application locally in a Docker container that emulates the Lambda execution environment\.
 + [Installing the AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html)
-+ [Testing and debugging serverless applications](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-test-and-debug.html)
++ [Testing and debugging serverless applications with AWS SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-test-and-debug.html)
++ [Deploying serverless applications using CI/CD systems with AWS SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-deploying.html)
 
 AWS Cloud9 provides an online development environment that includes Node\.js, the AWS SAM CLI, and Docker\. With AWS Cloud9, you can start developing quickly and access your development environment from any computer\. For instructions, see [Getting started](https://docs.aws.amazon.com/cloud9/latest/user-guide/get-started.html) in the *AWS Cloud9 User Guide*\.
 
@@ -277,7 +285,7 @@ For local development, AWS toolkits for integrated development environments \(ID
 
 As you develop your application, you will likely encounter the following types of errors\.
 + **Build errors** – Issues that occur during the build phase, including compilation, test, and packaging errors\.
-+ **Deployment errors** – Issues that occur when AWS CloudFormation isn't able to update the application stack\. These include permissions errors, account limits, service issues, or template errors\.
++ **Deployment errors** – Issues that occur when AWS CloudFormation isn't able to update the application stack\. These include permissions errors, account quotas, service issues, or template errors\.
 + **Invocation errors** – Errors that are returned by a function's code or runtime\.
 
 For build and deployment errors, you can identify the cause of an error in the Lambda console\.
@@ -326,7 +334,7 @@ You can continue to modify and use the sample to develop your own application\. 
 
 1. Open the [Amazon S3 console](https://console.aws.amazon.com/s3)\.
 
-1. Delete the artifact bucket – **aws\-*us\-east\-2*\-*123456789012*\-my\-app\-pipe**\.
+1. Delete the artifact bucket – ***us\-east\-2*\-*123456789012*\-my\-app\-pipe**\.
 
 1. Return to the AWS CloudFormation console and delete the infrastructure stack – **serverlessrepo\-my\-app\-toolchain**\.
 

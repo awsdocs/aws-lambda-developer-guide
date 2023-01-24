@@ -17,7 +17,7 @@ When Lambda runs your function, it passes a context object to the [handler](java
 
 The following example shows a function that uses the context object to access the Lambda logger\.
 
-**Example [Handler\.java](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/java-basic/src/main/java/example/Handler.java)**  
+**Example [Handler\.java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-basic/src/main/java/example/Handler.java)**  
 
 ```
 package example;
@@ -66,7 +66,7 @@ REPORT RequestId: 6bc28136-xmpl-4365-b021-0ce6b2e64ab0	Duration: 198.50 ms	Bille
 
 The interface for the context object is available in the [aws\-lambda\-java\-core](https://github.com/aws/aws-lambda-java-libs/tree/master/aws-lambda-java-core) library\. You can implement this interface to create a context class for testing\. The following example shows a context class that returns dummy values for most properties and a working test logger\.
 
-**Example [src/test/java/example/TestContext\.java](https://github.com/awsdocs/aws-lambda-developer-guide/blob/master/sample-apps/java-basic/src/test/java/example/TestContext.java)**  
+**Example [src/test/java/example/TestContext\.java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-basic/src/test/java/example/TestContext.java)**  
 
 ```
 package example;
@@ -99,10 +99,9 @@ For more information on logging, see [AWS Lambda function logging in Java](java-
 The GitHub repository for this guide includes sample applications that demonstrate the use of the context object\. Each sample application includes scripts for easy deployment and cleanup, an AWS Serverless Application Model \(AWS SAM\) template, and supporting resources\.
 
 **Sample Lambda applications in Java**
-+ [blank\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/blank-java) – A Java function that shows the use of Lambda's Java libraries, logging, environment variables, layers, AWS X\-Ray tracing, unit tests, and the AWS SDK\.
-+ [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-basic) – A minimal Java function with unit tests and variable logging configuration\.
-+ [java\-events](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-events) – A minimal Java function that uses the [aws\-lambda\-java\-events](java-package.md) library with event types that don't require the AWS SDK as a dependency, such as Amazon API Gateway\.
-+ [java\-events\-v1sdk](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/java-events-v1sdk) – A Java function that uses the [aws\-lambda\-java\-events](java-package.md) library with event types that require the AWS SDK as a dependency \(Amazon Simple Storage Service, Amazon DynamoDB, and Amazon Kinesis\)\.
-+ [s3\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/sample-apps/s3-java) – A Java function that processes notification events from Amazon S3 and uses the Java Class Library \(JCL\) to create thumbnails from uploaded image files\.
++ [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-basic) – A collection of minimal Java functions with unit tests and variable logging configuration\.
++ [java\-events](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-events) – A collection of Java functions that contain skeleton code for how to handle events from various services such as Amazon API Gateway, Amazon SQS, and Amazon Kinesis\. These functions use the latest version of the [aws\-lambda\-java\-events](java-package.md) library \(3\.0\.0 and newer\)\. These examples do not require the AWS SDK as a dependency\.
++ [s3\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/s3-java) – A Java function that processes notification events from Amazon S3 and uses the Java Class Library \(JCL\) to create thumbnails from uploaded image files\.
++ [Use API Gateway to invoke a Lambda function](https://docs.aws.amazon.com/lambda/latest/dg/example_cross_LambdaAPIGateway_section.html) – A Java function that scans a Amazon DynamoDB table that contains employee information\. It then uses Amazon Simple Notification Service to send a text message to employees celebrating their work anniversaries\. This example uses API Gateway to invoke the function\.
 
 All of the sample applications have a test context class for unit tests\. The `java-basic` application shows you how to use the context object to get a logger\. It uses SLF4J and Log4J 2 to provide a logger that works for local unit tests\.

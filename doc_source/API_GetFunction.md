@@ -40,69 +40,91 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "[Code](#SSS-GetFunction-response-Code)": { 
-      "[Location](API_FunctionCodeLocation.md#SSS-Type-FunctionCodeLocation-Location)": "string",
-      "[RepositoryType](API_FunctionCodeLocation.md#SSS-Type-FunctionCodeLocation-RepositoryType)": "string"
+   "Code": { 
+      "ImageUri": "string",
+      "Location": "string",
+      "RepositoryType": "string",
+      "ResolvedImageUri": "string"
    },
-   "[Concurrency](#SSS-GetFunction-response-Concurrency)": { 
-      "[ReservedConcurrentExecutions](API_Concurrency.md#SSS-Type-Concurrency-ReservedConcurrentExecutions)": number
+   "Concurrency": { 
+      "ReservedConcurrentExecutions": number
    },
-   "[Configuration](#SSS-GetFunction-response-Configuration)": { 
-      "[CodeSha256](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-CodeSha256)": "string",
-      "[CodeSize](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-CodeSize)": number,
-      "[DeadLetterConfig](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-DeadLetterConfig)": { 
-         "[TargetArn](API_DeadLetterConfig.md#SSS-Type-DeadLetterConfig-TargetArn)": "string"
+   "Configuration": { 
+      "Architectures": [ "string" ],
+      "CodeSha256": "string",
+      "CodeSize": number,
+      "DeadLetterConfig": { 
+         "TargetArn": "string"
       },
-      "[Description](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-Description)": "string",
-      "[Environment](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-Environment)": { 
-         "[Error](API_EnvironmentResponse.md#SSS-Type-EnvironmentResponse-Error)": { 
-            "[ErrorCode](API_EnvironmentError.md#SSS-Type-EnvironmentError-ErrorCode)": "string",
-            "[Message](API_EnvironmentError.md#SSS-Type-EnvironmentError-Message)": "string"
+      "Description": "string",
+      "Environment": { 
+         "Error": { 
+            "ErrorCode": "string",
+            "Message": "string"
          },
-         "[Variables](API_EnvironmentResponse.md#SSS-Type-EnvironmentResponse-Variables)": { 
+         "Variables": { 
             "string" : "string" 
          }
       },
-      "[FileSystemConfigs](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-FileSystemConfigs)": [ 
-         { 
-            "[Arn](API_FileSystemConfig.md#SSS-Type-FileSystemConfig-Arn)": "string",
-            "[LocalMountPath](API_FileSystemConfig.md#SSS-Type-FileSystemConfig-LocalMountPath)": "string"
-         }
-      ],
-      "[FunctionArn](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-FunctionArn)": "string",
-      "[FunctionName](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-FunctionName)": "string",
-      "[Handler](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-Handler)": "string",
-      "[KMSKeyArn](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-KMSKeyArn)": "string",
-      "[LastModified](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-LastModified)": "string",
-      "[LastUpdateStatus](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-LastUpdateStatus)": "string",
-      "[LastUpdateStatusReason](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-LastUpdateStatusReason)": "string",
-      "[LastUpdateStatusReasonCode](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-LastUpdateStatusReasonCode)": "string",
-      "[Layers](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-Layers)": [ 
-         { 
-            "[Arn](API_Layer.md#SSS-Type-Layer-Arn)": "string",
-            "[CodeSize](API_Layer.md#SSS-Type-Layer-CodeSize)": number
-         }
-      ],
-      "[MasterArn](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-MasterArn)": "string",
-      "[MemorySize](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-MemorySize)": number,
-      "[RevisionId](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-RevisionId)": "string",
-      "[Role](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-Role)": "string",
-      "[Runtime](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-Runtime)": "string",
-      "[State](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-State)": "string",
-      "[StateReason](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-StateReason)": "string",
-      "[StateReasonCode](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-StateReasonCode)": "string",
-      "[Timeout](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-Timeout)": number,
-      "[TracingConfig](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-TracingConfig)": { 
-         "[Mode](API_TracingConfigResponse.md#SSS-Type-TracingConfigResponse-Mode)": "string"
+      "EphemeralStorage": { 
+         "Size": number
       },
-      "[Version](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-Version)": "string",
-      "[VpcConfig](API_FunctionConfiguration.md#SSS-Type-FunctionConfiguration-VpcConfig)": { 
-         "[SecurityGroupIds](API_VpcConfigResponse.md#SSS-Type-VpcConfigResponse-SecurityGroupIds)": [ "string" ],
-         "[SubnetIds](API_VpcConfigResponse.md#SSS-Type-VpcConfigResponse-SubnetIds)": [ "string" ],
-         "[VpcId](API_VpcConfigResponse.md#SSS-Type-VpcConfigResponse-VpcId)": "string"
+      "FileSystemConfigs": [ 
+         { 
+            "Arn": "string",
+            "LocalMountPath": "string"
+         }
+      ],
+      "FunctionArn": "string",
+      "FunctionName": "string",
+      "Handler": "string",
+      "ImageConfigResponse": { 
+         "Error": { 
+            "ErrorCode": "string",
+            "Message": "string"
+         },
+         "ImageConfig": { 
+            "Command": [ "string" ],
+            "EntryPoint": [ "string" ],
+            "WorkingDirectory": "string"
+         }
+      },
+      "KMSKeyArn": "string",
+      "LastModified": "string",
+      "LastUpdateStatus": "string",
+      "LastUpdateStatusReason": "string",
+      "LastUpdateStatusReasonCode": "string",
+      "Layers": [ 
+         { 
+            "Arn": "string",
+            "CodeSize": number,
+            "SigningJobArn": "string",
+            "SigningProfileVersionArn": "string"
+         }
+      ],
+      "MasterArn": "string",
+      "MemorySize": number,
+      "PackageType": "string",
+      "RevisionId": "string",
+      "Role": "string",
+      "Runtime": "string",
+      "SigningJobArn": "string",
+      "SigningProfileVersionArn": "string",
+      "State": "string",
+      "StateReason": "string",
+      "StateReasonCode": "string",
+      "Timeout": number,
+      "TracingConfig": { 
+         "Mode": "string"
+      },
+      "Version": "string",
+      "VpcConfig": { 
+         "SecurityGroupIds": [ "string" ],
+         "SubnetIds": [ "string" ],
+         "VpcId": "string"
       }
    },
-   "[Tags](#SSS-GetFunction-response-Tags)": { 
+   "Tags": { 
       "string" : "string" 
    }
 }
@@ -132,19 +154,19 @@ Type: String to string map
 
 ## Errors<a name="API_GetFunction_Errors"></a>
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **ResourceNotFoundException**   
+ ** ResourceNotFoundException **   
 The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 
- **TooManyRequestsException**   
+ ** TooManyRequestsException **   
 The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 
@@ -155,7 +177,7 @@ For more information about using this API in one of the language\-specific AWS S
 +  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/GetFunction) 
 +  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/GetFunction) 
 +  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/GetFunction) 
-+  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/GetFunction) 
++  [AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/GetFunction) 
 +  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/GetFunction) 
 +  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/GetFunction) 
 +  [AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/GetFunction) 

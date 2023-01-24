@@ -6,7 +6,7 @@ To run a batch operation, you create an Amazon S3 [batch operations job](https:/
 
 When the batch job starts, Amazon S3 invokes the Lambda function [synchronously](invocation-sync.md) for each object in the manifest\. The event parameter includes the names of the bucket and the object\. 
 
-The following example shows the event that Amazon S3 sends to the Lambda function for an object that is named **customerImage1\.jpg** in the **awsexamplebucket** bucket\.
+The following example shows the event that Amazon S3 sends to the Lambda function for an object that is named **customerImage1\.jpg** in the **examplebucket** bucket\.
 
 **Example Amazon S3 batch request event**  
 
@@ -22,7 +22,7 @@ The following example shows the event that Amazon S3 sends to the Lambda functio
             "taskId": "dGFza2lkZ29lc2hlcmUK",
             "s3Key": "customerImage1.jpg",
             "s3VersionId": "1",
-            "s3BucketArn": "arn:aws:s3:us-east-1:0123456788:awsexamplebucket"
+            "s3BucketArn": "arn:aws:s3:us-east-1:0123456788:examplebucket"
         }
     ]  
 }
@@ -55,11 +55,11 @@ Note that you can't reuse an existing Amazon S3 event\-based function for batch 
 
 In the [resource\-based policy](access-control-resource-based.md) that you create for the Amazon S3 batch job, ensure that you set permission for the job to invoke your Lambda function\.
 
-In the [execution role](lambda-intro-execution-role.md) for the function, set a trust policy for Amazon S3 to assume the role when it executes your function\. 
+In the execution role for the function, set a [trust policy for Amazon S3 to assume the role when it runs your function](https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops-iam-role-policies.html)\.
 
 If your function uses the AWS SDK to manage Amazon S3 resources, you need to add Amazon S3 permissions in the execution role\. 
 
-When the job executes, Amazon S3 starts multiple function instances to process the Amazon S3 objects in parallel, up to the [concurrency limit](invocation-scaling.md) of the function\. Amazon S3 limits the initial ramp\-up of instances to avoid excess cost for smaller jobs\. 
+When the job runs, Amazon S3 starts multiple function instances to process the Amazon S3 objects in parallel, up to the [concurrency limit](invocation-scaling.md) of the function\. Amazon S3 limits the initial ramp\-up of instances to avoid excess cost for smaller jobs\. 
 
 If the Lambda function returns a `TemporaryFailure` response code, Amazon S3 retries the operation\. 
 

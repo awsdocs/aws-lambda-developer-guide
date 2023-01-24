@@ -2,24 +2,30 @@
 
 In this tutorial, you create a simple Android mobile application that uses Amazon Cognito to get credentials and invokes a Lambda function\.
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/lambda/latest/dg/images/lambda-android.png)
-
 The mobile application retrieves AWS credentials from an Amazon Cognito identity pool and uses them to invoke a Lambda function with an event that contains request data\. The function processes the request and returns a response to the front\-end\.
 
 ## Prerequisites<a name="with-android-prepare"></a>
 
-This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Getting started with AWS Lambda](getting-started.md) to create your first Lambda function\.
+This tutorial assumes that you have some knowledge of basic Lambda operations and the Lambda console\. If you haven't already, follow the instructions in [Create a Lambda function with the console](getting-started.md#getting-started-create-function) to create your first Lambda function\.
 
-To follow the procedures in this guide, you will need a command line terminal or shell to run commands\. Commands are shown in listings preceded by a prompt symbol \($\) and the name of the current directory, when appropriate:
+To complete the following steps, you need a command line terminal or shell to run commands\. Commands and the expected output are listed in separate blocks:
 
 ```
-~/lambda-project$ this is a command
-this is output
+aws --version
+```
+
+You should see the following output:
+
+```
+aws-cli/2.0.57 Python/3.7.4 Darwin/19.6.0 exe/x86_64
 ```
 
 For long commands, an escape character \(`\`\) is used to split a command over multiple lines\.
 
-On Linux and macOS, use your preferred shell and package manager\. On Windows 10, you can [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows\-integrated version of Ubuntu and Bash\.
+On Linux and macOS, use your preferred shell and package manager\.
+
+**Note**  
+On Windows, some Bash CLI commands that you commonly use with Lambda \(such as `zip`\) are not supported by the operating system's built\-in terminals\. To get a Windows\-integrated version of Ubuntu and Bash, [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10)\. 
 
 ## Create the execution role<a name="with-android-create-execution-role"></a>
 
@@ -64,13 +70,13 @@ exports.handler = function(event, context, callback) {
 1. Create a deployment package\.
 
    ```
-   $ zip function.zip index.js
+   zip function.zip index.js
    ```
 
 1. Create a Lambda function with the `create-function` command\.
 
    ```
-   $ aws lambda create-function --function-name AndroidBackendLambdaFunction \
+   aws lambda create-function --function-name AndroidBackendLambdaFunction \
    --zip-file fileb://function.zip --handler index.handler --runtime nodejs12.x \
    --role arn:aws:iam::123456789012:role/lambda-android-role
    ```
@@ -87,16 +93,18 @@ Invoke the function manually using the sample event data\.
    {   "firstName": "first-name",   "lastName": "last-name" }
    ```
 
-1.  Execute the following `invoke` command:
+1.  Run the following `invoke` command:
 
    ```
-   $ aws lambda  invoke --function-name AndroidBackendLambdaFunction \
+   aws lambda  invoke --function-name AndroidBackendLambdaFunction \
    --payload file://file-path/input.txt outputfile.txt
    ```
 
+   The cli\-binary\-format option is required if you're using AWS CLI version 2\. To make this the default setting, run `aws configure set cli-binary-format raw-in-base64-out`\. For more information, see [AWS CLI supported global command line options](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-options.html#cli-configure-options-list)\.
+
 ## Create an Amazon Cognito identity pool<a name="with-on-demand-custom-android-create-cognito-pool"></a>
 
-In this section, you create an Amazon Cognito identity pool\. The identity pool has two IAM roles\. You update the IAM role for unauthenticated users and grant permissions to execute the `AndroidBackendLambdaFunction` Lambda function\. 
+In this section, you create an Amazon Cognito identity pool\. The identity pool has two IAM roles\. You update the IAM role for unauthenticated users and grant permissions to run the `AndroidBackendLambdaFunction` Lambda function\. 
 
 For more information about IAM roles, see [IAM roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *IAM User Guide*\. For more information about Amazon Cognito services, see the [Amazon Cognito](https://aws.amazon.com/cognito/) product detail page\. 
 

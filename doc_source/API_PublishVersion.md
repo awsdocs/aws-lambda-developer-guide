@@ -2,7 +2,7 @@
 
 Creates a [version](https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html) from the current code and configuration of a function\. Use versions to create a snapshot of your function code and configuration that doesn't change\.
 
-AWS Lambda doesn't publish a version if the function's configuration and code haven't changed since the last version\. Use [UpdateFunctionCode](API_UpdateFunctionCode.md) or [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md) to update the function before publishing a version\.
+ AWS Lambda doesn't publish a version if the function's configuration and code haven't changed since the last version\. Use [UpdateFunctionCode](API_UpdateFunctionCode.md) or [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md) to update the function before publishing a version\.
 
 Clients can invoke versions directly or with an alias\. To create an alias, use [CreateAlias](API_CreateAlias.md)\.
 
@@ -13,9 +13,9 @@ POST /2015-03-31/functions/FunctionName/versions HTTP/1.1
 Content-type: application/json
 
 {
-   "[CodeSha256](#SSS-PublishVersion-request-CodeSha256)": "string",
-   "[Description](#SSS-PublishVersion-request-Description)": "string",
-   "[RevisionId](#SSS-PublishVersion-request-RevisionId)": "string"
+   "CodeSha256": "string",
+   "Description": "string",
+   "RevisionId": "string"
 }
 ```
 
@@ -62,58 +62,78 @@ HTTP/1.1 201
 Content-type: application/json
 
 {
-   "[CodeSha256](#SSS-PublishVersion-response-CodeSha256)": "string",
-   "[CodeSize](#SSS-PublishVersion-response-CodeSize)": number,
-   "[DeadLetterConfig](#SSS-PublishVersion-response-DeadLetterConfig)": { 
-      "[TargetArn](API_DeadLetterConfig.md#SSS-Type-DeadLetterConfig-TargetArn)": "string"
+   "Architectures": [ "string" ],
+   "CodeSha256": "string",
+   "CodeSize": number,
+   "DeadLetterConfig": { 
+      "TargetArn": "string"
    },
-   "[Description](#SSS-PublishVersion-response-Description)": "string",
-   "[Environment](#SSS-PublishVersion-response-Environment)": { 
-      "[Error](API_EnvironmentResponse.md#SSS-Type-EnvironmentResponse-Error)": { 
-         "[ErrorCode](API_EnvironmentError.md#SSS-Type-EnvironmentError-ErrorCode)": "string",
-         "[Message](API_EnvironmentError.md#SSS-Type-EnvironmentError-Message)": "string"
+   "Description": "string",
+   "Environment": { 
+      "Error": { 
+         "ErrorCode": "string",
+         "Message": "string"
       },
-      "[Variables](API_EnvironmentResponse.md#SSS-Type-EnvironmentResponse-Variables)": { 
+      "Variables": { 
          "string" : "string" 
       }
    },
-   "[FileSystemConfigs](#SSS-PublishVersion-response-FileSystemConfigs)": [ 
-      { 
-         "[Arn](API_FileSystemConfig.md#SSS-Type-FileSystemConfig-Arn)": "string",
-         "[LocalMountPath](API_FileSystemConfig.md#SSS-Type-FileSystemConfig-LocalMountPath)": "string"
-      }
-   ],
-   "[FunctionArn](#SSS-PublishVersion-response-FunctionArn)": "string",
-   "[FunctionName](#SSS-PublishVersion-response-FunctionName)": "string",
-   "[Handler](#SSS-PublishVersion-response-Handler)": "string",
-   "[KMSKeyArn](#SSS-PublishVersion-response-KMSKeyArn)": "string",
-   "[LastModified](#SSS-PublishVersion-response-LastModified)": "string",
-   "[LastUpdateStatus](#SSS-PublishVersion-response-LastUpdateStatus)": "string",
-   "[LastUpdateStatusReason](#SSS-PublishVersion-response-LastUpdateStatusReason)": "string",
-   "[LastUpdateStatusReasonCode](#SSS-PublishVersion-response-LastUpdateStatusReasonCode)": "string",
-   "[Layers](#SSS-PublishVersion-response-Layers)": [ 
-      { 
-         "[Arn](API_Layer.md#SSS-Type-Layer-Arn)": "string",
-         "[CodeSize](API_Layer.md#SSS-Type-Layer-CodeSize)": number
-      }
-   ],
-   "[MasterArn](#SSS-PublishVersion-response-MasterArn)": "string",
-   "[MemorySize](#SSS-PublishVersion-response-MemorySize)": number,
-   "[RevisionId](#SSS-PublishVersion-response-RevisionId)": "string",
-   "[Role](#SSS-PublishVersion-response-Role)": "string",
-   "[Runtime](#SSS-PublishVersion-response-Runtime)": "string",
-   "[State](#SSS-PublishVersion-response-State)": "string",
-   "[StateReason](#SSS-PublishVersion-response-StateReason)": "string",
-   "[StateReasonCode](#SSS-PublishVersion-response-StateReasonCode)": "string",
-   "[Timeout](#SSS-PublishVersion-response-Timeout)": number,
-   "[TracingConfig](#SSS-PublishVersion-response-TracingConfig)": { 
-      "[Mode](API_TracingConfigResponse.md#SSS-Type-TracingConfigResponse-Mode)": "string"
+   "EphemeralStorage": { 
+      "Size": number
    },
-   "[Version](#SSS-PublishVersion-response-Version)": "string",
-   "[VpcConfig](#SSS-PublishVersion-response-VpcConfig)": { 
-      "[SecurityGroupIds](API_VpcConfigResponse.md#SSS-Type-VpcConfigResponse-SecurityGroupIds)": [ "string" ],
-      "[SubnetIds](API_VpcConfigResponse.md#SSS-Type-VpcConfigResponse-SubnetIds)": [ "string" ],
-      "[VpcId](API_VpcConfigResponse.md#SSS-Type-VpcConfigResponse-VpcId)": "string"
+   "FileSystemConfigs": [ 
+      { 
+         "Arn": "string",
+         "LocalMountPath": "string"
+      }
+   ],
+   "FunctionArn": "string",
+   "FunctionName": "string",
+   "Handler": "string",
+   "ImageConfigResponse": { 
+      "Error": { 
+         "ErrorCode": "string",
+         "Message": "string"
+      },
+      "ImageConfig": { 
+         "Command": [ "string" ],
+         "EntryPoint": [ "string" ],
+         "WorkingDirectory": "string"
+      }
+   },
+   "KMSKeyArn": "string",
+   "LastModified": "string",
+   "LastUpdateStatus": "string",
+   "LastUpdateStatusReason": "string",
+   "LastUpdateStatusReasonCode": "string",
+   "Layers": [ 
+      { 
+         "Arn": "string",
+         "CodeSize": number,
+         "SigningJobArn": "string",
+         "SigningProfileVersionArn": "string"
+      }
+   ],
+   "MasterArn": "string",
+   "MemorySize": number,
+   "PackageType": "string",
+   "RevisionId": "string",
+   "Role": "string",
+   "Runtime": "string",
+   "SigningJobArn": "string",
+   "SigningProfileVersionArn": "string",
+   "State": "string",
+   "StateReason": "string",
+   "StateReasonCode": "string",
+   "Timeout": number,
+   "TracingConfig": { 
+      "Mode": "string"
+   },
+   "Version": "string",
+   "VpcConfig": { 
+      "SecurityGroupIds": [ "string" ],
+      "SubnetIds": [ "string" ],
+      "VpcId": "string"
    }
 }
 ```
@@ -123,6 +143,12 @@ Content-type: application/json
 If the action is successful, the service sends back an HTTP 201 response\.
 
 The following data is returned in JSON format by the service\.
+
+ ** [Architectures](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-Architectures"></a>
+The instruction set architecture that the function supports\. Architecture is a string array with one of the valid values\. The default architecture value is `x86_64`\.  
+Type: Array of strings  
+Array Members: Fixed number of 1 item\.  
+Valid Values:` x86_64 | arm64` 
 
  ** [CodeSha256](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-CodeSha256"></a>
 The SHA256 hash of the function's deployment package\.  
@@ -142,11 +168,15 @@ Type: String
 Length Constraints: Minimum length of 0\. Maximum length of 256\.
 
  ** [Environment](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-Environment"></a>
-The function's environment variables\.  
+The function's [environment variables](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html)\. Omitted from AWS CloudTrail logs\.  
 Type: [EnvironmentResponse](API_EnvironmentResponse.md) object
 
+ ** [EphemeralStorage](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-EphemeralStorage"></a>
+The size of the function’s /tmp directory in MB\. The default value is 512, but can be any whole number between 512 and 10240 MB\.  
+Type: [EphemeralStorage](API_EphemeralStorage.md) object
+
  ** [FileSystemConfigs](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-FileSystemConfigs"></a>
-Connection settings for an Amazon EFS file system\.  
+Connection settings for an [Amazon EFS file system](https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html)\.  
 Type: Array of [FileSystemConfig](API_FileSystemConfig.md) objects  
 Array Members: Maximum number of 1 item\.
 
@@ -167,8 +197,12 @@ Type: String
 Length Constraints: Maximum length of 128\.  
 Pattern: `[^\s]+` 
 
+ ** [ImageConfigResponse](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-ImageConfigResponse"></a>
+The function's image configuration values\.  
+Type: [ImageConfigResponse](API_ImageConfigResponse.md) object
+
  ** [KMSKeyArn](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-KMSKeyArn"></a>
-The KMS key that's used to encrypt the function's environment variables\. This key is only returned if you've configured a customer managed CMK\.  
+The AWS KMS key that's used to encrypt the function's environment variables\. This key is only returned if you've configured a customer managed key\.  
 Type: String  
 Pattern: `(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()` 
 
@@ -188,21 +222,26 @@ Type: String
  ** [LastUpdateStatusReasonCode](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-LastUpdateStatusReasonCode"></a>
 The reason code for the last update that was performed on the function\.  
 Type: String  
-Valid Values:` EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses | InvalidSubnet | InvalidSecurityGroup` 
+Valid Values:` EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses | InvalidSubnet | InvalidSecurityGroup | ImageDeleted | ImageAccessDenied | InvalidImage` 
 
  ** [Layers](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-Layers"></a>
 The function's [ layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)\.  
 Type: Array of [Layer](API_Layer.md) objects
 
  ** [MasterArn](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-MasterArn"></a>
-For Lambda@Edge functions, the ARN of the master function\.  
+For Lambda@Edge functions, the ARN of the main function\.  
 Type: String  
 Pattern: `arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?` 
 
  ** [MemorySize](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-MemorySize"></a>
-The memory that's allocated to the function\.  
+The amount of memory available to the function at runtime\.   
 Type: Integer  
-Valid Range: Minimum value of 128\. Maximum value of 3008\.
+Valid Range: Minimum value of 128\. Maximum value of 10240\.
+
+ ** [PackageType](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-PackageType"></a>
+The type of deployment package\. Set to `Image` for container image and set `Zip` for \.zip file archive\.  
+Type: String  
+Valid Values:` Zip | Image` 
 
  ** [RevisionId](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-RevisionId"></a>
 The latest updated revision of the function or alias\.  
@@ -216,7 +255,17 @@ Pattern: `arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+`
  ** [Runtime](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-Runtime"></a>
 The runtime environment for the Lambda function\.  
 Type: String  
-Valid Values:` nodejs10.x | nodejs12.x | java8 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore2.1 | dotnetcore3.1 | go1.x | ruby2.5 | ruby2.7 | provided` 
+Valid Values:` nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | nodejs10.x | nodejs12.x | nodejs14.x | nodejs16.x | java8 | java8.al2 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | python3.9 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | dotnetcore3.1 | dotnet6 | nodejs4.3-edge | go1.x | ruby2.5 | ruby2.7 | provided | provided.al2` 
+
+ ** [SigningJobArn](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-SigningJobArn"></a>
+The ARN of the signing job\.  
+Type: String  
+Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)` 
+
+ ** [SigningProfileVersionArn](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-SigningProfileVersionArn"></a>
+The ARN of the signing profile version\.  
+Type: String  
+Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)` 
 
  ** [State](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-State"></a>
 The current state of the function\. When the state is `Inactive`, you can reactivate the function by invoking it\.  
@@ -230,7 +279,7 @@ Type: String
  ** [StateReasonCode](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-StateReasonCode"></a>
 The reason code for the function's current state\. When the code is `Creating`, you can't invoke or modify the function\.  
 Type: String  
-Valid Values:` Idle | Creating | Restoring | EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses | InvalidSubnet | InvalidSecurityGroup` 
+Valid Values:` Idle | Creating | Restoring | EniLimitExceeded | InsufficientRolePermissions | InvalidConfiguration | InternalError | SubnetOutOfIPAddresses | InvalidSubnet | InvalidSecurityGroup | ImageDeleted | ImageAccessDenied | InvalidImage` 
 
  ** [Timeout](#API_PublishVersion_ResponseSyntax) **   <a name="SSS-PublishVersion-response-Timeout"></a>
 The amount of time in seconds that Lambda allows a function to run before stopping it\.  
@@ -253,31 +302,31 @@ Type: [VpcConfigResponse](API_VpcConfigResponse.md) object
 
 ## Errors<a name="API_PublishVersion_Errors"></a>
 
- **CodeStorageExceededException**   
+ ** CodeStorageExceededException **   
 You have exceeded your maximum total code size per account\. [Learn more](https://docs.aws.amazon.com/lambda/latest/dg/limits.html)   
 HTTP Status Code: 400
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **PreconditionFailedException**   
+ ** PreconditionFailedException **   
 The RevisionId provided does not match the latest RevisionId for the Lambda function or alias\. Call the `GetFunction` or the `GetAlias` API to retrieve the latest RevisionId for your resource\.  
 HTTP Status Code: 412
 
- **ResourceConflictException**   
+ ** ResourceConflictException **   
 The resource already exists, or another operation is in progress\.  
 HTTP Status Code: 409
 
- **ResourceNotFoundException**   
+ ** ResourceNotFoundException **   
 The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 
- **TooManyRequestsException**   
+ ** TooManyRequestsException **   
 The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 
@@ -288,7 +337,7 @@ For more information about using this API in one of the language\-specific AWS S
 +  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/PublishVersion) 
 +  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/PublishVersion) 
 +  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/PublishVersion) 
-+  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/PublishVersion) 
++  [AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/PublishVersion) 
 +  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/PublishVersion) 
 +  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/PublishVersion) 
 +  [AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/PublishVersion) 

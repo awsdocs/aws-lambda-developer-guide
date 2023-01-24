@@ -1,6 +1,6 @@
 # ListEventSourceMappings<a name="API_ListEventSourceMappings"></a>
 
-Lists event source mappings\. Specify an `EventSourceArn` to only show event source mappings for a single event source\.
+Lists event source mappings\. Specify an `EventSourceArn` to show only event source mappings for a single event source\.
 
 ## Request Syntax<a name="API_ListEventSourceMappings_RequestSyntax"></a>
 
@@ -17,6 +17,8 @@ The Amazon Resource Name \(ARN\) of the event source\.
 +  **Amazon Kinesis** \- The ARN of the data stream or a stream consumer\.
 +  **Amazon DynamoDB Streams** \- The ARN of the stream\.
 +  **Amazon Simple Queue Service** \- The ARN of the queue\.
++  **Amazon Managed Streaming for Apache Kafka** \- The ARN of the cluster\.
++  **Amazon MQ** \- The ARN of the broker\.
 Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)` 
 
  ** [FunctionName](#API_ListEventSourceMappings_RequestSyntax) **   <a name="SSS-ListEventSourceMappings-request-FunctionName"></a>
@@ -35,7 +37,7 @@ Pattern: `(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}
 A pagination token returned by a previous call\.
 
  ** [MaxItems](#API_ListEventSourceMappings_RequestSyntax) **   <a name="SSS-ListEventSourceMappings-request-MaxItems"></a>
-The maximum number of event source mappings to return\.  
+The maximum number of event source mappings to return\. Note that ListEventSourceMappings returns a maximum of 100 items in each response, even if you set the number higher\.  
 Valid Range: Minimum value of 1\. Maximum value of 10000\.
 
 ## Request Body<a name="API_ListEventSourceMappings_RequestBody"></a>
@@ -49,32 +51,62 @@ HTTP/1.1 200
 Content-type: application/json
 
 {
-   "[EventSourceMappings](#SSS-ListEventSourceMappings-response-EventSourceMappings)": [ 
+   "EventSourceMappings": [ 
       { 
-         "[BatchSize](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-BatchSize)": number,
-         "[BisectBatchOnFunctionError](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-BisectBatchOnFunctionError)": boolean,
-         "[DestinationConfig](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-DestinationConfig)": { 
-            "[OnFailure](API_DestinationConfig.md#SSS-Type-DestinationConfig-OnFailure)": { 
-               "[Destination](API_OnFailure.md#SSS-Type-OnFailure-Destination)": "string"
+         "AmazonManagedKafkaEventSourceConfig": { 
+            "ConsumerGroupId": "string"
+         },
+         "BatchSize": number,
+         "BisectBatchOnFunctionError": boolean,
+         "DestinationConfig": { 
+            "OnFailure": { 
+               "Destination": "string"
             },
-            "[OnSuccess](API_DestinationConfig.md#SSS-Type-DestinationConfig-OnSuccess)": { 
-               "[Destination](API_OnSuccess.md#SSS-Type-OnSuccess-Destination)": "string"
+            "OnSuccess": { 
+               "Destination": "string"
             }
          },
-         "[EventSourceArn](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-EventSourceArn)": "string",
-         "[FunctionArn](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-FunctionArn)": "string",
-         "[LastModified](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-LastModified)": number,
-         "[LastProcessingResult](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-LastProcessingResult)": "string",
-         "[MaximumBatchingWindowInSeconds](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-MaximumBatchingWindowInSeconds)": number,
-         "[MaximumRecordAgeInSeconds](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-MaximumRecordAgeInSeconds)": number,
-         "[MaximumRetryAttempts](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-MaximumRetryAttempts)": number,
-         "[ParallelizationFactor](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-ParallelizationFactor)": number,
-         "[State](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-State)": "string",
-         "[StateTransitionReason](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-StateTransitionReason)": "string",
-         "[UUID](API_EventSourceMappingConfiguration.md#SSS-Type-EventSourceMappingConfiguration-UUID)": "string"
+         "EventSourceArn": "string",
+         "FilterCriteria": { 
+            "Filters": [ 
+               { 
+                  "Pattern": "string"
+               }
+            ]
+         },
+         "FunctionArn": "string",
+         "FunctionResponseTypes": [ "string" ],
+         "LastModified": number,
+         "LastProcessingResult": "string",
+         "MaximumBatchingWindowInSeconds": number,
+         "MaximumRecordAgeInSeconds": number,
+         "MaximumRetryAttempts": number,
+         "ParallelizationFactor": number,
+         "Queues": [ "string" ],
+         "SelfManagedEventSource": { 
+            "Endpoints": { 
+               "string" : [ "string" ]
+            }
+         },
+         "SelfManagedKafkaEventSourceConfig": { 
+            "ConsumerGroupId": "string"
+         },
+         "SourceAccessConfigurations": [ 
+            { 
+               "Type": "string",
+               "URI": "string"
+            }
+         ],
+         "StartingPosition": "string",
+         "StartingPositionTimestamp": number,
+         "State": "string",
+         "StateTransitionReason": "string",
+         "Topics": [ "string" ],
+         "TumblingWindowInSeconds": number,
+         "UUID": "string"
       }
    ],
-   "[NextMarker](#SSS-ListEventSourceMappings-response-NextMarker)": "string"
+   "NextMarker": "string"
 }
 ```
 
@@ -94,19 +126,19 @@ Type: String
 
 ## Errors<a name="API_ListEventSourceMappings_Errors"></a>
 
- **InvalidParameterValueException**   
+ ** InvalidParameterValueException **   
 One of the parameters in the request is invalid\.  
 HTTP Status Code: 400
 
- **ResourceNotFoundException**   
+ ** ResourceNotFoundException **   
 The resource specified in the request does not exist\.  
 HTTP Status Code: 404
 
- **ServiceException**   
+ ** ServiceException **   
 The AWS Lambda service encountered an internal error\.  
 HTTP Status Code: 500
 
- **TooManyRequestsException**   
+ ** TooManyRequestsException **   
 The request throughput limit was exceeded\.  
 HTTP Status Code: 429
 
@@ -117,7 +149,7 @@ For more information about using this API in one of the language\-specific AWS S
 +  [AWS SDK for \.NET](https://docs.aws.amazon.com/goto/DotNetSDKV3/lambda-2015-03-31/ListEventSourceMappings) 
 +  [AWS SDK for C\+\+](https://docs.aws.amazon.com/goto/SdkForCpp/lambda-2015-03-31/ListEventSourceMappings) 
 +  [AWS SDK for Go](https://docs.aws.amazon.com/goto/SdkForGoV1/lambda-2015-03-31/ListEventSourceMappings) 
-+  [AWS SDK for Java](https://docs.aws.amazon.com/goto/SdkForJava/lambda-2015-03-31/ListEventSourceMappings) 
++  [AWS SDK for Java V2](https://docs.aws.amazon.com/goto/SdkForJavaV2/lambda-2015-03-31/ListEventSourceMappings) 
 +  [AWS SDK for JavaScript](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/lambda-2015-03-31/ListEventSourceMappings) 
 +  [AWS SDK for PHP V3](https://docs.aws.amazon.com/goto/SdkForPHPV3/lambda-2015-03-31/ListEventSourceMappings) 
 +  [AWS SDK for Python](https://docs.aws.amazon.com/goto/boto3/lambda-2015-03-31/ListEventSourceMappings) 

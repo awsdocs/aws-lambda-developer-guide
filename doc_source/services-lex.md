@@ -100,7 +100,7 @@ Note that the additional fields required for `dialogAction` vary based on the va
 You need to configure a service\-linked role as your function's [execution role](lambda-intro-execution-role.md)\. Amazon Lex defines the service\-linked role with predefined permissions\. When you create an Amazon Lex bot using the console, the service\-linked role is created automatically\. To create a service\-linked role with the AWS CLI, use the `create-service-linked-role` command\. 
 
 ```
-$ aws iam create-service-linked-role --aws-service-name lex.amazonaws.com
+aws iam create-service-linked-role --aws-service-name lex.amazonaws.com
 ```
 
 This command creates the following role\.

@@ -24,11 +24,11 @@ To use a custom runtime, set your function's runtime to `provided`\. The runtime
 ├── function.sh
 ```
 
-If there's a file named `bootstrap` in your deployment package, Lambda executes that file\. If not, Lambda looks for a runtime in the function's layers\. If the bootstrap file isn't found or isn't executable, your function returns an error upon invocation\.
+If there's a file named `bootstrap` in your deployment package, Lambda runs that file\. If not, Lambda looks for a runtime in the function's layers\. If the bootstrap file isn't found or isn't executable, your function returns an error upon invocation\.
 
 ## Building a custom runtime<a name="runtimes-custom-build"></a>
 
-A custom runtime's entry point is an executable file named `bootstrap`\. The bootstrap file can be the runtime, or it can invoke another file that creates the runtime\. The following example uses a bundled version of Node\.js to execute a JavaScript runtime in a separate file named `runtime.js`\.
+A custom runtime's entry point is an executable file named `bootstrap`\. The bootstrap file can be the runtime, or it can invoke another file that creates the runtime\. The following example uses a bundled version of Node\.js to run a JavaScript runtime in a separate file named `runtime.js`\.
 
 **Example bootstrap**  
 
@@ -38,7 +38,7 @@ cd $LAMBDA_TASK_ROOT
 ./node-v11.1.0-linux-x64/bin/node runtime.js
 ```
 
-Your runtime code is responsible for completing some initialization tasks\. Then it processes invocation events in a loop until it's terminated\. The initialization tasks run once [per instance of the function](runtimes-context.md) to prepare the environment to handle invocations\.
+Your runtime code is responsible for completing some initialization tasks\. Then it processes invocation events in a loop until it's terminated\. The initialization tasks run once [per instance of the function](lambda-runtime-environment.md) to prepare the environment to handle invocations\.
 
 **Initialization tasks**
 + **Retrieve settings** – Read environment variables to get details about the function and environment\.
@@ -46,7 +46,7 @@ Your runtime code is responsible for completing some initialization tasks\. Then
   + `LAMBDA_TASK_ROOT` – The directory that contains the function code\.
   + `AWS_LAMBDA_RUNTIME_API` – The host and port of the runtime API\.
 
-  See [Runtime environment variables](configuration-envvars.md#configuration-envvars-runtime) for a full list of available variables\.
+  See [Defined runtime environment variables](configuration-envvars.md#configuration-envvars-runtime) for a full list of available variables\.
 + **Initialize the function** – Load the handler file and run any global or static code that it contains\. Functions should create static resources like SDK clients and database connections once, and reuse them for multiple invocations\.
 + **Handle errors** – If an error occurs, call the [initialization error](runtimes-api.md#runtimes-api-initerror) API and exit immediately\.
 
@@ -57,8 +57,6 @@ Initialization counts towards billed execution time and timeout\. When an execut
 ```
 REPORT RequestId: f8ac1208... Init Duration: 48.26 ms   Duration: 237.17 ms   Billed Duration: 300 ms   Memory Size: 128 MB   Max Memory Used: 26 MB
 ```
-
-![\[Initialization time in an X-Ray trace.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/runtimes-custom-init.png)
 
 While it runs, a runtime uses the [Lambda runtime interface](runtimes-api.md) to manage incoming events and report errors\. After completing initialization tasks, the runtime processes incoming events in a loop\. In your runtime code, perform the following steps in order\.
 

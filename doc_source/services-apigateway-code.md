@@ -58,12 +58,12 @@ exports.handler = function(event, context, callback) {
             callback(null, "pong");
             break;
         default:
-            callback('Unknown operation: ${operation}');
+            callback(`Unknown operation: ${operation}`);
     }
 };
 ```
 
-Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda deployment package in Node\.js](nodejs-package.md)\.
+Zip up the sample code to create a deployment package\. For instructions, see [Deploy Node\.js Lambda functions with \.zip file archives](nodejs-package.md)\.
 
 ## Python 3<a name="services-apigateway-code-python"></a>
 
@@ -110,7 +110,7 @@ def handler(event, context):
         raise ValueError('Unrecognized operation "{}"'.format(operation))
 ```
 
-Zip up the sample code to create a deployment package\. For instructions, see [AWS Lambda deployment package in Python](python-package.md)\.
+Zip up the sample code to create a deployment package\. For instructions, see [Deploy Python Lambda functions with \.zip file archives](python-package.md)\.
 
 ## Go<a name="services-apigateway-code-go"></a>
 
@@ -120,12 +120,18 @@ The following example processes messages from API Gateway, and logs information 
 
 ```
 import (
-    "strings"
+    "context"
+    "fmt"
     "github.com/aws/aws-lambda-go/events"
+    runtime "github.com/aws/aws-lambda-go/lambda"
 )
 
+func main() {
+    runtime.Start(handleRequest)
+}
+
 func handleRequest(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-    fmt.Printf("Processing request data for request %s.\n", request.RequestContext.RequestId)
+    fmt.Printf("Processing request data for request %s.\n", request.RequestContext.RequestID)
     fmt.Printf("Body size = %d.\n", len(request.Body))
 
     fmt.Println("Headers:")
@@ -133,8 +139,8 @@ func handleRequest(ctx context.Context, request events.APIGatewayProxyRequest) (
         fmt.Printf("    %s: %s\n", key, value)
     }
 
-    return events.APIGatewayProxyResponse { Body: request.Body, StatusCode: 200 }, nil
+    return events.APIGatewayProxyResponse{Body: request.Body, StatusCode: 200}, nil
 }
 ```
 
-Build the executable with `go build` and create a deployment package\. For instructions, see [AWS Lambda deployment package in Go](golang-package.md)\.
+Build the executable with `go build` and create a deployment package\. For instructions, see [Deploy Go Lambda functions with \.zip file archives](golang-package.md)\.
