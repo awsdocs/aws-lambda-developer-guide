@@ -203,5 +203,10 @@ The [GetLayerVersion](API_GetLayerVersion.md) action also covers [GetLayerVersio
 | Action | Resource | Condition | 
 | --- | --- | --- | 
 |   [AddLayerVersionPermission](API_AddLayerVersionPermission.md)  [RemoveLayerVersionPermission](API_RemoveLayerVersionPermission.md)  [GetLayerVersion](API_GetLayerVersion.md)  [GetLayerVersionPolicy](API_GetLayerVersionPolicy.md)  [DeleteLayerVersion](API_DeleteLayerVersion.md)  |  Layer version  | None | 
+github/PULL_REQUEST_TEMPLATE.md
+|   [PublishLayerVersion](API_PublishLayerVersion.md)  [ListLayerVersions](API_ListLayerVersions.md)  |  Layer  | None | 
+|   [ListLayers](API_ListLayers.md)  |   `*`   | None | 
+
 |   [ListLayerVersions](API_ListLayerVersions.md)  [PublishLayerVersion](API_PublishLayerVersion.md)  |  Layer  | None | 
 |   [ListLayers](API_ListLayers.md)  |   `*`   |  None  | 
+main
