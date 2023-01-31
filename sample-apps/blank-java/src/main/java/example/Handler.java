@@ -28,7 +28,6 @@ public class Handler implements RequestHandler<Map<String,String>, String> {
         // log execution details
         logger.info("ENVIRONMENT VARIABLES: " + System.getenv());
         logger.info("EVENT: " + event);
-        logger.info("CONTEXT: " + context);
 
         // process event
         GetAccountSettingsResponse response;
