@@ -53,7 +53,7 @@ Create a Lambda function with a function URL endpoint using a \.zip file archive
 
    ```
    exports.handler = async (event) => {
-       let body = JSON.parse(event.body)
+       let body = JSON.parse(event.body);
        const product = body.num1 * body.num2;
        const response = {
            statusCode: 200,
@@ -131,7 +131,7 @@ Resources:
       Code:
         ZipFile: |
           exports.handler = async (event) => {
-              let body = JSON.parse(event.body)
+              let body = JSON.parse(event.body);
               const product = body.num1 * body.num2;
               const response = {
                   statusCode: 200,
