@@ -9,7 +9,6 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayV2ProxyResponseEve
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.util.Map;
 import java.util.HashMap;
 
 // Handler value: example.Handler
