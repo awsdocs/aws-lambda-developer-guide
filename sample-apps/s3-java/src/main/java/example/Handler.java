@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,7 +18,6 @@ import software.amazon.awssdk.awscore.exception.AwsServiceException;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
-import software.amazon.awssdk.services.s3.model.S3Object;
 import software.amazon.awssdk.services.s3.S3Client;
 
 import com.amazonaws.services.lambda.runtime.Context;
@@ -27,15 +25,11 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.S3Event;
 import com.amazonaws.services.lambda.runtime.events.models.s3.S3EventNotification.S3EventNotificationRecord;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 // Handler value: example.Handler
 public class Handler implements RequestHandler<S3Event, String> {
-  Gson gson = new GsonBuilder().setPrettyPrinting().create();
   private static final Logger logger = LoggerFactory.getLogger(Handler.class);
   private static final float MAX_DIMENSION = 100;
   private final String REGEX = ".*\\.([^\\.]*)";
@@ -46,7 +40,6 @@ public class Handler implements RequestHandler<S3Event, String> {
   @Override
   public String handleRequest(S3Event s3event, Context context) {
     try {
-      logger.info("EVENT: " + gson.toJson(s3event));
       S3EventNotificationRecord record = s3event.getRecords().get(0);
       
       String srcBucket = record.getS3().getBucket().getName();
