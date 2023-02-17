@@ -76,10 +76,10 @@ Note that the first three steps are identical whether you deploy your function a
    RUN yum install -y golang
    RUN go env -w GOPROXY=direct
    # cache dependencies
-   ADD go.mod go.sum ./
+   COPY go.mod go.sum ./
    RUN go mod download
    # build
-   ADD . .
+   COPY . .
    RUN go build -o /main
    # copy artifacts to a clean image
    FROM public.ecr.aws/lambda/provided:al2
@@ -118,10 +118,10 @@ FROM alpine as build
 RUN apk add go git
 RUN go env -w GOPROXY=direct
 # cache dependencies
-ADD go.mod go.sum ./
+COPY go.mod go.sum ./
 RUN go mod download 
 # build
-ADD . .
+COPY . .
 RUN go build -o /main
 # copy artifacts to a clean image
 FROM alpine
