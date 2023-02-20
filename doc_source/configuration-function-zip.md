@@ -88,7 +88,7 @@ The console creates a Lambda function with a single source file\. For scripting 
 **Note**  
 The Lambda console uses AWS Cloud9 to provide an integrated development environment in the browser\. You can also use AWS Cloud9 to develop Lambda functions in your own environment\. For more information, see [Working with Lambda Functions](https://docs.aws.amazon.com/cloud9/latest/user-guide/lambda-functions.html) in the AWS Cloud9 user guide\.
 
-When you save your function code, the Lambda console creates a \.zip file archive deployment package\. When you develop your function code outside of the console \(using an SDE\) you need to [create a deployment package](nodejs-package.md) to upload your code to the Lambda function\.
+When you save your function code, the Lambda console creates a \.zip file archive deployment package\. When you develop your function code outside of the console \(using an IDE\) you need to [create a deployment package](nodejs-package.md) to upload your code to the Lambda function\.
 
 ## Updating function code<a name="configuration-function-update"></a>
 

@@ -43,7 +43,7 @@ The following is the result of `get-function-configuration` on a function underg
 {
     "FunctionName": "my-function",
     "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
-    "Runtime": "nodejs12.x",
+    "Runtime": "nodejs16.x",
     "VpcConfig": {
         "SubnetIds": [
             "subnet-071f712345678e7c8",

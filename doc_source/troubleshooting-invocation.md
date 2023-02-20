@@ -15,7 +15,7 @@ Your AWS Identity and Access Management \(IAM\) user, or the role that you assum
 **Note**  
 Unlike other Lambda API operations, the name of the IAM action \(`lambda:InvokeFunction`\) doesn't match the name of the API operation \(`Invoke`\) for invoking a function\.
 
-For more information, see [AWS Lambda permissions](lambda-permissions.md)\.
+For more information, see [Lambda permissions](lambda-permissions.md)\.
 
 ## Lambda: Operation cannot be performed ResourceConflictException<a name="troubleshooting-invocation-ResourceConflictException"></a>
 

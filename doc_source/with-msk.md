@@ -10,7 +10,8 @@ For Kafka\-based event sources, Lambda supports processing control parameters, s
 
 Lambda reads the messages sequentially for each partition\. After Lambda processes each batch, it commits the offsets of the messages in that batch\. If your function returns an error for any of the messages in a batch, Lambda retries the whole batch of messages until processing succeeds or the messages expire\.
 
-Lambda can run your function for up to 14 minutes\. Configure your function timeout to be 14 minutes or less \(the default timeout value is 3 seconds\)\. Lambda may retry invocations that exceed 14 minutes\.
+**Note**  
+While Lambda functions typically have a maximum timeout limit of 15 minutes, event source mappings for Amazon MSK, self\-managed Apache Kafka, and Amazon MQ for ActiveMQ and RabbitMQ only support functions with maximum timeout limits of 14 minutes\. This constraint ensures that the event source mapping can properly handle function errors and retries\.
 
 Lambda sends the batch of messages in the event parameter when it invokes your function\. The event payload contains an array of messages\. Each array item contains details of the Amazon MSK topic and partition identifier, together with a timestamp and a base64\-encoded message\.
 
@@ -18,6 +19,7 @@ Lambda sends the batch of messages in the event parameter when it invokes your f
 {
    "eventSource":"aws:kafka",
    "eventSourceArn":"arn:aws:kafka:sa-east-1:123456789012:cluster/vpc-2priv-2pub/751d2973-a626-431c-9d4e-d7975eb44dd7-2",
+   "bootstrapServers":"b-2.demo-cluster-1.a1bcde.c1.kafka.us-east-1.amazonaws.com:9092,b-1.demo-cluster-1.a1bcde.c1.kafka.us-east-1.amazonaws.com:9092",
    "records":{
       "mytopic-0":[
          {
@@ -26,6 +28,7 @@ Lambda sends the batch of messages in the event parameter when it invokes your f
             "offset":15,
             "timestamp":1545084650987,
             "timestampType":"CREATE_TIME",
+            "key":"abcDEFghiJKLmnoPQRstuVWXyz1234==",
             "value":"SGVsbG8sIHRoaXMgaXMgYSB0ZXN0Lg==",
             "headers":[
                {
@@ -70,6 +73,7 @@ Lambda needs permission to access the Amazon MSK cluster, retrieve records, and 
 + [IAM role\-based authentication](#msk-permissions-iam-policy)
 + [Mutual TLS authentication](#msk-permissions-mTLS)
 + [Configuring the mTLS secret](#smaa-auth-secret)
++ [How Lambda chooses a bootstrap broker](#msk-bootstrap-brokers)
 
 ### Unauthenticated access<a name="msk-permissions-none"></a>
 
@@ -85,7 +89,7 @@ Amazon MSK doesn't support SASL/PLAIN authentication\.
 
 ### IAM role\-based authentication<a name="msk-permissions-iam-policy"></a>
 
-You can use IAM to authenticate the identity of clients that connect to the MSK cluster\. To create and deploy IAM user or role\-based policies, use the IAM console or API\. For more information, see [IAM access control](https://docs.aws.amazon.com/msk/latest/developerguide/iam-access-control.html) in the *Amazon Managed Streaming for Apache Kafka Developer Guide*\.
+You can use IAM to authenticate the identity of clients that connect to the MSK cluster\. If IAM auth is active on your MSK cluster, and you don't provide a secret for auth, Lambda automatically defaults to using IAM auth\. To create and deploy IAM user or role\-based policies, use the IAM console or API\. For more information, see [IAM access control](https://docs.aws.amazon.com/msk/latest/developerguide/iam-access-control.html) in the *Amazon Managed Streaming for Apache Kafka Developer Guide*\.
 
 To allow Lambda to connect to the MSK cluster, read records, and perform other required actions, add the following permissions to your function's [execution role](lambda-intro-execution-role.md)\.
 
@@ -106,14 +110,14 @@ To allow Lambda to connect to the MSK cluster, read records, and perform other r
             "Resource": [
                 "arn:aws:kafka:region:account-id:cluster/cluster-name/cluster-uuid",
                 "arn:aws:kafka:region:account-id:topic/cluster-name/cluster-uuid/topic-name",
-                "arn:aws:kafka:region:account-id:group/cluster-name/cluster-uuid/group-name"
+                "arn:aws:kafka:region:account-id:group/cluster-name/cluster-uuid/consumer-group-id"
             ]
         }
     ]
 }
 ```
 
-You can scope these permissions to a specific cluster, topic, and group\. For more information, see the [Amazon MSK Kafka actions](https://docs.aws.amazon.com/msk/latest/developerguide/iam-access-control.html#kafka-actions) in the *Amazon Managed Streaming for Apache Kafka Developer Guide*\. The group name that IAM uses is equivalent to the event source mapping's UUID\.
+You can scope these permissions to a specific cluster, topic, and group\. For more information, see the [Amazon MSK Kafka actions](https://docs.aws.amazon.com/msk/latest/developerguide/iam-access-control.html#kafka-actions) in the *Amazon Managed Streaming for Apache Kafka Developer Guide*\.
 
 ### Mutual TLS authentication<a name="msk-permissions-mTLS"></a>
 
@@ -188,6 +192,18 @@ zp2mwJn2NYB7AZ7+imp0azDZb+8YG2aUCiyqb6PnnA==
 }
 ```
 
+### How Lambda chooses a bootstrap broker<a name="msk-bootstrap-brokers"></a>
+
+Lambda chooses a [ bootstrap broker](https://docs.aws.amazon.com/msk/latest/developerguide/msk-get-bootstrap-brokers.html) based on the authentication methods available on your cluster, and whether you provide a secret for authentication\. If you provide a secret for mTLS or SASL/SCRAM, Lambda automatically chooses that auth method\. If you don't provide a secret, Lambda selects the strongest auth method that's active on your cluster\. The following is the order of priority in which Lambda selects a broker, from strongest to weakest auth:
++ mTLS \(secret provided for mTLS\)
++ SASL/SCRAM \(secret provided for SASL/SCRAM\)
++ SASL IAM \(no secret provided, and IAM auth active\)
++ Unauthenticated TLS \(no secret provided, and IAM auth not active\)
++ Plaintext \(no secret provided, and both IAM auth and unauthenticated TLS are not active\)
+
+**Note**  
+If Lambda can't connect to the most secure broker type, Lambda doesn't attempt to connect to a different \(weaker\) broker type\. If you want Lambda to choose a weaker broker type, deactivate all stronger auth methods on your cluster\.
+
 ## Managing API access and permissions<a name="msk-permissions"></a>
 
 In addition to accessing the Amazon MSK cluster, your function needs permissions to perform various Amazon MSK API actions\. You add these permissions to the function's execution role\. If your users need access to any of the Amazon MSK API actions, add the required permissions to the identity policy for the IAM user or role\.
@@ -195,6 +211,7 @@ In addition to accessing the Amazon MSK cluster, your function needs permissions
 ### Required Lambda function execution role permissions<a name="msk-api-actions"></a>
 
 Your Lambda function's [execution role](lambda-intro-execution-role.md) must have the following permissions to access the MSK cluster on your behalf\. You can either add the AWS managed policy `AWSLambdaMSKExecutionRole` to your execution role, or create a custom policy with permission to perform the following actions:
++ [kafka:DescribeCluster](https://docs.aws.amazon.com/msk/1.0/apireference/clusters-clusterarn.html#clusters-clusterarnget)
 + [kafka:DescribeClusterV2](https://docs.aws.amazon.com/MSK/2.0/APIReference/v2-clusters-clusterarn.html#v2-clusters-clusterarnget)
 + [kafka:GetBootstrapBrokers](https://docs.aws.amazon.com/msk/1.0/apireference/clusters-clusterarn-bootstrap-brokers.html#clusters-clusterarn-bootstrap-brokersget)
 + [ec2:CreateNetworkInterface](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html)
@@ -206,6 +223,9 @@ Your Lambda function's [execution role](lambda-intro-execution-role.md) must hav
 + [logs:CreateLogGroup](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogGroup.html)
 + [logs:CreateLogStream](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateLogStream.html)
 + [logs:PutLogEvents](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html)
+
+**Note**  
+Lambda eventually plans to remove the `kafka:DescribeCluster` permission from this policy\. You should migrate any applications using `kafka:DescribeCluster` to use `kafka:DescribeClusterV2` instead\.
 
 ### Adding permissions to your execution role<a name="msk-permissions-add-policy"></a>
 
@@ -277,7 +297,7 @@ This error indicates that the Amazon MSK consumer couldn't use the provided cert
 
 ## Network configuration<a name="services-msk-vpc-config"></a>
 
-Lambda must have access to the Amazon Virtual Private Cloud \(Amazon VPC\) resources associated with your Amazon MSK cluster\. We recommend that you deploy AWS PrivateLink [VPC endpoints](https://docs.aws.amazon.com/vpc/latest/privatelink/endpoint-services-overview.html) for Lambda and AWS Security Token Service \(AWS STS\)\. If authentication is required, also deploy a VPC endpoint for Secrets Manager\.
+Lambda must have access to the Amazon Virtual Private Cloud \(Amazon VPC\) resources associated with your Amazon MSK cluster\. We recommend that you deploy [AWS PrivateLink VPC endpoints](https://docs.aws.amazon.com/vpc/latest/privatelink/aws-services-privatelink-support.html) for Lambda and AWS Security Token Service \(AWS STS\)\. The poller needs access to AWS STS to assume the execution role associated with the Lambda function\. Lambda must have access to the Lambda VPC endpoint to invoke the function\. If you configured a secret in Secrets Manager to authenticate Lambda with the brokers, also [deploy a VPC endpoint for Secrets Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html)\.
 
 Alternatively, ensure that the VPC associated with your MSK cluster includes one NAT gateway per public subnet\. For more information, see [Internet and service access for VPC\-connected functions](configuration-vpc.md#vpc-internet)\.
 
@@ -293,13 +313,23 @@ For more information about configuring the network, see [Setting up AWS Lambda w
 
 ## Adding Amazon MSK as an event source<a name="services-msk-topic-add"></a>
 
-To create an [event source mapping](invocation-eventsourcemapping.md), add Amazon MSK as a Lambda function [trigger](gettingstarted-concepts.md#gettingstarted-concepts-trigger) using the Lambda console, an [AWS SDK](http://aws.amazon.com/getting-started/tools-sdks/), or the [AWS Command Line Interface \(AWS CLI\)](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)\.
+To create an [event source mapping](invocation-eventsourcemapping.md), add Amazon MSK as a Lambda function [trigger](gettingstarted-concepts.md#gettingstarted-concepts-trigger) using the Lambda console, an [AWS SDK](http://aws.amazon.com/getting-started/tools-sdks/), or the [AWS Command Line Interface \(AWS CLI\)](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)\. Note that when you add Amazon MSK as a trigger, Lambda assumes the VPC settings of the Amazon MSK cluster, not the Lambda function's VPC settings\.
 
 This section describes how to create an event source mapping using the Lambda console and the AWS CLI\.
 
 ### Prerequisites<a name="services-msk-prereqs"></a>
 + An Amazon MSK cluster and a Kafka topic\. For more information, see [Getting Started Using Amazon MSK](https://docs.aws.amazon.com/msk/latest/developerguide/getting-started.html) in the *Amazon Managed Streaming for Apache Kafka Developer Guide*\.
 + An [execution role](lambda-intro-execution-role.md) with permission to access the AWS resources that your MSK cluster uses\.
+
+### Customizable consumer group ID<a name="services-msk-consumer-group-id"></a>
+
+When setting up Kafka as an event source, you can specify a consumer group ID\. This consumer group ID is an existing identifier for the Kafka consumer group that you want your Lambda function to join\. You can use this feature to seamlessly migrate any ongoing Kafka record processing setups from other consumers to Lambda\.
+
+If you specify a consumer group ID and there are other active pollers within that consumer group, Kafka distributes messages across all consumers\. In other words, Lambda doesn't receive all message for the Kafka topic\. If you want Lambda to handle all messages in the topic, turn off any other pollers in that consumer group\.
+
+Additionally, if you specify a consumer group ID, and Kafka finds a valid existing consumer group with the same ID, Lambda ignores the `StartingPosition` parameter for your event source mapping\. Instead, Lambda begins processing records according to the committed offset of the consumer group\. If you specify a consumer group ID, and Kafka cannot find an existing consumer group, then Lambda configures your event source with the specified `StartingPosition`\.
+
+The consumer group ID that you specify must be unique among all your Kafka event sources\. After creating a Kafka event source mapping with the consumer group ID specified, you cannot update this value\.
 
 ### Adding an Amazon MSK trigger \(console\)<a name="services-msk-trigger"></a>
 
@@ -321,7 +351,11 @@ Follow these steps to add your Amazon MSK cluster and a Kafka topic as a trigger
 
    1. For **Batch size**, enter the maximum number of messages to receive in a single batch\.
 
+   1. For **Batch window**, enter the maximum amount of seconds that Lambda spends gathering records before invoking the function\.
+
    1. For **Topic name**, enter the name of a Kafka topic\.
+
+   1. \(Optional\) For **Consumer group ID**, enter the ID of a Kafka consumer group to join\.
 
    1. \(Optional\) For **Starting position**, choose **Latest** to start reading the stream from the latest record\. Or, choose **Trim horizon** to start at the earliest available record\.
 
@@ -372,9 +406,9 @@ To check how many function invocations occur in parallel, you can also monitor t
 
 ## Amazon CloudWatch metrics<a name="services-msk-metrics"></a>
 
-Lambda emits the `OffsetLag` metric while your function processes records\. The value of this metric is the difference in offset between the last record written to the Kafka event source topic, and the last record that Lambda processed\. You can use `OffsetLag` to estimate the latency between when a record is added and when your function processes it\.
+Lambda emits the `OffsetLag` metric while your function processes records\. The value of this metric is the difference in offset between the last record written to the Kafka event source topic and the last record that your function's consumer group processed\. You can use `OffsetLag` to estimate the latency between when a record is added and when your consumer group processes it\.
 
-An increasing trend in `OffsetLag` can indicate issues with your function\. For more information, see [Working with Lambda function metrics](monitoring-metrics.md)\.
+An increasing trend in `OffsetLag` can indicate issues with pollers in your function's consumer group\. For more information, see [Working with Lambda function metrics](monitoring-metrics.md)\.
 
 ## Amazon MSK configuration parameters<a name="services-msk-parms"></a>
 
@@ -385,10 +419,13 @@ All Lambda event source types share the same [CreateEventSourceMapping](API_Crea
 
 | Parameter | Required | Default | Notes | 
 | --- | --- | --- | --- | 
+|  AmazonManagedKafkaEventSourceConfig  |  N  |  Contains the ConsumerGroupId field, which defaults to a unique value\.  |  Can set only on Create  | 
 |  BatchSize  |  N  |  100  |  Maximum: 10,000  | 
 |  Enabled  |  N  |  Enabled  |     | 
 |  EventSourceArn  |  Y  |  |  Can set only on Create  | 
 |  FunctionName  |  Y  |     |     | 
-|  SourceAccessConfigurations  |  N  |  No credentials  |  VPC information or SASL/SCRAM authentication credentials for your event source  | 
+|  FilterCriteria  |  N  |     |  [Lambda event filtering](invocation-eventfiltering.md)  | 
+|  MaximumBatchingWindowInSeconds  |  N  |  500 ms  |  [Batching behavior](invocation-eventsourcemapping.md#invocation-eventsourcemapping-batching)  | 
+|  SourceAccessConfigurations  |  N  |  No credentials  |  SASL/SCRAM or CLIENT\_CERTIFICATE\_TLS\_AUTH \(MutualTLS\) authentication credentials for your event source  | 
 |  StartingPosition  |  Y  |     |  TRIM\_HORIZON or LATEST Can set only on Create  | 
 |  Topics  |  Y  |     |  Kafka topic name Can set only on Create  | 

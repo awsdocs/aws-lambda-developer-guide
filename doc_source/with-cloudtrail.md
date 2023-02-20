@@ -81,5 +81,4 @@ For detailed information about how to configure Amazon S3 as the event source, s
 
 **Topics**
 + [Logging Lambda API calls with CloudTrail](logging-using-cloudtrail.md)
-+ [Tutorial: Triggering a Lambda function with AWS CloudTrail events](with-cloudtrail-example.md)
 + [Sample function code](with-cloudtrail-create-package.md)

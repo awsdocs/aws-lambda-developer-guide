@@ -20,7 +20,10 @@ aws-cli/2.0.57 Python/3.7.4 Darwin/19.6.0 exe/x86_64
 
 For long commands, an escape character \(`\`\) is used to split a command over multiple lines\.
 
-On Linux and macOS, use your preferred shell and package manager\. On Windows 10, you can [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows\-integrated version of Ubuntu and Bash\.
+On Linux and macOS, use your preferred shell and package manager\.
+
+**Note**  
+On Windows, some Bash CLI commands that you commonly use with Lambda \(such as `zip`\) are not supported by the operating system's built\-in terminals\. To get a Windows\-integrated version of Ubuntu and Bash, [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10)\. 
 
 In the tutorial, you use two accounts\. The AWS CLI commands illustrate this by using two [named profiles](https://docs.aws.amazon.com/cli/latest/userguide/cli-multiple-profiles.html), each configured for use with a different account\. If you use profiles with different names, or the default profile and one named profile, modify the commands as needed\.
 
@@ -87,7 +90,7 @@ exports.handler = function(event, context, callback) {
    ```
    aws lambda create-function --function-name Function-With-SNS \
    --zip-file fileb://function.zip --handler index.handler --runtime nodejs12.x \
-   --role arn:aws:iam::<AccountB_ID>:role/service-role/lambda-sns-execution-role  \
+   --role arn:aws:iam::<AccountB_ID>:role/lambda-sns-role  \
    --timeout 60 --profile accountB
    ```
 
@@ -128,7 +131,7 @@ You should see the following output:
 Do not use the `--source-account` parameter to add a source account to the Lambda policy when adding the policy\. Source account is not supported for Amazon SNS event sources and will result in access being denied\.
 
 **Note**  
-If the account with the SNS topic is hosted in an opt\-in region, you need to specify the region in the principal\. For an example, see [Invoking Lambda functions using Amazon SNS notifications](https://docs.aws.amazon.com/sns/latest/dg/sns-lambda.html) in the *Amazon Simple Notification Service Developer Guide*\. 
+If the account with the SNS topic is hosted in an [opt\-in region](https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable), you need to specify the region in the principal\. For example, if you're working with an SNS topic in the Asia Pacific \(Hong Kong\) region, you need to specify `sns.ap-east-1.amazonaws.com` instead of `sns.amazonaws.com` for the principal\. 
 
 ## Create a subscription \(account B\)<a name="with-sns-create-subscription"></a>
 

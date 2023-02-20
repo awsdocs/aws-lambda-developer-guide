@@ -4,28 +4,34 @@ You can use AWS X\-Ray to visualize the components of your application, identify
 
 If you've enabled X\-Ray tracing in a service that invokes your function, Lambda sends traces to X\-Ray automatically\. The upstream service, such as Amazon API Gateway, or an application hosted on Amazon EC2 that is instrumented with the X\-Ray SDK, samples incoming requests and adds a tracing header that tells Lambda to send traces or not\.
 
-To trace requests that don't have a tracing header, enable active tracing in your function's configuration\.
+**Note**  
+X\-Ray tracing is currently not supported for Lambda functions with Amazon Managed Streaming for Apache Kafka \(Amazon MSK\), self\-managed Apache Kafka, or Amazon MQ with ActiveMQ and RabbitMQ event source mappings\.
 
-**To enable active tracing**
+To toggle active tracing on your Lambda function with the console, follow these steps:
+
+**To turn on active tracing**
 
 1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
 
 1. Choose a function\.
 
-1. Choose **Configuration** and then choose **Monitoring tools**\.
+1. Choose **Configuration** and then choose **Monitoring and operations tools**\.
 
 1. Choose **Edit**\.
 
-1. Under **X\-Ray**, enable **Active tracing**\.
+1. Under **X\-Ray**, toggle on **Active tracing**\.
 
 1. Choose **Save**\.
 
 **Pricing**  
 You can use X\-Ray tracing for free each month up to a certain limit as part of the AWS Free Tier\. Beyond that threshold, X\-Ray charges for trace storage and retrieval\. For more information, see [AWS X\-Ray pricing](http://aws.amazon.com/xray/pricing/)\.
 
-Your function needs permission to upload trace data to X\-Ray\. When you enable active tracing in the Lambda console, Lambda adds the required permissions to your function's [execution role](lambda-intro-execution-role.md)\. Otherwise, add the [AWSXRayDaemonWriteAccess](https://console.aws.amazon.com/iam/home#/policies/arn:aws:iam::aws:policy/AWSXRayDaemonWriteAccess) policy to the execution role\.
+Your function needs permission to upload trace data to X\-Ray\. When you activate tracing in the Lambda console, Lambda adds the required permissions to your function's [execution role](lambda-intro-execution-role.md)\. Otherwise, add the [AWSXRayDaemonWriteAccess](https://console.aws.amazon.com/iam/home#/policies/arn:aws:iam::aws:policy/AWSXRayDaemonWriteAccess) policy to the execution role\.
 
-X\-Ray applies a sampling algorithm to ensure that tracing is efficient, while still providing a representative sample of the requests that your application serves\. The default sampling rate is 1 request per second and 5 percent of additional requests\. This sampling rate cannot be configured for Lambda functions\.
+X\-Ray doesn't trace all requests to your application\. X\-Ray applies a sampling algorithm to ensure that tracing is efficient, while still providing a representative sample of all requests\. The sampling rate is 1 request per second and 5 percent of additional requests\.
+
+**Note**  
+You cannot configure the X\-Ray sampling rate for your functions\.
 
 In X\-Ray, a *trace* records information about a request that is processed by one or more *services*\. Services record *segments* that contain layers of *subsegments*\. Lambda records a segment for the Lambda service that handles the invocation request, and one for the work done by the function\. The function segment comes with subsegments for `Initialization`, `Invocation` and `Overhead`\. For more information see [ Lambda execution environment lifecycle](lambda-runtime-environment.md)\.
 
@@ -48,7 +54,7 @@ See the following topics for a language\-specific introduction to tracing in Lam
 + [Instrumenting Node\.js code in AWS Lambda](nodejs-tracing.md)
 + [Instrumenting Python code in AWS Lambda](python-tracing.md)
 + [Instrumenting Ruby code in AWS Lambda](ruby-tracing.md)
-+ [Instrumenting Java code in Lambda](java-tracing.md)
++ [Instrumenting Java code in AWS Lambda](java-tracing.md)
 + [Instrumenting Go code in AWS Lambda](golang-tracing.md)
 + [Instrumenting C\# code in AWS Lambda](csharp-tracing.md)
 
@@ -92,7 +98,7 @@ aws lambda update-function-configuration --function-name my-function \
 --tracing-config Mode=Active
 ```
 
-Tracing mode is part of the version\-specific configuration that is locked when you publish a version of your function\. You can't change the tracing mode on a published version\.
+Tracing mode is part of the version\-specific configuration when you publish a version of your function\. You can't change the tracing mode on a published version\.
 
 ## Enabling active tracing with AWS CloudFormation<a name="services-xray-cloudformation"></a>
 

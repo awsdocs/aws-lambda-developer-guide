@@ -18,6 +18,9 @@ You upload your container images to Amazon Elastic Container Registry \(Amazon E
 
 For more information about Lambda container images, see [Creating Lambda container images](images-create.md)\.
 
+**Note**  
+Container images aren't supported for Lambda functions in the Middle East \(UAE\) Region\.
+
 ## \.zip file archives<a name="gettingstarted-package-zip"></a>
 
 A \.zip file archive includes your application code and its dependencies\. When you author functions using the Lambda console or a toolkit, Lambda automatically creates a \.zip file archive of your code\.
@@ -107,7 +110,7 @@ For more information, see [sam build](https://docs.aws.amazon.com/serverless-app
 
 ### Deployment packages over 50 MB<a name="gettingstarted-package-s3"></a>
 
-If your deployment package is larger than 50 MB, we recommend uploading your function code and dependencies to an Amazon S3 bucket\.
+If your deployment package is larger than 50 MB, upload your function code and dependencies to an Amazon S3 bucket\.
 
 You can create a deployment package and upload the \.zip file to your Amazon S3 bucket in the AWS Region where you want to create a Lambda function\. When you create your Lambda function, specify the S3 bucket name and object key name on the Lambda console, or using the AWS CLI\.
 

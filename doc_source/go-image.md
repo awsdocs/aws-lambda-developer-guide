@@ -32,9 +32,9 @@ The workflow for a function defined as a container image includes these steps:
 AWS provides the following base image for Go:
 
 
-| Tags | Runtime | Operating system | Dockerfile | 
-| --- | --- | --- | --- | 
-|  1  | Go 1\.x | Amazon Linux 2018\.03 | [Dockerfile for Go 1\.x on GitHub](https://github.com/aws/aws-lambda-base-images/blob/go1.x/Dockerfile.go1.x) | 
+| Tags | Runtime | Operating system | Dockerfile | Deprecation | 
+| --- | --- | --- | --- | --- | 
+| 1 | Go 1\.x | Amazon Linux | [Dockerfile for Go 1\.x on GitHub](https://github.com/aws/aws-lambda-base-images/blob/go1.x/Dockerfile.go1.x) |    | 
 
 Amazon ECR repository: [gallery\.ecr\.aws/lambda/go](https://gallery.ecr.aws/lambda/go)
 

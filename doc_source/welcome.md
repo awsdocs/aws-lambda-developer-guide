@@ -1,6 +1,6 @@
 # What is AWS Lambda?<a name="welcome"></a>
 
-Lambda is a compute service that lets you run code without provisioning or managing servers\. Lambda runs your code on a high\-availability compute infrastructure and performs all of the administration of the compute resources, including server and operating system maintenance, capacity provisioning and automatic scaling, code monitoring and logging\. With Lambda, you can run code for virtually any type of application or backend service\. All you need to do is supply your code in one of the [languages that Lambda supports](lambda-runtimes.md)\.
+Lambda is a compute service that lets you run code without provisioning or managing servers\. Lambda runs your code on a high\-availability compute infrastructure and performs all of the administration of the compute resources, including server and operating system maintenance, capacity provisioning and automatic scaling, and logging\. With Lambda, you can run code for virtually any type of application or backend service\. All you need to do is supply your code in one of the [languages that Lambda supports](lambda-runtimes.md)\.
 
 **Note**  
 In the AWS Lambda Developer Guide, we assume that you have experience with coding, compiling, and deploying programs using one of the supported languages\.
@@ -95,7 +95,7 @@ You can create, invoke, and manage your Lambda functions using any of the follow
 +  **AWS Management Console** – Provides a web interface for you to access your functions\. For more information, see [Lambda console](foundation-console.md)\.
 +  **AWS Command Line Interface \(AWS CLI\)** – Provides commands for a broad set of AWS services, including Lambda, and is supported on Windows, macOS, and Linux\. For more information, see [Using Lambda with the AWS CLI](gettingstarted-awscli.md)\.
 + **AWS SDKs** – Provide language\-specific APIs and manage many of the connection details, such as signature calculation, request retry handling, and error handling\. For more information, see [AWS SDKs](http://aws.amazon.com/tools/#SDKs)\.
-+  **AWS CloudFormation** – Enables you to create templates that define your Lambda applications\. For more information, see [AWS Lambda applications](deploying-lambda-apps.md)\. AWS CloudFormation also supports the [AWS Cloud Development Kit \(CDK\)](http://aws.amazon.com/cdk)\.
++  **AWS CloudFormation** – Enables you to create templates that define your Lambda applications\. For more information, see [AWS Lambda applications](deploying-lambda-apps.md)\. AWS CloudFormation also supports the [AWS Cloud Development Kit \(AWS CDK\)](http://aws.amazon.com/cdk)\.
 +  **AWS Serverless Application Model \(AWS SAM\)** – Provides templates and a CLI to configure and manage AWS serverless applications\. For more information, see [SAM CLI](lambda-settingup.md#lambda-settingup-samcli)\.
 
 

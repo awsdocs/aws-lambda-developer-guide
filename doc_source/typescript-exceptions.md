@@ -60,7 +60,7 @@ Metadata: # Manage esbuild properties
     - app.ts
 ```
 
-**Example for the AWS Cloud Development Kit \(CDK\)**  
+**Example for the AWS Cloud Development Kit \(AWS CDK\)**  
 To use a source map with an AWS CDK application, add the following code to the file that contains the [NodejsFunction construct](https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_lambda_nodejs-readme.html)\.  
 
 ```

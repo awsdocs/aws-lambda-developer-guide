@@ -1,6 +1,6 @@
 # ListEventSourceMappings<a name="API_ListEventSourceMappings"></a>
 
-Lists event source mappings\. Specify an `EventSourceArn` to only show event source mappings for a single event source\.
+Lists event source mappings\. Specify an `EventSourceArn` to show only event source mappings for a single event source\.
 
 ## Request Syntax<a name="API_ListEventSourceMappings_RequestSyntax"></a>
 
@@ -18,6 +18,7 @@ The Amazon Resource Name \(ARN\) of the event source\.
 +  **Amazon DynamoDB Streams** \- The ARN of the stream\.
 +  **Amazon Simple Queue Service** \- The ARN of the queue\.
 +  **Amazon Managed Streaming for Apache Kafka** \- The ARN of the cluster\.
++  **Amazon MQ** \- The ARN of the broker\.
 Pattern: `arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)` 
 
  ** [FunctionName](#API_ListEventSourceMappings_RequestSyntax) **   <a name="SSS-ListEventSourceMappings-request-FunctionName"></a>
@@ -52,6 +53,9 @@ Content-type: application/json
 {
    "EventSourceMappings": [ 
       { 
+         "AmazonManagedKafkaEventSourceConfig": { 
+            "ConsumerGroupId": "string"
+         },
          "BatchSize": number,
          "BisectBatchOnFunctionError": boolean,
          "DestinationConfig": { 
@@ -83,6 +87,9 @@ Content-type: application/json
             "Endpoints": { 
                "string" : [ "string" ]
             }
+         },
+         "SelfManagedKafkaEventSourceConfig": { 
+            "ConsumerGroupId": "string"
          },
          "SourceAccessConfigurations": [ 
             { 

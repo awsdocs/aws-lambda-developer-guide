@@ -29,7 +29,7 @@ Create [layers](configuration-layers.md) to separate your \.zip archive function
 
 ## Edit code using the console editor<a name="code-editor"></a>
 
-You can use the code editor in the AWS Lambda console to write, test, and view the execution results of your Lambda function code\. The code editor supports languages that do not require compiling, such as Node\.js and Python\. The code editor suppports only \.zip archive deployment packages, and the size of the deployment package must be less than 3 MB\. 
+You can use the code editor in the AWS Lambda console to write, test, and view the execution results of your Lambda function code\. The code editor supports languages that do not require compiling, such as Node\.js and Python\. The code editor supports only \.zip archive deployment packages, and the size of the deployment package must be less than 3 MB\. 
 
 The code editor includes the *menu bar*, *windows*, and the *editor pane*\.
 

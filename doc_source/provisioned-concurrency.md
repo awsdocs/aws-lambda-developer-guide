@@ -188,8 +188,6 @@ In the following example, a function scales between a minimum and maximum amount
 
  Both of these alarms use the *average* statistic by default\. Functions that have traffic patterns of quick bursts may not trigger your provisioned concurrency to scale up\. For example, if your Lambda function executes quickly \(20–100 ms\) and your traffic pattern comes in quick bursts, this may cause incoming requests to exceed your allocated provisioned concurrency during the burst, but if the burst doesn’t last 3 minutes, auto scaling will not trigger\. Additionally, if CloudWatch doesn’t get three data points that hit the target average, the auto scaling policy will not trigger\. 
 
- If your scaling policy does not trigger and your provisioned concurrency does not scale, check that the alarms were triggered\. If not, deploy your function with a custom CloudWatch alarm set to use the *max* statistic\. 
-
 For more information on target tracking scaling policies, see [Target tracking scaling policies for Application Auto Scaling](https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html)\.
 
 ### Scheduled scaling<a name="managing-provisioned-concurrency-scheduling"></a>

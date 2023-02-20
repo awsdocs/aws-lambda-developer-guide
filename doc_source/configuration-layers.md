@@ -8,6 +8,9 @@ You can use layers only with Lambda functions [deployed as a \.zip file archive]
 
 You can create layers using the Lambda console, the Lambda API, AWS CloudFormation, or the AWS Serverless Application Model \(AWS SAM\)\. For more information about creating layers with AWS SAM, see [Working with layers](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-layers.html) in the *AWS Serverless Application Model Developer Guide*\.
 
+**Note**  
+For Node\.js runtimes, Lambda doesn't currently support ES module dependencies in layers\.
+
 **Topics**
 + [Creating layer content](#configuration-layers-upload)
 + [Compiling the \.zip file archive for your layer](#configuration-layers-compile)
@@ -70,7 +73,7 @@ pillow.zip
 
 ```
 json.zip
-└ ruby/gems/2.5.0/
+└ ruby/gems/2.7.0/
                | build_info
                | cache
                | doc

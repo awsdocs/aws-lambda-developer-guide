@@ -4,6 +4,9 @@ AWS provides a set of open\-source [base images](runtimes-images.md#runtimes-ima
 
 For example applications, including a Node\.js example and a Python example, see [Container image support for Lambda](http://aws.amazon.com/blogs/aws/new-for-aws-lambda-container-image-support/) on the AWS Blog\.
 
+**Note**  
+Container images aren't supported for Lambda functions in the Middle East \(UAE\) Region\.
+
 **Topics**
 + [Base images for Lambda](runtimes-images.md)
 + [Testing Lambda container images locally](images-test.md)
@@ -20,7 +23,7 @@ For example applications, including a Node\.js example and a Python example, see
 
 To deploy a container image to Lambda, you need the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) and [Docker CLI](https://docs.docker.com/get-docker)\. Additionally, note the following requirements:
 + The container image must implement the Lambda [Runtime API](runtimes-api.md)\. The AWS open\-source [runtime interface clients](runtimes-images.md#runtimes-api-client) implement the API\. You can add a runtime interface client to your preferred base image to make it compatible with Lambda\.
-+ The container image must be able to run on a read\-only file system\. Your function code can access a writable `/tmp` directory with 512 MB of storage\. 
++ The container image must be able to run on a read\-only file system\. Your function code can access a writable `/tmp` directory with between 512 MB and 10,240 MB, in 1\-MB increments, of storage\. 
 + The default Lambda user must be able to read all the files required to run your function code\. Lambda follows security best practices by defining a default Linux user with least\-privileged permissions\. Verify that your application code does not rely on files that other Linux users are restricted from running\.
 + Lambda supports only Linux\-based container images\.
 + Lambda provides multi\-architecture base images\. However, the image you build for your function must target only one of the architectures\. Lambda does not support functions that use multi\-architecture container images\.
@@ -112,14 +115,14 @@ AWS periodically provides updates to the AWS base images for Lambda\. If your Do
    ```
    FROM public.ecr.aws/lambda/python:3.8
    
-   # Copy function code
-   COPY app.py ${LAMBDA_TASK_ROOT}
-   
    # Install the function's dependencies using file requirements.txt
    # from your project folder.
    
    COPY requirements.txt  .
    RUN  pip3 install -r requirements.txt --target "${LAMBDA_TASK_ROOT}"
+   
+   # Copy function code
+   COPY app.py ${LAMBDA_TASK_ROOT}
    
    # Set the CMD to your handler (could also be done as a parameter override outside of the Dockerfile)
    CMD [ "app.handler" ]

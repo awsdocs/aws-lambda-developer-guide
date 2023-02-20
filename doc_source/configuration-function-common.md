@@ -12,6 +12,7 @@ For function configuration best practices, see [Function configuration](best-pra
 + [Configuring functions \(console\)](#configuration-common-summary)
 + [Configuring functions \(API\)](#configuration-function-api)
 + [Configuring function memory \(console\)](#configuration-memory-console)
++ [Configuring function timeout \(console\)](#configuration-timeout-console)
 + [Configuring ephemeral storage \(console\)](#configuration-ephemeral-storage)
 + [Accepting function memory recommendations \(console\)](#configuration-memory-optimization-accept)
 + [Configuring triggers \(console\)](#configuration-common-triggers)
@@ -32,14 +33,14 @@ The **Function overview** shows a visualization of your function and its upstrea
 ## Configuring functions \(console\)<a name="configuration-common-summary"></a>
 
 For the following function configurations, you can change the settings only for the unpublished version of a function\. In the console, the function **Configuration** tab provides the following sections:
-+ **General configuration** – Configure [memory](#configuration-memory-console) or opt in to the [AWS Compute Optimizer](#configuration-memory-optimization-accept)\. You can also configure function timeout and the execution role\.
++ **General configuration** – Configure [memory](#configuration-memory-console) or opt in to the [AWS Compute Optimizer](#configuration-memory-optimization-accept)\. You can also configure function [timeout](#configuration-timeout-console) and the execution role\.
 + **Permissions** – Configure the execution role and other [permissions](lambda-permissions.md)\.
 + **Environment variables** – Key\-value pairs that Lambda sets in the execution environment\. To extend your function's configuration outside of code, [use environment variables](configuration-envvars.md)\. 
 + **Tags** – Key\-value pairs that Lambda attaches to your function resource\. [Use tags](configuration-tags.md) to organize Lambda functions into groups for cost reporting and filtering in the Lambda console\.
 
   Tags apply to the entire function, including all versions and aliases\.
 + **Virtual private cloud \(VPC\)** – If your function needs network access to resources that are not available over the internet, [configure it to connect to a virtual private cloud \(VPC\)](configuration-vpc.md)\.
-+ **Monitoring and operations tools** – configure CloudWatch and other monitoring tools\.
++ **Monitoring and operations tools** – configure CloudWatch and other [monitoring tools](lambda-monitoring.md)\.
 + **Concurrency** – [Reserve concurrency for a function](configuration-concurrency.md) to set the maximum number of simultaneous executions for a function\. Provision concurrency to ensure that a function can scale without fluctuations in latency\. Reserved concurrency applies to the entire function, including all versions and aliases\.
 + **Function URL** – Configure a [function URL](lambda-urls.md) to add a unique HTTP\(S\) endpoint to your Lambda function\. You can configure a function URL on the `$LATEST` unpublished function version, or on any function alias\.
 
@@ -95,9 +96,27 @@ You can configure the memory of your function in the Lambda console\.
 
 1. Choose **Save**\.
 
+## Configuring function timeout \(console\)<a name="configuration-timeout-console"></a>
+
+Lambda runs your code for a set amount of time before timing out\. *Timeout* is the maximum amount of time in seconds that a Lambda function can run\. The default value for this setting is 3 seconds, but you can adjust this in increments of 1 second up to a maximum value of 15 minutes\.
+
+You can configure the timeout of your function in the Lambda console\.
+
+**To change the timeout of a function**
+
+1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
+
+1. Choose a function\.
+
+1. On the function configuration page, on the **General configuration** pane, choose **Edit**\.
+
+1. For **Timeout**, set a value from 1 second to 15 minutes\.
+
+1. Choose **Save**\.
+
 ## Configuring ephemeral storage \(console\)<a name="configuration-ephemeral-storage"></a>
 
- By default, Lambda allocates 512 MB for a function’s /tmp directory\. You can increase or decrease this amount using the **Ephemeral storage \(MB\)** setting\. To configure the size of a function’s /tmp directory, set a whole number value between 512 MB and 10,240 MB\. 
+ By default, Lambda allocates 512 MB for a function’s /tmp directory\. You can increase or decrease this amount using the **Ephemeral storage \(MB\)** setting\. To configure the size of a function’s /tmp directory, set a whole number value between 512 MB and 10,240 MB, in 1\-MB increments\. 
 
 **Note**  
  Configuring ephemeral storage past the default 512 MB allocated incurs a cost\. For more information, see [Lambda pricing](https://aws.amazon.com/lambda/pricing)\. 
@@ -157,34 +176,6 @@ For details about how services trigger Lambda functions, see [Using AWS Lambda w
 
 ## Testing functions \(console\)<a name="configuration-common-test"></a>
 
-You can create test events for your function from the **Test** tab\.
-
-**To create a test event**
-
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
-
-1. Choose the function to test, and choose **Test**\.
-
-1. Under **Test event**, select **New event**\.
-
-1. Select a **Template**\.
-
-1. For **Name**, enter a name for the test\. In the text entry box, enter the JSON test event\.
-
-1. Choose **Save changes**\.
-
-Saved test events are also available from the **Code** tab, under the **Test** menu\. After you create one or more test events, you can invoke your function using one of your tests as an event\.
-
-**To test the function**
-
-1. Open the [Functions page](https://console.aws.amazon.com/lambda/home#/functions) of the Lambda console\.
-
-1. Choose the function to test, and choose **Test**\.
-
-1. Under **Test event**, select **Saved events** and select the event you want to use\.
-
-1. Choose **Test**\.
-
-1. Expand the **Execution result** panel to display details about the test\.
+You can create test events for your function from the **Test** tab\. For more information, see [Testing Lambda functions in the console](https://docs.aws.amazon.com/lambda/latest/dg/testing-functions.html)\.
 
 You can also invoke your function without saving your test event by choosing **Test** before saving\. This creates an unsaved test event that Lambda will preserve for the duration of the session\. You can access your unsaved test events from either the **Test** or **Code** tab\. 

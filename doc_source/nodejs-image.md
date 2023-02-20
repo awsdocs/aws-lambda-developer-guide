@@ -30,11 +30,11 @@ The workflow for a function defined as a container image includes these steps:
 AWS provides the following base images for Node\.js:
 
 
-| Tags | Runtime | Operating system | Dockerfile | 
-| --- | --- | --- | --- | 
-| 16 | NodeJS 16\.x | Amazon Linux 2 | [Dockerfile for Node\.js 16\.x on GitHub](https://github.com/aws/aws-lambda-base-images/blob/nodejs16.x/Dockerfile.nodejs16.x) | 
-| 14 | NodeJS 14\.x | Amazon Linux 2 | [Dockerfile for Node\.js 14\.x on GitHub](https://github.com/aws/aws-lambda-base-images/blob/nodejs14.x/Dockerfile.nodejs14.x) | 
-| 12 | NodeJS 12\.x | Amazon Linux 2 | [Dockerfile for Node\.js 12\.x on GitHub](https://github.com/aws/aws-lambda-base-images/blob/nodejs12.x/Dockerfile.nodejs12.x) | 
+| Tags | Runtime | Operating system | Dockerfile | Deprecation | 
+| --- | --- | --- | --- | --- | 
+| 16 | Node\.js 16 | Amazon Linux 2 | [Dockerfile for Node\.js 16 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/nodejs16.x/Dockerfile.nodejs16.x) |    | 
+| 14 | Node\.js 14 | Amazon Linux 2 | [Dockerfile for Node\.js 14 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/nodejs14.x/Dockerfile.nodejs14.x) |    | 
+| 12 | Node\.js 12 | Amazon Linux 2 | [Dockerfile for Node\.js 12 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/nodejs12.x/Dockerfile.nodejs12.x) |  Mar 31, 2023  | 
 
 Amazon ECR repository: [gallery\.ecr\.aws/lambda/nodejs](https://gallery.ecr.aws/lambda/nodejs)
 

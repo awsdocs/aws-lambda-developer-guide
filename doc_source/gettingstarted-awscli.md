@@ -22,7 +22,10 @@ aws-cli/2.0.57 Python/3.7.4 Darwin/19.6.0 exe/x86_64
 
 For long commands, an escape character \(`\`\) is used to split a command over multiple lines\.
 
-On Linux and macOS, use your preferred shell and package manager\. On Windows 10, you can [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows\-integrated version of Ubuntu and Bash\.
+On Linux and macOS, use your preferred shell and package manager\.
+
+**Note**  
+On Windows, some Bash CLI commands that you commonly use with Lambda \(such as `zip`\) are not supported by the operating system's built\-in terminals\. To get a Windows\-integrated version of Ubuntu and Bash, [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10)\. 
 
 This tutorial uses the AWS Command Line Interface \(AWS CLI\) to call service API operations\. To install the AWS CLI, see [Installing the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) in the AWS Command Line Interface User Guide\.
 
@@ -36,7 +39,7 @@ In the following example, you specify the trust policy inline\. Requirements for
 aws iam create-role --role-name lambda-ex --assume-role-policy-document '{"Version": "2012-10-17","Statement": [{ "Effect": "Allow", "Principal": {"Service": "lambda.amazonaws.com"}, "Action": "sts:AssumeRole"}]}'
 ```
 
-You can also define the [trust policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html) for the role using a JSON file\. In the following example, `trust-policy.json` is a file in the current directory\. This trust policy allows Lambda to use the role's permissions by giving the service principal `lambda.amazonaws.com` permission to call the AWS Security Token Service `AssumeRole` action\.
+You can also define the [trust policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#delegation) for the role using a JSON file\. In the following example, `trust-policy.json` is a file in the current directory\. This trust policy allows Lambda to use the role's permissions by giving the service principal `lambda.amazonaws.com` permission to call the AWS Security Token Service \(AWS STS\) `AssumeRole` action\.
 
 **Example trust\-policy\.json**  
 
@@ -85,7 +88,7 @@ You should see the following output:
 }
 ```
 
-To add permissions to the role, use the `attach-policy-to-role` command\. Start by adding the `AWSLambdaBasicExecutionRole` managed policy\.
+To add permissions to the role, use the attach\-policy\-to\-role command\. Start by adding the `AWSLambdaBasicExecutionRole` managed policy\.
 
 ```
 aws iam attach-role-policy --role-name lambda-ex --policy-arn arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
@@ -121,7 +124,7 @@ exports.handler = async function(event, context) {
 
    ```
    aws lambda create-function --function-name my-function \
-   --zip-file fileb://function.zip --handler index.handler --runtime nodejs12.x \
+   --zip-file fileb://function.zip --handler index.handler --runtime nodejs16.x \
    --role arn:aws:iam::123456789012:role/lambda-ex
    ```
 
@@ -131,7 +134,7 @@ exports.handler = async function(event, context) {
    {
        "FunctionName": "my-function",
        "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
-       "Runtime": "nodejs12.x",
+       "Runtime": "nodejs16.x",
        "Role": "arn:aws:iam::123456789012:role/lambda-ex",
        "Handler": "index.handler",
        "CodeSha256": "FpFMvUhayLkOoVBpNuNiIVML/tuGv2iJQ7t0yWVTU8c=",
@@ -237,6 +240,20 @@ You should see the following output:
 }
 ```
 
+## Update the function<a name="cli-update-function"></a>
+
+After you create a function, you can configure additional capabilities for the function, such as triggers, network access, and file system access\. You can also adjust resources associated with the function, such as memory and concurrency\. These configurations apply to functions defined as \.zip file archives and to functions defined as container images\.
+
+Use the [update\-function\-configuration](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/update-function-configuration.html) command to configure functions\. The following example sets the function memory to 256 MB\.
+
+**Example update\-function\-configuration command**  
+
+```
+aws lambda update-function-configuration \
+--function-name my-function \
+--memory-size 256
+```
+
 ## List the Lambda functions in your account<a name="with-userapp-walkthrough-custom-events-list-functions"></a>
 
 Run the following AWS CLI `list-functions` command to retrieve a list of functions that you have created\. 
@@ -253,7 +270,7 @@ You should see the following output:
         {
             "FunctionName": "cli",
             "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
-            "Runtime": "nodejs12.x",
+            "Runtime": "nodejs16.x",
             "Role": "arn:aws:iam::123456789012:role/lambda-ex",
             "Handler": "index.handler",
             ...
@@ -261,7 +278,7 @@ You should see the following output:
         {
             "FunctionName": "random-error",
             "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:random-error",
-            "Runtime": "nodejs12.x",
+            "Runtime": "nodejs16.x",
             "Role": "arn:aws:iam::123456789012:role/lambda-role",
             "Handler": "index.handler",
             ...
@@ -293,7 +310,7 @@ You should see the following output:
     "Configuration": {
         "FunctionName": "my-function",
         "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
-        "Runtime": "nodejs12.x",
+        "Runtime": "nodejs16.x",
         "Role": "arn:aws:iam::123456789012:role/lambda-ex",
         "CodeSha256": "FpFMvUhayLkOoVBpNuNiIVML/tuGv2iJQ7t0yWVTU8c=",
         "Version": "$LATEST",

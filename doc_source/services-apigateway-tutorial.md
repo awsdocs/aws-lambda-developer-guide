@@ -43,7 +43,10 @@ aws-cli/2.0.57 Python/3.7.4 Darwin/19.6.0 exe/x86_64
 
 For long commands, an escape character \(`\`\) is used to split a command over multiple lines\.
 
-On Linux and macOS, use your preferred shell and package manager\. On Windows 10, you can [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows\-integrated version of Ubuntu and Bash\.
+On Linux and macOS, use your preferred shell and package manager\.
+
+**Note**  
+On Windows, some Bash CLI commands that you commonly use with Lambda \(such as `zip`\) are not supported by the operating system's built\-in terminals\. To get a Windows\-integrated version of Ubuntu and Bash, [install the Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10)\. 
 
 ## Create an execution role<a name="services-apigateway-tutorial-role"></a>
 
@@ -108,15 +111,13 @@ Create an [execution role](lambda-intro-execution-role.md)\. This AWS Identity a
 
 1. For the use case, choose **Lambda**\.
 
-1. Choose **Next: Permissions**\.
+1. Choose **Next**\.
 
 1. In the policy search box, enter **lambda\-apigateway\-policy**\.
 
-1. In the search results, select the policy that you created \(`lambda-apigateway-policy`\), and then choose **Next: Tags**\.
+1. In the search results, select the policy that you created \(`lambda-apigateway-policy`\), and then choose **Next**\.
 
-1. Choose **Next: Review**\.
-
-1. Under **Review**, for the **Role name**, enter **lambda\-apigateway\-role**\.
+1. Under **Role details**, for the **Role name**, enter **lambda\-apigateway\-role**\.
 
 1. Choose **Create role**\.
 
@@ -266,62 +267,6 @@ def handler(event, context):
    ```
 
 ------
-#### [ Go ]
-
-**Example LambdaFunctionOverHttps\.go**  
-
-```
-package main
-              
-import (
-    "context"
-    "fmt"
-    "github.com/aws/aws-lambda-go/events"
-    runtime "github.com/aws/aws-lambda-go/lambda"
-)
-
-func main() {
-    runtime.Start(handleRequest)
-}
-
-func handleRequest(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-    fmt.Printf("Processing request data for request %s.\n", request.RequestContext.RequestID)
-    fmt.Printf("Body size = %d.\n", len(request.Body))
-
-    fmt.Println("Headers:")
-    for key, value := range request.Headers {
-        fmt.Printf("    %s: %s\n", key, value)
-    }
-
-    return events.APIGatewayProxyResponse{Body: request.Body, StatusCode: 200}, nil
-}
-```
-
-**To create the function**
-
-1. Save the code example as a file named `LambdaFunctionOverHttps.go`\.
-
-1. Compile your executable\.
-
-   ```
-   GOOS=linux go build LambdaFunctionOverHttps.go
-   ```
-
-1. Create a deployment package\.
-
-   ```
-   zip function.zip LambdaFunctionOverHttps
-   ```
-
-1. Create a Lambda function using the `create-function` AWS Command Line Interface \(AWS CLI\) command\. For the `role` parameter, enter the execution role's Amazon Resource Name \(ARN\), which you copied earlier\.
-
-   ```
-   aws lambda create-function --function-name LambdaFunctionOverHttps \
-   --zip-file fileb://function.zip --handler LambdaFunctionOverHttps --runtime go1.x \
-   --role arn:aws:iam::123456789012:role/service-role/lambda-apigateway-role
-   ```
-
-------
 
 ## Test the function<a name="services-apigateway-tutorial-test"></a>
 
@@ -341,14 +286,14 @@ Test the Lambda function manually using the following sample event data\. You ca
    }
    ```
 
-1. Run the following `invoke` AWS CLI command:
+1. Run the following `invoke` AWS CLI command\.
 
    ```
    aws lambda invoke --function-name LambdaFunctionOverHttps \
-   --payload file://input.txt outputfile.txt
+   --payload file://input.txt outputfile.txt --cli-binary-format raw-in-base64-out
    ```
 
-   The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.
+   The cli\-binary\-format option is required if you're using AWS CLI version 2\. To make this the default setting, run `aws configure set cli-binary-format raw-in-base64-out`\. For more information, see [AWS CLI supported global command line options](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-options.html#cli-configure-options-list)\.
 
 1. Verify the output in the file `outputfile.txt`\.
 

@@ -1,6 +1,6 @@
 # Lambda event filtering<a name="invocation-eventfiltering"></a>
 
-For Amazon Kinesis, Amazon DynamoDB, and Amazon Simple Queue Service \(Amazon SQS\) event sources, you can use event filtering to control which events Lambda sends to your function for processing\. For example, you can define filter criteria so that you process only the records from a Kinesis stream that have the status code `ERROR`\.
+You can use event filtering to control which events Lambda sends to your function for processing\. For example, you can define filter criteria so that you process only the records from a Kinesis stream that have the status code `ERROR`\.
 
 You can define up to five different filters for a single event source\. If an event satisfies any one of these five filters, Lambda sends the event to your function\. Otherwise, Lambda discards the event\. An event either satisfies the filter criteria or it doesn't\. If you're using batching windows, Lambda applies your filter criteria to each new event to determine whether to add it to the current batch\.
 
@@ -12,6 +12,7 @@ You can define up to five different filters for a single event source\. If an ev
 + [Attaching filter criteria to an event source mapping \(AWS CLI\)](#filtering-cli)
 + [Properly filtering Amazon SQS messages](#filtering-sqs)
 + [Properly filtering Kinesis and DynamoDB messages](#filtering-streams)
++ [Properly filtering Amazon Managed Streaming for Apache Kafka, self\-managed Apache Kafka, and Amazon MQ messages](#filtering-poller)
 
 ## Event filtering basics<a name="filtering-basics"></a>
 
@@ -57,9 +58,36 @@ There are three main parts to a `FilterCriteria` object: metadata properties, da
 + **Data properties** are the fields of the event body\. In the example `FilterCriteria`, `Data1` refers to a data property\. In the Kinesis event example, `Data1` could refer to fields such as `City` and `Temperature`\.
 **Note**  
 To filter on data properties, make sure to contain them in `FilterCriteria` within the proper key\. This key depends on the event source\. For Kinesis event sources, the data key is `data`\. For Amazon SQS event sources, the data key is `body`\. For DynamoDB event sources, the data key is `dynamodb`\.
-+ **Filter rules** define the filter that you want to apply to a specific property\. In the example `FilterCriteria`, `rule1` applies to `Metadata1`, and `rule2` applies to `Data1`\. The syntax of your filter rule depends on the comparison operator that you use\. For more information, see [Filter rule syntaxFiltering examples](#filtering-syntax)\.
++ **Filter rules** define the filter that you want to apply to a specific property\. In the example `FilterCriteria`, `rule1` applies to `Metadata1`, and `rule2` applies to `Data1`\. The syntax of your filter rule depends on the comparison operator that you use\. For more information, see [Filter rule syntax](#filtering-syntax)\.
 
 When you create a `FilterCriteria` object, specify only the metadata properties and data properties that you want the filter to match on\. For Lambda to consider the event a match, the event must contain all the field names included in a filter\. Lambda ignores the fields that aren't included in a filter\.
+
+### Duplicate keys<a name="filtering-duplicate-keys"></a>
+
+If a pattern contains duplicate keys with different values, Lambda uses only the last value for that key\. For example, here's a JSON filter pattern that contains multiple values for `"duplicateKey"`:
+
+```
+{
+  "Metadata1": [ "pattern1" ],
+  "data": {
+      "duplicateKey" : ["hello"],
+      "uniqueKey" : ["test123"],
+      "duplicateKey" : ["world"] 
+  }
+}
+```
+
+In this scenario, Lambda interprets the filter rule as follows:
+
+```
+{
+  "Metadata1": [ "pattern1" ],
+  "data": {
+      "uniqueKey" : ["test123"],
+      "duplicateKey" : ["world"] 
+  }
+}
+```
 
 ## Filter rule syntax<a name="filtering-syntax"></a>
 
@@ -201,11 +229,11 @@ Follow these steps to create a new event source mapping with filter criteria usi
 
 1. Under **Function overview**, choose **Add trigger**\.
 
-1. For **Trigger configuration**, choose a trigger type that supports event filtering\. These include **SQS**, **DynamoDB**, and **Kinesis**\.
+1. For **Trigger configuration**, choose a trigger type that supports event filtering\. These include **SQS**, **DynamoDB**, **Kinesis**, **MSK**, and **MQ**\.
 
 1. Expand **Additional settings**\.
 
-1. Under **Filter criteria**, define and enter your filters\. For example, you can enter the following:
+1. Under **Filter criteria**, choose **Add**, and then define and enter your filters\. For example, you can enter the following:
 
    ```
    { "a" : [ 1, 2 ] }
@@ -279,7 +307,7 @@ aws lambda update-event-source-mapping \
 
 If an Amazon SQS message doesn't satisfy your filter criteria, Lambda automatically removes the message from the queue\. You don't have to manually delete these messages in Amazon SQS\.
 
-For Amazon SQS, the message `body` can be any string\. However, this can be problematic if your `FilterCriteria` expects `body` to be in a valid JSON format\. The reverse scenario is also true—if the incoming message `body` is in a valid JSON format, this can lead to unintended behavior if your filter criteria expects `body` to be a plain string\.
+For Amazon SQS, the message `body` can be any string\. However, this can be problematic if your `FilterCriteria` expect `body` to be in a valid JSON format\. The reverse scenario is also true—if the incoming message `body` is in JSON format but your filter criteria expects `body` to be a plain string, this can lead to unintended behavior\.
 
 To avoid this issue, ensure that the format of `body` in your `FilterCriteria` matches the expected format of `body` in messages that you receive from your queue\. Before filtering your messages, Lambda automatically evaluates the format of the incoming message `body` and of your filter pattern for `body`\. If there is a mismatch, Lambda drops the message\. The following table summarizes this evaluation:
 
@@ -299,7 +327,7 @@ If you don't include `body` as part of your `FilterCriteria`, Lambda skips this 
 
 Once your filter criteria processes an Kinesis or DynamoDB record, the streams iterator advances past this record\. If the record doesn't satisfy your filter criteria, you don't have to manually delete the record from your event source\. After the retention period, Kinesis and DynamoDB automatically delete these old records\. If you want records to be deleted sooner, see [Changing the Data Retention Period](https://docs.aws.amazon.com/kinesis/latest/dev/kinesis-extended-retention.html)\.
 
-To properly filter events from stream event sources, both the data field and your filter criteria for the data field must be in valid JSON format\. \(For Kinesis, the data field is `data`\. For DynamoDB, the data field is `dynamodb`\.\) If either field isn't in a valid JSON format, Lambda drops the message or throws an exception\. The following table summarizes the specific behavior:
+To properly filter events from Kinesis and DynamoDB sources, both the data field and your filter criteria for the data field must be in valid JSON format\. \(For Kinesis, the data field is `data`\. For DynamoDB, the data field is `dynamodb`\.\) If either field isn't in a valid JSON format, Lambda drops the message or throws an exception\. The following table summarizes the specific behavior:
 
 
 | Incoming data format \(`data` or `dynamodb`\) | Filter pattern format for data properties | Resulting action | 
@@ -310,3 +338,25 @@ To properly filter events from stream event sources, both the data field and you
 |  Non\-JSON  |  Valid JSON  |  Lambda drops the record\.  | 
 |  Non\-JSON  |  No filter pattern for data properties  |  Lambda filters \(on the other metadata properties only\) based on your filter criteria\.  | 
 |  Non\-JSON  |  Non\-JSON  |  Lambda throws an exception at the time of the event source mapping creation or update\. The filter pattern for data properties must be in a valid JSON format\.  | 
+
+## Properly filtering Amazon Managed Streaming for Apache Kafka, self\-managed Apache Kafka, and Amazon MQ messages<a name="filtering-poller"></a>
+
+**Note**  
+After you attach filter criteria to a Kafka or Amazon MQ event source mapping, it can take up to 15 minutes to apply your filtering rules to events\.
+
+For [Amazon MQ sources](with-mq.md), the message field is `data`\. For Kafka sources \([Amazon MSK](with-msk.md) and [self\-managed Apache Kafka](with-kafka.md)\), there are two message fields: `key` and `value`\.
+
+Lambda drops messages that don't match all fields included in the filter\. For Kafka, Lambda commits offsets for matched and unmatched messages after successfully invoking the function\. For Amazon MQ, Lambda acknowledges matched messages after successfully invoking the function and acknowledges unmatched messages when filtering them\.
+
+Kafka and Amazon MQ messages must be UTF\-8 encoded strings, either plain strings or in JSON format\. That's because Lambda decodes Kafka and Amazon MQ byte arrays into UTF\-8 before applying filter criteria\. If your messages use another encoding, such as UTF\-16 or ASCII, or if the message format doesn't match the `FilterCriteria` format, Lambda processes metadata filters only\. The following table summarizes the specific behavior:
+
+
+| Incoming message format \(`data` or `key` and `value`\) | Filter pattern format for message properties | Resulting action | 
+| --- | --- | --- | 
+|  Plain string  |  Plain string  |  Lambda filters based on your filter criteria\.  | 
+|  Plain string  |  No filter pattern for data properties  |  Lambda filters \(on the other metadata properties only\) based on your filter criteria\.  | 
+|  Plain string  |  Valid JSON  |  Lambda filters \(on the other metadata properties only\) based on your filter criteria\.  | 
+|  Valid JSON  |  Plain string  |  Lambda filters \(on the other metadata properties only\) based on your filter criteria\.  | 
+|  Valid JSON  |  No filter pattern for data properties  |  Lambda filters \(on the other metadata properties only\) based on your filter criteria\.  | 
+|  Valid JSON  |  Valid JSON  |  Lambda filters based on your filter criteria\.  | 
+|  Non\-UTF\-8 encoded string  |  JSON, plain string, or no pattern  |  Lambda filters \(on the other metadata properties only\) based on your filter criteria\.  | 

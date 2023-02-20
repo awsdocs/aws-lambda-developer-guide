@@ -34,11 +34,11 @@ The workflow for a function defined as a container image includes these steps:
 AWS provides the following base images for \.NET:
 
 
-| Tags | Runtime | Operating system | Dockerfile | 
-| --- | --- | --- | --- | 
-| 6 | \.NET 6\.0 | Amazon Linux 2 | [Dockerfile for \.NET 6\.0 on GitHub](https://github.com/aws/aws-lambda-dotnet/tree/master/LambdaRuntimeDockerfiles/Images/net6) | 
-| 5\.0 | \.NET 5\.0 | Amazon Linux 2 | [Dockerfile for \.NET 5\.0 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/dotnet5.0/Dockerfile.dotnet5.0) | 
-| core3\.1 | \.NET Core 3\.1 | Amazon Linux 2 | [Dockerfile for \.NET 3\.1 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/dotnetcore3.1/Dockerfile.dotnetcore3.1) | 
+| Tags | Runtime | Operating system | Dockerfile | Deprecation | 
+| --- | --- | --- | --- | --- | 
+| core3\.1 | \.NET Core 3\.1 | Amazon Linux 2 | [Dockerfile for \.NET Core 3\.1 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/dotnetcore3.1/Dockerfile.dotnetcore3.1) |  Mar 31, 2023  | 
+| 6 | \.NET 6 | Amazon Linux 2 | [Dockerfile for \.NET 6 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/dotnet6/Dockerfile.dotnet6) |    | 
+| 5\.0 | \.NET 5 | Amazon Linux 2 | [Dockerfile for \.NET 5 on GitHub](https://github.com/aws/aws-lambda-base-images/blob/dotnet5.0/Dockerfile.dotnet5.0) |    | 
 
 Amazon ECR repository: [gallery\.ecr\.aws/lambda/dotnet](https://gallery.ecr.aws/lambda/dotnet)
 

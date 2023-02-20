@@ -2,7 +2,7 @@
 
 Lambda function authors use extensions to integrate Lambda with their preferred tools for monitoring, observability, security, and governance\. Function authors can use extensions from AWS, [AWS Partners](extensions-api-partners.md), and open\-source projects\. For more information on using extensions, see [Introducing AWS Lambda Extensions](http://aws.amazon.com/blogs/aws/getting-started-with-using-your-favorite-operational-tools-on-aws-lambda-extensions-are-now-generally-available/) on the AWS Compute Blog\.
 
-![\[Architecture diagram of the execution environment.\]](http://docs.aws.amazon.com/lambda/latest/dg/images/logs-api-concept-diagram.png)
+![\[\]](http://docs.aws.amazon.com/lambda/latest/dg/images/telemetry-api-concept-diagram.png)
 
 As an extension author, you can use the Lambda Extensions API to integrate deeply into the Lambda [execution environment](lambda-runtime-environment.md)\. Your extension can register for function and execution environment lifecycle events\. In response to these events, you can start new processes, run logic, and control and participate in all phases of the Lambda lifecycle: initialization, invocation, and shutdown\. In addition, you can use the [Runtime Logs API](runtimes-logs-api.md) to receive a stream of logs\.
 
@@ -10,7 +10,7 @@ An extension runs as an independent process in the execution environment and can
 
 Lambda also supports *internal extensions*\. An internal extension runs as a separate thread in the runtime process\. The runtime starts and stops the internal extension\. An alternative way to integrate with the Lambda environment is to use language\-specific [environment variables and wrapper scripts](runtimes-modify.md)\. You can use these to configure the runtime environment and modify the startup behavior of the runtime process\.
 
-You can add extensions to a function in two ways\. For a function deployed as a [\.zip file archive](gettingstarted-package.md#gettingstarted-package-zip), you deploy your extension as a [layer](configuration-layers.md)\. For a function defined as a container image, you add [the extensions](using-extensions.md#invocation-extensions-images) to your container image\.
+You can add extensions to a function in two ways\. For a function deployed as a [\.zip file archive](gettingstarted-package.md#gettingstarted-package-zip), you deploy your extension as a [layer](configuration-layers.md)\. For a function defined as a container image, you add [the extensions](extensions-configuration.md#invocation-extensions-images) to your container image\.
 
 **Note**  
 For example extensions and wrapper scripts, see [AWS Lambda Extensions](https://github.com/aws-samples/aws-lambda-extensions) on the AWS Samples GitHub repository\.
@@ -193,8 +193,9 @@ Internal extensions are started and stopped by the runtime process, so they are 
 **Method** – **POST**
 
 **Headers**
-
-`Lambda-Extension-Name` – The full file name of the extension\. Required: yes\. Type: string\.
++ `Lambda-Extension-Name` – The full file name of the extension\. Required: yes\. Type: string\.
++ `Lambda-Extension-Accept-Feature` – Use this to specify optional Extensions features during registration\. Required: no\. Type: comma separated string\. Features available to specify using this setting:
+  + `accountId` – If specified, the Extension registration response will contain the account ID associated with the Lambda function that you're registering the Extension for\.
 
 **Body parameters **
 
@@ -224,6 +225,17 @@ Internal extensions are started and stopped by the runtime process, so they are 
     "functionName": "helloWorld",
     "functionVersion": "$LATEST",
     "handler": "lambda_function.lambda_handler"
+}
+```
+
+**Example response body with optional accountId feature**  
+
+```
+{
+    "functionName": "helloWorld",
+    "functionVersion": "$LATEST",
+    "handler": "lambda_function.lambda_handler",
+    "accountId": "123456789012"
 }
 ```
 

@@ -5,13 +5,13 @@ You can run JavaScript code with Node\.js in AWS Lambda\. Lambda provides [runti
 Lambda supports the following Node\.js runtimes\.
 
 
-**Node\.js runtimes**  
+**Node\.js**  
 
-| Name | Identifier | SDK for JavaScript | Operating system | Architectures | 
-| --- | --- | --- | --- | --- | 
-|  Node\.js 16  |  `nodejs16.x`  |  2\.1055\.0  |  Amazon Linux 2  |  x86\_64, arm64  | 
-|  Node\.js 14  |  `nodejs14.x`  |  2\.1055\.0  |  Amazon Linux 2  |  x86\_64, arm64  | 
-|  Node\.js 12  |  `nodejs12.x`  |  2\.1055\.0  |  Amazon Linux 2  |  x86\_64, arm64  | 
+| Name | Identifier | SDK | Operating system | Architectures | Deprecation | 
+| --- | --- | --- | --- | --- | --- | 
+|  Node\.js 16  |  `nodejs16.x`  |  2\.1083\.0  |  Amazon Linux 2  |  x86\_64, arm64  |    | 
+|  Node\.js 14  |  `nodejs14.x`  |  2\.1055\.0  |  Amazon Linux 2  |  x86\_64, arm64  |    | 
+|  Node\.js 12  |  `nodejs12.x`  |  2\.1055\.0  |  Amazon Linux 2  |  x86\_64, arm64  |  Mar 31, 2023  | 
 
 Lambda functions use an [execution role](lambda-intro-execution-role.md) to get permission to write logs to Amazon CloudWatch Logs, and to access other services and resources\. If you don't already have an execution role for function development, create one\.
 
@@ -59,7 +59,7 @@ The Lambda console uses AWS Cloud9 to provide an integrated development environm
 
 The `index.js` file exports a function named `handler` that takes an event object and a context object\. This is the [handler function](nodejs-handler.md) that Lambda calls when the function is invoked\. The Node\.js function runtime gets invocation events from Lambda and passes them to the handler\. In the function configuration, the handler value is `index.handler`\.
 
-When you save your function code, the Lambda console creates a \.zip file archive deployment package\. When you develop your function code outside of the console \(using an SDE\) you need to [create a deployment package](nodejs-package.md) to upload your code to the Lambda function\.
+When you save your function code, the Lambda console creates a \.zip file archive deployment package\. When you develop your function code outside of the console \(using an IDE\) you need to [create a deployment package](nodejs-package.md) to upload your code to the Lambda function\.
 
 **Note**  
 To get started with application development in your local environment, deploy one of the sample applications available in this guide's GitHub repository\.  

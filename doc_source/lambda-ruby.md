@@ -5,11 +5,11 @@ You can run Ruby code in AWS Lambda\. Lambda provides [runtimes](lambda-runtimes
 Lambda supports the following Ruby runtimes\.
 
 
-**Ruby runtimes**  
+**Ruby**  
 
-| Name | Identifier | SDK for Ruby | Operating system | Architectures | 
-| --- | --- | --- | --- | --- | 
-|  Ruby 2\.7  |  `ruby2.7`  |  3\.0\.1  |  Amazon Linux 2  |  x86\_64, arm64  | 
+| Name | Identifier | SDK | Operating system | Architectures | Deprecation | 
+| --- | --- | --- | --- | --- | --- | 
+|  Ruby 2\.7  |  `ruby2.7`  |  3\.1\.0  |  Amazon Linux 2  |  x86\_64, arm64  |    | 
 
 **Note**  
 For end of support information about Ruby 2\.5, see [Runtime deprecation policy](lambda-runtimes.md#runtime-support-policy)\.
@@ -60,7 +60,7 @@ The Lambda console uses AWS Cloud9 to provide an integrated development environm
 
 The `lambda_function.rb` file exports a function named `lambda_handler` that takes an event object and a context object\. This is the [handler function](ruby-handler.md) that Lambda calls when the function is invoked\. The Ruby function runtime gets invocation events from Lambda and passes them to the handler\. In the function configuration, the handler value is `lambda_function.lambda_handler`\.
 
-When you save your function code, the Lambda console creates a \.zip file archive deployment package\. When you develop your function code outside of the console \(using an SDE\) you need to [create a deployment package](ruby-package.md) to upload your code to the Lambda function\.
+When you save your function code, the Lambda console creates a \.zip file archive deployment package\. When you develop your function code outside of the console \(using an IDE\) you need to [create a deployment package](ruby-package.md) to upload your code to the Lambda function\.
 
 **Note**  
 To get started with application development in your local environment, deploy one of the sample applications available in this guide's GitHub repository\.  

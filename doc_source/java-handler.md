@@ -38,30 +38,21 @@ The [Lambda runtime](lambda-runtimes.md) receives an event as a JSON\-formatted 
 + `package.Class::method` – Full format\. For example: `example.Handler::handleRequest`\.
 + `package.Class` – Abbreviated format for functions that implement a [handler interface](#java-handler-interfaces)\. For example: `example.Handler`\.
 
-You can add [initialization code](foundation-progmodel.md) outside of your handler method to reuse resources across multiple invocations\. When the runtime loads your handler, it runs static code and the class constructor\. Resources that are created during initialization stay in memory between invocations, and can be reused by the handler thousands of times\.
+You can add [initialization code](https://docs.aws.amazon.com/lambda/latest/operatorguide/static-initialization.html) outside of your handler method to reuse resources across multiple invocations\. When the runtime loads your handler, it runs static code and the class constructor\. Resources that are created during initialization stay in memory between invocations, and can be reused by the handler thousands of times\.
 
-In the following example, the logger, serializer, and AWS SDK client are created when the function serves its first event\. Subsequent events served by the same function instance are much faster because those resources already exist\.
+In the following example, the logger and the serializer are created when the function serves its first event\. Subsequent events served by the same function instance are much faster because those resources already exist\.
 
-**Example [Handler\.java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-java/src/main/java/example/Handler.java) – Initialization code**  
+**Example [HandlerS3\.java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-events/src/main/java/example/HandlerS3.java) – Initialization code**  
 
 ```
-// Handler value: example.Handler
-public class Handler implements RequestHandler<SQSEvent, String>{
-  private static final Logger logger = LoggerFactory.getLogger(Handler.class);
-  private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-  private static final LambdaAsyncClient lambdaClient = LambdaAsyncClient.create();
-  ...
-  @Override
-  public String handleRequest(SQSEvent event, Context context)
-  {
-    String response = new String();
-    // call Lambda API
-    logger.info("Getting account settings");
-    CompletableFuture<GetAccountSettingsResponse> accountSettings =
-        lambdaClient.getAccountSettings(GetAccountSettingsRequest.builder().build());
-    // log execution details
-    logger.info("ENVIRONMENT VARIABLES: " + gson.toJson(System.getenv()));
-    ...
+public class HandlerS3 implements RequestHandler<S3Event, String>{
+    private static final Logger logger = LoggerFactory.getLogger(HandlerS3.class);
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    @Override
+    public String handleRequest(S3Event event, Context context)
+    {
+      ...
+    }
 ```
 
 The GitHub repo for this guide provides easy\-to\-deploy sample applications that demonstrate a variety of handler types\. For details, see the [end of this topic](#java-handler-samples)\.
@@ -170,12 +161,12 @@ public class HandlerStream implements RequestStreamHandler {
 The GitHub repository for this guide includes sample applications that demonstrate the use of various handler types and interfaces\. Each sample application includes scripts for easy deployment and cleanup, an AWS SAM template, and supporting resources\.
 
 **Sample Lambda applications in Java**
-+ [blank\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-java) – A Java function that shows the use of Lambda's Java libraries, logging, environment variables, layers, AWS X\-Ray tracing, unit tests, and the AWS SDK\.
-+ [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-basic) – A minimal Java function with unit tests and variable logging configuration\.
-+ [java\-events](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-events) – A minimal Java function that uses the latest version \(3\.0\.0 and newer\) of the [aws\-lambda\-java\-events](java-package.md) library\. These examples do not require the AWS SDK as a dependency\.
++ [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-basic) – A collection of minimal Java functions with unit tests and variable logging configuration\.
++ [java\-events](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-events) – A collection of Java functions that contain skeleton code for how to handle events from various services such as Amazon API Gateway, Amazon SQS, and Amazon Kinesis\. These functions use the latest version of the [aws\-lambda\-java\-events](java-package.md) library \(3\.0\.0 and newer\)\. These examples do not require the AWS SDK as a dependency\.
 + [s3\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/s3-java) – A Java function that processes notification events from Amazon S3 and uses the Java Class Library \(JCL\) to create thumbnails from uploaded image files\.
++ [Use API Gateway to invoke a Lambda function](https://docs.aws.amazon.com/lambda/latest/dg/example_cross_LambdaAPIGateway_section.html) – A Java function that scans a Amazon DynamoDB table that contains employee information\. It then uses Amazon Simple Notification Service to send a text message to employees celebrating their work anniversaries\. This example uses API Gateway to invoke the function\.
 
-The `blank-java` and `s3-java` applications take an AWS service event as input and return a string\. The `java-basic` application includes several types of handlers:
+The `java-events` and `s3-java` applications take an AWS service event as input and return a string\. The `java-basic` application includes several types of handlers:
 + [Handler\.java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-basic/src/main/java/example/Handler.java) – Takes a `Map<String,String>` as input\.
 + [HandlerInteger\.java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-basic/src/main/java/example/HandlerInteger.java) – Takes an `Integer` as input\.
 + [HandlerList\.java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-basic/src/main/java/example/HandlerList.java) – Takes a `List<Integer>` as input\.

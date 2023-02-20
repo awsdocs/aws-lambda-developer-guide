@@ -36,10 +36,10 @@ To interact with Amazon MQ, Lambda creates a consumer group which can read from 
 
 For Amazon MQ event sources, Lambda batches records together and sends them to your function in a single payload\. To control behavior, you can configure the batching window and batch size\. Lambda pulls messages until it processes the payload size maximum of 6 MB, the batching window expires, or the number of records reaches the full batch size\. For more information, see [Batching behavior](invocation-eventsourcemapping.md#invocation-eventsourcemapping-batching)\.
 
-Lambda converts your batch into a single payload, and then invokes your function\. Messages are neither persisted nor deserialized\. Instead, the consumer group retrieves them as a BLOB of bytes, and then base64\-encodes them into a JSON payload\. If your function returns an error for any of the messages in a batch, Lambda retries the whole batch of messages until processing succeeds or the messages expire\.
+The consumer group retrieves the messages as a BLOB of bytes, base64\-encodes them into a single JSON payload, and then invokes your function\. If your function returns an error for any of the messages in a batch, Lambda retries the whole batch of messages until processing succeeds or the messages expire\.
 
 **Note**  
-Lambda can run your function for up to 14 minutes\. Configure your function timeout to be 14 minutes or less \(the default timeout value is 3 seconds\)\. Lambda may retry invocations that exceed 14 minutes\.
+While Lambda functions typically have a maximum timeout limit of 15 minutes, event source mappings for Amazon MSK, self\-managed Apache Kafka, and Amazon MQ for ActiveMQ and RabbitMQ only support functions with maximum timeout limits of 14 minutes\. This constraint ensures that the event source mapping can properly handle function errors and retries\.
 
 You can monitor a given function's concurrency usage using the `ConcurrentExecutions` metric in Amazon CloudWatch\. For more information about concurrency, see [Managing Lambda reserved concurrency](configuration-concurrency.md)\.
 
@@ -47,34 +47,44 @@ You can monitor a given function's concurrency usage using the `ConcurrentExecut
 
 ```
 {
-   "eventSource": "aws:amq",
+   "eventSource": "aws:mq",
    "eventSourceArn": "arn:aws:mq:us-west-2:111122223333:broker:test:b-9bcfa592-423a-4942-879d-eb284b418fc8",
    "messages": [
-      {
-         "messageID": "ID:b-9bcfa592-423a-4942-879d-eb284b418fc8-1.mq.us-west-2.amazonaws.com-37557-1234520418293-4:1:1:1:1",
-         "messageType": "jms/text-message",
-         "data": "QUJDOkFBQUE=",
-         "connectionId": "myJMSCoID",
-         "redelivered": false,
-         "destination": {
-            "physicalname": "testQueue"
-         },
-         "timestamp": 1598827811958,
-         "brokerInTime": 1598827811958,
-         "brokerOutTime": 1598827811959
+      { 
+        "messageID": "ID:b-9bcfa592-423a-4942-879d-eb284b418fc8-1.mq.us-west-2.amazonaws.com-37557-1234520418293-4:1:1:1:1", 
+        "messageType": "jms/text-message",
+        "deliveryMode": 1,
+        "replyTo": null,
+        "type": null,
+        "expiration": "60000",
+        "priority": 1,
+        "correlationId": "myJMSCoID",
+        "redelivered": false,
+        "destination": { 
+          "physicalname": "testQueue" 
+        },
+        "data":"QUJDOkFBQUE=",
+        "timestamp": 1598827811958,
+        "brokerInTime": 1598827811958, 
+        "brokerOutTime": 1598827811959 
       },
-      {
-         "messageID": "ID:b-9bcfa592-423a-4942-879d-eb284b418fc8-1.mq.us-west-2.amazonaws.com-37557-1234520418293-4:1:1:1:1",
-         "messageType": "jms/bytes-message",
-         "data": "3DTOOW7crj51prgVLQaGQ82S48k=",
-         "connectionId": "myJMSCoID1",
-         "persistent": false,
-         "destination": {
-            "physicalname": "testQueue"
-         },
-         "timestamp": 1598827811958,
-         "brokerInTime": 1598827811958,
-         "brokerOutTime": 1598827811959
+      { 
+        "messageID": "ID:b-9bcfa592-423a-4942-879d-eb284b418fc8-1.mq.us-west-2.amazonaws.com-37557-1234520418293-4:1:1:1:1",
+        "messageType": "jms/bytes-message",
+        "deliveryMode": 1,
+        "replyTo": null,
+        "type": null,
+        "expiration": "60000",
+        "priority": 2,
+        "correlationId": "myJMSCoID1",
+        "redelivered": false,
+        "destination": { 
+          "physicalname": "testQueue" 
+        },
+        "data":"LQaGQ82S48k=",
+        "timestamp": 1598827811958,
+        "brokerInTime": 1598827811958, 
+        "brokerOutTime": 1598827811959 
       }
    ]
 }
@@ -193,7 +203,7 @@ To create the event source mapping with the AWS Command Line Interface \(AWS CLI
 
 By default, Amazon MQ brokers are created with the `PubliclyAccessible` flag set to false\. It is only when `PubliclyAccessible` is set to true that the broker receives a public IP address\.
 
-For full access with your event source mapping, your broker must either use a public endpoint or provide access to the VPC\. To meet the Amazon Virtual Private Cloud \(Amazon VPC\) access requirements, you can do one of the following:
+For full access with your event source mapping, your broker must either use a public endpoint or provide access to the VPC\. Note that when you add Amazon MQ as a trigger, Lambda assumes the VPC settings of the Amazon MQ broker, not the Lambda function's VPC settings\. To meet the Amazon Virtual Private Cloud \(Amazon VPC\) access requirements, you can do one of the following:
 + Configure one NAT gateway per public subnet\. For more information, see [Internet and service access for VPC\-connected functions](configuration-vpc.md#vpc-internet)\.
 + Create a connection between your Amazon VPC and Lambda\. Your Amazon VPC must also connect to AWS Security Token Service \(AWS STS\) and Secrets Manager endpoints\. For more information, see [Configuring interface VPC endpoints for Lambda](configuration-vpc-endpoints.md)\.
 
@@ -315,5 +325,7 @@ All Lambda event source types share the same [CreateEventSourceMapping](API_Crea
 |  BatchSize  |  N  |  100  |  Maximum: 10,000  | 
 |  Enabled  |  N  |  true  |   | 
 |  FunctionName  |  Y  |   |   | 
+|  FilterCriteria  |  N  |     |  [Lambda event filtering](invocation-eventfiltering.md)  | 
+|  MaximumBatchingWindowInSeconds  |  N  |  500 ms  |  [Batching behavior](invocation-eventsourcemapping.md#invocation-eventsourcemapping-batching)  | 
 |  Queues  |  N  |   |  The name of the Amazon MQ broker destination queue to consume\.  | 
-|  SourceAccessConfigurations  |  N  |   |  An array of the authentication protocol, VPC components, or virtual host to secure and define your Amazon MQ event source\.  | 
+|  SourceAccessConfigurations  |  N  |   |  For ActiveMQ, BASIC\_AUTH credentials\. For RabbitMQ, can contain both BASIC\_AUTH credentials and VIRTUAL\_HOST information\.  | 

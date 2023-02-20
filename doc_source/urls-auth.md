@@ -6,7 +6,7 @@ The `AuthType` parameter determines how Lambda authenticates or authorizes reque
 + `AWS_IAM` – Lambda uses AWS Identity and Access Management \(IAM\) to authenticate and authorize requests based on the IAM principal's identity policy and the function's resource\-based policy\. Choose this option if you want only authenticated IAM users and roles to invoke your function via the function URL\.
 + `NONE` – Lambda doesn't perform any authentication before invoking your function\. However, your function's resource\-based policy is always in effect and must grant public access before your function URL can receive requests\. Choose this option to allow public, unauthenticated access to your function URL\.
 
-In addition to `AuthType`, you can also use resource\-based policies to grant permissions to other AWS accounts to invoke your function\. For more information, see [Using resource\-based policies for AWS Lambda](access-control-resource-based.md)\.
+In addition to `AuthType`, you can also use resource\-based policies to grant permissions to other AWS accounts to invoke your function\. For more information, see [Using resource\-based policies for Lambda](access-control-resource-based.md)\.
 
 For additional insights into security, you can use AWS Identity and Access Management Access Analyzer to get a comprehensive analysis of external access to your function URL\. IAM Access Analyzer also monitors for new or updated permissions on your Lambda functions to help you identify permissions that grant public and cross\-account access\. IAM Access Analyzer is free to use for any AWS customer\. To get started with IAM Access Analyzer, see [Using AWS IAM Access Analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html)\.
 
@@ -115,7 +115,8 @@ If you choose the `NONE` auth type, Lambda doesn't use IAM to authenticate reque
 ```
 
 **Note**  
-When you create a function URL with auth type `NONE` via the console or AWS Serverless Application Model \(AWS SAM\), Lambda automatically creates the preceding resource\-based policy statement for you\. \(If the policy already exists, or the user or role creating the application doesn't have the appropriate permissions, then Lambda won't create it for you\.\) If you're using the AWS CLI, AWS CloudFormation, or the Lambda API directly, you must add `lambda:InvokeFunctionUrl` permissions yourself\. This makes your function public\.
+When you create a function URL with auth type `NONE` via the console or AWS Serverless Application Model \(AWS SAM\), Lambda automatically creates the preceding resource\-based policy statement for you\. If the policy already exists, or the user or role creating the application doesn't have the appropriate permissions, then Lambda won't create it for you\. If you're using the AWS CLI, AWS CloudFormation, or the Lambda API directly, you must add `lambda:InvokeFunctionUrl` permissions yourself\. This makes your function public\.  
+In addition, if you delete your function URL with auth type `NONE`, Lambda doesn't automatically delete the associated resource\-based policy\. If you want to delete this policy, you must manually do so\.
 
 In this statement, the `lambda:FunctionUrlAuthType` condition key value is `NONE`\. This policy statement allows access only when your function URL's auth type is also `NONE`\.
 

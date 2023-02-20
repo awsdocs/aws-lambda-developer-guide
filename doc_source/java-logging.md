@@ -150,7 +150,7 @@ The `base64` utility is available on Linux, macOS, and [Ubuntu on Windows](https
 **Example get\-logs\.sh script**  
 In the same command prompt, use the following script to download the last five log events\. The script uses `sed` to remove quotes from the output file, and sleeps for 15 seconds to allow time for the logs to become available\. The output includes the response from Lambda and the output from the `get-log-events` command\.   
 Copy the contents of the following code sample and save in your Lambda project directory as `get-logs.sh`\.  
-The cli\-binary\-format option is required if you are using AWS CLI version 2\. You can also configure this option in your [AWS CLI config file](https://docs.aws.amazon.com/cli/latest/userguide/cliv2-migration.html#cliv2-migration-binaryparam)\.  
+The cli\-binary\-format option is required if you're using AWS CLI version 2\. To make this the default setting, run `aws configure set cli-binary-format raw-in-base64-out`\. For more information, see [AWS CLI supported global command line options](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-options.html#cli-configure-options-list)\.  
 
 ```
 #!/bin/bash
@@ -228,7 +228,7 @@ To customize log output, support logging during unit tests, and log AWS SDK call
 
 To add the request ID to your function's logs, use the appender in the [aws\-lambda\-java\-log4j2](java-package.md) library\. The following example shows a Log4j 2 configuration file that adds a timestamp and request ID to all logs\.
 
-**Example [src/main/resources/log4j2\.xml](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-java/src/main/resources/log4j2.xml) – Appender configuration**  
+**Example [src/main/resources/log4j2\.xml](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/s3-java/src/main/resources/log4j2.xml) – Appender configuration**  
 
 ```
 <Configuration status="WARN">
@@ -275,52 +275,39 @@ SLF4J is a facade library for logging in Java code\. In your function code, you 
 
 In the following example, the handler class uses SLF4J to retrieve a logger\.
 
-**Example [src/main/java/example/Handler\.java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-java/src/main/java/example/Handler.java) – Logging with SLF4J**  
+**Example [src/main/java/example/HandlerS3\.java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-events/src/main/java/example/HandlerS3.java) – Logging with SLF4J**  
 
 ```
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 // Handler value: example.Handler
-public class Handler implements RequestHandler<SQSEvent, String>{
-  private static final Logger logger = LoggerFactory.getLogger(Handler.class);
-  Gson gson = new GsonBuilder().setPrettyPrinting().create();
-  LambdaAsyncClient lambdaClient = LambdaAsyncClient.create();
-  @Override
-  public String handleRequest(SQSEvent event, Context context)
-  {
-    String response = new String();
-    // call Lambda API
-    logger.info("Getting account settings");
-    CompletableFuture<GetAccountSettingsResponse> accountSettings = 
-        lambdaClient.getAccountSettings(GetAccountSettingsRequest.builder().build());
-    // log execution details
-    logger.info("ENVIRONMENT VARIABLES: {}", gson.toJson(System.getenv()));
-...
+public class HandlerS3 implements RequestHandler<S3Event, String>{
+    private static final Logger logger = LoggerFactory.getLogger(HandlerS3.class);
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    @Override
+    public String handleRequest(S3Event event, Context context)
+    {
+        ...
+        logger.info("RECORD: " + record);
+        logger.info("SOURCE BUCKET: " + srcBucket);
+        logger.info("SOURCE KEY: " + srcKey);
+        ...
+    }
+}
 ```
 
 The build configuration takes runtime dependencies on the Lambda appender and SLF4J adapter, and implementation dependencies on Log4J 2\.
 
-**Example [build\.gradle](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-java/build.gradle) – Logging dependencies**  
+**Example [build\.gradle](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-events/build.gradle) – Logging dependencies**  
 
 ```
 dependencies {
-    implementation platform('software.amazon.awssdk:bom:2.10.73')
-    implementation platform('com.amazonaws:aws-xray-recorder-sdk-bom:2.4.0')
-    implementation 'software.amazon.awssdk:lambda'
-    implementation 'com.amazonaws:aws-xray-recorder-sdk-core'
-    implementation 'com.amazonaws:aws-xray-recorder-sdk-aws-sdk-core'
-    implementation 'com.amazonaws:aws-xray-recorder-sdk-aws-sdk-v2'
-    implementation 'com.amazonaws:aws-xray-recorder-sdk-aws-sdk-v2-instrumentor'
-    implementation 'com.amazonaws:aws-lambda-java-core:1.2.1'
-    implementation 'com.amazonaws:aws-lambda-java-events:3.11.0'
-    implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'org.apache.logging.log4j:log4j-api:2.17.1'
-    implementation 'org.apache.logging.log4j:log4j-core:2.17.1'
-    runtimeOnly 'org.apache.logging.log4j:log4j-slf4j18-impl:2.17.1'
-    runtimeOnly 'com.amazonaws:aws-lambda-java-log4j2:1.5.1'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.0'
+    ...
+    implementation 'org.apache.logging.log4j:log4j-api:[2.17.1,)'
+    implementation 'org.apache.logging.log4j:log4j-core:[2.17.1,)'
+    implementation 'org.apache.logging.log4j:log4j-slf4j18-impl:[2.17.1,)'
+    ...
 }
 ```
 
@@ -331,11 +318,9 @@ When you run your code locally for tests, the context object with the Lambda log
 The GitHub repository for this guide includes sample applications that demonstrate the use of various logging configurations\. Each sample application includes scripts for easy deployment and cleanup, an AWS SAM template, and supporting resources\.
 
 **Sample Lambda applications in Java**
-+ [blank\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-java) – A Java function that shows the use of Lambda's Java libraries, logging, environment variables, layers, AWS X\-Ray tracing, unit tests, and the AWS SDK\.
-+ [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-basic) – A minimal Java function with unit tests and variable logging configuration\.
-+ [java\-events](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-events) – A minimal Java function that uses the latest version \(3\.0\.0 and newer\) of the [aws\-lambda\-java\-events](java-package.md) library\. These examples do not require the AWS SDK as a dependency\.
++ [java\-basic](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-basic) – A collection of minimal Java functions with unit tests and variable logging configuration\.
++ [java\-events](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/java-events) – A collection of Java functions that contain skeleton code for how to handle events from various services such as Amazon API Gateway, Amazon SQS, and Amazon Kinesis\. These functions use the latest version of the [aws\-lambda\-java\-events](java-package.md) library \(3\.0\.0 and newer\)\. These examples do not require the AWS SDK as a dependency\.
 + [s3\-java](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/s3-java) – A Java function that processes notification events from Amazon S3 and uses the Java Class Library \(JCL\) to create thumbnails from uploaded image files\.
++ [Use API Gateway to invoke a Lambda function](https://docs.aws.amazon.com/lambda/latest/dg/example_cross_LambdaAPIGateway_section.html) – A Java function that scans a Amazon DynamoDB table that contains employee information\. It then uses Amazon Simple Notification Service to send a text message to employees celebrating their work anniversaries\. This example uses API Gateway to invoke the function\.
 
 The `java-basic` sample application shows a minimal logging configuration that supports logging tests\. The handler code uses the `LambdaLogger` logger provided by the context object\. For tests, the application uses a custom `TestLogger` class that implements the `LambdaLogger` interface with a Log4j 2 logger\. It uses SLF4J as a facade for compatibility with the AWS SDK\. Logging libraries are excluded from build output to keep the deployment package small\.
-
-The `blank-java` sample application builds on the basic configuration with AWS SDK logging and the Lambda Log4j 2 appender\. It uses Log4j 2 in Lambda with custom appender that adds the invocation request ID to each line\.

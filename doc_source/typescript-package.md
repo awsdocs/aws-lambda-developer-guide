@@ -2,7 +2,7 @@
 
 Before you can deploy TypeScript code to AWS Lambda, you need to transpile it into JavaScript\. This page explains three ways to build and deploy TypeScript code to Lambda:
 + [Using the AWS Serverless Application Model \(AWS SAM\)](#aws-sam-ts)
-+ [Using the AWS Cloud Development Kit \(CDK\)](#aws-cdk-ts)
++ [Using the AWS Cloud Development Kit \(AWS CDK\)](#aws-cdk-ts)
 + [Using the AWS Command Line Interface \(AWS CLI\) and esbuild](#aws-cli-ts)
 
 The AWS SAM and AWS CDK simplify building and deploying TypeScript functions\. The [AWS SAM template specification](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification.html) provides a simple and clean syntax to describe the Lambda functions, APIs, permissions, configurations, and events that make up your serverless application\. The [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/home.html) lets you build reliable, scalable, cost\-effective applications in the cloud with the considerable expressive power of a programming language\. The AWS CDK is intended for moderately to highly experienced AWS users\. Both the AWS CDK and the AWS SAM use esbuild to transpile TypeScript code into JavaScript\.
@@ -97,7 +97,7 @@ To complete the steps in this section, you must have the following:
    npm install -D @types/aws-lambda
    ```
 
-1. Open the **lib** directory\. You should see a file called **hello\-world\-stack\.ts**\. Create new two new files in this directory: **hello\-world\.function\.ts** and **hello\-world\.ts**\.
+1. Open the **lib** directory\. You should see a file called **hello\-world\-stack\.ts**\. Create two new files in this directory: **hello\-world\.function\.ts** and **hello\-world\.ts**\.
 
 1. Open **hello\-world\.function\.ts** and add the following code to the file\. This is the code for the Lambda function\.
 

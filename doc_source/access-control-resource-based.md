@@ -1,6 +1,6 @@
-# Using resource\-based policies for AWS Lambda<a name="access-control-resource-based"></a>
+# Using resource\-based policies for Lambda<a name="access-control-resource-based"></a>
 
-AWS Lambda supports resource\-based permissions policies for Lambda functions and layers\. Resource\-based policies let you grant usage permission to other AWS accounts or organizations on a per\-resource basis\. You also use a resource\-based policy to allow an AWS service to invoke your function on your behalf\.
+Lambda supports resource\-based permissions policies for Lambda functions and layers\. Resource\-based policies let you grant usage permission to other AWS accounts or organizations on a per\-resource basis\. You also use a resource\-based policy to allow an AWS service to invoke your function on your behalf\.
 
 For Lambda functions, you can [grant an account permission](#permissions-resource-xaccountinvoke) to invoke or manage a function\. You can also use a single resource\-based policy to grant permissions to an entire organization in AWS Organizations\. You can also use resource\-based policies to [grant invoke permission to an AWS service](#permissions-resource-serviceinvoke) that invokes a function in response to activity in your account\. 
 

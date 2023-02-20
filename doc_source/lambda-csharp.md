@@ -19,12 +19,13 @@ AWS Lambda provides the following libraries for C\# functions:
 These packages are available at [Nuget packages](https://www.nuget.org/packages/)\.
 
 
-**\.NET runtimes**  
+**\.NET**  
 
-| Name | Identifier | Operating system | Architectures | 
-| --- | --- | --- | --- | 
-|  \.NET 6  |  `dotnet6`  |  Amazon Linux 2  |  x86\_64, arm64  | 
-|  \.NET Core 3\.1  |  `dotnetcore3.1`  |  Amazon Linux 2  |  x86\_64, arm64  | 
+| Name | Identifier | Operating system | Architectures | Deprecation | 
+| --- | --- | --- | --- | --- | 
+|  \.NET Core 3\.1  |  `dotnetcore3.1`  |  Amazon Linux 2  |  x86\_64, arm64  |  Mar 31, 2023  | 
+|  \.NET 6  |  `dotnet6`  |  Amazon Linux 2  |  x86\_64, arm64  |    | 
+|  \.NET 5  |  `dotnet5.0`  |  Amazon Linux 2  |  x86\_64  |    | 
 
 **Note**  
 For end of support information about \.NET Core 2\.1, see [Runtime deprecation policy](lambda-runtimes.md#runtime-support-policy)\.
@@ -43,3 +44,4 @@ To get started with application development in your local environment, deploy on
 + [Lambda function logging in C\#](csharp-logging.md)
 + [AWS Lambda function errors in C\#](csharp-exceptions.md)
 + [Instrumenting C\# code in AWS Lambda](csharp-tracing.md)
++ [\.NET functions with native AOT compilation](dotnet-native-aot.md)

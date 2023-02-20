@@ -10,7 +10,7 @@ Type: [EnvironmentError](API_EnvironmentError.md) object
 Required: No
 
  ** Variables **   <a name="SSS-Type-EnvironmentResponse-Variables"></a>
-Environment variable key\-value pairs\.  
+Environment variable key\-value pairs\. Omitted from AWS CloudTrail logs\.  
 Type: String to string map  
 Key Pattern: `[a-zA-Z]([a-zA-Z0-9_])+`   
 Required: No

@@ -30,7 +30,7 @@ For more information about Amazon VPC networking definitions, see [ How Amazon V
 
 ## Connecting Lambda functions to your VPC<a name="foundation-nw-connecting"></a>
 
-By default, Lambda runs your functions in a secure VPC\. Lambda owns this VPC, which isn't connected to your account's [default VPC](https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html)\. When you connect a function to a VPC in your account, the function can't access the internet unless your VPC provides access\.
+A Lambda function always runs inside a VPC owned by the Lambda service\. By default, a Lambda function isn't connected to VPCs in your account\. When you connect a function to a VPC in your account, the function can't access the internet unless your VPC provides access\.
 
 Lambda accesses resources in your VPC using a Hyperplane ENI\. Hyperplane ENIs provide NAT capabilities from the Lambda VPC to your account VPC using VPC\-to\-VPC NAT \(V2N\)\. V2N provides connectivity from the Lambda VPC to your account VPC, but not in the other direction\.
 

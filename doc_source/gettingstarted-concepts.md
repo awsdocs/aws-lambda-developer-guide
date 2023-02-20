@@ -63,7 +63,7 @@ For more information about events from AWS services, see [Using AWS Lambda with 
 
 An *execution environment* provides a secure and isolated runtime environment for your Lambda function\. An execution environment manages the processes and resources that are required to run the function\. The execution environment provides lifecycle support for the function and for any [extensions](#gettingstarted-concepts-extensions) associated with your function\.
 
-For more information, see [AWS Lambda execution environment](lambda-runtime-environment.md)\.
+For more information, see [Lambda execution environment](lambda-runtime-environment.md)\.
 
 ## Instruction set architecture<a name="gettingstarted-concepts-arch"></a>
 
@@ -107,7 +107,7 @@ Lambda *extensions* enable you to augment your functions\. For example, you can 
 
 An internal extension runs in the runtime process and shares the same lifecycle as the runtime\. An external extension runs as a separate process in the execution environment\. The external extension is initialized before the function is invoked, runs in parallel with the function's runtime, and continues to run after the function invocation is complete\.
 
-For more information, see [Using Lambda extensions](using-extensions.md)\.
+For more information, see [Lambda extensions](lambda-extensions.md)\.
 
 ## Concurrency<a name="gettingstarted-concepts-concurrency"></a>
 

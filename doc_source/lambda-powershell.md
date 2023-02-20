@@ -3,12 +3,13 @@
 The following sections explain how common programming patterns and core concepts apply when you author Lambda function code in PowerShell\.
 
 
-**\.NET runtimes**  
+**\.NET**  
 
-| Name | Identifier | Operating system | Architectures | 
-| --- | --- | --- | --- | 
-|  \.NET 6  |  `dotnet6`  |  Amazon Linux 2  |  x86\_64, arm64  | 
-|  \.NET Core 3\.1  |  `dotnetcore3.1`  |  Amazon Linux 2  |  x86\_64, arm64  | 
+| Name | Identifier | Operating system | Architectures | Deprecation | 
+| --- | --- | --- | --- | --- | 
+|  \.NET Core 3\.1  |  `dotnetcore3.1`  |  Amazon Linux 2  |  x86\_64, arm64  |  Mar 31, 2023  | 
+|  \.NET 6  |  `dotnet6`  |  Amazon Linux 2  |  x86\_64, arm64  |    | 
+|  \.NET 5  |  `dotnet5.0`  |  Amazon Linux 2  |  x86\_64  |    | 
 
 Lambda provides the following sample applications for the PowerShell runtime:
 + [blank\-powershell](https://github.com/awsdocs/aws-lambda-developer-guide/tree/main/sample-apps/blank-powershell) – A PowerShell function that shows the use of logging, environment variables, and the AWS SDK\.
