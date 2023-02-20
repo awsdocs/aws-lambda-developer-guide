@@ -11,11 +11,8 @@ public class HandlerWeatherData implements RequestHandler<WeatherData, WeatherDa
   public WeatherData handleRequest(WeatherData event, Context context)
   {
     LambdaLogger logger = context.getLogger();
-    // log execution details
     logger.log("EVENT: " + event);
     logger.log("EVENT TYPE: " + event.getClass().toString());
-
-    // // process event
     return event;
   }
 }

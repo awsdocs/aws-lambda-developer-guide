@@ -13,15 +13,14 @@ public class HandlerDivide implements RequestHandler<List<Integer>, Integer>{
   public Integer handleRequest(List<Integer> event, Context context)
   {
     LambdaLogger logger = context.getLogger();
-    // process event
     if ( event.size() != 2 )
     {
       throw new InputLengthException("Input must be an array that contains 2 numbers.");
     }
     int numerator = event.get(0);
     int denominator = event.get(1);
-    logger.log("EVENT: " + event);
-    logger.log("EVENT TYPE: " + event.getClass().toString());
+    logger.log("EVENT: Numerator is " + event.get(0).toString() +
+      "; Denominator is " + event.get(1).toString());
     return numerator/denominator;
   }
 }

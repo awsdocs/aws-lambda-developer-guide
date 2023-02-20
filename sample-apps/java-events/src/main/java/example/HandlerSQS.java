@@ -14,7 +14,6 @@ public class HandlerSQS implements RequestHandler<SQSEvent, Void>{
   @Override
   public Void handleRequest(SQSEvent event, Context context)
   {
-    // process event
     for(SQSMessage msg : event.getRecords()){
       logger.info(msg.getBody());
     }

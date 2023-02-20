@@ -11,7 +11,6 @@ public class HandlerString implements RequestHandler<String, Integer>{
   public Integer handleRequest(String event, Context context)
   {
     LambdaLogger logger = context.getLogger();
-    // process event
     logger.log("EVENT: " + event);
     logger.log("EVENT TYPE: " + event.getClass().toString());
     return context.getRemainingTimeInMillis();
