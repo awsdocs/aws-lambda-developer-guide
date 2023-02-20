@@ -4,14 +4,11 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.events.CloudWatchLogsEvent;
-import com.amazonaws.services.lambda.runtime.events.CloudWatchLogsEvent.AWSLogs;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.Base64;
 import java.util.Base64.Decoder;
-
-import java.util.zip.Inflater;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;

@@ -11,8 +11,8 @@ build
 *.zip
 bin
 obj
-main
 Gemfile.lock
 lib
 __pycache__
 *.pyc
+.DS_Store

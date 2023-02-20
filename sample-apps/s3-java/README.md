@@ -79,9 +79,7 @@ To invoke the function directly, run `5-invoke.sh`.
         "ExecutedVersion": "$LATEST"
     }
 
-Let the script invoke the function a few times and then press `CRTL+C` to exit. Note that you
-may see function timeouts in the first few iterations due to cold starts; after a while, they
-should begin to succeed.
+Let the script invoke the function a few times and then press `CRTL+C` to exit.
 
 If you look at the `s3-java-bucket-<random_uuid>` bucket in your account, you should now see a
 key `resized-inbound/sample-s3-java.png` file, which represents the new, shrunken image.

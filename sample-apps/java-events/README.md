@@ -98,6 +98,7 @@ By default, the function uses a handler class named `Handler` that takes an API 
 - `HandlerLex.java` - Takes `LexEvent` as input.
 - `HandlerS3.java` - Takes `S3Event` as input.
 - `HandlerSNS.java` - Takes `SNSEvent` as input.
+- `HandlerSQS.java` - Takes `SQSEvent` as input.
 
 To use a different handler, change the value of the Handler setting in the application template (`template.yml` or `template-mvn.yaml`). For example, to use the Amazon Lex handler:
 
@@ -128,6 +129,7 @@ The following event type keys are supported:
 - `lex` - Lex dialog (`events/lex-flowers.json`)
 - `ddb` - DynamoDB record (`events/dynamodb-record.json`)
 - `s3` - S3Event record (`events/s3-notification.json`)
+- `sqs` - SQSEvent record (`events/sqs-record.json`)
 
 # Cleanup
 To delete the application, run `4-cleanup.sh`.

@@ -2,11 +2,8 @@ package example;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
-import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.events.DynamodbEvent;
 import com.amazonaws.services.lambda.runtime.events.DynamodbEvent.DynamodbStreamRecord;
-
-import com.amazonaws.services.dynamodbv2.model.Record;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
