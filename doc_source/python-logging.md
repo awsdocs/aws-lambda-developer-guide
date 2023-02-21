@@ -218,3 +218,16 @@ END RequestId: 1c8df7d3-xmpl-46da-9778-518e6eca8125
 REPORT RequestId: 1c8df7d3-xmpl-46da-9778-518e6eca8125  Duration: 2.75 ms   Billed Duration: 3 ms Memory Size: 128 MB Max Memory Used: 56 MB  Init Duration: 113.51 ms
 XRAY TraceId: 1-5e34a66a-474xmpl7c2534a87870b4370   SegmentId: 073cxmpl3e442861 Sampled: true
 ```
+
+WARNING: Settings in the logging library are global, meaning you could expose secrets in your logs. For example, the following will log the request and response in full meaning the secret string will be written to the cloudwatch log:
+```
+import logging
+
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
+
+secretsmanager = boto3.client('secretsmanager')
+secretsmanager.get_secret_value(
+  SecretId=secret_name
+)
+```
