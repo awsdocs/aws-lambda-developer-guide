@@ -9,6 +9,9 @@ import java.util.List;
 // Handler value: example.HandlerDivide
 public class HandlerDivide implements RequestHandler<List<Integer>, Integer>{
 
+  /*
+   * Takes a list of two integers and divides them.
+   */
   @Override
   public Integer handleRequest(List<Integer> event, Context context)
   {

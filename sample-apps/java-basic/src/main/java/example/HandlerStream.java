@@ -11,6 +11,10 @@ import java.io.OutputStream;
 public class HandlerStream implements RequestStreamHandler {
 
   @Override
+  /*
+   * Takes an InputStream and an OutputStream. Reads from the InputStream,
+   * and copies all characters to the OutputStream.
+   */
   public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context) throws IOException
   {
     int nextChar;

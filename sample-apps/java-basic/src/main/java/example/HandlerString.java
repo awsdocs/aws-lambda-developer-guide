@@ -5,14 +5,17 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 
 // Handler value: example.HandlerString
-public class HandlerString implements RequestHandler<String, Integer>{
+public class HandlerString implements RequestHandler<String, String>{
 
   @Override
-  public Integer handleRequest(String event, Context context)
+  /*
+   * Takes a String as input, and converts all characters to lowercase.
+   */
+  public String handleRequest(String event, Context context)
   {
     LambdaLogger logger = context.getLogger();
     logger.log("EVENT: " + event);
     logger.log("EVENT TYPE: " + event.getClass().toString());
-    return context.getRemainingTimeInMillis();
+    return event.toLowerCase();
   }
 }
