@@ -7,8 +7,13 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 // Handler value: example.HandlerStream
 public class HandlerStream implements RequestStreamHandler {
+
+  private static final Logger logger = LoggerFactory.getLogger(HandlerStream.class);
 
   @Override
   /*
@@ -27,7 +32,7 @@ public class HandlerStream implements RequestStreamHandler {
     } finally {
       inputStream.close();
       String finalString = outputStream.toString();
-      System.out.println(finalString);
+      logger.info("Final string result: " + finalString);
       outputStream.close();
     }
   }

@@ -5,28 +5,25 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.DynamodbEvent;
 import com.amazonaws.services.lambda.runtime.events.DynamodbEvent.DynamodbStreamRecord;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 // Handler value: example.HandlerDynamoDB
-public class HandlerDynamoDB implements RequestHandler<DynamodbEvent, String>{
+public class HandlerDynamoDB implements RequestHandler<DynamodbEvent, List<String>>{
+
   private static final Logger logger = LoggerFactory.getLogger(HandlerDynamoDB.class);
-  Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
   @Override
-  public String handleRequest(DynamodbEvent event, Context context)
+  public List<String> handleRequest(DynamodbEvent event, Context context)
   {
-    String response = new String("200 OK");
-    for (DynamodbStreamRecord record : event.getRecords()){
-      logger.info(record.getEventID());
-      logger.info(record.getEventName());
-      logger.info(record.getDynamodb().toString());
+    logger.info("EVENT TYPE: " + event.getClass().toString());
+    var operationsFound = new ArrayList<String>();
+    for (DynamodbStreamRecord record : event.getRecords()) {
+      operationsFound.add(record.getEventName());
     }
-    logger.info("Successfully processed " + event.getRecords().size() + " records.");
-    // log execution details
-    Util.logEnvironment(event, context, gson);
-    return response;
+    return operationsFound;
   }
 }

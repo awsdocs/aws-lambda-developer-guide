@@ -42,5 +42,6 @@
         "time": "10/Mar/2020:05:16:23 +0000",
         "timeEpoch": 1583817383220
     },
+    "body": "Hello world!",
     "isBase64Encoded": true
 }

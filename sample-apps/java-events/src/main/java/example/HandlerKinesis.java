@@ -8,22 +8,26 @@ import com.amazonaws.services.lambda.runtime.events.KinesisEvent.KinesisEventRec
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 // Handler value: example.HandleKinesis
-public class HandlerKinesis implements RequestHandler<KinesisEvent, String>{
+public class HandlerKinesis implements RequestHandler<KinesisEvent, List<String>>{
+
   private static final Logger logger = LoggerFactory.getLogger(HandlerKinesis.class);
   Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
   @Override
-  public String handleRequest(KinesisEvent event, Context context)
+  public List<String> handleRequest(KinesisEvent event, Context context)
   {
-    String response = new String("200 OK");
+    logger.info("EVENT TYPE: " + event.getClass().toString());
+    var dataRecords = new ArrayList<String>();
     for(KinesisEventRecord record : event.getRecords()) {
-      logger.info(gson.toJson(record.getKinesis().getData()));
+      dataRecords.add(gson.toJson(record.getKinesis().getData()));
     }
-    // log execution details
-    Util.logEnvironment(event, context, gson);
-    return response;
+    return dataRecords;
   }
 }

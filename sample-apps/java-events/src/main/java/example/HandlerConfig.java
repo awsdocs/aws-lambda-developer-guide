@@ -4,18 +4,18 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.ConfigEvent;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 // Handler value: example.HandlerConfig
 public class HandlerConfig implements RequestHandler<ConfigEvent, String>{
-  Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+  private static final Logger logger = LoggerFactory.getLogger(HandlerConfig.class);
+
   @Override
   public String handleRequest(ConfigEvent event, Context context)
   {
-    String response = new String("200 OK");
-    // log execution details
-    Util.logEnvironment(event, context, gson);
-    return response;
+    logger.info("EVENT TYPE: " + event.getClass().toString());
+    return event.getConfigRuleArn();
   }
 }

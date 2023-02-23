@@ -2,10 +2,14 @@ package example;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
-import com.amazonaws.services.lambda.runtime.LambdaLogger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 // Handler value: example.HandlerInteger
 public class HandlerInteger implements RequestHandler<Integer, Integer>{
+
+  private static final Logger logger = LoggerFactory.getLogger(HandlerInteger.class);
 
   @Override
   /*
@@ -13,9 +17,8 @@ public class HandlerInteger implements RequestHandler<Integer, Integer>{
    */
   public Integer handleRequest(Integer event, Context context)
   {
-    LambdaLogger logger = context.getLogger();
-    logger.log("EVENT: " + event);
-    logger.log("EVENT TYPE: " + event.getClass().toString());
+    logger.info("EVENT: " + event);
+    logger.info("EVENT TYPE: " + event.getClass().toString());
     return event + 1;
   }
 }
