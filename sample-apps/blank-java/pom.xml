@@ -23,21 +23,6 @@
       <version>2.2.9</version>
     </dependency>
     <dependency>
-      <groupId>com.amazonaws</groupId>
-      <artifactId>aws-lambda-java-log4j2</artifactId>
-      <version>1.5.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-api</artifactId>
-      <version>[2.17.1,)</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-core</artifactId>
-      <version>[2.17.1,)</version>
-    </dependency>
-    <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-slf4j18-impl</artifactId>
       <version>[2.17.1,)</version>
@@ -50,21 +35,6 @@
     <dependency>
       <groupId>com.amazonaws</groupId>
       <artifactId>aws-xray-recorder-sdk-core</artifactId>
-      <version>2.4.0</version>
-    </dependency>
-    <dependency>
-      <groupId>com.amazonaws</groupId>
-      <artifactId>aws-xray-recorder-sdk-aws-sdk-core</artifactId>
-      <version>2.4.0</version>
-    </dependency>
-    <dependency>
-      <groupId>com.amazonaws</groupId>
-      <artifactId>aws-xray-recorder-sdk-aws-sdk-v2</artifactId>
-      <version>2.4.0</version>
-    </dependency>
-    <dependency>
-      <groupId>com.amazonaws</groupId>
-      <artifactId>aws-xray-recorder-sdk-aws-sdk-v2-instrumentor</artifactId>
       <version>2.4.0</version>
     </dependency>
     <dependency>
@@ -99,6 +69,17 @@
         <version>3.2.2</version>
         <configuration>
           <createDependencyReducedPom>false</createDependencyReducedPom>
+          <filters>
+            <filter>
+                <artifact>*:*</artifact>
+                <excludes>
+                    <exclude>module-info.class</exclude>
+                    <exclude>META-INF/*</exclude>
+                    <exclude>META-INF/versions/**</exclude>
+                    <exclude>META-INF/services/**</exclude>
+                </excludes>
+            </filter>
+        </filters>
         </configuration>
         <executions>
           <execution>
