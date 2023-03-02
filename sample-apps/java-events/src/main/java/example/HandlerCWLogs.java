@@ -1,6 +1,7 @@
 package example;
 
 import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.CloudWatchLogsEvent;
 
@@ -14,18 +15,14 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.zip.GZIPInputStream;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 // Handler value: example.HandlerCWLogs
 public class HandlerCWLogs implements RequestHandler<CloudWatchLogsEvent, String>{
-
-  private static final Logger logger = LoggerFactory.getLogger(HandlerCWLogs.class);
 
   @Override
   public String handleRequest(CloudWatchLogsEvent event, Context context)
   {
-    logger.info("EVENT TYPE: " + event.getClass().toString());
+    LambdaLogger logger = context.getLogger();
+    logger.log("EVENT TYPE: " + event.getClass().toString());
     Decoder decoder = Base64.getDecoder();
     byte[] decodedEvent = decoder.decode(event.getAwsLogs().getData());
     StringBuilder output = new StringBuilder();
@@ -38,7 +35,7 @@ public class HandlerCWLogs implements RequestHandler<CloudWatchLogsEvent, String
       });
       // logger.info(output.toString());
     } catch(IOException e) {
-        logger.error("ERROR: " + e.toString());
+        logger.log("ERROR: " + e.toString());
     }
     return output.toString();
   }

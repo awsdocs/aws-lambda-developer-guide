@@ -1,24 +1,21 @@
 package example;
 
 import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 
 import java.util.HashMap;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 // Handler value: example.Handler
 public class HandlerApiGatewayV1 implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent>{
-
-  private static final Logger logger = LoggerFactory.getLogger(HandlerApiGatewayV1.class);
 
   @Override
   public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent event, Context context)
   {
-    logger.info("EVENT TYPE: " + event.getClass().toString());
+    LambdaLogger logger = context.getLogger();
+    logger.log("EVENT TYPE: " + event.getClass().toString());
     APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
     response.setIsBase64Encoded(false);
     response.setStatusCode(200);

@@ -6,10 +6,10 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: target/java-events-1.0-SNAPSHOT.jar
-      Handler: example.Handler
-      Runtime: java8
+      Handler: example.HandlerSQS
+      Runtime: java11
       Description: Java function
-      MemorySize: 512
+      MemorySize: 2048
       Timeout: 10
       # Function's execution role
       Policies:

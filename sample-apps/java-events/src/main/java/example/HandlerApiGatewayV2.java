@@ -1,24 +1,21 @@
 package example;
 
 import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayV2HTTPEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayV2HTTPResponse;
 
 import java.util.HashMap;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 // Handler value: example.HandlerApiGateway
 public class HandlerApiGatewayV2 implements RequestHandler<APIGatewayV2HTTPEvent, APIGatewayV2HTTPResponse>{
-
-  private static final Logger logger = LoggerFactory.getLogger(HandlerApiGatewayV2.class);
 
   @Override
   public APIGatewayV2HTTPResponse handleRequest(APIGatewayV2HTTPEvent event, Context context)
   {
-    logger.info("EVENT TYPE: " + event.getClass().toString());
+    LambdaLogger logger = context.getLogger();
+    logger.log("EVENT TYPE: " + event.getClass().toString());
     APIGatewayV2HTTPResponse response = new APIGatewayV2HTTPResponse();
     response.setIsBase64Encoded(false);
     response.setStatusCode(200);
