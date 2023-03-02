@@ -27,4 +27,4 @@ Resources:
       Description: Dependencies for the blank-java sample app.
       ContentUri: build/blank-java-lib.zip
       CompatibleRuntimes:
-        - java8
+        - java11
