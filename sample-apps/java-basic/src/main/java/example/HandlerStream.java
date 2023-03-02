@@ -1,19 +1,15 @@
 package example;
 
 import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
 
 import java.io.InputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 // Handler value: example.HandlerStream
 public class HandlerStream implements RequestStreamHandler {
-
-  private static final Logger logger = LoggerFactory.getLogger(HandlerStream.class);
 
   @Override
   /*
@@ -22,6 +18,7 @@ public class HandlerStream implements RequestStreamHandler {
    */
   public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context) throws IOException
   {
+    LambdaLogger logger = context.getLogger();
     int nextChar;
     try {
       while ((nextChar = inputStream.read()) != -1) {
@@ -32,7 +29,7 @@ public class HandlerStream implements RequestStreamHandler {
     } finally {
       inputStream.close();
       String finalString = outputStream.toString();
-      logger.info("Final string result: " + finalString);
+      logger.log("Final string result: " + finalString);
       outputStream.close();
     }
   }

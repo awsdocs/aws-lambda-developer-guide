@@ -95,7 +95,7 @@ To use a different handler, change the value of the Handler setting in the appli
       CodeUri: build/distributions/java-basic.zip
       Handler: example.HandlerList
 
-Deploy the change, and then use the invoke script to test the new configuration. For handlers, that don't take a JSON object as input, pass the type (`string`, `int` or `list`) as an argument to the invoke script.
+Deploy the change, and then use the invoke script to test the new configuration. For handlers, that don't take a JSON object as input, pass the type (`string`, `int`, `list`, or `divide`) as an argument to the invoke script.
 
     ./3-invoke.sh list
     {
