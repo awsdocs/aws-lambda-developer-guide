@@ -1,17 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
     <AWSProjectType>Lambda</AWSProjectType>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="Amazon.Lambda.Core" Version="1.1.0" />
-    <PackageReference Include="Amazon.Lambda.SQSEvents" Version="1.1.0" />
-    <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="1.7.0" />
-    <PackageReference Include="AWSSDK.Core" Version="3.3.104.38" />
-    <PackageReference Include="AWSSDK.Lambda" Version="3.3.108.11" />
-    <PackageReference Include="AWSXRayRecorder.Core" Version="2.6.2" />
-    <PackageReference Include="AWSXRayRecorder.Handlers.AwsSdk" Version="2.7.2" />
+    <PackageReference Include="Amazon.Lambda.Core" Version="2.1.0" />
+    <PackageReference Include="Amazon.Lambda.SQSEvents" Version="2.1.0" />
+    <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="2.1.0" />
+    <PackageReference Include="AWSSDK.Core" Version="3.7.103.24" />
+    <PackageReference Include="AWSSDK.Lambda" Version="3.7.104.3" />
+    <PackageReference Include="AWSXRayRecorder.Core" Version="2.13.0" />
+    <PackageReference Include="AWSXRayRecorder.Handlers.AwsSdk" Version="2.11.0" />
   </ItemGroup>
 </Project>
