@@ -14,7 +14,6 @@ public class HandlerInteger implements RequestHandler<Integer, Integer>{
   public Integer handleRequest(Integer event, Context context)
   {
     LambdaLogger logger = context.getLogger();
-    logger.log("EVENT: " + event);
     logger.log("EVENT TYPE: " + event.getClass().toString());
     return event + 1;
   }

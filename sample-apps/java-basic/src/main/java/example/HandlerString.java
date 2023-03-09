@@ -14,7 +14,6 @@ public class HandlerString implements RequestHandler<String, String>{
   public String handleRequest(String event, Context context)
   {
     LambdaLogger logger = context.getLogger();
-    logger.log("EVENT: " + event);
     logger.log("EVENT TYPE: " + event.getClass().toString());
     return event.toLowerCase();
   }
