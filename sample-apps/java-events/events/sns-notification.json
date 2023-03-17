@@ -14,7 +14,7 @@
                 },
                 "SigningCertUrl": "https://sns.us-east-2.amazonaws.com/SimpleNotificationService-a86cxmpl4e1f29c941702d737128f7b6.pem",
                 "MessageId": "476643b1-xmpl-526c-973d-1542ba9af1d6",
-                "Message": "Updated and expanded documentation for using Lambda with API Gateway, including support for HTTP APIs. Added a sample application that creates an API and function with AWS CloudFormation. For details, see Using AWS Lambda with Amazon API Gateway.",
+                "Message": "Updated and expanded documentation for using Lambda with API Gateway, including support for HTTP APIs.",
                 "Subject": "Latest updates from AWS Lambda",
                 "UnsubscribeUrl": "https://sns.us-east-2.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-2:123456789012:java-events-topic:dd15418a-xmpl-4cfd-b418-f7fcb08c7ee4",
                 "Type": "Notification",

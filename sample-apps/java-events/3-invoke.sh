@@ -16,6 +16,9 @@ then
     sns)
       PAYLOAD='file://events/sns-notification.json'
       ;;
+    cdn)
+      PAYLOAD='file://events/cloudfront.json'
+      ;;
     cfg)
       PAYLOAD='file://events/config-rule.json'
       ;;

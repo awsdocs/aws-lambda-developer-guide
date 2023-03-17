@@ -1,14 +1,16 @@
 package example;
 
 import com.amazonaws.services.lambda.runtime.Context;
-import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
+import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 import java.util.List;
 
 // Handler value: example.HandlerDivide
 public class HandlerDivide implements RequestHandler<List<Integer>, Integer>{
-
+  /*
+   * Takes a list of two integers and divides them.
+   */
   @Override
   public Integer handleRequest(List<Integer> event, Context context)
   {

@@ -96,6 +96,6 @@
         "domainName": "70ixmpl4fl.execute-api.us-east-2.amazonaws.com",
         "apiId": "70ixmpl4fl"
     },
-    "body": null,
+    "body": "Hello world!",
     "isBase64Encoded": false
 }

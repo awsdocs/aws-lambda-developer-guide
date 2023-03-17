@@ -1,22 +1,26 @@
 package example;
 
 import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.SQSEvent;
 import com.amazonaws.services.lambda.runtime.events.SQSEvent.SQSMessage;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.ArrayList;
+import java.util.List;
 
 // Handler value: example.HandlerSQS
-public class HandlerSQS implements RequestHandler<SQSEvent, Void>{
-  private static final Logger logger = LoggerFactory.getLogger(HandlerSQS.class);
+public class HandlerSQS implements RequestHandler<SQSEvent, List<String>>{
+
   @Override
-  public Void handleRequest(SQSEvent event, Context context)
+  public List<String> handleRequest(SQSEvent event, Context context)
   {
+    LambdaLogger logger = context.getLogger();
+    logger.log("EVENT TYPE: " + event.getClass().toString());
+    var messagesFound = new ArrayList<String>();
     for(SQSMessage msg : event.getRecords()){
-      logger.info(msg.getBody());
+      messagesFound.add(msg.getBody());
     }
-    return null;
+    return messagesFound;
   }
 }
