@@ -43,6 +43,10 @@ To build a Lambda layer that contains the function's runtime dependencies, run `
 
     blank-java$ ./2-build-layer.sh
 
+You can also run this commnand with Maven. To use Maven, add `mvn` to the command.
+
+    blank-java$ ./2-build-layer.sh mvn
+
 # Deploy
 
 To deploy the application, run `3-deploy.sh`.
@@ -55,7 +59,7 @@ To deploy the application, run `3-deploy.sh`.
 
 This script uses AWS CloudFormation to deploy the Lambda functions and an IAM role. If the AWS CloudFormation stack that contains the resources already exists, the script updates it with any changes to the template or function code.
 
-You can also build the application with Maven. To use maven, add `mvn` to the command.
+You can also build the application with Maven. To use Maven, add `mvn` to the command.
 
     java-basic$ ./3-deploy.sh mvn
     [INFO] Scanning for projects...
