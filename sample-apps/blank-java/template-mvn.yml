@@ -25,6 +25,6 @@ Resources:
     Properties:
       LayerName: blank-java-lib
       Description: Dependencies for the blank-java sample app.
-      ContentUri: build/blank-java-lib.zip
+      ContentUri: target/blank-java-1.0-SNAPSHOT.zip
       CompatibleRuntimes:
         - java11
