@@ -93,7 +93,7 @@ To create a function URL for an existing Lambda function using the AWS Command L
 aws lambda create-function-url-config \
     --function-name my-function \
     --qualifier prod \ // optional
-    --auth-type AWS_IAM
+    --auth-type AWS_IAM \
     --cors-config {AllowOrigins="https://example.com"} // optional
 ```
 
