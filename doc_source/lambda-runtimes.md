@@ -37,7 +37,6 @@ For new regions, Lambda will not support runtimes that are set to be deprecated 
 |  Java 8  |  `java8`  |    |  Amazon Linux  |  x86\_64  |    | 
 |  \.NET Core 3\.1  |  `dotnetcore3.1`  |    |  Amazon Linux 2  |  x86\_64, arm64  |  Mar 31, 2023  | 
 |  \.NET 6  |  `dotnet6`  |    |  Amazon Linux 2  |  x86\_64, arm64  |    | 
-|  \.NET 5  |  `dotnet5.0`  |    |  Amazon Linux 2  |  x86\_64  |    | 
 |  Go 1\.x  |  `go1.x`  |    |  Amazon Linux  |  x86\_64  |    | 
 |  Ruby 2\.7  |  `ruby2.7`  |  3\.1\.0  |  Amazon Linux 2  |  x86\_64, arm64  |    | 
 |  Custom Runtime  |  `provided.al2`  |    |  Amazon Linux 2  |  x86\_64, arm64  |    | 
