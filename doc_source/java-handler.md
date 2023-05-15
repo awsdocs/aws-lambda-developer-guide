@@ -36,7 +36,7 @@ The [Lambda runtime](lambda-runtimes.md) receives an event as a JSON\-formatted 
 
 **Handler formats**
 + `package.Class::method` – Full format\. For example: `example.Handler::handleRequest`\.
-+ `package.Class` – Abbreviated format for functions that implement a [handler interface](#java-handler-interfaces)\. For example: `example.Handler`\.
++ `package.Class` – Abbreviated format for classes that implement a [handler interface](#java-handler-interfaces)\. For example: `example.Handler`\.
 
 You can add [initialization code](https://docs.aws.amazon.com/lambda/latest/operatorguide/static-initialization.html) outside of your handler method to reuse resources across multiple invocations\. When the runtime loads your handler, it runs static code and the class constructor\. Resources that are created during initialization stay in memory between invocations, and can be reused by the handler thousands of times\.
 
