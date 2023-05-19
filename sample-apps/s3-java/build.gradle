@@ -27,23 +27,11 @@ test {
     useJUnitPlatform()
 }
 
-task packageBig(type: Zip) {
-    from compileJava
-    from processResources
+task packageJar(type: Zip) {
     into('lib') {
-        from configurations.runtimeClasspath
+        from(jar)
+        from(configurations.runtimeClasspath)
     }
-}
-
-task packageLibs(type: Zip) {
-    into('java/lib') {
-        from configurations.runtimeClasspath
-    }
-}
-
-task packageSmall(type: Zip) {
-    from compileJava
-    from processResources
 }
 
 java {
@@ -51,4 +39,4 @@ java {
     targetCompatibility = JavaVersion.VERSION_1_8
 }
 
-build.dependsOn packageSmall
+build.dependsOn packageJar
