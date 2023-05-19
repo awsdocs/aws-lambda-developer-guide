@@ -29,7 +29,7 @@ public class Handler implements RequestHandler<Object, String>{
   public String handleRequest(Object event, Context context)
   {
     LambdaLogger logger = context.getLogger();
-    String response = new String("SUCCESS");
+    String response = "SUCCESS";
     // log execution details
     logger.log("ENVIRONMENT VARIABLES: " + gson.toJson(System.getenv()));
     logger.log("CONTEXT: " + gson.toJson(context));

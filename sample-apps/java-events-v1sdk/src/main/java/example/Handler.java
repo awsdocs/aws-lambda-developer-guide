@@ -19,7 +19,7 @@ public class Handler implements RequestHandler<S3Event, String>{
   @Override
   public String handleRequest(S3Event event, Context context)
   {
-    String response = new String("200 OK");
+    String response = "200 OK";
     S3EventNotificationRecord record = event.getRecords().get(0);
     String srcBucket = record.getS3().getBucket().getName();
     // Object key may have spaces or unicode non-ASCII characters.
