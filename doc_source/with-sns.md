@@ -4,7 +4,7 @@ You can use a Lambda function to process Amazon Simple Notification Service \(Am
 
 Amazon SNS invokes your function [asynchronously](invocation-async.md) with an event that contains a message and metadata\.
 
-**Example Amazon SNS message event**
+**Example Amazon SNS message event**  
 
 ```
 {
@@ -44,17 +44,15 @@ For asynchronous invocation, Lambda queues the message and handles retries\. If 
 
 To perform cross\-account Amazon SNS deliveries to Lambda, you must authorize Amazon SNS to invoke your Lambda function\. In turn, Amazon SNS must allow the AWS account with the Lambda function to subscribe to the Amazon SNS topic\. For example, if the Amazon SNS topic is in account A and the Lambda function is in account B, both accounts must grant permissions to the other to access their respective resources\. Since not all the options for setting up cross\-account permissions are available from the AWS Management Console, you must use the AWS Command Line Interface \(AWS CLI\) for setup\.
 
-For more information, see [Fanout to Lambda functions](https://docs.aws.amazon.com/sns/latest/dg/sns-lambda-as-subscriber.html) in the _Amazon Simple Notification Service Developer Guide_\.
+For more information, see [Fanout to Lambda functions](https://docs.aws.amazon.com/sns/latest/dg/sns-lambda-as-subscriber.html) in the *Amazon Simple Notification Service Developer Guide*\.
 
 **Input types for Amazon SNS events**
 
 For input type examples for Amazon SNS events in Java, \.NET, and Go, see the following on the AWS GitHub repository:
-
-- [SNSEvent\.java](https://github.com/aws/aws-lambda-java-libs/blob/master/aws-lambda-java-events/src/main/java/com/amazonaws/services/lambda/runtime/events/SNSEvent.java)
-- [SNSEvent\.cs](https://github.com/aws/aws-lambda-dotnet/blob/master/Libraries/src/Amazon.Lambda.SNSEvents/SNSEvent.cs)
-- [sns\.go](https://github.com/aws/aws-lambda-go/blob/master/events/sns.go)
++ [SNSEvent\.java](https://github.com/aws/aws-lambda-java-libs/blob/master/aws-lambda-java-events/src/main/java/com/amazonaws/services/lambda/runtime/events/SNSEvent.java)
++ [SNSEvent\.cs](https://github.com/aws/aws-lambda-dotnet/blob/master/Libraries/src/Amazon.Lambda.SNSEvents/SNSEvent.cs)
++ [sns\.go](https://github.com/aws/aws-lambda-go/blob/master/events/sns.go)
 
 **Topics**
-
-- [Tutorial: Using AWS Lambda with Amazon Simple Notification Service](with-sns-example.md)
-- [Sample function code](with-sns-create-package.md)
++ [Tutorial: Using AWS Lambda with Amazon Simple Notification Service](with-sns-example.md)
++ [Sample function code](with-sns-create-package.md)
