@@ -19,3 +19,6 @@ public class HandlerIntegerJava17 implements RequestHandler<IntegerRecord, Integ
     return event.x() + event.y();
   }
 }
+
+record IntegerRecord(int x, int y, String message) {
+}
