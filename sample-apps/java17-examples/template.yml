@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: An AWS Lambda application that calls the Lambda API.
+Resources:
+  function:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: build/distributions/java17-examples.zip
+      Handler: example.HandlerIntegerJava17
+      Runtime: java17
+      Description: Java function
+      MemorySize: 2048
+      Timeout: 10
+      # Function's execution role
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - AWSLambda_ReadOnlyAccess
+        - AWSXrayWriteOnlyAccess
+        - AWSLambdaVPCAccessExecutionRole
+      Tracing: Active
