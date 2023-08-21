@@ -9,11 +9,12 @@
   ],
 
   "profile":"default",
-  "region" : "us-east-2",
+  "region" : "us-east-1",
   "configuration" : "Release",
   "framework" : "net6.0",
   "function-runtime":"dotnet6",
   "function-memory-size" : 512,
   "function-timeout" : 30,
-  "function-handler" : "blank-csharp::blankCsharp.Function::FunctionHandler"
+  "function-handler" : "blank-csharp::blankCsharp.Function::FunctionHandler",
+  "function-role" : "blank-csharp-role"
 }
