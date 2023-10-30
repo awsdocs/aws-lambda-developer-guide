@@ -69,7 +69,7 @@ func LongRunningHandler(ctx context.Context) (string, error) {
                 select {
 
                 case <- timeoutChannel:
-                        return "Finished before timing out.", nil
+                        return "Timed out before finishing.", nil
 
                 default:
                         log.Print("hello!")
