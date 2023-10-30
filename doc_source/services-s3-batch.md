@@ -41,7 +41,7 @@ Your Lambda function must return a JSON object with the fields as shown in the f
     {
       "taskId": "dGFza2lkZ29lc2hlcmUK",
       "resultCode": "Succeeded",
-      "resultString": "["Alice", "Bob"]"
+      "resultString": "[\"Alice\", \"Bob\"]"
     }
   ]
 }
