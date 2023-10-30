@@ -18,7 +18,7 @@ public class HandlerKinesis implements RequestHandler<KinesisEvent, String>{
   @Override
   public String handleRequest(KinesisEvent event, Context context)
   {
-    String response = new String("200 OK");
+    String response = "200 OK";
     for(KinesisEventRecord record : event.getRecords()) {
       logger.info(gson.toJson(record.getKinesis().getData()));
     }

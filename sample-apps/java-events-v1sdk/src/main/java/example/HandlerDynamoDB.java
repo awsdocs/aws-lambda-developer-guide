@@ -18,7 +18,7 @@ public class HandlerDynamoDB implements RequestHandler<DynamodbEvent, String>{
   @Override
   public String handleRequest(DynamodbEvent event, Context context)
   {
-    String response = new String("200 OK");
+    String response = "200 OK";
     for (DynamodbStreamRecord record : event.getRecords()){
       logger.info(record.getEventID());
       logger.info(record.getEventName());
