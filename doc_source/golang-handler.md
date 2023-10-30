@@ -65,7 +65,7 @@ type MyEvent struct {
 }
  
 type MyResponse struct {
-        Message string `json:"Answer:"`
+        Message string `json:"Answer"`
 }
  
 func HandleLambdaEvent(event MyEvent) (MyResponse, error) {
