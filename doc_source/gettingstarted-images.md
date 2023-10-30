@@ -10,14 +10,18 @@ You cannot convert an existing container image function to use a \.zip file arch
 When you select an image using an image tag, Lambda translates the tag to the underlying image digest\. To retrieve the digest for your image, use the [GetFunctionConfiguration](API_GetFunctionConfiguration.md) API operation\. To update the function to a newer image version, you must use the Lambda console to [update the function code](#configuration-images-update), or use the [UpdateFunctionCode](API_UpdateFunctionCode.md) API operation\. Configuration operations such as [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md) do not update the function's container image\.
 
 **Topics**
-+ [Prerequisites](#gettingstarted-images-prereq)
-+ [Permissions](#gettingstarted-images-permissions)
-+ [Creating the function](#configuration-images-create)
-+ [Testing the function](#get-started-invoke-function)
-+ [Overriding container settings](#configuration-images-settings)
-+ [Updating function code](#configuration-images-update)
-+ [Using the Lambda API](#configuration-images-api)
-+ [AWS CloudFormation](#configuration-images-cloudformation)
+- [Deploying Lambda functions as container images](#deploying-lambda-functions-as-container-images)
+  - [Prerequisites](#prerequisites)
+  - [Permissions](#permissions)
+    - [Amazon ECR permissions](#amazon-ecr-permissions)
+      - [Amazon ECR cross-account permissions](#amazon-ecr-cross-account-permissions)
+  - [Creating the function](#creating-the-function)
+  - [Testing the function](#testing-the-function)
+  - [Overriding container settings](#overriding-container-settings)
+  - [Updating function code](#updating-function-code)
+    - [Function version $LATEST](#function-version-latest)
+  - [Using the Lambda API](#using-the-lambda-api)
+  - [AWS CloudFormation](#aws-cloudformation)
 
 ## Prerequisites<a name="gettingstarted-images-prereq"></a>
 
@@ -56,7 +60,7 @@ For example, use the IAM console to create a role with the following policy:
   "Sid": "VisualEditor0",
   "Effect": "Allow",
   "Action": ["ecr:SetRepositoryPolicy","ecr:GetRepositoryPolicy"],
-  "Resource": "arn:aws:ecr:<region>:<account>:repository/<repo name>/"
+  "Resource": "arn:aws:ecr:<region>:<account>:repository/<repo-name>/"
   }
 ]
 }
@@ -105,7 +109,7 @@ A different account in the same region can create a function that uses a contain
           "ecr:GetDownloadUrlForLayer"
         ],
         "Principal": {
-          "AWS": "arn:aws:iam::123456789012:root"
+          "AWS": "arn:aws:iam::<account>:root"
         } 
       },
       {
@@ -121,7 +125,7 @@ A different account in the same region can create a function that uses a contain
         "Condition": {
           "StringLike": {
             "aws:sourceARN":
-              "arn:aws:lambda:us-east-1:123456789012:function:*"
+              "arn:aws:lambda:<region>:<account>:function:*"
           } 
         }
       }
@@ -129,7 +133,7 @@ A different account in the same region can create a function that uses a contain
     }
 ```
 
-To give access to multiple accounts, you add the account IDs to the Principal list in the `CrossAccountPermission` policy and to the Condition evaluation list in the `LambdaECRImageCrossAccountRetrievalPolicy`\. 
+To give access to multiple accounts, you add the account IDs to the Principal list in the `CrossAccountPermission` policy and to the Condition evaluation list in the `LambdaECRImageCrossAccountRetrievalPolicy`\.
 
 If you are working with multiple accounts in an AWS Organization, we recommend that you enumerate each account ID in the ECR permissions policy\. This approach aligns with the AWS security best practice of setting narrow permissions in IAM policies\.
 
@@ -282,10 +286,10 @@ When you create the function, you can specify the instruction set architecture\.
  You can create the function from the same account as the container registry or from a different account in the same region as the container registry in Amazon ECR\. For cross\-account access, adjust the [Amazon ECR permissions](#configuration-images-xaccount-permissions) for the image\.
 
 ```
-aws lambda create-function --region sa-east-1 --function-name my-function \
+aws lambda create-function --region <region> --function-name my-function \
     --package-type Image  \
     --code ImageUri=<ECR Image URI>   \
-    --role arn:aws:iam::123456789012:role/lambda-ex
+    --role arn:aws:iam::<account>:role/lambda-ex
 ```
 
 To update the function code, use the `update-function-code` command\. Specify the container image location using the `image-uri` parameter\.
@@ -294,7 +298,7 @@ To update the function code, use the `update-function-code` command\. Specify th
 You cannot change the `package-type` of a function\.
 
 ```
-aws lambda update-function-code --region sa-east-1 --function-name my-function \
+aws lambda update-function-code --region <region> --function-name my-function \
     --image-uri <ECR Image URI>   \
 ```
 
