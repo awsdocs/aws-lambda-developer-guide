@@ -38,6 +38,8 @@ Lambda uses your function's permissions to create and manage network interfaces\
 + **ec2:CreateNetworkInterface**
 + **ec2:DescribeNetworkInterfaces** – This action only works if it's allowed on all resources \(`"Resource": "*"`\)\.
 + **ec2:DeleteNetworkInterface** – If you don't specify a resource ID for **DeleteNetworkInterface** in the execution role, your function may not be able to access the VPC\. Either specify a unique resource ID, or include all resource IDs, for example, `"Resource": "arn:aws:ec2:us-west-2:123456789012:*/*"`\.
++ **ec2:AssignPrivateIpAddresses**
++ **ec2:UnassignPrivateIpAddresses**
 
 These permissions are included in the AWS managed policy **AWSLambdaVPCAccessExecutionRole**\. Note that these permissions are required only to create ENIs, not to invoke your VPC function\. In other words, you are still able to invoke your VPC function successfully even if you remove these permissions from your execution role\. To completely disassociate your Lambda function from the VPC, update the function's VPC configuration settings using the console or the [UpdateFunctionConfiguration](API_UpdateFunctionConfiguration.md) API\.
 
