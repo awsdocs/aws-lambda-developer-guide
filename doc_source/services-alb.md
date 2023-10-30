@@ -45,7 +45,7 @@ Your function processes the event and returns a response document to the load ba
 {
     "statusCode": 200,
     "statusDescription": "200 OK",
-    "isBase64Encoded": False,
+    "isBase64Encoded": false,
     "headers": {
         "Content-Type": "text/html"
     },
