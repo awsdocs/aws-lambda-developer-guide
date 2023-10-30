@@ -1,6 +1,6 @@
 # Lambda function aliases<a name="configuration-aliases"></a>
 
-You can create one or more aliases for your Lambda function\. A Lambda alias is like a pointer to a specific function version\. Users can access the function version using the alias Amazon Resource Name \(ARN\)\.
+You can create one or more aliases for your Lambda function\. A Lambda alias is like a pointer to a specific function version with the exception that it can point to two function versions during [traffic shifting](https://aws.amazon.com/about-aws/whats-new/2017/11/aws-lambda-supports-traffic-shifting-and-phased-deployments-with-aws-codedeploy/)\. Users can access the function version using the alias Amazon Resource Name \(ARN\)\.
 
 **Topics**
 + [Creating a function alias \(Console\)](#configuration-aliases-config)
