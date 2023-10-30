@@ -19,6 +19,7 @@ To subscribe to a telemetry stream, a Lambda extension can send a Subscribe API 
 + **Method** – `PUT`
 + **Headers**
   + `Content-Type`: `application/json`
+  + `Lambda-Extension-Identifier`: the `Lambda-Extension-Identifier` value received upon registering your extension\.
 + **Request body parameters**
   + **schemaVersion**
     + Required: Yes
