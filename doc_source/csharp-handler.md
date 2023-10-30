@@ -131,7 +131,7 @@ public partial class HttpApiJsonSerializerContext : JsonSerializerContext
 
 public class Functions
 {
-    public APIGatewayProxyResponse Get(APIGatewayHttpApiV2ProxyRequest
+    public APIGatewayHttpApiV2ProxyResponse Get(APIGatewayHttpApiV2ProxyRequest
 request, ILambdaContext context)
     {
         context.Logger.LogInformation("Get Request");
