@@ -166,7 +166,7 @@ In **Account B**, create an Amazon SQS queue that the Lambda function in **Accou
 
 ## Configure the event source \(Account A\)<a name="with-sqs-cross-account-event-source"></a>
 
-In **Account A**, create an event source mapping between the Amazon SQS queue in **Account B**and your Lambda function by running the following `create-event-source-mapping` AWS CLI command\.
+In **Account A**, create an event source mapping between the Amazon SQS queue in **Account B** and your Lambda function by running the following `create-event-source-mapping` AWS CLI command\.
 
 ```
 aws lambda create-event-source-mapping --function-name CrossAccountSQSExample --batch-size 10 \
