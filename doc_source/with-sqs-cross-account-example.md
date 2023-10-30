@@ -153,7 +153,11 @@ In **Account B**, create an Amazon SQS queue that the Lambda function in **Accou
                  "arn:aws:iam::<AccountA_ID>:role/cross-account-lambda-sqs-role"
               ]
            },
-           "Action": "sqs:*",
+            "Action": [
+                "sqs:ReceiveMessage",
+                "sqs:DeleteMessage",
+                "sqs:GetQueueAttributes"
+           ],
            "Resource": "arn:aws:sqs:us-east-1:<AccountB_ID>:LambdaCrossAccountQueue"
          }
        ]
