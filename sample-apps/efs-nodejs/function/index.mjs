@@ -1,13 +1,13 @@
-var fs = require('fs').promises
-const crypto = require('crypto')
+import fs from 'node:fs/promises'
+const crypto = await import('node:crypto')
 const dir = process.env.mountPath
 
-exports.handler = async function(event) {
+export const handler = async (event) => {
   console.log("EVENT: %s", JSON.stringify(event, null, 2))
   const filePath = dir + "/" + event.fileName
   const fileSize = event.fileSize
   // generate file
-  const buffer = await crypto.randomBytes(fileSize)
+  const buffer = crypto.randomBytes(fileSize)
   // write operation
   const writeTimeMs = await writeFile(filePath, buffer)
   // read file

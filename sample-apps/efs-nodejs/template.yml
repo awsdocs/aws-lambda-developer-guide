@@ -25,7 +25,7 @@ Resources:
             mountPath: !Ref mountPath
       MemorySize: 128
       Timeout: 15
-      Runtime: nodejs12.x
+      Runtime: nodejs18.x
       Tracing: Active
       Handler: index.handler
       VpcConfig:

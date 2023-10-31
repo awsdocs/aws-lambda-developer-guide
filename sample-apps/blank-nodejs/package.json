@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "devDependencies": {
-    "aws-sdk": "2.814.0",
-    "jest": "25.4.0"
+    "jest": "29.7.0"
   },
   "dependencies": {
-    "aws-xray-sdk-core": "1.1.2"
+    "aws-sdk": "2.1484.0",
+    "aws-xray-sdk-core": "3.5.3"
   },
   "scripts": {
     "test": "jest"

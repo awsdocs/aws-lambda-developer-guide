@@ -1,0 +1,25 @@
+$ ./4-invoke.sh 
+{
+    "StatusCode": 200,
+    "ExecutedVersion": "$LATEST"
+}
+{"writeTimeMs":60.659086,"readTimeMs":"Read error: Error: ENOENT: no such file or directory, open '/mnt/efs0/test.bin'","fileSizeBytes":0}
+{
+    "StatusCode": 200,
+    "ExecutedVersion": "$LATEST"
+}
+{"writeTimeMs":60.002857,"readTimeMs":79.54446,"fileSizeBytes":1398104}
+{
+    "StatusCode": 200,
+    "ExecutedVersion": "$LATEST"
+}
+{"writeTimeMs":50.76445,"readTimeMs":39.566218,"fileSizeBytes":1398104}
+{
+    "StatusCode": 200,
+    "ExecutedVersion": "$LATEST"
+}
+{"writeTimeMs":60.457508,"readTimeMs":199.181445,"fileSizeBytes":1398104}
+{
+    "StatusCode": 200,
+    "ExecutedVersion": "$LATEST"
+}
