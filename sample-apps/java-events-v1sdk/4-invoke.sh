@@ -5,10 +5,10 @@ if [ $1 ]
 then
   case $1 in
     ddb)
-      PAYLOAD='file://events/dynamodb-record.json'
+      PAYLOAD='fileb://events/dynamodb-record.json'
       ;;
     kin)
-      PAYLOAD='file://events/kinesis-record.json'
+      PAYLOAD='fileb://events/kinesis-record.json'
       ;;
     *)
       echo -n "Unknown event type"
@@ -20,7 +20,7 @@ while true; do
   then
     aws lambda invoke --function-name $FUNCTION --payload $PAYLOAD out.json
   else
-    aws lambda invoke --function-name $FUNCTION --payload file://event.json out.json
+    aws lambda invoke --function-name $FUNCTION --payload fileb://event.json out.json
   fi
   cat out.json
   echo ""
