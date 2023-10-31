@@ -6,14 +6,14 @@ while true; do
   then
     case $1 in
       async)
-        aws lambda invoke --function-name $ERROR_FUNCTION --payload file://event.json --invocation-type Event out.json
+        aws lambda invoke --function-name $ERROR_FUNCTION --payload fileb://event.json --invocation-type Event out.json
         ;;
       *)
         echo -n "Unknown argument"
         ;;
     esac
   else
-    aws lambda invoke --function-name $ERROR_FUNCTION --payload file://event.json out.json
+    aws lambda invoke --function-name $ERROR_FUNCTION --payload fileb://event.json out.json
   fi
   cat out.json
   echo ""

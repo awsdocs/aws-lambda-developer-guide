@@ -30,7 +30,7 @@ while true; do
   then
     aws lambda invoke --function-name $FUNCTION --payload $PAYLOAD out.json
   else
-    aws lambda invoke --function-name $FUNCTION --payload file://event.json out.json
+    aws lambda invoke --function-name $FUNCTION --payload fileb://event.json out.json
   fi
   cat out.json
   echo ""
