@@ -1,0 +1,583 @@
+{
+  "meta" : {
+    "reportVersion" : "2.5"
+  },
+  "run" : {
+    "version" : "2023.11.02-f12bfac-licensed",
+    "creationTimestamp" : "2023-12-08T16:49:20.367693Z",
+    "command" : "dcover create --coverage-reports --upload http://63.34.9.190:8080 --project lambda.java-basic --name baseline-tests",
+    "totalTime" : 85.374,
+    "environmentDetectionTime" : 0.568,
+    "indexingTime" : 0.25,
+    "entryPointsTime" : 0.552,
+    "generationTime" : 40.974,
+    "timeToFirstTest" : 37.689,
+    "timeToLastTest" : 70.961,
+    "indexQueryTime" : 3.142,
+    "verificationTime" : 2.908,
+    "validationTime" : 5.162
+  },
+  "codes" : {
+    "R000" : "Success",
+    "R002" : "Missing observers",
+    "T000" : "Method eligible for test creation",
+    "T001" : "Trivial getter",
+    "T002" : "Trivial setter",
+    "T005" : "Trivial constructor",
+    "T012" : "Synthetic method",
+    "V000" : "Validated successfully"
+  },
+  "summary" : {
+    "classesCount" : 9,
+    "methodsCount" : 30,
+    "completeTestCount" : 15,
+    "incompleteTestCount" : 0,
+    "skeletonTestCount" : 0,
+    "perMethodTestability" : {
+      "T000" : 7,
+      "T001" : 4,
+      "T002" : 4,
+      "T005" : 9,
+      "T012" : 6
+    },
+    "perMethodOutcome" : {
+      "R000" : 17,
+      "R002" : 7,
+      "T012" : 6
+    },
+    "perTestOutcome" : {
+      "R000" : 15
+    },
+    "perTestValidation" : {
+      "V000" : 15
+    }
+  },
+  "classes" : {
+    "example.Handler" : {
+      "methodsCount" : 3,
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T000" : 1,
+        "T005" : 1,
+        "T012" : 1
+      },
+      "perMethodOutcome" : {
+        "R000" : 1,
+        "R002" : 1,
+        "T012" : 1
+      },
+      "perTestOutcome" : {
+        "R000" : 1
+      }
+    },
+    "example.HandlerDivide" : {
+      "methodsCount" : 3,
+      "completeTestCount" : 4,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T000" : 1,
+        "T005" : 1,
+        "T012" : 1
+      },
+      "perMethodOutcome" : {
+        "R000" : 1,
+        "R002" : 1,
+        "T012" : 1
+      },
+      "perTestOutcome" : {
+        "R000" : 4
+      }
+    },
+    "example.HandlerInteger" : {
+      "methodsCount" : 3,
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T000" : 1,
+        "T005" : 1,
+        "T012" : 1
+      },
+      "perMethodOutcome" : {
+        "R000" : 1,
+        "R002" : 1,
+        "T012" : 1
+      },
+      "perTestOutcome" : {
+        "R000" : 1
+      }
+    },
+    "example.HandlerList" : {
+      "methodsCount" : 3,
+      "completeTestCount" : 3,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T000" : 1,
+        "T005" : 1,
+        "T012" : 1
+      },
+      "perMethodOutcome" : {
+        "R000" : 1,
+        "R002" : 1,
+        "T012" : 1
+      },
+      "perTestOutcome" : {
+        "R000" : 3
+      }
+    },
+    "example.HandlerStream" : {
+      "methodsCount" : 2,
+      "completeTestCount" : 2,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T000" : 1,
+        "T005" : 1
+      },
+      "perMethodOutcome" : {
+        "R000" : 1,
+        "R002" : 1
+      },
+      "perTestOutcome" : {
+        "R000" : 2
+      }
+    },
+    "example.HandlerString" : {
+      "methodsCount" : 3,
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T000" : 1,
+        "T005" : 1,
+        "T012" : 1
+      },
+      "perMethodOutcome" : {
+        "R000" : 1,
+        "R002" : 1,
+        "T012" : 1
+      },
+      "perTestOutcome" : {
+        "R000" : 1
+      }
+    },
+    "example.HandlerWeatherData" : {
+      "methodsCount" : 3,
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T000" : 1,
+        "T005" : 1,
+        "T012" : 1
+      },
+      "perMethodOutcome" : {
+        "R000" : 1,
+        "R002" : 1,
+        "T012" : 1
+      },
+      "perTestOutcome" : {
+        "R000" : 1
+      }
+    },
+    "example.InputLengthException" : {
+      "methodsCount" : 1,
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T005" : 1
+      },
+      "perMethodOutcome" : {
+        "R000" : 1
+      },
+      "perTestOutcome" : {
+        "R000" : 1
+      }
+    },
+    "example.WeatherData" : {
+      "methodsCount" : 9,
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : {
+        "T001" : 4,
+        "T002" : 4,
+        "T005" : 1
+      },
+      "perMethodOutcome" : {
+        "R000" : 9
+      },
+      "perTestOutcome" : {
+        "R000" : 1
+      }
+    }
+  },
+  "methods" : {
+    "example.Handler.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "R002",
+      "lineNumbers" : [
+        10
+      ]
+    },
+    "example.Handler.handleRequest:(Ljava/lang/Object;Lcom/amazonaws/services/lambda/runtime/Context;)Ljava/lang/Object;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T012",
+      "perMethodOutcome" : "T012",
+      "lineNumbers" : [
+        10
+      ]
+    },
+    "example.Handler.handleRequest:(Ljava/util/Map;Lcom/amazonaws/services/lambda/runtime/Context;)Ljava/lang/Void;" : {
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 1
+      },
+      "lineNumbers" : [
+        15,
+        16,
+        17
+      ]
+    },
+    "example.HandlerDivide.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "R002",
+      "lineNumbers" : [
+        10
+      ]
+    },
+    "example.HandlerDivide.handleRequest:(Ljava/lang/Object;Lcom/amazonaws/services/lambda/runtime/Context;)Ljava/lang/Object;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T012",
+      "perMethodOutcome" : "T012",
+      "lineNumbers" : [
+        10
+      ]
+    },
+    "example.HandlerDivide.handleRequest:(Ljava/util/List;Lcom/amazonaws/services/lambda/runtime/Context;)Ljava/lang/Integer;" : {
+      "completeTestCount" : 4,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 4
+      },
+      "lineNumbers" : [
+        17,
+        18,
+        20,
+        22,
+        23,
+        24,
+        25,
+        24,
+        26
+      ]
+    },
+    "example.HandlerInteger.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "R002",
+      "lineNumbers" : [
+        8
+      ]
+    },
+    "example.HandlerInteger.handleRequest:(Ljava/lang/Integer;Lcom/amazonaws/services/lambda/runtime/Context;)Ljava/lang/Integer;" : {
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 1
+      },
+      "lineNumbers" : [
+        16,
+        17,
+        18
+      ]
+    },
+    "example.HandlerInteger.handleRequest:(Ljava/lang/Object;Lcom/amazonaws/services/lambda/runtime/Context;)Ljava/lang/Object;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T012",
+      "perMethodOutcome" : "T012",
+      "lineNumbers" : [
+        8
+      ]
+    },
+    "example.HandlerList.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "R002",
+      "lineNumbers" : [
+        10
+      ]
+    },
+    "example.HandlerList.handleRequest:(Ljava/lang/Object;Lcom/amazonaws/services/lambda/runtime/Context;)Ljava/lang/Object;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T012",
+      "perMethodOutcome" : "T012",
+      "lineNumbers" : [
+        10
+      ]
+    },
+    "example.HandlerList.handleRequest:(Ljava/util/List;Lcom/amazonaws/services/lambda/runtime/Context;)Ljava/lang/Integer;" : {
+      "completeTestCount" : 3,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 3
+      },
+      "lineNumbers" : [
+        18,
+        19,
+        20
+      ]
+    },
+    "example.HandlerStream.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "R002",
+      "lineNumbers" : [
+        18
+      ]
+    },
+    "example.HandlerStream.handleRequest:(Ljava/io/InputStream;Ljava/io/OutputStream;Lcom/amazonaws/services/lambda/runtime/Context;)V" : {
+      "completeTestCount" : 2,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 2
+      },
+      "lineNumbers" : [
+        27,
+        28,
+        29,
+        32,
+        33,
+        38,
+        39,
+        40,
+        41,
+        42,
+        35,
+        36,
+        38,
+        39,
+        40,
+        41,
+        42,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43
+      ]
+    },
+    "example.HandlerString.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "R002",
+      "lineNumbers" : [
+        8
+      ]
+    },
+    "example.HandlerString.handleRequest:(Ljava/lang/Object;Lcom/amazonaws/services/lambda/runtime/Context;)Ljava/lang/Object;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T012",
+      "perMethodOutcome" : "T012",
+      "lineNumbers" : [
+        8
+      ]
+    },
+    "example.HandlerString.handleRequest:(Ljava/lang/String;Lcom/amazonaws/services/lambda/runtime/Context;)Ljava/lang/String;" : {
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 1
+      },
+      "lineNumbers" : [
+        16,
+        17,
+        18
+      ]
+    },
+    "example.HandlerWeatherData.<init>:()V" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "R002",
+      "lineNumbers" : [
+        8
+      ]
+    },
+    "example.HandlerWeatherData.handleRequest:(Lexample/WeatherData;Lcom/amazonaws/services/lambda/runtime/Context;)Lexample/WeatherData;" : {
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T000",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 1
+      },
+      "lineNumbers" : [
+        17,
+        18,
+        20,
+        21,
+        22,
+        24,
+        25
+      ]
+    },
+    "example.HandlerWeatherData.handleRequest:(Ljava/lang/Object;Lcom/amazonaws/services/lambda/runtime/Context;)Ljava/lang/Object;" : {
+      "completeTestCount" : 0,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T012",
+      "perMethodOutcome" : "T012",
+      "lineNumbers" : [
+        8
+      ]
+    },
+    "example.InputLengthException.<init>:(Ljava/lang/String;)V" : {
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 1
+      },
+      "lineNumbers" : [
+        7,
+        8
+      ]
+    },
+    "example.WeatherData.<init>:()V" : {
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T005",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 1
+      },
+      "lineNumbers" : [
+        3
+      ]
+    },
+    "example.WeatherData.getHumidityPct:()Ljava/lang/Double;" : {
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T001",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 1
+      },
+      "lineNumbers" : [
+        27
+      ]
+    },
+    "example.WeatherData.getPressureHPa:()Ljava/lang/Integer;" : {
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T001",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 1
+      },
+      "lineNumbers" : [
+        35
+      ]
+    },
+    "example.WeatherData.getTemperatureK:()Ljava/lang/Integer;" : {
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T001",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 1
+      },
+      "lineNumbers" : [
+        11
+      ]
+    },
+    "example.WeatherData.getWindKmh:()Ljava/lang/Integer;" : {
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T001",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 1
+      },
+      "lineNumbers" : [
+        19
+      ]
+    },
+    "example.WeatherData.setHumidityPct:(Ljava/lang/Double;)V" : {
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T002",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 1
+      },
+      "lineNumbers" : [
+        31,
+        32
+      ]
+    },
+    "example.WeatherData.setPressureHPa:(Ljava/lang/Integer;)V" : {
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T002",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 1
+      },
+      "lineNumbers" : [
+        39,
+        40
+      ]
+    },
+    "example.WeatherData.setTemperatureK:(Ljava/lang/Integer;)V" : {
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T002",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 1
+      },
+      "lineNumbers" : [
+        15,
+        16
+      ]
+    },
+    "example.WeatherData.setWindKmh:(Ljava/lang/Integer;)V" : {
+      "completeTestCount" : 1,
+      "incompleteTestCount" : 0,
+      "perMethodTestability" : "T002",
+      "perMethodOutcome" : "R000",
+      "perTestOutcome" : {
+        "R000" : 1
+      },
+      "lineNumbers" : [
+        23,
+        24
+      ]
+    }
+  }
+}

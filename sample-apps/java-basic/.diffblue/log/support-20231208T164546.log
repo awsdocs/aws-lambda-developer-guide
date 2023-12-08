@@ -1,0 +1,470 @@
+16:45:46.957 [DEBUG] [Preparing][main][c.d.cover.ui.a.x] Client heap size: 8192 MB
+16:45:46.965 [INFO]  [Preparing][main][c.d.cover.ui.a.x] Diffblue Cover 2023.11.02-f12bfac-licensed
+16:45:46.966 [INFO]  [Preparing][main][c.d.cover.ui.a.x] Running: dcover coverage-reports
+16:45:46.966 [INFO]  [Preparing][main][c.d.cover.ui.a.z] 
+16:45:46.966 [INFO]  [Preparing][main][c.d.cover.ui.a.z] Command: coverage-reports
+16:45:46.967 [INFO]  [Preparing][main][c.d.cover.ui.a.z] Generate coverage reports for Cover Reports.
+16:45:46.967 [INFO]  [Preparing][main][c.d.cover.ui.a.z] 
+16:45:47.135 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule r
+16:45:47.135 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule a
+16:45:47.135 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule CommonOptionsDetector
+16:45:47.136 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:45:47.136 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule CommonOptionsDetector took 1ms
+16:45:47.137 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule a
+16:45:47.137 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule c
+16:45:47.137 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule f
+16:45:47.137 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule s
+16:45:47.137 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:45:47.142 [INFO]  [Checking][main][c.d.cover.ui.a.h] Detected Java version 17.0.8
+16:45:47.142 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule s took 5ms
+16:45:47.142 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule f
+16:45:47.142 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:45:47.143 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule f took 0ms
+16:45:47.143 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule BuildSystemOptionsDetector
+16:45:47.143 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:45:47.144 [DEBUG] [Checking][main][c.d.c.c.m.c]   Error provided for SPECIFIED_BUILD_SYSTEM_CONFIG_FILE: Not Supplied
+16:45:47.144 [DEBUG] [Checking][main][c.d.c.c.m.c]   Error provided for SPECIFIED_CLASSPATH: Not Supplied
+16:45:47.144 [DEBUG] [Checking][main][c.d.c.c.m.c]   Error provided for SPECIFIED_BUILD_PATH: Not Supplied
+16:45:47.144 [DEBUG] [Checking][main][c.d.c.c.m.c]   Error provided for SPECIFIED_COMPLIANCE_LEVEL: Not Supplied
+16:45:47.144 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule BuildSystemOptionsDetector took 1ms
+16:45:47.144 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule c
+16:45:47.144 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:45:47.152 [INFO]  [Checking][main][c.d.d.d.c] Maven Using ${maven.home} of: /opt/homebrew/Cellar/maven/3.9.5.
+16:45:47.154 [INFO]  [Checking][main][c.d.d.d.c] Maven Executing: /bin/sh -c cd /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic && /opt/homebrew/Cellar/maven/3.9.5/bin/mvn -B -version
+16:45:47.479 [INFO]  [Checking][main][c.d.d.c.a] Standard output of build tool (Maven)
+16:45:47.479 [INFO]  [Checking][main][c.d.d.c.a] > Apache Maven 3.9.5 (57804ffe001d7215b5e7bcb531cf83df38f93546)
+16:45:47.479 [INFO]  [Checking][main][c.d.d.c.a] > Maven home: /opt/homebrew/Cellar/maven/3.9.5/libexec
+16:45:47.479 [INFO]  [Checking][main][c.d.d.c.a] > Java version: 17.0.8.1, vendor: Homebrew, runtime: /opt/homebrew/Cellar/openjdk@17/17.0.8.1/libexec/openjdk.jdk/Contents/Home
+16:45:47.479 [INFO]  [Checking][main][c.d.d.c.a] > Default locale: en_GB, platform encoding: UTF-8
+16:45:47.479 [INFO]  [Checking][main][c.d.d.c.a] > OS name: "mac os x", version: "14.1.2", arch: "aarch64", family: "mac"
+16:45:47.507 [INFO]  [Checking][main][c.d.d.d.c] Maven Using ${maven.home} of: /opt/homebrew/Cellar/maven/3.9.5.
+16:45:47.508 [INFO]  [Checking][main][c.d.d.d.c] Maven Executing: /bin/sh -c cd /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic && /opt/homebrew/Cellar/maven/3.9.5/bin/mvn -B -N -D output=diffblue.effective-pom.output.xml -D maven.ext.class.path=/usr/local/bin/diffblue/cover-buildsystem-maven-spy-jar-with-dependencies.jar org.apache.maven.plugins:maven-help-plugin:3.2.0:effective-pom
+16:45:49.183 [INFO]  [Checking][main][c.d.d.c.a] Standard output of build tool (Maven)
+16:45:49.183 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] Scanning for projects...
+16:45:49.183 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] 
+16:45:49.183 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] -----------------------< com.example:java-basic >-----------------------
+16:45:49.184 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] Building java-basic-function 1.0-SNAPSHOT
+16:45:49.184 [INFO]  [Checking][main][c.d.d.c.a] > [INFO]   from pom.xml
+16:45:49.184 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] --------------------------------[ jar ]---------------------------------
+16:45:49.184 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] 
+16:45:49.184 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] --- help:3.2.0:effective-pom (default-cli) @ java-basic ---
+16:45:49.184 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] Effective-POM written to: /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/diffblue.effective-pom.output.xml
+16:45:49.184 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:45:49.184 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] BUILD SUCCESS
+16:45:49.184 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:45:49.184 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] Total time:  0.846 s
+16:45:49.184 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] Finished at: 2023-12-08T16:45:49Z
+16:45:49.184 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:45:49.224 [INFO]  [Checking][main][c.d.cover.ui.a.h] Detected build system: Maven 3.9.5
+16:45:49.225 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule c took 2080ms
+16:45:49.225 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule b
+16:45:49.225 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:45:49.227 [DEBUG] [Checking][main][c.d.c.c.m.c]   Error provided for DETECTED_BUILD_SYSTEM_GRADLE: Not Detected
+16:45:49.227 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule b took 2ms
+16:45:49.227 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule aj
+16:45:49.227 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:45:49.229 [INFO]  [Checking][main][c.d.cover.m.a.aj] Operating System: Mac OS X aarch64 14.1.2
+16:45:49.229 [INFO]  [Checking][main][c.d.cover.m.a.aj] Default charset: UTF-8
+16:45:49.229 [INFO]  [Checking][main][c.d.cover.m.a.aj] Default locale: en_GB
+16:45:49.232 [INFO]  [Checking][main][c.d.cover.m.a.aj] Default time zone: Europe/London
+16:45:49.232 [DEBUG] [Checking][main][c.d.c.c.m.c]   Error provided for DETECTED_ENVIRONMENT_CLASSPATH: Not Supplied
+16:45:49.232 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule aj took 5ms
+16:45:49.232 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule a
+16:45:49.233 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:45:49.234 [INFO]  [Checking][main][c.d.cover.ui.a.h] Selected build system: Maven
+16:45:49.234 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule a took 1ms
+16:45:49.234 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule a
+16:45:49.234 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:45:49.234 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule a took 0ms
+16:45:49.234 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule b
+16:45:49.234 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:45:49.236 [INFO]  [Checking][main][c.d.d.d.c] Maven Using ${maven.home} of: /opt/homebrew/Cellar/maven/3.9.5.
+16:45:49.236 [INFO]  [Checking][main][c.d.d.d.c] Maven Executing: /bin/sh -c cd /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic && /opt/homebrew/Cellar/maven/3.9.5/bin/mvn -B -D output=/var/folders/p2/qfsg813s0h9b5mhb_8typkwm0000gp/T/build.classpath677309927988611401.tmp -D expression=build.classpath -D mdep.pathSeparator=#SEP# -D includeScope=test -D mdep.outputProperty=build.classpath -D maven.ext.class.path=/usr/local/bin/diffblue/cover-buildsystem-maven-spy-jar-with-dependencies.jar org.apache.maven.plugins:maven-dependency-plugin:3.3.0:build-classpath org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate
+16:45:51.786 [INFO]  [Checking][main][c.d.d.c.a] Standard output of build tool (Maven)
+16:45:51.786 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] Scanning for projects...
+16:45:51.786 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] 
+16:45:51.786 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] -----------------------< com.example:java-basic >-----------------------
+16:45:51.786 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] Building java-basic-function 1.0-SNAPSHOT
+16:45:51.786 [INFO]  [Checking][main][c.d.d.c.a] > [INFO]   from pom.xml
+16:45:51.786 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] --------------------------------[ jar ]---------------------------------
+16:45:51.786 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] 
+16:45:51.786 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] --- dependency:3.3.0:build-classpath (default-cli) @ java-basic ---
+16:45:51.786 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] Dependencies classpath:
+16:45:51.786 [INFO]  [Checking][main][c.d.d.c.a] > /Users/amishra/.m2/repository/com/amazonaws/aws-lambda-java-core/1.2.1/aws-lambda-java-core-1.2.1.jar#SEP#/Users/amishra/.m2/repository/org/slf4j/slf4j-nop/2.0.6/slf4j-nop-2.0.6.jar#SEP#/Users/amishra/.m2/repository/org/slf4j/slf4j-api/2.0.6/slf4j-api-2.0.6.jar#SEP#/Users/amishra/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.8.2/junit-jupiter-api-5.8.2.jar#SEP#/Users/amishra/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar#SEP#/Users/amishra/.m2/repository/org/junit/platform/junit-platform-commons/1.8.2/junit-platform-commons-1.8.2.jar#SEP#/Users/amishra/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar#SEP#/Users/amishra/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.8.2/junit-jupiter-engine-5.8.2.jar#SEP#/Users/amishra/.m2/repository/org/junit/platform/junit-platform-engine/1.8.2/junit-platform-engine-1.8.2.jar
+16:45:51.786 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] 
+16:45:51.786 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] -----------------------< com.example:java-basic >-----------------------
+16:45:51.786 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] Building java-basic-function 1.0-SNAPSHOT
+16:45:51.786 [INFO]  [Checking][main][c.d.d.c.a] > [INFO]   from pom.xml
+16:45:51.786 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] --------------------------------[ jar ]---------------------------------
+16:45:51.786 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] 
+16:45:51.786 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] --- help:3.2.0:evaluate (default-cli) @ java-basic ---
+16:45:51.786 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] No artifact parameter specified, using 'com.example:java-basic:jar:1.0-SNAPSHOT' as project.
+16:45:51.786 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] Result of evaluation written to: /var/folders/p2/qfsg813s0h9b5mhb_8typkwm0000gp/T/build.classpath677309927988611401.tmp
+16:45:51.786 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:45:51.786 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] BUILD SUCCESS
+16:45:51.786 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:45:51.786 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] Total time:  1.687 s
+16:45:51.786 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] Finished at: 2023-12-08T16:45:51Z
+16:45:51.786 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:45:51.814 [INFO]  [Checking][main][c.d.cover.ui.a.h] Selected classpath from build system Maven
+16:45:51.814 [INFO]  [Checking][main][c.d.cover.m.c.b] Expanded classpath: 
+/Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/test-classes
+/Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/classes (code under test)
+/Users/amishra/.m2/repository/com/amazonaws/aws-lambda-java-core/1.2.1/aws-lambda-java-core-1.2.1.jar
+/Users/amishra/.m2/repository/org/slf4j/slf4j-nop/2.0.6/slf4j-nop-2.0.6.jar
+/Users/amishra/.m2/repository/org/slf4j/slf4j-api/2.0.6/slf4j-api-2.0.6.jar
+/Users/amishra/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.8.2/junit-jupiter-api-5.8.2.jar
+/Users/amishra/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar
+/Users/amishra/.m2/repository/org/junit/platform/junit-platform-commons/1.8.2/junit-platform-commons-1.8.2.jar
+/Users/amishra/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar
+/Users/amishra/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.8.2/junit-jupiter-engine-5.8.2.jar
+/Users/amishra/.m2/repository/org/junit/platform/junit-platform-engine/1.8.2/junit-platform-engine-1.8.2.jar
+16:45:51.814 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule b took 2579ms
+16:45:51.814 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule r
+16:45:51.814 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:45:51.830 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule r took 16ms
+16:45:51.831 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule ae
+16:45:51.831 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:45:51.831 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule ae took 0ms
+16:45:51.831 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule t
+16:45:51.831 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:45:51.833 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule t took 2ms
+16:45:51.833 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule v
+16:45:51.833 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:45:51.834 [INFO]  [Checking][main][c.d.cover.ui.a.h] Detected JVM architecture: 64-Bit
+16:45:51.834 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule v took 0ms
+16:45:51.834 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule y
+16:45:51.834 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:45:51.928 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule y took 94ms
+16:45:51.929 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule af
+16:45:51.929 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:45:51.929 [DEBUG] [Checking][main][c.d.c.c.m.c]   Error provided for DETECTED_SPRING_CORE: Not Detected
+16:45:51.929 [DEBUG] [Checking][main][c.d.c.c.m.c]   Error provided for DETECTED_SPRING_WEB: Not Detected
+16:45:51.929 [DEBUG] [Checking][main][c.d.c.c.m.c]   Error provided for DETECTED_SPRING_TEST: Not Detected
+16:45:51.929 [DEBUG] [Checking][main][c.d.c.c.m.c]   Error provided for DETECTED_SPRING_SECURITY_WEB: Not Detected
+16:45:51.929 [DEBUG] [Checking][main][c.d.c.c.m.c]   Error provided for DETECTED_SPRING_BOOT: Not Detected
+16:45:51.929 [DEBUG] [Checking][main][c.d.c.c.m.c]   Error provided for DETECTED_SPRING_BOOT_TEST: Not Detected
+16:45:51.929 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule af took 0ms
+16:45:51.929 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule ar
+16:45:51.929 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:45:51.944 [DEBUG] [Checking][main][c.d.c.c.m.c]   Error provided for DETECTED_TESTING_FRAMEWORK_JUNIT: b: Failed to determine JUnit version by invoking class 'junit.runner.Version', method 'id', descriptor '()Ljava/lang/String'
+16:45:51.944 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule ar took 15ms
+16:45:51.944 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule as
+16:45:51.944 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:45:51.953 [INFO]  [Checking][main][c.d.cover.ui.a.h] Detected test framework: JUnit Jupiter 5.8.2
+16:45:51.963 [INFO]  [Checking][main][c.d.cover.ui.a.h] Detected JUnit Jupiter version 5.8.2
+16:45:51.963 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule as took 18ms
+16:45:51.963 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule u
+16:45:51.963 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:45:51.974 [DEBUG] [Checking][main][c.d.c.c.m.c]   Error provided for DETECTED_JUNIT_JUPITER_PARAMS: b: Failed to determine JUnit Jupiter Params version from manifest; resource not found: org/junit/jupiter/params/ParameterizedTest.class
+16:45:51.974 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule u took 11ms
+16:45:51.974 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule at
+16:45:51.974 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:45:51.979 [DEBUG] [Checking][main][c.d.c.c.m.c]   Error provided for DETECTED_TESTING_FRAMEWORK_TESTNG: b: Failed to determine TestNG version by invoking class 'org.testng.internal.Version', method 'getVersionString', descriptor '()Ljava/lang/String'
+16:45:51.979 [DEBUG] [Checking][main][c.d.c.c.m.c]   Error provided for DETECTED_TESTNG_BELOW_6_9_5: Skipped
+16:45:51.979 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule at took 5ms
+16:45:51.979 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule l
+16:45:51.979 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:45:51.985 [DEBUG] [Checking][main][c.d.c.c.m.c]   Error provided for DETECTED_JUNIT_VINTAGE_ENGINE: b: Failed to determine JUnit Vintage Engine version from manifest; resource not found: org/junit/vintage/engine/VintageTestEngine.class
+16:45:51.985 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule l took 6ms
+16:45:51.986 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule ValidationOptionsDetector
+16:45:51.986 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:45:51.986 [DEBUG] [Checking][main][c.d.c.c.m.c]   Error provided for SPECIFIED_VALIDATION_COMMAND: Not Supplied
+16:45:51.986 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule ValidationOptionsDetector took 0ms
+16:45:51.986 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule ai
+16:45:51.986 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:45:51.986 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule ai took 0ms
+16:45:51.986 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule p
+16:45:51.986 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule CoverageReportOptionsDetector
+16:45:51.986 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule aq
+16:45:51.986 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:45:51.989 [INFO]  [Checking][main][c.d.cover.ui.a.h] Selected test output directory: /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/src/test/java
+16:45:51.989 [DEBUG] [Checking][main][c.d.c.c.m.c]   Error provided for SPECIFIED_TESTING_FRAMEWORK: Not Supplied
+16:45:51.989 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule aq took 3ms
+16:45:51.989 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule CoverageReportOptionsDetector
+16:45:51.989 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:45:51.989 [DEBUG] [Checking][main][c.d.c.c.m.c]   Error provided for SPECIFIED_JACOCO_COMMAND_DIFFBLUE: Not Supplied
+16:45:51.989 [DEBUG] [Checking][main][c.d.c.c.m.c]   Error provided for SPECIFIED_JACOCO_COMMAND_MANUAL: Not Supplied
+16:45:51.989 [DEBUG] [Checking][main][c.d.c.c.m.c]   Error provided for SPECIFIED_JACOCO_XML_TEST_REPORT: Not Supplied
+16:45:51.989 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule CoverageReportOptionsDetector took 0ms
+16:45:51.989 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule p
+16:45:51.989 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:45:51.989 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule p took 0ms
+16:45:51.989 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule n
+16:45:51.989 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule ad
+16:45:51.989 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:45:54.249 [DEBUG] [Reporting][main][c.d.c.c.m.c]   Error provided for DETECTED_TESTS_EXECUTE_WITH_JUNIT: Skipped
+16:45:54.249 [DEBUG] [Reporting][main][c.d.c.c.m.c]   Error provided for DETECTED_TESTS_EXECUTE_WITH_JUNIT_JUPITER: Skipped
+16:45:54.249 [DEBUG] [Reporting][main][c.d.c.c.m.c]   Error provided for DETECTED_TESTS_EXECUTE_WITH_TESTNG: Skipped
+16:45:54.249 [DEBUG] [Reporting][main][c.d.c.c.m.c]   Error provided for SELECTED_EXECUTE_TESTS: Skipped
+16:45:54.249 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule ad took 2260ms
+16:45:54.249 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule g
+16:45:54.249 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule m
+16:45:54.249 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule ah
+16:45:54.249 [DEBUG] [Reporting][main][c.d.c.c.m.c]   Rule fired
+16:45:54.249 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule ah took 0ms
+16:45:54.249 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule m
+16:45:54.249 [DEBUG] [Reporting][main][c.d.c.c.m.c]   Rule fired
+16:45:54.253 [DEBUG] [Reporting][main][c.d.cover.m.c.m] JUnitJupiter5 is present
+16:45:54.253 [DEBUG] [Reporting][main][c.d.cover.m.c.m] JUnitJupiter5 is supported
+16:45:54.253 [DEBUG] [Reporting][main][c.d.cover.m.c.m] JUnit 5 is present and either it's not been specified by the user or it is the same as the version the user specified
+16:45:54.254 [INFO]  [Reporting][main][c.d.cover.ui.a.h] Selected test framework: JUnit Jupiter
+16:45:54.254 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule m took 4ms
+16:45:54.254 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule g
+16:45:54.254 [DEBUG] [Reporting][main][c.d.c.c.m.c]   Rule fired
+16:45:54.254 [DEBUG] [Reporting][main][c.d.c.c.m.c]   Error provided for SELECTED_JUNIT_VINTAGE_ENGINE: Skipped
+16:45:54.254 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule g took 0ms
+16:45:54.254 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule ah
+16:45:54.254 [DEBUG] [Reporting][main][c.d.c.c.m.c]   Rule fired
+16:45:54.255 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule ah took 0ms
+16:45:54.255 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule n
+16:45:54.255 [DEBUG] [Reporting][main][c.d.c.c.m.c]   Rule fired
+16:45:54.255 [DEBUG] [Reporting][main][c.d.c.c.m.c]   Error provided for DETECTED_TESTS_EXECUTE_WITH_JACOCO_JUNIT: Skipped
+16:45:54.255 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule n took 0ms
+16:45:54.255 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule o
+16:45:54.255 [DEBUG] [Reporting][main][c.d.c.c.m.c]   Rule fired
+16:45:54.265 [INFO]  [Reporting][main][c.d.d.d.c] Maven Using ${maven.home} of: /opt/homebrew/Cellar/maven/3.9.5.
+16:45:54.265 [INFO]  [Reporting][main][c.d.d.d.c] Maven Executing: /bin/sh -c cd /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic && /opt/homebrew/Cellar/maven/3.9.5/bin/mvn -B -D test=DiffblueDummyCoverageJupiterDiffblueTest -D surefire.failIfNoSpecifiedTests=false -D maven.test.failure.ignore=true -D failIfNoTests=false -D jacoco.skip=false -D maven.ext.class.path=/usr/local/bin/diffblue/cover-buildsystem-maven-spy-jar-with-dependencies.jar org.jacoco:jacoco-maven-plugin:0.8.7:prepare-agent test org.jacoco:jacoco-maven-plugin:0.8.7:report
+16:45:59.292 [INFO]  [Reporting][main][c.d.d.c.a] Standard output of build tool (Maven)
+16:45:59.292 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] Scanning for projects...
+16:45:59.292 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] 
+16:45:59.292 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] -----------------------< com.example:java-basic >-----------------------
+16:45:59.293 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] Building java-basic-function 1.0-SNAPSHOT
+16:45:59.293 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO]   from pom.xml
+16:45:59.293 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] --------------------------------[ jar ]---------------------------------
+16:45:59.293 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] 
+16:45:59.293 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] --- jacoco:0.8.7:prepare-agent (default-cli) @ java-basic ---
+16:45:59.293 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] argLine set to -javaagent:/Users/amishra/.m2/repository/org/jacoco/org.jacoco.agent/0.8.7/org.jacoco.agent-0.8.7-runtime.jar=destfile=/Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/jacoco.exec
+16:45:59.293 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] 
+16:45:59.293 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] --- resources:3.3.1:resources (default-resources) @ java-basic ---
+16:45:59.293 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] skip non existing resourceDirectory /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/src/main/resources
+16:45:59.293 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] 
+16:45:59.294 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] --- compiler:3.8.1:compile (default-compile) @ java-basic ---
+16:45:59.294 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] Changes detected - recompiling the module!
+16:45:59.294 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] Compiling 10 source files to /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/classes
+16:45:59.294 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] 
+16:45:59.294 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] --- resources:3.3.1:testResources (default-testResources) @ java-basic ---
+16:45:59.294 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] Copying 1 resource from src/test/resources to target/test-classes
+16:45:59.294 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] 
+16:45:59.294 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] --- compiler:3.8.1:testCompile (default-testCompile) @ java-basic ---
+16:45:59.294 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] Changes detected - recompiling the module!
+16:45:59.294 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] Compiling 5 source files to /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/test-classes
+16:45:59.294 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] 
+16:45:59.294 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] --- surefire:2.22.2:test (default-test) @ java-basic ---
+16:45:59.294 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] 
+16:45:59.294 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] -------------------------------------------------------
+16:45:59.294 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO]  T E S T S
+16:45:59.294 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] -------------------------------------------------------
+16:45:59.294 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] Running DiffblueDummyCoverageJupiterDiffblueTest
+16:45:59.294 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.02 s - in DiffblueDummyCoverageJupiterDiffblueTest
+16:45:59.294 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] 
+16:45:59.294 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] Results:
+16:45:59.294 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] 
+16:45:59.294 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+16:45:59.294 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] 
+16:45:59.294 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] 
+16:45:59.294 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] --- jacoco:0.8.7:report (default-cli) @ java-basic ---
+16:45:59.294 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] Loading execution data file /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/jacoco.exec
+16:45:59.294 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] Analyzed bundle 'java-basic-function' with 10 classes
+16:45:59.294 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:45:59.294 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] BUILD SUCCESS
+16:45:59.294 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:45:59.294 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] Total time:  3.265 s
+16:45:59.294 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] Finished at: 2023-12-08T16:45:58Z
+16:45:59.294 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:45:59.314 [INFO]  [Reporting][main][c.d.d.d.c] Maven Using ${maven.home} of: /opt/homebrew/Cellar/maven/3.9.5.
+16:45:59.314 [INFO]  [Reporting][main][c.d.d.d.c] Maven Executing: /bin/sh -c cd /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic && /opt/homebrew/Cellar/maven/3.9.5/bin/mvn -B -D test=!*DiffblueTest,**/DiffblueDummy* -D surefire.failIfNoSpecifiedTests=false -D maven.test.failure.ignore=true -D failIfNoTests=false -D jacoco.skip=false -D maven.ext.class.path=/usr/local/bin/diffblue/cover-buildsystem-maven-spy-jar-with-dependencies.jar org.jacoco:jacoco-maven-plugin:0.8.7:prepare-agent test org.jacoco:jacoco-maven-plugin:0.8.7:report
+16:46:04.337 [INFO]  [Reporting][main][c.d.d.c.a] Standard output of build tool (Maven)
+16:46:04.338 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] Scanning for projects...
+16:46:04.338 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] 
+16:46:04.338 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] -----------------------< com.example:java-basic >-----------------------
+16:46:04.338 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] Building java-basic-function 1.0-SNAPSHOT
+16:46:04.339 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO]   from pom.xml
+16:46:04.339 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] --------------------------------[ jar ]---------------------------------
+16:46:04.339 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] 
+16:46:04.339 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] --- jacoco:0.8.7:prepare-agent (default-cli) @ java-basic ---
+16:46:04.339 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] argLine set to -javaagent:/Users/amishra/.m2/repository/org/jacoco/org.jacoco.agent/0.8.7/org.jacoco.agent-0.8.7-runtime.jar=destfile=/Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/jacoco.exec
+16:46:04.339 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] 
+16:46:04.339 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] --- resources:3.3.1:resources (default-resources) @ java-basic ---
+16:46:04.339 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] skip non existing resourceDirectory /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/src/main/resources
+16:46:04.339 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] 
+16:46:04.339 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] --- compiler:3.8.1:compile (default-compile) @ java-basic ---
+16:46:04.339 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] Changes detected - recompiling the module!
+16:46:04.339 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] Compiling 10 source files to /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/classes
+16:46:04.339 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] 
+16:46:04.339 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] --- resources:3.3.1:testResources (default-testResources) @ java-basic ---
+16:46:04.339 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] Copying 1 resource from src/test/resources to target/test-classes
+16:46:04.340 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] 
+16:46:04.340 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] --- compiler:3.8.1:testCompile (default-testCompile) @ java-basic ---
+16:46:04.340 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] Changes detected - recompiling the module!
+16:46:04.340 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] Compiling 5 source files to /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/test-classes
+16:46:04.340 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] 
+16:46:04.340 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] --- surefire:2.22.2:test (default-test) @ java-basic ---
+16:46:04.340 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] 
+16:46:04.340 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] -------------------------------------------------------
+16:46:04.340 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO]  T E S T S
+16:46:04.340 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] -------------------------------------------------------
+16:46:04.340 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] Running DiffblueDummyCoverageJupiterTest
+16:46:04.340 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s - in DiffblueDummyCoverageJupiterTest
+16:46:04.340 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] 
+16:46:04.340 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] Results:
+16:46:04.340 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] 
+16:46:04.340 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+16:46:04.341 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] 
+16:46:04.341 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] 
+16:46:04.341 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] --- jacoco:0.8.7:report (default-cli) @ java-basic ---
+16:46:04.341 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] Loading execution data file /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/jacoco.exec
+16:46:04.341 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] Analyzed bundle 'java-basic-function' with 10 classes
+16:46:04.341 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:46:04.341 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] BUILD SUCCESS
+16:46:04.341 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:46:04.341 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] Total time:  3.283 s
+16:46:04.341 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] Finished at: 2023-12-08T16:46:03Z
+16:46:04.341 [INFO]  [Reporting][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:46:04.375 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule o took 10119ms
+16:46:04.375 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule c
+16:46:04.375 [DEBUG] [Reporting][main][c.d.c.c.m.c]   Rule fired
+16:46:04.380 [INFO]  [Reporting][main][c.d.cover.ui.a.h] Selected Java language compliance level: 11
+16:46:04.381 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule c took 5ms
+16:46:04.381 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule l
+16:46:04.381 [DEBUG] [Reporting][main][c.d.c.c.m.c]   Rule did not fire
+16:46:04.381 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule l took 0ms
+16:46:04.381 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule c
+16:46:04.381 [DEBUG] [Reporting][main][c.d.c.c.m.c]   Rule did not fire
+16:46:04.381 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule c took 0ms
+16:46:04.381 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule b
+16:46:04.381 [DEBUG] [Reporting][main][c.d.c.c.m.c]   Rule fired
+16:46:04.383 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule b took 2ms
+16:46:04.383 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule m
+16:46:04.383 [DEBUG] [Reporting][main][c.d.c.c.m.c]   Rule fired
+16:46:04.383 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule m took 0ms
+16:46:04.384 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule a
+16:46:04.384 [DEBUG] [Reporting][main][c.d.c.c.m.c]   Rule did not fire
+16:46:04.384 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule a took 0ms
+16:46:04.384 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule n
+16:46:04.384 [DEBUG] [Reporting][main][c.d.c.c.m.c]   Rule did not fire
+16:46:04.384 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule n took 0ms
+16:46:04.384 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule p
+16:46:04.384 [DEBUG] [Reporting][main][c.d.c.c.m.c]   Rule did not fire
+16:46:04.384 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule p took 0ms
+16:46:04.384 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule o
+16:46:04.384 [DEBUG] [Reporting][main][c.d.c.c.m.c]   Rule did not fire
+16:46:04.384 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule o took 0ms
+16:46:04.384 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule ak
+16:46:04.384 [DEBUG] [Reporting][main][c.d.c.c.m.c]   Rule fired
+16:46:04.384 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule ak took 0ms
+16:46:04.384 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule j
+16:46:04.384 [DEBUG] [Reporting][main][c.d.c.c.m.c]   Rule fired
+16:46:04.384 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule j took 0ms
+16:46:04.384 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule h
+16:46:04.384 [DEBUG] [Reporting][main][c.d.c.c.m.c]   Rule fired
+16:46:04.384 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule h took 0ms
+16:46:04.384 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule i
+16:46:04.384 [DEBUG] [Reporting][main][c.d.c.c.m.c]   Rule did not fire
+16:46:04.384 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule i took 0ms
+16:46:04.384 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule CliBuildSystemRecommender
+16:46:04.384 [DEBUG] [Reporting][main][c.d.c.c.m.c]   Rule fired
+16:46:04.384 [DEBUG] [Reporting][main][c.d.c.c.m.c] Processing rule CliBuildSystemRecommender took 0ms
+16:46:04.390 [INFO]  [Reporting][main][c.d.cover.ui.f] 
+16:46:04.390 [INFO]  [Reporting][main][c.d.cover.ui.f] Environment summary:
+16:46:04.390 [INFO]  [Reporting][main][c.d.cover.ui.f] --------------------
+16:46:04.392 [INFO]  [Reporting][main][c.d.cover.ui.f] Java version                  17.0.8                        SUCCESS        
+16:46:04.392 [INFO]  [Reporting][main][c.d.cover.ui.f] Build system                  Maven                         SUCCESS        
+16:46:04.392 [INFO]  [Reporting][main][c.d.cover.ui.f] JaCoCo plugin version         0.8.7                         SUCCESS        
+16:46:04.392 [INFO]  [Reporting][main][c.d.cover.ui.f] Testing framework             JUnit Jupiter 5               SUCCESS        
+16:46:04.392 [INFO]  [Reporting][main][c.d.cover.ui.f] Surefire version              2.22.2                        SUCCESS        
+16:46:04.392 [INFO]  [Reporting][main][c.d.cover.ui.f] 
+16:46:04.393 [INFO]  [Reporting][main][c.d.cover.ui.f] Environment check status: SUCCESS
+16:46:04.393 [INFO]  [Measuring][main][c.d.cover.ui.a.i] Calculating coverage from manual tests.
+16:46:04.395 [INFO]  [Measuring][main][c.d.d.d.c] Maven Using ${maven.home} of: /opt/homebrew/Cellar/maven/3.9.5.
+16:46:04.397 [INFO]  [Measuring][main][c.d.d.d.c] Maven Executing: /bin/sh -c cd /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic && /opt/homebrew/Cellar/maven/3.9.5/bin/mvn -B -D test=!*DiffblueTest.java,**/Test*.java,**/*Test.java,**/*Tests.java,**/*TestCase.java -D surefire.failIfNoSpecifiedTests=false -D maven.test.failure.ignore=true -D failIfNoTests=false -D jacoco.skip=false -D maven.ext.class.path=/usr/local/bin/diffblue/cover-buildsystem-maven-spy-jar-with-dependencies.jar org.jacoco:jacoco-maven-plugin:0.8.7:prepare-agent test org.jacoco:jacoco-maven-plugin:0.8.7:report
+16:46:08.414 [INFO]  [Measuring][main][c.d.d.c.a] Standard output of build tool (Maven)
+16:46:08.414 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] Scanning for projects...
+16:46:08.414 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] 
+16:46:08.414 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] -----------------------< com.example:java-basic >-----------------------
+16:46:08.414 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] Building java-basic-function 1.0-SNAPSHOT
+16:46:08.414 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO]   from pom.xml
+16:46:08.414 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] --------------------------------[ jar ]---------------------------------
+16:46:08.414 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] 
+16:46:08.414 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] --- jacoco:0.8.7:prepare-agent (default-cli) @ java-basic ---
+16:46:08.414 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] argLine set to -javaagent:/Users/amishra/.m2/repository/org/jacoco/org.jacoco.agent/0.8.7/org.jacoco.agent-0.8.7-runtime.jar=destfile=/Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/jacoco.exec
+16:46:08.414 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] 
+16:46:08.414 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] --- resources:3.3.1:resources (default-resources) @ java-basic ---
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] skip non existing resourceDirectory /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/src/main/resources
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] 
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] --- compiler:3.8.1:compile (default-compile) @ java-basic ---
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] Changes detected - recompiling the module!
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] Compiling 9 source files to /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/classes
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] 
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] --- resources:3.3.1:testResources (default-testResources) @ java-basic ---
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] Copying 1 resource from src/test/resources to target/test-classes
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] 
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] --- compiler:3.8.1:testCompile (default-testCompile) @ java-basic ---
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] Changes detected - recompiling the module!
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] Compiling 3 source files to /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/test-classes
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] 
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] --- surefire:2.22.2:test (default-test) @ java-basic ---
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] 
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] -------------------------------------------------------
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO]  T E S T S
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] -------------------------------------------------------
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] Running example.InvokeTest
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.059 s - in example.InvokeTest
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] 
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] Results:
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] 
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] 
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] 
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] --- jacoco:0.8.7:report (default-cli) @ java-basic ---
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] Loading execution data file /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/jacoco.exec
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] Analyzed bundle 'java-basic-function' with 9 classes
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] BUILD SUCCESS
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] Total time:  3.132 s
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] Finished at: 2023-12-08T16:46:08Z
+16:46:08.415 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:46:08.415 [INFO]  [Measuring][main][c.d.cover.ui.a.i] JaCoCo report file created in /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/.diffblue/reports/manual-tests-jacoco-report.xml
+16:46:08.425 [INFO]  [Measuring][main][c.d.cover.ui.a.i] Calculating coverage from diffblue tests.
+16:46:08.431 [INFO]  [Measuring][main][c.d.d.d.c] Maven Using ${maven.home} of: /opt/homebrew/Cellar/maven/3.9.5.
+16:46:08.431 [INFO]  [Measuring][main][c.d.d.d.c] Maven Executing: /bin/sh -c cd /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic && /opt/homebrew/Cellar/maven/3.9.5/bin/mvn -B -D test=*DiffblueTest.java -D surefire.failIfNoSpecifiedTests=false -D maven.test.failure.ignore=true -D failIfNoTests=false -D jacoco.skip=false -D maven.ext.class.path=/usr/local/bin/diffblue/cover-buildsystem-maven-spy-jar-with-dependencies.jar org.jacoco:jacoco-maven-plugin:0.8.7:prepare-agent test org.jacoco:jacoco-maven-plugin:0.8.7:report
+16:46:11.450 [INFO]  [Measuring][main][c.d.d.c.a] Standard output of build tool (Maven)
+16:46:11.451 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] Scanning for projects...
+16:46:11.451 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] 
+16:46:11.451 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] -----------------------< com.example:java-basic >-----------------------
+16:46:11.459 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] Building java-basic-function 1.0-SNAPSHOT
+16:46:11.459 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO]   from pom.xml
+16:46:11.459 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] --------------------------------[ jar ]---------------------------------
+16:46:11.459 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] 
+16:46:11.459 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] --- jacoco:0.8.7:prepare-agent (default-cli) @ java-basic ---
+16:46:11.459 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] argLine set to -javaagent:/Users/amishra/.m2/repository/org/jacoco/org.jacoco.agent/0.8.7/org.jacoco.agent-0.8.7-runtime.jar=destfile=/Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/jacoco.exec
+16:46:11.459 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] 
+16:46:11.459 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] --- resources:3.3.1:resources (default-resources) @ java-basic ---
+16:46:11.459 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] skip non existing resourceDirectory /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/src/main/resources
+16:46:11.459 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] 
+16:46:11.459 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] --- compiler:3.8.1:compile (default-compile) @ java-basic ---
+16:46:11.459 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] Nothing to compile - all classes are up to date
+16:46:11.459 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] 
+16:46:11.459 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] --- resources:3.3.1:testResources (default-testResources) @ java-basic ---
+16:46:11.459 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] Copying 1 resource from src/test/resources to target/test-classes
+16:46:11.459 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] 
+16:46:11.459 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] --- compiler:3.8.1:testCompile (default-testCompile) @ java-basic ---
+16:46:11.459 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] Changes detected - recompiling the module!
+16:46:11.459 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] Compiling 3 source files to /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/test-classes
+16:46:11.459 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] 
+16:46:11.459 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] --- surefire:2.22.2:test (default-test) @ java-basic ---
+16:46:11.459 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] 
+16:46:11.459 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] --- jacoco:0.8.7:report (default-cli) @ java-basic ---
+16:46:11.459 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] Loading execution data file /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/jacoco.exec
+16:46:11.459 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] Analyzed bundle 'java-basic-function' with 9 classes
+16:46:11.459 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:46:11.459 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] BUILD SUCCESS
+16:46:11.459 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:46:11.459 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] Total time:  1.814 s
+16:46:11.459 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] Finished at: 2023-12-08T16:46:11Z
+16:46:11.459 [INFO]  [Measuring][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:46:11.460 [INFO]  [Measuring][main][c.d.cover.ui.a.i] JaCoCo report file created in /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/.diffblue/reports/diffblue-tests-jacoco-report.xml
+16:46:11.495 [INFO]  [Reporting][main][c.d.cover.ui.a.x] 
+16:46:11.497 [INFO]  [Reporting][main][c.d.cover.ui.a.x] Log file: /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/.diffblue/log/user-20231208T164546.log
+16:46:11.497 [INFO]  [Reporting][main][c.d.cover.ui.a.x] Finished in 25s

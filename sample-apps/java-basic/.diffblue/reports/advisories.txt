@@ -1,0 +1,12 @@
+[WARN] E052: Missing dependency
+Unable to mock method inputs because a supported version of Mockito is not present on the classpath.
+Required dependencies were not found.
+Please add the following dependencies to your project:
+  <dependency>
+    <groupId>org.mockito</groupId>
+    <artifactId>mockito-core</artifactId>
+    <version>5.4.0</version>
+    <scope>test</scope>
+  </dependency>
+[WARN] Mocking Framework                                           WARNING        
+[WARN] Environment check status: WARNING

@@ -1,0 +1,63 @@
+16:46:39.354 [DEBUG] [Preparing][main][c.d.cover.ui.a.x] Client heap size: 8192 MB
+16:46:39.363 [INFO]  [Preparing][main][c.d.cover.ui.a.x] Diffblue Cover 2023.11.02-f12bfac-licensed
+16:46:39.363 [INFO]  [Preparing][main][c.d.cover.ui.a.x] Running: dcover upload http://63.34.9.190:8080 --project lambda.java-basic --name existing-tests
+16:46:39.363 [INFO]  [Preparing][main][c.d.cover.ui.a.z] 
+16:46:39.364 [INFO]  [Preparing][main][c.d.cover.ui.a.z] Command: upload
+16:46:39.364 [INFO]  [Preparing][main][c.d.cover.ui.a.z] Upload data to cover reports server.
+16:46:39.364 [INFO]  [Preparing][main][c.d.cover.ui.a.z] 
+16:46:39.529 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule CommonOptionsDetector
+16:46:39.530 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:46:39.532 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule CommonOptionsDetector took 1ms
+16:46:39.535 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule s
+16:46:39.535 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:46:39.539 [INFO]  [Checking][main][c.d.c.ui.a.aa] Detected Java version 17.0.8
+16:46:39.540 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule s took 4ms
+16:46:39.540 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule t
+16:46:39.540 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:46:39.542 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule t took 2ms
+16:46:39.542 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule v
+16:46:39.542 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:46:39.542 [INFO]  [Checking][main][c.d.c.ui.a.aa] Detected JVM architecture: 64-Bit
+16:46:39.543 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule v took 0ms
+16:46:39.543 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule UploadOptionsDetector
+16:46:39.543 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:46:39.550 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule UploadOptionsDetector took 7ms
+16:46:39.550 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule n
+16:46:39.550 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule did not fire
+16:46:39.550 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule n took 0ms
+16:46:39.550 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule p
+16:46:39.551 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule did not fire
+16:46:39.551 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule p took 0ms
+16:46:39.553 [INFO]  [Checking][main][c.d.cover.ui.f] 
+16:46:39.555 [INFO]  [Checking][main][c.d.cover.ui.f] Environment summary:
+16:46:39.555 [INFO]  [Checking][main][c.d.cover.ui.f] --------------------
+16:46:39.555 [INFO]  [Checking][main][c.d.cover.ui.f] 
+16:46:39.555 [INFO]  [Checking][main][c.d.cover.ui.f] Environment check status: SUCCESS
+16:46:39.556 [INFO]  [Uploading][main][c.d.c.ui.a.a.c] Username wasn't provided as input, checking env var DIFFBLUE_REPORT_USERNAME
+16:46:39.556 [INFO]  [Uploading][main][c.d.c.ui.a.a.c] Password wasn't provided as input, checking env var DIFFBLUE_REPORT_PASSWORD
+16:46:39.556 [INFO]  [Uploading][main][c.d.c.ui.a.a.c] Credentials were not provided
+16:46:39.571 [INFO]  [Uploading][main][c.d.c.ui.a.f.c] No Diffblue Cover tests detected. Uploading coverage reports for manual tests only.
+16:46:40.710 [INFO]  [Uploading][main][c.d.c.ui.a.f.a] 1 * Sending client request on thread main
+16:46:40.712 [INFO]  [Uploading][main][c.d.c.ui.a.f.a] 1 > Accept: application/vnd.diffblue.reports.v2+json,application/json
+16:46:40.712 [INFO]  [Uploading][main][c.d.c.ui.a.f.a] 1 > Content-Type: multipart/form-data
+16:46:40.802 [INFO]  [Uploading][main][c.d.c.ui.a.f.a] 1 * Received server response on thread main
+16:46:40.802 [INFO]  [Uploading][main][c.d.c.ui.a.f.a] 1 < 200
+16:46:40.803 [INFO]  [Uploading][main][c.d.c.ui.a.f.a] 1 < Keep-Alive: timeout=60
+16:46:40.803 [INFO]  [Uploading][main][c.d.c.ui.a.f.a] 1 < Transfer-Encoding: chunked
+16:46:40.803 [INFO]  [Uploading][main][c.d.c.ui.a.f.a] 1 < X-Frame-Options: DENY
+16:46:40.803 [INFO]  [Uploading][main][c.d.c.ui.a.f.a] 1 < Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+16:46:40.803 [INFO]  [Uploading][main][c.d.c.ui.a.f.a] 1 < X-Content-Type-Options: nosniff
+16:46:40.803 [INFO]  [Uploading][main][c.d.c.ui.a.f.a] 1 < Connection: keep-alive
+16:46:40.803 [INFO]  [Uploading][main][c.d.c.ui.a.f.a] 1 < Expires: 0
+16:46:40.803 [INFO]  [Uploading][main][c.d.c.ui.a.f.a] 1 < Pragma: no-cache
+16:46:40.803 [INFO]  [Uploading][main][c.d.c.ui.a.f.a] 1 < X-XSS-Protection: 1; mode=block
+16:46:40.803 [INFO]  [Uploading][main][c.d.c.ui.a.f.a] 1 < Date: Fri, 08 Dec 2023 16:46:40 GMT
+16:46:40.803 [INFO]  [Uploading][main][c.d.c.ui.a.f.a] 1 < Content-Type: application/vnd.diffblue.reports.v2+json
+16:46:40.804 [INFO]  [Uploading][main][c.d.c.ui.a.f.a] 1 < {"id":1000061,"name":"existing-tests","project":"lambda.java-basic","diffblueTestCount":0,"totalLineCount":61,"coveredLineCount":56,"uploadWarnings":[],"_links":{"dashboard":{"href":"http://0.0.0.0:8080/ui/project/lambda.java-basic?runId=1000061"},"self":{"href":"http://63.34.9.190:8080/run/1000061"}}}
+16:46:40.820 [INFO]  [Uploading][main][c.d.c.ui.a.aa] Cover Reports upload was successful
+Tests Created - 0 tests created by Diffblue Cover.
+Test Coverage - 56 lines of code are covered from a total of 61.
+View this run on the dashboard at http://0.0.0.0:8080/ui/project/lambda.java-basic?runId=1000061
+16:46:40.820 [INFO]  [Reporting][main][c.d.cover.ui.a.x] 
+16:46:40.821 [INFO]  [Reporting][main][c.d.cover.ui.a.x] Log file: /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/.diffblue/log/user-20231208T164638.log
+16:46:40.822 [INFO]  [Reporting][main][c.d.cover.ui.a.x] Finished in 2s

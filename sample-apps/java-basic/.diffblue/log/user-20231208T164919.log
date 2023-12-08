@@ -1,0 +1,1016 @@
+16:49:20.115 [INFO]  [Preparing] Diffblue Cover 2023.11.02-f12bfac-licensed
+16:49:20.115 [INFO]  [Preparing] Running: dcover create --coverage-reports --upload http://63.34.9.190:8080 --project lambda.java-basic --name baseline-tests
+16:49:20.116 [INFO]  [Preparing] 
+16:49:20.116 [INFO]  [Preparing] Command: create
+16:49:20.116 [INFO]  [Preparing] Create tests for the specified package/class/method prefix.
+16:49:20.117 [INFO]  [Preparing] 
+16:49:22.612 [INFO]  [Checking] Detecting environment:
+16:49:22.612 [INFO]  [Checking] ----------------------
+16:49:22.652 [INFO]  [Checking] Detected Java version 17.0.8
+16:49:22.662 [INFO]  [Checking] Maven Using ${maven.home} of: /opt/homebrew/Cellar/maven/3.9.5.
+16:49:22.664 [INFO]  [Checking] Maven Executing: /bin/sh -c cd /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic && /opt/homebrew/Cellar/maven/3.9.5/bin/mvn -B -version
+16:49:23.009 [INFO]  [Checking] Standard output of build tool (Maven)
+16:49:23.009 [INFO]  [Checking] > Apache Maven 3.9.5 (57804ffe001d7215b5e7bcb531cf83df38f93546)
+16:49:23.009 [INFO]  [Checking] > Maven home: /opt/homebrew/Cellar/maven/3.9.5/libexec
+16:49:23.009 [INFO]  [Checking] > Java version: 17.0.8.1, vendor: Homebrew, runtime: /opt/homebrew/Cellar/openjdk@17/17.0.8.1/libexec/openjdk.jdk/Contents/Home
+16:49:23.009 [INFO]  [Checking] > Default locale: en_GB, platform encoding: UTF-8
+16:49:23.009 [INFO]  [Checking] > OS name: "mac os x", version: "14.1.2", arch: "aarch64", family: "mac"
+16:49:23.034 [INFO]  [Checking] Maven Using ${maven.home} of: /opt/homebrew/Cellar/maven/3.9.5.
+16:49:23.034 [INFO]  [Checking] Maven Executing: /bin/sh -c cd /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic && /opt/homebrew/Cellar/maven/3.9.5/bin/mvn -B -N -D output=diffblue.effective-pom.output.xml -D maven.ext.class.path=/usr/local/bin/diffblue/cover-buildsystem-maven-spy-jar-with-dependencies.jar org.apache.maven.plugins:maven-help-plugin:3.2.0:effective-pom
+16:49:24.666 [INFO]  [Checking] Standard output of build tool (Maven)
+16:49:24.666 [INFO]  [Checking] > [INFO] Scanning for projects...
+16:49:24.666 [INFO]  [Checking] > [INFO] 
+16:49:24.666 [INFO]  [Checking] > [INFO] -----------------------< com.example:java-basic >-----------------------
+16:49:24.666 [INFO]  [Checking] > [INFO] Building java-basic-function 1.0-SNAPSHOT
+16:49:24.666 [INFO]  [Checking] > [INFO]   from pom.xml
+16:49:24.666 [INFO]  [Checking] > [INFO] --------------------------------[ jar ]---------------------------------
+16:49:24.666 [INFO]  [Checking] > [INFO] 
+16:49:24.666 [INFO]  [Checking] > [INFO] --- help:3.2.0:effective-pom (default-cli) @ java-basic ---
+16:49:24.666 [INFO]  [Checking] > [INFO] Effective-POM written to: /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/diffblue.effective-pom.output.xml
+16:49:24.666 [INFO]  [Checking] > [INFO] ------------------------------------------------------------------------
+16:49:24.666 [INFO]  [Checking] > [INFO] BUILD SUCCESS
+16:49:24.666 [INFO]  [Checking] > [INFO] ------------------------------------------------------------------------
+16:49:24.666 [INFO]  [Checking] > [INFO] Total time:  0.817 s
+16:49:24.666 [INFO]  [Checking] > [INFO] Finished at: 2023-12-08T16:49:24Z
+16:49:24.666 [INFO]  [Checking] > [INFO] ------------------------------------------------------------------------
+16:49:24.707 [INFO]  [Checking] Detected build system: Maven 3.9.5
+16:49:24.711 [INFO]  [Checking] Operating System: Mac OS X aarch64 14.1.2
+16:49:24.711 [INFO]  [Checking] Default charset: UTF-8
+16:49:24.711 [INFO]  [Checking] Default locale: en_GB
+16:49:24.711 [INFO]  [Checking] Default time zone: Europe/London
+16:49:24.712 [INFO]  [Checking] Selected build system: Maven
+16:49:24.714 [INFO]  [Checking] Maven Using ${maven.home} of: /opt/homebrew/Cellar/maven/3.9.5.
+16:49:24.714 [INFO]  [Checking] Maven Executing: /bin/sh -c cd /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic && /opt/homebrew/Cellar/maven/3.9.5/bin/mvn -B -D output=/var/folders/p2/qfsg813s0h9b5mhb_8typkwm0000gp/T/build.classpath1239841542761280067.tmp -D expression=build.classpath -D mdep.pathSeparator=#SEP# -D includeScope=test -D mdep.outputProperty=build.classpath -D maven.ext.class.path=/usr/local/bin/diffblue/cover-buildsystem-maven-spy-jar-with-dependencies.jar org.apache.maven.plugins:maven-dependency-plugin:3.3.0:build-classpath org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate
+16:49:27.236 [INFO]  [Checking] Standard output of build tool (Maven)
+16:49:27.236 [INFO]  [Checking] > [INFO] Scanning for projects...
+16:49:27.236 [INFO]  [Checking] > [INFO] 
+16:49:27.236 [INFO]  [Checking] > [INFO] -----------------------< com.example:java-basic >-----------------------
+16:49:27.236 [INFO]  [Checking] > [INFO] Building java-basic-function 1.0-SNAPSHOT
+16:49:27.236 [INFO]  [Checking] > [INFO]   from pom.xml
+16:49:27.236 [INFO]  [Checking] > [INFO] --------------------------------[ jar ]---------------------------------
+16:49:27.236 [INFO]  [Checking] > [INFO] 
+16:49:27.236 [INFO]  [Checking] > [INFO] --- dependency:3.3.0:build-classpath (default-cli) @ java-basic ---
+16:49:27.237 [INFO]  [Checking] > [INFO] Dependencies classpath:
+16:49:27.237 [INFO]  [Checking] > /Users/amishra/.m2/repository/com/amazonaws/aws-lambda-java-core/1.2.1/aws-lambda-java-core-1.2.1.jar#SEP#/Users/amishra/.m2/repository/org/mockito/mockito-core/5.4.0/mockito-core-5.4.0.jar#SEP#/Users/amishra/.m2/repository/net/bytebuddy/byte-buddy/1.14.5/byte-buddy-1.14.5.jar#SEP#/Users/amishra/.m2/repository/net/bytebuddy/byte-buddy-agent/1.14.5/byte-buddy-agent-1.14.5.jar#SEP#/Users/amishra/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar#SEP#/Users/amishra/.m2/repository/org/slf4j/slf4j-nop/2.0.6/slf4j-nop-2.0.6.jar#SEP#/Users/amishra/.m2/repository/org/slf4j/slf4j-api/2.0.6/slf4j-api-2.0.6.jar#SEP#/Users/amishra/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.8.2/junit-jupiter-api-5.8.2.jar#SEP#/Users/amishra/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar#SEP#/Users/amishra/.m2/repository/org/junit/platform/junit-platform-commons/1.8.2/junit-platform-commons-1.8.2.jar#SEP#/Users/amishra/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar#SEP#/Users/amishra/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.8.2/junit-jupiter-engine-5.8.2.jar#SEP#/Users/amishra/.m2/repository/org/junit/platform/junit-platform-engine/1.8.2/junit-platform-engine-1.8.2.jar
+16:49:27.237 [INFO]  [Checking] > [INFO] 
+16:49:27.237 [INFO]  [Checking] > [INFO] -----------------------< com.example:java-basic >-----------------------
+16:49:27.237 [INFO]  [Checking] > [INFO] Building java-basic-function 1.0-SNAPSHOT
+16:49:27.237 [INFO]  [Checking] > [INFO]   from pom.xml
+16:49:27.237 [INFO]  [Checking] > [INFO] --------------------------------[ jar ]---------------------------------
+16:49:27.237 [INFO]  [Checking] > [INFO] 
+16:49:27.237 [INFO]  [Checking] > [INFO] --- help:3.2.0:evaluate (default-cli) @ java-basic ---
+16:49:27.237 [INFO]  [Checking] > [INFO] No artifact parameter specified, using 'com.example:java-basic:jar:1.0-SNAPSHOT' as project.
+16:49:27.237 [INFO]  [Checking] > [INFO] Result of evaluation written to: /var/folders/p2/qfsg813s0h9b5mhb_8typkwm0000gp/T/build.classpath1239841542761280067.tmp
+16:49:27.237 [INFO]  [Checking] > [INFO] ------------------------------------------------------------------------
+16:49:27.237 [INFO]  [Checking] > [INFO] BUILD SUCCESS
+16:49:27.237 [INFO]  [Checking] > [INFO] ------------------------------------------------------------------------
+16:49:27.237 [INFO]  [Checking] > [INFO] Total time:  1.703 s
+16:49:27.237 [INFO]  [Checking] > [INFO] Finished at: 2023-12-08T16:49:27Z
+16:49:27.237 [INFO]  [Checking] > [INFO] ------------------------------------------------------------------------
+16:49:27.259 [INFO]  [Checking] Selected classpath from build system Maven
+16:49:27.260 [INFO]  [Checking] Expanded classpath: 
+/Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/test-classes
+/Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/classes (code under test)
+/Users/amishra/.m2/repository/com/amazonaws/aws-lambda-java-core/1.2.1/aws-lambda-java-core-1.2.1.jar
+/Users/amishra/.m2/repository/org/mockito/mockito-core/5.4.0/mockito-core-5.4.0.jar
+/Users/amishra/.m2/repository/net/bytebuddy/byte-buddy/1.14.5/byte-buddy-1.14.5.jar
+/Users/amishra/.m2/repository/net/bytebuddy/byte-buddy-agent/1.14.5/byte-buddy-agent-1.14.5.jar
+/Users/amishra/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar
+/Users/amishra/.m2/repository/org/slf4j/slf4j-nop/2.0.6/slf4j-nop-2.0.6.jar
+/Users/amishra/.m2/repository/org/slf4j/slf4j-api/2.0.6/slf4j-api-2.0.6.jar
+/Users/amishra/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.8.2/junit-jupiter-api-5.8.2.jar
+/Users/amishra/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar
+/Users/amishra/.m2/repository/org/junit/platform/junit-platform-commons/1.8.2/junit-platform-commons-1.8.2.jar
+/Users/amishra/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar
+/Users/amishra/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.8.2/junit-jupiter-engine-5.8.2.jar
+/Users/amishra/.m2/repository/org/junit/platform/junit-platform-engine/1.8.2/junit-platform-engine-1.8.2.jar
+16:49:27.393 [INFO]  [Checking] Detected test framework: JUnit Jupiter 5.8.2
+16:49:27.412 [INFO]  [Checking] Detected JUnit Jupiter version 5.8.2
+16:49:27.463 [INFO]  [Checking] Detected Mockito version 5.4.0
+16:49:27.843 [INFO]  [Checking] Indexing...
+16:49:28.092 [INFO]  [Checking] Selected test output directory: /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/src/test/java
+16:49:28.095 [INFO]  [Checking] Maven Using ${maven.home} of: /opt/homebrew/Cellar/maven/3.9.5.
+16:49:28.095 [INFO]  [Checking] Maven Executing: /bin/sh -c cd /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic && /opt/homebrew/Cellar/maven/3.9.5/bin/mvn -B -D test=DummyJupiterDiffblueTest -D maven.ext.class.path=/usr/local/bin/diffblue/cover-buildsystem-maven-spy-jar-with-dependencies.jar test
+16:49:32.116 [INFO]  [Checking] Standard output of build tool (Maven)
+16:49:32.116 [INFO]  [Checking] > [INFO] Scanning for projects...
+16:49:32.116 [INFO]  [Checking] > [INFO] 
+16:49:32.116 [INFO]  [Checking] > [INFO] -----------------------< com.example:java-basic >-----------------------
+16:49:32.116 [INFO]  [Checking] > [INFO] Building java-basic-function 1.0-SNAPSHOT
+16:49:32.116 [INFO]  [Checking] > [INFO]   from pom.xml
+16:49:32.116 [INFO]  [Checking] > [INFO] --------------------------------[ jar ]---------------------------------
+16:49:32.117 [INFO]  [Checking] > [INFO] 
+16:49:32.117 [INFO]  [Checking] > [INFO] --- resources:3.3.1:resources (default-resources) @ java-basic ---
+16:49:32.117 [INFO]  [Checking] > [INFO] skip non existing resourceDirectory /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/src/main/resources
+16:49:32.117 [INFO]  [Checking] > [INFO] 
+16:49:32.117 [INFO]  [Checking] > [INFO] --- compiler:3.8.1:compile (default-compile) @ java-basic ---
+16:49:32.117 [INFO]  [Checking] > [INFO] Nothing to compile - all classes are up to date
+16:49:32.117 [INFO]  [Checking] > [INFO] 
+16:49:32.117 [INFO]  [Checking] > [INFO] --- resources:3.3.1:testResources (default-testResources) @ java-basic ---
+16:49:32.117 [INFO]  [Checking] > [INFO] Copying 1 resource from src/test/resources to target/test-classes
+16:49:32.117 [INFO]  [Checking] > [INFO] 
+16:49:32.117 [INFO]  [Checking] > [INFO] --- compiler:3.8.1:testCompile (default-testCompile) @ java-basic ---
+16:49:32.117 [INFO]  [Checking] > [INFO] Changes detected - recompiling the module!
+16:49:32.117 [INFO]  [Checking] > [INFO] Compiling 12 source files to /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/test-classes
+16:49:32.117 [INFO]  [Checking] > [INFO] 
+16:49:32.117 [INFO]  [Checking] > [INFO] --- surefire:2.22.2:test (default-test) @ java-basic ---
+16:49:32.117 [INFO]  [Checking] > [INFO] 
+16:49:32.117 [INFO]  [Checking] > [INFO] -------------------------------------------------------
+16:49:32.117 [INFO]  [Checking] > [INFO]  T E S T S
+16:49:32.117 [INFO]  [Checking] > [INFO] -------------------------------------------------------
+16:49:32.117 [INFO]  [Checking] > [INFO] Running org.example.jupiter.DummyJupiterDiffblueTest
+16:49:32.117 [INFO]  [Checking] > [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.01 s - in org.example.jupiter.DummyJupiterDiffblueTest
+16:49:32.117 [INFO]  [Checking] > [INFO] 
+16:49:32.117 [INFO]  [Checking] > [INFO] Results:
+16:49:32.117 [INFO]  [Checking] > [INFO] 
+16:49:32.117 [INFO]  [Checking] > [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+16:49:32.117 [INFO]  [Checking] > [INFO] 
+16:49:32.117 [INFO]  [Checking] > [INFO] ------------------------------------------------------------------------
+16:49:32.117 [INFO]  [Checking] > [INFO] BUILD SUCCESS
+16:49:32.117 [INFO]  [Checking] > [INFO] ------------------------------------------------------------------------
+16:49:32.117 [INFO]  [Checking] > [INFO] Total time:  2.449 s
+16:49:32.117 [INFO]  [Checking] > [INFO] Finished at: 2023-12-08T16:49:31Z
+16:49:32.117 [INFO]  [Checking] > [INFO] ------------------------------------------------------------------------
+16:49:32.125 [INFO]  [Checking] Selected test framework: JUnit Jupiter
+16:49:32.196 [INFO]  [Checking] Maven Using ${maven.home} of: /opt/homebrew/Cellar/maven/3.9.5.
+16:49:32.197 [INFO]  [Checking] Maven Executing: /bin/sh -c cd /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic && /opt/homebrew/Cellar/maven/3.9.5/bin/mvn -B -D test=DummyJUnitJupiterLauncherDiffblueTest -D maven.ext.class.path=/usr/local/bin/diffblue/cover-buildsystem-maven-spy-jar-with-dependencies.jar test
+16:49:36.216 [INFO]  [Checking] Standard output of build tool (Maven)
+16:49:36.216 [INFO]  [Checking] > [INFO] Scanning for projects...
+16:49:36.217 [INFO]  [Checking] > [INFO] 
+16:49:36.217 [INFO]  [Checking] > [INFO] -----------------------< com.example:java-basic >-----------------------
+16:49:36.217 [INFO]  [Checking] > [INFO] Building java-basic-function 1.0-SNAPSHOT
+16:49:36.217 [INFO]  [Checking] > [INFO]   from pom.xml
+16:49:36.217 [INFO]  [Checking] > [INFO] --------------------------------[ jar ]---------------------------------
+16:49:36.217 [INFO]  [Checking] > [INFO] 
+16:49:36.217 [INFO]  [Checking] > [INFO] --- resources:3.3.1:resources (default-resources) @ java-basic ---
+16:49:36.217 [INFO]  [Checking] > [INFO] skip non existing resourceDirectory /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/src/main/resources
+16:49:36.217 [INFO]  [Checking] > [INFO] 
+16:49:36.217 [INFO]  [Checking] > [INFO] --- compiler:3.8.1:compile (default-compile) @ java-basic ---
+16:49:36.217 [INFO]  [Checking] > [INFO] Nothing to compile - all classes are up to date
+16:49:36.217 [INFO]  [Checking] > [INFO] 
+16:49:36.217 [INFO]  [Checking] > [INFO] --- resources:3.3.1:testResources (default-testResources) @ java-basic ---
+16:49:36.217 [INFO]  [Checking] > [INFO] Copying 1 resource from src/test/resources to target/test-classes
+16:49:36.217 [INFO]  [Checking] > [INFO] 
+16:49:36.217 [INFO]  [Checking] > [INFO] --- compiler:3.8.1:testCompile (default-testCompile) @ java-basic ---
+16:49:36.217 [INFO]  [Checking] > [INFO] Changes detected - recompiling the module!
+16:49:36.217 [INFO]  [Checking] > [INFO] Compiling 12 source files to /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/test-classes
+16:49:36.217 [INFO]  [Checking] > [INFO] 
+16:49:36.217 [INFO]  [Checking] > [INFO] --- surefire:2.22.2:test (default-test) @ java-basic ---
+16:49:36.217 [INFO]  [Checking] > [INFO] 
+16:49:36.217 [INFO]  [Checking] > [INFO] -------------------------------------------------------
+16:49:36.217 [INFO]  [Checking] > [INFO]  T E S T S
+16:49:36.218 [INFO]  [Checking] > [INFO] -------------------------------------------------------
+16:49:36.218 [INFO]  [Checking] > [INFO] Running DummyJUnitJupiterLauncherDiffblueTest
+16:49:36.218 [INFO]  [Checking] > (diffblue)/Users/amishra/.m2/repository/org/junit/platform/junit-platform-launcher/1.3.1/junit-platform-launcher-1.3.1.jar(/diffblue)
+16:49:36.218 [INFO]  [Checking] > [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 s - in DummyJUnitJupiterLauncherDiffblueTest
+16:49:36.218 [INFO]  [Checking] > [INFO] 
+16:49:36.218 [INFO]  [Checking] > [INFO] Results:
+16:49:36.218 [INFO]  [Checking] > [INFO] 
+16:49:36.218 [INFO]  [Checking] > [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+16:49:36.218 [INFO]  [Checking] > [INFO] 
+16:49:36.218 [INFO]  [Checking] > [INFO] ------------------------------------------------------------------------
+16:49:36.218 [INFO]  [Checking] > [INFO] BUILD SUCCESS
+16:49:36.218 [INFO]  [Checking] > [INFO] ------------------------------------------------------------------------
+16:49:36.218 [INFO]  [Checking] > [INFO] Total time:  2.338 s
+16:49:36.218 [INFO]  [Checking] > [INFO] Finished at: 2023-12-08T16:49:35Z
+16:49:36.218 [INFO]  [Checking] > [INFO] ------------------------------------------------------------------------
+16:49:36.265 [INFO]  [Checking] Detected JVM architecture: 64-Bit
+16:49:36.278 [INFO]  [Checking] Maven Using ${maven.home} of: /opt/homebrew/Cellar/maven/3.9.5.
+16:49:36.278 [INFO]  [Checking] Maven Executing: /bin/sh -c cd /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic && /opt/homebrew/Cellar/maven/3.9.5/bin/mvn -B -D test=DiffblueDummyCoverageJupiterDiffblueTest -D surefire.failIfNoSpecifiedTests=false -D maven.test.failure.ignore=true -D failIfNoTests=false -D jacoco.skip=false -D maven.ext.class.path=/usr/local/bin/diffblue/cover-buildsystem-maven-spy-jar-with-dependencies.jar org.jacoco:jacoco-maven-plugin:0.8.7:prepare-agent test org.jacoco:jacoco-maven-plugin:0.8.7:report
+16:49:41.296 [INFO]  [Checking] Standard output of build tool (Maven)
+16:49:41.296 [INFO]  [Checking] > [INFO] Scanning for projects...
+16:49:41.296 [INFO]  [Checking] > [INFO] 
+16:49:41.296 [INFO]  [Checking] > [INFO] -----------------------< com.example:java-basic >-----------------------
+16:49:41.297 [INFO]  [Checking] > [INFO] Building java-basic-function 1.0-SNAPSHOT
+16:49:41.297 [INFO]  [Checking] > [INFO]   from pom.xml
+16:49:41.297 [INFO]  [Checking] > [INFO] --------------------------------[ jar ]---------------------------------
+16:49:41.297 [INFO]  [Checking] > [INFO] 
+16:49:41.297 [INFO]  [Checking] > [INFO] --- jacoco:0.8.7:prepare-agent (default-cli) @ java-basic ---
+16:49:41.297 [INFO]  [Checking] > [INFO] argLine set to -javaagent:/Users/amishra/.m2/repository/org/jacoco/org.jacoco.agent/0.8.7/org.jacoco.agent-0.8.7-runtime.jar=destfile=/Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/jacoco.exec
+16:49:41.297 [INFO]  [Checking] > [INFO] 
+16:49:41.297 [INFO]  [Checking] > [INFO] --- resources:3.3.1:resources (default-resources) @ java-basic ---
+16:49:41.297 [INFO]  [Checking] > [INFO] skip non existing resourceDirectory /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/src/main/resources
+16:49:41.297 [INFO]  [Checking] > [INFO] 
+16:49:41.297 [INFO]  [Checking] > [INFO] --- compiler:3.8.1:compile (default-compile) @ java-basic ---
+16:49:41.297 [INFO]  [Checking] > [INFO] Changes detected - recompiling the module!
+16:49:41.297 [INFO]  [Checking] > [INFO] Compiling 10 source files to /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/classes
+16:49:41.297 [INFO]  [Checking] > [INFO] 
+16:49:41.297 [INFO]  [Checking] > [INFO] --- resources:3.3.1:testResources (default-testResources) @ java-basic ---
+16:49:41.298 [INFO]  [Checking] > [INFO] Copying 1 resource from src/test/resources to target/test-classes
+16:49:41.298 [INFO]  [Checking] > [INFO] 
+16:49:41.298 [INFO]  [Checking] > [INFO] --- compiler:3.8.1:testCompile (default-testCompile) @ java-basic ---
+16:49:41.298 [INFO]  [Checking] > [INFO] Changes detected - recompiling the module!
+16:49:41.298 [INFO]  [Checking] > [INFO] Compiling 13 source files to /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/test-classes
+16:49:41.298 [INFO]  [Checking] > [INFO] 
+16:49:41.298 [INFO]  [Checking] > [INFO] --- surefire:2.22.2:test (default-test) @ java-basic ---
+16:49:41.298 [INFO]  [Checking] > [INFO] 
+16:49:41.298 [INFO]  [Checking] > [INFO] -------------------------------------------------------
+16:49:41.298 [INFO]  [Checking] > [INFO]  T E S T S
+16:49:41.298 [INFO]  [Checking] > [INFO] -------------------------------------------------------
+16:49:41.298 [INFO]  [Checking] > [INFO] Running DiffblueDummyCoverageJupiterDiffblueTest
+16:49:41.298 [INFO]  [Checking] > [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s - in DiffblueDummyCoverageJupiterDiffblueTest
+16:49:41.298 [INFO]  [Checking] > [INFO] 
+16:49:41.298 [INFO]  [Checking] > [INFO] Results:
+16:49:41.298 [INFO]  [Checking] > [INFO] 
+16:49:41.298 [INFO]  [Checking] > [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+16:49:41.298 [INFO]  [Checking] > [INFO] 
+16:49:41.298 [INFO]  [Checking] > [INFO] 
+16:49:41.298 [INFO]  [Checking] > [INFO] --- jacoco:0.8.7:report (default-cli) @ java-basic ---
+16:49:41.298 [INFO]  [Checking] > [INFO] Loading execution data file /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/jacoco.exec
+16:49:41.298 [INFO]  [Checking] > [INFO] Analyzed bundle 'java-basic-function' with 10 classes
+16:49:41.298 [INFO]  [Checking] > [INFO] ------------------------------------------------------------------------
+16:49:41.298 [INFO]  [Checking] > [INFO] BUILD SUCCESS
+16:49:41.298 [INFO]  [Checking] > [INFO] ------------------------------------------------------------------------
+16:49:41.298 [INFO]  [Checking] > [INFO] Total time:  3.244 s
+16:49:41.298 [INFO]  [Checking] > [INFO] Finished at: 2023-12-08T16:49:40Z
+16:49:41.298 [INFO]  [Checking] > [INFO] ------------------------------------------------------------------------
+16:49:41.313 [INFO]  [Checking] Maven Using ${maven.home} of: /opt/homebrew/Cellar/maven/3.9.5.
+16:49:41.313 [INFO]  [Checking] Maven Executing: /bin/sh -c cd /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic && /opt/homebrew/Cellar/maven/3.9.5/bin/mvn -B -D test=!*DiffblueTest,**/DiffblueDummy* -D surefire.failIfNoSpecifiedTests=false -D maven.test.failure.ignore=true -D failIfNoTests=false -D jacoco.skip=false -D maven.ext.class.path=/usr/local/bin/diffblue/cover-buildsystem-maven-spy-jar-with-dependencies.jar org.jacoco:jacoco-maven-plugin:0.8.7:prepare-agent test org.jacoco:jacoco-maven-plugin:0.8.7:report
+16:49:46.345 [INFO]  [Checking] Standard output of build tool (Maven)
+16:49:46.345 [INFO]  [Checking] > [INFO] Scanning for projects...
+16:49:46.345 [INFO]  [Checking] > [INFO] 
+16:49:46.346 [INFO]  [Checking] > [INFO] -----------------------< com.example:java-basic >-----------------------
+16:49:46.346 [INFO]  [Checking] > [INFO] Building java-basic-function 1.0-SNAPSHOT
+16:49:46.346 [INFO]  [Checking] > [INFO]   from pom.xml
+16:49:46.346 [INFO]  [Checking] > [INFO] --------------------------------[ jar ]---------------------------------
+16:49:46.346 [INFO]  [Checking] > [INFO] 
+16:49:46.346 [INFO]  [Checking] > [INFO] --- jacoco:0.8.7:prepare-agent (default-cli) @ java-basic ---
+16:49:46.346 [INFO]  [Checking] > [INFO] argLine set to -javaagent:/Users/amishra/.m2/repository/org/jacoco/org.jacoco.agent/0.8.7/org.jacoco.agent-0.8.7-runtime.jar=destfile=/Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/jacoco.exec
+16:49:46.346 [INFO]  [Checking] > [INFO] 
+16:49:46.346 [INFO]  [Checking] > [INFO] --- resources:3.3.1:resources (default-resources) @ java-basic ---
+16:49:46.346 [INFO]  [Checking] > [INFO] skip non existing resourceDirectory /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/src/main/resources
+16:49:46.346 [INFO]  [Checking] > [INFO] 
+16:49:46.346 [INFO]  [Checking] > [INFO] --- compiler:3.8.1:compile (default-compile) @ java-basic ---
+16:49:46.346 [INFO]  [Checking] > [INFO] Changes detected - recompiling the module!
+16:49:46.346 [INFO]  [Checking] > [INFO] Compiling 10 source files to /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/classes
+16:49:46.346 [INFO]  [Checking] > [INFO] 
+16:49:46.347 [INFO]  [Checking] > [INFO] --- resources:3.3.1:testResources (default-testResources) @ java-basic ---
+16:49:46.347 [INFO]  [Checking] > [INFO] Copying 1 resource from src/test/resources to target/test-classes
+16:49:46.347 [INFO]  [Checking] > [INFO] 
+16:49:46.347 [INFO]  [Checking] > [INFO] --- compiler:3.8.1:testCompile (default-testCompile) @ java-basic ---
+16:49:46.347 [INFO]  [Checking] > [INFO] Changes detected - recompiling the module!
+16:49:46.347 [INFO]  [Checking] > [INFO] Compiling 13 source files to /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/test-classes
+16:49:46.347 [INFO]  [Checking] > [INFO] 
+16:49:46.347 [INFO]  [Checking] > [INFO] --- surefire:2.22.2:test (default-test) @ java-basic ---
+16:49:46.347 [INFO]  [Checking] > [INFO] 
+16:49:46.347 [INFO]  [Checking] > [INFO] -------------------------------------------------------
+16:49:46.347 [INFO]  [Checking] > [INFO]  T E S T S
+16:49:46.347 [INFO]  [Checking] > [INFO] -------------------------------------------------------
+16:49:46.347 [INFO]  [Checking] > [INFO] Running DiffblueDummyCoverageJupiterTest
+16:49:46.347 [INFO]  [Checking] > [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s - in DiffblueDummyCoverageJupiterTest
+16:49:46.347 [INFO]  [Checking] > [INFO] 
+16:49:46.347 [INFO]  [Checking] > [INFO] Results:
+16:49:46.347 [INFO]  [Checking] > [INFO] 
+16:49:46.347 [INFO]  [Checking] > [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+16:49:46.347 [INFO]  [Checking] > [INFO] 
+16:49:46.347 [INFO]  [Checking] > [INFO] 
+16:49:46.347 [INFO]  [Checking] > [INFO] --- jacoco:0.8.7:report (default-cli) @ java-basic ---
+16:49:46.347 [INFO]  [Checking] > [INFO] Loading execution data file /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/jacoco.exec
+16:49:46.347 [INFO]  [Checking] > [INFO] Analyzed bundle 'java-basic-function' with 10 classes
+16:49:46.347 [INFO]  [Checking] > [INFO] ------------------------------------------------------------------------
+16:49:46.347 [INFO]  [Checking] > [INFO] BUILD SUCCESS
+16:49:46.347 [INFO]  [Checking] > [INFO] ------------------------------------------------------------------------
+16:49:46.347 [INFO]  [Checking] > [INFO] Total time:  3.537 s
+16:49:46.347 [INFO]  [Checking] > [INFO] Finished at: 2023-12-08T16:49:45Z
+16:49:46.347 [INFO]  [Checking] > [INFO] ------------------------------------------------------------------------
+16:49:46.861 [INFO]  [Checking] Selected Java language compliance level: 11
+16:49:46.861 [INFO]  [Checking] Selected test validation: enabled
+16:49:46.879 [INFO]  [Checking] Prefixes for filtering classes/methods:
+16:49:46.879 [INFO]  [Checking] - example
+16:49:46.881 [INFO]  [Checking] Gathering methods to test...
+16:49:47.428 [INFO]  [Reporting] 
+16:49:47.428 [INFO]  [Reporting] Environment summary:
+16:49:47.428 [INFO]  [Reporting] --------------------
+16:49:47.430 [INFO]  [Reporting] Java version                  17.0.8                        SUCCESS        
+16:49:47.430 [INFO]  [Reporting] Build system                  Maven                         SUCCESS        
+16:49:47.430 [INFO]  [Reporting] Mocking Framework             Mockito 5.4.0                 SUCCESS        
+16:49:47.430 [INFO]  [Reporting] Surefire version              2.22.2                        SUCCESS        
+16:49:47.430 [INFO]  [Reporting] Testing framework             JUnit Jupiter 5               SUCCESS        
+16:49:47.430 [INFO]  [Reporting] JaCoCo plugin version         0.8.7                         SUCCESS        
+16:49:47.430 [INFO]  [Reporting] Launcher                      JUnit Jupiter                 SUCCESS        
+16:49:47.430 [INFO]  [Reporting] Test validation               Enabled                       SUCCESS        
+16:49:47.430 [INFO]  [Reporting] 
+16:49:47.430 [INFO]  [Reporting] Environment check status: SUCCESS
+16:49:47.449 [INFO]  [Creating] Found 24 callable methods in 9 classes
+16:49:47.450 [INFO]  [Creating] 
+16:49:47.450 [INFO]  [Creating] Creating tests:
+16:49:47.450 [INFO]  [Creating] ---------------
+16:49:47.461 [INFO]  [Creating] 
+================================================================================
+= Starting analysis for class 'example.Handler'
+================================================================================
+16:49:47.462 [INFO]  [Creating] Filtering out non-testable methods...
+16:49:49.441 [INFO]  [Creating] Filtering of methods complete. Creating analysis request
+16:49:49.441 [INFO]  [Creating] Attempting to get service client, retry 1.
+16:49:49.453 [INFO]  [Creating] Starting monitoring server.
+16:49:49.559 [INFO]  [Creating] Monitoring server listening on localhost/127.0.0.1:54981
+16:49:49.637 [INFO]  [Creating] Starting analyzer server process...
+16:49:49.638 [INFO]  [Creating] Server command-line: /opt/homebrew/Cellar/openjdk@17/17.0.8.1/libexec/openjdk.jdk/Contents/Home/bin/java -XX:+IgnoreUnrecognizedVMOptions -Xmx8g -Djdk.attach.allowAttachSelf=true -ea -javaagent:/usr/local/bin/diffblue/launcher-shared-jar.jar -Dlogback.configurationFile=/var/folders/p2/qfsg813s0h9b5mhb_8typkwm0000gp/T/diffblue/config/logback-remote-service.xml -Dcom.diffblue.springIsolationJar=/usr/local/bin/diffblue/cover-isolation-layer.jar -Dcover.jar.path=/usr/local/bin/diffblue/cover-service-analyzer.jar -Dcom.diffblue.assertionSuggestionJar=/usr/local/bin/diffblue/cover-service-analyzer.jar -Dcover.main.class=com.diffblue.cover.service.analyzer.Main -jar /usr/local/bin/diffblue/launcher-shared-jar.jar --service-lifespan 120 --monitoring-service-port 54981 --index-service-port 54981 --debug-log
+16:49:49.647 [INFO]  [Creating] Server started. Waiting up to 300 seconds for a connection to be established...
+16:49:50.433 [INFO]  [Creating] Starting new remote monitor client
+16:49:50.974 [INFO]  [Creating] Attempting to start remote server.
+16:49:51.395 [INFO]  [Creating] Server started, listening on localhost/127.0.0.1:54983
+16:49:51.651 [INFO]  [Creating] Expect analyzer service to be listening on port 54983.
+16:49:52.492 [INFO]  [Creating] Started analyzer service and client retrieved.
+16:49:55.267 [INFO]  [Creating] 
+================================================================================
+= Creating tests for 'example.Handler.<init>:()V' using 'TrM (!sp, !fnm, df, !ris)'
+================================================================================
+16:49:55.483 [INFO]  [Creating]      [1/24] example.Handler.<init>
+16:49:55.483 [INFO]  [Creating]      [1/24]   R002: Missing observers
+16:49:55.483 [INFO]  [Creating]      [1/24]     Diffblue Cover was unable to create an assertion.
+16:49:55.483 [INFO]  [Creating]      [1/24]     There are no fields that could be asserted on.
+16:49:55.487 [INFO]  [Creating] 
+================================================================================
+= Creating tests for 'example.Handler.handleRequest:(Ljava/util/Map;Lcom/amazonaws/services/lambda/runtime/Context;)Ljava/lang/Void;' using 'SiM (!sp, fnm, df, !ris)'
+================================================================================
+16:49:57.141 [INFO]  [Creating] Created 1+1 tests and partial tests via 'SiM (!sp, fnm, df, !ris)', 1/2, returning all 2
+16:49:58.060 [INFO]  [Creating]      [2/24] example.Handler.handleRequest
+16:49:58.060 [INFO]  [Creating]      [2/24]   Tests created: 1
+16:49:58.065 [INFO]  [Creating] [1/9] example.Handler
+16:49:58.065 [INFO]  [Creating] [1/9]   Tests created: 1
+16:49:58.065 [INFO]  [Creating] 
+================================================================================
+= Starting analysis for class 'example.HandlerDivide'
+================================================================================
+16:49:58.065 [INFO]  [Creating] Filtering out non-testable methods...
+16:49:58.067 [INFO]  [Creating] Filtering of methods complete. Creating analysis request
+16:49:58.067 [INFO]  [Creating] Attempting to get service client, retry 1.
+16:49:58.113 [INFO]  [Creating] 
+================================================================================
+= Creating tests for 'example.HandlerDivide.<init>:()V' using 'TrM (!sp, !fnm, df, !ris)'
+================================================================================
+16:49:58.664 [INFO]  [Creating]      [3/24] example.HandlerDivide.<init>
+16:49:58.664 [INFO]  [Creating]      [3/24]   R002: Missing observers
+16:49:58.664 [INFO]  [Creating]      [3/24]     Diffblue Cover was unable to create an assertion.
+16:49:58.664 [INFO]  [Creating]      [3/24]     There are no fields that could be asserted on.
+16:49:58.665 [INFO]  [Creating] 
+================================================================================
+= Creating tests for 'example.HandlerDivide.handleRequest:(Ljava/util/List;Lcom/amazonaws/services/lambda/runtime/Context;)Ljava/lang/Integer;' using 'SiM (!sp, fnm, df, !ris)'
+================================================================================
+16:50:00.073 [INFO]  [Creating] Created 4+1 tests and partial tests via 'SiM (!sp, fnm, df, !ris)', 1/2, returning all 5
+16:50:00.554 [INFO]  [Creating]      [4/24] example.HandlerDivide.handleRequest
+16:50:00.554 [INFO]  [Creating]      [4/24]   Tests created: 4
+16:50:00.558 [INFO]  [Creating] [2/9] example.HandlerDivide
+16:50:00.558 [INFO]  [Creating] [2/9]   Tests created: 4
+16:50:00.558 [INFO]  [Creating] 
+================================================================================
+= Starting analysis for class 'example.HandlerInteger'
+================================================================================
+16:50:00.558 [INFO]  [Creating] Filtering out non-testable methods...
+16:50:00.559 [INFO]  [Creating] Filtering of methods complete. Creating analysis request
+16:50:00.559 [INFO]  [Creating] Attempting to get service client, retry 1.
+16:50:00.591 [INFO]  [Creating] 
+================================================================================
+= Creating tests for 'example.HandlerInteger.<init>:()V' using 'TrM (!sp, !fnm, df, !ris)'
+================================================================================
+16:50:00.613 [INFO]  [Creating]      [5/24] example.HandlerInteger.<init>
+16:50:00.613 [INFO]  [Creating]      [5/24]   R002: Missing observers
+16:50:00.613 [INFO]  [Creating]      [5/24]     Diffblue Cover was unable to create an assertion.
+16:50:00.613 [INFO]  [Creating]      [5/24]     There are no fields that could be asserted on.
+16:50:00.614 [INFO]  [Creating] 
+================================================================================
+= Creating tests for 'example.HandlerInteger.handleRequest:(Ljava/lang/Integer;Lcom/amazonaws/services/lambda/runtime/Context;)Ljava/lang/Integer;' using 'SiM (!sp, fnm, df, !ris)'
+================================================================================
+16:50:00.724 [INFO]  [Creating] Created 1+1 tests and partial tests via 'SiM (!sp, fnm, df, !ris)', 1/2, returning all 2
+16:50:00.793 [INFO]  [Creating]      [6/24] example.HandlerInteger.handleRequest
+16:50:00.793 [INFO]  [Creating]      [6/24]   Tests created: 1
+16:50:00.797 [INFO]  [Creating] [3/9] example.HandlerInteger
+16:50:00.797 [INFO]  [Creating] [3/9]   Tests created: 1
+16:50:00.797 [INFO]  [Creating] 
+================================================================================
+= Starting analysis for class 'example.HandlerList'
+================================================================================
+16:50:00.797 [INFO]  [Creating] Filtering out non-testable methods...
+16:50:00.798 [INFO]  [Creating] Filtering of methods complete. Creating analysis request
+16:50:00.798 [INFO]  [Creating] Attempting to get service client, retry 1.
+16:50:00.827 [INFO]  [Creating] 
+================================================================================
+= Creating tests for 'example.HandlerList.<init>:()V' using 'TrM (!sp, !fnm, df, !ris)'
+================================================================================
+16:50:00.844 [INFO]  [Creating]      [7/24] example.HandlerList.<init>
+16:50:00.844 [INFO]  [Creating]      [7/24]   R002: Missing observers
+16:50:00.844 [INFO]  [Creating]      [7/24]     Diffblue Cover was unable to create an assertion.
+16:50:00.844 [INFO]  [Creating]      [7/24]     There are no fields that could be asserted on.
+16:50:00.845 [INFO]  [Creating] 
+================================================================================
+= Creating tests for 'example.HandlerList.handleRequest:(Ljava/util/List;Lcom/amazonaws/services/lambda/runtime/Context;)Ljava/lang/Integer;' using 'SiM (!sp, fnm, df, !ris)'
+================================================================================
+16:50:01.468 [INFO]  [Creating] Created 3+1 tests and partial tests via 'SiM (!sp, fnm, df, !ris)', 1/2, returning all 4
+16:50:01.728 [INFO]  [Creating]      [8/24] example.HandlerList.handleRequest
+16:50:01.728 [INFO]  [Creating]      [8/24]   Tests created: 3
+16:50:01.731 [INFO]  [Creating] [4/9] example.HandlerList
+16:50:01.731 [INFO]  [Creating] [4/9]   Tests created: 3
+16:50:01.731 [INFO]  [Creating] 
+================================================================================
+= Starting analysis for class 'example.HandlerStream'
+================================================================================
+16:50:01.731 [INFO]  [Creating] Filtering out non-testable methods...
+16:50:01.732 [INFO]  [Creating] Filtering of methods complete. Creating analysis request
+16:50:01.732 [INFO]  [Creating] Attempting to get service client, retry 1.
+16:50:01.761 [INFO]  [Creating] 
+================================================================================
+= Creating tests for 'example.HandlerStream.<init>:()V' using 'TrM (!sp, !fnm, df, !ris)'
+================================================================================
+16:50:01.942 [INFO]  [Creating]      [9/24] example.HandlerStream.<init>
+16:50:01.942 [INFO]  [Creating]      [9/24]   R002: Missing observers
+16:50:01.942 [INFO]  [Creating]      [9/24]     Diffblue Cover was unable to create an assertion.
+16:50:01.942 [INFO]  [Creating]      [9/24]     There are no fields that could be asserted on.
+16:50:01.943 [INFO]  [Creating] 
+================================================================================
+= Creating tests for 'example.HandlerStream.handleRequest:(Ljava/io/InputStream;Ljava/io/OutputStream;Lcom/amazonaws/services/lambda/runtime/Context;)V' using 'SiM (!sp, fnm, df, !ris)'
+================================================================================
+16:50:28.272 [INFO]  [Creating] Created 2+4 tests and partial tests via 'SiM (!sp, fnm, df, !ris)', 1/2, returning all 6
+16:50:29.174 [INFO]  [Creating]     [10/24] example.HandlerStream.handleRequest
+16:50:29.174 [INFO]  [Creating]     [10/24]   Tests created: 2
+16:50:29.178 [INFO]  [Creating] [5/9] example.HandlerStream
+16:50:29.178 [INFO]  [Creating] [5/9]   Tests created: 2
+16:50:29.178 [INFO]  [Creating] 
+================================================================================
+= Starting analysis for class 'example.HandlerString'
+================================================================================
+16:50:29.178 [INFO]  [Creating] Filtering out non-testable methods...
+16:50:29.179 [INFO]  [Creating] Filtering of methods complete. Creating analysis request
+16:50:29.179 [INFO]  [Creating] Attempting to get service client, retry 1.
+16:50:29.225 [INFO]  [Creating] 
+================================================================================
+= Creating tests for 'example.HandlerString.<init>:()V' using 'TrM (!sp, !fnm, df, !ris)'
+================================================================================
+16:50:29.253 [INFO]  [Creating]     [11/24] example.HandlerString.<init>
+16:50:29.253 [INFO]  [Creating]     [11/24]   R002: Missing observers
+16:50:29.253 [INFO]  [Creating]     [11/24]     Diffblue Cover was unable to create an assertion.
+16:50:29.253 [INFO]  [Creating]     [11/24]     There are no fields that could be asserted on.
+16:50:29.254 [INFO]  [Creating] 
+================================================================================
+= Creating tests for 'example.HandlerString.handleRequest:(Ljava/lang/String;Lcom/amazonaws/services/lambda/runtime/Context;)Ljava/lang/String;' using 'SiM (!sp, fnm, df, !ris)'
+================================================================================
+16:50:29.435 [INFO]  [Creating] Created 1+1 tests and partial tests via 'SiM (!sp, fnm, df, !ris)', 1/2, returning all 2
+16:50:29.518 [INFO]  [Creating]     [12/24] example.HandlerString.handleRequest
+16:50:29.518 [INFO]  [Creating]     [12/24]   Tests created: 1
+16:50:29.521 [INFO]  [Creating] [6/9] example.HandlerString
+16:50:29.532 [INFO]  [Creating] [6/9]   Tests created: 1
+16:50:29.532 [INFO]  [Creating] 
+================================================================================
+= Starting analysis for class 'example.HandlerWeatherData'
+================================================================================
+16:50:29.533 [INFO]  [Creating] Filtering out non-testable methods...
+16:50:29.534 [INFO]  [Creating] Filtering of methods complete. Creating analysis request
+16:50:29.534 [INFO]  [Creating] Attempting to get service client, retry 1.
+16:50:29.582 [INFO]  [Creating] 
+================================================================================
+= Creating tests for 'example.HandlerWeatherData.<init>:()V' using 'TrM (!sp, !fnm, df, !ris)'
+================================================================================
+16:50:29.608 [INFO]  [Creating]     [13/24] example.HandlerWeatherData.<init>
+16:50:29.608 [INFO]  [Creating]     [13/24]   R002: Missing observers
+16:50:29.608 [INFO]  [Creating]     [13/24]     Diffblue Cover was unable to create an assertion.
+16:50:29.608 [INFO]  [Creating]     [13/24]     There are no fields that could be asserted on.
+16:50:29.609 [INFO]  [Creating] 
+================================================================================
+= Creating tests for 'example.HandlerWeatherData.handleRequest:(Lexample/WeatherData;Lcom/amazonaws/services/lambda/runtime/Context;)Lexample/WeatherData;' using 'SiM (!sp, fnm, df, !ris)'
+================================================================================
+16:50:30.909 [INFO]  [Creating] Created 1+1 tests and partial tests via 'SiM (!sp, fnm, df, !ris)', 1/2, returning all 2
+16:50:31.009 [INFO]  [Creating]     [14/24] example.HandlerWeatherData.handleRequest
+16:50:31.009 [INFO]  [Creating]     [14/24]   Tests created: 1
+16:50:31.016 [INFO]  [Creating] [7/9] example.HandlerWeatherData
+16:50:31.016 [INFO]  [Creating] [7/9]   Tests created: 1
+16:50:31.016 [INFO]  [Creating] 
+================================================================================
+= Starting analysis for class 'example.InputLengthException'
+================================================================================
+16:50:31.016 [INFO]  [Creating] Filtering out non-testable methods...
+16:50:31.016 [INFO]  [Creating] Filtering of methods complete. Creating analysis request
+16:50:31.017 [INFO]  [Creating] Attempting to get service client, retry 1.
+16:50:31.039 [INFO]  [Creating] 
+================================================================================
+= Creating tests for 'example.InputLengthException.<init>:(Ljava/lang/String;)V' using 'TrM (!sp, !fnm, df, !ris)'
+================================================================================
+16:50:31.144 [INFO]  [Creating]     [15/24] example.InputLengthException.<init>
+16:50:31.144 [INFO]  [Creating]     [15/24]   Tests created: 1
+16:50:31.149 [INFO]  [Creating] [8/9] example.InputLengthException
+16:50:31.149 [INFO]  [Creating] [8/9]   Tests created: 1
+16:50:31.150 [INFO]  [Creating] 
+================================================================================
+= Starting analysis for class 'example.WeatherData'
+================================================================================
+16:50:31.150 [INFO]  [Creating] Filtering out non-testable methods...
+16:50:31.150 [INFO]  [Creating] Filtering of methods complete. Creating analysis request
+16:50:31.150 [INFO]  [Creating] Attempting to get service client, retry 1.
+16:50:31.196 [INFO]  [Creating] 
+================================================================================
+= Creating tests for 'example.WeatherData.<init>:()V, example.WeatherData.getHumidityPct:()Ljava/lang/Double;, example.WeatherData.getPressureHPa:()Ljava/lang/Integer;, example.WeatherData.getTemperatureK:()Ljava/lang/Integer;, example.WeatherData.getWindKmh:()Ljava/lang/Integer;, example.WeatherData.setHumidityPct:(Ljava/lang/Double;)V, example.WeatherData.setPressureHPa:(Ljava/lang/Integer;)V, example.WeatherData.setTemperatureK:(Ljava/lang/Integer;)V, example.WeatherData.setWindKmh:(Ljava/lang/Integer;)V' using 'TrM (!sp, !fnm, df, !ris)'
+================================================================================
+16:50:31.326 [INFO]  [Creating]     [16/24] example.WeatherData.<init>
+16:50:31.326 [INFO]  [Creating]     [17/24] example.WeatherData.getHumidityPct
+16:50:31.326 [INFO]  [Creating]     [18/24] example.WeatherData.getPressureHPa
+16:50:31.326 [INFO]  [Creating]     [19/24] example.WeatherData.getTemperatureK
+16:50:31.326 [INFO]  [Creating]     [20/24] example.WeatherData.getWindKmh
+16:50:31.326 [INFO]  [Creating]     [21/24] example.WeatherData.setHumidityPct
+16:50:31.326 [INFO]  [Creating]     [22/24] example.WeatherData.setPressureHPa
+16:50:31.326 [INFO]  [Creating]     [23/24] example.WeatherData.setTemperatureK
+16:50:31.326 [INFO]  [Creating]     [24/24] example.WeatherData.setWindKmh
+16:50:31.326 [INFO]  [Creating]     [24/24]   Tests created: 1
+16:50:31.329 [INFO]  [Creating] [9/9] example.WeatherData
+16:50:31.329 [INFO]  [Creating] [9/9]   Tests created: 1
+16:50:31.336 [INFO]  [Reporting] 
+16:50:31.336 [INFO]  [Reporting] Summary:
+16:50:31.336 [INFO]  [Reporting] --------
+16:50:31.337 [INFO]  [Reporting] Total:                                              24 methods
+16:50:31.337 [INFO]  [Reporting] 15 tests created for:                               17 methods
+16:50:31.337 [INFO]  [Reporting] 
+16:50:31.337 [INFO]  [Reporting] No tests created for:                                7 methods
+16:50:31.337 [INFO]  [Reporting]     7 R002: Missing observers
+16:50:31.370 [INFO]  [Validating] 
+16:50:31.370 [INFO]  [Validating] Running validation command.
+16:50:31.371 [INFO]  [Validating] Maven Using ${maven.home} of: /opt/homebrew/Cellar/maven/3.9.5.
+16:50:31.371 [INFO]  [Validating] Maven Executing: /bin/sh -c cd /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic && /opt/homebrew/Cellar/maven/3.9.5/bin/mvn -B -D maven.clean.failOnError=false -D maven.ext.class.path=/usr/local/bin/diffblue/cover-buildsystem-maven-spy-jar-with-dependencies.jar clean test
+16:50:36.405 [INFO]  [Validating] Standard output of build tool (Maven)
+16:50:36.406 [INFO]  [Validating] > [INFO] Scanning for projects...
+16:50:36.406 [INFO]  [Validating] > [INFO] 
+16:50:36.406 [INFO]  [Validating] > [INFO] -----------------------< com.example:java-basic >-----------------------
+16:50:36.407 [INFO]  [Validating] > [INFO] Building java-basic-function 1.0-SNAPSHOT
+16:50:36.407 [INFO]  [Validating] > [INFO]   from pom.xml
+16:50:36.407 [INFO]  [Validating] > [INFO] --------------------------------[ jar ]---------------------------------
+16:50:36.407 [INFO]  [Validating] > [INFO] 
+16:50:36.407 [INFO]  [Validating] > [INFO] --- clean:3.2.0:clean (default-clean) @ java-basic ---
+16:50:36.407 [INFO]  [Validating] > [INFO] Deleting /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target
+16:50:36.407 [INFO]  [Validating] > [INFO] 
+16:50:36.407 [INFO]  [Validating] > [INFO] --- resources:3.3.1:resources (default-resources) @ java-basic ---
+16:50:36.407 [INFO]  [Validating] > [INFO] skip non existing resourceDirectory /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/src/main/resources
+16:50:36.408 [INFO]  [Validating] > [INFO] 
+16:50:36.408 [INFO]  [Validating] > [INFO] --- compiler:3.8.1:compile (default-compile) @ java-basic ---
+16:50:36.408 [INFO]  [Validating] > [INFO] Changes detected - recompiling the module!
+16:50:36.408 [INFO]  [Validating] > [INFO] Compiling 9 source files to /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/classes
+16:50:36.408 [INFO]  [Validating] > [INFO] 
+16:50:36.408 [INFO]  [Validating] > [INFO] --- resources:3.3.1:testResources (default-testResources) @ java-basic ---
+16:50:36.408 [INFO]  [Validating] > [INFO] Copying 1 resource from src/test/resources to target/test-classes
+16:50:36.408 [INFO]  [Validating] > [INFO] 
+16:50:36.408 [INFO]  [Validating] > [INFO] --- compiler:3.8.1:testCompile (default-testCompile) @ java-basic ---
+16:50:36.408 [INFO]  [Validating] > [INFO] Changes detected - recompiling the module!
+16:50:36.408 [INFO]  [Validating] > [INFO] Compiling 12 source files to /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/test-classes
+16:50:36.408 [INFO]  [Validating] > [INFO] 
+16:50:36.408 [INFO]  [Validating] > [INFO] --- surefire:2.22.2:test (default-test) @ java-basic ---
+16:50:36.408 [INFO]  [Validating] > [INFO] 
+16:50:36.408 [INFO]  [Validating] > [INFO] -------------------------------------------------------
+16:50:36.408 [INFO]  [Validating] > [INFO]  T E S T S
+16:50:36.408 [INFO]  [Validating] > [INFO] -------------------------------------------------------
+16:50:36.408 [INFO]  [Validating] > [INFO] Running example.HandlerDivideDiffblueTest
+16:50:36.408 [INFO]  [Validating] > [INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.021 s - in example.HandlerDivideDiffblueTest
+16:50:36.408 [INFO]  [Validating] > [INFO] Running example.InvokeTest
+16:50:36.408 [INFO]  [Validating] > [INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 s - in example.InvokeTest
+16:50:36.408 [INFO]  [Validating] > [INFO] Running example.WeatherDataDiffblueTest
+16:50:36.408 [INFO]  [Validating] > [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in example.WeatherDataDiffblueTest
+16:50:36.408 [INFO]  [Validating] > [INFO] Running example.HandlerStringDiffblueTest
+16:50:36.408 [INFO]  [Validating] > [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in example.HandlerStringDiffblueTest
+16:50:36.408 [INFO]  [Validating] > [INFO] Running example.HandlerDiffblueTest
+16:50:36.408 [INFO]  [Validating] > [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in example.HandlerDiffblueTest
+16:50:36.408 [INFO]  [Validating] > [INFO] Running example.HandlerStreamDiffblueTest
+16:50:36.408 [INFO]  [Validating] > [INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.87 s - in example.HandlerStreamDiffblueTest
+16:50:36.408 [INFO]  [Validating] > [INFO] Running example.HandlerWeatherDataDiffblueTest
+16:50:36.408 [INFO]  [Validating] > [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in example.HandlerWeatherDataDiffblueTest
+16:50:36.408 [INFO]  [Validating] > [INFO] Running example.InputLengthExceptionDiffblueTest
+16:50:36.408 [INFO]  [Validating] > [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in example.InputLengthExceptionDiffblueTest
+16:50:36.408 [INFO]  [Validating] > [INFO] Running example.HandlerIntegerDiffblueTest
+16:50:36.408 [INFO]  [Validating] > [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in example.HandlerIntegerDiffblueTest
+16:50:36.408 [INFO]  [Validating] > [INFO] Running example.HandlerListDiffblueTest
+16:50:36.408 [INFO]  [Validating] > [INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in example.HandlerListDiffblueTest
+16:50:36.408 [INFO]  [Validating] > [INFO] 
+16:50:36.408 [INFO]  [Validating] > [INFO] Results:
+16:50:36.408 [INFO]  [Validating] > [INFO] 
+16:50:36.408 [INFO]  [Validating] > [INFO] Tests run: 22, Failures: 0, Errors: 0, Skipped: 0
+16:50:36.408 [INFO]  [Validating] > [INFO] 
+16:50:36.408 [INFO]  [Validating] > [INFO] ------------------------------------------------------------------------
+16:50:36.408 [INFO]  [Validating] > [INFO] BUILD SUCCESS
+16:50:36.409 [INFO]  [Validating] > [INFO] ------------------------------------------------------------------------
+16:50:36.409 [INFO]  [Validating] > [INFO] Total time:  3.604 s
+16:50:36.409 [INFO]  [Validating] > [INFO] Finished at: 2023-12-08T16:50:35Z
+16:50:36.409 [INFO]  [Validating] > [INFO] ------------------------------------------------------------------------
+16:50:36.409 [INFO]  [Validating] Standard error of build tool (Maven)
+16:50:36.409 [INFO]  [Validating] > java.io.IOException: Pipe not connected
+16:50:36.409 [INFO]  [Validating] > 	at java.base/java.io.PipedOutputStream.write(PipedOutputStream.java:120)
+16:50:36.409 [INFO]  [Validating] > 	at example.HandlerStream.handleRequest(HandlerStream.java:33)
+16:50:36.409 [INFO]  [Validating] > 	at example.HandlerStreamDiffblueTest.testHandleRequest2(HandlerStreamDiffblueTest.java:56)
+16:50:36.409 [INFO]  [Validating] > 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+16:50:36.409 [INFO]  [Validating] > 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+16:50:36.409 [INFO]  [Validating] > 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+16:50:36.409 [INFO]  [Validating] > 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+16:50:36.410 [INFO]  [Validating] > 	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:725)
+16:50:36.410 [INFO]  [Validating] > 	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+16:50:36.410 [INFO]  [Validating] > 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+16:50:36.410 [INFO]  [Validating] > 	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:149)
+16:50:36.410 [INFO]  [Validating] > 	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:140)
+16:50:36.410 [INFO]  [Validating] > 	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:84)
+16:50:36.410 [INFO]  [Validating] > 	at org.junit.jupiter.engine.execution.ExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(ExecutableInvoker.java:115)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.jupiter.engine.execution.ExecutableInvoker.lambda$invoke$0(ExecutableInvoker.java:105)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:104)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:98)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:214)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:210)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:135)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:66)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+16:50:36.411 [INFO]  [Validating] > 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+16:50:36.411 [INFO]  [Validating] > 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+16:50:36.411 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+16:50:36.412 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
+16:50:36.412 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+16:50:36.412 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
+16:50:36.412 [INFO]  [Validating] > 	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:220)
+16:50:36.412 [INFO]  [Validating] > 	at org.junit.platform.launcher.core.DefaultLauncher.lambda$execute$6(DefaultLauncher.java:188)
+16:50:36.412 [INFO]  [Validating] > 	at org.junit.platform.launcher.core.DefaultLauncher.withInterceptedStreams(DefaultLauncher.java:202)
+16:50:36.412 [INFO]  [Validating] > 	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:181)
+16:50:36.412 [INFO]  [Validating] > 	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:128)
+16:50:36.412 [INFO]  [Validating] > 	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:150)
+16:50:36.412 [INFO]  [Validating] > 	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:124)
+16:50:36.412 [INFO]  [Validating] > 	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:384)
+16:50:36.412 [INFO]  [Validating] > 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:345)
+16:50:36.412 [INFO]  [Validating] > 	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:126)
+16:50:36.412 [INFO]  [Validating] > 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:418)
+16:50:36.412 [INFO]  [Validating] > java.io.IOException: Underlying input stream returned zero bytes
+16:50:36.412 [INFO]  [Validating] > 	at java.base/sun.nio.cs.StreamDecoder.readBytes(StreamDecoder.java:274)
+16:50:36.412 [INFO]  [Validating] > 	at java.base/sun.nio.cs.StreamDecoder.implRead(StreamDecoder.java:313)
+16:50:36.412 [INFO]  [Validating] > 	at java.base/sun.nio.cs.StreamDecoder.read(StreamDecoder.java:188)
+16:50:36.412 [INFO]  [Validating] > 	at java.base/java.io.InputStreamReader.read(InputStreamReader.java:177)
+16:50:36.412 [INFO]  [Validating] > 	at java.base/java.io.BufferedReader.fill(BufferedReader.java:162)
+16:50:36.412 [INFO]  [Validating] > 	at java.base/java.io.BufferedReader.read(BufferedReader.java:183)
+16:50:36.412 [INFO]  [Validating] > 	at example.HandlerStream.handleRequest(HandlerStream.java:32)
+16:50:36.412 [INFO]  [Validating] > 	at example.HandlerStreamDiffblueTest.testHandleRequest(HandlerStreamDiffblueTest.java:34)
+16:50:36.412 [INFO]  [Validating] > 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+16:50:36.412 [INFO]  [Validating] > 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+16:50:36.412 [INFO]  [Validating] > 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+16:50:36.413 [INFO]  [Validating] > 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:725)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:149)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:140)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:84)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.jupiter.engine.execution.ExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(ExecutableInvoker.java:115)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.jupiter.engine.execution.ExecutableInvoker.lambda$invoke$0(ExecutableInvoker.java:105)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:104)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:98)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:214)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:210)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:135)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:66)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+16:50:36.413 [INFO]  [Validating] > 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+16:50:36.413 [INFO]  [Validating] > 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+16:50:36.413 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+16:50:36.414 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+16:50:36.414 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+16:50:36.414 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+16:50:36.414 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+16:50:36.414 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+16:50:36.414 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+16:50:36.414 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+16:50:36.414 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+16:50:36.414 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
+16:50:36.414 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+16:50:36.414 [INFO]  [Validating] > 	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
+16:50:36.414 [INFO]  [Validating] > 	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:220)
+16:50:36.414 [INFO]  [Validating] > 	at org.junit.platform.launcher.core.DefaultLauncher.lambda$execute$6(DefaultLauncher.java:188)
+16:50:36.414 [INFO]  [Validating] > 	at org.junit.platform.launcher.core.DefaultLauncher.withInterceptedStreams(DefaultLauncher.java:202)
+16:50:36.414 [INFO]  [Validating] > 	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:181)
+16:50:36.414 [INFO]  [Validating] > 	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:128)
+16:50:36.414 [INFO]  [Validating] > 	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:150)
+16:50:36.414 [INFO]  [Validating] > 	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:124)
+16:50:36.414 [INFO]  [Validating] > 	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:384)
+16:50:36.414 [INFO]  [Validating] > 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:345)
+16:50:36.414 [INFO]  [Validating] > 	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:126)
+16:50:36.414 [INFO]  [Validating] > 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:418)
+16:50:36.532 [INFO]  [Validating] All 15 created tests were successfully validated.
+16:50:36.545 [INFO]  [Measuring] Calculating coverage from manual tests.
+16:50:36.547 [INFO]  [Measuring] Maven Using ${maven.home} of: /opt/homebrew/Cellar/maven/3.9.5.
+16:50:36.548 [INFO]  [Measuring] Maven Executing: /bin/sh -c cd /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic && /opt/homebrew/Cellar/maven/3.9.5/bin/mvn -B -D test=!*DiffblueTest.java,**/Test*.java,**/*Test.java,**/*Tests.java,**/*TestCase.java -D surefire.failIfNoSpecifiedTests=false -D maven.test.failure.ignore=true -D failIfNoTests=false -D jacoco.skip=false -D maven.ext.class.path=/usr/local/bin/diffblue/cover-buildsystem-maven-spy-jar-with-dependencies.jar org.jacoco:jacoco-maven-plugin:0.8.7:prepare-agent test org.jacoco:jacoco-maven-plugin:0.8.7:report
+16:50:40.571 [INFO]  [Measuring] Standard output of build tool (Maven)
+16:50:40.572 [INFO]  [Measuring] > [INFO] Scanning for projects...
+16:50:40.572 [INFO]  [Measuring] > [INFO] 
+16:50:40.572 [INFO]  [Measuring] > [INFO] -----------------------< com.example:java-basic >-----------------------
+16:50:40.572 [INFO]  [Measuring] > [INFO] Building java-basic-function 1.0-SNAPSHOT
+16:50:40.572 [INFO]  [Measuring] > [INFO]   from pom.xml
+16:50:40.572 [INFO]  [Measuring] > [INFO] --------------------------------[ jar ]---------------------------------
+16:50:40.572 [INFO]  [Measuring] > [INFO] 
+16:50:40.572 [INFO]  [Measuring] > [INFO] --- jacoco:0.8.7:prepare-agent (default-cli) @ java-basic ---
+16:50:40.572 [INFO]  [Measuring] > [INFO] argLine set to -javaagent:/Users/amishra/.m2/repository/org/jacoco/org.jacoco.agent/0.8.7/org.jacoco.agent-0.8.7-runtime.jar=destfile=/Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/jacoco.exec
+16:50:40.572 [INFO]  [Measuring] > [INFO] 
+16:50:40.572 [INFO]  [Measuring] > [INFO] --- resources:3.3.1:resources (default-resources) @ java-basic ---
+16:50:40.572 [INFO]  [Measuring] > [INFO] skip non existing resourceDirectory /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/src/main/resources
+16:50:40.572 [INFO]  [Measuring] > [INFO] 
+16:50:40.572 [INFO]  [Measuring] > [INFO] --- compiler:3.8.1:compile (default-compile) @ java-basic ---
+16:50:40.572 [INFO]  [Measuring] > [INFO] Nothing to compile - all classes are up to date
+16:50:40.572 [INFO]  [Measuring] > [INFO] 
+16:50:40.572 [INFO]  [Measuring] > [INFO] --- resources:3.3.1:testResources (default-testResources) @ java-basic ---
+16:50:40.572 [INFO]  [Measuring] > [INFO] Copying 1 resource from src/test/resources to target/test-classes
+16:50:40.572 [INFO]  [Measuring] > [INFO] 
+16:50:40.572 [INFO]  [Measuring] > [INFO] --- compiler:3.8.1:testCompile (default-testCompile) @ java-basic ---
+16:50:40.572 [INFO]  [Measuring] > [INFO] Nothing to compile - all classes are up to date
+16:50:40.572 [INFO]  [Measuring] > [INFO] 
+16:50:40.572 [INFO]  [Measuring] > [INFO] --- surefire:2.22.2:test (default-test) @ java-basic ---
+16:50:40.572 [INFO]  [Measuring] > [INFO] 
+16:50:40.572 [INFO]  [Measuring] > [INFO] -------------------------------------------------------
+16:50:40.572 [INFO]  [Measuring] > [INFO]  T E S T S
+16:50:40.572 [INFO]  [Measuring] > [INFO] -------------------------------------------------------
+16:50:40.572 [INFO]  [Measuring] > [INFO] Running example.InvokeTest
+16:50:40.573 [INFO]  [Measuring] > [INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.053 s - in example.InvokeTest
+16:50:40.573 [INFO]  [Measuring] > [INFO] 
+16:50:40.573 [INFO]  [Measuring] > [INFO] Results:
+16:50:40.573 [INFO]  [Measuring] > [INFO] 
+16:50:40.573 [INFO]  [Measuring] > [INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0
+16:50:40.573 [INFO]  [Measuring] > [INFO] 
+16:50:40.573 [INFO]  [Measuring] > [INFO] 
+16:50:40.573 [INFO]  [Measuring] > [INFO] --- jacoco:0.8.7:report (default-cli) @ java-basic ---
+16:50:40.573 [INFO]  [Measuring] > [INFO] Loading execution data file /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/jacoco.exec
+16:50:40.573 [INFO]  [Measuring] > [INFO] Analyzed bundle 'java-basic-function' with 9 classes
+16:50:40.573 [INFO]  [Measuring] > [INFO] ------------------------------------------------------------------------
+16:50:40.573 [INFO]  [Measuring] > [INFO] BUILD SUCCESS
+16:50:40.573 [INFO]  [Measuring] > [INFO] ------------------------------------------------------------------------
+16:50:40.573 [INFO]  [Measuring] > [INFO] Total time:  2.531 s
+16:50:40.573 [INFO]  [Measuring] > [INFO] Finished at: 2023-12-08T16:50:39Z
+16:50:40.573 [INFO]  [Measuring] > [INFO] ------------------------------------------------------------------------
+16:50:40.573 [INFO]  [Measuring] JaCoCo report file created in /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/.diffblue/reports/manual-tests-jacoco-report.xml
+16:50:40.644 [INFO]  [Measuring] Calculating coverage from diffblue tests.
+16:50:40.671 [INFO]  [Measuring] Maven Using ${maven.home} of: /opt/homebrew/Cellar/maven/3.9.5.
+16:50:40.673 [INFO]  [Measuring] Maven Executing: /bin/sh -c cd /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic && /opt/homebrew/Cellar/maven/3.9.5/bin/mvn -B -D test=*DiffblueTest.java -D surefire.failIfNoSpecifiedTests=false -D maven.test.failure.ignore=true -D failIfNoTests=false -D jacoco.skip=false -D maven.ext.class.path=/usr/local/bin/diffblue/cover-buildsystem-maven-spy-jar-with-dependencies.jar org.jacoco:jacoco-maven-plugin:0.8.7:prepare-agent test org.jacoco:jacoco-maven-plugin:0.8.7:report
+16:50:45.701 [INFO]  [Measuring] Standard output of build tool (Maven)
+16:50:45.701 [INFO]  [Measuring] > [INFO] Scanning for projects...
+16:50:45.701 [INFO]  [Measuring] > [INFO] 
+16:50:45.701 [INFO]  [Measuring] > [INFO] -----------------------< com.example:java-basic >-----------------------
+16:50:45.701 [INFO]  [Measuring] > [INFO] Building java-basic-function 1.0-SNAPSHOT
+16:50:45.701 [INFO]  [Measuring] > [INFO]   from pom.xml
+16:50:45.701 [INFO]  [Measuring] > [INFO] --------------------------------[ jar ]---------------------------------
+16:50:45.701 [INFO]  [Measuring] > [INFO] 
+16:50:45.701 [INFO]  [Measuring] > [INFO] --- jacoco:0.8.7:prepare-agent (default-cli) @ java-basic ---
+16:50:45.701 [INFO]  [Measuring] > [INFO] argLine set to -javaagent:/Users/amishra/.m2/repository/org/jacoco/org.jacoco.agent/0.8.7/org.jacoco.agent-0.8.7-runtime.jar=destfile=/Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/jacoco.exec
+16:50:45.701 [INFO]  [Measuring] > [INFO] 
+16:50:45.701 [INFO]  [Measuring] > [INFO] --- resources:3.3.1:resources (default-resources) @ java-basic ---
+16:50:45.701 [INFO]  [Measuring] > [INFO] skip non existing resourceDirectory /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/src/main/resources
+16:50:45.701 [INFO]  [Measuring] > [INFO] 
+16:50:45.701 [INFO]  [Measuring] > [INFO] --- compiler:3.8.1:compile (default-compile) @ java-basic ---
+16:50:45.701 [INFO]  [Measuring] > [INFO] Nothing to compile - all classes are up to date
+16:50:45.701 [INFO]  [Measuring] > [INFO] 
+16:50:45.701 [INFO]  [Measuring] > [INFO] --- resources:3.3.1:testResources (default-testResources) @ java-basic ---
+16:50:45.701 [INFO]  [Measuring] > [INFO] Copying 1 resource from src/test/resources to target/test-classes
+16:50:45.701 [INFO]  [Measuring] > [INFO] 
+16:50:45.701 [INFO]  [Measuring] > [INFO] --- compiler:3.8.1:testCompile (default-testCompile) @ java-basic ---
+16:50:45.701 [INFO]  [Measuring] > [INFO] Nothing to compile - all classes are up to date
+16:50:45.701 [INFO]  [Measuring] > [INFO] 
+16:50:45.701 [INFO]  [Measuring] > [INFO] --- surefire:2.22.2:test (default-test) @ java-basic ---
+16:50:45.701 [INFO]  [Measuring] > [INFO] 
+16:50:45.701 [INFO]  [Measuring] > [INFO] -------------------------------------------------------
+16:50:45.701 [INFO]  [Measuring] > [INFO]  T E S T S
+16:50:45.701 [INFO]  [Measuring] > [INFO] -------------------------------------------------------
+16:50:45.701 [INFO]  [Measuring] > [INFO] Running example.HandlerDivideDiffblueTest
+16:50:45.701 [INFO]  [Measuring] > [INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.038 s - in example.HandlerDivideDiffblueTest
+16:50:45.701 [INFO]  [Measuring] > [INFO] Running example.WeatherDataDiffblueTest
+16:50:45.701 [INFO]  [Measuring] > [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in example.WeatherDataDiffblueTest
+16:50:45.701 [INFO]  [Measuring] > [INFO] Running example.HandlerStringDiffblueTest
+16:50:45.701 [INFO]  [Measuring] > [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in example.HandlerStringDiffblueTest
+16:50:45.701 [INFO]  [Measuring] > [INFO] Running example.HandlerDiffblueTest
+16:50:45.701 [INFO]  [Measuring] > [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in example.HandlerDiffblueTest
+16:50:45.701 [INFO]  [Measuring] > [INFO] Running example.HandlerStreamDiffblueTest
+16:50:45.701 [INFO]  [Measuring] > [INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.136 s - in example.HandlerStreamDiffblueTest
+16:50:45.701 [INFO]  [Measuring] > [INFO] Running example.HandlerWeatherDataDiffblueTest
+16:50:45.701 [INFO]  [Measuring] > [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in example.HandlerWeatherDataDiffblueTest
+16:50:45.701 [INFO]  [Measuring] > [INFO] Running example.InputLengthExceptionDiffblueTest
+16:50:45.701 [INFO]  [Measuring] > [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in example.InputLengthExceptionDiffblueTest
+16:50:45.701 [INFO]  [Measuring] > [INFO] Running example.HandlerIntegerDiffblueTest
+16:50:45.701 [INFO]  [Measuring] > [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in example.HandlerIntegerDiffblueTest
+16:50:45.701 [INFO]  [Measuring] > [INFO] Running example.HandlerListDiffblueTest
+16:50:45.701 [INFO]  [Measuring] > [INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s - in example.HandlerListDiffblueTest
+16:50:45.701 [INFO]  [Measuring] > [INFO] 
+16:50:45.701 [INFO]  [Measuring] > [INFO] Results:
+16:50:45.701 [INFO]  [Measuring] > [INFO] 
+16:50:45.701 [INFO]  [Measuring] > [INFO] Tests run: 15, Failures: 0, Errors: 0, Skipped: 0
+16:50:45.702 [INFO]  [Measuring] > [INFO] 
+16:50:45.702 [INFO]  [Measuring] > [INFO] 
+16:50:45.702 [INFO]  [Measuring] > [INFO] --- jacoco:0.8.7:report (default-cli) @ java-basic ---
+16:50:45.702 [INFO]  [Measuring] > [INFO] Loading execution data file /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/jacoco.exec
+16:50:45.702 [INFO]  [Measuring] > [INFO] Analyzed bundle 'java-basic-function' with 9 classes
+16:50:45.702 [INFO]  [Measuring] > [INFO] ------------------------------------------------------------------------
+16:50:45.702 [INFO]  [Measuring] > [INFO] BUILD SUCCESS
+16:50:45.702 [INFO]  [Measuring] > [INFO] ------------------------------------------------------------------------
+16:50:45.702 [INFO]  [Measuring] > [INFO] Total time:  4.004 s
+16:50:45.702 [INFO]  [Measuring] > [INFO] Finished at: 2023-12-08T16:50:45Z
+16:50:45.702 [INFO]  [Measuring] > [INFO] ------------------------------------------------------------------------
+16:50:45.702 [INFO]  [Measuring] Standard error of build tool (Maven)
+16:50:45.702 [INFO]  [Measuring] > java.io.IOException: Pipe not connected
+16:50:45.702 [INFO]  [Measuring] > 	at java.base/java.io.PipedOutputStream.write(PipedOutputStream.java:120)
+16:50:45.702 [INFO]  [Measuring] > 	at example.HandlerStream.handleRequest(HandlerStream.java:33)
+16:50:45.702 [INFO]  [Measuring] > 	at example.HandlerStreamDiffblueTest.testHandleRequest2(HandlerStreamDiffblueTest.java:56)
+16:50:45.702 [INFO]  [Measuring] > 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+16:50:45.702 [INFO]  [Measuring] > 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+16:50:45.702 [INFO]  [Measuring] > 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+16:50:45.702 [INFO]  [Measuring] > 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:725)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:149)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:140)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:84)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.execution.ExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(ExecutableInvoker.java:115)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.execution.ExecutableInvoker.lambda$invoke$0(ExecutableInvoker.java:105)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:104)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:98)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:214)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:210)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:135)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:66)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+16:50:45.702 [INFO]  [Measuring] > 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+16:50:45.702 [INFO]  [Measuring] > 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:220)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.launcher.core.DefaultLauncher.lambda$execute$6(DefaultLauncher.java:188)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.launcher.core.DefaultLauncher.withInterceptedStreams(DefaultLauncher.java:202)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:181)
+16:50:45.702 [INFO]  [Measuring] > 	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:128)
+16:50:45.702 [INFO]  [Measuring] > 	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:150)
+16:50:45.702 [INFO]  [Measuring] > 	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:124)
+16:50:45.702 [INFO]  [Measuring] > 	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:384)
+16:50:45.702 [INFO]  [Measuring] > 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:345)
+16:50:45.702 [INFO]  [Measuring] > 	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:126)
+16:50:45.702 [INFO]  [Measuring] > 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:418)
+16:50:45.703 [INFO]  [Measuring] > java.io.IOException: Underlying input stream returned zero bytes
+16:50:45.703 [INFO]  [Measuring] > 	at java.base/sun.nio.cs.StreamDecoder.readBytes(StreamDecoder.java:274)
+16:50:45.703 [INFO]  [Measuring] > 	at java.base/sun.nio.cs.StreamDecoder.implRead(StreamDecoder.java:313)
+16:50:45.703 [INFO]  [Measuring] > 	at java.base/sun.nio.cs.StreamDecoder.read(StreamDecoder.java:188)
+16:50:45.703 [INFO]  [Measuring] > 	at java.base/java.io.InputStreamReader.read(InputStreamReader.java:177)
+16:50:45.703 [INFO]  [Measuring] > 	at java.base/java.io.BufferedReader.fill(BufferedReader.java:162)
+16:50:45.703 [INFO]  [Measuring] > 	at java.base/java.io.BufferedReader.read(BufferedReader.java:183)
+16:50:45.703 [INFO]  [Measuring] > 	at example.HandlerStream.handleRequest(HandlerStream.java:32)
+16:50:45.703 [INFO]  [Measuring] > 	at example.HandlerStreamDiffblueTest.testHandleRequest(HandlerStreamDiffblueTest.java:34)
+16:50:45.703 [INFO]  [Measuring] > 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+16:50:45.703 [INFO]  [Measuring] > 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+16:50:45.703 [INFO]  [Measuring] > 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+16:50:45.703 [INFO]  [Measuring] > 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:725)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:149)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:140)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:84)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.execution.ExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(ExecutableInvoker.java:115)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.execution.ExecutableInvoker.lambda$invoke$0(ExecutableInvoker.java:105)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:104)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:98)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:214)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:210)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:135)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:66)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+16:50:45.703 [INFO]  [Measuring] > 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+16:50:45.703 [INFO]  [Measuring] > 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:220)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.launcher.core.DefaultLauncher.lambda$execute$6(DefaultLauncher.java:188)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.launcher.core.DefaultLauncher.withInterceptedStreams(DefaultLauncher.java:202)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:181)
+16:50:45.703 [INFO]  [Measuring] > 	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:128)
+16:50:45.703 [INFO]  [Measuring] > 	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:150)
+16:50:45.703 [INFO]  [Measuring] > 	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:124)
+16:50:45.703 [INFO]  [Measuring] > 	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:384)
+16:50:45.703 [INFO]  [Measuring] > 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:345)
+16:50:45.703 [INFO]  [Measuring] > 	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:126)
+16:50:45.703 [INFO]  [Measuring] > 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:418)
+16:50:45.704 [INFO]  [Measuring] JaCoCo report file created in /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/.diffblue/reports/diffblue-tests-jacoco-report.xml
+16:50:45.757 [INFO]  [Reporting] Writing JSON report to /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/.diffblue/reports/report.json
+16:50:45.778 [INFO]  [Reporting] Username wasn't provided as input, checking env var DIFFBLUE_REPORT_USERNAME
+16:50:45.778 [INFO]  [Reporting] Password wasn't provided as input, checking env var DIFFBLUE_REPORT_PASSWORD
+16:50:45.778 [INFO]  [Reporting] Credentials were not provided
+16:50:46.990 [INFO]  [Reporting] 1 * Sending client request on thread main
+16:50:46.993 [INFO]  [Reporting] 1 > Accept: application/vnd.diffblue.reports.v2+json,application/json
+16:50:46.993 [INFO]  [Reporting] 1 > Content-Type: multipart/form-data
+16:50:47.089 [INFO]  [Reporting] 1 * Received server response on thread main
+16:50:47.089 [INFO]  [Reporting] 1 < 200
+16:50:47.090 [INFO]  [Reporting] 1 < Keep-Alive: timeout=60
+16:50:47.090 [INFO]  [Reporting] 1 < Transfer-Encoding: chunked
+16:50:47.090 [INFO]  [Reporting] 1 < X-Frame-Options: DENY
+16:50:47.090 [INFO]  [Reporting] 1 < Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+16:50:47.090 [INFO]  [Reporting] 1 < X-Content-Type-Options: nosniff
+16:50:47.090 [INFO]  [Reporting] 1 < Connection: keep-alive
+16:50:47.090 [INFO]  [Reporting] 1 < Expires: 0
+16:50:47.090 [INFO]  [Reporting] 1 < Pragma: no-cache
+16:50:47.090 [INFO]  [Reporting] 1 < X-XSS-Protection: 1; mode=block
+16:50:47.090 [INFO]  [Reporting] 1 < Date: Fri, 08 Dec 2023 16:50:47 GMT
+16:50:47.090 [INFO]  [Reporting] 1 < Content-Type: application/vnd.diffblue.reports.v2+json
+16:50:47.090 [INFO]  [Reporting] 1 < {"id":1000063,"name":"baseline-tests","project":"lambda.java-basic","diffblueTestCount":15,"totalLineCount":61,"coveredLineCount":61,"uploadWarnings":[],"_links":{"dashboard":{"href":"http://0.0.0.0:8080/ui/project/lambda.java-basic?runId=1000063"},"self":{"href":"http://63.34.9.190:8080/run/1000063"}}}
+16:50:47.097 [INFO]  [Reporting] Cover Reports upload was successful
+Tests Created - 15 tests created by Diffblue Cover.
+Test Coverage - 61 lines of code are covered from a total of 61.
+View this run on the dashboard at http://0.0.0.0:8080/ui/project/lambda.java-basic?runId=1000063
+16:50:47.134 [INFO]  [Reporting] 
+16:50:47.134 [INFO]  [Reporting] Log file: /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/.diffblue/log/user-20231208T164919.log
+16:50:47.135 [INFO]  [Reporting] Finished in 1m 25s

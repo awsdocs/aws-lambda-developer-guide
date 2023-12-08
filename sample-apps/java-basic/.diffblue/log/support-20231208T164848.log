@@ -1,0 +1,312 @@
+16:48:49.446 [DEBUG] [Preparing][main][c.d.cover.ui.a.x] Client heap size: 8192 MB
+16:48:49.455 [INFO]  [Preparing][main][c.d.cover.ui.a.x] Diffblue Cover 2023.11.02-f12bfac-licensed
+16:48:49.456 [INFO]  [Preparing][main][c.d.cover.ui.a.x] Running: dcover fix-build
+16:48:49.456 [INFO]  [Preparing][main][c.d.cover.ui.a.z] 
+16:48:49.456 [INFO]  [Preparing][main][c.d.cover.ui.a.z] Command: refactor
+16:48:49.457 [INFO]  [Preparing][main][c.d.cover.ui.a.z] Apply refactorings.
+16:48:49.457 [INFO]  [Preparing][main][c.d.cover.ui.a.z] 
+16:48:49.621 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule r
+16:48:49.622 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule a
+16:48:49.622 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule CommonOptionsDetector
+16:48:49.622 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:48:49.623 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule CommonOptionsDetector took 1ms
+16:48:49.624 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule a
+16:48:49.624 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule c
+16:48:49.624 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule f
+16:48:49.624 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule s
+16:48:49.624 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:48:49.628 [INFO]  [Checking][main][c.d.cover.ui.a.v] Detected Java version 17.0.8
+16:48:49.628 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule s took 4ms
+16:48:49.628 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule f
+16:48:49.628 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:48:49.629 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule f took 0ms
+16:48:49.629 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule BuildSystemOptionsDetector
+16:48:49.629 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:48:49.629 [DEBUG] [Checking][main][c.d.c.c.m.c]   Error provided for SPECIFIED_BUILD_SYSTEM_CONFIG_FILE: Not Supplied
+16:48:49.630 [DEBUG] [Checking][main][c.d.c.c.m.c]   Error provided for SPECIFIED_CLASSPATH: Not Supplied
+16:48:49.630 [DEBUG] [Checking][main][c.d.c.c.m.c]   Error provided for SPECIFIED_BUILD_PATH: Not Supplied
+16:48:49.630 [DEBUG] [Checking][main][c.d.c.c.m.c]   Error provided for SPECIFIED_COMPLIANCE_LEVEL: Not Supplied
+16:48:49.630 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule BuildSystemOptionsDetector took 0ms
+16:48:49.630 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule c
+16:48:49.630 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:48:49.638 [INFO]  [Checking][main][c.d.d.d.c] Maven Using ${maven.home} of: /opt/homebrew/Cellar/maven/3.9.5.
+16:48:49.640 [INFO]  [Checking][main][c.d.d.d.c] Maven Executing: /bin/sh -c cd /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic && /opt/homebrew/Cellar/maven/3.9.5/bin/mvn -B -version
+16:48:49.978 [INFO]  [Checking][main][c.d.d.c.a] Standard output of build tool (Maven)
+16:48:49.978 [INFO]  [Checking][main][c.d.d.c.a] > Apache Maven 3.9.5 (57804ffe001d7215b5e7bcb531cf83df38f93546)
+16:48:49.978 [INFO]  [Checking][main][c.d.d.c.a] > Maven home: /opt/homebrew/Cellar/maven/3.9.5/libexec
+16:48:49.978 [INFO]  [Checking][main][c.d.d.c.a] > Java version: 17.0.8.1, vendor: Homebrew, runtime: /opt/homebrew/Cellar/openjdk@17/17.0.8.1/libexec/openjdk.jdk/Contents/Home
+16:48:49.978 [INFO]  [Checking][main][c.d.d.c.a] > Default locale: en_GB, platform encoding: UTF-8
+16:48:49.978 [INFO]  [Checking][main][c.d.d.c.a] > OS name: "mac os x", version: "14.1.2", arch: "aarch64", family: "mac"
+16:48:50.004 [INFO]  [Checking][main][c.d.d.d.c] Maven Using ${maven.home} of: /opt/homebrew/Cellar/maven/3.9.5.
+16:48:50.004 [INFO]  [Checking][main][c.d.d.d.c] Maven Executing: /bin/sh -c cd /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic && /opt/homebrew/Cellar/maven/3.9.5/bin/mvn -B -N -D output=diffblue.effective-pom.output.xml -D maven.ext.class.path=/usr/local/bin/diffblue/cover-buildsystem-maven-spy-jar-with-dependencies.jar org.apache.maven.plugins:maven-help-plugin:3.2.0:effective-pom
+16:48:51.613 [INFO]  [Checking][main][c.d.d.c.a] Standard output of build tool (Maven)
+16:48:51.613 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] Scanning for projects...
+16:48:51.613 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] 
+16:48:51.613 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] -----------------------< com.example:java-basic >-----------------------
+16:48:51.613 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] Building java-basic-function 1.0-SNAPSHOT
+16:48:51.613 [INFO]  [Checking][main][c.d.d.c.a] > [INFO]   from pom.xml
+16:48:51.613 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] --------------------------------[ jar ]---------------------------------
+16:48:51.613 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] 
+16:48:51.613 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] --- help:3.2.0:effective-pom (default-cli) @ java-basic ---
+16:48:51.613 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] Effective-POM written to: /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/diffblue.effective-pom.output.xml
+16:48:51.613 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:48:51.613 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] BUILD SUCCESS
+16:48:51.613 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:48:51.613 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] Total time:  0.783 s
+16:48:51.613 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] Finished at: 2023-12-08T16:48:51Z
+16:48:51.613 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:48:51.656 [INFO]  [Checking][main][c.d.cover.ui.a.v] Detected build system: Maven 3.9.5
+16:48:51.656 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule c took 2026ms
+16:48:51.656 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule b
+16:48:51.656 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:48:51.658 [DEBUG] [Checking][main][c.d.c.c.m.c]   Error provided for DETECTED_BUILD_SYSTEM_GRADLE: Not Detected
+16:48:51.658 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule b took 1ms
+16:48:51.658 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule aj
+16:48:51.658 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:48:51.660 [INFO]  [Checking][main][c.d.cover.m.a.aj] Operating System: Mac OS X aarch64 14.1.2
+16:48:51.660 [INFO]  [Checking][main][c.d.cover.m.a.aj] Default charset: UTF-8
+16:48:51.660 [INFO]  [Checking][main][c.d.cover.m.a.aj] Default locale: en_GB
+16:48:51.664 [INFO]  [Checking][main][c.d.cover.m.a.aj] Default time zone: Europe/London
+16:48:51.664 [DEBUG] [Checking][main][c.d.c.c.m.c]   Error provided for DETECTED_ENVIRONMENT_CLASSPATH: Not Supplied
+16:48:51.664 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule aj took 6ms
+16:48:51.664 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule a
+16:48:51.664 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:48:51.665 [INFO]  [Checking][main][c.d.cover.ui.a.v] Selected build system: Maven
+16:48:51.665 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule a took 1ms
+16:48:51.665 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule a
+16:48:51.665 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:48:51.665 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule a took 0ms
+16:48:51.665 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule b
+16:48:51.665 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:48:51.667 [INFO]  [Checking][main][c.d.d.d.c] Maven Using ${maven.home} of: /opt/homebrew/Cellar/maven/3.9.5.
+16:48:51.668 [INFO]  [Checking][main][c.d.d.d.c] Maven Executing: /bin/sh -c cd /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic && /opt/homebrew/Cellar/maven/3.9.5/bin/mvn -B -D output=/var/folders/p2/qfsg813s0h9b5mhb_8typkwm0000gp/T/build.classpath2328009418665484478.tmp -D expression=build.classpath -D mdep.pathSeparator=#SEP# -D includeScope=test -D mdep.outputProperty=build.classpath -D maven.ext.class.path=/usr/local/bin/diffblue/cover-buildsystem-maven-spy-jar-with-dependencies.jar org.apache.maven.plugins:maven-dependency-plugin:3.3.0:build-classpath org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate
+16:48:54.155 [INFO]  [Checking][main][c.d.d.c.a] Standard output of build tool (Maven)
+16:48:54.155 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] Scanning for projects...
+16:48:54.156 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] 
+16:48:54.156 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] -----------------------< com.example:java-basic >-----------------------
+16:48:54.156 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] Building java-basic-function 1.0-SNAPSHOT
+16:48:54.156 [INFO]  [Checking][main][c.d.d.c.a] > [INFO]   from pom.xml
+16:48:54.156 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] --------------------------------[ jar ]---------------------------------
+16:48:54.156 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] 
+16:48:54.156 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] --- dependency:3.3.0:build-classpath (default-cli) @ java-basic ---
+16:48:54.156 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] Dependencies classpath:
+16:48:54.156 [INFO]  [Checking][main][c.d.d.c.a] > /Users/amishra/.m2/repository/com/amazonaws/aws-lambda-java-core/1.2.1/aws-lambda-java-core-1.2.1.jar#SEP#/Users/amishra/.m2/repository/org/slf4j/slf4j-nop/2.0.6/slf4j-nop-2.0.6.jar#SEP#/Users/amishra/.m2/repository/org/slf4j/slf4j-api/2.0.6/slf4j-api-2.0.6.jar#SEP#/Users/amishra/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.8.2/junit-jupiter-api-5.8.2.jar#SEP#/Users/amishra/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar#SEP#/Users/amishra/.m2/repository/org/junit/platform/junit-platform-commons/1.8.2/junit-platform-commons-1.8.2.jar#SEP#/Users/amishra/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar#SEP#/Users/amishra/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.8.2/junit-jupiter-engine-5.8.2.jar#SEP#/Users/amishra/.m2/repository/org/junit/platform/junit-platform-engine/1.8.2/junit-platform-engine-1.8.2.jar
+16:48:54.156 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] 
+16:48:54.156 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] -----------------------< com.example:java-basic >-----------------------
+16:48:54.156 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] Building java-basic-function 1.0-SNAPSHOT
+16:48:54.156 [INFO]  [Checking][main][c.d.d.c.a] > [INFO]   from pom.xml
+16:48:54.156 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] --------------------------------[ jar ]---------------------------------
+16:48:54.156 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] 
+16:48:54.156 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] --- help:3.2.0:evaluate (default-cli) @ java-basic ---
+16:48:54.156 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] No artifact parameter specified, using 'com.example:java-basic:jar:1.0-SNAPSHOT' as project.
+16:48:54.156 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] Result of evaluation written to: /var/folders/p2/qfsg813s0h9b5mhb_8typkwm0000gp/T/build.classpath2328009418665484478.tmp
+16:48:54.156 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:48:54.156 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] BUILD SUCCESS
+16:48:54.156 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:48:54.156 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] Total time:  1.649 s
+16:48:54.156 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] Finished at: 2023-12-08T16:48:54Z
+16:48:54.156 [INFO]  [Checking][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:48:54.177 [INFO]  [Checking][main][c.d.cover.ui.a.v] Selected classpath from build system Maven
+16:48:54.177 [INFO]  [Checking][main][c.d.cover.m.c.b] Expanded classpath: 
+/Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/test-classes
+/Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/classes (code under test)
+/Users/amishra/.m2/repository/com/amazonaws/aws-lambda-java-core/1.2.1/aws-lambda-java-core-1.2.1.jar
+/Users/amishra/.m2/repository/org/slf4j/slf4j-nop/2.0.6/slf4j-nop-2.0.6.jar
+/Users/amishra/.m2/repository/org/slf4j/slf4j-api/2.0.6/slf4j-api-2.0.6.jar
+/Users/amishra/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.8.2/junit-jupiter-api-5.8.2.jar
+/Users/amishra/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar
+/Users/amishra/.m2/repository/org/junit/platform/junit-platform-commons/1.8.2/junit-platform-commons-1.8.2.jar
+/Users/amishra/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar
+/Users/amishra/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.8.2/junit-jupiter-engine-5.8.2.jar
+/Users/amishra/.m2/repository/org/junit/platform/junit-platform-engine/1.8.2/junit-platform-engine-1.8.2.jar
+16:48:54.177 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule b took 2511ms
+16:48:54.177 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule r
+16:48:54.177 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:48:54.189 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule r took 11ms
+16:48:54.189 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule ae
+16:48:54.189 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:48:54.189 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule ae took 0ms
+16:48:54.189 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule t
+16:48:54.189 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:48:54.191 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule t took 2ms
+16:48:54.191 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule v
+16:48:54.191 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:48:54.192 [INFO]  [Checking][main][c.d.cover.ui.a.v] Detected JVM architecture: 64-Bit
+16:48:54.192 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule v took 0ms
+16:48:54.192 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule RefactorOptionsDetector
+16:48:54.192 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:48:54.192 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule RefactorOptionsDetector took 0ms
+16:48:54.192 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule ah
+16:48:54.192 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:48:54.192 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule ah took 0ms
+16:48:54.192 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule c
+16:48:54.192 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:48:54.194 [INFO]  [Checking][main][c.d.cover.ui.a.v] Selected Java language compliance level: 11
+16:48:54.195 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule c took 2ms
+16:48:54.195 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule h
+16:48:54.195 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:48:54.195 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule h took 0ms
+16:48:54.195 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule l
+16:48:54.195 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule did not fire
+16:48:54.195 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule l took 0ms
+16:48:54.195 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule c
+16:48:54.195 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule did not fire
+16:48:54.195 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule c took 0ms
+16:48:54.195 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule b
+16:48:54.195 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:48:54.196 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule b took 1ms
+16:48:54.197 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule m
+16:48:54.197 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:48:54.197 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule m took 0ms
+16:48:54.197 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule a
+16:48:54.197 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule did not fire
+16:48:54.197 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule a took 0ms
+16:48:54.197 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule n
+16:48:54.197 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule did not fire
+16:48:54.197 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule n took 0ms
+16:48:54.197 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule p
+16:48:54.197 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule did not fire
+16:48:54.197 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule p took 0ms
+16:48:54.197 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule CliBuildSystemRecommender
+16:48:54.197 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule fired
+16:48:54.197 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule CliBuildSystemRecommender took 0ms
+16:48:54.197 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule v
+16:48:54.197 [DEBUG] [Checking][main][c.d.c.c.m.c]   Rule did not fire
+16:48:54.197 [DEBUG] [Checking][main][c.d.c.c.m.c] Processing rule v took 0ms
+16:48:54.204 [INFO]  [Checking][main][c.d.cover.ui.f] 
+16:48:54.204 [INFO]  [Checking][main][c.d.cover.ui.f] Environment summary:
+16:48:54.204 [INFO]  [Checking][main][c.d.cover.ui.f] --------------------
+16:48:54.206 [INFO]  [Checking][main][c.d.cover.ui.f] Java version                  17.0.8                        SUCCESS        
+16:48:54.206 [INFO]  [Checking][main][c.d.cover.ui.f] Build system                  Maven                         SUCCESS        
+16:48:54.206 [INFO]  [Checking][main][c.d.cover.ui.f] 
+16:48:54.206 [INFO]  [Checking][main][c.d.cover.ui.f] Environment check status: SUCCESS
+16:48:54.207 [INFO]  [Refactoring][main][c.d.c.r.a.a] Applying refactorings from configuration file /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/.diffblue/refactorings.yml
+16:48:54.239 [INFO]  [Refactoring][main][c.d.d.d.c] Maven Using ${maven.home} of: /opt/homebrew/Cellar/maven/3.9.5.
+16:48:54.239 [INFO]  [Refactoring][main][c.d.d.d.c] Maven Executing: /bin/sh -c cd /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic && /opt/homebrew/Cellar/maven/3.9.5/bin/mvn -B -D file=/var/folders/p2/qfsg813s0h9b5mhb_8typkwm0000gp/T/cover-refactoring-recipes-1000.0.0.jar -D groupId=com.diffblue.cover -D artifactId=cover-refactoring-recipes -D packaging=jar -D version=1000.0.0 -D maven.ext.class.path=/usr/local/bin/diffblue/cover-buildsystem-maven-spy-jar-with-dependencies.jar install:install-file
+16:48:56.248 [INFO]  [Refactoring][main][c.d.d.c.a] Standard output of build tool (Maven)
+16:48:56.248 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Scanning for projects...
+16:48:56.249 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] 
+16:48:56.249 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] -----------------------< com.example:java-basic >-----------------------
+16:48:56.249 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Building java-basic-function 1.0-SNAPSHOT
+16:48:56.249 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO]   from pom.xml
+16:48:56.249 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] --------------------------------[ jar ]---------------------------------
+16:48:56.249 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] 
+16:48:56.249 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] --- install:3.1.1:install-file (default-cli) @ java-basic ---
+16:48:56.249 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] pom.xml not found in cover-refactoring-recipes-1000.0.0.jar
+16:48:56.249 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Installing /var/folders/p2/qfsg813s0h9b5mhb_8typkwm0000gp/T/cover-refactoring-recipes-1000.0.0.jar to /Users/amishra/.m2/repository/com/diffblue/cover/cover-refactoring-recipes/1000.0.0/cover-refactoring-recipes-1000.0.0.jar
+16:48:56.249 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:48:56.249 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] BUILD SUCCESS
+16:48:56.249 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:48:56.249 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Total time:  0.357 s
+16:48:56.249 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Finished at: 2023-12-08T16:48:55Z
+16:48:56.249 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:48:56.257 [INFO]  [Refactoring][main][c.d.d.d.c] Maven Using ${maven.home} of: /opt/homebrew/Cellar/maven/3.9.5.
+16:48:56.258 [INFO]  [Refactoring][main][c.d.d.d.c] Maven Executing: /bin/sh -c cd /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic && /opt/homebrew/Cellar/maven/3.9.5/bin/mvn -B -D file=/var/folders/p2/qfsg813s0h9b5mhb_8typkwm0000gp/T/rewrite-maven-plugin-4.42.0.jar -D groupId=org.openrewrite.maven -D artifactId=rewrite-maven-plugin -D packaging=jar -D version=4.42.0 -D maven.ext.class.path=/usr/local/bin/diffblue/cover-buildsystem-maven-spy-jar-with-dependencies.jar install:install-file
+16:48:58.274 [INFO]  [Refactoring][main][c.d.d.c.a] Standard output of build tool (Maven)
+16:48:58.275 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Scanning for projects...
+16:48:58.275 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] 
+16:48:58.275 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] -----------------------< com.example:java-basic >-----------------------
+16:48:58.275 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Building java-basic-function 1.0-SNAPSHOT
+16:48:58.275 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO]   from pom.xml
+16:48:58.275 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] --------------------------------[ jar ]---------------------------------
+16:48:58.275 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] 
+16:48:58.275 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] --- install:3.1.1:install-file (default-cli) @ java-basic ---
+16:48:58.276 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Installing /var/folders/p2/qfsg813s0h9b5mhb_8typkwm0000gp/T/rewrite-maven-plugin-4.42.0.jar to /Users/amishra/.m2/repository/org/openrewrite/maven/rewrite-maven-plugin/4.42.0/rewrite-maven-plugin-4.42.0.jar
+16:48:58.276 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Installing /var/folders/p2/qfsg813s0h9b5mhb_8typkwm0000gp/T/rewrite-maven-plugin-4.42.03250688560934906256.pom to /Users/amishra/.m2/repository/org/openrewrite/maven/rewrite-maven-plugin/4.42.0/rewrite-maven-plugin-4.42.0.pom
+16:48:58.276 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:48:58.276 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] BUILD SUCCESS
+16:48:58.276 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:48:58.276 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Total time:  0.393 s
+16:48:58.276 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Finished at: 2023-12-08T16:48:57Z
+16:48:58.276 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:48:58.283 [INFO]  [Refactoring][main][c.d.d.d.c] Maven Using ${maven.home} of: /opt/homebrew/Cellar/maven/3.9.5.
+16:48:58.285 [INFO]  [Refactoring][main][c.d.d.d.c] Maven Executing: /bin/sh -c cd /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic && /opt/homebrew/Cellar/maven/3.9.5/bin/mvn -B -D file=/var/folders/p2/qfsg813s0h9b5mhb_8typkwm0000gp/T/rewrite-maven-plugin-4.42.0.pom -D groupId=org.openrewrite.maven -D artifactId=rewrite-maven-plugin -D packaging=pom -D version=4.42.0 -D maven.ext.class.path=/usr/local/bin/diffblue/cover-buildsystem-maven-spy-jar-with-dependencies.jar install:install-file
+16:49:00.304 [INFO]  [Refactoring][main][c.d.d.c.a] Standard output of build tool (Maven)
+16:49:00.305 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Scanning for projects...
+16:49:00.305 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] 
+16:49:00.305 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] -----------------------< com.example:java-basic >-----------------------
+16:49:00.306 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Building java-basic-function 1.0-SNAPSHOT
+16:49:00.306 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO]   from pom.xml
+16:49:00.306 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] --------------------------------[ jar ]---------------------------------
+16:49:00.306 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] 
+16:49:00.306 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] --- install:3.1.1:install-file (default-cli) @ java-basic ---
+16:49:00.306 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Installing /var/folders/p2/qfsg813s0h9b5mhb_8typkwm0000gp/T/rewrite-maven-plugin-4.42.0.pom to /Users/amishra/.m2/repository/org/openrewrite/maven/rewrite-maven-plugin/4.42.0/rewrite-maven-plugin-4.42.0.pom
+16:49:00.306 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:49:00.307 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] BUILD SUCCESS
+16:49:00.307 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:49:00.307 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Total time:  0.346 s
+16:49:00.307 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Finished at: 2023-12-08T16:48:59Z
+16:49:00.307 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:49:00.308 [INFO]  [Refactoring][main][c.d.d.d.c] Maven Using ${maven.home} of: /opt/homebrew/Cellar/maven/3.9.5.
+16:49:00.309 [INFO]  [Refactoring][main][c.d.d.d.c] Maven Executing: /bin/sh -c cd /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic && /opt/homebrew/Cellar/maven/3.9.5/bin/mvn -B -D rewrite.activeRecipes=com.diffblue.cover.refactoring.Recipe -D rewrite.activeStyles=org.openrewrite.java.Autodetect -D rewrite.configLocation=/Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/.diffblue/refactorings.yml -D maven.ext.class.path=/usr/local/bin/diffblue/cover-buildsystem-maven-spy-jar-with-dependencies.jar org.openrewrite.maven:rewrite-maven-plugin:4.42.0:run
+16:49:07.348 [INFO]  [Refactoring][main][c.d.d.c.a] Standard output of build tool (Maven)
+16:49:07.349 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Scanning for projects...
+16:49:07.349 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] 
+16:49:07.349 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] -----------------------< com.example:java-basic >-----------------------
+16:49:07.349 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Building java-basic-function 1.0-SNAPSHOT
+16:49:07.350 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO]   from pom.xml
+16:49:07.350 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] --------------------------------[ jar ]---------------------------------
+16:49:07.350 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] 
+16:49:07.350 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] >>> rewrite:4.42.0:run (default-cli) > compile @ java-basic >>>
+16:49:07.350 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] 
+16:49:07.350 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] --- resources:3.3.1:resources (default-resources) @ java-basic ---
+16:49:07.350 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] skip non existing resourceDirectory /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/src/main/resources
+16:49:07.350 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] 
+16:49:07.351 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] --- compiler:3.8.1:compile (default-compile) @ java-basic ---
+16:49:07.351 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Nothing to compile - all classes are up to date
+16:49:07.351 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] 
+16:49:07.351 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] <<< rewrite:4.42.0:run (default-cli) < compile @ java-basic <<<
+16:49:07.351 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] 
+16:49:07.351 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] 
+16:49:07.351 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] --- rewrite:4.42.0:run (default-cli) @ java-basic ---
+16:49:07.351 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Using active recipe(s) [com.diffblue.cover.refactoring.Recipe]
+16:49:07.351 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Using active styles(s) [org.openrewrite.java.Autodetect]
+16:49:07.352 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Validating active recipes...
+16:49:07.352 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Project [java-basic-function] Resolving Poms...
+16:49:07.352 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Project [java-basic-function] Parsing source files
+16:49:07.352 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Running recipe(s)...
+16:49:07.352 [INFO]  [Refactoring][main][c.d.d.c.a] > [WARNING] Changes have been made to sample-apps/java-basic/pom.xml by:
+16:49:07.352 [INFO]  [Refactoring][main][c.d.d.c.a] > [WARNING]     com.diffblue.cover.refactoring.Recipe
+16:49:07.352 [INFO]  [Refactoring][main][c.d.d.c.a] > [WARNING]         org.openrewrite.maven.AddDependency: {groupId=org.mockito, artifactId=mockito-core, version=5.4.0, onlyIfUsing=*..*}
+16:49:07.352 [INFO]  [Refactoring][main][c.d.d.c.a] > [WARNING] Please review and commit the results.
+16:49:07.352 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:49:07.352 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] BUILD SUCCESS
+16:49:07.352 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:49:07.352 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Total time:  5.527 s
+16:49:07.353 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Finished at: 2023-12-08T16:49:06Z
+16:49:07.353 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:49:07.359 [INFO]  [Refactoring][main][c.d.c.r.Refactoring] Refreshing project state
+16:49:07.360 [INFO]  [Refactoring][main][c.d.c.r.Refactoring] Validating refactorings -- this may take a few moments...
+16:49:07.360 [INFO]  [Refactoring][main][c.d.d.d.c] Maven Using ${maven.home} of: /opt/homebrew/Cellar/maven/3.9.5.
+16:49:07.361 [INFO]  [Refactoring][main][c.d.d.d.c] Maven Executing: /bin/sh -c cd /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic && /opt/homebrew/Cellar/maven/3.9.5/bin/mvn -B -D maven.ext.class.path=/usr/local/bin/diffblue/cover-buildsystem-maven-spy-jar-with-dependencies.jar test-compile
+16:49:09.114 [INFO]  [Refactoring][main][c.d.d.c.a] Standard output of build tool (Maven)
+16:49:09.117 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Scanning for projects...
+16:49:09.117 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] 
+16:49:09.117 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] -----------------------< com.example:java-basic >-----------------------
+16:49:09.117 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Building java-basic-function 1.0-SNAPSHOT
+16:49:09.117 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO]   from pom.xml
+16:49:09.117 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] --------------------------------[ jar ]---------------------------------
+16:49:09.117 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] 
+16:49:09.117 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] --- resources:3.3.1:resources (default-resources) @ java-basic ---
+16:49:09.117 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] skip non existing resourceDirectory /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/src/main/resources
+16:49:09.117 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] 
+16:49:09.117 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] --- compiler:3.8.1:compile (default-compile) @ java-basic ---
+16:49:09.117 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Nothing to compile - all classes are up to date
+16:49:09.117 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] 
+16:49:09.117 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] --- resources:3.3.1:testResources (default-testResources) @ java-basic ---
+16:49:09.117 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Copying 1 resource from src/test/resources to target/test-classes
+16:49:09.117 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] 
+16:49:09.117 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] --- compiler:3.8.1:testCompile (default-testCompile) @ java-basic ---
+16:49:09.117 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Nothing to compile - all classes are up to date
+16:49:09.117 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:49:09.117 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] BUILD SUCCESS
+16:49:09.117 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:49:09.117 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Total time:  0.804 s
+16:49:09.117 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] Finished at: 2023-12-08T16:49:09Z
+16:49:09.117 [INFO]  [Refactoring][main][c.d.d.c.a] > [INFO] ------------------------------------------------------------------------
+16:49:09.117 [INFO]  [Refactoring][main][c.d.c.r.Refactoring] Modifications applied:
+16:49:09.118 [INFO]  [Refactoring][main][c.d.c.r.Refactoring]   sample-apps/java-basic/pom.xml
+16:49:09.118 [INFO]  [Refactoring][main][c.d.c.r.Refactoring] Refactorings completed
+16:49:09.118 [INFO]  [Reporting][main][c.d.cover.ui.a.x] 
+16:49:09.119 [INFO]  [Reporting][main][c.d.cover.ui.a.x] Log file: /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/.diffblue/log/user-20231208T164848.log
+16:49:09.119 [INFO]  [Reporting][main][c.d.cover.ui.a.x] Finished in 20s

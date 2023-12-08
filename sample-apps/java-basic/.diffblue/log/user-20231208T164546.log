@@ -1,0 +1,287 @@
+16:45:46.965 [INFO]  [Preparing] Diffblue Cover 2023.11.02-f12bfac-licensed
+16:45:46.966 [INFO]  [Preparing] Running: dcover coverage-reports
+16:45:46.966 [INFO]  [Preparing] 
+16:45:46.966 [INFO]  [Preparing] Command: coverage-reports
+16:45:46.967 [INFO]  [Preparing] Generate coverage reports for Cover Reports.
+16:45:46.967 [INFO]  [Preparing] 
+16:45:47.142 [INFO]  [Checking] Detected Java version 17.0.8
+16:45:47.152 [INFO]  [Checking] Maven Using ${maven.home} of: /opt/homebrew/Cellar/maven/3.9.5.
+16:45:47.154 [INFO]  [Checking] Maven Executing: /bin/sh -c cd /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic && /opt/homebrew/Cellar/maven/3.9.5/bin/mvn -B -version
+16:45:47.479 [INFO]  [Checking] Standard output of build tool (Maven)
+16:45:47.479 [INFO]  [Checking] > Apache Maven 3.9.5 (57804ffe001d7215b5e7bcb531cf83df38f93546)
+16:45:47.479 [INFO]  [Checking] > Maven home: /opt/homebrew/Cellar/maven/3.9.5/libexec
+16:45:47.479 [INFO]  [Checking] > Java version: 17.0.8.1, vendor: Homebrew, runtime: /opt/homebrew/Cellar/openjdk@17/17.0.8.1/libexec/openjdk.jdk/Contents/Home
+16:45:47.479 [INFO]  [Checking] > Default locale: en_GB, platform encoding: UTF-8
+16:45:47.479 [INFO]  [Checking] > OS name: "mac os x", version: "14.1.2", arch: "aarch64", family: "mac"
+16:45:47.507 [INFO]  [Checking] Maven Using ${maven.home} of: /opt/homebrew/Cellar/maven/3.9.5.
+16:45:47.508 [INFO]  [Checking] Maven Executing: /bin/sh -c cd /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic && /opt/homebrew/Cellar/maven/3.9.5/bin/mvn -B -N -D output=diffblue.effective-pom.output.xml -D maven.ext.class.path=/usr/local/bin/diffblue/cover-buildsystem-maven-spy-jar-with-dependencies.jar org.apache.maven.plugins:maven-help-plugin:3.2.0:effective-pom
+16:45:49.183 [INFO]  [Checking] Standard output of build tool (Maven)
+16:45:49.183 [INFO]  [Checking] > [INFO] Scanning for projects...
+16:45:49.183 [INFO]  [Checking] > [INFO] 
+16:45:49.183 [INFO]  [Checking] > [INFO] -----------------------< com.example:java-basic >-----------------------
+16:45:49.184 [INFO]  [Checking] > [INFO] Building java-basic-function 1.0-SNAPSHOT
+16:45:49.184 [INFO]  [Checking] > [INFO]   from pom.xml
+16:45:49.184 [INFO]  [Checking] > [INFO] --------------------------------[ jar ]---------------------------------
+16:45:49.184 [INFO]  [Checking] > [INFO] 
+16:45:49.184 [INFO]  [Checking] > [INFO] --- help:3.2.0:effective-pom (default-cli) @ java-basic ---
+16:45:49.184 [INFO]  [Checking] > [INFO] Effective-POM written to: /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/diffblue.effective-pom.output.xml
+16:45:49.184 [INFO]  [Checking] > [INFO] ------------------------------------------------------------------------
+16:45:49.184 [INFO]  [Checking] > [INFO] BUILD SUCCESS
+16:45:49.184 [INFO]  [Checking] > [INFO] ------------------------------------------------------------------------
+16:45:49.184 [INFO]  [Checking] > [INFO] Total time:  0.846 s
+16:45:49.184 [INFO]  [Checking] > [INFO] Finished at: 2023-12-08T16:45:49Z
+16:45:49.184 [INFO]  [Checking] > [INFO] ------------------------------------------------------------------------
+16:45:49.224 [INFO]  [Checking] Detected build system: Maven 3.9.5
+16:45:49.229 [INFO]  [Checking] Operating System: Mac OS X aarch64 14.1.2
+16:45:49.229 [INFO]  [Checking] Default charset: UTF-8
+16:45:49.229 [INFO]  [Checking] Default locale: en_GB
+16:45:49.232 [INFO]  [Checking] Default time zone: Europe/London
+16:45:49.234 [INFO]  [Checking] Selected build system: Maven
+16:45:49.236 [INFO]  [Checking] Maven Using ${maven.home} of: /opt/homebrew/Cellar/maven/3.9.5.
+16:45:49.236 [INFO]  [Checking] Maven Executing: /bin/sh -c cd /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic && /opt/homebrew/Cellar/maven/3.9.5/bin/mvn -B -D output=/var/folders/p2/qfsg813s0h9b5mhb_8typkwm0000gp/T/build.classpath677309927988611401.tmp -D expression=build.classpath -D mdep.pathSeparator=#SEP# -D includeScope=test -D mdep.outputProperty=build.classpath -D maven.ext.class.path=/usr/local/bin/diffblue/cover-buildsystem-maven-spy-jar-with-dependencies.jar org.apache.maven.plugins:maven-dependency-plugin:3.3.0:build-classpath org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate
+16:45:51.786 [INFO]  [Checking] Standard output of build tool (Maven)
+16:45:51.786 [INFO]  [Checking] > [INFO] Scanning for projects...
+16:45:51.786 [INFO]  [Checking] > [INFO] 
+16:45:51.786 [INFO]  [Checking] > [INFO] -----------------------< com.example:java-basic >-----------------------
+16:45:51.786 [INFO]  [Checking] > [INFO] Building java-basic-function 1.0-SNAPSHOT
+16:45:51.786 [INFO]  [Checking] > [INFO]   from pom.xml
+16:45:51.786 [INFO]  [Checking] > [INFO] --------------------------------[ jar ]---------------------------------
+16:45:51.786 [INFO]  [Checking] > [INFO] 
+16:45:51.786 [INFO]  [Checking] > [INFO] --- dependency:3.3.0:build-classpath (default-cli) @ java-basic ---
+16:45:51.786 [INFO]  [Checking] > [INFO] Dependencies classpath:
+16:45:51.786 [INFO]  [Checking] > /Users/amishra/.m2/repository/com/amazonaws/aws-lambda-java-core/1.2.1/aws-lambda-java-core-1.2.1.jar#SEP#/Users/amishra/.m2/repository/org/slf4j/slf4j-nop/2.0.6/slf4j-nop-2.0.6.jar#SEP#/Users/amishra/.m2/repository/org/slf4j/slf4j-api/2.0.6/slf4j-api-2.0.6.jar#SEP#/Users/amishra/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.8.2/junit-jupiter-api-5.8.2.jar#SEP#/Users/amishra/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar#SEP#/Users/amishra/.m2/repository/org/junit/platform/junit-platform-commons/1.8.2/junit-platform-commons-1.8.2.jar#SEP#/Users/amishra/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar#SEP#/Users/amishra/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.8.2/junit-jupiter-engine-5.8.2.jar#SEP#/Users/amishra/.m2/repository/org/junit/platform/junit-platform-engine/1.8.2/junit-platform-engine-1.8.2.jar
+16:45:51.786 [INFO]  [Checking] > [INFO] 
+16:45:51.786 [INFO]  [Checking] > [INFO] -----------------------< com.example:java-basic >-----------------------
+16:45:51.786 [INFO]  [Checking] > [INFO] Building java-basic-function 1.0-SNAPSHOT
+16:45:51.786 [INFO]  [Checking] > [INFO]   from pom.xml
+16:45:51.786 [INFO]  [Checking] > [INFO] --------------------------------[ jar ]---------------------------------
+16:45:51.786 [INFO]  [Checking] > [INFO] 
+16:45:51.786 [INFO]  [Checking] > [INFO] --- help:3.2.0:evaluate (default-cli) @ java-basic ---
+16:45:51.786 [INFO]  [Checking] > [INFO] No artifact parameter specified, using 'com.example:java-basic:jar:1.0-SNAPSHOT' as project.
+16:45:51.786 [INFO]  [Checking] > [INFO] Result of evaluation written to: /var/folders/p2/qfsg813s0h9b5mhb_8typkwm0000gp/T/build.classpath677309927988611401.tmp
+16:45:51.786 [INFO]  [Checking] > [INFO] ------------------------------------------------------------------------
+16:45:51.786 [INFO]  [Checking] > [INFO] BUILD SUCCESS
+16:45:51.786 [INFO]  [Checking] > [INFO] ------------------------------------------------------------------------
+16:45:51.786 [INFO]  [Checking] > [INFO] Total time:  1.687 s
+16:45:51.786 [INFO]  [Checking] > [INFO] Finished at: 2023-12-08T16:45:51Z
+16:45:51.786 [INFO]  [Checking] > [INFO] ------------------------------------------------------------------------
+16:45:51.814 [INFO]  [Checking] Selected classpath from build system Maven
+16:45:51.814 [INFO]  [Checking] Expanded classpath: 
+/Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/test-classes
+/Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/classes (code under test)
+/Users/amishra/.m2/repository/com/amazonaws/aws-lambda-java-core/1.2.1/aws-lambda-java-core-1.2.1.jar
+/Users/amishra/.m2/repository/org/slf4j/slf4j-nop/2.0.6/slf4j-nop-2.0.6.jar
+/Users/amishra/.m2/repository/org/slf4j/slf4j-api/2.0.6/slf4j-api-2.0.6.jar
+/Users/amishra/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.8.2/junit-jupiter-api-5.8.2.jar
+/Users/amishra/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar
+/Users/amishra/.m2/repository/org/junit/platform/junit-platform-commons/1.8.2/junit-platform-commons-1.8.2.jar
+/Users/amishra/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar
+/Users/amishra/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.8.2/junit-jupiter-engine-5.8.2.jar
+/Users/amishra/.m2/repository/org/junit/platform/junit-platform-engine/1.8.2/junit-platform-engine-1.8.2.jar
+16:45:51.834 [INFO]  [Checking] Detected JVM architecture: 64-Bit
+16:45:51.953 [INFO]  [Checking] Detected test framework: JUnit Jupiter 5.8.2
+16:45:51.963 [INFO]  [Checking] Detected JUnit Jupiter version 5.8.2
+16:45:51.989 [INFO]  [Checking] Selected test output directory: /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/src/test/java
+16:45:54.254 [INFO]  [Reporting] Selected test framework: JUnit Jupiter
+16:45:54.265 [INFO]  [Reporting] Maven Using ${maven.home} of: /opt/homebrew/Cellar/maven/3.9.5.
+16:45:54.265 [INFO]  [Reporting] Maven Executing: /bin/sh -c cd /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic && /opt/homebrew/Cellar/maven/3.9.5/bin/mvn -B -D test=DiffblueDummyCoverageJupiterDiffblueTest -D surefire.failIfNoSpecifiedTests=false -D maven.test.failure.ignore=true -D failIfNoTests=false -D jacoco.skip=false -D maven.ext.class.path=/usr/local/bin/diffblue/cover-buildsystem-maven-spy-jar-with-dependencies.jar org.jacoco:jacoco-maven-plugin:0.8.7:prepare-agent test org.jacoco:jacoco-maven-plugin:0.8.7:report
+16:45:59.292 [INFO]  [Reporting] Standard output of build tool (Maven)
+16:45:59.292 [INFO]  [Reporting] > [INFO] Scanning for projects...
+16:45:59.292 [INFO]  [Reporting] > [INFO] 
+16:45:59.292 [INFO]  [Reporting] > [INFO] -----------------------< com.example:java-basic >-----------------------
+16:45:59.293 [INFO]  [Reporting] > [INFO] Building java-basic-function 1.0-SNAPSHOT
+16:45:59.293 [INFO]  [Reporting] > [INFO]   from pom.xml
+16:45:59.293 [INFO]  [Reporting] > [INFO] --------------------------------[ jar ]---------------------------------
+16:45:59.293 [INFO]  [Reporting] > [INFO] 
+16:45:59.293 [INFO]  [Reporting] > [INFO] --- jacoco:0.8.7:prepare-agent (default-cli) @ java-basic ---
+16:45:59.293 [INFO]  [Reporting] > [INFO] argLine set to -javaagent:/Users/amishra/.m2/repository/org/jacoco/org.jacoco.agent/0.8.7/org.jacoco.agent-0.8.7-runtime.jar=destfile=/Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/jacoco.exec
+16:45:59.293 [INFO]  [Reporting] > [INFO] 
+16:45:59.293 [INFO]  [Reporting] > [INFO] --- resources:3.3.1:resources (default-resources) @ java-basic ---
+16:45:59.293 [INFO]  [Reporting] > [INFO] skip non existing resourceDirectory /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/src/main/resources
+16:45:59.293 [INFO]  [Reporting] > [INFO] 
+16:45:59.294 [INFO]  [Reporting] > [INFO] --- compiler:3.8.1:compile (default-compile) @ java-basic ---
+16:45:59.294 [INFO]  [Reporting] > [INFO] Changes detected - recompiling the module!
+16:45:59.294 [INFO]  [Reporting] > [INFO] Compiling 10 source files to /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/classes
+16:45:59.294 [INFO]  [Reporting] > [INFO] 
+16:45:59.294 [INFO]  [Reporting] > [INFO] --- resources:3.3.1:testResources (default-testResources) @ java-basic ---
+16:45:59.294 [INFO]  [Reporting] > [INFO] Copying 1 resource from src/test/resources to target/test-classes
+16:45:59.294 [INFO]  [Reporting] > [INFO] 
+16:45:59.294 [INFO]  [Reporting] > [INFO] --- compiler:3.8.1:testCompile (default-testCompile) @ java-basic ---
+16:45:59.294 [INFO]  [Reporting] > [INFO] Changes detected - recompiling the module!
+16:45:59.294 [INFO]  [Reporting] > [INFO] Compiling 5 source files to /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/test-classes
+16:45:59.294 [INFO]  [Reporting] > [INFO] 
+16:45:59.294 [INFO]  [Reporting] > [INFO] --- surefire:2.22.2:test (default-test) @ java-basic ---
+16:45:59.294 [INFO]  [Reporting] > [INFO] 
+16:45:59.294 [INFO]  [Reporting] > [INFO] -------------------------------------------------------
+16:45:59.294 [INFO]  [Reporting] > [INFO]  T E S T S
+16:45:59.294 [INFO]  [Reporting] > [INFO] -------------------------------------------------------
+16:45:59.294 [INFO]  [Reporting] > [INFO] Running DiffblueDummyCoverageJupiterDiffblueTest
+16:45:59.294 [INFO]  [Reporting] > [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.02 s - in DiffblueDummyCoverageJupiterDiffblueTest
+16:45:59.294 [INFO]  [Reporting] > [INFO] 
+16:45:59.294 [INFO]  [Reporting] > [INFO] Results:
+16:45:59.294 [INFO]  [Reporting] > [INFO] 
+16:45:59.294 [INFO]  [Reporting] > [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+16:45:59.294 [INFO]  [Reporting] > [INFO] 
+16:45:59.294 [INFO]  [Reporting] > [INFO] 
+16:45:59.294 [INFO]  [Reporting] > [INFO] --- jacoco:0.8.7:report (default-cli) @ java-basic ---
+16:45:59.294 [INFO]  [Reporting] > [INFO] Loading execution data file /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/jacoco.exec
+16:45:59.294 [INFO]  [Reporting] > [INFO] Analyzed bundle 'java-basic-function' with 10 classes
+16:45:59.294 [INFO]  [Reporting] > [INFO] ------------------------------------------------------------------------
+16:45:59.294 [INFO]  [Reporting] > [INFO] BUILD SUCCESS
+16:45:59.294 [INFO]  [Reporting] > [INFO] ------------------------------------------------------------------------
+16:45:59.294 [INFO]  [Reporting] > [INFO] Total time:  3.265 s
+16:45:59.294 [INFO]  [Reporting] > [INFO] Finished at: 2023-12-08T16:45:58Z
+16:45:59.294 [INFO]  [Reporting] > [INFO] ------------------------------------------------------------------------
+16:45:59.314 [INFO]  [Reporting] Maven Using ${maven.home} of: /opt/homebrew/Cellar/maven/3.9.5.
+16:45:59.314 [INFO]  [Reporting] Maven Executing: /bin/sh -c cd /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic && /opt/homebrew/Cellar/maven/3.9.5/bin/mvn -B -D test=!*DiffblueTest,**/DiffblueDummy* -D surefire.failIfNoSpecifiedTests=false -D maven.test.failure.ignore=true -D failIfNoTests=false -D jacoco.skip=false -D maven.ext.class.path=/usr/local/bin/diffblue/cover-buildsystem-maven-spy-jar-with-dependencies.jar org.jacoco:jacoco-maven-plugin:0.8.7:prepare-agent test org.jacoco:jacoco-maven-plugin:0.8.7:report
+16:46:04.337 [INFO]  [Reporting] Standard output of build tool (Maven)
+16:46:04.338 [INFO]  [Reporting] > [INFO] Scanning for projects...
+16:46:04.338 [INFO]  [Reporting] > [INFO] 
+16:46:04.338 [INFO]  [Reporting] > [INFO] -----------------------< com.example:java-basic >-----------------------
+16:46:04.338 [INFO]  [Reporting] > [INFO] Building java-basic-function 1.0-SNAPSHOT
+16:46:04.339 [INFO]  [Reporting] > [INFO]   from pom.xml
+16:46:04.339 [INFO]  [Reporting] > [INFO] --------------------------------[ jar ]---------------------------------
+16:46:04.339 [INFO]  [Reporting] > [INFO] 
+16:46:04.339 [INFO]  [Reporting] > [INFO] --- jacoco:0.8.7:prepare-agent (default-cli) @ java-basic ---
+16:46:04.339 [INFO]  [Reporting] > [INFO] argLine set to -javaagent:/Users/amishra/.m2/repository/org/jacoco/org.jacoco.agent/0.8.7/org.jacoco.agent-0.8.7-runtime.jar=destfile=/Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/jacoco.exec
+16:46:04.339 [INFO]  [Reporting] > [INFO] 
+16:46:04.339 [INFO]  [Reporting] > [INFO] --- resources:3.3.1:resources (default-resources) @ java-basic ---
+16:46:04.339 [INFO]  [Reporting] > [INFO] skip non existing resourceDirectory /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/src/main/resources
+16:46:04.339 [INFO]  [Reporting] > [INFO] 
+16:46:04.339 [INFO]  [Reporting] > [INFO] --- compiler:3.8.1:compile (default-compile) @ java-basic ---
+16:46:04.339 [INFO]  [Reporting] > [INFO] Changes detected - recompiling the module!
+16:46:04.339 [INFO]  [Reporting] > [INFO] Compiling 10 source files to /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/classes
+16:46:04.339 [INFO]  [Reporting] > [INFO] 
+16:46:04.339 [INFO]  [Reporting] > [INFO] --- resources:3.3.1:testResources (default-testResources) @ java-basic ---
+16:46:04.339 [INFO]  [Reporting] > [INFO] Copying 1 resource from src/test/resources to target/test-classes
+16:46:04.340 [INFO]  [Reporting] > [INFO] 
+16:46:04.340 [INFO]  [Reporting] > [INFO] --- compiler:3.8.1:testCompile (default-testCompile) @ java-basic ---
+16:46:04.340 [INFO]  [Reporting] > [INFO] Changes detected - recompiling the module!
+16:46:04.340 [INFO]  [Reporting] > [INFO] Compiling 5 source files to /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/test-classes
+16:46:04.340 [INFO]  [Reporting] > [INFO] 
+16:46:04.340 [INFO]  [Reporting] > [INFO] --- surefire:2.22.2:test (default-test) @ java-basic ---
+16:46:04.340 [INFO]  [Reporting] > [INFO] 
+16:46:04.340 [INFO]  [Reporting] > [INFO] -------------------------------------------------------
+16:46:04.340 [INFO]  [Reporting] > [INFO]  T E S T S
+16:46:04.340 [INFO]  [Reporting] > [INFO] -------------------------------------------------------
+16:46:04.340 [INFO]  [Reporting] > [INFO] Running DiffblueDummyCoverageJupiterTest
+16:46:04.340 [INFO]  [Reporting] > [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s - in DiffblueDummyCoverageJupiterTest
+16:46:04.340 [INFO]  [Reporting] > [INFO] 
+16:46:04.340 [INFO]  [Reporting] > [INFO] Results:
+16:46:04.340 [INFO]  [Reporting] > [INFO] 
+16:46:04.340 [INFO]  [Reporting] > [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+16:46:04.341 [INFO]  [Reporting] > [INFO] 
+16:46:04.341 [INFO]  [Reporting] > [INFO] 
+16:46:04.341 [INFO]  [Reporting] > [INFO] --- jacoco:0.8.7:report (default-cli) @ java-basic ---
+16:46:04.341 [INFO]  [Reporting] > [INFO] Loading execution data file /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/jacoco.exec
+16:46:04.341 [INFO]  [Reporting] > [INFO] Analyzed bundle 'java-basic-function' with 10 classes
+16:46:04.341 [INFO]  [Reporting] > [INFO] ------------------------------------------------------------------------
+16:46:04.341 [INFO]  [Reporting] > [INFO] BUILD SUCCESS
+16:46:04.341 [INFO]  [Reporting] > [INFO] ------------------------------------------------------------------------
+16:46:04.341 [INFO]  [Reporting] > [INFO] Total time:  3.283 s
+16:46:04.341 [INFO]  [Reporting] > [INFO] Finished at: 2023-12-08T16:46:03Z
+16:46:04.341 [INFO]  [Reporting] > [INFO] ------------------------------------------------------------------------
+16:46:04.380 [INFO]  [Reporting] Selected Java language compliance level: 11
+16:46:04.390 [INFO]  [Reporting] 
+16:46:04.390 [INFO]  [Reporting] Environment summary:
+16:46:04.390 [INFO]  [Reporting] --------------------
+16:46:04.392 [INFO]  [Reporting] Java version                  17.0.8                        SUCCESS        
+16:46:04.392 [INFO]  [Reporting] Build system                  Maven                         SUCCESS        
+16:46:04.392 [INFO]  [Reporting] JaCoCo plugin version         0.8.7                         SUCCESS        
+16:46:04.392 [INFO]  [Reporting] Testing framework             JUnit Jupiter 5               SUCCESS        
+16:46:04.392 [INFO]  [Reporting] Surefire version              2.22.2                        SUCCESS        
+16:46:04.392 [INFO]  [Reporting] 
+16:46:04.393 [INFO]  [Reporting] Environment check status: SUCCESS
+16:46:04.393 [INFO]  [Measuring] Calculating coverage from manual tests.
+16:46:04.395 [INFO]  [Measuring] Maven Using ${maven.home} of: /opt/homebrew/Cellar/maven/3.9.5.
+16:46:04.397 [INFO]  [Measuring] Maven Executing: /bin/sh -c cd /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic && /opt/homebrew/Cellar/maven/3.9.5/bin/mvn -B -D test=!*DiffblueTest.java,**/Test*.java,**/*Test.java,**/*Tests.java,**/*TestCase.java -D surefire.failIfNoSpecifiedTests=false -D maven.test.failure.ignore=true -D failIfNoTests=false -D jacoco.skip=false -D maven.ext.class.path=/usr/local/bin/diffblue/cover-buildsystem-maven-spy-jar-with-dependencies.jar org.jacoco:jacoco-maven-plugin:0.8.7:prepare-agent test org.jacoco:jacoco-maven-plugin:0.8.7:report
+16:46:08.414 [INFO]  [Measuring] Standard output of build tool (Maven)
+16:46:08.414 [INFO]  [Measuring] > [INFO] Scanning for projects...
+16:46:08.414 [INFO]  [Measuring] > [INFO] 
+16:46:08.414 [INFO]  [Measuring] > [INFO] -----------------------< com.example:java-basic >-----------------------
+16:46:08.414 [INFO]  [Measuring] > [INFO] Building java-basic-function 1.0-SNAPSHOT
+16:46:08.414 [INFO]  [Measuring] > [INFO]   from pom.xml
+16:46:08.414 [INFO]  [Measuring] > [INFO] --------------------------------[ jar ]---------------------------------
+16:46:08.414 [INFO]  [Measuring] > [INFO] 
+16:46:08.414 [INFO]  [Measuring] > [INFO] --- jacoco:0.8.7:prepare-agent (default-cli) @ java-basic ---
+16:46:08.414 [INFO]  [Measuring] > [INFO] argLine set to -javaagent:/Users/amishra/.m2/repository/org/jacoco/org.jacoco.agent/0.8.7/org.jacoco.agent-0.8.7-runtime.jar=destfile=/Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/jacoco.exec
+16:46:08.414 [INFO]  [Measuring] > [INFO] 
+16:46:08.414 [INFO]  [Measuring] > [INFO] --- resources:3.3.1:resources (default-resources) @ java-basic ---
+16:46:08.415 [INFO]  [Measuring] > [INFO] skip non existing resourceDirectory /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/src/main/resources
+16:46:08.415 [INFO]  [Measuring] > [INFO] 
+16:46:08.415 [INFO]  [Measuring] > [INFO] --- compiler:3.8.1:compile (default-compile) @ java-basic ---
+16:46:08.415 [INFO]  [Measuring] > [INFO] Changes detected - recompiling the module!
+16:46:08.415 [INFO]  [Measuring] > [INFO] Compiling 9 source files to /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/classes
+16:46:08.415 [INFO]  [Measuring] > [INFO] 
+16:46:08.415 [INFO]  [Measuring] > [INFO] --- resources:3.3.1:testResources (default-testResources) @ java-basic ---
+16:46:08.415 [INFO]  [Measuring] > [INFO] Copying 1 resource from src/test/resources to target/test-classes
+16:46:08.415 [INFO]  [Measuring] > [INFO] 
+16:46:08.415 [INFO]  [Measuring] > [INFO] --- compiler:3.8.1:testCompile (default-testCompile) @ java-basic ---
+16:46:08.415 [INFO]  [Measuring] > [INFO] Changes detected - recompiling the module!
+16:46:08.415 [INFO]  [Measuring] > [INFO] Compiling 3 source files to /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/test-classes
+16:46:08.415 [INFO]  [Measuring] > [INFO] 
+16:46:08.415 [INFO]  [Measuring] > [INFO] --- surefire:2.22.2:test (default-test) @ java-basic ---
+16:46:08.415 [INFO]  [Measuring] > [INFO] 
+16:46:08.415 [INFO]  [Measuring] > [INFO] -------------------------------------------------------
+16:46:08.415 [INFO]  [Measuring] > [INFO]  T E S T S
+16:46:08.415 [INFO]  [Measuring] > [INFO] -------------------------------------------------------
+16:46:08.415 [INFO]  [Measuring] > [INFO] Running example.InvokeTest
+16:46:08.415 [INFO]  [Measuring] > [INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.059 s - in example.InvokeTest
+16:46:08.415 [INFO]  [Measuring] > [INFO] 
+16:46:08.415 [INFO]  [Measuring] > [INFO] Results:
+16:46:08.415 [INFO]  [Measuring] > [INFO] 
+16:46:08.415 [INFO]  [Measuring] > [INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0
+16:46:08.415 [INFO]  [Measuring] > [INFO] 
+16:46:08.415 [INFO]  [Measuring] > [INFO] 
+16:46:08.415 [INFO]  [Measuring] > [INFO] --- jacoco:0.8.7:report (default-cli) @ java-basic ---
+16:46:08.415 [INFO]  [Measuring] > [INFO] Loading execution data file /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/jacoco.exec
+16:46:08.415 [INFO]  [Measuring] > [INFO] Analyzed bundle 'java-basic-function' with 9 classes
+16:46:08.415 [INFO]  [Measuring] > [INFO] ------------------------------------------------------------------------
+16:46:08.415 [INFO]  [Measuring] > [INFO] BUILD SUCCESS
+16:46:08.415 [INFO]  [Measuring] > [INFO] ------------------------------------------------------------------------
+16:46:08.415 [INFO]  [Measuring] > [INFO] Total time:  3.132 s
+16:46:08.415 [INFO]  [Measuring] > [INFO] Finished at: 2023-12-08T16:46:08Z
+16:46:08.415 [INFO]  [Measuring] > [INFO] ------------------------------------------------------------------------
+16:46:08.415 [INFO]  [Measuring] JaCoCo report file created in /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/.diffblue/reports/manual-tests-jacoco-report.xml
+16:46:08.425 [INFO]  [Measuring] Calculating coverage from diffblue tests.
+16:46:08.431 [INFO]  [Measuring] Maven Using ${maven.home} of: /opt/homebrew/Cellar/maven/3.9.5.
+16:46:08.431 [INFO]  [Measuring] Maven Executing: /bin/sh -c cd /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic && /opt/homebrew/Cellar/maven/3.9.5/bin/mvn -B -D test=*DiffblueTest.java -D surefire.failIfNoSpecifiedTests=false -D maven.test.failure.ignore=true -D failIfNoTests=false -D jacoco.skip=false -D maven.ext.class.path=/usr/local/bin/diffblue/cover-buildsystem-maven-spy-jar-with-dependencies.jar org.jacoco:jacoco-maven-plugin:0.8.7:prepare-agent test org.jacoco:jacoco-maven-plugin:0.8.7:report
+16:46:11.450 [INFO]  [Measuring] Standard output of build tool (Maven)
+16:46:11.451 [INFO]  [Measuring] > [INFO] Scanning for projects...
+16:46:11.451 [INFO]  [Measuring] > [INFO] 
+16:46:11.451 [INFO]  [Measuring] > [INFO] -----------------------< com.example:java-basic >-----------------------
+16:46:11.459 [INFO]  [Measuring] > [INFO] Building java-basic-function 1.0-SNAPSHOT
+16:46:11.459 [INFO]  [Measuring] > [INFO]   from pom.xml
+16:46:11.459 [INFO]  [Measuring] > [INFO] --------------------------------[ jar ]---------------------------------
+16:46:11.459 [INFO]  [Measuring] > [INFO] 
+16:46:11.459 [INFO]  [Measuring] > [INFO] --- jacoco:0.8.7:prepare-agent (default-cli) @ java-basic ---
+16:46:11.459 [INFO]  [Measuring] > [INFO] argLine set to -javaagent:/Users/amishra/.m2/repository/org/jacoco/org.jacoco.agent/0.8.7/org.jacoco.agent-0.8.7-runtime.jar=destfile=/Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/jacoco.exec
+16:46:11.459 [INFO]  [Measuring] > [INFO] 
+16:46:11.459 [INFO]  [Measuring] > [INFO] --- resources:3.3.1:resources (default-resources) @ java-basic ---
+16:46:11.459 [INFO]  [Measuring] > [INFO] skip non existing resourceDirectory /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/src/main/resources
+16:46:11.459 [INFO]  [Measuring] > [INFO] 
+16:46:11.459 [INFO]  [Measuring] > [INFO] --- compiler:3.8.1:compile (default-compile) @ java-basic ---
+16:46:11.459 [INFO]  [Measuring] > [INFO] Nothing to compile - all classes are up to date
+16:46:11.459 [INFO]  [Measuring] > [INFO] 
+16:46:11.459 [INFO]  [Measuring] > [INFO] --- resources:3.3.1:testResources (default-testResources) @ java-basic ---
+16:46:11.459 [INFO]  [Measuring] > [INFO] Copying 1 resource from src/test/resources to target/test-classes
+16:46:11.459 [INFO]  [Measuring] > [INFO] 
+16:46:11.459 [INFO]  [Measuring] > [INFO] --- compiler:3.8.1:testCompile (default-testCompile) @ java-basic ---
+16:46:11.459 [INFO]  [Measuring] > [INFO] Changes detected - recompiling the module!
+16:46:11.459 [INFO]  [Measuring] > [INFO] Compiling 3 source files to /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/test-classes
+16:46:11.459 [INFO]  [Measuring] > [INFO] 
+16:46:11.459 [INFO]  [Measuring] > [INFO] --- surefire:2.22.2:test (default-test) @ java-basic ---
+16:46:11.459 [INFO]  [Measuring] > [INFO] 
+16:46:11.459 [INFO]  [Measuring] > [INFO] --- jacoco:0.8.7:report (default-cli) @ java-basic ---
+16:46:11.459 [INFO]  [Measuring] > [INFO] Loading execution data file /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/target/jacoco.exec
+16:46:11.459 [INFO]  [Measuring] > [INFO] Analyzed bundle 'java-basic-function' with 9 classes
+16:46:11.459 [INFO]  [Measuring] > [INFO] ------------------------------------------------------------------------
+16:46:11.459 [INFO]  [Measuring] > [INFO] BUILD SUCCESS
+16:46:11.459 [INFO]  [Measuring] > [INFO] ------------------------------------------------------------------------
+16:46:11.459 [INFO]  [Measuring] > [INFO] Total time:  1.814 s
+16:46:11.459 [INFO]  [Measuring] > [INFO] Finished at: 2023-12-08T16:46:11Z
+16:46:11.459 [INFO]  [Measuring] > [INFO] ------------------------------------------------------------------------
+16:46:11.460 [INFO]  [Measuring] JaCoCo report file created in /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/.diffblue/reports/diffblue-tests-jacoco-report.xml
+16:46:11.495 [INFO]  [Reporting] 
+16:46:11.497 [INFO]  [Reporting] Log file: /Users/amishra/Developer/aws-lambda-developer-guide/sample-apps/java-basic/.diffblue/log/user-20231208T164546.log
+16:46:11.497 [INFO]  [Reporting] Finished in 25s
