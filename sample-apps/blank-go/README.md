@@ -30,6 +30,8 @@ To create a new bucket for deployment artifacts, run `1-create-bucket.sh`.
 
 To deploy the application, run `2-deploy.sh`.
 
+If you are using a Mac with Apple silicon, you need to add `GOARCH=amd64` to the `go build` command.
+
     blank-go$ ./2-deploy.sh
     Successfully packaged artifacts and wrote output template to file out.yml.
     Waiting for changeset to be created..
@@ -60,4 +62,4 @@ Choose a node in the main function graph. Then choose **View traces** to see a l
 # Cleanup
 To delete the application, run `4-cleanup.sh`.
 
-    blank$ ./4-cleanup.sh
+    blank-go$ ./4-cleanup.sh
