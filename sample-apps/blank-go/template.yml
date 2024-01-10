@@ -4,11 +4,12 @@ Description: An AWS Lambda application that calls the Lambda API.
 Resources:
   function:
     Type: AWS::Serverless::Function
+    Metadata:
+      BuildMethod: go1.x
     Properties:
-      Handler: main
-      Runtime: go1.x
-      CodeUri: function/.
-      Description: Call the AWS Lambda API
+      CodeUri: function/ # folder where your main program resides
+      Handler: bootstrap
+      Runtime: provided.al2023
       Timeout: 5
       # Function's execution role
       Policies:
