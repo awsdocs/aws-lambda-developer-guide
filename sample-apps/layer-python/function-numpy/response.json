@@ -1,0 +1,1 @@
+{"errorMessage": "Unable to import module 'lambda_function': No module named 'numpy'", "errorType": "Runtime.ImportModuleError", "requestId": "31c0a568-b1e1-4e63-8f76-1ddc89eea07c", "stackTrace": []}
