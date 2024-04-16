@@ -10,7 +10,6 @@ public class Handler {
 
     public String handleRequest(Map<String, String> input, Context context) throws IOException {
         // Parse the input JSON
-        System.out.println(input);
         ObjectMapper objectMapper = new ObjectMapper();
         F1Car f1Car = objectMapper.readValue(objectMapper.writeValueAsString(input), F1Car.class);
 
