@@ -10,7 +10,7 @@ Resources:
     Properties:
       CodeUri: target/s3-java-1.0-SNAPSHOT.jar
       Handler: example.Handler::handleRequest
-      Runtime: java8
+      Runtime: java21
       Description: Java function
       MemorySize: 512
       Timeout: 30

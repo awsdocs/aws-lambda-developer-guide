@@ -21,16 +21,13 @@ import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import software.amazon.awssdk.services.s3.S3Client;
 
 import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.S3Event;
 import com.amazonaws.services.lambda.runtime.events.models.s3.S3EventNotification.S3EventNotificationRecord;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 // Handler value: example.Handler
 public class Handler implements RequestHandler<S3Event, String> {
-  private static final Logger logger = LoggerFactory.getLogger(Handler.class);
   private static final float MAX_DIMENSION = 100;
   private final String REGEX = ".*\\.([^\\.]*)";
   private final String JPG_TYPE = "jpg";
@@ -39,6 +36,7 @@ public class Handler implements RequestHandler<S3Event, String> {
   private final String PNG_MIME = "image/png";
   @Override
   public String handleRequest(S3Event s3event, Context context) {
+    LambdaLogger logger = context.getLogger();
     try {
       S3EventNotificationRecord record = s3event.getRecords().get(0);
       
@@ -53,12 +51,12 @@ public class Handler implements RequestHandler<S3Event, String> {
       // Infer the image type.
       Matcher matcher = Pattern.compile(REGEX).matcher(srcKey);
       if (!matcher.matches()) {
-          logger.info("Unable to infer image type for key " + srcKey);
+          logger.log("Unable to infer image type for key " + srcKey);
           return "";
       }
       String imageType = matcher.group(1);
       if (!(JPG_TYPE.equals(imageType)) && !(PNG_TYPE.equals(imageType))) {
-          logger.info("Skipping non-image " + srcKey);
+          logger.log("Skipping non-image " + srcKey);
           return "";
       }
 
@@ -75,9 +73,9 @@ public class Handler implements RequestHandler<S3Event, String> {
       ImageIO.write(newImage, imageType, outputStream);
 
       // Upload new image to S3
-      putObject(s3Client, outputStream, dstBucket, dstKey, imageType);
+      putObject(s3Client, outputStream, dstBucket, dstKey, imageType, logger);
 
-      logger.info("Successfully resized " + srcBucket + "/"
+      logger.log("Successfully resized " + srcBucket + "/"
               + srcKey + " and uploaded to " + dstBucket + "/" + dstKey);
       return "Ok";
     } catch (IOException e) {
@@ -94,7 +92,7 @@ public class Handler implements RequestHandler<S3Event, String> {
   }
 
   private void putObject(S3Client s3Client, ByteArrayOutputStream outputStream,
-    String bucket, String key, String imageType) {
+    String bucket, String key, String imageType, LambdaLogger logger) {
       Map<String, String> metadata = new HashMap<>();
       metadata.put("Content-Length", Integer.toString(outputStream.size()));
       if (JPG_TYPE.equals(imageType)) {
@@ -110,14 +108,14 @@ public class Handler implements RequestHandler<S3Event, String> {
         .build();
 
       // Uploading to S3 destination bucket
-      logger.info("Writing to: " + bucket + "/" + key);
+      logger.log("Writing to: " + bucket + "/" + key);
       try {
         s3Client.putObject(putObjectRequest,
           RequestBody.fromBytes(outputStream.toByteArray()));
       }
       catch(AwsServiceException e)
       {
-        logger.error(e.awsErrorDetails().errorMessage());
+        logger.log(e.awsErrorDetails().errorMessage());
         System.exit(1);
       }
   }
