@@ -1,3 +1,0 @@
-{
-  "query": "CREATE TABLE events ( id varchar(255), title varchar(255), timestamp BIGINT, entries varchar(32765));"
-}
