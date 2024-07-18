@@ -1,0 +1,34 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Resources:
+  EncryptPDFFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: EncryptPDF
+      Architectures: [x86_64]
+      CodeUri: ./
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.12
+      Timeout: 15
+      MemorySize: 256
+      LoggingConfig:
+        LogFormat: JSON
+      Policies:
+        - AmazonS3FullAccess
+      Events:
+        S3Event:
+          Type: S3
+          Properties:
+            Bucket: !Ref PDFSourceBucket
+            Events: s3:ObjectCreated:*
+
+  PDFSourceBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: EXAMPLE-BUCKET
+
+  EncryptedPDFBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: EXAMPLE-BUCKET-encrypted
