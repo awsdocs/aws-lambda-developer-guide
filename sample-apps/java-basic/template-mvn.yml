@@ -7,7 +7,7 @@ Resources:
     Properties:
       CodeUri: target/java-basic-1.0-SNAPSHOT.jar
       Handler: example.Handler
-      Runtime: java11
+      Runtime: java21
       Description: Java function
       MemorySize: 2048
       Timeout: 10

@@ -7,7 +7,7 @@ Resources:
     Properties:
       CodeUri: build/distributions/java-basic.zip
       Handler: example.Handler
-      Runtime: java11
+      Runtime: java21
       Description: Java function
       MemorySize: 2048
       Timeout: 10

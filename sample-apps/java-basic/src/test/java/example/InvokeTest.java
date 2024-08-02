@@ -1,6 +1,5 @@
 package example;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -14,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
@@ -58,20 +58,27 @@ class InvokeTest {
   }
 
   @Test
-  void testHandlerStream() throws IOException {
-    logger.info("Invoke TEST - HandlerStream");
-    String inputStr = "Hello world";
-    byte[] inputBytes = inputStr.getBytes();
-    ByteArrayInputStream inputStream = new ByteArrayInputStream(inputBytes);
-    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-    Context context = new TestContext();
-    HandlerStream handler = new HandlerStream();
-    handler.handleRequest(inputStream, outputStream, context);
-    byte[] outputBytes = outputStream.toByteArray();
-    assertArrayEquals(inputBytes, outputBytes);
-    String outputStr = new String(outputBytes, StandardCharsets.UTF_8);
-    assertEquals(inputStr, outputStr);
-  }
+    public void testHandlerStream() throws IOException {
+        HandlerStream orderProcessor = new HandlerStream();
+        String input = """
+                {
+                    "orderId": "123",
+                    "items": [
+                        {
+                            "name": "widgets",
+                            "quantity": 10
+                        }
+                    ]
+                }
+                """;
+        Context context = null;
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
+        OutputStream outputStream = new ByteArrayOutputStream();
+
+        orderProcessor.handleRequest(inputStream, outputStream, context);
+
+        assertEquals("{\"orderId\":\"123\"}", outputStream.toString());
+    }
 
   @Test
   void testHandlerString() {
