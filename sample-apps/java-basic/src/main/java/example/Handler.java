@@ -10,10 +10,9 @@ import java.util.Map;
 public class Handler implements RequestHandler<Map<String,String>, Void>{
 
   @Override
-  public Void handleRequest(Map<String,String> event, Context context)
+  public void handleRequest(Map<String,String> event, Context context)
   {
     LambdaLogger logger = context.getLogger();
     logger.log("EVENT TYPE: " + event.getClass());
-    return null;
   }
 }
