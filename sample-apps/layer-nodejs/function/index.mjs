@@ -8,7 +8,7 @@ export const handler = async (event) => {
   { 'user': 'Pat', 'active': false }
   ];
    
-  let out = _.findLastIndex(users, function(o) { return o.user == 'pebbles'; });
+  let out = _.findLastIndex(users, function(o) { return o.user == 'Pat'; });
   const response = {
     statusCode: 200,
     body: JSON.stringify(out + ", " + users[out].user),
