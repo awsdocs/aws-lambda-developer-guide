@@ -33,6 +33,19 @@ func init() {
 	s3Client = s3.NewFromConfig(cfg)
 }
 
+func uploadReceiptToS3(ctx context.Context, bucketName, key, receiptContent string) error {
+	_, err := s3Client.PutObject(ctx, &s3.PutObjectInput{
+		Bucket: &bucketName,
+		Key:    &key,
+		Body:   strings.NewReader(receiptContent),
+	})
+	if err != nil {
+		log.Printf("Failed to upload receipt to S3: %v", err)
+		return err
+	}
+	return nil
+}
+
 func handleRequest(ctx context.Context, event json.RawMessage) error {
 	// Parse the input event
 	var order Order
@@ -53,14 +66,8 @@ func handleRequest(ctx context.Context, event json.RawMessage) error {
 		order.OrderID, order.Amount, order.Item)
 	key := "receipts/" + order.OrderID + ".txt"
 
-	// Upload the receipt to S3
-	_, err := s3Client.PutObject(ctx, &s3.PutObjectInput{
-		Bucket: &bucketName,
-		Key:    &key,
-		Body:   strings.NewReader(receiptContent),
-	})
-	if err != nil {
-		log.Printf("Failed to upload receipt to S3: %v", err)
+	// Upload the receipt to S3 using the helper method
+	if err := uploadReceiptToS3(ctx, bucketName, key, receiptContent); err != nil {
 		return err
 	}
 
