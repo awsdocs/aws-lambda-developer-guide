@@ -6,7 +6,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: lambda_function.lambda_handler
-      Runtime: python3.8
+      Runtime: python3.11
       CodeUri: function/.
       Description: Call the AWS Lambda API
       Timeout: 10
@@ -25,4 +25,4 @@ Resources:
       Description: Dependencies for the blank-python sample app.
       ContentUri: package/.
       CompatibleRuntimes:
-        - python3.8
+        - python3.11

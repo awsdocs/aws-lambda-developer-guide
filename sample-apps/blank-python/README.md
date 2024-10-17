@@ -11,29 +11,35 @@ The project source includes function code and supporting resources:
 Use the following instructions to deploy the sample application.
 
 # Requirements
-- [Python 3.7](https://www.python.org/downloads/). Sample also works with Python 3.8 and 3.9. 
+- [Python 3.11](https://www.python.org/downloads/). Sample also works with Python 3.9.
 - The Bash shell. For Linux and macOS, this is included by default. In Windows 10, you can install the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows-integrated version of Ubuntu and Bash.
 - [The AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) v1.17 or newer.
 
 # Setup
 Download or clone this repository.
 
-    $ git clone https://github.com/awsdocs/aws-lambda-developer-guide.git
-    $ cd aws-lambda-developer-guide/sample-apps/blank-python
+    git clone https://github.com/awsdocs/aws-lambda-developer-guide.git
+    cd aws-lambda-developer-guide/sample-apps/blank-python
 
 To create a new bucket for deployment artifacts, run `1-create-bucket.sh`.
 
-    blank-python$ ./1-create-bucket.sh
+    ./1-create-bucket.sh
+
+Example output:
+
     make_bucket: lambda-artifacts-a5e491dbb5b22e0d
 
 To build a Lambda layer that contains the function's runtime dependencies, run `2-build-layer.sh`. Packaging dependencies in a layer reduces the size of the deployment package that you upload when you modify your code.
 
-    blank-python$ ./2-build-layer.sh
+    ./2-build-layer.sh
 
 # Deploy
 To deploy the application, run `3-deploy.sh`.
 
-    blank-python$ ./3-deploy.sh
+    ./3-deploy.sh
+    
+Example output:
+
     Uploading to e678bc216e6a0d510d661ca9ae2fd941  9519118 / 9519118.0  (100.00%)
     Successfully packaged artifacts and wrote output template to file out.yml.
     Waiting for changeset to be created..
@@ -45,7 +51,10 @@ This script uses AWS CloudFormation to deploy the Lambda functions and an IAM ro
 # Test
 To invoke the function, run `4-invoke.sh`.
 
-    blank-python$ ./4-invoke.sh
+    ./4-invoke.sh
+
+Example output:
+      
     {
         "StatusCode": 200,
         "ExecutedVersion": "$LATEST"
@@ -65,4 +74,4 @@ Choose a node in the main function graph. Then choose **View traces** to see a l
 # Cleanup
 To delete the application, run `5-cleanup.sh`.
 
-    blank-python$ ./5-cleanup.sh
+    ./5-cleanup.sh
