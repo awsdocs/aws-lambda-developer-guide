@@ -1,0 +1,20 @@
+{
+  "name": "lambda-typescript-layer-example",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "tsc index.ts --module nodenext --lib es2020 --outDir dist/",
+    "postbuild": "cd dist && zip -r index.zip index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT-0",
+  "description": "",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.145",
+    "@types/lodash": "^4.17.9",
+    "lodash": "^4.17.21",
+    "typescript": "^5.6.2"
+  }
+}
