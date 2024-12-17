@@ -21,7 +21,7 @@ public class Handler implements RequestHandler<Map<String,String>, String> {
         LambdaLogger logger = context.getLogger();
         logger.log("Handler invoked");
 
-        GetAccountSettingsResponse response = null;
+        GetAccountSettingsResponse response;
         try {
             response = lambdaClient.getAccountSettings();
         } catch(LambdaException e) {
