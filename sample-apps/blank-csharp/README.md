@@ -11,7 +11,7 @@ The project source includes function code and supporting resources:
 Use the following instructions to deploy the sample application. For more information on the application's architecture and implementation, see [Managing Spot Instance Requests](https://docs.aws.amazon.com/lambda/latest/dg/services-ec2-tutorial.html) in the developer guide.
 
 # Requirements
-- [.NET Core SDK 6.0](https://dotnet.microsoft.com/download/dotnet-core/6.0)
+- [.NET Core SDK 8.0](https://dotnet.microsoft.com/download/dotnet-core/8.0)
 - [AWS extensions for .NET CLI](https://github.com/aws/aws-extensions-for-dotnet-cli)
 - The Bash shell. For Linux and macOS, this is included by default. In Windows 10, you can install the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows-integrated version of Ubuntu and Bash.
 - [The AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) v1.17 or newer.
