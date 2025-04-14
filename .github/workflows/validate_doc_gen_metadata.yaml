@@ -1,0 +1,24 @@
+
+# Ensure DocGen metadata is valid for internal AWS docs build
+# https://github.com/awsdocs/aws-doc-sdk-examples-tools
+name: Validate DocGen Metadata
+
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout repo content
+        uses: actions/checkout@v3
+      - name: validate metadata
+        uses: awsdocs/aws-doc-sdk-examples-tools@main
