@@ -9,6 +9,6 @@
   "license": "MIT-0",
   "description": "",
   "dependencies": {
-    "lodash": "4.17.21"
+    "lodash": "4.17.23"
   }
 }
